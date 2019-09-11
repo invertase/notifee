@@ -1,0 +1,29 @@
+{
+  "name": "@notifications/react-native",
+  "version": "0.0.1",
+  "author": "Invertase <oss@invertase.io> (http://invertase.io)",
+  "description": "React Native Firebase - Notifications",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "genversion --semi lib/version.js",
+    "build:clean": "rimraf android/build && rimraf ios/build",
+    "prepare": "yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/invertase/react-native-firebase/tree/master/packages/notifications"
+  },
+  "license": "Restricted",
+  "keywords": [
+    "react",
+    "react-native",
+    "firebase",
+    "notifications"
+  ],
+  "dependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

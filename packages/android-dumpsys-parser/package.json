@@ -1,0 +1,44 @@
+{
+  "name": "@notifications/tools-android-dumpsys-parser",
+  "private": true,
+  "version": "0.0.1",
+  "description": "tools-android-dumpsys-parser",
+  "engines": {
+    "node": ">= 10.13 <11"
+  },
+  "files": [
+    "build/index.min.js",
+    "build/helper.min.js",
+      "LICENSE",
+    "README.md"
+  ],
+  "main": "src/",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^10.14.16",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "~5.19.0",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-microsoft-contrib": "~6.2.0",
+    "tsutils": "~3.17.1",
+    "typescript": "~3.5.3",
+    "uglify-js": "^3.6.0"
+  },
+  "scripts": {
+    "clean": "rimraf coverage build tmp",
+    "build": "tsc -p tsconfig.release.json && yarn run ugly && yarn run ugly-helper",
+    "build:watch": "tsc -w -p tsconfig.release.json",
+    "lint": "tslint -t stylish --project \"tsconfig.json\"",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "ugly": "uglifyjs --config-file=uglifyjs.json -- build/index.js > build/index.min.js",
+    "ugly-helper": "uglifyjs --config-file=uglifyjs-helper.json -- build/helper.js > build/helper.min.js",
+    "prepublishOnly": "yarn run build"
+  },
+  "author": "Invertase <oss@invertase.io>",
+  "license": "PRIVATE",
+  "dependencies": {
+    "tslib": "~1.10.0"
+  }
+}

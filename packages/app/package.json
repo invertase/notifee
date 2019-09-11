@@ -1,0 +1,61 @@
+{
+  "name": "@react-native-firebase/app",
+  "version": "0.2.3",
+  "author": "Invertase <oss@invertase.io> (http://invertase.io)",
+  "description": "A well tested, feature rich Firebase implementation for React Native, supporting iOS & Android. Individual module support for Admob, Analytics, Auth, Crash Reporting, Cloud Firestore, Database, Dynamic Links, Functions, Messaging (FCM), Remote Config, Storage and more.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "genversion --semi lib/version.js && node ./scripts/genversion-ios",
+    "build:clean": "rimraf android/build && rimraf ios/build",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/invertase/react-native-firebase/tree/master/packages/app"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "react",
+    "admob",
+    "auth",
+    "config",
+    "digits",
+    "fabric",
+    "functions",
+    "phone-auth",
+    "sms",
+    "firestore",
+    "cloud-firestore",
+    "datastore",
+    "remote-config",
+    "transactions",
+    "react-native",
+    "react-native-firebase",
+    "firebase",
+    "fcm",
+    "apn",
+    "gcm",
+    "analytics",
+    "messaging",
+    "database",
+    "android",
+    "ios",
+    "crash",
+    "firestack",
+    "performance",
+    "firestore",
+    "dynamic-links",
+    "crashlytics"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "dependencies": {
+  },
+  "gitHead": "889bf5379c8ce5257b33fb3ad1ac9c905fe26fff",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
+  ],
+  "packages": [
+    "packages/*",
+    "tests_react_native"
+  ],
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md"
+      ]
+    }
+  },
+  "version": "0.2.3"
+}
