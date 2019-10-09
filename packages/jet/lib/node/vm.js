@@ -29,12 +29,9 @@ function reply(id, result) {
  * @return {Promise<string>}
  */
 async function downloadUrl(_bundleUrl) {
-  const bundleUrl = _bundleUrl.replace(
-    ':8081',
-    `:${process.env.RCT_METRO_PORT || 8081}`
-  );
+  const bundleUrl = _bundleUrl.replace(':8081', `:${process.env.RCT_METRO_PORT || 8081}`);
   const res = await new Promise((resolve, reject) =>
-    http.get(bundleUrl, resolve).on('error', reject)
+    http.get(bundleUrl, resolve).on('error', reject),
   );
 
   let buffer = '';
@@ -76,16 +73,15 @@ async function downloadBundle(bundleUrl) {
  * @return {Promise.<*>}
  */
 async function getBundle(request) {
-  if (bundle) return bundle;
-  console.log(
-    `${chalk.blue('[✈️]')} debugger has connected! Downloading app JS bundle...`
-  );
+  if (bundle) {
+    return bundle;
+  }
+  console.log(`${chalk.blue('[✈️]')} debugger has connected! Downloading app JS bundle...`);
 
   const parsedUrl = url.parse(request.url, true);
   invariant(parsedUrl.query);
   parsedUrl.query.sourceMapURL = true;
   delete parsedUrl.search;
-
   return downloadBundle(url.format(parsedUrl));
 }
 
@@ -132,14 +128,12 @@ module.exports = {
           ) {
             returnValue = global.jet.context.__fbBatchedBridge[method].apply(
               null,
-              request.arguments
+              request.arguments,
             );
           }
         } catch (e) {
           if (method !== '$disconnected') {
-            throw new Error(
-              `Failed while making a call bridge call ${method}::${e.message}`
-            );
+            throw new Error(`Failed while making a call bridge call ${method}::${e.message}`);
           }
         } finally {
           reply(request.id, JSON.stringify(returnValue));

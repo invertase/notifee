@@ -66,6 +66,8 @@ export default function validateAndroidNotification(android) {
     visibility: AndroidVisibility.PRIVATE,
   };
 
+  // throw new Error('Did a woopsie!');
+
   if (isUndefined(android)) {
     return out;
   }

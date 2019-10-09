@@ -13,7 +13,7 @@
     "lerna:clean": "lerna clean",
     "gen:reference": "node scripts/generate-typedoc.js",
     "tests_rn:packager:chrome": "cd tests_react_native && node_modules/.bin/react-native start --platforms ios,android",
-    "tests_rn:packager:jet": "cd tests_react_native && cross-env REACT_DEBUGGER=\"echo nope\" node_modules/.bin/react-native start --reset-cache",
+    "tests_rn:packager:jet": "cd tests_react_native && cross-env REACT_DEBUGGER=\"echo nope\" node_modules/.bin/react-native start",
     "tests_rn:packager:jet-reset-cache": "cd tests_react_native & cross-env REACT_DEBUGGER=\"echo nope\" node_modules/.bin/react-native start --reset-cache",
     "tests_rn:android:build": "cd tests_react_native && ./node_modules/.bin/detox build --configuration android.emu.debug",
     "tests_rn:android:build-release": "cd tests_react_native && ./node_modules/.bin/detox build --configuration android.emu.release",
@@ -34,6 +34,7 @@
     "npm:publish:release": "echo '!!🔴!! RELEASE !!🔴!!' && echo '!!!!! RELEASE !!!!!!' && lerna publish from-package --dist-tag latest --no-git-reset"
   },
   "devDependencies": {
+    "detox": "14.4.1",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/runtime": "^7.5.5",

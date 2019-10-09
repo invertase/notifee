@@ -15,11 +15,11 @@ const INTERNAL_KEYS = ['context', 'rn', 'reload'];
 if (!jetNode) {
   Jet.debug(true);
 } else {
-  const sIn = setInterval;
-  const sIm = setImmediate;
-  sIn(() => sIm(() => {}), 500);
-  // TODO: Salakar: ^-- investigate issue, without this android becomes unresponsive when app is resumed from background
-  jetNode._replaceNativeTimers(Timing, JSTimers);
+  // const sIn = setInterval;
+  // const sIm = setImmediate;
+  // sIn(() => sIm(() => {}), 500);
+  // // TODO: Salakar: ^-- investigate issue, without this android becomes unresponsive when app is resumed from background
+  // jetNode._replaceNativeTimers(Timing, JSTimers);
   jetNode.exposeContextProperty('rn', ReactNative);
   jetNode.exposeContextProperty('reload', Jet.reload);
 }

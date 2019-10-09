@@ -12,12 +12,35 @@ try {
   // ignore
 }
 
+async function tryAtMost(userPromise, maxRetries = 3, retryInterval = 5000, _tempPromiseDeferred) {
+  const tempPromise = _tempPromiseDeferred || Promise.defer();
+  const { resolve, reject, promise } = tempPromise;
+  if (maxRetries <= 0) {
+    return reject(new Error('Failed to execute promise in the allotted time & retries.'));
+  }
+
+  const timeout = setTimeout(function() {
+    console.error(new Error('Retrying promise as it did not respond in time'));
+    tryAtMost(userPromise, maxRetries - 1, retryInterval, tempPromise);
+  }, retryInterval);
+
+  process.nextTick(async () => {
+    const result = await userPromise;
+    resolve(result);
+    clearTimeout(timeout);
+    console.log('Promise resolved!!');
+  });
+
+  return promise;
+}
+
 if (detox) {
   /* ---------------------
    *   DEVICE OVERRIDES
    * --------------------- */
   // TODO: Salakar: all of this will go in first release
   // TODO: Salakar: jet global will provide it's own methods that internally call these
+  console.log('Proxying detox ->>>');
 
   let device;
   Object.defineProperty(global, 'device', {
@@ -37,13 +60,19 @@ if (detox) {
       // TODO: Salakar: jet global will provide it's own methods that internally call these
 
       // device.launchApp({ ... })
-      const detoxOriginalLaunchApp = originalDevice.launchApp.bind(
-        originalDevice
-      );
+      const detoxOriginalLaunchApp = originalDevice.launchApp.bind(originalDevice);
       originalDevice.launchApp = async options => {
-        if (options && options.newInstance) ready.reset();
-        await detoxOriginalLaunchApp(options);
-        return ready.wait();
+        if (options && options.newInstance) {
+          ready.reset();
+        }
+        console.dir('>>> LAUNCH APP BEFORE');
+        const result = await tryAtMost(detoxOriginalLaunchApp(options), 3, 5000);
+        console.dir('>>> LAUNCH APP AFTER');
+        console.dir('>>> JET WAIT BEFORE');
+
+        await ready.wait();
+        console.dir('>>> JET WAIT AFTER');
+        return result;
       };
 
       device = originalDevice;

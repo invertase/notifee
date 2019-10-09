@@ -2,9 +2,7 @@
 let rnRequireMap;
 // TODO move to utils
 function isObject(item) {
-  return item
-    ? typeof item === 'object' && !Array.isArray(item) && item !== null
-    : false;
+  return item ? typeof item === 'object' && !Array.isArray(item) && item !== null : false;
 }
 
 global.jet = module.exports = {
@@ -22,7 +20,7 @@ global.jet = module.exports = {
   require(target, unCached = false) {
     if (!jet.context) {
       throw new Error(
-        'Context not available - jet.require must be used inside your individual tests, not in the global or module scope.'
+        'Context not available - jet.require must be used inside your individual tests, not in the global or module scope.',
       );
     }
     const { __r: rnRequire } = jet.context;
@@ -63,28 +61,34 @@ global.jet = module.exports = {
     }
 
     const exports = rnRequire(moduleIdFound);
-    return Object.hasOwnProperty.call(exports, 'default')
-      ? exports.default
-      : exports;
+    return Object.hasOwnProperty.call(exports, 'default') ? exports.default : exports;
   },
 
   Object(nodeObjectSrc) {
-    if (!global.jet.context) return nodeObjectSrc;
+    if (!global.jet.context) {
+      return nodeObjectSrc;
+    }
     const { Object } = jet.context.window;
     // eslint-disable-next-line
     return Object.assign(new Object(), nodeObjectSrc);
   },
 
   Array(nodeArraySrc) {
-    if (!global.jet.context) return nodeArraySrc;
+    if (!global.jet.context) {
+      return nodeArraySrc;
+    }
     const { Array } = jet.context.window;
     // eslint-disable-next-line
     return new Array(...nodeArraySrc);
   },
 
   contextify(src) {
-    if (isObject(src)) return module.exports.Object(src);
-    if (Array.isArray(src)) return module.exports.Array(src);
+    if (isObject(src)) {
+      return module.exports.Object(src);
+    }
+    if (Array.isArray(src)) {
+      return module.exports.Array(src);
+    }
     return src;
   },
 };

@@ -48,7 +48,9 @@ class Timing {
    * @private
    */
   _doFrame() {
-    if (this._stopped) return;
+    if (this._stopped) {
+      return;
+    }
     const frameTime = Date.now();
 
     const timersToCall = [];
@@ -79,7 +81,7 @@ class Timing {
     nextFrameDelay = FRAME_DURATION - (Date.now() - frameTime);
     this._fTimeout = setTimeout(
       this._doFrame.bind(this),
-      nextFrameDelay <= 0 ? 0 : nextFrameDelay - 1
+      nextFrameDelay <= 0 ? 0 : nextFrameDelay - 1,
     );
   }
 

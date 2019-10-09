@@ -16,8 +16,7 @@ function frameToStr(parsed) {
     column: parsed.column,
   });
   return `    at ${name || parsed.functionName || '<anonymous>'} (${source ||
-    parsed.fileName}:${line || parsed.lineNumber}:${column ||
-    parsed.columnNumber})`;
+    parsed.fileName}:${line || parsed.lineNumber}:${column || parsed.columnNumber})`;
 }
 
 /**
@@ -27,7 +26,9 @@ function frameToStr(parsed) {
  * @return {*}
  */
 function sourceMappedError(error) {
-  if (!error || !error.stack) return error;
+  if (!error || !error.stack) {
+    return error;
+  }
   const original = error.stack.split('\n');
   const parsed = ErrorStack.parse(error);
 
@@ -35,8 +36,11 @@ function sourceMappedError(error) {
 
   for (let i = 0; i < parsed.length; i++) {
     const { fileName } = parsed[i];
-    if (fileName === bundleFileName) newStack.push(frameToStr(parsed[i]));
-    else newStack.push(original[i + 1]);
+    if (fileName === bundleFileName) {
+      newStack.push(frameToStr(parsed[i]));
+    } else {
+      newStack.push(original[i + 1]);
+    }
   }
 
   error.stack = newStack.join('\n');

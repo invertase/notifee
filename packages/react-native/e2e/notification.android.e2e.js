@@ -28,9 +28,7 @@ android.describe('notifications', () => {
   beforeEach(async () => {
     // Prevents notifications not being delivered as we spam them
     if (testCount >= 8) {
-      await Utils.sleep(300);
       await device.launchApp({ newInstance: true });
-      await Utils.sleep(300);
       testCount = 0;
     }
     testCount++;

@@ -4,7 +4,9 @@ const { sourceMappedError } = require('./../source-map');
 let attempts = 0;
 
 function tryPatchAfter() {
-  if (attempts > 3) return;
+  if (attempts > 3) {
+    return;
+  }
   // setup after hook to ensure final context coverage is captured
   if (global.after) {
     after(() => {

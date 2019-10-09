@@ -34,11 +34,12 @@
     "functions": 95,
     "branches": 95,
     "include": [
-      "packages/**"
+      "packages/react-native"
     ],
     "exclude": [
       "node_modules",
-      "packages/**/node_modules/**"
+      "packages/jet",
+      "packages/**/node_modules"
     ],
     "cwd": "..",
     "all": true,

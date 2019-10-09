@@ -9,11 +9,7 @@ module.exports = function consoleContext() {
      * @param args
      */
     log(...args) {
-      if (
-        args[0] &&
-        typeof args[0] === 'string' &&
-        args[0].startsWith('Running application "')
-      ) {
+      if (args[0] && typeof args[0] === 'string' && args[0].startsWith('Running application "')) {
         return;
       }
 
@@ -21,9 +17,7 @@ module.exports = function consoleContext() {
     },
 
     warn(...args) {
-      console.log(
-        ...args.map(a => (typeof a === 'string' ? chalk.yellowBright(a) : a))
-      );
+      console.log(...args.map(a => (typeof a === 'string' ? chalk.yellowBright(a) : a)));
     },
   };
 };

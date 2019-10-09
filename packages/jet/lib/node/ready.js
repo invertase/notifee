@@ -4,7 +4,9 @@ process.on('jet-attached', () => (ready = true));
 
 module.exports = {
   wait() {
-    if (ready) return Promise.resolve();
+    if (ready) {
+      return Promise.resolve();
+    }
     return new Promise(resolve => {
       process.once('jet-attached', resolve);
     });
