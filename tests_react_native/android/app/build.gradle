@@ -28,9 +28,6 @@ def useIntlJsc = false
 
 android {
   compileSdkVersion 28
-  aaptOptions {
-    noCompress "tflite"
-  }
   defaultConfig {
     applicationId "com.invertase.testing"
     minSdkVersion 18
@@ -117,7 +114,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
   //noinspection GradleDynamicVersion
-  
+
   // JSC from node_modules
   if (useIntlJsc) {
     implementation 'org.webkit:android-jsc-intl:+'

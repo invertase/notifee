@@ -26,9 +26,19 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import static io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext;
-import static io.invertase.firebase.common.SharedUtils.getResourceIdByName;
 
 public class ReactNativeFirebaseNotificationUtils {
+  /**
+   * Attemps to find a device resource id by name and type
+   * @param name
+   * @param type mipmap/drawable/raw
+   * @return
+   */
+  public static int getResourceIdByName(String name, String type) {
+    String packageName = getApplicationContext().getPackageName();
+    return getApplicationContext().getResources().getIdentifier(name, type, packageName);
+  }
+
 
 //  static int getResourceId(Context context, String type, String image) {
 //    return context

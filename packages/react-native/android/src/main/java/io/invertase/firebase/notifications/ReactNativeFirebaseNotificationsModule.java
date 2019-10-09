@@ -161,4 +161,17 @@ public class ReactNativeFirebaseNotificationsModule extends ReactNativeFirebaseM
     }
     promise.resolve(Collections.emptyList());
   }
+
+  // TODO move to utils module class
+  public static void rejectPromiseWithCodeAndMessage(
+    Promise promise,
+    String code,
+    String message,
+    Exception exception
+  ) {
+    WritableMap userInfoMap = Arguments.createMap();
+    userInfoMap.putString("code", code);
+    userInfoMap.putString("message", message);
+    promise.reject(code, message, exception, userInfoMap);
+  }
 }

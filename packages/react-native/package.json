@@ -2,7 +2,7 @@
   "name": "@notifications/react-native",
   "version": "0.0.1",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
-  "description": "React Native Firebase - Notifications",
+  "description": "Notifications for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -21,8 +21,6 @@
     "firebase",
     "notifications"
   ],
-  "dependencies": {
-  },
   "publishConfig": {
     "access": "public"
   }

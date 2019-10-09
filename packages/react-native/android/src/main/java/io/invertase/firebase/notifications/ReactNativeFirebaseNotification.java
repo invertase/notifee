@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext;
-import static io.invertase.firebase.common.SharedUtils.getResourceIdByName;
 import static io.invertase.firebase.notifications.ReactNativeFirebaseNotificationUtils.getSoundUri;
 
 public class ReactNativeFirebaseNotification {
@@ -408,9 +407,9 @@ public class ReactNativeFirebaseNotification {
   }
 
   private int getResourceIcon(String icon) {
-    int resourceId = getResourceIdByName(icon, "mipmap");
+    int resourceId = ReactNativeFirebaseNotificationUtils.getResourceIdByName(icon, "mipmap");
     if (resourceId == 0) {
-      resourceId = getResourceIdByName(icon, "drawable");
+      resourceId = ReactNativeFirebaseNotificationUtils.getResourceIdByName(icon, "drawable");
     }
 
     return resourceId;
