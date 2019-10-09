@@ -18,8 +18,8 @@
 let validate;
 
 describe('notifications() Notification', () => {
-  before(() => {
-    validate = jet.require('packages/notifications/lib/validateNotification');
+  before(async () => {
+    validate = jet.require('packages/react-native/lib/validateNotification');
   });
 
   it('throws if notification is not an object', () => {

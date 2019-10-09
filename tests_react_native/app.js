@@ -21,11 +21,12 @@ import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react
 import jet from 'jet/platform/react-native';
 import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
 
-import notifications from '@notifications/react-native';
+import firebase from '@react-native-firebase/app';
+import '@notifications/react-native';
 
 jet.exposeContextProperty('NativeModules', NativeModules);
 jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);
-jet.exposeContextProperty('ExportedNativeModule', notifications);
+jet.exposeContextProperty('module', firebase);
 
 class Root extends Component {
   constructor(props) {

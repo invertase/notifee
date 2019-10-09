@@ -542,6 +542,17 @@ export default function validateAndroidNotification(android) {
   }
 
   /**
+   * vibrate
+   */
+  if (hasOwnProperty(android, 'vibrate')) {
+    if (!isBoolean(android.vibrate)) {
+      throw new Error("'notification.android.vibrate' expected a boolean value.");
+    }
+
+    out.vibrate = android.vibrate;
+  }
+
+  /**
    * vibrationPattern
    */
   if (hasOwnProperty(android, 'vibrationPattern')) {

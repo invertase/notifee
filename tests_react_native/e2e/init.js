@@ -5,7 +5,9 @@ const { requirePackageTests } = require('./helpers');
 const { detox: detoxConfig } = require('../package.json');
 
 detoxConfig.configurations['android.emu.debug'].name =
-  process.env.ANDROID_AVD_NAME || detoxConfig.configurations['android.emu.debug'].name;
+  process.env.ANDROID_AVD_NAME ||
+  'TestingAVD_29' || // TODO change me/switch dynamically on CI / locally
+  detoxConfig.configurations['android.emu.debug'].name;
 
 requirePackageTests('react-native');
 

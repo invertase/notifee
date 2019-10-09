@@ -210,7 +210,7 @@ function replaceMPrefix(key: string) {
  */
 function parseNotificationRecord(source: string) {
   let m;
-  const newNotificationRecord = {};
+  const newNotificationRecord = { _raw: source};
   // https://regex101.com/r/WQGUcJ/4
   const regex = /^\s\s\s\s\s\s([a-zA-Z]*)=(.*)$/gm;
 

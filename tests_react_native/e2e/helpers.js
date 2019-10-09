@@ -24,7 +24,7 @@ Object.defineProperty(global, 'A2A', {
   },
 });
 
-Object.defineProperty(global, 'ExportedNativeModule', {
+Object.defineProperty(global, 'firebase', {
   get() {
     return jet.module;
   },

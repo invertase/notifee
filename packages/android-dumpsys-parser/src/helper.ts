@@ -1,4 +1,4 @@
-const { default: parser, stringToHashCode} = require('./').default;
+const { default: parser, stringToHashCode} = require('./');
 
 // tslint:disable-next-line:no-function-expression
 module.exports = async function createNotificationsAPI() {

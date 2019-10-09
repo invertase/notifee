@@ -28,7 +28,9 @@ android.describe('notifications', () => {
   beforeEach(async () => {
     // Prevents notifications not being delivered as we spam them
     if (testCount >= 8) {
+      await Utils.sleep(300);
       await device.launchApp({ newInstance: true });
+      await Utils.sleep(300);
       testCount = 0;
     }
     testCount++;
@@ -40,7 +42,7 @@ android.describe('notifications', () => {
     });
   });
 
-  describe.only('android', () => {
+  describe('android', () => {
     it('throws if a channel does not exist', async () => {
       try {
         await firebase.notifications().displayNotification({
@@ -154,7 +156,7 @@ android.describe('notifications', () => {
           name: 'Custom Sound',
           channelId: 'sound',
           importance: firebase.notifications.AndroidImportance.HIGH,
-          sound: 'hollow.mp3'
+          sound: 'hollow.mp3',
         });
 
         const notificationId = await firebase.notifications().displayNotification({
@@ -344,6 +346,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO only Android 29+
     describe('groupAlertBehaviour', () => {
       it('sets groupAlertBehaviour', async () => {
         const notificationId = await firebase.notifications().displayNotification({
@@ -357,7 +360,6 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         notification.group.should.equal('foo bar group');
-
         notification.groupAlertBehavior.should.eql(
           firebase.notifications.AndroidGroupAlertBehavior.CHILDREN,
         );
@@ -457,6 +459,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO only Android 29+
     describe('number', () => {
       it('sets custom number', async () => {
         const notificationId = await firebase.notifications().displayNotification({
@@ -622,7 +625,7 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            smallIcon: 'drawable_test'
+            smallIcon: 'drawable_test',
           },
         });
 
@@ -676,7 +679,7 @@ android.describe('notifications', () => {
               picture: 'https://static.invertase.io/assets/jet.png',
               largeIcon: 'https://static.invertase.io/assets/jet.png',
               title: 'Title override',
-              summary: 'Summary override'
+              summary: 'Summary override',
             },
           },
         });

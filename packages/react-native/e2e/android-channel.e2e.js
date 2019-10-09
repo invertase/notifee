@@ -19,7 +19,7 @@ let validate;
 
 describe('notifications() Notification', () => {
   before(() => {
-    validate = jet.require('packages/notifications/lib/validateAndroidChannel');
+    validate = jet.require('packages/react-native/lib/validateAndroidChannel');
   });
 
   it('throws if not an object', () => {
@@ -97,9 +97,8 @@ describe('notifications() Notification', () => {
     v.bypassDnd.should.eql(false);
     v.enableLights.should.eql(true);
     v.enableVibration.should.eql(true);
-    v.showBadge.should.eql(false);
-    v.sound.should.eql('default');
-    v.lockscreenVisibility.should.eql(firebase.notifications.AndroidVisibility.PRIVATE);
+    v.showBadge.should.eql(true);
+    v.visibility.should.eql(firebase.notifications.AndroidVisibility.PRIVATE);
   });
 
   xdescribe('allowBubbles', () => {
@@ -310,18 +309,18 @@ describe('notifications() Notification', () => {
     });
   });
 
-  describe('lockscreenVisibility', () => {
+  describe('visibility', () => {
     it('throws if is not a valid type', () => {
       try {
         validate({
           channelId: 'foo',
           name: 'bar',
-          lockscreenVisibility: 'public',
+          visibility: 'public',
         });
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql(
-          "'channel.lockscreenVisibility' expected visibility to be an AndroidVisibility value",
+          "'channel.visibility' expected visibility to be an AndroidVisibility value",
         );
         return Promise.resolve();
       }
@@ -331,9 +330,9 @@ describe('notifications() Notification', () => {
       const v = validate({
         channelId: 'foo',
         name: 'bar',
-        lockscreenVisibility: firebase.notifications.AndroidVisibility.SECRET,
+        visibility: firebase.notifications.AndroidVisibility.SECRET,
       });
-      v.lockscreenVisibility.should.eql(firebase.notifications.AndroidVisibility.SECRET);
+      v.visibility.should.eql(firebase.notifications.AndroidVisibility.SECRET);
     });
   });
 
