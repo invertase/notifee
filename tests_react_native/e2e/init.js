@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const detox = require('detox');
-const jet = require('jet/platform/node');
+const jet = require('@notifications/jet/platform/node');
 const { requirePackageTests } = require('./helpers');
 const { detox: detoxConfig } = require('../package.json');
 

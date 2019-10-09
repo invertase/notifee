@@ -14,11 +14,11 @@
   },
   "devDependencies": {
     "@notifications/tools-android-dumpsys-parser": "^0.0.1",
+    "@notifications/jet": "^0.0.1",
     "@react-native-community/cli": "^2.9.0",
     "a2a": "^0.2.0",
     "babel-plugin-istanbul": "^5.2.0",
-    "detox": "12.5.0",
-    "jet": "^0.4.4",
+    "detox": "14.4.1",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "patch-package": "^6.1.0",

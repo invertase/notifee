@@ -125,9 +125,9 @@ dependencies {
   /* ------------------------
    *  TESTING SDKS/LIBRARIES
    * ------------------------ */
-  implementation(project(path: ':jet')) {
-    transitive = false
-  }
+//  implementation(project(path: ':jet')) {
+//    transitive = false
+//  }
   androidTestImplementation('com.wix:detox:+') { transitive = true }
   androidTestImplementation 'junit:junit:4.12'
 }
@@ -141,3 +141,11 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+configurations.all {
+  resolutionStrategy {
+    // TODO the line below is required for Detox since version 12.5;
+    //      it should removed as soon as the project compiles without it
+    force 'androidx.annotation:annotation:1.0.0'
+  }
+}

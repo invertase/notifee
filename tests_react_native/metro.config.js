@@ -43,14 +43,20 @@ const config = {
           }
           if (name && name.startsWith && name.startsWith('@notifications')) {
             const packageName = name.replace('@notifications/', '');
-            return join(__dirname, `../packages/${packageName}`);
+            const replacedPkgName = join(__dirname, `../packages/${packageName}`);
+            console.log(replacedPkgName);
+            return replacedPkgName;
           }
           return join(__dirname, `node_modules/${name}`);
         },
       },
     ),
   },
-  watchFolders: [resolve(__dirname, '.'), resolve(__dirname, './../packages/react-native')],
+  watchFolders: [
+    // resolve(__dirname, '.'),
+    resolve(__dirname, './../packages/react-native'),
+    resolve(__dirname, './../packages/jet'),
+  ],
 };
 
 module.exports = config;

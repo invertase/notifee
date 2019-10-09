@@ -18,7 +18,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react-native';
 
-import jet from 'jet/platform/react-native';
+import jet from '@notifications/jet';
 import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
 
 import firebase from '@react-native-firebase/app';
