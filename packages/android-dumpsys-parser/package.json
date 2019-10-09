@@ -6,12 +6,6 @@
   "engines": {
     "node": ">= 10.13 <11"
   },
-  "files": [
-    "build/index.min.js",
-    "build/helper.min.js",
-      "LICENSE",
-    "README.md"
-  ],
   "main": "src/",
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -26,15 +20,13 @@
     "uglify-js": "^3.6.0"
   },
   "scripts": {
-    "clean": "rimraf coverage build tmp",
-    "build": "tsc -p tsconfig.release.json && yarn run ugly && yarn run ugly-helper",
+    "build:clean": "rimraf coverage lib tmp",
+    "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "ugly": "uglifyjs --config-file=uglifyjs.json -- build/index.js > build/index.min.js",
-    "ugly-helper": "uglifyjs --config-file=uglifyjs-helper.json -- build/helper.js > build/helper.min.js",
-    "prepublishOnly": "yarn run build"
+    "prepare": "yarn run build"
   },
   "author": "Invertase <oss@invertase.io>",
   "license": "PRIVATE",

@@ -15,7 +15,6 @@
   "devDependencies": {
     "@notifications/tools-android-dumpsys-parser": "^0.0.1",
     "@react-native-community/cli": "^2.9.0",
-    "@react-native-firebase/private-tests-helpers": "^0.0.13",
     "a2a": "^0.2.0",
     "babel-plugin-istanbul": "^5.2.0",
     "detox": "12.5.0",

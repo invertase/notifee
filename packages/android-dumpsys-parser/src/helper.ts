@@ -1,8 +1,6 @@
-/* tslint:disable */
-const parser = require('@invertase/private-notification-parser').default;
-const stringToHashCode = require('@invertase/private-notification-parser')
-  .stringToHashCode;
+const { default: parser, stringToHashCode} = require('./').default;
 
+// tslint:disable-next-line:no-function-expression
 module.exports = async function createNotificationsAPI() {
   // @ts-ignore
   if (device.getPlatform() === 'ios') {
@@ -18,28 +16,23 @@ module.exports = async function createNotificationsAPI() {
   // @ts-ignore
   const deviceId = device._deviceId;
   // @ts-ignore
-  // await to mash it up a bit
-  const deviceDriver = await device.deviceDriver;
+  const deviceDriver = device.deviceDriver;
   const adb = deviceDriver.adb;
   const cmd = adb.adbCmd.bind(adb);
-  const cmdStr = 'c2hlbGwgZHVtcHN5cyBub3RpZmljYXRpb24gLS1ub3JlZGFjdA==';
-  // await to mash it up a bit
-  const cmdStrActual = await Buffer.from(cmdStr, 'base64').toString('utf-8');
+  const cmdStr = 'shell dumpsys notification --noredact';
 
   async function getAllNotifications() {
-    const output = (await cmd(deviceId, cmdStrActual, {})).stdout;
-    // await to mash it up a bit
-    return await parser(output);
+    const output = (await cmd(deviceId, cmdStr, {})).stdout;
+    return parser(output);
   }
 
   // @ts-ignore
   Object.assign(device, {
     get notifications() {
       return {
-        async findById(stringId) {
+        async findById(stringId: string) {
           const notifications = await getAllNotifications();
-          // await to mash it up a bit
-          return await notifications.find(n => n.id === stringToHashCode(stringId));
+          return notifications.find((n: any) => n.id === stringToHashCode(stringId));
         },
         all() {
           return getAllNotifications();
