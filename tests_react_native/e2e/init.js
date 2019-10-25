@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const jet = require('@notifications/jet/platform/node');
+const jet = require('@notifee/jet/platform/node');
 const detox = require('detox');
 const { requirePackageTests } = require('./helpers');
 const { detox: detoxConfig } = require('../package.json');
@@ -13,7 +13,7 @@ requirePackageTests('react-native');
 
 before(async () => {
   await detox.init(detoxConfig);
-  await require('@notifications/tools-android-dumpsys-parser/lib/helper')();
+  await require('@notifee/tools-android-dumpsys-parser/lib/helper')();
   await jet.init();
 });
 

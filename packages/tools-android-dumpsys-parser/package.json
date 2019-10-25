@@ -1,5 +1,5 @@
 {
-  "name": "@notifications/tools-android-dumpsys-parser",
+  "name": "@notifee/tools-android-dumpsys-parser",
   "private": true,
   "version": "0.0.1",
   "description": "tools-android-dumpsys-parser",

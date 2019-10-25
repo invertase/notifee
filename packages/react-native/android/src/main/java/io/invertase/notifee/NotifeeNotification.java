@@ -1,20 +1,4 @@
-/*
- *  Copyright (c) 2016-present Invertase Limited & Contributors
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this library except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
-package io.invertase.firebase.notifications;
+package io.invertase.notifee;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -28,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -41,24 +26,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext;
-import static io.invertase.firebase.notifications.ReactNativeFirebaseNotificationUtils.getSoundUri;
+import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
+import static io.invertase.notifee.NotifeeUtils.getSoundUri;
 
-public class ReactNativeFirebaseNotification {
+class NotifeeNotification {
   private Bundle notificationBundle;
   private Bundle androidOptionsBundle;
 
-  private ReactNativeFirebaseNotification(Bundle notificationBundle) {
+  private NotifeeNotification(Bundle notificationBundle) {
     this.notificationBundle = notificationBundle;
     this.androidOptionsBundle = notificationBundle.getBundle("android");
   }
 
-  static ReactNativeFirebaseNotification fromBundle(Bundle bundle) {
-    return new ReactNativeFirebaseNotification(bundle);
+  static NotifeeNotification fromBundle(Bundle bundle) {
+    return new NotifeeNotification(bundle);
   }
 
-  static ReactNativeFirebaseNotification fromReadableMap(ReadableMap readableMap) {
-    return new ReactNativeFirebaseNotification(Arguments.toBundle(readableMap));
+  static NotifeeNotification fromReadableMap(@NonNull ReadableMap readableMap) {
+    return new NotifeeNotification(Objects.requireNonNull(Arguments.toBundle(readableMap)));
   }
 
   WritableMap toWritableMap() {
@@ -75,7 +60,10 @@ public class ReactNativeFirebaseNotification {
 
   private Notification getNotification() {
     String channelId = Objects.requireNonNull(androidOptionsBundle.getString("channelId"));
-    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId);
+    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(
+      getApplicationContext(),
+      channelId
+    );
 
     // TODO go through all options from bundle and set on notification
     if (notificationBundle.containsKey("title")) {
@@ -123,7 +111,8 @@ public class ReactNativeFirebaseNotification {
     }
 
     if (androidOptionsBundle.containsKey("channelId") && Build.VERSION.SDK_INT >= 26) {
-      NotificationChannel notificationChannel = getNotificationManager().getNotificationChannel(channelId);
+      NotificationChannel notificationChannel = getNotificationManager().getNotificationChannel(
+        channelId);
 
       if (notificationChannel == null) {
         throw new InvalidNotificationParameterException(
@@ -171,7 +160,8 @@ public class ReactNativeFirebaseNotification {
     }
 
     if (androidOptionsBundle.containsKey("largeIcon")) {
-      Bitmap largeIcon = getImageBitmap(Objects.requireNonNull(androidOptionsBundle.getString("largeIcon")));
+      Bitmap largeIcon = getImageBitmap(Objects.requireNonNull(androidOptionsBundle.getString(
+        "largeIcon")));
 
       if (largeIcon != null) {
         notificationBuilder.setLargeIcon(largeIcon);
@@ -216,7 +206,8 @@ public class ReactNativeFirebaseNotification {
     }
 
     if (androidOptionsBundle.containsKey("remoteInputHistory")) {
-      ArrayList remoteInputHistory = androidOptionsBundle.getParcelableArrayList("remoteInputHistory");
+      ArrayList remoteInputHistory = androidOptionsBundle.getParcelableArrayList(
+        "remoteInputHistory");
       String[] history = new String[remoteInputHistory.size()];
       for (int i = 0; i < remoteInputHistory.size(); i++) {
         history[i] = (String) remoteInputHistory.get(i);
@@ -325,7 +316,8 @@ public class ReactNativeFirebaseNotification {
     NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
 
     if (bigPictureStyleBundle.containsKey("picture")) {
-      Bitmap picture = getImageBitmap(Objects.requireNonNull(bigPictureStyleBundle.getString("picture")));
+      Bitmap picture = getImageBitmap(Objects.requireNonNull(bigPictureStyleBundle.getString(
+        "picture")));
 
       if (picture != null) {
         bigPictureStyle.bigPicture(picture);
@@ -333,7 +325,8 @@ public class ReactNativeFirebaseNotification {
     }
 
     if (bigPictureStyleBundle.containsKey("largeIcon")) {
-      Bitmap largeIcon = getImageBitmap(Objects.requireNonNull(bigPictureStyleBundle.getString("largeIcon")));
+      Bitmap largeIcon = getImageBitmap(Objects.requireNonNull(bigPictureStyleBundle.getString(
+        "largeIcon")));
 
       if (largeIcon != null) {
         bigPictureStyle.bigLargeIcon(largeIcon);
@@ -407,9 +400,9 @@ public class ReactNativeFirebaseNotification {
   }
 
   private int getResourceIcon(String icon) {
-    int resourceId = ReactNativeFirebaseNotificationUtils.getResourceIdByName(icon, "mipmap");
+    int resourceId = NotifeeUtils.getResourceIdByName(icon, "mipmap");
     if (resourceId == 0) {
-      resourceId = ReactNativeFirebaseNotificationUtils.getResourceIdByName(icon, "drawable");
+      resourceId = NotifeeUtils.getResourceIdByName(icon, "drawable");
     }
 
     return resourceId;
@@ -423,7 +416,11 @@ public class ReactNativeFirebaseNotification {
       notificationTag = Objects.requireNonNull(androidOptionsBundle.getString("tag"));
     }
 
-    getNotificationManagerCompat().notify(notificationTag, notificationId.hashCode(), getNotification());
+    getNotificationManagerCompat().notify(
+      notificationTag,
+      notificationId.hashCode(),
+      getNotification()
+    );
   }
 
 }

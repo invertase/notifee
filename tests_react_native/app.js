@@ -18,11 +18,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react-native';
 
-import jet from '@notifications/jet';
+import jet from '@notifee/jet';
 import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
 
 import firebase from '@react-native-firebase/app';
-import '@notifications/react-native';
+import '@notifee/react-native';
 
 jet.exposeContextProperty('NativeModules', NativeModules);
 jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);

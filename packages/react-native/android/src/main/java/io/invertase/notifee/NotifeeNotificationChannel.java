@@ -1,20 +1,4 @@
-/*
- *  Copyright (c) 2016-present Invertase Limited & Contributors
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this library except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
-package io.invertase.firebase.notifications;
+package io.invertase.notifee;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -36,11 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext;
-import static io.invertase.firebase.notifications.ReactNativeFirebaseNotificationUtils.getFileName;
-import static io.invertase.firebase.notifications.ReactNativeFirebaseNotificationUtils.getSoundUri;
+import static io.invertase.notifee.NotifeeUtils.getFileName;
+import static io.invertase.notifee.NotifeeUtils.getSoundUri;
+import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
-class ReactNativeFirebaseNotificationChannel {
+class NotifeeNotificationChannel {
   private static NotificationManager getNotificationManager() {
     return (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
   }
@@ -63,7 +47,8 @@ class ReactNativeFirebaseNotificationChannel {
 
   static WritableMap getChannelGroup(String channelGroupId) {
     if (Build.VERSION.SDK_INT >= 28) {
-      return createChannelGroupMap(getNotificationManager().getNotificationChannelGroup(channelGroupId));
+      return createChannelGroupMap(getNotificationManager().getNotificationChannelGroup(
+        channelGroupId));
     }
 
     return null;
@@ -199,7 +184,10 @@ class ReactNativeFirebaseNotificationChannel {
       }
 
       writableMap.putBoolean("showBadge", notificationChannel.canShowBadge());
-      writableMap.putString("sound", getFileName(getApplicationContext(), notificationChannel.getSound()));
+      writableMap.putString(
+        "sound",
+        getFileName(getApplicationContext(), notificationChannel.getSound())
+      );
       writableMap.putBoolean("vibrationEnabled", notificationChannel.shouldVibrate());
 
       long[] vibration = notificationChannel.getVibrationPattern();

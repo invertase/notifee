@@ -1,5 +1,5 @@
 {
-  "name": "@notifications/tests-react-native",
+  "name": "@notifee/tests-react-native",
   "version": "0.2.3",
   "private": true,
   "scripts": {
@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "@react-native-firebase/app": "^6.0.1",
-    "@notifications/react-native": "0.0.1",
+    "@notifee/react-native": "0.0.1",
     "react": "16.8.6",
     "react-native": "0.60.4"
   },
   "devDependencies": {
-    "@notifications/tools-android-dumpsys-parser": "^0.0.1",
-    "@notifications/jet": "^0.0.1",
+    "@notifee/tools-android-dumpsys-parser": "^0.0.1",
+    "@notifee/jet": "^0.0.1",
     "@react-native-community/cli": "^2.9.0",
     "a2a": "^0.2.0",
     "babel-plugin-istanbul": "^5.2.0",

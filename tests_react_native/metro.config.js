@@ -41,8 +41,8 @@ const config = {
           if (typeof name !== 'string') {
             return target[name];
           }
-          if (name && name.startsWith && name.startsWith('@notifications')) {
-            const packageName = name.replace('@notifications/', '');
+          if (name && name.startsWith && name.startsWith('@notifee')) {
+            const packageName = name.replace('@notifee/', '');
             const replacedPkgName = join(__dirname, `../packages/${packageName}`);
             console.log(replacedPkgName);
             return replacedPkgName;

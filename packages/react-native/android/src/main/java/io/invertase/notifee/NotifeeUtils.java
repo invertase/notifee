@@ -1,20 +1,4 @@
-/*
- *  Copyright (c) 2016-present Invertase Limited & Contributors
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this library except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
-package io.invertase.firebase.notifications;
+package io.invertase.notifee;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -25,20 +9,16 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import static io.invertase.firebase.app.ReactNativeFirebaseApp.getApplicationContext;
+import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
-public class ReactNativeFirebaseNotificationUtils {
+class NotifeeUtils {
   /**
-   * Attemps to find a device resource id by name and type
-   * @param name
-   * @param type mipmap/drawable/raw
-   * @return
+   * Attempts to find a device resource id by name and type
    */
-  public static int getResourceIdByName(String name, String type) {
+  static int getResourceIdByName(String name, String type) {
     String packageName = getApplicationContext().getPackageName();
     return getApplicationContext().getResources().getIdentifier(name, type, packageName);
   }
-
 
 //  static int getResourceId(Context context, String type, String image) {
 //    return context
@@ -49,13 +29,10 @@ public class ReactNativeFirebaseNotificationUtils {
   static String getFileName(Context context, Uri uri) {
     String result = null;
     if (uri.getScheme() != null && uri.getScheme().equals("content")) {
-      Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-      try {
+      try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
         if (cursor != null && cursor.moveToFirst()) {
           result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
         }
-      } finally {
-        if (cursor != null) cursor.close();
       }
     }
 
