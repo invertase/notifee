@@ -19,26 +19,26 @@ let validate;
 
 describe('notifications() Notification', () => {
   before(() => {
-    validate = jet.require('packages/notifications/lib/validateAndroidNotification');
+    validate = jet.require('packages/react-native/lib/validateAndroidNotification');
   });
 
   it('uses default values', () => {
     const v = validate();
-
     const expected = jet.contextify({
       autoCancel: true,
       badgeIconType: firebase.notifications.AndroidBadgeIconType.NONE,
+      channelId: '',
       colorized: false,
-      groupAlertBehaviour: firebase.notifications.AndroidGroupAlertBehavior.ALL,
+      groupAlertBehavior: firebase.notifications.AndroidGroupAlertBehavior.ALL,
       groupSummary: false,
       localOnly: false,
       ongoing: false,
       onlyAlertOnce: false,
       priority: firebase.notifications.AndroidPriority.DEFAULT,
       showWhenTimestamp: false,
-      smallIcon: ['ic_launcher', -1],
+      smallIcon: jet.contextify(['ic_launcher', -1]),
       usesChronometer: false,
-      vibrate: true,
+      sound: 'default',
       visibility: firebase.notifications.AndroidVisibility.PRIVATE,
     });
 
@@ -56,7 +56,7 @@ describe('notifications() Notification', () => {
     }
   });
 
-  describe('actions', () => {
+  xdescribe('actions', () => {
     // todo
   });
 
@@ -287,24 +287,24 @@ describe('notifications() Notification', () => {
     });
   });
 
-  describe('groupAlertBehaviour', () => {
-    it('throws if groupAlertBehaviour is invalid', () => {
+  describe('groupAlertBehavior', () => {
+    it('throws if groupAlertBehavior is invalid', () => {
       try {
-        validate({ groupAlertBehaviour: 'foobar' });
+        validate({ groupAlertBehavior: 'foobar' });
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql(
-          "'notification.android.groupAlertBehaviour' expected a valid AndroidGroupAlertBehavior",
+          "'notification.android.groupAlertBehavior' expected a valid AndroidGroupAlertBehavior",
         );
         return Promise.resolve();
       }
     });
 
-    it('sets groupAlertBehaviour', () => {
+    it('sets groupAlertBehavior', () => {
       const v = validate({
-        groupAlertBehaviour: firebase.notifications.AndroidGroupAlertBehavior.SUMMARY,
+        groupAlertBehavior: firebase.notifications.AndroidGroupAlertBehavior.SUMMARY,
       });
-      v.groupAlertBehaviour.should.eql(firebase.notifications.AndroidGroupAlertBehavior.SUMMARY);
+      v.groupAlertBehavior.should.eql(firebase.notifications.AndroidGroupAlertBehavior.SUMMARY);
     });
   });
 

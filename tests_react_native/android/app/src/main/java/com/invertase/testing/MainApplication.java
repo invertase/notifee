@@ -7,8 +7,6 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.devsupport.DevInternalSettings;
 import com.facebook.soloader.SoLoader;
-import io.invertase.firebase.app.ReactNativeFirebaseApp;
-import io.invertase.jet.JetPackage;
 
 import java.util.List;
 
@@ -17,13 +15,12 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
+      return true;
     }
 
     @Override
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
-      packages.add(new JetPackage());
       return packages;
     }
   };
@@ -36,7 +33,6 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    ReactNativeFirebaseApp.initializeSecondaryApp("secondaryFromNative", getApplicationContext());
     SoLoader.init(this, false);
 
     // TODO move to jet

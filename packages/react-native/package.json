@@ -1,8 +1,8 @@
 {
-  "name": "@notifications/react-native",
+  "name": "@notifee/react-native",
   "version": "0.0.1",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
-  "description": "React Native Firebase - Notifications",
+  "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -12,17 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/invertase/react-native-firebase/tree/master/packages/notifications"
+    "url": "https://github.com/invertase/notifee-public"
   },
   "license": "Restricted",
   "keywords": [
     "react",
     "react-native",
     "firebase",
+    "fcm",
+    "notifee",
     "notifications"
   ],
-  "dependencies": {
-  },
   "publishConfig": {
     "access": "public"
   }

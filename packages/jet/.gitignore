@@ -1,0 +1,61 @@
+**/android/gradlew
+**/android/gradlew.bat
+**/android/gradle
+**/android/.gradle
+android/gradlew
+android/gradlew.bat
+android/gradle
+android/.gradle
+*.iml
+
+
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+**/xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcworkspace
+ios/Pods
+
+
+
+# Android/IJ
+#
+.idea
+.gradle
+local.properties
+
+# node.js
+#
+node_modules/
+npm-debug.log
+
+# BUCK
+buck-out/
+\.buckd/
+**/android/app/libs
+**/android/keystores/debug.keystore
+android/app/libs
+android/keystores/debug.keystore
+.nyc_output
+coverage
+
+

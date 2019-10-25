@@ -1,0 +1,49 @@
+{
+  "name": "@notifee/jet",
+  "private": true,
+  "version": "0.0.1",
+  "license": "PRIVATE",
+  "description": "Bring your React Native JS code into Node.js and test it mock-free and native code free. Perfect for React Native module developers wanting full CI.",
+  "author": {
+    "name": "Mike Diarmid",
+    "email": "mike.diarmid@gmail.com",
+    "url": "http://github.com/Salakar/"
+  },
+  "main": "./lib/node",
+  "react-native": "./lib/react-native",
+  "keywords": [
+    "react-native",
+    "react native module",
+    "detox",
+    "debugger",
+    "mocha",
+    "coverage",
+    "node",
+    "nodejs",
+    "protocol",
+    "batched bridge",
+    "istanbul",
+    "ci",
+    "integration",
+    "test",
+    "testing"
+  ],
+  "scripts": {},
+  "optionalDependencies": {
+    "mocha": "^6.1.4"
+  },
+  "peerDependencies": {
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "error-stack-parser": "^2.0.2",
+    "istanbul-lib-coverage": "^1.2.0",
+    "source-map": "^0.7.3",
+    "tinyqueue": "^1.2.3",
+    "ws": "^6.0.0",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.3.2"
+  }
+}

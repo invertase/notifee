@@ -19,7 +19,6 @@ import {
   hasOwnProperty,
   isArray,
   isBoolean,
-  isNumber,
   isObject,
   isString,
 } from '@react-native-firebase/app/lib/common';
@@ -170,9 +169,7 @@ export default function validateAndroidChannel(channel) {
    */
   if (hasOwnProperty(channel, 'visibility')) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
-      throw new Error(
-        "'channel.visibility' expected visibility to be an AndroidVisibility value.",
-      );
+      throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
 
     out.visibility = channel.visibility;

@@ -1,29 +1,8 @@
 /* eslint-disable no-console */
-/*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 const { resolve } = require('path');
 const { existsSync } = require('fs');
 const requireAll = require('require-all');
 
-/**
- *
- * @param packageName
- */
 function requirePackageTests(packageName) {
   const e2eDir = `./../packages/${packageName}/e2e`;
   if (existsSync(e2eDir)) {
@@ -45,7 +24,7 @@ Object.defineProperty(global, 'A2A', {
   },
 });
 
-Object.defineProperty(global, 'notifications', {
+Object.defineProperty(global, 'firebase', {
   get() {
     return jet.module;
   },
@@ -63,12 +42,8 @@ Object.defineProperty(global, 'NativeEventEmitter', {
   },
 });
 
-Object.defineProperty(global, 'TestsAPI', {
-  get() {
-    return new TestingApi();
-  },
-});
-
 global.isCI = !!process.env.CI;
+
+require('./testing_api')(global);
 
 module.exports.requirePackageTests = requirePackageTests;

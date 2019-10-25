@@ -66,6 +66,8 @@ export default function validateAndroidNotification(android) {
     visibility: AndroidVisibility.PRIVATE,
   };
 
+  // throw new Error('Did a woopsie!');
+
   if (isUndefined(android)) {
     return out;
   }
@@ -539,6 +541,17 @@ export default function validateAndroidNotification(android) {
     }
 
     out.usesChronometer = android.usesChronometer;
+  }
+
+  /**
+   * vibrate
+   */
+  if (hasOwnProperty(android, 'vibrate')) {
+    if (!isBoolean(android.vibrate)) {
+      throw new Error("'notification.android.vibrate' expected a boolean value.");
+    }
+
+    out.vibrate = android.vibrate;
   }
 
   /**

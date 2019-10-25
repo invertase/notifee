@@ -1,9 +1,0 @@
-{
-  "toplevel": true,
-  "output": {
-    "keep_quoted_props": true
-  },
-  "mangle": {
-    "reserved": ["stringToHashCode"]
-  }
-}

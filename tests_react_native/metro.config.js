@@ -41,16 +41,22 @@ const config = {
           if (typeof name !== 'string') {
             return target[name];
           }
-          if (name && name.startsWith && name.startsWith('@notifications')) {
-            const packageName = name.replace('@notifications/', '');
-            return join(__dirname, `../packages/${packageName}`);
+          if (name && name.startsWith && name.startsWith('@notifee')) {
+            const packageName = name.replace('@notifee/', '');
+            const replacedPkgName = join(__dirname, `../packages/${packageName}`);
+            console.log(replacedPkgName);
+            return replacedPkgName;
           }
           return join(__dirname, `node_modules/${name}`);
         },
       },
     ),
   },
-  watchFolders: [resolve(__dirname, '.'), resolve(__dirname, './../packages/react-native')],
+  watchFolders: [
+    // resolve(__dirname, '.'),
+    resolve(__dirname, './../packages/react-native'),
+    resolve(__dirname, './../packages/jet'),
+  ],
 };
 
 module.exports = config;

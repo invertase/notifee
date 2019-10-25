@@ -4,7 +4,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.4.2'
+    classpath 'com.android.tools.build:gradle:3.5.1'
   }
 }
 
@@ -51,10 +51,12 @@ repositories {
 }
 
 dependencies {
-  api project(':@react-native-firebase_app')
-  implementation platform("com.google.firebase:firebase-bom:${ReactNative.ext.getVersion("firebase", "bom")}")
-  implementation "com.google.firebase:firebase-core"
+  implementation 'androidx.work:work-runtime:2.2.0'
+  implementation "com.squareup.okhttp3:okhttp:4.2.1"
+  implementation 'com.google.android.gms:play-services-tasks:17.0.0'
 }
+
+apply from: file("./notifee-json.gradle")
 
 ReactNative.shared.applyPackageVersion()
 ReactNative.shared.applyDefaultExcludes()
