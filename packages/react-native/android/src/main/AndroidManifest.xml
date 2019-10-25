@@ -13,7 +13,7 @@
       android:name="io.invertase.notifee.core.NotifeeInitProvider"
       android:authorities="${applicationId}.notifee-init-provider"
       android:exported="false"
-      android:initOrder="100" />
+      android:initOrder="-100" />
   </application>
 
 </manifest>

@@ -51,6 +51,8 @@ repositories {
 }
 
 dependencies {
+  implementation 'androidx.work:work-runtime:2.2.0'
+  implementation "com.squareup.okhttp3:okhttp:4.2.1"
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
 }
 

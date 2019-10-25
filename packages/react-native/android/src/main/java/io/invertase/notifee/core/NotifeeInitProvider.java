@@ -8,9 +8,12 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import androidx.annotation.Nullable;
+import androidx.work.ExistingPeriodicWorkPolicy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+
+import static io.invertase.notifee.core.NotifeeWorker.scheduleLicenseCheckWork;
 
 public class NotifeeInitProvider extends ContentProvider {
   private static final String PROVIDER_AUTHORITY = "notifee-init-provider";
@@ -35,7 +38,7 @@ public class NotifeeInitProvider extends ContentProvider {
       }
       NotifeeContextHolder.setApplicationContext(applicationContext);
     }
-
+    scheduleLicenseCheckWork(ExistingPeriodicWorkPolicy.KEEP);
     return false;
   }
 
