@@ -3,7 +3,7 @@
  */
 
 import AndroidColor from './AndroidColor';
-import { isNumber, isString } from './core/utils';
+import { isNumber, isString } from './utils';
 
 /**
  * Validates any hexadecimal (optional transparency)

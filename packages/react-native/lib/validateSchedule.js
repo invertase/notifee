@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isBoolean, isNumber, isObject } from './core/utils';
+import { hasOwnProperty, isBoolean, isNumber, isObject } from './utils';
 import AndroidRepeatInterval from './AndroidRepeatInterval';
 
 export default function validateSchedule(schedule) {

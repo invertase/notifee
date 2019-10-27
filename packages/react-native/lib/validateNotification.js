@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateNotificationId, hasOwnProperty, isObject, isString } from './core/utils';
+import { generateNotificationId, hasOwnProperty, isObject, isString } from './utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';

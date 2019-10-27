@@ -3,7 +3,7 @@
  */
 
 import { getCoreModule, getNativeModule } from './NotifeeNativeModuleRegistry';
-import SharedEventEmitter from './SharedEventEmitter';
+import NotifeeJSEventEmitter from './NotifeeJSEventEmitter';
 
 let notifeeConfigJson = null;
 
@@ -22,7 +22,7 @@ export default class NotifeeNativeModule {
   }
 
   get emitter() {
-    return SharedEventEmitter;
+    return NotifeeJSEventEmitter;
   }
 
   get native() {

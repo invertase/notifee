@@ -3,7 +3,7 @@
  */
 
 import AndroidStyle from './AndroidStyle';
-import { hasOwnProperty, isString } from './core/utils';
+import { hasOwnProperty, isString } from './utils';
 
 /**
  * Validates a BigPictureStyle

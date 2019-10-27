@@ -2,8 +2,8 @@
  * Copyright (c) 2016-present Invertase Limited & Contributors
  */
 
-import { isFunction, isNumber, isString, isIOS, isArray, isNull } from './core/utils';
-import NotifeeNativeModule from './core/NotifeeNativeModule';
+import { isFunction, isNumber, isString, isIOS, isArray, isNull } from './utils';
+import NotifeeNativeModule from './NotifeeNativeModule';
 
 import validateNotification from './validateNotification';
 import validateSchedule from './validateSchedule';

@@ -7,7 +7,7 @@ import { NativeModules, Platform } from 'react-native';
 import { CORE_NATIVE_MODULE_NAME } from './NotifeeConstants';
 import NotifeeNativeError from './NotifeeNativeError';
 import NotifeeNativeEventEmitter from './NotifeeNativeEventEmitter';
-import SharedEventEmitter from './SharedEventEmitter';
+import SharedEventEmitter from './NotifeeJSEventEmitter';
 
 const NATIVE_MODULE_REGISTRY = {};
 const NATIVE_MODULE_EVENT_SUBSCRIPTIONS = {};

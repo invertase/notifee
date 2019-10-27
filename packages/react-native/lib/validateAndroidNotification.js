@@ -10,7 +10,7 @@ import {
   isObject,
   isString,
   isUndefined,
-} from './core/utils';
+} from './utils';
 
 import AndroidBadgeIconType from './AndroidBadgeIconType';
 import AndroidGroupAlertBehavior from './AndroidGroupAlertBehavior';
@@ -487,7 +487,7 @@ export default function validateAndroidNotification(android) {
     }
 
     if (android.tag.includes('|')) {
-      throw new Error(`'notification.android.tag' tag cannot contain the "|" (pipe) character.`);
+      throw new Error('\'notification.android.tag\' tag cannot contain the "|" (pipe) character.');
     }
 
     out.tag = android.tag;

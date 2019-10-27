@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isArray, isBoolean, isObject, isString } from './core/utils';
+import { hasOwnProperty, isArray, isBoolean, isObject, isString } from './utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 import AndroidVisibility from './AndroidVisibility';
 import AndroidImportance from './AndroidImportance';

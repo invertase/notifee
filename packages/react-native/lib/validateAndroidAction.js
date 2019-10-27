@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { isArray, isBoolean, isObject, isString, hasOwnProperty } from './core/utils';
+import { isArray, isBoolean, isObject, isString, hasOwnProperty } from './utils';
 
 import AndroidSemanticAction from './AndroidSemanticAction';
 

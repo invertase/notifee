@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isObject, isString } from './core/utils';
+import { hasOwnProperty, isObject, isString } from './utils';
 
 export default function validateAndroidChannelGroup(group) {
   if (!isObject(group)) {

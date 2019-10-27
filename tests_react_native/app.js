@@ -19,7 +19,7 @@ import React, { Component } from 'react';
 import { AppRegistry, NativeModules, StyleSheet, Text, View } from 'react-native';
 
 import jet from '@notifee/jet';
-import NativeEventEmitter from '@notifee/react-native/lib/core/NotifeeNativeEventEmitter';
+import NativeEventEmitter from '@notifee/react-native/lib/NotifeeNativeEventEmitter';
 import notifee from '@notifee/react-native';
 import * as notifeeExports from '@notifee/react-native';
 
