@@ -16,17 +16,17 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, NativeModules, StyleSheet, Text, View } from 'react-native';
 
 import jet from '@notifee/jet';
-import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
-
-import firebase from '@react-native-firebase/app';
-import '@notifee/react-native';
+import NativeEventEmitter from '@notifee/react-native/lib/core/NotifeeNativeEventEmitter';
+import notifee from '@notifee/react-native';
+import * as notifeeExports from '@notifee/react-native';
 
 jet.exposeContextProperty('NativeModules', NativeModules);
 jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);
-jet.exposeContextProperty('module', firebase);
+jet.exposeContextProperty('module', notifee);
+jet.exposeContextProperty('moduleExports', notifeeExports);
 
 class Root extends Component {
   constructor(props) {
@@ -44,13 +44,6 @@ class Root extends Component {
     if (!currentTest) {
       return (
         <View style={[styles.container, styles.horizontal]}>
-          <Image
-            source={{
-              uri:
-                'https://github.com/invertase/react-native-firebase-starter/raw/master/assets/ReactNativeFirebase.png',
-            }}
-            style={[styles.logo]}
-          />
           <Text style={[styles.item, styles.module]} testID="module">
             {'No Tests Started'}
           </Text>
@@ -88,13 +81,6 @@ class Root extends Component {
 
     return (
       <View style={[styles.container, styles.horizontal]}>
-        <Image
-          source={{
-            uri:
-              'https://github.com/invertase/react-native-firebase-starter/raw/master/assets/RNFirebase.png',
-          }}
-          style={[styles.logo]}
-        />
         <Text style={[styles.item, styles.module]} testID="module">
           {module}
         </Text>

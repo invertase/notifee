@@ -16,7 +16,8 @@ public class NotifeePackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(@Nonnull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
-    modules.add(new NotifeeModule(reactContext));
+    modules.add(new NotifeeCoreModule(reactContext));
+    modules.add(new NotifeeApiModule(reactContext));
     return modules;
   }
 

@@ -1,10 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: "com.google.firebase.firebase-perf"
-
-crashlytics {
-  enableNdk true
-}
 
 import com.android.build.OutputFile
 
@@ -139,13 +133,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
   into 'libs'
 }
 
-apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
-configurations.all {
-  resolutionStrategy {
-    // TODO the line below is required for Detox since version 12.5;
-    //      it should removed as soon as the project compiles without it
-    force 'androidx.annotation:annotation:1.0.0'
-  }
-}
+//configurations.all {
+//  resolutionStrategy {
+//    // TODO the line below is required for Detox since version 12.5;
+//    //      it should removed as soon as the project compiles without it
+//    force 'androidx.annotation:annotation:1.0.0'
+//  }
+//}

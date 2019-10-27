@@ -1,17 +1,5 @@
 /*
- *  Copyright (c) 2016-present Invertase Limited & Contributors
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this library except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  Copyright (c) 2016-present Invertase Limited
  */
 
 const ID = {
@@ -33,17 +21,17 @@ android.describe('notifications', () => {
     }
     testCount++;
 
-    await firebase.notifications().createChannel({
+    await notifee.createChannel({
       name: 'Hello Foo',
       channelId: 'foo',
-      importance: firebase.notifications.AndroidImportance.HIGH,
+      importance: notifeeExports.AndroidImportance.HIGH,
     });
   });
 
   describe('android', () => {
     it('throws if a channel does not exist', async () => {
       try {
-        await firebase.notifications().displayNotification({
+        await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'idonotexist',
@@ -51,13 +39,13 @@ android.describe('notifications', () => {
         });
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
-        e.code.should.containEql('notifications/channel-not-found');
+        e.code.should.containEql('channel-not-found');
         return Promise.resolve();
       }
     });
 
     it('creates a basic notification', async () => {
-      const notificationId = await firebase.notifications().displayNotification({
+      const notificationId = await notifee.displayNotification({
         body: 'foo bar baz',
         android: {
           channelId: 'foo',
@@ -72,7 +60,7 @@ android.describe('notifications', () => {
     });
 
     it('creates a basic notification with custom id', async () => {
-      const notificationId = await firebase.notifications().displayNotification({
+      const notificationId = await notifee.displayNotification({
         notificationId: ID.raw,
         body: 'foo bar baz',
         android: {
@@ -85,7 +73,7 @@ android.describe('notifications', () => {
     });
 
     it('creates a notification with a custom tag', async () => {
-      const notificationId = await firebase.notifications().displayNotification({
+      const notificationId = await notifee.displayNotification({
         body: 'foo bar baz',
         android: {
           channelId: 'foo',
@@ -98,7 +86,7 @@ android.describe('notifications', () => {
     });
 
     it('creates with base data', async () => {
-      const notificationId = await firebase.notifications().displayNotification({
+      const notificationId = await notifee.displayNotification({
         title: 'Hello',
         subtitle: 'World',
         body: 'foo bar baz3',
@@ -120,7 +108,7 @@ android.describe('notifications', () => {
         bar: 'invertase',
       };
 
-      const notificationId = await firebase.notifications().displayNotification({
+      const notificationId = await notifee.displayNotification({
         title: 'foo6',
         body: 'foo bar baz5',
         android: {
@@ -138,7 +126,7 @@ android.describe('notifications', () => {
 
     describe('sound', () => {
       it('uses the default sound', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz5',
           android: {
             channelId: 'foo',
@@ -150,14 +138,14 @@ android.describe('notifications', () => {
       });
 
       it('uses a custom sound', async () => {
-        await firebase.notifications().createChannel({
+        await notifee.createChannel({
           name: 'Custom Sound',
           channelId: 'sound',
-          importance: firebase.notifications.AndroidImportance.HIGH,
+          importance: notifeeExports.AndroidImportance.HIGH,
           sound: 'hollow.mp3',
         });
 
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz5',
           android: {
             channelId: 'sound',
@@ -175,7 +163,7 @@ android.describe('notifications', () => {
 
     describe('autoCancel', () => {
       it('sets autoCancel default on the notification', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -188,7 +176,7 @@ android.describe('notifications', () => {
       });
 
       it('sets autoCancel value on the notification', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -203,11 +191,11 @@ android.describe('notifications', () => {
 
     describe('badgeIconType', () => {
       it('sets badgeIconType on the notification', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            badgeIconType: firebase.notifications.AndroidBadgeIconType.LARGE,
+            badgeIconType: notifeeExports.AndroidBadgeIconType.LARGE,
           },
         });
 
@@ -218,11 +206,11 @@ android.describe('notifications', () => {
 
     describe('category', () => {
       it('sets category on the notification', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            category: firebase.notifications.AndroidCategory.SOCIAL,
+            category: notifeeExports.AndroidCategory.SOCIAL,
           },
         });
 
@@ -233,7 +221,7 @@ android.describe('notifications', () => {
 
     describe('channelId', () => {
       it('uses the notification channel', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -251,11 +239,11 @@ android.describe('notifications', () => {
 
     describe('color', () => {
       it('uses a predefined color', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            color: firebase.notifications.AndroidColor.AQUA,
+            color: notifeeExports.AndroidColor.AQUA,
           },
         });
 
@@ -265,7 +253,7 @@ android.describe('notifications', () => {
       });
 
       it('uses a custom color', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -281,7 +269,7 @@ android.describe('notifications', () => {
 
     describe('colorized', () => {
       it('sets default colorized', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -293,7 +281,7 @@ android.describe('notifications', () => {
       });
 
       it('sets colorized', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -311,7 +299,7 @@ android.describe('notifications', () => {
 
     describe('contentInfo', () => {
       it('sets contentInfo', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           title: 'foo bar baz5',
           body: 'foo bar baz5',
           android: {
@@ -331,7 +319,7 @@ android.describe('notifications', () => {
 
     describe('group', () => {
       it('sets group', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -347,26 +335,26 @@ android.describe('notifications', () => {
     // TODO only Android 29+
     describe('groupAlertBehaviour', () => {
       it('sets groupAlertBehaviour', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
             group: 'foo bar group',
-            groupAlertBehavior: firebase.notifications.AndroidGroupAlertBehavior.CHILDREN,
+            groupAlertBehavior: notifeeExports.AndroidGroupAlertBehavior.CHILDREN,
           },
         });
 
         const notification = await device.notifications.findById(notificationId);
         notification.group.should.equal('foo bar group');
         notification.groupAlertBehavior.should.eql(
-          firebase.notifications.AndroidGroupAlertBehavior.CHILDREN,
+          notifeeExports.AndroidGroupAlertBehavior.CHILDREN,
         );
       });
     });
 
     describe('groupSummary', () => {
       it('sets groupSummary', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -382,7 +370,7 @@ android.describe('notifications', () => {
 
     describe('largeIcon', () => {
       it('sets a HTTP large icon', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -398,7 +386,7 @@ android.describe('notifications', () => {
       // TODO not working
       xit('sets a mipmap large icon', async () => {
         await Utils.sleep(6000);
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -413,7 +401,7 @@ android.describe('notifications', () => {
       });
 
       it('sets a drawable large icon', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -429,7 +417,7 @@ android.describe('notifications', () => {
 
     describe('lights', () => {
       it('sets lights', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -444,7 +432,7 @@ android.describe('notifications', () => {
 
     describe('localOnly', () => {
       it('sets localOnly', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -460,7 +448,7 @@ android.describe('notifications', () => {
     // TODO only Android 29+
     describe('number', () => {
       it('sets custom number', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -475,7 +463,7 @@ android.describe('notifications', () => {
 
     describe('ongoing', () => {
       it('sets ongoing boolean', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -490,7 +478,7 @@ android.describe('notifications', () => {
 
     describe('onlyAlertOnce', () => {
       it('sets onlyAlertOnce boolean', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -505,22 +493,22 @@ android.describe('notifications', () => {
 
     describe('priority', () => {
       it('sets priority', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            priority: firebase.notifications.AndroidPriority.MAX,
+            priority: notifeeExports.AndroidPriority.MAX,
           },
         });
 
         const notification = await device.notifications.findById(notificationId);
-        notification.priority.should.eql(firebase.notifications.AndroidPriority.MAX);
+        notification.priority.should.eql(notifeeExports.AndroidPriority.MAX);
       });
     });
 
     describe('progress', () => {
       it('sets max/current progress', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -538,7 +526,7 @@ android.describe('notifications', () => {
       });
 
       it('sets indeterminate progress', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -559,7 +547,7 @@ android.describe('notifications', () => {
 
     describe('remoteInputHistory', () => {
       it('sets remote input history', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -576,7 +564,7 @@ android.describe('notifications', () => {
 
     describe('shortcutId', () => {
       it('sets shortcutId', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -591,7 +579,7 @@ android.describe('notifications', () => {
 
     describe('showWhenTimestamp', () => {
       it('sets showWhenTimestamp', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -606,7 +594,7 @@ android.describe('notifications', () => {
 
     describe('smallIcon', () => {
       it('uses default ic_launcher drawable icon', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -619,7 +607,7 @@ android.describe('notifications', () => {
 
       // TODO is this working? Comes up round with no icon...
       xit('uses a custom drawable icon', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -635,7 +623,7 @@ android.describe('notifications', () => {
 
     describe('sortKey', () => {
       it('sets sortKey', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -650,12 +638,12 @@ android.describe('notifications', () => {
 
     describe('style -> BigPictureStyle', () => {
       it('sets a big picture style', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifeeExports.AndroidStyle.BIGPICTURE,
               picture: 'https://static.invertase.io/assets/jet.png',
             },
           },
@@ -668,12 +656,12 @@ android.describe('notifications', () => {
       });
 
       it('sets bigPicture with options', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifeeExports.AndroidStyle.BIGPICTURE,
               picture: 'https://static.invertase.io/assets/jet.png',
               largeIcon: 'https://static.invertase.io/assets/jet.png',
               title: 'Title override',
@@ -695,12 +683,12 @@ android.describe('notifications', () => {
 
     describe('style -> BigTextStyle', () => {
       it('sets a big text style', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifeeExports.AndroidStyle.BIGTEXT,
               text: bigText,
             },
           },
@@ -712,12 +700,12 @@ android.describe('notifications', () => {
       });
 
       it('sets bigText with options', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifeeExports.AndroidStyle.BIGTEXT,
               text: bigText,
               title: 'title expanded',
               summary: 'summary expanded',
@@ -735,7 +723,7 @@ android.describe('notifications', () => {
 
     describe('ticker', () => {
       it('sets ticker', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -751,7 +739,7 @@ android.describe('notifications', () => {
     describe('timeoutAfter', () => {
       it('sets timeoutAfter', async () => {
         const timeout = Date.now() + 2000;
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -766,7 +754,7 @@ android.describe('notifications', () => {
 
     describe('usesChronometer', () => {
       it('sets usesChronometer', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -780,7 +768,7 @@ android.describe('notifications', () => {
 
     describe('vibrationPattern', () => {
       it('sets vibrationPattern', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
@@ -794,11 +782,11 @@ android.describe('notifications', () => {
 
     describe('visibility', () => {
       it('sets visibility', async () => {
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            visibility: firebase.notifications.AndroidVisibility.SECRET,
+            visibility: notifeeExports.AndroidVisibility.SECRET,
           },
         });
 
@@ -810,7 +798,7 @@ android.describe('notifications', () => {
     describe('when', () => {
       it('sets when timestamp', async () => {
         const when = Date.now() + 3000000;
-        const notificationId = await firebase.notifications().displayNotification({
+        const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
             channelId: 'foo',

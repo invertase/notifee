@@ -1,29 +1,8 @@
 /*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright (c) 2016-present Invertase Limited
  */
 
-describe('notifications()', () => {
-  describe('namespace', () => {
-    it('accessible from firebase.app()', () => {
-      const app = firebase.app();
-      should.exist(app.notifications);
-      app.notifications().app.should.equal(app);
-    });
-  });
-
+describe('notifee', () => {
   it('calls cancelAllNotifications without throwing', () => {
     // todo
   });
@@ -31,7 +10,7 @@ describe('notifications()', () => {
   describe('cancelNotification()', () => {
     it('throws if notificationId is not a string', () => {
       try {
-        firebase.notifications().cancelNotification(123);
+        notifee.cancelNotification(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'notificationId' expected a string value");
@@ -47,7 +26,7 @@ describe('notifications()', () => {
   describe('createChannel()', () => {
     it('throws if channel is invalid', () => {
       try {
-        firebase.notifications().createChannel(123);
+        notifee.createChannel(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -63,7 +42,7 @@ describe('notifications()', () => {
   describe('createChannels()', () => {
     it('throws if channels is not an array', () => {
       try {
-        firebase.notifications().createChannels({});
+        notifee.createChannels({});
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'channels' expected an array of AndroidChannel");
@@ -73,7 +52,7 @@ describe('notifications()', () => {
 
     it('throws if channels are invalid', () => {
       try {
-        firebase.notifications().createChannels([{}]);
+        notifee.createChannels([{}]);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -90,7 +69,7 @@ describe('notifications()', () => {
   describe('createChannelGroup()', () => {
     it('throws if channel group is invalid', () => {
       try {
-        firebase.notifications().createChannelGroup(123);
+        notifee.createChannelGroup(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -106,7 +85,7 @@ describe('notifications()', () => {
   describe('createChannelGroups()', () => {
     it('throws if channel groups is not an array', () => {
       try {
-        firebase.notifications().createChannelGroups({});
+        notifee.createChannelGroups({});
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'channelGroups' expected an array of AndroidChannelGroup");
@@ -116,7 +95,7 @@ describe('notifications()', () => {
 
     it('throws if channel groups are invalid', () => {
       try {
-        firebase.notifications().createChannelGroups([{}]);
+        notifee.createChannelGroups([{}]);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -133,7 +112,7 @@ describe('notifications()', () => {
   describe('deleteChannel', () => {
     it('throws if channel id is not a string', () => {
       try {
-        firebase.notifications().deleteChannel(123);
+        notifee.deleteChannel(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -150,7 +129,7 @@ describe('notifications()', () => {
   describe('deleteChannelGroup', () => {
     it('throws if channel group id is not a string', () => {
       try {
-        firebase.notifications().deleteChannelGroup(123);
+        notifee.deleteChannelGroup(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -167,7 +146,7 @@ describe('notifications()', () => {
   describe('displayNotification()', () => {
     it('throws if notification is invalid', () => {
       try {
-        firebase.notifications().displayNotification('foobar');
+        notifee.displayNotification('foobar');
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // has own tests
@@ -182,22 +161,22 @@ describe('notifications()', () => {
 
   xdescribe('getBadge()', () => {
     it('gets a value', async () => {
-      await firebase.notifications.setBadge(123);
-      const value = await firebase.getBadge();
+      await notifeeExports.setBadge(123);
+      const value = await notifee.getBadge();
       value.should.eql(123);
     });
   });
 
   xdescribe('setBadge()', () => {
     it('sets a value', async () => {
-      await firebase.notifications.setBadge(234);
-      const value = await firebase.getBadge();
+      await notifeeExports.setBadge(234);
+      const value = await notifee.getBadge();
       value.should.eql(243);
     });
 
     it('removes the badge', async () => {
-      await firebase.notifications.setBadge(null);
-      const value = await firebase.getBadge();
+      await notifeeExports.setBadge(null);
+      const value = await notifee.getBadge();
       should.equal(value, null);
     });
   });
@@ -213,7 +192,7 @@ describe('notifications()', () => {
   describe('onNotificationDisplayed()', () => {
     it('throws if function not provided', () => {
       try {
-        firebase.notifications().onNotificationDisplayed('foobar');
+        notifee.onNotificationDisplayed('foobar');
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'observer' expected a function");
@@ -225,7 +204,7 @@ describe('notifications()', () => {
   describe('onNotificationOpened()', () => {
     it('throws if function not provided', () => {
       try {
-        firebase.notifications().onNotificationOpened('foobar');
+        notifee.onNotificationOpened('foobar');
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'observer' expected a function");
@@ -241,7 +220,7 @@ describe('notifications()', () => {
   describe('removeDeliveredNotification()', () => {
     it('throws if id is invalid', () => {
       try {
-        firebase.notifications().removeDeliveredNotification(123);
+        notifee.removeDeliveredNotification(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         e.message.should.containEql("'notificationId' expected a string value");
@@ -257,7 +236,7 @@ describe('notifications()', () => {
   describe('scheduleNotification()', () => {
     it('throws if notification is invalid', () => {
       try {
-        firebase.notifications().scheduleNotification(123);
+        notifee.scheduleNotification(123);
         return Promise.reject(new Error('Did not throw Error'));
       } catch (e) {
         // own tests
@@ -267,7 +246,7 @@ describe('notifications()', () => {
 
     it('throws if schedule is invalid', () => {
       try {
-        firebase.notifications().scheduleNotification(
+        notifee.scheduleNotification(
           {
             body: 'foobar',
           },

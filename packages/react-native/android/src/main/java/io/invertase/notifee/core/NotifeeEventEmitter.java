@@ -121,9 +121,9 @@ public class NotifeeEventEmitter {
     try {
       reactContext.getJSModule(
         DeviceEventManagerModule.RCTDeviceEventEmitter.class
-      ).emit("rnfb_" + event.getEventName(), event.getEventBody());
+      ).emit("notifee_" + event.getEventName(), event.getEventBody());
     } catch (Exception e) {
-      Log.wtf("RNFB_EMITTER", "Error sending Event " + event.getEventName(), e);
+      Log.wtf("NOTIFEE_EMITTER", "Error sending Event " + event.getEventName(), e);
       return false;
     }
 

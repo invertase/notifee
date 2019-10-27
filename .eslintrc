@@ -33,8 +33,8 @@
   },
   "globals": {
     "__DEV__": true,
-    "__RNFB__": true,
-    "firebase": true,
+    "notifee": true,
+    "notifeeExports": true,
     "should": true,
     "Utils": true,
     "window": true
