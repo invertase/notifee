@@ -157,8 +157,7 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing autoCancel result...
-    xdescribe('autoCancel', () => {
+    describe('autoCancel', () => {
       it('sets autoCancel default on the notification', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -168,8 +167,8 @@ android.describe('notifications', () => {
         });
 
         const notification = await device.notifications.findById(notificationId);
-
         should.exist(notification);
+        notification.flags.should.eql('0x10');
       });
 
       it('sets autoCancel value on the notification', async () => {
@@ -183,10 +182,12 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.flags.should.eql('0x0'); // no way to parse this
       });
     });
 
-    describe('badgeIconType', () => {
+    // TODO not testing badgeIconType result...
+    xdescribe('badgeIconType', () => {
       it('sets badgeIconType on the notification', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -197,6 +198,7 @@ android.describe('notifications', () => {
         });
 
         const notification = await device.notifications.findById(notificationId);
+        console.dir(notification);
         should.exist(notification);
       });
     });
@@ -213,6 +215,8 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        // TODO fix parser
+        notification._raw.should.containEql('category=social');
       });
     });
 
@@ -306,7 +310,7 @@ android.describe('notifications', () => {
         });
 
         const notification = await device.notifications.findById(notificationId);
-        notification.infoText.should.eql('Content Information');
+        notification.contentInfo.should.eql('Content Information');
       });
     });
 
@@ -345,7 +349,6 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing groupSummary result...
     describe('groupSummary', () => {
       it('sets groupSummary', async () => {
         const notificationId = await notifee.displayNotification({
@@ -359,10 +362,12 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.flags.should.eql('0x210'); // no way to parse this
       });
     });
 
-    describe('largeIcon', () => {
+    // TODO not testing largeIcon result...
+    xdescribe('largeIcon', () => {
       it('sets a HTTP large icon', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -410,7 +415,7 @@ android.describe('notifications', () => {
     });
 
     // TODO not testing lights result...
-    describe('lights', () => {
+    xdescribe('lights', () => {
       it('sets lights', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -425,7 +430,6 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not event testing localOnly...
     describe('localOnly', () => {
       it('sets localOnly', async () => {
         const notificationId = await notifee.displayNotification({
@@ -438,6 +442,7 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.flags.should.eql('0x110'); // no way to parse this
       });
     });
 
@@ -457,7 +462,6 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing ongoing result...
     describe('ongoing', () => {
       it('sets ongoing boolean', async () => {
         const notificationId = await notifee.displayNotification({
@@ -470,10 +474,10 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.flags.should.eql('0x12'); // no way to parse this
       });
     });
 
-    // TODO not testing onlyAlertOnce result...
     describe('onlyAlertOnce', () => {
       it('sets onlyAlertOnce boolean', async () => {
         const notificationId = await notifee.displayNotification({
@@ -486,6 +490,7 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.flags.should.eql('0x18'); // no way to parse this
       });
     });
 
@@ -561,7 +566,7 @@ android.describe('notifications', () => {
     });
 
     // TODO not testing shortcutId result...
-    describe('shortcutId', () => {
+    xdescribe('shortcutId', () => {
       it('sets shortcutId', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -619,8 +624,8 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing sort key result...
-    xdescribe('sortKey', () => {
+    // TODO MD: sort key available in raw notif obj - needs extracting
+    describe('sortKey', () => {
       it('sets sortKey', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -632,6 +637,8 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        // TODO parser needs fixing
+        notification._raw.should.containEql('sortKey=abc');
       });
     });
 
@@ -676,7 +683,8 @@ android.describe('notifications', () => {
 
         notification['title.big'].should.eql('Title override');
         notification.summaryText.should.eql('Summary override');
-        // notification.largeIcon.... // todo works, but needs test to check
+        // TODO parser output needs fixing
+        notification._raw.should.containEql('android.largeIcon.big=Icon');
       });
     });
 
@@ -735,10 +743,9 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing timeoutAfter result...
-    xdescribe('timeoutAfter', () => {
+    describe('timeoutAfter', () => {
       it('sets timeoutAfter', async () => {
-        const timeout = Date.now() + 2000;
+        const timeout = 6666666666666; // 2181
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
@@ -749,6 +756,8 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        // TODO parser needs fixing, field merged with color currently
+        notification._raw.should.containEql('timeout=2181');
       });
     });
 
@@ -782,6 +791,7 @@ android.describe('notifications', () => {
     });
 
     // TODO not testing visibility result...
+    // TODO MD: `vis=SECRET` in notif raw object, needs parsing
     xdescribe('visibility', () => {
       it('sets visibility', async () => {
         const notificationId = await notifee.displayNotification({
@@ -797,10 +807,9 @@ android.describe('notifications', () => {
       });
     });
 
-    // TODO not testing when timestamp result...
-    xdescribe('when', () => {
+    describe('when', () => {
       it('sets when timestamp', async () => {
-        const when = Date.now() + 3000000;
+        const when = 1111111111;
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
           android: {
@@ -811,6 +820,7 @@ android.describe('notifications', () => {
 
         const notification = await device.notifications.findById(notificationId);
         should.exist(notification);
+        notification.when.should.equal(when);
       });
     });
   });
