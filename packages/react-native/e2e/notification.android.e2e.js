@@ -56,7 +56,7 @@ android.describe('notifications', () => {
 
       notification.text.should.eql('foo bar baz');
       notification.title.should.eql('');
-      notification.subText.should.eql('');
+      notification.subtitle.should.eql('');
     });
 
     it('creates a basic notification with custom id', async () => {
@@ -99,7 +99,7 @@ android.describe('notifications', () => {
 
       notification.text.should.eql('foo bar baz3');
       notification.title.should.eql('Hello');
-      notification.subText.should.eql('World');
+      notification.subtitle.should.eql('World');
     });
 
     it('stores data on the notification', async () => {
@@ -157,11 +157,8 @@ android.describe('notifications', () => {
       });
     });
 
-    describe('actions', () => {
-      // todo
-    });
-
-    describe('autoCancel', () => {
+    // TODO not testing autoCancel result...
+    xdescribe('autoCancel', () => {
       it('sets autoCancel default on the notification', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -313,10 +310,6 @@ android.describe('notifications', () => {
       });
     });
 
-    xdescribe('defaults', () => {
-      // todo defaults
-    });
-
     describe('group', () => {
       it('sets group', async () => {
         const notificationId = await notifee.displayNotification({
@@ -352,6 +345,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not testing groupSummary result...
     describe('groupSummary', () => {
       it('sets groupSummary', async () => {
         const notificationId = await notifee.displayNotification({
@@ -415,6 +409,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not testing lights result...
     describe('lights', () => {
       it('sets lights', async () => {
         const notificationId = await notifee.displayNotification({
@@ -430,6 +425,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not event testing localOnly...
     describe('localOnly', () => {
       it('sets localOnly', async () => {
         const notificationId = await notifee.displayNotification({
@@ -461,6 +457,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not testing ongoing result...
     describe('ongoing', () => {
       it('sets ongoing boolean', async () => {
         const notificationId = await notifee.displayNotification({
@@ -476,6 +473,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not testing onlyAlertOnce result...
     describe('onlyAlertOnce', () => {
       it('sets onlyAlertOnce boolean', async () => {
         const notificationId = await notifee.displayNotification({
@@ -562,6 +560,7 @@ android.describe('notifications', () => {
       });
     });
 
+    // TODO not testing shortcutId result...
     describe('shortcutId', () => {
       it('sets shortcutId', async () => {
         const notificationId = await notifee.displayNotification({
@@ -616,12 +615,12 @@ android.describe('notifications', () => {
         });
 
         const notification = await device.notifications.findById(notificationId);
-        console.log(notification);
         notification.icon.should.containEql('drawable/drawable_test');
       });
     });
 
-    describe('sortKey', () => {
+    // TODO not testing sort key result...
+    xdescribe('sortKey', () => {
       it('sets sortKey', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -732,11 +731,12 @@ android.describe('notifications', () => {
         });
 
         const notification = await device.notifications.findById(notificationId);
-        notification.tickerText.should.eql('ticker value');
+        notification.ticker.should.eql('ticker value');
       });
     });
 
-    describe('timeoutAfter', () => {
+    // TODO not testing timeoutAfter result...
+    xdescribe('timeoutAfter', () => {
       it('sets timeoutAfter', async () => {
         const timeout = Date.now() + 2000;
         const notificationId = await notifee.displayNotification({
@@ -762,11 +762,12 @@ android.describe('notifications', () => {
           },
         });
         const notification = await device.notifications.findById(notificationId);
-        notification.showChronometer.should.eql(true);
+        notification.usesChronometer.should.eql(true);
       });
     });
 
-    describe('vibrationPattern', () => {
+    // TODO not testing vibrationPattern. result...
+    xdescribe('vibrationPattern', () => {
       it('sets vibrationPattern', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -780,7 +781,8 @@ android.describe('notifications', () => {
       });
     });
 
-    describe('visibility', () => {
+    // TODO not testing visibility result...
+    xdescribe('visibility', () => {
       it('sets visibility', async () => {
         const notificationId = await notifee.displayNotification({
           body: 'foo bar baz',
@@ -795,7 +797,8 @@ android.describe('notifications', () => {
       });
     });
 
-    describe('when', () => {
+    // TODO not testing when timestamp result...
+    xdescribe('when', () => {
       it('sets when timestamp', async () => {
         const when = Date.now() + 3000000;
         const notificationId = await notifee.displayNotification({

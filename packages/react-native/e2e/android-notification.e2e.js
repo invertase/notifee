@@ -245,10 +245,7 @@ describe('notifications() Notification', () => {
 
     it('sets defaults', () => {
       const v = validate({
-        defaults: [
-          notifeeExports.AndroidDefaults.SOUND,
-          notifeeExports.AndroidDefaults.VIBRATE,
-        ],
+        defaults: [notifeeExports.AndroidDefaults.SOUND, notifeeExports.AndroidDefaults.VIBRATE],
       });
       v.defaults.should.be.Array();
       v.defaults.length.should.eql(2);
