@@ -1,6 +1,6 @@
-# React Native Firebase - Testing Project
+# Notifee - Testing Project
 
-Our tests are powered by [Jet ✈️](https://github.com/invertase/jet).
+Tests are powered by [Jet ✈️](https://github.com/invertase/jet).
 
 > **Note**: instructions in this file assume you're running terminal commands from the root of the project and not from inside the tests directory.
 
@@ -36,7 +36,7 @@ yarn build:all:clean
 
 ```bash
 yarn
-yarn tests:ios:pod:install
+yarn tests_rn:ios:pod:install
 ```
 
 ---
@@ -46,7 +46,7 @@ yarn tests:ios:pod:install
 Start the React Native packager using the script provided;
 
 ```bash
-yarn tests:packager:jet
+yarn tests_rn:packager:jet
 ```
 
 > ⚠️ It must be this script only that starts the RN Packager, using the default RN packager command will not work.
@@ -66,13 +66,13 @@ As always; the first build for each platform will take a while. Subsequent build
 #### Android
 
 ```bash
-yarn tests:android:build
+yarn tests_rn:android:build
 ```
 
 #### iOS
 
 ```bash
-yarn tests:ios:build
+yarn tests_rn:ios:build
 ```
 
 ---
@@ -101,23 +101,23 @@ This action will launch a new simulator (if not already open) and run the tests 
 #### Android
 
 ```bash
-yarn tests:android:test
+yarn tests_rn:android:test
 ```
 
 #### iOS
 
 ```bash
-yarn tests:ios:test
+yarn tests_rn:ios:test
 ```
 
-The `tests:${platform}:test` commands uninstall any existing app and installs a fresh copy. You can
-run `tests:${platform}:test-reuse` instead if you don't need to re-install the app (i.e only making JS code changes).
+The `tests_rn:${platform}:test` commands uninstall any existing app and installs a fresh copy. You can
+run `tests_rn:${platform}:test-reuse` instead if you don't need to re-install the app (i.e only making JS code changes).
 Just remember to use `test-${platform}` if you made native code changes and rebuilt - after installing once you can
 go back to using the `reuse` variant.
 
-The `tests:${platform}:cover` variant of the yarn scripts will additionally run tests with coverage.
-Coverage is output to the root directory of the project: `react-native-firebase/coverage`,
-open `react-native-firebase/coverage/lcov-report/index.html` in your browser after running tests
+The `tests_rn:${platform}:cover` variant of the yarn scripts will additionally run tests with coverage.
+Coverage is output to the root directory of the project: `notifee/coverage`,
+open `notifee/coverage/lcov-report/index.html` in your browser after running tests
 to view detailed coverage output.
 
 ---
@@ -143,19 +143,5 @@ yarn validate:all:js
 yarn validate:all:ts
 yarn validate:all:flow
 ```
-
----
-
-<p>
-  <img align="left" width="75px" src="https://static.invertase.io/assets/invertase-logo-small.png"> 
-  <p align="left">  
-    Built and maintained with 💛 by <a href="https://invertase.io">Invertase</a>.
-  </p>
-  <p align="left">  
-    <a href="https://invertase.io/hire-us">💼 Hire Us</a> | 
-    <a href="https://opencollective.com/react-native-firebase">☕️ Sponsor Us</a> | 
-    <a href="https://opencollective.com/jobs">‍💻 Work With Us</a>
-  </p>
-</p>
 
 ---

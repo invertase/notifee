@@ -1,34 +1,21 @@
 /*
- *  Copyright (c) 2016-present Invertase Limited & Contributors
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this library except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  Copyright (c) 2016-present Invertase Limited
  */
 
 /* eslint-disable no-console */
-import React, { useEffect, Component } from 'react';
-import { AppRegistry, Image, StyleSheet, View, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { AppRegistry, StyleSheet, View, Text } from 'react-native';
 
-import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/notifications';
+import notifee from '@notifee/react-native';
 
 function Root() {
   async function init() {
-    const channel = await firebase.notifications().createChannel({
-      name: 'Hellow World',
+    await notifee.createChannel({
+      name: 'Hello World',
       channelId: 'foo3',
     });
 
-    const returnedNotification = await firebase.notifications().displayNotification({
+    const returnedNotification = await notifee.displayNotification({
       notificationId: Math.random().toString(10),
       title: 'Hello',
       subtitle: 'World',
@@ -45,7 +32,7 @@ function Root() {
 
   return (
     <View style={[styles.container, styles.horizontal]}>
-      <Text>Hello from Notifications</Text>
+      <Text>Hello from Notifee</Text>
     </View>
   );
 }
