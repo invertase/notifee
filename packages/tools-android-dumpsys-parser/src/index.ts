@@ -18,7 +18,7 @@ const keyNameOverrideMap = {
   fgServiceShown: 'foregroundServiceShown',
   subText: 'subtitle',
   tickerText: 'ticker',
-  showChronometer: 'showChronometer',
+  showChronometer: 'usesChronometer',
 };
 
 /**
