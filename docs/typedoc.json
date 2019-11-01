@@ -5,6 +5,98 @@
 	"flags": {},
 	"children": [
 		{
+			"id": 117,
+			"name": "AndroidBadgeIconType",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface\ndescribes how the badge icon is shown to the user."
+			},
+			"children": [
+				{
+					"id": 120,
+					"name": "LARGE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Shows the notification `largeIcon`."
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 937,
+							"character": 7
+						}
+					],
+					"defaultValue": "2"
+				},
+				{
+					"id": 118,
+					"name": "NONE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Shows no badge, but instead uses the notification `number` if provided."
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 927,
+							"character": 6
+						}
+					],
+					"defaultValue": "0"
+				},
+				{
+					"id": 119,
+					"name": "SMALL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Shows the notification `smallIcon`."
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 932,
+							"character": 7
+						}
+					],
+					"defaultValue": "1"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						120,
+						118,
+						119
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 923,
+					"character": 32
+				}
+			]
+		},
+		{
 			"id": 152,
 			"name": "AndroidColor",
 			"kind": 4,
@@ -430,6 +522,206 @@
 			]
 		},
 		{
+			"id": 191,
+			"name": "AndroidImportance",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 192,
+					"name": "DEFAULT",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1082,
+							"character": 9
+						}
+					],
+					"defaultValue": "3"
+				},
+				{
+					"id": 193,
+					"name": "HIGH",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1083,
+							"character": 6
+						}
+					],
+					"defaultValue": "4"
+				},
+				{
+					"id": 194,
+					"name": "LOW",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1084,
+							"character": 5
+						}
+					],
+					"defaultValue": "2"
+				},
+				{
+					"id": 195,
+					"name": "MAX",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1085,
+							"character": 5
+						}
+					],
+					"defaultValue": "5"
+				},
+				{
+					"id": 196,
+					"name": "MIN",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1086,
+							"character": 5
+						}
+					],
+					"defaultValue": "1"
+				},
+				{
+					"id": 197,
+					"name": "NONE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1087,
+							"character": 6
+						}
+					],
+					"defaultValue": "0"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						192,
+						193,
+						194,
+						195,
+						196,
+						197
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1081,
+					"character": 29
+				}
+			]
+		},
+		{
+			"id": 121,
+			"name": "AndroidStyle",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Available Android Notification Styles.",
+				"text": "Used when providing a `style` to a notification builder with `displayNotification`.\n"
+			},
+			"children": [
+				{
+					"id": 122,
+					"name": "BIGPICTURE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 946,
+							"character": 12
+						}
+					],
+					"defaultValue": "0"
+				},
+				{
+					"id": 123,
+					"name": "BIGTEXT",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 947,
+							"character": 9
+						}
+					],
+					"defaultValue": "1"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						122,
+						123
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 945,
+					"character": 24
+				}
+			]
+		},
+		{
 			"id": 87,
 			"name": "AndroidAction",
 			"kind": 256,
@@ -638,107 +930,6 @@
 			]
 		},
 		{
-			"id": 117,
-			"name": "AndroidBadgeIconType",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface\ndescribes how the badge icon is shown to the user."
-			},
-			"children": [
-				{
-					"id": 120,
-					"name": "LARGE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Shows the notification `largeIcon`."
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 937,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "2"
-					}
-				},
-				{
-					"id": 118,
-					"name": "NONE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Shows no badge, but instead uses the notification `number` if provided."
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 927,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				},
-				{
-					"id": 119,
-					"name": "SMALL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Shows the notification `smallIcon`."
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 932,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						120,
-						118,
-						119
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 923,
-					"character": 37
-				}
-			]
-		},
-		{
 			"id": 124,
 			"name": "AndroidBigPictureStyle",
 			"kind": 256,
@@ -877,8 +1068,9 @@
 						}
 					],
 					"type": {
-						"type": "unknown",
-						"name": "0"
+						"type": "reference",
+						"name": "BIGPICTURE",
+						"id": 122
 					}
 				}
 			],
@@ -1021,8 +1213,9 @@
 						}
 					],
 					"type": {
-						"type": "unknown",
-						"name": "1"
+						"type": "reference",
+						"name": "BIGTEXT",
+						"id": 123
 					}
 				}
 			],
@@ -1646,28 +1839,34 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "3"
+								"type": "reference",
+								"name": "DEFAULT",
+								"id": 192
 							},
 							{
-								"type": "unknown",
-								"name": "4"
+								"type": "reference",
+								"name": "HIGH",
+								"id": 193
 							},
 							{
-								"type": "unknown",
-								"name": "2"
+								"type": "reference",
+								"name": "LOW",
+								"id": 194
 							},
 							{
-								"type": "unknown",
-								"name": "5"
+								"type": "reference",
+								"name": "MAX",
+								"id": 195
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "MIN",
+								"id": 196
 							},
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "NONE",
+								"id": 197
 							}
 						]
 					}
@@ -2207,158 +2406,6 @@
 			]
 		},
 		{
-			"id": 191,
-			"name": "AndroidImportance",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 192,
-					"name": "DEFAULT",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1082,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "3"
-					}
-				},
-				{
-					"id": 193,
-					"name": "HIGH",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1083,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "4"
-					}
-				},
-				{
-					"id": 194,
-					"name": "LOW",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1084,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "2"
-					}
-				},
-				{
-					"id": 195,
-					"name": "MAX",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1085,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "5"
-					}
-				},
-				{
-					"id": 196,
-					"name": "MIN",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1086,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				},
-				{
-					"id": 197,
-					"name": "NONE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1087,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						192,
-						193,
-						194,
-						195,
-						196,
-						197
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1081,
-					"character": 34
-				}
-			]
-		},
-		{
 			"id": 53,
 			"name": "AndroidNotification",
 			"kind": 256,
@@ -2465,16 +2512,19 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "NONE",
+								"id": 118
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "SMALL",
+								"id": 119
 							},
 							{
-								"type": "unknown",
-								"name": "2"
+								"type": "reference",
+								"name": "LARGE",
+								"id": 120
 							}
 						]
 					}
@@ -4544,78 +4594,6 @@
 					"fileName": "lib/index.d.ts",
 					"line": 862,
 					"character": 38
-				}
-			]
-		},
-		{
-			"id": 121,
-			"name": "AndroidStyle",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "Available Android Notification Styles.",
-				"text": "Used when providing a `style` to a notification builder with `displayNotification`.\n"
-			},
-			"children": [
-				{
-					"id": 122,
-					"name": "BIGPICTURE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 946,
-							"character": 12
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				},
-				{
-					"id": 123,
-					"name": "BIGTEXT",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 947,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						122,
-						123
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 945,
-					"character": 29
 				}
 			]
 		},
@@ -9211,7 +9189,10 @@
 			"title": "Enumerations",
 			"kind": 4,
 			"children": [
-				152
+				117,
+				152,
+				191,
+				121
 			]
 		},
 		{
@@ -9219,7 +9200,6 @@
 			"kind": 256,
 			"children": [
 				87,
-				117,
 				124,
 				130,
 				135,
@@ -9227,14 +9207,12 @@
 				229,
 				175,
 				180,
-				191,
 				53,
 				184,
 				198,
 				95,
 				206,
 				105,
-				121,
 				202,
 				44,
 				48,

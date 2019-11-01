@@ -267,9 +267,9 @@ export interface AndroidNotification {
    * Defaults to `AndroidBadgeIconType.NONE`.
    */
   badgeIconType?:
-    | AndroidBadgeIconType['NONE']
-    | AndroidBadgeIconType['SMALL']
-    | AndroidBadgeIconType['LARGE'];
+    | AndroidBadgeIconType.NONE
+    | AndroidBadgeIconType.SMALL
+    | AndroidBadgeIconType.LARGE;
 
   /**
    * Assigns the notification to a category. Use the one which best describes the notification.
@@ -920,21 +920,21 @@ export interface AndroidSemanticAction {
  * When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface
  * describes how the badge icon is shown to the user.
  */
-export interface AndroidBadgeIconType {
+export enum AndroidBadgeIconType {
   /**
    * Shows no badge, but instead uses the notification `number` if provided.
    */
-  NONE: 0;
+  NONE = 0,
 
   /**
    * Shows the notification `smallIcon`.
    */
-  SMALL: 1;
+  SMALL = 1,
 
   /**
    * Shows the notification `largeIcon`.
    */
-  LARGE: 2;
+  LARGE = 2,
 }
 
 /**
@@ -942,9 +942,9 @@ export interface AndroidBadgeIconType {
  *
  * Used when providing a `style` to a notification builder with `displayNotification`.
  */
-export interface AndroidStyle {
-  BIGPICTURE: 0;
-  BIGTEXT: 1;
+export enum AndroidStyle {
+  BIGPICTURE = 0,
+  BIGTEXT = 1,
 }
 
 /**
@@ -960,7 +960,7 @@ export interface AndroidStyle {
  * ```
  */
 export interface AndroidBigPictureStyle {
-  type: AndroidStyle['BIGPICTURE'];
+  type: AndroidStyle.BIGPICTURE;
   picture: string;
   title?: string;
   largeIcon?: string;
@@ -992,7 +992,7 @@ export interface AndroidBigPictureStyle {
  * ```
  */
 export interface AndroidBigTextStyle {
-  type: AndroidStyle['BIGTEXT'];
+  type: AndroidStyle.BIGTEXT;
   /**
    * The text to display when the notification is expanded.
    */
@@ -1078,13 +1078,13 @@ export interface AndroidPriority {
   NONE: 0;
 }
 
-export interface AndroidImportance {
-  DEFAULT: 3;
-  HIGH: 4;
-  LOW: 2;
-  MAX: 5;
-  MIN: 1;
-  NONE: 0;
+export enum AndroidImportance {
+  DEFAULT = 3,
+  HIGH = 4,
+  LOW = 2,
+  MAX = 5,
+  MIN = 1,
+  NONE = 0,
 }
 
 /**
@@ -1330,12 +1330,12 @@ export interface AndroidChannel {
    * This setting cannot be overridden once the channel is created.
    */
   importance?:
-    | AndroidImportance['DEFAULT']
-    | AndroidImportance['HIGH']
-    | AndroidImportance['LOW']
-    | AndroidImportance['MAX']
-    | AndroidImportance['MIN']
-    | AndroidImportance['NONE'];
+    | AndroidImportance.DEFAULT
+    | AndroidImportance.HIGH
+    | AndroidImportance.LOW
+    | AndroidImportance.MAX
+    | AndroidImportance.MIN
+    | AndroidImportance.NONE;
 
   /**
    * If lights are enabled (via `enableLights`), sets/overrides the light color for notifications
@@ -1548,16 +1548,16 @@ declare interface Module {
 }
 
 declare interface ModuleWithStatics extends Module {
-  AndroidBadgeIconType: AndroidBadgeIconType;
+  AndroidBadgeIconType: typeof AndroidBadgeIconType;
   AndroidCategory: AndroidCategory;
   AndroidGroupAlertBehavior: AndroidGroupAlertBehavior;
   AndroidPriority: AndroidPriority;
   AndroidVisibility: AndroidVisibility;
   AndroidRepeatInterval: AndroidRepeatInterval;
   AndroidDefaults: AndroidDefaults;
-  AndroidImportance: AndroidImportance;
+  AndroidImportance: typeof AndroidImportance;
   AndroidColor: typeof AndroidColor;
-  AndroidStyle: AndroidStyle;
+  AndroidStyle: typeof AndroidStyle;
 }
 
 declare const notifeeModule: ModuleWithStatics;
