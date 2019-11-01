@@ -288,22 +288,22 @@ export interface AndroidNotification {
    * ```
    */
   category?:
-    | AndroidCategory['ALARM']
-    | AndroidCategory['CALL']
-    | AndroidCategory['EMAIL']
-    | AndroidCategory['ERROR']
-    | AndroidCategory['EVENT']
-    | AndroidCategory['MESSAGE']
-    | AndroidCategory['NAVIGATION']
-    | AndroidCategory['PROGRESS']
-    | AndroidCategory['PROMO']
-    | AndroidCategory['RECOMMENDATION']
-    | AndroidCategory['REMINDER']
-    | AndroidCategory['SERVICE']
-    | AndroidCategory['SOCIAL']
-    | AndroidCategory['STATUS']
-    | AndroidCategory['SYSTEM']
-    | AndroidCategory['TRANSPORT'];
+    | AndroidCategory.ALARM
+    | AndroidCategory.CALL
+    | AndroidCategory.EMAIL
+    | AndroidCategory.ERROR
+    | AndroidCategory.EVENT
+    | AndroidCategory.MESSAGE
+    | AndroidCategory.NAVIGATION
+    | AndroidCategory.PROGRESS
+    | AndroidCategory.PROMO
+    | AndroidCategory.RECOMMENDATION
+    | AndroidCategory.REMINDER
+    | AndroidCategory.SERVICE
+    | AndroidCategory.SOCIAL
+    | AndroidCategory.STATUS
+    | AndroidCategory.SYSTEM
+    | AndroidCategory.TRANSPORT;
 
   /**
    * Specify the `AndroidChannel` which the notification will be delivered on.
@@ -456,9 +456,9 @@ export interface AndroidNotification {
    * ```
    */
   groupAlertBehavior?:
-    | AndroidGroupAlertBehavior['ALL']
-    | AndroidGroupAlertBehavior['SUMMARY']
-    | AndroidGroupAlertBehavior['CHILDREN'];
+    | AndroidGroupAlertBehavior.ALL
+    | AndroidGroupAlertBehavior.SUMMARY
+    | AndroidGroupAlertBehavior.CHILDREN;
 
   /**
    * Whether this notification should be a group summary.
@@ -549,12 +549,12 @@ export interface AndroidNotification {
    * ```
    */
   priority?:
-    | AndroidPriority['DEFAULT']
-    | AndroidPriority['HIGH']
-    | AndroidPriority['LOW']
-    | AndroidPriority['MAX']
-    | AndroidPriority['MIN']
-    | AndroidPriority['NONE'];
+    | AndroidPriority.DEFAULT
+    | AndroidPriority.HIGH
+    | AndroidPriority.LOW
+    | AndroidPriority.MAX
+    | AndroidPriority.MIN
+    | AndroidPriority.NONE;
 
   /**
    * A notification can show current progress of a task. The progress state can either be fixed or
@@ -808,10 +808,7 @@ export interface AndroidNotification {
    *
    * See `AndroidVisibility` for more information.
    */
-  visibility?:
-    | AndroidVisibility['PRIVATE']
-    | AndroidVisibility['PUBLIC']
-    | AndroidVisibility['SECRET'];
+  visibility?: AndroidVisibility.PRIVATE | AndroidVisibility.PUBLIC | AndroidVisibility.SECRET;
 
   /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
@@ -1009,23 +1006,23 @@ export interface AndroidBigTextStyle {
   summary?: string;
 }
 
-export interface AndroidCategory {
-  ALARM: 'alarm';
-  CALL: 'call';
-  EMAIL: 'email';
-  ERROR: 'error';
-  EVENT: 'event';
-  MESSAGE: 'msg';
-  NAVIGATION: 'navigation';
-  PROGRESS: 'progress';
-  PROMO: 'promo';
-  RECOMMENDATION: 'recommendation';
-  REMINDER: 'reminder';
-  SERVICE: 'service';
-  SOCIAL: 'social';
-  STATUS: 'status';
-  SYSTEM: 'sys';
-  TRANSPORT: 'transport';
+export enum AndroidCategory {
+  ALARM = 'alarm',
+  CALL = 'call',
+  EMAIL = 'email',
+  ERROR = 'error',
+  EVENT = 'event',
+  MESSAGE = 'msg',
+  NAVIGATION = 'navigation',
+  PROGRESS = 'progress',
+  PROMO = 'promo',
+  RECOMMENDATION = 'recommendation',
+  REMINDER = 'reminder',
+  SERVICE = 'service',
+  SOCIAL = 'social',
+  STATUS = 'status',
+  SYSTEM = 'sys',
+  TRANSPORT = 'transport',
 }
 
 /**
@@ -1056,26 +1053,26 @@ export enum AndroidColor {
   TEAL = 'teal',
 }
 
-export interface AndroidDefaults {
-  ALL: -1;
-  SOUND: 1;
-  VIBRATE: 2;
-  LIGHTS: 4;
+export enum AndroidDefaults {
+  ALL = -1,
+  SOUND = 1,
+  VIBRATE = 2,
+  LIGHTS = 4,
 }
 
-export interface AndroidGroupAlertBehavior {
-  ALL: 0;
-  SUMMARY: 1;
-  CHILDREN: 2;
+export enum AndroidGroupAlertBehavior {
+  ALL = 0,
+  SUMMARY = 1,
+  CHILDREN = 2,
 }
 
-export interface AndroidPriority {
-  DEFAULT: 3;
-  HIGH: 4;
-  LOW: 2;
-  MAX: 5;
-  MIN: 1;
-  NONE: 0;
+export enum AndroidPriority {
+  DEFAULT = 3,
+  HIGH = 4,
+  LOW = 2,
+  MAX = 5,
+  MIN = 1,
+  NONE = 0,
 }
 
 export enum AndroidImportance {
@@ -1157,33 +1154,33 @@ export interface AndroidProgress {
  *
  * Default value is `AndroidVisibility.PRIVATE`.
  */
-export interface AndroidVisibility {
+export enum AndroidVisibility {
   /**
    * Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens.
    */
-  PRIVATE: 0;
+  PRIVATE = 0,
 
   /**
    * Show this notification in its entirety on all lockscreens.
    */
-  PUBLIC: 1;
+  PUBLIC = 1,
 
   /**
    * Do not reveal any part of this notification on a secure lockscreen.
    *
    * Useful for notifications showing sensitive information such as banking apps.
    */
-  SECRET: -1;
+  SECRET = -1,
 }
 
 /**
  * Interface used when defining the `repeatInterval` on a scheduled notification.
  */
-export interface AndroidRepeatInterval {
-  MINUTE: 'minute';
-  HOUR: 'hour';
-  DAY: 'day';
-  WEEK: 'week';
+export enum AndroidRepeatInterval {
+  MINUTE = 'minute',
+  HOUR = 'hour',
+  DAY = 'day',
+  WEEK = 'week',
 }
 
 /**
@@ -1242,10 +1239,10 @@ export interface Schedule {
    * });
    */
   repeatInterval?:
-    | AndroidRepeatInterval['MINUTE']
-    | AndroidRepeatInterval['HOUR']
-    | AndroidRepeatInterval['DAY']
-    | AndroidRepeatInterval['WEEK'];
+    | AndroidRepeatInterval.MINUTE
+    | AndroidRepeatInterval.HOUR
+    | AndroidRepeatInterval.DAY
+    | AndroidRepeatInterval.WEEK;
 }
 
 /**
@@ -1350,10 +1347,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  visibility?:
-    | AndroidVisibility['PRIVATE']
-    | AndroidVisibility['PUBLIC']
-    | AndroidVisibility['SECRET'];
+  visibility?: AndroidVisibility.PRIVATE | AndroidVisibility.PUBLIC | AndroidVisibility.SECRET;
 
   /**
    * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
@@ -1549,12 +1543,12 @@ declare interface Module {
 
 declare interface ModuleWithStatics extends Module {
   AndroidBadgeIconType: typeof AndroidBadgeIconType;
-  AndroidCategory: AndroidCategory;
-  AndroidGroupAlertBehavior: AndroidGroupAlertBehavior;
-  AndroidPriority: AndroidPriority;
-  AndroidVisibility: AndroidVisibility;
-  AndroidRepeatInterval: AndroidRepeatInterval;
-  AndroidDefaults: AndroidDefaults;
+  AndroidCategory: typeof AndroidCategory;
+  AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
+  AndroidPriority: typeof AndroidPriority;
+  AndroidVisibility: typeof AndroidVisibility;
+  AndroidRepeatInterval: typeof AndroidRepeatInterval;
+  AndroidDefaults: typeof AndroidDefaults;
   AndroidImportance: typeof AndroidImportance;
   AndroidColor: typeof AndroidColor;
   AndroidStyle: typeof AndroidStyle;

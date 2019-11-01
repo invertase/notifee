@@ -30,7 +30,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 937,
+							"line": 934,
 							"character": 7
 						}
 					],
@@ -50,7 +50,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 927,
+							"line": 924,
 							"character": 6
 						}
 					],
@@ -70,7 +70,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 932,
+							"line": 929,
 							"character": 7
 						}
 					],
@@ -91,8 +91,322 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 923,
+					"line": 920,
 					"character": 32
+				}
+			]
+		},
+		{
+			"id": 135,
+			"name": "AndroidCategory",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 136,
+					"name": "ALARM",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1010,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"alarm\""
+				},
+				{
+					"id": 137,
+					"name": "CALL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1011,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"call\""
+				},
+				{
+					"id": 138,
+					"name": "EMAIL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1012,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"email\""
+				},
+				{
+					"id": 139,
+					"name": "ERROR",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1013,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"error\""
+				},
+				{
+					"id": 140,
+					"name": "EVENT",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1014,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"event\""
+				},
+				{
+					"id": 141,
+					"name": "MESSAGE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1015,
+							"character": 9
+						}
+					],
+					"defaultValue": "\"msg\""
+				},
+				{
+					"id": 142,
+					"name": "NAVIGATION",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1016,
+							"character": 12
+						}
+					],
+					"defaultValue": "\"navigation\""
+				},
+				{
+					"id": 143,
+					"name": "PROGRESS",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1017,
+							"character": 10
+						}
+					],
+					"defaultValue": "\"progress\""
+				},
+				{
+					"id": 144,
+					"name": "PROMO",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1018,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"promo\""
+				},
+				{
+					"id": 145,
+					"name": "RECOMMENDATION",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1019,
+							"character": 16
+						}
+					],
+					"defaultValue": "\"recommendation\""
+				},
+				{
+					"id": 146,
+					"name": "REMINDER",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1020,
+							"character": 10
+						}
+					],
+					"defaultValue": "\"reminder\""
+				},
+				{
+					"id": 147,
+					"name": "SERVICE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1021,
+							"character": 9
+						}
+					],
+					"defaultValue": "\"service\""
+				},
+				{
+					"id": 148,
+					"name": "SOCIAL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1022,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"social\""
+				},
+				{
+					"id": 149,
+					"name": "STATUS",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1023,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"status\""
+				},
+				{
+					"id": 150,
+					"name": "SYSTEM",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1024,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"sys\""
+				},
+				{
+					"id": 151,
+					"name": "TRANSPORT",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1025,
+							"character": 11
+						}
+					],
+					"defaultValue": "\"transport\""
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						136,
+						137,
+						138,
+						139,
+						140,
+						141,
+						142,
+						143,
+						144,
+						145,
+						146,
+						147,
+						148,
+						149,
+						150,
+						151
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1009,
+					"character": 27
 				}
 			]
 		},
@@ -119,7 +433,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1048,
+							"line": 1045,
 							"character": 6
 						}
 					],
@@ -136,7 +450,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1038,
+							"line": 1035,
 							"character": 7
 						}
 					],
@@ -153,7 +467,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1036,
+							"line": 1033,
 							"character": 6
 						}
 					],
@@ -170,7 +484,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1040,
+							"line": 1037,
 							"character": 6
 						}
 					],
@@ -187,7 +501,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1044,
+							"line": 1041,
 							"character": 10
 						}
 					],
@@ -204,7 +518,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1047,
+							"line": 1044,
 							"character": 10
 						}
 					],
@@ -221,7 +535,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1049,
+							"line": 1046,
 							"character": 9
 						}
 					],
@@ -238,7 +552,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1045,
+							"line": 1042,
 							"character": 6
 						}
 					],
@@ -255,7 +569,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1037,
+							"line": 1034,
 							"character": 7
 						}
 					],
@@ -272,7 +586,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1043,
+							"line": 1040,
 							"character": 11
 						}
 					],
@@ -289,7 +603,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1046,
+							"line": 1043,
 							"character": 11
 						}
 					],
@@ -306,7 +620,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1050,
+							"line": 1047,
 							"character": 6
 						}
 					],
@@ -323,7 +637,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1041,
+							"line": 1038,
 							"character": 9
 						}
 					],
@@ -340,7 +654,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1051,
+							"line": 1048,
 							"character": 8
 						}
 					],
@@ -357,7 +671,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1052,
+							"line": 1049,
 							"character": 6
 						}
 					],
@@ -374,7 +688,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1053,
+							"line": 1050,
 							"character": 7
 						}
 					],
@@ -391,7 +705,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1054,
+							"line": 1051,
 							"character": 8
 						}
 					],
@@ -408,7 +722,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1035,
+							"line": 1032,
 							"character": 5
 						}
 					],
@@ -425,7 +739,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1055,
+							"line": 1052,
 							"character": 8
 						}
 					],
@@ -442,7 +756,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1056,
+							"line": 1053,
 							"character": 6
 						}
 					],
@@ -459,7 +773,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1039,
+							"line": 1036,
 							"character": 7
 						}
 					],
@@ -476,7 +790,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1042,
+							"line": 1039,
 							"character": 8
 						}
 					],
@@ -516,8 +830,186 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1034,
+					"line": 1031,
 					"character": 24
+				}
+			]
+		},
+		{
+			"id": 175,
+			"name": "AndroidDefaults",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 176,
+					"name": "ALL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1057,
+							"character": 5
+						}
+					],
+					"defaultValue": " -1"
+				},
+				{
+					"id": 179,
+					"name": "LIGHTS",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1060,
+							"character": 8
+						}
+					],
+					"defaultValue": "4"
+				},
+				{
+					"id": 177,
+					"name": "SOUND",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1058,
+							"character": 7
+						}
+					],
+					"defaultValue": "1"
+				},
+				{
+					"id": 178,
+					"name": "VIBRATE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1059,
+							"character": 9
+						}
+					],
+					"defaultValue": "2"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						176,
+						179,
+						177,
+						178
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1056,
+					"character": 27
+				}
+			]
+		},
+		{
+			"id": 180,
+			"name": "AndroidGroupAlertBehavior",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 181,
+					"name": "ALL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1064,
+							"character": 5
+						}
+					],
+					"defaultValue": "0"
+				},
+				{
+					"id": 183,
+					"name": "CHILDREN",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1066,
+							"character": 10
+						}
+					],
+					"defaultValue": "2"
+				},
+				{
+					"id": 182,
+					"name": "SUMMARY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1065,
+							"character": 9
+						}
+					],
+					"defaultValue": "1"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						181,
+						183,
+						182
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1063,
+					"character": 37
 				}
 			]
 		},
@@ -541,7 +1033,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1082,
+							"line": 1079,
 							"character": 9
 						}
 					],
@@ -558,7 +1050,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1083,
+							"line": 1080,
 							"character": 6
 						}
 					],
@@ -575,7 +1067,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1084,
+							"line": 1081,
 							"character": 5
 						}
 					],
@@ -592,7 +1084,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1085,
+							"line": 1082,
 							"character": 5
 						}
 					],
@@ -609,7 +1101,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1086,
+							"line": 1083,
 							"character": 5
 						}
 					],
@@ -626,7 +1118,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1087,
+							"line": 1084,
 							"character": 6
 						}
 					],
@@ -650,8 +1142,243 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1081,
+					"line": 1078,
 					"character": 29
+				}
+			]
+		},
+		{
+			"id": 184,
+			"name": "AndroidPriority",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 185,
+					"name": "DEFAULT",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1070,
+							"character": 9
+						}
+					],
+					"defaultValue": "3"
+				},
+				{
+					"id": 186,
+					"name": "HIGH",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1071,
+							"character": 6
+						}
+					],
+					"defaultValue": "4"
+				},
+				{
+					"id": 187,
+					"name": "LOW",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1072,
+							"character": 5
+						}
+					],
+					"defaultValue": "2"
+				},
+				{
+					"id": 188,
+					"name": "MAX",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1073,
+							"character": 5
+						}
+					],
+					"defaultValue": "5"
+				},
+				{
+					"id": 189,
+					"name": "MIN",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1074,
+							"character": 5
+						}
+					],
+					"defaultValue": "1"
+				},
+				{
+					"id": 190,
+					"name": "NONE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1075,
+							"character": 6
+						}
+					],
+					"defaultValue": "0"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						185,
+						186,
+						187,
+						188,
+						189,
+						190
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1069,
+					"character": 27
+				}
+			]
+		},
+		{
+			"id": 206,
+			"name": "AndroidRepeatInterval",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Interface used when defining the `repeatInterval` on a scheduled notification."
+			},
+			"children": [
+				{
+					"id": 209,
+					"name": "DAY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1182,
+							"character": 5
+						}
+					],
+					"defaultValue": "\"day\""
+				},
+				{
+					"id": 208,
+					"name": "HOUR",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1181,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"hour\""
+				},
+				{
+					"id": 207,
+					"name": "MINUTE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1180,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"minute\""
+				},
+				{
+					"id": 210,
+					"name": "WEEK",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1183,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"week\""
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						209,
+						208,
+						207,
+						210
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1179,
+					"character": 33
 				}
 			]
 		},
@@ -679,7 +1406,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 946,
+							"line": 943,
 							"character": 12
 						}
 					],
@@ -696,7 +1423,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 947,
+							"line": 944,
 							"character": 9
 						}
 					],
@@ -716,8 +1443,102 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 945,
+					"line": 942,
 					"character": 24
+				}
+			]
+		},
+		{
+			"id": 202,
+			"name": "AndroidVisibility",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Interface used to define the visibility of an Android notification.",
+				"text": "Use with the `visibility` property on the notification.\n\nDefault value is `AndroidVisibility.PRIVATE`.\n"
+			},
+			"children": [
+				{
+					"id": 203,
+					"name": "PRIVATE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens."
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1161,
+							"character": 9
+						}
+					],
+					"defaultValue": "0"
+				},
+				{
+					"id": 204,
+					"name": "PUBLIC",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Show this notification in its entirety on all lockscreens."
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1166,
+							"character": 8
+						}
+					],
+					"defaultValue": "1"
+				},
+				{
+					"id": 205,
+					"name": "SECRET",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Do not reveal any part of this notification on a secure lockscreen.",
+						"text": "Useful for notifications showing sensitive information such as banking apps.\n"
+					},
+					"sources": [
+						{
+							"fileName": "lib/index.d.ts",
+							"line": 1173,
+							"character": 8
+						}
+					],
+					"defaultValue": " -1"
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						203,
+						204,
+						205
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/index.d.ts",
+					"line": 1157,
+					"character": 29
 				}
 			]
 		},
@@ -742,7 +1563,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 844,
+							"line": 841,
 							"character": 23
 						}
 					],
@@ -775,7 +1596,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 842,
+							"line": 839,
 							"character": 6
 						}
 					],
@@ -795,7 +1616,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 841,
+							"line": 838,
 							"character": 5
 						}
 					],
@@ -816,7 +1637,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 845,
+							"line": 842,
 							"character": 14
 						}
 					],
@@ -841,7 +1662,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 846,
+							"line": 843,
 							"character": 16
 						}
 					],
@@ -863,7 +1684,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 847,
+							"line": 844,
 							"character": 20
 						}
 					],
@@ -896,7 +1717,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 843,
+							"line": 840,
 							"character": 7
 						}
 					],
@@ -924,7 +1745,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 840,
+					"line": 837,
 					"character": 30
 				}
 			]
@@ -954,7 +1775,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 966,
+							"line": 963,
 							"character": 11
 						}
 					],
@@ -983,7 +1804,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 964,
+							"line": 961,
 							"character": 9
 						}
 					],
@@ -1004,7 +1825,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 967,
+							"line": 964,
 							"character": 9
 						}
 					],
@@ -1034,7 +1855,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 965,
+							"line": 962,
 							"character": 7
 						}
 					],
@@ -1063,7 +1884,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 963,
+							"line": 960,
 							"character": 6
 						}
 					],
@@ -1090,7 +1911,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 962,
+					"line": 959,
 					"character": 39
 				}
 			]
@@ -1123,7 +1944,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1009,
+							"line": 1006,
 							"character": 9
 						}
 					],
@@ -1155,7 +1976,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 999,
+							"line": 996,
 							"character": 6
 						}
 					],
@@ -1179,7 +2000,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1004,
+							"line": 1001,
 							"character": 7
 						}
 					],
@@ -1208,7 +2029,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 995,
+							"line": 992,
 							"character": 6
 						}
 					],
@@ -1234,370 +2055,8 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 994,
+					"line": 991,
 					"character": 36
-				}
-			]
-		},
-		{
-			"id": 135,
-			"name": "AndroidCategory",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 136,
-					"name": "ALARM",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1013,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "alarm"
-					}
-				},
-				{
-					"id": 137,
-					"name": "CALL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1014,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "call"
-					}
-				},
-				{
-					"id": 138,
-					"name": "EMAIL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1015,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "email"
-					}
-				},
-				{
-					"id": 139,
-					"name": "ERROR",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1016,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "error"
-					}
-				},
-				{
-					"id": 140,
-					"name": "EVENT",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1017,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "event"
-					}
-				},
-				{
-					"id": 141,
-					"name": "MESSAGE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1018,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "msg"
-					}
-				},
-				{
-					"id": 142,
-					"name": "NAVIGATION",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1019,
-							"character": 12
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "navigation"
-					}
-				},
-				{
-					"id": 143,
-					"name": "PROGRESS",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1020,
-							"character": 10
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "progress"
-					}
-				},
-				{
-					"id": 144,
-					"name": "PROMO",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1021,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "promo"
-					}
-				},
-				{
-					"id": 145,
-					"name": "RECOMMENDATION",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1022,
-							"character": 16
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "recommendation"
-					}
-				},
-				{
-					"id": 146,
-					"name": "REMINDER",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1023,
-							"character": 10
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "reminder"
-					}
-				},
-				{
-					"id": 147,
-					"name": "SERVICE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1024,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "service"
-					}
-				},
-				{
-					"id": 148,
-					"name": "SOCIAL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1025,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "social"
-					}
-				},
-				{
-					"id": 149,
-					"name": "STATUS",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1026,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "status"
-					}
-				},
-				{
-					"id": 150,
-					"name": "SYSTEM",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1027,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "sys"
-					}
-				},
-				{
-					"id": 151,
-					"name": "TRANSPORT",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1028,
-							"character": 11
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "transport"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						136,
-						137,
-						138,
-						139,
-						140,
-						141,
-						142,
-						143,
-						144,
-						145,
-						146,
-						147,
-						148,
-						149,
-						150,
-						151
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1012,
-					"character": 32
 				}
 			]
 		},
@@ -1626,7 +2085,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1287,
+							"line": 1284,
 							"character": 11
 						}
 					],
@@ -1662,7 +2121,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1276,
+							"line": 1273,
 							"character": 11
 						}
 					],
@@ -1687,7 +2146,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1296,
+							"line": 1293,
 							"character": 13
 						}
 					],
@@ -1721,7 +2180,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1305,
+							"line": 1302,
 							"character": 14
 						}
 					],
@@ -1759,7 +2218,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1314,
+							"line": 1311,
 							"character": 17
 						}
 					],
@@ -1797,7 +2256,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1323,
+							"line": 1320,
 							"character": 9
 						}
 					],
@@ -1831,7 +2290,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1332,
+							"line": 1329,
 							"character": 12
 						}
 					],
@@ -1887,7 +2346,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1346,
+							"line": 1343,
 							"character": 12
 						}
 					],
@@ -1921,7 +2380,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1284,
+							"line": 1281,
 							"character": 6
 						}
 					],
@@ -1946,7 +2405,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1363,
+							"line": 1357,
 							"character": 11
 						}
 					],
@@ -1980,7 +2439,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1366,
+							"line": 1360,
 							"character": 7
 						}
 					],
@@ -2014,7 +2473,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1373,
+							"line": 1367,
 							"character": 18
 						}
 					],
@@ -2042,7 +2501,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1353,
+							"line": 1350,
 							"character": 12
 						}
 					],
@@ -2050,16 +2509,19 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "PRIVATE",
+								"id": 203
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "PUBLIC",
+								"id": 204
 							},
 							{
-								"type": "unknown",
-								"name": "-1"
+								"type": "reference",
+								"name": "SECRET",
+								"id": 205
 							}
 						]
 					}
@@ -2089,7 +2551,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1272,
+					"line": 1269,
 					"character": 31
 				}
 			]
@@ -2121,7 +2583,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1385,
+							"line": 1379,
 							"character": 16
 						}
 					],
@@ -2145,7 +2607,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1396,
+							"line": 1390,
 							"character": 13
 						}
 					],
@@ -2177,7 +2639,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1391,
+							"line": 1385,
 							"character": 6
 						}
 					],
@@ -2201,207 +2663,8 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1381,
+					"line": 1375,
 					"character": 36
-				}
-			]
-		},
-		{
-			"id": 175,
-			"name": "AndroidDefaults",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 176,
-					"name": "ALL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1060,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "-1"
-					}
-				},
-				{
-					"id": 179,
-					"name": "LIGHTS",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1063,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "4"
-					}
-				},
-				{
-					"id": 177,
-					"name": "SOUND",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1061,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				},
-				{
-					"id": 178,
-					"name": "VIBRATE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1062,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "2"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						176,
-						179,
-						177,
-						178
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1059,
-					"character": 32
-				}
-			]
-		},
-		{
-			"id": 180,
-			"name": "AndroidGroupAlertBehavior",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 181,
-					"name": "ALL",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1067,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				},
-				{
-					"id": 183,
-					"name": "CHILDREN",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1069,
-							"character": 10
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "2"
-					}
-				},
-				{
-					"id": 182,
-					"name": "SUMMARY",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1068,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						181,
-						183,
-						182
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1066,
-					"character": 42
 				}
 			]
 		},
@@ -2553,68 +2816,84 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "stringLiteral",
-								"value": "alarm"
+								"type": "reference",
+								"name": "ALARM",
+								"id": 136
 							},
 							{
-								"type": "stringLiteral",
-								"value": "call"
+								"type": "reference",
+								"name": "CALL",
+								"id": 137
 							},
 							{
-								"type": "stringLiteral",
-								"value": "email"
+								"type": "reference",
+								"name": "EMAIL",
+								"id": 138
 							},
 							{
-								"type": "stringLiteral",
-								"value": "error"
+								"type": "reference",
+								"name": "ERROR",
+								"id": 139
 							},
 							{
-								"type": "stringLiteral",
-								"value": "event"
+								"type": "reference",
+								"name": "EVENT",
+								"id": 140
 							},
 							{
-								"type": "stringLiteral",
-								"value": "msg"
+								"type": "reference",
+								"name": "MESSAGE",
+								"id": 141
 							},
 							{
-								"type": "stringLiteral",
-								"value": "navigation"
+								"type": "reference",
+								"name": "NAVIGATION",
+								"id": 142
 							},
 							{
-								"type": "stringLiteral",
-								"value": "progress"
+								"type": "reference",
+								"name": "PROGRESS",
+								"id": 143
 							},
 							{
-								"type": "stringLiteral",
-								"value": "promo"
+								"type": "reference",
+								"name": "PROMO",
+								"id": 144
 							},
 							{
-								"type": "stringLiteral",
-								"value": "recommendation"
+								"type": "reference",
+								"name": "RECOMMENDATION",
+								"id": 145
 							},
 							{
-								"type": "stringLiteral",
-								"value": "reminder"
+								"type": "reference",
+								"name": "REMINDER",
+								"id": 146
 							},
 							{
-								"type": "stringLiteral",
-								"value": "service"
+								"type": "reference",
+								"name": "SERVICE",
+								"id": 147
 							},
 							{
-								"type": "stringLiteral",
-								"value": "social"
+								"type": "reference",
+								"name": "SOCIAL",
+								"id": 148
 							},
 							{
-								"type": "stringLiteral",
-								"value": "status"
+								"type": "reference",
+								"name": "STATUS",
+								"id": 149
 							},
 							{
-								"type": "stringLiteral",
-								"value": "sys"
+								"type": "reference",
+								"name": "SYSTEM",
+								"id": 150
 							},
 							{
-								"type": "stringLiteral",
-								"value": "transport"
+								"type": "reference",
+								"name": "TRANSPORT",
+								"id": 151
 							}
 						]
 					}
@@ -2873,16 +3152,19 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "ALL",
+								"id": 181
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "SUMMARY",
+								"id": 182
 							},
 							{
-								"type": "unknown",
-								"name": "2"
+								"type": "reference",
+								"name": "CHILDREN",
+								"id": 183
 							}
 						]
 					}
@@ -3177,28 +3459,34 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "3"
+								"type": "reference",
+								"name": "DEFAULT",
+								"id": 185
 							},
 							{
-								"type": "unknown",
-								"name": "4"
+								"type": "reference",
+								"name": "HIGH",
+								"id": 186
 							},
 							{
-								"type": "unknown",
-								"name": "2"
+								"type": "reference",
+								"name": "LOW",
+								"id": 187
 							},
 							{
-								"type": "unknown",
-								"name": "5"
+								"type": "reference",
+								"name": "MAX",
+								"id": 188
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "MIN",
+								"id": 189
 							},
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "NONE",
+								"id": 190
 							}
 						]
 					}
@@ -3596,16 +3884,19 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "unknown",
-								"name": "0"
+								"type": "reference",
+								"name": "PRIVATE",
+								"id": 203
 							},
 							{
-								"type": "unknown",
-								"name": "1"
+								"type": "reference",
+								"name": "PUBLIC",
+								"id": 204
 							},
 							{
-								"type": "unknown",
-								"name": "-1"
+								"type": "reference",
+								"name": "SECRET",
+								"id": 205
 							}
 						]
 					}
@@ -3626,7 +3917,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 837,
+							"line": 834,
 							"character": 6
 						}
 					],
@@ -3695,158 +3986,6 @@
 			]
 		},
 		{
-			"id": 184,
-			"name": "AndroidPriority",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 185,
-					"name": "DEFAULT",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1073,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "3"
-					}
-				},
-				{
-					"id": 186,
-					"name": "HIGH",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1074,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "4"
-					}
-				},
-				{
-					"id": 187,
-					"name": "LOW",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1075,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "2"
-					}
-				},
-				{
-					"id": 188,
-					"name": "MAX",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1076,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "5"
-					}
-				},
-				{
-					"id": 189,
-					"name": "MIN",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1077,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				},
-				{
-					"id": 190,
-					"name": "NONE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1078,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						185,
-						186,
-						187,
-						188,
-						189,
-						190
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1072,
-					"character": 32
-				}
-			]
-		},
-		{
 			"id": 198,
 			"name": "AndroidProgress",
 			"kind": 256,
@@ -3874,7 +4013,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1142,
+							"line": 1139,
 							"character": 9
 						}
 					],
@@ -3899,7 +4038,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1150,
+							"line": 1147,
 							"character": 15
 						}
 					],
@@ -3936,7 +4075,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1135,
+							"line": 1132,
 							"character": 5
 						}
 					],
@@ -3960,7 +4099,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1129,
+					"line": 1126,
 					"character": 32
 				}
 			]
@@ -3986,7 +4125,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 853,
+							"line": 850,
 							"character": 16
 						}
 					],
@@ -4010,7 +4149,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 854,
+							"line": 851,
 							"character": 24
 						}
 					],
@@ -4044,7 +4183,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 855,
+							"line": 852,
 							"character": 9
 						}
 					],
@@ -4068,7 +4207,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 852,
+							"line": 849,
 							"character": 8
 						}
 					],
@@ -4129,7 +4268,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 851,
+							"line": 848,
 							"character": 5
 						}
 					],
@@ -4150,7 +4289,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 856,
+							"line": 853,
 							"character": 7
 						}
 					],
@@ -4186,121 +4325,8 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 850,
+					"line": 847,
 					"character": 35
-				}
-			]
-		},
-		{
-			"id": 206,
-			"name": "AndroidRepeatInterval",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "Interface used when defining the `repeatInterval` on a scheduled notification."
-			},
-			"children": [
-				{
-					"id": 209,
-					"name": "DAY",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1185,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "day"
-					}
-				},
-				{
-					"id": 208,
-					"name": "HOUR",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1184,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "hour"
-					}
-				},
-				{
-					"id": 207,
-					"name": "MINUTE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1183,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "minute"
-					}
-				},
-				{
-					"id": 210,
-					"name": "WEEK",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1186,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "stringLiteral",
-						"value": "week"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						209,
-						208,
-						207,
-						210
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1182,
-					"character": 38
 				}
 			]
 		},
@@ -4330,7 +4356,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 866,
+							"line": 863,
 							"character": 9
 						}
 					],
@@ -4353,7 +4379,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 871,
+							"line": 868,
 							"character": 6
 						}
 					],
@@ -4376,7 +4402,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 876,
+							"line": 873,
 							"character": 8
 						}
 					],
@@ -4399,7 +4425,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 881,
+							"line": 878,
 							"character": 14
 						}
 					],
@@ -4422,7 +4448,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 886,
+							"line": 883,
 							"character": 16
 						}
 					],
@@ -4445,7 +4471,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 891,
+							"line": 888,
 							"character": 6
 						}
 					],
@@ -4468,7 +4494,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 896,
+							"line": 893,
 							"character": 6
 						}
 					],
@@ -4491,7 +4517,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 901,
+							"line": 898,
 							"character": 7
 						}
 					],
@@ -4514,7 +4540,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 906,
+							"line": 903,
 							"character": 13
 						}
 					],
@@ -4537,7 +4563,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 911,
+							"line": 908,
 							"character": 11
 						}
 					],
@@ -4560,7 +4586,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 916,
+							"line": 913,
 							"character": 8
 						}
 					],
@@ -4592,111 +4618,8 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 862,
+					"line": 859,
 					"character": 38
-				}
-			]
-		},
-		{
-			"id": 202,
-			"name": "AndroidVisibility",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "Interface used to define the visibility of an Android notification.",
-				"text": "Use with the `visibility` property on the notification.\n\nDefault value is `AndroidVisibility.PRIVATE`.\n"
-			},
-			"children": [
-				{
-					"id": 203,
-					"name": "PRIVATE",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens."
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1164,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "0"
-					}
-				},
-				{
-					"id": 204,
-					"name": "PUBLIC",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Show this notification in its entirety on all lockscreens."
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1169,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "1"
-					}
-				},
-				{
-					"id": 205,
-					"name": "SECRET",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Do not reveal any part of this notification on a secure lockscreen.",
-						"text": "Useful for notifications showing sensitive information such as banking apps.\n"
-					},
-					"sources": [
-						{
-							"fileName": "lib/index.d.ts",
-							"line": 1176,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "unknown",
-						"name": "-1"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						203,
-						204,
-						205
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "lib/index.d.ts",
-					"line": 1160,
-					"character": 34
 				}
 			]
 		},
@@ -5257,7 +5180,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1414,
+							"line": 1408,
 							"character": 24
 						}
 					]
@@ -5303,7 +5226,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1416,
+							"line": 1410,
 							"character": 20
 						}
 					]
@@ -5357,7 +5280,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1455,
+							"line": 1449,
 							"character": 15
 						}
 					]
@@ -5404,7 +5327,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1466,
+							"line": 1460,
 							"character": 20
 						}
 					]
@@ -5454,7 +5377,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1468,
+							"line": 1462,
 							"character": 21
 						}
 					]
@@ -5511,7 +5434,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1464,
+							"line": 1458,
 							"character": 16
 						}
 					]
@@ -5564,7 +5487,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1481,
+							"line": 1475,
 							"character": 15
 						}
 					]
@@ -5610,7 +5533,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1483,
+							"line": 1477,
 							"character": 20
 						}
 					]
@@ -5665,7 +5588,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1508,
+							"line": 1502,
 							"character": 21
 						}
 					]
@@ -5707,7 +5630,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1529,
+							"line": 1523,
 							"character": 10
 						}
 					]
@@ -5770,7 +5693,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1517,
+							"line": 1511,
 							"character": 12
 						}
 					]
@@ -5826,7 +5749,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1524,
+							"line": 1518,
 							"character": 17
 						}
 					]
@@ -5863,7 +5786,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1526,
+							"line": 1520,
 							"character": 18
 						}
 					]
@@ -5903,7 +5826,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1522,
+							"line": 1516,
 							"character": 13
 						}
 					]
@@ -5946,7 +5869,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1531,
+							"line": 1525,
 							"character": 24
 						}
 					]
@@ -5983,7 +5906,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1533,
+							"line": 1527,
 							"character": 27
 						}
 					]
@@ -6025,7 +5948,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1535,
+							"line": 1529,
 							"character": 16
 						}
 					]
@@ -6067,7 +5990,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1537,
+							"line": 1531,
 							"character": 25
 						}
 					]
@@ -6109,7 +6032,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1539,
+							"line": 1533,
 							"character": 22
 						}
 					]
@@ -6142,7 +6065,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1541,
+							"line": 1535,
 							"character": 33
 						}
 					]
@@ -6188,7 +6111,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1543,
+							"line": 1537,
 							"character": 29
 						}
 					]
@@ -6247,7 +6170,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1545,
+							"line": 1539,
 							"character": 22
 						}
 					]
@@ -6293,7 +6216,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1547,
+							"line": 1541,
 							"character": 10
 						}
 					]
@@ -6333,7 +6256,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1413,
+					"line": 1407,
 					"character": 24
 				}
 			],
@@ -6361,7 +6284,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1551,
+							"line": 1545,
 							"character": 22
 						}
 					],
@@ -6380,7 +6303,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1552,
+							"line": 1546,
 							"character": 17
 						}
 					],
@@ -6399,7 +6322,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1559,
+							"line": 1553,
 							"character": 14
 						}
 					],
@@ -6418,7 +6341,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1557,
+							"line": 1551,
 							"character": 17
 						}
 					],
@@ -6437,7 +6360,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1553,
+							"line": 1547,
 							"character": 27
 						}
 					],
@@ -6456,7 +6379,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1558,
+							"line": 1552,
 							"character": 19
 						}
 					],
@@ -6475,7 +6398,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1554,
+							"line": 1548,
 							"character": 17
 						}
 					],
@@ -6494,7 +6417,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1556,
+							"line": 1550,
 							"character": 23
 						}
 					],
@@ -6513,7 +6436,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1560,
+							"line": 1554,
 							"character": 14
 						}
 					],
@@ -6532,7 +6455,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1555,
+							"line": 1549,
 							"character": 19
 						}
 					],
@@ -6575,7 +6498,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1414,
+							"line": 1408,
 							"character": 24
 						}
 					],
@@ -6631,7 +6554,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1416,
+							"line": 1410,
 							"character": 20
 						}
 					],
@@ -6695,7 +6618,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1455,
+							"line": 1449,
 							"character": 15
 						}
 					],
@@ -6752,7 +6675,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1466,
+							"line": 1460,
 							"character": 20
 						}
 					],
@@ -6812,7 +6735,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1468,
+							"line": 1462,
 							"character": 21
 						}
 					],
@@ -6879,7 +6802,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1464,
+							"line": 1458,
 							"character": 16
 						}
 					],
@@ -6942,7 +6865,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1481,
+							"line": 1475,
 							"character": 15
 						}
 					],
@@ -6998,7 +6921,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1483,
+							"line": 1477,
 							"character": 20
 						}
 					],
@@ -7063,7 +6986,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1508,
+							"line": 1502,
 							"character": 21
 						}
 					],
@@ -7115,7 +7038,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1529,
+							"line": 1523,
 							"character": 10
 						}
 					],
@@ -7188,7 +7111,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1517,
+							"line": 1511,
 							"character": 12
 						}
 					],
@@ -7254,7 +7177,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1524,
+							"line": 1518,
 							"character": 17
 						}
 					],
@@ -7301,7 +7224,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1526,
+							"line": 1520,
 							"character": 18
 						}
 					],
@@ -7351,7 +7274,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1522,
+							"line": 1516,
 							"character": 13
 						}
 					],
@@ -7404,7 +7327,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1531,
+							"line": 1525,
 							"character": 24
 						}
 					],
@@ -7451,7 +7374,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1533,
+							"line": 1527,
 							"character": 27
 						}
 					],
@@ -7503,7 +7426,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1535,
+							"line": 1529,
 							"character": 16
 						}
 					],
@@ -7555,7 +7478,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1537,
+							"line": 1531,
 							"character": 25
 						}
 					],
@@ -7607,7 +7530,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1539,
+							"line": 1533,
 							"character": 22
 						}
 					],
@@ -7650,7 +7573,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1541,
+							"line": 1535,
 							"character": 33
 						}
 					],
@@ -7706,7 +7629,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1543,
+							"line": 1537,
 							"character": 29
 						}
 					],
@@ -7775,7 +7698,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1545,
+							"line": 1539,
 							"character": 22
 						}
 					],
@@ -7831,7 +7754,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1547,
+							"line": 1541,
 							"character": 10
 						}
 					],
@@ -7892,7 +7815,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1550,
+					"line": 1544,
 					"character": 35
 				}
 			],
@@ -8897,7 +8820,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1224,
+							"line": 1221,
 							"character": 7
 						}
 					],
@@ -8934,7 +8857,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1212,
+							"line": 1209,
 							"character": 10
 						}
 					],
@@ -8959,7 +8882,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1244,
+							"line": 1241,
 							"character": 16
 						}
 					],
@@ -8967,20 +8890,24 @@
 						"type": "union",
 						"types": [
 							{
-								"type": "stringLiteral",
-								"value": "minute"
+								"type": "reference",
+								"name": "MINUTE",
+								"id": 207
 							},
 							{
-								"type": "stringLiteral",
-								"value": "hour"
+								"type": "reference",
+								"name": "HOUR",
+								"id": 208
 							},
 							{
-								"type": "stringLiteral",
-								"value": "day"
+								"type": "reference",
+								"name": "DAY",
+								"id": 209
 							},
 							{
-								"type": "stringLiteral",
-								"value": "week"
+								"type": "reference",
+								"name": "WEEK",
+								"id": 210
 							}
 						]
 					}
@@ -9000,7 +8927,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1198,
+					"line": 1195,
 					"character": 25
 				}
 			]
@@ -9019,7 +8946,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1192,
+					"line": 1189,
 					"character": 32
 				}
 			],
@@ -9061,7 +8988,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1192,
+							"line": 1189,
 							"character": 34
 						}
 					]
@@ -9079,7 +9006,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1195,
+					"line": 1192,
 					"character": 43
 				}
 			],
@@ -9107,7 +9034,7 @@
 					"sources": [
 						{
 							"fileName": "lib/index.d.ts",
-							"line": 1195,
+							"line": 1192,
 							"character": 45
 						}
 					]
@@ -9126,7 +9053,7 @@
 			"sources": [
 				{
 					"fileName": "lib/index.d.ts",
-					"line": 1563,
+					"line": 1557,
 					"character": 27
 				}
 			],
@@ -9190,9 +9117,15 @@
 			"kind": 4,
 			"children": [
 				117,
+				135,
 				152,
+				175,
+				180,
 				191,
-				121
+				184,
+				206,
+				121,
+				202
 			]
 		},
 		{
@@ -9202,18 +9135,12 @@
 				87,
 				124,
 				130,
-				135,
 				215,
 				229,
-				175,
-				180,
 				53,
-				184,
 				198,
 				95,
-				206,
 				105,
-				202,
 				44,
 				48,
 				35,
