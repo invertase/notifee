@@ -16,7 +16,7 @@ const { inputFiles } = app.bootstrap({
   mode: 'file',
   includeDeclarations: true,
   excludeExternals: true,
-  tsconfig: path.resolve(process.cwd(), 'tsconfig.json'),
+  tsconfig: path.resolve(process.cwd(), 'tsconfig.docs.json'),
 });
 
 app.generateJson(inputFiles, output);

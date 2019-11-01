@@ -29,7 +29,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 934,
 							"character": 7
 						}
@@ -49,7 +49,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 924,
 							"character": 6
 						}
@@ -69,7 +69,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 929,
 							"character": 7
 						}
@@ -90,7 +90,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 920,
 					"character": 32
 				}
@@ -115,7 +115,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1010,
 							"character": 7
 						}
@@ -132,7 +132,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1011,
 							"character": 6
 						}
@@ -149,7 +149,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1012,
 							"character": 7
 						}
@@ -166,7 +166,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1013,
 							"character": 7
 						}
@@ -183,7 +183,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1014,
 							"character": 7
 						}
@@ -200,7 +200,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1015,
 							"character": 9
 						}
@@ -217,7 +217,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1016,
 							"character": 12
 						}
@@ -234,7 +234,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1017,
 							"character": 10
 						}
@@ -251,7 +251,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1018,
 							"character": 7
 						}
@@ -268,7 +268,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1019,
 							"character": 16
 						}
@@ -285,7 +285,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1020,
 							"character": 10
 						}
@@ -302,7 +302,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1021,
 							"character": 9
 						}
@@ -319,7 +319,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1022,
 							"character": 8
 						}
@@ -336,7 +336,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1023,
 							"character": 8
 						}
@@ -353,7 +353,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1024,
 							"character": 8
 						}
@@ -370,7 +370,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1025,
 							"character": 11
 						}
@@ -404,7 +404,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1009,
 					"character": 27
 				}
@@ -432,7 +432,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1045,
 							"character": 6
 						}
@@ -449,7 +449,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1035,
 							"character": 7
 						}
@@ -466,7 +466,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1033,
 							"character": 6
 						}
@@ -483,7 +483,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1037,
 							"character": 6
 						}
@@ -500,7 +500,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1041,
 							"character": 10
 						}
@@ -517,7 +517,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1044,
 							"character": 10
 						}
@@ -534,7 +534,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1046,
 							"character": 9
 						}
@@ -551,7 +551,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1042,
 							"character": 6
 						}
@@ -568,7 +568,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1034,
 							"character": 7
 						}
@@ -585,7 +585,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1040,
 							"character": 11
 						}
@@ -602,7 +602,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1043,
 							"character": 11
 						}
@@ -619,7 +619,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1047,
 							"character": 6
 						}
@@ -636,7 +636,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1038,
 							"character": 9
 						}
@@ -653,7 +653,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1048,
 							"character": 8
 						}
@@ -670,7 +670,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1049,
 							"character": 6
 						}
@@ -687,7 +687,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1050,
 							"character": 7
 						}
@@ -704,7 +704,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1051,
 							"character": 8
 						}
@@ -721,7 +721,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1032,
 							"character": 5
 						}
@@ -738,7 +738,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1052,
 							"character": 8
 						}
@@ -755,7 +755,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1053,
 							"character": 6
 						}
@@ -772,7 +772,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1036,
 							"character": 7
 						}
@@ -789,7 +789,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1039,
 							"character": 8
 						}
@@ -829,7 +829,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1031,
 					"character": 24
 				}
@@ -854,7 +854,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1057,
 							"character": 5
 						}
@@ -871,7 +871,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1060,
 							"character": 8
 						}
@@ -888,7 +888,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1058,
 							"character": 7
 						}
@@ -905,7 +905,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1059,
 							"character": 9
 						}
@@ -927,7 +927,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1056,
 					"character": 27
 				}
@@ -952,7 +952,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1064,
 							"character": 5
 						}
@@ -969,7 +969,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1066,
 							"character": 10
 						}
@@ -986,7 +986,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1065,
 							"character": 9
 						}
@@ -1007,7 +1007,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1063,
 					"character": 37
 				}
@@ -1032,7 +1032,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1079,
 							"character": 9
 						}
@@ -1049,7 +1049,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1080,
 							"character": 6
 						}
@@ -1066,7 +1066,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1081,
 							"character": 5
 						}
@@ -1083,7 +1083,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1082,
 							"character": 5
 						}
@@ -1100,7 +1100,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1083,
 							"character": 5
 						}
@@ -1117,7 +1117,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1084,
 							"character": 6
 						}
@@ -1141,7 +1141,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1078,
 					"character": 29
 				}
@@ -1166,7 +1166,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1070,
 							"character": 9
 						}
@@ -1183,7 +1183,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1071,
 							"character": 6
 						}
@@ -1200,7 +1200,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1072,
 							"character": 5
 						}
@@ -1217,7 +1217,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1073,
 							"character": 5
 						}
@@ -1234,7 +1234,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1074,
 							"character": 5
 						}
@@ -1251,7 +1251,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1075,
 							"character": 6
 						}
@@ -1275,7 +1275,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1069,
 					"character": 27
 				}
@@ -1303,7 +1303,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1182,
 							"character": 5
 						}
@@ -1320,7 +1320,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1181,
 							"character": 6
 						}
@@ -1337,7 +1337,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1180,
 							"character": 8
 						}
@@ -1354,7 +1354,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1183,
 							"character": 6
 						}
@@ -1376,7 +1376,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1179,
 					"character": 33
 				}
@@ -1405,7 +1405,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 943,
 							"character": 12
 						}
@@ -1422,7 +1422,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 944,
 							"character": 9
 						}
@@ -1442,7 +1442,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 942,
 					"character": 24
 				}
@@ -1474,7 +1474,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1161,
 							"character": 9
 						}
@@ -1494,7 +1494,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1166,
 							"character": 8
 						}
@@ -1515,7 +1515,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1173,
 							"character": 8
 						}
@@ -1536,7 +1536,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1157,
 					"character": 29
 				}
@@ -1562,7 +1562,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 841,
 							"character": 23
 						}
@@ -1595,7 +1595,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 839,
 							"character": 6
 						}
@@ -1615,7 +1615,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 838,
 							"character": 5
 						}
@@ -1636,7 +1636,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 842,
 							"character": 14
 						}
@@ -1661,7 +1661,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 843,
 							"character": 16
 						}
@@ -1683,7 +1683,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 844,
 							"character": 20
 						}
@@ -1716,7 +1716,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 840,
 							"character": 7
 						}
@@ -1744,7 +1744,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 837,
 					"character": 30
 				}
@@ -1774,7 +1774,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 963,
 							"character": 11
 						}
@@ -1803,7 +1803,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 961,
 							"character": 9
 						}
@@ -1824,7 +1824,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 964,
 							"character": 9
 						}
@@ -1854,7 +1854,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 962,
 							"character": 7
 						}
@@ -1883,7 +1883,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 960,
 							"character": 6
 						}
@@ -1910,7 +1910,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 959,
 					"character": 39
 				}
@@ -1943,7 +1943,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1006,
 							"character": 9
 						}
@@ -1975,7 +1975,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 996,
 							"character": 6
 						}
@@ -1999,7 +1999,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1001,
 							"character": 7
 						}
@@ -2028,7 +2028,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 992,
 							"character": 6
 						}
@@ -2054,7 +2054,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 991,
 					"character": 36
 				}
@@ -2084,7 +2084,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1284,
 							"character": 11
 						}
@@ -2120,7 +2120,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1273,
 							"character": 11
 						}
@@ -2145,7 +2145,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1293,
 							"character": 13
 						}
@@ -2179,7 +2179,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1302,
 							"character": 14
 						}
@@ -2217,7 +2217,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1311,
 							"character": 17
 						}
@@ -2255,7 +2255,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1320,
 							"character": 9
 						}
@@ -2289,7 +2289,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1329,
 							"character": 12
 						}
@@ -2345,7 +2345,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1343,
 							"character": 12
 						}
@@ -2379,7 +2379,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1281,
 							"character": 6
 						}
@@ -2404,7 +2404,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1357,
 							"character": 11
 						}
@@ -2438,7 +2438,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1360,
 							"character": 7
 						}
@@ -2472,7 +2472,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1367,
 							"character": 18
 						}
@@ -2500,7 +2500,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1350,
 							"character": 12
 						}
@@ -2550,7 +2550,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1269,
 					"character": 31
 				}
@@ -2582,7 +2582,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1379,
 							"character": 16
 						}
@@ -2606,7 +2606,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1390,
 							"character": 13
 						}
@@ -2638,7 +2638,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1385,
 							"character": 6
 						}
@@ -2662,7 +2662,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1375,
 					"character": 36
 				}
@@ -2699,7 +2699,7 @@
 					"comment": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 237,
 							"character": 9
 						}
@@ -2728,7 +2728,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 251,
 							"character": 12
 						}
@@ -2766,7 +2766,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 269,
 							"character": 15
 						}
@@ -2807,7 +2807,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 290,
 							"character": 10
 						}
@@ -2913,7 +2913,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 331,
 							"character": 11
 						}
@@ -2947,7 +2947,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 358,
 							"character": 13
 						}
@@ -2981,7 +2981,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 395,
 							"character": 7
 						}
@@ -3016,7 +3016,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 406,
 							"character": 11
 						}
@@ -3050,7 +3050,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 409,
 							"character": 13
 						}
@@ -3080,7 +3080,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 412,
 							"character": 10
 						}
@@ -3109,7 +3109,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 432,
 							"character": 7
 						}
@@ -3143,7 +3143,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 458,
 							"character": 20
 						}
@@ -3184,7 +3184,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 471,
 							"character": 14
 						}
@@ -3222,7 +3222,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 480,
 							"character": 11
 						}
@@ -3256,7 +3256,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 501,
 							"character": 8
 						}
@@ -3304,7 +3304,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 510,
 							"character": 11
 						}
@@ -3341,7 +3341,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 515,
 							"character": 8
 						}
@@ -3375,7 +3375,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 523,
 							"character": 9
 						}
@@ -3412,7 +3412,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 528,
 							"character": 15
 						}
@@ -3450,7 +3450,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 551,
 							"character": 10
 						}
@@ -3506,7 +3506,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 608,
 							"character": 10
 						}
@@ -3528,7 +3528,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 611,
 							"character": 20
 						}
@@ -3556,7 +3556,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 619,
 							"character": 12
 						}
@@ -3590,7 +3590,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 645,
 							"character": 19
 						}
@@ -3628,7 +3628,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 685,
 							"character": 11
 						}
@@ -3671,7 +3671,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 695,
 							"character": 9
 						}
@@ -3705,7 +3705,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 720,
 							"character": 7
 						}
@@ -3741,7 +3741,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 739,
 							"character": 8
 						}
@@ -3775,7 +3775,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 758,
 							"character": 14
 						}
@@ -3809,7 +3809,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 781,
 							"character": 17
 						}
@@ -3847,7 +3847,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 801,
 							"character": 18
 						}
@@ -3875,7 +3875,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 811,
 							"character": 12
 						}
@@ -3916,7 +3916,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 834,
 							"character": 6
 						}
@@ -3979,7 +3979,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 233,
 					"character": 36
 				}
@@ -4012,7 +4012,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1139,
 							"character": 9
 						}
@@ -4037,7 +4037,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1147,
 							"character": 15
 						}
@@ -4074,7 +4074,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1132,
 							"character": 5
 						}
@@ -4098,7 +4098,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1126,
 					"character": 32
 				}
@@ -4124,7 +4124,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 850,
 							"character": 16
 						}
@@ -4148,7 +4148,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 851,
 							"character": 24
 						}
@@ -4182,7 +4182,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 852,
 							"character": 9
 						}
@@ -4206,7 +4206,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 849,
 							"character": 8
 						}
@@ -4267,7 +4267,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 848,
 							"character": 5
 						}
@@ -4288,7 +4288,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 853,
 							"character": 7
 						}
@@ -4324,7 +4324,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 847,
 					"character": 35
 				}
@@ -4355,7 +4355,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 863,
 							"character": 9
 						}
@@ -4378,7 +4378,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 868,
 							"character": 6
 						}
@@ -4401,7 +4401,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 873,
 							"character": 8
 						}
@@ -4424,7 +4424,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 878,
 							"character": 14
 						}
@@ -4447,7 +4447,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 883,
 							"character": 16
 						}
@@ -4470,7 +4470,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 888,
 							"character": 6
 						}
@@ -4493,7 +4493,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 893,
 							"character": 6
 						}
@@ -4516,7 +4516,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 898,
 							"character": 7
 						}
@@ -4539,7 +4539,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 903,
 							"character": 13
 						}
@@ -4562,7 +4562,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 908,
 							"character": 11
 						}
@@ -4585,7 +4585,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 913,
 							"character": 8
 						}
@@ -4617,7 +4617,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 859,
 					"character": 38
 				}
@@ -4642,7 +4642,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 200,
 							"character": 12
 						}
@@ -4663,7 +4663,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 202,
 							"character": 9
 						}
@@ -4684,7 +4684,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 201,
 							"character": 5
 						}
@@ -4708,7 +4708,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 199,
 					"character": 30
 				}
@@ -4734,7 +4734,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 209,
 							"character": 23
 						}
@@ -4764,7 +4764,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 208,
 							"character": 17
 						}
@@ -4797,7 +4797,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 210,
 							"character": 15
 						}
@@ -4817,7 +4817,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 207,
 							"character": 10
 						}
@@ -4842,7 +4842,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 206,
 					"character": 37
 				}
@@ -4876,7 +4876,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 176,
 							"character": 13
 						}
@@ -4914,7 +4914,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 171,
 							"character": 12
 						}
@@ -4936,7 +4936,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 178,
 							"character": 7
 						}
@@ -4966,7 +4966,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 181,
 							"character": 10
 						}
@@ -4996,7 +4996,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 196,
 							"character": 10
 						}
@@ -5025,7 +5025,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 186,
 							"character": 11
 						}
@@ -5059,7 +5059,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 188,
 							"character": 13
 						}
@@ -5097,7 +5097,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 193,
 							"character": 18
 						}
@@ -5135,7 +5135,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 167,
 					"character": 32
 				}
@@ -5179,7 +5179,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1408,
 							"character": 24
 						}
@@ -5225,7 +5225,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1410,
 							"character": 20
 						}
@@ -5279,7 +5279,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1449,
 							"character": 15
 						}
@@ -5326,7 +5326,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1460,
 							"character": 20
 						}
@@ -5376,7 +5376,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1462,
 							"character": 21
 						}
@@ -5433,7 +5433,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1458,
 							"character": 16
 						}
@@ -5486,7 +5486,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1475,
 							"character": 15
 						}
@@ -5532,7 +5532,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1477,
 							"character": 20
 						}
@@ -5587,7 +5587,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1502,
 							"character": 21
 						}
@@ -5629,7 +5629,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1523,
 							"character": 10
 						}
@@ -5692,7 +5692,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1511,
 							"character": 12
 						}
@@ -5748,7 +5748,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1518,
 							"character": 17
 						}
@@ -5785,7 +5785,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1520,
 							"character": 18
 						}
@@ -5825,7 +5825,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1516,
 							"character": 13
 						}
@@ -5868,7 +5868,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1525,
 							"character": 24
 						}
@@ -5905,7 +5905,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1527,
 							"character": 27
 						}
@@ -5947,7 +5947,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1529,
 							"character": 16
 						}
@@ -5989,7 +5989,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1531,
 							"character": 25
 						}
@@ -6031,7 +6031,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1533,
 							"character": 22
 						}
@@ -6064,7 +6064,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1535,
 							"character": 33
 						}
@@ -6110,7 +6110,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1537,
 							"character": 29
 						}
@@ -6169,7 +6169,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1539,
 							"character": 22
 						}
@@ -6215,7 +6215,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1541,
 							"character": 10
 						}
@@ -6255,7 +6255,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1407,
 					"character": 24
 				}
@@ -6283,7 +6283,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1545,
 							"character": 22
 						}
@@ -6302,7 +6302,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1546,
 							"character": 17
 						}
@@ -6321,7 +6321,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1553,
 							"character": 14
 						}
@@ -6340,7 +6340,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1551,
 							"character": 17
 						}
@@ -6359,7 +6359,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1547,
 							"character": 27
 						}
@@ -6378,7 +6378,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1552,
 							"character": 19
 						}
@@ -6397,7 +6397,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1548,
 							"character": 17
 						}
@@ -6416,7 +6416,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1550,
 							"character": 23
 						}
@@ -6435,7 +6435,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1554,
 							"character": 14
 						}
@@ -6454,7 +6454,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1549,
 							"character": 19
 						}
@@ -6497,7 +6497,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1408,
 							"character": 24
 						}
@@ -6553,7 +6553,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1410,
 							"character": 20
 						}
@@ -6617,7 +6617,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1449,
 							"character": 15
 						}
@@ -6674,7 +6674,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1460,
 							"character": 20
 						}
@@ -6734,7 +6734,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1462,
 							"character": 21
 						}
@@ -6801,7 +6801,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1458,
 							"character": 16
 						}
@@ -6864,7 +6864,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1475,
 							"character": 15
 						}
@@ -6920,7 +6920,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1477,
 							"character": 20
 						}
@@ -6985,7 +6985,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1502,
 							"character": 21
 						}
@@ -7037,7 +7037,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1523,
 							"character": 10
 						}
@@ -7110,7 +7110,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1511,
 							"character": 12
 						}
@@ -7176,7 +7176,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1518,
 							"character": 17
 						}
@@ -7223,7 +7223,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1520,
 							"character": 18
 						}
@@ -7273,7 +7273,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1516,
 							"character": 13
 						}
@@ -7326,7 +7326,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1525,
 							"character": 24
 						}
@@ -7373,7 +7373,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1527,
 							"character": 27
 						}
@@ -7425,7 +7425,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1529,
 							"character": 16
 						}
@@ -7477,7 +7477,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1531,
 							"character": 25
 						}
@@ -7529,7 +7529,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1533,
 							"character": 22
 						}
@@ -7572,7 +7572,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1535,
 							"character": 33
 						}
@@ -7628,7 +7628,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1537,
 							"character": 29
 						}
@@ -7697,7 +7697,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1539,
 							"character": 22
 						}
@@ -7753,7 +7753,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1541,
 							"character": 10
 						}
@@ -7814,7 +7814,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1544,
 					"character": 35
 				}
@@ -7854,7 +7854,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 46,
 							"character": 6
 						}
@@ -7879,7 +7879,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 110,
 							"character": 6
 						}
@@ -7945,7 +7945,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 53,
 							"character": 16
 						}
@@ -7979,7 +7979,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 119,
 							"character": 7
 						}
@@ -8013,7 +8013,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 92,
 							"character": 10
 						}
@@ -8047,7 +8047,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 73,
 							"character": 7
 						}
@@ -8083,7 +8083,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 28,
 					"character": 29
 				}
@@ -8125,7 +8125,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 140,
 							"character": 9
 						}
@@ -8150,7 +8150,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 46,
 							"character": 6
 						}
@@ -8180,7 +8180,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 110,
 							"character": 6
 						}
@@ -8251,7 +8251,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 159,
 							"character": 5
 						}
@@ -8277,7 +8277,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 53,
 							"character": 16
 						}
@@ -8316,7 +8316,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 119,
 							"character": 7
 						}
@@ -8355,7 +8355,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 92,
 							"character": 10
 						}
@@ -8394,7 +8394,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 73,
 							"character": 7
 						}
@@ -8437,7 +8437,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 122,
 					"character": 36
 				}
@@ -8469,7 +8469,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 163,
 							"character": 9
 						}
@@ -8494,7 +8494,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 46,
 							"character": 6
 						}
@@ -8524,7 +8524,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 110,
 							"character": 6
 						}
@@ -8590,7 +8590,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 164,
 							"character": 5
 						}
@@ -8616,7 +8616,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 53,
 							"character": 16
 						}
@@ -8655,7 +8655,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 119,
 							"character": 7
 						}
@@ -8694,7 +8694,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 92,
 							"character": 10
 						}
@@ -8733,7 +8733,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 73,
 							"character": 7
 						}
@@ -8776,7 +8776,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 162,
 					"character": 35
 				}
@@ -8819,7 +8819,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1221,
 							"character": 7
 						}
@@ -8856,7 +8856,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1209,
 							"character": 10
 						}
@@ -8881,7 +8881,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1241,
 							"character": 16
 						}
@@ -8926,7 +8926,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1195,
 					"character": 25
 				}
@@ -8945,7 +8945,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1189,
 					"character": 32
 				}
@@ -8987,7 +8987,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1189,
 							"character": 34
 						}
@@ -9005,7 +9005,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1192,
 					"character": 43
 				}
@@ -9033,7 +9033,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/index.d.ts",
+							"fileName": "index.d.ts",
 							"line": 1192,
 							"character": 45
 						}
@@ -9052,7 +9052,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "lib/index.d.ts",
+					"fileName": "index.d.ts",
 					"line": 1557,
 					"character": 27
 				}
@@ -9062,53 +9062,6 @@
 				"name": "ModuleWithStatics",
 				"id": 297
 			}
-		},
-		{
-			"id": 379,
-			"name": "myNotificationBuilder",
-			"kind": 64,
-			"kindString": "Function",
-			"flags": {},
-			"signatures": [
-				{
-					"id": 380,
-					"name": "myNotificationBuilder",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {},
-					"parameters": [
-						{
-							"id": 381,
-							"name": "notification",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {},
-							"type": {
-								"type": "reference",
-								"name": "RemoteNotification",
-								"id": 23
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"name": "Promise",
-						"typeArguments": [
-							{
-								"type": "intrinsic",
-								"name": "void"
-							}
-						]
-					}
-				}
-			],
-			"sources": [
-				{
-					"fileName": "type-test.ts",
-					"line": 12,
-					"character": 36
-				}
-			]
 		}
 	],
 	"groups": [
@@ -9165,13 +9118,6 @@
 			"kind": 32,
 			"children": [
 				378
-			]
-		},
-		{
-			"title": "Functions",
-			"kind": 64,
-			"children": [
-				379
 			]
 		}
 	]
