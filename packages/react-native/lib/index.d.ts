@@ -266,10 +266,7 @@ export interface AndroidNotification {
    *
    * Defaults to `AndroidBadgeIconType.NONE`.
    */
-  badgeIconType?:
-    | AndroidBadgeIconType.NONE
-    | AndroidBadgeIconType.SMALL
-    | AndroidBadgeIconType.LARGE;
+  badgeIconType?: AndroidBadgeIconType;
 
   /**
    * Assigns the notification to a category. Use the one which best describes the notification.
@@ -287,23 +284,7 @@ export interface AndroidNotification {
    * await firebase.notifications().displayNotification(notification);
    * ```
    */
-  category?:
-    | AndroidCategory.ALARM
-    | AndroidCategory.CALL
-    | AndroidCategory.EMAIL
-    | AndroidCategory.ERROR
-    | AndroidCategory.EVENT
-    | AndroidCategory.MESSAGE
-    | AndroidCategory.NAVIGATION
-    | AndroidCategory.PROGRESS
-    | AndroidCategory.PROMO
-    | AndroidCategory.RECOMMENDATION
-    | AndroidCategory.REMINDER
-    | AndroidCategory.SERVICE
-    | AndroidCategory.SOCIAL
-    | AndroidCategory.STATUS
-    | AndroidCategory.SYSTEM
-    | AndroidCategory.TRANSPORT;
+  category?: AndroidCategory;
 
   /**
    * Specify the `AndroidChannel` which the notification will be delivered on.
@@ -455,10 +436,7 @@ export interface AndroidNotification {
    * });
    * ```
    */
-  groupAlertBehavior?:
-    | AndroidGroupAlertBehavior.ALL
-    | AndroidGroupAlertBehavior.SUMMARY
-    | AndroidGroupAlertBehavior.CHILDREN;
+  groupAlertBehavior?: AndroidGroupAlertBehavior;
 
   /**
    * Whether this notification should be a group summary.
@@ -548,13 +526,7 @@ export interface AndroidNotification {
    * });
    * ```
    */
-  priority?:
-    | AndroidPriority.DEFAULT
-    | AndroidPriority.HIGH
-    | AndroidPriority.LOW
-    | AndroidPriority.MAX
-    | AndroidPriority.MIN
-    | AndroidPriority.NONE;
+  priority?: AndroidPriority;
 
   /**
    * A notification can show current progress of a task. The progress state can either be fixed or
@@ -808,7 +780,7 @@ export interface AndroidNotification {
    *
    * See `AndroidVisibility` for more information.
    */
-  visibility?: AndroidVisibility.PRIVATE | AndroidVisibility.PUBLIC | AndroidVisibility.SECRET;
+  visibility?: AndroidVisibility;
 
   /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
@@ -1238,11 +1210,7 @@ export interface Schedule {
    *   repeatInterval: AndroidRepeatInterval.WEEK,
    * });
    */
-  repeatInterval?:
-    | AndroidRepeatInterval.MINUTE
-    | AndroidRepeatInterval.HOUR
-    | AndroidRepeatInterval.DAY
-    | AndroidRepeatInterval.WEEK;
+  repeatInterval?: AndroidRepeatInterval;
 }
 
 /**
@@ -1326,13 +1294,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  importance?:
-    | AndroidImportance.DEFAULT
-    | AndroidImportance.HIGH
-    | AndroidImportance.LOW
-    | AndroidImportance.MAX
-    | AndroidImportance.MIN
-    | AndroidImportance.NONE;
+  importance?: AndroidImportance;
 
   /**
    * If lights are enabled (via `enableLights`), sets/overrides the light color for notifications
@@ -1347,7 +1309,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  visibility?: AndroidVisibility.PRIVATE | AndroidVisibility.PUBLIC | AndroidVisibility.SECRET;
+  visibility?: AndroidVisibility;
 
   /**
    * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.

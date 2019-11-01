@@ -1,11 +1,14 @@
-import notifee, { RemoteNotification } from '@notifee/react-native';
+import notifee, { AndroidRepeatInterval, RemoteNotification } from '@notifee/react-native';
 
 console.log(notifee.AndroidColor.AQUA);
 
 notifee
-  .displayNotification({
+  .scheduleNotification({
     title: 'foo',
     body: 'bar',
+  }, {
+    repeatInterval: AndroidRepeatInterval.DAY,
+    fireDate: Date.now(),
   })
   .then(value => value);
 
