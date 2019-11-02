@@ -4,7 +4,7 @@ const detox = require('detox');
 const { requirePackageTests } = require('./helpers');
 const { detox: detoxConfig } = require('../package.json');
 
-detoxConfig.configurations['android.emu.debug'].name =
+detoxConfig.configurations['android.emu.debug'].device.avdName =
   process.env.ANDROID_AVD_NAME ||
   'TestingAVD_29' || // TODO change me/switch dynamically on CI / locally
   detoxConfig.configurations['android.emu.debug'].name;

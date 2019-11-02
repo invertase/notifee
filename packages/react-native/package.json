@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
-  "main": "lib/index.js",
+  "main": "lib/index.ts",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "genversion --semi lib/version.js",

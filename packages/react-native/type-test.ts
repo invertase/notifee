@@ -3,13 +3,16 @@ import notifee, { AndroidRepeatInterval, RemoteNotification } from '@notifee/rea
 console.log(notifee.AndroidColor.AQUA);
 
 notifee
-  .scheduleNotification({
-    title: 'foo',
-    body: 'bar',
-  }, {
-    repeatInterval: AndroidRepeatInterval.DAY,
-    fireDate: Date.now(),
-  })
+  .scheduleNotification(
+    {
+      title: 'foo',
+      body: 'bar',
+    },
+    {
+      repeatInterval: AndroidRepeatInterval.DAY,
+      fireDate: Date.now(),
+    },
+  )
   .then(value => value);
 
 async function myNotificationBuilder(notification: RemoteNotification) {
