@@ -24,7 +24,7 @@
  *   },
  * };
  *
- * await firebase.notifications().displayNotification(notification);
+ * await notifee.displayNotification(notification);
  * ```
  */
 export interface Notification {
@@ -42,7 +42,7 @@ export interface Notification {
    *   body: 'Hello World!',
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   body: string;
@@ -69,7 +69,7 @@ export interface Notification {
    *   body: 'Hello World!',
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   title?: string;
@@ -88,7 +88,7 @@ export interface Notification {
    *   body: 'Hello World!',
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   subtitle?: string;
@@ -106,7 +106,7 @@ export interface Notification {
    *   }
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   data?: { [key: string]: string };
@@ -136,7 +136,7 @@ export interface NotificationBuilder extends Notification {
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   android?: AndroidNotification;
@@ -155,7 +155,7 @@ export interface NotificationBuilder extends Notification {
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   ios?: IOSNotification;
@@ -227,7 +227,7 @@ export interface IOSAttachmentOptions {
  *   },
  * };
  *
- * await firebase.notifications().displayNotification(notification);
+ * await notifee.displayNotification(notification);
  * ```
  *
  * @android
@@ -279,11 +279,11 @@ export interface AndroidNotification {
    * const notification = {
    *   body: 'Congratulations...',
    *   android: {
-   *     category: firebase.notifications.AndroidCategory.MESSAGE,
+   *     category: notifee.AndroidCategory.MESSAGE,
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   category?: AndroidCategory;
@@ -298,12 +298,12 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * const channelId = firebase.notifications().createChannel({
+   * const channelId = notifee.createChannel({
    *   channelId: 'my-custom-channel',
    *   name: 'Custom Notification Channel',
    * });
    *
-   * await firebase.notifications().displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Notification with channel',
    *   android: {
    *     channelId,
@@ -326,12 +326,12 @@ export interface AndroidNotification {
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    *
    * ...
    *
    * // The user taps the notification....
-   * const notification = await firebase.notifications().getInitialNotification();
+   * const notification = await notifee.getInitialNotification();
    *
    * if (notification.android.clickAction === 'open_settings') {
    *   // open settings view
@@ -351,9 +351,9 @@ export interface AndroidNotification {
    * Using a predefined color.
    *
    * ```js
-   * import notification, { AndroidColor } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidColor } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     color: AndroidColor.AQUA,
    *   },
@@ -365,9 +365,9 @@ export interface AndroidNotification {
    * Using a hexadecimal color.
    *
    * ```js
-   * import notification, { AndroidColor } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidColor } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     color: '#2196f3', // material blue
    *     // color: '#802196f3', // 50% opacity material blue
@@ -403,9 +403,9 @@ export interface AndroidNotification {
    * ![Grouped Notifications](https://developer.android.com/images/ui/notifications/notification-group_2x.png)
    *
    * ```js
-   * import notification from '@react-native-firebase/notifications';
+   * import notifee from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     group: message.group.id,
    *   },
@@ -428,9 +428,9 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * import notification, { AndroidGroupAlertBehavior } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidGroupAlertBehavior } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     group: message.group.id,
    *     groupAlertBehavior: AndroidGroupAlertBehavior.CHILDREN,
@@ -471,7 +471,7 @@ export interface AndroidNotification {
    * Show a red light, for 300ms and turn it off for 600ms.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     lights: ['#f44336', 300, 600],
    *   },
@@ -521,9 +521,9 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
-   *     priority: firebase.notifications.AndroidPriority.LOW,
+   *     priority: notifee.AndroidPriority.LOW,
    *   },
    * });
    * ```
@@ -539,7 +539,7 @@ export interface AndroidNotification {
    * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   notificationId: 'upload-task',
    *   android: {
    *     progress: {
@@ -550,7 +550,7 @@ export interface AndroidNotification {
    * });
    *
    * // Sometime later... Set progress to 50%
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   notificationId: 'upload-task',
    *   android: {
    *     progress: {
@@ -568,7 +568,7 @@ export interface AndroidNotification {
    * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     progress: {
    *       max: 10,
@@ -608,7 +608,7 @@ export interface AndroidNotification {
    * ![When Timestamp](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     when: Date.now(),
    *     showWhenTimestamp: true,
@@ -628,7 +628,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
    *     smallIcon: 'my_app_icon',
@@ -648,7 +648,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
    *     smallIcon: ['battery_level', 2],
@@ -680,11 +680,11 @@ export interface AndroidNotification {
    * #### Example - Big Text Style
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Congratulations you have won a prize...',
    *   android: {
    *     style: {
-   *       type: firebase.notifications.AndroidStyle.BIGTEXT,
+   *       type: notifee.AndroidStyle.BIGTEXT,
    *       text: 'Congratulations you have won a prize. To claim the prize please login to your account...'
    *     }
    *   },
@@ -702,7 +702,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     body: 'You have 1 new message',
    *     ticker: 'A new message has been received',
@@ -721,7 +721,7 @@ export interface AndroidNotification {
    * Time out in 10 minutes.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
    *     timeoutAfter: Date.now() + 600000,
@@ -743,7 +743,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
    *     when: Date.now() + 300000,
@@ -764,7 +764,7 @@ export interface AndroidNotification {
    * Vibrate for 300ms with a 300ms delay.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     body: 'Vibrating notification',
    *     vibrationPattern: [300, 300],
@@ -795,7 +795,7 @@ export interface AndroidNotification {
    * Show the length of time the notification has been showing for.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Phone call in progress',
    *   android: {
    *     ongoing: true,
@@ -951,11 +951,11 @@ export interface AndroidBigPictureStyle {
  * #### Example
  *
  * ```js
- * await firebase.notifications().displayNotification({
+ * await notifee.displayNotification({
  *   body: 'Hello World',
  *   android: {
  *     style: {
- *       type: firebase.notifications.AndroidStyle.BIGTEXT,
+ *       type: notifee.AndroidStyle.BIGTEXT,
  *       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur magna ut nulla blandit tristique.',
  *     },
  *   }
@@ -1069,7 +1069,7 @@ export enum AndroidImportance {
  * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
  *
  * ```js
- * await notification.displayNotification({
+ * await notifee.displayNotification({
  *   android: {
  *     progress: {
  *       max: 10,
@@ -1086,7 +1086,7 @@ export enum AndroidImportance {
  * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
  *
  * ```js
- * await notification.displayNotification({
+ * await notifee.displayNotification({
  *   android: {
  *     progress: {
  *       max: 10,
@@ -1175,7 +1175,7 @@ export interface Schedule {
    * Schedule notification to display 10 minutes from now.
    *
    * ```js
-   * await firebase.notifications().scheduleNotification(notification, {
+   * await notifee.scheduleNotification(notification, {
    *   fireDate: Date.now() + 600000,
    * });
    * ```
@@ -1205,9 +1205,9 @@ export interface Schedule {
    * every week
    *
    * ```js
-   * import notifications, { AndroidRepeatInterval } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidRepeatInterval } from '@notifee/react-native';
    *
-   * await firebase.notifications().scheduleNotification(notification, {
+   * await notifee.scheduleNotification(notification, {
    *   fireDate: Date.now() + 600000,
    *   repeatInterval: AndroidRepeatInterval.WEEK,
    * });
@@ -1228,7 +1228,7 @@ export interface Schedule {
  * #### Example
  *
  * ```js
- * await firebase.notifications().createChannel({
+ * await notifee.createChannel({
  *   channelId: 'alarms',
  *   name: 'Alarms & Timers',
  *   lightColor: '#3f51b5',
@@ -1355,18 +1355,7 @@ export interface AndroidChannelGroup {
 }
 
 /**
- *
- * The Firebase Notifications service interface.
- *
- * > This module is available for the default app only.
- *
- * #### Example
- *
- * Get the Notifications service for the default app:
- *
- * ```js
- * const defaultAppNotifications = firebase.notifications();
- * ```
+ * The Notifee API interface.
  */
 declare interface Module {
   cancelAllNotifications(): Promise<void>;
@@ -1394,13 +1383,13 @@ declare interface Module {
    * #### Example
    *
    * ```js
-   * const channelId = await firebase.notifications().createChannel({
+   * const channelId = await notifee.createChannel({
    *   channelId: 'custom-channel',
    *   name: 'Custom Channel',
    *   description: 'A test channel',
    * });
    *
-   * await firebase.notifications().displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Test notification',
    *   android: {
    *     channelId, // 'custom-channel'
@@ -1431,7 +1420,7 @@ declare interface Module {
    * #### Example
    *
    * ```js
-   * await firebase.notifications().deleteChannel('custom-channel');
+   * await notifee.deleteChannel('custom-channel');
    * ```
    *
    * @param channelId The channel ID to delete.
@@ -1448,7 +1437,7 @@ declare interface Module {
    * #### Example
    *
    * ```js
-   * await firebase.notifications().displayNotification({
+   * await notifee.displayNotification({
    *   title: 'Test',
    *   body: 'Test notification body',
    *   android: {
