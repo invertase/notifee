@@ -2,18 +2,34 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-export default class NotifeeNativeError extends Error {
-  static fromEvent(errorEvent, stack) {
+import { NativeError } from '../types/Library';
+
+export default class NotifeeNativeError extends Error implements NativeError {
+  public readonly code: string;
+  private readonly jsStack: string;
+  public readonly nativeErrorCode: string;
+  public readonly nativeErrorMessage: string;
+
+  // todo errorEvent type
+  static fromEvent(errorEvent: any, stack?: string): NotifeeNativeError {
     return new NotifeeNativeError({ userInfo: errorEvent }, stack || new Error().stack);
   }
 
-  constructor(nativeError, jsStack) {
+  // TODO native error type
+  constructor(nativeError: any, jsStack = '') {
     super();
     const { userInfo } = nativeError;
 
+    this.code = `${userInfo.code || 'unknown'}`;
     Object.defineProperty(this, 'code', {
       enumerable: false,
       value: `${userInfo.code || 'unknown'}`,
+    });
+
+    this.jsStack = jsStack;
+    Object.defineProperty(this, 'jsStack', {
+      enumerable: false,
+      value: jsStack,
     });
 
     Object.defineProperty(this, 'message', {
@@ -21,21 +37,18 @@ export default class NotifeeNativeError extends Error {
       value: `[${this.code}] ${userInfo.message || nativeError.message}`,
     });
 
-    Object.defineProperty(this, 'jsStack', {
-      enumerable: false,
-      value: jsStack,
-    });
-
     Object.defineProperty(this, 'userInfo', {
       enumerable: false,
       value: userInfo,
     });
 
+    this.nativeErrorCode = userInfo.nativeErrorCode || null;
     Object.defineProperty(this, 'nativeErrorCode', {
       enumerable: false,
       value: userInfo.nativeErrorCode || null,
     });
 
+    this.nativeErrorMessage = userInfo.nativeErrorMessage || null;
     Object.defineProperty(this, 'nativeErrorMessage', {
       enumerable: false,
       value: userInfo.nativeErrorMessage || null,
@@ -49,7 +62,7 @@ export default class NotifeeNativeError extends Error {
    *
    * @returns {string}
    */
-  getStackWithMessage(message) {
+  getStackWithMessage(message: string): string {
     return [message, ...this.jsStack.split('\n').slice(2, 13)].join('\n');
   }
 }

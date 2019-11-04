@@ -13,20 +13,20 @@ describe('notifications() Notification', () => {
     const v = validate();
     const expected = jet.contextify({
       autoCancel: true,
-      badgeIconType: notifeeExports.AndroidBadgeIconType.NONE,
+      badgeIconType: notifee.AndroidBadgeIconType.NONE,
       channelId: '',
       colorized: false,
-      groupAlertBehavior: notifeeExports.AndroidGroupAlertBehavior.ALL,
+      groupAlertBehavior: notifee.AndroidGroupAlertBehavior.ALL,
       groupSummary: false,
       localOnly: false,
       ongoing: false,
       onlyAlertOnce: false,
-      priority: notifeeExports.AndroidPriority.DEFAULT,
+      priority: notifee.AndroidPriority.DEFAULT,
       showWhenTimestamp: false,
       smallIcon: jet.contextify(['ic_launcher', -1]),
       usesChronometer: false,
       sound: 'default',
-      visibility: notifeeExports.AndroidVisibility.PRIVATE,
+      visibility: notifee.AndroidVisibility.PRIVATE,
     });
 
     const actual = jet.contextify(v);
@@ -78,8 +78,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a badgeIconType value', () => {
-      const v = validate({ badgeIconType: notifeeExports.AndroidBadgeIconType.LARGE });
-      v.badgeIconType.should.be.eql(notifeeExports.AndroidBadgeIconType.LARGE);
+      const v = validate({ badgeIconType: notifee.AndroidBadgeIconType.LARGE });
+      v.badgeIconType.should.be.eql(notifee.AndroidBadgeIconType.LARGE);
     });
   });
 
@@ -97,8 +97,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a category', () => {
-      const v = validate({ category: notifeeExports.AndroidCategory.EMAIL });
-      v.category.should.eql(notifeeExports.AndroidCategory.EMAIL);
+      const v = validate({ category: notifee.AndroidCategory.EMAIL });
+      v.category.should.eql(notifee.AndroidCategory.EMAIL);
     });
   });
 
@@ -158,11 +158,11 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a color', () => {
-      const v1 = validate({ color: notifeeExports.AndroidColor.GREEN });
+      const v1 = validate({ color: notifee.AndroidColor.GREEN });
       const v2 = validate({ color: '#ffffff' });
       const v3 = validate({ color: '#80ffffff' });
 
-      v1.color.should.eql(notifeeExports.AndroidColor.GREEN);
+      v1.color.should.eql(notifee.AndroidColor.GREEN);
       v2.color.should.eql('#ffffff');
       v3.color.should.eql('#80ffffff');
     });
@@ -229,8 +229,8 @@ describe('notifications() Notification', () => {
       try {
         validate({
           defaults: [
-            notifeeExports.AndroidDefaults.SOUND,
-            notifeeExports.AndroidDefaults.VIBRATE,
+            notifee.AndroidDefaults.SOUND,
+            notifee.AndroidDefaults.VIBRATE,
             'foo',
           ],
         });
@@ -245,12 +245,12 @@ describe('notifications() Notification', () => {
 
     it('sets defaults', () => {
       const v = validate({
-        defaults: [notifeeExports.AndroidDefaults.SOUND, notifeeExports.AndroidDefaults.VIBRATE],
+        defaults: [notifee.AndroidDefaults.SOUND, notifee.AndroidDefaults.VIBRATE],
       });
       v.defaults.should.be.Array();
       v.defaults.length.should.eql(2);
-      v.defaults[0].should.eql(notifeeExports.AndroidDefaults.SOUND);
-      v.defaults[1].should.eql(notifeeExports.AndroidDefaults.VIBRATE);
+      v.defaults[0].should.eql(notifee.AndroidDefaults.SOUND);
+      v.defaults[1].should.eql(notifee.AndroidDefaults.VIBRATE);
     });
   });
 
@@ -286,9 +286,9 @@ describe('notifications() Notification', () => {
 
     it('sets groupAlertBehavior', () => {
       const v = validate({
-        groupAlertBehavior: notifeeExports.AndroidGroupAlertBehavior.SUMMARY,
+        groupAlertBehavior: notifee.AndroidGroupAlertBehavior.SUMMARY,
       });
-      v.groupAlertBehavior.should.eql(notifeeExports.AndroidGroupAlertBehavior.SUMMARY);
+      v.groupAlertBehavior.should.eql(notifee.AndroidGroupAlertBehavior.SUMMARY);
     });
   });
 
@@ -502,8 +502,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets priority', () => {
-      const v = validate({ priority: notifeeExports.AndroidPriority.LOW });
-      v.priority.should.eql(notifeeExports.AndroidPriority.LOW);
+      const v = validate({ priority: notifee.AndroidPriority.LOW });
+      v.priority.should.eql(notifee.AndroidPriority.LOW);
     });
   });
 
@@ -783,7 +783,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 123,
             },
           });
@@ -800,7 +800,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: '',
             },
           });
@@ -816,7 +816,7 @@ describe('notifications() Notification', () => {
       it('sets a picture value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
           },
         });
@@ -828,7 +828,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               largeIcon: 123,
             },
@@ -845,7 +845,7 @@ describe('notifications() Notification', () => {
       it('sets a largeIcon value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             largeIcon: 'bar',
           },
@@ -859,7 +859,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               title: 123,
             },
@@ -876,7 +876,7 @@ describe('notifications() Notification', () => {
       it('sets a title value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             title: 'bar',
           },
@@ -890,7 +890,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               summary: 123,
             },
@@ -907,7 +907,7 @@ describe('notifications() Notification', () => {
       it('sets a summary value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             summary: 'bar',
           },
@@ -920,7 +920,7 @@ describe('notifications() Notification', () => {
       it('sets all values', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             largeIcon: 'bar',
             title: 'baz',
@@ -940,7 +940,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 123,
             },
           });
@@ -957,7 +957,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: '',
             },
           });
@@ -973,7 +973,7 @@ describe('notifications() Notification', () => {
       it('sets a text value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
           },
         });
@@ -985,7 +985,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 'foo',
               title: 123,
             },
@@ -1002,7 +1002,7 @@ describe('notifications() Notification', () => {
       it('sets a title value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             title: 'baz',
           },
@@ -1016,7 +1016,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 'foo',
               summary: 123,
             },
@@ -1033,7 +1033,7 @@ describe('notifications() Notification', () => {
       it('sets a summary value', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             summary: 'baz',
           },
@@ -1046,7 +1046,7 @@ describe('notifications() Notification', () => {
       it('sets all values', () => {
         const v = validate({
           style: {
-            type: notifeeExports.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             title: 'bar',
             summary: 'baz',

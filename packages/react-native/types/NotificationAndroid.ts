@@ -3,214 +3,6 @@
  */
 
 /**
- * Interface for building a local notification for both Android & iOS devices.
- *
- * #### Example
- *
- * ```js
- * const notification = {
- *   body: 'Hello World!',
- *   title: 'Welcome',
- *   data: {
- *     user: '123',
- *   },
- *   android: {
- *     color: '#3f51b5',
- *   },
- *   ios: {
- *     alertAction: 'Open App',
- *   },
- * };
- *
- * await firebase.notifications().displayNotification(notification);
- * ```
- */
-export interface Notification {
-  /**
-   * The main body content of a notification. This field required and is the main body of your notification.
-   *
-   * On Android, if you wish to read the body when the notification is opened, add it to the `data` object.
-   *
-   * #### Example
-   *
-   * ![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)
-   *
-   * ```js
-   * const notification = {
-   *   body: 'Hello World!',
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  body: string;
-
-  /**
-   * A unique identifier for your notification.
-   *
-   * Defaults to a random string.
-   */
-  notificationId?: string;
-
-  /**
-   * The notification title which appears above the body text.
-   *
-   * On Android, if you wish to read the title when the notification is opened, add it to the `data` object.
-   *
-   * #### Example
-   *
-   * ![Title Text](https://prismic-io.s3.amazonaws.com/invertase%2F6fa1dea9-8cf6-4e9a-b318-8d8f73d568cf_new+project+%2818%29.jpg)
-   *
-   * ```js
-   * const notification = {
-   *   title: 'Welcome!',
-   *   body: 'Hello World!',
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  title?: string;
-
-  /**
-   * The notification subtitle, which appears on a new line below the title.
-   *
-   * #### Example
-   *
-   * ![Title Text](https://prismic-io.s3.amazonaws.com/invertase%2F6fa1dea9-8cf6-4e9a-b318-8d8f73d568cf_new+project+%2818%29.jpg)
-   *
-   * ```js
-   * const notification = {
-   *   title: 'Welcome!',
-   *   subtitle: 'Learn more...',
-   *   body: 'Hello World!',
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  subtitle?: string;
-
-  /**
-   * Additional data to store on the notification. Only `string` values can be stored.
-   *
-   * #### Example
-   *
-   * ```js
-   * const notification = {
-   *   body: 'Hello World!',
-   *   data: {
-   *     user: '123',
-   *   }
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  data?: { [key: string]: string };
-
-  /**
-   * Overrides the sound the notification is displayed with.
-   *
-   * The default value is `default`, which is the system default sound.
-   *
-   * TODO @ehesp FAQ/Guide on custom sounds
-   */
-  sound?: string;
-}
-
-export interface NotificationBuilder extends Notification {
-  /**
-   * Android specific notification options. See the `AndroidNotification` interface for more
-   * information and default options which are applied to a notification.
-   *
-   * #### Example
-   *
-   * ```js
-   * const notification = {
-   *   body: 'Hello World!',
-   *   android: {
-   *     color: '#3f51b5',
-   *   },
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  android?: AndroidNotification;
-
-  /**
-   * iOS specific notification options. See the `IOSNotification` interface for more information
-   * and default options which are applied to a notification.
-   *
-   * #### Example
-   *
-   * ```js
-   * const notification = {
-   *   body: 'Hello World!',
-   *   ios: {
-   *     alertAction: 'Open App',
-   *   },
-   * };
-   *
-   * await firebase.notifications().displayNotification(notification);
-   * ```
-   */
-  ios?: IOSNotification;
-}
-
-export interface RemoteNotification extends Notification {
-  android: AndroidNotification;
-  ios: IOSNotification;
-}
-
-export interface IOSNotification {
-  /**
-   * @ios iOS 10+
-   */
-  attachment?: IOSAttachment;
-
-  /**
-   * @ios iOS 9 Only
-   */
-  alertAction?: string;
-
-  badge?: number;
-
-  // todo ios categories?
-  category?: string;
-
-  /**
-   * @ios iOS 9 Only
-   */
-  hasAction?: boolean;
-
-  launchImage?: string;
-
-  /**
-   * @ios iOS 10+
-   */
-  threadIdentifier?: string;
-
-  // todo
-  complete?: Function;
-}
-
-export interface IOSAttachment {
-  identifier: string;
-  url: string;
-  options?: IOSAttachmentOptions;
-}
-
-// TODO whats required here?
-export interface IOSAttachmentOptions {
-  typeHint: string;
-  thumbnailHidden?: boolean;
-  thumbnailClippingRect?: object;
-  thumbnailTime: number;
-}
-
-/**
  * The interface for Android specific options which are applied to a notification.
  *
  * #### Example
@@ -225,12 +17,12 @@ export interface IOSAttachmentOptions {
  *   },
  * };
  *
- * await firebase.notifications().displayNotification(notification);
+ * await notifee.displayNotification(notification);
  * ```
  *
  * @android
  */
-export interface AndroidNotification {
+export interface NotificationAndroid {
   /**
    *
    */
@@ -277,11 +69,11 @@ export interface AndroidNotification {
    * const notification = {
    *   body: 'Congratulations...',
    *   android: {
-   *     category: firebase.notifications.AndroidCategory.MESSAGE,
+   *     category: notifee.AndroidCategory.MESSAGE,
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    * ```
    */
   category?: AndroidCategory;
@@ -296,12 +88,12 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * const channelId = firebase.notifications().createChannel({
+   * const channelId = notifee.createChannel({
    *   channelId: 'my-custom-channel',
    *   name: 'Custom Notification Channel',
    * });
    *
-   * await firebase.notifications().displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Notification with channel',
    *   android: {
    *     channelId,
@@ -324,12 +116,12 @@ export interface AndroidNotification {
    *   },
    * };
    *
-   * await firebase.notifications().displayNotification(notification);
+   * await notifee.displayNotification(notification);
    *
    * ...
    *
    * // The user taps the notification....
-   * const notification = await firebase.notifications().getInitialNotification();
+   * const notification = await notifee.getInitialNotification();
    *
    * if (notification.android.clickAction === 'open_settings') {
    *   // open settings view
@@ -349,9 +141,9 @@ export interface AndroidNotification {
    * Using a predefined color.
    *
    * ```js
-   * import notification, { AndroidColor } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidColor } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     color: AndroidColor.AQUA,
    *   },
@@ -363,9 +155,9 @@ export interface AndroidNotification {
    * Using a hexadecimal color.
    *
    * ```js
-   * import notification, { AndroidColor } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidColor } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     color: '#2196f3', // material blue
    *     // color: '#802196f3', // 50% opacity material blue
@@ -401,9 +193,9 @@ export interface AndroidNotification {
    * ![Grouped Notifications](https://developer.android.com/images/ui/notifications/notification-group_2x.png)
    *
    * ```js
-   * import notification from '@react-native-firebase/notifications';
+   * import notifee from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     group: message.group.id,
    *   },
@@ -426,9 +218,9 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * import notification, { AndroidGroupAlertBehavior } from '@react-native-firebase/notifications';
+   * import notifee, { AndroidGroupAlertBehavior } from '@notifee/react-native';
    *
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     group: message.group.id,
    *     groupAlertBehavior: AndroidGroupAlertBehavior.CHILDREN,
@@ -469,7 +261,7 @@ export interface AndroidNotification {
    * Show a red light, for 300ms and turn it off for 600ms.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     lights: ['#f44336', 300, 600],
    *   },
@@ -519,9 +311,9 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
-   *     priority: firebase.notifications.AndroidPriority.LOW,
+   *     priority: notifee.AndroidPriority.LOW,
    *   },
    * });
    * ```
@@ -537,7 +329,7 @@ export interface AndroidNotification {
    * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   notificationId: 'upload-task',
    *   android: {
    *     progress: {
@@ -548,7 +340,7 @@ export interface AndroidNotification {
    * });
    *
    * // Sometime later... Set progress to 50%
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   notificationId: 'upload-task',
    *   android: {
    *     progress: {
@@ -566,7 +358,7 @@ export interface AndroidNotification {
    * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     progress: {
    *       max: 10,
@@ -606,7 +398,7 @@ export interface AndroidNotification {
    * ![When Timestamp](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     when: Date.now(),
    *     showWhenTimestamp: true,
@@ -626,7 +418,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
    *     smallIcon: 'my_app_icon',
@@ -646,7 +438,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
    *     smallIcon: ['battery_level', 2],
@@ -678,11 +470,11 @@ export interface AndroidNotification {
    * #### Example - Big Text Style
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Congratulations you have won a prize...',
    *   android: {
    *     style: {
-   *       type: firebase.notifications.AndroidStyle.BIGTEXT,
+   *       type: notifee.AndroidStyle.BIGTEXT,
    *       text: 'Congratulations you have won a prize. To claim the prize please login to your account...'
    *     }
    *   },
@@ -700,7 +492,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     body: 'You have 1 new message',
    *     ticker: 'A new message has been received',
@@ -719,7 +511,7 @@ export interface AndroidNotification {
    * Time out in 10 minutes.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
    *     timeoutAfter: Date.now() + 600000,
@@ -741,7 +533,7 @@ export interface AndroidNotification {
    * #### Example
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
    *     when: Date.now() + 300000,
@@ -762,7 +554,7 @@ export interface AndroidNotification {
    * Vibrate for 300ms with a 300ms delay.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   android: {
    *     body: 'Vibrating notification',
    *     vibrationPattern: [300, 300],
@@ -793,7 +585,7 @@ export interface AndroidNotification {
    * Show the length of time the notification has been showing for.
    *
    * ```js
-   * await notification.displayNotification({
+   * await notifee.displayNotification({
    *   body: 'Phone call in progress',
    *   android: {
    *     ongoing: true,
@@ -823,97 +615,6 @@ export interface AndroidRemoteInput {
   allowFreeFormTextInput?: boolean; // true
   choices?: string[];
   label?: string;
-}
-
-/**
- * TODO
- */
-export interface AndroidSemanticAction {
-  /**
-   * Archive the content associated with the notification. This could mean archiving an email, message, etc.
-   */
-  ARCHIVE: 5;
-
-  /**
-   * Call a contact, group, etc.
-   */
-  CALL: 10;
-
-  /**
-   * Delete the content associated with the notification. This could mean deleting an email, message, etc.
-   */
-  DELETE: 4;
-
-  /**
-   * Mark content as read.
-   */
-  MARK_AS_READ: 2;
-
-  /**
-   * Mark content as unread.
-   */
-  MARK_AS_UNREAD: 3;
-
-  /**
-   * Mute the content associated with the notification. This could mean silencing a conversation or currently playing media.
-   */
-  MUTE: 6;
-
-  /**
-   * No semantic action defined.
-   */
-  NONE: 0;
-
-  /**
-   * Reply to a conversation, chat, group, or wherever replies may be appropriate.
-   */
-  REPLY: 1;
-
-  /**
-   * Mark content with a thumbs down.
-   */
-  THUMBS_DOWN: 9;
-
-  /**
-   * Mark content with a thumbs up.
-   */
-  THUMBS_UP: 8;
-
-  /**
-   * Unmute the content associated with the notification. This could mean un-silencing a conversation or currently playing media.
-   */
-  UNMUTE: 7;
-}
-
-/**
- * When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface
- * describes how the badge icon is shown to the user.
- */
-export enum AndroidBadgeIconType {
-  /**
-   * Shows no badge, but instead uses the notification `number` if provided.
-   */
-  NONE = 0,
-
-  /**
-   * Shows the notification `smallIcon`.
-   */
-  SMALL = 1,
-
-  /**
-   * Shows the notification `largeIcon`.
-   */
-  LARGE = 2,
-}
-
-/**
- * Available Android Notification Styles.
- *
- * Used when providing a `style` to a notification builder with `displayNotification`.
- */
-export enum AndroidStyle {
-  BIGPICTURE = 0,
-  BIGTEXT = 1,
 }
 
 /**
@@ -949,11 +650,11 @@ export interface AndroidBigPictureStyle {
  * #### Example
  *
  * ```js
- * await firebase.notifications().displayNotification({
+ * await notifee.displayNotification({
  *   body: 'Hello World',
  *   android: {
  *     style: {
- *       type: firebase.notifications.AndroidStyle.BIGTEXT,
+ *       type: notifee.AndroidStyle.BIGTEXT,
  *       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur magna ut nulla blandit tristique.',
  *     },
  *   }
@@ -978,84 +679,6 @@ export interface AndroidBigTextStyle {
   summary?: string;
 }
 
-export enum AndroidCategory {
-  ALARM = 'alarm',
-  CALL = 'call',
-  EMAIL = 'email',
-  ERROR = 'error',
-  EVENT = 'event',
-  MESSAGE = 'msg',
-  NAVIGATION = 'navigation',
-  PROGRESS = 'progress',
-  PROMO = 'promo',
-  RECOMMENDATION = 'recommendation',
-  REMINDER = 'reminder',
-  SERVICE = 'service',
-  SOCIAL = 'social',
-  STATUS = 'status',
-  SYSTEM = 'sys',
-  TRANSPORT = 'transport',
-}
-
-/**
- * A set or predefined colors which can be used with Android Notifications.
- */
-export enum AndroidColor {
-  RED = 'red',
-  BLUE = 'blue',
-  GREEN = 'green',
-  BLACK = 'black',
-  WHITE = 'white',
-  CYAN = 'cyan',
-  MAGENTA = 'magenta',
-  YELLOW = 'yellow',
-  LIGHTGRAY = 'lightgray',
-  DARKGRAY = 'darkgray',
-  GRAY = 'gray',
-  LIGHTGREY = 'lightgrey',
-  DARKGREY = 'darkgrey',
-  AQUA = 'aqua',
-  FUCHSIA = 'fuchsia',
-  LIME = 'lime',
-  MAROON = 'maroon',
-  NAVY = 'navy',
-  OLIVE = 'olive',
-  PURPLE = 'purple',
-  SILVER = 'silver',
-  TEAL = 'teal',
-}
-
-export enum AndroidDefaults {
-  ALL = -1,
-  SOUND = 1,
-  VIBRATE = 2,
-  LIGHTS = 4,
-}
-
-export enum AndroidGroupAlertBehavior {
-  ALL = 0,
-  SUMMARY = 1,
-  CHILDREN = 2,
-}
-
-export enum AndroidPriority {
-  DEFAULT = 3,
-  HIGH = 4,
-  LOW = 2,
-  MAX = 5,
-  MIN = 1,
-  NONE = 0,
-}
-
-export enum AndroidImportance {
-  DEFAULT = 3,
-  HIGH = 4,
-  LOW = 2,
-  MAX = 5,
-  MIN = 1,
-  NONE = 0,
-}
-
 /**
  * Interface for defining the progress of an Android Notification.
  *
@@ -1067,7 +690,7 @@ export enum AndroidImportance {
  * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
  *
  * ```js
- * await notification.displayNotification({
+ * await notifee.displayNotification({
  *   android: {
  *     progress: {
  *       max: 10,
@@ -1084,7 +707,7 @@ export enum AndroidImportance {
  * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
  *
  * ```js
- * await notification.displayNotification({
+ * await notifee.displayNotification({
  *   android: {
  *     progress: {
  *       max: 10,
@@ -1120,100 +743,6 @@ export interface AndroidProgress {
 }
 
 /**
- * Interface used to define the visibility of an Android notification.
- *
- * Use with the `visibility` property on the notification.
- *
- * Default value is `AndroidVisibility.PRIVATE`.
- */
-export enum AndroidVisibility {
-  /**
-   * Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens.
-   */
-  PRIVATE = 0,
-
-  /**
-   * Show this notification in its entirety on all lockscreens.
-   */
-  PUBLIC = 1,
-
-  /**
-   * Do not reveal any part of this notification on a secure lockscreen.
-   *
-   * Useful for notifications showing sensitive information such as banking apps.
-   */
-  SECRET = -1,
-}
-
-/**
- * Interface used when defining the `repeatInterval` on a scheduled notification.
- */
-export enum AndroidRepeatInterval {
-  MINUTE = 'minute',
-  HOUR = 'hour',
-  DAY = 'day',
-  WEEK = 'week',
-}
-
-/**
- * TODO docs
- */
-export type NotificationObserver = (notification: RemoteNotification) => void;
-
-// TODO Docs
-export type NotificationObserverUnsubscribe = () => void;
-
-// TODO docs
-export interface Schedule {
-  /**
-   * The date when the notification should first be shown, in milliseconds since 1970.
-   *
-   * #### Example
-   *
-   * Schedule notification to display 10 minutes from now.
-   *
-   * ```js
-   * await firebase.notifications().scheduleNotification(notification, {
-   *   fireDate: Date.now() + 600000,
-   * });
-   * ```
-   */
-  fireDate: number;
-
-  /**
-   * Whether the `fireDate` should be respected exactly.
-   *
-   * To help save battery, only set to `true` under scenarios where the notification
-   * `fireDate` is critical.
-   *
-   * Defaults to `false`. Has no effect on iOS.
-   *
-   * @android
-   */
-  exact?: boolean;
-
-  /**
-   * How frequently after  the `fireDate` should the notification be repeated.
-   *
-   * If not present, the notification will only be displayed once on the given `fireDate`.
-   *
-   * #### Example
-   *
-   * Schedule notification to display 10 minutes from now, and repeat
-   * every week
-   *
-   * ```js
-   * import notifications, { AndroidRepeatInterval } from '@react-native-firebase/notifications';
-   *
-   * await firebase.notifications().scheduleNotification(notification, {
-   *   fireDate: Date.now() + 600000,
-   *   repeatInterval: AndroidRepeatInterval.WEEK,
-   * });
-   */
-  repeatInterval?: AndroidRepeatInterval;
-}
-
-/**
  * An interface for describing an Android Channel.
  *
  * Channels override any individual notification preferences (e.g. lights/vibration) and the user
@@ -1226,7 +755,7 @@ export interface Schedule {
  * #### Example
  *
  * ```js
- * await firebase.notifications().createChannel({
+ * await notifee.createChannel({
  *   channelId: 'alarms',
  *   name: 'Alarms & Timers',
  *   lightColor: '#3f51b5',
@@ -1353,168 +882,216 @@ export interface AndroidChannelGroup {
 }
 
 /**
- *
- * The Firebase Notifications service interface.
- *
- * > This module is available for the default app only.
- *
- * #### Example
- *
- * Get the Notifications service for the default app:
- *
- * ```js
- * const defaultAppNotifications = firebase.notifications();
- * ```
+ * When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface
+ * describes how the badge icon is shown to the user.
  */
-declare interface Module {
-  cancelAllNotifications(): Promise<void>;
-
-  cancelNotification(notificationId: string): Promise<void>;
+export enum AndroidBadgeIconType {
+  /**
+   * Shows no badge, but instead uses the notification `number` if provided.
+   */
+  NONE = 0,
 
   /**
-   * Creates a new Android channel. Channels are used to collectively assign notifications to
-   * a single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.
-   * Channels can be further organized into groups (see `createChannelGroup`).
-   *
-   * Once a channel has been created, only certain fields such as the name & description can be
-   * modified. To change a groups settings, you must delete the group (via `deleteChannel`)
-   * and re-create it. Keep in mind the user always have final control over channel settings.
-   *
-   * Creating an existing notification channel with its original values performs no operation,
-   * so it's safe to call this code when starting an app.
-   *
-   * Created channels can be viewed/managed under App Info -> Notifications.
-   *
-   * > On Android 8.0 (API 26) all notifications must be assigned to a channel.
-   *
-   * Returns the channel ID.
-   *
-   * #### Example
-   *
-   * ```js
-   * const channelId = await firebase.notifications().createChannel({
-   *   channelId: 'custom-channel',
-   *   name: 'Custom Channel',
-   *   description: 'A test channel',
-   * });
-   *
-   * await firebase.notifications().displayNotification({
-   *   body: 'Test notification',
-   *   android: {
-   *     channelId, // 'custom-channel'
-   *   },
-   * });
-   * ```
-   *
-   * @param channel An `AndroidChannel` interface.
+   * Shows the notification `smallIcon`.
    */
-  createChannel(channel: AndroidChannel): Promise<string>;
+  SMALL = 1,
 
   /**
-   * Creates multiple channels in a single operation.
-   *
-   * See `createChannel` for more information.
-   *
-   * @param channels An array of AndroidChannel interfaces.
+   * Shows the notification `largeIcon`.
    */
-  createChannels(channels: AndroidChannel[]): Promise<void>;
-
-  createChannelGroup(channelGroup: AndroidChannelGroup): Promise<string>;
-
-  createChannelGroups(channelGroups: AndroidChannelGroup[]): Promise<void>;
-
-  /**
-   * Deletes a channel by ID.
-   *
-   * #### Example
-   *
-   * ```js
-   * await firebase.notifications().deleteChannel('custom-channel');
-   * ```
-   *
-   * @param channelId The channel ID to delete.
-   */
-  deleteChannel(channelId: string): Promise<void>;
-
-  deleteChannelGroup(channelGroupId: string): Promise<void>;
-
-  /**
-   * Displays a notification on the device.
-   *
-   * See `AndroidNotification` and `IOSNotification` for platform specific options.
-   *
-   * #### Example
-   *
-   * ```js
-   * await firebase.notifications().displayNotification({
-   *   title: 'Test',
-   *   body: 'Test notification body',
-   *   android: {
-   *     // Android specific options
-   *   },
-   *   ios: {
-   *     // iOS specific options
-   *   },
-   * });
-   * ```
-   *
-   * @param notification A `Notification` interface.
-   * @return Promise<string> A promise that resolves the new notification id
-   */
-  displayNotification(notification: NotificationBuilder): Promise<string>;
-
-  /**
-   * Returns a single `AndroidChannel` by id.
-   *
-   * Returns `null` if no channel could be matched to the given ID.
-   *
-   * @param channelId The channel id.
-   */
-  getChannel(channelId: string): Promise<AndroidChannel | null>;
-
-  /**
-   * Returns an array of `AndroidChannel` which are currently active on the device.
-   */
-  getChannels(): Promise<AndroidChannel[]>;
-
-  getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null>;
-
-  getChannelGroups(): Promise<AndroidChannelGroup[]>;
-
-  // todo null if no badge?
-  getBadge(): Promise<number | null>;
-
-  getInitialNotification(): Promise<RemoteNotification | null>;
-
-  getScheduledNotifications(): Promise<RemoteNotification[]>;
-
-  onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe;
-
-  onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe;
-
-  onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe;
-
-  removeAllDeliveredNotifications(): Promise<void>;
-
-  removeDeliveredNotification(notificationId: string): Promise<void>;
-
-  scheduleNotification(notification: NotificationBuilder, schedule: Schedule): Promise<void>;
-
-  setBadge(badge: number): Promise<void>;
+  LARGE = 2,
 }
 
-declare interface ModuleWithStatics extends Module {
-  AndroidBadgeIconType: typeof AndroidBadgeIconType;
-  AndroidCategory: typeof AndroidCategory;
-  AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
-  AndroidPriority: typeof AndroidPriority;
-  AndroidVisibility: typeof AndroidVisibility;
-  AndroidRepeatInterval: typeof AndroidRepeatInterval;
-  AndroidDefaults: typeof AndroidDefaults;
-  AndroidImportance: typeof AndroidImportance;
-  AndroidColor: typeof AndroidColor;
-  AndroidStyle: typeof AndroidStyle;
+/**
+ * TODO
+ */
+export enum AndroidCategory {
+  ALARM = 'alarm',
+  CALL = 'call',
+  EMAIL = 'email',
+  ERROR = 'error',
+  EVENT = 'event',
+  MESSAGE = 'msg',
+  NAVIGATION = 'navigation',
+  PROGRESS = 'progress',
+  PROMO = 'promo',
+  RECOMMENDATION = 'recommendation',
+  REMINDER = 'reminder',
+  SERVICE = 'service',
+  SOCIAL = 'social',
+  STATUS = 'status',
+  SYSTEM = 'sys',
+  TRANSPORT = 'transport',
 }
 
-declare const notifeeModule: ModuleWithStatics;
-export default notifeeModule;
+/**
+ * A set or predefined colors which can be used with Android Notifications.
+ */
+export enum AndroidColor {
+  RED = 'red',
+  BLUE = 'blue',
+  GREEN = 'green',
+  BLACK = 'black',
+  WHITE = 'white',
+  CYAN = 'cyan',
+  MAGENTA = 'magenta',
+  YELLOW = 'yellow',
+  LIGHTGRAY = 'lightgray',
+  DARKGRAY = 'darkgray',
+  GRAY = 'gray',
+  LIGHTGREY = 'lightgrey',
+  DARKGREY = 'darkgrey',
+  AQUA = 'aqua',
+  FUCHSIA = 'fuchsia',
+  LIME = 'lime',
+  MAROON = 'maroon',
+  NAVY = 'navy',
+  OLIVE = 'olive',
+  PURPLE = 'purple',
+  SILVER = 'silver',
+  TEAL = 'teal',
+}
+
+/**
+ * TODO
+ */
+export enum AndroidDefaults {
+  ALL = -1,
+  LIGHTS = 4,
+  SOUND = 1,
+  VIBRATE = 2,
+}
+
+/**
+ * TODO
+ */
+export enum AndroidGroupAlertBehavior {
+  ALL = 0,
+  SUMMARY = 1,
+  CHILDREN = 2,
+}
+
+/**
+ *  TODO
+ *
+ *  https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT
+ *
+ *  [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}
+ */
+export enum AndroidImportance {
+  DEFAULT = 3,
+  HIGH = 4,
+  LOW = 2,
+  MAX = 5,
+  MIN = 1,
+  NONE = 0,
+}
+
+/**
+ * TODO
+ *
+ * https://developer.android.com/reference/androidx/core/app/NotificationCompat#PRIORITY_DEFAULT
+ */
+export enum AndroidPriority {
+  DEFAULT = 0,
+  HIGH = 1,
+  LOW = -1,
+  MAX = 2,
+  MIN = -2,
+}
+
+/**
+ * TODO
+ */
+export enum AndroidSemanticAction {
+  /**
+   * Archive the content associated with the notification. This could mean archiving an email, message, etc.
+   */
+  ARCHIVE = 5,
+
+  /**
+   * Call a contact, group, etc.
+   */
+  CALL = 10,
+
+  /**
+   * Delete the content associated with the notification. This could mean deleting an email, message, etc.
+   */
+  DELETE = 4,
+
+  /**
+   * Mark content as read.
+   */
+  MARK_AS_READ = 2,
+
+  /**
+   * Mark content as unread.
+   */
+  MARK_AS_UNREAD = 3,
+
+  /**
+   * Mute the content associated with the notification. This could mean silencing a conversation or currently playing media.
+   */
+  MUTE = 6,
+
+  /**
+   * No semantic action defined.
+   */
+  NONE = 0,
+
+  /**
+   * Reply to a conversation, chat, group, or wherever replies may be appropriate.
+   */
+  REPLY = 1,
+
+  /**
+   * Mark content with a thumbs down.
+   */
+  THUMBS_DOWN = 9,
+
+  /**
+   * Mark content with a thumbs up.
+   */
+  THUMBS_UP = 8,
+
+  /**
+   * Unmute the content associated with the notification. This could mean un-silencing a conversation or currently playing media.
+   */
+  UNMUTE = 7,
+}
+
+/**
+ * Available Android Notification Styles.
+ *
+ * Used when providing a `style` to a notification builder with `displayNotification`.
+ */
+export enum AndroidStyle {
+  BIGPICTURE = 0,
+  BIGTEXT = 1,
+}
+
+/**
+ * Interface used to define the visibility of an Android notification.
+ *
+ * Use with the `visibility` property on the notification.
+ *
+ * Default value is `AndroidVisibility.PRIVATE`.
+ */
+export enum AndroidVisibility {
+  /**
+   * Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens.
+   */
+  PRIVATE = 0,
+
+  /**
+   * Show this notification in its entirety on all lockscreens.
+   */
+  PUBLIC = 1,
+
+  /**
+   * Do not reveal any part of this notification on a secure lockscreen.
+   *
+   * Useful for notifications showing sensitive information such as banking apps.
+   */
+  SECRET = -1,
+}

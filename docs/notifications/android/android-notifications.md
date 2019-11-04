@@ -6,7 +6,7 @@ description: Display rich customised notifications to your users.
 # Android Notifications
 
 This page covers all of the available options for displaying rich customised notifications to your users.
-For full information on each of the options available, see the [`AndroidNotification`](#) API reference.
+For full information on each of the options available, see the [`NotificationAndroid`](#) API reference.
 
 To customize a notification, pass any additional options to the `android` parameter whilst building a notification:
 
@@ -25,7 +25,7 @@ await firebase.notifications().displayNotification(notification);
 ## Feature List
 
 Below is a list of currently supported features. Any API specific features are gracefully handled by the
-library. See the [`AndroidNotification`](#) API reference for full descriptions and examples.
+library. See the [`NotificationAndroid`](#) API reference for full descriptions and examples.
 
 | Parameter            | Description                                                                                                                                                     | API    |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|

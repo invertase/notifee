@@ -12,13 +12,15 @@ import {
   isUndefined,
 } from './utils';
 
-import AndroidBadgeIconType from './AndroidBadgeIconType';
-import AndroidGroupAlertBehavior from './AndroidGroupAlertBehavior';
-import AndroidPriority from './AndroidPriority';
-import AndroidVisibility from './AndroidVisibility';
-import AndroidCategory from './AndroidCategory';
-import AndroidStyle from './AndroidStyle';
-import AndroidDefaults from './AndroidDefaults';
+import {
+  AndroidBadgeIconType,
+  AndroidDefaults,
+  AndroidStyle,
+  AndroidCategory,
+  AndroidGroupAlertBehavior,
+  AndroidPriority,
+  AndroidVisibility,
+} from './../types/NotificationAndroid';
 
 import {
   isValidColor,

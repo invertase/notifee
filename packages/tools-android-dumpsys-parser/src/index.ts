@@ -19,6 +19,8 @@ const keyNameOverrideMap = {
   subText: 'subtitle',
   tickerText: 'ticker',
   showChronometer: 'usesChronometer',
+  infoText: 'contentInfo',
+  mRankingTimeMs: 'when',
 };
 
 /**

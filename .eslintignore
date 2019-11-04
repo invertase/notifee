@@ -1,6 +1,5 @@
 src/version.js
 packages/**/node_modules/**
-**/*.ts
 node_modules
 scripts/
 coverage

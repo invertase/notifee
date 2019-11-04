@@ -85,7 +85,7 @@ describe('notifications() Notification', () => {
     v.enableLights.should.eql(true);
     v.enableVibration.should.eql(true);
     v.showBadge.should.eql(true);
-    v.visibility.should.eql(notifeeExports.AndroidVisibility.PRIVATE);
+    v.visibility.should.eql(notifee.AndroidVisibility.PRIVATE);
   });
 
   xdescribe('allowBubbles', () => {
@@ -249,9 +249,9 @@ describe('notifications() Notification', () => {
       const v = validate({
         channelId: 'foo',
         name: 'bar',
-        importance: notifeeExports.AndroidImportance.MIN,
+        importance: notifee.AndroidImportance.MIN,
       });
-      v.importance.should.eql(notifeeExports.AndroidImportance.MIN);
+      v.importance.should.eql(notifee.AndroidImportance.MIN);
     });
   });
 
@@ -317,9 +317,9 @@ describe('notifications() Notification', () => {
       const v = validate({
         channelId: 'foo',
         name: 'bar',
-        visibility: notifeeExports.AndroidVisibility.SECRET,
+        visibility: notifee.AndroidVisibility.SECRET,
       });
-      v.visibility.should.eql(notifeeExports.AndroidVisibility.SECRET);
+      v.visibility.should.eql(notifee.AndroidVisibility.SECRET);
     });
   });
 

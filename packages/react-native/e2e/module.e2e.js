@@ -3,6 +3,10 @@
  */
 
 describe('notifee', () => {
+  it('exports ts enums as js values', () => {
+    notifee.AndroidColor.RED.should.equal('red');
+  });
+
   it('calls cancelAllNotifications without throwing', () => {
     // todo
   });
@@ -161,7 +165,7 @@ describe('notifee', () => {
 
   xdescribe('getBadge()', () => {
     it('gets a value', async () => {
-      await notifeeExports.setBadge(123);
+      await notifee.setBadge(123);
       const value = await notifee.getBadge();
       value.should.eql(123);
     });
@@ -169,13 +173,13 @@ describe('notifee', () => {
 
   xdescribe('setBadge()', () => {
     it('sets a value', async () => {
-      await notifeeExports.setBadge(234);
+      await notifee.setBadge(234);
       const value = await notifee.getBadge();
       value.should.eql(243);
     });
 
     it('removes the badge', async () => {
-      await notifeeExports.setBadge(null);
+      await notifee.setBadge(null);
       const value = await notifee.getBadge();
       should.equal(value, null);
     });

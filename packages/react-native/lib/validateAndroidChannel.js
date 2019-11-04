@@ -4,8 +4,8 @@
 
 import { hasOwnProperty, isArray, isBoolean, isObject, isString } from './utils';
 import { isValidColor, isValidVibratePattern } from './validate';
-import AndroidVisibility from './AndroidVisibility';
-import AndroidImportance from './AndroidImportance';
+
+import { AndroidVisibility, AndroidImportance } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannel(channel) {
   if (!isObject(channel)) {

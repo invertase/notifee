@@ -2,28 +2,35 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NativeModules, Platform } from 'react-native';
+import { EventSubscription, NativeModules, NativeModulesStatic, Platform } from 'react-native';
 
 import { CORE_NATIVE_MODULE_NAME } from './NotifeeConstants';
 import NotifeeNativeError from './NotifeeNativeError';
 import NotifeeNativeEventEmitter from './NotifeeNativeEventEmitter';
 import SharedEventEmitter from './NotifeeJSEventEmitter';
+import { NativeModuleConfig } from './types';
 
-const NATIVE_MODULE_REGISTRY = {};
-const NATIVE_MODULE_EVENT_SUBSCRIPTIONS = {};
+const NATIVE_MODULE_REGISTRY: {
+  [key: string]: NativeModulesStatic;
+} = {};
+const NATIVE_MODULE_EVENT_SUBSCRIPTIONS: {
+  [key: string]: EventSubscription;
+} = {};
 
 /**
  * Wraps a native module method to provide custom Error classes.
  * @param method
  * @returns {Function}
  */
-function nativeModuleMethodWrapped(method) {
-  return (...args) => {
+function nativeModuleMethodWrapped(method: Function) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (...args: any[]): Promise<any> | any => {
     const possiblePromise = method(...args);
 
     if (possiblePromise && possiblePromise.then) {
       const jsStack = new Error().stack;
-      return possiblePromise.catch(nativeError =>
+      // TODO nativeError type
+      return possiblePromise.catch((nativeError: any) =>
         Promise.reject(new NotifeeNativeError(nativeError, jsStack)),
       );
     }
@@ -37,8 +44,8 @@ function nativeModuleMethodWrapped(method) {
  *
  * @param NativeModule
  */
-function nativeModuleWrapped(NativeModule) {
-  const native = {};
+function nativeModuleWrapped(NativeModule: NativeModulesStatic): NativeModulesStatic {
+  const native = {} as NativeModulesStatic;
 
   if (!NativeModule) {
     return NativeModule;
@@ -59,102 +66,89 @@ function nativeModuleWrapped(NativeModule) {
 }
 
 /**
- * Initialises and wraps all the native module methods.
- *
- * @param module
- * @returns {*}
- */
-function initialiseNativeModule(module) {
-  const multiModuleRoot = {};
-  const config = module._config;
-  const { nativeEvents, nativeModuleName } = config;
-  const multiModule = Array.isArray(nativeModuleName);
-  const key = multiModule ? nativeModuleName.join(':') : nativeModuleName;
-  const nativeModuleNames = multiModule ? nativeModuleName : [nativeModuleName];
-
-  for (let i = 0; i < nativeModuleNames.length; i++) {
-    const nativeModule = NativeModules[nativeModuleNames[i]];
-    if (!multiModule && !nativeModule) {
-      throw new Error(getMissingModuleHelpText(nativeModuleNames[i]));
-    }
-
-    if (multiModule) {
-      multiModuleRoot[nativeModuleNames[i]] = !!nativeModule;
-    }
-
-    Object.assign(multiModuleRoot, nativeModuleWrapped(nativeModule));
-  }
-
-  if (nativeEvents && nativeEvents.length) {
-    for (let i = 0, len = nativeEvents.length; i < len; i++) {
-      subscribeToNativeModuleEvent(nativeEvents[i]);
-    }
-  }
-
-  Object.freeze(multiModuleRoot);
-  NATIVE_MODULE_REGISTRY[key] = multiModuleRoot;
-  return NATIVE_MODULE_REGISTRY[key];
-}
-
-/**
  * Subscribe to a native event for js side distribution
  * @param eventName
  * @private
  */
-function subscribeToNativeModuleEvent(eventName) {
+function subscribeToNativeModuleEvent(eventName: string): void {
   if (!NATIVE_MODULE_EVENT_SUBSCRIPTIONS[eventName]) {
-    NotifeeNativeEventEmitter.addListener(eventName, event => {
-      SharedEventEmitter.emit(eventName, event);
-    });
-
-    NATIVE_MODULE_EVENT_SUBSCRIPTIONS[eventName] = true;
+    NATIVE_MODULE_EVENT_SUBSCRIPTIONS[eventName] = NotifeeNativeEventEmitter.addListener(
+      eventName,
+      (event: object) => {
+        SharedEventEmitter.emit(eventName, event);
+      },
+    );
   }
 }
 
 /**
  * Help text for missing native module.
+ *
  * @returns {string}
  */
-function getMissingModuleHelpText(nativeModule) {
+function getMissingModuleHelpText(nativeModuleName: string): string {
   if (Platform.OS === 'ios') {
     return (
-      `You attempted to use Notifee but its not installed natively on your iOS project. (${nativeModule})` +
+      `You attempted to use Notifee but its not installed natively on your iOS project. (${nativeModuleName})` +
       '\r\n\r\nEnsure you have auto-linking enabled in your Podfile, re-installed your Pods & rebuilt your app.' +
       '\r\n\r\nSee http://notifee.app/docs/installation for full setup instructions.'
     );
   }
 
   return (
-    `You attempted to use Notifee but its not installed natively on your Android project. (${nativeModule})` +
+    `You attempted to use Notifee but its not installed natively on your Android project. (${nativeModuleName})` +
     '\r\n\r\nEnsure you have auto-linking enabled in your gradle files and have rebuilt your app.' +
     '\r\n\r\nSee http://notifee.app/docs/installation for full setup instructions.'
   );
 }
 
 /**
+ * Initialises and wraps all the native module methods.
+ *
+ * @returns {*}
+ * @param config
+ */
+function initialiseNativeModule(config: NativeModuleConfig): NativeModulesStatic {
+  const nativeModuleCopy = {} as NativeModulesStatic;
+  const { nativeEvents, nativeModuleName } = config;
+  const nativeModule = NativeModules[nativeModuleName];
+
+  if (!nativeModule) {
+    throw new Error(getMissingModuleHelpText(CORE_NATIVE_MODULE_NAME));
+  }
+
+  Object.assign(nativeModuleCopy, nativeModuleWrapped(nativeModule));
+
+  for (let i = 0, len = nativeEvents.length; i < len; i++) {
+    subscribeToNativeModuleEvent(nativeEvents[i]);
+  }
+
+  Object.freeze(nativeModuleCopy);
+  NATIVE_MODULE_REGISTRY[nativeModuleName] = nativeModuleCopy;
+  return NATIVE_MODULE_REGISTRY[nativeModuleName];
+}
+
+/**
  * Gets a wrapped native module instance.
  * Will attempt to create a new instance if non previously created.
  *
- * @param module
  * @returns {*}
+ * @param moduleConfig
  */
-export function getNativeModule(module) {
-  const config = module._config;
-  const { nativeModuleName } = config;
-  const multiModule = Array.isArray(nativeModuleName);
-  const key = multiModule ? nativeModuleName.join(':') : nativeModuleName;
+export function getNativeModule(moduleConfig: NativeModuleConfig): NativeModulesStatic {
+  const { nativeModuleName } = moduleConfig;
 
-  if (NATIVE_MODULE_REGISTRY[key]) {
-    return NATIVE_MODULE_REGISTRY[key];
+  if (NATIVE_MODULE_REGISTRY[nativeModuleName]) {
+    return NATIVE_MODULE_REGISTRY[nativeModuleName];
   }
 
-  return initialiseNativeModule(module);
+  return initialiseNativeModule(moduleConfig);
 }
 
 /**
  * Custom wrapped core native module module.
  */
-export function getCoreModule() {
+export function getCoreModule(): NativeModulesStatic {
   if (NATIVE_MODULE_REGISTRY[CORE_NATIVE_MODULE_NAME]) {
     return NATIVE_MODULE_REGISTRY[CORE_NATIVE_MODULE_NAME];
   }
