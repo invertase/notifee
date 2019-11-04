@@ -1049,6 +1049,9 @@ export enum AndroidPriority {
   NONE = 0,
 }
 
+/**
+ *  [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}
+ */
 export enum AndroidImportance {
   DEFAULT = 3,
   HIGH = 4,

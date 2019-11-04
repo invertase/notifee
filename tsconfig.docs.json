@@ -1,5 +1,5 @@
 {
-  "include": ["packages/**/lib/*.d.ts"],
+  "include": ["packages/react-native/index.d.ts"],
   "compilerOptions": {
     "noEmit": true,
     "target": "es5",
