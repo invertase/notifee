@@ -1,9 +1,6 @@
 # Built application files
 android/*/build/
 
-# Crashlytics configuations
-android/com_crashlytics_export_strings.xml
-
 # Local configuration file (sdk path, etc)
 android/local.properties
 

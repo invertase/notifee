@@ -9,20 +9,18 @@ const EXCLUDE_KEYS = [
 ];
 
 const keyNameOverrideMap = {
-  // prettier-ignore
-  'pri': 'priority',
-  // prettier-ignore
-  'effectiveNotificationChannel': 'channel',
-  // prettier-ignore
-  'seen': 'hasSeen',
-  // prettier-ignore
-  'opPkg': 'packageName',
-  // prettier-ignore
-  'template': 'style',
-  // prettier-ignore
-  'groupKey': 'group',
-  // prettier-ignore
-  'fgServiceShown': 'foregroundServiceShown'
+  pri: 'priority',
+  effectiveNotificationChannel: 'channel',
+  seen: 'hasSeen',
+  opPkg: 'packageName',
+  template: 'style',
+  groupKey: 'group',
+  fgServiceShown: 'foregroundServiceShown',
+  subText: 'subtitle',
+  tickerText: 'ticker',
+  showChronometer: 'usesChronometer',
+  infoText: 'contentInfo',
+  mRankingTimeMs: 'when',
 };
 
 /**
@@ -175,9 +173,7 @@ function parseNotificationRecordActions(source: string) {
 
   const lines = match[0]
     .split('\n')
-    .filter(
-      (line: string) => line.startsWith(' '.repeat(8)) && !line.endsWith('}'),
-    )
+    .filter((line: string) => line.startsWith(' '.repeat(8)) && !line.endsWith('}'))
     .map((line: string) => line.trim());
 
   for (let i = 0; i < lines.length; i++) {
@@ -210,7 +206,7 @@ function replaceMPrefix(key: string) {
  */
 function parseNotificationRecord(source: string) {
   let m;
-  const newNotificationRecord = { _raw: source};
+  const newNotificationRecord = { _raw: source };
   // https://regex101.com/r/WQGUcJ/4
   const regex = /^\s\s\s\s\s\s([a-zA-Z]*)=(.*)$/gm;
 
@@ -222,9 +218,7 @@ function parseNotificationRecord(source: string) {
 
     const [, key, value] = m;
     if (!EXCLUDE_KEYS.includes(key)) {
-      newNotificationRecord[keyNameOverrideMap[key] || key] = parseValue(
-        value.trim(),
-      );
+      newNotificationRecord[keyNameOverrideMap[key] || key] = parseValue(value.trim());
     }
   }
 
@@ -286,8 +280,7 @@ function parseNotificationList(source: string) {
   const notificationRecordMatches = matches[0].match(
     /NotificationRecord(\s|\S)*?(?=NotificationRecord|$)/g,
   );
-  if (!notificationRecordMatches || !notificationRecordMatches.length)
-    return [];
+  if (!notificationRecordMatches || !notificationRecordMatches.length) return [];
 
   return notificationRecordMatches
     .map((recordMatch: string) => parseNotificationRecord(recordMatch))

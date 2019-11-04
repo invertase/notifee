@@ -2,7 +2,9 @@
   "include": ["packages/**/lib/*.d.ts", "packages/**/type-test.ts"],
   "compilerOptions": {
     "noEmit": true,
-    "target": "es5",
+    "allowJs": true,
+    "target": "esnext",
+    "isolatedModules": true,
     "module": "commonjs",
     "declaration": true,
     "importHelpers": true,
@@ -12,12 +14,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "preserveConstEnums": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "lib": ["es2015", "es2016", "esnext", "dom"]
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es6"]
   },
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "jet",
+    "**/*.spec.ts",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }

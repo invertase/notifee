@@ -28,7 +28,6 @@ async function tryAtMost(userPromise, maxRetries = 3, retryInterval = 5000, _tem
     const result = await userPromise;
     resolve(result);
     clearTimeout(timeout);
-    console.log('Promise resolved!!');
   });
 
   return promise;
@@ -40,8 +39,6 @@ if (detox) {
    * --------------------- */
   // TODO: Salakar: all of this will go in first release
   // TODO: Salakar: jet global will provide it's own methods that internally call these
-  console.log('Proxying detox ->>>');
-
   let device;
   Object.defineProperty(global, 'device', {
     get() {
@@ -65,13 +62,9 @@ if (detox) {
         if (options && options.newInstance) {
           ready.reset();
         }
-        console.dir('>>> LAUNCH APP BEFORE');
         const result = await tryAtMost(detoxOriginalLaunchApp(options), 3, 5000);
-        console.dir('>>> LAUNCH APP AFTER');
-        console.dir('>>> JET WAIT BEFORE');
 
         await ready.wait();
-        console.dir('>>> JET WAIT AFTER');
         return result;
       };
 

@@ -1,18 +1,5 @@
 /*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright (c) 2016-present Invertase Limited
  */
 
 import {
@@ -23,15 +10,17 @@ import {
   isObject,
   isString,
   isUndefined,
-} from '@react-native-firebase/app/lib/common';
+} from './utils';
 
-import AndroidBadgeIconType from './AndroidBadgeIconType';
-import AndroidGroupAlertBehavior from './AndroidGroupAlertBehavior';
-import AndroidPriority from './AndroidPriority';
-import AndroidVisibility from './AndroidVisibility';
-import AndroidCategory from './AndroidCategory';
-import AndroidStyle from './AndroidStyle';
-import AndroidDefaults from './AndroidDefaults';
+import {
+  AndroidBadgeIconType,
+  AndroidDefaults,
+  AndroidStyle,
+  AndroidCategory,
+  AndroidGroupAlertBehavior,
+  AndroidPriority,
+  AndroidVisibility,
+} from './../types/NotificationAndroid';
 
 import {
   isValidColor,
@@ -500,7 +489,7 @@ export default function validateAndroidNotification(android) {
     }
 
     if (android.tag.includes('|')) {
-      throw new Error(`'notification.android.tag' tag cannot contain the "|" (pipe) character.`);
+      throw new Error('\'notification.android.tag\' tag cannot contain the "|" (pipe) character.');
     }
 
     out.tag = android.tag;

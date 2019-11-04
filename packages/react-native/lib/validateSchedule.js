@@ -1,27 +1,9 @@
 /*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright (c) 2016-present Invertase Limited
  */
 
-import {
-  hasOwnProperty,
-  isBoolean,
-  isNumber,
-  isObject,
-} from '@react-native-firebase/app/lib/common';
-import AndroidRepeatInterval from './AndroidRepeatInterval';
+import { hasOwnProperty, isBoolean, isNumber, isObject } from './utils';
+import { NotificationRepeatInterval } from './../types/Notification';
 
 export default function validateSchedule(schedule) {
   if (!isObject(schedule)) {
@@ -53,12 +35,12 @@ export default function validateSchedule(schedule) {
 
   if (hasOwnProperty(schedule, 'repeatInterval')) {
     if (
-      schedule.repeatInterval !== AndroidRepeatInterval.MINUTE ||
-      schedule.repeatInterval !== AndroidRepeatInterval.HOUR ||
-      schedule.repeatInterval !== AndroidRepeatInterval.DAY ||
-      schedule.repeatInterval !== AndroidRepeatInterval.WEEK
+      schedule.repeatInterval !== NotificationRepeatInterval.MINUTE ||
+      schedule.repeatInterval !== NotificationRepeatInterval.HOUR ||
+      schedule.repeatInterval !== NotificationRepeatInterval.DAY ||
+      schedule.repeatInterval !== NotificationRepeatInterval.WEEK
     ) {
-      throw new Error("'schedule.repeatInterval' expected a valid AndroidRepeatInterval.");
+      throw new Error("'schedule.repeatInterval' expected a valid NotificationRepeatInterval.");
     }
 
     out.repeatInterval = schedule.repeatInterval;

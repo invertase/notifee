@@ -12,15 +12,13 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.Collections;
 import java.util.Objects;
 
-import io.invertase.notifee.core.NotifeeEventEmitter;
 import io.invertase.notifee.core.NotifeeNativeModule;
 
-public class NotifeeModule extends NotifeeNativeModule {
-  private static final String TAG = "NotifeeModule";
+public class NotifeeApiModule extends NotifeeNativeModule {
+  private static final String TAG = "NotifeeApiModule";
 
-  NotifeeModule(ReactApplicationContext reactContext) {
+  NotifeeApiModule(ReactApplicationContext reactContext) {
     super(reactContext, TAG);
-    NotifeeEventEmitter.getSharedInstance().attachReactContext(reactContext);
   }
 
   @ReactMethod

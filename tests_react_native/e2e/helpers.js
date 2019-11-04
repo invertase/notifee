@@ -24,9 +24,15 @@ Object.defineProperty(global, 'A2A', {
   },
 });
 
-Object.defineProperty(global, 'firebase', {
+Object.defineProperty(global, 'notifee', {
   get() {
     return jet.module;
+  },
+});
+
+Object.defineProperty(global, 'notifeeExports', {
+  get() {
+    return jet.moduleExports;
   },
 });
 

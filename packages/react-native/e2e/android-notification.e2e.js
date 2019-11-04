@@ -1,18 +1,5 @@
 /*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright (c) 2016-present Invertase Limited
  */
 
 let validate;
@@ -26,20 +13,20 @@ describe('notifications() Notification', () => {
     const v = validate();
     const expected = jet.contextify({
       autoCancel: true,
-      badgeIconType: firebase.notifications.AndroidBadgeIconType.NONE,
+      badgeIconType: notifee.AndroidBadgeIconType.NONE,
       channelId: '',
       colorized: false,
-      groupAlertBehavior: firebase.notifications.AndroidGroupAlertBehavior.ALL,
+      groupAlertBehavior: notifee.AndroidGroupAlertBehavior.ALL,
       groupSummary: false,
       localOnly: false,
       ongoing: false,
       onlyAlertOnce: false,
-      priority: firebase.notifications.AndroidPriority.DEFAULT,
+      priority: notifee.AndroidPriority.DEFAULT,
       showWhenTimestamp: false,
       smallIcon: jet.contextify(['ic_launcher', -1]),
       usesChronometer: false,
       sound: 'default',
-      visibility: firebase.notifications.AndroidVisibility.PRIVATE,
+      visibility: notifee.AndroidVisibility.PRIVATE,
     });
 
     const actual = jet.contextify(v);
@@ -91,8 +78,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a badgeIconType value', () => {
-      const v = validate({ badgeIconType: firebase.notifications.AndroidBadgeIconType.LARGE });
-      v.badgeIconType.should.be.eql(firebase.notifications.AndroidBadgeIconType.LARGE);
+      const v = validate({ badgeIconType: notifee.AndroidBadgeIconType.LARGE });
+      v.badgeIconType.should.be.eql(notifee.AndroidBadgeIconType.LARGE);
     });
   });
 
@@ -110,8 +97,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a category', () => {
-      const v = validate({ category: firebase.notifications.AndroidCategory.EMAIL });
-      v.category.should.eql(firebase.notifications.AndroidCategory.EMAIL);
+      const v = validate({ category: notifee.AndroidCategory.EMAIL });
+      v.category.should.eql(notifee.AndroidCategory.EMAIL);
     });
   });
 
@@ -171,11 +158,11 @@ describe('notifications() Notification', () => {
     });
 
     it('sets a color', () => {
-      const v1 = validate({ color: firebase.notifications.AndroidColor.GREEN });
+      const v1 = validate({ color: notifee.AndroidColor.GREEN });
       const v2 = validate({ color: '#ffffff' });
       const v3 = validate({ color: '#80ffffff' });
 
-      v1.color.should.eql(firebase.notifications.AndroidColor.GREEN);
+      v1.color.should.eql(notifee.AndroidColor.GREEN);
       v2.color.should.eql('#ffffff');
       v3.color.should.eql('#80ffffff');
     });
@@ -242,8 +229,8 @@ describe('notifications() Notification', () => {
       try {
         validate({
           defaults: [
-            firebase.notifications.AndroidDefaults.SOUND,
-            firebase.notifications.AndroidDefaults.VIBRATE,
+            notifee.AndroidDefaults.SOUND,
+            notifee.AndroidDefaults.VIBRATE,
             'foo',
           ],
         });
@@ -258,15 +245,12 @@ describe('notifications() Notification', () => {
 
     it('sets defaults', () => {
       const v = validate({
-        defaults: [
-          firebase.notifications.AndroidDefaults.SOUND,
-          firebase.notifications.AndroidDefaults.VIBRATE,
-        ],
+        defaults: [notifee.AndroidDefaults.SOUND, notifee.AndroidDefaults.VIBRATE],
       });
       v.defaults.should.be.Array();
       v.defaults.length.should.eql(2);
-      v.defaults[0].should.eql(firebase.notifications.AndroidDefaults.SOUND);
-      v.defaults[1].should.eql(firebase.notifications.AndroidDefaults.VIBRATE);
+      v.defaults[0].should.eql(notifee.AndroidDefaults.SOUND);
+      v.defaults[1].should.eql(notifee.AndroidDefaults.VIBRATE);
     });
   });
 
@@ -302,9 +286,9 @@ describe('notifications() Notification', () => {
 
     it('sets groupAlertBehavior', () => {
       const v = validate({
-        groupAlertBehavior: firebase.notifications.AndroidGroupAlertBehavior.SUMMARY,
+        groupAlertBehavior: notifee.AndroidGroupAlertBehavior.SUMMARY,
       });
-      v.groupAlertBehavior.should.eql(firebase.notifications.AndroidGroupAlertBehavior.SUMMARY);
+      v.groupAlertBehavior.should.eql(notifee.AndroidGroupAlertBehavior.SUMMARY);
     });
   });
 
@@ -518,8 +502,8 @@ describe('notifications() Notification', () => {
     });
 
     it('sets priority', () => {
-      const v = validate({ priority: firebase.notifications.AndroidPriority.LOW });
-      v.priority.should.eql(firebase.notifications.AndroidPriority.LOW);
+      const v = validate({ priority: notifee.AndroidPriority.LOW });
+      v.priority.should.eql(notifee.AndroidPriority.LOW);
     });
   });
 
@@ -799,7 +783,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 123,
             },
           });
@@ -816,7 +800,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: '',
             },
           });
@@ -832,7 +816,7 @@ describe('notifications() Notification', () => {
       it('sets a picture value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
           },
         });
@@ -844,7 +828,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               largeIcon: 123,
             },
@@ -861,7 +845,7 @@ describe('notifications() Notification', () => {
       it('sets a largeIcon value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             largeIcon: 'bar',
           },
@@ -875,7 +859,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               title: 123,
             },
@@ -892,7 +876,7 @@ describe('notifications() Notification', () => {
       it('sets a title value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             title: 'bar',
           },
@@ -906,7 +890,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'foo',
               summary: 123,
             },
@@ -923,7 +907,7 @@ describe('notifications() Notification', () => {
       it('sets a summary value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             summary: 'bar',
           },
@@ -936,7 +920,7 @@ describe('notifications() Notification', () => {
       it('sets all values', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGPICTURE,
+            type: notifee.AndroidStyle.BIGPICTURE,
             picture: 'foo',
             largeIcon: 'bar',
             title: 'baz',
@@ -956,7 +940,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 123,
             },
           });
@@ -973,7 +957,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: '',
             },
           });
@@ -989,7 +973,7 @@ describe('notifications() Notification', () => {
       it('sets a text value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
           },
         });
@@ -1001,7 +985,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 'foo',
               title: 123,
             },
@@ -1018,7 +1002,7 @@ describe('notifications() Notification', () => {
       it('sets a title value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             title: 'baz',
           },
@@ -1032,7 +1016,7 @@ describe('notifications() Notification', () => {
         try {
           validate({
             style: {
-              type: firebase.notifications.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: 'foo',
               summary: 123,
             },
@@ -1049,7 +1033,7 @@ describe('notifications() Notification', () => {
       it('sets a summary value', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             summary: 'baz',
           },
@@ -1062,7 +1046,7 @@ describe('notifications() Notification', () => {
       it('sets all values', () => {
         const v = validate({
           style: {
-            type: firebase.notifications.AndroidStyle.BIGTEXT,
+            type: notifee.AndroidStyle.BIGTEXT,
             text: 'foo',
             title: 'bar',
             summary: 'baz',

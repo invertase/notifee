@@ -1,32 +1,17 @@
 /*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright (c) 2016-present Invertase Limited
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, NativeModules, StyleSheet, Text, View } from 'react-native';
 
 import jet from '@notifee/jet';
-import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
+import notifee from '@notifee/react-native';
+import NativeEventEmitter from '@notifee/react-native/src/NotifeeNativeEventEmitter';
 
-import firebase from '@react-native-firebase/app';
-import '@notifee/react-native';
-
+jet.exposeContextProperty('module', notifee);
 jet.exposeContextProperty('NativeModules', NativeModules);
 jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);
-jet.exposeContextProperty('module', firebase);
 
 class Root extends Component {
   constructor(props) {
@@ -44,13 +29,6 @@ class Root extends Component {
     if (!currentTest) {
       return (
         <View style={[styles.container, styles.horizontal]}>
-          <Image
-            source={{
-              uri:
-                'https://github.com/invertase/react-native-firebase-starter/raw/master/assets/ReactNativeFirebase.png',
-            }}
-            style={[styles.logo]}
-          />
           <Text style={[styles.item, styles.module]} testID="module">
             {'No Tests Started'}
           </Text>
@@ -88,13 +66,6 @@ class Root extends Component {
 
     return (
       <View style={[styles.container, styles.horizontal]}>
-        <Image
-          source={{
-            uri:
-              'https://github.com/invertase/react-native-firebase-starter/raw/master/assets/RNFirebase.png',
-          }}
-          style={[styles.logo]}
-        />
         <Text style={[styles.item, styles.module]} testID="module">
           {module}
         </Text>

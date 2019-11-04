@@ -7,7 +7,6 @@
     "prepare": "patch-package"
   },
   "dependencies": {
-    "@react-native-firebase/app": "^6.0.1",
     "@notifee/react-native": "0.0.1",
     "react": "16.8.6",
     "react-native": "0.60.4"
@@ -18,7 +17,7 @@
     "@react-native-community/cli": "^2.9.0",
     "a2a": "^0.2.0",
     "babel-plugin-istanbul": "^5.2.0",
-    "detox": "14.4.1",
+    "detox": "14.5.1",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "patch-package": "^6.1.0",
@@ -60,31 +59,41 @@
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/testing.app",
         "build": "xcodebuild -workspace ios/testing.xcworkspace -scheme testing -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -UseModernBuildSystem=YES -quiet | xcpretty -k",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "device": {
+          "type": "iPhone 11 Pro"
+        }
       },
       "ios.ci": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/testing.app",
         "build": "xcodebuild -workspace ios/testing.xcworkspace -scheme testing -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -UseModernBuildSystem=YES \"RCT_METRO_PORT=$RCT_METRO_PORT\" | xcpretty -k",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "device": {
+          "type": "iPhone 11 Pro"
+        }
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
         "build": "pushd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug -Dorg.gradle.daemon=false && popd",
         "type": "android.emulator",
-        "name": "TestingAVD"
+        "device": {
+          "avdName": "TestingAVD"
+        }
       },
       "ios.sim.release": {
         "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/testing.app",
         "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -workspace ios/testing.xcworkspace -scheme testing -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -UseModernBuildSystem=YES -quiet | xcpretty -k",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "device": {
+          "type": "iPhone 11 Pro"
+        }
       },
       "android.emu.release": {
         "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
         "build": "pushd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && popd",
         "type": "android.emulator",
-        "name": "TestingAVD"
+        "device": {
+          "avdName": "TestingAVD"
+        }
       }
     }
   }

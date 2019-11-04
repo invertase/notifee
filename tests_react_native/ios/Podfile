@@ -1,5 +1,4 @@
 platform :ios, '9.0'
-require_relative '../node_modules/@react-native-firebase/app/pod_config'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 install! 'cocoapods', :deterministic_uuids => false
@@ -31,9 +30,6 @@ target 'testing' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'Jet', :path => '../node_modules/jet/ios'
-
-  react_native_firebase!
   use_native_modules!
 end
 
