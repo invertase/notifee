@@ -2,7 +2,11 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-describe('notifee', () => {
+describe.only('notifee', () => {
+  it.only('exports ts enums as js values', () => {
+    notifeeExports.AndroidColor.RED.should.equal('red');
+  });
+
   it('calls cancelAllNotifications without throwing', () => {
     // todo
   });

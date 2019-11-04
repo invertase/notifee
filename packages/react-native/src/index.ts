@@ -2,16 +2,41 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-export { default } from '../lib/NotifeeApiModule';
-export { version as SDK_VERSION } from './version';
-export { AndroidVisibility } from './AndroidVisibility';
-export { AndroidBadgeIconType } from './AndroidBadgeIconType';
-export { AndroidCategory } from './AndroidCategory';
-export { AndroidGroupAlertBehavior } from './AndroidGroupAlertBehavior';
-export { AndroidPriority } from './AndroidPriority';
-export { AndroidRepeatInterval } from './AndroidRepeatInterval';
-export { AndroidDefaults } from './AndroidDefaults';
-export { AndroidImportance } from './AndroidImportance';
+import { version as SDK_VERSION } from './version';
 
-export { default as AndroidColor } from '../lib/AndroidColor';
-export { default as AndroidStyle } from '../lib/AndroidStyle';
+import { Module } from '../types/Module';
+import { ModuleWithStatics } from '../types/ModuleWithStatics';
+import { NotificationRepeatInterval } from '../types/Notification';
+import {
+  AndroidBadgeIconType,
+  AndroidCategory,
+  AndroidColor,
+  AndroidDefaults,
+  AndroidGroupAlertBehavior,
+  AndroidImportance,
+  AndroidPriority,
+  AndroidSemanticAction,
+  AndroidStyle,
+  AndroidVisibility,
+} from '../types/NotificationAndroid';
+
+// TODO
+const module = {} as Module;
+
+const defaultExports: ModuleWithStatics = Object.assign(module, {
+  AndroidVisibility,
+  AndroidSemanticAction,
+  AndroidBadgeIconType,
+  AndroidCategory,
+  AndroidGroupAlertBehavior,
+  AndroidPriority,
+  NotificationRepeatInterval,
+  AndroidDefaults,
+  AndroidImportance,
+  AndroidColor,
+  AndroidStyle,
+  SDK_VERSION,
+});
+
+export default defaultExports;
+
