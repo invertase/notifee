@@ -27,9 +27,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   cancelNotification(notificationId: string): Promise<void> {
     if (!isString(notificationId)) {
-      throw new Error(
-        "firebase.notifications().cancelNotification(*) 'notificationId' expected a string value.",
-      );
+      throw new Error("notifee.cancelNotification(*) 'notificationId' expected a string value.");
     }
 
     return this.native.cancelNotification(notificationId);
@@ -40,7 +38,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     try {
       options = validateAndroidChannel(channel);
     } catch (e) {
-      throw new Error(`firebase.notifications().createChannel(*) ${e.message}`);
+      throw new Error(`notifee.createChannel(*) ${e.message}`);
     }
 
     if (isIOS) {
@@ -54,9 +52,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   createChannels(channels: AndroidChannel[]): Promise<void> {
     if (!isArray(channels)) {
-      throw new Error(
-        "firebase.notifications().createChannels(*) 'channels' expected an array of AndroidChannel.",
-      );
+      throw new Error("notifee.createChannels(*) 'channels' expected an array of AndroidChannel.");
     }
 
     const options = [];
@@ -65,9 +61,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         options[i] = validateAndroidChannel(channels[i]);
       }
     } catch (e) {
-      throw new Error(
-        `firebase.notifications().createChannels(*) 'channels' a channel is invalid: ${e.message}`,
-      );
+      throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
     if (isIOS) {
@@ -82,7 +76,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     try {
       options = validateAndroidChannelGroup(channelGroup);
     } catch (e) {
-      throw new Error(`firebase.notifications().createChannelGroup(*) ${e.message}`);
+      throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
     }
 
     if (isIOS) {
@@ -97,7 +91,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   createChannelGroups(channelGroups: AndroidChannelGroup[]): Promise<void> {
     if (!isArray(channelGroups)) {
       throw new Error(
-        "firebase.notifications().createChannelGroups(*) 'channelGroups' expected an array of AndroidChannelGroup.",
+        "notifee.createChannelGroups(*) 'channelGroups' expected an array of AndroidChannelGroup.",
       );
     }
 
@@ -108,7 +102,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       }
     } catch (e) {
       throw new Error(
-        `firebase.notifications().createChannelGroups(*) 'channelGroups' a channel group is invalid: ${e.message}`,
+        `notifee.createChannelGroups(*) 'channelGroups' a channel group is invalid: ${e.message}`,
       );
     }
 
@@ -121,9 +115,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   deleteChannel(channelId: string): Promise<void> {
     if (!isString(channelId)) {
-      throw new Error(
-        "firebase.notifications().deleteChannel(*) 'channelId' expected a string value.",
-      );
+      throw new Error("notifee.deleteChannel(*) 'channelId' expected a string value.");
     }
 
     if (isIOS) {
@@ -135,9 +127,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   deleteChannelGroup(channelGroupId: string): Promise<void> {
     if (!isString(channelGroupId)) {
-      throw new Error(
-        "firebase.notifications().deleteChannelGroup(*) 'channelGroupId' expected a string value.",
-      );
+      throw new Error("notifee.deleteChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
     if (isIOS) {
@@ -152,7 +142,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     try {
       options = validateNotification(notification);
     } catch (e) {
-      throw new Error(`firebase.notifications().displayNotification(*) ${e.message}`);
+      throw new Error(`notifee.displayNotification(*) ${e.message}`);
     }
 
     return this.native.displayNotification(options).then(() => {
@@ -162,9 +152,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   getChannel(channelId: string): Promise<AndroidChannel | null> {
     if (!isString(channelId)) {
-      throw new Error(
-        "firebase.notifications().getChannel(*) 'channelId' expected a string value.",
-      );
+      throw new Error("notifee.getChannel(*) 'channelId' expected a string value.");
     }
 
     if (isIOS) {
@@ -184,9 +172,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null> {
     if (!isString(channelGroupId)) {
-      throw new Error(
-        "firebase.notifications().getChannelGroup(*) 'channelGroupId' expected a string value.",
-      );
+      throw new Error("notifee.getChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
     if (isIOS) {
@@ -220,7 +206,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
-      throw new Error("firebase.notifications().onNotification(*) 'observer' expected a function.");
+      throw new Error("notifee.onNotification(*) 'observer' expected a function.");
     }
 
     // todo return subscriber
@@ -229,9 +215,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
-      throw new Error(
-        "firebase.notifications().onNotificationDisplayed(*) 'observer' expected a function.",
-      );
+      throw new Error("notifee.onNotificationDisplayed(*) 'observer' expected a function.");
     }
 
     // todo return subscriber
@@ -240,9 +224,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
-      throw new Error(
-        "firebase.notifications().onNotificationOpened(*) 'observer' expected a function.",
-      );
+      throw new Error("notifee.onNotificationOpened(*) 'observer' expected a function.");
     }
 
     // todo return subscriber
@@ -256,7 +238,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   removeDeliveredNotification(notificationId: string): Promise<void> {
     if (!isString(notificationId)) {
       throw new Error(
-        "firebase.notifications().removeDeliveredNotification(*) 'notificationId' expected a string value.",
+        "notifee.removeDeliveredNotification(*) 'notificationId' expected a string value.",
       );
     }
 
@@ -271,14 +253,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     try {
       notificationOptions = validateNotification(notification);
     } catch (e) {
-      throw new Error(`firebase.notifications().scheduleNotification(*) ${e.message}`);
+      throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
     }
 
     let scheduleOptions;
     try {
       scheduleOptions = validateSchedule(schedule);
     } catch (e) {
-      throw new Error(`firebase.notifications().scheduleNotification(_, *) ${e.message}`);
+      throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
     }
 
     return this.native.scheduleNotification(notificationOptions, scheduleOptions);
@@ -287,7 +269,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   setBadge(badge: number): Promise<void> {
     if (!isNull(badge) || !isNumber(badge)) {
       throw new Error(
-        "firebase.notifications().removeDeliveredNotification(*) 'badge' expected null or a number value.",
+        "notifee.removeDeliveredNotification(*) 'badge' expected null or a number value.",
       );
     }
 

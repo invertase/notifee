@@ -24,7 +24,7 @@ android.describe('notifications', () => {
     await notifee.createChannel({
       name: 'Hello Foo',
       channelId: 'foo',
-      importance: notifeeExports.AndroidImportance.HIGH,
+      importance: notifee.AndroidImportance.HIGH,
     });
   });
 
@@ -141,7 +141,7 @@ android.describe('notifications', () => {
         await notifee.createChannel({
           name: 'Custom Sound',
           channelId: 'sound',
-          importance: notifeeExports.AndroidImportance.HIGH,
+          importance: notifee.AndroidImportance.HIGH,
           sound: 'hollow.mp3',
         });
 
@@ -193,7 +193,7 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            badgeIconType: notifeeExports.AndroidBadgeIconType.LARGE,
+            badgeIconType: notifee.AndroidBadgeIconType.LARGE,
           },
         });
 
@@ -209,7 +209,7 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            category: notifeeExports.AndroidCategory.SOCIAL,
+            category: notifee.AndroidCategory.SOCIAL,
           },
         });
 
@@ -244,7 +244,7 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            color: notifeeExports.AndroidColor.AQUA,
+            color: notifee.AndroidColor.AQUA,
           },
         });
 
@@ -337,14 +337,14 @@ android.describe('notifications', () => {
           android: {
             channelId: 'foo',
             group: 'foo bar group',
-            groupAlertBehavior: notifeeExports.AndroidGroupAlertBehavior.CHILDREN,
+            groupAlertBehavior: notifee.AndroidGroupAlertBehavior.CHILDREN,
           },
         });
 
         const notification = await device.notifications.findById(notificationId);
         notification.group.should.equal('foo bar group');
         notification.groupAlertBehavior.should.eql(
-          notifeeExports.AndroidGroupAlertBehavior.CHILDREN,
+          notifee.AndroidGroupAlertBehavior.CHILDREN,
         );
       });
     });
@@ -500,12 +500,12 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            priority: notifeeExports.AndroidPriority.MAX,
+            priority: notifee.AndroidPriority.MAX,
           },
         });
 
         const notification = await device.notifications.findById(notificationId);
-        notification.priority.should.eql(notifeeExports.AndroidPriority.MAX);
+        notification.priority.should.eql(notifee.AndroidPriority.MAX);
       });
     });
 
@@ -649,7 +649,7 @@ android.describe('notifications', () => {
           android: {
             channelId: 'foo',
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'https://static.invertase.io/assets/jet.png',
             },
           },
@@ -667,7 +667,7 @@ android.describe('notifications', () => {
           android: {
             channelId: 'foo',
             style: {
-              type: notifeeExports.AndroidStyle.BIGPICTURE,
+              type: notifee.AndroidStyle.BIGPICTURE,
               picture: 'https://static.invertase.io/assets/jet.png',
               largeIcon: 'https://static.invertase.io/assets/jet.png',
               title: 'Title override',
@@ -695,7 +695,7 @@ android.describe('notifications', () => {
           android: {
             channelId: 'foo',
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: bigText,
             },
           },
@@ -712,7 +712,7 @@ android.describe('notifications', () => {
           android: {
             channelId: 'foo',
             style: {
-              type: notifeeExports.AndroidStyle.BIGTEXT,
+              type: notifee.AndroidStyle.BIGTEXT,
               text: bigText,
               title: 'title expanded',
               summary: 'summary expanded',
@@ -798,7 +798,7 @@ android.describe('notifications', () => {
           body: 'foo bar baz',
           android: {
             channelId: 'foo',
-            visibility: notifeeExports.AndroidVisibility.SECRET,
+            visibility: notifee.AndroidVisibility.SECRET,
           },
         });
 
