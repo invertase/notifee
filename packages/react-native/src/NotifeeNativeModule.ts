@@ -4,16 +4,22 @@
 
 import { getCoreModule, getNativeModule } from './NotifeeNativeModuleRegistry';
 import NotifeeJSEventEmitter from './NotifeeJSEventEmitter';
+import { EventEmitter, NativeModulesStatic } from 'react-native';
+import { NativeModuleConfig } from './types';
+import { NotifeeJsonConfig } from '../types/Library';
 
-let notifeeConfigJson = null;
+let notifeeConfigJson: any = null;
 
 export default class NotifeeNativeModule {
-  constructor(config) {
+  private _nativeModule: NativeModulesStatic | null;
+  private readonly _config: NativeModuleConfig;
+
+  constructor(config: NativeModuleConfig) {
     this._nativeModule = null;
     this._config = Object.assign({}, config);
-  }0
+  }
 
-  get notifeeConfigJson() {
+  get notifeeConfig(): NotifeeJsonConfig {
     if (notifeeConfigJson) {
       return notifeeConfigJson;
     }
@@ -21,18 +27,16 @@ export default class NotifeeNativeModule {
     return notifeeConfigJson;
   }
 
-  get emitter() {
+  get emitter(): EventEmitter {
     return NotifeeJSEventEmitter;
   }
 
-  get native() {
+  get native(): NativeModulesStatic {
     if (this._nativeModule) {
       return this._nativeModule;
     }
-    this._nativeModule = getNativeModule(this);
+
+    this._nativeModule = getNativeModule(this._config);
     return this._nativeModule;
   }
 }
-
-// Instance of checks don't work once compiled
-NotifeeNativeModule.__extended__ = {};

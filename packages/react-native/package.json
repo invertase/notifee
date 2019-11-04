@@ -10,6 +10,12 @@
     "build:clean": "rimraf android/build && rimraf ios/build",
     "prepare": "yarn run build"
   },
+  "devDependencies": {
+    "@types/react-native": "^0.60.22"
+  },
+  "peerDependencies": {
+    "react-native": "*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/invertase/notifee-public"

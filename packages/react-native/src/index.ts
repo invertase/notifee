@@ -2,11 +2,8 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { version as SDK_VERSION } from './version';
-
-import { Module } from '../types/Module';
-import { ModuleWithStatics } from '../types/ModuleWithStatics';
-import { NotificationRepeatInterval } from '../types/Notification';
+import NotifeeApiModule from './NotifeeApiModule';
+import { ModuleStatics, ModuleWithStatics } from '../types/Module';
 import {
   AndroidBadgeIconType,
   AndroidCategory,
@@ -19,11 +16,16 @@ import {
   AndroidStyle,
   AndroidVisibility,
 } from '../types/NotificationAndroid';
+import { NotificationRepeatInterval } from '../types/Notification';
+import { version as SDK_VERSION } from './version';
 
-// TODO
-const module = {} as Module;
+const module = new NotifeeApiModule({
+  version: SDK_VERSION,
+  nativeModuleName: 'NotifeeApiModule',
+  nativeEvents: [],
+});
 
-const defaultExports: ModuleWithStatics = Object.assign(module, {
+const statics: ModuleStatics = {
   AndroidVisibility,
   AndroidSemanticAction,
   AndroidBadgeIconType,
@@ -36,7 +38,7 @@ const defaultExports: ModuleWithStatics = Object.assign(module, {
   AndroidColor,
   AndroidStyle,
   SDK_VERSION,
-});
+};
 
+const defaultExports: ModuleWithStatics = Object.assign(module, statics);
 export default defaultExports;
-

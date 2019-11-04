@@ -1,15 +1,33 @@
-/**
- * The Notifee API interface.
+/*
+ * Copyright (c) 2016-present Invertase Limited
  */
-import { AndroidChannel, AndroidChannelGroup } from './NotificationAndroid';
+
 import {
   NotificationBuilder,
   NotificationObserver,
   NotificationObserverUnsubscribe,
+  NotificationRepeatInterval,
   NotificationSchedule,
   RemoteNotification,
 } from './Notification';
+import {
+  AndroidBadgeIconType,
+  AndroidCategory,
+  AndroidChannel,
+  AndroidChannelGroup,
+  AndroidColor,
+  AndroidDefaults,
+  AndroidGroupAlertBehavior,
+  AndroidImportance,
+  AndroidPriority,
+  AndroidSemanticAction,
+  AndroidStyle,
+  AndroidVisibility,
+} from './NotificationAndroid';
 
+/**
+ * TODO
+ */
 export interface Module {
   cancelAllNotifications(): Promise<void>;
 
@@ -149,3 +167,27 @@ export interface Module {
 
   setBadge(badge: number): Promise<void>;
 }
+
+/**
+ * TODO
+ */
+export interface ModuleStatics {
+  AndroidBadgeIconType: typeof AndroidBadgeIconType;
+  AndroidCategory: typeof AndroidCategory;
+  AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
+  AndroidSemanticAction: typeof AndroidSemanticAction;
+  AndroidPriority: typeof AndroidPriority;
+  AndroidVisibility: typeof AndroidVisibility;
+  AndroidDefaults: typeof AndroidDefaults;
+  AndroidImportance: typeof AndroidImportance;
+  AndroidColor: typeof AndroidColor;
+  AndroidStyle: typeof AndroidStyle;
+  NotificationRepeatInterval: typeof NotificationRepeatInterval;
+  SDK_VERSION: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+/**
+ * TODO
+ */
+export interface ModuleWithStatics extends Module, ModuleStatics {}
