@@ -1050,6 +1050,8 @@ export enum AndroidPriority {
 }
 
 /**
+ *  Foo Bar Importance
+ *
  *  [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}
  */
 export enum AndroidImportance {
