@@ -7,12 +7,10 @@ import { AppRegistry, NativeModules, StyleSheet, Text, View } from 'react-native
 
 import jet from '@notifee/jet';
 import notifee from '@notifee/react-native';
-import * as notifeeExports from '@notifee/react-native';
-import NativeEventEmitter from '@notifee/react-native/lib/NotifeeNativeEventEmitter';
+import NativeEventEmitter from '@notifee/react-native/src/NotifeeNativeEventEmitter';
 
 jet.exposeContextProperty('module', notifee);
 jet.exposeContextProperty('NativeModules', NativeModules);
-jet.exposeContextProperty('moduleExports', notifeeExports);
 jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);
 
 class Root extends Component {

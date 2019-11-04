@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import AndroidStyle from './AndroidStyle';
+import { AndroidStyle } from './../types/NotificationAndroid';
 import { hasOwnProperty, isString } from './utils';
 
 /**
