@@ -4,7 +4,7 @@
 
 import { isArray, isBoolean, isObject, isString, hasOwnProperty } from './utils';
 
-import { AndroidSemanticAction } from '../types/NotificationAndroid';
+import { AndroidSemanticAction } from '../../types/NotificationAndroid';
 
 export default function validateAndroidAction(action) {
   if (!isObject(action)) {

@@ -20,7 +20,7 @@ import {
   AndroidGroupAlertBehavior,
   AndroidPriority,
   AndroidVisibility,
-} from './../types/NotificationAndroid';
+} from '../../types/NotificationAndroid';
 
 import {
   isValidColor,

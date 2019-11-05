@@ -6,7 +6,7 @@ let validate;
 
 describe('notifications() Notification', () => {
   before(() => {
-    validate = jet.require('packages/react-native/lib/validateAndroidNotification');
+    validate = jet.require('packages/react-native/lib/src/js/validateAndroidNotification');
   });
 
   it('uses default values', () => {

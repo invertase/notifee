@@ -53,6 +53,7 @@ android/gradle/
 coverage
 yarn.lock
 e2e/
+src/
 .github
 .vscode
 .nyc_output

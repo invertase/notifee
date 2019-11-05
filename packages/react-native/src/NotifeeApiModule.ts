@@ -14,11 +14,11 @@ import {
 import NotifeeNativeModule from './NotifeeNativeModule';
 
 // TODO migrate to TS?
-import { isFunction, isNumber, isString, isIOS, isArray, isNull } from '../lib/utils';
-import validateNotification from '../lib/validateNotification';
-import validateSchedule from '../lib/validateSchedule';
-import validateAndroidChannel from '../lib/validateAndroidChannel';
-import validateAndroidChannelGroup from '../lib/validateAndroidChannelGroup';
+import { isFunction, isNumber, isString, isIOS, isArray, isNull } from './js/utils';
+import validateNotification from './js/validateNotification';
+import validateSchedule from './js/validateSchedule';
+import validateAndroidChannel from './js/validateAndroidChannel';
+import validateAndroidChannelGroup from './js/validateAndroidChannelGroup';
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   cancelAllNotifications(): Promise<void> {

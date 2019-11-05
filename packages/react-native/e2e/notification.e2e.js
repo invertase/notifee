@@ -6,7 +6,7 @@ let validate;
 
 describe('notifications() Notification', () => {
   before(async () => {
-    validate = jet.require('packages/react-native/lib/validateNotification');
+    validate = jet.require('packages/react-native/lib/src/js/validateNotification');
   });
 
   it('throws if notification is not an object', () => {

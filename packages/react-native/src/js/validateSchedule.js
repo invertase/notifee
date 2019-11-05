@@ -3,7 +3,7 @@
  */
 
 import { hasOwnProperty, isBoolean, isNumber, isObject } from './utils';
-import { NotificationRepeatInterval } from './../types/Notification';
+import { NotificationRepeatInterval } from '../../types/Notification';
 
 export default function validateSchedule(schedule) {
   if (!isObject(schedule)) {

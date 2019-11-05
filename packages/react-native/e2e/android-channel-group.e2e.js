@@ -6,7 +6,7 @@ let validate;
 
 describe('notifications() Notification', () => {
   before(() => {
-    validate = jet.require('packages/react-native/lib/validateAndroidChannelGroup');
+    validate = jet.require('packages/react-native/lib/src/js/validateAndroidChannelGroup');
     console.log(validate);
   });
 
