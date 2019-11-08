@@ -11,12 +11,12 @@
  */
 export interface NotificationIOS {
   /**
-   * @ios iOS 10+
+   * @platform ios iOS 10+
    */
   attachment?: IOSAttachment;
 
   /**
-   * @ios iOS 9 Only
+   * @platform ios iOS 9 Only
    */
   alertAction?: string;
 
@@ -26,14 +26,14 @@ export interface NotificationIOS {
   category?: string;
 
   /**
-   * @ios iOS 9 Only
+   * @platform ios iOS 9 Only
    */
   hasAction?: boolean;
 
   launchImage?: string;
 
   /**
-   * @ios iOS 10+
+   * @platform ios iOS 10+
    */
   threadIdentifier?: string;
 

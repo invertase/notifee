@@ -9047,8 +9047,8 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 9 Only\n"
+								"tag": "platform",
+								"text": "ios iOS 9 Only\n"
 							}
 						]
 					},
@@ -9085,8 +9085,8 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 10+\n"
+								"tag": "platform",
+								"text": "ios iOS 10+\n"
 							}
 						]
 					},
@@ -9196,8 +9196,8 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 9 Only\n"
+								"tag": "platform",
+								"text": "ios iOS 9 Only\n"
 							}
 						]
 					},
@@ -9268,8 +9268,8 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 10+\n"
+								"tag": "platform",
+								"text": "ios iOS 10+\n"
 							}
 						]
 					},
