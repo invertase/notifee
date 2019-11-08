@@ -20,7 +20,7 @@
  * await notifee.displayNotification(notification);
  * ```
  *
- * @android
+ * @platform android
  */
 export interface NotificationAndroid {
   /**
@@ -598,6 +598,11 @@ export interface NotificationAndroid {
   when?: number;
 }
 
+/**
+ * TODO
+ *
+ * @platform android
+ */
 export interface AndroidAction {
   key: string;
   icon: string;
@@ -608,6 +613,11 @@ export interface AndroidAction {
   showsUserInterface?: boolean; // true
 }
 
+/**
+ * TODO
+ *
+ * @platform android
+ */
 export interface AndroidRemoteInput {
   key: string;
   extras?: { [key: string]: string };
@@ -628,6 +638,8 @@ export interface AndroidRemoteInput {
  * ```js
  * TODO example
  * ```
+ *
+ * @platform android
  */
 export interface AndroidBigPictureStyle {
   type: AndroidStyle.BIGPICTURE;
@@ -660,6 +672,8 @@ export interface AndroidBigPictureStyle {
  *   }
  * });
  * ```
+ *
+ * @platform android
  */
 export interface AndroidBigTextStyle {
   type: AndroidStyle.BIGTEXT;
@@ -717,6 +731,8 @@ export interface AndroidBigTextStyle {
  *   },
  * });
  * ```
+ *
+ * @platform android
  */
 export interface AndroidProgress {
   /**
@@ -762,6 +778,8 @@ export interface AndroidProgress {
  *   vibrationPattern: [300, 400],
  * });
  * ```
+ *
+ * @platform android
  */
 export interface AndroidChannel {
   /**
@@ -862,6 +880,8 @@ export interface AndroidChannel {
  * Interface for an Android Channel Group.
  *
  * ![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)
+ *
+ * @platform android
  */
 export interface AndroidChannelGroup {
   /**
@@ -884,6 +904,8 @@ export interface AndroidChannelGroup {
 /**
  * When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface
  * describes how the badge icon is shown to the user.
+ *
+ * @platform android
  */
 export enum AndroidBadgeIconType {
   /**
@@ -904,6 +926,8 @@ export enum AndroidBadgeIconType {
 
 /**
  * TODO
+ *
+ * @platform android
  */
 export enum AndroidCategory {
   ALARM = 'alarm',
@@ -926,6 +950,8 @@ export enum AndroidCategory {
 
 /**
  * A set or predefined colors which can be used with Android Notifications.
+ *
+ * @platform android
  */
 export enum AndroidColor {
   RED = 'red',
@@ -954,6 +980,8 @@ export enum AndroidColor {
 
 /**
  * TODO
+ *
+ * @platform android
  */
 export enum AndroidDefaults {
   ALL = -1,
@@ -964,6 +992,8 @@ export enum AndroidDefaults {
 
 /**
  * TODO
+ *
+ * @platform android
  */
 export enum AndroidGroupAlertBehavior {
   ALL = 0,
@@ -977,6 +1007,8 @@ export enum AndroidGroupAlertBehavior {
  *  https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT
  *
  *  [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}
+ *
+ * @platform android
  */
 export enum AndroidImportance {
   DEFAULT = 3,
@@ -991,6 +1023,8 @@ export enum AndroidImportance {
  * TODO
  *
  * https://developer.android.com/reference/androidx/core/app/NotificationCompat#PRIORITY_DEFAULT
+ *
+ * @platform android
  */
 export enum AndroidPriority {
   DEFAULT = 0,
@@ -1002,6 +1036,8 @@ export enum AndroidPriority {
 
 /**
  * TODO
+ *
+ * @platform android
  */
 export enum AndroidSemanticAction {
   /**
@@ -1064,6 +1100,8 @@ export enum AndroidSemanticAction {
  * Available Android Notification Styles.
  *
  * Used when providing a `style` to a notification builder with `displayNotification`.
+ *
+ * @platform android
  */
 export enum AndroidStyle {
   BIGPICTURE = 0,
@@ -1076,6 +1114,8 @@ export enum AndroidStyle {
  * Use with the `visibility` property on the notification.
  *
  * Default value is `AndroidVisibility.PRIVATE`.
+ *
+ * @platform android
  */
 export enum AndroidVisibility {
   /**

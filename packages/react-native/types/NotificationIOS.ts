@@ -6,6 +6,8 @@
 
 /**
  * TODO
+ *
+ * @platform ios
  */
 export interface NotificationIOS {
   /**
@@ -41,6 +43,8 @@ export interface NotificationIOS {
 
 /**
  * TODO
+ *
+ * @platform ios
  */
 export interface IOSAttachment {
   identifier: string;
@@ -50,6 +54,8 @@ export interface IOSAttachment {
 
 /**
  * TODO
+ *
+ * @platform ios
  */
 export interface IOSAttachmentOptions {
   typeHint: string;
