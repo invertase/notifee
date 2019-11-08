@@ -45,6 +45,8 @@ export interface Notification {
    *
    * await notifee.displayNotification(notification);
    * ```
+   *
+   * @foo bar
    */
   body: string;
 

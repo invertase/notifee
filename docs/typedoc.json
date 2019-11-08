@@ -1783,7 +1783,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 255,
+							"line": 257,
 							"character": 5
 						}
 					],
@@ -1800,7 +1800,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 254,
+							"line": 256,
 							"character": 6
 						}
 					],
@@ -1817,7 +1817,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 253,
+							"line": 255,
 							"character": 8
 						}
 					],
@@ -1834,7 +1834,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 256,
+							"line": 258,
 							"character": 6
 						}
 					],
@@ -1856,7 +1856,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 252,
+					"line": 254,
 					"character": 38
 				}
 			]
@@ -7240,12 +7240,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -7270,7 +7276,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -7336,7 +7342,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -7370,7 +7376,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -7404,7 +7410,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -7438,7 +7444,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -8687,7 +8693,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 148,
+							"line": 150,
 							"character": 9
 						}
 					],
@@ -8707,12 +8713,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -8742,7 +8754,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -8819,7 +8831,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 169,
+							"line": 171,
 							"character": 5
 						}
 					],
@@ -8845,7 +8857,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -8884,7 +8896,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -8923,7 +8935,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -8962,7 +8974,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -9005,7 +9017,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 128,
+					"line": 130,
 					"character": 36
 				}
 			],
@@ -9353,7 +9365,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 226,
+							"line": 228,
 							"character": 7
 						}
 					],
@@ -9390,7 +9402,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 214,
+							"line": 216,
 							"character": 10
 						}
 					],
@@ -9415,7 +9427,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 246,
+							"line": 248,
 							"character": 16
 						}
 					],
@@ -9440,7 +9452,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 200,
+					"line": 202,
 					"character": 37
 				}
 			]
@@ -9476,7 +9488,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 179,
+							"line": 181,
 							"character": 9
 						}
 					],
@@ -9496,12 +9508,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -9531,7 +9549,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -9605,7 +9623,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 184,
+							"line": 186,
 							"character": 5
 						}
 					],
@@ -9631,7 +9649,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -9670,7 +9688,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -9709,7 +9727,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -9748,7 +9766,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -9791,7 +9809,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 175,
+					"line": 177,
 					"character": 35
 				}
 			],
@@ -9817,7 +9835,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 190,
+					"line": 192,
 					"character": 32
 				}
 			],
@@ -9859,7 +9877,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 190,
+							"line": 192,
 							"character": 34
 						}
 					]
@@ -9880,7 +9898,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 195,
+					"line": 197,
 					"character": 43
 				}
 			],
@@ -9908,7 +9926,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 195,
+							"line": 197,
 							"character": 45
 						}
 					]
