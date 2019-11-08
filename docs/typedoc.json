@@ -3968,7 +3968,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 147,
+							"line": 150,
 							"character": 10
 						}
 					]
@@ -3990,7 +3990,13 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Returns a single `AndroidChannel` by id.",
-								"text": "Returns `null` if no channel could be matched to the given ID.\n"
+								"text": "Returns `null` if no channel could be matched to the given ID.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
 							},
 							"parameters": [
 								{
@@ -4000,7 +4006,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel id.\n"
+										"text": "The channel id."
 									},
 									"type": {
 										"type": "intrinsic",
@@ -4033,7 +4039,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 135,
+							"line": 136,
 							"character": 12
 						}
 					]
@@ -4091,7 +4097,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 142,
+							"line": 145,
 							"character": 17
 						}
 					]
@@ -4130,7 +4136,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 144,
+							"line": 147,
 							"character": 18
 						}
 					]
@@ -4151,7 +4157,13 @@
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device."
+								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device.",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
 							},
 							"type": {
 								"type": "reference",
@@ -4172,7 +4184,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 140,
+							"line": 143,
 							"character": 13
 						}
 					]
@@ -4217,7 +4229,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 149,
+							"line": 152,
 							"character": 24
 						}
 					]
@@ -4256,7 +4268,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 151,
+							"line": 154,
 							"character": 27
 						}
 					]
@@ -4300,7 +4312,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 153,
+							"line": 156,
 							"character": 16
 						}
 					]
@@ -4344,7 +4356,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 155,
+							"line": 158,
 							"character": 25
 						}
 					]
@@ -4388,7 +4400,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 157,
+							"line": 160,
 							"character": 22
 						}
 					]
@@ -4423,7 +4435,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 159,
+							"line": 162,
 							"character": 33
 						}
 					]
@@ -4471,7 +4483,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 161,
+							"line": 164,
 							"character": 29
 						}
 					]
@@ -4532,7 +4544,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 163,
+							"line": 166,
 							"character": 22
 						}
 					]
@@ -4580,7 +4592,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 168,
+							"line": 171,
 							"character": 10
 						}
 					]
@@ -4655,7 +4667,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 175,
+							"line": 178,
 							"character": 22
 						}
 					],
@@ -4676,7 +4688,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 176,
+							"line": 179,
 							"character": 17
 						}
 					],
@@ -4697,7 +4709,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 183,
+							"line": 186,
 							"character": 14
 						}
 					],
@@ -4718,7 +4730,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 181,
+							"line": 184,
 							"character": 17
 						}
 					],
@@ -4739,7 +4751,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 177,
+							"line": 180,
 							"character": 27
 						}
 					],
@@ -4760,7 +4772,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 182,
+							"line": 185,
 							"character": 19
 						}
 					],
@@ -4781,7 +4793,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 179,
+							"line": 182,
 							"character": 17
 						}
 					],
@@ -4802,7 +4814,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 178,
+							"line": 181,
 							"character": 23
 						}
 					],
@@ -4823,7 +4835,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 184,
+							"line": 187,
 							"character": 14
 						}
 					],
@@ -4844,7 +4856,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 180,
+							"line": 183,
 							"character": 19
 						}
 					],
@@ -4865,7 +4877,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 185,
+							"line": 188,
 							"character": 28
 						}
 					],
@@ -4886,7 +4898,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 186,
+							"line": 189,
 							"character": 13
 						}
 					],
@@ -4919,7 +4931,7 @@
 			"sources": [
 				{
 					"fileName": "Module.ts",
-					"line": 174,
+					"line": 177,
 					"character": 30
 				}
 			],
@@ -4954,7 +4966,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 175,
+							"line": 178,
 							"character": 22
 						}
 					],
@@ -4980,7 +4992,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 176,
+							"line": 179,
 							"character": 17
 						}
 					],
@@ -5006,7 +5018,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 183,
+							"line": 186,
 							"character": 14
 						}
 					],
@@ -5032,7 +5044,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 181,
+							"line": 184,
 							"character": 17
 						}
 					],
@@ -5058,7 +5070,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 177,
+							"line": 180,
 							"character": 27
 						}
 					],
@@ -5084,7 +5096,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 182,
+							"line": 185,
 							"character": 19
 						}
 					],
@@ -5110,7 +5122,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 179,
+							"line": 182,
 							"character": 17
 						}
 					],
@@ -5136,7 +5148,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 178,
+							"line": 181,
 							"character": 23
 						}
 					],
@@ -5162,7 +5174,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 184,
+							"line": 187,
 							"character": 14
 						}
 					],
@@ -5188,7 +5200,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 180,
+							"line": 183,
 							"character": 19
 						}
 					],
@@ -5214,7 +5226,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 185,
+							"line": 188,
 							"character": 28
 						}
 					],
@@ -5240,7 +5252,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 186,
+							"line": 189,
 							"character": 13
 						}
 					],
@@ -5847,7 +5859,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 147,
+							"line": 150,
 							"character": 10
 						}
 					],
@@ -5874,7 +5886,13 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Returns a single `AndroidChannel` by id.",
-								"text": "Returns `null` if no channel could be matched to the given ID.\n"
+								"text": "Returns `null` if no channel could be matched to the given ID.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
 							},
 							"parameters": [
 								{
@@ -5884,7 +5902,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel id.\n"
+										"text": "The channel id."
 									},
 									"type": {
 										"type": "intrinsic",
@@ -5922,7 +5940,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 135,
+							"line": 136,
 							"character": 12
 						}
 					],
@@ -5990,7 +6008,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 142,
+							"line": 145,
 							"character": 17
 						}
 					],
@@ -6039,7 +6057,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 144,
+							"line": 147,
 							"character": 18
 						}
 					],
@@ -6065,7 +6083,13 @@
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device."
+								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device.",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
 							},
 							"type": {
 								"type": "reference",
@@ -6091,7 +6115,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 140,
+							"line": 143,
 							"character": 13
 						}
 					],
@@ -6146,7 +6170,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 149,
+							"line": 152,
 							"character": 24
 						}
 					],
@@ -6195,7 +6219,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 151,
+							"line": 154,
 							"character": 27
 						}
 					],
@@ -6249,7 +6273,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 153,
+							"line": 156,
 							"character": 16
 						}
 					],
@@ -6303,7 +6327,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 155,
+							"line": 158,
 							"character": 25
 						}
 					],
@@ -6357,7 +6381,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 157,
+							"line": 160,
 							"character": 22
 						}
 					],
@@ -6402,7 +6426,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 159,
+							"line": 162,
 							"character": 33
 						}
 					],
@@ -6460,7 +6484,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 161,
+							"line": 164,
 							"character": 29
 						}
 					],
@@ -6531,7 +6555,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 163,
+							"line": 166,
 							"character": 22
 						}
 					],
@@ -6589,7 +6613,7 @@
 					"sources": [
 						{
 							"fileName": "Module.ts",
-							"line": 168,
+							"line": 171,
 							"character": 10
 						}
 					],
@@ -6652,7 +6676,7 @@
 			"sources": [
 				{
 					"fileName": "Module.ts",
-					"line": 193,
+					"line": 196,
 					"character": 34
 				}
 			],

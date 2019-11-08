@@ -131,11 +131,14 @@ export interface Module {
    * Returns `null` if no channel could be matched to the given ID.
    *
    * @param channelId The channel id.
+   * @platform android
    */
   getChannel(channelId: string): Promise<AndroidChannel | null>;
 
   /**
    * Returns an array of `AndroidChannel` which are currently active on the device.
+   *
+   * @platform android
    */
   getChannels(): Promise<AndroidChannel[]>;
 
