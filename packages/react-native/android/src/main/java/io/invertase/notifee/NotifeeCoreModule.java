@@ -1,5 +1,7 @@
 package io.invertase.notifee;
 
+import android.os.Build;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -106,6 +108,7 @@ public class NotifeeCoreModule extends NotifeeNativeModule {
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
     constants.put("NOTIFEE_RAW_JSON", NotifeeJSON.getSharedInstance().getRawJSON());
+    constants.put("ANDROID_API_LEVEL", Build.VERSION.SDK_INT);
     return constants;
   }
 }

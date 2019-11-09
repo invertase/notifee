@@ -8,6 +8,7 @@
   "scripts": {
     "build": "genversion --es6 --semi src/version.ts && tsc",
     "build:clean": "rimraf android/build && rimraf ios/build && rimraf lib",
+    "build:watch": "tsc --watch",
     "prepare": "yarn run build"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@
     "prepare": "yarn run lerna:link && lerna run prepare",
     "build:all:clean": "lerna run build:clean",
     "build:all:build": "lerna run build",
+    "build_rn:watch": "cd packages/react-native && yarn run build:watch",
     "validate:all:js": "eslint ./",
     "validate:all:ts": "tsc --project ./ && tslint --project tsconfig.json -c tslint.json packages/**/**/*.ts",
     "validate:all:flow": "flow",
