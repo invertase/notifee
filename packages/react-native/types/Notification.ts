@@ -45,6 +45,8 @@ export interface Notification {
    *
    * await notifee.displayNotification(notification);
    * ```
+   *
+   * @foo bar
    */
   body: string;
 
@@ -142,6 +144,8 @@ export interface NotificationBuilder extends Notification {
    *
    * await notifee.displayNotification(notification);
    * ```
+   *
+   * @platform android
    */
   android?: NotificationAndroid;
 
@@ -161,6 +165,8 @@ export interface NotificationBuilder extends Notification {
    *
    * await notifee.displayNotification(notification);
    * ```
+   *
+   * @platform ios
    */
   ios?: NotificationIOS;
 }
@@ -169,7 +175,14 @@ export interface NotificationBuilder extends Notification {
  * TODO
  */
 export interface RemoteNotification extends Notification {
+  /**
+   * @platform android
+   */
   android: NotificationAndroid;
+
+  /**
+   * @platform ios
+   */
   ios: NotificationIOS;
 }
 
@@ -210,7 +223,7 @@ export interface NotificationSchedule {
    *
    * Defaults to `false`. Has no effect on iOS.
    *
-   * @android
+   * @platform android
    */
   exact?: boolean;
 

@@ -13,7 +13,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface\ndescribes how the badge icon is shown to the user."
+				"shortText": "When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface\ndescribes how the badge icon is shown to the user.",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -30,7 +36,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 902,
+							"line": 924,
 							"character": 7
 						}
 					],
@@ -50,7 +56,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 892,
+							"line": 914,
 							"character": 6
 						}
 					],
@@ -70,7 +76,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 897,
+							"line": 919,
 							"character": 7
 						}
 					],
@@ -91,7 +97,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 888,
+					"line": 910,
 					"character": 32
 				}
 			]
@@ -105,7 +111,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -119,7 +131,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 909,
+							"line": 933,
 							"character": 7
 						}
 					],
@@ -136,7 +148,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 910,
+							"line": 934,
 							"character": 6
 						}
 					],
@@ -153,7 +165,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 911,
+							"line": 935,
 							"character": 7
 						}
 					],
@@ -170,7 +182,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 912,
+							"line": 936,
 							"character": 7
 						}
 					],
@@ -187,7 +199,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 913,
+							"line": 937,
 							"character": 7
 						}
 					],
@@ -204,7 +216,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 914,
+							"line": 938,
 							"character": 9
 						}
 					],
@@ -221,7 +233,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 915,
+							"line": 939,
 							"character": 12
 						}
 					],
@@ -238,7 +250,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 916,
+							"line": 940,
 							"character": 10
 						}
 					],
@@ -255,7 +267,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 917,
+							"line": 941,
 							"character": 7
 						}
 					],
@@ -272,7 +284,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 918,
+							"line": 942,
 							"character": 16
 						}
 					],
@@ -289,7 +301,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 919,
+							"line": 943,
 							"character": 10
 						}
 					],
@@ -306,7 +318,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 920,
+							"line": 944,
 							"character": 9
 						}
 					],
@@ -323,7 +335,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 921,
+							"line": 945,
 							"character": 8
 						}
 					],
@@ -340,7 +352,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 922,
+							"line": 946,
 							"character": 8
 						}
 					],
@@ -357,7 +369,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 923,
+							"line": 947,
 							"character": 8
 						}
 					],
@@ -374,7 +386,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 924,
+							"line": 948,
 							"character": 11
 						}
 					],
@@ -408,7 +420,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 908,
+					"line": 932,
 					"character": 27
 				}
 			]
@@ -422,7 +434,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "A set or predefined colors which can be used with Android Notifications."
+				"shortText": "A set or predefined colors which can be used with Android Notifications.",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -436,7 +454,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 944,
+							"line": 970,
 							"character": 6
 						}
 					],
@@ -453,7 +471,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 934,
+							"line": 960,
 							"character": 7
 						}
 					],
@@ -470,7 +488,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 932,
+							"line": 958,
 							"character": 6
 						}
 					],
@@ -487,7 +505,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 936,
+							"line": 962,
 							"character": 6
 						}
 					],
@@ -504,7 +522,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 940,
+							"line": 966,
 							"character": 10
 						}
 					],
@@ -521,7 +539,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 943,
+							"line": 969,
 							"character": 10
 						}
 					],
@@ -538,7 +556,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 945,
+							"line": 971,
 							"character": 9
 						}
 					],
@@ -555,7 +573,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 941,
+							"line": 967,
 							"character": 6
 						}
 					],
@@ -572,7 +590,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 933,
+							"line": 959,
 							"character": 7
 						}
 					],
@@ -589,7 +607,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 939,
+							"line": 965,
 							"character": 11
 						}
 					],
@@ -606,7 +624,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 942,
+							"line": 968,
 							"character": 11
 						}
 					],
@@ -623,7 +641,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 946,
+							"line": 972,
 							"character": 6
 						}
 					],
@@ -640,7 +658,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 937,
+							"line": 963,
 							"character": 9
 						}
 					],
@@ -657,7 +675,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 947,
+							"line": 973,
 							"character": 8
 						}
 					],
@@ -674,7 +692,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 948,
+							"line": 974,
 							"character": 6
 						}
 					],
@@ -691,7 +709,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 949,
+							"line": 975,
 							"character": 7
 						}
 					],
@@ -708,7 +726,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 950,
+							"line": 976,
 							"character": 8
 						}
 					],
@@ -725,7 +743,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 931,
+							"line": 957,
 							"character": 5
 						}
 					],
@@ -742,7 +760,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 951,
+							"line": 977,
 							"character": 8
 						}
 					],
@@ -759,7 +777,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 952,
+							"line": 978,
 							"character": 6
 						}
 					],
@@ -776,7 +794,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 935,
+							"line": 961,
 							"character": 7
 						}
 					],
@@ -793,7 +811,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 938,
+							"line": 964,
 							"character": 8
 						}
 					],
@@ -833,7 +851,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 930,
+					"line": 956,
 					"character": 24
 				}
 			]
@@ -847,7 +865,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -861,7 +885,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 959,
+							"line": 987,
 							"character": 5
 						}
 					],
@@ -878,7 +902,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 960,
+							"line": 988,
 							"character": 8
 						}
 					],
@@ -895,7 +919,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 961,
+							"line": 989,
 							"character": 7
 						}
 					],
@@ -912,7 +936,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 962,
+							"line": 990,
 							"character": 9
 						}
 					],
@@ -934,7 +958,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 958,
+					"line": 986,
 					"character": 27
 				}
 			]
@@ -948,7 +972,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -962,7 +992,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 969,
+							"line": 999,
 							"character": 5
 						}
 					],
@@ -979,7 +1009,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 971,
+							"line": 1001,
 							"character": 10
 						}
 					],
@@ -996,7 +1026,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 970,
+							"line": 1000,
 							"character": 9
 						}
 					],
@@ -1017,7 +1047,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 968,
+					"line": 998,
 					"character": 37
 				}
 			]
@@ -1032,7 +1062,13 @@
 			},
 			"comment": {
 				"shortText": " TODO",
-				"text": " https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT\n\n [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}\n"
+				"text": " https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT\n\n [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1046,7 +1082,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 982,
+							"line": 1014,
 							"character": 9
 						}
 					],
@@ -1063,7 +1099,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 983,
+							"line": 1015,
 							"character": 6
 						}
 					],
@@ -1080,7 +1116,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 984,
+							"line": 1016,
 							"character": 5
 						}
 					],
@@ -1097,7 +1133,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 985,
+							"line": 1017,
 							"character": 5
 						}
 					],
@@ -1114,7 +1150,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 986,
+							"line": 1018,
 							"character": 5
 						}
 					],
@@ -1131,7 +1167,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 987,
+							"line": 1019,
 							"character": 6
 						}
 					],
@@ -1155,7 +1191,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 981,
+					"line": 1013,
 					"character": 29
 				}
 			]
@@ -1170,7 +1206,13 @@
 			},
 			"comment": {
 				"shortText": "TODO",
-				"text": "https://developer.android.com/reference/androidx/core/app/NotificationCompat#PRIORITY_DEFAULT\n"
+				"text": "https://developer.android.com/reference/androidx/core/app/NotificationCompat#PRIORITY_DEFAULT\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1184,7 +1226,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 996,
+							"line": 1030,
 							"character": 9
 						}
 					],
@@ -1201,7 +1243,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 997,
+							"line": 1031,
 							"character": 6
 						}
 					],
@@ -1218,7 +1260,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 998,
+							"line": 1032,
 							"character": 5
 						}
 					],
@@ -1235,7 +1277,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 999,
+							"line": 1033,
 							"character": 5
 						}
 					],
@@ -1252,7 +1294,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1000,
+							"line": 1034,
 							"character": 5
 						}
 					],
@@ -1275,7 +1317,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 995,
+					"line": 1029,
 					"character": 27
 				}
 			]
@@ -1289,7 +1331,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1306,7 +1354,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1010,
+							"line": 1046,
 							"character": 9
 						}
 					],
@@ -1326,7 +1374,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1015,
+							"line": 1051,
 							"character": 6
 						}
 					],
@@ -1346,7 +1394,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1020,
+							"line": 1056,
 							"character": 8
 						}
 					],
@@ -1366,7 +1414,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1025,
+							"line": 1061,
 							"character": 14
 						}
 					],
@@ -1386,7 +1434,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1030,
+							"line": 1066,
 							"character": 16
 						}
 					],
@@ -1406,7 +1454,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1035,
+							"line": 1071,
 							"character": 6
 						}
 					],
@@ -1426,7 +1474,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1040,
+							"line": 1076,
 							"character": 6
 						}
 					],
@@ -1446,7 +1494,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1045,
+							"line": 1081,
 							"character": 7
 						}
 					],
@@ -1466,7 +1514,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1050,
+							"line": 1086,
 							"character": 13
 						}
 					],
@@ -1486,7 +1534,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1055,
+							"line": 1091,
 							"character": 11
 						}
 					],
@@ -1506,7 +1554,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1060,
+							"line": 1096,
 							"character": 8
 						}
 					],
@@ -1535,7 +1583,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 1006,
+					"line": 1042,
 					"character": 33
 				}
 			]
@@ -1550,7 +1598,13 @@
 			},
 			"comment": {
 				"shortText": "Available Android Notification Styles.",
-				"text": "Used when providing a `style` to a notification builder with `displayNotification`.\n"
+				"text": "Used when providing a `style` to a notification builder with `displayNotification`.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1564,7 +1618,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1069,
+							"line": 1107,
 							"character": 12
 						}
 					],
@@ -1581,7 +1635,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1070,
+							"line": 1108,
 							"character": 9
 						}
 					],
@@ -1601,7 +1655,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 1068,
+					"line": 1106,
 					"character": 24
 				}
 			]
@@ -1616,7 +1670,13 @@
 			},
 			"comment": {
 				"shortText": "Interface used to define the visibility of an Android notification.",
-				"text": "Use with the `visibility` property on the notification.\n\nDefault value is `AndroidVisibility.PRIVATE`.\n"
+				"text": "Use with the `visibility` property on the notification.\n\nDefault value is `AndroidVisibility.PRIVATE`.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1633,7 +1693,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1084,
+							"line": 1124,
 							"character": 9
 						}
 					],
@@ -1653,7 +1713,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1089,
+							"line": 1129,
 							"character": 8
 						}
 					],
@@ -1674,7 +1734,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 1096,
+							"line": 1136,
 							"character": 8
 						}
 					],
@@ -1695,7 +1755,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 1080,
+					"line": 1120,
 					"character": 29
 				}
 			]
@@ -1723,7 +1783,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 244,
+							"line": 257,
 							"character": 5
 						}
 					],
@@ -1740,7 +1800,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 243,
+							"line": 256,
 							"character": 6
 						}
 					],
@@ -1757,7 +1817,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 242,
+							"line": 255,
 							"character": 8
 						}
 					],
@@ -1774,7 +1834,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 245,
+							"line": 258,
 							"character": 6
 						}
 					],
@@ -1796,7 +1856,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 241,
+					"line": 254,
 					"character": 38
 				}
 			]
@@ -1808,6 +1868,15 @@
 			"kindString": "Interface",
 			"flags": {
 				"isExported": true
+			},
+			"comment": {
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1822,7 +1891,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 605,
+							"line": 610,
 							"character": 23
 						}
 					],
@@ -1855,7 +1924,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 603,
+							"line": 608,
 							"character": 6
 						}
 					],
@@ -1875,7 +1944,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 602,
+							"line": 607,
 							"character": 5
 						}
 					],
@@ -1896,7 +1965,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 606,
+							"line": 611,
 							"character": 14
 						}
 					],
@@ -1921,7 +1990,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 607,
+							"line": 612,
 							"character": 16
 						}
 					],
@@ -1943,7 +2012,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 608,
+							"line": 613,
 							"character": 20
 						}
 					],
@@ -1976,7 +2045,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 604,
+							"line": 609,
 							"character": 7
 						}
 					],
@@ -2004,7 +2073,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 601,
+					"line": 606,
 					"character": 30
 				}
 			]
@@ -2019,7 +2088,13 @@
 			},
 			"comment": {
 				"shortText": "Notifications can show a large image when expanded, which is useful for apps with a heavy media\nfocus, such as Instagram.",
-				"text": "![Big Picture Style](https://developer.android.com/images/ui/notifications/template-image_2x.png)\n\n#### Example\n\n```js\nTODO example\n```\n"
+				"text": "![Big Picture Style](https://developer.android.com/images/ui/notifications/template-image_2x.png)\n\n#### Example\n\n```js\nTODO example\n```\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2034,7 +2109,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 636,
+							"line": 648,
 							"character": 11
 						}
 					],
@@ -2063,7 +2138,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 634,
+							"line": 646,
 							"character": 9
 						}
 					],
@@ -2084,7 +2159,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 637,
+							"line": 649,
 							"character": 9
 						}
 					],
@@ -2114,7 +2189,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 635,
+							"line": 647,
 							"character": 7
 						}
 					],
@@ -2143,7 +2218,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 633,
+							"line": 645,
 							"character": 6
 						}
 					],
@@ -2170,7 +2245,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 632,
+					"line": 644,
 					"character": 39
 				}
 			]
@@ -2185,7 +2260,13 @@
 			},
 			"comment": {
 				"shortText": "Notifications can show a large amount of text when expanded, for example when displaying new\nmessages.",
-				"text": "By default, messages are not expanded, causing any overflowing notification `body` next to be\ntruncated. Setting a `bigTextStyle` allows the notification to be expandable showing the full\ntext body.\n\n![Big Text Style](https://developer.android.com/images/ui/notifications/template-large-text_2x.png)\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  body: 'Hello World',\n  android: {\n    style: {\n      type: notifee.AndroidStyle.BIGTEXT,\n      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur magna ut nulla blandit tristique.',\n    },\n  }\n});\n```\n"
+				"text": "By default, messages are not expanded, causing any overflowing notification `body` next to be\ntruncated. Setting a `bigTextStyle` allows the notification to be expandable showing the full\ntext body.\n\n![Big Text Style](https://developer.android.com/images/ui/notifications/template-large-text_2x.png)\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  body: 'Hello World',\n  android: {\n    style: {\n      type: notifee.AndroidStyle.BIGTEXT,\n      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur magna ut nulla blandit tristique.',\n    },\n  }\n});\n```\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2203,7 +2284,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 679,
+							"line": 693,
 							"character": 9
 						}
 					],
@@ -2235,7 +2316,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 669,
+							"line": 683,
 							"character": 6
 						}
 					],
@@ -2259,7 +2340,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 674,
+							"line": 688,
 							"character": 7
 						}
 					],
@@ -2288,7 +2369,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 665,
+							"line": 679,
 							"character": 6
 						}
 					],
@@ -2314,7 +2395,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 664,
+					"line": 678,
 					"character": 36
 				}
 			]
@@ -2329,7 +2410,13 @@
 			},
 			"comment": {
 				"shortText": "An interface for describing an Android Channel.",
-				"text": "Channels override any individual notification preferences (e.g. lights/vibration) and the user\nhas control over the setting.\n\n> On Android 8.0 (API 26) each notification must be assigned to a channel.\n\n![Android Channel](https://prismic-io.s3.amazonaws.com/invertase%2Fbb773539-581a-457d-ae43-687a7a7646a9_new+project+%2822%29.jpg)\n\n#### Example\n\n```js\nawait notifee.createChannel({\n  channelId: 'alarms',\n  name: 'Alarms & Timers',\n  lightColor: '#3f51b5',\n  vibrationPattern: [300, 400],\n});\n```\n"
+				"text": "Channels override any individual notification preferences (e.g. lights/vibration) and the user\nhas control over the setting.\n\n> On Android 8.0 (API 26) each notification must be assigned to a channel.\n\n![Android Channel](https://prismic-io.s3.amazonaws.com/invertase%2Fbb773539-581a-457d-ae43-687a7a7646a9_new+project+%2822%29.jpg)\n\n#### Example\n\n```js\nawait notifee.createChannel({\n  channelId: 'alarms',\n  name: 'Alarms & Timers',\n  lightColor: '#3f51b5',\n  vibrationPattern: [300, 400],\n});\n```\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2344,7 +2431,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 781,
+							"line": 799,
 							"character": 11
 						}
 					],
@@ -2380,7 +2467,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 770,
+							"line": 788,
 							"character": 11
 						}
 					],
@@ -2405,7 +2492,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 790,
+							"line": 808,
 							"character": 13
 						}
 					],
@@ -2439,7 +2526,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 799,
+							"line": 817,
 							"character": 14
 						}
 					],
@@ -2477,7 +2564,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 808,
+							"line": 826,
 							"character": 17
 						}
 					],
@@ -2515,7 +2602,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 817,
+							"line": 835,
 							"character": 9
 						}
 					],
@@ -2549,7 +2636,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 826,
+							"line": 844,
 							"character": 12
 						}
 					],
@@ -2575,7 +2662,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 834,
+							"line": 852,
 							"character": 12
 						}
 					],
@@ -2609,7 +2696,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 778,
+							"line": 796,
 							"character": 6
 						}
 					],
@@ -2634,7 +2721,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 848,
+							"line": 866,
 							"character": 11
 						}
 					],
@@ -2668,7 +2755,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 851,
+							"line": 869,
 							"character": 7
 						}
 					],
@@ -2702,7 +2789,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 858,
+							"line": 876,
 							"character": 18
 						}
 					],
@@ -2730,7 +2817,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 841,
+							"line": 859,
 							"character": 12
 						}
 					],
@@ -2765,7 +2852,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 766,
+					"line": 784,
 					"character": 31
 				}
 			]
@@ -2780,7 +2867,13 @@
 			},
 			"comment": {
 				"shortText": "Interface for an Android Channel Group.",
-				"text": "![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)\n"
+				"text": "![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2797,7 +2890,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 870,
+							"line": 890,
 							"character": 16
 						}
 					],
@@ -2821,7 +2914,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 881,
+							"line": 901,
 							"character": 13
 						}
 					],
@@ -2853,7 +2946,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 876,
+							"line": 896,
 							"character": 6
 						}
 					],
@@ -2877,7 +2970,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 866,
+					"line": 886,
 					"character": 36
 				}
 			]
@@ -2892,7 +2985,13 @@
 			},
 			"comment": {
 				"shortText": "Interface for defining the progress of an Android Notification.",
-				"text": "A notification can show current progress of a task. The progress state can either be fixed or\nindeterminate (unknown).\n\n#### Example - Fixed Progress\n\n![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    progress: {\n      max: 10,\n      current: 5,\n    }\n  },\n});\n```\n\n#### Example - Indeterminate Progress\n\nSetting `indeterminate` to `true` overrides the `max`/`current` settings.\n\n![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    progress: {\n      max: 10,\n      current: 5,\n      indeterminate: true,\n    }\n  },\n});\n```\n"
+				"text": "A notification can show current progress of a task. The progress state can either be fixed or\nindeterminate (unknown).\n\n#### Example - Fixed Progress\n\n![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    progress: {\n      max: 10,\n      current: 5,\n    }\n  },\n});\n```\n\n#### Example - Indeterminate Progress\n\nSetting `indeterminate` to `true` overrides the `max`/`current` settings.\n\n![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    progress: {\n      max: 10,\n      current: 5,\n      indeterminate: true,\n    }\n  },\n});\n```\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2910,7 +3009,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 734,
+							"line": 750,
 							"character": 9
 						}
 					],
@@ -2935,7 +3034,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 742,
+							"line": 758,
 							"character": 15
 						}
 					],
@@ -2972,7 +3071,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 727,
+							"line": 743,
 							"character": 5
 						}
 					],
@@ -2996,7 +3095,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 721,
+					"line": 737,
 					"character": 32
 				}
 			]
@@ -3008,6 +3107,15 @@
 			"kindString": "Interface",
 			"flags": {
 				"isExported": true
+			},
+			"comment": {
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -3022,7 +3130,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 614,
+							"line": 624,
 							"character": 16
 						}
 					],
@@ -3046,7 +3154,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 615,
+							"line": 625,
 							"character": 24
 						}
 					],
@@ -3080,7 +3188,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 616,
+							"line": 626,
 							"character": 9
 						}
 					],
@@ -3104,7 +3212,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 613,
+							"line": 623,
 							"character": 8
 						}
 					],
@@ -3165,7 +3273,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 612,
+							"line": 622,
 							"character": 5
 						}
 					],
@@ -3186,7 +3294,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationAndroid.ts",
-							"line": 617,
+							"line": 627,
 							"character": 7
 						}
 					],
@@ -3222,7 +3330,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationAndroid.ts",
-					"line": 611,
+					"line": 621,
 					"character": 35
 				}
 			]
@@ -3236,7 +3344,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -3250,7 +3364,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 46,
+							"line": 50,
 							"character": 12
 						}
 					],
@@ -3271,7 +3385,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 48,
+							"line": 52,
 							"character": 9
 						}
 					],
@@ -3292,7 +3406,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 47,
+							"line": 51,
 							"character": 5
 						}
 					],
@@ -3316,7 +3430,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationIOS.ts",
-					"line": 45,
+					"line": 49,
 					"character": 30
 				}
 			]
@@ -3330,7 +3444,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -3345,7 +3465,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 57,
+							"line": 63,
 							"character": 23
 						}
 					],
@@ -3375,7 +3495,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 56,
+							"line": 62,
 							"character": 17
 						}
 					],
@@ -3408,7 +3528,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 58,
+							"line": 64,
 							"character": 15
 						}
 					],
@@ -3428,7 +3548,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 55,
+							"line": 61,
 							"character": 10
 						}
 					],
@@ -3453,7 +3573,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationIOS.ts",
-					"line": 54,
+					"line": 60,
 					"character": 37
 				}
 			]
@@ -6715,7 +6835,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/mike/Documents/Projects/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 984,
 							"character": 17
 						}
@@ -6785,7 +6905,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/mike/Documents/Projects/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 973,
 							"character": 8
 						}
@@ -6865,7 +6985,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/mike/Documents/Projects/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 975,
 							"character": 9
 						}
@@ -7120,12 +7240,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -7150,7 +7276,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -7216,7 +7342,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -7250,7 +7376,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -7284,7 +7410,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -7318,7 +7444,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -7384,8 +7510,8 @@
 				"text": "#### Example\n\n```js\nconst notification = {\n  body: 'Hello World!',\n  android: {\n    color: '#3F51B5',\n    autoCancel: false,\n    ongoing: true,\n  },\n};\n\nawait notifee.displayNotification(notification);\n```\n",
 				"tags": [
 					{
-						"tag": "android",
-						"text": "\n"
+						"tag": "platform",
+						"text": "android\n"
 					}
 				]
 			},
@@ -8556,12 +8682,18 @@
 					},
 					"comment": {
 						"shortText": "Android specific notification options. See the `NotificationAndroid` interface for more\ninformation and default options which are applied to a notification.",
-						"text": "#### Example\n\n```js\nconst notification = {\n  body: 'Hello World!',\n  android: {\n    color: '#3f51b5',\n  },\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "#### Example\n\n```js\nconst notification = {\n  body: 'Hello World!',\n  android: {\n    color: '#3f51b5',\n  },\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "platform",
+								"text": "android\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 146,
+							"line": 150,
 							"character": 9
 						}
 					],
@@ -8581,12 +8713,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -8616,7 +8754,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -8682,12 +8820,18 @@
 					},
 					"comment": {
 						"shortText": "iOS specific notification options. See the `NotificationIOS` interface for more information\nand default options which are applied to a notification.",
-						"text": "#### Example\n\n```js\nconst notification = {\n  body: 'Hello World!',\n  ios: {\n    alertAction: 'Open App',\n  },\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "#### Example\n\n```js\nconst notification = {\n  body: 'Hello World!',\n  ios: {\n    alertAction: 'Open App',\n  },\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "platform",
+								"text": "ios\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 165,
+							"line": 171,
 							"character": 5
 						}
 					],
@@ -8713,7 +8857,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -8752,7 +8896,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -8791,7 +8935,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -8830,7 +8974,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -8873,7 +9017,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 128,
+					"line": 130,
 					"character": 36
 				}
 			],
@@ -8894,7 +9038,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO"
+				"shortText": "TODO",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -8909,15 +9059,15 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 9 Only\n"
+								"tag": "platform",
+								"text": "ios iOS 9 Only\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 19,
+							"line": 21,
 							"character": 13
 						}
 					],
@@ -8947,15 +9097,15 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 10+\n"
+								"tag": "platform",
+								"text": "ios iOS 10+\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 14,
+							"line": 16,
 							"character": 12
 						}
 					],
@@ -8977,7 +9127,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 21,
+							"line": 23,
 							"character": 7
 						}
 					],
@@ -9007,7 +9157,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 24,
+							"line": 26,
 							"character": 10
 						}
 					],
@@ -9037,7 +9187,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 39,
+							"line": 41,
 							"character": 10
 						}
 					],
@@ -9058,15 +9208,15 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 9 Only\n"
+								"tag": "platform",
+								"text": "ios iOS 9 Only\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 29,
+							"line": 31,
 							"character": 11
 						}
 					],
@@ -9100,7 +9250,7 @@
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 31,
+							"line": 33,
 							"character": 13
 						}
 					],
@@ -9130,15 +9280,15 @@
 					"comment": {
 						"tags": [
 							{
-								"tag": "ios",
-								"text": "iOS 10+\n"
+								"tag": "platform",
+								"text": "ios iOS 10+\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "NotificationIOS.ts",
-							"line": 36,
+							"line": 38,
 							"character": 18
 						}
 					],
@@ -9176,7 +9326,7 @@
 			"sources": [
 				{
 					"fileName": "NotificationIOS.ts",
-					"line": 10,
+					"line": 12,
 					"character": 32
 				}
 			]
@@ -9207,15 +9357,15 @@
 						"text": "To help save battery, only set to `true` under scenarios where the notification\n`fireDate` is critical.\n\nDefaults to `false`. Has no effect on iOS.\n",
 						"tags": [
 							{
-								"tag": "android",
-								"text": "\n"
+								"tag": "platform",
+								"text": "android\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 215,
+							"line": 228,
 							"character": 7
 						}
 					],
@@ -9252,7 +9402,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 203,
+							"line": 216,
 							"character": 10
 						}
 					],
@@ -9277,7 +9427,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 235,
+							"line": 248,
 							"character": 16
 						}
 					],
@@ -9302,7 +9452,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 189,
+					"line": 202,
 					"character": 37
 				}
 			]
@@ -9327,10 +9477,18 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "platform",
+								"text": "android\n"
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 172,
+							"line": 181,
 							"character": 9
 						}
 					],
@@ -9350,12 +9508,18 @@
 					},
 					"comment": {
 						"shortText": "The main body content of a notification. This field required and is the main body of your notification.",
-						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n"
+						"text": "On Android, if you wish to read the body when the notification is opened, add it to the `data` object.\n\n#### Example\n\n![Body Text](https://prismic-io.s3.amazonaws.com/invertase%2F7f9cc068-c618-44f0-88da-6041c6d55f48_new+project+%2817%29.jpg)\n\n```js\nconst notification = {\n  body: 'Hello World!',\n};\n\nawait notifee.displayNotification(notification);\n```\n",
+						"tags": [
+							{
+								"tag": "foo",
+								"text": "bar\n"
+							}
+						]
 					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 49,
+							"line": 51,
 							"character": 6
 						}
 					],
@@ -9385,7 +9549,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 113,
+							"line": 115,
 							"character": 6
 						}
 					],
@@ -9448,10 +9612,18 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "platform",
+								"text": "ios\n"
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 173,
+							"line": 186,
 							"character": 5
 						}
 					],
@@ -9477,7 +9649,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 56,
+							"line": 58,
 							"character": 16
 						}
 					],
@@ -9516,7 +9688,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 122,
+							"line": 124,
 							"character": 7
 						}
 					],
@@ -9555,7 +9727,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 95,
+							"line": 97,
 							"character": 10
 						}
 					],
@@ -9594,7 +9766,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 76,
+							"line": 78,
 							"character": 7
 						}
 					],
@@ -9637,7 +9809,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 171,
+					"line": 177,
 					"character": 35
 				}
 			],
@@ -9663,7 +9835,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 179,
+					"line": 192,
 					"character": 32
 				}
 			],
@@ -9705,7 +9877,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 179,
+							"line": 192,
 							"character": 34
 						}
 					]
@@ -9726,7 +9898,7 @@
 			"sources": [
 				{
 					"fileName": "Notification.ts",
-					"line": 184,
+					"line": 197,
 					"character": 43
 				}
 			],
@@ -9754,7 +9926,7 @@
 					"sources": [
 						{
 							"fileName": "Notification.ts",
-							"line": 184,
+							"line": 197,
 							"character": 45
 						}
 					]
