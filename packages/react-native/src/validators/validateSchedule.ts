@@ -2,10 +2,10 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isBoolean, isNumber, isObject } from './utils';
-import { NotificationRepeatInterval } from '../../types/Notification';
+import { hasOwnProperty, isBoolean, isNumber, isObject } from '../utils';
+import { NotificationRepeatInterval, NotificationSchedule } from '../../types/Notification';
 
-export default function validateSchedule(schedule) {
+export default function validateSchedule(schedule: NotificationSchedule): NotificationSchedule {
   if (!isObject(schedule)) {
     throw new Error("'schedule' expected an object value.");
   }
@@ -20,7 +20,7 @@ export default function validateSchedule(schedule) {
     throw new Error("'schedule.fireDate' date must be in the future.");
   }
 
-  const out = {
+  const out: NotificationSchedule = {
     fireDate: schedule.fireDate,
     exact: false,
   };
@@ -30,16 +30,11 @@ export default function validateSchedule(schedule) {
       throw new Error("'schedule.exact' expected a boolean value.");
     }
 
-    out.exact = schedule.exact;
+    out.exact = !!schedule.exact;
   }
 
-  if (hasOwnProperty(schedule, 'repeatInterval')) {
-    if (
-      schedule.repeatInterval !== NotificationRepeatInterval.MINUTE ||
-      schedule.repeatInterval !== NotificationRepeatInterval.HOUR ||
-      schedule.repeatInterval !== NotificationRepeatInterval.DAY ||
-      schedule.repeatInterval !== NotificationRepeatInterval.WEEK
-    ) {
+  if (hasOwnProperty(schedule, 'repeatInterval') && schedule.repeatInterval != undefined) {
+    if (!Object.values(NotificationRepeatInterval).includes(schedule.repeatInterval)) {
       throw new Error("'schedule.repeatInterval' expected a valid NotificationRepeatInterval.");
     }
 

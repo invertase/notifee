@@ -383,12 +383,12 @@ export interface NotificationAndroid {
   shortcutId?: string;
 
   /**
-   * Sets whether the timestamp provided to `when` is shown in the notification.
+   * Sets whether the `timestamp` provided is shown in the notification.
    *
    * Setting this field is useful for notifications which are more informative with a timestamp,
-   * such as a message.
+   * such as an E-Mail.
    *
-   * If no `when` timestamp is set, this field has no effect.
+   * If no `timestamp` is set, this field has no effect.
    *
    * #### Example
    *
@@ -400,13 +400,13 @@ export interface NotificationAndroid {
    * ```js
    * await notifee.displayNotification({
    *   android: {
-   *     when: Date.now(),
-   *     showWhenTimestamp: true,
+   *     timestamp: Date.now(),
+   *     showTimestamp: true,
    *   },
    * });
    * ```
    */
-  showWhenTimestamp?: boolean;
+  showTimestamp?: boolean;
 
   /**
    * The small icon for the notification.
@@ -522,11 +522,11 @@ export interface NotificationAndroid {
   timeoutAfter?: number;
 
   /**
-   * Show the `when` field as a stopwatch. Instead of presenting when as a timestamp, the
-   * notification will show an automatically updating display of the minutes and seconds from the `when` timestamp.
+   * Show the `timestamp` field as a stopwatch. Instead of presenting when as a timestamp, the
+   * notification will show an automatically updating display of the minutes and seconds from the `timestamp`.
    * Useful when showing an elapsed time (like an ongoing phone call).
    *
-   * If no `when` timestamp is set, this has no effect.
+   * If no `timestamp` is set, this has no effect.
    *
    * Defaults to `false`.
    *
@@ -536,13 +536,13 @@ export interface NotificationAndroid {
    * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
-   *     when: Date.now() + 300000,
-   *     usesChronometer: true,
+   *     timestamp: Date.now() + 300000,
+   *     showChronometer: true,
    *   },
    * });
    * ```
    */
-  usesChronometer?: boolean;
+  showChronometer?: boolean;
 
   /**
    * Enables and sets the vibrate pattern.
@@ -577,8 +577,8 @@ export interface NotificationAndroid {
   /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
    *
-   * - Use with `showWhenTimestamp` to show the timestamp to the users.
-   * - Use with `usesChronometer` to create a on-going timer.
+   * - Use with `showTimestamp` to show the timestamp to the users.
+   * - Use with `showChronometer` to create a on-going timer.
    *
    * #### Example
    *
@@ -589,13 +589,13 @@ export interface NotificationAndroid {
    *   body: 'Phone call in progress',
    *   android: {
    *     ongoing: true,
-   *     when: Date.now(),
-   *     usesChronometer: true,
+   *     timestamp: Date.now(),
+   *     showChronometer: true,
    *   },
    * });
    * ```
    */
-  when?: number;
+  timestamp?: number;
 }
 
 /**
@@ -864,9 +864,6 @@ export interface AndroidChannel {
    * Defaults to `true`.
    */
   showBadge?: boolean;
-
-  // todo
-  sound?: string; // audio attributes?
 
   /**
    * Sets/overrides the vibration pattern for notifications posted to this channel.

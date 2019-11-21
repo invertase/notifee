@@ -5,7 +5,7 @@
 	"flags": {},
 	"children": [
 		{
-			"id": 104,
+			"id": 103,
 			"name": "AndroidBadgeIconType",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -23,7 +23,7 @@
 			},
 			"children": [
 				{
-					"id": 107,
+					"id": 106,
 					"name": "LARGE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -35,15 +35,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 924,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 921,
 							"character": 7
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 105,
+					"id": 104,
 					"name": "NONE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -55,15 +55,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 914,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 911,
 							"character": 6
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 106,
+					"id": 105,
 					"name": "SMALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -75,8 +75,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 919,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 916,
 							"character": 7
 						}
 					],
@@ -88,22 +88,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						107,
-						105,
-						106
+						106,
+						104,
+						105
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 910,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 907,
 					"character": 32
 				}
 			]
 		},
 		{
-			"id": 108,
+			"id": 107,
 			"name": "AndroidCategory",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -121,7 +121,7 @@
 			},
 			"children": [
 				{
-					"id": 109,
+					"id": 108,
 					"name": "ALARM",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -130,15 +130,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 933,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 930,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"alarm\""
 				},
 				{
-					"id": 110,
+					"id": 109,
 					"name": "CALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -147,15 +147,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 934,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 931,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"call\""
 				},
 				{
-					"id": 111,
+					"id": 110,
 					"name": "EMAIL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -164,15 +164,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 935,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 932,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"email\""
 				},
 				{
-					"id": 112,
+					"id": 111,
 					"name": "ERROR",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -181,15 +181,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 936,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 933,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"error\""
 				},
 				{
-					"id": 113,
+					"id": 112,
 					"name": "EVENT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -198,15 +198,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 937,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 934,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"event\""
 				},
 				{
-					"id": 114,
+					"id": 113,
 					"name": "MESSAGE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -215,15 +215,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 938,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 935,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"msg\""
 				},
 				{
-					"id": 115,
+					"id": 114,
 					"name": "NAVIGATION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -232,15 +232,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 939,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 936,
 							"character": 12
 						}
 					],
 					"defaultValue": "\"navigation\""
 				},
 				{
-					"id": 116,
+					"id": 115,
 					"name": "PROGRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -249,15 +249,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 940,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 937,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"progress\""
 				},
 				{
-					"id": 117,
+					"id": 116,
 					"name": "PROMO",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -266,15 +266,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 941,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 938,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"promo\""
 				},
 				{
-					"id": 118,
+					"id": 117,
 					"name": "RECOMMENDATION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -283,15 +283,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 942,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 939,
 							"character": 16
 						}
 					],
 					"defaultValue": "\"recommendation\""
 				},
 				{
-					"id": 119,
+					"id": 118,
 					"name": "REMINDER",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -300,15 +300,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 943,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 940,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"reminder\""
 				},
 				{
-					"id": 120,
+					"id": 119,
 					"name": "SERVICE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -317,15 +317,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 944,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 941,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"service\""
 				},
 				{
-					"id": 121,
+					"id": 120,
 					"name": "SOCIAL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -334,15 +334,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 945,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 942,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"social\""
 				},
 				{
-					"id": 122,
+					"id": 121,
 					"name": "STATUS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -351,15 +351,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 946,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 943,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"status\""
 				},
 				{
-					"id": 123,
+					"id": 122,
 					"name": "SYSTEM",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -368,15 +368,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 947,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 944,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"sys\""
 				},
 				{
-					"id": 124,
+					"id": 123,
 					"name": "TRANSPORT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -385,8 +385,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 948,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 945,
 							"character": 11
 						}
 					],
@@ -398,6 +398,7 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						108,
 						109,
 						110,
 						111,
@@ -412,21 +413,20 @@
 						120,
 						121,
 						122,
-						123,
-						124
+						123
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 932,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 929,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 125,
+			"id": 124,
 			"name": "AndroidColor",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -444,7 +444,7 @@
 			},
 			"children": [
 				{
-					"id": 139,
+					"id": 138,
 					"name": "AQUA",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -453,15 +453,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 970,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 967,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"aqua\""
 				},
 				{
-					"id": 129,
+					"id": 128,
 					"name": "BLACK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -470,15 +470,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 960,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 957,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"black\""
 				},
 				{
-					"id": 127,
+					"id": 126,
 					"name": "BLUE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -487,15 +487,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 958,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 955,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"blue\""
 				},
 				{
-					"id": 131,
+					"id": 130,
 					"name": "CYAN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -504,15 +504,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 962,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 959,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"cyan\""
 				},
 				{
-					"id": 135,
+					"id": 134,
 					"name": "DARKGRAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -521,15 +521,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 966,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 963,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"darkgray\""
 				},
 				{
-					"id": 138,
+					"id": 137,
 					"name": "DARKGREY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -538,15 +538,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 969,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 966,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"darkgrey\""
 				},
 				{
-					"id": 140,
+					"id": 139,
 					"name": "FUCHSIA",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -555,15 +555,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 971,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 968,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"fuchsia\""
 				},
 				{
-					"id": 136,
+					"id": 135,
 					"name": "GRAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -572,15 +572,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 967,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 964,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"gray\""
 				},
 				{
-					"id": 128,
+					"id": 127,
 					"name": "GREEN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -589,15 +589,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 959,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 956,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"green\""
 				},
 				{
-					"id": 134,
+					"id": 133,
 					"name": "LIGHTGRAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -606,15 +606,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 965,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 962,
 							"character": 11
 						}
 					],
 					"defaultValue": "\"lightgray\""
 				},
 				{
-					"id": 137,
+					"id": 136,
 					"name": "LIGHTGREY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -623,15 +623,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 968,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 965,
 							"character": 11
 						}
 					],
 					"defaultValue": "\"lightgrey\""
 				},
 				{
-					"id": 141,
+					"id": 140,
 					"name": "LIME",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -640,15 +640,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 972,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 969,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"lime\""
 				},
 				{
-					"id": 132,
+					"id": 131,
 					"name": "MAGENTA",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -657,15 +657,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 963,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 960,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"magenta\""
 				},
 				{
-					"id": 142,
+					"id": 141,
 					"name": "MAROON",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -674,15 +674,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 973,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 970,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"maroon\""
 				},
 				{
-					"id": 143,
+					"id": 142,
 					"name": "NAVY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -691,15 +691,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 974,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 971,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"navy\""
 				},
 				{
-					"id": 144,
+					"id": 143,
 					"name": "OLIVE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -708,15 +708,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 975,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 972,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"olive\""
 				},
 				{
-					"id": 145,
+					"id": 144,
 					"name": "PURPLE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -725,15 +725,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 976,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 973,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"purple\""
 				},
 				{
-					"id": 126,
+					"id": 125,
 					"name": "RED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -742,15 +742,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 957,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 954,
 							"character": 5
 						}
 					],
 					"defaultValue": "\"red\""
 				},
 				{
-					"id": 146,
+					"id": 145,
 					"name": "SILVER",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -759,15 +759,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 977,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 974,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"silver\""
 				},
 				{
-					"id": 147,
+					"id": 146,
 					"name": "TEAL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -776,15 +776,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 978,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 975,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"teal\""
 				},
 				{
-					"id": 130,
+					"id": 129,
 					"name": "WHITE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -793,15 +793,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 961,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 958,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"white\""
 				},
 				{
-					"id": 133,
+					"id": 132,
 					"name": "YELLOW",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -810,8 +810,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 964,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 961,
 							"character": 8
 						}
 					],
@@ -823,41 +823,41 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						139,
-						129,
-						127,
-						131,
-						135,
 						138,
-						140,
-						136,
 						128,
+						126,
+						130,
 						134,
 						137,
+						139,
+						135,
+						127,
+						133,
+						136,
+						140,
+						131,
 						141,
-						132,
 						142,
 						143,
 						144,
+						125,
 						145,
-						126,
 						146,
-						147,
-						130,
-						133
+						129,
+						132
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 956,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 953,
 					"character": 24
 				}
 			]
 		},
 		{
-			"id": 148,
+			"id": 147,
 			"name": "AndroidDefaults",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -875,7 +875,7 @@
 			},
 			"children": [
 				{
-					"id": 149,
+					"id": 148,
 					"name": "ALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -884,15 +884,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 987,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 984,
 							"character": 5
 						}
 					],
 					"defaultValue": " -1"
 				},
 				{
-					"id": 150,
+					"id": 149,
 					"name": "LIGHTS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -901,15 +901,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 988,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 985,
 							"character": 8
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 151,
+					"id": 150,
 					"name": "SOUND",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -918,15 +918,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 989,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 986,
 							"character": 7
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 152,
+					"id": 151,
 					"name": "VIBRATE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -935,8 +935,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 990,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 987,
 							"character": 9
 						}
 					],
@@ -948,23 +948,23 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						148,
 						149,
 						150,
-						151,
-						152
+						151
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 986,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 983,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 153,
+			"id": 152,
 			"name": "AndroidGroupAlertBehavior",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -982,7 +982,7 @@
 			},
 			"children": [
 				{
-					"id": 154,
+					"id": 153,
 					"name": "ALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -991,15 +991,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 999,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 996,
 							"character": 5
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 156,
+					"id": 155,
 					"name": "CHILDREN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1008,15 +1008,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1001,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 998,
 							"character": 10
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 155,
+					"id": 154,
 					"name": "SUMMARY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1025,8 +1025,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1000,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 997,
 							"character": 9
 						}
 					],
@@ -1038,22 +1038,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						154,
-						156,
-						155
+						153,
+						155,
+						154
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 998,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 995,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 157,
+			"id": 156,
 			"name": "AndroidImportance",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1072,7 +1072,7 @@
 			},
 			"children": [
 				{
-					"id": 158,
+					"id": 157,
 					"name": "DEFAULT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1081,15 +1081,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1014,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1011,
 							"character": 9
 						}
 					],
 					"defaultValue": "3"
 				},
 				{
-					"id": 159,
+					"id": 158,
 					"name": "HIGH",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1098,15 +1098,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1015,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1012,
 							"character": 6
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 160,
+					"id": 159,
 					"name": "LOW",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1115,15 +1115,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1016,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1013,
 							"character": 5
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 161,
+					"id": 160,
 					"name": "MAX",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1132,15 +1132,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1017,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1014,
 							"character": 5
 						}
 					],
 					"defaultValue": "5"
 				},
 				{
-					"id": 162,
+					"id": 161,
 					"name": "MIN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1149,15 +1149,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1018,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1015,
 							"character": 5
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 163,
+					"id": 162,
 					"name": "NONE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1166,8 +1166,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1019,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1016,
 							"character": 6
 						}
 					],
@@ -1179,25 +1179,25 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						157,
 						158,
 						159,
 						160,
 						161,
-						162,
-						163
+						162
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 1013,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 1010,
 					"character": 29
 				}
 			]
 		},
 		{
-			"id": 164,
+			"id": 163,
 			"name": "AndroidPriority",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1216,7 +1216,7 @@
 			},
 			"children": [
 				{
-					"id": 165,
+					"id": 164,
 					"name": "DEFAULT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1225,15 +1225,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1030,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1027,
 							"character": 9
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 166,
+					"id": 165,
 					"name": "HIGH",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1242,15 +1242,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1031,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1028,
 							"character": 6
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 167,
+					"id": 166,
 					"name": "LOW",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1259,15 +1259,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1032,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1029,
 							"character": 5
 						}
 					],
 					"defaultValue": " -1"
 				},
 				{
-					"id": 168,
+					"id": 167,
 					"name": "MAX",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1276,15 +1276,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1033,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1030,
 							"character": 5
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 169,
+					"id": 168,
 					"name": "MIN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1293,8 +1293,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1034,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1031,
 							"character": 5
 						}
 					],
@@ -1306,24 +1306,24 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						164,
 						165,
 						166,
 						167,
-						168,
-						169
+						168
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 1029,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 1026,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 170,
+			"id": 169,
 			"name": "AndroidSemanticAction",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1341,7 +1341,7 @@
 			},
 			"children": [
 				{
-					"id": 171,
+					"id": 170,
 					"name": "ARCHIVE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1353,15 +1353,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1046,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1043,
 							"character": 9
 						}
 					],
 					"defaultValue": "5"
 				},
 				{
-					"id": 172,
+					"id": 171,
 					"name": "CALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1373,15 +1373,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1051,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1048,
 							"character": 6
 						}
 					],
 					"defaultValue": "10"
 				},
 				{
-					"id": 173,
+					"id": 172,
 					"name": "DELETE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1393,15 +1393,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1056,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1053,
 							"character": 8
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 174,
+					"id": 173,
 					"name": "MARK_AS_READ",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1413,15 +1413,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1061,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1058,
 							"character": 14
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 175,
+					"id": 174,
 					"name": "MARK_AS_UNREAD",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1433,15 +1433,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1066,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1063,
 							"character": 16
 						}
 					],
 					"defaultValue": "3"
 				},
 				{
-					"id": 176,
+					"id": 175,
 					"name": "MUTE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1453,15 +1453,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1071,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1068,
 							"character": 6
 						}
 					],
 					"defaultValue": "6"
 				},
 				{
-					"id": 177,
+					"id": 176,
 					"name": "NONE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1473,15 +1473,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1076,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1073,
 							"character": 6
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 178,
+					"id": 177,
 					"name": "REPLY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1493,15 +1493,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1081,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1078,
 							"character": 7
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 179,
+					"id": 178,
 					"name": "THUMBS_DOWN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1513,15 +1513,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1086,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1083,
 							"character": 13
 						}
 					],
 					"defaultValue": "9"
 				},
 				{
-					"id": 180,
+					"id": 179,
 					"name": "THUMBS_UP",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1533,15 +1533,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1091,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1088,
 							"character": 11
 						}
 					],
 					"defaultValue": "8"
 				},
 				{
-					"id": 181,
+					"id": 180,
 					"name": "UNMUTE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1553,8 +1553,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1096,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1093,
 							"character": 8
 						}
 					],
@@ -1566,6 +1566,7 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						170,
 						171,
 						172,
 						173,
@@ -1575,21 +1576,20 @@
 						177,
 						178,
 						179,
-						180,
-						181
+						180
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 1042,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 1039,
 					"character": 33
 				}
 			]
 		},
 		{
-			"id": 182,
+			"id": 181,
 			"name": "AndroidStyle",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1608,7 +1608,7 @@
 			},
 			"children": [
 				{
-					"id": 183,
+					"id": 182,
 					"name": "BIGPICTURE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1617,15 +1617,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1107,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1104,
 							"character": 12
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 184,
+					"id": 183,
 					"name": "BIGTEXT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1634,8 +1634,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1108,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1105,
 							"character": 9
 						}
 					],
@@ -1647,21 +1647,21 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						183,
-						184
+						182,
+						183
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 1106,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 1103,
 					"character": 24
 				}
 			]
 		},
 		{
-			"id": 185,
+			"id": 184,
 			"name": "AndroidVisibility",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1680,7 +1680,7 @@
 			},
 			"children": [
 				{
-					"id": 186,
+					"id": 185,
 					"name": "PRIVATE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1692,15 +1692,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1124,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1121,
 							"character": 9
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 187,
+					"id": 186,
 					"name": "PUBLIC",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1712,15 +1712,15 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1129,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1126,
 							"character": 8
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 188,
+					"id": 187,
 					"name": "SECRET",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1733,8 +1733,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 1136,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 1133,
 							"character": 8
 						}
 					],
@@ -1746,22 +1746,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						185,
 						186,
-						187,
-						188
+						187
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 1120,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 1117,
 					"character": 29
 				}
 			]
 		},
 		{
-			"id": 227,
+			"id": 226,
 			"name": "NotificationRepeatInterval",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1773,7 +1773,7 @@
 			},
 			"children": [
 				{
-					"id": 230,
+					"id": 229,
 					"name": "DAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1782,7 +1782,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 257,
 							"character": 5
 						}
@@ -1790,7 +1790,7 @@
 					"defaultValue": "\"day\""
 				},
 				{
-					"id": 229,
+					"id": 228,
 					"name": "HOUR",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1799,7 +1799,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 256,
 							"character": 6
 						}
@@ -1807,7 +1807,7 @@
 					"defaultValue": "\"hour\""
 				},
 				{
-					"id": 228,
+					"id": 227,
 					"name": "MINUTE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1816,7 +1816,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 255,
 							"character": 8
 						}
@@ -1824,7 +1824,7 @@
 					"defaultValue": "\"minute\""
 				},
 				{
-					"id": 231,
+					"id": 230,
 					"name": "WEEK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1833,7 +1833,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 258,
 							"character": 6
 						}
@@ -1846,16 +1846,16 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						230,
 						229,
 						228,
-						231
+						227,
+						230
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 254,
 					"character": 38
 				}
@@ -1890,7 +1890,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 610,
 							"character": 23
 						}
@@ -1923,7 +1923,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 608,
 							"character": 6
 						}
@@ -1943,7 +1943,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 607,
 							"character": 5
 						}
@@ -1964,7 +1964,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 611,
 							"character": 14
 						}
@@ -1989,7 +1989,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 612,
 							"character": 16
 						}
@@ -1997,7 +1997,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidSemanticAction",
-						"id": 170
+						"id": 169
 					}
 				},
 				{
@@ -2011,7 +2011,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 613,
 							"character": 20
 						}
@@ -2044,7 +2044,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 609,
 							"character": 7
 						}
@@ -2072,7 +2072,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 606,
 					"character": 30
 				}
@@ -2108,7 +2108,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 648,
 							"character": 11
 						}
@@ -2137,7 +2137,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 646,
 							"character": 9
 						}
@@ -2158,7 +2158,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 649,
 							"character": 9
 						}
@@ -2188,7 +2188,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 647,
 							"character": 7
 						}
@@ -2217,7 +2217,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 645,
 							"character": 6
 						}
@@ -2225,7 +2225,7 @@
 					"type": {
 						"type": "reference",
 						"name": "BIGPICTURE",
-						"id": 183
+						"id": 182
 					}
 				}
 			],
@@ -2244,7 +2244,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 644,
 					"character": 39
 				}
@@ -2283,7 +2283,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 693,
 							"character": 9
 						}
@@ -2315,7 +2315,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 683,
 							"character": 6
 						}
@@ -2339,7 +2339,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 688,
 							"character": 7
 						}
@@ -2368,7 +2368,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 679,
 							"character": 6
 						}
@@ -2376,7 +2376,7 @@
 					"type": {
 						"type": "reference",
 						"name": "BIGTEXT",
-						"id": 184
+						"id": 183
 					}
 				}
 			],
@@ -2394,7 +2394,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 678,
 					"character": 36
 				}
@@ -2430,7 +2430,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 799,
 							"character": 11
 						}
@@ -2466,7 +2466,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 788,
 							"character": 11
 						}
@@ -2491,7 +2491,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 808,
 							"character": 13
 						}
@@ -2525,7 +2525,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 817,
 							"character": 14
 						}
@@ -2563,7 +2563,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 826,
 							"character": 17
 						}
@@ -2601,7 +2601,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 835,
 							"character": 9
 						}
@@ -2635,7 +2635,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 844,
 							"character": 12
 						}
@@ -2643,7 +2643,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidImportance",
-						"id": 157
+						"id": 156
 					}
 				},
 				{
@@ -2661,7 +2661,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 852,
 							"character": 12
 						}
@@ -2672,7 +2672,7 @@
 							{
 								"type": "reference",
 								"name": "AndroidColor",
-								"id": 125
+								"id": 124
 							},
 							{
 								"type": "intrinsic",
@@ -2695,7 +2695,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 796,
 							"character": 6
 						}
@@ -2720,7 +2720,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 866,
 							"character": 11
 						}
@@ -2745,36 +2745,6 @@
 				},
 				{
 					"id": 98,
-					"name": "sound",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 869,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 99,
 					"name": "vibrationPattern",
 					"kind": 1024,
 					"kindString": "Property",
@@ -2788,8 +2758,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 876,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 873,
 							"character": 18
 						}
 					],
@@ -2816,7 +2786,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 859,
 							"character": 12
 						}
@@ -2824,7 +2794,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 185
+						"id": 184
 					}
 				}
 			],
@@ -2844,21 +2814,20 @@
 						88,
 						97,
 						98,
-						99,
 						96
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 784,
 					"character": 31
 				}
 			]
 		},
 		{
-			"id": 100,
+			"id": 99,
 			"name": "AndroidChannelGroup",
 			"kind": 256,
 			"kindString": "Interface",
@@ -2877,7 +2846,7 @@
 			},
 			"children": [
 				{
-					"id": 101,
+					"id": 100,
 					"name": "channelGroupId",
 					"kind": 1024,
 					"kindString": "Property",
@@ -2889,8 +2858,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 890,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 887,
 							"character": 16
 						}
 					],
@@ -2900,7 +2869,7 @@
 					}
 				},
 				{
-					"id": 103,
+					"id": 102,
 					"name": "description",
 					"kind": 1024,
 					"kindString": "Property",
@@ -2913,8 +2882,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 901,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 898,
 							"character": 13
 						}
 					],
@@ -2933,7 +2902,7 @@
 					}
 				},
 				{
-					"id": 102,
+					"id": 101,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -2945,8 +2914,8 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 896,
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 893,
 							"character": 6
 						}
 					],
@@ -2961,16 +2930,16 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						101,
-						103,
-						102
+						100,
+						102,
+						101
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
-					"line": 886,
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
+					"line": 883,
 					"character": 36
 				}
 			]
@@ -3008,7 +2977,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 750,
 							"character": 9
 						}
@@ -3033,7 +3002,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 758,
 							"character": 15
 						}
@@ -3070,7 +3039,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 743,
 							"character": 5
 						}
@@ -3094,7 +3063,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 737,
 					"character": 32
 				}
@@ -3129,7 +3098,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 624,
 							"character": 16
 						}
@@ -3153,7 +3122,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 625,
 							"character": 24
 						}
@@ -3187,7 +3156,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 626,
 							"character": 9
 						}
@@ -3211,7 +3180,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 623,
 							"character": 8
 						}
@@ -3272,7 +3241,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 622,
 							"character": 5
 						}
@@ -3293,7 +3262,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 627,
 							"character": 7
 						}
@@ -3329,7 +3298,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 621,
 					"character": 35
 				}
@@ -3363,7 +3332,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 50,
 							"character": 12
 						}
@@ -3384,7 +3353,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 52,
 							"character": 9
 						}
@@ -3405,7 +3374,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 51,
 							"character": 5
 						}
@@ -3429,7 +3398,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationIOS.ts",
+					"fileName": "packages/react-native/types/NotificationIOS.ts",
 					"line": 49,
 					"character": 30
 				}
@@ -3464,7 +3433,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 63,
 							"character": 23
 						}
@@ -3494,7 +3463,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 62,
 							"character": 17
 						}
@@ -3527,7 +3496,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 64,
 							"character": 15
 						}
@@ -3547,7 +3516,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 61,
 							"character": 10
 						}
@@ -3572,14 +3541,14 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationIOS.ts",
+					"fileName": "packages/react-native/types/NotificationIOS.ts",
 					"line": 60,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 239,
+			"id": 238,
 			"name": "Module",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3591,7 +3560,7 @@
 			},
 			"children": [
 				{
-					"id": 240,
+					"id": 239,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3600,7 +3569,7 @@
 					},
 					"signatures": [
 						{
-							"id": 241,
+							"id": 240,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -3619,14 +3588,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 32,
 							"character": 24
 						}
 					]
 				},
 				{
-					"id": 242,
+					"id": 241,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3635,14 +3604,14 @@
 					},
 					"signatures": [
 						{
-							"id": 243,
+							"id": 242,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 244,
+									"id": 243,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3667,14 +3636,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 34,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 245,
+					"id": 244,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3683,7 +3652,7 @@
 					},
 					"signatures": [
 						{
-							"id": 246,
+							"id": 245,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -3694,7 +3663,7 @@
 							},
 							"parameters": [
 								{
-									"id": 247,
+									"id": 246,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3723,14 +3692,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 73,
 							"character": 15
 						}
 					]
 				},
 				{
-					"id": 251,
+					"id": 250,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3739,14 +3708,14 @@
 					},
 					"signatures": [
 						{
-							"id": 252,
+							"id": 251,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 253,
+									"id": 252,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3754,7 +3723,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
-										"id": 100
+										"id": 99
 									}
 								}
 							],
@@ -3772,14 +3741,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 84,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 254,
+					"id": 253,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3788,14 +3757,14 @@
 					},
 					"signatures": [
 						{
-							"id": 255,
+							"id": 254,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 256,
+									"id": 255,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3805,7 +3774,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 100
+											"id": 99
 										}
 									}
 								}
@@ -3824,14 +3793,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 86,
 							"character": 21
 						}
 					]
 				},
 				{
-					"id": 248,
+					"id": 247,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3840,7 +3809,7 @@
 					},
 					"signatures": [
 						{
-							"id": 249,
+							"id": 248,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -3851,7 +3820,7 @@
 							},
 							"parameters": [
 								{
-									"id": 250,
+									"id": 249,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3883,14 +3852,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 82,
 							"character": 16
 						}
 					]
 				},
 				{
-					"id": 257,
+					"id": 256,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3899,7 +3868,7 @@
 					},
 					"signatures": [
 						{
-							"id": 258,
+							"id": 257,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -3910,7 +3879,7 @@
 							},
 							"parameters": [
 								{
-									"id": 259,
+									"id": 258,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3938,14 +3907,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 99,
 							"character": 15
 						}
 					]
 				},
 				{
-					"id": 260,
+					"id": 259,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -3954,14 +3923,14 @@
 					},
 					"signatures": [
 						{
-							"id": 261,
+							"id": 260,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 262,
+									"id": 261,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -3986,14 +3955,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 101,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 263,
+					"id": 262,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4002,7 +3971,7 @@
 					},
 					"signatures": [
 						{
-							"id": 264,
+							"id": 263,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4014,7 +3983,7 @@
 							},
 							"parameters": [
 								{
-									"id": 265,
+									"id": 264,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4025,7 +3994,7 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationBuilder",
-										"id": 199
+										"id": 198
 									}
 								}
 							],
@@ -4043,14 +4012,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 126,
 							"character": 21
 						}
 					]
 				},
 				{
-					"id": 276,
+					"id": 275,
 					"name": "getBadge",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4059,7 +4028,7 @@
 					},
 					"signatures": [
 						{
-							"id": 277,
+							"id": 276,
 							"name": "getBadge",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4087,14 +4056,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 150,
 							"character": 10
 						}
 					]
 				},
 				{
-					"id": 266,
+					"id": 265,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4103,7 +4072,7 @@
 					},
 					"signatures": [
 						{
-							"id": 267,
+							"id": 266,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4120,7 +4089,7 @@
 							},
 							"parameters": [
 								{
-									"id": 268,
+									"id": 267,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4158,14 +4127,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 136,
 							"character": 12
 						}
 					]
 				},
 				{
-					"id": 271,
+					"id": 270,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4174,14 +4143,14 @@
 					},
 					"signatures": [
 						{
-							"id": 272,
+							"id": 271,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 273,
+									"id": 272,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4202,7 +4171,7 @@
 											{
 												"type": "reference",
 												"name": "AndroidChannelGroup",
-												"id": 100
+												"id": 99
 											},
 											{
 												"type": "intrinsic",
@@ -4216,14 +4185,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 145,
 							"character": 17
 						}
 					]
 				},
 				{
-					"id": 274,
+					"id": 273,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4232,7 +4201,7 @@
 					},
 					"signatures": [
 						{
-							"id": 275,
+							"id": 274,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4246,7 +4215,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 100
+											"id": 99
 										}
 									}
 								]
@@ -4255,14 +4224,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 147,
 							"character": 18
 						}
 					]
 				},
 				{
-					"id": 269,
+					"id": 268,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4271,7 +4240,7 @@
 					},
 					"signatures": [
 						{
-							"id": 270,
+							"id": 269,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4303,14 +4272,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 143,
 							"character": 13
 						}
 					]
 				},
 				{
-					"id": 278,
+					"id": 277,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4319,7 +4288,7 @@
 					},
 					"signatures": [
 						{
-							"id": 279,
+							"id": 278,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4334,7 +4303,7 @@
 											{
 												"type": "reference",
 												"name": "RemoteNotification",
-												"id": 211
+												"id": 210
 											},
 											{
 												"type": "intrinsic",
@@ -4348,14 +4317,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 152,
 							"character": 24
 						}
 					]
 				},
 				{
-					"id": 280,
+					"id": 279,
 					"name": "getScheduledNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4364,7 +4333,7 @@
 					},
 					"signatures": [
 						{
-							"id": 281,
+							"id": 280,
 							"name": "getScheduledNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4378,7 +4347,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "RemoteNotification",
-											"id": 211
+											"id": 210
 										}
 									}
 								]
@@ -4387,14 +4356,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 154,
 							"character": 27
 						}
 					]
 				},
 				{
-					"id": 282,
+					"id": 281,
 					"name": "onNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4403,14 +4372,14 @@
 					},
 					"signatures": [
 						{
-							"id": 283,
+							"id": 282,
 							"name": "onNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 284,
+									"id": 283,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4418,27 +4387,27 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 156,
 							"character": 16
 						}
 					]
 				},
 				{
-					"id": 285,
+					"id": 284,
 					"name": "onNotificationDisplayed",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4447,14 +4416,14 @@
 					},
 					"signatures": [
 						{
-							"id": 286,
+							"id": 285,
 							"name": "onNotificationDisplayed",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 287,
+									"id": 286,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4462,27 +4431,27 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 158,
 							"character": 25
 						}
 					]
 				},
 				{
-					"id": 288,
+					"id": 287,
 					"name": "onNotificationOpened",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4491,14 +4460,14 @@
 					},
 					"signatures": [
 						{
-							"id": 289,
+							"id": 288,
 							"name": "onNotificationOpened",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 290,
+									"id": 289,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4506,27 +4475,27 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 160,
 							"character": 22
 						}
 					]
 				},
 				{
-					"id": 291,
+					"id": 290,
 					"name": "removeAllDeliveredNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4535,7 +4504,7 @@
 					},
 					"signatures": [
 						{
-							"id": 292,
+							"id": 291,
 							"name": "removeAllDeliveredNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4554,14 +4523,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 162,
 							"character": 33
 						}
 					]
 				},
 				{
-					"id": 293,
+					"id": 292,
 					"name": "removeDeliveredNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4570,14 +4539,14 @@
 					},
 					"signatures": [
 						{
-							"id": 294,
+							"id": 293,
 							"name": "removeDeliveredNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 295,
+									"id": 294,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4602,14 +4571,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 164,
 							"character": 29
 						}
 					]
 				},
 				{
-					"id": 296,
+					"id": 295,
 					"name": "scheduleNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4618,14 +4587,14 @@
 					},
 					"signatures": [
 						{
-							"id": 297,
+							"id": 296,
 							"name": "scheduleNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 298,
+									"id": 297,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4633,11 +4602,11 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationBuilder",
-										"id": 199
+										"id": 198
 									}
 								},
 								{
-									"id": 299,
+									"id": 298,
 									"name": "schedule",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4645,7 +4614,7 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationSchedule",
-										"id": 223
+										"id": 222
 									}
 								}
 							],
@@ -4663,14 +4632,14 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 166,
 							"character": 22
 						}
 					]
 				},
 				{
-					"id": 300,
+					"id": 299,
 					"name": "setBadge",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4679,14 +4648,14 @@
 					},
 					"signatures": [
 						{
-							"id": 301,
+							"id": 300,
 							"name": "setBadge",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 302,
+									"id": 301,
 									"name": "badge",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -4711,7 +4680,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 171,
 							"character": 10
 						}
@@ -4723,35 +4692,35 @@
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						240,
-						242,
-						245,
-						251,
-						254,
-						248,
-						257,
-						260,
-						263,
-						276,
-						266,
-						271,
-						274,
-						269,
-						278,
-						280,
-						282,
-						285,
-						288,
-						291,
-						293,
-						296,
-						300
+						239,
+						241,
+						244,
+						250,
+						253,
+						247,
+						256,
+						259,
+						262,
+						275,
+						265,
+						270,
+						273,
+						268,
+						277,
+						279,
+						281,
+						284,
+						287,
+						290,
+						292,
+						295,
+						299
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Module.ts",
+					"fileName": "packages/react-native/types/Module.ts",
 					"line": 31,
 					"character": 23
 				}
@@ -4760,12 +4729,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 316
+					"id": 315
 				}
 			]
 		},
 		{
-			"id": 303,
+			"id": 302,
 			"name": "ModuleStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4777,7 +4746,7 @@
 			},
 			"children": [
 				{
-					"id": 304,
+					"id": 303,
 					"name": "AndroidBadgeIconType",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4786,7 +4755,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 178,
 							"character": 22
 						}
@@ -4794,11 +4763,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidBadgeIconType",
-						"id": 104
+						"id": 103
 					}
 				},
 				{
-					"id": 305,
+					"id": 304,
 					"name": "AndroidCategory",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4807,7 +4776,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 179,
 							"character": 17
 						}
@@ -4815,11 +4784,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidCategory",
-						"id": 108
+						"id": 107
 					}
 				},
 				{
-					"id": 312,
+					"id": 311,
 					"name": "AndroidColor",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4828,7 +4797,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 186,
 							"character": 14
 						}
@@ -4836,11 +4805,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidColor",
-						"id": 125
+						"id": 124
 					}
 				},
 				{
-					"id": 310,
+					"id": 309,
 					"name": "AndroidDefaults",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4849,7 +4818,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 184,
 							"character": 17
 						}
@@ -4857,11 +4826,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidDefaults",
-						"id": 148
+						"id": 147
 					}
 				},
 				{
-					"id": 306,
+					"id": 305,
 					"name": "AndroidGroupAlertBehavior",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4870,7 +4839,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 180,
 							"character": 27
 						}
@@ -4878,11 +4847,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidGroupAlertBehavior",
-						"id": 153
+						"id": 152
 					}
 				},
 				{
-					"id": 311,
+					"id": 310,
 					"name": "AndroidImportance",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4891,7 +4860,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 185,
 							"character": 19
 						}
@@ -4899,11 +4868,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidImportance",
-						"id": 157
+						"id": 156
 					}
 				},
 				{
-					"id": 308,
+					"id": 307,
 					"name": "AndroidPriority",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4912,7 +4881,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 182,
 							"character": 17
 						}
@@ -4920,11 +4889,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidPriority",
-						"id": 164
+						"id": 163
 					}
 				},
 				{
-					"id": 307,
+					"id": 306,
 					"name": "AndroidSemanticAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4933,7 +4902,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 181,
 							"character": 23
 						}
@@ -4941,11 +4910,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidSemanticAction",
-						"id": 170
+						"id": 169
 					}
 				},
 				{
-					"id": 313,
+					"id": 312,
 					"name": "AndroidStyle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4954,7 +4923,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 187,
 							"character": 14
 						}
@@ -4962,11 +4931,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidStyle",
-						"id": 182
+						"id": 181
 					}
 				},
 				{
-					"id": 309,
+					"id": 308,
 					"name": "AndroidVisibility",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4975,7 +4944,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 183,
 							"character": 19
 						}
@@ -4983,11 +4952,11 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 185
+						"id": 184
 					}
 				},
 				{
-					"id": 314,
+					"id": 313,
 					"name": "NotificationRepeatInterval",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4996,7 +4965,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 188,
 							"character": 28
 						}
@@ -5004,11 +4973,11 @@
 					"type": {
 						"type": "reference",
 						"name": "NotificationRepeatInterval",
-						"id": 227
+						"id": 226
 					}
 				},
 				{
-					"id": 315,
+					"id": 314,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5017,7 +4986,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 189,
 							"character": 13
 						}
@@ -5033,24 +5002,24 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						303,
 						304,
-						305,
-						312,
-						310,
-						306,
 						311,
-						308,
-						307,
-						313,
 						309,
-						314,
-						315
+						305,
+						310,
+						307,
+						306,
+						312,
+						308,
+						313,
+						314
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Module.ts",
+					"fileName": "packages/react-native/types/Module.ts",
 					"line": 177,
 					"character": 30
 				}
@@ -5059,12 +5028,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 316
+					"id": 315
 				}
 			]
 		},
 		{
-			"id": 316,
+			"id": 315,
 			"name": "ModuleWithStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -5076,7 +5045,7 @@
 			},
 			"children": [
 				{
-					"id": 380,
+					"id": 379,
 					"name": "AndroidBadgeIconType",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5085,7 +5054,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 178,
 							"character": 22
 						}
@@ -5093,16 +5062,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidBadgeIconType",
-						"id": 104
+						"id": 103
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidBadgeIconType",
-						"id": 304
+						"id": 303
 					}
 				},
 				{
-					"id": 381,
+					"id": 380,
 					"name": "AndroidCategory",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5111,7 +5080,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 179,
 							"character": 17
 						}
@@ -5119,16 +5088,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidCategory",
-						"id": 108
+						"id": 107
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidCategory",
-						"id": 305
+						"id": 304
 					}
 				},
 				{
-					"id": 388,
+					"id": 387,
 					"name": "AndroidColor",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5137,7 +5106,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 186,
 							"character": 14
 						}
@@ -5145,16 +5114,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidColor",
-						"id": 125
+						"id": 124
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidColor",
-						"id": 312
+						"id": 311
 					}
 				},
 				{
-					"id": 386,
+					"id": 385,
 					"name": "AndroidDefaults",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5163,7 +5132,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 184,
 							"character": 17
 						}
@@ -5171,16 +5140,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidDefaults",
-						"id": 148
+						"id": 147
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidDefaults",
-						"id": 310
+						"id": 309
 					}
 				},
 				{
-					"id": 382,
+					"id": 381,
 					"name": "AndroidGroupAlertBehavior",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5189,7 +5158,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 180,
 							"character": 27
 						}
@@ -5197,16 +5166,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidGroupAlertBehavior",
-						"id": 153
+						"id": 152
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidGroupAlertBehavior",
-						"id": 306
+						"id": 305
 					}
 				},
 				{
-					"id": 387,
+					"id": 386,
 					"name": "AndroidImportance",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5215,7 +5184,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 185,
 							"character": 19
 						}
@@ -5223,16 +5192,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidImportance",
-						"id": 157
+						"id": 156
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidImportance",
-						"id": 311
+						"id": 310
 					}
 				},
 				{
-					"id": 384,
+					"id": 383,
 					"name": "AndroidPriority",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5241,7 +5210,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 182,
 							"character": 17
 						}
@@ -5249,16 +5218,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidPriority",
-						"id": 164
+						"id": 163
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidPriority",
-						"id": 308
+						"id": 307
 					}
 				},
 				{
-					"id": 383,
+					"id": 382,
 					"name": "AndroidSemanticAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5267,7 +5236,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 181,
 							"character": 23
 						}
@@ -5275,16 +5244,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidSemanticAction",
-						"id": 170
+						"id": 169
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidSemanticAction",
-						"id": 307
+						"id": 306
 					}
 				},
 				{
-					"id": 389,
+					"id": 388,
 					"name": "AndroidStyle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5293,7 +5262,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 187,
 							"character": 14
 						}
@@ -5301,16 +5270,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidStyle",
-						"id": 182
+						"id": 181
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidStyle",
-						"id": 313
+						"id": 312
 					}
 				},
 				{
-					"id": 385,
+					"id": 384,
 					"name": "AndroidVisibility",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5319,7 +5288,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 183,
 							"character": 19
 						}
@@ -5327,16 +5296,16 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 185
+						"id": 184
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.AndroidVisibility",
-						"id": 309
+						"id": 308
 					}
 				},
 				{
-					"id": 390,
+					"id": 389,
 					"name": "NotificationRepeatInterval",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5345,7 +5314,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 188,
 							"character": 28
 						}
@@ -5353,16 +5322,16 @@
 					"type": {
 						"type": "reference",
 						"name": "NotificationRepeatInterval",
-						"id": 227
+						"id": 226
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.NotificationRepeatInterval",
-						"id": 314
+						"id": 313
 					}
 				},
 				{
-					"id": 391,
+					"id": 390,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5371,7 +5340,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 189,
 							"character": 13
 						}
@@ -5383,11 +5352,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.SDK_VERSION",
-						"id": 315
+						"id": 314
 					}
 				},
 				{
-					"id": 317,
+					"id": 316,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5396,7 +5365,7 @@
 					},
 					"signatures": [
 						{
-							"id": 318,
+							"id": 317,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5414,13 +5383,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelAllNotifications",
-								"id": 240
+								"id": 239
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 32,
 							"character": 24
 						}
@@ -5428,11 +5397,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelAllNotifications",
-						"id": 240
+						"id": 239
 					}
 				},
 				{
-					"id": 319,
+					"id": 318,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5441,14 +5410,14 @@
 					},
 					"signatures": [
 						{
-							"id": 320,
+							"id": 319,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 321,
+									"id": 320,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5472,13 +5441,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelNotification",
-								"id": 242
+								"id": 241
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 34,
 							"character": 20
 						}
@@ -5486,11 +5455,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelNotification",
-						"id": 242
+						"id": 241
 					}
 				},
 				{
-					"id": 322,
+					"id": 321,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5499,7 +5468,7 @@
 					},
 					"signatures": [
 						{
-							"id": 323,
+							"id": 322,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5510,7 +5479,7 @@
 							},
 							"parameters": [
 								{
-									"id": 324,
+									"id": 323,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5538,13 +5507,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannel",
-								"id": 245
+								"id": 244
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 73,
 							"character": 15
 						}
@@ -5552,11 +5521,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannel",
-						"id": 245
+						"id": 244
 					}
 				},
 				{
-					"id": 328,
+					"id": 327,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5565,14 +5534,14 @@
 					},
 					"signatures": [
 						{
-							"id": 329,
+							"id": 328,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 330,
+									"id": 329,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5580,7 +5549,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
-										"id": 100
+										"id": 99
 									}
 								}
 							],
@@ -5597,13 +5566,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroup",
-								"id": 251
+								"id": 250
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 84,
 							"character": 20
 						}
@@ -5611,11 +5580,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroup",
-						"id": 251
+						"id": 250
 					}
 				},
 				{
-					"id": 331,
+					"id": 330,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5624,14 +5593,14 @@
 					},
 					"signatures": [
 						{
-							"id": 332,
+							"id": 331,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 333,
+									"id": 332,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5641,7 +5610,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 100
+											"id": 99
 										}
 									}
 								}
@@ -5659,13 +5628,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroups",
-								"id": 254
+								"id": 253
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 86,
 							"character": 21
 						}
@@ -5673,11 +5642,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroups",
-						"id": 254
+						"id": 253
 					}
 				},
 				{
-					"id": 325,
+					"id": 324,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5686,7 +5655,7 @@
 					},
 					"signatures": [
 						{
-							"id": 326,
+							"id": 325,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5697,7 +5666,7 @@
 							},
 							"parameters": [
 								{
-									"id": 327,
+									"id": 326,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5728,13 +5697,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannels",
-								"id": 248
+								"id": 247
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 82,
 							"character": 16
 						}
@@ -5742,11 +5711,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannels",
-						"id": 248
+						"id": 247
 					}
 				},
 				{
-					"id": 334,
+					"id": 333,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5755,7 +5724,7 @@
 					},
 					"signatures": [
 						{
-							"id": 335,
+							"id": 334,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5766,7 +5735,7 @@
 							},
 							"parameters": [
 								{
-									"id": 336,
+									"id": 335,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5793,13 +5762,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannel",
-								"id": 257
+								"id": 256
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 99,
 							"character": 15
 						}
@@ -5807,11 +5776,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannel",
-						"id": 257
+						"id": 256
 					}
 				},
 				{
-					"id": 337,
+					"id": 336,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5820,14 +5789,14 @@
 					},
 					"signatures": [
 						{
-							"id": 338,
+							"id": 337,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 339,
+									"id": 338,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5851,13 +5820,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannelGroup",
-								"id": 260
+								"id": 259
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 101,
 							"character": 20
 						}
@@ -5865,11 +5834,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannelGroup",
-						"id": 260
+						"id": 259
 					}
 				},
 				{
-					"id": 340,
+					"id": 339,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5878,7 +5847,7 @@
 					},
 					"signatures": [
 						{
-							"id": 341,
+							"id": 340,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5890,7 +5859,7 @@
 							},
 							"parameters": [
 								{
-									"id": 342,
+									"id": 341,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5901,7 +5870,7 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationBuilder",
-										"id": 199
+										"id": 198
 									}
 								}
 							],
@@ -5918,13 +5887,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.displayNotification",
-								"id": 263
+								"id": 262
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 126,
 							"character": 21
 						}
@@ -5932,11 +5901,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.displayNotification",
-						"id": 263
+						"id": 262
 					}
 				},
 				{
-					"id": 353,
+					"id": 352,
 					"name": "getBadge",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5945,7 +5914,7 @@
 					},
 					"signatures": [
 						{
-							"id": 354,
+							"id": 353,
 							"name": "getBadge",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5972,13 +5941,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getBadge",
-								"id": 276
+								"id": 275
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 150,
 							"character": 10
 						}
@@ -5986,11 +5955,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getBadge",
-						"id": 276
+						"id": 275
 					}
 				},
 				{
-					"id": 343,
+					"id": 342,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5999,7 +5968,7 @@
 					},
 					"signatures": [
 						{
-							"id": 344,
+							"id": 343,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6016,7 +5985,7 @@
 							},
 							"parameters": [
 								{
-									"id": 345,
+									"id": 344,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6053,13 +6022,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannel",
-								"id": 266
+								"id": 265
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 136,
 							"character": 12
 						}
@@ -6067,11 +6036,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannel",
-						"id": 266
+						"id": 265
 					}
 				},
 				{
-					"id": 348,
+					"id": 347,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6080,14 +6049,14 @@
 					},
 					"signatures": [
 						{
-							"id": 349,
+							"id": 348,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 350,
+									"id": 349,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6108,7 +6077,7 @@
 											{
 												"type": "reference",
 												"name": "AndroidChannelGroup",
-												"id": 100
+												"id": 99
 											},
 											{
 												"type": "intrinsic",
@@ -6121,13 +6090,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroup",
-								"id": 271
+								"id": 270
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 145,
 							"character": 17
 						}
@@ -6135,11 +6104,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroup",
-						"id": 271
+						"id": 270
 					}
 				},
 				{
-					"id": 351,
+					"id": 350,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6148,7 +6117,7 @@
 					},
 					"signatures": [
 						{
-							"id": 352,
+							"id": 351,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6162,7 +6131,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 100
+											"id": 99
 										}
 									}
 								]
@@ -6170,13 +6139,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroups",
-								"id": 274
+								"id": 273
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 147,
 							"character": 18
 						}
@@ -6184,11 +6153,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroups",
-						"id": 274
+						"id": 273
 					}
 				},
 				{
-					"id": 346,
+					"id": 345,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6197,7 +6166,7 @@
 					},
 					"signatures": [
 						{
-							"id": 347,
+							"id": 346,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6228,13 +6197,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannels",
-								"id": 269
+								"id": 268
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 143,
 							"character": 13
 						}
@@ -6242,11 +6211,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannels",
-						"id": 269
+						"id": 268
 					}
 				},
 				{
-					"id": 355,
+					"id": 354,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6255,7 +6224,7 @@
 					},
 					"signatures": [
 						{
-							"id": 356,
+							"id": 355,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6270,7 +6239,7 @@
 											{
 												"type": "reference",
 												"name": "RemoteNotification",
-												"id": 211
+												"id": 210
 											},
 											{
 												"type": "intrinsic",
@@ -6283,13 +6252,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getInitialNotification",
-								"id": 278
+								"id": 277
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 152,
 							"character": 24
 						}
@@ -6297,11 +6266,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getInitialNotification",
-						"id": 278
+						"id": 277
 					}
 				},
 				{
-					"id": 357,
+					"id": 356,
 					"name": "getScheduledNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6310,7 +6279,7 @@
 					},
 					"signatures": [
 						{
-							"id": 358,
+							"id": 357,
 							"name": "getScheduledNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6324,7 +6293,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "RemoteNotification",
-											"id": 211
+											"id": 210
 										}
 									}
 								]
@@ -6332,13 +6301,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getScheduledNotifications",
-								"id": 280
+								"id": 279
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 154,
 							"character": 27
 						}
@@ -6346,11 +6315,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getScheduledNotifications",
-						"id": 280
+						"id": 279
 					}
 				},
 				{
-					"id": 359,
+					"id": 358,
 					"name": "onNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6359,14 +6328,14 @@
 					},
 					"signatures": [
 						{
-							"id": 360,
+							"id": 359,
 							"name": "onNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 361,
+									"id": 360,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6374,25 +6343,25 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onNotification",
-								"id": 282
+								"id": 281
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 156,
 							"character": 16
 						}
@@ -6400,11 +6369,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onNotification",
-						"id": 282
+						"id": 281
 					}
 				},
 				{
-					"id": 362,
+					"id": 361,
 					"name": "onNotificationDisplayed",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6413,14 +6382,14 @@
 					},
 					"signatures": [
 						{
-							"id": 363,
+							"id": 362,
 							"name": "onNotificationDisplayed",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 364,
+									"id": 363,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6428,25 +6397,25 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onNotificationDisplayed",
-								"id": 285
+								"id": 284
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 158,
 							"character": 25
 						}
@@ -6454,11 +6423,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onNotificationDisplayed",
-						"id": 285
+						"id": 284
 					}
 				},
 				{
-					"id": 365,
+					"id": 364,
 					"name": "onNotificationOpened",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6467,14 +6436,14 @@
 					},
 					"signatures": [
 						{
-							"id": 366,
+							"id": 365,
 							"name": "onNotificationOpened",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 367,
+									"id": 366,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6482,25 +6451,25 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationObserver",
-										"id": 232
+										"id": 231
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
 								"name": "NotificationObserverUnsubscribe",
-								"id": 236
+								"id": 235
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onNotificationOpened",
-								"id": 288
+								"id": 287
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 160,
 							"character": 22
 						}
@@ -6508,11 +6477,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onNotificationOpened",
-						"id": 288
+						"id": 287
 					}
 				},
 				{
-					"id": 368,
+					"id": 367,
 					"name": "removeAllDeliveredNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6521,7 +6490,7 @@
 					},
 					"signatures": [
 						{
-							"id": 369,
+							"id": 368,
 							"name": "removeAllDeliveredNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6539,13 +6508,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.removeAllDeliveredNotifications",
-								"id": 291
+								"id": 290
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 162,
 							"character": 33
 						}
@@ -6553,11 +6522,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.removeAllDeliveredNotifications",
-						"id": 291
+						"id": 290
 					}
 				},
 				{
-					"id": 370,
+					"id": 369,
 					"name": "removeDeliveredNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6566,14 +6535,14 @@
 					},
 					"signatures": [
 						{
-							"id": 371,
+							"id": 370,
 							"name": "removeDeliveredNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 372,
+									"id": 371,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6597,13 +6566,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.removeDeliveredNotification",
-								"id": 293
+								"id": 292
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 164,
 							"character": 29
 						}
@@ -6611,11 +6580,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.removeDeliveredNotification",
-						"id": 293
+						"id": 292
 					}
 				},
 				{
-					"id": 373,
+					"id": 372,
 					"name": "scheduleNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6624,14 +6593,14 @@
 					},
 					"signatures": [
 						{
-							"id": 374,
+							"id": 373,
 							"name": "scheduleNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 375,
+									"id": 374,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6639,11 +6608,11 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationBuilder",
-										"id": 199
+										"id": 198
 									}
 								},
 								{
-									"id": 376,
+									"id": 375,
 									"name": "schedule",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6651,7 +6620,7 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationSchedule",
-										"id": 223
+										"id": 222
 									}
 								}
 							],
@@ -6668,13 +6637,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.scheduleNotification",
-								"id": 296
+								"id": 295
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 166,
 							"character": 22
 						}
@@ -6682,11 +6651,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.scheduleNotification",
-						"id": 296
+						"id": 295
 					}
 				},
 				{
-					"id": 377,
+					"id": 376,
 					"name": "setBadge",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6695,14 +6664,14 @@
 					},
 					"signatures": [
 						{
-							"id": 378,
+							"id": 377,
 							"name": "setBadge",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 379,
+									"id": 378,
 									"name": "badge",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6726,13 +6695,13 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.setBadge",
-								"id": 300
+								"id": 299
 							}
 						}
 					],
 					"sources": [
 						{
-							"fileName": "Module.ts",
+							"fileName": "packages/react-native/types/Module.ts",
 							"line": 171,
 							"character": 10
 						}
@@ -6740,7 +6709,7 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.setBadge",
-						"id": 300
+						"id": 299
 					}
 				}
 			],
@@ -6749,53 +6718,53 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						379,
 						380,
-						381,
-						388,
-						386,
-						382,
 						387,
-						384,
-						383,
-						389,
 						385,
-						390,
-						391
+						381,
+						386,
+						383,
+						382,
+						388,
+						384,
+						389,
+						390
 					]
 				},
 				{
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						317,
-						319,
-						322,
-						328,
-						331,
-						325,
-						334,
-						337,
-						340,
-						353,
-						343,
-						348,
-						351,
-						346,
-						355,
-						357,
-						359,
-						362,
-						365,
-						368,
-						370,
-						373,
-						377
+						316,
+						318,
+						321,
+						327,
+						330,
+						324,
+						333,
+						336,
+						339,
+						352,
+						342,
+						347,
+						350,
+						345,
+						354,
+						356,
+						358,
+						361,
+						364,
+						367,
+						369,
+						372,
+						376
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Module.ts",
+					"fileName": "packages/react-native/types/Module.ts",
 					"line": 196,
 					"character": 34
 				}
@@ -6804,17 +6773,17 @@
 				{
 					"type": "reference",
 					"name": "Module",
-					"id": 239
+					"id": 238
 				},
 				{
 					"type": "reference",
 					"name": "ModuleStatics",
-					"id": 303
+					"id": 302
 				}
 			]
 		},
 		{
-			"id": 400,
+			"id": 399,
 			"name": "NativeError",
 			"kind": 256,
 			"kindString": "Interface",
@@ -6826,7 +6795,7 @@
 			},
 			"children": [
 				{
-					"id": 407,
+					"id": 406,
 					"name": "Error",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6835,7 +6804,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 984,
 							"character": 17
 						}
@@ -6846,7 +6815,7 @@
 					}
 				},
 				{
-					"id": 401,
+					"id": 400,
 					"name": "code",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6858,7 +6827,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 32,
 							"character": 15
 						}
@@ -6869,7 +6838,7 @@
 					}
 				},
 				{
-					"id": 402,
+					"id": 401,
 					"name": "message",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6881,7 +6850,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 37,
 							"character": 18
 						}
@@ -6896,7 +6865,7 @@
 					}
 				},
 				{
-					"id": 405,
+					"id": 404,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6905,7 +6874,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 973,
 							"character": 8
 						}
@@ -6920,7 +6889,7 @@
 					}
 				},
 				{
-					"id": 403,
+					"id": 402,
 					"name": "nativeErrorCode",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6932,7 +6901,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 42,
 							"character": 26
 						}
@@ -6952,7 +6921,7 @@
 					}
 				},
 				{
-					"id": 404,
+					"id": 403,
 					"name": "nativeErrorMessage",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6964,7 +6933,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 47,
 							"character": 29
 						}
@@ -6975,7 +6944,7 @@
 					}
 				},
 				{
-					"id": 406,
+					"id": 405,
 					"name": "stack",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6985,7 +6954,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "/Users/elliothesp/Documents/Code/notifee/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 975,
 							"character": 9
 						}
@@ -7018,19 +6987,19 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						407,
+						406,
+						400,
 						401,
-						402,
-						405,
-						403,
 						404,
-						406
+						402,
+						403,
+						405
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Library.ts",
+					"fileName": "packages/react-native/types/Library.ts",
 					"line": 28,
 					"character": 28
 				}
@@ -7043,7 +7012,7 @@
 			]
 		},
 		{
-			"id": 397,
+			"id": 396,
 			"name": "NotifeeJsonConfig",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7055,7 +7024,7 @@
 			},
 			"children": [
 				{
-					"id": 398,
+					"id": 397,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7065,7 +7034,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 21,
 							"character": 9
 						}
@@ -7073,11 +7042,11 @@
 					"type": {
 						"type": "reference",
 						"name": "NotifeeJsonConfigAndroid",
-						"id": 393
+						"id": 392
 					}
 				},
 				{
-					"id": 399,
+					"id": 398,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7087,7 +7056,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 22,
 							"character": 5
 						}
@@ -7095,7 +7064,7 @@
 					"type": {
 						"type": "reference",
 						"name": "NotifeeJsonConfigIOS",
-						"id": 395
+						"id": 394
 					}
 				}
 			],
@@ -7104,21 +7073,21 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						398,
-						399
+						397,
+						398
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Library.ts",
+					"fileName": "packages/react-native/types/Library.ts",
 					"line": 20,
 					"character": 34
 				}
 			]
 		},
 		{
-			"id": 393,
+			"id": 392,
 			"name": "NotifeeJsonConfigAndroid",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7130,7 +7099,7 @@
 			},
 			"children": [
 				{
-					"id": 394,
+					"id": 393,
 					"name": "licenseKey",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7139,7 +7108,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 5,
 							"character": 12
 						}
@@ -7155,20 +7124,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						394
+						393
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Library.ts",
+					"fileName": "packages/react-native/types/Library.ts",
 					"line": 4,
 					"character": 41
 				}
 			]
 		},
 		{
-			"id": 395,
+			"id": 394,
 			"name": "NotifeeJsonConfigIOS",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7180,7 +7149,7 @@
 			},
 			"children": [
 				{
-					"id": 396,
+					"id": 395,
 					"name": "licenseKey",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7189,7 +7158,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Library.ts",
+							"fileName": "packages/react-native/types/Library.ts",
 							"line": 13,
 							"character": 12
 						}
@@ -7205,20 +7174,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						396
+						395
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Library.ts",
+					"fileName": "packages/react-native/types/Library.ts",
 					"line": 12,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 189,
+			"id": 188,
 			"name": "Notification",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7231,7 +7200,7 @@
 			},
 			"children": [
 				{
-					"id": 190,
+					"id": 189,
 					"name": "body",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7250,7 +7219,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 51,
 							"character": 6
 						}
@@ -7261,7 +7230,7 @@
 					}
 				},
 				{
-					"id": 194,
+					"id": 193,
 					"name": "data",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7275,7 +7244,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 115,
 							"character": 6
 						}
@@ -7290,21 +7259,21 @@
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 195,
+									"id": 194,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"indexSignature": [
 										{
-											"id": 196,
+											"id": 195,
 											"name": "__index",
 											"kind": 8192,
 											"kindString": "Index signature",
 											"flags": {},
 											"parameters": [
 												{
-													"id": 197,
+													"id": 196,
 													"name": "key",
 													"kind": 32768,
 													"kindString": "Parameter",
@@ -7327,7 +7296,7 @@
 					}
 				},
 				{
-					"id": 191,
+					"id": 190,
 					"name": "notificationId",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7341,7 +7310,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 58,
 							"character": 16
 						}
@@ -7361,7 +7330,7 @@
 					}
 				},
 				{
-					"id": 198,
+					"id": 197,
 					"name": "sound",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7375,7 +7344,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 124,
 							"character": 7
 						}
@@ -7395,7 +7364,7 @@
 					}
 				},
 				{
-					"id": 193,
+					"id": 192,
 					"name": "subtitle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7409,7 +7378,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 97,
 							"character": 10
 						}
@@ -7429,7 +7398,7 @@
 					}
 				},
 				{
-					"id": 192,
+					"id": 191,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7443,7 +7412,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 78,
 							"character": 7
 						}
@@ -7468,18 +7437,18 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						190,
-						194,
-						191,
-						198,
+						189,
 						193,
-						192
+						190,
+						197,
+						192,
+						191
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 31,
 					"character": 29
 				}
@@ -7488,12 +7457,12 @@
 				{
 					"type": "reference",
 					"name": "NotificationBuilder",
-					"id": 199
+					"id": 198
 				},
 				{
 					"type": "reference",
 					"name": "RemoteNotification",
-					"id": 211
+					"id": 210
 				}
 			]
 		},
@@ -7528,7 +7497,7 @@
 					"comment": {},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 29,
 							"character": 9
 						}
@@ -7557,7 +7526,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 43,
 							"character": 12
 						}
@@ -7595,7 +7564,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 61,
 							"character": 15
 						}
@@ -7603,7 +7572,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidBadgeIconType",
-						"id": 104
+						"id": 103
 					}
 				},
 				{
@@ -7621,7 +7590,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 79,
 							"character": 10
 						}
@@ -7629,7 +7598,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidCategory",
-						"id": 108
+						"id": 107
 					}
 				},
 				{
@@ -7647,7 +7616,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 104,
 							"character": 11
 						}
@@ -7681,7 +7650,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 131,
 							"character": 13
 						}
@@ -7715,7 +7684,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 168,
 							"character": 7
 						}
@@ -7726,7 +7695,7 @@
 							{
 								"type": "reference",
 								"name": "AndroidColor",
-								"id": 125
+								"id": 124
 							},
 							{
 								"type": "intrinsic",
@@ -7750,7 +7719,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 179,
 							"character": 11
 						}
@@ -7784,7 +7753,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 182,
 							"character": 13
 						}
@@ -7814,7 +7783,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 185,
 							"character": 10
 						}
@@ -7824,7 +7793,7 @@
 						"elementType": {
 							"type": "reference",
 							"name": "AndroidDefaults",
-							"id": 148
+							"id": 147
 						}
 					}
 				},
@@ -7843,7 +7812,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 205,
 							"character": 7
 						}
@@ -7877,7 +7846,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 231,
 							"character": 20
 						}
@@ -7885,7 +7854,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidGroupAlertBehavior",
-						"id": 153
+						"id": 152
 					}
 				},
 				{
@@ -7903,7 +7872,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 241,
 							"character": 14
 						}
@@ -7941,7 +7910,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 250,
 							"character": 11
 						}
@@ -7975,7 +7944,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 271,
 							"character": 8
 						}
@@ -7989,7 +7958,7 @@
 									{
 										"type": "reference",
 										"name": "AndroidColor",
-										"id": 125
+										"id": 124
 									},
 									{
 										"type": "intrinsic",
@@ -8023,7 +7992,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 280,
 							"character": 11
 						}
@@ -8060,7 +8029,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 285,
 							"character": 8
 						}
@@ -8094,7 +8063,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 293,
 							"character": 9
 						}
@@ -8131,7 +8100,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 298,
 							"character": 15
 						}
@@ -8169,7 +8138,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 321,
 							"character": 10
 						}
@@ -8177,7 +8146,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidPriority",
-						"id": 164
+						"id": 163
 					}
 				},
 				{
@@ -8195,7 +8164,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 372,
 							"character": 10
 						}
@@ -8217,7 +8186,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 375,
 							"character": 20
 						}
@@ -8245,7 +8214,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 383,
 							"character": 12
 						}
@@ -8265,8 +8234,8 @@
 					}
 				},
 				{
-					"id": 43,
-					"name": "showWhenTimestamp",
+					"id": 49,
+					"name": "showChronometer",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -8274,14 +8243,52 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "Sets whether the timestamp provided to `when` is shown in the notification.",
-						"text": "Setting this field is useful for notifications which are more informative with a timestamp,\nsuch as a message.\n\nIf no `when` timestamp is set, this field has no effect.\n\n#### Example\n\nAssuming the current notification has delivered to the user 8 minutes ago, the timestamp\nwill be displayed to the user in the notification, for example:\n\n![When Timestamp](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    when: Date.now(),\n    showWhenTimestamp: true,\n  },\n});\n```\n"
+						"shortText": "Show the `timestamp` field as a stopwatch. Instead of presenting when as a timestamp, the\nnotification will show an automatically updating display of the minutes and seconds from the `timestamp`.\nUseful when showing an elapsed time (like an ongoing phone call).",
+						"text": "If no `timestamp` is set, this has no effect.\n\nDefaults to `false`.\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  body: 'Limited time prize available',\n  android: {\n    timestamp: Date.now() + 300000,\n    showChronometer: true,\n  },\n});\n```\n"
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 545,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
+					"id": 43,
+					"name": "showTimestamp",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets whether the `timestamp` provided is shown in the notification.",
+						"text": "Setting this field is useful for notifications which are more informative with a timestamp,\nsuch as an E-Mail.\n\nIf no `timestamp` is set, this field has no effect.\n\n#### Example\n\nAssuming the current notification has delivered to the user 8 minutes ago, the timestamp\nwill be displayed to the user in the notification, for example:\n\n![When Timestamp](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)\n\n```js\nawait notifee.displayNotification({\n  android: {\n    timestamp: Date.now(),\n    showTimestamp: true,\n  },\n});\n```\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 409,
-							"character": 19
+							"character": 15
 						}
 					],
 					"type": {
@@ -8317,7 +8324,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 449,
 							"character": 11
 						}
@@ -8360,7 +8367,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 459,
 							"character": 9
 						}
@@ -8394,7 +8401,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 484,
 							"character": 7
 						}
@@ -8430,7 +8437,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 503,
 							"character": 8
 						}
@@ -8464,7 +8471,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 522,
 							"character": 14
 						}
@@ -8484,8 +8491,8 @@
 					}
 				},
 				{
-					"id": 49,
-					"name": "usesChronometer",
+					"id": 52,
+					"name": "timestamp",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -8493,14 +8500,14 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "Show the `when` field as a stopwatch. Instead of presenting when as a timestamp, the\nnotification will show an automatically updating display of the minutes and seconds from the `when` timestamp.\nUseful when showing an elapsed time (like an ongoing phone call).",
-						"text": "If no `when` timestamp is set, this has no effect.\n\nDefaults to `false`.\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  body: 'Limited time prize available',\n  android: {\n    when: Date.now() + 300000,\n    usesChronometer: true,\n  },\n});\n```\n"
+						"shortText": "The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.",
+						"text": "- Use with `showTimestamp` to show the timestamp to the users.\n- Use with `showChronometer` to create a on-going timer.\n\n#### Example\n\nShow the length of time the notification has been showing for.\n\n```js\nawait notifee.displayNotification({\n  body: 'Phone call in progress',\n  android: {\n    ongoing: true,\n    timestamp: Date.now(),\n    showChronometer: true,\n  },\n});\n```\n"
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 545,
-							"character": 17
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
+							"line": 598,
+							"character": 11
 						}
 					],
 					"type": {
@@ -8512,11 +8519,7 @@
 							},
 							{
 								"type": "intrinsic",
-								"name": "false"
-							},
-							{
-								"type": "intrinsic",
-								"name": "true"
+								"name": "number"
 							}
 						]
 					}
@@ -8536,7 +8539,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 565,
 							"character": 18
 						}
@@ -8564,7 +8567,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationAndroid.ts",
+							"fileName": "packages/react-native/types/NotificationAndroid.ts",
 							"line": 575,
 							"character": 12
 						}
@@ -8572,41 +8575,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 185
-					}
-				},
-				{
-					"id": 52,
-					"name": "when",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.",
-						"text": "- Use with `showWhenTimestamp` to show the timestamp to the users.\n- Use with `usesChronometer` to create a on-going timer.\n\n#### Example\n\nShow the length of time the notification has been showing for.\n\n```js\nawait notifee.displayNotification({\n  body: 'Phone call in progress',\n  android: {\n    ongoing: true,\n    when: Date.now(),\n    usesChronometer: true,\n  },\n});\n```\n"
-					},
-					"sources": [
-						{
-							"fileName": "NotificationAndroid.ts",
-							"line": 598,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "number"
-							}
-						]
+						"id": 184
 					}
 				}
 			],
@@ -8638,29 +8607,29 @@
 						40,
 						41,
 						42,
+						49,
 						43,
 						44,
 						45,
 						46,
 						47,
 						48,
-						49,
+						52,
 						50,
-						51,
-						52
+						51
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "NotificationAndroid.ts",
+					"fileName": "packages/react-native/types/NotificationAndroid.ts",
 					"line": 25,
 					"character": 36
 				}
 			]
 		},
 		{
-			"id": 199,
+			"id": 198,
 			"name": "NotificationBuilder",
 			"kind": 256,
 			"kindString": "Interface",
@@ -8672,7 +8641,7 @@
 			},
 			"children": [
 				{
-					"id": 200,
+					"id": 199,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8692,7 +8661,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 150,
 							"character": 9
 						}
@@ -8704,7 +8673,7 @@
 					}
 				},
 				{
-					"id": 202,
+					"id": 201,
 					"name": "body",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8723,7 +8692,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 51,
 							"character": 6
 						}
@@ -8735,11 +8704,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.body",
-						"id": 190
+						"id": 189
 					}
 				},
 				{
-					"id": 206,
+					"id": 205,
 					"name": "data",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8753,7 +8722,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 115,
 							"character": 6
 						}
@@ -8768,21 +8737,21 @@
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 207,
+									"id": 206,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"indexSignature": [
 										{
-											"id": 208,
+											"id": 207,
 											"name": "__index",
 											"kind": 8192,
 											"kindString": "Index signature",
 											"flags": {},
 											"parameters": [
 												{
-													"id": 209,
+													"id": 208,
 													"name": "key",
 													"kind": 32768,
 													"kindString": "Parameter",
@@ -8806,11 +8775,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.data",
-						"id": 194
+						"id": 193
 					}
 				},
 				{
-					"id": 201,
+					"id": 200,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8830,7 +8799,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 171,
 							"character": 5
 						}
@@ -8842,7 +8811,7 @@
 					}
 				},
 				{
-					"id": 203,
+					"id": 202,
 					"name": "notificationId",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8856,7 +8825,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 58,
 							"character": 16
 						}
@@ -8877,11 +8846,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.notificationId",
-						"id": 191
+						"id": 190
 					}
 				},
 				{
-					"id": 210,
+					"id": 209,
 					"name": "sound",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8895,7 +8864,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 124,
 							"character": 7
 						}
@@ -8916,11 +8885,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.sound",
-						"id": 198
+						"id": 197
 					}
 				},
 				{
-					"id": 205,
+					"id": 204,
 					"name": "subtitle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8934,7 +8903,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 97,
 							"character": 10
 						}
@@ -8955,11 +8924,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.subtitle",
-						"id": 193
+						"id": 192
 					}
 				},
 				{
-					"id": 204,
+					"id": 203,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -8973,7 +8942,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 78,
 							"character": 7
 						}
@@ -8994,7 +8963,7 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.title",
-						"id": 192
+						"id": 191
 					}
 				}
 			],
@@ -9003,20 +8972,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						199,
+						201,
+						205,
 						200,
 						202,
-						206,
-						201,
-						203,
-						210,
-						205,
-						204
+						209,
+						204,
+						203
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 130,
 					"character": 36
 				}
@@ -9025,7 +8994,7 @@
 				{
 					"type": "reference",
 					"name": "Notification",
-					"id": 189
+					"id": 188
 				}
 			]
 		},
@@ -9066,7 +9035,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 21,
 							"character": 13
 						}
@@ -9104,7 +9073,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 16,
 							"character": 12
 						}
@@ -9126,7 +9095,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 23,
 							"character": 7
 						}
@@ -9156,7 +9125,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 26,
 							"character": 10
 						}
@@ -9186,7 +9155,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 41,
 							"character": 10
 						}
@@ -9215,7 +9184,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 31,
 							"character": 11
 						}
@@ -9249,7 +9218,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 33,
 							"character": 13
 						}
@@ -9287,7 +9256,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "NotificationIOS.ts",
+							"fileName": "packages/react-native/types/NotificationIOS.ts",
 							"line": 38,
 							"character": 18
 						}
@@ -9325,14 +9294,14 @@
 			],
 			"sources": [
 				{
-					"fileName": "NotificationIOS.ts",
+					"fileName": "packages/react-native/types/NotificationIOS.ts",
 					"line": 12,
 					"character": 32
 				}
 			]
 		},
 		{
-			"id": 223,
+			"id": 222,
 			"name": "NotificationSchedule",
 			"kind": 256,
 			"kindString": "Interface",
@@ -9344,7 +9313,7 @@
 			},
 			"children": [
 				{
-					"id": 225,
+					"id": 224,
 					"name": "exact",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9364,7 +9333,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 228,
 							"character": 7
 						}
@@ -9388,7 +9357,7 @@
 					}
 				},
 				{
-					"id": 224,
+					"id": 223,
 					"name": "fireDate",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9401,7 +9370,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 216,
 							"character": 10
 						}
@@ -9412,7 +9381,7 @@
 					}
 				},
 				{
-					"id": 226,
+					"id": 225,
 					"name": "repeatInterval",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9426,7 +9395,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 248,
 							"character": 16
 						}
@@ -9434,7 +9403,7 @@
 					"type": {
 						"type": "reference",
 						"name": "NotificationRepeatInterval",
-						"id": 227
+						"id": 226
 					}
 				}
 			],
@@ -9443,22 +9412,22 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						225,
 						224,
-						226
+						223,
+						225
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 202,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 211,
+			"id": 210,
 			"name": "RemoteNotification",
 			"kind": 256,
 			"kindString": "Interface",
@@ -9470,7 +9439,7 @@
 			},
 			"children": [
 				{
-					"id": 212,
+					"id": 211,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9487,7 +9456,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 181,
 							"character": 9
 						}
@@ -9499,7 +9468,7 @@
 					}
 				},
 				{
-					"id": 214,
+					"id": 213,
 					"name": "body",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9518,7 +9487,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 51,
 							"character": 6
 						}
@@ -9530,11 +9499,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.body",
-						"id": 190
+						"id": 189
 					}
 				},
 				{
-					"id": 218,
+					"id": 217,
 					"name": "data",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9548,7 +9517,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 115,
 							"character": 6
 						}
@@ -9563,21 +9532,21 @@
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 219,
+									"id": 218,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"indexSignature": [
 										{
-											"id": 220,
+											"id": 219,
 											"name": "__index",
 											"kind": 8192,
 											"kindString": "Index signature",
 											"flags": {},
 											"parameters": [
 												{
-													"id": 221,
+													"id": 220,
 													"name": "key",
 													"kind": 32768,
 													"kindString": "Parameter",
@@ -9601,11 +9570,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.data",
-						"id": 194
+						"id": 193
 					}
 				},
 				{
-					"id": 213,
+					"id": 212,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9622,7 +9591,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 186,
 							"character": 5
 						}
@@ -9634,7 +9603,7 @@
 					}
 				},
 				{
-					"id": 215,
+					"id": 214,
 					"name": "notificationId",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9648,7 +9617,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 58,
 							"character": 16
 						}
@@ -9669,11 +9638,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.notificationId",
-						"id": 191
+						"id": 190
 					}
 				},
 				{
-					"id": 222,
+					"id": 221,
 					"name": "sound",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9687,7 +9656,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 124,
 							"character": 7
 						}
@@ -9708,11 +9677,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.sound",
-						"id": 198
+						"id": 197
 					}
 				},
 				{
-					"id": 217,
+					"id": 216,
 					"name": "subtitle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9726,7 +9695,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 97,
 							"character": 10
 						}
@@ -9747,11 +9716,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.subtitle",
-						"id": 193
+						"id": 192
 					}
 				},
 				{
-					"id": 216,
+					"id": 215,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9765,7 +9734,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 78,
 							"character": 7
 						}
@@ -9786,7 +9755,7 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Notification.title",
-						"id": 192
+						"id": 191
 					}
 				}
 			],
@@ -9795,20 +9764,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						211,
+						213,
+						217,
 						212,
 						214,
-						218,
-						213,
-						215,
-						222,
-						217,
-						216
+						221,
+						216,
+						215
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 177,
 					"character": 35
 				}
@@ -9817,12 +9786,12 @@
 				{
 					"type": "reference",
 					"name": "Notification",
-					"id": 189
+					"id": 188
 				}
 			]
 		},
 		{
-			"id": 232,
+			"id": 231,
 			"name": "NotificationObserver",
 			"kind": 4194304,
 			"kindString": "Type alias",
@@ -9834,7 +9803,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 192,
 					"character": 32
 				}
@@ -9842,21 +9811,21 @@
 			"type": {
 				"type": "reflection",
 				"declaration": {
-					"id": 233,
+					"id": 232,
 					"name": "__type",
 					"kind": 65536,
 					"kindString": "Type literal",
 					"flags": {},
 					"signatures": [
 						{
-							"id": 234,
+							"id": 233,
 							"name": "__call",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 235,
+									"id": 234,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9864,7 +9833,7 @@
 									"type": {
 										"type": "reference",
 										"name": "RemoteNotification",
-										"id": 211
+										"id": 210
 									}
 								}
 							],
@@ -9876,7 +9845,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 192,
 							"character": 34
 						}
@@ -9885,7 +9854,7 @@
 			}
 		},
 		{
-			"id": 236,
+			"id": 235,
 			"name": "NotificationObserverUnsubscribe",
 			"kind": 4194304,
 			"kindString": "Type alias",
@@ -9897,7 +9866,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "Notification.ts",
+					"fileName": "packages/react-native/types/Notification.ts",
 					"line": 197,
 					"character": 43
 				}
@@ -9905,14 +9874,14 @@
 			"type": {
 				"type": "reflection",
 				"declaration": {
-					"id": 237,
+					"id": 236,
 					"name": "__type",
 					"kind": 65536,
 					"kindString": "Type literal",
 					"flags": {},
 					"signatures": [
 						{
-							"id": 238,
+							"id": 237,
 							"name": "__call",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9925,7 +9894,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "Notification.ts",
+							"fileName": "packages/react-native/types/Notification.ts",
 							"line": 197,
 							"character": 45
 						}
@@ -9934,7 +9903,7 @@
 			}
 		},
 		{
-			"id": 392,
+			"id": 391,
 			"name": "notifeeModule",
 			"kind": 32,
 			"kindString": "Variable",
@@ -9944,7 +9913,7 @@
 			},
 			"sources": [
 				{
-					"fileName": "index.d.ts",
+					"fileName": "packages/react-native/types/index.d.ts",
 					"line": 8,
 					"character": 27
 				}
@@ -9952,7 +9921,7 @@
 			"type": {
 				"type": "reference",
 				"name": "ModuleWithStatics",
-				"id": 316
+				"id": 315
 			}
 		}
 	],
@@ -9961,17 +9930,17 @@
 			"title": "Enumerations",
 			"kind": 4,
 			"children": [
-				104,
-				108,
-				125,
-				148,
-				153,
-				157,
-				164,
-				170,
-				182,
-				185,
-				227
+				103,
+				107,
+				124,
+				147,
+				152,
+				156,
+				163,
+				169,
+				181,
+				184,
+				226
 			]
 		},
 		{
@@ -9982,39 +9951,39 @@
 				71,
 				77,
 				86,
-				100,
+				99,
 				82,
 				61,
 				10,
 				14,
-				239,
-				303,
-				316,
-				400,
-				397,
-				393,
-				395,
-				189,
+				238,
+				302,
+				315,
+				399,
+				396,
+				392,
+				394,
+				188,
 				19,
-				199,
+				198,
 				1,
-				223,
-				211
+				222,
+				210
 			]
 		},
 		{
 			"title": "Type aliases",
 			"kind": 4194304,
 			"children": [
-				232,
-				236
+				231,
+				235
 			]
 		},
 		{
 			"title": "Variables",
 			"kind": 32,
 			"children": [
-				392
+				391
 			]
 		}
 	]

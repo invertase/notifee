@@ -2,12 +2,15 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateNotificationId, hasOwnProperty, isObject, isString } from './utils';
+import { generateNotificationId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';
+import { NotificationBuilder } from '../../types/Notification';
 
-export default function validateNotification(notification) {
+export default function validateNotification(
+  notification: NotificationBuilder,
+): NotificationBuilder {
   if (!isObject(notification)) {
     throw new Error("'notification' expected an object value.");
   }
@@ -18,7 +21,7 @@ export default function validateNotification(notification) {
   }
 
   // Defaults
-  const out = {
+  const out: NotificationBuilder = {
     notificationId: '',
     title: '',
     subtitle: '',
@@ -69,7 +72,7 @@ export default function validateNotification(notification) {
   /**
    * data
    */
-  if (hasOwnProperty(notification, 'data')) {
+  if (hasOwnProperty(notification, 'data') && notification.data != undefined) {
     if (!isObject(notification.data)) {
       throw new Error("'notification.data' expected an object value containing key/value pairs.");
     }
@@ -99,13 +102,15 @@ export default function validateNotification(notification) {
   /**
    * android
    */
-  out.android = validateAndroidNotification(notification.android);
+  if (hasOwnProperty(notification, 'android') && notification.android != undefined) {
+    out.android = validateAndroidNotification(notification.android);
+  }
 
   /**
    * ios
    */
-  if (hasOwnProperty(notification, 'ios')) {
-    out.ios = validateiOSNotification(notification.ios);
+  if (hasOwnProperty(notification, 'ios') && notification.ios != undefined) {
+    // out.ios = validateiOSNotification(); // todo
   }
 
   return out;

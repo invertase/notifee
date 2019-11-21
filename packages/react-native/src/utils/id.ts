@@ -1,6 +1,6 @@
 const AUTO_ID_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-export function generateNotificationId() {
+export function generateNotificationId(): string {
   let autoId = '';
 
   for (let i = 0; i < 20; i++) {

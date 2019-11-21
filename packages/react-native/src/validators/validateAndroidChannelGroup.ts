@@ -2,9 +2,12 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isObject, isString } from './utils';
+import { hasOwnProperty, isObject, isString } from '../utils';
+import { AndroidChannelGroup } from '../../types/NotificationAndroid';
 
-export default function validateAndroidChannelGroup(group) {
+export default function validateAndroidChannelGroup(
+  group: AndroidChannelGroup,
+): AndroidChannelGroup {
   if (!isObject(group)) {
     throw new Error("'group' expected an object value.");
   }
@@ -26,7 +29,7 @@ export default function validateAndroidChannelGroup(group) {
   /**
    * Defaults
    */
-  const out = {
+  const out: AndroidChannelGroup = {
     channelGroupId: group.channelGroupId,
     name: group.name,
   };

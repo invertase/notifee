@@ -2,12 +2,16 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isArray, isBoolean, isObject, isString } from './utils';
+import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
-import { AndroidVisibility, AndroidImportance } from '../../types/NotificationAndroid';
+import {
+  AndroidVisibility,
+  AndroidImportance,
+  AndroidChannel,
+} from '../../types/NotificationAndroid';
 
-export default function validateAndroidChannel(channel) {
+export default function validateAndroidChannel(channel: AndroidChannel): AndroidChannel {
   if (!isObject(channel)) {
     throw new Error("'channel' expected an object value.");
   }
@@ -39,10 +43,10 @@ export default function validateAndroidChannel(channel) {
   /**
    * Defaults
    */
-  const out = {
+  const out: AndroidChannel = {
     channelId: channel.channelId,
     name: channel.name,
-    allowBubbles: false,
+    // allowBubbles: false,
     bypassDnd: false,
     enableLights: true,
     enableVibration: true,
@@ -120,7 +124,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * importance
    */
-  if (hasOwnProperty(channel, 'importance')) {
+  if (hasOwnProperty(channel, 'importance') && channel.importance != undefined) {
     if (!Object.values(AndroidImportance).includes(channel.importance)) {
       throw new Error("'channel.importance' expected an AndroidImportance value.");
     }
@@ -131,7 +135,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * lightColor
    */
-  if (hasOwnProperty(channel, 'lightColor')) {
+  if (hasOwnProperty(channel, 'lightColor') && channel.lightColor != undefined) {
     if (!isString(channel.lightColor)) {
       throw new Error("'channel.lightColor' expected a string value.");
     }
@@ -148,7 +152,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * visibility
    */
-  if (hasOwnProperty(channel, 'visibility')) {
+  if (hasOwnProperty(channel, 'visibility') && channel.visibility != undefined) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
       throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
@@ -169,23 +173,24 @@ export default function validateAndroidChannel(channel) {
 
   /**
    * sound
+   * TODO sound on channel?
    */
-  if (hasOwnProperty(channel, 'sound')) {
-    if (!isString(channel.sound)) {
-      throw new Error("'channel.sound' expected a string value.");
-    }
-
-    if (!channel.sound) {
-      throw new Error("'channel.sound' expected a valid sound string.");
-    }
-
-    out.sound = channel.sound;
-  }
+  // if (hasOwnProperty(channel, 'sound')) {
+  //   if (!isString(channel.sound)) {
+  //     throw new Error("'channel.sound' expected a string value.");
+  //   }
+  //
+  //   if (!channel.sound) {
+  //     throw new Error("'channel.sound' expected a valid sound string.");
+  //   }
+  //
+  //   out.sound = channel.sound;
+  // }
 
   /**
    * vibrationPattern
    */
-  if (hasOwnProperty(channel, 'vibrationPattern')) {
+  if (hasOwnProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
     if (!isArray(channel.vibrationPattern)) {
       throw new Error("'channel.vibrationPattern' expected an array.");
     }
