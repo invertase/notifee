@@ -484,8 +484,9 @@ export interface NotificationAndroid {
   style?: AndroidBigPictureStyle | AndroidBigTextStyle;
 
   /**
-   * A ticker is used for accessibility purposes for devices with accessibility services enabled. Text passed
-   * to `ticker` will be audibly announced.
+   * Text that summarizes this notification for accessibility services. As of the Android L release, this
+   * text is no longer shown on screen, but it is still useful to accessibility services
+   * (where it serves as an audible announcement of the notification's appearance).
    *
    * Ticker text does not show in the notification.
    *
