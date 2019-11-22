@@ -29,9 +29,15 @@ class NotifeeUtils {
   static String getFileName(Context context, Uri uri) {
     String result = null;
     if (uri.getScheme() != null && uri.getScheme().equals("content")) {
-      try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
+      Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+
+      try {
         if (cursor != null && cursor.moveToFirst()) {
           result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
+        }
+      } finally {
+        if (cursor != null) {
+          cursor.close();
         }
       }
     }
@@ -91,7 +97,7 @@ class NotifeeUtils {
 
     // If still no resource, default
     if (resourceId == 0) {
-      Log.d("RNFBNotificationUtils", "Could not find specified sound " + sound);
+      Log.d("NotificationUtils", "Could not find specified sound " + sound);
       return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     }
 

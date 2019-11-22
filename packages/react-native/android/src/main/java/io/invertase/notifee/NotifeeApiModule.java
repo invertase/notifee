@@ -49,6 +49,8 @@ public class NotifeeApiModule extends NotifeeNativeModule {
     });
   }
 
+  // TODO handle cancel notifications
+
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
     promise.resolve(null);
