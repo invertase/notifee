@@ -50,6 +50,16 @@ public class NotifeeApiModule extends NotifeeNativeModule {
   }
 
   @ReactMethod
+  public void cancelNotification(String notificationId, Promise promise) {
+    promise.resolve(null);
+  }
+
+  @ReactMethod
+  public void cancelAllNotifications(Promise promise) {
+    promise.resolve(null);
+  }
+
+  @ReactMethod
   public void createChannel(ReadableMap channelMap, Promise promise) {
     try {
       NotifeeNotificationChannel.createChannel(channelMap);
