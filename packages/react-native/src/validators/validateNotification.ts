@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateNotificationId, hasOwnProperty, isObject, isString } from '../utils';
+import { generateId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';
@@ -44,7 +44,7 @@ export default function validateNotification(
 
     out.notificationId = notification.notificationId;
   } else {
-    out.notificationId = generateNotificationId();
+    out.notificationId = generateId();
   }
 
   /**
@@ -102,16 +102,12 @@ export default function validateNotification(
   /**
    * android
    */
-  if (hasOwnProperty(notification, 'android') && notification.android != undefined) {
-    out.android = validateAndroidNotification(notification.android);
-  }
+  out.android = validateAndroidNotification(notification.android);
 
   /**
    * ios
    */
-  if (hasOwnProperty(notification, 'ios') && notification.ios != undefined) {
-    // out.ios = validateiOSNotification(); // todo
-  }
+  out.ios = validateiOSNotification(); // todo
 
   return out;
 }

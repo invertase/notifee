@@ -184,10 +184,11 @@ class NotifeeNotificationChannel {
       }
 
       writableMap.putBoolean("showBadge", notificationChannel.canShowBadge());
-      writableMap.putString(
-        "sound",
-        getFileName(getApplicationContext(), notificationChannel.getSound())
-      );
+      writableMap.putString("sound", "");
+//      writableMap.putString(
+//        "sound",
+//        getFileName(getApplicationContext(), notificationChannel.getSound())
+//      );
       writableMap.putBoolean("vibrationEnabled", notificationChannel.shouldVibrate());
 
       long[] vibration = notificationChannel.getVibrationPattern();

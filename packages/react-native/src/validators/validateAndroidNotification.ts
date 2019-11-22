@@ -39,7 +39,7 @@ import {
 } from './validateAndroidStyle';
 
 export default function validateAndroidNotification(
-  android: NotificationAndroid,
+  android?: NotificationAndroid,
 ): NotificationAndroid {
   const out: NotificationAndroid = {
     autoCancel: true,
@@ -58,7 +58,7 @@ export default function validateAndroidNotification(
     visibility: AndroidVisibility.PRIVATE,
   };
 
-  if (isUndefined(android)) {
+  if (android === undefined) {
     return out;
   }
 

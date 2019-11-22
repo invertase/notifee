@@ -2,6 +2,7 @@ package io.invertase.notifee;
 
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -9,7 +10,6 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.google.android.gms.tasks.Tasks;
 
-import java.util.Collections;
 import java.util.Objects;
 
 import io.invertase.notifee.core.NotifeeNativeModule;
@@ -96,7 +96,7 @@ public class NotifeeApiModule extends NotifeeNativeModule {
       promise.resolve(null);
     } catch (NullPointerException e) {
       promise.reject(
-        "notifications/channel-group-not-found",
+        "channel-group-not-found",
         "The requested NotificationChannelGroup does not exist, have you created it?"
       );
     }
@@ -131,7 +131,7 @@ public class NotifeeApiModule extends NotifeeNativeModule {
     } catch (Throwable t) {
       // do nothing - most likely a NoSuchMethodError for < v4 support lib
     }
-    promise.resolve(Collections.emptyList());
+    promise.resolve(Arguments.createArray());
   }
 
   @ReactMethod
@@ -153,6 +153,6 @@ public class NotifeeApiModule extends NotifeeNativeModule {
     } catch (Throwable t) {
       // do nothing - most likely a NoSuchMethodError for < v4 support lib
     }
-    promise.resolve(Collections.emptyList());
+    promise.resolve(Arguments.createArray());
   }
 }
