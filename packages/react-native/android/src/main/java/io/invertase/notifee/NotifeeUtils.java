@@ -39,6 +39,8 @@ class NotifeeUtils {
         if (cursor != null && cursor.moveToFirst()) {
           result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
         }
+      } catch (Exception e) {
+        // ignore
       } finally {
         if (cursor != null) {
           cursor.close();
