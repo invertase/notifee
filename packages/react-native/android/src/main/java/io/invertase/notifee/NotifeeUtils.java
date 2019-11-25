@@ -9,6 +9,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableArray;
+
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
 class NotifeeUtils {
@@ -102,5 +106,45 @@ class NotifeeUtils {
     }
 
     return Uri.parse("android.resource://" + getApplicationContext().getPackageName() + "/" + resourceId);
+  }
+
+  /**
+   * Converts a JS vibration pattern into a valid native pattern
+   *
+   * @param pattern array of numbers
+   * @return long[]
+   */
+  static long[] parseVibrationPattern(ReadableArray pattern) {
+    long[] vibration = new long[pattern.size()];
+    for (int i = 0; i < pattern.size(); i++) {
+      vibration[i] = (long) pattern.getDouble(i);
+    }
+    return vibration;
+  }
+
+  /**
+   * Gets a JS vibration pattern array from a native pattern
+   *
+   * @param pattern long[]
+   * @return WritableArray
+   */
+  static WritableArray getVibrationPattern(long[] pattern) {
+    WritableArray vibrationArray = Arguments.createArray();
+    if (pattern != null) {
+      for (long val : pattern) {
+        vibrationArray.pushDouble(val);
+      }
+    }
+    return vibrationArray;
+  }
+
+  /**
+   * Converts a native color int into a JS Hexadecimal string
+   *
+   * @param color native color
+   * @return hex code
+   */
+  static String getColor(int color) {
+    return String.format("#%06X", (0xFFFFFF & color));
   }
 }

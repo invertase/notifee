@@ -45,8 +45,6 @@ export interface Notification {
    *
    * await notifee.displayNotification(notification);
    * ```
-   *
-   * @foo bar
    */
   body: string;
 
@@ -55,7 +53,7 @@ export interface Notification {
    *
    * Defaults to a random string.
    */
-  notificationId?: string;
+  id?: string;
 
   /**
    * The notification title which appears above the body text.
@@ -113,15 +111,6 @@ export interface Notification {
    * ```
    */
   data?: { [key: string]: string };
-
-  /**
-   * Overrides the sound the notification is displayed with.
-   *
-   * The default value is `default`, which is the system default sound.
-   *
-   * TODO @ehesp FAQ/Guide on custom sounds
-   */
-  sound?: string;
 }
 
 /**

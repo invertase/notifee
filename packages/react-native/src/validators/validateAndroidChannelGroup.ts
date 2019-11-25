@@ -13,10 +13,10 @@ export default function validateAndroidChannelGroup(
   }
 
   /**
-   * channelGroupId
+   * id
    */
-  if (!isString(group.channelGroupId) || !group.channelGroupId) {
-    throw new Error("'group.channelGroupId' expected a string value.");
+  if (!isString(group.id) || !group.id) {
+    throw new Error("'group.id' expected a string value.");
   }
 
   /**
@@ -30,7 +30,7 @@ export default function validateAndroidChannelGroup(
    * Defaults
    */
   const out: AndroidChannelGroup = {
-    channelGroupId: group.channelGroupId,
+    id: group.id,
     name: group.name,
   };
 

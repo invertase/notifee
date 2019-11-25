@@ -22,29 +22,26 @@ export default function validateNotification(
 
   // Defaults
   const out: NotificationBuilder = {
-    notificationId: '',
+    id: '',
     title: '',
     subtitle: '',
     body: notification.body,
     data: {},
     ios: {},
     android: {},
-    sound: 'default',
   };
 
   /**
-   * notificationId
+   * id
    */
-  if (hasOwnProperty(notification, 'notificationId')) {
-    if (!isString(notification.notificationId) || !notification.notificationId) {
-      throw new Error(
-        "'notification.notificationId' invalid notification ID, expected a unique string value.",
-      );
+  if (hasOwnProperty(notification, 'id')) {
+    if (!isString(notification.id) || !notification.id) {
+      throw new Error("'notification.id' invalid notification ID, expected a unique string value.");
     }
 
-    out.notificationId = notification.notificationId;
+    out.id = notification.id;
   } else {
-    out.notificationId = generateId();
+    out.id = generateId();
   }
 
   /**
@@ -89,14 +86,6 @@ export default function validateNotification(
     }
 
     out.data = notification.data;
-  }
-
-  if (hasOwnProperty(notification, 'sound')) {
-    if (!isString(notification.sound)) {
-      throw new Error("'notification.sound' expected a string value.");
-    }
-
-    out.sound = notification.sound;
   }
 
   /**

@@ -3,7 +3,12 @@
  */
 
 import { Module } from '../types/Module';
-import { AndroidChannel, AndroidChannelGroup } from '../types/NotificationAndroid';
+import {
+  AndroidChannel,
+  AndroidChannelGroup,
+  NativeAndroidChannel,
+  NativeAndroidChannelGroup,
+} from '../types/NotificationAndroid';
 import {
   NotificationBuilder,
   NotificationObserver,
@@ -44,8 +49,12 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return Promise.resolve('');
     }
 
+    if (this.core.ANDROID_API_LEVEL < 26) {
+      return Promise.resolve(options.id);
+    }
+
     return this.native.createChannel(options).then(() => {
-      return options.channelId;
+      return options.id;
     });
   }
 
@@ -63,7 +72,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -78,12 +87,16 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
     }
 
+    if (this.core.ANDROID_API_LEVEL < 26) {
+      return Promise.resolve(options.id);
+    }
+
     if (isIOS) {
       return Promise.resolve('');
     }
 
     return this.native.createChannelGroup(options).then(() => {
-      return options.channelGroupId;
+      return options.id;
     });
   }
 
@@ -105,7 +118,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       );
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -117,7 +130,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -129,7 +142,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -145,44 +158,44 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.displayNotification(options).then(() => {
-      return options.notificationId;
+      return options.id;
     });
   }
 
-  public getChannel(channelId: string): Promise<AndroidChannel | null> {
+  public getChannel(channelId: string): Promise<NativeAndroidChannel | null> {
     if (!isString(channelId)) {
       throw new Error("notifee.getChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
     return this.native.getChannel(channelId);
   }
 
-  public getChannels(): Promise<AndroidChannel[]> {
-    if (isIOS) {
+  public getChannels(): Promise<NativeAndroidChannel[]> {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
     return this.native.getChannels();
   }
 
-  public getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null> {
+  public getChannelGroup(channelGroupId: string): Promise<NativeAndroidChannelGroup | null> {
     if (!isString(channelGroupId)) {
       throw new Error("notifee.getChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
     return this.native.getChannelGroup(channelGroupId);
   }
 
-  public getChannelGroups(): Promise<AndroidChannelGroup[]> {
-    if (isIOS) {
+  public getChannelGroups(): Promise<NativeAndroidChannelGroup[]> {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 

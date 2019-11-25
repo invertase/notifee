@@ -17,15 +17,15 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   }
 
   /**
-   * channelId
+   * id
    */
-  if (!isString(channel.channelId)) {
-    throw new Error("'channel.channelId' expected a string value.");
+  if (!isString(channel.id)) {
+    throw new Error("'channel.id' expected a string value.");
   }
 
   // empty check
-  if (!channel.channelId) {
-    throw new Error("'channel.channelId' expected a valid string channelId.");
+  if (!channel.id) {
+    throw new Error("'channel.id' expected a valid string channelId.");
   }
 
   /**
@@ -44,27 +44,38 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
    * Defaults
    */
   const out: AndroidChannel = {
-    channelId: channel.channelId,
+    id: channel.id,
     name: channel.name,
-    // allowBubbles: false,
+    bubbles: false,
     bypassDnd: false,
-    enableLights: true,
-    enableVibration: true,
-    showBadge: true,
+    lights: true,
+    vibration: true,
+    badge: true,
     importance: AndroidImportance.DEFAULT,
     visibility: AndroidVisibility.PRIVATE,
   };
 
-  // /**
-  //  * allowBubbles
-  //  */
-  // if (hasOwnProperty(channel, 'allowBubbles')) {
-  //   if (!isBoolean(channel.allowBubbles)) {
-  //     throw new Error("'channel.allowBubbles' expected a boolean value.");
-  //   }
-  //
-  //   out.allowBubbles = channel.allowBubbles;
-  // }
+  /**
+   * badge
+   */
+  if (hasOwnProperty(channel, 'badge')) {
+    if (!isBoolean(channel.badge)) {
+      throw new Error("'channel.badge' expected a boolean value.");
+    }
+
+    out.badge = channel.badge;
+  }
+
+  /**
+   * bubbles
+   */
+  if (hasOwnProperty(channel, 'bubbles')) {
+    if (!isBoolean(channel.bubbles)) {
+      throw new Error("'channel.bubbles' expected a boolean value.");
+    }
+
+    out.bubbles = channel.bubbles;
+  }
 
   /**
    * bypassDnd
@@ -89,25 +100,25 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   }
 
   /**
-   * enableLights
+   * lights
    */
-  if (hasOwnProperty(channel, 'enableLights')) {
-    if (!isBoolean(channel.enableLights)) {
-      throw new Error("'channel.enableLights' expected a boolean value.");
+  if (hasOwnProperty(channel, 'lights')) {
+    if (!isBoolean(channel.lights)) {
+      throw new Error("'channel.lights' expected a boolean value.");
     }
 
-    out.enableLights = channel.enableLights;
+    out.lights = channel.lights;
   }
 
   /**
-   * enableVibration
+   * vibration
    */
-  if (hasOwnProperty(channel, 'enableVibration')) {
-    if (!isBoolean(channel.enableVibration)) {
-      throw new Error("'channel.enableVibration' expected a boolean value.");
+  if (hasOwnProperty(channel, 'vibration')) {
+    if (!isBoolean(channel.vibration)) {
+      throw new Error("'channel.vibration' expected a boolean value.");
     }
 
-    out.enableVibration = channel.enableVibration;
+    out.vibration = channel.vibration;
   }
 
   /**
@@ -161,31 +172,19 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   }
 
   /**
-   * showBadge
+   * sound
    */
-  if (hasOwnProperty(channel, 'showBadge')) {
-    if (!isBoolean(channel.showBadge)) {
-      throw new Error("'channel.showBadge' expected a boolean value.");
+  if (hasOwnProperty(channel, 'sound')) {
+    if (!isString(channel.sound)) {
+      throw new Error("'channel.sound' expected a string value.");
     }
 
-    out.showBadge = channel.showBadge;
-  }
+    if (!channel.sound) {
+      throw new Error("'channel.sound' expected a valid sound string.");
+    }
 
-  /**
-   * sound
-   * TODO sound on channel?
-   */
-  // if (hasOwnProperty(channel, 'sound')) {
-  //   if (!isString(channel.sound)) {
-  //     throw new Error("'channel.sound' expected a string value.");
-  //   }
-  //
-  //   if (!channel.sound) {
-  //     throw new Error("'channel.sound' expected a valid sound string.");
-  //   }
-  //
-  //   out.sound = channel.sound;
-  // }
+    out.sound = channel.sound;
+  }
 
   /**
    * vibrationPattern

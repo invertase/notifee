@@ -2,7 +2,6 @@ package io.invertase.notifee;
 
 import android.util.Log;
 
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -63,108 +62,129 @@ public class NotifeeApiModule extends NotifeeNativeModule {
 
   @ReactMethod
   public void createChannel(ReadableMap channelMap, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.createChannel(channelMap);
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void createChannelGroup(ReadableMap channelGroupMap, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.createChannelGroup(channelGroupMap);
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void createChannelGroups(ReadableArray channelGroupsArray, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.createChannelGroups(channelGroupsArray);
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void createChannels(ReadableArray channelsArray, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.createChannels(channelsArray);
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void deleteChannelGroup(String channelId, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.deleteChannelGroup(channelId);
-      promise.resolve(null);
-    } catch (NullPointerException e) {
-      promise.reject(
-        "channel-group-not-found",
-        "The requested NotificationChannelGroup does not exist, have you created it?"
-      );
-    }
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void deleteChannel(String channelId, Promise promise) {
-    try {
+    Tasks.call(() -> {
       NotifeeNotificationChannel.deleteChannel(channelId);
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void getChannel(String channelId, Promise promise) {
-    try {
-      promise.resolve(NotifeeNotificationChannel.getChannel(channelId));
-      return;
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+    Tasks.call(() -> NotifeeNotificationChannel.getChannel(channelId)).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void getChannels(Promise promise) {
-    try {
-      promise.resolve(NotifeeNotificationChannel.getChannels());
-      return;
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(Arguments.createArray());
+    Tasks.call(NotifeeNotificationChannel::getChannels).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void getChannelGroup(String channelGroupId, Promise promise) {
-    try {
-      promise.resolve(NotifeeNotificationChannel.getChannelGroup(channelGroupId));
-      return;
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(null);
+    Tasks.call(() -> NotifeeNotificationChannel.getChannelGroup(channelGroupId)).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void getChannelGroups(Promise promise) {
-    try {
-      promise.resolve(NotifeeNotificationChannel.getChannelGroups());
-      return;
-    } catch (Throwable t) {
-      // do nothing - most likely a NoSuchMethodError for < v4 support lib
-    }
-    promise.resolve(Arguments.createArray());
+    Tasks.call(NotifeeNotificationChannel::getChannelGroups).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 }

@@ -112,7 +112,7 @@ export interface NotificationAndroid {
    * const notification = {
    *   body: 'Update your settings',
    *   android: {
-   *     channelId: 'open_settings',
+   *     channelId: 'open-settings',
    *   },
    * };
    *
@@ -123,7 +123,7 @@ export interface NotificationAndroid {
    * // The user taps the notification....
    * const notification = await notifee.getInitialNotification();
    *
-   * if (notification.android.clickAction === 'open_settings') {
+   * if (notification.android.clickAction === 'open-settings') {
    *   // open settings view
    * }
    * ```
@@ -330,7 +330,7 @@ export interface NotificationAndroid {
    *
    * ```js
    * await notifee.displayNotification({
-   *   notificationId: 'upload-task',
+   *   id: 'upload-task',
    *   android: {
    *     progress: {
    *       max: 10,
@@ -341,7 +341,7 @@ export interface NotificationAndroid {
    *
    * // Sometime later... Set progress to 50%
    * await notifee.displayNotification({
-   *   notificationId: 'upload-task',
+   *   id: 'upload-task',
    *   android: {
    *     progress: {
    *       max: 10,
@@ -778,7 +778,7 @@ export interface AndroidProgress {
  *
  * ```js
  * await notifee.createChannel({
- *   channelId: 'alarms',
+ *   id: 'alarms',
  *   name: 'Alarms & Timers',
  *   lightColor: '#3f51b5',
  *   vibrationPattern: [300, 400],
@@ -791,7 +791,7 @@ export interface AndroidChannel {
   /**
    * The unique channel ID.
    */
-  channelId: string;
+  id: string;
 
   /**
    * The channel name. This is shown to the user so must be descriptive and relate to the notifications
@@ -801,7 +801,36 @@ export interface AndroidChannel {
    */
   name: string;
 
-  // todo used?
+  /**
+   * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
+   *
+   * Defaults to `true`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  badge?: boolean;
+
+  /**
+   * Sets whether notifications posted to this channel can appear outside of the notification shade,
+   * floating over other apps' content as a bubble. This value is ignored when the channels
+   * priority is less than high (`AndroidImportance.HIGH`).
+   *
+   * Defaults to `false`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  bubbles?: boolean;
+
+  /**
+   * Sets whether or not notifications posted to this channel can interrupt the user in
+   * 'Do Not Disturb' mode.
+   *
+   * Defaults to `false`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   *
+   * @platform android API Level >= 29
+   */
   bypassDnd?: boolean;
 
   /**
@@ -810,6 +839,8 @@ export interface AndroidChannel {
    * The recommended maximum length is 300 characters; the value may be truncated if it is too long.
    *
    * This setting can be updated after creation.
+   *
+   * @platform android API Level >= 28
    */
   description?: string;
 
@@ -820,7 +851,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  enableLights?: boolean;
+  lights?: boolean;
 
   /**
    * Sets whether notification posted to this channel should vibrate.
@@ -829,7 +860,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  enableVibration?: boolean;
+  vibration?: boolean;
 
   /**
    * Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.
@@ -845,7 +876,7 @@ export interface AndroidChannel {
    *
    * See `AndroidImportance` for more details on the levels.
    *
-   * This setting cannot be overridden once the channel is created.
+   * This setting can only be set to a lower importance level once set.
    */
   importance?: AndroidImportance;
 
@@ -858,25 +889,40 @@ export interface AndroidChannel {
   lightColor?: AndroidColor | string;
 
   /**
-   * Sets whether notifications posted to this channel appear on the lockscreen or not, and if so, whether they appear in a redacted form.
+   * Sets whether notifications posted to this channel appear on the lockscreen or not,
+   * and if so, whether they appear in a redacted form.
    *
    * This setting cannot be overridden once the channel is created.
    */
   visibility?: AndroidVisibility;
 
   /**
-   * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
-   *
-   * Defaults to `true`.
-   */
-  showBadge?: boolean;
-
-  /**
    * Sets/overrides the vibration pattern for notifications posted to this channel.
    *
    * The pattern in milliseconds. Must be an even amount of numbers.
+   *
+   * This setting cannot be overridden once the channel is created.
    */
   vibrationPattern?: number[];
+
+  /**
+   * Overrides the sound the notification is displayed with.
+   *
+   * The default value is `default`, which is the system default sound.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  sound?: string;
+}
+
+export interface NativeAndroidChannel extends AndroidChannel {
+  /*
+   * Returns whether or not notifications posted to this Channel group are
+   * blocked.
+   *
+   * @platform android API Level >= 28
+   */
+  isBlocked: boolean;
 }
 
 /**
@@ -890,18 +936,42 @@ export interface AndroidChannelGroup {
   /**
    * Unique id for this channel group.
    */
-  channelGroupId: string;
+  id: string;
 
   /**
    * The name of the group. This is visible to the user so should be a descriptive name which
    * categorizes other channels (e.g. reminders).
+   *
+   * The recommended maximum length is 40 characters; the value may be truncated if it is too long.
    */
   name: string;
 
   /**
    * An optional description of the group. This is visible to the user.
+   *
+   * @platform android API Level >= 28
    */
   description?: string;
+}
+
+/**
+ * Interface for a native Android Channel Group.
+ *
+ * @platform android
+ */
+export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
+  /**
+   * Returns whether or not notifications posted to a Channel belonging to this group are
+   * blocked by the user.
+   *
+   * @platform android API Level >= 28
+   */
+  isBlocked: boolean;
+
+  /**
+   * Returns a list of channels assigned to this channel group.
+   */
+  channels: NativeAndroidChannel[];
 }
 
 /**

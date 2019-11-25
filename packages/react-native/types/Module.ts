@@ -23,6 +23,8 @@ import {
   AndroidSemanticAction,
   AndroidStyle,
   AndroidVisibility,
+  NativeAndroidChannel,
+  NativeAndroidChannelGroup,
 } from './NotificationAndroid';
 
 /**
@@ -133,18 +135,18 @@ export interface Module {
    * @param channelId The channel id.
    * @platform android
    */
-  getChannel(channelId: string): Promise<AndroidChannel | null>;
+  getChannel(channelId: string): Promise<NativeAndroidChannel | null>;
 
   /**
    * Returns an array of `AndroidChannel` which are currently active on the device.
    *
    * @platform android
    */
-  getChannels(): Promise<AndroidChannel[]>;
+  getChannels(): Promise<NativeAndroidChannel[]>;
 
-  getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null>;
+  getChannelGroup(channelGroupId: string): Promise<NativeAndroidChannelGroup | null>;
 
-  getChannelGroups(): Promise<AndroidChannelGroup[]>;
+  getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
   // todo null if no badge?
   getBadge(): Promise<number | null>;

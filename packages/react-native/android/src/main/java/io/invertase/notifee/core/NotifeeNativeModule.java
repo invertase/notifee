@@ -2,6 +2,7 @@ package io.invertase.notifee.core;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -30,6 +31,7 @@ public class NotifeeNativeModule extends ReactContextBaseJavaModule {
   }
 
   protected static void rejectPromiseWithExceptionMap(Promise promise, Exception exception) {
+    Log.e("NotifeeException", exception.getMessage(), exception);
     promise.reject(exception, NotifeeUtils.getExceptionMap(exception));
   }
 

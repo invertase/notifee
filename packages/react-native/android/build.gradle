@@ -4,7 +4,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.5.1'
+    classpath 'com.android.tools.build:gradle:3.5.2'
   }
 }
 
@@ -17,15 +17,11 @@ project.ext {
     versions: [
       android           : [
         minSdk    : 16,
-        targetSdk : 28,
-        compileSdk: 28,
+        targetSdk : 29,
+        compileSdk: 29,
         // optional as gradle.buildTools comes with one by default
         // overriding here though to match the version RN uses
-        buildTools: "28.0.3"
-      ],
-
-      firebase          : [
-        bom: "21.1.0"
+//        buildTools: "28.0.3"
       ],
     ],
   ])
@@ -51,7 +47,8 @@ repositories {
 }
 
 dependencies {
-  implementation 'androidx.work:work-runtime:2.2.0'
+  implementation 'androidx.work:work-runtime:2.3.0-beta01'
+  implementation 'androidx.core:core:1.1.0'
   implementation "com.squareup.okhttp3:okhttp:4.2.1"
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
 }
