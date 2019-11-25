@@ -1,5 +1,8 @@
 package io.invertase.notifee;
 
+import android.content.Intent;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
@@ -12,6 +15,8 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.Objects;
 
 import io.invertase.notifee.core.NotifeeNativeModule;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class NotifeeApiModule extends NotifeeNativeModule {
   private static final String TAG = "NotifeeApiModule";
@@ -186,5 +191,33 @@ public class NotifeeApiModule extends NotifeeNativeModule {
         rejectPromiseWithExceptionMap(promise, task.getException());
       }
     });
+  }
+
+  @ReactMethod
+  public void openNotificationSettings(String channelId, Promise promise) {
+    Intent intent;
+
+    if (Build.VERSION.SDK_INT >= 26) {
+      if (channelId != null) {
+        intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
+      } else {
+        intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+      }
+
+      intent.putExtra(Settings.EXTRA_APP_PACKAGE, getApplicationContext().getPackageName());
+    } else {
+      intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+    }
+
+    intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+
+    if (getCurrentActivity() != null) {
+      getCurrentActivity().runOnUiThread(() -> getApplicationContext().startActivity(intent));
+    } else {
+      Log.d(TAG, "Attempted to start activity but no current activity was available.");
+    }
+
+    promise.resolve(null);
   }
 }

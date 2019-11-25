@@ -18,7 +18,7 @@ import {
 } from '../types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-import { isFunction, isNumber, isString, isIOS, isArray, isNull } from './utils';
+import { isFunction, isNumber, isString, isIOS, isArray, isNull, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
 import validateSchedule from './validators/validateSchedule';
 import validateAndroidChannel from './validators/validateAndroidChannel';
@@ -241,6 +241,18 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     // todo return subscriber
     return (): void => {};
+  }
+
+  public openNotificationSettings(channelId?: string): Promise<void> {
+    if (!isUndefined(channelId) && !isString(channelId)) {
+      throw new Error("notifee.openNotificationSettings(*) 'channelId' expected a string value.");
+    }
+
+    if (isIOS) {
+      return Promise.resolve();
+    }
+
+    return this.native.openNotificationSettings(channelId || null);
   }
 
   public removeAllDeliveredNotifications(): Promise<void> {
