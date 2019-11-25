@@ -250,15 +250,18 @@ class NotifeeNotificationChannel {
       writableMap.putString("groupId", notificationChannel.getGroup());
       writableMap.putInt("importance", notificationChannel.getImportance());
       writableMap.putBoolean("vibration", notificationChannel.shouldVibrate());
-      writableMap.putArray("vibrationPattern", getVibrationPattern(notificationChannel.getVibrationPattern()));
       writableMap.putString("sound", getFileName(getApplicationContext(), notificationChannel.getSound()));
       writableMap.putBoolean("isBlocked", notificationChannel.getImportance() == IMPORTANCE_NONE);
       writableMap.putString("lightColor", getColor(notificationChannel.getLightColor()));
 
+      WritableArray pattern = getVibrationPattern(notificationChannel.getVibrationPattern());
+      if (pattern.size() > 0) {
+        writableMap.putArray("vibrationPattern", pattern);
+      }
+
+      // Unless the user manually changes this in app settings, it is always -1000.
       int visibility = notificationChannel.getLockscreenVisibility();
-      if (visibility == -1000) { // -1000 = not set
-        writableMap.putNull("visibility");
-      } else {
+      if (visibility != -1000) { // -1000 = not set
         writableMap.putInt("visibility", visibility);
       }
     }
