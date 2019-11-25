@@ -112,7 +112,7 @@ export interface NotificationAndroid {
    * const notification = {
    *   body: 'Update your settings',
    *   android: {
-   *     channelId: 'open_settings',
+   *     channelId: 'open-settings',
    *   },
    * };
    *
@@ -123,7 +123,7 @@ export interface NotificationAndroid {
    * // The user taps the notification....
    * const notification = await notifee.getInitialNotification();
    *
-   * if (notification.android.clickAction === 'open_settings') {
+   * if (notification.android.clickAction === 'open-settings') {
    *   // open settings view
    * }
    * ```
@@ -330,7 +330,7 @@ export interface NotificationAndroid {
    *
    * ```js
    * await notifee.displayNotification({
-   *   notificationId: 'upload-task',
+   *   id: 'upload-task',
    *   android: {
    *     progress: {
    *       max: 10,
@@ -341,7 +341,7 @@ export interface NotificationAndroid {
    *
    * // Sometime later... Set progress to 50%
    * await notifee.displayNotification({
-   *   notificationId: 'upload-task',
+   *   id: 'upload-task',
    *   android: {
    *     progress: {
    *       max: 10,
@@ -383,12 +383,12 @@ export interface NotificationAndroid {
   shortcutId?: string;
 
   /**
-   * Sets whether the timestamp provided to `when` is shown in the notification.
+   * Sets whether the `timestamp` provided is shown in the notification.
    *
    * Setting this field is useful for notifications which are more informative with a timestamp,
-   * such as a message.
+   * such as an E-Mail.
    *
-   * If no `when` timestamp is set, this field has no effect.
+   * If no `timestamp` is set, this field has no effect.
    *
    * #### Example
    *
@@ -400,13 +400,13 @@ export interface NotificationAndroid {
    * ```js
    * await notifee.displayNotification({
    *   android: {
-   *     when: Date.now(),
-   *     showWhenTimestamp: true,
+   *     timestamp: Date.now(),
+   *     showTimestamp: true,
    *   },
    * });
    * ```
    */
-  showWhenTimestamp?: boolean;
+  showTimestamp?: boolean;
 
   /**
    * The small icon for the notification.
@@ -484,8 +484,9 @@ export interface NotificationAndroid {
   style?: AndroidBigPictureStyle | AndroidBigTextStyle;
 
   /**
-   * A ticker is used for accessibility purposes for devices with accessibility services enabled. Text passed
-   * to `ticker` will be audibly announced.
+   * Text that summarizes this notification for accessibility services. As of the Android L release, this
+   * text is no longer shown on screen, but it is still useful to accessibility services
+   * (where it serves as an audible announcement of the notification's appearance).
    *
    * Ticker text does not show in the notification.
    *
@@ -522,11 +523,11 @@ export interface NotificationAndroid {
   timeoutAfter?: number;
 
   /**
-   * Show the `when` field as a stopwatch. Instead of presenting when as a timestamp, the
-   * notification will show an automatically updating display of the minutes and seconds from the `when` timestamp.
+   * Show the `timestamp` field as a stopwatch. Instead of presenting when as a timestamp, the
+   * notification will show an automatically updating display of the minutes and seconds from the `timestamp`.
    * Useful when showing an elapsed time (like an ongoing phone call).
    *
-   * If no `when` timestamp is set, this has no effect.
+   * If no `timestamp` is set, this has no effect.
    *
    * Defaults to `false`.
    *
@@ -536,13 +537,13 @@ export interface NotificationAndroid {
    * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
-   *     when: Date.now() + 300000,
-   *     usesChronometer: true,
+   *     timestamp: Date.now() + 300000,
+   *     showChronometer: true,
    *   },
    * });
    * ```
    */
-  usesChronometer?: boolean;
+  showChronometer?: boolean;
 
   /**
    * Enables and sets the vibrate pattern.
@@ -575,10 +576,15 @@ export interface NotificationAndroid {
   visibility?: AndroidVisibility;
 
   /**
+   * TODO tag description
+   */
+  tag?: string;
+
+  /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
    *
-   * - Use with `showWhenTimestamp` to show the timestamp to the users.
-   * - Use with `usesChronometer` to create a on-going timer.
+   * - Use with `showTimestamp` to show the timestamp to the users.
+   * - Use with `showChronometer` to create a on-going timer.
    *
    * #### Example
    *
@@ -589,13 +595,13 @@ export interface NotificationAndroid {
    *   body: 'Phone call in progress',
    *   android: {
    *     ongoing: true,
-   *     when: Date.now(),
-   *     usesChronometer: true,
+   *     timestamp: Date.now(),
+   *     showChronometer: true,
    *   },
    * });
    * ```
    */
-  when?: number;
+  timestamp?: number;
 }
 
 /**
@@ -772,7 +778,7 @@ export interface AndroidProgress {
  *
  * ```js
  * await notifee.createChannel({
- *   channelId: 'alarms',
+ *   id: 'alarms',
  *   name: 'Alarms & Timers',
  *   lightColor: '#3f51b5',
  *   vibrationPattern: [300, 400],
@@ -785,7 +791,7 @@ export interface AndroidChannel {
   /**
    * The unique channel ID.
    */
-  channelId: string;
+  id: string;
 
   /**
    * The channel name. This is shown to the user so must be descriptive and relate to the notifications
@@ -795,7 +801,36 @@ export interface AndroidChannel {
    */
   name: string;
 
-  // todo used?
+  /**
+   * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
+   *
+   * Defaults to `true`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  badge?: boolean;
+
+  /**
+   * Sets whether notifications posted to this channel can appear outside of the notification shade,
+   * floating over other apps' content as a bubble. This value is ignored when the channels
+   * priority is less than high (`AndroidImportance.HIGH`).
+   *
+   * Defaults to `false`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  bubbles?: boolean;
+
+  /**
+   * Sets whether or not notifications posted to this channel can interrupt the user in
+   * 'Do Not Disturb' mode.
+   *
+   * Defaults to `false`.
+   *
+   * This setting cannot be overridden once the channel is created.
+   *
+   * @platform android API Level >= 29
+   */
   bypassDnd?: boolean;
 
   /**
@@ -804,6 +839,8 @@ export interface AndroidChannel {
    * The recommended maximum length is 300 characters; the value may be truncated if it is too long.
    *
    * This setting can be updated after creation.
+   *
+   * @platform android API Level >= 28
    */
   description?: string;
 
@@ -814,7 +851,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  enableLights?: boolean;
+  lights?: boolean;
 
   /**
    * Sets whether notification posted to this channel should vibrate.
@@ -823,7 +860,7 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  enableVibration?: boolean;
+  vibration?: boolean;
 
   /**
    * Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.
@@ -839,7 +876,7 @@ export interface AndroidChannel {
    *
    * See `AndroidImportance` for more details on the levels.
    *
-   * This setting cannot be overridden once the channel is created.
+   * This setting can only be set to a lower importance level once set.
    */
   importance?: AndroidImportance;
 
@@ -852,28 +889,40 @@ export interface AndroidChannel {
   lightColor?: AndroidColor | string;
 
   /**
-   * Sets whether notifications posted to this channel appear on the lockscreen or not, and if so, whether they appear in a redacted form.
+   * Sets whether notifications posted to this channel appear on the lockscreen or not,
+   * and if so, whether they appear in a redacted form.
    *
    * This setting cannot be overridden once the channel is created.
    */
   visibility?: AndroidVisibility;
 
   /**
-   * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
-   *
-   * Defaults to `true`.
-   */
-  showBadge?: boolean;
-
-  // todo
-  sound?: string; // audio attributes?
-
-  /**
    * Sets/overrides the vibration pattern for notifications posted to this channel.
    *
    * The pattern in milliseconds. Must be an even amount of numbers.
+   *
+   * This setting cannot be overridden once the channel is created.
    */
   vibrationPattern?: number[];
+
+  /**
+   * Overrides the sound the notification is displayed with.
+   *
+   * The default value is `default`, which is the system default sound.
+   *
+   * This setting cannot be overridden once the channel is created.
+   */
+  sound?: string;
+}
+
+export interface NativeAndroidChannel extends AndroidChannel {
+  /*
+   * Returns whether or not notifications posted to this Channel group are
+   * blocked.
+   *
+   * @platform android API Level >= 28
+   */
+  isBlocked: boolean;
 }
 
 /**
@@ -887,18 +936,42 @@ export interface AndroidChannelGroup {
   /**
    * Unique id for this channel group.
    */
-  channelGroupId: string;
+  id: string;
 
   /**
    * The name of the group. This is visible to the user so should be a descriptive name which
    * categorizes other channels (e.g. reminders).
+   *
+   * The recommended maximum length is 40 characters; the value may be truncated if it is too long.
    */
   name: string;
 
   /**
    * An optional description of the group. This is visible to the user.
+   *
+   * @platform android API Level >= 28
    */
   description?: string;
+}
+
+/**
+ * Interface for a native Android Channel Group.
+ *
+ * @platform android
+ */
+export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
+  /**
+   * Returns whether or not notifications posted to a Channel belonging to this group are
+   * blocked by the user.
+   *
+   * @platform android API Level >= 28
+   */
+  isBlocked: boolean;
+
+  /**
+   * Returns a list of channels assigned to this channel group.
+   */
+  channels: NativeAndroidChannel[];
 }
 
 /**
@@ -1014,7 +1087,6 @@ export enum AndroidImportance {
   DEFAULT = 3,
   HIGH = 4,
   LOW = 2,
-  MAX = 5,
   MIN = 1,
   NONE = 0,
 }

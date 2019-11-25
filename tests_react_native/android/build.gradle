@@ -50,7 +50,6 @@ subprojects {
   task listAllDependencies(type: DependencyReportTask) {}
   ext {
     compileSdk = 28
-    buildTools = "28.0.3"
     minSdk = 16
     targetSdk = 28
   }
@@ -59,12 +58,6 @@ subprojects {
     if (!project.name.equalsIgnoreCase("app")
       && project.hasProperty("android")) {
       android {
-        compileSdkVersion compileSdk
-        buildToolsVersion buildTools
-        defaultConfig {
-          minSdkVersion minSdk
-          targetSdkVersion targetSdk
-        }
         variantFilter { variant ->
           def names = variant.flavors*.name
           if (names.contains("minReactNative44")) {

@@ -3,7 +3,12 @@
  */
 
 import { Module } from '../types/Module';
-import { AndroidChannel, AndroidChannelGroup } from '../types/NotificationAndroid';
+import {
+  AndroidChannel,
+  AndroidChannelGroup,
+  NativeAndroidChannel,
+  NativeAndroidChannelGroup,
+} from '../types/NotificationAndroid';
 import {
   NotificationBuilder,
   NotificationObserver,
@@ -13,19 +18,18 @@ import {
 } from '../types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-// TODO migrate to TS?
-import { isFunction, isNumber, isString, isIOS, isArray, isNull } from './js/utils';
-import validateNotification from './js/validateNotification';
-import validateSchedule from './js/validateSchedule';
-import validateAndroidChannel from './js/validateAndroidChannel';
-import validateAndroidChannelGroup from './js/validateAndroidChannelGroup';
+import { isFunction, isNumber, isString, isIOS, isArray, isNull, isUndefined } from './utils';
+import validateNotification from './validators/validateNotification';
+import validateSchedule from './validators/validateSchedule';
+import validateAndroidChannel from './validators/validateAndroidChannel';
+import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
-  cancelAllNotifications(): Promise<void> {
+  public cancelAllNotifications(): Promise<void> {
     return this.native.cancelAllNotifications();
   }
 
-  cancelNotification(notificationId: string): Promise<void> {
+  public cancelNotification(notificationId: string): Promise<void> {
     if (!isString(notificationId)) {
       throw new Error("notifee.cancelNotification(*) 'notificationId' expected a string value.");
     }
@@ -33,8 +37,8 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.cancelNotification(notificationId);
   }
 
-  createChannel(channel: AndroidChannel): Promise<string> {
-    let options: any; // TODO options type
+  public createChannel(channel: AndroidChannel): Promise<string> {
+    let options: AndroidChannel;
     try {
       options = validateAndroidChannel(channel);
     } catch (e) {
@@ -45,17 +49,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return Promise.resolve('');
     }
 
+    if (this.core.ANDROID_API_LEVEL < 26) {
+      return Promise.resolve(options.id);
+    }
+
     return this.native.createChannel(options).then(() => {
-      return options.channelId;
+      return options.id;
     });
   }
 
-  createChannels(channels: AndroidChannel[]): Promise<void> {
+  public createChannels(channels: AndroidChannel[]): Promise<void> {
     if (!isArray(channels)) {
       throw new Error("notifee.createChannels(*) 'channels' expected an array of AndroidChannel.");
     }
 
-    const options = [];
+    const options: AndroidChannel[] = [];
     try {
       for (let i = 0; i < channels.length; i++) {
         options[i] = validateAndroidChannel(channels[i]);
@@ -64,19 +72,23 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
     return this.native.createChannels(options);
   }
 
-  createChannelGroup(channelGroup: AndroidChannelGroup): Promise<string> {
-    let options: any; // TODO options type
+  public createChannelGroup(channelGroup: AndroidChannelGroup): Promise<string> {
+    let options: AndroidChannelGroup;
     try {
       options = validateAndroidChannelGroup(channelGroup);
     } catch (e) {
       throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
+    }
+
+    if (this.core.ANDROID_API_LEVEL < 26) {
+      return Promise.resolve(options.id);
     }
 
     if (isIOS) {
@@ -84,11 +96,11 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.createChannelGroup(options).then(() => {
-      return options.channelGroupId;
+      return options.id;
     });
   }
 
-  createChannelGroups(channelGroups: AndroidChannelGroup[]): Promise<void> {
+  public createChannelGroups(channelGroups: AndroidChannelGroup[]): Promise<void> {
     if (!isArray(channelGroups)) {
       throw new Error(
         "notifee.createChannelGroups(*) 'channelGroups' expected an array of AndroidChannelGroup.",
@@ -106,39 +118,39 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       );
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
     return this.native.createChannelGroups(options);
   }
 
-  deleteChannel(channelId: string): Promise<void> {
+  public deleteChannel(channelId: string): Promise<void> {
     if (!isString(channelId)) {
       throw new Error("notifee.deleteChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
     return this.native.deleteChannel(channelId);
   }
 
-  deleteChannelGroup(channelGroupId: string): Promise<void> {
+  public deleteChannelGroup(channelGroupId: string): Promise<void> {
     if (!isString(channelGroupId)) {
       throw new Error("notifee.deleteChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
     return this.native.deleteChannelGroup(channelGroupId);
   }
 
-  displayNotification(notification: NotificationBuilder): Promise<string> {
-    let options: any; // TODO options type
+  public displayNotification(notification: NotificationBuilder): Promise<string> {
+    let options: NotificationBuilder;
     try {
       options = validateNotification(notification);
     } catch (e) {
@@ -146,65 +158,65 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.displayNotification(options).then(() => {
-      return options.notificationId;
+      return options.id;
     });
   }
 
-  getChannel(channelId: string): Promise<AndroidChannel | null> {
+  public getChannel(channelId: string): Promise<NativeAndroidChannel | null> {
     if (!isString(channelId)) {
       throw new Error("notifee.getChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
     return this.native.getChannel(channelId);
   }
 
-  getChannels(): Promise<AndroidChannel[]> {
-    if (isIOS) {
+  public getChannels(): Promise<NativeAndroidChannel[]> {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
     return this.native.getChannels();
   }
 
-  getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null> {
+  public getChannelGroup(channelGroupId: string): Promise<NativeAndroidChannelGroup | null> {
     if (!isString(channelGroupId)) {
       throw new Error("notifee.getChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS) {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
     return this.native.getChannelGroup(channelGroupId);
   }
 
-  getChannelGroups(): Promise<AndroidChannelGroup[]> {
-    if (isIOS) {
+  public getChannelGroups(): Promise<NativeAndroidChannelGroup[]> {
+    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
     return this.native.getChannelGroups();
   }
 
-  getBadge(): Promise<number | null> {
+  public getBadge(): Promise<number | null> {
     return this.native.getBadge();
   }
 
   // TODO is the return direct from native a valid RemoteNotification
-  getInitialNotification(): Promise<RemoteNotification | null> {
+  public getInitialNotification(): Promise<RemoteNotification | null> {
     return this.native.getInitialNotification();
   }
 
   // TODO is the return direct from native a valid RemoteNotification array
-  getScheduledNotifications(): Promise<RemoteNotification[]> {
+  public getScheduledNotifications(): Promise<RemoteNotification[]> {
     return this.native.getScheduledNotifications();
   }
 
-  onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe {
+  public onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
       throw new Error("notifee.onNotification(*) 'observer' expected a function.");
     }
@@ -213,7 +225,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return (): void => {};
   }
 
-  onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe {
+  public onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
       throw new Error("notifee.onNotificationDisplayed(*) 'observer' expected a function.");
     }
@@ -222,7 +234,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return (): void => {};
   }
 
-  onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe {
+  public onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe {
     if (!isFunction(observer)) {
       throw new Error("notifee.onNotificationOpened(*) 'observer' expected a function.");
     }
@@ -231,11 +243,23 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return (): void => {};
   }
 
-  removeAllDeliveredNotifications(): Promise<void> {
+  public openNotificationSettings(channelId?: string): Promise<void> {
+    if (!isUndefined(channelId) && !isString(channelId)) {
+      throw new Error("notifee.openNotificationSettings(*) 'channelId' expected a string value.");
+    }
+
+    if (isIOS) {
+      return Promise.resolve();
+    }
+
+    return this.native.openNotificationSettings(channelId || null);
+  }
+
+  public removeAllDeliveredNotifications(): Promise<void> {
     return this.native.removeAllDeliveredNotifications();
   }
 
-  removeDeliveredNotification(notificationId: string): Promise<void> {
+  public removeDeliveredNotification(notificationId: string): Promise<void> {
     if (!isString(notificationId)) {
       throw new Error(
         "notifee.removeDeliveredNotification(*) 'notificationId' expected a string value.",
@@ -245,7 +269,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.removeDeliveredNotification(notificationId);
   }
 
-  scheduleNotification(
+  public scheduleNotification(
     notification: NotificationBuilder,
     schedule: NotificationSchedule,
   ): Promise<void> {
@@ -266,7 +290,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.scheduleNotification(notificationOptions, scheduleOptions);
   }
 
-  setBadge(badge: number): Promise<void> {
+  public setBadge(badge: number): Promise<void> {
     if (!isNull(badge) || !isNumber(badge)) {
       throw new Error(
         "notifee.removeDeliveredNotification(*) 'badge' expected null or a number value.",

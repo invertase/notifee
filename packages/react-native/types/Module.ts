@@ -23,6 +23,8 @@ import {
   AndroidSemanticAction,
   AndroidStyle,
   AndroidVisibility,
+  NativeAndroidChannel,
+  NativeAndroidChannelGroup,
 } from './NotificationAndroid';
 
 /**
@@ -133,18 +135,18 @@ export interface Module {
    * @param channelId The channel id.
    * @platform android
    */
-  getChannel(channelId: string): Promise<AndroidChannel | null>;
+  getChannel(channelId: string): Promise<NativeAndroidChannel | null>;
 
   /**
    * Returns an array of `AndroidChannel` which are currently active on the device.
    *
    * @platform android
    */
-  getChannels(): Promise<AndroidChannel[]>;
+  getChannels(): Promise<NativeAndroidChannel[]>;
 
-  getChannelGroup(channelGroupId: string): Promise<AndroidChannelGroup | null>;
+  getChannelGroup(channelGroupId: string): Promise<NativeAndroidChannelGroup | null>;
 
-  getChannelGroups(): Promise<AndroidChannelGroup[]>;
+  getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
   // todo null if no badge?
   getBadge(): Promise<number | null>;
@@ -158,6 +160,26 @@ export interface Module {
   onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe;
 
   onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe;
+
+  /**
+   * Opens the Android System settings for the application.
+   *
+   * If the API version is >= 26:
+   * - With no `channelId`, the notification settings screen is displayed.
+   * - With a `channelId`, the notification settings screen for the specific channel is displayed.
+   *
+   * If the API version is < 26, the application settings screen is displayed. The `channelId`
+   * is ignored.
+   *
+   * If an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect
+   * back to your application.
+   *
+   * On iOS, this is a no-op.
+   *
+   * @platform android
+   * @param channelId
+   */
+  openNotificationSettings(channelId?: string): Promise<void>;
 
   removeAllDeliveredNotifications(): Promise<void>;
 

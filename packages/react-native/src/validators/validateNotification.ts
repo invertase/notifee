@@ -2,12 +2,15 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateNotificationId, hasOwnProperty, isObject, isString } from './utils';
+import { generateId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';
+import { NotificationBuilder } from '../../types/Notification';
 
-export default function validateNotification(notification) {
+export default function validateNotification(
+  notification: NotificationBuilder,
+): NotificationBuilder {
   if (!isObject(notification)) {
     throw new Error("'notification' expected an object value.");
   }
@@ -18,30 +21,27 @@ export default function validateNotification(notification) {
   }
 
   // Defaults
-  const out = {
-    notificationId: '',
+  const out: NotificationBuilder = {
+    id: '',
     title: '',
     subtitle: '',
     body: notification.body,
     data: {},
     ios: {},
     android: {},
-    sound: 'default',
   };
 
   /**
-   * notificationId
+   * id
    */
-  if (hasOwnProperty(notification, 'notificationId')) {
-    if (!isString(notification.notificationId) || !notification.notificationId) {
-      throw new Error(
-        "'notification.notificationId' invalid notification ID, expected a unique string value.",
-      );
+  if (hasOwnProperty(notification, 'id')) {
+    if (!isString(notification.id) || !notification.id) {
+      throw new Error("'notification.id' invalid notification ID, expected a unique string value.");
     }
 
-    out.notificationId = notification.notificationId;
+    out.id = notification.id;
   } else {
-    out.notificationId = generateNotificationId();
+    out.id = generateId();
   }
 
   /**
@@ -69,7 +69,7 @@ export default function validateNotification(notification) {
   /**
    * data
    */
-  if (hasOwnProperty(notification, 'data')) {
+  if (hasOwnProperty(notification, 'data') && notification.data != undefined) {
     if (!isObject(notification.data)) {
       throw new Error("'notification.data' expected an object value containing key/value pairs.");
     }
@@ -88,14 +88,6 @@ export default function validateNotification(notification) {
     out.data = notification.data;
   }
 
-  if (hasOwnProperty(notification, 'sound')) {
-    if (!isString(notification.sound)) {
-      throw new Error("'notification.sound' expected a string value.");
-    }
-
-    out.sound = notification.sound;
-  }
-
   /**
    * android
    */
@@ -104,9 +96,7 @@ export default function validateNotification(notification) {
   /**
    * ios
    */
-  if (hasOwnProperty(notification, 'ios')) {
-    out.ios = validateiOSNotification(notification.ios);
-  }
+  out.ios = validateiOSNotification(); // todo
 
   return out;
 }

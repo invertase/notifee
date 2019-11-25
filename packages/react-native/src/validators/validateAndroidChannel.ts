@@ -2,26 +2,30 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isArray, isBoolean, isObject, isString } from './utils';
+import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
-import { AndroidVisibility, AndroidImportance } from '../../types/NotificationAndroid';
+import {
+  AndroidVisibility,
+  AndroidImportance,
+  AndroidChannel,
+} from '../../types/NotificationAndroid';
 
-export default function validateAndroidChannel(channel) {
+export default function validateAndroidChannel(channel: AndroidChannel): AndroidChannel {
   if (!isObject(channel)) {
     throw new Error("'channel' expected an object value.");
   }
 
   /**
-   * channelId
+   * id
    */
-  if (!isString(channel.channelId)) {
-    throw new Error("'channel.channelId' expected a string value.");
+  if (!isString(channel.id)) {
+    throw new Error("'channel.id' expected a string value.");
   }
 
   // empty check
-  if (!channel.channelId) {
-    throw new Error("'channel.channelId' expected a valid string channelId.");
+  if (!channel.id) {
+    throw new Error("'channel.id' expected a valid string channelId.");
   }
 
   /**
@@ -39,28 +43,39 @@ export default function validateAndroidChannel(channel) {
   /**
    * Defaults
    */
-  const out = {
-    channelId: channel.channelId,
+  const out: AndroidChannel = {
+    id: channel.id,
     name: channel.name,
-    allowBubbles: false,
+    bubbles: false,
     bypassDnd: false,
-    enableLights: true,
-    enableVibration: true,
-    showBadge: true,
+    lights: true,
+    vibration: true,
+    badge: true,
     importance: AndroidImportance.DEFAULT,
     visibility: AndroidVisibility.PRIVATE,
   };
 
-  // /**
-  //  * allowBubbles
-  //  */
-  // if (hasOwnProperty(channel, 'allowBubbles')) {
-  //   if (!isBoolean(channel.allowBubbles)) {
-  //     throw new Error("'channel.allowBubbles' expected a boolean value.");
-  //   }
-  //
-  //   out.allowBubbles = channel.allowBubbles;
-  // }
+  /**
+   * badge
+   */
+  if (hasOwnProperty(channel, 'badge')) {
+    if (!isBoolean(channel.badge)) {
+      throw new Error("'channel.badge' expected a boolean value.");
+    }
+
+    out.badge = channel.badge;
+  }
+
+  /**
+   * bubbles
+   */
+  if (hasOwnProperty(channel, 'bubbles')) {
+    if (!isBoolean(channel.bubbles)) {
+      throw new Error("'channel.bubbles' expected a boolean value.");
+    }
+
+    out.bubbles = channel.bubbles;
+  }
 
   /**
    * bypassDnd
@@ -85,25 +100,25 @@ export default function validateAndroidChannel(channel) {
   }
 
   /**
-   * enableLights
+   * lights
    */
-  if (hasOwnProperty(channel, 'enableLights')) {
-    if (!isBoolean(channel.enableLights)) {
-      throw new Error("'channel.enableLights' expected a boolean value.");
+  if (hasOwnProperty(channel, 'lights')) {
+    if (!isBoolean(channel.lights)) {
+      throw new Error("'channel.lights' expected a boolean value.");
     }
 
-    out.enableLights = channel.enableLights;
+    out.lights = channel.lights;
   }
 
   /**
-   * enableVibration
+   * vibration
    */
-  if (hasOwnProperty(channel, 'enableVibration')) {
-    if (!isBoolean(channel.enableVibration)) {
-      throw new Error("'channel.enableVibration' expected a boolean value.");
+  if (hasOwnProperty(channel, 'vibration')) {
+    if (!isBoolean(channel.vibration)) {
+      throw new Error("'channel.vibration' expected a boolean value.");
     }
 
-    out.enableVibration = channel.enableVibration;
+    out.vibration = channel.vibration;
   }
 
   /**
@@ -120,7 +135,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * importance
    */
-  if (hasOwnProperty(channel, 'importance')) {
+  if (hasOwnProperty(channel, 'importance') && channel.importance != undefined) {
     if (!Object.values(AndroidImportance).includes(channel.importance)) {
       throw new Error("'channel.importance' expected an AndroidImportance value.");
     }
@@ -131,7 +146,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * lightColor
    */
-  if (hasOwnProperty(channel, 'lightColor')) {
+  if (hasOwnProperty(channel, 'lightColor') && channel.lightColor != undefined) {
     if (!isString(channel.lightColor)) {
       throw new Error("'channel.lightColor' expected a string value.");
     }
@@ -148,23 +163,12 @@ export default function validateAndroidChannel(channel) {
   /**
    * visibility
    */
-  if (hasOwnProperty(channel, 'visibility')) {
+  if (hasOwnProperty(channel, 'visibility') && channel.visibility != undefined) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
       throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
 
     out.visibility = channel.visibility;
-  }
-
-  /**
-   * showBadge
-   */
-  if (hasOwnProperty(channel, 'showBadge')) {
-    if (!isBoolean(channel.showBadge)) {
-      throw new Error("'channel.showBadge' expected a boolean value.");
-    }
-
-    out.showBadge = channel.showBadge;
   }
 
   /**
@@ -185,7 +189,7 @@ export default function validateAndroidChannel(channel) {
   /**
    * vibrationPattern
    */
-  if (hasOwnProperty(channel, 'vibrationPattern')) {
+  if (hasOwnProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
     if (!isArray(channel.vibrationPattern)) {
       throw new Error("'channel.vibrationPattern' expected an array.");
     }

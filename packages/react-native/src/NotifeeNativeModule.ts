@@ -14,12 +14,12 @@ export default class NotifeeNativeModule {
   private _nativeModule: NativeModulesStatic | null;
   private readonly _config: NativeModuleConfig;
 
-  constructor(config: NativeModuleConfig) {
+  public constructor(config: NativeModuleConfig) {
     this._nativeModule = null;
     this._config = Object.assign({}, config);
   }
 
-  get notifeeConfig(): NotifeeJsonConfig {
+  public get notifeeConfig(): NotifeeJsonConfig {
     if (notifeeConfigJson) {
       return notifeeConfigJson;
     }
@@ -27,16 +27,20 @@ export default class NotifeeNativeModule {
     return notifeeConfigJson;
   }
 
-  get emitter(): EventEmitter {
+  public get emitter(): EventEmitter {
     return NotifeeJSEventEmitter;
   }
 
-  get native(): NativeModulesStatic {
+  public get native(): NativeModulesStatic {
     if (this._nativeModule) {
       return this._nativeModule;
     }
 
     this._nativeModule = getNativeModule(this._config);
     return this._nativeModule;
+  }
+
+  public get core(): NativeModulesStatic {
+    return getCoreModule();
   }
 }

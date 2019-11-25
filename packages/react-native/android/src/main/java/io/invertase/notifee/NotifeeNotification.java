@@ -90,6 +90,7 @@ class NotifeeNotification {
     if (androidOptionsBundle.containsKey("actions")) {
       ArrayList actions = androidOptionsBundle.getParcelableArrayList("actions");
 
+      // TODO implement actions
       for (Object action : Objects.requireNonNull(actions)) {
 //        notificationBuilder.addAction(
 //          buildNotificationAction(action)
@@ -220,8 +221,8 @@ class NotifeeNotification {
       notificationBuilder.setShortcutId(androidOptionsBundle.getString("shortcutId"));
     }
 
-    if (androidOptionsBundle.containsKey("showWhenTimestamp")) {
-      notificationBuilder.setShowWhen(androidOptionsBundle.getBoolean("showWhenTimestamp"));
+    if (androidOptionsBundle.containsKey("showTimestamp")) {
+      notificationBuilder.setShowWhen(androidOptionsBundle.getBoolean("showTimestamp"));
     }
 
     if (androidOptionsBundle.containsKey("smallIcon")) {
@@ -271,8 +272,8 @@ class NotifeeNotification {
       notificationBuilder.setTimeoutAfter(timeoutAfter);
     }
 
-    if (androidOptionsBundle.containsKey("usesChronometer")) {
-      notificationBuilder.setUsesChronometer(androidOptionsBundle.getBoolean("usesChronometer"));
+    if (androidOptionsBundle.containsKey("showChronometer")) {
+      notificationBuilder.setUsesChronometer(androidOptionsBundle.getBoolean("showChronometer"));
     }
 
     if (androidOptionsBundle.containsKey("vibrationPattern")) {
@@ -291,8 +292,8 @@ class NotifeeNotification {
       notificationBuilder.setVisibility((int) androidOptionsBundle.getDouble("visibility"));
     }
 
-    if (androidOptionsBundle.containsKey("when")) {
-      long when = (long) androidOptionsBundle.getDouble("when");
+    if (androidOptionsBundle.containsKey("timestamp")) {
+      long when = (long) androidOptionsBundle.getDouble("timestamp");
       notificationBuilder.setWhen(when);
     }
 

@@ -2,18 +2,21 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isObject, isString } from './utils';
+import { hasOwnProperty, isObject, isString } from '../utils';
+import { AndroidChannelGroup } from '../../types/NotificationAndroid';
 
-export default function validateAndroidChannelGroup(group) {
+export default function validateAndroidChannelGroup(
+  group: AndroidChannelGroup,
+): AndroidChannelGroup {
   if (!isObject(group)) {
     throw new Error("'group' expected an object value.");
   }
 
   /**
-   * channelGroupId
+   * id
    */
-  if (!isString(group.channelGroupId) || !group.channelGroupId) {
-    throw new Error("'group.channelGroupId' expected a string value.");
+  if (!isString(group.id) || !group.id) {
+    throw new Error("'group.id' expected a string value.");
   }
 
   /**
@@ -26,8 +29,8 @@ export default function validateAndroidChannelGroup(group) {
   /**
    * Defaults
    */
-  const out = {
-    channelGroupId: group.channelGroupId,
+  const out: AndroidChannelGroup = {
+    id: group.id,
     name: group.name,
   };
 

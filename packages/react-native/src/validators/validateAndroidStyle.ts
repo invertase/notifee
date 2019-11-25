@@ -2,15 +2,21 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { AndroidStyle } from '../../types/NotificationAndroid';
-import { hasOwnProperty, isString } from './utils';
+import {
+  AndroidBigPictureStyle,
+  AndroidBigTextStyle,
+  AndroidStyle,
+} from '../../types/NotificationAndroid';
+import { hasOwnProperty, isString } from '../utils';
 
 /**
  * Validates a BigPictureStyle
  * @param style
  * @returns {{type: *, picture: *}}
  */
-export function validateAndroidBigPictureStyle(style) {
+export function validateAndroidBigPictureStyle(
+  style: AndroidBigPictureStyle,
+): AndroidBigPictureStyle {
   if (!isString(style.picture) || !style.picture) {
     throw new Error(
       "'notification.android.style' BigPictureStyle: 'picture' expected a valid string value.",
@@ -18,7 +24,7 @@ export function validateAndroidBigPictureStyle(style) {
   }
 
   // Defaults
-  const out = {
+  const out: AndroidBigPictureStyle = {
     type: AndroidStyle.BIGPICTURE,
     picture: style.picture,
   };
@@ -60,7 +66,7 @@ export function validateAndroidBigPictureStyle(style) {
  *
  * @param style
  */
-export function validateAndroidBigTextStyle(style) {
+export function validateAndroidBigTextStyle(style: AndroidBigTextStyle): AndroidBigTextStyle {
   if (!isString(style.text) || !style.text) {
     throw new Error(
       "'notification.android.style' BigTextStyle: 'text' expected a valid string value.",
@@ -68,7 +74,7 @@ export function validateAndroidBigTextStyle(style) {
   }
 
   // Defaults
-  const out = {
+  const out: AndroidBigTextStyle = {
     type: AndroidStyle.BIGTEXT,
     text: style.text,
   };

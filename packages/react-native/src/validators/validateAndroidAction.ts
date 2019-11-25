@@ -2,11 +2,11 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { isArray, isBoolean, isObject, isString, hasOwnProperty } from './utils';
+import { isArray, isBoolean, isObject, isString, hasOwnProperty } from '../utils';
 
-import { AndroidSemanticAction } from '../../types/NotificationAndroid';
+import { AndroidAction, AndroidSemanticAction } from '../../types/NotificationAndroid';
 
-export default function validateAndroidAction(action) {
+export default function validateAndroidAction(action: AndroidAction): AndroidAction {
   if (!isObject(action)) {
     throw new Error("'action' expected an object value.");
   }
@@ -15,7 +15,7 @@ export default function validateAndroidAction(action) {
     throw new Error("'action.key' expected a string value.");
   }
 
-  if (!isString(action.key) || !action.icon) {
+  if (!isString(action.icon) || !action.icon) {
     throw new Error("'action.icon' expected a string value.");
   }
 
@@ -24,7 +24,7 @@ export default function validateAndroidAction(action) {
     throw new Error("'action.title' expected a string value.");
   }
 
-  const out = {
+  const out: AndroidAction = {
     key: action.key,
     icon: action.icon,
     title: action.title,
@@ -48,7 +48,7 @@ export default function validateAndroidAction(action) {
     out.remoteInputs = action.remoteInputs;
   }
 
-  if (hasOwnProperty(action, 'semanticAction')) {
+  if (hasOwnProperty(action, 'semanticAction') && action.semanticAction != undefined) {
     if (!Object.values(AndroidSemanticAction).includes(action.semanticAction)) {
       throw new Error("'action.semanticAction' expected an AndroidSemanticAction.");
     }

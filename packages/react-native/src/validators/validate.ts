@@ -3,15 +3,15 @@
  */
 
 import { AndroidColor } from '../../types/NotificationAndroid';
-import { isNumber, isString } from './utils';
+import { isNumber, isString } from '../utils';
 
 /**
  * Validates any hexadecimal (optional transparency)
  * @param color
  * @returns {boolean}
  */
-export function isValidColor(color) {
-  if (AndroidColor[color.toUpperCase()]) {
+export function isValidColor(color: string): boolean {
+  if (Object.values(AndroidColor).includes(color as AndroidColor)) {
     return true;
   }
 
@@ -29,7 +29,7 @@ export function isValidColor(color) {
  * @param timestamp
  * @returns {boolean}
  */
-export function isValidTimestamp(timestamp) {
+export function isValidTimestamp(timestamp: number): boolean {
   return timestamp > 0;
 }
 
@@ -37,7 +37,7 @@ export function isValidTimestamp(timestamp) {
  * Ensures all values in the pattern are valid
  * @param pattern {array}
  */
-export function isValidVibratePattern(pattern) {
+export function isValidVibratePattern(pattern: number[]): boolean {
   if (pattern.length % 2 !== 0) {
     return false;
   }
@@ -57,7 +57,10 @@ export function isValidVibratePattern(pattern) {
  * Ensures a given light pattern is valid
  * @param pattern {array}
  */
-export function isValidLightPattern(pattern) {
+type LightPattern = [string, number, number];
+type ValidLightPattern = [boolean] | [boolean, 'color' | 'onMs' | 'offMs'];
+
+export function isValidLightPattern(pattern: LightPattern): ValidLightPattern {
   const [color, onMs, offMs] = pattern;
 
   if (!isValidColor(color)) {
@@ -79,7 +82,7 @@ export function isValidLightPattern(pattern) {
   return [true];
 }
 
-export function isValidRemoteInputHistory(history) {
+export function isValidRemoteInputHistory(history: string[]): boolean {
   for (let i = 0; i < history.length; i++) {
     const element = history[i];
     if (!isString(element)) {

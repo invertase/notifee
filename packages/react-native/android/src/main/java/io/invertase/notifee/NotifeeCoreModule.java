@@ -108,7 +108,7 @@ public class NotifeeCoreModule extends NotifeeNativeModule {
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
     constants.put("NOTIFEE_RAW_JSON", NotifeeJSON.getSharedInstance().getRawJSON());
-    constants.put("ANDROID_API_LEVEL", Build.VERSION.SDK_INT);
+    constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
     return constants;
   }
 }
