@@ -41,6 +41,7 @@ import {
 export default function validateAndroidNotification(
   android?: NotificationAndroid,
 ): NotificationAndroid {
+  // Notification default values
   const out: NotificationAndroid = {
     autoCancel: true,
     badgeIconType: AndroidBadgeIconType.NONE,
@@ -484,17 +485,17 @@ export default function validateAndroidNotification(
    * tag
    * TODO not sure what this is?
    */
-  // if (hasOwnProperty(android, 'tag')) {
-  //   if (!isString(android.tag)) {
-  //     throw new Error("'notification.android.tag' expected a string value.");
-  //   }
-  //
-  //   if (android.tag.includes('|')) {
-  //     throw new Error('\'notification.android.tag\' tag cannot contain the "|" (pipe) character.');
-  //   }
-  //
-  //   out.tag = android.tag;
-  // }
+  if (hasOwnProperty(android, 'tag') && android.tag != undefined) {
+    if (!isString(android.tag)) {
+      throw new Error("'notification.android.tag' expected a string value.");
+    }
+
+    if (android.tag.includes('|')) {
+      throw new Error(`'notification.android.tag' tag cannot contain the "|" (pipe) character.`);
+    }
+
+    out.tag = android.tag;
+  }
 
   /**
    * ticker

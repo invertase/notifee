@@ -576,6 +576,11 @@ export interface NotificationAndroid {
   visibility?: AndroidVisibility;
 
   /**
+   * TODO tag description
+   */
+  tag?: string;
+
+  /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
    *
    * - Use with `showTimestamp` to show the timestamp to the users.
