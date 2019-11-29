@@ -298,22 +298,6 @@ android.describe('notifications', () => {
       });
     });
 
-    describe('contentInfo', () => {
-      it('sets contentInfo', async () => {
-        const notificationId = await notifee.displayNotification({
-          title: 'foo bar baz5',
-          body: 'foo bar baz5',
-          android: {
-            channelId: 'foo',
-            contentInfo: 'Content Information',
-          },
-        });
-
-        const notification = await device.notifications.findById(notificationId);
-        notification.contentInfo.should.eql('Content Information');
-      });
-    });
-
     describe('group', () => {
       it('sets group', async () => {
         const notificationId = await notifee.displayNotification({

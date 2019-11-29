@@ -15,6 +15,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.Person;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static io.invertase.notifee.NotifeeUtils.getPerson;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 import static io.invertase.notifee.NotifeeUtils.getSoundUri;
 
@@ -137,10 +139,6 @@ class NotifeeNotification {
 
     if (androidOptionsBundle.containsKey("colorized")) {
       notificationBuilder.setColorized(androidOptionsBundle.getBoolean("colorized"));
-    }
-
-    if (androidOptionsBundle.containsKey("contentInfo")) {
-      notificationBuilder.setContentInfo(androidOptionsBundle.getString("contentInfo"));
     }
 
     if (androidOptionsBundle.containsKey("chronometerDirection")) {
@@ -266,6 +264,9 @@ class NotifeeNotification {
         case 2:
           style = getInboxStyle(styleBundle);
           break;
+        case 3:
+          style = getMessagingStyle(styleBundle);
+          break;
       }
 
       if (style != null) {
@@ -310,15 +311,6 @@ class NotifeeNotification {
     return notificationBuilder.build();
   }
 
-//  private NotificationCompat.Action buildNotificationAction(Object action) {
-//    String icon = action.getString();
-//
-//    NotificationCompat.Action.Builder ab = new NotificationCompat.Action.Builder(
-//      "foo",
-//      "bar",
-//      "baz"
-//    );
-//  }
 
   /**
    * BigPictureStyle
@@ -398,6 +390,39 @@ class NotifeeNotification {
     }
 
     return inputStyle;
+  }
+
+  /**
+   * MessagingStyle
+   */
+  private NotificationCompat.MessagingStyle getMessagingStyle(Bundle messagingStyleBundle) {
+    NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(
+      getPerson(Objects.requireNonNull(messagingStyleBundle.getBundle("person")))
+    );
+
+    if (messagingStyleBundle.containsKey("title")) {
+      messagingStyle = messagingStyle.setConversationTitle(messagingStyleBundle.getString("title"));
+    }
+
+    if (messagingStyleBundle.containsKey("group")) {
+      messagingStyle = messagingStyle.setGroupConversation(messagingStyleBundle.getBoolean("group"));
+    }
+
+    ArrayList<Bundle> messages = messagingStyleBundle.getParcelableArrayList("messages");
+
+    for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
+      Bundle message = messages.get(i);
+      Person person = null;
+      long timestamp = (long) message.getDouble("timestamp");
+
+      if (message.containsKey("person")) {
+        person = getPerson(Objects.requireNonNull(message.getBundle("person")));
+      }
+
+      messagingStyle = messagingStyle.addMessage(message.getString("text"), timestamp, person);
+    }
+
+    return messagingStyle;
   }
 
   /**

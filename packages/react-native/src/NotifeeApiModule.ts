@@ -202,10 +202,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getChannelGroups();
   }
 
-  public getBadge(): Promise<number | null> {
-    return this.native.getBadge();
-  }
-
   // TODO is the return direct from native a valid RemoteNotification
   public getInitialNotification(): Promise<RemoteNotification | null> {
     return this.native.getInitialNotification();
@@ -288,16 +284,5 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.scheduleNotification(notificationOptions, scheduleOptions);
-  }
-
-  public setBadge(badge: number): Promise<void> {
-    if (!isNull(badge) || !isNumber(badge)) {
-      throw new Error(
-        "notifee.removeDeliveredNotification(*) 'badge' expected null or a number value.",
-      );
-    }
-
-    // todo can a badge be negative?
-    return this.native.setBadge(badge);
   }
 }

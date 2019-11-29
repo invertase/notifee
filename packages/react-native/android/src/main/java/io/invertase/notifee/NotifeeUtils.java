@@ -4,13 +4,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.Person;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
@@ -148,5 +151,34 @@ class NotifeeUtils {
    */
   static String getColor(int color) {
     return String.format("#%06X", (0xFFFFFF & color));
+  }
+
+  static Person getPerson(Bundle personBundle) {
+    Person.Builder personBuilder = new Person.Builder();
+
+    personBuilder.setName(personBundle.getString("name"));
+
+    if (personBundle.containsKey("id")) {
+      personBuilder.setKey(personBundle.getString("id"));
+    }
+
+    if (personBundle.containsKey("bot")) {
+      personBuilder.setBot(personBundle.getBoolean("bot"));
+    }
+
+    if (personBundle.containsKey("important")) {
+      personBuilder.setImportant(personBundle.getBoolean("important"));
+    }
+
+    if (personBundle.containsKey("icon")) {
+      // TODO icon
+    }
+
+
+    if (personBundle.containsKey("uri")) {
+      personBuilder.setUri(personBundle.getString("uri"));
+    }
+
+    return personBuilder.build();
   }
 }

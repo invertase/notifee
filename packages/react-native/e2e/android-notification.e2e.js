@@ -185,23 +185,6 @@ describe('notifications() Notification', () => {
     });
   });
 
-  describe('contentInfo', () => {
-    it('throws if contentInfo is not a string', () => {
-      try {
-        validate({ contentInfo: 123 });
-        return Promise.reject(new Error('Did not throw Error'));
-      } catch (e) {
-        e.message.should.containEql("'notification.android.contentInfo' expected a string value");
-        return Promise.resolve();
-      }
-    });
-
-    it('sets contentInfo value', () => {
-      const v = validate({ contentInfo: 'foo bar' });
-      v.contentInfo.should.eql('foo bar');
-    });
-  });
-
   describe('defaults', () => {
     it('throws if defaults is not an array', () => {
       try {

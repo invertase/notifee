@@ -37,6 +37,7 @@ import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
   validateAndroidInboxStyle,
+  validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
 
 export default function validateAndroidNotification(
@@ -182,17 +183,6 @@ export default function validateAndroidNotification(
     }
 
     out.colorized = android.colorized;
-  }
-
-  /**
-   * contentInfo
-   */
-  if (hasOwnProperty(android, 'contentInfo')) {
-    if (!isString(android.contentInfo)) {
-      throw new Error("'notification.android.contentInfo' expected a string value.");
-    }
-
-    out.contentInfo = android.contentInfo;
   }
 
   /**
@@ -502,9 +492,12 @@ export default function validateAndroidNotification(
       case AndroidStyle.INBOX:
         out.style = validateAndroidInboxStyle(android.style);
         break;
+      case AndroidStyle.MESSAGING:
+        out.style = validateAndroidMessagingStyle(android.style);
+        break;
       default:
         throw new Error(
-          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT or AndroidStyle.INBOX.",
+          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT, AndroidStyle.INBOX or AndroidStyle.MESSAGING.",
         );
     }
   }

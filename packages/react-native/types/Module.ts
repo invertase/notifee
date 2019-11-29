@@ -148,9 +148,6 @@ export interface Module {
 
   getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
-  // todo null if no badge?
-  getBadge(): Promise<number | null>;
-
   getInitialNotification(): Promise<RemoteNotification | null>;
 
   getScheduledNotifications(): Promise<RemoteNotification[]>;
@@ -189,8 +186,6 @@ export interface Module {
     notification: NotificationBuilder,
     schedule: NotificationSchedule,
   ): Promise<void>;
-
-  setBadge(badge: number): Promise<void>;
 }
 
 /**

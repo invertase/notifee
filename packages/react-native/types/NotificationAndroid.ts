@@ -189,9 +189,6 @@ export interface NotificationAndroid {
    */
   colorized?: boolean;
 
-  // TODO is this needed? https://stackoverflow.com/a/40753998/11760094 - use subtext instead?
-  contentInfo?: string;
-
   /**
    * If `showChronometer` is `true`, the direction of the chronometer can be changed to count down instead of up.
    *
@@ -519,7 +516,7 @@ export interface NotificationAndroid {
    * });
    * ```
    **/
-  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle;
+  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
 
   /**
    * Text that summarizes this notification for accessibility services. As of the Android L release, this
@@ -615,7 +612,9 @@ export interface NotificationAndroid {
   visibility?: AndroidVisibility;
 
   /**
-   * TODO tag description
+   * - tags
+   * - for querying notifications
+   * - has no visual impact on notifications
    */
   tag?: string;
 
@@ -738,11 +737,116 @@ export interface AndroidBigTextStyle {
   summary?: string;
 }
 
+/**
+ * TODO
+ */
 export interface AndroidInboxStyle {
   type: AndroidStyle.INBOX;
   lines: string[];
   title?: string;
   summary?: string;
+}
+
+/**
+ *
+ */
+export interface AndroidMessagingStyle {
+  type: AndroidStyle.MESSAGING;
+
+  /**
+   * The person who is receiving a message on the current device.
+   */
+  person: AndroidPerson;
+
+  /**
+   * An array of messages to display inside of the notification.
+   */
+  messages: AndroidMessagingStyleMessage[];
+
+  /**
+   * An optional conversation title, displayed at the top of the
+   * notification.
+   */
+  title?: string;
+
+  /**
+   * Sets whether this conversation notification represents a group
+   * (3 or more persons).
+   */
+  group?: boolean;
+}
+
+/**
+ * The interface for messages when constructing a Messaging Style notification.
+ *
+ * #### Example
+ *
+ * ```js
+ *
+ * ```
+ */
+export interface AndroidMessagingStyleMessage {
+  /**
+   * The content of the message.
+   */
+  text: string;
+
+  /**
+   * The timestamp of when the message arrived in milliseconds.
+   */
+  timestamp: number;
+
+  /**
+   * The sender of this message. See `AndroidPerson` reference for more information
+   * on the properties available.
+   *
+   * > This property should only be provided if the message is from an external person, and not the person receiving the message.
+   */
+  person?: AndroidPerson;
+}
+
+/**
+ * The interface used to describe a person shown in notifications. Currently used with `AndroidMessagingStyle` notifications.
+ */
+export interface AndroidPerson {
+  /**
+   * The name of the person.
+   *
+   * If no `id` is provided, the name will be used as the unique identifier.
+   */
+  name: string;
+
+  /**
+   * An optional unique ID of the person. Setting this property is preferred for unique identification,
+   * however not required. If no value is provided, the `name` will be used instead..
+   */
+  id?: string;
+
+  /**
+   * If `true` this person represents a machine rather than a human. This is used primarily for testing and automated tooling.
+   *
+   * Defaults to `false`.
+   */
+  bot?: boolean;
+
+  /**
+   * If `true` this person will be marked as important.
+   *
+   * Important users are those who frequently contact the receiving person.
+   *
+   * Defaults to `false`.
+   */
+  important?: boolean;
+
+  /**
+   * TODO
+   */
+  icon?: string; // todo - format?
+
+  /**
+   * TODO
+   */
+  uri?: string; // todo - how?
 }
 
 /**
@@ -1225,6 +1329,7 @@ export enum AndroidStyle {
   BIGPICTURE = 0,
   BIGTEXT = 1,
   INBOX = 2,
+  MESSAGING = 3,
 }
 
 /**
