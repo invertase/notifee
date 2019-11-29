@@ -2,7 +2,6 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-
 describe('notifee', () => {
   it.only('playground', async () => {
     // notifee.AndroidColor.RED.should.equal('red');
@@ -12,7 +11,7 @@ describe('notifee', () => {
     const channelId = await notifee.createChannel({
       id: 'test',
       name: 'Testing Channel!!!',
-      importance: notifee.AndroidImportance.HIGH,
+      // importance: notifee.AndroidImportance.HIGH,
       badge: true,
       bubbles: true,
     });
@@ -43,13 +42,30 @@ describe('notifee', () => {
         // },
         shortcutId: '123',
         // showTimestamp: true,
+        // style: {
+        //   type: notifee.AndroidStyle.BIGTEXT,
+        //   text: 'Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo Foooo ',
+        //   title: 'BigText',
+        // },
+        // style: {
+        //   type: notifee.AndroidStyle.BIGPICTURE,
+        //   picture:
+        //     'https://images.unsplash.com/photo-1568526381923-caf3fd520382?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+        //   title: 'BigPicture',
+        // },
+        style: {
+          type: notifee.AndroidStyle.INBOX,
+          lines: [],
+          // lines: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven'],
+          title: 'InboxStyle',
+        },
         ticker: 'Elliot Smells',
         // timeoutAfter: 8000,
         showChronometer: true,
         timestamp: Date.now() - 20000,
         tag: 'elliot',
       },
-    }
+    };
 
     await notifee.displayNotification(config);
     // await notifee.displayNotification(config);

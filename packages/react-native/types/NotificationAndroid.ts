@@ -519,7 +519,7 @@ export interface NotificationAndroid {
    * });
    * ```
    **/
-  style?: AndroidBigPictureStyle | AndroidBigTextStyle;
+  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle;
 
   /**
    * Text that summarizes this notification for accessibility services. As of the Android L release, this
@@ -735,6 +735,13 @@ export interface AndroidBigTextStyle {
   /**
    * Sets summary text when the notification is expanded.
    */
+  summary?: string;
+}
+
+export interface AndroidInboxStyle {
+  type: AndroidStyle.INBOX;
+  lines: string[];
+  title?: string;
   summary?: string;
 }
 
@@ -1217,6 +1224,7 @@ export enum AndroidSemanticAction {
 export enum AndroidStyle {
   BIGPICTURE = 0,
   BIGTEXT = 1,
+  INBOX = 2,
 }
 
 /**

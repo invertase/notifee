@@ -5,14 +5,13 @@
 import {
   AndroidBigPictureStyle,
   AndroidBigTextStyle,
+  AndroidInboxStyle,
   AndroidStyle,
 } from '../../types/NotificationAndroid';
-import { hasOwnProperty, isString } from '../utils';
+import { hasOwnProperty, isArray, isString } from '../utils';
 
 /**
  * Validates a BigPictureStyle
- * @param style
- * @returns {{type: *, picture: *}}
  */
 export function validateAndroidBigPictureStyle(
   style: AndroidBigPictureStyle,
@@ -63,8 +62,7 @@ export function validateAndroidBigPictureStyle(
 }
 
 /**
- *
- * @param style
+ * Validates a BigTextStyle
  */
 export function validateAndroidBigTextStyle(style: AndroidBigTextStyle): AndroidBigTextStyle {
   if (!isString(style.text) || !style.text) {
@@ -93,6 +91,50 @@ export function validateAndroidBigTextStyle(style: AndroidBigTextStyle): Android
     if (!isString(style.summary)) {
       throw new Error(
         "'notification.android.style' BigTextStyle: 'summary' expected a string value.",
+      );
+    }
+
+    out.summary = style.summary;
+  }
+
+  return out;
+}
+
+/**
+ * Validates a InboxStyle
+ */
+export function validateAndroidInboxStyle(style: AndroidInboxStyle): AndroidInboxStyle {
+  if (!isArray(style.lines)) {
+    throw new Error("'notification.android.style' InboxStyle: 'lines' expected an array.");
+  }
+
+  for (let i = 0; i < style.lines.length; i++) {
+    const line = style.lines[i];
+
+    if (!isString(line)) {
+      throw new Error(
+        `'notification.android.style' InboxStyle: 'lines' expected a string value at array index ${i}.`,
+      );
+    }
+  }
+
+  const out: AndroidInboxStyle = {
+    type: AndroidStyle.INBOX,
+    lines: style.lines,
+  };
+
+  if (hasOwnProperty(style, 'title')) {
+    if (!isString(style.title)) {
+      throw new Error("'notification.android.style' InboxStyle: 'title' expected a string value.");
+    }
+
+    out.title = style.title;
+  }
+
+  if (hasOwnProperty(style, 'summary')) {
+    if (!isString(style.summary)) {
+      throw new Error(
+        "'notification.android.style' InboxStyle: 'summary' expected a string value.",
       );
     }
 

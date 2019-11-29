@@ -263,6 +263,9 @@ class NotifeeNotification {
         case 1:
           style = getBigTextStyle(styleBundle);
           break;
+        case 2:
+          style = getInboxStyle(styleBundle);
+          break;
       }
 
       if (style != null) {
@@ -371,6 +374,30 @@ class NotifeeNotification {
     }
 
     return bigTextStyle;
+  }
+
+  /**
+   * InboxStyle
+   */
+  private NotificationCompat.InboxStyle getInboxStyle(Bundle inputStyleBundle) {
+    NotificationCompat.InboxStyle inputStyle = new NotificationCompat.InboxStyle();
+
+    if (inputStyleBundle.containsKey("title")) {
+      inputStyle = inputStyle.setBigContentTitle(inputStyleBundle.getString("title"));
+    }
+
+    if (inputStyleBundle.containsKey("summary")) {
+      inputStyle = inputStyle.setSummaryText(inputStyleBundle.getString("summary"));
+    }
+
+    ArrayList<String> lines = inputStyleBundle.getStringArrayList("lines");
+
+    for (int i = 0; i < Objects.requireNonNull(lines).size(); i++) {
+      String line = lines.get(i);
+      inputStyle = inputStyle.addLine(line);
+    }
+
+    return inputStyle;
   }
 
   /**

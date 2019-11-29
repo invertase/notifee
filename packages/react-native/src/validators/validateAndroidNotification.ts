@@ -36,6 +36,7 @@ import validateAndroidAction from './validateAndroidAction';
 import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
+  validateAndroidInboxStyle,
 } from './validateAndroidStyle';
 
 export default function validateAndroidNotification(
@@ -498,9 +499,12 @@ export default function validateAndroidNotification(
       case AndroidStyle.BIGTEXT:
         out.style = validateAndroidBigTextStyle(android.style);
         break;
+      case AndroidStyle.INBOX:
+        out.style = validateAndroidInboxStyle(android.style);
+        break;
       default:
         throw new Error(
-          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE or AndroidStyle.BIGTEXT.",
+          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT or AndroidStyle.INBOX.",
         );
     }
   }
