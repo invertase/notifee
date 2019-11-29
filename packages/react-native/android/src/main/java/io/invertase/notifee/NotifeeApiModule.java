@@ -28,10 +28,9 @@ public class NotifeeApiModule extends NotifeeNativeModule {
   @ReactMethod
   public void displayNotification(ReadableMap notificationRaw, Promise promise) {
     Tasks.call(getExecutor(), () -> {
-      NotifeeNotification notifeeNotification = NotifeeNotification.fromReadableMap(
-        notificationRaw);
-      notifeeNotification.displayNotification();
-      return notifeeNotification;
+      NotifeeNotification notification = NotifeeNotification.fromReadableMap(notificationRaw);
+      Tasks.await(notification.displayNotification());
+      return notification;
     }).addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
         promise.resolve(Objects.requireNonNull(task.getResult()).toWritableMap());

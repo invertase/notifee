@@ -12,7 +12,7 @@
     "prepare": "yarn run build"
   },
   "devDependencies": {
-    "@types/react-native": "^0.60.22"
+    "@types/react-native": "^0.60.23"
   },
   "peerDependencies": {
     "react-native": "*"

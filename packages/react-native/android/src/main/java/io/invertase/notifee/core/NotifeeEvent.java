@@ -11,7 +11,7 @@ public class NotifeeEvent implements NotifeeNativeEvent {
     this.eventBody = eventBody;
   }
 
-   @Override
+  @Override
   public String getEventName() {
     return eventName;
   }

@@ -2,6 +2,7 @@ package io.invertase.notifee;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,27 +12,102 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.Person;
 
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.views.imagehelper.ImageSource;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+
+import javax.annotation.Nonnull;
 
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
 class NotifeeUtils {
+
+  static Task<Bitmap> getImageBitmapFromUrl(String imageUrl) {
+    ImageSource imageSource;
+    final TaskCompletionSource<Bitmap> bitmapTCS = new TaskCompletionSource<>();
+    Task<Bitmap> bitmapTask = bitmapTCS.getTask();
+
+    // supports for resources by name e.g. 'ic_launcher', as the ids of the resources would be
+    // unknown in JavaScript code
+    if (!imageUrl.contains("/")) {
+      String imageResourceUrl = getImageResourceUrl(imageUrl);
+      if (imageResourceUrl == null) {
+        bitmapTCS.setResult(null);
+        return bitmapTask;
+      }
+      imageSource = new ImageSource(getApplicationContext(), imageResourceUrl);
+    } else {
+      imageSource = new ImageSource(getApplicationContext(), imageUrl);
+    }
+
+    ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(imageSource.getUri()).build();
+    DataSource<CloseableReference<CloseableImage>> dataSource = Fresco.getImagePipeline().fetchDecodedImage(
+      imageRequest,
+      getApplicationContext()
+    );
+
+    dataSource.subscribe(new BaseBitmapDataSubscriber() {
+      @Override
+      protected void onNewResultImpl(@javax.annotation.Nullable Bitmap bitmap) {
+        bitmapTCS.setResult(bitmap);
+      }
+
+      @Override
+      protected void onFailureImpl(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+        Log.e(
+          "NotifeeImageLoader",
+          "Failed to load an image: " + imageUrl,
+          dataSource.getFailureCause()
+        );
+        bitmapTCS.setResult(null);
+      }
+    }, CallerThreadExecutor.getInstance());
+
+    return bitmapTask;
+  }
+
+  private static String getImageResourceUrl(String icon) {
+    int resourceId = getResourceIdByName(icon, "mipmap");
+
+    if (resourceId == 0) {
+      resourceId = getResourceIdByName(icon, "drawable");
+    }
+
+    if (resourceId == 0) {
+      return null;
+    }
+
+    return "res:///" + resourceId;
+  }
+
+  static int getImageResourceId(String resourceName) {
+    int resourceId = getResourceIdByName(resourceName, "mipmap");
+    if (resourceId == 0) {
+      resourceId = getResourceIdByName(resourceName, "drawable");
+    }
+
+    return resourceId;
+  }
+
+
   /**
    * Attempts to find a device resource id by name and type
    */
-  static int getResourceIdByName(String name, String type) {
+  private static int getResourceIdByName(String name, String type) {
     String packageName = getApplicationContext().getPackageName();
     return getApplicationContext().getResources().getIdentifier(name, type, packageName);
   }
-
-//  static int getResourceId(Context context, String type, String image) {
-//    return context
-//      .getResources()
-//      .getIdentifier(image, type, context.getPackageName());
-//  }
 
   static String getFileName(Context context, Uri uri) {
     String result = null;

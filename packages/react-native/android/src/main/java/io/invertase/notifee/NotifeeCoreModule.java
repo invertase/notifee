@@ -1,7 +1,5 @@
 package io.invertase.notifee;
 
-import android.os.Build;
-
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
