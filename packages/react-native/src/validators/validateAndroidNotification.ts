@@ -44,9 +44,9 @@ export default function validateAndroidNotification(
   // Notification default values
   const out: NotificationAndroid = {
     autoCancel: true,
-    badgeIconType: AndroidBadgeIconType.NONE,
+    badgeIconType: AndroidBadgeIconType.LARGE,
     colorized: false,
-    channelId: '',
+    chronometerDirection: 'up',
     groupAlertBehavior: AndroidGroupAlertBehavior.ALL,
     groupSummary: false,
     localOnly: false,
@@ -111,6 +111,15 @@ export default function validateAndroidNotification(
     }
 
     out.badgeIconType = android.badgeIconType;
+  }
+
+  /**
+   * bubbleMetadata
+   */
+  if (hasOwnProperty(android, 'bubbleMetadata') && android.bubbleMetadata != undefined) {
+    // todo validate
+
+    out.bubbleMetadata = android.bubbleMetadata;
   }
 
   /**
@@ -183,6 +192,21 @@ export default function validateAndroidNotification(
     }
 
     out.contentInfo = android.contentInfo;
+  }
+
+  /**
+   * chronometerDirection
+   */
+  if (hasOwnProperty(android, 'chronometerDirection')) {
+    if (!isString(android.chronometerDirection)) {
+      throw new Error("'notification.android.chronometerDirection' expected a string value.");
+    }
+
+    if (android.chronometerDirection !== 'up' && android.chronometerDirection !== 'down') {
+      throw new Error(`'notification.android.chronometerDirection' must be one of "up" or "down".`);
+    }
+
+    out.chronometerDirection = android.chronometerDirection;
   }
 
   /**

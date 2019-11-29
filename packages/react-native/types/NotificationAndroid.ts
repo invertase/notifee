@@ -36,7 +36,7 @@ export interface NotificationAndroid {
    * panel. Setting this to `false` will keep the notification in the panel.
    *
    * If `false`, the notification will persist in the notification panel after being pressed. It will
-   * remain there until the user removes (e.g. swipes away) or is cancelled via `removeDeliveredNotification`.
+   * remain there until the user removes it (e.g. swipes away) or is cancelled via `removeDeliveredNotification`.
    *
    * Defaults to `true`.
    */
@@ -47,18 +47,29 @@ export interface NotificationAndroid {
    * on a launcher icon when the associated app has an active notification. Users can long-press
    * on the app icon to reveal the notifications (alongside any app shortcuts).
    *
+   * This value might be ignored, for launchers that don't support badge icons.
+   *
    * ![Badges](https://developer.android.com/images/ui/notifications/badges-open_2x.png)
    *
    * If the notification is shown as a badge, this option can be set to control how the badge icon
    * is shown:
    *
-   * - `NONE`: Always shows as a number.
-   * - `SMALL`: Uses the icon provided to `smallIcon`.
-   * - `LARGE`: Uses the icon provided to `largeIcon`.
+   * - `NONE`: Uses the default preference of the device launcher. Some launchers will display no icon, others will use the `largeIcon` (if provided).
+   * - `SMALL`: Uses the icon provided to `smallIcon`, if available.
+   * - `LARGE`: Uses the icon provided to `largeIcon`, if available.
    *
-   * Defaults to `AndroidBadgeIconType.NONE`.
+   * Defaults to `AndroidBadgeIconType.LARGE`.
+   *
+   * @platform android API Level >= 26
    */
   badgeIconType?: AndroidBadgeIconType;
+
+  /**
+   * TODO
+   *
+   * @platform android API Level >= 29
+   */
+  bubbleMetadata?: object;
 
   /**
    * Assigns the notification to a category. Use the one which best describes the notification.
@@ -112,7 +123,7 @@ export interface NotificationAndroid {
    * const notification = {
    *   body: 'Update your settings',
    *   android: {
-   *     channelId: 'open-settings',
+   *     clickAction: 'open-settings',
    *   },
    * };
    *
@@ -180,6 +191,15 @@ export interface NotificationAndroid {
 
   // TODO is this needed? https://stackoverflow.com/a/40753998/11760094 - use subtext instead?
   contentInfo?: string;
+
+  /**
+   * If `showChronometer` is `true`, the direction of the chronometer can be changed to count down instead of up.
+   *
+   * Has no effect if `showChronometer` is `false`.
+   *
+   * Defaults to `up`.
+   */
+  chronometerDirection?: 'up' | 'down';
 
   // todo
   defaults?: AndroidDefaults[];
@@ -280,7 +300,12 @@ export interface NotificationAndroid {
   localOnly?: boolean;
 
   /**
-   * Set the large number at the right-hand side of the notification.
+   * Overrides the current number of active notifications shown on the device.
+   *
+   * The number of active notifications is shown in various locations (such as the notification badge tray)
+   * depending on your device and launcher type.
+   *
+   * If no number is provided, the system displays the current number of active notifications.
    */
   number?: number;
 
@@ -293,7 +318,11 @@ export interface NotificationAndroid {
   ongoing?: boolean;
 
   /**
-   * Set this flag if you would only like the sound, vibrate and ticker to be played if the notification is not already showing.
+   * Notifications with the same `id` will only show a single instance at any one time on your device,
+   * however will still alert the user (for example, by making a sound).
+   *
+   * If this flag is set to `true`, notifications with the same `id` will only alert the user once whilst
+   * the notification is active.
    */
   onlyAlertOnce?: boolean;
 
@@ -317,6 +346,8 @@ export interface NotificationAndroid {
    *   },
    * });
    * ```
+   *
+   * @platform android API Level < 26
    */
   priority?: AndroidPriority;
 
@@ -371,7 +402,14 @@ export interface NotificationAndroid {
    */
   progress?: AndroidProgress;
 
-  // todo
+  /**
+   * TODO
+   */
+  publicVersion?: object;
+
+  /**
+   * TODO
+   */
   remoteInputHistory?: string[];
 
   /**
@@ -505,17 +543,17 @@ export interface NotificationAndroid {
 
   /**
    * Sets the time in milliseconds at which the notification should be
-   * cancelled, if it is not already cancelled.
+   * cancelled once displayed, if it is not already cancelled.
    *
    * #### Example
    *
-   * Time out in 10 minutes.
+   * Time out after 10 seconds.
    *
    * ```js
    * await notifee.displayNotification({
-   *   body: 'Limited time prize available',
+   *   body: 'Show for 10 seconds',
    *   android: {
-   *     timeoutAfter: Date.now() + 600000,
+   *     timeoutAfter: 10000,
    *   },
    * });
    * ```
@@ -523,21 +561,22 @@ export interface NotificationAndroid {
   timeoutAfter?: number;
 
   /**
-   * Show the `timestamp` field as a stopwatch. Instead of presenting when as a timestamp, the
-   * notification will show an automatically updating display of the minutes and seconds from the `timestamp`.
-   * Useful when showing an elapsed time (like an ongoing phone call).
+   * Shows a counting timer on the notification, useful for on-going notifications such as a phone call.
    *
-   * If no `timestamp` is set, this has no effect.
+   * If no `timestamp` is provided, a counter will display on the notification starting from 00:00. If a `timestamp` is
+   * provided, the number of hours/minutes/seconds since that have elapsed since that value will be shown instead.
    *
    * Defaults to `false`.
    *
    * #### Example
    *
+   * Show a counter starting from 00:20.
+   *
    * ```js
    * await notifee.displayNotification({
    *   body: 'Limited time prize available',
    *   android: {
-   *     timestamp: Date.now() + 300000,
+   *     timestamp: Date.now() - 20000,
    *     showChronometer: true,
    *   },
    * });
@@ -982,7 +1021,7 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
  */
 export enum AndroidBadgeIconType {
   /**
-   * Shows no badge, but instead uses the notification `number` if provided.
+   * No badge is displayed, will always show as a number.
    */
   NONE = 0,
 

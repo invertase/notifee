@@ -2,7 +2,114 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
+
 describe('notifee', () => {
+  it.only('playground', async () => {
+    // notifee.AndroidColor.RED.should.equal('red');
+
+    // await Utils.sleep(2000);
+
+    const channelId = await notifee.createChannel({
+      id: 'test',
+      name: 'Testing Channel!!!',
+      importance: notifee.AndroidImportance.HIGH,
+      badge: true,
+      bubbles: true,
+    });
+
+    const config = {
+      title: 'Foooooo',
+      subtitle: 'Barrrr',
+      body: 'Hello World ',
+      data: {
+        foo: 'bar',
+        bar: '123',
+      },
+      android: {
+        autoCancel: false,
+        largeIcon: 'https://invertase.io/icons/icon-48x48.png',
+        badgeIconType: notifee.AndroidBadgeIconType.LARGE,
+        channelId,
+        // category: notifee.AndroidCategory.CALL,
+        color: '#ff69b4',
+        contentInfo: 'Elliot',
+        // number: 13,
+        ongoing: true,
+        onlyAlertOnce: false,
+        // progress: {
+        //   max: 0,
+        //   current: 0,
+        //   indeterminate: true,
+        // },
+        shortcutId: '123',
+        // showTimestamp: true,
+        ticker: 'Elliot Smells',
+        // timeoutAfter: 8000,
+        showChronometer: true,
+        timestamp: Date.now() - 20000,
+        tag: 'elliot',
+      },
+    }
+
+    await notifee.displayNotification(config);
+    // await notifee.displayNotification(config);
+    // await notifee.displayNotification(config);
+
+    await Utils.sleep(40000);
+
+    // await Utils.sleep(2000);
+
+    // await notifee.createChannelGroup({
+    //   id: '123',
+    //   name: 'Testing Group',
+    //   description: 'Group description',
+    // });
+    //
+    // const id = await notifee.createChannel({
+    //   id: 'testing1234',
+    //   name: 'Testing Channel!!!',
+    //   description: 'Foo bar baz',
+    //   importance: notifee.AndroidImportance.LOW,
+    //   visibility: notifee.AndroidVisibility.SECRET,
+    //   badge: false,
+    //   // groupId: '123',
+    // });
+
+    // await notifee.openNotificationSettings('testing1234234234');
+
+    // console.log('GOOOOOOOOOO');
+    // await Utils.sleep(15000);
+
+    // const channel = await notifee.getChannel(id);
+    // const group = await notifee.getChannelGroup('123');
+    //
+    // console.log(channel);
+
+    // console.log('Channel ID', foo);
+    //
+    // const channels = await notifee.getChannels();
+    //
+    // console.log(channels);
+    // const id = await notifee.displayNotification({
+    //   title: 'Notifee',
+    //   body: 'Hello World',
+    //   android: {
+    //     channelId: 'testing',
+    //     // color: notifee.AndroidColor.GREEN,
+    //     // colorized: true,
+    //     // priority: notifee.AndroidPriority.MAX,
+    //     // ongoing: true,
+    //     // style: {
+    //     //   type: notifee.AndroidStyle.BIGTEXT,
+    //     //   text: 'Foooo',
+    //     // }
+    //     // showTimestamp: true,
+    //     // // showChronometer: true,
+    //     // timestamp: Date.now() - 240000,
+    //   },
+    // });
+  });
+
   it('exports ts enums as js values', () => {
     notifee.AndroidColor.RED.should.equal('red');
   });

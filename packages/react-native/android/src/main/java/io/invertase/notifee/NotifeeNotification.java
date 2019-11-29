@@ -82,20 +82,15 @@ class NotifeeNotification {
       notificationBuilder.setExtras(notificationBundle.getBundle("data"));
     }
 
-    if (notificationBundle.containsKey("sound")) {
+    // TODO sound
+    if (androidOptionsBundle.containsKey("sound")) {
       Uri sound = getSoundUri(Objects.requireNonNull(notificationBundle.getString("sound")));
       notificationBuilder.setSound(sound);
     }
 
     if (androidOptionsBundle.containsKey("actions")) {
       ArrayList actions = androidOptionsBundle.getParcelableArrayList("actions");
-
       // TODO implement actions
-      for (Object action : Objects.requireNonNull(actions)) {
-//        notificationBuilder.addAction(
-//          buildNotificationAction(action)
-//        );
-      }
     }
 
     if (androidOptionsBundle.containsKey("autoCancel")) {
@@ -106,6 +101,11 @@ class NotifeeNotification {
       int badgeIconType = (int) androidOptionsBundle.getDouble("badgeIconType");
       notificationBuilder.setBadgeIconType(badgeIconType);
     }
+
+    if (androidOptionsBundle.containsKey("bubbleMetadata")) {
+      // TODO implement bubbles - requires channel flag setting to true
+    }
+
 
     if (androidOptionsBundle.containsKey("category")) {
       notificationBuilder.setCategory(androidOptionsBundle.getString("category"));
@@ -141,6 +141,13 @@ class NotifeeNotification {
 
     if (androidOptionsBundle.containsKey("contentInfo")) {
       notificationBuilder.setContentInfo(androidOptionsBundle.getString("contentInfo"));
+    }
+
+    if (androidOptionsBundle.containsKey("chronometerDirection")) {
+      String direction = androidOptionsBundle.getString("chronometerDirection");
+      if (Objects.requireNonNull(direction).equals("down")) {
+//        notificationBuilder.setChronometerCountDown(true);
+      }
     }
 
     if (androidOptionsBundle.containsKey("defaults")) {
@@ -410,7 +417,7 @@ class NotifeeNotification {
   }
 
   public void displayNotification() {
-    String notificationId = Objects.requireNonNull(notificationBundle.getString("notificationId"));
+    String notificationId = Objects.requireNonNull(notificationBundle.getString("id"));
 
     String notificationTag = null;
     if (androidOptionsBundle.containsKey("tag")) {
