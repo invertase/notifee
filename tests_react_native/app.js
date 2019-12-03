@@ -124,7 +124,7 @@ AppRegistry.registerComponent('testing', () => Root);
 
 function BubbleTest() {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Bubbling Hell</Text>
     </View>
   );

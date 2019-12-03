@@ -65,7 +65,16 @@ export interface NotificationAndroid {
   badgeIconType?: AndroidBadgeIconType;
 
   /**
-   * TODO
+   * Bubbles are an experimental Android feature, supported on devices with an API Level >= 29.
+   *
+   * When a channel has bubbles enabled and an AndroidBubble interface is provided to the notification,
+   * supported devices will display the notification as a bubble. Bubbles overlay the user interface, can be
+   * moved around on the device, expanded/minimized and also be dismissed by the user.
+   *
+   * The content of a bubble can be anything, however it is advised to keep the bubble minimal, single layered
+   * (for example no navigation) and relevant to the notification.
+   *
+   * For more information, see the [Android Bubbles](/react-native/android/bubbles) concept guide.
    *
    * @platform android API Level >= 29
    */
@@ -402,7 +411,7 @@ export interface NotificationAndroid {
   /**
    * TODO
    */
-  publicVersion?: object;
+  publicVersion?: null;
 
   /**
    * TODO

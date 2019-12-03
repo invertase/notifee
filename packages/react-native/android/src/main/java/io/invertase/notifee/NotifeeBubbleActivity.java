@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 
+// TODO Handle errors when activity paused/killed
+// Pausing an activity that is not the current activity, this is incorrect! Current activity: MainActivity Paused activity: NotifeeBubbleActivity
 public class NotifeeBubbleActivity extends ReactActivity {
 
   @Override

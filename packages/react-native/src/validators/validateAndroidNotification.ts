@@ -22,6 +22,7 @@ import {
   AndroidVisibility,
   NotificationAndroid,
   AndroidProgress,
+  AndroidBubble,
 } from '../../types/NotificationAndroid';
 
 import {
@@ -119,9 +120,45 @@ export default function validateAndroidNotification(
    * bubble
    */
   if (hasOwnProperty(android, 'bubble') && android.bubble != undefined) {
-    // todo validate
+    if (!isObject(android.bubble)) {
+      throw new Error("'notification.android.bubble' expected an object value.");
+    }
 
-    out.bubble = android.bubble;
+    if (!isString(android.bubble.icon) || !android.bubble.icon) {
+      throw new Error("'notification.android.bubble.icon' expected a non-empty string value.");
+    }
+
+    const bubbleOut: AndroidBubble = {
+      icon: android.bubble.icon,
+    };
+
+    if (hasOwnProperty(android.bubble, 'height') && android.bubble.height != undefined) {
+      if (!isNumber(android.bubble.height) || android.bubble.height < 1) {
+        throw new Error("'notification.android.bubble.height' expected a signed integer value.");
+      }
+
+      bubbleOut.height = android.bubble.height;
+    }
+
+    if (hasOwnProperty(android.bubble, 'autoExpand')) {
+      if (!isBoolean(android.bubble.autoExpand)) {
+        throw new Error("'notification.android.bubble.autoExpand' expected a boolean value.");
+      }
+
+      bubbleOut.autoExpand = android.bubble.autoExpand;
+    }
+
+    if (hasOwnProperty(android.bubble, 'suppressNotification')) {
+      if (!isBoolean(android.bubble.suppressNotification)) {
+        throw new Error(
+          "'notification.android.bubble.suppressNotification' expected a boolean value.",
+        );
+      }
+
+      bubbleOut.suppressNotification = android.bubble.suppressNotification;
+    }
+
+    out.bubble = bubbleOut;
   }
 
   /**

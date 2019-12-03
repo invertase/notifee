@@ -125,7 +125,9 @@ class NotifeeNotification {
 
          bubbleBuilder.setIntent(bubbleIntent);
 
-         IconCompat bubbleIcon = IconCompat.createWithContentUri(Objects.requireNonNull(bubbleBundle.getString("icon")));
+         Bitmap bitmap = Tasks.await(getImageBitmapFromUrl(Objects.requireNonNull(bubbleBundle.getString("icon"))));
+
+         IconCompat bubbleIcon = IconCompat.createWithAdaptiveBitmap(bitmap);
          bubbleBuilder.setIcon(bubbleIcon);
 
          if (bubbleBundle.containsKey("height")) {

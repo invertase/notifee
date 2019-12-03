@@ -31,6 +31,10 @@ describe('notifee', () => {
         channelId,
         // category: notifee.AndroidCategory.CALL,
         color: '#ff69b4',
+        bubble: {
+          icon: 'https://static.invertase.io/assets/React-Native-Firebase.png',
+          autoExpand: true,
+        },
         // number: 13,
         ongoing: true,
         onlyAlertOnce: false,
@@ -99,6 +103,7 @@ describe('notifee', () => {
         // },
         ticker: 'Elliot Smells',
         // timeoutAfter: 8000,
+        chronometerDirection: 'down',
         showChronometer: true,
         timestamp: Date.now() - 20000,
         tag: 'elliot',
