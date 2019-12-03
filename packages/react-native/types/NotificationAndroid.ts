@@ -661,6 +661,8 @@ export interface AndroidAction {
   icon: string;
   title: string;
   allowGeneratedReplies?: boolean;
+  contextual?: boolean;
+
   remoteInputs?: AndroidRemoteInput[];
   semanticAction?: AndroidSemanticAction;
   showsUserInterface?: boolean; // true

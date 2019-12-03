@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.Person;
+import androidx.core.app.RemoteInput;
 import androidx.core.graphics.drawable.IconCompat;
 
 import com.facebook.react.bridge.Arguments;
@@ -101,10 +102,59 @@ class NotifeeNotification {
         notificationBuilder.setSound(sound);
       }
 
-      // if (androidOptionsBundle.containsKey("actions")) {
-      //  ArrayList actions = androidOptionsBundle.getParcelableArrayList("actions");
-      // TODO implement actions
-      // }
+      if (androidOptionsBundle.containsKey("actions")) {
+        ArrayList actions = androidOptionsBundle.getParcelableArrayList("actions");
+
+        for (int i = 0; i < Objects.requireNonNull(actions).size(); i++) {
+          Bundle actionBundle = (Bundle) actions.get(i);
+
+          Bitmap bitmap = Tasks.await(getImageBitmapFromUrl(Objects.requireNonNull(actionBundle.getString("icon"))));
+
+          Context context = getApplicationContext();
+          Intent target = new Intent(context, NotifeeBubbleActivity.class);
+          PendingIntent bubbleIntent = PendingIntent.getBroadcast(context, 0, target, 0);
+
+          NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
+            IconCompat.createWithAdaptiveBitmap(bitmap),
+            actionBundle.getString("title"),
+            bubbleIntent
+          );
+
+          // todo better name?
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH &&
+            actionBundle.containsKey("remoteInput"))
+          {
+            Bundle remoteInputBundle = actionBundle.getBundle("remoteInput");
+
+            RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("foo");
+            remoteInputBuilder.setChoices(Objects.requireNonNull(remoteInputBundle).getCharSequenceArray("choices"));
+            remoteInputBuilder.setLabel("Elliot");
+            remoteInputBuilder.setAllowFreeFormInput(true);
+
+            actionBuilder.addRemoteInput(remoteInputBuilder.build());
+          }
+
+          // TODO add extras?
+
+          if (actionBundle.containsKey("allowGeneratedReplies")) {
+            actionBuilder.setAllowGeneratedReplies(actionBundle.getBoolean("allowGeneratedReplies"));
+          }
+
+          if (actionBundle.containsKey("contextual")) {
+            actionBuilder.setContextual(actionBundle.getBoolean("contextual"));
+          }
+
+          if (actionBundle.containsKey("semanticAction")) {
+            actionBuilder.setSemanticAction(actionBundle.getInt("semanticAction"));
+          }
+
+          if (actionBundle.containsKey("showsUserInterface")) {
+            actionBuilder.setShowsUserInterface(actionBundle.getBoolean("showsUserInterface"));
+          }
+
+          notificationBuilder.addAction(actionBuilder.build());
+        }
+      }
 
       if (androidOptionsBundle.containsKey("autoCancel")) {
         notificationBuilder.setAutoCancel(androidOptionsBundle.getBoolean("autoCancel"));
@@ -115,35 +165,35 @@ class NotifeeNotification {
         notificationBuilder.setBadgeIconType(badgeIconType);
       }
 
-       if (androidOptionsBundle.containsKey("bubble")) {
-         Context context = getApplicationContext();
-         Intent target = new Intent(context, NotifeeBubbleActivity.class);
-         PendingIntent bubbleIntent = PendingIntent.getActivity(context, 0, target, 0);
+      if (androidOptionsBundle.containsKey("bubble")) {
+        Context context = getApplicationContext();
+        Intent target = new Intent(context, NotifeeBubbleActivity.class);
+        PendingIntent bubbleIntent = PendingIntent.getActivity(context, 0, target, 0);
 
-         Bundle bubbleBundle = androidOptionsBundle.getBundle("bubble");
-         NotificationCompat.BubbleMetadata.Builder bubbleBuilder = new NotificationCompat.BubbleMetadata.Builder();
+        Bundle bubbleBundle = androidOptionsBundle.getBundle("bubble");
+        NotificationCompat.BubbleMetadata.Builder bubbleBuilder = new NotificationCompat.BubbleMetadata.Builder();
 
-         bubbleBuilder.setIntent(bubbleIntent);
+        bubbleBuilder.setIntent(bubbleIntent);
 
-         Bitmap bitmap = Tasks.await(getImageBitmapFromUrl(Objects.requireNonNull(bubbleBundle.getString("icon"))));
+        Bitmap bitmap = Tasks.await(getImageBitmapFromUrl(Objects.requireNonNull(bubbleBundle.getString("icon"))));
 
-         IconCompat bubbleIcon = IconCompat.createWithAdaptiveBitmap(bitmap);
-         bubbleBuilder.setIcon(bubbleIcon);
+        IconCompat bubbleIcon = IconCompat.createWithAdaptiveBitmap(bitmap);
+        bubbleBuilder.setIcon(bubbleIcon);
 
-         if (bubbleBundle.containsKey("height")) {
-           bubbleBuilder.setDesiredHeight(bubbleBundle.getInt("height"));
-         }
+        if (bubbleBundle.containsKey("height")) {
+          bubbleBuilder.setDesiredHeight(bubbleBundle.getInt("height"));
+        }
 
-         if (bubbleBundle.containsKey("autoExpand")) {
-           bubbleBuilder.setAutoExpandBubble(bubbleBundle.getBoolean("autoExpand"));
-         }
+        if (bubbleBundle.containsKey("autoExpand")) {
+          bubbleBuilder.setAutoExpandBubble(bubbleBundle.getBoolean("autoExpand"));
+        }
 
-         if (bubbleBundle.containsKey("suppressNotification")) {
-           bubbleBuilder.setSuppressNotification(bubbleBundle.getBoolean("suppressNotification"));
-         }
+        if (bubbleBundle.containsKey("suppressNotification")) {
+          bubbleBuilder.setSuppressNotification(bubbleBundle.getBoolean("suppressNotification"));
+        }
 
-         notificationBuilder.setBubbleMetadata(bubbleBuilder.build());
-       }
+        notificationBuilder.setBubbleMetadata(bubbleBuilder.build());
+      }
 
 
       if (androidOptionsBundle.containsKey("category")) {
@@ -177,12 +227,12 @@ class NotifeeNotification {
         notificationBuilder.setColorized(androidOptionsBundle.getBoolean("colorized"));
       }
 
-       if (androidOptionsBundle.containsKey("chronometerDirection")) {
-         String direction = androidOptionsBundle.getString("chronometerDirection");
-         if (Objects.requireNonNull(direction).equals("down")) {
-           notificationBuilder.setChronometerCountDown(true);
-         }
-       }
+      if (androidOptionsBundle.containsKey("chronometerDirection")) {
+        String direction = androidOptionsBundle.getString("chronometerDirection");
+        if (Objects.requireNonNull(direction).equals("down")) {
+          notificationBuilder.setChronometerCountDown(true);
+        }
+      }
 
       // if (androidOptionsBundle.containsKey("defaults")) {
       // TODO defaults

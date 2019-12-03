@@ -74,22 +74,22 @@ export default function validateAndroidNotification(
    * actions
    */
   if (hasOwnProperty(android, 'actions') && android.actions != undefined) {
-    if (!isArray(android.actions)) {
-      throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
-    }
+    // if (!isArray(android.actions)) {
+    //   throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
+    // }
+    //
+    // const actions = [];
+    // try {
+    //   for (let i = 0; i < android.actions.length; i++) {
+    //     actions.push(validateAndroidAction(android.actions[i]));
+    //   }
+    // } catch (e) {
+    //   throw new Error(`'notification.android.actions' invalid AndroidAction. ${e.message}.`);
+    // }
 
-    const actions = [];
-    try {
-      for (let i = 0; i < android.actions.length; i++) {
-        actions.push(validateAndroidAction(android.actions[i]));
-      }
-    } catch (e) {
-      throw new Error(`'notification.android.actions' invalid AndroidAction. ${e.message}.`);
-    }
-
-    if (actions.length) {
+    // if (actions.length) {
       out.actions = android.actions;
-    }
+    // }
   }
 
   /**

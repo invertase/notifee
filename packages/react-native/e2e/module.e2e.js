@@ -16,6 +16,8 @@ describe('notifee', () => {
       bubbles: true,
     });
 
+    console.log(channelId);
+
     const config = {
       title: 'Foooooo',
       subtitle: 'Barrrr',
@@ -25,16 +27,42 @@ describe('notifee', () => {
         bar: '123',
       },
       android: {
+        actions: [
+          {
+            title: 'First',
+            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            contextual: true,
+            allowGeneratedReplies: true,
+            showsUserInterface: true,
+            remoteInput: {
+              choices: ['Foo', 'Bar'],
+            }
+          },
+          {
+            title: 'Middle',
+            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            contextual: true,
+            allowGeneratedReplies: true,
+            showsUserInterface: false,
+          },
+          {
+            title: 'Last',
+            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            contextual: true,
+            allowGeneratedReplies: true,
+            showsUserInterface: true,
+          },
+        ],
         autoCancel: false,
         // largeIcon: 'https://invertase.io/icons/icon-48x48.png',
         badgeIconType: notifee.AndroidBadgeIconType.SMALL,
         channelId,
         // category: notifee.AndroidCategory.CALL,
         color: '#ff69b4',
-        bubble: {
-          icon: 'https://static.invertase.io/assets/React-Native-Firebase.png',
-          autoExpand: true,
-        },
+        // bubble: {
+        //   icon: 'https://static.invertase.io/assets/React-Native-Firebase.png',
+        //   autoExpand: true,
+        // },
         // number: 13,
         ongoing: true,
         onlyAlertOnce: false,
@@ -59,7 +87,19 @@ describe('notifee', () => {
         style: {
           type: notifee.AndroidStyle.INBOX,
           // lines: [],
-          lines: ['Hello Elliot', 'Thank you for contacting us blah blah blah  blah blah blah  blah blah blah  blah blah blah', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven'],
+          lines: [
+            'Hello Elliot',
+            'Thank you for contacting us blah blah blah  blah blah blah  blah blah blah  blah blah blah',
+            'Three',
+            'Four',
+            'Five',
+            'Six',
+            'Seven',
+            'Eight',
+            'Nine',
+            'Ten',
+            'Eleven',
+          ],
           title: 'Google Fit - Fitness Tracking',
         },
         // style: {
