@@ -69,7 +69,7 @@ export interface NotificationAndroid {
    *
    * @platform android API Level >= 29
    */
-  bubbleMetadata?: object;
+  bubble?: AndroidBubble;
 
   /**
    * Assigns the notification to a category. Use the one which best describes the notification.
@@ -655,6 +655,13 @@ export interface AndroidAction {
   remoteInputs?: AndroidRemoteInput[];
   semanticAction?: AndroidSemanticAction;
   showsUserInterface?: boolean; // true
+}
+
+export interface AndroidBubble {
+  icon: string;
+  height?: number;
+  autoExpand?: boolean;
+  suppressNotification?: boolean;
 }
 
 /**

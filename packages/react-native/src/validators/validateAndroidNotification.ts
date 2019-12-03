@@ -116,12 +116,12 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * bubbleMetadata
+   * bubble
    */
-  if (hasOwnProperty(android, 'bubbleMetadata') && android.bubbleMetadata != undefined) {
+  if (hasOwnProperty(android, 'bubble') && android.bubble != undefined) {
     // todo validate
 
-    out.bubbleMetadata = android.bubbleMetadata;
+    out.bubble = android.bubble;
   }
 
   /**

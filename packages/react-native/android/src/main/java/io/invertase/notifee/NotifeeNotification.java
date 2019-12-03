@@ -3,9 +3,12 @@ package io.invertase.notifee;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.Person;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
@@ -111,9 +115,33 @@ class NotifeeNotification {
         notificationBuilder.setBadgeIconType(badgeIconType);
       }
 
-      // if (androidOptionsBundle.containsKey("bubbleMetadata")) {
-      // TODO implement bubbles - requires channel flag setting to true
-      // }
+       if (androidOptionsBundle.containsKey("bubble")) {
+         Context context = getApplicationContext();
+         Intent target = new Intent(context, NotifeeBubbleActivity.class);
+         PendingIntent bubbleIntent = PendingIntent.getActivity(context, 0, target, 0);
+
+         Bundle bubbleBundle = androidOptionsBundle.getBundle("bubble");
+         NotificationCompat.BubbleMetadata.Builder bubbleBuilder = new NotificationCompat.BubbleMetadata.Builder();
+
+         bubbleBuilder.setIntent(bubbleIntent);
+
+         IconCompat bubbleIcon = IconCompat.createWithContentUri(Objects.requireNonNull(bubbleBundle.getString("icon")));
+         bubbleBuilder.setIcon(bubbleIcon);
+
+         if (bubbleBundle.containsKey("height")) {
+           bubbleBuilder.setDesiredHeight(bubbleBundle.getInt("height"));
+         }
+
+         if (bubbleBundle.containsKey("autoExpand")) {
+           bubbleBuilder.setAutoExpandBubble(bubbleBundle.getBoolean("autoExpand"));
+         }
+
+         if (bubbleBundle.containsKey("suppressNotification")) {
+           bubbleBuilder.setSuppressNotification(bubbleBundle.getBoolean("suppressNotification"));
+         }
+
+         notificationBuilder.setBubbleMetadata(bubbleBuilder.build());
+       }
 
 
       if (androidOptionsBundle.containsKey("category")) {
@@ -147,12 +175,12 @@ class NotifeeNotification {
         notificationBuilder.setColorized(androidOptionsBundle.getBoolean("colorized"));
       }
 
-      // if (androidOptionsBundle.containsKey("chronometerDirection")) {
-      //   String direction = androidOptionsBundle.getString("chronometerDirection");
-      //   if (Objects.requireNonNull(direction).equals("down")) {
-      //     notificationBuilder.setChronometerCountDown(true);
-      //   }
-      // }
+       if (androidOptionsBundle.containsKey("chronometerDirection")) {
+         String direction = androidOptionsBundle.getString("chronometerDirection");
+         if (Objects.requireNonNull(direction).equals("down")) {
+           notificationBuilder.setChronometerCountDown(true);
+         }
+       }
 
       // if (androidOptionsBundle.containsKey("defaults")) {
       // TODO defaults

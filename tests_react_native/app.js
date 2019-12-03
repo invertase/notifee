@@ -121,3 +121,13 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('testing', () => Root);
+
+function BubbleTest() {
+  return (
+    <View>
+      <Text>Bubbling Hell</Text>
+    </View>
+  );
+}
+
+AppRegistry.registerComponent('bubble', () => BubbleTest);
