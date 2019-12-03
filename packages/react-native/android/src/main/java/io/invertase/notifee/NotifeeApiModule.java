@@ -29,7 +29,8 @@ public class NotifeeApiModule extends NotifeeNativeModule {
   public void displayNotification(ReadableMap notificationRaw, Promise promise) {
     Tasks.call(getExecutor(), () -> {
       NotifeeNotification notification = NotifeeNotification.fromReadableMap(notificationRaw);
-      Tasks.await(notification.displayNotification());
+//      Tasks.await(notification.displayNotification());
+      Tasks.await(notification.displayForegroundServiceNotification());
       return notification;
     }).addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
@@ -56,6 +57,7 @@ public class NotifeeApiModule extends NotifeeNativeModule {
 
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
+    Log.d("ELLIOT", "Cancelling!!!!!!!");
     promise.resolve(null);
   }
 

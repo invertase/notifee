@@ -7,6 +7,8 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
 
   <application>
     <provider
@@ -19,6 +21,7 @@
       android:allowEmbedded="true"
       android:documentLaunchMode="always"
       android:resizeableActivity="true" />
+    <service android:name=".NotifeeForegroundService" />
   </application>
 
 </manifest>

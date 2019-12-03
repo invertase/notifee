@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.Person;
 import androidx.core.app.RemoteInput;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
 import com.facebook.react.bridge.Arguments;
@@ -31,6 +32,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static io.invertase.notifee.NotifeeForegroundService.START_FOREGROUND_SERVICE_ACTION;
 import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
 import static io.invertase.notifee.NotifeeUtils.getImageResourceId;
 import static io.invertase.notifee.NotifeeUtils.getPerson;
@@ -555,6 +557,26 @@ class NotifeeNotification {
         notificationId.hashCode(),
         notification
       );
+
+      return null;
+    });
+  }
+
+  Task<Void> displayForegroundServiceNotification() {
+    return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
+      String notificationId = Objects.requireNonNull(notificationBundle.getString("id"));
+
+      Notification notification = Tasks.await(getNotification());
+
+      Intent serviceIntent = new Intent(getApplicationContext(), NotifeeForegroundService.class);
+
+      serviceIntent.setAction(START_FOREGROUND_SERVICE_ACTION);
+      serviceIntent.putExtra("notificationBundle", notificationBundle);
+      serviceIntent.putExtra("notification", notification);
+      serviceIntent.putExtra("notificationId", notificationId);
+      serviceIntent.putExtra("hash", notificationId.hashCode());
+
+      ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
 
       return null;
     });

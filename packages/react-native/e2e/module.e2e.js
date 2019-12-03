@@ -30,7 +30,7 @@ describe('notifee', () => {
         actions: [
           {
             title: 'First',
-            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            icon: 'https://invertase.io/icons/icon-48x48.png',
             contextual: true,
             allowGeneratedReplies: true,
             showsUserInterface: true,
@@ -40,14 +40,14 @@ describe('notifee', () => {
           },
           {
             title: 'Middle',
-            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            icon: 'https://invertase.io/icons/icon-48x48.png',
             contextual: true,
             allowGeneratedReplies: true,
             showsUserInterface: false,
           },
           {
             title: 'Last',
-            icon: 'https://invertase.io/icons/icon-48x48.png', // TODO
+            icon: 'https://invertase.io/icons/icon-48x48.png',
             contextual: true,
             allowGeneratedReplies: true,
             showsUserInterface: true,
@@ -59,18 +59,19 @@ describe('notifee', () => {
         channelId,
         // category: notifee.AndroidCategory.CALL,
         color: '#ff69b4',
+        colorized: true,
         // bubble: {
         //   icon: 'https://static.invertase.io/assets/React-Native-Firebase.png',
         //   autoExpand: true,
         // },
         // number: 13,
-        ongoing: true,
+        // ongoing: true,
         onlyAlertOnce: false,
-        // progress: {
-        //   max: 10,
-        //   current: 5,
-        //   // indeterminate: true,
-        // },
+        progress: {
+          max: 10,
+          current: 2,
+          // indeterminate: true,
+        },
         shortcutId: '123',
         // showTimestamp: true,
         // style: {
@@ -84,24 +85,24 @@ describe('notifee', () => {
         //     'https://images.unsplash.com/photo-1568526381923-caf3fd520382?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
         //   title: 'BigPicture',
         // },
-        style: {
-          type: notifee.AndroidStyle.INBOX,
-          // lines: [],
-          lines: [
-            'Hello Elliot',
-            'Thank you for contacting us blah blah blah  blah blah blah  blah blah blah  blah blah blah',
-            'Three',
-            'Four',
-            'Five',
-            'Six',
-            'Seven',
-            'Eight',
-            'Nine',
-            'Ten',
-            'Eleven',
-          ],
-          title: 'Google Fit - Fitness Tracking',
-        },
+        // style: {
+        //   type: notifee.AndroidStyle.INBOX,
+        //   // lines: [],
+        //   lines: [
+        //     'Hello Elliot',
+        //     'Thank you for contacting us blah blah blah  blah blah blah  blah blah blah  blah blah blah',
+        //     'Three',
+        //     'Four',
+        //     'Five',
+        //     'Six',
+        //     'Seven',
+        //     'Eight',
+        //     'Nine',
+        //     'Ten',
+        //     'Eleven',
+        //   ],
+        //   title: 'Google Fit - Fitness Tracking',
+        // },
         // style: {
         //   type: notifee.AndroidStyle.MESSAGING,
         //   // title: 'Group Chat',
@@ -151,6 +152,7 @@ describe('notifee', () => {
     };
 
     await notifee.displayNotification(config);
+    // await notifee.displayNotification(config);
     // await notifee.displayNotification(config);
     // await notifee.displayNotification(config);
 
