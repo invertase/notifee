@@ -29,6 +29,20 @@ export interface NotificationAndroid {
   actions?: AndroidAction[];
 
   /**
+   * When set to `true` this notification will be shown as a foreground service.
+   *
+   * The application can only display one foreground service notification at once. If a
+   * foreground service notification is already running and a new notification with this flag set to
+   * `true` is provided, the service will stop the existing service and start a new one.
+   *
+   * Ensure a foreground service runner function has been provided to `registerForegroundService`.
+   * Without one, the notification will not be displayed.
+   *
+   * Defaults to `false`.
+   */
+  asForegroundService?: boolean;
+
+  /**
    * Setting this flag will make it so the notification is automatically canceled when the user
    * clicks it in the panel.
    *
@@ -124,33 +138,6 @@ export interface NotificationAndroid {
   channelId?: string;
 
   /**
-   * A click action is used to help identify a notification which is being handled by your application.
-   *
-   * #### Example
-   *
-   * ```js
-   * const notification = {
-   *   body: 'Update your settings',
-   *   android: {
-   *     clickAction: 'open-settings',
-   *   },
-   * };
-   *
-   * await notifee.displayNotification(notification);
-   *
-   * ...
-   *
-   * // The user taps the notification....
-   * const notification = await notifee.getInitialNotification();
-   *
-   * if (notification.android.clickAction === 'open-settings') {
-   *   // open settings view
-   * }
-   * ```
-   */
-  clickAction?: string;
-
-  /**
    * Set an custom accent color for the notification. If not provided, the default notification
    * system color will be used.
    *
@@ -188,13 +175,14 @@ export interface NotificationAndroid {
   color?: AndroidColor | string;
 
   /**
-   * Set whether this notification should be colorized. When set, the color set with `color`
-   * will be used as the background color of this notification.
+   * When `asForegroundService` is `true`, the notification will use the provided `color` property
+   * to set a background color on the notification. This property has no effect when `asForegroundService`
+   * is `false`.
    *
    * This should only be used for high priority ongoing tasks like navigation, an ongoing call,
    * or other similarly high-priority events for the user.
    *
-   * For most styles, the coloring will only be applied if the notification is for a foreground service notification.
+   * Defaults to `false`.
    */
   colorized?: boolean;
 
@@ -297,15 +285,6 @@ export interface NotificationAndroid {
   lights?: [AndroidColor | string, number, number];
 
   /**
-   * Set whether or not this notification is only relevant to the current device.
-   *
-   * Some notifications can be bridged to other devices for remote display. This hint can be set to recommend this notification not be bridged.
-   *
-   * Defaults to `false`.
-   */
-  localOnly?: boolean;
-
-  /**
    * Overrides the current number of active notifications shown on the device.
    *
    * The number of active notifications is shown in various locations (such as the notification badge tray)
@@ -331,6 +310,22 @@ export interface NotificationAndroid {
    * the notification is active.
    */
   onlyAlertOnce?: boolean;
+
+  /**
+   * By default notifications have no behaviour when a user interacts with them. The
+   * `onPressAction` property allows you to set what happens when a user presses
+   * the notification.
+   *
+   * - When `false` no action is taken when the notification is pressed.
+   * - When `true` the application will open when the notification is pressed.
+   *
+   * It is also possible to provide advanced configuration to handle a notification being pressed,
+   * such as displaying a different Android Activity or React component. See the
+   * [Android Actions](/react-native/android/actions) core concepts guide to learn more.
+   *
+   * TODO check docs path
+   */
+  onPressAction?: boolean | AndroidPressAction;
 
   /**
    * Set the relative priority for this notification. Priority is an indication of how much of the
@@ -668,6 +663,15 @@ export interface AndroidAction {
   showsUserInterface?: boolean; // true
 }
 
+/**
+ *
+ */
+export interface AndroidPressAction {
+  id: string;
+  launchActivity?: string;
+  reactComponent?: string;
+}
+
 export interface AndroidBubble {
   icon: string;
   height?: number;
@@ -857,9 +861,12 @@ export interface AndroidPerson {
   important?: boolean;
 
   /**
-   * TODO
+   * The icon to display next to the person in the notification. The icon can be URL or local
+   * Android resource.
+   *
+   * If not provided, an icon will be automatically creating using the `name` property.
    */
-  icon?: string; // todo - format?
+  icon?: string;
 
   /**
    * TODO
@@ -914,14 +921,14 @@ export interface AndroidProgress {
    *
    * Must be greater than the `current` value.
    */
-  max: number;
+  max?: number;
 
   /**
    * The current progress.
    *
    * E.g. setting to `4` with a `max` value of `10` would set a fixed progress bar on the notification at 40% complete.
    */
-  current: number;
+  current?: number;
 
   /**
    * If `true`, overrides the `max` and `current` values and displays an unknown progress style. Useful when you have no

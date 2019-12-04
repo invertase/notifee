@@ -30,7 +30,10 @@ export function isError(value: object): boolean {
   return value instanceof Error;
 }
 
-export function hasOwnProperty(target: object, property: string): boolean {
+export function hasOwnProperty<T>(
+  target: T,
+  property: string | number | symbol,
+): property is keyof T {
   return Object.hasOwnProperty.call(target, property);
 }
 

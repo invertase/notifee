@@ -30,9 +30,7 @@ import { NotificationAndroid } from './NotificationAndroid';
  */
 export interface Notification {
   /**
-   * The main body content of a notification. This field required and is the main body of your notification.
-   *
-   * On Android, if you wish to read the body when the notification is opened, add it to the `data` object.
+   * The main body content of a notification.
    *
    * #### Example
    *
@@ -46,7 +44,7 @@ export interface Notification {
    * await notifee.displayNotification(notification);
    * ```
    */
-  body: string;
+  body?: string;
 
   /**
    * A unique identifier for your notification.

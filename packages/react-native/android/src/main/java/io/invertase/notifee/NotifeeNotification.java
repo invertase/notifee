@@ -32,24 +32,43 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static androidx.core.app.NotificationCompat.EXTRA_CHRONOMETER_COUNT_DOWN;
 import static io.invertase.notifee.NotifeeForegroundService.START_FOREGROUND_SERVICE_ACTION;
+import static io.invertase.notifee.NotifeeUtils.getClassForName;
 import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
 import static io.invertase.notifee.NotifeeUtils.getImageResourceId;
+import static io.invertase.notifee.NotifeeUtils.getMainActivityClassName;
 import static io.invertase.notifee.NotifeeUtils.getPerson;
 import static io.invertase.notifee.NotifeeUtils.getSoundUri;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
-class NotifeeNotification {
-  private static final ExecutorService NOTIFICATION_DISPLAY_EXECUTOR = Executors.newFixedThreadPool(2);
-  private static final ExecutorService NOTIFICATION_BUILD_EXECUTOR = Executors.newFixedThreadPool(2);
+public class NotifeeNotification {
+  public static final ExecutorService NOTIFICATION_DISPLAY_EXECUTOR = Executors.newFixedThreadPool(2);
+  public static final ExecutorService NOTIFICATION_BUILD_EXECUTOR = Executors.newFixedThreadPool(4);
+  public static final String NOTIFICATION_INTENT_ACTION = "io.invertase.notifee.intent";
 
   private Bundle notificationBundle;
   private Bundle androidOptionsBundle;
-
+  private int notificationHashCode;
 
   private NotifeeNotification(Bundle notificationBundle) {
     this.notificationBundle = notificationBundle;
     this.androidOptionsBundle = notificationBundle.getBundle("android");
+    this.notificationHashCode = Objects.requireNonNull(notificationBundle.getString("id")).hashCode();
+  }
+
+  public static String getMainComponentName(Intent intent, String defaultName) {
+    if (intent == null) {
+      return defaultName;
+    }
+
+    Bundle extras = intent.getExtras();
+
+    if (extras == null || !extras.containsKey("reactComponent")) {
+      return defaultName;
+    }
+
+    return extras.getString("reactComponent");
   }
 
   @SuppressWarnings("unused")
@@ -59,6 +78,10 @@ class NotifeeNotification {
 
   static NotifeeNotification fromReadableMap(@NonNull ReadableMap readableMap) {
     return new NotifeeNotification(Objects.requireNonNull(Arguments.toBundle(readableMap)));
+  }
+
+  public Boolean isForegroundServiceNotification() {
+    return this.androidOptionsBundle.containsKey("asForegroundService") && this.androidOptionsBundle.getBoolean("asForegroundService");
   }
 
   WritableMap toWritableMap() {
@@ -81,7 +104,12 @@ class NotifeeNotification {
         channelId
       );
 
-      // TODO go through all options from bundle and set on notification
+      // Always keep at top. Some Compat fields set values in extras.
+      if (notificationBundle.containsKey("data")) {
+        Bundle data = notificationBundle.getBundle("data");
+        notificationBuilder.setExtras((Bundle) Objects.requireNonNull(data).clone());
+      }
+
       if (notificationBundle.containsKey("title")) {
         notificationBuilder.setContentTitle(notificationBundle.getString("title"));
       }
@@ -92,10 +120,6 @@ class NotifeeNotification {
 
       if (notificationBundle.containsKey("body")) {
         notificationBuilder.setContentText(notificationBundle.getString("body"));
-      }
-
-      if (notificationBundle.containsKey("data")) {
-        notificationBuilder.setExtras(notificationBundle.getBundle("data"));
       }
 
       // TODO sound
@@ -122,10 +146,9 @@ class NotifeeNotification {
             bubbleIntent
           );
 
-          // todo better name?
+          // todo implement, better name?
           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH &&
-            actionBundle.containsKey("remoteInput"))
-          {
+            actionBundle.containsKey("remoteInput")) {
             Bundle remoteInputBundle = actionBundle.getBundle("remoteInput");
 
             RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("foo");
@@ -216,10 +239,6 @@ class NotifeeNotification {
         }
       }
 
-      // if (androidOptionsBundle.containsKey("clickAction")) {
-      // todo clickAction
-      // }
-
       if (androidOptionsBundle.containsKey("color")) {
         int color = Color.parseColor(androidOptionsBundle.getString("color"));
         notificationBuilder.setColor(color);
@@ -291,6 +310,54 @@ class NotifeeNotification {
 
       if (androidOptionsBundle.containsKey("onlyAlertOnce")) {
         notificationBuilder.setOnlyAlertOnce(androidOptionsBundle.getBoolean("onlyAlertOnce"));
+      }
+
+      if (androidOptionsBundle.containsKey("onPressAction")) {
+        Bundle onPressActionBundle = androidOptionsBundle.getBundle("onPressAction");
+
+        String launchActivity;
+
+        if (Objects.requireNonNull(onPressActionBundle).containsKey("launchActivity")) {
+          launchActivity = onPressActionBundle.getString("launchActivity");
+        } else {
+          launchActivity = getMainActivityClassName();
+        }
+
+        if (launchActivity == null) {
+          throw new InvalidNotificationParameterException(
+            InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
+            "Launch Activity for notification onPressAction could not be found."
+          );
+        }
+
+        Class launchActivityClass = getClassForName(launchActivity);
+
+        if (launchActivityClass == null) {
+          throw new InvalidNotificationParameterException(
+            InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
+            String.format("Launch Activity for notification onPressAction does not exist ('%s').", launchActivity)
+          );
+        }
+
+        Intent contentIntent = new Intent(getApplicationContext(), launchActivityClass);
+        contentIntent.setAction(NOTIFICATION_INTENT_ACTION);
+        contentIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        contentIntent.putExtra("actionId", onPressActionBundle.getString("id"));
+        contentIntent.putExtra("notificationBundle", notificationBundle);
+        contentIntent.putExtra("launchActivity", launchActivity);
+
+        if (onPressActionBundle.containsKey("reactComponent")) {
+          contentIntent.putExtra("reactComponent", onPressActionBundle.getString("reactComponent"));
+        }
+
+        PendingIntent pendingContentIntent = PendingIntent.getActivity(
+          getApplicationContext(),
+          notificationHashCode,
+          contentIntent,
+          PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        notificationBuilder.setContentIntent(pendingContentIntent);
       }
 
       if (androidOptionsBundle.containsKey("priority")) {
@@ -370,7 +437,7 @@ class NotifeeNotification {
             style = getInboxStyle(styleBundle);
             break;
           case 3:
-            style = getMessagingStyle(styleBundle);
+            style = Tasks.await(getMessagingStyle(styleBundle));
             break;
         }
 
@@ -511,40 +578,40 @@ class NotifeeNotification {
   /**
    * MessagingStyle
    */
-  private NotificationCompat.MessagingStyle getMessagingStyle(Bundle messagingStyleBundle) {
-    NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(
-      getPerson(Objects.requireNonNull(messagingStyleBundle.getBundle("person")))
-    );
+  private Task<NotificationCompat.MessagingStyle> getMessagingStyle(Bundle messagingStyleBundle) {
+    return Tasks.call(NOTIFICATION_BUILD_EXECUTOR, () -> {
+      Person person = Tasks.await(getPerson(Objects.requireNonNull(messagingStyleBundle.getBundle("person"))));
 
-    if (messagingStyleBundle.containsKey("title")) {
-      messagingStyle = messagingStyle.setConversationTitle(messagingStyleBundle.getString("title"));
-    }
+      NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(person);
 
-    if (messagingStyleBundle.containsKey("group")) {
-      messagingStyle = messagingStyle.setGroupConversation(messagingStyleBundle.getBoolean("group"));
-    }
-
-    ArrayList<Bundle> messages = messagingStyleBundle.getParcelableArrayList("messages");
-
-    for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
-      Bundle message = messages.get(i);
-      Person person = null;
-      long timestamp = (long) message.getDouble("timestamp");
-
-      if (message.containsKey("person")) {
-        person = getPerson(Objects.requireNonNull(message.getBundle("person")));
+      if (messagingStyleBundle.containsKey("title")) {
+        messagingStyle = messagingStyle.setConversationTitle(messagingStyleBundle.getString("title"));
       }
 
-      messagingStyle = messagingStyle.addMessage(message.getString("text"), timestamp, person);
-    }
+      if (messagingStyleBundle.containsKey("group")) {
+        messagingStyle = messagingStyle.setGroupConversation(messagingStyleBundle.getBoolean("group"));
+      }
 
-    return messagingStyle;
+      ArrayList<Bundle> messages = messagingStyleBundle.getParcelableArrayList("messages");
+
+      for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
+        Bundle message = messages.get(i);
+        Person messagePerson = null;
+        long timestamp = (long) message.getDouble("timestamp");
+
+        if (message.containsKey("person")) {
+          messagePerson = Tasks.await(getPerson(Objects.requireNonNull(message.getBundle("person"))));
+        }
+
+        messagingStyle = messagingStyle.addMessage(message.getString("text"), timestamp, messagePerson);
+      }
+
+      return messagingStyle;
+    });
   }
 
   Task<Void> displayNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
-      String notificationId = Objects.requireNonNull(notificationBundle.getString("id"));
-
       String notificationTag = null;
       if (androidOptionsBundle.containsKey("tag")) {
         notificationTag = Objects.requireNonNull(androidOptionsBundle.getString("tag"));
@@ -554,7 +621,7 @@ class NotifeeNotification {
 
       getNotificationManagerCompat().notify(
         notificationTag,
-        notificationId.hashCode(),
+        notificationHashCode,
         notification
       );
 
@@ -564,8 +631,6 @@ class NotifeeNotification {
 
   Task<Void> displayForegroundServiceNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
-      String notificationId = Objects.requireNonNull(notificationBundle.getString("id"));
-
       Notification notification = Tasks.await(getNotification());
 
       Intent serviceIntent = new Intent(getApplicationContext(), NotifeeForegroundService.class);
@@ -573,8 +638,7 @@ class NotifeeNotification {
       serviceIntent.setAction(START_FOREGROUND_SERVICE_ACTION);
       serviceIntent.putExtra("notificationBundle", notificationBundle);
       serviceIntent.putExtra("notification", notification);
-      serviceIntent.putExtra("notificationId", notificationId);
-      serviceIntent.putExtra("hash", notificationId.hashCode());
+      serviceIntent.putExtra("hash", notificationHashCode);
 
       ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
 

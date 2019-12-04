@@ -21,6 +21,19 @@ class Root extends Component {
     };
 
     jet.exposeContextProperty('root', this);
+
+    // setTimeout(async () => {
+    (async () => {
+      // const n = await notifee.getInitialNotification();
+      // console.log('INITIAL NOTIF', n);
+    })();
+
+    // }, 8000);
+  }
+
+  async componentDidMount() {
+    const n = await notifee.getInitialNotification();
+    console.log('INITIAL NOTIF', n);
   }
 
   render() {
@@ -131,35 +144,3 @@ function BubbleTest() {
 }
 
 AppRegistry.registerComponent('bubble', () => BubbleTest);
-
-AppRegistry.registerHeadlessTask('SomeTaskName', () => {
-  return (data) => {
-    return new Promise(async (res) => {
-      console.log(data);
-      const { android } = data.notification;
-      const { progress } = android;
-      delete data.notification.android.chronometerDirection;
-      delete data.notification.android.smallIcon;
-      delete data.notification.data;
-
-      console.log('Running registerHeadlessTask');
-
-      let i;
-      i = setInterval(async () => {
-        if (progress.current === progress.max) {
-          clearInterval(i);
-          return res();
-        }
-        data.notification.android.progress.current++;
-        await notifee.displayNotification(data.notification);
-      }, 1000);
-
-      // setTimeout(async () => {
-      //   console.log('Running setTimeout');
-      //   console.dir(notifee);
-      //   await notifee.cancelNotification(data.notificationId);
-      //   res();
-      // }, 4000);
-    });
-  };
-});

@@ -9,6 +9,8 @@ import android.provider.Settings;
 
 import com.facebook.react.ReactActivity;
 
+import io.invertase.notifee.NotifeeNotification;
+
 public class MainActivity extends ReactActivity {
 
   public static final int PERMISSION_REQ_CODE = 1234;
@@ -25,7 +27,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "testing";
+    return NotifeeNotification.getMainComponentName(getIntent(), "testing");
   }
 
   @Override

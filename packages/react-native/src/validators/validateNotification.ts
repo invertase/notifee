@@ -15,17 +15,12 @@ export default function validateNotification(
     throw new Error("'notification' expected an object value.");
   }
 
-  // Required
-  if (!hasOwnProperty(notification, 'body') || !isString(notification.body) || !notification.body) {
-    throw new Error("'notification.body' expected a string value containing notification text.");
-  }
-
   // Defaults
   const out: NotificationBuilder = {
     id: '',
     title: '',
     subtitle: '',
-    body: notification.body,
+    body: '',
     data: {},
     ios: {},
     android: {},
@@ -53,6 +48,17 @@ export default function validateNotification(
     }
 
     out.title = notification.title;
+  }
+
+  /**
+   * body
+   */
+  if (hasOwnProperty(notification, 'body')) {
+    if (!isString(notification.body)) {
+      throw new Error("'notification.body' expected a string value.");
+    }
+
+    out.body = notification.body;
   }
 
   /**

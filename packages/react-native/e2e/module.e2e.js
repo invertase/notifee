@@ -8,10 +8,16 @@ describe('notifee', () => {
 
     // await Utils.sleep(2000);
 
+    notifee.registerForegroundService(data => {
+      return new Promise(() => {
+        console.log('registerForegroundService', data)
+      });
+    });
+
     const channelId = await notifee.createChannel({
       id: 'test',
       name: 'Testing Channel!!!',
-      // importance: notifee.AndroidImportance.HIGH,
+      importance: notifee.AndroidImportance.HIGH,
       badge: true,
       bubbles: true,
     });
@@ -36,7 +42,7 @@ describe('notifee', () => {
             showsUserInterface: true,
             remoteInput: {
               choices: ['Foo', 'Bar'],
-            }
+            },
           },
           {
             title: 'Middle',
@@ -53,6 +59,8 @@ describe('notifee', () => {
             showsUserInterface: true,
           },
         ],
+        asForegroundService: false,
+        onPressAction: false,
         autoCancel: false,
         // largeIcon: 'https://invertase.io/icons/icon-48x48.png',
         badgeIconType: notifee.AndroidBadgeIconType.SMALL,
@@ -68,9 +76,9 @@ describe('notifee', () => {
         // ongoing: true,
         onlyAlertOnce: false,
         progress: {
-          max: 10,
-          current: 2,
-          // indeterminate: true,
+          // max: 10,
+          // current: 2,
+          // indeterminate: false,
         },
         shortcutId: '123',
         // showTimestamp: true,
@@ -123,6 +131,7 @@ describe('notifee', () => {
         //         id: 'bot',
         //         name: 'Mike',
         //         bot: true,
+        //         icon: 'https://static.invertase.io/assets/React-Native-Firebase.png',
         //       },
         //     },
         //     {
@@ -152,11 +161,8 @@ describe('notifee', () => {
     };
 
     await notifee.displayNotification(config);
-    // await notifee.displayNotification(config);
-    // await notifee.displayNotification(config);
-    // await notifee.displayNotification(config);
 
-    await Utils.sleep(40000);
+    await Utils.sleep(900000);
 
     // await Utils.sleep(2000);
 

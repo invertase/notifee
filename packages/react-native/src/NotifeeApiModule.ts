@@ -2,6 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
+import { AppRegistry } from 'react-native';
 import { Module } from '../types/Module';
 import {
   AndroidChannel,
@@ -10,6 +11,7 @@ import {
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
 import {
+  Notification,
   NotificationBuilder,
   NotificationObserver,
   NotificationObserverUnsubscribe,
@@ -23,6 +25,7 @@ import validateNotification from './validators/validateNotification';
 import validateSchedule from './validators/validateSchedule';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
+
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   public cancelAllNotifications(): Promise<void> {
@@ -249,6 +252,20 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.openNotificationSettings(channelId || null);
+  }
+
+  public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
+    if (!isFunction(runner)) {
+      throw new Error("notifee.registerForegroundService(_, *) 'runner' expected a function.");
+    }
+
+    if (isIOS) {
+      return;
+    }
+
+    AppRegistry.registerHeadlessTask(this.core.NOTIFEE_FOREGROUND_SERVICE, () => {
+      return ({ notification }) => runner(notification);
+    });
   }
 
   public removeAllDeliveredNotifications(): Promise<void> {

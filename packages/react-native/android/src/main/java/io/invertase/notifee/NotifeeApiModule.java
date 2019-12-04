@@ -1,15 +1,21 @@
 package io.invertase.notifee;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.tasks.Tasks;
 
 import java.util.Objects;
@@ -17,20 +23,29 @@ import java.util.Objects;
 import io.invertase.notifee.core.NotifeeNativeModule;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static io.invertase.notifee.NotifeeNotification.NOTIFICATION_INTENT_ACTION;
 
-public class NotifeeApiModule extends NotifeeNativeModule {
+public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEventListener {
   private static final String TAG = "NotifeeApiModule";
+  private Bundle initialNotificationBundle;
 
   NotifeeApiModule(ReactApplicationContext reactContext) {
     super(reactContext, TAG);
+    reactContext.addActivityEventListener(this);
+    initialNotificationBundle = null;
   }
 
   @ReactMethod
   public void displayNotification(ReadableMap notificationRaw, Promise promise) {
     Tasks.call(getExecutor(), () -> {
       NotifeeNotification notification = NotifeeNotification.fromReadableMap(notificationRaw);
-//      Tasks.await(notification.displayNotification());
-      Tasks.await(notification.displayForegroundServiceNotification());
+
+      if (notification.isForegroundServiceNotification()) {
+        Tasks.await(notification.displayForegroundServiceNotification());
+      } else {
+        Tasks.await(notification.displayNotification());
+      }
+
       return notification;
     }).addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
@@ -151,6 +166,12 @@ public class NotifeeApiModule extends NotifeeNativeModule {
   }
 
   @ReactMethod
+  public void getInitialNotification(Promise promise) {
+    // TODO handle intent
+    promise.resolve(null);
+  }
+
+  @ReactMethod
   public void getChannel(String channelId, Promise promise) {
     Tasks.call(() -> NotifeeNotificationChannel.getChannel(channelId)).addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
@@ -220,5 +241,17 @@ public class NotifeeApiModule extends NotifeeNativeModule {
     }
 
     promise.resolve(null);
+  }
+
+  @Override
+  public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    // noop
+  }
+
+  @Override
+  public void onNewIntent(Intent intent) {
+    if (intent.getAction() != null && intent.getAction().equals(NOTIFICATION_INTENT_ACTION)) {
+      // TODO intent handling
+    }
   }
 }

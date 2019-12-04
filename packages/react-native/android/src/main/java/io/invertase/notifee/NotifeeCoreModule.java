@@ -15,6 +15,8 @@ import io.invertase.notifee.core.NotifeeNativeModule;
 import io.invertase.notifee.core.NotifeePreferences;
 import io.invertase.notifee.core.NotifeeUtils;
 
+import static io.invertase.notifee.NotifeeForegroundService.FOREGROUND_SERVICE_TASK_KEY;
+
 public class NotifeeCoreModule extends NotifeeNativeModule {
   private static final String TAG = "NotifeeCoreModule";
 
@@ -107,6 +109,7 @@ public class NotifeeCoreModule extends NotifeeNativeModule {
     Map<String, Object> constants = new HashMap<>();
     constants.put("NOTIFEE_RAW_JSON", NotifeeJSON.getSharedInstance().getRawJSON());
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
+    constants.put("NOTIFEE_FOREGROUND_SERVICE", FOREGROUND_SERVICE_TASK_KEY);
     return constants;
   }
 }

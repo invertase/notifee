@@ -1,6 +1,7 @@
 package io.invertase.notifee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
@@ -12,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -27,9 +29,13 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.views.imagehelper.ImageSource;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
+
+import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
+import static io.invertase.notifee.NotifeeNotification.NOTIFICATION_BUILD_EXECUTOR;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
 class NotifeeUtils {
@@ -230,32 +236,77 @@ class NotifeeUtils {
     return String.format("#%06X", (0xFFFFFF & color));
   }
 
-  static Person getPerson(Bundle personBundle) {
-    Person.Builder personBuilder = new Person.Builder();
+  /**
+   * Converts a person bundle from JS into a Person
+   *
+   * @param personBundle
+   * @return
+   */
+  static Task<Person> getPerson(Bundle personBundle) {
+    return Tasks.call(NOTIFICATION_BUILD_EXECUTOR, () -> {
+      Person.Builder personBuilder = new Person.Builder();
 
-    personBuilder.setName(personBundle.getString("name"));
+      personBuilder.setName(personBundle.getString("name"));
 
-    if (personBundle.containsKey("id")) {
-      personBuilder.setKey(personBundle.getString("id"));
+      if (personBundle.containsKey("id")) {
+        personBuilder.setKey(personBundle.getString("id"));
+      }
+
+      if (personBundle.containsKey("bot")) {
+        personBuilder.setBot(personBundle.getBoolean("bot"));
+      }
+
+      if (personBundle.containsKey("important")) {
+        personBuilder.setImportant(personBundle.getBoolean("important"));
+      }
+
+      if (personBundle.containsKey("icon")) {
+        Bitmap icon = Tasks.await(
+          getImageBitmapFromUrl(
+            Objects.requireNonNull(personBundle.getString("icon"))
+          )
+        );
+
+        if (icon != null) {
+          personBuilder.setIcon(IconCompat.createWithAdaptiveBitmap(icon));
+        }
+      }
+
+
+      if (personBundle.containsKey("uri")) {
+        personBuilder.setUri(personBundle.getString("uri"));
+      }
+
+      return personBuilder.build();
+    });
+  }
+
+  /**
+   * Gets the main activity class name for this application
+   */
+  static @Nullable
+  String getMainActivityClassName() {
+    String packageName = getApplicationContext().getPackageName();
+    Intent launchIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
+
+    if (launchIntent == null || launchIntent.getComponent() == null) {
+      return null;
     }
 
-    if (personBundle.containsKey("bot")) {
-      personBuilder.setBot(personBundle.getBoolean("bot"));
+    return launchIntent.getComponent().getClassName();
+  }
+
+  /**
+   * Returns a Class instance for a given class name
+   * @param className
+   * @return
+   */
+  static @Nullable
+  Class getClassForName(String className) {
+    try {
+      return Class.forName(className);
+    } catch (ClassNotFoundException e) {
+      return null;
     }
-
-    if (personBundle.containsKey("important")) {
-      personBuilder.setImportant(personBundle.getBoolean("important"));
-    }
-
-    if (personBundle.containsKey("icon")) {
-      // TODO icon
-    }
-
-
-    if (personBundle.containsKey("uri")) {
-      personBuilder.setUri(personBundle.getString("uri"));
-    }
-
-    return personBuilder.build();
   }
 }

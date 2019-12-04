@@ -1,17 +1,14 @@
 package io.invertase.notifee;
 
 import android.app.Notification;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.facebook.react.HeadlessJsTaskService;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 
@@ -19,8 +16,11 @@ import java.util.Objects;
 
 public class NotifeeForegroundService extends HeadlessJsTaskService {
 
+  static final String FOREGROUND_SERVICE_TASK_KEY = "notifee_foreground_service";
   static final String START_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.start_foreground_service";
   static final String STOP_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.stop_foreground_service";
+
+  private int activeNotificationHash = -1;
 
   @Nullable
   @Override
@@ -38,9 +38,23 @@ public class NotifeeForegroundService extends HeadlessJsTaskService {
 
       if (action.equals(START_FOREGROUND_SERVICE_ACTION)) {
         Notification notification = extras.getParcelable("notification");
-        startForeground(hash, notification);
-        startTask(getTaskConfig(intent));
+
+        // If notification exists, and new one is different
+        if (activeNotificationHash != -1 && hash != activeNotificationHash) {
+          // Stop foreground, but keep service active
+          stopForeground(true);
+
+          // Start new
+          startForeground(hash, notification);
+          startTask(getTaskConfig(intent));
+        }
+        // No service is active
+        else if (activeNotificationHash == -1) {
+          startForeground(hash, notification);
+          startTask(getTaskConfig(intent));
+        }
       } else {
+        activeNotificationHash = -1;
         stopSelf(hash);
       }
     }
@@ -49,20 +63,24 @@ public class NotifeeForegroundService extends HeadlessJsTaskService {
   }
 
   @Override
-  protected @Nullable HeadlessJsTaskConfig getTaskConfig(Intent intent) {
-    Log.d("ELLIOT", "getTaskConfig");
+  protected @Nullable
+  HeadlessJsTaskConfig getTaskConfig(Intent intent) {
     Bundle extras = intent.getExtras();
-    WritableMap foo =  Arguments.createMap();
-    foo.putMap("notification", Arguments.fromBundle(extras.getBundle("notificationBundle")));
+    WritableMap writableMap = Arguments.createMap();
 
-    if (extras != null) {
-      return new HeadlessJsTaskConfig(
-        "SomeTaskName",
-        foo,
-        0, // timeout for the task
-        true // optional: defines whether or not  the task is allowed in foreground. Default is false
-      );
-    }
-    return null;
+    writableMap.putMap("notification", Arguments.fromBundle(Objects.requireNonNull(extras.getBundle("notificationBundle"))));
+
+    return new HeadlessJsTaskConfig(
+      FOREGROUND_SERVICE_TASK_KEY,
+      writableMap,
+      0, // timeout for the task
+      true
+    );
+  }
+
+  @Override
+  public void onHeadlessJsTaskFinish(int taskId) {
+    activeNotificationHash = -1;
+    super.onHeadlessJsTaskFinish(taskId);
   }
 }

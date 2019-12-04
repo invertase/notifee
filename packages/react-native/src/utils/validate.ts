@@ -2,63 +2,44 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-export function isNull(value: any): boolean {
+export function isNull(value: any): value is null {
   return value === null;
 }
 
-export function isObject(value: any): boolean {
+export function isObject(value: any): value is object {
   return value ? typeof value === 'object' && !Array.isArray(value) && !isNull(value) : false;
 }
 
-/**
- * Simple is date check
- * https://stackoverflow.com/a/44198641
- * @param value
- * @returns {boolean}
- */
-export function isDate(value: any): boolean {
-  // use the global isNaN() and not Number.isNaN() since it will validate an Invalid Date
-  return value && Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value);
-}
-
-export function isFunction(value: any): boolean {
+export function isFunction(value: any): value is Function {
   return value ? typeof value === 'function' : false;
 }
 
-export function isString(value: any): boolean {
+export function isString(value: any): value is string {
   return typeof value === 'string';
 }
 
-export function isNumber(value: any): boolean {
+export function isNumber(value: any): value is number {
   return typeof value === 'number';
 }
 
-export function isFinite(value: any): boolean {
-  return Number.isFinite(value);
-}
-
-export function isInteger(value: any): boolean {
-  return Number.isInteger(value);
-}
-
-export function isBoolean(value: any): boolean {
+export function isBoolean(value: any): value is boolean {
   return typeof value === 'boolean';
 }
 
-export function isArray(value: any): boolean {
+export function isArray(value: any): value is Array<any> {
   return Array.isArray(value);
 }
 
-export function isUndefined(value: any): boolean {
+export function isUndefined(value: any): value is undefined {
   return value == undefined;
 }
 
-export function objectKeyValuesAreStrings(object: object): boolean {
-  if (!isObject(object)) {
+export function objectKeyValuesAreStrings(value: object): value is { [key: string]: string } {
+  if (!isObject(value)) {
     return false;
   }
 
-  const entries = Object.entries(object);
+  const entries = Object.entries(value);
 
   for (let i = 0; i < entries.length; i++) {
     const [key, value] = entries[i];
@@ -91,18 +72,4 @@ const IS_VALID_URL_REGEX = /^(http|https):\/\/[^ "]+$/;
 
 export function isValidUrl(url: string): boolean {
   return IS_VALID_URL_REGEX.test(url);
-}
-
-/**
- * Array includes
- *
- * @param value
- * @param oneOf
- * @returns {boolean}
- */
-export function isOneOf(value: string | number, oneOf: (string | number)[]): boolean {
-  if (!isArray(oneOf)) {
-    return false;
-  }
-  return oneOf.includes(value);
 }

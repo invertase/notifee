@@ -3,6 +3,7 @@
  */
 
 import {
+  Notification,
   NotificationBuilder,
   NotificationObserver,
   NotificationObserverUnsubscribe,
@@ -177,6 +178,16 @@ export interface Module {
    * @param channelId
    */
   openNotificationSettings(channelId?: string): Promise<void>;
+
+  /**
+   * Register a foreground service runner used to manage long running notifications.
+   *
+   * TODO description
+   *
+   * @param runner The runner function which runs for the duration of the service's lifetime.
+   * @platform android
+   */
+  registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 
   removeAllDeliveredNotifications(): Promise<void>;
 
