@@ -160,7 +160,11 @@ describe('notifee', () => {
       },
     };
 
-    await notifee.displayNotification(config);
+    const id = await notifee.displayNotification(config);
+
+    await Utils.sleep(5000);
+
+    await notifee.cancelNotification(id);
 
     await Utils.sleep(900000);
 

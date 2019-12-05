@@ -57,6 +57,13 @@ public class NotifeeNotification {
     this.notificationHashCode = Objects.requireNonNull(notificationBundle.getString("id")).hashCode();
   }
 
+  /**
+   * Returns the component name for an activity to open, triggered by a notification Intent
+   *
+   * @param intent the notification intent which opened the app
+   * @param defaultName the default component name if no intent or reactComponent was available
+   * @return the string component name
+   */
   public static String getMainComponentName(Intent intent, String defaultName) {
     if (intent == null) {
       return defaultName;
@@ -76,26 +83,64 @@ public class NotifeeNotification {
     return new NotifeeNotification(bundle);
   }
 
+  /**
+   * Converts a ReadableMap from JS into a NotifeeNotification class
+   *
+   * @param readableMap ReadableMap from JS land
+   * @return the NotifeeNotification
+   */
   static NotifeeNotification fromReadableMap(@NonNull ReadableMap readableMap) {
     return new NotifeeNotification(Objects.requireNonNull(Arguments.toBundle(readableMap)));
   }
 
-  public Boolean isForegroundServiceNotification() {
-    return this.androidOptionsBundle.containsKey("asForegroundService") && this.androidOptionsBundle.getBoolean("asForegroundService");
-  }
-
+  /**
+   * Creates a WritableMap from the current notification Bundle
+   * @return WritableMap
+   */
   WritableMap toWritableMap() {
     return Arguments.fromBundle(notificationBundle);
   }
 
+  /**
+   * Gets a non-compat notification manager
+   * @return NotificationManager
+   */
   private NotificationManager getNotificationManager() {
     return (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
   }
 
+  /**
+   * Returns a compat notification manager
+   * @return NotificationManagerCompat
+   */
   private NotificationManagerCompat getNotificationManagerCompat() {
     return NotificationManagerCompat.from(getApplicationContext());
   }
 
+  /**
+   * Returns a compat notification manager - as static
+   * @return NotificationManagerCompat
+   */
+  public static NotificationManagerCompat getNotificationManagerCompat(Context context) {
+    return NotificationManagerCompat.from(context);
+  }
+
+  /**
+   * Returns whether this notification should display in a foreground service
+   * @return boolean value
+   */
+  public Boolean isForegroundServiceNotification() {
+    return this.androidOptionsBundle.containsKey("asForegroundService") && this.androidOptionsBundle.getBoolean("asForegroundService");
+  }
+
+  public void cancelNotification(String notificationId) {
+    getNotificationManagerCompat().cancel(notificationId.hashCode());
+  }
+
+  /**
+   * Gets a Notification instance from the current bundle passed from JS
+   * @return Notification
+   */
   private Task<Notification> getNotification() {
     return Tasks.call(NOTIFICATION_BUILD_EXECUTOR, () -> {
       String channelId = Objects.requireNonNull(androidOptionsBundle.getString("channelId"));
@@ -610,6 +655,10 @@ public class NotifeeNotification {
     });
   }
 
+  /**
+   * Displays a notification in the app
+   * @return void
+   */
   Task<Void> displayNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
       String notificationTag = null;
@@ -629,6 +678,11 @@ public class NotifeeNotification {
     });
   }
 
+  /**
+   * Displays a notification inside of a foreground service, the user can control this service
+   * via their JS by registering a runner function with notifee
+   * @return void
+   */
   Task<Void> displayForegroundServiceNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
       Notification notification = Tasks.await(getNotification());

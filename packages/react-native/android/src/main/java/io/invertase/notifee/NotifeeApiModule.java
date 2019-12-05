@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.core.app.NotificationManagerCompat;
+
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -68,16 +70,17 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
     });
   }
 
-  // TODO handle cancel notifications
-
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
-    Log.d("ELLIOT", "Cancelling!!!!!!!");
+    NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat(getApplicationContext());
+    notificationManagerCompat.cancel(notificationId.hashCode());
     promise.resolve(null);
   }
 
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
+    NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat(getApplicationContext());
+    notificationManagerCompat.cancelAll();
     promise.resolve(null);
   }
 
