@@ -4,7 +4,7 @@
 
 /* eslint-disable no-console */
 import React, { useEffect } from 'react';
-import { AppRegistry, StyleSheet, View, Text } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
 import notifee from '@notifee/react-native';
 
@@ -12,15 +12,22 @@ function Root() {
   async function init() {
     await notifee.createChannel({
       name: 'Hello World',
-      channelId: 'foo3',
+      id: 'foo3',
     });
 
     const returnedNotification = await notifee.displayNotification({
-      notificationId: Math.random().toString(10),
+      id: Math.random().toString(10),
       title: 'Hello',
       subtitle: 'World',
       body: 'foobarbazdaz test \n test \n',
-      channelId: 'foo1',
+      android: {
+        channelId: 'foo3',
+        largeIcon: 'https://static.invertase.io/assets/invertase-logo.png',
+        style: {
+          type: notifee.AndroidStyle.BIGPICTURE,
+          picture: 'https://static.invertase.io/assets/invertase-logo.png',
+        },
+      },
     });
 
     console.warn(JSON.stringify(returnedNotification));

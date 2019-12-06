@@ -1,1 +1,2 @@
-require('./app');
+// require('./app');
+require('./example/app');
