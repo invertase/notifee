@@ -263,6 +263,10 @@ export default function validateAndroidNotification(
     out.defaults = android.defaults;
   }
 
+  if (hasOwnProperty(android, 'fullScreenAction')) {
+    out.fullScreenAction = android.fullScreenAction;
+  }
+
   /**
    * group
    */

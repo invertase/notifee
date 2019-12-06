@@ -20,12 +20,11 @@ import {
 } from '../types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-import { isFunction, isNumber, isString, isIOS, isArray, isNull, isUndefined } from './utils';
+import { isFunction, isString, isIOS, isArray, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
 import validateSchedule from './validators/validateSchedule';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
-
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   public cancelAllNotifications(): Promise<void> {

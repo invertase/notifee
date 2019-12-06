@@ -37,6 +37,7 @@ import static io.invertase.notifee.NotifeeForegroundService.START_FOREGROUND_SER
 import static io.invertase.notifee.NotifeeUtils.getClassForName;
 import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
 import static io.invertase.notifee.NotifeeUtils.getImageResourceId;
+import static io.invertase.notifee.NotifeeUtils.getLaunchActivity;
 import static io.invertase.notifee.NotifeeUtils.getMainActivityClassName;
 import static io.invertase.notifee.NotifeeUtils.getPerson;
 import static io.invertase.notifee.NotifeeUtils.getSoundUri;
@@ -304,6 +305,37 @@ public class NotifeeNotification {
       // TODO defaults
       // }
 
+      if (androidOptionsBundle.containsKey("fullScreenAction")) {
+        Bundle fullScreenActionBundle = androidOptionsBundle.getBundle("fullScreenAction");
+
+        String launchActivity = null;
+
+        if (Objects.requireNonNull(fullScreenActionBundle).containsKey("launchActivity")) {
+          launchActivity = fullScreenActionBundle.getString("launchActivity");
+        }
+
+        Class launchActivityClass = getLaunchActivity(launchActivity);
+
+        Intent contentIntent = new Intent(getApplicationContext(), launchActivityClass);
+        contentIntent.setAction(NOTIFICATION_INTENT_ACTION);
+        contentIntent.putExtra("actionId", fullScreenActionBundle.getString("id"));
+        contentIntent.putExtra("notificationBundle", notificationBundle);
+        contentIntent.putExtra("launchActivity", launchActivity);
+
+        if (fullScreenActionBundle.containsKey("reactComponent")) {
+          contentIntent.putExtra("reactComponent", fullScreenActionBundle.getString("reactComponent"));
+        }
+
+        PendingIntent pendingContentIntent = PendingIntent.getActivity(
+          getApplicationContext(),
+          notificationHashCode,
+          contentIntent,
+          PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        notificationBuilder.setFullScreenIntent(pendingContentIntent, true);
+      }
+
       if (androidOptionsBundle.containsKey("group")) {
         notificationBuilder.setGroup(androidOptionsBundle.getString("group"));
       }
@@ -360,29 +392,13 @@ public class NotifeeNotification {
       if (androidOptionsBundle.containsKey("onPressAction")) {
         Bundle onPressActionBundle = androidOptionsBundle.getBundle("onPressAction");
 
-        String launchActivity;
+        String launchActivity = null;
 
         if (Objects.requireNonNull(onPressActionBundle).containsKey("launchActivity")) {
           launchActivity = onPressActionBundle.getString("launchActivity");
-        } else {
-          launchActivity = getMainActivityClassName();
         }
 
-        if (launchActivity == null) {
-          throw new InvalidNotificationParameterException(
-            InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
-            "Launch Activity for notification onPressAction could not be found."
-          );
-        }
-
-        Class launchActivityClass = getClassForName(launchActivity);
-
-        if (launchActivityClass == null) {
-          throw new InvalidNotificationParameterException(
-            InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
-            String.format("Launch Activity for notification onPressAction does not exist ('%s').", launchActivity)
-          );
-        }
+        Class launchActivityClass = getLaunchActivity(launchActivity);
 
         Intent contentIntent = new Intent(getApplicationContext(), launchActivityClass);
         contentIntent.setAction(NOTIFICATION_INTENT_ACTION);

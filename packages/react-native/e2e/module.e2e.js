@@ -25,42 +25,47 @@ describe('notifee', () => {
     console.log(channelId);
 
     const config = {
-      title: 'Foooooo',
-      subtitle: 'Barrrr',
-      body: 'Hello World ',
+      title: 'Uploading image...',
+      // subtitle: 'Barrrr',
+      // body: 'Hello World ',
       data: {
         foo: 'bar',
         bar: '123',
       },
       android: {
-        actions: [
-          {
-            title: 'First',
-            icon: 'https://invertase.io/icons/icon-48x48.png',
-            contextual: true,
-            allowGeneratedReplies: true,
-            showsUserInterface: true,
-            remoteInput: {
-              choices: ['Foo', 'Bar'],
-            },
-          },
-          {
-            title: 'Middle',
-            icon: 'https://invertase.io/icons/icon-48x48.png',
-            contextual: true,
-            allowGeneratedReplies: true,
-            showsUserInterface: false,
-          },
-          {
-            title: 'Last',
-            icon: 'https://invertase.io/icons/icon-48x48.png',
-            contextual: true,
-            allowGeneratedReplies: true,
-            showsUserInterface: true,
-          },
-        ],
+        // actions: [
+        //   {
+        //     title: 'First',
+        //     icon: 'https://invertase.io/icons/icon-48x48.png',
+        //     contextual: true,
+        //     allowGeneratedReplies: true,
+        //     showsUserInterface: true,
+        //     remoteInput: {
+        //       choices: ['Foo', 'Bar'],
+        //     },
+        //   },
+        //   {
+        //     title: 'Middle',
+        //     icon: 'https://invertase.io/icons/icon-48x48.png',
+        //     contextual: true,
+        //     allowGeneratedReplies: true,
+        //     showsUserInterface: false,
+        //   },
+        //   {
+        //     title: 'Last',
+        //     icon: 'https://invertase.io/icons/icon-48x48.png',
+        //     contextual: true,
+        //     allowGeneratedReplies: true,
+        //     showsUserInterface: true,
+        //   },
+        // ],
         asForegroundService: false,
         onPressAction: false,
+        fullScreenAction: {
+          id: 'foo',
+          launchActivity: 'io.invertase.notifee.NotifeeBubbleActivity',
+          // reactComponent: 'bubble',
+        },
         autoCancel: false,
         // largeIcon: 'https://invertase.io/icons/icon-48x48.png',
         badgeIconType: notifee.AndroidBadgeIconType.SMALL,
@@ -78,7 +83,7 @@ describe('notifee', () => {
         progress: {
           // max: 10,
           // current: 2,
-          // indeterminate: false,
+          indeterminate: true,
         },
         shortcutId: '123',
         // showTimestamp: true,
@@ -154,7 +159,7 @@ describe('notifee', () => {
         ticker: 'Elliot Smells',
         // timeoutAfter: 8000,
         chronometerDirection: 'down',
-        showChronometer: true,
+        // showChronometer: true,
         timestamp: Date.now() - 20000,
         tag: 'elliot',
       },

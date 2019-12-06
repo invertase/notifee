@@ -70,6 +70,7 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
     });
   }
 
+  // TODO these dont seem to work
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
     NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat(getApplicationContext());

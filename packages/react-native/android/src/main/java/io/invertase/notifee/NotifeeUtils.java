@@ -309,4 +309,37 @@ class NotifeeUtils {
       return null;
     }
   }
+
+  /**
+   *
+   * @param launchActivity
+   * @return
+   */
+  static Class getLaunchActivity(@Nullable String launchActivity) {
+    String activity;
+
+    if (launchActivity != null) {
+      activity = launchActivity;
+    } else {
+     activity = getMainActivityClassName();
+    }
+
+    if (activity == null) {
+      throw new InvalidNotificationParameterException(
+        InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
+        "Launch Activity for notification could not be found."
+      );
+    }
+
+    Class launchActivityClass = getClassForName(activity);
+
+    if (launchActivityClass == null) {
+      throw new InvalidNotificationParameterException(
+        InvalidNotificationParameterException.ACTIVITY_NOT_FOUND,
+        String.format("Launch Activity for notification does not exist ('%s').", launchActivity)
+      );
+    }
+
+    return launchActivityClass;
+  }
 }
