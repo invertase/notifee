@@ -63,7 +63,7 @@ export default function validateAndroidNotification(
     visibility: AndroidVisibility.PRIVATE,
   };
 
-  if (android === undefined) {
+  if (isUndefined(android)) {
     return out;
   }
 
