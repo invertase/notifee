@@ -7,7 +7,7 @@
 
 ----
 
-Coming soon. Questions welcome via issues.
+Coming soon. Questions welcome via issues. See [the website](https://notifee.app/) for additional information such as licensing & features.
 
 - [[Twitter]](https://twitter.com/notifee_app)
 - [[Register interest for Alpha access]](https://docs.google.com/forms/d/e/1FAIpQLSfA1wvwkOzPzWdbDlXhoI8VxLkH6EQHMm0PElSujM9AG133bw/viewform)
