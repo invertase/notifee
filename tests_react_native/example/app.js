@@ -40,8 +40,27 @@ const channels = [
   },
 ];
 
+notifee.onEvent((eventType, event, headless) => {
+  console.log('onEvent', { eventType }, event, { headless });
+
+  if (eventType === 2) {
+    const notification = event.notification;
+
+    if (event.action.id === 'first_action') {
+      notification.android.actions[0].title = 'Thanks';
+      notifee.displayNotification(notification).then(() => console.log('Updated'));
+    }
+  }
+
+  return Promise.resolve();
+});
+
 function Root() {
+  const [id, setId] = React.useState(null);
+
   async function init() {
+    const foo = await notifee.getInitialNotification();
+    console.log(foo);
     await Promise.all(channels.map($ => notifee.createChannel($)));
   }
 
@@ -55,12 +74,20 @@ function Root() {
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => notifee.displayNotification($))).catch(console.error);
     } else {
-      notifee.displayNotification(notification).catch(console.error);
+      notifee
+        .displayNotification(notification)
+        .then(id => setId(id))
+        .catch(console.error);
     }
   }
 
   return (
     <ScrollView style={[styles.container]}>
+      {!!id && (
+        <View>
+          <Button title={`Cancel ${id}`} onPress={() => notifee.cancelNotification(id)} />
+        </View>
+      )}
       <View style={styles.row}>
         <View style={{ flex: 1 }} />
         {channels.map(channel => (
@@ -106,3 +133,14 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('testing', () => Root);
+
+function TestComponent() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Test Component</Text>
+    </View>
+  );
+}
+
+AppRegistry.registerComponent('test_component', () => TestComponent);
+

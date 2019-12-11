@@ -13,9 +13,11 @@ import io.invertase.notifee.core.NotifeeEventEmitter;
 import io.invertase.notifee.core.NotifeeJSON;
 import io.invertase.notifee.core.NotifeeNativeModule;
 import io.invertase.notifee.core.NotifeePreferences;
-import io.invertase.notifee.core.NotifeeUtils;
+import io.invertase.notifee.core.NotifeeCoreUtils;
 
 import static io.invertase.notifee.NotifeeForegroundService.FOREGROUND_SERVICE_TASK_KEY;
+import static io.invertase.notifee.NotifeeReceiverService.RECEIVER_SERVICE_EVENT_KEY;
+import static io.invertase.notifee.NotifeeReceiverService.RECEIVER_SERVICE_TASK_KEY;
 
 public class NotifeeCoreModule extends NotifeeNativeModule {
   private static final String TAG = "NotifeeCoreModule";
@@ -47,9 +49,9 @@ public class NotifeeCoreModule extends NotifeeNativeModule {
     NotifeeEventEmitter emitter = NotifeeEventEmitter.getSharedInstance();
     emitter.sendEvent(new NotifeeEvent(
       eventName,
-      NotifeeUtils.readableMapToWritableMap(eventBody)
+      NotifeeCoreUtils.readableMapToWritableMap(eventBody)
     ));
-    promise.resolve(NotifeeUtils.readableMapToWritableMap(eventBody));
+    promise.resolve(NotifeeCoreUtils.readableMapToWritableMap(eventBody));
   }
 
   @ReactMethod
@@ -109,6 +111,8 @@ public class NotifeeCoreModule extends NotifeeNativeModule {
     Map<String, Object> constants = new HashMap<>();
     constants.put("NOTIFEE_RAW_JSON", NotifeeJSON.getSharedInstance().getRawJSON());
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
+    constants.put("NOTIFEE_RECEIVER_SERVICE_TASK_KEY", RECEIVER_SERVICE_TASK_KEY);
+    constants.put("NOTIFEE_RECEIVER_SERVICE_EVENT_KEY", RECEIVER_SERVICE_EVENT_KEY);
     constants.put("NOTIFEE_FOREGROUND_SERVICE", FOREGROUND_SERVICE_TASK_KEY);
     return constants;
   }

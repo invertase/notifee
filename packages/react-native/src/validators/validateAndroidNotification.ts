@@ -5,6 +5,7 @@
 import {
   hasOwnProperty,
   isArray,
+  isArrayOfStrings,
   isBoolean,
   isNumber,
   isObject,
@@ -14,26 +15,24 @@ import {
 
 import {
   AndroidBadgeIconType,
-  AndroidDefaults,
-  AndroidStyle,
+  AndroidBubble,
   AndroidCategory,
+  AndroidDefaults,
   AndroidGroupAlertBehavior,
-  AndroidPriority,
+  AndroidImportance,
+  AndroidProgress,
+  AndroidStyle,
   AndroidVisibility,
   NotificationAndroid,
-  AndroidProgress,
-  AndroidBubble,
 } from '../../types/NotificationAndroid';
 
 import {
   isValidColor,
   isValidLightPattern,
-  isValidRemoteInputHistory,
   isValidTimestamp,
   isValidVibratePattern,
 } from './validate';
 
-import validateAndroidAction from './validateAndroidAction';
 import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
@@ -41,6 +40,7 @@ import {
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
 import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidAction from './validateAndroidAction';
 
 export default function validateAndroidNotification(
   android?: NotificationAndroid,
@@ -52,11 +52,12 @@ export default function validateAndroidNotification(
     badgeIconType: AndroidBadgeIconType.LARGE,
     colorized: false,
     chronometerDirection: 'up',
+    defaults: [AndroidDefaults.ALL],
     groupAlertBehavior: AndroidGroupAlertBehavior.ALL,
     groupSummary: false,
     ongoing: false,
     onlyAlertOnce: false,
-    priority: AndroidPriority.DEFAULT,
+    importance: AndroidImportance.DEFAULT,
     showTimestamp: false,
     smallIcon: ['ic_launcher', -1],
     showChronometer: false,
@@ -75,22 +76,22 @@ export default function validateAndroidNotification(
    * actions
    */
   if (hasOwnProperty(android, 'actions') && android.actions != undefined) {
-    // if (!isArray(android.actions)) {
-    //   throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
-    // }
-    //
-    // const actions = [];
-    // try {
-    //   for (let i = 0; i < android.actions.length; i++) {
-    //     actions.push(validateAndroidAction(android.actions[i]));
-    //   }
-    // } catch (e) {
-    //   throw new Error(`'notification.android.actions' invalid AndroidAction. ${e.message}.`);
-    // }
+    if (!isArray(android.actions)) {
+      throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
+    }
 
-    // if (actions.length) {
-    out.actions = android.actions;
-    // }
+    const actions = [];
+    try {
+      for (let i = 0; i < android.actions.length; i++) {
+        actions.push(validateAndroidAction(android.actions[i]));
+      }
+    } catch (e) {
+      throw new Error(`'notification.android.actions' invalid AndroidAction. ${e.message}.`);
+    }
+
+    if (actions.length) {
+      out.actions = android.actions;
+    }
   }
 
   /**
@@ -255,7 +256,7 @@ export default function validateAndroidNotification(
     for (let i = 0; i < android.defaults.length; i++) {
       if (!defaults.includes(android.defaults[i])) {
         throw new Error(
-          "'notification.android.defaults' invalid array value, expected a AndroidDefaults value.",
+          "'notification.android.defaults' invalid array value, expected an AndroidDefaults value.",
         );
       }
     }
@@ -300,6 +301,14 @@ export default function validateAndroidNotification(
     }
 
     out.groupSummary = android.groupSummary;
+  }
+
+  if (hasOwnProperty(android, 'inputHistory')) {
+    if (!isArrayOfStrings(android.inputHistory)) {
+      throw new Error("'notification.android.inputHistory' expected an array of string values.");
+    }
+
+    out.inputHistory = android.inputHistory;
   }
 
   /**
@@ -381,34 +390,23 @@ export default function validateAndroidNotification(
   /**
    * onPressAction
    */
-  if (hasOwnProperty(android, 'onPressAction')) {
-    if (isBoolean(android.onPressAction)) {
-      // Only set if true
-      if (android.onPressAction) {
-        out.onPressAction = {
-          id: 'default',
-        };
-      }
-    } else if (isObject(android.onPressAction)) {
-      try {
-        out.onPressAction = validateAndroidOnPressAction(android.onPressAction);
-      } catch (e) {
-        throw new Error(`'notification.android.onPressAction' ${e.message}`);
-      }
-    } else {
-      throw new Error("'notification.android.onPressAction' expected a boolean or object value.");
+  if (hasOwnProperty(android, 'onPressAction') && !isUndefined(android.onPressAction)) {
+    try {
+      out.onPressAction = validateAndroidOnPressAction(android.onPressAction);
+    } catch (e) {
+      throw new Error(`'notification.android.onPressAction' ${e.message}`);
     }
   }
 
   /**
-   * priority
+   * importance
    */
-  if (hasOwnProperty(android, 'priority') && !isUndefined(android.priority)) {
-    if (!Object.values(AndroidPriority).includes(android.priority)) {
-      throw new Error("'notification.android.priority' expected a valid AndroidPriority.");
+  if (hasOwnProperty(android, 'importance') && !isUndefined(android.importance)) {
+    if (!Object.values(AndroidImportance).includes(android.importance)) {
+      throw new Error("'notification.android.importance' expected a valid AndroidImportance.");
     }
 
-    out.priority = android.priority;
+    out.importance = android.importance;
   }
 
   /**
@@ -474,22 +472,6 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * remoteInputHistory
-   */
-  if (hasOwnProperty(android, 'remoteInputHistory') && !isUndefined(android.remoteInputHistory)) {
-    if (
-      !isArray(android.remoteInputHistory) ||
-      !isValidRemoteInputHistory(android.remoteInputHistory)
-    ) {
-      throw new Error(
-        "'notification.android.remoteInputHistory' expected an array of string values.",
-      );
-    }
-
-    out.remoteInputHistory = android.remoteInputHistory;
-  }
-
-  /**
    * shortcutId
    */
   if (hasOwnProperty(android, 'shortcutId')) {
@@ -522,8 +504,10 @@ export default function validateAndroidNotification(
         throw new Error("'notification.android.smallIcon' expected icon to be a string.");
       }
 
-      if (!isNumber(level) || level < 0) {
-        throw new Error("'notification.android.smallIcon' expected level to be a positive number.");
+      if (!isNumber(level) || level < -1) {
+        throw new Error(
+          "'notification.android.smallIcon' expected level to be a number greater than -1.",
+        );
       }
 
       out.smallIcon = [icon, level];

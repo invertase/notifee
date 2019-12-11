@@ -5,11 +5,11 @@
 import {
   Notification,
   NotificationBuilder,
-  NotificationObserver,
-  NotificationObserverUnsubscribe,
   NotificationRepeatInterval,
   NotificationSchedule,
   RemoteNotification,
+  EventType,
+  EventObserver,
 } from './Notification';
 import {
   AndroidBadgeIconType,
@@ -20,7 +20,6 @@ import {
   AndroidDefaults,
   AndroidGroupAlertBehavior,
   AndroidImportance,
-  AndroidPriority,
   AndroidSemanticAction,
   AndroidStyle,
   AndroidVisibility,
@@ -153,11 +152,7 @@ export interface Module {
 
   getScheduledNotifications(): Promise<RemoteNotification[]>;
 
-  onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe;
-
-  onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe;
-
-  onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe;
+  onEvent(observer: EventObserver): void;
 
   /**
    * Opens the Android System settings for the application.
@@ -189,10 +184,6 @@ export interface Module {
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 
-  removeAllDeliveredNotifications(): Promise<void>;
-
-  removeDeliveredNotification(notificationId: string): Promise<void>;
-
   scheduleNotification(
     notification: NotificationBuilder,
     schedule: NotificationSchedule,
@@ -203,11 +194,11 @@ export interface Module {
  * TODO
  */
 export interface ModuleStatics {
+  EventType: typeof EventType;
   AndroidBadgeIconType: typeof AndroidBadgeIconType;
   AndroidCategory: typeof AndroidCategory;
   AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
   AndroidSemanticAction: typeof AndroidSemanticAction;
-  AndroidPriority: typeof AndroidPriority;
   AndroidVisibility: typeof AndroidVisibility;
   AndroidDefaults: typeof AndroidDefaults;
   AndroidImportance: typeof AndroidImportance;

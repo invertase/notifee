@@ -20,21 +20,21 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.tasks.Tasks;
 
+import java.util.List;
 import java.util.Objects;
 
 import io.invertase.notifee.core.NotifeeNativeModule;
+import io.invertase.notifee.database.NotifeeDatabase;
+import io.invertase.notifee.database.NotifeeNotificationEntity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static io.invertase.notifee.NotifeeNotification.NOTIFICATION_INTENT_ACTION;
 
 public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEventListener {
   private static final String TAG = "NotifeeApiModule";
-  private Bundle initialNotificationBundle;
 
   NotifeeApiModule(ReactApplicationContext reactContext) {
     super(reactContext, TAG);
     reactContext.addActivityEventListener(this);
-    initialNotificationBundle = null;
   }
 
   @ReactMethod
@@ -70,19 +70,44 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
     });
   }
 
-  // TODO these dont seem to work
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
-    NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat(getApplicationContext());
-    notificationManagerCompat.cancel(notificationId.hashCode());
-    promise.resolve(null);
+    Tasks.call(() -> {
+      // TODO get notification by ID, and whether it's scheduled
+      Boolean scheduled = false;
+
+      if (scheduled == false) {
+        NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat();
+        notificationManagerCompat.cancel(notificationId.hashCode());
+      } else {
+        // TODO cancel a scheduled notification
+      }
+
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
-    NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat(getApplicationContext());
-    notificationManagerCompat.cancelAll();
-    promise.resolve(null);
+    Tasks.call(() -> {
+      // TODO get all notifications & scheduled ones
+      NotificationManagerCompat notificationManagerCompat = NotifeeNotification.getNotificationManagerCompat();
+      notificationManagerCompat.cancelAll();
+
+      return null;
+    }).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        promise.resolve(task.getResult());
+      } else {
+        rejectPromiseWithExceptionMap(promise, task.getException());
+      }
+    });
   }
 
   @ReactMethod
@@ -171,6 +196,16 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
 
   @ReactMethod
   public void getInitialNotification(Promise promise) {
+//    NotifeeDatabase database = NotifeeDatabase.getDatabase(getApplicationContext());
+//
+//    NotifeeNotificationEntity entity = new NotifeeNotificationEntity("ABC", "elliot");
+//
+//
+//    database.notifeeNotificationDao().insertNotification(entity);
+//
+//
+//    List<NotifeeNotificationEntity> notificationEntity = database.notifeeNotificationDao().getAll();
+
     // TODO handle intent
     promise.resolve(null);
   }
@@ -254,8 +289,5 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
 
   @Override
   public void onNewIntent(Intent intent) {
-    if (intent.getAction() != null && intent.getAction().equals(NOTIFICATION_INTENT_ACTION)) {
-      // TODO intent handling
-    }
   }
 }

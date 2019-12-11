@@ -3,7 +3,12 @@
  */
 
 import { NotificationIOS } from './NotificationIOS';
-import { NotificationAndroid } from './NotificationAndroid';
+import {
+  AndroidPressAction,
+  NativeAndroidChannel,
+  NativeAndroidChannelGroup,
+  NotificationAndroid,
+} from './NotificationAndroid';
 
 /**
  * Interface for building a local notification for both Android & iOS devices.
@@ -176,12 +181,123 @@ export interface RemoteNotification extends Notification {
 /**
  * TODO
  */
-export type NotificationObserver = (notification: RemoteNotification) => void;
+export type EventObserver = (
+  type: EventType,
+  event:
+    | AndroidNotificationEvent
+    | AndroidChannelBlockedEvent
+    | AndroidChannelGroupBlockedEvent
+    | AndroidAppBlockedEvent,
+  headless: boolean,
+) => Promise<void>;
 
 /**
- * TODO
+ * An enum representing an event type for `onNotificationEvent` subscriptions.
  */
-export type NotificationObserverUnsubscribe = () => void;
+export enum EventType {
+  /**
+   * An unknown event was received.
+   *
+   * This event type is a failsafe to catch any unknown events from the device. Please
+   * report an issue with a reproduction so it can be correctly handled.
+   */
+  UNKNOWN = -1,
+
+  /**
+   * Event type is sent when the user dismisses a notification. This is triggered via the user swiping
+   * the notification from the notification shade or performing "Clear all" notifications.
+   *
+   * This event is **not** sent when a notification is cancelled or times out.
+   *
+   * The payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
+   */
+  DISMISSED,
+
+  /**
+   * Event type is sent when a notification has been pressed by the user.
+   *
+   * On Android, notifications must include an `android.onPressAction` property for this event to trigger.
+   *
+   * The payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
+   */
+  PRESS,
+
+  /**
+   * Event type is sent when a user presses a notification action.
+   *
+   * The event sent with this type is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
+   */
+  ACTION_PRESS,
+
+  /**
+   * Event type sent when a notification has been delivered to the device. For scheduled notifications,
+   * this event is sent when at the point when the schedule runs, not when a notification is first
+   * created.
+   *
+   * It's important to note even though a notification has been delivered, it may not be shown to the
+   * user. For example, they may have notifications disabled on the device/channel/app.
+   *
+   * The event payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
+   */
+  DELIVERED,
+
+  /**
+   * Event is sent when the user changes the notification blocked state for the entire application or
+   * when the user opens the application settings.
+   *
+   * The payload sent with this event is [AndroidAppBlockedEvent](/react-native/reference/androidappblockedevent).
+   *
+   * @platform android API Level >= 28
+   */
+  APP_BLOCKED,
+
+  /**
+   * Event type is sent when the user changes the notification blocked state for a channel in the application.
+   *
+   * The payload sent with this event is [AndroidChannelBlockedEvent](/react-native/reference/androidappblockedevent).
+   *
+   * @platform android API Level >= 28
+   */
+  CHANNEL_BLOCKED,
+
+  /**
+   * Event type is sent when the user changes the notification blocked state for a channel group in the application.
+   *
+   * The payload sent with this event is [AndroidChannelGroupBlockedEvent](/react-native/reference/androidchannelgroupblockedevent).
+   *
+   * @platform android API Level >= 28
+   */
+  CHANNEL_GROUP_BLOCKED,
+}
+
+export interface AndroidNotificationEvent {
+  action?: AndroidPressAction;
+
+  /**
+   * The input from a notification action.
+   *
+   * Once an input has been received, the notification should be updated to remove the pending state
+   * of the notification action, by adding the input value to the `inputHistory` property.
+   *
+   * @platform android API Level >= 20
+   */
+  input?: string;
+  notification: RemoteNotification;
+}
+
+export interface AndroidChannelBlockedEvent {
+  channel: NativeAndroidChannel;
+}
+
+export interface AndroidChannelGroupBlockedEvent {
+  channelGroup: NativeAndroidChannelGroup;
+}
+
+export interface AndroidAppBlockedEvent {
+  app: {
+    blocked: boolean;
+  };
+}
 
 /**
  * TODO

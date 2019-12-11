@@ -2,66 +2,47 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { isArray, isBoolean, isObject, isString, hasOwnProperty } from '../utils';
+import { isArray, isBoolean, isObject, isString, hasOwnProperty, isUndefined } from '../utils';
 
-import { AndroidAction, AndroidSemanticAction } from '../../types/NotificationAndroid';
+import { AndroidAction } from '../../types/NotificationAndroid';
+import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidInput from './validateAndroidInput';
 
 export default function validateAndroidAction(action: AndroidAction): AndroidAction {
   if (!isObject(action)) {
     throw new Error("'action' expected an object value.");
   }
 
-  if (!isString(action.key) || !action.key) {
-    throw new Error("'action.key' expected a string value.");
+  try {
+    validateAndroidOnPressAction(action.onPressAction);
+  } catch (e) {
+    throw new Error(`'action' ${e.message}.`);
   }
 
   if (!isString(action.icon) || !action.icon) {
     throw new Error("'action.icon' expected a string value.");
   }
 
-  // required?
   if (!isString(action.title) || !action.title) {
     throw new Error("'action.title' expected a string value.");
   }
 
   const out: AndroidAction = {
-    key: action.key,
+    onPressAction: action.onPressAction,
     icon: action.icon,
     title: action.title,
   };
 
-  if (hasOwnProperty(action, 'allowGeneratedReplies')) {
-    if (!isBoolean(action.allowGeneratedReplies)) {
-      throw new Error("'action.allowGeneratedReplies' expected a boolean value.");
+  if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
+    if (isBoolean(action.input) && action.input) {
+      out.input = validateAndroidInput();
+    } else {
+      try {
+        out.input = validateAndroidInput(action.input);
+      } catch (e) {
+        throw new Error(`'action' ${e.message}.`);
+      }
     }
-
-    out.allowGeneratedReplies = action.allowGeneratedReplies;
-  }
-
-  if (hasOwnProperty(action, 'remoteInputs')) {
-    if (!isArray(action.remoteInputs)) {
-      throw new Error("'action.remoteInputs' expected an array of AndroidRemoteInput.");
-    }
-
-    // todo validate remote input
-
-    out.remoteInputs = action.remoteInputs;
-  }
-
-  if (hasOwnProperty(action, 'semanticAction') && action.semanticAction != undefined) {
-    if (!Object.values(AndroidSemanticAction).includes(action.semanticAction)) {
-      throw new Error("'action.semanticAction' expected an AndroidSemanticAction.");
-    }
-
-    out.semanticAction = action.semanticAction;
-  }
-
-  if (hasOwnProperty(action, 'showsUserInterface')) {
-    if (!isBoolean(action.showsUserInterface)) {
-      throw new Error("'action.showsUserInterface' expected a boolean value.");
-    }
-
-    out.showsUserInterface = action.showsUserInterface;
   }
 
   return out;

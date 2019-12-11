@@ -11,20 +11,21 @@ import {
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
 import {
+  EventObserver,
   Notification,
   NotificationBuilder,
-  NotificationObserver,
-  NotificationObserverUnsubscribe,
   NotificationSchedule,
   RemoteNotification,
 } from '../types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-import { isFunction, isString, isIOS, isArray, isUndefined } from './utils';
+import { isFunction, isString, isIOS, isArray, isUndefined, isAndroid } from './utils';
 import validateNotification from './validators/validateNotification';
 import validateSchedule from './validators/validateSchedule';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
+
+let onNotificationEventHeadlessTaskRegistered = false;
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   public cancelAllNotifications(): Promise<void> {
@@ -214,31 +215,30 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getScheduledNotifications();
   }
 
-  public onNotification(observer: NotificationObserver): NotificationObserverUnsubscribe {
+  public onEvent(observer: EventObserver): () => void {
     if (!isFunction(observer)) {
-      throw new Error("notifee.onNotification(*) 'observer' expected a function.");
+      throw new Error("notifee.onEvent(*) 'observer' expected a function.");
     }
 
-    // todo return subscriber
-    return (): void => {};
-  }
+    const subscriber = this.emitter.addListener(
+      this.core.NOTIFEE_RECEIVER_SERVICE_EVENT_KEY,
+      ({ type, event, headless }) => {
+        observer(type, event, headless);
+      },
+    );
 
-  public onNotificationDisplayed(observer: NotificationObserver): NotificationObserverUnsubscribe {
-    if (!isFunction(observer)) {
-      throw new Error("notifee.onNotificationDisplayed(*) 'observer' expected a function.");
+    if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
+      AppRegistry.registerHeadlessTask(this.core.NOTIFEE_RECEIVER_SERVICE_TASK_KEY, () => {
+        return ({ type, event, headless }: any): Promise<void> => {
+          return observer(type, event, headless);
+        };
+      });
+      onNotificationEventHeadlessTaskRegistered = true;
     }
 
-    // todo return subscriber
-    return (): void => {};
-  }
-
-  public onNotificationOpened(observer: NotificationObserver): NotificationObserverUnsubscribe {
-    if (!isFunction(observer)) {
-      throw new Error("notifee.onNotificationOpened(*) 'observer' expected a function.");
-    }
-
-    // todo return subscriber
-    return (): void => {};
+    return (): void => {
+      subscriber.remove();
+    };
   }
 
   public openNotificationSettings(channelId?: string): Promise<void> {
@@ -265,20 +265,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     AppRegistry.registerHeadlessTask(this.core.NOTIFEE_FOREGROUND_SERVICE, () => {
       return ({ notification }) => runner(notification);
     });
-  }
-
-  public removeAllDeliveredNotifications(): Promise<void> {
-    return this.native.removeAllDeliveredNotifications();
-  }
-
-  public removeDeliveredNotification(notificationId: string): Promise<void> {
-    if (!isString(notificationId)) {
-      throw new Error(
-        "notifee.removeDeliveredNotification(*) 'notificationId' expected a string value.",
-      );
-    }
-
-    return this.native.removeDeliveredNotification(notificationId);
   }
 
   public scheduleNotification(

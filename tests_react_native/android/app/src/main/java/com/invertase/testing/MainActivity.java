@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.facebook.react.ReactActivity;
 
@@ -27,8 +28,16 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return NotifeeNotification.getMainComponentName(getIntent(), "testing");
+    Log.d("ELLIOT", "getMainComponentName");
+    return NotifeeNotification.getMainComponentName("testing");
   }
+
+//  @Override
+//  public void onNewIntent(Intent intent) {
+//    super.onNewIntent(intent);
+//    String action = intent.getAction();
+//    Log.d("ELLIOT", "onNewIntent " + action);
+//  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

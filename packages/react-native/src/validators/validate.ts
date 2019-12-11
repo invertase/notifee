@@ -81,17 +81,3 @@ export function isValidLightPattern(pattern: LightPattern): ValidLightPattern {
 
   return [true];
 }
-
-export function isValidRemoteInputHistory(history: string[]): boolean {
-  for (let i = 0; i < history.length; i++) {
-    const element = history[i];
-    if (!isString(element)) {
-      return false;
-    }
-    if (!element) {
-      return false;
-    }
-  }
-
-  return true;
-}

@@ -143,6 +143,9 @@ export interface NotificationAndroid {
    *
    * The color can be a predefined system `AndroidColor` or [hexadecimal](https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4).
    *
+   * Setting a color will change key parts of a notification, such as the small icon, action text and
+   * the input area background color.
+   *
    * #### Example
    *
    * Using a predefined color.
@@ -153,21 +156,8 @@ export interface NotificationAndroid {
    * await notifee.displayNotification({
    *   android: {
    *     color: AndroidColor.AQUA,
-   *   },
-   * });
-   * ```
-   *
-   * #### Example
-   *
-   * Using a hexadecimal color.
-   *
-   * ```js
-   * import notifee, { AndroidColor } from '@notifee/react-native';
-   *
-   * await notifee.displayNotification({
-   *   android: {
+   *     // or
    *     color: '#2196f3', // material blue
-   *     // color: '#802196f3', // 50% opacity material blue
    *   },
    * });
    * ```
@@ -195,7 +185,16 @@ export interface NotificationAndroid {
    */
   chronometerDirection?: 'up' | 'down';
 
-  // todo
+  /**
+   * For devices without notification channel support, this property sets the default behaviour
+   * for a notification.
+   *
+   * On API Level >= 26, this has no effect.
+   *
+   * See [AndroidDefaults](/react-native/reference/androiddefaults) for more information.
+   *
+   * @platform android API Level < 26
+   */
   defaults?: AndroidDefaults[];
 
   fullScreenAction?: AndroidPressAction;
@@ -257,6 +256,16 @@ export interface NotificationAndroid {
   groupSummary?: boolean;
 
   /**
+   * The local user input history for this notification.
+   *
+   * Input history is shown on supported devices below the main notification body. History of the
+   * users input with the notification should be shown when receiving action input by updating
+   * the existing notification. It is recommended to clear the history when it is no longer
+   * relevant (e.g. someone has responded to the users input).
+   */
+  inputHistory?: string[];
+
+  /**
    * Sets a large icon on the notification.
    *
    * ![Large Icon](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)
@@ -314,45 +323,44 @@ export interface NotificationAndroid {
   onlyAlertOnce?: boolean;
 
   /**
-   * By default notifications have no behaviour when a user interacts with them. The
+   * By default notifications have no behaviour when a user presses them. The
    * `onPressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * - When `false` no action is taken when the notification is pressed.
-   * - When `true` the application will open when the notification is pressed.
-   *
-   * It is also possible to provide advanced configuration to handle a notification being pressed,
-   * such as displaying a different Android Activity or React component. See the
-   * [Android Actions](/react-native/android/actions) core concepts guide to learn more.
-   *
-   * TODO check docs path
+   * The notification will always open the application when an `onPressAction` is provided. It is
+   * however possible to provide advanced configuration to the press action to open custom
+   * activities or React components. See [AndroidPressAction](/react-native/reference/androidpressaction)
+   * for more information.
    */
-  onPressAction?: boolean | AndroidPressAction;
+  onPressAction?: AndroidPressAction;
 
   /**
-   * Set the relative priority for this notification. Priority is an indication of how much of the
-   * user's valuable attention should be consumed by this notification. Low-priority notifications
-   * may be hidden from the user in certain situations, while the user might be interrupted for a
-   * higher-priority notification. The system sets a notification's priority based on various
-   * factors including the setPriority value. The effect may differ slightly on different platforms.
+   * Set a notification importance for devices without channel support.
    *
-   * Defaults to `AndroidPriority.DEFAULT`.
+   * Devices using Android API Level < 26 have no channel support, meaning incoming notifications
+   * won't be assigned an importance level from the channel. If your application supports devices
+   * without channel support, set this property to directly assign an importance level to the incoming
+   * notification.
    *
-   * See `AndroidPriority` for descriptions of each priority settings.
+   * Defaults to `AndroidImportance.DEFAULT`.
+   *
+   * See [AndroidImportance](/react-native/reference/androidimportance) for descriptions of each importance level.
    *
    * #### Example
+   *
+   * Set this notification importance to high.
    *
    * ```js
    * await notifee.displayNotification({
    *   android: {
-   *     priority: notifee.AndroidPriority.LOW,
+   *     importance: notifee.AndroidImportance.HIGH,
    *   },
    * });
    * ```
    *
    * @platform android API Level < 26
    */
-  priority?: AndroidPriority;
+  importance?: AndroidImportance;
 
   /**
    * A notification can show current progress of a task. The progress state can either be fixed or
@@ -409,11 +417,6 @@ export interface NotificationAndroid {
    * TODO
    */
   publicVersion?: null;
-
-  /**
-   * TODO
-   */
-  remoteInputHistory?: string[];
 
   /**
    * If this notification is duplicative of a Launcher shortcut, sets the id of the shortcut,
@@ -649,28 +652,107 @@ export interface NotificationAndroid {
 }
 
 /**
- * TODO
+ * The interface used to describe a notification action.
+ *
+ * Notification actions allow users to interact with notifications, allowing you to handle events
+ * within your application. When an action completes (e.g. pressing an action, or filling out an input
+ * box) and event is sent and can be handled by a `onEvent` listener.
+ *
+ * When an action completes, it is up to you handle the event by either cancelling or updating the
+ * notification.
  *
  * @platform android
  */
 export interface AndroidAction {
-  key: string;
-  icon: string;
-  title: string;
-  allowGeneratedReplies?: boolean;
-  contextual?: boolean;
+  /**
+   * The press action interface describing what happens when an action completes.
+   *
+   * Note; unlike the `onPressAction` in the notification body, an action is not required to open the application
+   * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
+   * or [Android Actions](/react-native/docs/android/actions) for more information.
+   */
+  onPressAction: AndroidPressAction;
 
-  remoteInputs?: AndroidRemoteInput[];
-  semanticAction?: AndroidSemanticAction;
-  showsUserInterface?: boolean; // true
+  /**
+   * An remote http icon representing the action. Newer devices may not show the icon and
+   * just show the action title.
+   *
+   * Recommended icon size is 24x24 px.
+   */
+  icon: string;
+
+  /**
+   * The title of the notification, e.g. "Reply", "Mark as read" etc.
+   */
+  title: string;
+
+  /**
+   * If provided, the action accepts user input.
+   *
+   * If `true`, the user will be able to provide free text input when the action is pressed. This
+   * property can be further configured for advanced inputs.
+   *
+   * See the [AndroidInput](/react-native/reference/androidinput) reference
+   * or [Android Actions](/react-native/docs/android/actions) for more information.
+   */
+  input?: true | AndroidInput;
 }
 
 /**
+ * The interface used to describe a press action for Android notifications.
  *
+ * There are various ways a user can interact with a notification, the most common being pressing
+ * the notification, pressing an action or providing text input. This interface defines what happens
+ * when a user performs such interaction.
+ *
+ * When provided to a notification `onPressAction`, the application will always open (if not already)
+ * using the default `launchActivity` for the application.
+ *
+ * When provided to a notification action, the action will only open the application if a `launchActivity`
+ * and/or `reactComponent` is provided.
+ *
+ * @platform android
  */
 export interface AndroidPressAction {
+  /**
+   * The unique ID for the action.
+   *
+   * The `id` property is used to differentiate between user press actions. When listening to notification
+   * events via `onEvent`, the ID can be read from the `event.action` object:
+   *
+   * ```js
+   * notifee.onEvent((eventType, event) => {
+   *   if (eventType === notifee.EventType.PRESS || eventType === notifee.EventType.ACTION_PRESS) {
+   *     console.log(`User press action id: ${event.action.id}`);
+   *   }
+   * });
+   * ```
+   */
   id: string;
+
+  /**
+   * The custom Android Activity to launch on a press action.
+   *
+   * This property can be used in advanced scenarios to launch a custom Android Activity when the user
+   * performs a press action.
+   *
+   * If the action originated from the notification body, this value defaults to `default`, opening the
+   * default Android Activity your application runs on. When providing a custom Activity class you must provide the
+   * full scope & the class must extend `ReactActivity`.
+   *
+   * TODO Guide
+   */
   launchActivity?: string;
+
+  /**
+   * A custom registered React component to launch on press action.
+   *
+   * This property can be used to open a custom React component when the user performs a press action.
+   * For this to correctly function, a basic native code change is required. See [Android Actions](#)
+   * to learn more.
+   *
+   * TODO Guide
+   */
   reactComponent?: string;
 }
 
@@ -686,13 +768,45 @@ export interface AndroidBubble {
  *
  * @platform android
  */
-export interface AndroidRemoteInput {
-  key: string;
-  extras?: { [key: string]: string };
-  allowDataTypes?: string[];
-  allowFreeFormTextInput?: boolean; // true
+export interface AndroidInput {
+  /**
+   * If `true`, when an action is pressed this allows the user to type free form text into the input area.
+   * If `false`, you must provide an array of `choices` the user is allowed to use as the input.
+   *
+   * Defaults to `true`.
+   */
+  allowFreeFormInput?: boolean;
+
+  /**
+   * Sets whether generated replies can be added to the action.
+   *
+   * Generated replies will only be shown if the input has `choices` and whether the device
+   * is able to generate replies.
+   *
+   * Defaults to `true`.
+   */
+  allowGeneratedReplies?: boolean;
+
+  /**
+   * An array of pre-defined input choices the user can select.
+   *
+   * If `allowFreeFormInput` is `false`, this property must contain at least one choice.
+   */
   choices?: string[];
-  label?: string;
+
+  /**
+   * If `true`, the user will be able to edit the selected choice before sending the action event, however
+   * `allowFreeFormInput` must also be `true`.
+   *
+   * By default, the platform will decide whether choices can be editable. To explicitly enable or disable
+   * this, provide `true` or `false`.
+   */
+  editableChoices?: boolean;
+
+  /**
+   * The placeholder text to display inside of the user input area.
+   */
+  placeholder?: string;
 }
 
 /**
@@ -856,7 +970,9 @@ export interface AndroidPerson {
   /**
    * If `true` this person will be marked as important.
    *
-   * Important users are those who frequently contact the receiving person.
+   * Important users are those who frequently contact the receiving person. If the app is in
+   * "Do not disturb" mode, a notification containing an important person may override this mode
+   * if the person has been whitelisted on the device.
    *
    * Defaults to `false`.
    */
@@ -1097,9 +1213,11 @@ export interface NativeAndroidChannel extends AndroidChannel {
    * Returns whether or not notifications posted to this Channel group are
    * blocked.
    *
+   * On API levels < 28, returns `false`.
+   *
    * @platform android API Level >= 28
    */
-  isBlocked: boolean;
+  blocked: boolean;
 }
 
 /**
@@ -1141,9 +1259,11 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
    * Returns whether or not notifications posted to a Channel belonging to this group are
    * blocked by the user.
    *
+   * On API levels < 28, returns `false`.
+   *
    * @platform android API Level >= 28
    */
-  isBlocked: boolean;
+  blocked: boolean;
 
   /**
    * Returns a list of channels assigned to this channel group.
@@ -1175,7 +1295,11 @@ export enum AndroidBadgeIconType {
 }
 
 /**
- * TODO
+ * The category of a notification.
+ *
+ * Setting a category on a notification helps the device to understand what the notification is for,
+ * or what impact it will have on the user. The category can be used for ranking and filtering
+ * the notification.
  *
  * @platform android
  */
@@ -1229,14 +1353,34 @@ export enum AndroidColor {
 }
 
 /**
- * TODO
+ * On devices which do not support notification channels (API Level < 26), the notification
+ * by default will use all methods to alert the user (depending on the importance).
  *
- * @platform android
+ * To override the default behaviour, provide an array of defaults to the notification.
+ *
+ * On API Levels >= 26, this has no effect and notifications will use the channel behaviour.
+ *
+ * @platform android API Level < 26
  */
 export enum AndroidDefaults {
+  /**
+   * All options will be used where possible.
+   */
   ALL = -1,
+
+  /**
+   * The notification will use lights to alert the user.
+   */
   LIGHTS = 4,
+
+  /**
+   * The notification will use sound to alert the user.
+   */
   SOUND = 1,
+
+  /**
+   * The notification will vibrate to alert the user.
+   */
   VIBRATE = 2,
 }
 
@@ -1252,35 +1396,61 @@ export enum AndroidGroupAlertBehavior {
 }
 
 /**
- *  TODO
+ * The interface describing the importance levels of an incoming notification.
  *
- *  https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_DEFAULT
+ * A notification importance level can be set directly onto a notification channel for supported devices (API Level >= 26)
+ * or directly onto the notification for devices which do not support channels.
  *
- *  [A link to AndroidPriority]{@link AndroidPriority} and [a link to AndroidPriority.HIGH]{@link AndroidPriority#HIGH}
+ * The importance is used by the device to both change the visual prompt of a received notification
+ * and also how it visually appears in the device notification shade.
  *
  * @platform android
  */
 export enum AndroidImportance {
+  /**
+   * The default importance applied to a channel/notification.
+   *
+   * The application small icon will show in the device statusbar. When the user pulls down the
+   * notification shade, the notification will show in it's expanded state (if applicable).
+   */
   DEFAULT = 3,
-  HIGH = 4,
-  LOW = 2,
-  MIN = 1,
-  NONE = 0,
-}
 
-/**
- * TODO
- *
- * https://developer.android.com/reference/androidx/core/app/NotificationCompat#PRIORITY_DEFAULT
- *
- * @platform android
- */
-export enum AndroidPriority {
-  DEFAULT = 0,
-  HIGH = 1,
-  LOW = -1,
-  MAX = 2,
-  MIN = -2,
+  /**
+   * The highest importance level applied to a channel/notification.
+   *
+   * Notifications will appear on-top of applications, allowing direct interaction without pulling
+   * down the notification shade. This level should only be used for urgent notifications, such as
+   * incoming phone calls, messages etc, which require immediate attention.
+   */
+  HIGH = 4,
+
+  /**
+   * A low importance level applied to a channel/notification.
+   *
+   * The application small icon will show in the device statusbar, however the notification will not alert
+   * the user (no sound or vibration). The notification will show in it's expanded state when the
+   * notification shade is pulled down.
+   */
+  LOW = 2,
+
+  /**
+   * The minimum importance level applied to a channel/notification.
+   *
+   * The application small icon will not show up in the statusbar, or alert the user. The notification
+   * will be in a collapsed state in the notification shade and placed at the bottom of the list.
+   *
+   * This level should be used when the notification requires no immediate attention. An example of this
+   * importance level is the Google app providing weather updates and only being visible when the
+   * user pulls the notification shade down,
+   *
+   */
+  MIN = 1,
+
+  /**
+   * The notification will not be shown. This has the same effect as the user disabling notifications
+   * in the application settings.
+   */
+  NONE = 0,
 }
 
 /**

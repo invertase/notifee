@@ -9,7 +9,7 @@ export default function validateAndroidOnPressAction(
   }
 
   if (!isString(pressAction.id) || pressAction.id.length === 0) {
-    throw new Error("'key' expected a non-empty string value.");
+    throw new Error("'id' expected a non-empty string value.");
   }
 
   const out: AndroidPressAction = {

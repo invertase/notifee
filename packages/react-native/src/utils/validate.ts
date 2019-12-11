@@ -30,6 +30,14 @@ export function isArray(value: any): value is Array<any> {
   return Array.isArray(value);
 }
 
+export function isArrayOfStrings(value: any): value is Array<string> {
+  if (!isArray(value)) return false;
+  for (let i = 0; i < value.length; i++) {
+    if (!isString(value[i])) return false;
+  }
+  return true;
+}
+
 export function isUndefined(value: any): value is undefined {
   return value == undefined;
 }

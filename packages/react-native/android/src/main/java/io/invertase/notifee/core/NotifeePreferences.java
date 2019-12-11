@@ -50,7 +50,7 @@ public class NotifeePreferences {
     Map<String, ?> prefMap = getPreferences().getAll();
 
     for (Map.Entry<String, ?> entry : prefMap.entrySet()) {
-      NotifeeUtils.mapPutValue(entry.getKey(), entry.getValue(), writableMap);
+      NotifeeCoreUtils.mapPutValue(entry.getKey(), entry.getValue(), writableMap);
     }
 
     return writableMap;

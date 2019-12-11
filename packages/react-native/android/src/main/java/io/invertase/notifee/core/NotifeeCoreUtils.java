@@ -2,7 +2,10 @@ package io.invertase.notifee.core;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -29,8 +32,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
+
 @SuppressWarnings({"unused", "JavaDoc", "WeakerAccess"})
-public class NotifeeUtils {
+public class NotifeeCoreUtils {
   private static final String TAG = "NotifeeUtils";
   private static final String RN_DEVSUPPORT_CLASS = "DevSupportManagerImpl";
   private static final String RN_DEVSUPPORT_PACKAGE = "com.facebook.react.devsupport";
@@ -171,6 +176,51 @@ public class NotifeeUtils {
    */
   public static Boolean isReactNative() {
     return !isExpo() && hasPackageClass(REACT_NATIVE_CORE_PACKAGE, REACT_NATIVE_REGISTRY_CLASS);
+  }
+
+  /**
+   * Return whether application is running.
+   * @url https://github.com/Blankj/AndroidUtilCode/blob/master/lib/utilcode/src/main/java/com/blankj/utilcode/util/AppUtils.java#L255
+   * @return Boolean
+   */
+  public static Boolean isAppRunning() {
+    int uid;
+    Context appContext = getApplicationContext();
+
+    String packageName = appContext.getPackageName();
+    PackageManager packageManager = appContext.getPackageManager();
+
+    try {
+      ApplicationInfo ai = packageManager.getApplicationInfo(packageName, 0);
+      if (ai == null) return false;
+      uid = ai.uid;
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    ActivityManager am = (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
+
+    if (am != null) {
+      List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(Integer.MAX_VALUE);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && taskInfo != null && taskInfo.size() > 0) {
+        for (ActivityManager.RunningTaskInfo aInfo : taskInfo) {
+          if (aInfo.baseActivity != null && packageName.equals(aInfo.baseActivity.getPackageName())) {
+            return true;
+          }
+        }
+      }
+      List<ActivityManager.RunningServiceInfo> serviceInfo = am.getRunningServices(Integer.MAX_VALUE);
+      if (serviceInfo != null && serviceInfo.size() > 0) {
+        for (ActivityManager.RunningServiceInfo aInfo : serviceInfo) {
+          if (uid == aInfo.uid) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
   }
 
   /**

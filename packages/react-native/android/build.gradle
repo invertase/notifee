@@ -50,6 +50,8 @@ dependencies {
   implementation 'androidx.work:work-runtime:2.3.0-beta01'
   implementation 'androidx.core:core:1.2.0-rc01'
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
+  implementation "androidx.room:room-runtime:2.2.2"
+  annotationProcessor "androidx.room:room-compiler:2.2.2"
 }
 
 apply from: file("./notifee-json.gradle")

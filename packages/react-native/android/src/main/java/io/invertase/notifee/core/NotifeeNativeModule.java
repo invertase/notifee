@@ -32,7 +32,7 @@ public class NotifeeNativeModule extends ReactContextBaseJavaModule {
 
   protected static void rejectPromiseWithExceptionMap(Promise promise, Exception exception) {
     Log.e("NotifeeException", exception.getMessage(), exception);
-    promise.reject(exception, NotifeeUtils.getExceptionMap(exception));
+    promise.reject(exception, NotifeeCoreUtils.getExceptionMap(exception));
   }
 
   protected static void rejectPromiseWithCodeAndMessage(

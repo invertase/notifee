@@ -153,10 +153,10 @@ class NotifeeNotificationChannel {
       writableMap.putString("name", notificationChannelGroup.getName().toString());
       writableMap.putArray("channels", createChannelsArray(notificationChannelGroup.getChannels()));
       if (Build.VERSION.SDK_INT >= 28) {
-        writableMap.putBoolean("isBlocked", notificationChannelGroup.isBlocked());
+        writableMap.putBoolean("blocked", notificationChannelGroup.isBlocked());
         writableMap.putString("description", notificationChannelGroup.getDescription());
       } else {
-        writableMap.putBoolean("isBlocked", false);
+        writableMap.putBoolean("blocked", false);
         writableMap.putString("description", "");
       }
     }
@@ -255,7 +255,7 @@ class NotifeeNotificationChannel {
       writableMap.putInt("importance", notificationChannel.getImportance());
       writableMap.putBoolean("vibration", notificationChannel.shouldVibrate());
       writableMap.putString("sound", getFileName(getApplicationContext(), notificationChannel.getSound()));
-      writableMap.putBoolean("isBlocked", notificationChannel.getImportance() == IMPORTANCE_NONE);
+      writableMap.putBoolean("blocked", notificationChannel.getImportance() == IMPORTANCE_NONE);
       writableMap.putString("lightColor", getColor(notificationChannel.getLightColor()));
 
       WritableArray pattern = getVibrationPattern(notificationChannel.getVibrationPattern());
