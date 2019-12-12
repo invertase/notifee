@@ -54,6 +54,7 @@ export default function validateAndroidNotification(
     defaults: [AndroidDefaults.ALL],
     groupAlertBehavior: AndroidGroupAlertBehavior.ALL,
     groupSummary: false,
+    localOnly: false,
     ongoing: false,
     onlyAlertOnce: false,
     importance: AndroidImportance.DEFAULT,
@@ -306,6 +307,17 @@ export default function validateAndroidNotification(
     }
 
     out.lights = android.lights;
+  }
+
+  /**
+   * localOnly
+   */
+  if (hasOwnProperty(android, 'localOnly')) {
+    if (!isBoolean(android.localOnly)) {
+      throw new Error("'notification.android.localOnly' expected a boolean value.");
+    }
+
+    out.localOnly = android.localOnly;
   }
 
   /**

@@ -34,12 +34,20 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
+import io.invertase.notifee.core.NotifeeLogger;
+
 import static io.invertase.notifee.NotifeeNotification.NOTIFICATION_BUILD_EXECUTOR;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
-class NotifeeUtils {
+public class NotifeeUtils {
 
-  static Task<Bitmap> getImageBitmapFromUrl(String imageUrl) {
+  /**
+   * Returns a Bitmap from any given HTTP image URL, or local resource.
+   *
+   * @param imageUrl
+   * @return Bitmap or null if the image failed to load
+   */
+  public static Task<Bitmap> getImageBitmapFromUrl(String imageUrl) {
     ImageSource imageSource;
     final TaskCompletionSource<Bitmap> bitmapTCS = new TaskCompletionSource<>();
     Task<Bitmap> bitmapTask = bitmapTCS.getTask();
@@ -71,8 +79,8 @@ class NotifeeUtils {
 
       @Override
       protected void onFailureImpl(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
-        Log.e(
-          "NotifeeImageLoader",
+        NotifeeLogger.e(
+          "Utils",
           "Failed to load an image: " + imageUrl,
           dataSource.getFailureCause()
         );
@@ -83,6 +91,11 @@ class NotifeeUtils {
     return bitmapTask;
   }
 
+  /**
+   * Returns a resource path for a local resource
+   * @param icon
+   * @return
+   */
   private static String getImageResourceUrl(String icon) {
     int resourceId = getResourceIdByName(icon, "mipmap");
 
@@ -97,7 +110,13 @@ class NotifeeUtils {
     return "res:///" + resourceId;
   }
 
-  static int getImageResourceId(String resourceName) {
+  /**
+   * Gets a resource ID by name.
+   *
+   * @param resourceName
+   * @return integer or 0 if not found
+   */
+  public static int getImageResourceId(String resourceName) {
     int resourceId = getResourceIdByName(resourceName, "mipmap");
     if (resourceId == 0) {
       resourceId = getResourceIdByName(resourceName, "drawable");
@@ -108,13 +127,20 @@ class NotifeeUtils {
 
 
   /**
-   * Attempts to find a device resource id by name and type
+   * Attempts to find a resource id by name and type
    */
   private static int getResourceIdByName(String name, String type) {
     String packageName = getApplicationContext().getPackageName();
     return getApplicationContext().getResources().getIdentifier(name, type, packageName);
   }
 
+  /**
+   *
+   *
+   * @param context
+   * @param uri
+   * @return
+   */
   static String getFileName(Context context, Uri uri) {
     String result = null;
     if (uri.getScheme() != null && uri.getScheme().equals("content")) {
@@ -167,6 +193,12 @@ class NotifeeUtils {
 //    }
 //  }
 
+  /**
+   * Gets a Uri to a local sound file on the device.
+   *
+   * @param sound use `default` to return the device default sound
+   * @return
+   */
   static Uri getSoundUri(@Nullable String sound) {
     if (sound == null) {
       return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -188,7 +220,7 @@ class NotifeeUtils {
 
     // If still no resource, default
     if (resourceId == 0) {
-      Log.d("NotificationUtils", "Could not find specified sound " + sound);
+      NotifeeLogger.d("Utils", "Could not find specified sound " + sound);
       return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     }
 
@@ -241,7 +273,7 @@ class NotifeeUtils {
    * @param personBundle
    * @return
    */
-  static Task<Person> getPerson(Bundle personBundle) {
+  public static Task<Person> getPerson(Bundle personBundle) {
     return Tasks.call(NOTIFICATION_BUILD_EXECUTOR, () -> {
       Person.Builder personBuilder = new Person.Builder();
 

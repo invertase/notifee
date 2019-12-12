@@ -123,7 +123,7 @@ public class NotifeeEventEmitter {
         DeviceEventManagerModule.RCTDeviceEventEmitter.class
       ).emit("notifee_" + event.getEventName(), event.getEventBody());
     } catch (Exception e) {
-      Log.wtf("NOTIFEE_EMITTER", "Error sending Event " + event.getEventName(), e);
+      NotifeeLogger.e("EventEmitter", "Error sending Event " + event.getEventName(), e);
       return false;
     }
 

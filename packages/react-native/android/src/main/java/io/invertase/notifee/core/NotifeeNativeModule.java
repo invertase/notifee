@@ -2,7 +2,6 @@ package io.invertase.notifee.core;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -31,7 +30,7 @@ public class NotifeeNativeModule extends ReactContextBaseJavaModule {
   }
 
   protected static void rejectPromiseWithExceptionMap(Promise promise, Exception exception) {
-    Log.e("NotifeeException", exception.getMessage(), exception);
+    NotifeeLogger.e("NativeModule", "rejectPromiseWithExceptionMap:" + exception.getMessage(), exception);
     promise.reject(exception, NotifeeCoreUtils.getExceptionMap(exception));
   }
 
@@ -41,31 +40,32 @@ public class NotifeeNativeModule extends ReactContextBaseJavaModule {
     String message,
     Exception exception
   ) {
+    NotifeeLogger.e("NativeModule", "rejectPromiseWithCodeAndMessage" + exception.getMessage(), exception);
     WritableMap userInfoMap = Arguments.createMap();
     userInfoMap.putString("code", code);
     userInfoMap.putString("message", message);
     promise.reject(code, message, exception, userInfoMap);
   }
 
-  public static void rejectPromiseWithCodeAndMessage(Promise promise, String code, String message) {
-    WritableMap userInfoMap = Arguments.createMap();
-    userInfoMap.putString("code", code);
-    userInfoMap.putString("message", message);
-    promise.reject(code, message, userInfoMap);
-  }
-
-  public static void rejectPromiseWithCodeAndMessage(
-    Promise promise,
-    String code,
-    String message,
-    String nativeErrorMessage
-  ) {
-    WritableMap userInfoMap = Arguments.createMap();
-    userInfoMap.putString("code", code);
-    userInfoMap.putString("message", message);
-    userInfoMap.putString("nativeErrorMessage", nativeErrorMessage);
-    promise.reject(code, message, userInfoMap);
-  }
+//  public static void rejectPromiseWithCodeAndMessage(Promise promise, String code, String message) {
+//    WritableMap userInfoMap = Arguments.createMap();
+//    userInfoMap.putString("code", code);
+//    userInfoMap.putString("message", message);
+//    promise.reject(code, message, userInfoMap);
+//  }
+//
+//  public static void rejectPromiseWithCodeAndMessage(
+//    Promise promise,
+//    String code,
+//    String message,
+//    String nativeErrorMessage
+//  ) {
+//    WritableMap userInfoMap = Arguments.createMap();
+//    userInfoMap.putString("code", code);
+//    userInfoMap.putString("message", message);
+//    userInfoMap.putString("nativeErrorMessage", nativeErrorMessage);
+//    promise.reject(code, message, userInfoMap);
+//  }
 
   @Override
   public void initialize() {

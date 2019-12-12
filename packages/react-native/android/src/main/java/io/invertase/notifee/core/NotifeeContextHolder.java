@@ -11,7 +11,7 @@ public class NotifeeContextHolder {
   }
 
   static void setApplicationContext(Context applicationContext) {
-    Log.d("NotifeeContextHolder", "received application context.");
+    NotifeeLogger.d("ContextHolder", "received application context.");
     NotifeeContextHolder.applicationContext = applicationContext;
   }
 }

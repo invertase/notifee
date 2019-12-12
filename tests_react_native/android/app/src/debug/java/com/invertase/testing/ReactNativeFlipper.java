@@ -30,6 +30,7 @@ public class ReactNativeFlipper {
       client.addPlugin(new ReactFlipperPlugin());
       client.addPlugin(new DatabasesFlipperPlugin(context));
       client.addPlugin(new SharedPreferencesFlipperPlugin(context));
+      client.addPlugin(new NotifeeFlipperPlugin());
       client.addPlugin(CrashReporterPlugin.getInstance());
 
       NetworkFlipperPlugin networkFlipperPlugin = new NetworkFlipperPlugin();

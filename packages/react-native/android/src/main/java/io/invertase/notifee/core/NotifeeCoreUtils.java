@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
@@ -16,21 +15,14 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.LifecycleState;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
@@ -50,18 +42,11 @@ public class NotifeeCoreUtils {
   private static final String REACT_NATIVE_CORE_PACKAGE = "com.facebook.react.bridge";
 
   /**
-   * Create a Uri from the path, defaulting to file when there is no supplied scheme
+   * Creates a WritableMap from an exception, used to create a JS error object.
+   *
+   * @param exception
+   * @return
    */
-  public static Uri getUri(String uri) {
-    Uri parsed = Uri.parse(uri);
-
-    if (parsed.getScheme() == null || parsed.getScheme().isEmpty()) {
-      return Uri.fromFile(new File(uri));
-    }
-
-    return parsed;
-  }
-
   public static WritableMap getExceptionMap(Exception exception) {
     WritableMap exceptionMap = Arguments.createMap();
     String code = "unknown";
@@ -71,111 +56,6 @@ public class NotifeeCoreUtils {
     exceptionMap.putString("nativeErrorCode", code);
     exceptionMap.putString("nativeErrorMessage", message);
     return exceptionMap;
-  }
-
-  public static String timestampToUTC(long timestamp) {
-    Calendar calendar = Calendar.getInstance();
-    Date date = new Date((timestamp + calendar.getTimeZone().getOffset(timestamp)) * 1000);
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-    format.setTimeZone(TimeZone.getTimeZone("UTC"));
-    return format.format(date);
-  }
-
-  /**
-   * send a JS event
-   **/
-  public static void sendEvent(final ReactContext context, final String eventName, Object body) {
-    if (context != null) {
-      context
-        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-        .emit(eventName, body);
-    } else {
-      Log.d(TAG, "Missing context - cannot send event!");
-    }
-  }
-
-  /**
-   * We need to check if app is in foreground otherwise the app will crash.
-   * http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
-   *
-   * @param context Context
-   * @return boolean
-   */
-  public static boolean isAppInForeground(Context context) {
-    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-    if (activityManager == null) return false;
-
-    List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-    if (appProcesses == null) return false;
-
-    final String packageName = context.getPackageName();
-    for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-      if (
-        appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
-          && appProcess.processName.equals(packageName)
-      ) {
-        ReactContext reactContext;
-
-        try {
-          reactContext = (ReactContext) context;
-        } catch (ClassCastException exception) {
-          // Not react context so default to true
-          return true;
-        }
-
-        return reactContext.getLifecycleState() == LifecycleState.RESUMED;
-      }
-    }
-
-    return false;
-  }
-
-  public static int getResId(Context ctx, String resName) {
-    int resourceId = ctx
-      .getResources()
-      .getIdentifier(resName, "string", ctx.getPackageName());
-
-    if (resourceId == 0) {
-      Log.e(TAG, "resource " + resName + " could not be found");
-    }
-
-    return resourceId;
-  }
-
-  /**
-   * Checks for dev support availability - so we can ignore in release builds for example.
-   *
-   * @return Boolean
-   */
-  public static Boolean reactNativeHasDevSupport() {
-    return hasPackageClass(RN_DEVSUPPORT_PACKAGE, RN_DEVSUPPORT_CLASS);
-  }
-
-  /**
-   * Is the build platform Expo?
-   *
-   * @return Boolean
-   */
-  public static Boolean isExpo() {
-    return hasPackageClass(EXPO_CORE_PACKAGE, EXPO_REGISTRY_CLASS);
-  }
-
-  /**
-   * Is the build platform Flutter?
-   *
-   * @return Boolean
-   */
-  public static Boolean isFlutter() {
-    return hasPackageClass(FLUTTER_CORE_PACKAGE, FLUTTER_REGISTRY_CLASS);
-  }
-
-  /**
-   * Is the build platform React Native?
-   *
-   * @return Boolean
-   */
-  public static Boolean isReactNative() {
-    return !isExpo() && hasPackageClass(REACT_NATIVE_CORE_PACKAGE, REACT_NATIVE_REGISTRY_CLASS);
   }
 
   /**
@@ -225,6 +105,78 @@ public class NotifeeCoreUtils {
   }
 
   /**
+   * We need to check if app is in foreground otherwise the app will crash.
+   * http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
+   *
+   * @param context Context
+   * @return boolean
+   */
+  public static boolean isAppInForeground(Context context) {
+    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+    if (activityManager == null) return false;
+
+    List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+    if (appProcesses == null) return false;
+
+    final String packageName = context.getPackageName();
+    for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+      if (
+        appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+          && appProcess.processName.equals(packageName)
+      ) {
+        ReactContext reactContext;
+
+        try {
+          reactContext = (ReactContext) context;
+        } catch (ClassCastException exception) {
+          // Not react context so default to true
+          return true;
+        }
+
+        return reactContext.getLifecycleState() == LifecycleState.RESUMED;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Checks for dev support availability - so we can ignore in release builds for example.
+   *
+   * @return Boolean
+   */
+  public static Boolean reactNativeHasDevSupport() {
+    return hasPackageClass(RN_DEVSUPPORT_PACKAGE, RN_DEVSUPPORT_CLASS);
+  }
+
+  /**
+   * Is the build platform Expo?
+   *
+   * @return Boolean
+   */
+  public static Boolean isExpo() {
+    return hasPackageClass(EXPO_CORE_PACKAGE, EXPO_REGISTRY_CLASS);
+  }
+
+  /**
+   * Is the build platform Flutter?
+   *
+   * @return Boolean
+   */
+  public static Boolean isFlutter() {
+    return hasPackageClass(FLUTTER_CORE_PACKAGE, FLUTTER_REGISTRY_CLASS);
+  }
+
+  /**
+   * Is the build platform React Native?
+   *
+   * @return Boolean
+   */
+  public static Boolean isReactNative() {
+    return !isExpo() && hasPackageClass(REACT_NATIVE_CORE_PACKAGE, REACT_NATIVE_REGISTRY_CLASS);
+  }
+
+  /**
    * Returns true/false if a class for a package exists in the app class bundle
    *
    * @param packageName
@@ -249,6 +201,13 @@ public class NotifeeCoreUtils {
     }
   }
 
+  /**
+   * Converts a native JSONObject into a WritableMap to send back to JS as an object
+   *
+   * @param jsonObject
+   * @return
+   * @throws JSONException
+   */
   public static WritableMap jsonObjectToWritableMap(JSONObject jsonObject) throws JSONException {
     Iterator<String> iterator = jsonObject.keys();
     WritableMap writableMap = Arguments.createMap();
@@ -274,6 +233,13 @@ public class NotifeeCoreUtils {
     return writableMap;
   }
 
+  /**
+   * Converts a native JSONObject into a WritableMap to send back to JS as an array of objects
+   *
+   * @param jsonArray
+   * @return
+   * @throws JSONException
+   */
   public static WritableArray jsonArrayToWritableArray(JSONArray jsonArray) throws JSONException {
     WritableArray writableArray = Arguments.createArray();
 
@@ -296,6 +262,12 @@ public class NotifeeCoreUtils {
     return writableArray;
   }
 
+  /**
+   * Converts a native Map into a WritableMap
+   *
+   * @param value
+   * @return
+   */
   public static WritableMap mapToWritableMap(Map<String, Object> value) {
     WritableMap writableMap = Arguments.createMap();
 
@@ -306,6 +278,12 @@ public class NotifeeCoreUtils {
     return writableMap;
   }
 
+  /**
+   * Converts a native List into a WritableArray
+   *
+   * @param objects
+   * @return
+   */
   private static WritableArray listToWritableArray(List<Object> objects) {
     WritableArray writableArray = Arguments.createArray();
     for (Object object : objects) {
@@ -314,6 +292,12 @@ public class NotifeeCoreUtils {
     return writableArray;
   }
 
+  /**
+   * Pushes a native type into a WritableArray
+   *
+   * @param value
+   * @param array
+   */
   @SuppressWarnings("unchecked")
   public static void arrayPushValue(
     @androidx.annotation.Nullable Object value,
@@ -372,6 +356,13 @@ public class NotifeeCoreUtils {
     }
   }
 
+  /**
+   * Adds a native type into a WritableMap
+   *
+   * @param key
+   * @param value
+   * @param map
+   */
   @SuppressWarnings("unchecked")
   public static void mapPutValue(String key, @Nullable Object value, WritableMap map) {
     if (value == null || value == JSONObject.NULL) {

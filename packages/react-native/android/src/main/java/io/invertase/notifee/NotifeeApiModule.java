@@ -3,12 +3,14 @@ package io.invertase.notifee;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.NotificationManagerCompat;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -18,6 +20,8 @@ import com.google.android.gms.tasks.Tasks;
 
 import java.util.Objects;
 
+import io.invertase.notifee.bundles.NotifeeNotificationBundle;
+import io.invertase.notifee.core.NotifeeLogger;
 import io.invertase.notifee.core.NotifeeNativeModule;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -31,9 +35,11 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
   }
 
   @ReactMethod
-  public void displayNotification(ReadableMap notificationRaw, Promise promise) {
+  public void displayNotification(ReadableMap notificationMap, Promise promise) {
     Tasks.call(getExecutor(), () -> {
-      NotifeeNotification notification = NotifeeNotification.fromReadableMap(notificationRaw);
+      NotifeeNotification notification = new NotifeeNotification(
+        Arguments.toBundle(notificationMap)
+      );
 
       if (notification.isForegroundServiceNotification()) {
         Tasks.await(notification.displayForegroundServiceNotification());
@@ -44,10 +50,9 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
       return notification;
     }).addOnCompleteListener(task -> {
       if (task.isSuccessful()) {
-        promise.resolve(Objects.requireNonNull(task.getResult()).toWritableMap());
+        promise.resolve(null);
       } else {
         Exception exception = task.getException();
-        Log.e(TAG, "Error displaying a notification", exception);
         if (exception instanceof InvalidNotificationParameterException) {
           InvalidNotificationParameterException notificationParameterException = (InvalidNotificationParameterException) exception;
           rejectPromiseWithCodeAndMessage(

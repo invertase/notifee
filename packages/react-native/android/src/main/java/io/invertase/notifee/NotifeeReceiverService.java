@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
@@ -23,6 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import io.invertase.notifee.core.NotifeeContextHolder;
 import io.invertase.notifee.core.NotifeeEvent;
 import io.invertase.notifee.core.NotifeeEventEmitter;
+import io.invertase.notifee.core.NotifeeLogger;
 
 import static io.invertase.notifee.NotifeeUtils.getLaunchActivity;
 import static io.invertase.notifee.core.NotifeeCoreUtils.isAppInForeground;
@@ -216,7 +218,7 @@ public class NotifeeReceiverService extends HeadlessJsTaskService {
 
     // Always launch an activity when a notification is pressed
     launchPendingIntentActivity(
-      Objects.requireNonNull(notificationBundle.getString("id")).hashCode(),
+      Objects.requireNonNull(notificationBundle.getString("id")),
       onPressActionBundle.getString("launchActivity"),
       onPressActionBundle.getString("reactComponent")
     );
@@ -249,25 +251,21 @@ public class NotifeeReceiverService extends HeadlessJsTaskService {
       return;
     }
 
-    int notificationHashCode = Objects.requireNonNull(notificationBundle.getString("id")).hashCode();
+    String notificationId = Objects.requireNonNull(notificationBundle.getString("id"));
 
-    launchPendingIntentActivity(
-      notificationHashCode,
-      launchActivity,
-      reactComponent
-    );
+    launchPendingIntentActivity(notificationId, launchActivity, reactComponent);
 
-    NotificationManagerCompat.from(getApplicationContext()).cancel(notificationHashCode);
+    NotificationManagerCompat.from(getApplicationContext()).cancel(Objects.requireNonNull(notificationId).hashCode());
   }
 
   /**
    * Launch an activity with a pending intent
    *
-   * @param notificationHashCode Unique notification hash code
-   * @param launchActivity       Optional activity name to launch
-   * @param reactComponent       Optional react component to use
+   * @param notificationId Unique notification id
+   * @param launchActivity Optional activity name to launch
+   * @param reactComponent Optional react component to use
    */
-  private void launchPendingIntentActivity(int notificationHashCode, @Nullable String launchActivity, @Nullable String reactComponent) {
+  private void launchPendingIntentActivity(@NonNull String notificationId, @Nullable String launchActivity, @Nullable String reactComponent) {
     Class launchActivityClass = getLaunchActivity(launchActivity);
 
     Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
@@ -282,7 +280,7 @@ public class NotifeeReceiverService extends HeadlessJsTaskService {
 
     PendingIntent pendingContentIntent = PendingIntent.getActivity(
       getApplicationContext(),
-      notificationHashCode,
+      notificationId.hashCode(),
       launchIntent,
       PendingIntent.FLAG_UPDATE_CURRENT
     );
@@ -290,8 +288,11 @@ public class NotifeeReceiverService extends HeadlessJsTaskService {
     try {
       pendingContentIntent.send();
     } catch (Exception e) {
-      Log.e(TAG, "Failed to send PendingIntent from launchPendingIntentActivity.");
-      e.printStackTrace();
+      NotifeeLogger.e(
+        "ReceiverService",
+        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + notificationId,
+        e
+      );
     }
   }
 }

@@ -280,6 +280,14 @@ export interface NotificationAndroid {
   lights?: [AndroidColor | string, number, number];
 
   /**
+   * TODO
+   * Description - if true, wont show on connected devices
+   *
+   * Defaults to `false`.
+   */
+  localOnly?: boolean;
+
+  /**
    * Overrides the current number of active notifications shown on the device.
    *
    * The number of active notifications is shown in various locations (such as the notification badge tray)
