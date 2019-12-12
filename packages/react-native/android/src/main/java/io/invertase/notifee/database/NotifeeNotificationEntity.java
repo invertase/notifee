@@ -7,19 +7,37 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-// todo add index columns
+import java.util.Objects;
 
 @Entity(tableName = "notifications")
 public class NotifeeNotificationEntity {
-  @PrimaryKey
   @NonNull
-  public String notificationId;
+  @PrimaryKey
+  String id;
 
   @ColumnInfo(name = "tag")
-  public String tag;
+  String tag;
 
-  public NotifeeNotificationEntity(String notificationId, String tag) {
-    this.notificationId = notificationId;
-    this.tag = tag;
+  @ColumnInfo(name = "created_at")
+  Long createdAt;
+
+  @ColumnInfo(name = "modified_at")
+  Long modifiedAt;
+
+  // TODO just testing
+  @ColumnInfo(name = "bundle")
+  String bundle;
+
+  public static NotifeeNotificationEntity fromBundle(Bundle notification) {
+    NotifeeNotificationEntity entity = new NotifeeNotificationEntity();
+    entity.id = Objects.requireNonNull(notification.getString("id"));
+    entity.tag = notification.getString("tag");
+    entity.modifiedAt = System.currentTimeMillis();
+    entity.createdAt = System.currentTimeMillis();
+
+    // TODO just testing
+    entity.bundle = notification.toString();
+
+    return entity;
   }
 }

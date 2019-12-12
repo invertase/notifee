@@ -33,6 +33,11 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import io.invertase.notifee.database.NotifeeDatabase;
+import io.invertase.notifee.database.NotifeeNotificationDao;
+import io.invertase.notifee.database.NotifeeNotificationDao_Impl;
+import io.invertase.notifee.database.NotifeeNotificationEntity;
+
 import static io.invertase.notifee.NotifeeForegroundService.START_FOREGROUND_SERVICE_ACTION;
 import static io.invertase.notifee.NotifeeReceiverService.ACTION_NOTIFICATION_ACTION_PRESS_INTENT;
 import static io.invertase.notifee.NotifeeReceiverService.ACTION_NOTIFICATION_DELETE_INTENT;
@@ -71,17 +76,10 @@ public class NotifeeNotification {
 
       if (NotifeeReceiverService.reactComponents.size() > 0) {
         synchronized (NotifeeReceiverService.reactComponents) {
-          Log.d("ELLIOT", "reactComponents has size");
-
           reactComponent = NotifeeReceiverService.reactComponents.get(0);
           NotifeeReceiverService.reactComponents.remove(0);
         }
-      } else {
-        Log.d("ELLIOT", "reactComponents is empty");
       }
-
-      Log.d("ELLIOT", "reactComponents = " + reactComponent);
-
 
       if (reactComponent != null) {
         return reactComponent;
@@ -89,28 +87,6 @@ public class NotifeeNotification {
 
       return defaultName;
     }
-
-//    if (intent == null) {
-//      Log.d("ELLIOT", "intent null");
-//      return defaultName;
-//    }
-//
-//    String action = intent.getAction();
-//    Log.d("ELLIOT", "action = " + action);
-//
-//    if (action == null || !action.equals(NotifeeReceiverService.ACTION_NOTIFICATION_INTENT)) {
-//      return defaultName;
-//    }
-//
-//    Bundle extras = intent.getExtras();
-//
-//    if (extras == null) return defaultName;
-//
-//    String reactComponent = extras.getString("reactComponent");
-//
-//    if (reactComponent == null) return defaultName;
-//
-//    return reactComponent;
   }
 
   @SuppressWarnings("unused")
@@ -235,37 +211,6 @@ public class NotifeeNotification {
         int badgeIconType = (int) androidOptionsBundle.getDouble("badgeIconType");
         notificationBuilder.setBadgeIconType(badgeIconType);
       }
-
-//      if (androidOptionsBundle.containsKey("bubble")) {
-//        Context context = getApplicationContext();
-//        Intent target = new Intent(context, NotifeeBubbleActivity.class);
-//        PendingIntent bubbleIntent = PendingIntent.getActivity(context, 0, target, 0);
-//
-//        Bundle bubbleBundle = androidOptionsBundle.getBundle("bubble");
-//        NotificationCompat.BubbleMetadata.Builder bubbleBuilder = new NotificationCompat.BubbleMetadata.Builder();
-//
-//        bubbleBuilder.setIntent(bubbleIntent);
-//
-//        Bitmap bitmap = Tasks.await(getImageBitmapFromUrl(Objects.requireNonNull(bubbleBundle.getString("icon"))));
-//
-//        IconCompat bubbleIcon = IconCompat.createWithAdaptiveBitmap(bitmap);
-//        bubbleBuilder.setIcon(bubbleIcon);
-//
-//        if (bubbleBundle.containsKey("height")) {
-//          bubbleBuilder.setDesiredHeight(bubbleBundle.getInt("height"));
-//        }
-//
-//        if (bubbleBundle.containsKey("autoExpand")) {
-//          bubbleBuilder.setAutoExpandBubble(bubbleBundle.getBoolean("autoExpand"));
-//        }
-//
-//        if (bubbleBundle.containsKey("suppressNotification")) {
-//          bubbleBuilder.setSuppressNotification(bubbleBundle.getBoolean("suppressNotification"));
-//        }
-//
-//        notificationBuilder.setBubbleMetadata(bubbleBuilder.build());
-//      }
-
 
       if (androidOptionsBundle.containsKey("category")) {
         notificationBuilder.setCategory(androidOptionsBundle.getString("category"));
@@ -755,10 +700,13 @@ public class NotifeeNotification {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
       Notification notification = Tasks.await(getNotification());
 
-      // TODO removed TAG, causes cancelling issues. We can store it in the database anyway?
       getNotificationManagerCompat().notify(
         notificationHashCode,
         notification
+      );
+
+      NotifeeDatabase.getDatabase().getDao().insert(
+        NotifeeNotificationEntity.fromBundle(notificationBundle)
       );
 
       sendDeliveredIntent();

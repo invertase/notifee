@@ -7,6 +7,3 @@ export interface NativeModuleConfig {
   nativeModuleName: string;
   nativeEvents: string[];
 }
-
-
-

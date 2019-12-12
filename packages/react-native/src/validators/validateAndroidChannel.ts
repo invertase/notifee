@@ -46,7 +46,6 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   const out: AndroidChannel = {
     id: channel.id,
     name: channel.name,
-    bubbles: false,
     bypassDnd: false,
     lights: true,
     vibration: true,
@@ -64,17 +63,6 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
     }
 
     out.badge = channel.badge;
-  }
-
-  /**
-   * bubbles
-   */
-  if (hasOwnProperty(channel, 'bubbles')) {
-    if (!isBoolean(channel.bubbles)) {
-      throw new Error("'channel.bubbles' expected a boolean value.");
-    }
-
-    out.bubbles = channel.bubbles;
   }
 
   /**

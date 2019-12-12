@@ -1,7 +1,6 @@
 package io.invertase.notifee.core;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,6 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.gms.tasks.Tasks;
 
 import java.util.concurrent.TimeUnit;
@@ -91,7 +88,6 @@ public class NotifeeWorker extends Worker {
     } else {
       return Result.failure();
     }
-
 
 
 //    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && inputKeyType.equals(BROADCAST_RECEIVER_WORKER_KEY)) {

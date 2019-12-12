@@ -79,22 +79,6 @@ export interface NotificationAndroid {
   badgeIconType?: AndroidBadgeIconType;
 
   /**
-   * Bubbles are an experimental Android feature, supported on devices with an API Level >= 29.
-   *
-   * When a channel has bubbles enabled and an AndroidBubble interface is provided to the notification,
-   * supported devices will display the notification as a bubble. Bubbles overlay the user interface, can be
-   * moved around on the device, expanded/minimized and also be dismissed by the user.
-   *
-   * The content of a bubble can be anything, however it is advised to keep the bubble minimal, single layered
-   * (for example no navigation) and relevant to the notification.
-   *
-   * For more information, see the [Android Bubbles](/react-native/android/bubbles) concept guide.
-   *
-   * @platform android API Level >= 29
-   */
-  bubble?: AndroidBubble;
-
-  /**
    * Assigns the notification to a category. Use the one which best describes the notification.
    *
    * The category may be used by the device for ranking and filtering.
@@ -756,13 +740,6 @@ export interface AndroidPressAction {
   reactComponent?: string;
 }
 
-export interface AndroidBubble {
-  icon: string;
-  height?: number;
-  autoExpand?: boolean;
-  suppressNotification?: boolean;
-}
-
 /**
  * TODO
  *
@@ -1102,17 +1079,6 @@ export interface AndroidChannel {
    * This setting cannot be overridden once the channel is created.
    */
   badge?: boolean;
-
-  /**
-   * Sets whether notifications posted to this channel can appear outside of the notification shade,
-   * floating over other apps' content as a bubble. This value is ignored when the channels
-   * priority is less than high (`AndroidImportance.HIGH`).
-   *
-   * Defaults to `false`.
-   *
-   * This setting cannot be overridden once the channel is created.
-   */
-  bubbles?: boolean;
 
   /**
    * Sets whether or not notifications posted to this channel can interrupt the user in

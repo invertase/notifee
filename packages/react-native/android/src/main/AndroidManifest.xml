@@ -7,7 +7,7 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
 
@@ -17,26 +17,26 @@
       android:authorities="${applicationId}.notifee-init-provider"
       android:exported="false"
       android:initOrder="-100" />
-    <!-- Bubble Activity -->
-    <activity
-      android:name=".NotifeeBubbleActivity"
-      android:allowEmbedded="true"
-      android:documentLaunchMode="always"
-      android:resizeableActivity="true" />
 
     <!-- Foreground Service -->
-    <service android:name=".NotifeeForegroundService" android:exported="false" />
+    <service
+      android:name=".NotifeeForegroundService"
+      android:exported="false" />
 
     <!-- Broadcast Receiver -->
-    <receiver android:name=".NotifeeBroadcastReceiver" android:exported="false">
+    <receiver
+      android:name=".NotifeeBroadcastReceiver"
+      android:exported="false">
       <intent-filter>
-        <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED"/>
-        <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED"/>
-        <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED"/>
+        <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
+        <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
+        <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
       </intent-filter>
     </receiver>
 
     <!-- Receiver Service -->
-    <service android:name=".NotifeeReceiverService" android:exported="false" />
+    <service
+      android:name=".NotifeeReceiverService"
+      android:exported="false" />
   </application>
 </manifest>

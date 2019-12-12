@@ -8,12 +8,12 @@ import com.facebook.react.bridge.ReadableMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.invertase.notifee.core.NotifeeCoreUtils;
 import io.invertase.notifee.core.NotifeeEvent;
 import io.invertase.notifee.core.NotifeeEventEmitter;
 import io.invertase.notifee.core.NotifeeJSON;
 import io.invertase.notifee.core.NotifeeNativeModule;
 import io.invertase.notifee.core.NotifeePreferences;
-import io.invertase.notifee.core.NotifeeCoreUtils;
 
 import static io.invertase.notifee.NotifeeForegroundService.FOREGROUND_SERVICE_TASK_KEY;
 import static io.invertase.notifee.NotifeeReceiverService.RECEIVER_SERVICE_EVENT_KEY;

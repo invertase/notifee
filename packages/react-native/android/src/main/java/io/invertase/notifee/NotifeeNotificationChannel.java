@@ -179,10 +179,6 @@ class NotifeeNotificationChannel {
         channel.setShowBadge(channelMap.getBoolean("badge"));
       }
 
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && channelMap.hasKey("bubbles")) {
-        channel.setAllowBubbles(channelMap.getBoolean("bubbles"));
-      }
-
       if (channelMap.hasKey("bypassDnd")) {
         channel.setBypassDnd(channelMap.getBoolean("bypassDnd"));
       }
@@ -243,11 +239,6 @@ class NotifeeNotificationChannel {
       writableMap.putString("id", notificationChannel.getId());
       writableMap.putString("name", notificationChannel.getName().toString());
       writableMap.putBoolean("badge", notificationChannel.canShowBadge());
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        writableMap.putBoolean("bubbles", notificationChannel.canBubble());
-      } else {
-        writableMap.putBoolean("bubbles", false);
-      }
       writableMap.putBoolean("bypassDnd", notificationChannel.canBypassDnd());
       writableMap.putString("description", notificationChannel.getDescription());
       writableMap.putBoolean("lights", notificationChannel.shouldShowLights());

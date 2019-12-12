@@ -1,6 +1,5 @@
 package io.invertase.notifee;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 
@@ -36,10 +34,7 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
-import io.invertase.notifee.core.NotifeeContextHolder;
-
 import static io.invertase.notifee.NotifeeNotification.NOTIFICATION_BUILD_EXECUTOR;
-import static io.invertase.notifee.NotifeeReceiverService.getActionRequestCode;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
 class NotifeeUtils {
@@ -302,6 +297,7 @@ class NotifeeUtils {
 
   /**
    * Returns a Class instance for a given class name
+   *
    * @param className
    * @return returns a Class instance or null if not found
    */
@@ -315,7 +311,6 @@ class NotifeeUtils {
   }
 
   /**
-   *
    * @param launchActivity
    * @return
    */
@@ -325,7 +320,7 @@ class NotifeeUtils {
     if (launchActivity != null && !launchActivity.equals("default")) {
       activity = launchActivity;
     } else {
-     activity = getMainActivityClassName();
+      activity = getMainActivityClassName();
     }
 
     if (activity == null) {

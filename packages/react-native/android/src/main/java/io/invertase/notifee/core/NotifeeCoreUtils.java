@@ -180,8 +180,9 @@ public class NotifeeCoreUtils {
 
   /**
    * Return whether application is running.
-   * @url https://github.com/Blankj/AndroidUtilCode/blob/master/lib/utilcode/src/main/java/com/blankj/utilcode/util/AppUtils.java#L255
+   *
    * @return Boolean
+   * @url https://github.com/Blankj/AndroidUtilCode/blob/master/lib/utilcode/src/main/java/com/blankj/utilcode/util/AppUtils.java#L255
    */
   public static Boolean isAppRunning() {
     int uid;

@@ -80,29 +80,11 @@ describe('notifications() Notification', () => {
     });
     v.channelId.should.eql('foo');
     v.name.should.eql('bar');
-    v.allowBubbles.should.eql(false);
     v.bypassDnd.should.eql(false);
     v.enableLights.should.eql(true);
     v.enableVibration.should.eql(true);
     v.showBadge.should.eql(true);
     v.visibility.should.eql(notifee.AndroidVisibility.PRIVATE);
-  });
-
-  xdescribe('allowBubbles', () => {
-    it('throws if allowBubbles is not a boolean', () => {
-      try {
-        validate({ allowBubbles: 123 });
-        return Promise.reject(new Error('Did not throw Error'));
-      } catch (e) {
-        e.message.should.containEql("'channel.allowBubbles' expected a boolean value");
-        return Promise.resolve();
-      }
-    });
-
-    it('sets allowBubbles', () => {
-      const v = validate({ allowBubbles: true });
-      v.allowBubbles.should.eql(true);
-    });
   });
 
   describe('bypassDnd', () => {

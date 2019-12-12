@@ -3,7 +3,8 @@ apply plugin: 'com.android.application'
 import com.android.build.OutputFile
 
 project.ext.react = [
-  entryFile: "index.js"
+  entryFile   : "index.js",
+  enableHermes: true,  // clean and rebuild if changing
 ]
 
 // up to mono root
@@ -19,6 +20,15 @@ def enableSeparateBuildPerCPUArchitecture = false
  * Note that this variant is about 6MiB larger per architecture than default.
  */
 def useIntlJsc = false
+
+/**
+ * Whether to enable the Hermes VM.
+ *
+ * This should be set on project.ext.react and mirrored here.  If it is not set
+ * on project.ext.react, JavaScript will not be compiled to Hermes Bytecode
+ * and the benefits of using Hermes will therefore be sharply reduced.
+ */
+def enableHermes = project.ext.react.get("enableHermes", false)
 
 android {
   compileSdkVersion 29
@@ -41,7 +51,7 @@ android {
       reset()
       enable enableSeparateBuildPerCPUArchitecture
       universalApk false  // If true, also generate a universal APK
-      include "armeabi-v7a", "x86"
+      include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
     }
   }
 
@@ -107,7 +117,22 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
-  //noinspection GradleDynamicVersion
+
+//  debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
+//  }
+//  debugImplementation("com.facebook.flipper:flipper-leakcanary-plugin:${FLIPPER_VERSION}") {
+//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
+//  }
+//  debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
+//  }
+  debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+  debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+    exclude group:'com.facebook.yoga'
+    exclude group:'com.facebook.flipper', module: 'fbjni'
+    exclude group:'com.facebook.litho', module: 'litho-annotations'
+  }
 
   // JSC from node_modules
   if (useIntlJsc) {
@@ -116,12 +141,17 @@ dependencies {
     implementation 'org.webkit:android-jsc:+'
   }
 
+  if (enableHermes) {
+    def hermesPath = "../../node_modules/hermes-engine/android/"
+    debugImplementation files(hermesPath + "hermes-debug.aar")
+    releaseImplementation files(hermesPath + "hermes-release.aar")
+  } else {
+    implementation jscFlavor
+  }
+
   /* ------------------------
    *  TESTING SDKS/LIBRARIES
    * ------------------------ */
-//  implementation(project(path: ':jet')) {
-//    transitive = false
-//  }
   androidTestImplementation('com.wix:detox:+') { transitive = true }
   androidTestImplementation 'junit:junit:4.12'
 }
@@ -134,11 +164,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-//configurations.all {
-//  resolutionStrategy {
-//    // TODO the line below is required for Detox since version 12.5;
-//    //      it should removed as soon as the project compiles without it
-//    force 'androidx.annotation:annotation:1.0.0'
-//  }
-//}

@@ -19,7 +19,6 @@ describe('notifee', () => {
       name: 'Testing Channel!!!',
       importance: notifee.AndroidImportance.HIGH,
       badge: true,
-      bubbles: true,
     });
 
     console.log(channelId);
@@ -63,8 +62,6 @@ describe('notifee', () => {
         onPressAction: false,
         fullScreenAction: {
           id: 'foo',
-          launchActivity: 'io.invertase.notifee.NotifeeBubbleActivity',
-          // reactComponent: 'bubble',
         },
         autoCancel: false,
         // largeIcon: 'https://invertase.io/icons/icon-48x48.png',
