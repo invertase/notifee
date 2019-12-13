@@ -8,9 +8,6 @@ import androidx.room.RoomDatabase;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import io.invertase.notifee.NotifeeEventBus;
 import io.invertase.notifee.core.NotifeeContextHolder;
 import io.invertase.notifee.events.NotifeeNotificationEvent;

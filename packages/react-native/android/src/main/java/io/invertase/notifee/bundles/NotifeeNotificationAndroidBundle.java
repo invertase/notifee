@@ -30,7 +30,8 @@ public class NotifeeNotificationAndroidBundle {
     mNotificationAndroidBundle = bundle;
   }
 
-  public @Nullable ArrayList<NotifeeNotificationAndroidActionBundle> getActions() {
+  public @Nullable
+  ArrayList<NotifeeNotificationAndroidActionBundle> getActions() {
     if (mNotificationAndroidBundle.containsKey("actions")) {
       ArrayList<Bundle> actionBundles = Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
       ArrayList<NotifeeNotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
@@ -398,7 +399,8 @@ public class NotifeeNotificationAndroidBundle {
    *
    * @return String
    */
-  public @Nullable String getSortKey() {
+  public @Nullable
+  String getSortKey() {
     return mNotificationAndroidBundle.getString("sortKey");
   }
 
@@ -433,7 +435,8 @@ public class NotifeeNotificationAndroidBundle {
    *
    * @return String
    */
-  public @Nullable String getTicker() {
+  public @Nullable
+  String getTicker() {
     return mNotificationAndroidBundle.getString("ticker");
   }
 
@@ -442,7 +445,8 @@ public class NotifeeNotificationAndroidBundle {
    *
    * @return long
    */
-  public @Nullable Long getTimeoutAfter() {
+  public @Nullable
+  Long getTimeoutAfter() {
     if (mNotificationAndroidBundle.containsKey("timeoutAfter")) {
       return (long) mNotificationAndroidBundle.getDouble("timeoutAfter");
     }

@@ -15,15 +15,18 @@ public class NotifeeNotificationAndroidPressActionBundle {
     mNotificationAndroidPressActionBundle = onPressActionBundle;
   }
 
-  public @NonNull String getId() {
+  public @NonNull
+  String getId() {
     return Objects.requireNonNull(mNotificationAndroidPressActionBundle.getString("id"));
   }
 
-  public @Nullable String getLaunchActivity() {
+  public @Nullable
+  String getLaunchActivity() {
     return mNotificationAndroidPressActionBundle.getString("launchActivity");
   }
 
-  public @Nullable String getReactComponent() {
+  public @Nullable
+  String getReactComponent() {
     return mNotificationAndroidPressActionBundle.getString("reactComponent");
   }
 }

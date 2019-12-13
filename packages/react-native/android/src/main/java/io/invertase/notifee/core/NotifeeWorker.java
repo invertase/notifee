@@ -1,7 +1,6 @@
 package io.invertase.notifee.core;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
@@ -79,7 +78,7 @@ public class NotifeeWorker extends Worker {
           break;
       }
     } catch (Exception e) {
-      NotifeeLogger.e("Worker", "Job failure for key " +  inputKeyType, e);
+      NotifeeLogger.e("Worker", "Job failure for key " + inputKeyType, e);
       success = false;
     }
 

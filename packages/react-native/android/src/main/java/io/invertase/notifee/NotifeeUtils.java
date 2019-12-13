@@ -8,7 +8,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.Person;
@@ -22,12 +21,10 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.views.imagehelper.ImageSource;
-
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.gms.tasks.Tasks;
@@ -95,6 +92,7 @@ public class NotifeeUtils {
 
   /**
    * Returns a resource path for a local resource
+   *
    * @param icon
    * @return
    */
@@ -137,8 +135,6 @@ public class NotifeeUtils {
   }
 
   /**
-   *
-   *
    * @param context
    * @param uri
    * @return

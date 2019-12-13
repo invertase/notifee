@@ -1,7 +1,6 @@
 package io.invertase.notifee.core;
 
 import android.content.Context;
-import android.util.Log;
 
 public class NotifeeContextHolder {
   private static Context applicationContext;
