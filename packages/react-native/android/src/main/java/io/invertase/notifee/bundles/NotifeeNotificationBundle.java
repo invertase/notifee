@@ -1,14 +1,16 @@
 package io.invertase.notifee.bundles;
 
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
-import javax.annotation.Nullable;
+import io.invertase.notifee.core.BundleJSONConverter;
 
 public class NotifeeNotificationBundle {
 
@@ -16,6 +18,17 @@ public class NotifeeNotificationBundle {
 
   public NotifeeNotificationBundle(Bundle bundle) {
     mNotificationBundle = bundle;
+  }
+
+  public @Nullable
+  static NotifeeNotificationBundle fromJSONString(String jsonString) {
+    try {
+      JSONObject jsonObject = new JSONObject(jsonString);
+      Bundle notificationBundle = BundleJSONConverter.convertToBundle(jsonObject);
+      return new NotifeeNotificationBundle(notificationBundle);
+    } catch (JSONException jsonException) {
+      return null;
+    }
   }
 
   public @NonNull
@@ -56,4 +69,13 @@ public class NotifeeNotificationBundle {
     if (data != null) return (Bundle) data.clone();
     return null;
   }
+
+  public String toJSONString() {
+    try {
+      return BundleJSONConverter.convertToJSON(mNotificationBundle).toString();
+    } catch (JSONException e) {
+      return "";
+    }
+  }
+
 }

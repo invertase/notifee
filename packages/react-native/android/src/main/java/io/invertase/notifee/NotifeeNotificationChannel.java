@@ -33,24 +33,24 @@ public class NotifeeNotificationChannel {
     return NotificationManagerCompat.from(getApplicationContext());
   }
 
-  static WritableMap getChannel(String channelId) {
+  public static WritableMap getChannel(String channelId) {
     return createChannelMap(getNotificationManager().getNotificationChannel(channelId));
   }
 
-  static WritableArray getChannels() {
+  public static WritableArray getChannels() {
     return createChannelsArray(getNotificationManager().getNotificationChannels());
   }
 
-  static WritableMap getChannelGroup(String channelGroupId) {
+  public static WritableMap getChannelGroup(String channelGroupId) {
     return createChannelGroupMap(getNotificationManager().getNotificationChannelGroup(
       channelGroupId));
   }
 
-  static WritableArray getChannelGroups() {
+  public static WritableArray getChannelGroups() {
     return createChannelGroupsArray(getNotificationManager().getNotificationChannelGroups());
   }
 
-  static void createChannel(ReadableMap channelMap) {
+  public static void createChannel(ReadableMap channelMap) {
     NotificationChannel channel = parseChannelMap(channelMap);
 
     if (channel != null) {
@@ -58,7 +58,7 @@ public class NotifeeNotificationChannel {
     }
   }
 
-  static void createChannelGroup(ReadableMap channelGroupMap) {
+  public static void createChannelGroup(ReadableMap channelGroupMap) {
     NotificationChannelGroup channelGroup = parseChannelGroupMap(channelGroupMap);
 
     if (channelGroup != null) {
@@ -66,7 +66,7 @@ public class NotifeeNotificationChannel {
     }
   }
 
-  static void createChannelGroups(ReadableArray channelGroupsArray) {
+  public static void createChannelGroups(ReadableArray channelGroupsArray) {
     if (Build.VERSION.SDK_INT >= 26) {
       List<NotificationChannelGroup> channelGroups = new ArrayList<>();
       for (int i = 0; i < channelGroupsArray.size(); i++) {
@@ -77,7 +77,7 @@ public class NotifeeNotificationChannel {
     }
   }
 
-  static void createChannels(ReadableArray channelsArray) {
+  public static void createChannels(ReadableArray channelsArray) {
     if (Build.VERSION.SDK_INT >= 26) {
       List<NotificationChannel> channels = new ArrayList<>();
       for (int i = 0; i < channelsArray.size(); i++) {
@@ -88,11 +88,11 @@ public class NotifeeNotificationChannel {
     }
   }
 
-  static void deleteChannelGroup(String groupId) {
+  public static void deleteChannelGroup(String groupId) {
     getNotificationManager().deleteNotificationChannelGroup(groupId);
   }
 
-  static void deleteChannel(String channelId) {
+  public static void deleteChannel(String channelId) {
     getNotificationManager().deleteNotificationChannel(channelId);
   }
 

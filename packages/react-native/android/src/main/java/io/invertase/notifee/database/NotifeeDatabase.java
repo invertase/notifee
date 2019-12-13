@@ -40,7 +40,6 @@ public abstract class NotifeeDatabase extends RoomDatabase {
   @Subscribe(priority = 1)
   public void onNotificationEvent(NotifeeNotificationEvent event) {
     Log.d("MIKE", event.toString());
-
   }
 
   public abstract NotifeeNotificationDao getDao();

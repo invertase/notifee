@@ -36,8 +36,13 @@ public class NotifeeNotification {
   private NotifeeNotificationBundle mNotificationBundle;
   private NotifeeNotificationAndroidBundle mNotificationAndroidBundle;
 
-  NotifeeNotification(Bundle notificationBundle) {
+  public NotifeeNotification(Bundle notificationBundle) {
     this.mNotificationBundle = new NotifeeNotificationBundle(notificationBundle);
+    this.mNotificationAndroidBundle = this.mNotificationBundle.getAndroidBundle();
+  }
+
+  public NotifeeNotification(NotifeeNotificationBundle notificationBundle) {
+    this.mNotificationBundle = notificationBundle;
     this.mNotificationAndroidBundle = this.mNotificationBundle.getAndroidBundle();
   }
 
@@ -81,7 +86,7 @@ public class NotifeeNotification {
    *
    * @return NotificationManagerCompat
    */
-  static NotificationManagerCompat getNotificationManagerCompat() {
+  public static NotificationManagerCompat getNotificationManagerCompat() {
     return NotificationManagerCompat.from(getApplicationContext());
   }
 
@@ -90,7 +95,7 @@ public class NotifeeNotification {
    *
    * @return Boolean
    */
-  Boolean isForegroundServiceNotification() {
+  public Boolean isForegroundServiceNotification() {
     return mNotificationAndroidBundle.getAsForegroundService();
   }
 
@@ -271,7 +276,7 @@ public class NotifeeNotification {
    *
    * @return void
    */
-  Task<Void> displayNotification() {
+  public Task<Void> displayNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
       Notification notification = Tasks.await(getNotification());
 
@@ -295,14 +300,13 @@ public class NotifeeNotification {
    *
    * @return void
    */
-  Task<Void> displayForegroundServiceNotification() {
+  public Task<Void> displayForegroundServiceNotification() {
     return Tasks.call(NOTIFICATION_DISPLAY_EXECUTOR, () -> {
       Notification notification = Tasks.await(getNotification());
 
       Intent serviceIntent = new Intent(getApplicationContext(), NotifeeForegroundService.class);
 
       serviceIntent.setAction(START_FOREGROUND_SERVICE_ACTION);
-//      serviceIntent.putExtra("notificationBundle", notificationBundle);
       serviceIntent.putExtra("notification", notification);
       serviceIntent.putExtra("hash", mNotificationBundle.getHashCode());
 

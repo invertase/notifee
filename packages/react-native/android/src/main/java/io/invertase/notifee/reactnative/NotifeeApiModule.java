@@ -1,9 +1,8 @@
-package io.invertase.notifee;
+package io.invertase.notifee.reactnative;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -18,10 +17,9 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.google.android.gms.tasks.Tasks;
 
-import java.util.Objects;
-
-import io.invertase.notifee.bundles.NotifeeNotificationBundle;
-import io.invertase.notifee.core.NotifeeLogger;
+import io.invertase.notifee.InvalidNotificationParameterException;
+import io.invertase.notifee.NotifeeNotification;
+import io.invertase.notifee.NotifeeNotificationChannel;
 import io.invertase.notifee.core.NotifeeNativeModule;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;

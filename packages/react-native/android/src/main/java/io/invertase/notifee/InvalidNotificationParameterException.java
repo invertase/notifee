@@ -2,7 +2,7 @@ package io.invertase.notifee;
 
 import java.security.InvalidParameterException;
 
-class InvalidNotificationParameterException extends InvalidParameterException {
+public class InvalidNotificationParameterException extends InvalidParameterException {
   static String CHANNEL_NOT_FOUND = "channel-not-found";
   static String ACTIVITY_NOT_FOUND = "activity-not-found";
   private String code;
@@ -12,7 +12,7 @@ class InvalidNotificationParameterException extends InvalidParameterException {
     this.code = code;
   }
 
-  String getCode() {
+  public String getCode() {
     return code;
   }
 }

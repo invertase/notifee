@@ -1,4 +1,4 @@
-package io.invertase.notifee;
+package io.invertase.notifee.reactnative;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
