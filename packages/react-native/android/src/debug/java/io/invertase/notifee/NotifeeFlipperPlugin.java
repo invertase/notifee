@@ -1,8 +1,12 @@
-package com.invertase.testing;
+package io.invertase.notifee;
 
 import com.facebook.flipper.core.FlipperConnection;
 import com.facebook.flipper.core.FlipperObject;
 import com.facebook.flipper.core.FlipperPlugin;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import io.invertase.notifee.events.NotifeeNotificationEvent;
 
 public class NotifeeFlipperPlugin implements FlipperPlugin {
 
@@ -15,13 +19,13 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
 
   @Override
   public void onConnect(FlipperConnection connection) throws Exception {
+    NotifeeEventBus.getInstance().getDefault().register(this);
     mFlipperConnection = connection;
-
-    newRow();
   }
 
   @Override
   public void onDisconnect() throws Exception {
+    NotifeeEventBus.getInstance().getDefault().unregister(this);
     mFlipperConnection = null;
   }
 
@@ -30,14 +34,18 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
     return false;
   }
 
-  private void newRow() {
+  @Subscribe
+  private void onNotificationEvent(NotifeeNotificationEvent event) {
     FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
 
-    flipperBuilder.put("foo", "bar");
-    flipperBuilder.put("bar", "baz");
+    flipperBuilder.put("type", event.getType());
+    flipperBuilder.put("id", event.getNotification().getId());
+    flipperBuilder.put("id", event.getNotification().getTitle());
+    flipperBuilder.put("id", event.getNotification().getTitle());
+    flipperBuilder.put("timestamp", System.currentTimeMillis());
 
     if (mFlipperConnection != null) {
-      mFlipperConnection.send("newRow", flipperBuilder.build());
+      mFlipperConnection.send("onNotificationEvent", flipperBuilder.build());
     }
   }
 }

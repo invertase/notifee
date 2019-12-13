@@ -30,6 +30,11 @@ project.ext {
 android {
   defaultConfig {
     multiDexEnabled true
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = [eventBusIndex: 'io.invertase.notifee.NotifeeEventBusIndex']
+      }
+    }
   }
   lintOptions {
     disable 'GradleCompatible'
@@ -50,9 +55,18 @@ dependencies {
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
   implementation 'androidx.work:work-runtime:2.3.0-beta01'
   implementation 'androidx.core:core:1.2.0-rc01'
+
   implementation "androidx.room:room-runtime:2.2.2"
   annotationProcessor "androidx.room:room-compiler:2.2.2"
+
   implementation 'org.greenrobot:eventbus:3.1.1'
+  annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+
+  debugImplementation("com.facebook.flipper:flipper:0.23.5") {
+    exclude group:'com.facebook.yoga'
+    exclude group:'com.facebook.flipper', module: 'fbjni'
+    exclude group:'com.facebook.litho', module: 'litho-annotations'
+  }
 }
 
 apply from: file("./notifee-json.gradle")

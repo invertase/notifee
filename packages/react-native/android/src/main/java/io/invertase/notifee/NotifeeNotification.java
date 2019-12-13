@@ -24,6 +24,7 @@ import io.invertase.notifee.bundles.NotifeeNotificationAndroidActionBundle;
 import io.invertase.notifee.bundles.NotifeeNotificationAndroidBundle;
 import io.invertase.notifee.bundles.NotifeeNotificationBundle;
 import io.invertase.notifee.core.NotifeeLogger;
+import io.invertase.notifee.events.NotifeeNotificationEvent;
 
 import static io.invertase.notifee.NotifeeForegroundService.START_FOREGROUND_SERVICE_ACTION;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
@@ -280,8 +281,12 @@ public class NotifeeNotification {
         notification
       );
 
+
+
       NotifeeLogger.d("Notification", "Inserting notification into database with id " + mNotificationBundle.getId());
-//      NotifeeDatabase.getDatabase().getDao().insert(
+      NotifeeEventBus.getInstance().getDefault().post(new NotifeeNotificationEvent("delivered", mNotificationBundle));
+
+      //      NotifeeDatabase.getDatabase().getDao().insert(
 //        NotifeeNotificationEntity.fromBundle(notificationBundle)
 //      );
 
