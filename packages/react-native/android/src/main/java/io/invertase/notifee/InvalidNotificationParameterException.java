@@ -7,7 +7,7 @@ class InvalidNotificationParameterException extends InvalidParameterException {
   static String ACTIVITY_NOT_FOUND = "activity-not-found";
   private String code;
 
-  InvalidNotificationParameterException(String code, String msg) {
+  public InvalidNotificationParameterException(String code, String msg) {
     super(msg);
     this.code = code;
   }

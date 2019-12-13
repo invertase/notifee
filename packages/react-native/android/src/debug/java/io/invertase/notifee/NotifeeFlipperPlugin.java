@@ -1,5 +1,7 @@
 package io.invertase.notifee;
 
+import android.util.Log;
+
 import com.facebook.flipper.core.FlipperConnection;
 import com.facebook.flipper.core.FlipperObject;
 import com.facebook.flipper.core.FlipperPlugin;
@@ -19,13 +21,13 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
 
   @Override
   public void onConnect(FlipperConnection connection) throws Exception {
-    NotifeeEventBus.getInstance().getDefault().register(this);
+    NotifeeEventBus.register(this);
     mFlipperConnection = connection;
   }
 
   @Override
   public void onDisconnect() throws Exception {
-    NotifeeEventBus.getInstance().getDefault().unregister(this);
+    NotifeeEventBus.unregister(this);
     mFlipperConnection = null;
   }
 
@@ -35,7 +37,7 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
   }
 
   @Subscribe
-  private void onNotificationEvent(NotifeeNotificationEvent event) {
+  public void onNotificationEvent(NotifeeNotificationEvent event) {
     FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
 
     flipperBuilder.put("type", event.getType());
@@ -43,7 +45,6 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
     flipperBuilder.put("title", event.getNotification().getTitle());
     flipperBuilder.put("body", event.getNotification().getBody());
     flipperBuilder.put("subtitle", event.getNotification().getSubTitle());
-
     flipperBuilder.put("timestamp", System.currentTimeMillis());
 
     if (mFlipperConnection != null) {

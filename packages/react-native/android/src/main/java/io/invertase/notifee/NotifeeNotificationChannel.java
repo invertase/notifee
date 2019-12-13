@@ -27,7 +27,7 @@ import static io.invertase.notifee.NotifeeUtils.getVibrationPattern;
 import static io.invertase.notifee.NotifeeUtils.parseVibrationPattern;
 import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
 
-class NotifeeNotificationChannel {
+public class NotifeeNotificationChannel {
   // https://developer.android.com/reference/androidx/core/app/NotificationManagerCompat.html
   private static NotificationManagerCompat getNotificationManager() {
     return NotificationManagerCompat.from(getApplicationContext());

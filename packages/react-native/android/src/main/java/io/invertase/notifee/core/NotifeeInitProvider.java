@@ -13,6 +13,8 @@ import androidx.work.ExistingPeriodicWorkPolicy;
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
+import io.invertase.notifee.database.NotifeeDatabase;
+
 import static io.invertase.notifee.core.NotifeeWorker.scheduleLicenseCheckWork;
 
 public class NotifeeInitProvider extends ContentProvider {
@@ -38,7 +40,10 @@ public class NotifeeInitProvider extends ContentProvider {
       }
       NotifeeContextHolder.setApplicationContext(applicationContext);
     }
+
     scheduleLicenseCheckWork(ExistingPeriodicWorkPolicy.KEEP);
+    NotifeeDatabase.initialize();
+
     return false;
   }
 

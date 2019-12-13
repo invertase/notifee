@@ -1,6 +1,8 @@
 package io.invertase.notifee.bundles;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
@@ -16,36 +18,42 @@ public class NotifeeNotificationBundle {
     mNotificationBundle = bundle;
   }
 
-  public @NonNull int getHashCode() {
+  public @NonNull
+  Integer getHashCode() {
     return getId().hashCode();
   }
 
-  public @NonNull String getId() {
+  public @NonNull
+  String getId() {
     return Objects.requireNonNull(mNotificationBundle.getString("id"));
   }
 
-  public @Nullable String getTitle() {
+  public @Nullable
+  String getTitle() {
     return mNotificationBundle.getString("title");
   }
 
-  public @Nullable String getSubTitle() {
+  public @Nullable
+  String getSubTitle() {
     return mNotificationBundle.getString("subtitle");
   }
 
-  public @Nullable String getBody() {
+  public @Nullable
+  String getBody() {
     return mNotificationBundle.getString("body");
   }
 
-  public @NonNull NotifeeNotificationAndroidBundle getAndroidBundle() {
+  public @NonNull
+  NotifeeNotificationAndroidBundle getAndroidBundle() {
     return new NotifeeNotificationAndroidBundle(
       mNotificationBundle.getBundle("android")
     );
   }
 
-  public @Nullable Bundle getData() {
+  public @Nullable
+  Bundle getData() {
     Bundle data = mNotificationBundle.getBundle("data");
     if (data != null) return (Bundle) data.clone();
     return null;
   }
-
 }

@@ -16,9 +16,9 @@ import java.util.Objects;
 
 public class NotifeeForegroundService extends HeadlessJsTaskService {
 
-  static final String FOREGROUND_SERVICE_TASK_KEY = "notifee_foreground_service";
-  static final String START_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.start_foreground_service";
-  static final String STOP_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.stop_foreground_service";
+  public static final String FOREGROUND_SERVICE_TASK_KEY = "notifee_foreground_service";
+  public static final String START_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.start_foreground_service";
+  public static final String STOP_FOREGROUND_SERVICE_ACTION = "io.invertase.notifee.stop_foreground_service";
 
   private int activeNotificationHash = -1;
 

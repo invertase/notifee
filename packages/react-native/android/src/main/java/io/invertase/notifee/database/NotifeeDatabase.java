@@ -1,10 +1,19 @@
 package io.invertase.notifee.database;
 
+import android.util.Log;
+
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import org.greenrobot.eventbus.Subscribe;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import io.invertase.notifee.NotifeeEventBus;
 import io.invertase.notifee.core.NotifeeContextHolder;
+import io.invertase.notifee.events.NotifeeNotificationEvent;
 
 @Database(
   entities = {
@@ -15,16 +24,23 @@ import io.invertase.notifee.core.NotifeeContextHolder;
 )
 public abstract class NotifeeDatabase extends RoomDatabase {
 
-  static NotifeeDatabase database;
+  static NotifeeDatabase database = null;
 
-  public static NotifeeDatabase getDatabase() {
-    if (database != null) return database;
-    database = Room.databaseBuilder(
-      NotifeeContextHolder.getApplicationContext(),
-      NotifeeDatabase.class,
-      "notifee"
-    ).build();
-    return database;
+  public static void initialize() {
+    if (database == null) {
+      NotifeeDatabase newDatabase = Room.databaseBuilder(
+        NotifeeContextHolder.getApplicationContext(),
+        NotifeeDatabase.class,
+        "notifee"
+      ).build();
+      NotifeeEventBus.register(newDatabase);
+    }
+  }
+
+  @Subscribe(priority = 1)
+  public void onNotificationEvent(NotifeeNotificationEvent event) {
+    Log.d("MIKE", event.toString());
+
   }
 
   public abstract NotifeeNotificationDao getDao();

@@ -281,16 +281,9 @@ public class NotifeeNotification {
         notification
       );
 
-
-
-      NotifeeLogger.d("Notification", "Inserting notification into database with id " + mNotificationBundle.getId());
-      NotifeeEventBus.getInstance().getDefault().post(new NotifeeNotificationEvent("delivered", mNotificationBundle));
-
-      //      NotifeeDatabase.getDatabase().getDao().insert(
-//        NotifeeNotificationEntity.fromBundle(notificationBundle)
-//      );
-
-      sendDeliveredIntent();
+      NotifeeEventBus.post(
+        new NotifeeNotificationEvent(NotifeeNotificationEvent.DELIVERED, mNotificationBundle)
+      );
 
       return null;
     });
@@ -316,31 +309,7 @@ public class NotifeeNotification {
       NotifeeLogger.d("Notification", "Starting foreground service for notification " + mNotificationBundle.getId());
       ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
 
-      sendDeliveredIntent();
-
       return null;
     });
-  }
-
-  /**
-   * Instantly triggers an intent to notify user that the notification has been delivered to the
-   * device.
-   */
-  private void sendDeliveredIntent() {
-//    PendingIntent intent = NotifeeReceiverService.createIntent(
-////      ACTION_NOTIFICATION_DELIVERED_INTENT,
-////      new String[]{"notification"},
-////      notificationBundle
-////    );
-////
-////    try {
-////      intent.send();
-////    } catch (Exception e) {
-////      NotifeeLogger.e(
-////        "Notification",
-////        "Failed to send delivered intent for notification " + notificationBundle.getString("id"),
-////        e
-////      );
-////    }
   }
 }
