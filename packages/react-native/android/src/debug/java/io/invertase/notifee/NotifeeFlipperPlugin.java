@@ -40,8 +40,10 @@ public class NotifeeFlipperPlugin implements FlipperPlugin {
 
     flipperBuilder.put("type", event.getType());
     flipperBuilder.put("id", event.getNotification().getId());
-    flipperBuilder.put("id", event.getNotification().getTitle());
-    flipperBuilder.put("id", event.getNotification().getTitle());
+    flipperBuilder.put("title", event.getNotification().getTitle());
+    flipperBuilder.put("body", event.getNotification().getBody());
+    flipperBuilder.put("subtitle", event.getNotification().getSubTitle());
+
     flipperBuilder.put("timestamp", System.currentTimeMillis());
 
     if (mFlipperConnection != null) {
