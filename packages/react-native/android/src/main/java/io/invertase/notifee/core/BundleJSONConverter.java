@@ -147,8 +147,8 @@ public class BundleJSONConverter {
       if (value instanceof List<?>) {
         JSONArray jsonArray = new JSONArray();
         @SuppressWarnings("unchecked")
-        List<String> listValue = (List<String>) value;
-        for (String stringValue : listValue) {
+        List<Object> listValue = (List<Object>) value;
+        for (Object stringValue : listValue) {
           jsonArray.put(stringValue);
         }
         json.put(key, jsonArray);
