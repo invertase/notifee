@@ -1,207 +1,170 @@
-/*
- * Copyright 2010-present Facebook.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// source: https://github.com/iheartradio/android-facebook-sdk/blob/master/facebook/src/com/facebook/internal/BundleJSONConverter.java
-
 package io.invertase.notifee.core;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-/*
- * com.facebook.internal is solely for the use of other packages within the Facebook SDK for Android. Use of
- * any of the classes in this package is unsupported, and they may be modified or removed without warning at
- * any time.
- */
-
-/*
- * A helper class that can round trip between JSON and Bundle objects that contains the types:
- *   Boolean, Integer, Long, Double, String
- * If other types are found, an IllegalArgumentException is thrown.
- */
 public class BundleJSONConverter {
-  private static final Map<Class<?>, Setter> SETTERS = new HashMap<Class<?>, Setter>();
-
-  static {
-    SETTERS.put(Boolean.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        bundle.putBoolean(key, (Boolean) value);
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        json.put(key, value);
-      }
-    });
-    SETTERS.put(Integer.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        bundle.putInt(key, (Integer) value);
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        json.put(key, value);
-      }
-    });
-    SETTERS.put(Long.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        bundle.putLong(key, (Long) value);
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        json.put(key, value);
-      }
-    });
-    SETTERS.put(Double.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        bundle.putDouble(key, (Double) value);
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        json.put(key, value);
-      }
-    });
-    SETTERS.put(String.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        bundle.putString(key, (String) value);
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        json.put(key, value);
-      }
-    });
-    SETTERS.put(String[].class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        throw new IllegalArgumentException("Unexpected type from JSON");
-      }
-
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-        for (String stringValue : (String[]) value) {
-          jsonArray.put(stringValue);
-        }
-        json.put(key, jsonArray);
-      }
-    });
-
-    SETTERS.put(JSONArray.class, new Setter() {
-      public void setOnBundle(Bundle bundle, String key, Object value) throws JSONException {
-        JSONArray jsonArray = (JSONArray) value;
-        ArrayList<String> stringArrayList = new ArrayList<String>();
-        // Empty list, can't even figure out the type, assume an ArrayList<String>
-        if (jsonArray.length() == 0) {
-          bundle.putStringArrayList(key, stringArrayList);
-          return;
-        }
-
-        // Only strings are supported for now
-        for (int i = 0; i < jsonArray.length(); i++) {
-          Object current = jsonArray.get(i);
-          if (current instanceof String) {
-            stringArrayList.add((String) current);
-          } else {
-            throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass());
-          }
-        }
-        bundle.putStringArrayList(key, stringArrayList);
-      }
-
-      @Override
-      public void setOnJSON(JSONObject json, String key, Object value) throws JSONException {
-        throw new IllegalArgumentException("JSONArray's are not supported in bundles.");
-      }
-    });
-  }
-
-  public static JSONObject convertToJSON(Bundle bundle) throws JSONException {
-    JSONObject json = new JSONObject();
-
-    for (String key : bundle.keySet()) {
-      Object value = bundle.get(key);
-      if (value == null) {
-        // Null is not supported.
-        continue;
-      }
-
-      // Special case List<String> as getClass would not work, since List is an interface
-      if (value instanceof List<?>) {
-        JSONArray jsonArray = new JSONArray();
-        @SuppressWarnings("unchecked")
-        List<Object> listValue = (List<Object>) value;
-        for (Object stringValue : listValue) {
-          jsonArray.put(stringValue);
-        }
-        json.put(key, jsonArray);
-        continue;
-      }
-
-      // Special case Bundle as it's one way, on the return it will be JSONObject
-      if (value instanceof Bundle) {
-        json.put(key, convertToJSON((Bundle) value));
-        continue;
-      }
-
-      Setter setter = SETTERS.get(value.getClass());
-      if (setter == null) {
-        throw new IllegalArgumentException("Unsupported type: " + value.getClass());
-      }
-      setter.setOnJSON(json, key, value);
-    }
-
-    return json;
-  }
-
-  public static Bundle convertToBundle(JSONObject jsonObject) throws JSONException {
+  public static Bundle convertToBundle(JSONObject jsonObject) {
     Bundle bundle = new Bundle();
-    @SuppressWarnings("unchecked")
     Iterator<String> jsonIterator = jsonObject.keys();
     while (jsonIterator.hasNext()) {
-      String key = jsonIterator.next();
-      Object value = jsonObject.get(key);
-      if (value == null || value == JSONObject.NULL) {
-        // Null is not supported.
-        continue;
-      }
+      try {
+        String key = jsonIterator.next();
+        Object value = jsonObject.get(key);
+        if (value == JSONObject.NULL) {
+          continue;
+        }
 
-      // Special case JSONObject as it's one way, on the return it would be Bundle.
-      if (value instanceof JSONObject) {
-        bundle.putBundle(key, convertToBundle((JSONObject) value));
-        continue;
-      }
+        if (value instanceof JSONObject) {
+          bundle.putBundle(key, convertToBundle((JSONObject) value));
+          continue;
+        }
 
-      Setter setter = SETTERS.get(value.getClass());
-      if (setter == null) {
-        throw new IllegalArgumentException("Unsupported type: " + value.getClass());
+        Class clazz = value.getClass();
+
+        if (clazz == JSONArray.class) {
+          setJSONArray(bundle, key, (JSONArray) value);
+        } else if (clazz == String.class) {
+          bundle.putString(key, (String) value);
+        } else if (clazz == Boolean.class) {
+          bundle.putBoolean(key, (Boolean) value);
+        } else if (clazz == boolean.class) {
+          bundle.putBoolean(key, (boolean) value);
+        } else if (clazz == Integer.class) {
+          bundle.putInt(key, (Integer) value);
+        } else if (clazz == int.class) {
+          bundle.putInt(key, (int) value);
+        } else if (clazz == Long.class) {
+          bundle.putLong(key, (Long) value);
+        } else if (clazz == long.class) {
+          bundle.putLong(key, (long) value);
+        } else if (clazz == Double.class) {
+          bundle.putDouble(key, (Double) value);
+        } else if (clazz == double.class) {
+          bundle.putDouble(key, (double) value);
+        } else {
+          throw new IllegalArgumentException("Unexpected type: " + clazz);
+        }
+      } catch (JSONException e) {
+        // ignore exceptions
       }
-      setter.setOnBundle(bundle, key, value);
     }
 
     return bundle;
   }
 
-  public interface Setter {
-    void setOnBundle(Bundle bundle, String key, Object value) throws JSONException;
+  private static Object convertToJavaArray(Class clazz, JSONArray jsonArray) throws JSONException {
+    Object array = Array.newInstance(clazz, jsonArray.length());
+    for (int i = 0; i < jsonArray.length(); i++) {
+      Object current = jsonArray.get(i);
+      if (clazz.isAssignableFrom(unboxClass(current.getClass()))) {
+        Array.set(array, i, current);
+      } else {
+        throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass() + ". All array elements must be same type.");
+      }
+    }
 
-    void setOnJSON(JSONObject json, String key, Object value) throws JSONException;
+    return array;
+  }
+
+  private static Class unboxClass(Class clazz) {
+    if (clazz == Byte.class) {
+      return byte.class;
+    } else if (clazz == Character.class) {
+      return char.class;
+    } else if (clazz == Float.class) {
+      return float.class;
+    } else if (clazz == Short.class) {
+      return short.class;
+    } else if (clazz == Boolean.class) {
+      return boolean.class;
+    } else if (clazz == Double.class) {
+      return double.class;
+    } else if (clazz == Integer.class) {
+      return int.class;
+    } else if (clazz == Long.class) {
+      return long.class;
+    } else {
+      return clazz;
+    }
+  }
+
+  private static void setJSONArray(Bundle bundle, String key, JSONArray jsonArray) throws JSONException {
+    // Empty list, can't even figure out the type, assume an ArrayList<String>
+    if (jsonArray.length() == 0) {
+      bundle.putStringArray(key, new String[0]);
+    } else {
+      Object first = jsonArray.get(0);
+
+      // We could do this all with reflection but this seems (slightly) better maybe?
+      Class clazz = unboxClass(first.getClass());
+      if (byte.class.isAssignableFrom(clazz)) {
+        bundle.putByteArray(key, (byte[]) convertToJavaArray(byte.class, jsonArray));
+      } else if (char.class.isAssignableFrom(clazz)) {
+        bundle.putCharArray(key, (char[]) convertToJavaArray(char.class, jsonArray));
+      } else if (float.class.isAssignableFrom(clazz)) {
+        bundle.putFloatArray(key, (float[]) convertToJavaArray(float.class, jsonArray));
+      } else if (short.class.isAssignableFrom(clazz)) {
+        bundle.putShortArray(key, (short[]) convertToJavaArray(short.class, jsonArray));
+      } else if (String.class.isAssignableFrom(clazz)) {
+        bundle.putStringArray(key, (String[]) convertToJavaArray(String.class, jsonArray));
+      } else if (boolean.class.isAssignableFrom(clazz)) {
+        bundle.putBooleanArray(key, (boolean[]) convertToJavaArray(boolean.class, jsonArray));
+      } else if (double.class.isAssignableFrom(clazz)) {
+        bundle.putDoubleArray(key, (double[]) convertToJavaArray(double.class, jsonArray));
+      } else if (int.class.isAssignableFrom(clazz)) {
+        bundle.putIntArray(key, (int[]) convertToJavaArray(int.class, jsonArray));
+      } else if (long.class.isAssignableFrom(clazz)) {
+        bundle.putLongArray(key, (long[]) convertToJavaArray(long.class, jsonArray));
+      } else if (first instanceof JSONObject) {
+        ArrayList<Bundle> parcelableArrayList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+          Object current = jsonArray.get(i);
+          if (current instanceof JSONObject) {
+            parcelableArrayList.add(convertToBundle((JSONObject) current));
+          } else {
+            throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass());
+          }
+        }
+
+        Bundle[] array = new Bundle[parcelableArrayList.size()];
+        array = parcelableArrayList.toArray(array);
+        bundle.putParcelableArray(key, array);
+      } else {
+        throw new IllegalArgumentException("Unexpected type in an array: " + first.getClass());
+      }
+    }
+  }
+
+  public static JSONObject convertToJSON(Bundle bundle) throws JSONException {
+    JSONObject jsonObject = new JSONObject();
+    Iterator<String> jsonIterator = bundle.keySet().iterator();
+
+    while (jsonIterator.hasNext()) {
+      String key = jsonIterator.next();
+      jsonObject.put(key, jsonWrapValue(bundle.get(key)));
+    }
+
+    return jsonObject;
+  }
+
+  private static Object jsonWrapValue(Object valueObject) {
+    if (valueObject == null) {
+      return null;
+    } else {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        return JSONObject.wrap(valueObject);
+      } else {
+        return null;
+      }
+    }
   }
 }

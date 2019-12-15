@@ -1,0 +1,71 @@
+buildscript {
+  repositories {
+    google()
+    jcenter()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.5.3'
+  }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 29
+  buildToolsVersion "29.0.2"
+
+
+  defaultConfig {
+    minSdkVersion 16
+    targetSdkVersion 29
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles 'consumer-rules.pro'
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = [eventBusIndex: 'app.notifee.core.EventBusIndex']
+      }
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+}
+
+repositories {
+  google()
+  jcenter()
+  mavenCentral()
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  implementation 'com.google.android.gms:play-services-tasks:17.0.0'
+  implementation 'androidx.work:work-runtime:2.3.0-beta01'
+  implementation 'androidx.core:core:1.2.0-rc01'
+
+  implementation "androidx.room:room-runtime:2.2.2"
+  annotationProcessor "androidx.room:room-compiler:2.2.2"
+
+  implementation 'org.greenrobot:eventbus:3.1.1'
+  annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
