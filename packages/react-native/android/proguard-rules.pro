@@ -10,15 +10,8 @@
     <init>(java.lang.Throwable);
 }
 
-# OkHttp3
--dontwarn okio.**
--dontwarn okhttp3.**
--dontwarn javax.annotation.**
--dontwarn org.conscrypt.**
-# A resource is loaded with a relative path so the package of this class must be preserved.
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # React Native
 -keepnames class com.facebook.react.ReactActivity
--keepnames class io.invertase.notifee.reactnative.NotifeeApiModule;
--keepnames class io.invertase.notifee.reactnative.NotifeeCoreModule;
+-keepnames class app.notifee.react.NotifeeApiModule;
+-keepnames class app.notifee.react.NotifeeCoreModule;

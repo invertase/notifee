@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@notifee/tools-android-dumpsys-parser": "^0.0.1",
-    "@notifee/jet": "^0.0.1",
     "@react-native-community/cli": "^2.9.0",
     "a2a": "^0.2.0",
     "babel-plugin-istanbul": "^5.2.0",

@@ -52,6 +52,9 @@ repositories {
 }
 
 dependencies {
+  // notifee_core.aar
+  implementation fileTree(include: ['*.aar'], dir: 'libs')
+
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
   implementation 'androidx.work:work-runtime:2.3.0-beta01'
   implementation 'androidx.core:core:1.2.0-rc01'

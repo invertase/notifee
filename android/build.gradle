@@ -46,7 +46,25 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+}
 
+android.libraryVariants.all { variant ->
+  def variantName = variant.name.capitalize()
+  def assembleTaskName = "assemble${variantName}"
+  def copyTaskName = "copy${variantName}Artifacts"
+
+  task(copyTaskName, type: Copy, dependsOn: assembleTaskName, group: "build") {
+    variant.outputs.each { output ->
+      def newOutputName = "notifee_core.aar"
+      from(output.outputFile.parent) {
+        include output.outputFile.name
+        rename output.outputFile.name, newOutputName
+      }
+    }
+    into new File("$project.rootDir/../packages/react-native/android/libs")
+  }
+
+  project.tasks.getByName(assembleTaskName).finalizedBy(copyTaskName)
 }
 
 repositories {
@@ -56,8 +74,6 @@ repositories {
 }
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-
   implementation 'com.google.android.gms:play-services-tasks:17.0.0'
   implementation 'androidx.work:work-runtime:2.3.0-beta01'
   implementation 'androidx.core:core:1.2.0-rc01'

@@ -22,6 +22,8 @@ import io.invertase.notifee.NotifeeNotification;
 import io.invertase.notifee.NotifeeNotificationChannel;
 import io.invertase.notifee.core.NotifeeNativeModule;
 
+import app.notifee.core.TestJavaClass;
+
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEventListener {
@@ -29,6 +31,8 @@ public class NotifeeApiModule extends NotifeeNativeModule implements ActivityEve
 
   NotifeeApiModule(ReactApplicationContext reactContext) {
     super(reactContext, TAG);
+    Log.d("TEST", TestJavaClass.FOO);
+    Log.d("TEST", TestJavaClass.FOO_BAR);
     reactContext.addActivityEventListener(this);
   }
 

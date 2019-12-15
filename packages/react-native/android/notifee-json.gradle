@@ -1,8 +1,8 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
-String fileName = "notifee.config.json"
 String jsonRoot = "android"
+String fileName = "notifee.config.json"
 
 File jsonFile = null
 File parentDir = rootProject.projectDir

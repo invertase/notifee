@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "prepare": "yarn run lerna:link && lerna run prepare",
-    "build:all:clean": "lerna run build:clean",
+    "build:all:clean": "rimraf android/build && rimraf android/.gradle && rimraf ios/build && lerna run build:clean",
     "build:all:build": "lerna run build",
     "build_rn:watch": "cd packages/react-native && yarn run build:watch",
     "validate:all:js": "eslint ./",

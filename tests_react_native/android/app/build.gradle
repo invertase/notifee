@@ -34,6 +34,7 @@ android {
   compileSdkVersion 29
   defaultConfig {
     applicationId "com.invertase.testing"
+
     minSdkVersion 18
     targetSdkVersion 29
     versionCode 1
@@ -44,7 +45,6 @@ android {
 
     testBuildType System.getProperty('testBuildType', 'debug')
     testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-    multiDexEnabled true
   }
   splits {
     abi {
@@ -66,7 +66,7 @@ android {
 
   buildTypes {
     release {
-      minifyEnabled true
+      minifyEnabled false
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
       proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
       signingConfig signingConfigs.release
@@ -114,20 +114,13 @@ android {
 }
 
 dependencies {
+  // notifee_core.aar
+  implementation fileTree(include: ['*.aar'], dir: '../../../../packages/react-native/android/libs')
   implementation fileTree(include: ['*.jar'], dir: 'libs')
+
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
 
-//  debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
-//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
-//  }
-//  debugImplementation("com.facebook.flipper:flipper-leakcanary-plugin:${FLIPPER_VERSION}") {
-//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
-//  }
-//  debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
-//    exclude group: 'com.facebook.fbjni', module: 'fbjni'
-//  }
-  debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
   debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
     exclude group:'com.facebook.yoga'
     exclude group:'com.facebook.flipper', module: 'fbjni'
@@ -152,8 +145,8 @@ dependencies {
   /* ------------------------
    *  TESTING SDKS/LIBRARIES
    * ------------------------ */
-  androidTestImplementation('com.wix:detox:+') { transitive = true }
-  androidTestImplementation 'junit:junit:4.12'
+//  androidTestImplementation('com.wix:detox:+') { transitive = true }
+//  androidTestImplementation 'junit:junit:4.12'
 }
 
 // Run this once to be able to run the application with BUCK
@@ -162,5 +155,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
   from configurations.compile
   into 'libs'
 }
+
+task buildNotifeeCore(type: GradleBuild) {
+  buildFile = '../../../android/build.gradle'
+  tasks = ['assembleDebug'] // change to assembleRelease to test release builds
+}
+
+preBuild.dependsOn buildNotifeeCore
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
