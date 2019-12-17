@@ -1,65 +1,64 @@
-package io.invertase.notifee.bundles;
+package app.notifee.core.bundles;
 
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
-import androidx.core.graphics.drawable.IconCompat;
 
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import io.invertase.notifee.NotifeeReceiverService;
+import app.notifee.core.utils.ResourceUtils;
+//import io.invertase.notifee.NotifeeReceiverService;
 
-import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
-import static io.invertase.notifee.core.NotifeeContextHolder.getApplicationContext;
-
-public class NotifeeNotificationAndroidActionBundle {
+@Keep
+public class NotificationAndroidActionBundle {
 
   private Bundle mNotificationAndroidActionBundle;
 
-  NotifeeNotificationAndroidActionBundle(Bundle actionBundle) {
+  private NotificationAndroidActionBundle(Bundle actionBundle) {
     mNotificationAndroidActionBundle = actionBundle;
   }
 
+  public static NotificationAndroidActionBundle fromBundle(Bundle actionBundle) {
+    return new NotificationAndroidActionBundle(actionBundle);
+  }
+
   /**
-   * Creates a NotificationCompat.Action from the given NotifeeNotificationAndroidActionBundle instance
+   * Creates a NotificationCompat.Action from the given NotificationAndroidActionBundle instance
    *
-   * @param bundle NotifeeNotificationAndroidActionBundle instance
    * @return Task<NotificationCompat.Action>
    */
-  public static Task<NotificationCompat.Action> toNotificationAction(NotifeeNotificationAndroidActionBundle bundle) {
-    // TODO executor
-    return Tasks.call(() -> {
-
-      // TODO action pending intent handler!
-      Intent intent = new Intent(getApplicationContext(), NotifeeReceiverService.class);
-      PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-      Bitmap icon = Tasks.await(bundle.getIcon());
-
-      NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
-        IconCompat.createWithAdaptiveBitmap(icon),
-        bundle.getTitle(),
-        pendingIntent
-      );
-
-      RemoteInput remoteInput = bundle.getRemoteInput(actionBuilder);
-      if (remoteInput != null) {
-        actionBuilder.addRemoteInput(remoteInput);
-      }
-
-      return actionBuilder.build();
-    });
-  }
+//  public Task<NotificationCompat.Action> toNotificationAction() {
+//    // TODO executor
+//    return Tasks.call(() -> {
+//
+//      // TODO action pending intent handler!
+//      Intent intent = new Intent(ContextHolder.getApplicationContext(), NotifeeReceiverService.class);
+//      PendingIntent pendingIntent = PendingIntent.getService(ContextHolder.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//      Bitmap icon = Tasks.await(getIcon());
+//
+//      NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
+//        IconCompat.createWithAdaptiveBitmap(icon),
+//        getTitle(),
+//        pendingIntent
+//      );
+//
+//      RemoteInput remoteInput = getRemoteInput(actionBuilder);
+//      if (remoteInput != null) {
+//        actionBuilder.addRemoteInput(remoteInput);
+//      }
+//
+//      return actionBuilder.build();
+//    });
+//  }
 
   /**
    * Gets the title of the action
@@ -78,18 +77,18 @@ public class NotifeeNotificationAndroidActionBundle {
    */
   public Task<Bitmap> getIcon() {
     String icon = Objects.requireNonNull(mNotificationAndroidActionBundle.getString("icon"));
-    return getImageBitmapFromUrl(icon);
+    return ResourceUtils.getImageBitmapFromUrl(icon);
   }
 
   /**
    * Gets the onPressAction instance for this action
    *
-   * @return NotifeeNotificationAndroidPressActionBundle
+   * @return NotificationAndroidPressActionBundle
    */
   public @NonNull
-  NotifeeNotificationAndroidPressActionBundle getPressAction() {
+  NotificationAndroidPressActionBundle getPressAction() {
     Bundle pressActionBundle = mNotificationAndroidActionBundle.getBundle("onPressAction");
-    return new NotifeeNotificationAndroidPressActionBundle(pressActionBundle);
+    return NotificationAndroidPressActionBundle.fromBundle(pressActionBundle);
   }
 
   /**

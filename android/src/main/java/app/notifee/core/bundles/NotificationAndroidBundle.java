@@ -1,43 +1,52 @@
 package app.notifee.core.bundles;
 
 import android.app.Notification;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+
 import java.util.ArrayList;
 import java.util.Objects;
-//
-//import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
-//import static io.invertase.notifee.NotifeeUtils.getImageResourceId;
 
+import app.notifee.core.Logger;
+import app.notifee.core.utils.ResourceUtils;
+
+@Keep
 public class NotificationAndroidBundle {
-
   private Bundle mNotificationAndroidBundle;
 
-  public NotificationAndroidBundle(Bundle bundle) {
+  private NotificationAndroidBundle(Bundle bundle) {
     mNotificationAndroidBundle = bundle;
   }
 
-//  public @Nullable
-//  ArrayList<NotifeeNotificationAndroidActionBundle> getActions() {
-//    if (mNotificationAndroidBundle.containsKey("actions")) {
-//      ArrayList<Bundle> actionBundles = Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
-//      ArrayList<NotifeeNotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
-//
-//      for (Bundle actionBundle : actionBundles) {
-//        actions.add(new NotifeeNotificationAndroidActionBundle(actionBundle));
-//      }
-//
-//      return actions;
-//    }
-//
-//    return null;
-//  }
+  public static NotificationAndroidBundle fromBundle(Bundle bundle) {
+    return new NotificationAndroidBundle(bundle);
+  }
+
+  public @Nullable
+  ArrayList<NotificationAndroidActionBundle> getActions() {
+    if (mNotificationAndroidBundle.containsKey("actions")) {
+      ArrayList<Bundle> actionBundles = Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
+      ArrayList<NotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
+
+      for (Bundle actionBundle : actionBundles) {
+        actions.add(NotificationAndroidActionBundle.fromBundle(actionBundle));
+      }
+
+      return actions;
+    }
+
+    return null;
+  }
 
   /**
    * Gets whether the notification is for a foreground service
@@ -217,14 +226,14 @@ public class NotificationAndroidBundle {
    *
    * @return Task<Bitmap>
    */
-//  public Task<Bitmap> getLargeIcon() {
-//    if (hasLargeIcon()) {
-//      String largeIcon = Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
-//      return getImageBitmapFromUrl(largeIcon);
-//    }
-//
-//    return Tasks.call(() -> null);
-//  }
+  public Task<Bitmap> getLargeIcon() {
+    if (hasLargeIcon()) {
+      String largeIcon = Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
+      return ResourceUtils.getImageBitmapFromUrl(largeIcon);
+    }
+
+    return Tasks.call(() -> null);
+  }
 
   /**
    * Gets the light output for the notification
@@ -359,33 +368,33 @@ public class NotificationAndroidBundle {
    *
    * @return ArrayList<Integer>
    */
-//  public @Nullable
-//  ArrayList<Integer> getSmallIcon() {
-//    if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
-//      return null;
-//    }
-//
-//    ArrayList smallIconList = Objects.requireNonNull(
-//      mNotificationAndroidBundle.getParcelableArrayList("smallIcon")
-//    );
-//
-//    String smallIconRaw = (String) smallIconList.get(0);
-//    int smallIconId = getImageResourceId(smallIconRaw);
-//
-//    if (smallIconId == 0) {
-//      Logger.d(
-//        "NotificationAndroidBundle",
-//        String.format("Notification small icon '%s' could not be found", smallIconRaw)
-//      );
-//      return null;
-//    }
-//
-//    ArrayList<Integer> smallIcon = new ArrayList<>(2);
-//    smallIcon.add(smallIconId);
-//    smallIcon.add((int) smallIconList.get(1));
-//
-//    return smallIcon;
-//  }
+  public @Nullable
+  ArrayList<Integer> getSmallIcon() {
+    if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
+      return null;
+    }
+
+    ArrayList smallIconList = Objects.requireNonNull(
+      mNotificationAndroidBundle.getParcelableArrayList("smallIcon")
+    );
+
+    String smallIconRaw = (String) smallIconList.get(0);
+    int smallIconId = ResourceUtils.getImageResourceId(smallIconRaw);
+
+    if (smallIconId == 0) {
+      Logger.d(
+        "NotificationAndroidBundle",
+        String.format("Notification small icon '%s' could not be found", smallIconRaw)
+      );
+      return null;
+    }
+
+    ArrayList<Integer> smallIcon = new ArrayList<>(2);
+    smallIcon.add(smallIconId);
+    smallIcon.add((int) smallIconList.get(1));
+
+    return smallIcon;
+  }
 
   /**
    * Gets the sort key
@@ -411,17 +420,17 @@ public class NotificationAndroidBundle {
    *
    * @return Task<NotificationCompat.Style>
    */
-//  public Task<NotificationCompat.Style> getStyle() {
-//    if (!hasStyle()) {
-//      return Tasks.call(() -> null);
-//    }
-//
-//    NotifeeNotificationAndroidStyleBundle styleBundle = new NotifeeNotificationAndroidStyleBundle(
-//      mNotificationAndroidBundle.getBundle("style")
-//    );
-//
-//    return styleBundle.getStyle();
-//  }
+  public Task<NotificationCompat.Style> getStyle() {
+    if (!hasStyle()) {
+      return Tasks.call(() -> null);
+    }
+
+    NotificationAndroidStyleBundle styleBundle = NotificationAndroidStyleBundle.fromBundle(
+      mNotificationAndroidBundle.getBundle("style")
+    );
+
+    return styleBundle.getStyle();
+  }
 
   /**
    * Gets the ticker text

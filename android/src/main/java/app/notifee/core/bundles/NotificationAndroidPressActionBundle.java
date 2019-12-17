@@ -1,18 +1,24 @@
-package io.invertase.notifee.bundles;
+package app.notifee.core.bundles;
 
 import android.os.Bundle;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
-public class NotifeeNotificationAndroidPressActionBundle {
+@Keep
+public class NotificationAndroidPressActionBundle {
 
   private Bundle mNotificationAndroidPressActionBundle;
 
-  NotifeeNotificationAndroidPressActionBundle(Bundle onPressActionBundle) {
+  private NotificationAndroidPressActionBundle(Bundle onPressActionBundle) {
     mNotificationAndroidPressActionBundle = onPressActionBundle;
+  }
+
+  public static NotificationAndroidPressActionBundle fromBundle(Bundle onPressActionBundle) {
+    return new NotificationAndroidPressActionBundle(onPressActionBundle);
   }
 
   public @NonNull

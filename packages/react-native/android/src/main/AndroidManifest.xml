@@ -1,42 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="io.invertase.notifee">
-
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-  <uses-permission android:name="android.permission.VIBRATE" />
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-
+<manifest package="io.invertase.notifee">
 
   <application>
-    <provider
-      android:name="io.invertase.notifee.core.NotifeeInitProvider"
-      android:authorities="${applicationId}.notifee-init-provider"
-      android:exported="false"
-      android:initOrder="-100" />
 
-    <!-- Foreground Service -->
-    <service
-      android:name=".NotifeeForegroundService"
-      android:exported="false" />
-
-    <!-- Broadcast Receiver -->
-    <receiver
-      android:name=".NotifeeBroadcastReceiver"
-      android:exported="false">
-      <intent-filter>
-        <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
-        <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
-        <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
-      </intent-filter>
-    </receiver>
-
-    <!-- Receiver Service -->
-    <service
-      android:name=".NotifeeReceiverService"
-      android:exported="false" />
   </application>
 </manifest>

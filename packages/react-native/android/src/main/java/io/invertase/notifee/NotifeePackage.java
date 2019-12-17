@@ -1,4 +1,4 @@
-package io.invertase.notifee.reactnative;
+package io.invertase.notifee;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -16,7 +16,6 @@ public class NotifeePackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(@Nonnull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
-    modules.add(new NotifeeCoreModule(reactContext));
     modules.add(new NotifeeApiModule(reactContext));
     return modules;
   }

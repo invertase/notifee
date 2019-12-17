@@ -7,12 +7,13 @@ import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import app.notifee.core.database.Database;
 
-class InitProvider extends ContentProvider {
+public class InitProvider extends ContentProvider {
   private static final String PROVIDER_AUTHORITY = "notifee-init-provider";
 
   @Override
@@ -26,19 +27,18 @@ class InitProvider extends ContentProvider {
     super.attachInfo(context, info);
   }
 
+  @CallSuper
   @Override
   public boolean onCreate() {
     if (ContextHolder.getApplicationContext() == null) {
       Context context = getContext();
-
       if (context != null && context.getApplicationContext() != null) {
         context = context.getApplicationContext();
       }
 
-      ContextHolder.setApplicationContext(context);
-
-      // initialize internal tools
+      Notifee.configure();
       Database.initialize(context);
+      ContextHolder.setApplicationContext(context);
     }
 
     return false;
