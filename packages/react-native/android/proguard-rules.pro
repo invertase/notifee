@@ -14,6 +14,6 @@
 -keep class io.invertase.notifee.NotifeeEventSubscriber;
 
 # React Native
--keepnames class com.facebook.react.ReactActivity'
+-keepnames class com.facebook.react.ReactActivity;
 -keepnames class app.notifee.react.NotifeeApiModule;
 -keepnames class app.notifee.react.NotifeeCoreModule;
