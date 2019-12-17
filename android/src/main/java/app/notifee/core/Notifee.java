@@ -27,8 +27,7 @@ class Notifee {
   }
 
   @KeepForSdk
-  public static
-  Notifee getInstance() {
+  public static Notifee getInstance() {
     return mNotifee;
   }
 

@@ -22,6 +22,9 @@ interface DatabaseNotificationDao {
   )
   void trimRows();
 
+  @Query("SELECT * FROM notifications WHERE id=:id")
+  DatabaseNotificationEntity[] getById(String id);
+
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   void insert(DatabaseNotificationEntity notificationEntity);
 

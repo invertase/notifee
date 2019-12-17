@@ -33,7 +33,7 @@ public class NotifeeEventSubscriber implements EventListener {
 
   @Override
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
-    // do something
+    // TODO do something with headless tasks
     blockStateEvent.setResult();
   }
 }

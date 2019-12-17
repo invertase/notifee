@@ -2,7 +2,6 @@ package app.notifee.core.events;
 
 import android.os.Bundle;
 
-import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 
 import app.notifee.core.KeepForSdk;
