@@ -40,6 +40,4 @@ public class EventSubscriber {
       eventListener.onLogEvent(logEvent);
     }
   }
-
-
 }

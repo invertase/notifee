@@ -7,6 +7,7 @@ import app.notifee.core.events.NotificationEvent;
 public interface EventListener {
   @KeepForSdk
   void onNotificationEvent(NotificationEvent notificationEvent);
+
   @KeepForSdk
   void onLogEvent(LogEvent logEvent);
 }

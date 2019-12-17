@@ -2,7 +2,6 @@ package app.notifee.core.events;
 
 import android.os.Bundle;
 
-import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 
 import app.notifee.core.KeepForSdk;
@@ -19,8 +18,6 @@ public class NotificationEvent {
   private final Bundle extras;
   private final NotificationBundle notification;
 
-  // TODO remove constructor KeepForSdk once refactor complete
-  @KeepForSdk
   private NotificationEvent(String type, NotificationBundle bundle) {
     this.type = type;
     this.notification = bundle;
