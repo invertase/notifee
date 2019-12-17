@@ -1,3 +1,86 @@
+package app.notifee.core;
+
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.IBinder;
+
+import androidx.annotation.Nullable;
+
+import app.notifee.core.bundles.NotificationBundle;
+import app.notifee.core.events.NotificationEvent;
+
+import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
+
+class ReceiverService extends Service {
+
+  static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
+
+  /**
+   * Creates a PendingIntent, which when sent triggers this class.
+   *
+   * @param action       An Action - matches up with the JS EventType Enum.
+   * @param extraKeys    Array of strings
+   * @param extraBundles One or more bundles
+   * @return
+   */
+  public static PendingIntent createIntent(String action, String[] extraKeys, Bundle... extraBundles) {
+    Context context = ContextHolder.getApplicationContext();
+    Intent intent = new Intent(context, ReceiverService.class);
+    intent.setAction(action);
+
+    for (int i = 0; i < extraKeys.length; i++) {
+      String key = extraKeys[i];
+
+      if (i <= extraBundles.length - 1) {
+        Bundle bundle = extraBundles[i];
+        intent.putExtra(key, bundle);
+      } else {
+        intent.putExtra(key, (String) null);
+      }
+    }
+
+    int uniqueInt = (int) (System.currentTimeMillis() & 0xfffffff);
+    return PendingIntent.getService(context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+  }
+
+  @Nullable
+  @Override
+  public IBinder onBind(Intent intent) {
+    return null;
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags, int startId) {
+    String action = intent.getAction();
+
+    if (action == null) {
+      return START_NOT_STICKY;
+    }
+
+    switch (action) {
+      case DELETE_INTENT:
+        onDeleteIntent(intent);
+    }
+
+    return START_NOT_STICKY;
+  }
+
+  private void onDeleteIntent(Intent intent) {
+    Bundle notification = intent.getBundleExtra("notification");
+
+    if (notification == null) {
+      return;
+    }
+
+    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
+    EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationBundle));
+  }
+}
+
+
 //package app.notifee.core;
 //
 //import android.app.PendingIntent;

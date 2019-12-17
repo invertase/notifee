@@ -11,7 +11,7 @@
 
   <application>
     <provider
-      android:name="app.notifee.core.InitProvider"
+      android:name=".InitProvider"
       android:authorities="${applicationId}.notifee-init-provider"
       android:exported="false"
       android:initOrder="-100" />
