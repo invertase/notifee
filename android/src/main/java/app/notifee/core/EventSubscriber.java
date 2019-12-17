@@ -5,6 +5,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.HashSet;
 import java.util.Set;
 
+import app.notifee.core.events.BlockStateEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 
@@ -41,5 +42,10 @@ public class EventSubscriber {
     }
   }
 
-
+  @Subscribe
+  public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
+    for (EventListener eventListener : mListeners) {
+      eventListener.onBlockStateEvent(blockStateEvent);
+    }
+  }
 }

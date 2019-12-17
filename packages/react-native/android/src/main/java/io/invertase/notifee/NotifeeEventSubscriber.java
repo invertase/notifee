@@ -6,6 +6,7 @@ import androidx.annotation.Keep;
 
 import app.notifee.core.EventSubscriber;
 import app.notifee.core.EventListener;
+import app.notifee.core.events.BlockStateEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 
@@ -28,5 +29,11 @@ public class NotifeeEventSubscriber implements EventListener {
   @Override
   public void onLogEvent(LogEvent logEvent) {
     Log.d("MIKE", logEvent.getMessage());
+  }
+
+  @Override
+  public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
+    // do something
+    blockStateEvent.setResult();
   }
 }
