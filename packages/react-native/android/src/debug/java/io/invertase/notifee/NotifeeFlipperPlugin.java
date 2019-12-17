@@ -1,86 +1,91 @@
-//package io.invertase.notifee;
-//
-//import android.util.Log;
-//
-//import com.facebook.flipper.core.FlipperConnection;
-//import com.facebook.flipper.core.FlipperObject;
-//import com.facebook.flipper.core.FlipperPlugin;
-//
-//import org.greenrobot.eventbus.Subscribe;
-//
-//import java.util.concurrent.atomic.AtomicInteger;
-//
-//import io.invertase.notifee.bundles.NotifeeNotificationBundle;
-//import io.invertase.notifee.events.NotifeeNotificationEvent;
-//
-//public class NotifeeFlipperPlugin implements FlipperPlugin {
-//  private FlipperConnection mFlipperConnection = null;
-//  private AtomicInteger eventIdInteger = new AtomicInteger(0);
-//
-//  @Override
-//  public String getId() {
-//    return "flipper-plugin-notifee";
-//  }
-//
-//  @Override
-//  public void onConnect(FlipperConnection connection) throws Exception {
-//    mFlipperConnection = connection;
-//    NotifeeEventBus.register(this);
-//
-//    connection.receive("displayNotification", (params, responder) -> {
-//      String jsonString = params.getString("notification");
-//      NotifeeNotificationBundle notificationBundle = NotifeeNotificationBundle.fromJSONString(jsonString);
-//      if (notificationBundle == null) {
-//        responder.error(
-//          new FlipperObject.Builder()
-//            .put("message", "Error parsing notification from JSON.")
-//            .build()
-//        );
-//        return;
-//      }
-//
-//      NotifeeNotification notifeeNotification = new NotifeeNotification(notificationBundle);
-//      notifeeNotification.displayNotification().addOnCompleteListener((task -> {
-//        if (task.isSuccessful()) {
-//          FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
-//          flipperBuilder.put("timestamp", System.currentTimeMillis());
-//          flipperBuilder.put("notification", jsonString);
-//          responder.success(flipperBuilder.build());
-//        } else {
-//          responder.error(
-//            new FlipperObject.Builder()
-//              .put("message", "Error occurred while displaying notification.")
-//              .build()
-//          );
-//        }
-//      }));
-//    });
-//
-//  }
-//
-//  @Override
-//  public void onDisconnect() throws Exception {
-//    NotifeeEventBus.unregister(this);
-//    mFlipperConnection = null;
-//  }
-//
-//  @Override
-//  public boolean runInBackground() {
-//    return false;
-//  }
-//
-//  @Subscribe
-//  public void onNotificationEvent(NotificationEvent event) {
-//    Log.d("MIKE", "onNotificationEvent Flipper");
-//    if (mFlipperConnection == null) return;
-//
-//    FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
-//    flipperBuilder.put("eventType", event.getType());
-//    flipperBuilder.put("eventId", eventIdInteger.incrementAndGet());
-//    flipperBuilder.put("eventTimestamp", System.currentTimeMillis());
-//
-//    flipperBuilder.put("extras", event.getExtras());
-//    flipperBuilder.put("notification", event.getNotification().toJSONString());
-//    mFlipperConnection.send("onNotificationEvent", flipperBuilder.build());
-//  }
-//}
+package io.invertase.notifee;
+
+import android.util.Log;
+
+import com.facebook.flipper.core.FlipperConnection;
+import com.facebook.flipper.core.FlipperObject;
+import com.facebook.flipper.core.FlipperPlugin;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+import app.notifee.core.EventListener;
+import app.notifee.core.EventSubscriber;
+import app.notifee.core.Notifee;
+import app.notifee.core.events.LogEvent;
+import app.notifee.core.events.NotificationEvent;
+import app.notifee.core.bundles.NotificationBundle;
+
+
+public class NotifeeFlipperPlugin implements FlipperPlugin, EventListener {
+  private FlipperConnection mFlipperConnection = null;
+  private AtomicInteger eventIdInteger = new AtomicInteger(0);
+
+  @Override
+  public String getId() {
+    return "flipper-plugin-notifee";
+  }
+
+  @Override
+  public void onConnect(FlipperConnection connection) {
+    mFlipperConnection = connection;
+    EventSubscriber.register(this);
+
+    connection.receive("displayNotification", (params, responder) -> {
+      String jsonString = params.getString("notification");
+      NotificationBundle notificationBundle = NotificationBundle.fromJSONString(jsonString);
+      if (notificationBundle == null) {
+        responder.error(
+          new FlipperObject.Builder()
+            .put("message", "Error parsing notification from JSON.")
+            .build()
+        );
+        return;
+      }
+
+      Notifee.getInstance().displayNotification(notificationBundle.toBundle(), (e, aVoid) -> {
+        if (e != null) {
+          responder.error(
+            new FlipperObject.Builder()
+              .put("message", "Error occurred while displaying notification.")
+              .build()
+          );
+        } else {
+          FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
+          flipperBuilder.put("timestamp", System.currentTimeMillis());
+          flipperBuilder.put("notification", jsonString);
+          responder.success(flipperBuilder.build());
+        }
+      });
+    });
+
+  }
+
+  @Override
+  public void onDisconnect() throws Exception {
+    EventSubscriber.unregister(this);
+    mFlipperConnection = null;
+  }
+
+  @Override
+  public boolean runInBackground() {
+    return false;
+  }
+
+  @Override
+  public void onLogEvent(LogEvent logEvent) {
+
+  }
+
+  @Override
+  public void onNotificationEvent(NotificationEvent notificationEvent) {
+    Log.d("MIKE", "onNotificationEvent Flipper");
+    if (mFlipperConnection == null) return;
+    FlipperObject.Builder flipperBuilder = new FlipperObject.Builder();
+    flipperBuilder.put("eventType", notificationEvent.getType());
+    flipperBuilder.put("eventId", eventIdInteger.incrementAndGet());
+    flipperBuilder.put("eventTimestamp", System.currentTimeMillis());
+    flipperBuilder.put("extras", notificationEvent.getExtras());
+    flipperBuilder.put("notification", notificationEvent.getNotification().toJSONString());
+    mFlipperConnection.send("onNotificationEvent", flipperBuilder.build());
+  }
+}

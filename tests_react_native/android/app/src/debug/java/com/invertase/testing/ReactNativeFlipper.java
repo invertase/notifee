@@ -7,11 +7,10 @@ import com.facebook.flipper.android.utils.FlipperUtils;
 import com.facebook.flipper.core.FlipperClient;
 import com.facebook.flipper.plugins.crashreporter.CrashReporterPlugin;
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin;
-
 import com.facebook.flipper.plugins.fresco.FrescoFlipperPlugin;
-import com.facebook.flipper.plugins.leakcanary.LeakCanaryFlipperPlugin;
 import com.facebook.flipper.plugins.inspector.DescriptorMapping;
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin;
+import com.facebook.flipper.plugins.leakcanary.LeakCanaryFlipperPlugin;
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor;
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin;
 import com.facebook.flipper.plugins.react.ReactFlipperPlugin;
@@ -20,8 +19,9 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.network.NetworkingModule;
 
-//import io.invertase.notifee.NotifeeFlipperPlugin;
+import io.invertase.notifee.NotifeeFlipperPlugin;
 
+@SuppressWarnings("WeakerAccess")
 public class ReactNativeFlipper {
   public static void initializeFlipper(Context context, ReactInstanceManager reactInstanceManager) {
     if (FlipperUtils.shouldEnableFlipper(context)) {
@@ -32,7 +32,7 @@ public class ReactNativeFlipper {
       client.addPlugin(new ReactFlipperPlugin());
       client.addPlugin(new DatabasesFlipperPlugin(context));
       client.addPlugin(new SharedPreferencesFlipperPlugin(context));
-//      client.addPlugin(new NotifeeFlipperPlugin());
+      client.addPlugin(new NotifeeFlipperPlugin());
       client.addPlugin(CrashReporterPlugin.getInstance());
 
       NetworkFlipperPlugin networkFlipperPlugin = new NetworkFlipperPlugin();
