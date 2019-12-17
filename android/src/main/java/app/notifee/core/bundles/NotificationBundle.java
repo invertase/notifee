@@ -16,6 +16,7 @@ import app.notifee.core.utils.JSONUtils;
 @KeepForSdk
 public class NotificationBundle {
   private Bundle mNotificationBundle;
+
   private NotificationBundle(Bundle bundle) {
     mNotificationBundle = bundle;
   }

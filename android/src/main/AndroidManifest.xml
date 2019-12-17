@@ -11,13 +11,25 @@
 
   <application>
     <provider
-      android:name="app.notifee.core.InitProvider"
+      android:name=".InitProvider"
       android:authorities="${applicationId}.notifee-init-provider"
       android:exported="false"
       android:initOrder="-100" />
+
     <!-- Receiver Service -->
     <service
       android:name=".ReceiverService"
       android:exported="false" />
+
+    <!-- Broadcast Receiver -->
+    <receiver
+      android:name=".BlockStateBroadcastReceiver"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
+        <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
+        <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

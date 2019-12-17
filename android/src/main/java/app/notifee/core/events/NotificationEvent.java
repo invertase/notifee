@@ -18,13 +18,13 @@ public class NotificationEvent {
   private final Bundle extras;
   private final NotificationBundle notification;
 
-  private NotificationEvent(String type, NotificationBundle bundle) {
+  public NotificationEvent(String type, NotificationBundle bundle) {
     this.type = type;
     this.notification = bundle;
     this.extras = null;
   }
 
-  private NotificationEvent(String type, NotificationBundle bundle, Bundle extras) {
+  public NotificationEvent(String type, NotificationBundle bundle, Bundle extras) {
     this.type = type;
     this.notification = bundle;
     this.extras = extras;

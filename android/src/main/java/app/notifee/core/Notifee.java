@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
+import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.utils.ObjectUtils;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -26,8 +27,7 @@ class Notifee {
   }
 
   @KeepForSdk
-  public static
-  Notifee getInstance() {
+  public static Notifee getInstance() {
     return mNotifee;
   }
 
@@ -72,7 +72,15 @@ class Notifee {
   // TODO
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
-    result.onComplete(null, null);
+    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notificationMap);
+    NotificationManager.displayNotification(notificationBundle)
+      .addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+          result.onComplete(null, task.getResult());
+        } else {
+          result.onComplete(task.getException(), null);
+        }
+      });
   }
 
   // TODO
