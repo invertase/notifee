@@ -54,7 +54,7 @@ public class NotificationAndroidBundle {
    * @return Boolean
    */
   public Boolean getAsForegroundService() {
-    return mNotificationAndroidBundle.getBoolean("asForegroundService");
+    return mNotificationAndroidBundle.getBoolean("asForegroundService", false);
   }
 
   /**
@@ -295,6 +295,16 @@ public class NotificationAndroidBundle {
    */
   public Boolean getOnlyAlertOnce() {
     return mNotificationAndroidBundle.getBoolean("onlyAlertOnce", false);
+  }
+
+  /**
+   * Gets an onPressAction bundle for the notification
+   *
+   * @return Bundle or null
+   */
+  public @Nullable
+  Bundle getPressAction() {
+    return mNotificationAndroidBundle.getBundle("onPressAction");
   }
 
   /**
