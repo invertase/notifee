@@ -1,5 +1,7 @@
 package app.notifee.core;
 
+import android.content.Context;
+
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashSet;
@@ -18,6 +20,10 @@ public class EventSubscriber {
     EventBus.register(this);
   }
 
+  static EventSubscriber getInstance() {
+    return mInstance;
+  }
+
   @KeepForSdk
   public static void register(EventListener listener) {
     mInstance.mListeners.add(listener);
@@ -26,6 +32,11 @@ public class EventSubscriber {
   @KeepForSdk
   public static void unregister(EventListener listener) {
     mInstance.mListeners.remove(listener);
+  }
+
+  @KeepForSdk
+  public static Context getContext() {
+    return ContextHolder.getApplicationContext();
   }
 
   @Subscribe
@@ -44,6 +55,7 @@ public class EventSubscriber {
 
   @Subscribe
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
+    blockStateEvent.setCompletionResult(); // TODO remove line once RN init provider made
     for (EventListener eventListener : mListeners) {
       eventListener.onBlockStateEvent(blockStateEvent);
     }

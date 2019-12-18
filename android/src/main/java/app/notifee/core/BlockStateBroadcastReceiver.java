@@ -6,43 +6,47 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import androidx.annotation.Keep;
+import androidx.concurrent.futures.ResolvableFuture;
 import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker.Result;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
-import com.google.android.gms.tasks.Tasks;
+import java.util.concurrent.TimeUnit;
 
 import app.notifee.core.events.BlockStateEvent;
 
 public class BlockStateBroadcastReceiver extends BroadcastReceiver {
-  static Result doWork(Data workData) {
-    final TaskCompletionSource<Void> completionSource = new TaskCompletionSource<>();
-    final Task<Void> task = completionSource.getTask();
+  private final static String TAG = "BlockState";
+
+  @Keep
+  public BlockStateBroadcastReceiver() {
+  }
+
+  static void doWork(
+    Data workData, ResolvableFuture<Result> completer
+  ) {
+    Logger.v(TAG, "doWork STARTED");
+
+    final MethodCallResult<Void> methodCallResult;
+    methodCallResult = (error, result) -> {
+      if (error != null) {
+        Logger.e(TAG, "doWork FAILURE", error);
+        completer.set(Result.failure());
+      } else {
+        Logger.v(TAG, "doWork SUCCESS");
+        completer.set(Result.success());
+      }
+    };
 
     BlockStateEvent blockStateEvent = new BlockStateEvent(workData.getString("eventType"),
       workData.getString("channelOrGroupId"), workData.getBoolean("blocked", false),
-      (error, result) -> {
-        if (error != null) {
-          completionSource.setException(error);
-        } else {
-          completionSource.setResult(null);
-        }
-      }
+      methodCallResult
     );
 
     EventBus.post(blockStateEvent);
-
-    try {
-      Tasks.await(task);
-    } catch (Exception e) {
-      return Result.failure();
-    }
-
-    return Result.success();
   }
 
   @Override
@@ -56,8 +60,9 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
       return;
     }
 
+    String uniqueWorkId = action;
     Data.Builder workDataBuilder = new Data.Builder();
-    workDataBuilder.putString(WorkRunner.KEY_WORK_TYPE, WorkRunner.WORK_TYPE_BLOCK_STATE_RECEIVER);
+    workDataBuilder.putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_BLOCK_STATE_RECEIVER);
 
     switch (action) {
       case NotificationManager.ACTION_APP_BLOCK_STATE_CHANGED:
@@ -65,20 +70,19 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
         break;
       case NotificationManager.ACTION_NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED:
         workDataBuilder.putString("eventType", BlockStateEvent.TYPE_CHANNEL);
-        workDataBuilder.putString("channelOrGroupId",
-          intent.getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_ID)
-        );
+        String channelId = intent.getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_ID);
+        workDataBuilder.putString("channelOrGroupId", channelId);
+        uniqueWorkId += "." + channelId;
         break;
       case NotificationManager.ACTION_NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED:
         workDataBuilder.putString("eventType", BlockStateEvent.TYPE_CHANNEL_GROUP);
-        workDataBuilder.putString("channelOrGroupId",
-          intent.getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_GROUP_ID)
-        );
+        String channelGroupId = intent
+          .getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_GROUP_ID);
+        workDataBuilder.putString("channelOrGroupId", channelGroupId);
+        uniqueWorkId += "." + channelGroupId;
         break;
       default:
-        Logger.d(BlockStateBroadcastReceiver.class.getName(),
-          "unknown intent action received, ignoring."
-        );
+        Logger.d(TAG, "unknown intent action received, ignoring.");
         return;
     }
 
@@ -86,10 +90,12 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
       intent.getBooleanExtra(NotificationManager.EXTRA_BLOCKED_STATE, false)
     );
 
-    OneTimeWorkRequest.Builder builder = new OneTimeWorkRequest.Builder(WorkRunner.class)
-      .setInputData(workDataBuilder.build());
+    OneTimeWorkRequest.Builder builder = new OneTimeWorkRequest.Builder(Worker.class)
+      .setInitialDelay(3, TimeUnit.SECONDS).setInputData(workDataBuilder.build());
 
     WorkManager.getInstance(ContextHolder.getApplicationContext())
-      .enqueueUniqueWork(action, ExistingWorkPolicy.REPLACE, builder.build());
+      .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
+
+    Logger.v(TAG, "scheduled new work for unique id " + uniqueWorkId);
   }
 }

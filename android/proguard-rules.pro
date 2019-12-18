@@ -54,6 +54,11 @@
 #            LIBRARIES
 # --------------------------------
 
+# Work Manager
+-keepclassmembers class * extends androidx.work.ListenableWorker {
+    public <init>(android.content.Context,androidx.work.WorkerParameters);
+}
+
 # Room
 -keepclassmembers class * {
   @androidx.room.* <methods>;

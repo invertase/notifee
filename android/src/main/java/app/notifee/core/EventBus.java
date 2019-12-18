@@ -1,6 +1,5 @@
 package app.notifee.core;
 
-@KeepForSdk
 public class EventBus {
   private final static EventBus instance = new EventBus();
   private org.greenrobot.eventbus.EventBus eventBus;
@@ -25,8 +24,6 @@ public class EventBus {
     return getInstance().getDefault().getStickyEvent(eventType);
   }
 
-  // TODO remove KeepForSDK after refactor
-  @KeepForSdk
   public static void post(Object event) {
     getInstance().getDefault().post(event);
   }

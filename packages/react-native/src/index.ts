@@ -21,7 +21,7 @@ import { version as SDK_VERSION } from './version';
 const module = new NotifeeApiModule({
   version: SDK_VERSION,
   nativeModuleName: 'NotifeeApiModule',
-  nativeEvents: ['receiver_service'],
+  nativeEvents: ['app.notifee.notification.event'],
 });
 
 const statics: ModuleStatics = {
