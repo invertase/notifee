@@ -52,7 +52,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return Promise.resolve('');
     }
 
-    if (this.core.ANDROID_API_LEVEL < 26) {
+    if (this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(options.id);
     }
 
@@ -75,7 +75,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -90,7 +90,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
     }
 
-    if (this.core.ANDROID_API_LEVEL < 26) {
+    if (this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(options.id);
     }
 
@@ -121,7 +121,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       );
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -133,7 +133,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -145,7 +145,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -170,7 +170,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.getChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
@@ -178,7 +178,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public getChannels(): Promise<NativeAndroidChannel[]> {
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
@@ -190,7 +190,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.getChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
@@ -198,7 +198,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public getChannelGroups(): Promise<NativeAndroidChannelGroup[]> {
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
@@ -221,14 +221,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     const subscriber = this.emitter.addListener(
-      this.core.NOTIFEE_RECEIVER_SERVICE_EVENT_KEY,
+      this.native.NOTIFICATION_EVENT_KEY,
       ({ type, event, headless }) => {
         observer(type, event, headless);
       },
     );
 
     if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
-      AppRegistry.registerHeadlessTask(this.core.NOTIFEE_RECEIVER_SERVICE_TASK_KEY, () => {
+      AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
         return ({ type, event, headless }: any): Promise<void> => {
           return observer(type, event, headless);
         };
@@ -262,7 +262,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return;
     }
 
-    AppRegistry.registerHeadlessTask(this.core.NOTIFEE_FOREGROUND_SERVICE, () => {
+    AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
       return ({ notification }) => runner(notification);
     });
   }

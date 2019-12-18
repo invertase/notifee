@@ -10,9 +10,6 @@ import java.util.Map;
 public class ObjectUtils {
   public static final String MODULE_BUILD_CONFIG_CLASS = "io.invertase.notifee.BuildConfig";
 
-  // TODO remove `.reactnative.` from class name once refactor complete
-  public static final String MODULE_EVENT_SUBSCRIBER_CLASS = "io.invertase.notifee.reactnative.NotifeeEventSubscriber";
-
   public static @Nullable
   Class getClassForName(String className) {
     try {

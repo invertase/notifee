@@ -57,17 +57,6 @@ class Notifee {
         return;
       }
 
-      Class eventSubscriberClass = ObjectUtils
-        .getClassForName(ObjectUtils.MODULE_EVENT_SUBSCRIBER_CLASS);
-      Object subscriberClassInstance = ObjectUtils
-        .getClassInstanceFromDefaultConstructor(eventSubscriberClass);
-      if (subscriberClassInstance != null) {
-        Logger.d("configure", "module event subscriber registered with event bus");
-        EventBus.register(subscriberClassInstance);
-      } else {
-        Logger.e("configure", "module event subscriber could not be found!");
-      }
-
       mNotifee = new Notifee(moduleBuildConfig);
     }
   }

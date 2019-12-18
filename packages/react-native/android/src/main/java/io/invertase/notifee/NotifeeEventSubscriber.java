@@ -12,14 +12,8 @@ import app.notifee.core.events.NotificationEvent;
 
 @Keep
 public class NotifeeEventSubscriber implements EventListener {
-  private static final NotifeeEventSubscriber mInstance = new NotifeeEventSubscriber();
-  private NotifeeEventSubscriber() {
-    EventSubscriber.register(this);
-  }
-
-  public static NotifeeEventSubscriber getInstance() {
-    return mInstance;
-  }
+  static final String NOTIFICATION_EVENT_KEY = "app.notifee.notification.event";
+  static final String FOREGROUND_NOTIFICATION_TASK_KEY = "app.notifee.foreground.task";
 
   @Override
   public void onNotificationEvent(NotificationEvent notificationEvent) {
