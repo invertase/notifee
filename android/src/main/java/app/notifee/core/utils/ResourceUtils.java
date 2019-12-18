@@ -58,9 +58,8 @@ public class ResourceUtils {
 
   public static Uri getResourceDrawableUri(@Nullable String name) {
     int resId = getResourceIdByName(name, "drawable");
-    return resId > 0
-      ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build()
-      : Uri.EMPTY;
+    return resId > 0 ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId))
+      .build() : Uri.EMPTY;
   }
 
 
@@ -88,10 +87,8 @@ public class ResourceUtils {
 
     ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(imageUri).build();
 
-    DataSource<CloseableReference<CloseableImage>> dataSource = Fresco.getImagePipeline().fetchDecodedImage(
-      imageRequest,
-      ContextHolder.getApplicationContext()
-    );
+    DataSource<CloseableReference<CloseableImage>> dataSource = Fresco.getImagePipeline()
+      .fetchDecodedImage(imageRequest, ContextHolder.getApplicationContext());
 
     dataSource.subscribe(new BaseBitmapDataSubscriber() {
       @Override
@@ -100,12 +97,10 @@ public class ResourceUtils {
       }
 
       @Override
-      protected void onFailureImpl(@NonNull DataSource<CloseableReference<CloseableImage>> dataSource) {
-        Logger.e(
-          "Utils",
-          "Failed to load an image: " + imageUrl,
-          dataSource.getFailureCause()
-        );
+      protected void onFailureImpl(
+        @NonNull DataSource<CloseableReference<CloseableImage>> dataSource
+      ) {
+        Logger.e("Utils", "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
         bitmapTCS.setResult(null);
       }
     }, CallerThreadExecutor.getInstance());
@@ -130,9 +125,8 @@ public class ResourceUtils {
       return null;
     }
 
-    return resourceId > 0
-      ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resourceId)).build().toString()
-      : Uri.EMPTY.toString();
+    return resourceId > 0 ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME)
+      .path(String.valueOf(resourceId)).build().toString() : Uri.EMPTY.toString();
   }
 
   /**

@@ -20,8 +20,8 @@ public class InitProvider extends ContentProvider {
   public void attachInfo(Context context, ProviderInfo info) {
     if (info != null && !info.authority.endsWith(InitProvider.PROVIDER_AUTHORITY)) {
       throw new IllegalStateException(
-        "Incorrect provider authority in manifest. This is most likely due to a missing "
-          + "applicationId variable in application's build.gradle.");
+        "Incorrect provider authority in manifest. This is most likely due to a missing " +
+          "applicationId variable in application's build.gradle.");
     }
 
     super.attachInfo(context, info);
@@ -47,10 +47,7 @@ public class InitProvider extends ContentProvider {
   @Nullable
   @Override
   public Cursor query(
-    @NonNull Uri uri,
-    String[] projection,
-    String selection,
-    String[] selectionArgs,
+    @NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
     String sortOrder
   ) {
     return null;
@@ -75,10 +72,7 @@ public class InitProvider extends ContentProvider {
 
   @Override
   public int update(
-    @NonNull Uri uri,
-    ContentValues values,
-    String selection,
-    String[] selectionArgs
+    @NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs
   ) {
     return 0;
   }

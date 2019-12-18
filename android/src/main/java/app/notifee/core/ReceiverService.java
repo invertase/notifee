@@ -27,7 +27,9 @@ class ReceiverService extends Service {
    * @param extraBundles One or more bundles
    * @return
    */
-  public static PendingIntent createIntent(String action, String[] extraKeys, Bundle... extraBundles) {
+  public static PendingIntent createIntent(
+    String action, String[] extraKeys, Bundle... extraBundles
+  ) {
     Context context = ContextHolder.getApplicationContext();
     Intent intent = new Intent(context, ReceiverService.class);
     intent.setAction(action);

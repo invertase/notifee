@@ -6,15 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
-import com.google.android.gms.tasks.Tasks;
-
-import app.notifee.core.events.BlockStateEvent;
-
 class WorkRunner extends Worker {
-
-  static final String INPUT_KEY_TYPE = "type";
+  static final String KEY_WORK_TYPE = "workType";
+  static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
 
   public WorkRunner(@NonNull Context context, @NonNull WorkerParameters workerParams) {
     super(context, workerParams);
@@ -23,32 +17,17 @@ class WorkRunner extends Worker {
   @NonNull
   @Override
   public Result doWork() {
-    String inputKeyType = getInputData().getString(INPUT_KEY_TYPE);
-
-    if (inputKeyType == null) {
+    String workType = getInputData().getString(KEY_WORK_TYPE);
+    if (workType == null) {
       Logger.d("Worker", "Received incoming task with no input key type.");
       return Result.success();
     }
 
-    boolean success = true;
-
-    final TaskCompletionSource<Void> completionSource = new TaskCompletionSource<>();
-    final Task<Void> task = completionSource.getTask();
-
-    BlockStateEvent blockStateEvent = new BlockStateEvent("FOO", getInputData(), (error, result) -> {
-      if (error != null) {
-        completionSource.setException(error);
-      } else {
-        completionSource.setResult(null);
-      }
-    });
-
-    try {
-      Tasks.await(task);
-    } catch (Exception e) {
-      return Result.failure();
+    if (workType.equals(WORK_TYPE_BLOCK_STATE_RECEIVER)) {
+      return BlockStateBroadcastReceiver.doWork(getInputData());
     }
 
+    Logger.d("WorkerRunner", "unknown work type received: " + workType);
     return Result.success();
   }
 }

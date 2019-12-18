@@ -69,7 +69,8 @@ public class JSONUtils {
       if (clazz.isAssignableFrom(unboxClass(current.getClass()))) {
         Array.set(array, i, current);
       } else {
-        throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass() + ". All array elements must be same type.");
+        throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass() +
+          ". All array elements must be same type.");
       }
     }
 
@@ -98,7 +99,8 @@ public class JSONUtils {
     }
   }
 
-  private static void setJSONArray(Bundle bundle, String key, JSONArray jsonArray) throws JSONException {
+  private static void setJSONArray(Bundle bundle, String key, JSONArray jsonArray) throws
+                                                                                   JSONException {
     // Empty list, can't even figure out the type, assume an ArrayList<String>
     if (jsonArray.length() == 0) {
       bundle.putStringArray(key, new String[0]);
@@ -132,7 +134,8 @@ public class JSONUtils {
           if (current instanceof JSONObject) {
             parcelableArrayList.add(convertToBundle((JSONObject) current));
           } else {
-            throw new IllegalArgumentException("Unexpected type in an array: " + current.getClass());
+            throw new IllegalArgumentException(
+              "Unexpected type in an array: " + current.getClass());
           }
         }
 
