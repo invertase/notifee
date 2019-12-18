@@ -13,6 +13,7 @@ import java.util.Objects;
 import app.notifee.core.KeepForSdk;
 import app.notifee.core.utils.JSONUtils;
 
+@KeepForSdk
 public class NotificationBundle {
   private Bundle mNotificationBundle;
 
@@ -27,6 +28,7 @@ public class NotificationBundle {
   /**
    * Returns null if JSON failed to parse.
    */
+  @KeepForSdk
   public @Nullable
   static NotificationBundle fromJSONString(@NonNull String jsonString) {
     try {
@@ -80,6 +82,7 @@ public class NotificationBundle {
   /**
    * Returns null if failed to convert Bundle to JSON string
    */
+  @KeepForSdk
   public @Nullable
   String toJSONString() {
     try {
@@ -89,6 +92,7 @@ public class NotificationBundle {
     }
   }
 
+  @KeepForSdk
   public Bundle toBundle() {
     return (Bundle) mNotificationBundle.clone();
   }
