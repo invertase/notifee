@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
@@ -44,24 +43,24 @@ class Notifee {
   static void configure() {
     if (mNotifee != null) return;
     synchronized (Notifee.class) {
-      Class moduleBuildConfigClass = ObjectUtils.getClassForName(
-        ObjectUtils.MODULE_BUILD_CONFIG_CLASS
-      );
+      Class moduleBuildConfigClass = ObjectUtils
+        .getClassForName(ObjectUtils.MODULE_BUILD_CONFIG_CLASS);
       if (moduleBuildConfigClass == null) {
         Logger.e("configure", "default module build class was not found!");
         return;
       }
 
-      Map<String, Object> moduleBuildConfig = ObjectUtils.getClassProperties(moduleBuildConfigClass);
+      Map<String, Object> moduleBuildConfig = ObjectUtils
+        .getClassProperties(moduleBuildConfigClass);
       if (moduleBuildConfig == null) {
         Logger.e("configure", "failed to read module build configuration!");
         return;
       }
 
-      Class eventSubscriberClass = ObjectUtils.getClassForName(
-        ObjectUtils.MODULE_EVENT_SUBSCRIBER_CLASS
-      );
-      Object subscriberClassInstance = ObjectUtils.getClassInstanceFromDefaultConstructor(eventSubscriberClass);
+      Class eventSubscriberClass = ObjectUtils
+        .getClassForName(ObjectUtils.MODULE_EVENT_SUBSCRIBER_CLASS);
+      Object subscriberClassInstance = ObjectUtils
+        .getClassInstanceFromDefaultConstructor(eventSubscriberClass);
       if (subscriberClassInstance != null) {
         Logger.d("configure", "module event subscriber registered with event bus");
         EventBus.register(subscriberClassInstance);
@@ -75,39 +74,36 @@ class Notifee {
 
   @KeepForSdk
   public void cancelNotification(String notificationId, MethodCallResult<Void> result) {
-    NotificationManager.cancelNotification(notificationId)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    NotificationManager.cancelNotification(notificationId).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
   public void cancelAllNotifications(MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications()
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    NotificationManager.cancelAllNotifications().addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
     ChannelBundle channelBundle = ChannelBundle.fromBundle(channelMap);
-    ChannelManager.createChannel(channelBundle)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.createChannel(channelBundle).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
@@ -117,27 +113,25 @@ class Notifee {
       channelBundles.add(ChannelBundle.fromBundle(bundle));
     }
 
-    ChannelManager.createChannels(channelBundles)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.createChannels(channelBundles).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
   public void createChannelGroup(Bundle channelGroupMap, MethodCallResult<Void> result) {
     ChannelGroupBundle channelGroupBundle = ChannelGroupBundle.fromBundle(channelGroupMap);
-    ChannelManager.createChannelGroup(channelGroupBundle)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.createChannelGroup(channelGroupBundle).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
@@ -147,14 +141,13 @@ class Notifee {
       channelGroupBundles.add(ChannelGroupBundle.fromBundle(bundle));
     }
 
-    ChannelManager.createChannelGroups(channelGroupBundles)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.createChannelGroups(channelGroupBundles).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
@@ -169,68 +162,60 @@ class Notifee {
     result.onComplete(null, null);
   }
 
-  // TODO
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
     NotificationBundle notificationBundle = NotificationBundle.fromBundle(notificationMap);
-    NotificationManager.displayNotification(notificationBundle)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    NotificationManager.displayNotification(notificationBundle).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
-  // TODO
   @KeepForSdk
   public void getAllChannels(MethodCallResult<List<Bundle>> result) {
-    ChannelManager.getAllChannels()
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.getAllChannels().addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
-  // TODO
   @KeepForSdk
   public void getChannel(String channelId, MethodCallResult<Bundle> result) {
-    ChannelManager.getChannel(channelId)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.getChannel(channelId).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
   public void getAllChannelGroups(MethodCallResult<List<Bundle>> result) {
-    ChannelManager.getAllChannelGroups()
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.getAllChannelGroups().addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   @KeepForSdk
   public void getChannelGroup(String channelGroupsId, MethodCallResult<Bundle> result) {
-    ChannelManager.getChannelGroup(channelGroupsId)
-      .addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+    ChannelManager.getChannelGroup(channelGroupsId).addOnCompleteListener(task -> {
+      if (task.isSuccessful()) {
+        result.onComplete(null, task.getResult());
+      } else {
+        result.onComplete(task.getException(), null);
+      }
+    });
   }
 
   // TODO
@@ -241,17 +226,18 @@ class Notifee {
 
   @KeepForSdk
   public void openNotificationSettings(Activity activity, MethodCallResult<Void> result) {
-    openNotificationSettings(null, activity, result, () -> new Intent(Settings.ACTION_APPLICATION_SETTINGS));
+    openNotificationSettings(null, activity, result);
   }
 
   @KeepForSdk
   public void openNotificationSettings(
-    @Nullable String channelId,
-    Activity activity,
-    MethodCallResult<Void> result, Supplier<Intent> supplier
+    @Nullable String channelId, Activity activity, MethodCallResult<Void> result
   ) {
     if (getContext() == null || activity == null) {
-      Logger.d("openNotificationSettings", "attempted to start activity but no current activity or context was available.");
+      Logger.d(
+        "openNotificationSettings",
+        "attempted to start activity but no current activity or context was available."
+      );
       result.onComplete(null, null);
       return;
     }
@@ -266,8 +252,9 @@ class Notifee {
       }
       intent.putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
     } else {
-      intent = supplier.get();
+      intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
     }
+
     intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 
     activity.runOnUiThread(() -> getContext().startActivity(intent));
