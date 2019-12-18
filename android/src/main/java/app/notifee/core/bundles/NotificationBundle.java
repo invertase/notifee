@@ -13,7 +13,6 @@ import java.util.Objects;
 import app.notifee.core.KeepForSdk;
 import app.notifee.core.utils.JSONUtils;
 
-@KeepForSdk
 public class NotificationBundle {
   private Bundle mNotificationBundle;
 
@@ -21,7 +20,6 @@ public class NotificationBundle {
     mNotificationBundle = bundle;
   }
 
-  @KeepForSdk
   public static NotificationBundle fromBundle(@NonNull Bundle bundle) {
     return new NotificationBundle(bundle);
   }
@@ -29,7 +27,6 @@ public class NotificationBundle {
   /**
    * Returns null if JSON failed to parse.
    */
-  @KeepForSdk
   public @Nullable
   static NotificationBundle fromJSONString(@NonNull String jsonString) {
     try {
@@ -41,37 +38,31 @@ public class NotificationBundle {
     }
   }
 
-  @KeepForSdk
   public @NonNull
   Integer getHashCode() {
     return getId().hashCode();
   }
 
-  @KeepForSdk
   public @NonNull
   String getId() {
     return Objects.requireNonNull(mNotificationBundle.getString("id"));
   }
 
-  @KeepForSdk
   public @Nullable
   String getTitle() {
     return mNotificationBundle.getString("title");
   }
 
-  @KeepForSdk
   public @Nullable
   String getSubTitle() {
     return mNotificationBundle.getString("subtitle");
   }
 
-  @KeepForSdk
   public @Nullable
   String getBody() {
     return mNotificationBundle.getString("body");
   }
 
-  @KeepForSdk
   public @NonNull
   NotificationAndroidBundle getAndroidBundle() {
     return NotificationAndroidBundle.fromBundle(
@@ -79,7 +70,6 @@ public class NotificationBundle {
     );
   }
 
-  @KeepForSdk
   public @Nullable
   Bundle getData() {
     Bundle data = mNotificationBundle.getBundle("data");
@@ -90,7 +80,6 @@ public class NotificationBundle {
   /**
    * Returns null if failed to convert Bundle to JSON string
    */
-  @KeepForSdk
   public @Nullable
   String toJSONString() {
     try {
@@ -100,7 +89,6 @@ public class NotificationBundle {
     }
   }
 
-  @KeepForSdk
   public Bundle toBundle() {
     return (Bundle) mNotificationBundle.clone();
   }

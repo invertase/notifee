@@ -1,5 +1,7 @@
 package io.invertase.notifee;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Arguments;
@@ -9,7 +11,10 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +68,27 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void createChannels(ReadableArray channelsArray, Promise promise) {
+    ArrayList<Object> rawChannelsArray = channelsArray.toArrayList();
+    ArrayList<Bundle> channels = new ArrayList<>(rawChannelsArray.size());
+
+    for (Object o : rawChannelsArray) {
+      channels.add((Bundle) o);
+    }
+
+    Notifee
+      .getInstance()
+      .createChannels(channels, (e, aVoid) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(aVoid);
+        }
+      });
+  }
+
+  @ReactMethod
   public void createChannelGroup(ReadableMap channelGroupMap, Promise promise) {
     Notifee
       .getInstance()
@@ -78,12 +104,49 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void createChannelGroups(ReadableArray channelGroupsArray, Promise promise) {
-    // TODO
+    ArrayList<Object> rawChannelGroupsArray = channelGroupsArray.toArrayList();
+    ArrayList<Bundle> channelGroups = new ArrayList<>(channelGroupsArray.size());
+
+    for (Object o : rawChannelGroupsArray) {
+      channelGroups.add((Bundle) o);
+    }
+
+    Notifee
+      .getInstance()
+      .createChannelGroups(channelGroups, (e, aVoid) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(aVoid);
+        }
+      });
   }
 
   @ReactMethod
-  public void createChannels(ReadableArray channelsArray, Promise promise) {
-    // TODO
+  public void deleteChannel(String channelId, Promise promise) {
+    Notifee.getInstance()
+      .deleteChannel(channelId, (e, aVoid) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(aVoid);
+        }
+      });
+  }
+
+  @ReactMethod
+  public void deleteChannelGroup(String channelId, Promise promise) {
+    Notifee.getInstance()
+      .deleteChannelGroup(channelId, (e, aVoid) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(aVoid);
+        }
+      });
   }
 
   @ReactMethod
@@ -101,37 +164,71 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void deleteChannelGroup(String channelId, Promise promise) {
-    // TODO
-  }
-
-  @ReactMethod
-  public void deleteChannel(String channelId, Promise promise) {
-    // TODO
-  }
-
-  @ReactMethod
-  public void getInitialNotification(Promise promise) {
-    // TODO
+  public void getAllChannels(Promise promise) {
+    Notifee.getInstance()
+      .getAllChannels((e, aBundleList) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          WritableArray writableArray = Arguments.createArray();
+          for (Bundle bundle : aBundleList) {
+            writableArray.pushMap(
+              Arguments.fromBundle(bundle)
+            );
+          }
+          promise.resolve(writableArray);
+        }
+      });
   }
 
   @ReactMethod
   public void getChannel(String channelId, Promise promise) {
-    // TODO
-  }
-
-  @ReactMethod
-  public void getAllChannels(Promise promise) {
-    // TODO
-  }
-
-  @ReactMethod
-  public void getChannelGroup(String channelGroupId, Promise promise) {
-    // TODO
+    Notifee.getInstance()
+      .getChannel(channelId, (e, aBundle) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(Arguments.fromBundle(aBundle));
+        }
+      });
   }
 
   @ReactMethod
   public void getAllChannelGroups(Promise promise) {
+    Notifee.getInstance()
+      .getAllChannelGroups((e, aBundleList) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          WritableArray writableArray = Arguments.createArray();
+          for (Bundle bundle : aBundleList) {
+            writableArray.pushMap(
+              Arguments.fromBundle(bundle)
+            );
+          }
+          promise.resolve(writableArray);
+        }
+      });
+  }
+
+  @ReactMethod
+  public void getChannelGroup(String channelGroupId, Promise promise) {
+    Notifee.getInstance()
+      .getChannel(channelGroupId, (e, aBundle) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(Arguments.fromBundle(aBundle));
+        }
+      });
+  }
+
+  @ReactMethod
+  public void getInitialNotification(Promise promise) {
     // TODO
   }
 

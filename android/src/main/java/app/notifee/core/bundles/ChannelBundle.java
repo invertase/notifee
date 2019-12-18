@@ -21,7 +21,6 @@ public class ChannelBundle {
     this.mChannelBundle = bundle;
   }
 
-  @KeepForSdk
   public static ChannelBundle fromBundle(@NonNull Bundle bundle) {
     return new ChannelBundle(bundle);
   }
