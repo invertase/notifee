@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
+import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.utils.ObjectUtils;
 
@@ -69,6 +70,64 @@ class Notifee {
     }
   }
 
+  @KeepForSdk
+  public void cancelNotification(String notificationId, MethodCallResult<Void> result) {
+    NotificationManager.cancelNotification(notificationId)
+      .addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+          result.onComplete(null, task.getResult());
+        } else {
+          result.onComplete(task.getException(), null);
+        }
+      });
+  }
+
+  @KeepForSdk
+  public void cancelAllNotifications(MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotifications()
+      .addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+          result.onComplete(null, task.getResult());
+        } else {
+          result.onComplete(task.getException(), null);
+        }
+      });
+  }
+
+  // TODO
+  @KeepForSdk
+  public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
+    ChannelBundle channelBundle = ChannelBundle.fromBundle(channelMap);
+    ChannelManager.createChannel(channelBundle)
+      .addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+          result.onComplete(null, task.getResult());
+        } else {
+          result.onComplete(task.getException(), null);
+        }
+      });
+  }
+
+  // TODO
+  @KeepForSdk
+  public void createChannels(List<Bundle> channelsList, MethodCallResult<Void> result) {
+    result.onComplete(null, null);
+  }
+
+  // TODO
+  @KeepForSdk
+  public void deleteChannel(String channelId, MethodCallResult<Void> result) {
+    ChannelManager.deleteChannel(channelId);
+    result.onComplete(null, null);
+  }
+
+  // TODO
+  @KeepForSdk
+  public void deleteChannelGroup(String channelGroupId, MethodCallResult<Void> result) {
+    ChannelManager.deleteChannelGroup(channelGroupId);
+    result.onComplete(null, null);
+  }
+
   // TODO
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
@@ -85,30 +144,6 @@ class Notifee {
 
   // TODO
   @KeepForSdk
-  public void cancelNotification(String notificationId, MethodCallResult<Void> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
-  public void cancelAllNotifications(MethodCallResult<Void> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
-  public void createChannel(Bundle channelBundle, MethodCallResult<Void> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
-  public void createChannels(List<Bundle> channelsList, MethodCallResult<Void> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
   public void getChannel(String channelId, MethodCallResult<Bundle> result) {
     result.onComplete(null, null);
   }
@@ -116,12 +151,6 @@ class Notifee {
   // TODO
   @KeepForSdk
   public void getAllChannels(MethodCallResult<List<Bundle>> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
-  public void deleteChannel(String channelId, MethodCallResult<Void> result) {
     result.onComplete(null, null);
   }
 
@@ -151,17 +180,10 @@ class Notifee {
 
   // TODO
   @KeepForSdk
-  public void deleteChannelGroup(String channelGroupId, MethodCallResult<Void> result) {
-    result.onComplete(null, null);
-  }
-
-  // TODO
-  @KeepForSdk
   public void getInitialNotification(MethodCallResult<Bundle> result) {
     result.onComplete(null, null);
   }
 
-  // TODO
   @KeepForSdk
   public void openNotificationSettings(Activity activity, MethodCallResult<Void> result) {
     openNotificationSettings(null, activity, result);

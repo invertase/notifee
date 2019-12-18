@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import app.notifee.core.EventListener;
 import app.notifee.core.EventSubscriber;
 import app.notifee.core.Notifee;
+import app.notifee.core.events.BlockStateEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.bundles.NotificationBundle;
@@ -73,6 +74,11 @@ public class NotifeeFlipperPlugin implements FlipperPlugin, EventListener {
 
   @Override
   public void onLogEvent(LogEvent logEvent) {
+
+  }
+
+  @Override
+  public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
 
   }
 

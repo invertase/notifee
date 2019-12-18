@@ -3,6 +3,7 @@ package app.notifee.core;
 import android.app.Notification;
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,37 @@ import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 
 class NotificationManager {
+
+  static Task<Void> cancelNotification(@NonNull String notificationId) {
+    return Tasks.call(() -> {
+      // TODO get notification by ID, and whether it's scheduled
+      Boolean scheduled = false;
+
+      if (scheduled == false) {
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(
+          ContextHolder.getApplicationContext()
+        );
+        notificationManagerCompat.cancel(notificationId.hashCode());
+        // TODO Update DB
+      } else {
+        // TODO cancel a scheduled notification
+      }
+
+      return null;
+    });
+  }
+
+  static Task<Void> cancelAllNotifications() {
+    return Tasks.call(() -> {
+      // TODO delete database scheduled ones
+      NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(
+        ContextHolder.getApplicationContext()
+      );
+      notificationManagerCompat.cancelAll();
+      // TODO update DB?
+      return null;
+    });
+  }
 
   static Task<Void> displayNotification(NotificationBundle notificationBundle) {
     return Tasks.call(() -> {

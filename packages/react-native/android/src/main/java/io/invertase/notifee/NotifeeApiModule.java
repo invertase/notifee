@@ -21,20 +21,6 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void displayNotification(ReadableMap notificationMap, Promise promise) {
-    Notifee
-      .getInstance()
-      .displayNotification(Arguments.toBundle(notificationMap), (e, aVoid) -> {
-        if (e != null) {
-          // TODO custom error class with message/code
-          promise.reject(e);
-        } else {
-          promise.resolve(aVoid);
-        }
-      });
-  }
-
-  @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
     Notifee
       .getInstance()
@@ -98,6 +84,20 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void createChannels(ReadableArray channelsArray, Promise promise) {
     // TODO
+  }
+
+  @ReactMethod
+  public void displayNotification(ReadableMap notificationMap, Promise promise) {
+    Notifee
+      .getInstance()
+      .displayNotification(Arguments.toBundle(notificationMap), (e, aVoid) -> {
+        if (e != null) {
+          // TODO custom error class with message/code
+          promise.reject(e);
+        } else {
+          promise.resolve(aVoid);
+        }
+      });
   }
 
   @ReactMethod
