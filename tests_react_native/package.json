@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@notifee/react-native": "0.0.1",
+    "@react-native-firebase/app": "^6.2.0",
+    "@react-native-firebase/messaging": "^6.2.0",
     "react": "16.9.0",
     "react-native": "0.61.5"
   },

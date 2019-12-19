@@ -498,7 +498,7 @@ public class NotificationAndroidBundle {
    */
   public int getVisibility() {
     if (mNotificationAndroidBundle.containsKey("visibility")) {
-      return mNotificationAndroidBundle.getInt("visibility");
+      return (int) mNotificationAndroidBundle.getDouble("visibility");
     }
 
     return NotificationCompat.VISIBILITY_PRIVATE;
