@@ -10,12 +10,6 @@
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
   <application>
-    <provider
-      android:name=".InitProvider"
-      android:authorities="${applicationId}.notifee-init-provider"
-      android:exported="false"
-      android:initOrder="-100" />
-
     <!-- Receiver Service -->
     <service
       android:name=".ReceiverService"

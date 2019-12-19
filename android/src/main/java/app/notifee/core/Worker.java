@@ -25,7 +25,6 @@ class Worker extends ListenableWorker {
     @NonNull Context appContext, @NonNull WorkerParameters workerParams
   ) {
     super(appContext, workerParams);
-    EventSubscriber.getInstance(); // TODO make a init method and move to init provider
   }
 
   @Override

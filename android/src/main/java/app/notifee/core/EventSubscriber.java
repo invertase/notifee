@@ -15,13 +15,8 @@ import app.notifee.core.events.NotificationEvent;
 public class EventSubscriber {
   private static final EventSubscriber mInstance = new EventSubscriber();
   private final Set<EventListener> mListeners = new HashSet<>();
-
   private EventSubscriber() {
     EventBus.register(this);
-  }
-
-  static EventSubscriber getInstance() {
-    return mInstance;
   }
 
   @KeepForSdk
@@ -55,7 +50,6 @@ public class EventSubscriber {
 
   @Subscribe
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
-    blockStateEvent.setCompletionResult(); // TODO remove line once RN init provider made
     for (EventListener eventListener : mListeners) {
       eventListener.onBlockStateEvent(blockStateEvent);
     }

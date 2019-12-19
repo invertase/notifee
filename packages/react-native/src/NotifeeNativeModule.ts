@@ -27,7 +27,6 @@ export default class NotifeeNativeModule {
     for (let i = 0; i < config.nativeEvents.length; i++) {
       const eventName = config.nativeEvents[i];
       this._nativeEmitter.addListener(eventName, (payload: any) => {
-        console.log('!!EVENT!! ' + eventName);
         this.emitter.emit(eventName, payload);
       });
     }
