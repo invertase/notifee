@@ -21,7 +21,7 @@ import app.notifee.core.utils.ObjectUtils;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 @KeepForSdk
-class Notifee {
+public class Notifee {
   private static Notifee mNotifee = null;
   private Map<String, Object> mModuleBuildConfig;
 

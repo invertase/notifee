@@ -59,6 +59,9 @@ class NotificationManager {
         androidBundle.getChannelId()
       );
 
+      // Always keep at top
+      builder.setExtras(notificationBundle.getData());
+
       builder.setDeleteIntent(ReceiverService.createIntent(
         ReceiverService.DELETE_INTENT,
         new String[]{"notification"},
@@ -150,8 +153,10 @@ class NotificationManager {
 
       builder.setShowWhen(androidBundle.getShowTimestamp());
 
-      // TODO Small Icon
-
+      Integer smallIconId = androidBundle.getSmallIcon();
+      if (smallIconId != null) {
+        builder.setSmallIcon(smallIconId);
+      }
 
       if (androidBundle.getSortKey() != null) {
         builder.setSortKey(androidBundle.getSortKey());
