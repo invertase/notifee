@@ -6,6 +6,9 @@
 import React, { useEffect } from 'react';
 import { AppRegistry, ScrollView, StyleSheet, Text, View, Button } from 'react-native';
 
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/messaging';
+
 import notifee from '@notifee/react-native';
 
 import notifications from './notifications';
@@ -59,8 +62,10 @@ function Root() {
   const [id, setId] = React.useState(null);
 
   async function init() {
-    const foo = await notifee.getInitialNotification();
-    console.log(foo);
+    const fcmToken = await firebase.messaging().getToken();
+    console.log({ fcmToken });
+    // const initialNotification = await notifee.getInitialNotification();
+    // console.log({ initialNotification });
     await Promise.all(channels.map($ => notifee.createChannel($)));
   }
 
