@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ObjectUtils {
-  public static final String MODULE_BUILD_CONFIG_CLASS = "io.invertase.notifee.BuildConfig";
-
   public static @Nullable
   Class getClassForName(String className) {
     try {
@@ -46,7 +44,7 @@ public class ObjectUtils {
         }
       }
     } catch (IllegalAccessException exception) {
-      // TODO error log
+      return null;
     }
     return properties;
   }

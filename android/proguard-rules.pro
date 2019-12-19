@@ -59,6 +59,15 @@
     public <init>(android.content.Context,androidx.work.WorkerParameters);
 }
 
+# JWT
+-keep class io.jsonwebtoken.** { *; }
+-keepnames class io.jsonwebtoken.* { *; }
+-keepnames interface io.jsonwebtoken.* { *; }
+
+-keep class org.bouncycastle.** { *; }
+-keepnames class org.bouncycastle.** { *; }
+-dontwarn org.bouncycastle.**
+
 # Room
 -keepclassmembers class * {
   @androidx.room.* <methods>;

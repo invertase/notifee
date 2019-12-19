@@ -62,6 +62,7 @@ public class JSONUtils {
     return bundle;
   }
 
+  @SuppressWarnings("unchecked")
   private static Object convertToJavaArray(Class clazz, JSONArray jsonArray) throws JSONException {
     Object array = Array.newInstance(clazz, jsonArray.length());
     for (int i = 0; i < jsonArray.length(); i++) {

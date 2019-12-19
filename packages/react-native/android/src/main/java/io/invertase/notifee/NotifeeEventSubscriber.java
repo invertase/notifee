@@ -29,7 +29,6 @@ public class NotifeeEventSubscriber implements EventListener {
         break;
       // TODO other types, press = 1, action_press = 2
     }
-
     // TODO `action` bundle if applicable?
     // TODO `input` if applicable?
 

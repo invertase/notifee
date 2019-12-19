@@ -7,27 +7,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
 import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.utils.ObjectUtils;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 @KeepForSdk
 public class Notifee {
   private static Notifee mNotifee = null;
-  private Map<String, Object> mModuleBuildConfig;
-
-  private Notifee(Map<String, Object> moduleBuildConfig) {
-    mModuleBuildConfig = moduleBuildConfig;
-  }
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -40,24 +34,34 @@ public class Notifee {
     return ContextHolder.getApplicationContext();
   }
 
-  static void configure() {
-    if (mNotifee != null) return;
+  @KeepForSdk
+  public static void configure(
+    @NonNull String jsonConfigString, @NonNull EventListener defaultListener
+  ) {
     synchronized (Notifee.class) {
-      Class moduleBuildConfigClass = ObjectUtils
-        .getClassForName(ObjectUtils.MODULE_BUILD_CONFIG_CLASS);
-      if (moduleBuildConfigClass == null) {
-        Logger.e("configure", "default module build class was not found!");
-        return;
-      }
+      if (mNotifee == null) initialize();
+      JSONConfig.initialize(jsonConfigString);
+      EventSubscriber.register(defaultListener);
+    }
+  }
 
-      Map<String, Object> moduleBuildConfig = ObjectUtils
-        .getClassProperties(moduleBuildConfigClass);
-      if (moduleBuildConfig == null) {
-        Logger.e("configure", "failed to read module build configuration!");
-        return;
-      }
-
-      mNotifee = new Notifee(moduleBuildConfig);
+  static void initialize() {
+    synchronized (Notifee.class) {
+      if (mNotifee != null) return;
+      mNotifee = new Notifee();
+      LicenseChecker.initialize(
+        "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA/7MJ1T3Oa+vSACnoc11G\n" +
+          "gP1GQ4dNbzJDHRczA6lgX/+gmsDACaZkoe7vyq/fTZrrTVggXLZXvhQjNQwrmDC7\n" +
+          "Z1zeFKZZecmxXjL+HxXBZj4fGCoENvOqLop0FkCNvgFS9aYEze+NLQWwWCTmqw08\n" +
+          "9tBjlhMAZFrsx4I66aXJZh69KoG8w/v1Hj1Am2BlVSD1K1kS+KTXTV/4Lmn31/gF\n" +
+          "s5SCFzB7Y2yLSdxSdljahmDWcdaDY8GIEOtK5JImO53kML08cdpYBksOYqXlk2+a\n" +
+          "mTQup6IVzlrQoeu7fIRvJ8w4ExuWOXgKS9thU1x/NLUujAnv7O5PkAWOXoVQF5GM\n" +
+          "fzDX6VtbiDQyvwND8nNz2Z3345b53zc+9eghWKo6zDMacNrc1/WNtO5WgMEwilvK\n" +
+          "kiVHGWHRYYbKNZKckWf+fkXTOfXiajFkCARzaIvvIHPOoiw/SxYQR7rp8OimlLgR\n" +
+          "c5qJw2rCcXrvqSLXvIyF7MHfmwX0yzyy6cYOQBnoYrs/sUxliEiYDg9AMlLSBEoC\n" +
+          "qCl2oNFq+UN6H/Onv+FKvCAeTWowsco2OXw9ry1q83FY6ksAW8rh0cA25dosAfcm\n" +
+          "DYSDKXKXjmJCL07Ehi1OLACDwb9z7z1zGWISXMAVdkzzL59s01nKbnCcNLQd6CqF\n" +
+          "RTTO/skUue3mgizqFfqGb8sCAwEAAQ==");
     }
   }
 
