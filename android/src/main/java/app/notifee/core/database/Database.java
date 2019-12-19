@@ -6,6 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import app.notifee.core.EventBus;
 import app.notifee.core.events.DatabaseEvent;
@@ -33,7 +34,7 @@ public abstract class Database extends RoomDatabase {
     }
   }
 
-  @Subscribe(priority = 1)
+  @Subscribe(priority = 1, threadMode = ThreadMode.ASYNC)
   public void onNotificationEvent(NotificationEvent event) {
     DatabaseNotificationDao dao = database.getDao();
     String entityId = event.getNotification().getId();

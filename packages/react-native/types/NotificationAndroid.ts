@@ -445,31 +445,11 @@ export interface NotificationAndroid {
   showTimestamp?: boolean;
 
   /**
-   * The small icon for the notification.
+   * The small icon to show in the heads-up notification.
    *
-   * To set custom small icon levels (e.g. for battery levels), see below.
+   * TODO: How to add custom icons
    *
-   * ![Small Icon](https://prismic-io.s3.amazonaws.com/invertase%2F566dd0e6-99bc-4e58-82c1-755f0225ec0b_new+project+%2820%29.jpg)
-   *
-   * #### Example
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   bodyL: 'Custom small icon',
-   *   android: {
-   *     smallIcon: 'my_app_icon',
-   *   },
-   * });
-   * ```
-   */
-  // TODO merge docs with one below
-  // smallIcon?: string;
-
-  /**
-   * The small icon for the notification with various levels.
-   *
-   * Icon levels can be used to show different icons. For example if displaying a notification about the
-   * device battery level, 4 different levels can be defined (4 = full battery icon, 1 = low battery icon).
+   * Defaults to `ic_launcher`.
    *
    * #### Example
    *
@@ -477,12 +457,12 @@ export interface NotificationAndroid {
    * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
-   *     smallIcon: ['battery_level', 2],
+   *     smallIcon: 'app-icon',
    *   },
    * });
    * ```
    */
-  smallIcon?: [string, number] | string;
+  smallIcon?: string;
 
   /**
    * Set a sort key that orders this notification among other notifications from the same package.

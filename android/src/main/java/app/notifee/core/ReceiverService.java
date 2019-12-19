@@ -14,7 +14,7 @@ import app.notifee.core.events.NotificationEvent;
 
 import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
 
-class ReceiverService extends Service {
+public class ReceiverService extends Service {
 
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";

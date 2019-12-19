@@ -135,7 +135,7 @@ public class NotificationAndroidBundle {
   public Boolean getChronometerCountDown() {
     if (mNotificationAndroidBundle.containsKey("chronometerDirection")) {
       String direction = mNotificationAndroidBundle.getString("chronometerDirection");
-      if (direction != null) return direction.equals("down");
+      return direction != null && direction.equals("down");
     }
 
     return false;
@@ -379,31 +379,23 @@ public class NotificationAndroidBundle {
    * @return ArrayList<Integer>
    */
   public @Nullable
-  ArrayList<Integer> getSmallIcon() {
+  Integer getSmallIcon() {
     if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
       return null;
     }
 
-    ArrayList smallIconList = Objects.requireNonNull(
-      mNotificationAndroidBundle.getParcelableArrayList("smallIcon")
-    );
-
-    String smallIconRaw = (String) smallIconList.get(0);
-    int smallIconId = ResourceUtils.getImageResourceId(smallIconRaw);
+    String rawIcon = mNotificationAndroidBundle.getString("smallIcon");
+    int smallIconId = ResourceUtils.getImageResourceId(rawIcon);
 
     if (smallIconId == 0) {
       Logger.d(
         "NotificationAndroidBundle",
-        String.format("Notification small icon '%s' could not be found", smallIconRaw)
+        String.format("Notification small icon '%s' could not be found", rawIcon)
       );
       return null;
     }
 
-    ArrayList<Integer> smallIcon = new ArrayList<>(2);
-    smallIcon.add(smallIconId);
-    smallIcon.add((int) smallIconList.get(1));
-
-    return smallIcon;
+    return smallIconId;
   }
 
   /**

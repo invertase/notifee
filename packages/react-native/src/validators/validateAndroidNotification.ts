@@ -59,7 +59,7 @@ export default function validateAndroidNotification(
     onlyAlertOnce: false,
     importance: AndroidImportance.DEFAULT,
     showTimestamp: false,
-    smallIcon: ['ic_launcher', -1],
+    smallIcon: 'ic_launcher',
     showChronometer: false,
     visibility: AndroidVisibility.PRIVATE,
   };
@@ -463,27 +463,11 @@ export default function validateAndroidNotification(
    * smallIcon
    */
   if (hasOwnProperty(android, 'smallIcon') && !isUndefined(android.smallIcon)) {
-    if (isArray(android.smallIcon)) {
-      const [icon, level] = android.smallIcon as [string, number];
-
-      if (!isString(icon) || !icon) {
-        throw new Error("'notification.android.smallIcon' expected icon to be a string.");
-      }
-
-      if (!isNumber(level) || level < -1) {
-        throw new Error(
-          "'notification.android.smallIcon' expected level to be a number greater than -1.",
-        );
-      }
-
-      out.smallIcon = [icon, level];
-    } else if (isString(android.smallIcon)) {
-      out.smallIcon = [android.smallIcon as string, -1];
-    } else {
-      throw new Error(
-        "'notification.android.smallIcon' expected an array containing icon with level or string value.",
-      );
+    if (!isString(android.smallIcon)) {
+      throw new Error("'notification.android.smallIcon' expected value to be a string.");
     }
+
+    out.smallIcon = android.smallIcon;
   }
 
   /**

@@ -72,11 +72,11 @@ public class NotificationBundle {
     );
   }
 
-  public @Nullable
+  public @NonNull
   Bundle getData() {
     Bundle data = mNotificationBundle.getBundle("data");
     if (data != null) return (Bundle) data.clone();
-    return null;
+    return new Bundle();
   }
 
   /**
