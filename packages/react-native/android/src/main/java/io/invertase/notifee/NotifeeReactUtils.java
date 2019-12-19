@@ -1,7 +1,11 @@
 package io.invertase.notifee;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.util.SparseArray;
 
 import androidx.annotation.Nullable;
 
@@ -10,29 +14,146 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.common.LifecycleState;
+import com.facebook.react.jstasks.HeadlessJsTaskConfig;
+import com.facebook.react.jstasks.HeadlessJsTaskContext;
+import com.facebook.react.jstasks.HeadlessJsTaskEventListener;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+
+import java.util.List;
 
 import app.notifee.core.EventSubscriber;
 
 class NotifeeReactUtils {
-  static ReactContext getReactContextForContext(Context context) {
-    ReactNativeHost reactNativeHost = ((ReactApplication) context).getReactNativeHost();
+  private static final SparseArray<GenericCallback> headlessTasks = new SparseArray<>();
+  private static final HeadlessJsTaskEventListener headlessTasksListener = new HeadlessJsTaskEventListener() {
+    @Override
+    public void onHeadlessJsTaskStart(int taskId) {
+    }
+
+    @Override
+    public void onHeadlessJsTaskFinish(int taskId) {
+      synchronized (headlessTasks) {
+        GenericCallback callback = headlessTasks.get(taskId);
+        if (callback != null) {
+          headlessTasks.remove(taskId);
+          callback.call();
+        }
+      }
+    }
+  };
+
+  private static @Nullable
+  ReactContext getReactContext() {
+    ReactNativeHost reactNativeHost = ((ReactApplication) EventSubscriber.getContext())
+      .getReactNativeHost();
     ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
     return reactInstanceManager.getCurrentReactContext();
   }
 
-  static void sendEvent(String eventName, @Nullable WritableMap eventMap) {
+  private static void initializeReactContext(GenericCallback callback) {
+    ReactNativeHost reactNativeHost = (
+      (ReactApplication) EventSubscriber.getContext()
+    ).getReactNativeHost();
+
+    ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
+
+    reactInstanceManager
+      .addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
+        @Override
+        public void onReactContextInitialized(final ReactContext reactContext) {
+          reactInstanceManager.removeReactInstanceEventListener(this);
+          new Handler(Looper.getMainLooper()).postDelayed(callback::call, 100);
+        }
+      });
+
+    if (!reactInstanceManager.hasStartedCreatingInitialContext()) {
+      reactInstanceManager.createReactContextInBackground();
+    }
+  }
+
+  static void startHeadlessTask(
+    String taskName, WritableMap taskData, long taskTimeout,
+    @Nullable GenericCallback taskCompletionCallback
+  ) {
+    GenericCallback callback = () -> {
+      HeadlessJsTaskContext taskContext = HeadlessJsTaskContext.getInstance(getReactContext());
+      HeadlessJsTaskConfig taskConfig = new HeadlessJsTaskConfig(taskName, taskData, taskTimeout,
+        true
+      );
+
+      synchronized (headlessTasks) {
+        if (headlessTasks.size() == 0) {
+          taskContext.addTaskEventListener(headlessTasksListener);
+        }
+      }
+
+      headlessTasks.put(taskContext.startTask(taskConfig), () -> {
+        synchronized (headlessTasks) {
+          if (headlessTasks.size() == 0) {
+            taskContext.removeTaskEventListener(headlessTasksListener);
+          }
+        }
+        if (taskCompletionCallback != null) {
+          taskCompletionCallback.call();
+        }
+      });
+    };
+
+    if (getReactContext() == null) {
+      initializeReactContext(callback);
+    } else {
+      callback.call();
+    }
+  }
+
+  static void sendEvent(String eventName, WritableMap eventMap) {
     try {
-      ReactContext reactContext = NotifeeReactUtils
-        .getReactContextForContext(EventSubscriber.getContext());
+      ReactContext reactContext = getReactContext();
+
       if (reactContext == null || !reactContext.hasActiveCatalystInstance()) {
         return;
       }
 
       reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
         .emit(eventName, eventMap);
+
     } catch (Exception e) {
       Log.e("SEND_EVENT", "", e);
     }
+  }
+
+  public static boolean isAppInForeground() {
+    Context context = EventSubscriber.getContext();
+
+    ActivityManager activityManager = (ActivityManager) context
+      .getSystemService(Context.ACTIVITY_SERVICE);
+    if (activityManager == null) return false;
+
+    List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
+      .getRunningAppProcesses();
+    if (appProcesses == null) return false;
+
+    final String packageName = context.getPackageName();
+    for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+      if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
+        appProcess.processName.equals(packageName)) {
+        ReactContext reactContext;
+
+        try {
+          reactContext = (ReactContext) context;
+        } catch (ClassCastException exception) {
+          return true;
+        }
+
+        return reactContext.getLifecycleState() == LifecycleState.RESUMED;
+      }
+    }
+
+    return false;
+  }
+
+  interface GenericCallback {
+    void call();
   }
 }
