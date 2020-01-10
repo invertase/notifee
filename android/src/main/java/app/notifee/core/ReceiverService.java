@@ -63,6 +63,7 @@ public class ReceiverService extends Service {
       return START_NOT_STICKY;
     }
 
+    // TODO handle additional intents (actions, click etc)
     switch (action) {
       case DELETE_INTENT:
         onDeleteIntent(intent);

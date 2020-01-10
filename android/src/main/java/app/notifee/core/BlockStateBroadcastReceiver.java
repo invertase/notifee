@@ -25,6 +25,7 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
   public BlockStateBroadcastReceiver() {
   }
 
+  // TODO get channel, or channel group: ChannelManager.getChannel
   static void doWork(
     Data workData, ResolvableFuture<Result> completer
   ) {

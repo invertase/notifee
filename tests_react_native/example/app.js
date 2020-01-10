@@ -58,12 +58,19 @@ notifee.onEvent((eventType, event, headless) => {
   return Promise.resolve();
 });
 
+function onMessage(message) {
+  console.log('New FCM Message', message);
+}
+
+firebase.messaging().setBackgroundMessageHandler(onMessage);
+
 function Root() {
   const [id, setId] = React.useState(null);
 
   async function init() {
     const fcmToken = await firebase.messaging().getToken();
     console.log({ fcmToken });
+    firebase.messaging().onMessage(onMessage);
     // const initialNotification = await notifee.getInitialNotification();
     // console.log({ initialNotification });
     await Promise.all(channels.map($ => notifee.createChannel($)));

@@ -7,6 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+// TODO handle foreground service
 public class ForegroundService extends Service {
 
   public static final String START_FOREGROUND_SERVICE_ACTION = "app.notifee.core.ForegroundService.START";
