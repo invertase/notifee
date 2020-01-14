@@ -16,12 +16,14 @@ import java.util.List;
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
 import app.notifee.core.bundles.NotificationBundle;
+import app.notifee.core.database.Database;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 @KeepForSdk
 public class Notifee {
   private static Notifee mNotifee = null;
+  private static NotifeeConfig mNotifeeConfig = null;
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -36,21 +38,29 @@ public class Notifee {
 
   @KeepForSdk
   public static void configure(
-    @NonNull String jsonConfigString, @NonNull EventListener defaultListener
+    @NonNull NotifeeConfig notifeeConfig
   ) {
     synchronized (Notifee.class) {
-      if (mNotifee == null) initialize();
-      JSONConfig.initialize(jsonConfigString);
-      EventSubscriber.register(defaultListener);
+      if (mNotifee == null) {
+        initialize(notifeeConfig);
+      }
     }
   }
 
-  static void initialize() {
+  private static void initialize(NotifeeConfig notifeeConfig) {
     synchronized (Notifee.class) {
       if (mNotifee != null) return;
       mNotifee = new Notifee();
+      mNotifeeConfig = notifeeConfig;
+      Database.initialize();
+      JSONConfig.initialize(notifeeConfig.getJsonConfig());
+      EventSubscriber.register(notifeeConfig.getEventSubscriber());
       LicenseChecker.initialize();
     }
+  }
+
+  static NotifeeConfig getNotifeeConfig() {
+    return mNotifeeConfig;
   }
 
   @KeepForSdk

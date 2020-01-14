@@ -36,8 +36,6 @@ public class InitProvider extends ContentProvider {
         context = context.getApplicationContext();
       }
       ContextHolder.setApplicationContext(context);
-      Database.initialize();
-      Notifee.initialize();
     }
 
     return false;

@@ -1,6 +1,8 @@
 package app.notifee.core;
 
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 
@@ -414,13 +416,18 @@ class LicenseChecker {
 
     jwtBuilder.claim(JWT_KEY_JWT, jwtLicenseKey);
 
-    // TODO populate with real data
-    jwtBuilder.claim(JWT_KEY_DEVICE_BRAND, "Samsung");
-    jwtBuilder.claim(JWT_KEY_DEVICE_MODEL, "SMG-95F");
-    jwtBuilder.claim(JWT_KEY_PRODUCT_VERSION, "0.0.1");
-    jwtBuilder.claim(JWT_KEY_FRAMEWORK_VERSION, "0.60.6");
-    jwtBuilder.claim(JWT_KEY_APP_VERSION, "0.0.1");
+    jwtBuilder.claim(JWT_KEY_DEVICE_BRAND, Build.BRAND);
+    jwtBuilder.claim(JWT_KEY_DEVICE_MODEL, Build.MODEL);
+    jwtBuilder.claim(JWT_KEY_DEVICE_OS_VERSION, "" + Build.VERSION.SDK_INT);
 
+    try {
+      jwtBuilder.claim(JWT_KEY_APP_VERSION, getPackageInfo().versionName);
+    } catch (Exception e) {
+      jwtBuilder.claim(JWT_KEY_APP_VERSION, "<unknown>");
+    }
+
+    jwtBuilder.claim(JWT_KEY_PRODUCT_VERSION, Notifee.getNotifeeConfig().getProductVersion());
+    jwtBuilder.claim(JWT_KEY_FRAMEWORK_VERSION, Notifee.getNotifeeConfig().getFrameworkVersion());
 
     try {
       jwtBuilder.signWith(loadPrivateKey(mInstance.mClientPrivateKey), SignatureAlgorithm.RS384);
@@ -430,6 +437,11 @@ class LicenseChecker {
     }
 
     return jwtBuilder.compact();
+  }
+
+  private static PackageInfo getPackageInfo() throws Exception {
+    return ContextHolder.getApplicationContext().getPackageManager()
+      .getPackageInfo(ContextHolder.getApplicationContext().getPackageName(), 0);
   }
 
   /**
