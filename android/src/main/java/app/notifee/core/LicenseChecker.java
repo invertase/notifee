@@ -1,6 +1,8 @@
 package app.notifee.core;
 
 import android.content.pm.ApplicationInfo;
+import android.util.Base64;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.concurrent.futures.ResolvableFuture;
@@ -14,12 +16,24 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -131,6 +145,7 @@ class LicenseChecker {
   static void doLocalWork(
     ResolvableFuture<ListenableWorker.Result> completer
   ) {
+    Logger.d(TAG, "Local verification started.");
     // mark local verification as pending while we try verify the license
     Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.PENDING.asInt);
 
@@ -140,16 +155,20 @@ class LicenseChecker {
       // mark local verification as no license found, when we in debug builds this status is ignored
       // as a license is not required in debug
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE.asInt);
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
 
     // verify the jwt token
-    Jwt<Header, Claims> verifiedJwt = getInstance().verifyToken(androidLicenseKey);
+    Jws<Claims> verifiedJwt = getInstance().verifyToken(androidLicenseKey);
     if (verifiedJwt == null) {
       // mark local verification as invalid license
       Preferences.getSharedInstance()
         .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
@@ -159,6 +178,8 @@ class LicenseChecker {
       // mark local verification as invalid license
       Preferences.getSharedInstance()
         .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
@@ -174,23 +195,27 @@ class LicenseChecker {
         "Your license key is not for this application, expected application to be " + jwtAppId +
           " but found " + packageName
       );
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
 
     // confirm license is for the right platform
-    int jwtPlatform = jwtBody.get(JWT_KEY_PLATFORM, int.class);
+    Integer jwtPlatform = jwtBody.get(JWT_KEY_PLATFORM, Integer.class);
     if (jwtPlatform != LicensePlatform.ANDROID.asInt) {
       // mark local verification as invalid license as its not for this platform
       Preferences.getSharedInstance()
         .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
       Logger.e(TAG, "Your license key is not for this platform (Android)");
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
 
     // license is valid, lets schedule the remote check work
-    boolean jwtPrimary = jwtBody.get(JWT_KEY_PLATFORM, boolean.class);
+    Boolean jwtPrimary = jwtBody.get(JWT_KEY_PRIMARY, Boolean.class);
 
     long remoteWorkIntervalDays = 4;
     if (!jwtPrimary) {
@@ -204,6 +229,8 @@ class LicenseChecker {
     // mark local verification a valid license
     Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK.asInt);
 
+    Logger.d(TAG, "Local verification succeeded.");
+
     completer.set(ListenableWorker.Result.success());
   }
 
@@ -214,73 +241,105 @@ class LicenseChecker {
    * @param completer
    */
   static void doRemoteWork(
-    Data workData, ResolvableFuture<ListenableWorker.Result> completer
+    Data workData, final ResolvableFuture<ListenableWorker.Result> completer
   ) {
-    boolean isPrimaryKey = workData.getBoolean(Worker.KEY_IS_PRIMARY, true);
+    Logger.d(TAG, "Remote verification started.");
+    boolean isPrimaryKey = workData.getBoolean(Worker.KEY_IS_PRIMARY, false);
+
     String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
+    if (androidLicenseKey == null) {
+      Logger.d(TAG, "Remote verification skipped as license key not found.");
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
     String verifyTokenJwt = buildVerifyLicenseRequestToken(androidLicenseKey);
 
-    OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient.Builder().callTimeout(15, TimeUnit.SECONDS).build();
 
-    Request request = new Request.Builder().url("https://api.invertase.io/license/verify")
+    Request request = new Request.Builder().url("https://api.notifee.app/license/verify")
       .post(RequestBody.create(MediaType.parse("text/plain; charset=utf-8"), verifyTokenJwt))
       .build();
 
-    String responseBody = null;
-    boolean successful = false;
-    try {
-      Response response = client.newCall(request).execute();
-      successful = response.isSuccessful();
-      if (successful && response.body() != null) {
-        responseBody = response.body().toString();
+    client.newCall(request).enqueue(new Callback() {
+      @Override
+      public void onFailure(
+        @NotNull Call call, @NotNull IOException e
+      ) {
+        Logger.e(TAG, "Remote license verification request failed.", e);
+        // schedule to try again sooner if request failed,
+        // remote status will remain as pending until verified
+        scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+        completer.set(ListenableWorker.Result.success());
       }
-    } catch (Exception e) {
-      Logger.e(TAG, "Remote license verification request failed", e);
-    }
 
-    // not successful most likely means the API failed
-    if (!successful) {
-      // schedule to try again sooner if request failed, remote status will remain as pending
-      // until verified
-      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
-      completer.set(ListenableWorker.Result.success());
-      return;
-    }
+      @Override
+      public void onResponse(
+        @NotNull Call call, @NotNull Response response
+      ) {
+        Logger.d(TAG, "Remote verification API responded.");
+        try {
+          String responseBody = null;
+          boolean successful = response.isSuccessful();
+          if (successful && response.body() != null) {
+            responseBody = response.body().string();
+          }
 
-    // verify the response jwt token
-    Jwt<Header, Claims> verifiedJwt = getInstance().verifyToken(responseBody);
-    if (verifiedJwt == null) {
-      // schedule to try again sooner if request failed, remote status will remain as pending
-      // until verified
-      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
-      completer.set(ListenableWorker.Result.success());
-      return;
-    }
+          // not successful most likely means the API failed
+          if (!successful) {
+            // schedule to try again sooner if request failed, remote
+            // status will remain as pending until verified
+            Logger.d(TAG, "Remote verification API call not successful, code: " + response.code());
+            completer.set(ListenableWorker.Result.success());
+            scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+            return;
+          }
 
-    Claims claims = verifiedJwt.getBody();
-    if (!claims.containsKey(JWT_KEY_RESPONSE)) {
-      // schedule to try again sooner if request failed, remote status will remain as pending
-      // until verified
-      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
-      completer.set(ListenableWorker.Result.success());
-      return;
-    }
+          // verify the response jwt token
+          Jws<Claims> verifiedJwt = getInstance().verifyToken(responseBody);
+          if (verifiedJwt == null) {
+            // schedule to try again sooner if request failed, remote status will remain as pending
+            // until verified
+            Logger.d(TAG, "Remote verification response not verified.");
+            completer.set(ListenableWorker.Result.success());
+            scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+            return;
+          }
 
-    int response = claims.get(JWT_KEY_RESPONSE, int.class);
-    Preferences.getSharedInstance().setIntValue("rvs", response);
+          Claims claims = verifiedJwt.getBody();
+          if (!claims.containsKey(JWT_KEY_RESPONSE)) {
+            // schedule to try again sooner if request failed, remote status will remain as pending
+            // until verified
+            Logger.d(TAG, "Remote verification response missing key.");
+            completer.set(ListenableWorker.Result.success());
+            scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+            return;
+          }
 
-    long remoteWorkIntervalDays = 4;
+          Integer remoteStatus = claims.get(JWT_KEY_RESPONSE, Integer.class);
+          Preferences.getSharedInstance().setIntValue("rvs", remoteStatus);
 
-    // if the license was OK then only check every 4 days, or 1 if primary key
-    if (response == RemoteVerificationStatus.OK.asInt) {
-      remoteWorkIntervalDays = isPrimaryKey ? 1 : 4;
-    } else {
-      // license validation failed, check again as soon as possible
-      remoteWorkIntervalDays = 1;
-    }
+          long remoteWorkIntervalDays;
 
-    scheduleRemoteWork(remoteWorkIntervalDays, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
-    completer.set(ListenableWorker.Result.success());
+          // if the license was OK then only check every 4 days, or 1 if primary key
+          if (remoteStatus == RemoteVerificationStatus.OK.asInt) {
+            remoteWorkIntervalDays = isPrimaryKey ? 1 : 4;
+          } else {
+            // license validation failed, check again as soon as possible
+            remoteWorkIntervalDays = 1;
+          }
+
+          Logger.d(TAG, "Remote verification completed with status: " + remoteStatus);
+
+          completer.set(ListenableWorker.Result.success());
+          scheduleRemoteWork(
+            remoteWorkIntervalDays, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+        } catch (Exception e) {
+          Logger.e(TAG, "onResponse exception", e);
+          completer.set(ListenableWorker.Result.failure());
+        }
+      }
+    });
   }
 
   /**
@@ -291,6 +350,7 @@ class LicenseChecker {
       .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_LICENSE_VERIFY_LOCAL).build();
 
     OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
+    workRequestBuilder.addTag(Worker.WORK_TYPE_LICENSE_VERIFY_LOCAL);
     workRequestBuilder.setInputData(workData);
 
     WorkManager.getInstance(ContextHolder.getApplicationContext())
@@ -323,10 +383,10 @@ class LicenseChecker {
 
     workRequestBuilder.setInputData(workData);
     workRequestBuilder.setConstraints(constraints);
-    workRequestBuilder.keepResultsForAtLeast(daysInterval, TimeUnit.DAYS);
+    workRequestBuilder.addTag(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
 
     if (existingPeriodicWorkPolicy == ExistingPeriodicWorkPolicy.REPLACE) {
-      workRequestBuilder.setInitialDelay(daysInterval, TimeUnit.DAYS);
+      workRequestBuilder.setInitialDelay((daysInterval * 24) / 2, TimeUnit.HOURS);
     }
 
     WorkManager.getInstance(ContextHolder.getApplicationContext())
@@ -337,23 +397,39 @@ class LicenseChecker {
 
   /**
    * Builds a remote validation request JWT payload.
-   * TODO
+   *
    * @param jwtLicenseKey
    * @return
    */
-  static String buildVerifyLicenseRequestToken(String jwtLicenseKey) {
-    // TODO build jwt to send to verify api
-    // JWT example claims:
-    //   {
-    //     jwt: jwtLicenseKey,
-    //     device_brand: 'Samsung',
-    //     device_model: 'SMG-95F',
-    //     device_os_version: '28', // e.g ANDROID 28
-    //     product_version: '0.1.0', // NOTIFEE
-    //     framework_version: '0.60.6', // RN
-    //     app_version: '1.6.9', // Users app version
-    //   },
-    return "";
+  private static String buildVerifyLicenseRequestToken(String jwtLicenseKey) {
+    JwtBuilder jwtBuilder = Jwts.builder();
+    long nowMillis = System.currentTimeMillis();
+    Date now = new Date(nowMillis);
+
+    jwtBuilder.setIssuedAt(now);
+
+    long expMillis = nowMillis + 28800000; // 8 hours
+    Date expiry = new Date(expMillis);
+    jwtBuilder.setExpiration(expiry);
+
+    jwtBuilder.claim(JWT_KEY_JWT, jwtLicenseKey);
+
+    // TODO populate with real data
+    jwtBuilder.claim(JWT_KEY_DEVICE_BRAND, "Samsung");
+    jwtBuilder.claim(JWT_KEY_DEVICE_MODEL, "SMG-95F");
+    jwtBuilder.claim(JWT_KEY_PRODUCT_VERSION, "0.0.1");
+    jwtBuilder.claim(JWT_KEY_FRAMEWORK_VERSION, "0.60.6");
+    jwtBuilder.claim(JWT_KEY_APP_VERSION, "0.0.1");
+
+
+    try {
+      jwtBuilder.signWith(loadPrivateKey(mInstance.mClientPrivateKey), SignatureAlgorithm.RS384);
+    } catch (Exception e) {
+      Log.e(TAG, "", e);
+      return "";
+    }
+
+    return jwtBuilder.compact();
   }
 
   /**
@@ -396,12 +472,26 @@ class LicenseChecker {
       .getIntValue("rvs", RemoteVerificationStatus.PENDING.asInt)];
   }
 
+  private static PublicKey loadPublicKey(String publicKeyStr) throws Exception {
+    byte[] buffer = Base64.decode(publicKeyStr, Base64.DEFAULT);
+    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    X509EncodedKeySpec keySpec = new X509EncodedKeySpec(buffer);
+    return keyFactory.generatePublic(keySpec);
+  }
+
+  private static PrivateKey loadPrivateKey(String privateKeyStr) throws Exception {
+    byte[] buffer = Base64.decode(privateKeyStr, Base64.DEFAULT);
+    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(buffer);
+    return keyFactory.generatePrivate(keySpec);
+  }
+
   private @Nullable
-  Jwt<Header, Claims> verifyToken(String token) {
-    Jwt<Header, Claims> jwt = null;
+  Jws<Claims> verifyToken(String token) {
+    Jws<Claims> jwt = null;
 
     try {
-      jwt = Jwts.parser().setSigningKey(mServerPublicKey).parseClaimsJwt(token);
+      jwt = Jwts.parser().setSigningKey(loadPublicKey(mServerPublicKey)).parseClaimsJws(token);
     } catch (Exception e) {
       Logger.e(TAG, "Error parsing license key, invalid JWT?", e);
     }
