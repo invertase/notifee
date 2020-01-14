@@ -1,27 +1,121 @@
 package app.notifee.core;
 
+import android.content.pm.ApplicationInfo;
+
+import androidx.annotation.Nullable;
+import androidx.concurrent.futures.ResolvableFuture;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.ListenableWorker;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import java.util.concurrent.TimeUnit;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 class LicenseChecker {
-  private static LicenseChecker mInstance = null;
+  private static final String TAG = "License";
+  private static final LicenseChecker mInstance = new LicenseChecker();
+  private static final String JWT_KEY_JWT = "0";
+  private static final String JWT_KEY_DEVICE_BRAND = "1";
+  private static final String JWT_KEY_DEVICE_MODEL = "2";
+  private static final String JWT_KEY_DEVICE_OS_VERSION = "3";
+  private static final String JWT_KEY_PRODUCT_VERSION = "4";
+  private static final String JWT_KEY_FRAMEWORK_VERSION = "5";
+  private static final String JWT_KEY_APP_VERSION = "6";
+  private static final String JWT_KEY_RESPONSE = "7";
+  private static final String JWT_KEY_APP_ID = "n";
+  private static final String JWT_KEY_LID = "o";
+  private static final String JWT_KEY_ID = "t";
+  private static final String JWT_KEY_PLATFORM = "i";
+  private static final String JWT_KEY_PRIMARY = "f";
+  private static final String JWT_KEY_TYPE = "e";
+  private String mServerPublicKey = null;
+  private String mClientPrivateKey = null;
 
-  private byte[] mSalt = null;
-
-  private String mPublicKey = null;
-
-  static void initialize(String publicSigningKey) {
-    synchronized (LicenseChecker.class) {
-      if (mInstance == null) {
-        mInstance = new LicenseChecker();
-        mInstance.mPublicKey = publicSigningKey;
-        mInstance.mSalt = new byte[]{
-          -79, -117, -82, -103, 109, -95, -69, -32, -76, 127, -100, -56, -18, -84, 61, -16, 119, 19,
-          -81, 105
-        };
+  static void initialize() {
+    synchronized (LicenseChecker.mInstance) {
+      if (mInstance.mServerPublicKey == null) {
+        mInstance.mServerPublicKey =
+          "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA/7MJ1T3Oa+vSACnoc11G\n" +
+            "gP1GQ4dNbzJDHRczA6lgX/+gmsDACaZkoe7vyq/fTZrrTVggXLZXvhQjNQwrmDC7\n" +
+            "Z1zeFKZZecmxXjL+HxXBZj4fGCoENvOqLop0FkCNvgFS9aYEze+NLQWwWCTmqw08\n" +
+            "9tBjlhMAZFrsx4I66aXJZh69KoG8w/v1Hj1Am2BlVSD1K1kS+KTXTV/4Lmn31/gF\n" +
+            "s5SCFzB7Y2yLSdxSdljahmDWcdaDY8GIEOtK5JImO53kML08cdpYBksOYqXlk2+a\n" +
+            "mTQup6IVzlrQoeu7fIRvJ8w4ExuWOXgKS9thU1x/NLUujAnv7O5PkAWOXoVQF5GM\n" +
+            "fzDX6VtbiDQyvwND8nNz2Z3345b53zc+9eghWKo6zDMacNrc1/WNtO5WgMEwilvK\n" +
+            "kiVHGWHRYYbKNZKckWf+fkXTOfXiajFkCARzaIvvIHPOoiw/SxYQR7rp8OimlLgR\n" +
+            "c5qJw2rCcXrvqSLXvIyF7MHfmwX0yzyy6cYOQBnoYrs/sUxliEiYDg9AMlLSBEoC\n" +
+            "qCl2oNFq+UN6H/Onv+FKvCAeTWowsco2OXw9ry1q83FY6ksAW8rh0cA25dosAfcm\n" +
+            "DYSDKXKXjmJCL07Ehi1OLACDwb9z7z1zGWISXMAVdkzzL59s01nKbnCcNLQd6CqF\n" +
+            "RTTO/skUue3mgizqFfqGb8sCAwEAAQ==";
       }
+      if (mInstance.mClientPrivateKey == null) {
+        mInstance.mClientPrivateKey =
+          "MIIJKAIBAAKCAgEA3hzYAlBLQFPA3ibXKMwHr5QWgmoJzw089XyEptzdGcVa4zkj\n" +
+            "n8i8+UZCAzTOFYDVZtKfP2GEBcOQ80WoL1bCAI6eqXPrSgp02iCwviXbFhN1z+s7\n" +
+            "/dPHORcuILdcd9XWx7NNB04LPBMt5LlCae18Tvciak8HwaIvbvYL45XpUxkqKf/I\n" +
+            "TNqKi+FxR9k146Djkux7lWv1lhQFh9eUmeynwSswXhQnJhFnM94Rn6OTLX7XJSUx\n" +
+            "lwrDL0wPfs9NXmIXAkM6muM6NumzOTIIfm6YQULY8Ts1wcS+Z7zzER/Gov+tQfzi\n" +
+            "0i6h1xU1ItS27a3iIF6LN2ey8dQFoNnWNgXylwCZIqmkJMLxPu6lTiSpECpw1a4P\n" +
+            "qi7wUgJ5INm1brwOpUn3e392l5TRhgwN2vfYLhg0Nsj2LtTIIMqrrrZnQGwsh2fy\n" +
+            "G/TY7hFto2odH6NQnN7XmmTAjCRYtlrLD4+KbQ7alVXMyW8AqnRPJ8ULbmwaWq94\n" +
+            "3ieI/sI8jtV85b7WULe0lH5BCVMn43cSIn8JBPcn+qFD0pYhI1spCWBk3n82c+2J\n" +
+            "OijjbnXaH+mJ/GD7ShOtCWlmoIHCZstIR89B9WmXzp0r7BGi49pzB4E41z5nV8Jo\n" +
+            "JOu9/ntC8CRnnx3cZwla1gW5hQX5NYnev/VxNfteYUBDTuArV6dW0HtFmGMCAwEA\n" +
+            "AQKCAgBSVdLlGKqsj9+A+ljr8KYwue6WLYSxUjD0t1HdISZ89SG59WZ1Rs52gUrb\n" +
+            "MWnrorR4xz7tGdL86AAFjh7IXZrQ5g1+t0/TRIkIivG5qwLJ7jDQAF1evHCvgx5A\n" +
+            "Vnham9RgduDpAk8718g9b0dlSPm5s/b3/Y/cgaifs2m41cuGWF++7ehsRN7y94Es\n" +
+            "pyJI3U0/G5a8TybcmVNrhci6PnX5L29gkIvqmqztFzblPJfEV66dQGpfmUe9cq6T\n" +
+            "zXjasfXhitZgsDbWQE+Ftjxb0ddy6brNwastxybmAa8A/AyAQ9MQERRr4Ylw15W4\n" +
+            "8a1V8g1O/n0Q7snwxy3G8LltkUrZai/E1mQO4yMvVOluNxVYees3+iQd/jayOXIZ\n" +
+            "EQC977GBXVsSJHVpFoI2V9GET22cMV8oKQorW2U7gzH058u7WCa3PmXG/a4emX0m\n" +
+            "DFliLgry1XqE+VJ9DEkWlZyet0SKm6jUcgtqeJTzLQFhy061bCwLQlLIb3n/W87F\n" +
+            "2tWa6yZCUVrgNpn+389hnhaS/mMsykAY/4Oq5YVZvdtml7LcewtFa/n6vrGMlOsx\n" +
+            "rIv7Q6Pk2QZgphrUbwRS6xc9LxHt9ymiyrMp11he8h4U/tYdZpAJtdF+iuNwO/dR\n" +
+            "i4To+kDCcd/KoNQ1H72RxmmwEJJfkYVX5THFbacb5OjNBu1qoQKCAQEA9Mmqpfq2\n" +
+            "hyApaFgwsMBSgCOYZ52rYTiLfUqDkw8wZeL5B7WT0nOrEsSdETmRBze6053iQPLP\n" +
+            "Lh94JAmrI4kRvySUsJtT0p1kCnw3ldDlEkoVv1iMskI1OD23CVPpzfVJbplcJwLj\n" +
+            "LZo1MlteznSDhOQbgDkusYGrtT2Ie6DssTguPXLRmIncRFHKp99HEjP+Dl3qNaZM\n" +
+            "VkrzIMpwqVV05w5Fgifa+elLKgnC1m3X2JozRbkcarhl6jQcLB+A++VyzwPcmDA7\n" +
+            "DoJC77NkMEKyFkM6SeoolsDS25faJkP/hI8K9HQLsvzFqIDgMSyhuIWig0qIjw5r\n" +
+            "Hq92ru/Ha6eemQKCAQEA6ElLJMLwbGTr4Qr4JPH0kuPy7cKQc1cewq0PWB9qcTyr\n" +
+            "XVWdlJxwq9QqsRwck4R8zfuqHY8ebY9b6WeSTByjGKlI7ETf0/KdvIzlxoVGDvrX\n" +
+            "y1Qz80jDOCoOkbtiqiI9Go9Tqj+ZSfviLK57QHlHOWO7po4I7CEXLaPmPJILNkfG\n" +
+            "Nu4jvkK4XehaofgmwjoXT9Zmqf2k1oV/1lWytdKRDE4HBE7cNyFNnDJriPHeMBVM\n" +
+            "MwQzAF9BK0jkRAy5BKT6C9xxxgg5uLAQJYQxu4bjCXDDOnSKSk3VlIDQdPop0Y34\n" +
+            "ApWwE/zb0S+8C8GKRDqLD6lcHHuRt1y2oVAFoOz4WwKCAQBTz+S81b2/QFTNJDzv\n" +
+            "l7nno8hf2c0/CWRBLs0kAfRZPkBz0kjdqrrtPyJkLmiopv0xzYIVKM2lBiNVe3X8\n" +
+            "Qccwwe6jFVu65ibFrEg/5Hk6LOGLVV8+/YpJSmAsMm4AFbbhxmKV/NgZ2g3SwxQP\n" +
+            "7jbFvnBoE6wYHMTU1k+vvKat+wViBrka2EDxp2uS1ND5u5GGC8PQQLMsbJcYKBgw\n" +
+            "8lCHeAx2hvzjymvw5cyvLIbV494gRkQjiiVi7hqjRNod5S7NEI5sET93NUSD29E2\n" +
+            "8O8Wzkfb3O+uxjCr/S81IN0Q3wUqM715uDBZBF8+lwB8NE0zVMay7IXiyMMDHJgU\n" +
+            "FR0pAoIBAQDUC2RPUK0NJiu1qb/QahdrqC7xIHWg9NydtkGVnkgaytlcQHWzXgP0\n" +
+            "t5+pQhJMD9umZaBrj2SlewLaVLPWSyYPsylglZcF8ipQHwb6bFsB/bbUZC9wXPHo\n" +
+            "6WuXWUm+KbdB8ajcd2ZFhWx4gWb9+jgsiYCZkHtQovx3q3DXxjH6ARdOuaFjY6DO\n" +
+            "CPgDd3ZaQ5FYTk41y9eYBRIn5N9Y37mNVAVPx3V71ij094n232SG3EpNH/42zr28\n" +
+            "97N482xKcxfXkAtETenzULXMqZqEp6PF0GxHhm9fWSIpiFXDE0Ltiv3lziOIe4Fm\n" +
+            "un6c9LZ1hkO/rkjpr1vb2QTWySf6OZiVAoIBACE740xXJ68fHmaUbBgNGSvINw0/\n" +
+            "icg79ccHnfikWhou3AXR8ar9L36FkQWXap6yFFjKCBYHG4zHWAEHfv/6+DGw5NyA\n" +
+            "MvjGDdggZVkwVWblSuXP8TD7LLT8dhx/rSt23xnQAGBtDotNfpDsfm05QfDkclfH\n" +
+            "k74UxpK7dI/sO2bRInxVWlWa9TLNKcbMnOpkgYxfArxLXFBRWFMap+M7Ym5U7Dcp\n" +
+            "1zWl4Qf2eOZJqsOpUWMk95nakiL7RPo/u1590wsyIHoNQZirfULyQlf6f8br6L2Y\n" +
+            "3ZbTFU2wr6lIkpTKOTkmS6zGZBxk7GZDZrsilg51EOS6w0T3J3kkrdA5gGE=";
+      }
+      scheduleLocalWork();
     }
   }
 
@@ -29,13 +123,317 @@ class LicenseChecker {
     return mInstance;
   }
 
-  private Jwt<Header, Claims> verifyToken(String token) {
-    Jwt<Header, Claims> jwt = Jwts.parser().setSigningKey(mPublicKey).parseClaimsJwt(token);
+  /**
+   * Local/offline license validation via JWT.
+   *
+   * @param completer
+   */
+  static void doLocalWork(
+    ResolvableFuture<ListenableWorker.Result> completer
+  ) {
+    // mark local verification as pending while we try verify the license
+    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.PENDING.asInt);
+
+    // check a license key has been specified
+    String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
+    if (androidLicenseKey == null) {
+      // mark local verification as no license found, when we in debug builds this status is ignored
+      // as a license is not required in debug
+      Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE.asInt);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    // verify the jwt token
+    Jwt<Header, Claims> verifiedJwt = getInstance().verifyToken(androidLicenseKey);
+    if (verifiedJwt == null) {
+      // mark local verification as invalid license
+      Preferences.getSharedInstance()
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    Claims jwtBody = verifiedJwt.getBody();
+    if (!jwtBody.containsKey(JWT_KEY_APP_ID)) {
+      // mark local verification as invalid license
+      Preferences.getSharedInstance()
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    // confirm the license app id matches this application
+    String jwtAppId = jwtBody.get(JWT_KEY_APP_ID, String.class);
+    String packageName = ContextHolder.getApplicationContext().getPackageName();
+    if (!jwtAppId.equals(packageName)) {
+      // mark local verification as invalid license as its not for this application id
+      Preferences.getSharedInstance()
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      Logger.e(TAG,
+        "Your license key is not for this application, expected application to be " + jwtAppId +
+          " but found " + packageName
+      );
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    // confirm license is for the right platform
+    int jwtPlatform = jwtBody.get(JWT_KEY_PLATFORM, int.class);
+    if (jwtPlatform != LicensePlatform.ANDROID.asInt) {
+      // mark local verification as invalid license as its not for this platform
+      Preferences.getSharedInstance()
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+      Logger.e(TAG, "Your license key is not for this platform (Android)");
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    // license is valid, lets schedule the remote check work
+    boolean jwtPrimary = jwtBody.get(JWT_KEY_PLATFORM, boolean.class);
+
+    long remoteWorkIntervalDays = 4;
+    if (!jwtPrimary) {
+      // we remote validate secondary keys more often so server can detect if
+      // key is being abused, e.g. secondary being used to run a primary app
+      remoteWorkIntervalDays = 1;
+    }
+
+    scheduleRemoteWork(remoteWorkIntervalDays, jwtPrimary, ExistingPeriodicWorkPolicy.KEEP);
+
+    // mark local verification a valid license
+    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK.asInt);
+
+    completer.set(ListenableWorker.Result.success());
+  }
+
+  /**
+   * Remote/online license validation, calls the Notifee API verification endpoint.
+   *
+   * @param workData
+   * @param completer
+   */
+  static void doRemoteWork(
+    Data workData, ResolvableFuture<ListenableWorker.Result> completer
+  ) {
+    boolean isPrimaryKey = workData.getBoolean(Worker.KEY_IS_PRIMARY, true);
+    String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
+    String verifyTokenJwt = buildVerifyLicenseRequestToken(androidLicenseKey);
+
+    OkHttpClient client = new OkHttpClient();
+
+    Request request = new Request.Builder().url("https://api.invertase.io/license/verify")
+      .post(RequestBody.create(MediaType.parse("text/plain; charset=utf-8"), verifyTokenJwt))
+      .build();
+
+    String responseBody = null;
+    boolean successful = false;
+    try {
+      Response response = client.newCall(request).execute();
+      successful = response.isSuccessful();
+      if (successful && response.body() != null) {
+        responseBody = response.body().toString();
+      }
+    } catch (Exception e) {
+      Logger.e(TAG, "Remote license verification request failed", e);
+    }
+
+    // not successful most likely means the API failed
+    if (!successful) {
+      // schedule to try again sooner if request failed, remote status will remain as pending
+      // until verified
+      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    // verify the response jwt token
+    Jwt<Header, Claims> verifiedJwt = getInstance().verifyToken(responseBody);
+    if (verifiedJwt == null) {
+      // schedule to try again sooner if request failed, remote status will remain as pending
+      // until verified
+      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    Claims claims = verifiedJwt.getBody();
+    if (!claims.containsKey(JWT_KEY_RESPONSE)) {
+      // schedule to try again sooner if request failed, remote status will remain as pending
+      // until verified
+      scheduleRemoteWork(1, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    int response = claims.get(JWT_KEY_RESPONSE, int.class);
+    Preferences.getSharedInstance().setIntValue("rvs", response);
+
+    long remoteWorkIntervalDays = 4;
+
+    // if the license was OK then only check every 4 days, or 1 if primary key
+    if (response == RemoteVerificationStatus.OK.asInt) {
+      remoteWorkIntervalDays = isPrimaryKey ? 1 : 4;
+    } else {
+      // license validation failed, check again as soon as possible
+      remoteWorkIntervalDays = 1;
+    }
+
+    scheduleRemoteWork(remoteWorkIntervalDays, isPrimaryKey, ExistingPeriodicWorkPolicy.REPLACE);
+    completer.set(ListenableWorker.Result.success());
+  }
+
+  /**
+   * Create an immediate work request that validates the license key JWT.
+   */
+  private static void scheduleLocalWork() {
+    Data workData = new Data.Builder()
+      .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_LICENSE_VERIFY_LOCAL).build();
+
+    OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
+    workRequestBuilder.setInputData(workData);
+
+    WorkManager.getInstance(ContextHolder.getApplicationContext())
+      .enqueueUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_LOCAL, ExistingWorkPolicy.KEEP,
+        workRequestBuilder.build()
+      );
+  }
+
+  /**
+   * Create a periodic work request that runs every few days to validate the license with the
+   * remote notifee api. Work request will only run when internet connectivity is detected.
+   *
+   * @param daysInterval
+   * @param isPrimaryKey
+   * @param existingPeriodicWorkPolicy
+   */
+  private static void scheduleRemoteWork(
+    long daysInterval, boolean isPrimaryKey, ExistingPeriodicWorkPolicy existingPeriodicWorkPolicy
+  ) {
+    Constraints constraints = new Constraints.Builder()
+      .setRequiredNetworkType(NetworkType.CONNECTED).build();
+
+    Data workData = new Data.Builder()
+      .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE)
+      .putBoolean(Worker.KEY_IS_PRIMARY, isPrimaryKey).build();
+
+    PeriodicWorkRequest.Builder workRequestBuilder = new PeriodicWorkRequest.Builder(Worker.class,
+      daysInterval, TimeUnit.DAYS
+    );
+
+    workRequestBuilder.setInputData(workData);
+    workRequestBuilder.setConstraints(constraints);
+    workRequestBuilder.keepResultsForAtLeast(daysInterval, TimeUnit.DAYS);
+
+    if (existingPeriodicWorkPolicy == ExistingPeriodicWorkPolicy.REPLACE) {
+      workRequestBuilder.setInitialDelay(daysInterval, TimeUnit.DAYS);
+    }
+
+    WorkManager.getInstance(ContextHolder.getApplicationContext())
+      .enqueueUniquePeriodicWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE, existingPeriodicWorkPolicy,
+        workRequestBuilder.build()
+      );
+  }
+
+  /**
+   * Builds a remote validation request JWT payload.
+   * TODO
+   * @param jwtLicenseKey
+   * @return
+   */
+  static String buildVerifyLicenseRequestToken(String jwtLicenseKey) {
+    // TODO build jwt to send to verify api
+    // JWT example claims:
+    //   {
+    //     jwt: jwtLicenseKey,
+    //     device_brand: 'Samsung',
+    //     device_model: 'SMG-95F',
+    //     device_os_version: '28', // e.g ANDROID 28
+    //     product_version: '0.1.0', // NOTIFEE
+    //     framework_version: '0.60.6', // RN
+    //     app_version: '1.6.9', // Users app version
+    //   },
+    return "";
+  }
+
+  /**
+   * Returns a boolean of whether the current license is valid.
+   *
+   * @return
+   */
+  static boolean isLicenseValid() {
+    boolean isDebug = (
+      0 != (
+        ContextHolder.getApplicationContext().getApplicationInfo().flags &
+          ApplicationInfo.FLAG_DEBUGGABLE
+      )
+    );
+
+    // free to use in development
+    if (isDebug) {
+      return true;
+    }
+
+    LocalVerificationStatus localStatus = getLocalStatus();
+    RemoteVerificationStatus remoteStatus = getRemoteStatus();
+
+    // if remote & local statuses are either OK or PENDING then assume the license is valid
+    return (
+      remoteStatus == RemoteVerificationStatus.PENDING ||
+        remoteStatus == RemoteVerificationStatus.OK
+    ) && (
+      localStatus == LocalVerificationStatus.PENDING || localStatus == LocalVerificationStatus.OK
+    );
+  }
+
+  private static LocalVerificationStatus getLocalStatus() {
+    return LocalVerificationStatus.values()[Preferences.getSharedInstance()
+      .getIntValue("lvs", LocalVerificationStatus.PENDING.asInt)];
+  }
+
+  private static RemoteVerificationStatus getRemoteStatus() {
+    return RemoteVerificationStatus.values()[Preferences.getSharedInstance()
+      .getIntValue("rvs", RemoteVerificationStatus.PENDING.asInt)];
+  }
+
+  private @Nullable
+  Jwt<Header, Claims> verifyToken(String token) {
+    Jwt<Header, Claims> jwt = null;
+
+    try {
+      jwt = Jwts.parser().setSigningKey(mServerPublicKey).parseClaimsJwt(token);
+    } catch (Exception e) {
+      Logger.e(TAG, "Error parsing license key, invalid JWT?", e);
+    }
+
     return jwt;
   }
 
-  private String buildJwt() {
-    // TODO
-    return "";
+  private enum LicensePlatform {
+    ANDROID(0), IOS(1);
+    final int asInt;
+
+    LicensePlatform(int platform) {
+      this.asInt = platform;
+    }
+  }
+
+  private enum LocalVerificationStatus {
+    OK(0), PENDING(1), NO_LICENSE(2), INVALID_LICENSE(3);
+    final int asInt;
+
+    LocalVerificationStatus(int status) {
+      this.asInt = status;
+    }
+  }
+
+  private enum RemoteVerificationStatus {
+    OK(0), PENDING(1), BAD_REQUEST_TOKEN(2), BAD_REQUEST_PAYLOAD(3), LICENSE_INVALID(
+      4), LICENSE_PAYLOAD_INVALID(5), LICENSE_NOT_FOUND(6), LICENSE_TOO_MANY_DEVICES(7);
+    final int asInt;
+
+    RemoteVerificationStatus(int status) {
+      this.asInt = status;
+    }
   }
 }

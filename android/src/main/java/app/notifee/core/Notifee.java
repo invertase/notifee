@@ -49,19 +49,7 @@ public class Notifee {
     synchronized (Notifee.class) {
       if (mNotifee != null) return;
       mNotifee = new Notifee();
-      LicenseChecker.initialize(
-        "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA/7MJ1T3Oa+vSACnoc11G\n" +
-          "gP1GQ4dNbzJDHRczA6lgX/+gmsDACaZkoe7vyq/fTZrrTVggXLZXvhQjNQwrmDC7\n" +
-          "Z1zeFKZZecmxXjL+HxXBZj4fGCoENvOqLop0FkCNvgFS9aYEze+NLQWwWCTmqw08\n" +
-          "9tBjlhMAZFrsx4I66aXJZh69KoG8w/v1Hj1Am2BlVSD1K1kS+KTXTV/4Lmn31/gF\n" +
-          "s5SCFzB7Y2yLSdxSdljahmDWcdaDY8GIEOtK5JImO53kML08cdpYBksOYqXlk2+a\n" +
-          "mTQup6IVzlrQoeu7fIRvJ8w4ExuWOXgKS9thU1x/NLUujAnv7O5PkAWOXoVQF5GM\n" +
-          "fzDX6VtbiDQyvwND8nNz2Z3345b53zc+9eghWKo6zDMacNrc1/WNtO5WgMEwilvK\n" +
-          "kiVHGWHRYYbKNZKckWf+fkXTOfXiajFkCARzaIvvIHPOoiw/SxYQR7rp8OimlLgR\n" +
-          "c5qJw2rCcXrvqSLXvIyF7MHfmwX0yzyy6cYOQBnoYrs/sUxliEiYDg9AMlLSBEoC\n" +
-          "qCl2oNFq+UN6H/Onv+FKvCAeTWowsco2OXw9ry1q83FY6ksAW8rh0cA25dosAfcm\n" +
-          "DYSDKXKXjmJCL07Ehi1OLACDwb9z7z1zGWISXMAVdkzzL59s01nKbnCcNLQd6CqF\n" +
-          "RTTO/skUue3mgizqFfqGb8sCAwEAAQ==");
+      LicenseChecker.initialize();
     }
   }
 

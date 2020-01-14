@@ -12,7 +12,10 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 class Worker extends ListenableWorker {
   static final String KEY_WORK_TYPE = "workType";
+  static final String KEY_IS_PRIMARY = "isPrimaryKey";
   static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
+  static final String WORK_TYPE_LICENSE_VERIFY_LOCAL = "app.notifee.core.LicenseVerify.LOCAL";
+  static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
 
   private ResolvableFuture<Result> mFuture;
 
@@ -37,7 +40,6 @@ class Worker extends ListenableWorker {
   @Override
   public ListenableFuture<Result> startWork() {
     mFuture = ResolvableFuture.create();
-
     String workType = getInputData().getString(KEY_WORK_TYPE);
     if (workType == null) {
       Logger.d("Worker", "received incoming task with no input key type.");
@@ -48,6 +50,10 @@ class Worker extends ListenableWorker {
     if (workType.equals(WORK_TYPE_BLOCK_STATE_RECEIVER)) {
       Logger.d("Worker", "received incoming task with type " + workType);
       BlockStateBroadcastReceiver.doWork(getInputData(), mFuture);
+    } else if (workType.equals(WORK_TYPE_LICENSE_VERIFY_LOCAL)) {
+      LicenseChecker.doLocalWork(mFuture);
+    } else if (workType.equals(WORK_TYPE_LICENSE_VERIFY_REMOTE)) {
+      LicenseChecker.doRemoteWork(getInputData(), mFuture);
     } else {
       Logger.d("Worker", "unknown work type received: " + workType);
       mFuture.set(Result.success());
