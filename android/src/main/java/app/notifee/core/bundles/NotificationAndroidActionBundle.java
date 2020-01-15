@@ -30,35 +30,9 @@ public class NotificationAndroidActionBundle {
     return new NotificationAndroidActionBundle(actionBundle);
   }
 
-  /**
-   * Creates a NotificationCompat.Action from the given NotificationAndroidActionBundle instance
-   *
-   * @return Task<NotificationCompat.Action>
-   */
-//  public Task<NotificationCompat.Action> toNotificationAction() {
-//    // TODO executor
-//    return Tasks.call(() -> {
-//
-//      // TODO action pending intent handler!
-//      Intent intent = new Intent(ContextHolder.getApplicationContext(), NotifeeReceiverService.class);
-//      PendingIntent pendingIntent = PendingIntent.getService(ContextHolder.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//      Bitmap icon = Tasks.await(getIcon());
-//
-//      NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
-//        IconCompat.createWithAdaptiveBitmap(icon),
-//        getTitle(),
-//        pendingIntent
-//      );
-//
-//      RemoteInput remoteInput = getRemoteInput(actionBuilder);
-//      if (remoteInput != null) {
-//        actionBuilder.addRemoteInput(remoteInput);
-//      }
-//
-//      return actionBuilder.build();
-//    });
-//  }
+  public Bundle toBundle() {
+    return (Bundle) mNotificationAndroidActionBundle.clone();
+  }
 
   /**
    * Gets the title of the action
@@ -72,12 +46,9 @@ public class NotificationAndroidActionBundle {
 
   /**
    * Gets the icon of the action
-   *
-   * @return Task<Bitmap>
    */
-  public Task<Bitmap> getIcon() {
-    String icon = Objects.requireNonNull(mNotificationAndroidActionBundle.getString("icon"));
-    return ResourceUtils.getImageBitmapFromUrl(icon);
+  public String getIcon() {
+    return Objects.requireNonNull(mNotificationAndroidActionBundle.getString("icon"));
   }
 
   /**
@@ -100,8 +71,10 @@ public class NotificationAndroidActionBundle {
    */
   public @Nullable
   RemoteInput getRemoteInput(NotificationCompat.Action.Builder actionBuilder) {
-    if (mNotificationAndroidActionBundle.containsKey("input") && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH) {
-      Bundle inputBundle = Objects.requireNonNull(mNotificationAndroidActionBundle.getBundle("input"));
+    if (mNotificationAndroidActionBundle.containsKey("input") &&
+      android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH) {
+      Bundle inputBundle = Objects
+        .requireNonNull(mNotificationAndroidActionBundle.getBundle("input"));
 
       // TODO reciever key
       RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("TODO");
@@ -120,19 +93,23 @@ public class NotificationAndroidActionBundle {
 
       if (inputBundle.containsKey("choices")) {
         ArrayList<String> choicesArray = inputBundle.getStringArrayList("choices");
-        CharSequence[] choices = Objects.requireNonNull(choicesArray).toArray(new CharSequence[choicesArray.size()]);
+        CharSequence[] choices = Objects.requireNonNull(choicesArray)
+          .toArray(new CharSequence[choicesArray.size()]);
         remoteInputBuilder.setChoices(choices);
       }
 
       if (inputBundle.containsKey("editableChoices")) {
         boolean editable = inputBundle.getBoolean("editableChoices");
         if (editable) {
-          remoteInputBuilder.setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_ENABLED);
+          remoteInputBuilder
+            .setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_ENABLED);
         } else {
-          remoteInputBuilder.setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_DISABLED);
+          remoteInputBuilder
+            .setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_DISABLED);
         }
       } else {
-        remoteInputBuilder.setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_AUTO);
+        remoteInputBuilder
+          .setEditChoicesBeforeSending(RemoteInput.EDIT_CHOICES_BEFORE_SENDING_AUTO);
       }
 
       return remoteInputBuilder.build();

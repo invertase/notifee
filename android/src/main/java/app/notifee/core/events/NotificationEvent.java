@@ -13,6 +13,8 @@ public class NotificationEvent {
   public final static String TYPE_DELIVERED = "delivered";
   @KeepForSdk
   public final static String TYPE_DISMISSED = "dismissed";
+  @KeepForSdk
+  public final static String TYPE_OPENED = "opened";
 
   private final String type;
   private final Bundle extras;

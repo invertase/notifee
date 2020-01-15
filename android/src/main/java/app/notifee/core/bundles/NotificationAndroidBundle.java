@@ -1,7 +1,6 @@
 package app.notifee.core.bundles;
 
 import android.app.Notification;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -35,7 +34,8 @@ public class NotificationAndroidBundle {
   public @Nullable
   ArrayList<NotificationAndroidActionBundle> getActions() {
     if (mNotificationAndroidBundle.containsKey("actions")) {
-      ArrayList<Bundle> actionBundles = Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
+      ArrayList<Bundle> actionBundles = Objects
+        .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
       ArrayList<NotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
 
       for (Bundle actionBundle : actionBundles) {
@@ -205,8 +205,10 @@ public class NotificationAndroidBundle {
   public @Nullable
   CharSequence[] getInputHistory() {
     if (mNotificationAndroidBundle.containsKey("inputHistory")) {
-      ArrayList<String> inputHistoryArray = mNotificationAndroidBundle.getStringArrayList("inputHistory");
-      return Objects.requireNonNull(inputHistoryArray).toArray(new CharSequence[inputHistoryArray.size()]);
+      ArrayList<String> inputHistoryArray = mNotificationAndroidBundle
+        .getStringArrayList("inputHistory");
+      return Objects.requireNonNull(inputHistoryArray)
+        .toArray(new CharSequence[inputHistoryArray.size()]);
     }
 
     return null;
@@ -222,17 +224,14 @@ public class NotificationAndroidBundle {
   }
 
   /**
-   * Returns a task to get the large icon
-   *
-   * @return Task<Bitmap>
+   * Returns the large icon string
    */
-  public Task<Bitmap> getLargeIcon() {
+  public String getLargeIcon() {
     if (hasLargeIcon()) {
-      String largeIcon = Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
-      return ResourceUtils.getImageBitmapFromUrl(largeIcon);
+      return Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
     }
 
-    return Tasks.call(() -> null);
+    return null;
   }
 
   /**
@@ -243,7 +242,8 @@ public class NotificationAndroidBundle {
   public @Nullable
   ArrayList<Integer> getLights() {
     if (mNotificationAndroidBundle.containsKey("lights")) {
-      ArrayList lightList = Objects.requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
+      ArrayList lightList = Objects
+        .requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
       String rawColor = (String) lightList.get(0);
 
       ArrayList<Integer> lights = new ArrayList<>(3);
@@ -340,14 +340,11 @@ public class NotificationAndroidBundle {
   public @Nullable
   AndroidProgress getProgress() {
     if (mNotificationAndroidBundle.containsKey("progress")) {
-      Bundle progressBundle = Objects.requireNonNull(
-        mNotificationAndroidBundle.getBundle("progress")
-      );
+      Bundle progressBundle = Objects
+        .requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
-      return new AndroidProgress(
-        (int) progressBundle.getDouble("max"),
-        (int) progressBundle.getDouble("current"),
-        progressBundle.getBoolean("indeterminate", false)
+      return new AndroidProgress((int) progressBundle.getDouble("max"),
+        (int) progressBundle.getDouble("current"), progressBundle.getBoolean("indeterminate", false)
       );
     }
 
@@ -388,8 +385,7 @@ public class NotificationAndroidBundle {
     int smallIconId = ResourceUtils.getImageResourceId(rawIcon);
 
     if (smallIconId == 0) {
-      Logger.d(
-        "NotificationAndroidBundle",
+      Logger.d("NotificationAndroidBundle",
         String.format("Notification small icon '%s' could not be found", rawIcon)
       );
       return null;
@@ -427,9 +423,8 @@ public class NotificationAndroidBundle {
       return Tasks.call(() -> null);
     }
 
-    NotificationAndroidStyleBundle styleBundle = NotificationAndroidStyleBundle.fromBundle(
-      mNotificationAndroidBundle.getBundle("style")
-    );
+    NotificationAndroidStyleBundle styleBundle = NotificationAndroidStyleBundle
+      .fromBundle(mNotificationAndroidBundle.getBundle("style"));
 
     return styleBundle.getStyle();
   }
@@ -477,9 +472,8 @@ public class NotificationAndroidBundle {
       return new long[0];
     }
 
-    ArrayList vibrationPattern = Objects.requireNonNull(
-      mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern")
-    );
+    ArrayList vibrationPattern = Objects
+      .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern"));
 
     long[] vibrateArray = new long[vibrationPattern.size()];
 

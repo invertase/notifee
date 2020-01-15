@@ -18,6 +18,7 @@ public class ReceiverService extends Service {
 
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
+  static final String ACTION_PRESS_INTENT = "app.notifee.core.ReceiverService.ACTION_PRESS_INTENT";
 
   /**
    * Creates a PendingIntent, which when sent triggers this class.

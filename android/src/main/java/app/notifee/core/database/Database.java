@@ -37,6 +37,7 @@ public abstract class Database extends RoomDatabase {
       eventType = DatabaseEvent.TYPE_UPDATED;
     }
 
+
     // TODO setup db records
 
     EventBus.post(new DatabaseEvent(eventType, "notification", entityId));

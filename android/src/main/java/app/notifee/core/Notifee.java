@@ -205,8 +205,9 @@ public class Notifee {
       NotificationBundle notificationBundle = NotificationBundle.fromBundle(notificationMap);
       NotificationManager.displayNotification(notificationBundle).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
+          result.onComplete(null, null);
         } else {
+          Logger.e(TAG, "displayNotification", task.getException());
           result.onComplete(task.getException(), null);
         }
       });
