@@ -101,7 +101,7 @@ public class JSONUtils {
   }
 
   private static void setJSONArray(Bundle bundle, String key, JSONArray jsonArray) throws
-                                                                                   JSONException {
+    JSONException {
     // Empty list, can't even figure out the type, assume an ArrayList<String>
     if (jsonArray.length() == 0) {
       bundle.putStringArray(key, new String[0]);

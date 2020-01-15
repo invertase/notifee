@@ -11,8 +11,6 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import app.notifee.core.KeepForSdk;
-
 public class ChannelBundle {
 
   private final Bundle mChannelBundle;
@@ -25,11 +23,13 @@ public class ChannelBundle {
     return new ChannelBundle(bundle);
   }
 
-  public @NonNull String getId() {
+  public @NonNull
+  String getId() {
     return Objects.requireNonNull(mChannelBundle.getString("id"));
   }
 
-  public @NonNull String getName() {
+  public @NonNull
+  String getName() {
     return Objects.requireNonNull(mChannelBundle.getString("name"));
   }
 
@@ -41,7 +41,8 @@ public class ChannelBundle {
     return mChannelBundle.getBoolean("bypassDnd", false);
   }
 
-  public @Nullable String getDescription() {
+  public @Nullable
+  String getDescription() {
     return mChannelBundle.getString("description");
   }
 
@@ -53,7 +54,8 @@ public class ChannelBundle {
     return mChannelBundle.getBoolean("vibration", true);
   }
 
-  public @Nullable String getGroupId() {
+  public @Nullable
+  String getGroupId() {
     return mChannelBundle.getString("groupId");
   }
 

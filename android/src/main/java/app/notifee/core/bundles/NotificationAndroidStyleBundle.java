@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Tasks;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import app.notifee.core.utils.ResourceUtils;
 
@@ -36,8 +38,8 @@ public class NotificationAndroidStyleBundle {
    * @param personBundle
    * @return
    */
-  public static Task<Person> getPerson(Bundle personBundle) {
-    return Tasks.call(() -> {
+  private static Task<Person> getPerson(Executor executor, Bundle personBundle) {
+    return Tasks.call(executor, () -> {
       Person.Builder personBuilder = new Person.Builder();
 
       personBuilder.setName(personBundle.getString("name"));
@@ -59,6 +61,7 @@ public class NotificationAndroidStyleBundle {
           ResourceUtils.getImageBitmapFromUrl(
             Objects.requireNonNull(personBundle.getString("icon"))
           )
+          , 15, TimeUnit.SECONDS
         );
 
         if (icon != null) {
@@ -75,30 +78,31 @@ public class NotificationAndroidStyleBundle {
     });
   }
 
-  public @Nullable
-  Task<NotificationCompat.Style> getStyle() {
-    // todo executor
-    return Tasks.call(() -> {
-      int type = (int) mNotificationAndroidStyleBundle.getDouble("type");
-      NotificationCompat.Style style = null;
+  public Bundle toBundle() {
+    return (Bundle) mNotificationAndroidStyleBundle.clone();
+  }
 
-      switch (type) {
-        case 0:
-          style = Tasks.await(getBigPictureStyle());
-          break;
-        case 1:
-          style = getBigTextStyle();
-          break;
-        case 2:
-          style = getInboxStyle();
-          break;
-        case 3:
-          style = Tasks.await(getMessagingStyle());
-          break;
-      }
+  @Nullable
+  public Task<NotificationCompat.Style> getStyleTask(Executor executor) {
+    int type = (int) mNotificationAndroidStyleBundle.getDouble("type");
+    Task<NotificationCompat.Style> styleTask = null;
 
-      return style;
-    });
+    switch (type) {
+      case 0:
+        styleTask = getBigPictureStyleTask(executor);
+        break;
+      case 1:
+        styleTask = Tasks.forResult(getBigTextStyle());
+        break;
+      case 2:
+        styleTask = Tasks.forResult(getInboxStyle());
+        break;
+      case 3:
+        styleTask = getMessagingStyleTask(executor);
+        break;
+    }
+
+    return styleTask;
   }
 
   /**
@@ -106,9 +110,8 @@ public class NotificationAndroidStyleBundle {
    *
    * @return
    */
-  private Task<NotificationCompat.BigPictureStyle> getBigPictureStyle() {
-    // todo executor
-    return Tasks.call(() -> {
+  private Task<NotificationCompat.Style> getBigPictureStyleTask(Executor executor) {
+    return Tasks.call(executor, () -> {
       NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
 
       if (mNotificationAndroidStyleBundle.containsKey("picture")) {
@@ -116,6 +119,7 @@ public class NotificationAndroidStyleBundle {
           ResourceUtils.getImageBitmapFromUrl(
             Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"))
           )
+          , 15, TimeUnit.SECONDS
         );
 
         if (picture != null) {
@@ -128,6 +132,7 @@ public class NotificationAndroidStyleBundle {
           ResourceUtils.getImageBitmapFromUrl(
             Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"))
           )
+          , 15, TimeUnit.SECONDS
         );
 
         if (largeIcon != null) {
@@ -198,13 +203,13 @@ public class NotificationAndroidStyleBundle {
 
   /**
    * Gets a MessagingStyle for a notification
-   *
-   * @return Task<NotificationCompat.MessagingStyle>
    */
-  private Task<NotificationCompat.MessagingStyle> getMessagingStyle() {
-    // todo executor
-    return Tasks.call(() -> {
-      Person person = Tasks.await(getPerson(Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person"))));
+  private Task<NotificationCompat.Style> getMessagingStyleTask(Executor executor) {
+    return Tasks.call(executor, () -> {
+      Person person = Tasks.await(
+        getPerson(executor, Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
+        , 20, TimeUnit.SECONDS
+      );
 
       NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(person);
 
@@ -224,7 +229,10 @@ public class NotificationAndroidStyleBundle {
         long timestamp = (long) message.getDouble("timestamp");
 
         if (message.containsKey("person")) {
-          messagePerson = Tasks.await(getPerson(Objects.requireNonNull(message.getBundle("person"))));
+          messagePerson = Tasks.await(
+            getPerson(executor, Objects.requireNonNull(message.getBundle("person")))
+            , 20, TimeUnit.SECONDS
+          );
         }
 
         messagingStyle = messagingStyle.addMessage(message.getString("text"), timestamp, messagePerson);

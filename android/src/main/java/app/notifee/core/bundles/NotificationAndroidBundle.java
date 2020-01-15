@@ -10,9 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -418,15 +415,15 @@ public class NotificationAndroidBundle {
    *
    * @return Task<NotificationCompat.Style>
    */
-  public Task<NotificationCompat.Style> getStyle() {
+  public @Nullable
+  NotificationAndroidStyleBundle getStyle() {
     if (!hasStyle()) {
-      return Tasks.call(() -> null);
+      return null;
     }
 
-    NotificationAndroidStyleBundle styleBundle = NotificationAndroidStyleBundle
-      .fromBundle(mNotificationAndroidBundle.getBundle("style"));
-
-    return styleBundle.getStyle();
+    return NotificationAndroidStyleBundle.fromBundle(
+      mNotificationAndroidBundle.getBundle("style")
+    );
   }
 
   /**

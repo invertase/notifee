@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import app.notifee.core.bundles.NotificationAndroidActionBundle;
 import app.notifee.core.bundles.NotificationAndroidBundle;
+import app.notifee.core.bundles.NotificationAndroidStyleBundle;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.utils.ResourceUtils;
@@ -30,7 +31,7 @@ import app.notifee.core.utils.ResourceUtils;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 class NotificationManager {
-  private static final ExecutorService NOTIFICATION_BUILD_EXECUTOR = Executors.newFixedThreadPool(4);
+  private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
     NotificationBundle notificationBundle
@@ -133,8 +134,6 @@ class NotificationManager {
         builder.setSortKey(androidBundle.getSortKey());
       }
 
-      // TODO Style
-
       if (androidBundle.getTicker() != null) {
         builder.setTicker(androidBundle.getTicker());
       }
@@ -198,9 +197,9 @@ class NotificationManager {
           );
 
         Bitmap icon = Tasks.await(
-          // 5 second timeout - should this be configurable?
+          // 10 second timeout - should this be configurable?
           ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
-          5, TimeUnit.SECONDS
+          10, TimeUnit.SECONDS
         );
 
         NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
@@ -220,11 +219,39 @@ class NotificationManager {
       return builder;
     };
 
-    return Tasks.call(NOTIFICATION_BUILD_EXECUTOR, builderCallable)
+    /*
+     * A task continuation that builds the notification style, if any. Additionally fetches any
+     * image bitmaps (e.g. Person image, or BigPicture image) through Fresco.
+     */
+    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> styleContinuation = task -> {
+      NotificationCompat.Builder builder = task.getResult();
+      NotificationAndroidStyleBundle androidStyleBundle = androidBundle.getStyle();
+      if (androidStyleBundle == null) {
+        return builder;
+      }
+
+      Task<NotificationCompat.Style> styleTask = androidStyleBundle.getStyleTask(
+        CACHED_THREAD_POOL
+      );
+      if (styleTask == null) {
+        return builder;
+      }
+
+      NotificationCompat.Style style = Tasks.await(styleTask);
+      if (style != null) {
+        builder.setStyle(style);
+      }
+
+      return builder;
+    };
+
+    return Tasks.call(CACHED_THREAD_POOL, builderCallable)
       // get a large image bitmap if largeIcon is set
-      .continueWith(NOTIFICATION_BUILD_EXECUTOR, largeIconContinuation)
+      .continueWith(CACHED_THREAD_POOL, largeIconContinuation)
       // build notification actions, tasks based to allow image fetching
-      .continueWith(NOTIFICATION_BUILD_EXECUTOR, actionsContinuation);
+      .continueWith(CACHED_THREAD_POOL, actionsContinuation)
+      // build notification style, tasks based to allow image fetching
+      .continueWith(CACHED_THREAD_POOL, styleContinuation);
   }
 
   static Task<Void> cancelNotification(@NonNull String notificationId) {
@@ -259,7 +286,7 @@ class NotificationManager {
 
   static Task<Void> displayNotification(NotificationBundle notificationBundle) {
     return notificationBundleToBuilder(notificationBundle)
-      .continueWith(NOTIFICATION_BUILD_EXECUTOR, (task) -> {
+      .continueWith(CACHED_THREAD_POOL, (task) -> {
         NotificationCompat.Builder builder = task.getResult();
         NotificationAndroidBundle androidBundle = notificationBundle.getAndroidBundle();
 

@@ -1,6 +1,5 @@
 package app.notifee.core.bundles;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.Keep;
@@ -9,12 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
 
-import com.google.android.gms.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
-import app.notifee.core.utils.ResourceUtils;
 //import io.invertase.notifee.NotifeeReceiverService;
 
 @Keep

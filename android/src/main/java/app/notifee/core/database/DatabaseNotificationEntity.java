@@ -31,7 +31,6 @@ class DatabaseNotificationEntity {
   Long modifiedAt;
 
 
-
   // TODO just testing
   @ColumnInfo(name = "bundle")
   String bundle;

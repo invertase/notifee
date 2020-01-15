@@ -19,15 +19,18 @@ public class ChannelGroupBundle {
     return new ChannelGroupBundle(bundle);
   }
 
-  public @NonNull String getId() {
+  public @NonNull
+  String getId() {
     return Objects.requireNonNull(mChannelGroupBundle.getString("id"));
   }
 
-  public @NonNull String getName() {
+  public @NonNull
+  String getName() {
     return Objects.requireNonNull(mChannelGroupBundle.getString("name"));
   }
 
-  public @Nullable String getDescription() {
+  public @Nullable
+  String getDescription() {
     return mChannelGroupBundle.getString("description");
   }
 }

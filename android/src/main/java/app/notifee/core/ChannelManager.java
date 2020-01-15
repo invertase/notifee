@@ -191,7 +191,9 @@ public class ChannelManager {
     channelBundle.putString("lightColor", ""); // TODO convert light color
 
     long[] vibrationPattern = channel.getVibrationPattern();
-    if (vibrationPattern.length > 0) channelBundle.putLongArray("vibrationPattern", vibrationPattern);
+    if (vibrationPattern.length > 0) {
+      channelBundle.putLongArray("vibrationPattern", vibrationPattern);
+    }
 
     // Unless the user manually changes this in app settings, it is always -1000.
     int visibility = channel.getLockscreenVisibility();

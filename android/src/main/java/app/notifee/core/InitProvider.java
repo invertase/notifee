@@ -11,8 +11,6 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import app.notifee.core.database.Database;
-
 public class InitProvider extends ContentProvider {
   private static final String PROVIDER_AUTHORITY = "notifee-init-provider";
 
