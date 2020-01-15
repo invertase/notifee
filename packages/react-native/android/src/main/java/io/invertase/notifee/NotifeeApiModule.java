@@ -204,13 +204,25 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getInitialNotification(Promise promise) {
-    // TODO
+    Notifee.getInstance().getInitialNotification((e, aBundle) -> {
+      if (e != null) {
+        // TODO custom error class with message/code
+        promise.reject(e);
+      } else {
+        promise.resolve(Arguments.fromBundle(aBundle));
+      }
+    });
   }
 
   @ReactMethod
   public void openNotificationSettings(String channelId, Promise promise) {
     Notifee.getInstance().openNotificationSettings(channelId, getCurrentActivity(), (e, aVoid) -> {
-      promise.resolve(aVoid);
+      if (e != null) {
+        // TODO custom error class with message/code
+        promise.reject(e);
+      } else {
+        promise.resolve(aVoid);
+      }
     });
   }
 
@@ -223,11 +235,11 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   @Override
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
-    // TODO
-    //   constants.put("NOTIFEE_RAW_JSON", NotifeeJSON.getSharedInstance().getRawJSON());
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
     constants.put("NOTIFICATION_EVENT_KEY", NotifeeEventSubscriber.NOTIFICATION_EVENT_KEY);
-    constants.put("FOREGROUND_NOTIFICATION_TASK_KEY", NotifeeEventSubscriber.FOREGROUND_NOTIFICATION_TASK_KEY);
+    constants.put("FOREGROUND_NOTIFICATION_TASK_KEY",
+      NotifeeEventSubscriber.FOREGROUND_NOTIFICATION_TASK_KEY
+    );
     return constants;
   }
 }

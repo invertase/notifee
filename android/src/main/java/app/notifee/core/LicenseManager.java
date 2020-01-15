@@ -42,9 +42,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-class LicenseChecker {
+class LicenseManager {
   private static final String TAG = "License";
-  private static final LicenseChecker mInstance = new LicenseChecker();
+  private static final LicenseManager mInstance = new LicenseManager();
   private static final String JWT_KEY_JWT = "0";
   private static final String JWT_KEY_DEVICE_BRAND = "1";
   private static final String JWT_KEY_DEVICE_MODEL = "2";
@@ -63,7 +63,7 @@ class LicenseChecker {
   private String mClientPrivateKey = null;
 
   static void initialize() {
-    synchronized (LicenseChecker.mInstance) {
+    synchronized (LicenseManager.mInstance) {
       if (mInstance.mServerPublicKey == null) {
         mInstance.mServerPublicKey =
           "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA/7MJ1T3Oa+vSACnoc11G\n" +
@@ -135,7 +135,7 @@ class LicenseChecker {
     }
   }
 
-  static LicenseChecker getInstance() {
+  static LicenseManager getInstance() {
     return mInstance;
   }
 

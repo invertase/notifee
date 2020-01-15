@@ -51,9 +51,9 @@ class Worker extends ListenableWorker {
       Logger.d("Worker", "received incoming task with type " + workType);
       BlockStateBroadcastReceiver.doWork(getInputData(), mFuture);
     } else if (workType.equals(WORK_TYPE_LICENSE_VERIFY_LOCAL)) {
-      LicenseChecker.doLocalWork(mFuture);
+      LicenseManager.doLocalWork(mFuture);
     } else if (workType.equals(WORK_TYPE_LICENSE_VERIFY_REMOTE)) {
-      LicenseChecker.doRemoteWork(getInputData(), mFuture);
+      LicenseManager.doRemoteWork(getInputData(), mFuture);
     } else {
       Logger.d("Worker", "unknown work type received: " + workType);
       mFuture.set(Result.success());
