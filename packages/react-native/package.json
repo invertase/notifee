@@ -4,7 +4,7 @@
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "lib/src/index.js",
-  "types": "types/index.d.ts",
+  "types": "lib/src/index.d.ts",
   "scripts": {
     "build": "genversion --es6 --semi src/version.ts && tsc",
     "build:clean": "rimraf android/libs/notifee_core.aar && rimraf android/build && rimraf ios/build && rimraf lib",

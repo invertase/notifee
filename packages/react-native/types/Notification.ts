@@ -183,11 +183,13 @@ export interface RemoteNotification extends Notification {
  */
 export type EventObserver = (
   type: EventType,
-  event:
+  event: {} & (
     | AndroidNotificationEvent
     | AndroidChannelBlockedEvent
     | AndroidChannelGroupBlockedEvent
-    | AndroidAppBlockedEvent,
+    | AndroidAppBlockedEvent
+  ),
+
   headless: boolean,
 ) => Promise<void>;
 

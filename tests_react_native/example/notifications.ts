@@ -1,4 +1,7 @@
-export default [
+import Notifee from '@notifee/react-native';
+import { NotificationBuilder } from '@notifee/react-native/lib/types/Notification';
+
+export const notifications: { key: string; notification: NotificationBuilder }[] = [
   {
     key: 'Empty',
     notification: {
@@ -102,6 +105,20 @@ export default [
           },
         ],
         channelId: 'foo',
+      },
+    },
+  },
+  {
+    key: 'Big Picture Style',
+    notification: {
+      title: 'Big Picture Style',
+      body: 'Expand for a cat',
+      android: {
+        channelId: 'foo',
+        style: {
+          type: Notifee.AndroidStyle.BIGPICTURE,
+          picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+        },
       },
     },
   },
