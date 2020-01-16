@@ -13,7 +13,7 @@ import Notifee from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
-import { NotificationBuilder } from '@notifee/react-native/lib/types/Notification';
+import { Notification, NotificationEventType } from '@notifee/react-native/lib/types/Notification';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
@@ -47,12 +47,12 @@ const channels = [
   },
 ];
 
-Notifee.onEvent((type, event, headless) => {
-  console.log('onEvent', { type }, event, { headless });
-  if (type === Notifee.EventType.ACTION_PRESS) {
-    const notification = event.notification;
+Notifee.onEvent(({ type, detail, headless }) => {
+  console.log('onEvent', { type }, detail, { headless });
+  if (type === NotificationEventType.ACTION_PRESS) {
+    const notification = detail.notification;
 
-    if (event.action.id === 'first_action') {
+    if (detail.action.id === 'first_action') {
       notification.android.actions[0].title = 'Thanks';
       Notifee.displayNotification(notification).then(() => console.log('Updated'));
     }
@@ -83,7 +83,7 @@ function Root(): any {
     init().catch(console.error);
   }, []);
 
-  function displayNotification(notification: NotificationBuilder, channelId: string): void {
+  function displayNotification(notification: Notification, channelId: string): void {
     if (!notification.android) notification.android = {};
     notification.android.channelId = channelId;
 

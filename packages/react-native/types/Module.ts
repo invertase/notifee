@@ -2,15 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import {
-  Notification,
-  NotificationBuilder,
-  NotificationRepeatInterval,
-  NotificationSchedule,
-  RemoteNotification,
-  EventType,
-  EventObserver,
-} from './Notification';
+import { Notification, NotificationEventObserver, NotificationEventType } from './Notification';
 import {
   AndroidBadgeIconType,
   AndroidCategory,
@@ -27,12 +19,8 @@ import {
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
 
-/**
- * TODO
- */
 export interface Module {
   cancelAllNotifications(): Promise<void>;
-
   cancelNotification(notificationId: string): Promise<void>;
 
   /**
@@ -125,7 +113,7 @@ export interface Module {
    * @param notification A `Notification` interface.
    * @return Promise<string> A promise that resolves the new notification id
    */
-  displayNotification(notification: NotificationBuilder): Promise<string>;
+  displayNotification(notification: Notification): Promise<string>;
 
   /**
    * Returns a single `AndroidChannel` by id.
@@ -148,11 +136,9 @@ export interface Module {
 
   getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
-  getInitialNotification(): Promise<RemoteNotification | null>;
+  getInitialNotification(): Promise<Notification | null>;
 
-  getScheduledNotifications(): Promise<RemoteNotification[]>;
-
-  onEvent(observer: EventObserver): void;
+  onEvent(observer: NotificationEventObserver): void;
 
   /**
    * Opens the Android System settings for the application.
@@ -177,24 +163,14 @@ export interface Module {
   /**
    * Register a foreground service runner used to manage long running notifications.
    *
-   * TODO description
-   *
    * @param runner The runner function which runs for the duration of the service's lifetime.
    * @platform android
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
-
-  scheduleNotification(
-    notification: NotificationBuilder,
-    schedule: NotificationSchedule,
-  ): Promise<void>;
 }
 
-/**
- * TODO
- */
 export interface ModuleStatics {
-  EventType: typeof EventType;
+  NotificationEventType: typeof NotificationEventType;
   AndroidBadgeIconType: typeof AndroidBadgeIconType;
   AndroidCategory: typeof AndroidCategory;
   AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
@@ -204,12 +180,8 @@ export interface ModuleStatics {
   AndroidImportance: typeof AndroidImportance;
   AndroidColor: typeof AndroidColor;
   AndroidStyle: typeof AndroidStyle;
-  NotificationRepeatInterval: typeof NotificationRepeatInterval;
   SDK_VERSION: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-/**
- * TODO
- */
 export interface ModuleWithStatics extends Module, ModuleStatics {}

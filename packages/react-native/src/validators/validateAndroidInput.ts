@@ -1,5 +1,5 @@
 import { AndroidInput } from '../../types/NotificationAndroid';
-import { hasOwnProperty, isArrayOfStrings, isBoolean, isObject, isString } from '../utils';
+import { hasOwnProperty, isArrayOfStrings, isBoolean, isString } from '../utils';
 
 export default function validateAndroidInput(input?: AndroidInput): AndroidInput {
   const out: AndroidInput = {

@@ -6,17 +6,15 @@ import { generateId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';
-import { NotificationBuilder } from '../../types/Notification';
+import { Notification } from '../../types/Notification';
 
-export default function validateNotification(
-  notification: NotificationBuilder,
-): NotificationBuilder {
+export default function validateNotification(notification: Notification): Notification {
   if (!isObject(notification)) {
     throw new Error("'notification' expected an object value.");
   }
 
   // Defaults
-  const out: NotificationBuilder = {
+  const out: Notification = {
     id: '',
     title: '',
     subtitle: '',

@@ -27,6 +27,7 @@ import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import io.jsonwebtoken.Claims;
@@ -135,7 +136,7 @@ class LicenseManager {
     }
   }
 
-  static LicenseManager getInstance() {
+  private static LicenseManager getInstance() {
     return mInstance;
   }
 
@@ -149,14 +150,14 @@ class LicenseManager {
   ) {
     Logger.d(TAG, "Local verification started.");
     // mark local verification as pending while we try verify the license
-    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.PENDING.asInt);
+    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.PENDING);
 
     // check a license key has been specified
     String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
     if (androidLicenseKey == null) {
       // mark local verification as no license found, when we in debug builds this status is ignored
       // as a license is not required in debug
-      Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE.asInt);
+      Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE);
       WorkManager.getInstance(ContextHolder.getApplicationContext())
         .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -168,7 +169,7 @@ class LicenseManager {
     if (verifiedJwt == null) {
       // mark local verification as invalid license
       Preferences.getSharedInstance()
-        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
       WorkManager.getInstance(ContextHolder.getApplicationContext())
         .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -179,7 +180,7 @@ class LicenseManager {
     if (!jwtBody.containsKey(JWT_KEY_APP_ID)) {
       // mark local verification as invalid license
       Preferences.getSharedInstance()
-        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
       WorkManager.getInstance(ContextHolder.getApplicationContext())
         .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -192,7 +193,7 @@ class LicenseManager {
     if (!jwtAppId.equals(packageName)) {
       // mark local verification as invalid license as its not for this application id
       Preferences.getSharedInstance()
-        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
       Logger.e(TAG,
         "Your license key is not for this application, expected application to be " + jwtAppId +
           " but found " + packageName
@@ -205,10 +206,10 @@ class LicenseManager {
 
     // confirm license is for the right platform
     Integer jwtPlatform = jwtBody.get(JWT_KEY_PLATFORM, Integer.class);
-    if (jwtPlatform != LicensePlatform.ANDROID.asInt) {
+    if (jwtPlatform != LicensePlatform.ANDROID) {
       // mark local verification as invalid license as its not for this platform
       Preferences.getSharedInstance()
-        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE.asInt);
+        .setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
       Logger.e(TAG, "Your license key is not for this platform (Android)");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
         .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
@@ -229,7 +230,7 @@ class LicenseManager {
     scheduleRemoteWork(remoteWorkIntervalDays, jwtPrimary, ExistingPeriodicWorkPolicy.KEEP);
 
     // mark local verification a valid license
-    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK.asInt);
+    Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK);
 
     Logger.d(TAG, "Local verification succeeded.");
 
@@ -284,7 +285,7 @@ class LicenseManager {
           String responseBody = null;
           boolean successful = response.isSuccessful();
           if (successful && response.body() != null) {
-            responseBody = response.body().string();
+            responseBody = Objects.requireNonNull(response.body()).string();
           }
 
           // not successful most likely means the API failed
@@ -324,7 +325,7 @@ class LicenseManager {
           long remoteWorkIntervalDays;
 
           // if the license was OK then only check every 4 days, or 1 if primary key
-          if (remoteStatus == RemoteVerificationStatus.OK.asInt) {
+          if (remoteStatus == RemoteVerificationStatus.OK) {
             remoteWorkIntervalDays = isPrimaryKey ? 1 : 4;
           } else {
             // license validation failed, check again as soon as possible
@@ -449,7 +450,7 @@ class LicenseManager {
    *
    * @return
    */
-  static boolean isLicenseValid() {
+  static boolean isLicenseInvalid() {
     boolean isDebug = (
       0 != (
         ContextHolder.getApplicationContext().getApplicationInfo().flags &
@@ -459,29 +460,25 @@ class LicenseManager {
 
     // free to use in development
     if (isDebug) {
-      return true;
+      return false;
     }
 
-    LocalVerificationStatus localStatus = getLocalStatus();
-    RemoteVerificationStatus remoteStatus = getRemoteStatus();
+    int localStatus = getLocalStatus();
+    int remoteStatus = getRemoteStatus();
 
     // if remote & local statuses are either OK or PENDING then assume the license is valid
-    return (
-      remoteStatus == RemoteVerificationStatus.PENDING ||
-        remoteStatus == RemoteVerificationStatus.OK
-    ) && (
-      localStatus == LocalVerificationStatus.PENDING || localStatus == LocalVerificationStatus.OK
-    );
+    return (remoteStatus != RemoteVerificationStatus.PENDING &&
+      remoteStatus != RemoteVerificationStatus.OK) || (localStatus != LocalVerificationStatus.PENDING && localStatus != LocalVerificationStatus.OK);
   }
 
-  private static LocalVerificationStatus getLocalStatus() {
-    return LocalVerificationStatus.values()[Preferences.getSharedInstance()
-      .getIntValue("lvs", LocalVerificationStatus.PENDING.asInt)];
+  private static int getLocalStatus() {
+    return Preferences.getSharedInstance()
+      .getIntValue("lvs", LocalVerificationStatus.PENDING);
   }
 
-  private static RemoteVerificationStatus getRemoteStatus() {
-    return RemoteVerificationStatus.values()[Preferences.getSharedInstance()
-      .getIntValue("rvs", RemoteVerificationStatus.PENDING.asInt)];
+  private static int getRemoteStatus() {
+    return Preferences.getSharedInstance()
+      .getIntValue("rvs", RemoteVerificationStatus.PENDING);
   }
 
   private static PublicKey loadPublicKey(String publicKeyStr) throws Exception {
@@ -511,31 +508,36 @@ class LicenseManager {
     return jwt;
   }
 
-  private enum LicensePlatform {
-    ANDROID(0), IOS(1);
-    final int asInt;
-
-    LicensePlatform(int platform) {
-      this.asInt = platform;
-    }
+  static void logLicenseWarningForMethod(String methodName) {
+    String warning = "Attempted to call method " + methodName + " but your license is invalid.";
+    Logger.w(TAG, warning);
   }
 
-  private enum LocalVerificationStatus {
-    OK(0), PENDING(1), NO_LICENSE(2), INVALID_LICENSE(3);
-    final int asInt;
-
-    LocalVerificationStatus(int status) {
-      this.asInt = status;
-    }
+  static void logLicenseWarningForEvent(String eventName) {
+    String warning = "Attempted to send a " + eventName + " event but your license is invalid.";
+    Logger.w(TAG, warning);
   }
 
-  private enum RemoteVerificationStatus {
-    OK(0), PENDING(1), BAD_REQUEST_TOKEN(2), BAD_REQUEST_PAYLOAD(3), LICENSE_INVALID(
-      4), LICENSE_PAYLOAD_INVALID(5), LICENSE_NOT_FOUND(6), LICENSE_TOO_MANY_DEVICES(7);
-    final int asInt;
+  private class LicensePlatform {
+    final static int ANDROID = 0;
+    final static int IOS = 1;
+  }
 
-    RemoteVerificationStatus(int status) {
-      this.asInt = status;
-    }
+  private class LocalVerificationStatus {
+    final static int OK = 0;
+    final static int PENDING = 1;
+    final static int NO_LICENSE = 2;
+    final static int INVALID_LICENSE = 3;
+  }
+
+  private class RemoteVerificationStatus {
+    final static int OK = 0;
+    final static int PENDING = 1;
+    final static int BAD_REQUEST_TOKEN = 2;
+    final static int BAD_REQUEST_PAYLOAD = 3;
+    final static int LICENSE_INVALID = 4;
+    final static int LICENSE_PAYLOAD_INVALID = 5;
+    final static int LICENSE_NOT_FOUND = 6;
+    final static int LICENSE_TOO_MANY_DEVICES = 7;
   }
 }

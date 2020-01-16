@@ -1179,7 +1179,7 @@ export interface NativeAndroidChannel extends AndroidChannel {
  *
  * ![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)
  *
- * @platform android
+ * @platform android API Level >= 26
  */
 export interface AndroidChannelGroup {
   /**
@@ -1198,6 +1198,8 @@ export interface AndroidChannelGroup {
   /**
    * An optional description of the group. This is visible to the user.
    *
+   * On Android APIs less than 28 this will always be undefined.
+   *
    * @platform android API Level >= 28
    */
   description?: string;
@@ -1206,7 +1208,7 @@ export interface AndroidChannelGroup {
 /**
  * Interface for a native Android Channel Group.
  *
- * @platform android
+ * @platform android API Level >= 26
  */
 export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
   /**

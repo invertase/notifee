@@ -10,14 +10,19 @@ import {
   NativeModules,
   NativeModulesStatic,
 } from 'react-native';
-import { NativeModuleConfig } from './types';
-import { NotifeeJsonConfig } from '../types/Library';
+import { JsonConfig } from '../types/Library';
+
+export interface NativeModuleConfig {
+  version: string;
+  nativeModuleName: string;
+  nativeEvents: string[];
+}
 
 export default class NotifeeNativeModule {
   private readonly _moduleConfig: NativeModuleConfig;
   private _nativeModule: NativeModulesStatic | null;
   private _nativeEmitter: NativeEventEmitter;
-  private _notifeeConfig: NotifeeJsonConfig | null;
+  private _notifeeConfig: JsonConfig | null;
 
   public constructor(config: NativeModuleConfig) {
     this._nativeModule = null;
@@ -32,14 +37,14 @@ export default class NotifeeNativeModule {
     }
   }
 
-  public get config(): NotifeeJsonConfig {
+  public get config(): JsonConfig {
     if (this._notifeeConfig) {
       return this._notifeeConfig;
     }
 
     this._notifeeConfig = JSON.parse(this.native.NOTIFEE_RAW_JSON);
 
-    return this._notifeeConfig as NotifeeJsonConfig;
+    return this._notifeeConfig as JsonConfig;
   }
 
   public get emitter(): EventEmitter {

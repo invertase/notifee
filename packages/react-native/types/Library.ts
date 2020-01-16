@@ -1,25 +1,23 @@
 /**
  * An interface describing the Android specific configuration properties for the `notifee.config.json` file.
  */
-export interface NotifeeJsonConfigAndroid {
-  licenseKey: string;
-  // TODO
+export interface JsonConfigAndroid {
+  license: string;
 }
 
 /**
  * An interface describing the iOS specific configuration properties for the `notifee.config.json` file.
  */
-export interface NotifeeJsonConfigIOS {
-  licenseKey: string;
-  // TODO
+export interface JsonConfigIOS {
+  license: string;
 }
 
 /**
  * An interface describing the contents of a `notifee.config.json` file.
  */
-export interface NotifeeJsonConfig {
-  android?: NotifeeJsonConfigAndroid;
-  ios?: NotifeeJsonConfigIOS;
+export interface JsonConfig {
+  android?: JsonConfigAndroid;
+  ios?: JsonConfigIOS;
 }
 
 /**
@@ -37,12 +35,12 @@ export interface NativeError extends Error {
   readonly message: string;
 
   /**
-   * The native sdks returned error code, different per platform
+   * The native returned error code, different per platform
    */
   readonly nativeErrorCode: string | number;
 
   /**
-   * The native sdks returned error message, different per platform
+   * The native returned error message, different per platform
    */
   readonly nativeErrorMessage: string;
 }

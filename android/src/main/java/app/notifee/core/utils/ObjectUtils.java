@@ -8,6 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ObjectUtils {
+
+  public interface TypedCallback<T> {
+    void call(T t);
+  }
+
+
   public static @Nullable
   Class getClassForName(String className) {
     try {

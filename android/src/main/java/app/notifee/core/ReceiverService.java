@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 
+import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
 
 public class ReceiverService extends Service {
-
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
   static final String ACTION_PRESS_INTENT = "app.notifee.core.ReceiverService.ACTION_PRESS_INTENT";
@@ -77,6 +77,11 @@ public class ReceiverService extends Service {
     Bundle notification = intent.getBundleExtra("notification");
 
     if (notification == null) {
+      return;
+    }
+
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForEvent("notification dismissed");
       return;
     }
 

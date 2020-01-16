@@ -181,17 +181,28 @@ public class ChannelManager {
     channelBundle.putString("name", channel.getName().toString());
     channelBundle.putBoolean("badge", channel.canShowBadge());
     channelBundle.putBoolean("bypassDnd", channel.canBypassDnd());
-    channelBundle.putString("description", channel.getDescription());
-    channelBundle.putBoolean("lights", channel.shouldShowLights());
-    channelBundle.putString("groupId", channel.getGroup());
+
+    // can be null, don't include if null
+    if (channel.getDescription() != null) {
+      channelBundle.putString("description", channel.getDescription());
+    }
+
+    // can be null, don't include if null
+    if (channel.getGroup() != null) {
+      channelBundle.putString("groupId", channel.getGroup());
+    }
+
     channelBundle.putInt("importance", channel.getImportance());
+    channelBundle.putBoolean("lights", channel.shouldShowLights());
     channelBundle.putBoolean("vibration", channel.shouldVibrate());
-    channelBundle.putString("sound", ""); // TODO convert sound to string
     channelBundle.putBoolean("blocked", channel.getImportance() == IMPORTANCE_NONE);
+
+    channelBundle.putString("sound", ""); // TODO convert sound to string
     channelBundle.putString("lightColor", ""); // TODO convert light color
 
+    // getVibrationPattern can be null
     long[] vibrationPattern = channel.getVibrationPattern();
-    if (vibrationPattern.length > 0) {
+    if (vibrationPattern != null && vibrationPattern.length > 0) {
       channelBundle.putLongArray("vibrationPattern", vibrationPattern);
     }
 
@@ -227,7 +238,6 @@ public class ChannelManager {
       channelGroupBundle.putString("description", channelGroup.getDescription());
     } else {
       channelGroupBundle.putBoolean("blocked", false);
-      channelGroupBundle.putString("description", "");
     }
 
     return channelGroupBundle;

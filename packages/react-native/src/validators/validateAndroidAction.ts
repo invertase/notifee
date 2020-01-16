@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { isArray, isBoolean, isObject, isString, hasOwnProperty, isUndefined } from '../utils';
+import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 import { AndroidAction } from '../../types/NotificationAndroid';
 import validateAndroidOnPressAction from './validateAndroidPressAction';

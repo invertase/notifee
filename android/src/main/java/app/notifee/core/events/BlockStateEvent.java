@@ -1,5 +1,7 @@
 package app.notifee.core.events;
 
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import app.notifee.core.KeepForSdk;
@@ -8,28 +10,32 @@ import app.notifee.core.MethodCallResult;
 @KeepForSdk
 public class BlockStateEvent {
   @KeepForSdk
-  public static final String TYPE_APP = "app";
-  @KeepForSdk
-  public static final String TYPE_CHANNEL = "channel";
-  @KeepForSdk
-  public static final String TYPE_CHANNEL_GROUP = "channel_group";
+  public final static int TYPE_APP_BLOCKED = 4;
 
-  private String type;
+  @KeepForSdk
+  public final static int TYPE_CHANNEL_BLOCKED = 5;
+
+  @KeepForSdk
+  public final static int TYPE_CHANNEL_GROUP_BLOCKED = 6;
+
+  private int type;
+
   private boolean blocked;
+
   private @Nullable
-  String channelOrGroupId;
+  Bundle channelOrGroupBundle;
 
   private MethodCallResult<Void> result;
 
   private boolean completed = false;
 
   public BlockStateEvent(
-    String type, @Nullable String channelOrGroupId, boolean blocked, MethodCallResult<Void> result
+    int type, @Nullable Bundle channelOrGroupBundle, boolean blocked, MethodCallResult<Void> result
   ) {
     this.type = type;
     this.result = result;
     this.blocked = blocked;
-    this.channelOrGroupId = channelOrGroupId;
+    this.channelOrGroupBundle = channelOrGroupBundle;
   }
 
   @KeepForSdk
@@ -41,7 +47,7 @@ public class BlockStateEvent {
   }
 
   @KeepForSdk
-  public String getType() {
+  public int getType() {
     return type;
   }
 
@@ -52,7 +58,7 @@ public class BlockStateEvent {
 
   @Nullable
   @KeepForSdk
-  public String getChannelOrGroupId() {
-    return channelOrGroupId;
+  public Bundle getChannelOrGroupBundle() {
+    return channelOrGroupBundle;
   }
 }

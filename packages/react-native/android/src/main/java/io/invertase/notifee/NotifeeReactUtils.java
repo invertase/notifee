@@ -123,7 +123,7 @@ class NotifeeReactUtils {
     }
   }
 
-  public static boolean isAppInForeground() {
+  static boolean isAppInForeground() {
     Context context = EventSubscriber.getContext();
 
     ActivityManager activityManager = (ActivityManager) context

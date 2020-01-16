@@ -5,14 +5,9 @@ import { NativeError } from '../types/Library';
 
 export default class NotifeeNativeError extends Error implements NativeError {
   public readonly code: string;
-  private readonly jsStack: string;
   public readonly nativeErrorCode: string;
   public readonly nativeErrorMessage: string;
-
-  // todo errorEvent type
-  static fromEvent(errorEvent: any, stack?: string): NotifeeNativeError {
-    return new NotifeeNativeError({ userInfo: errorEvent }, stack || new Error().stack);
-  }
+  private readonly jsStack: string;
 
   // TODO native error type
   constructor(nativeError: any, jsStack = '') {
@@ -54,6 +49,11 @@ export default class NotifeeNativeError extends Error implements NativeError {
     });
 
     this.stack = this.getStackWithMessage(`NativeError: ${this.message}`);
+  }
+
+  // todo errorEvent type
+  static fromEvent(errorEvent: any, stack?: string): NotifeeNativeError {
+    return new NotifeeNativeError({ userInfo: errorEvent }, stack || new Error().stack);
   }
 
   /**

@@ -1,5 +1,7 @@
 package io.invertase.notifee;
 
+import android.os.Bundle;
+
 import androidx.annotation.Keep;
 
 import com.facebook.react.bridge.Arguments;
@@ -17,62 +19,70 @@ public class NotifeeEventSubscriber implements EventListener {
   static final String NOTIFICATION_EVENT_KEY = "app.notifee.notification.event";
   static final String FOREGROUND_NOTIFICATION_TASK_KEY = "app.notifee.foreground.task";
 
+  private static final String KEY_TYPE = "type";
+  private static final String KEY_DETAIL = "detail";
+  private static final String KEY_HEADLESS = "headless";
+  private static final String KEY_NOTIFICATION = "notification";
+
   @Override
   public void onNotificationEvent(NotificationEvent notificationEvent) {
     WritableMap eventMap = Arguments.createMap();
-    switch (notificationEvent.getType()) {
-      case NotificationEvent.TYPE_DELIVERED:
-        eventMap.putInt("eventType", 3);
-        break;
-      case NotificationEvent.TYPE_DISMISSED:
-        eventMap.putInt("eventType", 0);
-        break;
-      // TODO other types, press = 1, action_press = 2
-    }
+    WritableMap eventDetailMap = Arguments.createMap();
+    eventMap.putInt(KEY_TYPE, notificationEvent.getType());
+
     // TODO `action` bundle if applicable?
     // TODO `input` if applicable?
 
-    eventMap
-      .putMap("notification", Arguments.fromBundle(notificationEvent.getNotification().toBundle()));
+    eventDetailMap.putMap(KEY_NOTIFICATION,
+      Arguments.fromBundle(notificationEvent.getNotification().toBundle())
+    );
+
+    eventMap.putMap(KEY_DETAIL, eventDetailMap);
 
     if (isAppInForeground()) {
-      eventMap.putBoolean("headless", false);
+      eventMap.putBoolean(KEY_HEADLESS, false);
       NotifeeReactUtils.sendEvent(NOTIFICATION_EVENT_KEY, eventMap);
     } else {
-      eventMap.putBoolean("headless", true);
+      eventMap.putBoolean(KEY_HEADLESS, true);
       NotifeeReactUtils.startHeadlessTask(NOTIFICATION_EVENT_KEY, eventMap, 60000, null);
     }
   }
 
   @Override
   public void onLogEvent(LogEvent logEvent) {
+    // TODO
   }
 
   @Override
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
     WritableMap eventMap = Arguments.createMap();
+    WritableMap eventDetailMap = Arguments.createMap();
 
-    switch (blockStateEvent.getType()) {
-      case BlockStateEvent.TYPE_APP:
-        eventMap.putInt("eventType", 4);
-        break;
-      case BlockStateEvent.TYPE_CHANNEL:
-        eventMap.putInt("eventType", 5);
-        // TODO js is expecting the full channel object rather than id
-        eventMap.putString("channel", blockStateEvent.getChannelOrGroupId());
-        break;
-      case BlockStateEvent.TYPE_CHANNEL_GROUP:
-        eventMap.putInt("eventType", 6);
-        // TODO js is expecting the full channel group object rather than id
-        eventMap.putString("channelGroup", blockStateEvent.getChannelOrGroupId());
-        break;
+    eventMap.putInt(KEY_TYPE, blockStateEvent.getType());
+
+    int type = blockStateEvent.getType();
+
+    if (type == BlockStateEvent.TYPE_CHANNEL_BLOCKED ||
+      type == BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED) {
+      String mapKey = type == BlockStateEvent.TYPE_CHANNEL_BLOCKED ? "channel" : "channelGroup";
+      Bundle channelOrGroupBundle = blockStateEvent.getChannelOrGroupBundle();
+      if (channelOrGroupBundle != null) {
+        eventDetailMap
+          .putMap(mapKey, Arguments.fromBundle(blockStateEvent.getChannelOrGroupBundle()));
+      }
     }
 
+    if (type == BlockStateEvent.TYPE_APP_BLOCKED) {
+      eventDetailMap.putBoolean("blocked", blockStateEvent.isBlocked());
+    }
+
+    eventMap.putMap(KEY_DETAIL, eventDetailMap);
+
     if (isAppInForeground()) {
-      eventMap.putBoolean("headless", false);
+      eventMap.putBoolean(KEY_HEADLESS, false);
       NotifeeReactUtils.sendEvent(NOTIFICATION_EVENT_KEY, eventMap);
     } else {
-      eventMap.putBoolean("headless", true);
+      eventMap.putBoolean(KEY_HEADLESS, true);
       NotifeeReactUtils.startHeadlessTask(NOTIFICATION_EVENT_KEY, eventMap, 0,
         blockStateEvent::setCompletionResult
       );

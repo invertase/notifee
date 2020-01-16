@@ -20,6 +20,7 @@ import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.database.Database;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
 
 @KeepForSdk
 public class Notifee {
@@ -100,7 +101,7 @@ public class Notifee {
 
   @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("createChannel");
       result.onComplete(null, null);
     } else {
@@ -117,7 +118,7 @@ public class Notifee {
 
   @KeepForSdk
   public void createChannels(List<Bundle> channelsList, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("createChannels");
       result.onComplete(null, null);
     } else {
@@ -138,7 +139,7 @@ public class Notifee {
 
   @KeepForSdk
   public void createChannelGroup(Bundle channelGroupMap, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("createChannelGroup");
       result.onComplete(null, null);
     } else {
@@ -155,7 +156,7 @@ public class Notifee {
 
   @KeepForSdk
   public void createChannelGroups(List<Bundle> channelGroupsList, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("createChannelGroups");
       result.onComplete(null, null);
     } else {
@@ -176,7 +177,7 @@ public class Notifee {
 
   @KeepForSdk
   public void deleteChannel(String channelId, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("deleteChannel");
       result.onComplete(null, null);
     } else {
@@ -187,7 +188,7 @@ public class Notifee {
 
   @KeepForSdk
   public void deleteChannelGroup(String channelGroupId, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("deleteChannelGroup");
       result.onComplete(null, null);
     } else {
@@ -198,7 +199,7 @@ public class Notifee {
 
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("displayNotification");
       result.onComplete(null, null);
     } else {
@@ -216,7 +217,7 @@ public class Notifee {
 
   @KeepForSdk
   public void getAllChannels(MethodCallResult<List<Bundle>> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getAllChannels");
       result.onComplete(null, Collections.emptyList());
     } else {
@@ -232,7 +233,7 @@ public class Notifee {
 
   @KeepForSdk
   public void getChannel(String channelId, MethodCallResult<Bundle> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getChannel");
       result.onComplete(null, null);
     } else {
@@ -248,7 +249,7 @@ public class Notifee {
 
   @KeepForSdk
   public void getAllChannelGroups(MethodCallResult<List<Bundle>> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getAllChannelGroups");
       result.onComplete(null, Collections.emptyList());
     } else {
@@ -263,12 +264,12 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void getChannelGroup(String channelGroupsId, MethodCallResult<Bundle> result) {
-    if (!LicenseManager.isLicenseValid()) {
+  public void getChannelGroup(String channelGroupId, MethodCallResult<Bundle> result) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getChannelGroup");
       result.onComplete(null, null);
     } else {
-      ChannelManager.getChannelGroup(channelGroupsId).addOnCompleteListener(task -> {
+      ChannelManager.getChannelGroup(channelGroupId).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, task.getResult());
         } else {
@@ -280,7 +281,7 @@ public class Notifee {
 
   @KeepForSdk
   public void getInitialNotification(MethodCallResult<Bundle> result) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getInitialNotification");
       result.onComplete(null, null);
     } else {
@@ -293,7 +294,7 @@ public class Notifee {
   public void openNotificationSettings(
     @Nullable String channelId, Activity activity, MethodCallResult<Void> result
   ) {
-    if (!LicenseManager.isLicenseValid()) {
+    if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("openNotificationSettings");
       result.onComplete(null, null);
     } else {
@@ -324,11 +325,6 @@ public class Notifee {
       activity.runOnUiThread(() -> getContext().startActivity(intent));
       result.onComplete(null, null);
     }
-  }
-
-  private void logLicenseWarningForMethod(String methodName) {
-    String warning = "Attempted to call method " + methodName + " but your license is invalid.";
-    Logger.w(TAG, warning);
   }
 }
 

@@ -10,30 +10,35 @@ import app.notifee.core.bundles.NotificationBundle;
 @KeepForSdk
 public class NotificationEvent {
   @KeepForSdk
-  public final static String TYPE_DELIVERED = "delivered";
-  @KeepForSdk
-  public final static String TYPE_DISMISSED = "dismissed";
-  @KeepForSdk
-  public final static String TYPE_OPENED = "opened";
+  public final static int TYPE_DISMISSED = 0;
 
-  private final String type;
+  @KeepForSdk
+  public final static int TYPE_PRESS = 1;
+
+  @KeepForSdk
+  public final static int TYPE_ACTION_PRESS = 2;
+
+  @KeepForSdk
+  public final static int TYPE_DELIVERED = 3;
+
+  private final int type;
   private final Bundle extras;
   private final NotificationBundle notification;
 
-  public NotificationEvent(String type, NotificationBundle bundle) {
+  public NotificationEvent(int type, NotificationBundle bundle) {
     this.type = type;
     this.notification = bundle;
     this.extras = null;
   }
 
-  public NotificationEvent(String type, NotificationBundle bundle, Bundle extras) {
+  public NotificationEvent(int type, NotificationBundle bundle, Bundle extras) {
     this.type = type;
     this.notification = bundle;
     this.extras = extras;
   }
 
   @KeepForSdk
-  public String getType() {
+  public int getType() {
     return type;
   }
 

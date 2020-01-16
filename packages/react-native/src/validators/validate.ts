@@ -3,7 +3,7 @@
  */
 
 import { AndroidColor } from '../../types/NotificationAndroid';
-import { isNumber, isString } from '../utils';
+import { isNumber } from '../utils';
 
 /**
  * Validates any hexadecimal (optional transparency)

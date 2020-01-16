@@ -11,6 +11,7 @@ import androidx.work.WorkerParameters;
 import com.google.common.util.concurrent.ListenableFuture;
 
 class Worker extends ListenableWorker {
+  static final String TAG = "Worker";
   static final String KEY_WORK_TYPE = "workType";
   static final String KEY_IS_PRIMARY = "isPrimaryKey";
   static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
@@ -42,14 +43,14 @@ class Worker extends ListenableWorker {
     mFuture = ResolvableFuture.create();
     String workType = getInputData().getString(KEY_WORK_TYPE);
     if (workType == null) {
-      Logger.d("Worker", "received incoming task with no input key type.");
+      Logger.d(TAG, "received task with no input key type.");
       mFuture.set(Result.success());
       return mFuture;
     }
 
     switch (workType) {
       case WORK_TYPE_BLOCK_STATE_RECEIVER:
-        Logger.d("Worker", "received incoming task with type " + workType);
+        Logger.d(TAG, "received task with type " + workType);
         BlockStateBroadcastReceiver.doWork(getInputData(), mFuture);
         break;
       case WORK_TYPE_LICENSE_VERIFY_LOCAL:
@@ -59,7 +60,7 @@ class Worker extends ListenableWorker {
         LicenseManager.doRemoteWork(getInputData(), mFuture);
         break;
       default:
-        Logger.d("Worker", "unknown work type received: " + workType);
+        Logger.d(TAG, "unknown work type received: " + workType);
         mFuture.set(Result.success());
         break;
     }

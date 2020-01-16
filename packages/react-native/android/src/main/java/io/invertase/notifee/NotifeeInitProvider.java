@@ -14,7 +14,6 @@ public class NotifeeInitProvider extends InitProvider {
     boolean onCreate = super.onCreate();
 
     NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
-
     configBuilder.setJsonConfig(BuildConfig.NOTIFEE_JSON_RAW);
     configBuilder.setProductVersion(BuildConfig.VERSION_NAME);
     configBuilder.setFrameworkVersion(getReactNativeVersionString());
