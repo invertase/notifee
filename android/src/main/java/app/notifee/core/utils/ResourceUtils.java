@@ -27,6 +27,7 @@ import app.notifee.core.ContextHolder;
 import app.notifee.core.Logger;
 
 public class ResourceUtils {
+  private static final String TAG = "ResourceUtils";
   private static final String LOCAL_RESOURCE_SCHEME = "res";
   private static volatile Map<String, Integer> sResourceIdCache;
 
@@ -100,7 +101,7 @@ public class ResourceUtils {
       protected void onFailureImpl(
         @NonNull DataSource<CloseableReference<CloseableImage>> dataSource
       ) {
-        Logger.e("Utils", "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
+        Logger.e(TAG, "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
         bitmapTCS.setResult(null);
       }
     }, CallerThreadExecutor.getInstance());
@@ -164,8 +165,8 @@ public class ResourceUtils {
       }
 
       Context context = ContextHolder.getApplicationContext();
-
       String packageName = context.getPackageName();
+
       int id = context.getResources().getIdentifier(name, type, packageName);
       getResourceIdCache().put(key, id);
       return id;

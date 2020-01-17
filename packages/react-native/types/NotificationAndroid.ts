@@ -465,6 +465,11 @@ export interface NotificationAndroid {
   smallIcon?: string;
 
   /**
+   * An additional level parameter for when the icon is an instance of a Android LevelListDrawable.
+   */
+  smallIconLevel?: number;
+
+  /**
    * Set a sort key that orders this notification among other notifications from the same package.
    * This can be useful if an external sort was already applied and an app would like to preserve
    * this. Notifications will be sorted lexicographically using this value, although providing

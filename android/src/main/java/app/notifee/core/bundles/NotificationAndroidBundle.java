@@ -368,9 +368,7 @@ public class NotificationAndroidBundle {
   }
 
   /**
-   * Gets the small icon & it's level, or null if the icon is missing from the device.
-   *
-   * @return ArrayList<Integer>
+   * Gets the small icon resource id from its string name, or null if the icon is missing from the device.
    */
   public @Nullable
   Integer getSmallIcon() {
@@ -389,6 +387,20 @@ public class NotificationAndroidBundle {
     }
 
     return smallIconId;
+  }
+
+  /**
+   * Gets the small icon & it's level, or null if the icon is missing from the device.
+   *
+   * @return ArrayList<Integer>
+   */
+  public @Nullable
+  Integer getSmallIconLevel() {
+    if (!mNotificationAndroidBundle.containsKey("smallIconLevel")) {
+      return null;
+    }
+
+    return mNotificationAndroidBundle.getInt("smallIconLevel");
   }
 
   /**

@@ -121,4 +121,32 @@ export default {
       ],
     },
   },
+  'android-style-bigpicture': {
+    title: 'Photo successfully upload',
+    body: 'Your photo named "Sunset in Paradise" was successfully uploaded.',
+    subtitle: 'Upload',
+    android: {
+      channelId: 'default',
+      color: '#2196f3',
+      style: {
+        type: 0,
+        picture:
+          'https://images.unsplash.com/photo-1460627390041-532a28402358?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+      },
+      actions: [
+        {
+          title: 'Share',
+          pressAction: {
+            id: 'share',
+          },
+        },
+        {
+          title: 'Edit',
+          pressAction: {
+            id: 'edit',
+          },
+        },
+      ],
+    },
+  },
 };
