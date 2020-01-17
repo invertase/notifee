@@ -59,7 +59,7 @@ describe('notifee', () => {
         //   },
         // ],
         asForegroundService: false,
-        onPressAction: false,
+        pressAction: false,
         fullScreenAction: {
           id: 'foo',
         },

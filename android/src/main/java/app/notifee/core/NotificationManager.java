@@ -199,7 +199,8 @@ class NotificationManager {
         PendingIntent pendingIntent = ReceiverService
           .createIntent(
             ACTION_PRESS_INTENT,
-            new String[]{"action"},
+            new String[]{"notification", "action"},
+            notificationBundle.toBundle(),
             actionBundle.toBundle()
           );
 

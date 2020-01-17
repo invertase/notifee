@@ -316,15 +316,15 @@ export interface NotificationAndroid {
 
   /**
    * By default notifications have no behaviour when a user presses them. The
-   * `onPressAction` property allows you to set what happens when a user presses
+   * `pressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * The notification will always open the application when an `onPressAction` is provided. It is
+   * The notification will always open the application when an `pressAction` is provided. It is
    * however possible to provide advanced configuration to the press action to open custom
    * activities or React components. See [AndroidPressAction](/react-native/reference/androidpressaction)
    * for more information.
    */
-  onPressAction?: AndroidPressAction;
+  pressAction?: AndroidPressAction;
 
   /**
    * Set a notification importance for devices without channel support.
@@ -644,24 +644,23 @@ export interface AndroidAction {
   /**
    * The press action interface describing what happens when an action completes.
    *
-   * Note; unlike the `onPressAction` in the notification body, an action is not required to open the application
+   * Note; unlike the `pressAction` in the notification body, an action is not required to open the application
    * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
    * or [Android Actions](/react-native/docs/android/actions) for more information.
    */
-  onPressAction: AndroidPressAction;
-
-  /**
-   * An remote http icon representing the action. Newer devices may not show the icon and
-   * just show the action title.
-   *
-   * Recommended icon size is 24x24 px.
-   */
-  icon: string;
+  pressAction: AndroidPressAction;
 
   /**
    * The title of the notification, e.g. "Reply", "Mark as read" etc.
    */
   title: string;
+
+  /**
+   * An remote http icon representing the action. Newer devices may not show the icon.
+   *
+   * Recommended icon size is 24x24 px.
+   */
+  icon?: string;
 
   /**
    * If provided, the action accepts user input.
@@ -682,7 +681,7 @@ export interface AndroidAction {
  * the notification, pressing an action or providing text input. This interface defines what happens
  * when a user performs such interaction.
  *
- * When provided to a notification `onPressAction`, the application will always open (if not already)
+ * When provided to a notification `pressAction`, the application will always open (if not already)
  * using the default `launchActivity` for the application.
  *
  * When provided to a notification action, the action will only open the application if a `launchActivity`

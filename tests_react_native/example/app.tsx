@@ -13,7 +13,9 @@ import Notifee from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
-import { Notification, NotificationEventType } from '@notifee/react-native/lib/types/Notification';
+import { Notification } from '@notifee/react-native/lib/types/Notification';
+
+import videos from './videos';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
@@ -25,6 +27,12 @@ const colors: { [key: string]: string } = {
 };
 
 const channels = [
+  {
+    name: 'Custom Sound',
+    id: 'high',
+    importance: Notifee.AndroidImportance.HIGH,
+    sound: 'hollow.mp3',
+  },
   {
     name: 'High Importance',
     id: 'high',
@@ -49,14 +57,14 @@ const channels = [
 
 Notifee.onEvent(({ type, detail, headless }) => {
   console.log('onEvent', { type }, detail, { headless });
-  if (type === NotificationEventType.ACTION_PRESS) {
-    const notification = detail.notification;
-
-    if (detail.action.id === 'first_action') {
-      notification.android.actions[0].title = 'Thanks';
-      Notifee.displayNotification(notification).then(() => console.log('Updated'));
-    }
-  }
+  // if (type === NotificationEventType.ACTION_PRESS) {
+  //   const notification = detail.notification;
+  //
+  //   if (detail.action.id === 'first_action') {
+  //     notification.android.actions[0].title = 'Thanks';
+  //     Notifee.displayNotification(notification).then(() => console.log('Updated'));
+  //   }
+  // }
 
   return Promise.resolve();
 });
@@ -128,6 +136,33 @@ function Root(): any {
   );
 }
 
+function Video() {
+  return (
+    <View style={{ padding: 8 }}>
+      <Button
+        title="Display Notification"
+        onPress={() => {
+          setTimeout(() => {
+            Notifee.displayNotification(videos['android-actions-showcase']).catch(console.error);
+            // Notifee.displayNotification({
+            //   title: 'Uploading images...',
+            //   android: {
+            //     channelId: 'default',
+            //     asForegroundService: true,
+            //     progress: {
+            //       max: 10,
+            //       current: 0,
+            //     },
+            //     color: '#553C9A',
+            //   },
+            // });
+          }, 3000);
+        }}
+      />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -152,7 +187,33 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('testing', () => Root);
+// Notifee.registerForegroundService(notification => {
+//   return new Promise(resolve => {
+//     let interval: any = null;
+//     let i = 0;
+//
+//     interval = setInterval(() => {
+//       if (i === 5) {
+//         clearInterval(interval);
+//         return resolve();
+//       }
+//
+//       i++;
+//       Notifee.displayNotification({
+//         ...notification,
+//         android: {
+//           ...notification.android,
+//           progress: {
+//             max: 10,
+//             current: i * 2,
+//           },
+//         },
+//       });
+//     }, 1500);
+//   });
+// });
+
+AppRegistry.registerComponent('testing', () => Video);
 
 function TestComponent(): any {
   return (

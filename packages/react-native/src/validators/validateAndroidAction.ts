@@ -5,7 +5,7 @@
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 import { AndroidAction } from '../../types/NotificationAndroid';
-import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidInput from './validateAndroidInput';
 
 export default function validateAndroidAction(action: AndroidAction): AndroidAction {
@@ -14,13 +14,9 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
   }
 
   try {
-    validateAndroidOnPressAction(action.onPressAction);
+    validateAndroidPressAction(action.pressAction);
   } catch (e) {
     throw new Error(`'action' ${e.message}.`);
-  }
-
-  if (!isString(action.icon) || !action.icon) {
-    throw new Error("'action.icon' expected a string value.");
   }
 
   if (!isString(action.title) || !action.title) {
@@ -28,10 +24,17 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
   }
 
   const out: AndroidAction = {
-    onPressAction: action.onPressAction,
-    icon: action.icon,
+    pressAction: action.pressAction,
     title: action.title,
   };
+
+  if (hasOwnProperty(action, 'icon') && !isUndefined(action.icon)) {
+    if (!isString(action.icon) || !action.icon) {
+      throw new Error("'action.icon' expected a string value.");
+    }
+
+    out.icon = action.icon;
+  }
 
   if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
     if (isBoolean(action.input) && action.input) {

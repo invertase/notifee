@@ -13,12 +13,16 @@ public class NotificationAndroidPressActionBundle {
 
   private Bundle mNotificationAndroidPressActionBundle;
 
-  private NotificationAndroidPressActionBundle(Bundle onPressActionBundle) {
-    mNotificationAndroidPressActionBundle = onPressActionBundle;
+  private NotificationAndroidPressActionBundle(Bundle pressActionBundle) {
+    mNotificationAndroidPressActionBundle = pressActionBundle;
   }
 
-  public static NotificationAndroidPressActionBundle fromBundle(Bundle onPressActionBundle) {
-    return new NotificationAndroidPressActionBundle(onPressActionBundle);
+  public Bundle toBundle() {
+    return (Bundle) mNotificationAndroidPressActionBundle.clone();
+  }
+
+  public static NotificationAndroidPressActionBundle fromBundle(Bundle pressActionBundle) {
+    return new NotificationAndroidPressActionBundle(pressActionBundle);
   }
 
   public @NonNull

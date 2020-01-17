@@ -24,18 +24,31 @@ public class NotifeeEventSubscriber implements EventListener {
   private static final String KEY_HEADLESS = "headless";
   private static final String KEY_NOTIFICATION = "notification";
 
+  private static final String KEY_DETAIL_PRESS_ACTION = "pressAction";
+  private static final String KEY_DETAIL_INPUT = "input";
+
   @Override
   public void onNotificationEvent(NotificationEvent notificationEvent) {
     WritableMap eventMap = Arguments.createMap();
     WritableMap eventDetailMap = Arguments.createMap();
     eventMap.putInt(KEY_TYPE, notificationEvent.getType());
 
-    // TODO `action` bundle if applicable?
-    // TODO `input` if applicable?
-
     eventDetailMap.putMap(KEY_NOTIFICATION,
       Arguments.fromBundle(notificationEvent.getNotification().toBundle())
     );
+
+    Bundle extras = notificationEvent.getExtras();
+    if (extras != null) {
+      Bundle pressAction = extras.getBundle(KEY_DETAIL_PRESS_ACTION);
+      if (pressAction != null) {
+        eventDetailMap.putMap(KEY_DETAIL_PRESS_ACTION, Arguments.fromBundle(pressAction));
+      }
+
+      String input = extras.getString(KEY_DETAIL_INPUT);
+      if (input != null) {
+        eventDetailMap.putString(KEY_DETAIL_INPUT, input);
+      }
+    }
 
     eventMap.putMap(KEY_DETAIL, eventDetailMap);
 

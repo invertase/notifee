@@ -38,7 +38,7 @@ import {
   validateAndroidInboxStyle,
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
-import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidAction from './validateAndroidAction';
 
 export default function validateAndroidNotification(
@@ -354,13 +354,13 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * onPressAction
+   * pressAction
    */
-  if (hasOwnProperty(android, 'onPressAction') && !isUndefined(android.onPressAction)) {
+  if (hasOwnProperty(android, 'pressAction') && !isUndefined(android.pressAction)) {
     try {
-      out.onPressAction = validateAndroidOnPressAction(android.onPressAction);
+      out.pressAction = validateAndroidPressAction(android.pressAction);
     } catch (e) {
-      throw new Error(`'notification.android.onPressAction' ${e.message}`);
+      throw new Error(`'notification.android.pressAction' ${e.message}`);
     }
   }
 

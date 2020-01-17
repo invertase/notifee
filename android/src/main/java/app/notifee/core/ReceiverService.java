@@ -8,14 +8,20 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.RemoteInput;
 
+import app.notifee.core.bundles.NotificationAndroidActionBundle;
+import app.notifee.core.bundles.NotificationAndroidPressActionBundle;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 
 import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
+import static app.notifee.core.events.NotificationEvent.TYPE_ACTION_PRESS;
 
 public class ReceiverService extends Service {
+  public static final String REMOTE_INPUT_RECEIVER_KEY = "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
+
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
   static final String ACTION_PRESS_INTENT = "app.notifee.core.ReceiverService.ACTION_PRESS_INTENT";
@@ -68,11 +74,18 @@ public class ReceiverService extends Service {
     switch (action) {
       case DELETE_INTENT:
         onDeleteIntent(intent);
+      case ACTION_PRESS_INTENT:
+        onActionPressIntent(intent);
     }
 
     return START_NOT_STICKY;
   }
 
+  /**
+   * Handle users delete/dismiss intents
+   *
+   * @param intent
+   */
   private void onDeleteIntent(Intent intent) {
     Bundle notification = intent.getBundleExtra("notification");
 
@@ -87,6 +100,47 @@ public class ReceiverService extends Service {
 
     NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
     EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationBundle));
+  }
+
+  /**
+   * Handle action intents
+   *
+   * @param intent
+   */
+  private void onActionPressIntent(Intent intent) {
+    Bundle notification = intent.getBundleExtra("notification");
+    Bundle action = intent.getBundleExtra("action");
+
+    if (notification == null || action == null) {
+      return;
+    }
+
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForEvent("notification press action");
+      return;
+    }
+
+    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
+    NotificationAndroidActionBundle actionBundle = NotificationAndroidActionBundle.fromBundle(action);
+    NotificationAndroidPressActionBundle pressActionBundle = actionBundle.getPressAction();
+
+    String launchActivity = pressActionBundle.getLaunchActivity();
+    String reactComponent = pressActionBundle.getReactComponent();
+
+    // TODO Launch the app / component
+
+    Bundle extras = new Bundle();
+    extras.putBundle("pressAction", actionBundle.getPressAction().toBundle());
+
+    Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
+    if (remoteInput != null) {
+      CharSequence input = remoteInput.getCharSequence(REMOTE_INPUT_RECEIVER_KEY);
+      if (input != null) {
+        extras.putString("input", input.toString());
+      }
+    }
+
+    EventBus.post(new NotificationEvent(TYPE_ACTION_PRESS, notificationBundle, extras));
   }
 }
 

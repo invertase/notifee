@@ -25,7 +25,7 @@ export const notifications: { key: string; notification: Notification }[] = [
         //   text: 'Helllllllo World!!!!!!!!',
         // },
 
-        // onPressAction: {
+        // pressAction: {
         //   id: 'testing',
         //   reactComponent: 'test_component',
         // },
@@ -71,7 +71,7 @@ export const notifications: { key: string; notification: Notification }[] = [
           {
             title: 'Reply, Open & Cancel',
             icon: 'https://invertase.io/icons/icon-48x48.png',
-            onPressAction: {
+            pressAction: {
               id: 'first_action',
               // reactComponent: 'test_component',
             },
@@ -86,7 +86,7 @@ export const notifications: { key: string; notification: Notification }[] = [
           {
             title: 'Open & Cancel',
             icon: 'https://invertase.io/icons/icon-48x48.png',
-            onPressAction: {
+            pressAction: {
               id: 'second_action',
               reactComponent: 'test_component',
             },
@@ -99,7 +99,7 @@ export const notifications: { key: string; notification: Notification }[] = [
           {
             title: 'Nothing',
             icon: 'https://invertase.io/icons/icon-48x48.png',
-            onPressAction: {
+            pressAction: {
               id: 'third_action',
             },
           },

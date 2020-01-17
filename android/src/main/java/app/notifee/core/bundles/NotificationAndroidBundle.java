@@ -295,13 +295,13 @@ public class NotificationAndroidBundle {
   }
 
   /**
-   * Gets an onPressAction bundle for the notification
+   * Gets an pressAction bundle for the notification
    *
    * @return Bundle or null
    */
   public @Nullable
   Bundle getPressAction() {
-    return mNotificationAndroidBundle.getBundle("onPressAction");
+    return mNotificationAndroidBundle.getBundle("pressAction");
   }
 
   /**
