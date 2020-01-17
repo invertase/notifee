@@ -143,7 +143,7 @@ function Video() {
         title="Display Notification"
         onPress={() => {
           setTimeout(() => {
-            Notifee.displayNotification(videos['android-actions-showcase']).catch(console.error);
+            Notifee.displayNotification(videos['android-text-styling']).catch(console.error);
             // Notifee.displayNotification({
             //   title: 'Uploading images...',
             //   android: {

@@ -28,6 +28,7 @@ import app.notifee.core.bundles.NotificationAndroidStyleBundle;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.utils.ResourceUtils;
+import app.notifee.core.utils.TextUtils;
 
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
@@ -63,15 +64,15 @@ class NotificationManager {
       }
 
       if (notificationBundle.getTitle() != null) {
-        builder.setContentTitle(notificationBundle.getTitle());
+        builder.setContentTitle(TextUtils.fromHtml(notificationBundle.getTitle()));
       }
 
       if (notificationBundle.getSubTitle() != null) {
-        builder.setSubText(notificationBundle.getSubTitle());
+        builder.setSubText(TextUtils.fromHtml(notificationBundle.getSubTitle()));
       }
 
       if (notificationBundle.getBody() != null) {
-        builder.setContentText(notificationBundle.getBody());
+        builder.setContentText(TextUtils.fromHtml(notificationBundle.getBody()));
       }
 
       if (androidBundle.getBadgeIconType() != null) {
@@ -237,7 +238,7 @@ class NotificationManager {
 
         NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
           iconCompat,
-          actionBundle.getTitle(),
+          TextUtils.fromHtml(actionBundle.getTitle()),
           pendingIntent
         );
 
