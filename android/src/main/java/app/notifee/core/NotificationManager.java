@@ -197,14 +197,21 @@ class NotificationManager {
             actionBundle.toBundle()
           );
 
-        Bitmap icon = Tasks.await(
-          // 10 second timeout - should this be configurable?
-          ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
-          10, TimeUnit.SECONDS
-        );
+        String actionIconString = actionBundle.getIcon();
+        IconCompat icon = null;
+
+        if (actionIconString != null) {
+          Bitmap bitmapIcon = Tasks.await(
+            // 10 second timeout - should this be configurable?
+            ResourceUtils.getImageBitmapFromUrl(actionIconString),
+            10, TimeUnit.SECONDS
+          );
+
+          icon = IconCompat.createWithAdaptiveBitmap(bitmapIcon);
+        }
 
         NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
-          IconCompat.createWithAdaptiveBitmap(icon),
+          icon,
           actionBundle.getTitle(),
           pendingIntent
         );
