@@ -17,6 +17,10 @@ public class NotificationAndroidPressActionBundle {
     mNotificationAndroidPressActionBundle = onPressActionBundle;
   }
 
+  public Bundle toBundle() {
+    return (Bundle) mNotificationAndroidPressActionBundle.clone();
+  }
+
   public static NotificationAndroidPressActionBundle fromBundle(Bundle onPressActionBundle) {
     return new NotificationAndroidPressActionBundle(onPressActionBundle);
   }

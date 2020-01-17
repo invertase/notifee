@@ -10,7 +10,9 @@ import androidx.core.app.RemoteInput;
 
 import java.util.ArrayList;
 import java.util.Objects;
-//import io.invertase.notifee.NotifeeReceiverService;
+
+import app.notifee.core.KeepForSdk;
+import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
 
 @Keep
 public class NotificationAndroidActionBundle {
@@ -71,8 +73,7 @@ public class NotificationAndroidActionBundle {
       Bundle inputBundle = Objects
         .requireNonNull(mNotificationAndroidActionBundle.getBundle("input"));
 
-      // TODO reciever key
-      RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("TODO");
+      RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder(REMOTE_INPUT_RECEIVER_KEY);
 
       if (inputBundle.containsKey("allowFreeFormInput")) {
         remoteInputBuilder.setAllowFreeFormInput(inputBundle.getBoolean("allowFreeFormInput"));

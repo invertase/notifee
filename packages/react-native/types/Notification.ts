@@ -195,7 +195,7 @@ export enum NotificationEventType {
   /**
    * Event type is sent when a notification has been pressed by the user.
    *
-   * On Android, notifications must include an `android.onPressAction` property for this event to trigger.
+   * On Android, notifications must include an `android.pressAction` property for this event to trigger.
    *
    * The payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
    */
@@ -250,7 +250,15 @@ export enum NotificationEventType {
 }
 
 export interface AndroidNotificationEvent {
-  action?: AndroidPressAction;
+  notification: Notification;
+
+  /**
+   * The press action which triggered the event.
+   *
+   * If a press action caused the event, this property will be available allowing you to retrieve the
+   * action ID and perform logic.
+   */
+  pressAction?: AndroidPressAction;
 
   /**
    * The input from a notification action.
@@ -261,7 +269,6 @@ export interface AndroidNotificationEvent {
    * @platform android API Level >= 20
    */
   input?: string;
-  notification: Notification;
 }
 
 export interface AndroidChannelBlockedEvent {
