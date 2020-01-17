@@ -16,8 +16,8 @@ import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.NotificationEvent;
 
 import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
-import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
 import static app.notifee.core.events.NotificationEvent.TYPE_ACTION_PRESS;
+import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
 
 public class ReceiverService extends Service {
   public static final String REMOTE_INPUT_RECEIVER_KEY = "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";

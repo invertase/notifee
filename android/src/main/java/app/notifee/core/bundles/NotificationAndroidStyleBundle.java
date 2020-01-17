@@ -2,7 +2,6 @@ package app.notifee.core.bundles;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Html;
 
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
@@ -61,7 +60,7 @@ public class NotificationAndroidStyleBundle {
       }
 
       if (personBundle.containsKey("icon")) {
-        String personIcon =  Objects.requireNonNull(personBundle.getString("icon"));
+        String personIcon = Objects.requireNonNull(personBundle.getString("icon"));
         Bitmap personIconBitmap = null;
 
         try {
@@ -125,7 +124,7 @@ public class NotificationAndroidStyleBundle {
       NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
 
       if (mNotificationAndroidStyleBundle.containsKey("picture")) {
-        String picture =  Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"));
+        String picture = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"));
         Bitmap pictureBitmap = null;
 
         try {
@@ -145,7 +144,7 @@ public class NotificationAndroidStyleBundle {
       }
 
       if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
-        String largeIcon =  Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
+        String largeIcon = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
         Bitmap largeIconBitmap = null;
 
         try {

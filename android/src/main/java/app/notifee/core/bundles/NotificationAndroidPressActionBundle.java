@@ -17,12 +17,12 @@ public class NotificationAndroidPressActionBundle {
     mNotificationAndroidPressActionBundle = pressActionBundle;
   }
 
-  public Bundle toBundle() {
-    return (Bundle) mNotificationAndroidPressActionBundle.clone();
-  }
-
   public static NotificationAndroidPressActionBundle fromBundle(Bundle pressActionBundle) {
     return new NotificationAndroidPressActionBundle(pressActionBundle);
+  }
+
+  public Bundle toBundle() {
+    return (Bundle) mNotificationAndroidPressActionBundle.clone();
   }
 
   public @NonNull

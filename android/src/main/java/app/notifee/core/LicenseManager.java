@@ -495,6 +495,16 @@ class LicenseManager {
     return keyFactory.generatePrivate(keySpec);
   }
 
+  static void logLicenseWarningForMethod(String methodName) {
+    String warning = "Attempted to call method " + methodName + " but your license is invalid.";
+    Logger.w(TAG, warning);
+  }
+
+  static void logLicenseWarningForEvent(String eventName) {
+    String warning = "Attempted to send a " + eventName + " event but your license is invalid.";
+    Logger.w(TAG, warning);
+  }
+
   private @Nullable
   Jws<Claims> verifyToken(String token) {
     Jws<Claims> jwt = null;
@@ -506,16 +516,6 @@ class LicenseManager {
     }
 
     return jwt;
-  }
-
-  static void logLicenseWarningForMethod(String methodName) {
-    String warning = "Attempted to call method " + methodName + " but your license is invalid.";
-    Logger.w(TAG, warning);
-  }
-
-  static void logLicenseWarningForEvent(String eventName) {
-    String warning = "Attempted to send a " + eventName + " event but your license is invalid.";
-    Logger.w(TAG, warning);
   }
 
   private class LicensePlatform {
