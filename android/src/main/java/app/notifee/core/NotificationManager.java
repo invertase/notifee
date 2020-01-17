@@ -20,6 +20,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import app.notifee.core.bundles.NotificationAndroidActionBundle;
 import app.notifee.core.bundles.NotificationAndroidBundle;
@@ -31,6 +32,7 @@ import app.notifee.core.utils.ResourceUtils;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 class NotificationManager {
+  private static final String TAG = "NotificationManager";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
@@ -127,7 +129,12 @@ class NotificationManager {
 
       Integer smallIconId = androidBundle.getSmallIcon();
       if (smallIconId != null) {
-        builder.setSmallIcon(smallIconId);
+        Integer smallIconLevel = androidBundle.getSmallIconLevel();
+        if (smallIconLevel != null) {
+          builder.setSmallIcon(smallIconId, smallIconLevel);
+        } else {
+          builder.setSmallIcon(smallIconId);
+        }
       }
 
       if (androidBundle.getSortKey() != null) {
@@ -196,14 +203,30 @@ class NotificationManager {
             actionBundle.toBundle()
           );
 
-        Bitmap icon = Tasks.await(
-          // 10 second timeout - should this be configurable?
-          ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
-          10, TimeUnit.SECONDS
-        );
+        String icon = actionBundle.getIcon();
+        Bitmap iconBitmap = null;
+
+        if (icon != null) {
+          try {
+            iconBitmap = Tasks.await(
+              // 10 second timeout - should this be configurable?
+              ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
+              10, TimeUnit.SECONDS
+            );
+          } catch (TimeoutException e) {
+            Logger.e(TAG, "Timeout occurred whilst trying to retrieve an action icon: " + icon, e);
+          } catch (Exception e) {
+            Logger.e(TAG, "An error occurred whilst trying to retrieve an action icon: " + icon, e);
+          }
+        }
+
+        IconCompat iconCompat = null;
+        if (iconBitmap != null) {
+          iconCompat = IconCompat.createWithAdaptiveBitmap(iconBitmap);
+        }
 
         NotificationCompat.Action.Builder actionBuilder = new NotificationCompat.Action.Builder(
-          IconCompat.createWithAdaptiveBitmap(icon),
+          iconCompat,
           actionBundle.getTitle(),
           pendingIntent
         );

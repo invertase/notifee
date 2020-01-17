@@ -471,6 +471,17 @@ export default function validateAndroidNotification(
   }
 
   /**
+   * smallIconLevel
+   */
+  if (hasOwnProperty(android, 'smallIconLevel') && !isUndefined(android.smallIcon)) {
+    if (!isNumber(android.smallIconLevel)) {
+      throw new Error("'notification.android.smallIconLevel' expected value to be a number.");
+    }
+
+    out.smallIconLevel = android.smallIconLevel;
+  }
+
+  /**
    * sortKey
    */
   if (hasOwnProperty(android, 'sortKey')) {
@@ -512,7 +523,6 @@ export default function validateAndroidNotification(
 
   /**
    * tag
-   * TODO not sure what this is?
    */
   if (hasOwnProperty(android, 'tag') && android.tag != undefined) {
     if (!isString(android.tag)) {
