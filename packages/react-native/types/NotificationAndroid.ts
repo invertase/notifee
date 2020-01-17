@@ -646,17 +646,16 @@ export interface AndroidAction {
   pressAction: AndroidPressAction;
 
   /**
-   * An remote http icon representing the action. Newer devices may not show the icon and
-   * just show the action title.
-   *
-   * Recommended icon size is 24x24 px.
-   */
-  icon: string;
-
-  /**
    * The title of the notification, e.g. "Reply", "Mark as read" etc.
    */
   title: string;
+
+  /**
+   * An remote http icon representing the action. Newer devices may not show the icon.
+   *
+   * Recommended icon size is 24x24 px.
+   */
+  icon?: string;
 
   /**
    * If provided, the action accepts user input.

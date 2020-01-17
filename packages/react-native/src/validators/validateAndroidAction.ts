@@ -19,19 +19,22 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
     throw new Error(`'action' ${e.message}.`);
   }
 
-  if (!isString(action.icon) || !action.icon) {
-    throw new Error("'action.icon' expected a string value.");
-  }
-
   if (!isString(action.title) || !action.title) {
     throw new Error("'action.title' expected a string value.");
   }
 
   const out: AndroidAction = {
     pressAction: action.pressAction,
-    icon: action.icon,
     title: action.title,
   };
+
+  if (hasOwnProperty(action, 'icon') && !isUndefined(action.icon)) {
+    if (!isString(action.icon) || !action.icon) {
+      throw new Error("'action.icon' expected a string value.");
+    }
+
+    out.icon = action.icon;
+  }
 
   if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
     if (isBoolean(action.input) && action.input) {
