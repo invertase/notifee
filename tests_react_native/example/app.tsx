@@ -143,7 +143,7 @@ function Video() {
         title="Display Notification"
         onPress={() => {
           setTimeout(() => {
-            Notifee.displayNotification(videos['android-style-bigpicture']).catch(console.error);
+            Notifee.displayNotification(videos['android-text-styling']).catch(console.error);
             // Notifee.displayNotification({
             //   title: 'Uploading images...',
             //   android: {
@@ -156,7 +156,7 @@ function Video() {
             //     color: '#553C9A',
             //   },
             // });
-          }, 1);
+          }, 3000);
         }}
       />
     </View>

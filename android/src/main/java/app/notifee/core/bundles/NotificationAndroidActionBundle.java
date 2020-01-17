@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import app.notifee.core.KeepForSdk;
+import app.notifee.core.utils.TextUtils;
+
 import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
 
 @Keep

@@ -56,6 +56,26 @@ export default {
       },
     },
   },
+  'android-text-styling': {
+    title: '<p style="color: #4caf50;"><b>Styled HTMLTitle</span></p></b></p> &#128576;',
+    subtitle: '&#129395;',
+    body:
+      'The <p style="text-decoration: line-through">body can</p> also be <p style="color: #ffffff; background-color: #9c27b0"><i>styled too</i></p> &#127881;!',
+    android: {
+      channelId: 'default',
+      color: '#4caf50',
+      actions: [
+        {
+          title: '<b>Dance</b> &#128111;',
+          pressAction: { id: 'foo' },
+        },
+        {
+          title: '<p style="color: #f44336;"><b>Cry</b> &#128557;</p>',
+          pressAction: { id: 'foo' },
+        },
+      ],
+    },
+  },
   'android-ongoing': {
     title: 'An ongoing notification',
     android: {
@@ -147,6 +167,61 @@ export default {
           },
         },
       ],
+    },
+  },
+  'android-style-bigtext': {
+    title: 'Sarah Lane',
+    body: 'Movie night',
+    subtitle: 'Sarah Lane',
+    android: {
+      channelId: 'default',
+      showTimestamp: true,
+      timestamp: Date.now() - 480000,
+      color: '#009688',
+      largeIcon: 'https://storage.googleapis.com/static.invertase.io/assets/avatars/female.png',
+      style: {
+        type: 1,
+        title: 'Movie night',
+        text: `Hey, do you have any plans for tonight? I was thinking a few of us could go watch a movie at the theater nearby since there won't be much going on for the next couple of weeks. There are some great options at 6 and 7pm, but whatever works best for you. If you have any suggestions for dinner beforehand hit reply!`,
+      },
+      actions: [
+        {
+          title: 'Reply',
+          pressAction: {
+            id: 'reply',
+          },
+        },
+        {
+          title: 'Archive',
+          pressAction: {
+            id: 'archive',
+          },
+        },
+      ],
+    },
+  },
+  'android-style-inbox': {
+    subtitle: '<p style="color: red;">9 Messages</p> &#128588;',
+    title: '<p style="color: red;">Group Catchup</p> &#128588;',
+    android: {
+      channelId: 'default',
+      showTimestamp: true,
+      color: '#ff9800',
+      style: {
+        type: 2,
+        summary: '+1 more',
+        lines: [
+          '<b>Jessica</b>  Are you all available later for a catchup?',
+          '<p style="color: red;"><b>David</b></p>  Sorry I am out this evening!',
+          '<b>Jessica</b>  No problem, Dave.',
+          '<b>Sarah</b>  I am, what time are you thinking? The earlier the better for me!',
+          '<b>John</b>  Ditto, earlier is best too.',
+          '<b>Jessica</b>  Ok great! Lets go for 6pm downtown?',
+          '<b>David</b>  Enjoy &#128512;',
+          '<b>Sarah</b>  Awesome! &#128588;',
+          '<b>John</b>  See you there.',
+        ],
+      },
     },
   },
 };

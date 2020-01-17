@@ -2,6 +2,7 @@ package app.notifee.core.bundles;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Html;
 
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import app.notifee.core.utils.ResourceUtils;
+import app.notifee.core.utils.TextUtils;
 
 @Keep
 public class NotificationAndroidStyleBundle {
@@ -141,11 +143,11 @@ public class NotificationAndroidStyleBundle {
       }
 
       if (mNotificationAndroidStyleBundle.containsKey("title")) {
-        bigPictureStyle = bigPictureStyle.setBigContentTitle(mNotificationAndroidStyleBundle.getString("title"));
+        bigPictureStyle = bigPictureStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
       }
 
       if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-        bigPictureStyle = bigPictureStyle.setSummaryText(mNotificationAndroidStyleBundle.getString("summary"));
+        bigPictureStyle = bigPictureStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
       }
 
       return bigPictureStyle;
@@ -161,15 +163,15 @@ public class NotificationAndroidStyleBundle {
     NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
 
     if (mNotificationAndroidStyleBundle.containsKey("text")) {
-      bigTextStyle = bigTextStyle.bigText(mNotificationAndroidStyleBundle.getString("text"));
+      bigTextStyle = bigTextStyle.bigText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("text")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("title")) {
-      bigTextStyle = bigTextStyle.setBigContentTitle(mNotificationAndroidStyleBundle.getString("title"));
+      bigTextStyle = bigTextStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-      bigTextStyle = bigTextStyle.setSummaryText(mNotificationAndroidStyleBundle.getString("summary"));
+      bigTextStyle = bigTextStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
     }
 
     return bigTextStyle;
@@ -184,18 +186,18 @@ public class NotificationAndroidStyleBundle {
     NotificationCompat.InboxStyle inputStyle = new NotificationCompat.InboxStyle();
 
     if (mNotificationAndroidStyleBundle.containsKey("title")) {
-      inputStyle = inputStyle.setBigContentTitle(mNotificationAndroidStyleBundle.getString("title"));
+      inputStyle = inputStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-      inputStyle = inputStyle.setSummaryText(mNotificationAndroidStyleBundle.getString("summary"));
+      inputStyle = inputStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
     }
 
     ArrayList<String> lines = mNotificationAndroidStyleBundle.getStringArrayList("lines");
 
     for (int i = 0; i < Objects.requireNonNull(lines).size(); i++) {
       String line = lines.get(i);
-      inputStyle = inputStyle.addLine(line);
+      inputStyle = inputStyle.addLine(TextUtils.fromHtml(line));
     }
 
     return inputStyle;
@@ -214,7 +216,7 @@ public class NotificationAndroidStyleBundle {
       NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(person);
 
       if (mNotificationAndroidStyleBundle.containsKey("title")) {
-        messagingStyle = messagingStyle.setConversationTitle(mNotificationAndroidStyleBundle.getString("title"));
+        messagingStyle = messagingStyle.setConversationTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
       }
 
       if (mNotificationAndroidStyleBundle.containsKey("group")) {
@@ -235,7 +237,7 @@ public class NotificationAndroidStyleBundle {
           );
         }
 
-        messagingStyle = messagingStyle.addMessage(message.getString("text"), timestamp, messagePerson);
+        messagingStyle = messagingStyle.addMessage(TextUtils.fromHtml(message.getString("text")), timestamp, messagePerson);
       }
 
       return messagingStyle;
