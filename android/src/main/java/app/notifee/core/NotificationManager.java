@@ -172,12 +172,22 @@ class NotificationManager {
 
       if (androidBundle.hasLargeIcon()) {
         String largeIcon = androidBundle.getLargeIcon();
-        Bitmap bitmapFromUrl = Tasks.await(
-          ResourceUtils.getImageBitmapFromUrl(largeIcon)
-          // 10 second timeout - should this be configurable?
-          , 10, TimeUnit.SECONDS
-        );
-        if (bitmapFromUrl != null) builder.setLargeIcon(bitmapFromUrl);
+        Bitmap largeIconBitmap = null;
+
+        try {
+          largeIconBitmap = Tasks.await(
+            ResourceUtils.getImageBitmapFromUrl(largeIcon),
+            10, TimeUnit.SECONDS
+          );
+        } catch (TimeoutException e) {
+          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a largeIcon image: " + largeIcon, e);
+        } catch (Exception e) {
+          Logger.e(TAG, "An error occurred whilst trying to retrieve a largeIcon image: " + largeIcon, e);
+        }
+
+        if (largeIconBitmap != null) {
+          builder.setLargeIcon(largeIconBitmap);
+        }
       }
 
       return builder;
@@ -210,7 +220,6 @@ class NotificationManager {
         if (icon != null) {
           try {
             iconBitmap = Tasks.await(
-              // 10 second timeout - should this be configurable?
               ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
               10, TimeUnit.SECONDS
             );
