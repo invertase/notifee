@@ -49,13 +49,13 @@ public class NotificationAndroidActionBundle {
   }
 
   /**
-   * Gets the onPressAction instance for this action
+   * Gets the pressAction instance for this action
    *
    * @return NotificationAndroidPressActionBundle
    */
   public @NonNull
   NotificationAndroidPressActionBundle getPressAction() {
-    Bundle pressActionBundle = mNotificationAndroidActionBundle.getBundle("onPressAction");
+    Bundle pressActionBundle = mNotificationAndroidActionBundle.getBundle("pressAction");
     return NotificationAndroidPressActionBundle.fromBundle(pressActionBundle);
   }
 

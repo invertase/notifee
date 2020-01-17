@@ -5,7 +5,7 @@
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 import { AndroidAction } from '../../types/NotificationAndroid';
-import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidInput from './validateAndroidInput';
 
 export default function validateAndroidAction(action: AndroidAction): AndroidAction {
@@ -14,7 +14,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
   }
 
   try {
-    validateAndroidOnPressAction(action.onPressAction);
+    validateAndroidPressAction(action.pressAction);
   } catch (e) {
     throw new Error(`'action' ${e.message}.`);
   }
@@ -28,7 +28,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
   }
 
   const out: AndroidAction = {
-    onPressAction: action.onPressAction,
+    pressAction: action.pressAction,
     icon: action.icon,
     title: action.title,
   };

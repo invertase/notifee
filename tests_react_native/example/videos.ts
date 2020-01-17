@@ -102,7 +102,7 @@ export default {
         {
           title: 'Reply',
           icon: 'https://storage.googleapis.com/static.invertase.io/assets/avatars/female.png',
-          onPressAction: {
+          pressAction: {
             id: 'reply',
           },
           input: {
@@ -114,7 +114,7 @@ export default {
         {
           title: 'Mask as Read',
           icon: 'https://storage.googleapis.com/static.invertase.io/assets/avatars/female.png',
-          onPressAction: {
+          pressAction: {
             id: 'mark',
           },
         },

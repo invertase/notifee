@@ -1,11 +1,11 @@
 import { AndroidPressAction } from '../../types/NotificationAndroid';
 import { isObject, isString, isUndefined } from '../utils';
 
-export default function validateAndroidOnPressAction(
+export default function validateAndroidPressAction(
   pressAction: AndroidPressAction,
 ): AndroidPressAction {
   if (!isObject(pressAction)) {
-    throw new Error("'onPressAction' expected an object value.");
+    throw new Error("'pressAction' expected an object value.");
   }
 
   if (!isString(pressAction.id) || pressAction.id.length === 0) {

@@ -13,7 +13,7 @@ import Notifee from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
-import { Notification, NotificationEventType } from '@notifee/react-native/lib/types/Notification';
+import { Notification } from '@notifee/react-native/lib/types/Notification';
 
 import videos from './videos';
 
