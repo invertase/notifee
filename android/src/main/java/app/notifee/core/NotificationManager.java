@@ -56,12 +56,13 @@ class NotificationManager {
           notificationBundle.toBundle()
         ));
 
-      if (notificationBundle.getAndroidBundle().getPressAction() != null) {
-        builder.setContentIntent(ReceiverService
-          .createIntent(ReceiverService.PRESS_INTENT, new String[]{"notification"},
-            notificationBundle.toBundle()
-          ));
-      }
+      builder.setContentIntent(ReceiverService
+        .createIntent(
+          ReceiverService.PRESS_INTENT,
+          new String[]{"notification", "pressAction"},
+          notificationBundle.toBundle(),
+          androidBundle.getPressAction()
+        ));
 
       if (notificationBundle.getTitle() != null) {
         builder.setContentTitle(TextUtils.fromHtml(notificationBundle.getTitle()));
@@ -210,9 +211,9 @@ class NotificationManager {
         PendingIntent pendingIntent = ReceiverService
           .createIntent(
             ACTION_PRESS_INTENT,
-            new String[]{"notification", "action"},
+            new String[]{"notification", "pressAction"},
             notificationBundle.toBundle(),
-            actionBundle.toBundle()
+            actionBundle.getPressAction().toBundle()
           );
 
         String icon = actionBundle.getIcon();

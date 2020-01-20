@@ -74,6 +74,8 @@ public class ReceiverService extends Service {
     switch (action) {
       case DELETE_INTENT:
         onDeleteIntent(intent);
+      case PRESS_INTENT:
+        onPressIntent(intent);
       case ACTION_PRESS_INTENT:
         onActionPressIntent(intent);
     }
@@ -103,15 +105,52 @@ public class ReceiverService extends Service {
   }
 
   /**
+   * Handle user notification press
+   *
+   * @param intent
+   */
+  private void onPressIntent(Intent intent) {
+    Bundle notification = intent.getBundleExtra("notification");
+
+    if (notification == null) {
+      return;
+    }
+
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForEvent("notification press");
+      return;
+    }
+
+
+    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
+    EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationBundle));
+
+    // Optional
+    Bundle pressAction = intent.getBundleExtra("pressAction");
+
+    if (pressAction == null) {
+      return;
+    }
+
+    NotificationAndroidPressActionBundle pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
+
+    String launchActivity = pressActionBundle.getLaunchActivity();
+    String reactComponent = pressActionBundle.getReactComponent();
+
+    // TODO Launch the app / compone
+  }
+
+
+  /**
    * Handle action intents
    *
    * @param intent
    */
   private void onActionPressIntent(Intent intent) {
     Bundle notification = intent.getBundleExtra("notification");
-    Bundle action = intent.getBundleExtra("action");
+    Bundle pressAction = intent.getBundleExtra("pressAction");
 
-    if (notification == null || action == null) {
+    if (notification == null || pressAction == null) {
       return;
     }
 
@@ -121,8 +160,7 @@ public class ReceiverService extends Service {
     }
 
     NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
-    NotificationAndroidActionBundle actionBundle = NotificationAndroidActionBundle.fromBundle(action);
-    NotificationAndroidPressActionBundle pressActionBundle = actionBundle.getPressAction();
+    NotificationAndroidPressActionBundle pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
 
     String launchActivity = pressActionBundle.getLaunchActivity();
     String reactComponent = pressActionBundle.getReactComponent();
@@ -130,7 +168,7 @@ public class ReceiverService extends Service {
     // TODO Launch the app / component
 
     Bundle extras = new Bundle();
-    extras.putBundle("pressAction", actionBundle.getPressAction().toBundle());
+    extras.putBundle("pressAction", pressActionBundle.toBundle());
 
     Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
     if (remoteInput != null) {
