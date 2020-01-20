@@ -9,11 +9,6 @@ import java.util.Map;
 
 public class ObjectUtils {
 
-  public interface TypedCallback<T> {
-    void call(T t);
-  }
-
-
   public static @Nullable
   Class getClassForName(String className) {
     try {
@@ -53,5 +48,9 @@ public class ObjectUtils {
       return null;
     }
     return properties;
+  }
+
+  public interface TypedCallback<T> {
+    void call(T t);
   }
 }

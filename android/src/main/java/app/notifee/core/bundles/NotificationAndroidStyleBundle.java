@@ -2,7 +2,6 @@ package app.notifee.core.bundles;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Html;
 
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
@@ -17,13 +16,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
+import app.notifee.core.Logger;
 import app.notifee.core.utils.ResourceUtils;
 import app.notifee.core.utils.TextUtils;
 
 @Keep
 public class NotificationAndroidStyleBundle {
-
+  private static final String TAG = "NotificationAndroidStyle";
   private Bundle mNotificationAndroidStyleBundle;
 
   private NotificationAndroidStyleBundle(Bundle styleBundle) {
@@ -59,18 +60,24 @@ public class NotificationAndroidStyleBundle {
       }
 
       if (personBundle.containsKey("icon")) {
-        Bitmap icon = Tasks.await(
-          ResourceUtils.getImageBitmapFromUrl(
-            Objects.requireNonNull(personBundle.getString("icon"))
-          )
-          , 15, TimeUnit.SECONDS
-        );
+        String personIcon = Objects.requireNonNull(personBundle.getString("icon"));
+        Bitmap personIconBitmap = null;
 
-        if (icon != null) {
-          personBuilder.setIcon(IconCompat.createWithAdaptiveBitmap(icon));
+        try {
+          personIconBitmap = Tasks.await(
+            ResourceUtils.getImageBitmapFromUrl(personIcon),
+            10, TimeUnit.SECONDS
+          );
+        } catch (TimeoutException e) {
+          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a person icon: " + personIcon, e);
+        } catch (Exception e) {
+          Logger.e(TAG, "An error occurred whilst trying to retrieve a person icon: " + personIcon, e);
+        }
+
+        if (personIconBitmap != null) {
+          personBuilder.setIcon(IconCompat.createWithAdaptiveBitmap(personIconBitmap));
         }
       }
-
 
       if (personBundle.containsKey("uri")) {
         personBuilder.setUri(personBundle.getString("uri"));
@@ -117,28 +124,42 @@ public class NotificationAndroidStyleBundle {
       NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
 
       if (mNotificationAndroidStyleBundle.containsKey("picture")) {
-        Bitmap picture = Tasks.await(
-          ResourceUtils.getImageBitmapFromUrl(
-            Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"))
-          )
-          , 15, TimeUnit.SECONDS
-        );
+        String picture = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"));
+        Bitmap pictureBitmap = null;
 
-        if (picture != null) {
-          bigPictureStyle.bigPicture(picture);
+        try {
+          pictureBitmap = Tasks.await(
+            ResourceUtils.getImageBitmapFromUrl(picture),
+            10, TimeUnit.SECONDS
+          );
+        } catch (TimeoutException e) {
+          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a big picture style image: " + picture, e);
+        } catch (Exception e) {
+          Logger.e(TAG, "An error occurred whilst trying to retrieve a big picture style image: " + picture, e);
+        }
+
+        if (pictureBitmap != null) {
+          bigPictureStyle.bigPicture(pictureBitmap);
         }
       }
 
       if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
-        Bitmap largeIcon = Tasks.await(
-          ResourceUtils.getImageBitmapFromUrl(
-            Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"))
-          )
-          , 15, TimeUnit.SECONDS
-        );
+        String largeIcon = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
+        Bitmap largeIconBitmap = null;
 
-        if (largeIcon != null) {
-          bigPictureStyle.bigLargeIcon(largeIcon);
+        try {
+          largeIconBitmap = Tasks.await(
+            ResourceUtils.getImageBitmapFromUrl(largeIcon),
+            10, TimeUnit.SECONDS
+          );
+        } catch (TimeoutException e) {
+          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a big picture style large icon: " + largeIcon, e);
+        } catch (Exception e) {
+          Logger.e(TAG, "An error occurred whilst trying to retrieve a big picture style large icon: " + largeIcon, e);
+        }
+
+        if (largeIconBitmap != null) {
+          bigPictureStyle.bigLargeIcon(largeIconBitmap);
         }
       }
 

@@ -4,6 +4,7 @@
 # Built application files
 *.apk
 *.ap_
+android/javasource.map
 
 # Files for the ART/Dalvik VM
 *.dex
