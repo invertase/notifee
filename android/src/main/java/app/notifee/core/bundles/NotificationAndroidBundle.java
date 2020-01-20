@@ -169,7 +169,7 @@ public class NotificationAndroidBundle {
    */
   public @Nullable
   String getGroup() {
-    return mNotificationAndroidBundle.getString("group");
+    return mNotificationAndroidBundle.getString("groupId");
   }
 
   /**

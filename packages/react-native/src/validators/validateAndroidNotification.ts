@@ -224,14 +224,14 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * group
+   * groupId
    */
-  if (hasOwnProperty(android, 'group')) {
-    if (!isString(android.group)) {
-      throw new Error("'notification.android.group' expected a string value.");
+  if (hasOwnProperty(android, 'groupId')) {
+    if (!isString(android.groupId)) {
+      throw new Error("'notification.android.groupId' expected a string value.");
     }
 
-    out.group = android.group;
+    out.groupId = android.groupId;
   }
 
   /**

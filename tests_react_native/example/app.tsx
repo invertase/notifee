@@ -56,17 +56,7 @@ const channels = [
 ];
 
 Notifee.onEvent(({ type, detail, headless }) => {
-  console.log('onEvent', { type }, detail, { headless });
-  // if (type === NotificationEventType.ACTION_PRESS) {
-  //   const notification = detail.notification;
-  //
-  //   if (detail.action.id === 'first_action') {
-  //     notification.android.actions[0].title = 'Thanks';
-  //     Notifee.displayNotification(notification).then(() => console.log('Updated'));
-  //   }
-  // }
 
-  return Promise.resolve();
 });
 
 function onMessage(message: RemoteMessage): void {
@@ -143,7 +133,7 @@ function Video() {
         title="Display Notification"
         onPress={() => {
           setTimeout(() => {
-            Notifee.displayNotification(videos['android-text-styling']).catch(console.error);
+            Notifee.displayNotification(videos['android-chronometer-down']).catch(console.error);
             // Notifee.displayNotification({
             //   title: 'Uploading images...',
             //   android: {

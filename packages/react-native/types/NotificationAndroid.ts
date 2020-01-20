@@ -196,12 +196,12 @@ export interface NotificationAndroid {
    *
    * await notifee.displayNotification({
    *   android: {
-   *     group: message.group.id,
+   *     groupId: message.group.id,
    *   },
    * });
    * ```
    */
-  group?: string;
+  groupId?: string;
 
   /**
    * Sets the group alert behavior for this notification. Use this method to mute this notification
@@ -221,7 +221,7 @@ export interface NotificationAndroid {
    *
    * await notifee.displayNotification({
    *   android: {
-   *     group: message.group.id,
+   *     groupId: message.group.id,
    *     groupAlertBehavior: AndroidGroupAlertBehavior.CHILDREN,
    *   },
    * });
