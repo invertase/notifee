@@ -7,12 +7,16 @@
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
   <application>
     <!-- Receiver Service -->
     <service
       android:name=".ReceiverService"
+      android:exported="false" />
+
+    <!-- Foreground Service -->
+    <service
+      android:name=".ForegroundService"
       android:exported="false" />
 
     <!-- Broadcast Receiver -->

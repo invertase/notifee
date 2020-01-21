@@ -1,6 +1,7 @@
 package app.notifee.core;
 
 import app.notifee.core.events.BlockStateEvent;
+import app.notifee.core.events.ForegroundServiceEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 
@@ -14,4 +15,7 @@ public interface EventListener {
 
   @KeepForSdk
   void onBlockStateEvent(BlockStateEvent blockStateEvent);
+
+  @KeepForSdk
+  void onForegroundServiceEvent(ForegroundServiceEvent foregroundServiceEvent);
 }

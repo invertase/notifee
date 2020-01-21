@@ -8,7 +8,9 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
 import app.notifee.core.EventListener;
+import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.events.BlockStateEvent;
+import app.notifee.core.events.ForegroundServiceEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 
@@ -21,6 +23,7 @@ public class NotifeeEventSubscriber implements EventListener {
 
   private static final String KEY_TYPE = "type";
   private static final String KEY_DETAIL = "detail";
+  private static final String KEY_BLOCKED = "blocked";
   private static final String KEY_HEADLESS = "headless";
   private static final String KEY_NOTIFICATION = "notification";
 
@@ -86,7 +89,7 @@ public class NotifeeEventSubscriber implements EventListener {
     }
 
     if (type == BlockStateEvent.TYPE_APP_BLOCKED) {
-      eventDetailMap.putBoolean("blocked", blockStateEvent.isBlocked());
+      eventDetailMap.putBoolean(KEY_BLOCKED, blockStateEvent.isBlocked());
     }
 
     eventMap.putMap(KEY_DETAIL, eventDetailMap);
@@ -100,5 +103,17 @@ public class NotifeeEventSubscriber implements EventListener {
         blockStateEvent::setCompletionResult
       );
     }
+  }
+
+  @Override
+  public void onForegroundServiceEvent(ForegroundServiceEvent foregroundServiceEvent) {
+    NotificationBundle notificationBundle = foregroundServiceEvent.getNotification();
+
+    WritableMap eventMap = Arguments.createMap();
+    eventMap.putMap(KEY_NOTIFICATION, Arguments.fromBundle(notificationBundle.toBundle()));
+
+    NotifeeReactUtils.startHeadlessTask(FOREGROUND_NOTIFICATION_TASK_KEY, eventMap, 0,
+      foregroundServiceEvent::setCompletionResult
+    );
   }
 }

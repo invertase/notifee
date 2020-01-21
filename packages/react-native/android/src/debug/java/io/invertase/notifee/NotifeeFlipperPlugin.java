@@ -12,6 +12,7 @@ import app.notifee.core.EventListener;
 import app.notifee.core.EventSubscriber;
 import app.notifee.core.Notifee;
 import app.notifee.core.events.BlockStateEvent;
+import app.notifee.core.events.ForegroundServiceEvent;
 import app.notifee.core.events.LogEvent;
 import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.bundles.NotificationBundle;
@@ -79,6 +80,11 @@ public class NotifeeFlipperPlugin implements FlipperPlugin, EventListener {
 
   @Override
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
+
+  }
+
+  @Override
+  public void onForegroundServiceEvent(ForegroundServiceEvent foregroundServiceEvent) {
 
   }
 

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
 import com.google.android.gms.tasks.Continuation;
@@ -16,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -324,14 +324,11 @@ class NotificationManager {
       .continueWith(CACHED_THREAD_POOL, (task) -> {
         NotificationCompat.Builder builder = task.getResult();
         NotificationAndroidBundle androidBundle = notificationBundle.getAndroidBundle();
-
+        Notification notification = Objects.requireNonNull(builder).build();
         int hashCode = notificationBundle.getHashCode();
-        Notification notification = builder.build();
 
         if (androidBundle.getAsForegroundService()) {
-          ContextCompat.startForegroundService(ContextHolder.getApplicationContext(),
-            ForegroundService.createIntent(notificationBundle.toBundle())
-          );
+          ForegroundService.start(hashCode, notification, notificationBundle.toBundle());
         } else {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .notify(hashCode, notification);
