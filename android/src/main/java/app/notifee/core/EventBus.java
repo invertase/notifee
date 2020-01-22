@@ -24,7 +24,7 @@ public class EventBus {
     return getInstance().getDefault().getStickyEvent(eventType);
   }
 
-  static void post(Object event) {
+  public static void post(Object event) {
     getInstance().getDefault().post(event);
   }
 

@@ -114,12 +114,7 @@ export interface Notification {
    * ```
    */
   data?: { [key: string]: string };
-}
 
-/**
- * TODO
- */
-export interface NotificationBuilder extends Notification {
   /**
    * Android specific notification options. See the `NotificationAndroid` interface for more
    * information and default options which are applied to a notification.
@@ -163,38 +158,22 @@ export interface NotificationBuilder extends Notification {
   ios?: NotificationIOS;
 }
 
-/**
- * TODO
- */
-export interface RemoteNotification extends Notification {
-  /**
-   * @platform android
-   */
-  android: NotificationAndroid;
-
-  /**
-   * @platform ios
-   */
-  ios: NotificationIOS;
-}
-
-/**
- * TODO
- */
-export type EventObserver = (
-  type: EventType,
-  event:
+export interface NotificationEvent {
+  type: NotificationEventType;
+  headless: boolean;
+  detail:
     | AndroidNotificationEvent
     | AndroidChannelBlockedEvent
     | AndroidChannelGroupBlockedEvent
-    | AndroidAppBlockedEvent,
-  headless: boolean,
-) => Promise<void>;
+    | AndroidAppBlockedEvent;
+}
+
+export type NotificationEventObserver = (event: NotificationEvent) => Promise<void>;
 
 /**
  * An enum representing an event type for `onNotificationEvent` subscriptions.
  */
-export enum EventType {
+export enum NotificationEventType {
   /**
    * An unknown event was received.
    *
@@ -211,23 +190,23 @@ export enum EventType {
    *
    * The payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
    */
-  DISMISSED,
+  DISMISSED = 0,
 
   /**
    * Event type is sent when a notification has been pressed by the user.
    *
-   * On Android, notifications must include an `android.onPressAction` property for this event to trigger.
+   * On Android, notifications must include an `android.pressAction` property for this event to trigger.
    *
    * The payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
    */
-  PRESS,
+  PRESS = 1,
 
   /**
    * Event type is sent when a user presses a notification action.
    *
    * The event sent with this type is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
    */
-  ACTION_PRESS,
+  ACTION_PRESS = 2,
 
   /**
    * Event type sent when a notification has been delivered to the device. For scheduled notifications,
@@ -239,7 +218,7 @@ export enum EventType {
    *
    * The event payload sent with this event is [AndroidNotificationEvent](/react-native/reference/androidnotificationevent).
    */
-  DELIVERED,
+  DELIVERED = 3,
 
   /**
    * Event is sent when the user changes the notification blocked state for the entire application or
@@ -249,7 +228,7 @@ export enum EventType {
    *
    * @platform android API Level >= 28
    */
-  APP_BLOCKED,
+  APP_BLOCKED = 4,
 
   /**
    * Event type is sent when the user changes the notification blocked state for a channel in the application.
@@ -258,7 +237,7 @@ export enum EventType {
    *
    * @platform android API Level >= 28
    */
-  CHANNEL_BLOCKED,
+  CHANNEL_BLOCKED = 5,
 
   /**
    * Event type is sent when the user changes the notification blocked state for a channel group in the application.
@@ -267,11 +246,19 @@ export enum EventType {
    *
    * @platform android API Level >= 28
    */
-  CHANNEL_GROUP_BLOCKED,
+  CHANNEL_GROUP_BLOCKED = 6,
 }
 
 export interface AndroidNotificationEvent {
-  action?: AndroidPressAction;
+  notification: Notification;
+
+  /**
+   * The press action which triggered the event.
+   *
+   * If a press action caused the event, this property will be available allowing you to retrieve the
+   * action ID and perform logic.
+   */
+  pressAction?: AndroidPressAction;
 
   /**
    * The input from a notification action.
@@ -282,81 +269,31 @@ export interface AndroidNotificationEvent {
    * @platform android API Level >= 20
    */
   input?: string;
-  notification: RemoteNotification;
 }
 
 export interface AndroidChannelBlockedEvent {
-  channel: NativeAndroidChannel;
+  /**
+   * The channel that had its block state changed.
+   *
+   * Note that if the channel no longer exists during the time the event
+   * was sent the channel property will be undefined.
+   */
+  channel?: NativeAndroidChannel;
 }
 
 export interface AndroidChannelGroupBlockedEvent {
-  channelGroup: NativeAndroidChannelGroup;
+  /**
+   * The channel group that had its block state changed.
+   *
+   * Note that if the channel group no longer exists during the time the event
+   * was sent the channelGroup property will be undefined.
+   */
+  channelGroup?: NativeAndroidChannelGroup;
 }
 
 export interface AndroidAppBlockedEvent {
-  app: {
-    blocked: boolean;
-  };
-}
-
-/**
- * TODO
- */
-export interface NotificationSchedule {
   /**
-   * The date when the notification should first be shown, in milliseconds since 1970.
-   *
-   * #### Example
-   *
-   * Schedule notification to display 10 minutes from now.
-   *
-   * ```js
-   * await notifee.scheduleNotification(notification, {
-   *   fireDate: Date.now() + 600000,
-   * });
-   * ```
+   * The blocked status of your entire application.
    */
-  fireDate: number;
-
-  /**
-   * Whether the `fireDate` should be respected exactly.
-   *
-   * To help save battery, only set to `true` under scenarios where the notification
-   * `fireDate` is critical.
-   *
-   * Defaults to `false`. Has no effect on iOS.
-   *
-   * @platform android
-   */
-  exact?: boolean;
-
-  /**
-   * How frequently after  the `fireDate` should the notification be repeated.
-   *
-   * If not present, the notification will only be displayed once on the given `fireDate`.
-   *
-   * #### Example
-   *
-   * Schedule notification to display 10 minutes from now, and repeat
-   * every week
-   *
-   * ```js
-   * import notifee, { AndroidRepeatInterval } from '@notifee/react-native';
-   *
-   * await notifee.scheduleNotification(notification, {
-   *   fireDate: Date.now() + 600000,
-   *   repeatInterval: AndroidRepeatInterval.WEEK,
-   * });
-   */
-  repeatInterval?: NotificationRepeatInterval;
-}
-
-/**
- * Interface used when defining the `repeatInterval` on a scheduled notification.
- */
-export enum NotificationRepeatInterval {
-  MINUTE = 'minute',
-  HOUR = 'hour',
-  DAY = 'day',
-  WEEK = 'week',
+  blocked: boolean;
 }

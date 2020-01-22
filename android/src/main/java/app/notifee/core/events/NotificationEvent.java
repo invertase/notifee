@@ -4,36 +4,50 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import app.notifee.core.KeepForSdk;
 import app.notifee.core.bundles.NotificationBundle;
 
+@KeepForSdk
 public class NotificationEvent {
-  public final static String TYPE_DELIVERED = "delivered";
-  public final static String TYPE_DISMISSED = "dismissed";
+  @KeepForSdk
+  public final static int TYPE_DISMISSED = 0;
 
-  private final String type;
+  @KeepForSdk
+  public final static int TYPE_PRESS = 1;
+
+  @KeepForSdk
+  public final static int TYPE_ACTION_PRESS = 2;
+
+  @KeepForSdk
+  public final static int TYPE_DELIVERED = 3;
+
+  private final int type;
   private final Bundle extras;
   private final NotificationBundle notification;
 
-  private NotificationEvent(String type, NotificationBundle bundle) {
+  public NotificationEvent(int type, NotificationBundle bundle) {
     this.type = type;
     this.notification = bundle;
     this.extras = null;
   }
 
-  private NotificationEvent(String type, NotificationBundle bundle, Bundle extras) {
+  public NotificationEvent(int type, NotificationBundle bundle, Bundle extras) {
     this.type = type;
     this.notification = bundle;
     this.extras = extras;
   }
 
-  public String getType() {
+  @KeepForSdk
+  public int getType() {
     return type;
   }
 
+  @KeepForSdk
   public NotificationBundle getNotification() {
     return notification;
   }
 
+  @KeepForSdk
   @Nullable
   public Bundle getExtras() {
     return extras;

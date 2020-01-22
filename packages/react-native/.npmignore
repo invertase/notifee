@@ -54,6 +54,7 @@ coverage
 yarn.lock
 e2e/
 src/
+types/
 .github
 .vscode
 .nyc_output

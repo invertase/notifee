@@ -196,12 +196,12 @@ export interface NotificationAndroid {
    *
    * await notifee.displayNotification({
    *   android: {
-   *     group: message.group.id,
+   *     groupId: message.group.id,
    *   },
    * });
    * ```
    */
-  group?: string;
+  groupId?: string;
 
   /**
    * Sets the group alert behavior for this notification. Use this method to mute this notification
@@ -221,7 +221,7 @@ export interface NotificationAndroid {
    *
    * await notifee.displayNotification({
    *   android: {
-   *     group: message.group.id,
+   *     groupId: message.group.id,
    *     groupAlertBehavior: AndroidGroupAlertBehavior.CHILDREN,
    *   },
    * });
@@ -316,15 +316,15 @@ export interface NotificationAndroid {
 
   /**
    * By default notifications have no behaviour when a user presses them. The
-   * `onPressAction` property allows you to set what happens when a user presses
+   * `pressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * The notification will always open the application when an `onPressAction` is provided. It is
+   * The notification will always open the application when an `pressAction` is provided. It is
    * however possible to provide advanced configuration to the press action to open custom
    * activities or React components. See [AndroidPressAction](/react-native/reference/androidpressaction)
    * for more information.
    */
-  onPressAction?: AndroidPressAction;
+  pressAction?: AndroidPressAction;
 
   /**
    * Set a notification importance for devices without channel support.
@@ -445,11 +445,11 @@ export interface NotificationAndroid {
   showTimestamp?: boolean;
 
   /**
-   * The small icon for the notification.
+   * The small icon to show in the heads-up notification.
    *
-   * To set custom small icon levels (e.g. for battery levels), see below.
+   * TODO: How to add custom icons
    *
-   * ![Small Icon](https://prismic-io.s3.amazonaws.com/invertase%2F566dd0e6-99bc-4e58-82c1-755f0225ec0b_new+project+%2820%29.jpg)
+   * Defaults to `ic_launcher`.
    *
    * #### Example
    *
@@ -457,32 +457,17 @@ export interface NotificationAndroid {
    * await notifee.displayNotification({
    *   bodyL: 'Custom small icon',
    *   android: {
-   *     smallIcon: 'my_app_icon',
+   *     smallIcon: 'app-icon',
    *   },
    * });
    * ```
    */
-  // TODO merge docs with one below
-  // smallIcon?: string;
+  smallIcon?: string;
 
   /**
-   * The small icon for the notification with various levels.
-   *
-   * Icon levels can be used to show different icons. For example if displaying a notification about the
-   * device battery level, 4 different levels can be defined (4 = full battery icon, 1 = low battery icon).
-   *
-   * #### Example
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   bodyL: 'Custom small icon',
-   *   android: {
-   *     smallIcon: ['battery_level', 2],
-   *   },
-   * });
-   * ```
+   * An additional level parameter for when the icon is an instance of a Android LevelListDrawable.
    */
-  smallIcon?: [string, number] | string;
+  smallIconLevel?: number;
 
   /**
    * Set a sort key that orders this notification among other notifications from the same package.
@@ -659,24 +644,23 @@ export interface AndroidAction {
   /**
    * The press action interface describing what happens when an action completes.
    *
-   * Note; unlike the `onPressAction` in the notification body, an action is not required to open the application
+   * Note; unlike the `pressAction` in the notification body, an action is not required to open the application
    * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
    * or [Android Actions](/react-native/docs/android/actions) for more information.
    */
-  onPressAction: AndroidPressAction;
-
-  /**
-   * An remote http icon representing the action. Newer devices may not show the icon and
-   * just show the action title.
-   *
-   * Recommended icon size is 24x24 px.
-   */
-  icon: string;
+  pressAction: AndroidPressAction;
 
   /**
    * The title of the notification, e.g. "Reply", "Mark as read" etc.
    */
   title: string;
+
+  /**
+   * An remote http icon representing the action. Newer devices may not show the icon.
+   *
+   * Recommended icon size is 24x24 px.
+   */
+  icon?: string;
 
   /**
    * If provided, the action accepts user input.
@@ -697,7 +681,7 @@ export interface AndroidAction {
  * the notification, pressing an action or providing text input. This interface defines what happens
  * when a user performs such interaction.
  *
- * When provided to a notification `onPressAction`, the application will always open (if not already)
+ * When provided to a notification `pressAction`, the application will always open (if not already)
  * using the default `launchActivity` for the application.
  *
  * When provided to a notification action, the action will only open the application if a `launchActivity`
@@ -1199,7 +1183,7 @@ export interface NativeAndroidChannel extends AndroidChannel {
  *
  * ![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)
  *
- * @platform android
+ * @platform android API Level >= 26
  */
 export interface AndroidChannelGroup {
   /**
@@ -1218,6 +1202,8 @@ export interface AndroidChannelGroup {
   /**
    * An optional description of the group. This is visible to the user.
    *
+   * On Android APIs less than 28 this will always be undefined.
+   *
    * @platform android API Level >= 28
    */
   description?: string;
@@ -1226,7 +1212,7 @@ export interface AndroidChannelGroup {
 /**
  * Interface for a native Android Channel Group.
  *
- * @platform android
+ * @platform android API Level >= 26
  */
 export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
   /**

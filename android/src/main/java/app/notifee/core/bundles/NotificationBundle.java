@@ -10,9 +10,10 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+import app.notifee.core.KeepForSdk;
 import app.notifee.core.utils.JSONUtils;
 
-
+@KeepForSdk
 public class NotificationBundle {
   private Bundle mNotificationBundle;
 
@@ -27,8 +28,9 @@ public class NotificationBundle {
   /**
    * Returns null if JSON failed to parse.
    */
+  @KeepForSdk
   public @Nullable
-  static NotificationBundle fromJSONString(String jsonString) {
+  static NotificationBundle fromJSONString(@NonNull String jsonString) {
     try {
       JSONObject jsonObject = new JSONObject(jsonString);
       Bundle notificationBundle = JSONUtils.convertToBundle(jsonObject);
@@ -65,21 +67,22 @@ public class NotificationBundle {
 
   public @NonNull
   NotificationAndroidBundle getAndroidBundle() {
-    return new NotificationAndroidBundle(
+    return NotificationAndroidBundle.fromBundle(
       mNotificationBundle.getBundle("android")
     );
   }
 
-  public @Nullable
+  public @NonNull
   Bundle getData() {
     Bundle data = mNotificationBundle.getBundle("data");
     if (data != null) return (Bundle) data.clone();
-    return null;
+    return new Bundle();
   }
 
   /**
    * Returns null if failed to convert Bundle to JSON string
    */
+  @KeepForSdk
   public @Nullable
   String toJSONString() {
     try {
@@ -89,6 +92,7 @@ public class NotificationBundle {
     }
   }
 
+  @KeepForSdk
   public Bundle toBundle() {
     return (Bundle) mNotificationBundle.clone();
   }

@@ -7,38 +7,34 @@ import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import app.notifee.core.database.Database;
-
-class InitProvider extends ContentProvider {
+@KeepForSdk
+public class InitProvider extends ContentProvider {
   private static final String PROVIDER_AUTHORITY = "notifee-init-provider";
 
   @Override
   public void attachInfo(Context context, ProviderInfo info) {
     if (info != null && !info.authority.endsWith(InitProvider.PROVIDER_AUTHORITY)) {
       throw new IllegalStateException(
-        "Incorrect provider authority in manifest. This is most likely due to a missing "
-          + "applicationId variable in application's build.gradle.");
+        "Incorrect provider authority in manifest. This is most likely due to a missing " +
+          "applicationId variable in application's build.gradle.");
     }
 
     super.attachInfo(context, info);
   }
 
+  @CallSuper
   @Override
   public boolean onCreate() {
     if (ContextHolder.getApplicationContext() == null) {
       Context context = getContext();
-
       if (context != null && context.getApplicationContext() != null) {
         context = context.getApplicationContext();
       }
-
       ContextHolder.setApplicationContext(context);
-
-      // initialize internal tools
-      Database.initialize(context);
     }
 
     return false;
@@ -47,10 +43,7 @@ class InitProvider extends ContentProvider {
   @Nullable
   @Override
   public Cursor query(
-    @NonNull Uri uri,
-    String[] projection,
-    String selection,
-    String[] selectionArgs,
+    @NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
     String sortOrder
   ) {
     return null;
@@ -75,10 +68,7 @@ class InitProvider extends ContentProvider {
 
   @Override
   public int update(
-    @NonNull Uri uri,
-    ContentValues values,
-    String selection,
-    String[] selectionArgs
+    @NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs
   ) {
     return 0;
   }

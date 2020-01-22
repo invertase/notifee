@@ -38,7 +38,7 @@ import {
   validateAndroidInboxStyle,
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
-import validateAndroidOnPressAction from './validateAndroidPressAction';
+import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidAction from './validateAndroidAction';
 
 export default function validateAndroidNotification(
@@ -59,7 +59,7 @@ export default function validateAndroidNotification(
     onlyAlertOnce: false,
     importance: AndroidImportance.DEFAULT,
     showTimestamp: false,
-    smallIcon: ['ic_launcher', -1],
+    smallIcon: 'ic_launcher',
     showChronometer: false,
     visibility: AndroidVisibility.PRIVATE,
   };
@@ -224,14 +224,14 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * group
+   * groupId
    */
-  if (hasOwnProperty(android, 'group')) {
-    if (!isString(android.group)) {
-      throw new Error("'notification.android.group' expected a string value.");
+  if (hasOwnProperty(android, 'groupId')) {
+    if (!isString(android.groupId)) {
+      throw new Error("'notification.android.groupId' expected a string value.");
     }
 
-    out.group = android.group;
+    out.groupId = android.groupId;
   }
 
   /**
@@ -354,13 +354,13 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * onPressAction
+   * pressAction
    */
-  if (hasOwnProperty(android, 'onPressAction') && !isUndefined(android.onPressAction)) {
+  if (hasOwnProperty(android, 'pressAction') && !isUndefined(android.pressAction)) {
     try {
-      out.onPressAction = validateAndroidOnPressAction(android.onPressAction);
+      out.pressAction = validateAndroidPressAction(android.pressAction);
     } catch (e) {
-      throw new Error(`'notification.android.onPressAction' ${e.message}`);
+      throw new Error(`'notification.android.pressAction' ${e.message}`);
     }
   }
 
@@ -463,27 +463,22 @@ export default function validateAndroidNotification(
    * smallIcon
    */
   if (hasOwnProperty(android, 'smallIcon') && !isUndefined(android.smallIcon)) {
-    if (isArray(android.smallIcon)) {
-      const [icon, level] = android.smallIcon as [string, number];
-
-      if (!isString(icon) || !icon) {
-        throw new Error("'notification.android.smallIcon' expected icon to be a string.");
-      }
-
-      if (!isNumber(level) || level < -1) {
-        throw new Error(
-          "'notification.android.smallIcon' expected level to be a number greater than -1.",
-        );
-      }
-
-      out.smallIcon = [icon, level];
-    } else if (isString(android.smallIcon)) {
-      out.smallIcon = [android.smallIcon as string, -1];
-    } else {
-      throw new Error(
-        "'notification.android.smallIcon' expected an array containing icon with level or string value.",
-      );
+    if (!isString(android.smallIcon)) {
+      throw new Error("'notification.android.smallIcon' expected value to be a string.");
     }
+
+    out.smallIcon = android.smallIcon;
+  }
+
+  /**
+   * smallIconLevel
+   */
+  if (hasOwnProperty(android, 'smallIconLevel') && !isUndefined(android.smallIcon)) {
+    if (!isNumber(android.smallIconLevel)) {
+      throw new Error("'notification.android.smallIconLevel' expected value to be a number.");
+    }
+
+    out.smallIconLevel = android.smallIconLevel;
   }
 
   /**
@@ -528,7 +523,6 @@ export default function validateAndroidNotification(
 
   /**
    * tag
-   * TODO not sure what this is?
    */
   if (hasOwnProperty(android, 'tag') && android.tag != undefined) {
     if (!isString(android.tag)) {

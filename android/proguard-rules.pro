@@ -5,18 +5,31 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
--printmapping out.map
--keepparameternames
+-printmapping javasource.map
 -renamesourcefileattribute SourceFile
 -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,EnclosingMethod
 
 # Preserve all annotations.
 -keepattributes *Annotation*
 
-# Preserve all public classes, and their public and protected fields and
-# methods.
--keep public class * {
-    public protected *;
+# Keep the classes/members we need for client functionality.
+-keep @interface androidx.annotation.Keep
+-keep @androidx.annotation.Keep class *
+-keepclasseswithmembers class * {
+  @androidx.annotation.Keep <fields>;
+}
+-keepclasseswithmembers class * {
+  @androidx.annotation.Keep <methods>;
+}
+
+# Keep the classes/members we need for client functionality.
+-keep @interface app.notifee.core.KeepForSdk
+-keep @app.notifee.core.KeepForSdk class *
+-keepclasseswithmembers class * {
+  @app.notifee.core.KeepForSdk <fields>;
+}
+-keepclasseswithmembers class * {
+  @app.notifee.core.KeepForSdk <methods>;
 }
 
 # Preserve all .class method names.
@@ -37,16 +50,33 @@
     public static ** valueOf(java.lang.String);
 }
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
 # --------------------------------
 #            LIBRARIES
 # --------------------------------
 
+# Work Manager
+-keepclassmembers class * extends androidx.work.ListenableWorker {
+    public <init>(android.content.Context,androidx.work.WorkerParameters);
+}
+
+# JWT
+-keep class io.jsonwebtoken.** { *; }
+-keepnames class io.jsonwebtoken.* { *; }
+-keepnames interface io.jsonwebtoken.* { *; }
+
+-keep class org.bouncycastle.** { *; }
+-keepnames class org.bouncycastle.** { *; }
+-dontwarn org.bouncycastle.**
+
+# Room
+-keepclassmembers class * {
+  @androidx.room.* <methods>;
+}
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.paging.**
+
+
 # EventBus
--keepattributes *Annotation*
 -keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
@@ -64,3 +94,9 @@
 -dontwarn org.conscrypt.**
 # A resource is loaded with a relative path so the package of this class must be preserved.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# -----
+-repackageclasses 'n.o.t.i.f.e.e'
+
+-classobfuscationdictionary obfuscate_dict.txt
+-obfuscationdictionary obfuscate_dict.txt

@@ -1,0 +1,480 @@
+# compiler: R8
+# compiler_version: 1.5.69
+# pg_map_id: 8c9a8ac
+app.notifee.core.BlockStateBroadcastReceiver -> app.notifee.core.BlockStateBroadcastReceiver:
+    32:33:void <init>() -> <init>
+    90:142:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    38:86:void doWork(androidx.work.Data,androidx.concurrent.futures.ResolvableFuture) -> z_n
+    43:61:void lambda$doWork$1(androidx.concurrent.futures.ResolvableFuture,int,boolean,android.os.Bundle) -> z_n
+    44:51:void lambda$null$0(androidx.concurrent.futures.ResolvableFuture,java.lang.Exception,java.lang.Void) -> z_n
+    69:75:void lambda$doWork$2(androidx.concurrent.futures.ResolvableFuture,app.notifee.core.utils.ObjectUtils$TypedCallback,java.lang.Exception,android.os.Bundle) -> z_n
+app.notifee.core.ChannelManager -> n.o.t.i.f.e.e.z_n:
+    167:170:android.os.Bundle lambda$getChannelGroup$7(java.lang.String) -> Z_e
+    69:73:java.lang.Void lambda$createChannels$1(java.util.List) -> Z_i
+    122:126:java.util.List lambda$getAllChannels$4() -> Z_i
+    166:166:com.google.android.gms.tasks.Task getChannelGroup(java.lang.String) -> Z_i
+    27:63:java.lang.Void lambda$createChannel$0(app.notifee.core.bundles.ChannelBundle) -> Z_o
+    68:68:com.google.android.gms.tasks.Task createChannels(java.util.List) -> Z_o
+    79:92:java.lang.Void lambda$createChannelGroup$2(app.notifee.core.bundles.ChannelGroupBundle) -> Z_o
+    116:118:void deleteChannelGroup(java.lang.String) -> Z_o
+    121:121:com.google.android.gms.tasks.Task getAllChannels() -> Z_o
+    140:143:android.os.Bundle lambda$getChannel$5(java.lang.String) -> z_f
+    26:26:com.google.android.gms.tasks.Task createChannel(app.notifee.core.bundles.ChannelBundle) -> z_n
+    78:78:com.google.android.gms.tasks.Task createChannelGroup(app.notifee.core.bundles.ChannelGroupBundle) -> z_n
+    97:97:com.google.android.gms.tasks.Task createChannelGroups(java.util.List) -> z_n
+    111:113:void deleteChannel(java.lang.String) -> z_n
+    148:148:com.google.android.gms.tasks.Task getAllChannelGroups() -> z_n
+    175:176:android.os.Bundle convertChannelToBundle(android.app.NotificationChannel) -> z_n
+    219:220:android.os.Bundle convertChannelGroupToBundle(android.app.NotificationChannelGroup) -> z_n
+    98:106:java.lang.Void lambda$createChannelGroups$3(java.util.List) -> z_t
+    139:139:com.google.android.gms.tasks.Task getChannel(java.lang.String) -> z_t
+    149:153:java.util.List lambda$getAllChannelGroups$6() -> z_t
+app.notifee.core.ContextHolder -> n.o.t.i.f.e.e.Z_o:
+    android.content.Context applicationContext -> z_n
+    9:9:android.content.Context getApplicationContext() -> z_n
+    13:15:void setApplicationContext(android.content.Context) -> z_n
+app.notifee.core.EventBus -> n.o.t.i.f.e.e.z_t:
+    app.notifee.core.EventBus instance -> Z_o
+    org.greenrobot.eventbus.EventBus eventBus -> z_n
+    4:4:void <clinit>() -> <clinit>
+    7:9:void <init>() -> <init>
+    12:12:app.notifee.core.EventBus getInstance() -> Z_o
+    16:17:void register(java.lang.Object) -> Z_o
+    28:29:void post(java.lang.Object) -> z_n
+    40:40:org.greenrobot.eventbus.EventBus getDefault() -> z_n
+app.notifee.core.EventSubscriber -> app.notifee.core.EventSubscriber:
+    java.util.Set mListeners -> z_n
+    app.notifee.core.EventSubscriber mInstance -> Z_o
+    16:16:void <clinit>() -> <clinit>
+    19:21:void <init>() -> <init>
+    35:35:android.content.Context getContext() -> getContext
+    54:57:void onBlockStateEvent(app.notifee.core.events.BlockStateEvent) -> onBlockStateEvent
+    47:50:void onLogEvent(app.notifee.core.events.LogEvent) -> onLogEvent
+    40:43:void onNotificationEvent(app.notifee.core.events.NotificationEvent) -> onNotificationEvent
+    25:26:void register(app.notifee.core.EventListener) -> register
+    30:31:void unregister(app.notifee.core.EventListener) -> unregister
+app.notifee.core.ForegroundService -> n.o.t.i.f.e.e.Z_i:
+    boolean mIsRunning -> z_n
+    int mStartMode -> Z_o
+    16:21:void <init>() -> <init>
+    69:69:android.os.IBinder onBind(android.content.Intent) -> onBind
+    37:63:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    25:33:void start(android.app.Notification,android.os.Bundle) -> z_n
+    50:52:void lambda$onStartCommand$0(java.lang.Exception,java.lang.Void) -> z_n
+app.notifee.core.InitProvider -> app.notifee.core.InitProvider:
+    15:15:void <init>() -> <init>
+    20:27:void attachInfo(android.content.Context,android.content.pm.ProviderInfo) -> attachInfo
+    66:66:int delete(android.net.Uri,java.lang.String,java.lang.String[]) -> delete
+    55:55:java.lang.String getType(android.net.Uri) -> getType
+    61:61:android.net.Uri insert(android.net.Uri,android.content.ContentValues) -> insert
+    32:40:boolean onCreate() -> onCreate
+    49:49:android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String) -> query
+    73:73:int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[]) -> update
+app.notifee.core.JSONConfig -> n.o.t.i.f.e.e.z_f:
+    app.notifee.core.JSONConfig mInstance -> Z_o
+    org.json.JSONObject mJSONObject -> z_n
+    7:7:void <clinit>() -> <clinit>
+    11:18:void <init>(java.lang.String) -> <init>
+    21:24:void initialize(java.lang.String) -> z_n
+    27:27:app.notifee.core.JSONConfig getInstance() -> z_n
+    46:47:java.lang.String getString(java.lang.String,java.lang.String) -> z_n
+app.notifee.core.LicenseManager -> n.o.t.i.f.e.e.Z_e:
+    app.notifee.core.LicenseManager mInstance -> z_t
+    java.lang.String mClientPrivateKey -> Z_o
+    java.lang.String mServerPublicKey -> z_n
+    48:48:void <clinit>() -> <clinit>
+    46:64:void <init>() -> <init>
+    67:136:void initialize() -> Z_e
+    499:501:void logLicenseWarningForMethod(java.lang.String) -> Z_e
+    444:444:android.content.pm.PackageInfo getPackageInfo() -> Z_i
+    485:488:java.security.PublicKey loadPublicKey(java.lang.String) -> Z_i
+    140:140:app.notifee.core.LicenseManager getInstance() -> Z_o
+    376:399:void scheduleRemoteWork(long,boolean,androidx.work.ExistingPeriodicWorkPolicy) -> Z_o
+    408:437:java.lang.String buildVerifyLicenseRequestToken(java.lang.String) -> Z_o
+    480:480:int getRemoteStatus() -> z_f
+    504:506:void logLicenseWarningForEvent(java.lang.String) -> z_f
+    46:46:void access$000(long,boolean,androidx.work.ExistingPeriodicWorkPolicy) -> z_n
+    46:46:app.notifee.core.LicenseManager access$100() -> z_n
+    46:46:io.jsonwebtoken.Jws access$200(app.notifee.core.LicenseManager,java.lang.String) -> z_n
+    151:238:void doLocalWork(androidx.concurrent.futures.ResolvableFuture) -> z_n
+    249:346:void doRemoteWork(androidx.work.Data,androidx.concurrent.futures.ResolvableFuture) -> z_n
+    510:518:io.jsonwebtoken.Jws verifyToken(java.lang.String) -> z_n
+    454:470:boolean isLicenseInvalid() -> z_nn
+    352:363:void scheduleLocalWork() -> z_oo
+    475:475:int getLocalStatus() -> z_t
+    492:495:java.security.PrivateKey loadPrivateKey(java.lang.String) -> z_t
+app.notifee.core.LicenseManager$1 -> n.o.t.i.f.e.e.Z_e$z_n:
+    androidx.concurrent.futures.ResolvableFuture val$completer -> Z_o
+    boolean val$isPrimaryKey -> z_n
+    267:267:void <init>(boolean,androidx.concurrent.futures.ResolvableFuture) -> <init>
+    272:277:void onFailure(okhttp3.Call,java.io.IOException) -> onFailure
+    283:344:void onResponse(okhttp3.Call,okhttp3.Response) -> onResponse
+app.notifee.core.Logger -> app.notifee.core.Logger:
+    9:9:void <init>() -> <init>
+    23:24:void d(java.lang.String,java.lang.String) -> d
+    38:40:void e(java.lang.String,java.lang.String,java.lang.Exception) -> e
+    44:46:void e(java.lang.String,java.lang.String) -> e
+    50:52:void e(java.lang.String,java.lang.String,java.lang.Throwable) -> e
+    28:29:void i(java.lang.String,java.lang.String) -> i
+    18:19:void v(java.lang.String,java.lang.String) -> v
+    33:34:void w(java.lang.String,java.lang.String) -> w
+    13:13:java.lang.String tagAndMessage(java.lang.String,java.lang.String) -> z_n
+app.notifee.core.Notifee -> app.notifee.core.Notifee:
+    app.notifee.core.Notifee mNotifee -> z_n
+    app.notifee.core.NotifeeConfig mNotifeeConfig -> Z_o
+    28:29:void <clinit>() -> <clinit>
+    26:26:void <init>() -> <init>
+    131:136:void lambda$createChannels$3(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> Z_e
+    273:278:void lambda$getChannelGroup$10(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> Z_ff
+    148:153:void lambda$createChannelGroup$4(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> Z_i
+    78:83:void lambda$cancelNotification$0(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> Z_o
+    225:230:void lambda$getAllChannels$7(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> Z_tt
+    93:100:void cancelAllNotifications(app.notifee.core.MethodCallResult) -> cancelAllNotifications
+    77:84:void cancelNotification(java.lang.String,app.notifee.core.MethodCallResult) -> cancelNotification
+    46:50:void configure(app.notifee.core.NotifeeConfig) -> configure
+    104:117:void createChannel(android.os.Bundle,app.notifee.core.MethodCallResult) -> createChannel
+    142:155:void createChannelGroup(android.os.Bundle,app.notifee.core.MethodCallResult) -> createChannelGroup
+    159:176:void createChannelGroups(java.util.List,app.notifee.core.MethodCallResult) -> createChannelGroups
+    121:138:void createChannels(java.util.List,app.notifee.core.MethodCallResult) -> createChannels
+    180:187:void deleteChannel(java.lang.String,app.notifee.core.MethodCallResult) -> deleteChannel
+    191:198:void deleteChannelGroup(java.lang.String,app.notifee.core.MethodCallResult) -> deleteChannelGroup
+    202:216:void displayNotification(android.os.Bundle,app.notifee.core.MethodCallResult) -> displayNotification
+    252:264:void getAllChannelGroups(app.notifee.core.MethodCallResult) -> getAllChannelGroups
+    220:232:void getAllChannels(app.notifee.core.MethodCallResult) -> getAllChannels
+    236:248:void getChannel(java.lang.String,app.notifee.core.MethodCallResult) -> getChannel
+    268:280:void getChannelGroup(java.lang.String,app.notifee.core.MethodCallResult) -> getChannelGroup
+    39:39:android.content.Context getContext() -> getContext
+    284:291:void getInitialNotification(app.notifee.core.MethodCallResult) -> getInitialNotification
+    33:33:app.notifee.core.Notifee getInstance() -> getInstance
+    297:307:void openNotificationSettings(java.lang.String,android.app.Activity,app.notifee.core.MethodCallResult) -> openNotificationSettings
+    169:174:void lambda$createChannelGroups$5(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_f
+    241:246:void lambda$getChannel$8(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_ii
+    54:62:void initialize(app.notifee.core.NotifeeConfig) -> z_n
+    66:66:app.notifee.core.NotifeeConfig getNotifeeConfig() -> z_n
+    94:99:void lambda$cancelAllNotifications$1(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_n
+    325:325:void lambda$openNotificationSettings$11(android.content.Intent) -> z_n
+    208:214:void lambda$displayNotification$6(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_nn
+    257:262:void lambda$getAllChannelGroups$9(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_oo
+    110:115:void lambda$createChannel$2(app.notifee.core.MethodCallResult,com.google.android.gms.tasks.Task) -> z_t
+app.notifee.core.NotifeeConfig -> app.notifee.core.NotifeeConfig:
+    java.lang.String mFrameworkVersion -> z_t
+    java.lang.String mProductVersion -> Z_o
+    app.notifee.core.EventListener mEventSubscriber -> Z_i
+    java.lang.String mJsonConfig -> z_n
+    4:4:void <init>(java.lang.String,java.lang.String,java.lang.String,app.notifee.core.EventListener,app.notifee.core.NotifeeConfig$1) -> <init>
+    13:18:void <init>(java.lang.String,java.lang.String,java.lang.String,app.notifee.core.EventListener) -> <init>
+    25:25:java.lang.String getProductVersion() -> Z_i
+    29:29:java.lang.String getFrameworkVersion() -> Z_o
+    33:33:app.notifee.core.EventListener getEventSubscriber() -> z_n
+    21:21:java.lang.String getJsonConfig() -> z_t
+app.notifee.core.NotifeeConfig$1 -> app.notifee.core.NotifeeConfig$z_n:
+app.notifee.core.NotifeeConfig$Builder -> app.notifee.core.NotifeeConfig$Builder:
+    java.lang.String mFrameworkVersion -> z_t
+    java.lang.String mProductVersion -> Z_o
+    app.notifee.core.EventListener mEventSubscriber -> Z_i
+    java.lang.String mJsonConfig -> z_n
+    37:37:void <init>() -> <init>
+    65:65:app.notifee.core.NotifeeConfig build() -> build
+    60:61:void setEventSubscriber(app.notifee.core.EventListener) -> setEventSubscriber
+    55:56:void setFrameworkVersion(java.lang.String) -> setFrameworkVersion
+    45:46:void setJsonConfig(java.lang.String) -> setJsonConfig
+    50:51:void setProductVersion(java.lang.String) -> setProductVersion
+app.notifee.core.NotificationManager -> n.o.t.i.f.e.e.z_nn:
+    java.util.concurrent.ExecutorService CACHED_THREAD_POOL -> z_n
+    38:38:void <clinit>() -> <clinit>
+    43:284:com.google.android.gms.tasks.Task notificationBundleToBuilder(app.notifee.core.bundles.NotificationBundle) -> Z_o
+    263:281:androidx.core.app.NotificationCompat$Builder lambda$notificationBundleToBuilder$3(app.notifee.core.bundles.NotificationAndroidBundle,com.google.android.gms.tasks.Task) -> Z_o
+    296:307:java.lang.Void lambda$cancelNotification$4(java.lang.String) -> Z_o
+    315:318:java.lang.Void lambda$cancelAllNotifications$5() -> Z_o
+    49:167:androidx.core.app.NotificationCompat$Builder lambda$notificationBundleToBuilder$0(app.notifee.core.bundles.NotificationAndroidBundle,app.notifee.core.bundles.NotificationBundle) -> z_n
+    174:196:androidx.core.app.NotificationCompat$Builder lambda$notificationBundleToBuilder$1(app.notifee.core.bundles.NotificationAndroidBundle,com.google.android.gms.tasks.Task) -> z_n
+    204:255:androidx.core.app.NotificationCompat$Builder lambda$notificationBundleToBuilder$2(app.notifee.core.bundles.NotificationAndroidBundle,app.notifee.core.bundles.NotificationBundle,com.google.android.gms.tasks.Task) -> z_n
+    294:294:com.google.android.gms.tasks.Task cancelNotification(java.lang.String) -> z_n
+    312:312:com.google.android.gms.tasks.Task cancelAllNotifications() -> z_n
+    324:324:com.google.android.gms.tasks.Task displayNotification(app.notifee.core.bundles.NotificationBundle) -> z_n
+    326:341:java.lang.Void lambda$displayNotification$6(app.notifee.core.bundles.NotificationBundle,com.google.android.gms.tasks.Task) -> z_n
+app.notifee.core.Preferences -> n.o.t.i.f.e.e.z_oo:
+    android.content.SharedPreferences preferences -> z_n
+    app.notifee.core.Preferences sharedInstance -> Z_o
+    8:8:void <clinit>() -> <clinit>
+    6:6:void <init>() -> <init>
+    12:12:app.notifee.core.Preferences getSharedInstance() -> Z_o
+    36:37:void setIntValue(java.lang.String,int) -> Z_o
+    40:40:int getIntValue(java.lang.String,int) -> z_n
+    56:59:android.content.SharedPreferences getPreferences() -> z_n
+app.notifee.core.ReceiverService -> app.notifee.core.ReceiverService:
+    22:22:void <init>() -> <init>
+    92:105:void onDeleteIntent(android.content.Intent) -> Z_o
+    62:62:android.os.IBinder onBind(android.content.Intent) -> onBind
+    67:83:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    40:56:android.app.PendingIntent createIntent(java.lang.String,java.lang.String[],android.os.Bundle[]) -> z_n
+    150:154:void onActionPressIntent(android.content.Intent) -> z_n
+    113:141:void onPressIntent(android.content.Intent) -> z_t
+app.notifee.core.Worker -> app.notifee.core.Worker:
+    androidx.concurrent.futures.ResolvableFuture mFuture -> z_n
+    31:32:void <init>(android.content.Context,androidx.work.WorkerParameters) -> <init>
+    36:38:void onStopped() -> onStopped
+    43:68:com.google.common.util.concurrent.ListenableFuture startWork() -> startWork
+app.notifee.core.bundles.ChannelBundle -> n.o.t.i.f.e.e.Z_tt:
+    android.os.Bundle mChannelBundle -> z_n
+    18:20:void <init>(android.os.Bundle) -> <init>
+    63:67:java.lang.Integer getImportance() -> Z_e
+    80:84:int getVisibility() -> Z_ee
+    88:103:long[] getVibrationPattern() -> Z_ff
+    59:59:java.lang.String getGroupId() -> Z_i
+    41:41:java.lang.Boolean getBypassDnd() -> Z_o
+    33:33:java.lang.String getName() -> Z_tt
+    28:28:java.lang.String getId() -> z_f
+    54:54:java.lang.Boolean getVibration() -> z_ii
+    23:23:app.notifee.core.bundles.ChannelBundle fromBundle(android.os.Bundle) -> z_n
+    37:37:java.lang.Boolean getBadge() -> z_n
+    72:76:java.lang.Integer getLightColor() -> z_nn
+    50:50:java.lang.Boolean getLights() -> z_oo
+    46:46:java.lang.String getDescription() -> z_t
+app.notifee.core.bundles.ChannelGroupBundle -> n.o.t.i.f.e.e.z_ii:
+    android.os.Bundle mChannelGroupBundle -> z_n
+    14:16:void <init>(android.os.Bundle) -> <init>
+    24:24:java.lang.String getId() -> Z_o
+    19:19:app.notifee.core.bundles.ChannelGroupBundle fromBundle(android.os.Bundle) -> z_n
+    34:34:java.lang.String getDescription() -> z_n
+    29:29:java.lang.String getName() -> z_t
+app.notifee.core.bundles.NotificationAndroidActionBundle -> app.notifee.core.bundles.NotificationAndroidActionBundle:
+    21:23:void <init>(android.os.Bundle) -> <init>
+    26:26:app.notifee.core.bundles.NotificationAndroidActionBundle fromBundle(android.os.Bundle) -> fromBundle
+    48:48:java.lang.String getIcon() -> getIcon
+    58:59:app.notifee.core.bundles.NotificationAndroidPressActionBundle getPressAction() -> getPressAction
+    71:114:androidx.core.app.RemoteInput getRemoteInput(androidx.core.app.NotificationCompat$Action$Builder) -> getRemoteInput
+    40:40:java.lang.String getTitle() -> getTitle
+    30:30:android.os.Bundle toBundle() -> toBundle
+app.notifee.core.bundles.NotificationAndroidBundle -> app.notifee.core.bundles.NotificationAndroidBundle:
+    23:25:void <init>(android.os.Bundle) -> <init>
+    28:28:app.notifee.core.bundles.NotificationAndroidBundle fromBundle(android.os.Bundle) -> fromBundle
+    33:45:java.util.ArrayList getActions() -> getActions
+    54:54:java.lang.Boolean getAsForegroundService() -> getAsForegroundService
+    63:63:java.lang.Boolean getAutoCancel() -> getAutoCancel
+    73:77:java.lang.Integer getBadgeIconType() -> getBadgeIconType
+    101:101:java.lang.String getCategory() -> getCategory
+    87:91:java.lang.String getChannelId() -> getChannelId
+    133:138:java.lang.Boolean getChronometerCountDown() -> getChronometerCountDown
+    111:115:java.lang.Integer getColor() -> getColor
+    124:124:java.lang.Boolean getColorized() -> getColorized
+    147:162:java.lang.Integer getDefaults() -> getDefaults
+    172:172:java.lang.String getGroup() -> getGroup
+    181:185:int getGroupAlertBehaviour() -> getGroupAlertBehaviour
+    194:194:java.lang.Boolean getGroupSummary() -> getGroupSummary
+    204:211:java.lang.CharSequence[] getInputHistory() -> getInputHistory
+    227:231:java.lang.String getLargeIcon() -> getLargeIcon
+    241:254:java.util.ArrayList getLights() -> getLights
+    263:263:java.lang.Boolean getLocalOnly() -> getLocalOnly
+    272:276:java.lang.Integer getNumber() -> getNumber
+    285:285:java.lang.Boolean getOngoing() -> getOngoing
+    294:294:java.lang.Boolean getOnlyAlertOnce() -> getOnlyAlertOnce
+    304:304:android.os.Bundle getPressAction() -> getPressAction
+    314:325:int getPriority() -> getPriority
+    339:348:app.notifee.core.bundles.NotificationAndroidBundle$AndroidProgress getProgress() -> getProgress
+    358:358:java.lang.String getShortcutId() -> getShortcutId
+    471:471:java.lang.Boolean getShowChronometer() -> getShowChronometer
+    367:367:java.lang.Boolean getShowTimestamp() -> getShowTimestamp
+    375:389:java.lang.Integer getSmallIcon() -> getSmallIcon
+    399:403:java.lang.Integer getSmallIconLevel() -> getSmallIconLevel
+    413:413:java.lang.String getSortKey() -> getSortKey
+    432:436:app.notifee.core.bundles.NotificationAndroidStyleBundle getStyle() -> getStyle
+    448:448:java.lang.String getTicker() -> getTicker
+    458:462:java.lang.Long getTimeoutAfter() -> getTimeoutAfter
+    516:520:long getTimestamp() -> getTimestamp
+    480:494:long[] getVibrationPattern() -> getVibrationPattern
+    503:507:int getVisibility() -> getVisibility
+    220:220:java.lang.Boolean hasLargeIcon() -> hasLargeIcon
+    422:422:java.lang.Boolean hasStyle() -> hasStyle
+app.notifee.core.bundles.NotificationAndroidBundle$AndroidProgress -> app.notifee.core.bundles.NotificationAndroidBundle$z_n:
+    int max -> z_n
+    boolean indeterminate -> z_t
+    int current -> Z_o
+    528:532:void <init>(app.notifee.core.bundles.NotificationAndroidBundle,int,int,boolean) -> <init>
+    543:543:boolean getIndeterminate() -> Z_o
+    539:539:int getCurrent() -> z_n
+    535:535:int getMax() -> z_t
+app.notifee.core.bundles.NotificationAndroidPressActionBundle -> app.notifee.core.bundles.NotificationAndroidPressActionBundle:
+    16:18:void <init>(android.os.Bundle) -> <init>
+    21:21:app.notifee.core.bundles.NotificationAndroidPressActionBundle fromBundle(android.os.Bundle) -> fromBundle
+    30:30:java.lang.String getId() -> getId
+    35:35:java.lang.String getLaunchActivity() -> getLaunchActivity
+    40:40:java.lang.String getReactComponent() -> getReactComponent
+    25:25:android.os.Bundle toBundle() -> toBundle
+app.notifee.core.bundles.NotificationAndroidStyleBundle -> app.notifee.core.bundles.NotificationAndroidStyleBundle:
+    30:32:void <init>(android.os.Bundle) -> <init>
+    35:35:app.notifee.core.bundles.NotificationAndroidStyleBundle fromBundle(android.os.Bundle) -> fromBundle
+    123:123:com.google.android.gms.tasks.Task getBigPictureStyleTask(java.util.concurrent.Executor) -> getBigPictureStyleTask
+    184:198:androidx.core.app.NotificationCompat$BigTextStyle getBigTextStyle() -> getBigTextStyle
+    207:224:androidx.core.app.NotificationCompat$InboxStyle getInboxStyle() -> getInboxStyle
+    231:231:com.google.android.gms.tasks.Task getMessagingStyleTask(java.util.concurrent.Executor) -> getMessagingStyleTask
+    45:45:com.google.android.gms.tasks.Task getPerson(java.util.concurrent.Executor,android.os.Bundle) -> getPerson
+    96:114:com.google.android.gms.tasks.Task getStyleTask(java.util.concurrent.Executor) -> getStyleTask
+    91:91:android.os.Bundle toBundle() -> toBundle
+    46:86:androidx.core.app.Person lambda$getPerson$0(android.os.Bundle) -> z_n
+    124:174:androidx.core.app.NotificationCompat$Style lambda$getBigPictureStyleTask$1() -> z_n
+    232:264:androidx.core.app.NotificationCompat$Style lambda$getMessagingStyleTask$2(java.util.concurrent.Executor) -> z_n
+app.notifee.core.bundles.NotificationBundle -> app.notifee.core.bundles.NotificationBundle:
+    android.os.Bundle mNotificationBundle -> z_n
+    20:22:void <init>(android.os.Bundle) -> <init>
+    60:60:java.lang.String getSubTitle() -> Z_e
+    45:45:java.lang.Integer getHashCode() -> Z_i
+    65:65:java.lang.String getBody() -> Z_o
+    35:39:app.notifee.core.bundles.NotificationBundle fromJSONString(java.lang.String) -> fromJSONString
+    97:97:android.os.Bundle toBundle() -> toBundle
+    89:91:java.lang.String toJSONString() -> toJSONString
+    50:50:java.lang.String getId() -> z_f
+    25:25:app.notifee.core.bundles.NotificationBundle fromBundle(android.os.Bundle) -> z_n
+    70:70:app.notifee.core.bundles.NotificationAndroidBundle getAndroidBundle() -> z_n
+    55:55:java.lang.String getTitle() -> z_nn
+    77:79:android.os.Bundle getData() -> z_t
+app.notifee.core.database.Database -> app.notifee.core.database.Database:
+    java.lang.String DB_NAME -> z_n
+    app.notifee.core.database.Database database -> Z_o
+    18:19:void <clinit>() -> <clinit>
+    17:17:void <init>() -> <init>
+    22:27:void initialize() -> Z_o
+    31:45:void onNotificationEvent(app.notifee.core.events.NotificationEvent) -> onNotificationEvent
+    app.notifee.core.database.DatabaseNotificationDao getDao() -> z_n
+app.notifee.core.database.DatabaseNotificationDao -> n.o.t.i.f.e.e.Z_ff:
+app.notifee.core.database.DatabaseNotificationDao_Impl -> n.o.t.i.f.e.e.Z_ee:
+    androidx.room.RoomDatabase __db -> z_n
+    androidx.room.EntityInsertionAdapter __insertionAdapterOfDatabaseNotificationEntity -> Z_o
+    androidx.room.EntityDeletionOrUpdateAdapter __updateAdapterOfDatabaseNotificationEntity -> Z_i
+    androidx.room.EntityDeletionOrUpdateAdapter __deletionAdapterOfDatabaseNotificationEntity -> z_t
+    androidx.room.SharedSQLiteStatement __preparedStmtOfTrimRows -> z_f
+    30:149:void <init>(androidx.room.RoomDatabase) -> <init>
+    165:172:void delete(app.notifee.core.database.DatabaseNotificationEntity) -> delete
+    203:240:java.util.List getAll() -> getAll
+    245:290:app.notifee.core.database.DatabaseNotificationEntity[] getById(java.lang.String) -> getById
+    153:160:void insert(app.notifee.core.database.DatabaseNotificationEntity) -> insert
+    189:198:void trimRows() -> trimRows
+    177:184:void update(app.notifee.core.database.DatabaseNotificationEntity) -> update
+app.notifee.core.database.DatabaseNotificationDao_Impl$1 -> n.o.t.i.f.e.e.Z_ee$z_n:
+    32:32:void <init>(app.notifee.core.database.DatabaseNotificationDao_Impl,androidx.room.RoomDatabase) -> <init>
+    32:32:void bind(androidx.sqlite.db.SupportSQLiteStatement,java.lang.Object) -> bind
+    35:35:java.lang.String createQuery() -> createQuery
+    40:75:void bind(androidx.sqlite.db.SupportSQLiteStatement,app.notifee.core.database.DatabaseNotificationEntity) -> z_n
+app.notifee.core.database.DatabaseNotificationDao_Impl$2 -> n.o.t.i.f.e.e.Z_ee$Z_o:
+    77:77:void <init>(app.notifee.core.database.DatabaseNotificationDao_Impl,androidx.room.RoomDatabase) -> <init>
+    77:77:void bind(androidx.sqlite.db.SupportSQLiteStatement,java.lang.Object) -> bind
+    80:80:java.lang.String createQuery() -> createQuery
+    85:90:void bind(androidx.sqlite.db.SupportSQLiteStatement,app.notifee.core.database.DatabaseNotificationEntity) -> z_n
+app.notifee.core.database.DatabaseNotificationDao_Impl$3 -> n.o.t.i.f.e.e.Z_ee$z_t:
+    92:92:void <init>(app.notifee.core.database.DatabaseNotificationDao_Impl,androidx.room.RoomDatabase) -> <init>
+    92:92:void bind(androidx.sqlite.db.SupportSQLiteStatement,java.lang.Object) -> bind
+    95:95:java.lang.String createQuery() -> createQuery
+    100:140:void bind(androidx.sqlite.db.SupportSQLiteStatement,app.notifee.core.database.DatabaseNotificationEntity) -> z_n
+app.notifee.core.database.DatabaseNotificationDao_Impl$4 -> n.o.t.i.f.e.e.Z_ee$Z_i:
+    142:142:void <init>(app.notifee.core.database.DatabaseNotificationDao_Impl,androidx.room.RoomDatabase) -> <init>
+    145:146:java.lang.String createQuery() -> createQuery
+app.notifee.core.database.DatabaseNotificationEntity -> n.o.t.i.f.e.e.Z_ne:
+    java.lang.String status -> z_t
+    java.lang.Long createdAt -> z_f
+    java.lang.String bundle -> z_nn
+    java.lang.String tag -> Z_o
+    java.lang.String channel -> Z_i
+    java.lang.String id -> z_n
+    java.lang.Long modifiedAt -> Z_e
+    13:13:void <init>() -> <init>
+app.notifee.core.database.Database_Impl -> app.notifee.core.database.Database_Impl:
+    app.notifee.core.database.DatabaseNotificationDao _databaseNotificationDao -> z_t
+    25:25:void <init>() -> <init>
+    25:25:java.util.List access$400(app.notifee.core.database.Database_Impl) -> Z_e
+    25:25:java.util.List access$200(app.notifee.core.database.Database_Impl) -> Z_i
+    25:25:java.util.List access$100(app.notifee.core.database.Database_Impl) -> Z_o
+    25:25:void access$700(app.notifee.core.database.Database_Impl,androidx.sqlite.db.SupportSQLiteDatabase) -> Z_o
+    25:25:java.util.List access$900(app.notifee.core.database.Database_Impl) -> Z_tt
+    116:128:void clearAllTables() -> clearAllTables
+    109:111:androidx.room.InvalidationTracker createInvalidationTracker() -> createInvalidationTracker
+    30:104:androidx.sqlite.db.SupportSQLiteOpenHelper createOpenHelper(androidx.room.DatabaseConfiguration) -> createOpenHelper
+    25:25:java.util.List access$300(app.notifee.core.database.Database_Impl) -> z_f
+    25:25:java.util.List access$000(app.notifee.core.database.Database_Impl) -> z_n
+    25:25:androidx.sqlite.db.SupportSQLiteDatabase access$602(app.notifee.core.database.Database_Impl,androidx.sqlite.db.SupportSQLiteDatabase) -> z_n
+    133:141:app.notifee.core.database.DatabaseNotificationDao getDao() -> z_n
+    25:25:java.util.List access$500(app.notifee.core.database.Database_Impl) -> z_nn
+    25:25:java.util.List access$800(app.notifee.core.database.Database_Impl) -> z_oo
+    25:25:java.util.List access$1000(app.notifee.core.database.Database_Impl) -> z_t
+app.notifee.core.database.Database_Impl$1 -> app.notifee.core.database.Database_Impl$z_n:
+    app.notifee.core.database.Database_Impl this$0 -> z_n
+    30:30:void <init>(app.notifee.core.database.Database_Impl,int) -> <init>
+    33:36:void createAllTables(androidx.sqlite.db.SupportSQLiteDatabase) -> createAllTables
+    40:46:void dropAllTables(androidx.sqlite.db.SupportSQLiteDatabase) -> dropAllTables
+    50:55:void onCreate(androidx.sqlite.db.SupportSQLiteDatabase) -> onCreate
+    59:66:void onOpen(androidx.sqlite.db.SupportSQLiteDatabase) -> onOpen
+    75:75:void onPostMigrate(androidx.sqlite.db.SupportSQLiteDatabase) -> onPostMigrate
+    70:71:void onPreMigrate(androidx.sqlite.db.SupportSQLiteDatabase) -> onPreMigrate
+    79:96:androidx.room.RoomOpenHelper$ValidationResult onValidateSchema(androidx.sqlite.db.SupportSQLiteDatabase) -> onValidateSchema
+app.notifee.core.events.BlockStateEvent -> app.notifee.core.events.BlockStateEvent:
+    boolean completed -> z_f
+    app.notifee.core.MethodCallResult result -> Z_i
+    android.os.Bundle channelOrGroupBundle -> z_t
+    boolean blocked -> Z_o
+    int type -> z_n
+    34:39:void <init>(int,android.os.Bundle,boolean,app.notifee.core.MethodCallResult) -> <init>
+    62:62:android.os.Bundle getChannelOrGroupBundle() -> getChannelOrGroupBundle
+    51:51:int getType() -> getType
+    56:56:boolean isBlocked() -> isBlocked
+    43:47:void setCompletionResult() -> setCompletionResult
+app.notifee.core.events.DatabaseEvent -> app.notifee.core.events.DatabaseEvent:
+    java.lang.String entityType -> z_t
+    java.lang.String entityId -> Z_o
+    java.lang.String type -> z_n
+    20:24:void <init>(java.lang.String,java.lang.String,java.lang.String) -> <init>
+    47:47:java.lang.String getEntityId() -> getEntityId
+    57:57:java.lang.String getEntityType() -> getEntityType
+    36:36:java.lang.String getType() -> getType
+app.notifee.core.events.ForegroundServiceEvent -> app.notifee.core.events.ForegroundServiceEvent:
+    app.notifee.core.MethodCallResult result -> Z_o
+    app.notifee.core.bundles.NotificationBundle notification -> z_n
+    boolean completed -> z_t
+    13:16:void <init>(app.notifee.core.bundles.NotificationBundle,app.notifee.core.MethodCallResult) -> <init>
+    20:20:app.notifee.core.bundles.NotificationBundle getNotification() -> getNotification
+    25:29:void setCompletionResult() -> setCompletionResult
+app.notifee.core.events.LogEvent -> app.notifee.core.events.LogEvent:
+    java.lang.String message -> z_t
+    java.lang.String level -> Z_o
+    java.lang.String tag -> z_n
+    java.lang.Throwable throwable -> Z_i
+    25:30:void <init>(java.lang.String,java.lang.String,java.lang.String) -> <init>
+    32:37:void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.Throwable) -> <init>
+    51:51:java.lang.String getLevel() -> getLevel
+    56:56:java.lang.String getMessage() -> getMessage
+    46:46:java.lang.String getTag() -> getTag
+    61:61:java.lang.Throwable getThrowable() -> getThrowable
+app.notifee.core.events.NotificationEvent -> app.notifee.core.events.NotificationEvent:
+    app.notifee.core.bundles.NotificationBundle notification -> z_t
+    android.os.Bundle extras -> Z_o
+    int type -> z_n
+    28:32:void <init>(int,app.notifee.core.bundles.NotificationBundle) -> <init>
+    34:38:void <init>(int,app.notifee.core.bundles.NotificationBundle,android.os.Bundle) -> <init>
+    53:53:android.os.Bundle getExtras() -> getExtras
+    47:47:app.notifee.core.bundles.NotificationBundle getNotification() -> getNotification
+    42:42:int getType() -> getType
+app.notifee.core.utils.JSONUtils -> n.o.t.i.f.e.e.z_of:
+    17:62:android.os.Bundle convertToBundle(org.json.JSONObject) -> z_n
+    67:78:java.lang.Object convertToJavaArray(java.lang.Class,org.json.JSONArray) -> z_n
+    82:99:java.lang.Class unboxClass(java.lang.Class) -> z_n
+    106:147:void setJSONArray(android.os.Bundle,java.lang.String,org.json.JSONArray) -> z_n
+    153:161:org.json.JSONObject convertToJSON(android.os.Bundle) -> z_n
+    165:171:java.lang.Object jsonWrapValue(java.lang.Object) -> z_n
+app.notifee.core.utils.ObjectUtils$TypedCallback -> n.o.t.i.f.e.e.z_ti:
+    void call(java.lang.Object) -> z_n
+app.notifee.core.utils.ResourceUtils -> n.o.t.i.f.e.e.Z_it:
+    java.util.Map sResourceIdCache -> z_n
+    29:29:void <init>() -> <init>
+    47:56:android.net.Uri getImageSourceUri(java.lang.String) -> Z_i
+    140:145:int getImageResourceId(java.lang.String) -> Z_o
+    61:62:android.net.Uri getResourceDrawableUri(java.lang.String) -> z_f
+    35:42:java.util.Map getResourceIdCache() -> z_n
+    75:109:com.google.android.gms.tasks.Task getImageBitmapFromUrl(java.lang.String) -> z_n
+    153:154:int getResourceIdByName(java.lang.String,java.lang.String) -> z_n
+    119:129:java.lang.String getImageResourceUrl(java.lang.String) -> z_t
+app.notifee.core.utils.ResourceUtils$1 -> n.o.t.i.f.e.e.Z_it$z_n:
+    java.lang.String val$imageUrl -> Z_o
+    com.google.android.gms.tasks.TaskCompletionSource val$bitmapTCS -> z_n
+    94:94:void <init>(com.google.android.gms.tasks.TaskCompletionSource,java.lang.String) -> <init>
+    104:106:void onFailureImpl(com.facebook.datasource.DataSource) -> onFailureImpl
+    97:98:void onNewResultImpl(android.graphics.Bitmap) -> onNewResultImpl
+app.notifee.core.utils.TextUtils -> n.o.t.i.f.e.e.z_fo:
+    10:10:android.text.Spanned fromHtml(java.lang.String) -> z_n

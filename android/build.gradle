@@ -73,14 +73,17 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.google.android.gms:play-services-tasks:17.0.0'
-  implementation 'androidx.work:work-runtime:2.3.0-beta01'
-  implementation 'androidx.core:core:1.2.0-rc01'
+  api "com.squareup.okhttp3:okhttp:4.3.1"
+  api 'androidx.concurrent:concurrent-futures:1.0.0'
+  api 'com.google.android.gms:play-services-tasks:17.0.0'
+  api 'androidx.work:work-runtime:2.3.0-rc01'
+  api 'androidx.core:core:1.2.0-rc01'
+  api "androidx.room:room-runtime:2.2.3"
+  api 'org.greenrobot:eventbus:3.1.1'
+  api 'com.facebook.fresco:fresco:2.1.0'
+  api 'io.jsonwebtoken:jjwt-api:0.10.7'
 
-  implementation "androidx.room:room-runtime:2.2.2"
-  annotationProcessor "androidx.room:room-compiler:2.2.2"
-
-  implementation 'org.greenrobot:eventbus:3.1.1'
+  annotationProcessor "androidx.room:room-compiler:2.2.3"
   annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 
   testImplementation 'junit:junit:4.12'

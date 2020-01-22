@@ -10,18 +10,11 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
-import {
-  EventObserver,
-  Notification,
-  NotificationBuilder,
-  NotificationSchedule,
-  RemoteNotification,
-} from '../types/Notification';
+import { Notification, NotificationEventObserver } from '../types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-import { isFunction, isString, isIOS, isArray, isUndefined, isAndroid } from './utils';
+import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
-import validateSchedule from './validators/validateSchedule';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
 
@@ -52,7 +45,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return Promise.resolve('');
     }
 
-    if (this.core.ANDROID_API_LEVEL < 26) {
+    if (this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(options.id);
     }
 
@@ -75,7 +68,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -90,7 +83,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
     }
 
-    if (this.core.ANDROID_API_LEVEL < 26) {
+    if (this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(options.id);
     }
 
@@ -121,7 +114,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       );
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -133,7 +126,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
@@ -145,23 +138,23 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.deleteChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve();
     }
 
     return this.native.deleteChannelGroup(channelGroupId);
   }
 
-  public displayNotification(notification: NotificationBuilder): Promise<string> {
-    let options: NotificationBuilder;
+  public displayNotification(notification: Notification): Promise<string> {
+    let options: Notification;
     try {
       options = validateNotification(notification);
     } catch (e) {
       throw new Error(`notifee.displayNotification(*) ${e.message}`);
     }
 
-    return this.native.displayNotification(options).then(() => {
-      return options.id;
+    return this.native.displayNotification(options).then((): string => {
+      return options.id as string;
     });
   }
 
@@ -170,7 +163,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.getChannel(*) 'channelId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
@@ -178,7 +171,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public getChannels(): Promise<NativeAndroidChannel[]> {
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
@@ -190,7 +183,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.getChannelGroup(*) 'channelGroupId' expected a string value.");
     }
 
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve(null);
     }
 
@@ -198,7 +191,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public getChannelGroups(): Promise<NativeAndroidChannelGroup[]> {
-    if (isIOS || this.core.ANDROID_API_LEVEL < 26) {
+    if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
       return Promise.resolve([]);
     }
 
@@ -206,31 +199,26 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   // TODO is the return direct from native a valid RemoteNotification
-  public getInitialNotification(): Promise<RemoteNotification | null> {
+  public getInitialNotification(): Promise<Notification | null> {
     return this.native.getInitialNotification();
   }
 
-  // TODO is the return direct from native a valid RemoteNotification array
-  public getScheduledNotifications(): Promise<RemoteNotification[]> {
-    return this.native.getScheduledNotifications();
-  }
-
-  public onEvent(observer: EventObserver): () => void {
+  public onEvent(observer: NotificationEventObserver): () => void {
     if (!isFunction(observer)) {
       throw new Error("notifee.onEvent(*) 'observer' expected a function.");
     }
 
     const subscriber = this.emitter.addListener(
-      this.core.NOTIFEE_RECEIVER_SERVICE_EVENT_KEY,
-      ({ type, event, headless }) => {
-        observer(type, event, headless);
+      this.native.NOTIFICATION_EVENT_KEY,
+      ({ type, detail, headless }) => {
+        observer({ type, detail, headless });
       },
     );
 
     if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
-      AppRegistry.registerHeadlessTask(this.core.NOTIFEE_RECEIVER_SERVICE_TASK_KEY, () => {
-        return ({ type, event, headless }: any): Promise<void> => {
-          return observer(type, event, headless);
+      AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
+        return ({ type, detail, headless }): Promise<void> => {
+          return observer({ type, detail, headless });
         };
       });
       onNotificationEventHeadlessTaskRegistered = true;
@@ -255,36 +243,37 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
     if (!isFunction(runner)) {
-      throw new Error("notifee.registerForegroundService(_, *) 'runner' expected a function.");
+      throw new Error("notifee.registerForegroundService(_) 'runner' expected a function.");
     }
 
     if (isIOS) {
       return;
     }
 
-    AppRegistry.registerHeadlessTask(this.core.NOTIFEE_FOREGROUND_SERVICE, () => {
-      return ({ notification }) => runner(notification);
+    AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
+      return ({ notification }): Promise<void> => runner(notification);
     });
   }
 
-  public scheduleNotification(
-    notification: NotificationBuilder,
-    schedule: NotificationSchedule,
-  ): Promise<void> {
-    let notificationOptions;
-    try {
-      notificationOptions = validateNotification(notification);
-    } catch (e) {
-      throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
-    }
-
-    let scheduleOptions;
-    try {
-      scheduleOptions = validateSchedule(schedule);
-    } catch (e) {
-      throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
-    }
-
-    return this.native.scheduleNotification(notificationOptions, scheduleOptions);
-  }
+  // TODO after iOS ready
+  // public scheduleNotification(
+  //   notification: NotificationBuilder,
+  //   schedule: NotificationSchedule,
+  // ): Promise<void> {
+  //   let notificationOptions;
+  //   try {
+  //     notificationOptions = validateNotification(notification);
+  //   } catch (e) {
+  //     throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
+  //   }
+  //
+  //   let scheduleOptions;
+  //   try {
+  //     scheduleOptions = validateSchedule(schedule);
+  //   } catch (e) {
+  //     throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
+  //   }
+  //
+  //   return this.native.scheduleNotification(notificationOptions, scheduleOptions);
+  // }
 }

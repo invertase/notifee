@@ -15,13 +15,13 @@ import {
   AndroidStyle,
   AndroidVisibility,
 } from '../types/NotificationAndroid';
-import { EventType, NotificationRepeatInterval } from '../types/Notification';
+import { NotificationEventType } from '../types/Notification';
 import { version as SDK_VERSION } from './version';
 
 const module = new NotifeeApiModule({
   version: SDK_VERSION,
   nativeModuleName: 'NotifeeApiModule',
-  nativeEvents: ['receiver_service'],
+  nativeEvents: ['app.notifee.notification.event'],
 });
 
 const statics: ModuleStatics = {
@@ -30,8 +30,7 @@ const statics: ModuleStatics = {
   AndroidBadgeIconType,
   AndroidCategory,
   AndroidGroupAlertBehavior,
-  EventType,
-  NotificationRepeatInterval,
+  NotificationEventType,
   AndroidDefaults,
   AndroidImportance,
   AndroidColor,

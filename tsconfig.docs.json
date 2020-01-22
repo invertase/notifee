@@ -1,6 +1,5 @@
 {
   "include": [
-    "packages/react-native/types/index.d.ts",
     "packages/react-native/types/**/*.ts"
   ],
   "compilerOptions": {

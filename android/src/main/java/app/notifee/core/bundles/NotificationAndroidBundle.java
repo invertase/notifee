@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -11,33 +12,38 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.util.ArrayList;
 import java.util.Objects;
-//
-//import static io.invertase.notifee.NotifeeUtils.getImageBitmapFromUrl;
-//import static io.invertase.notifee.NotifeeUtils.getImageResourceId;
 
+import app.notifee.core.Logger;
+import app.notifee.core.utils.ResourceUtils;
+
+@Keep
 public class NotificationAndroidBundle {
-
   private Bundle mNotificationAndroidBundle;
 
-  public NotificationAndroidBundle(Bundle bundle) {
+  private NotificationAndroidBundle(Bundle bundle) {
     mNotificationAndroidBundle = bundle;
   }
 
-//  public @Nullable
-//  ArrayList<NotifeeNotificationAndroidActionBundle> getActions() {
-//    if (mNotificationAndroidBundle.containsKey("actions")) {
-//      ArrayList<Bundle> actionBundles = Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
-//      ArrayList<NotifeeNotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
-//
-//      for (Bundle actionBundle : actionBundles) {
-//        actions.add(new NotifeeNotificationAndroidActionBundle(actionBundle));
-//      }
-//
-//      return actions;
-//    }
-//
-//    return null;
-//  }
+  public static NotificationAndroidBundle fromBundle(Bundle bundle) {
+    return new NotificationAndroidBundle(bundle);
+  }
+
+  public @Nullable
+  ArrayList<NotificationAndroidActionBundle> getActions() {
+    if (mNotificationAndroidBundle.containsKey("actions")) {
+      ArrayList<Bundle> actionBundles = Objects
+        .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
+      ArrayList<NotificationAndroidActionBundle> actions = new ArrayList<>(actionBundles.size());
+
+      for (Bundle actionBundle : actionBundles) {
+        actions.add(NotificationAndroidActionBundle.fromBundle(actionBundle));
+      }
+
+      return actions;
+    }
+
+    return null;
+  }
 
   /**
    * Gets whether the notification is for a foreground service
@@ -45,7 +51,7 @@ public class NotificationAndroidBundle {
    * @return Boolean
    */
   public Boolean getAsForegroundService() {
-    return mNotificationAndroidBundle.getBoolean("asForegroundService");
+    return mNotificationAndroidBundle.getBoolean("asForegroundService", false);
   }
 
   /**
@@ -126,7 +132,7 @@ public class NotificationAndroidBundle {
   public Boolean getChronometerCountDown() {
     if (mNotificationAndroidBundle.containsKey("chronometerDirection")) {
       String direction = mNotificationAndroidBundle.getString("chronometerDirection");
-      if (direction != null) return direction.equals("down");
+      return direction != null && direction.equals("down");
     }
 
     return false;
@@ -163,7 +169,7 @@ public class NotificationAndroidBundle {
    */
   public @Nullable
   String getGroup() {
-    return mNotificationAndroidBundle.getString("group");
+    return mNotificationAndroidBundle.getString("groupId");
   }
 
   /**
@@ -196,8 +202,10 @@ public class NotificationAndroidBundle {
   public @Nullable
   CharSequence[] getInputHistory() {
     if (mNotificationAndroidBundle.containsKey("inputHistory")) {
-      ArrayList<String> inputHistoryArray = mNotificationAndroidBundle.getStringArrayList("inputHistory");
-      return Objects.requireNonNull(inputHistoryArray).toArray(new CharSequence[inputHistoryArray.size()]);
+      ArrayList<String> inputHistoryArray = mNotificationAndroidBundle
+        .getStringArrayList("inputHistory");
+      return Objects.requireNonNull(inputHistoryArray)
+        .toArray(new CharSequence[inputHistoryArray.size()]);
     }
 
     return null;
@@ -213,18 +221,15 @@ public class NotificationAndroidBundle {
   }
 
   /**
-   * Returns a task to get the large icon
-   *
-   * @return Task<Bitmap>
+   * Returns the large icon string
    */
-//  public Task<Bitmap> getLargeIcon() {
-//    if (hasLargeIcon()) {
-//      String largeIcon = Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
-//      return getImageBitmapFromUrl(largeIcon);
-//    }
-//
-//    return Tasks.call(() -> null);
-//  }
+  public String getLargeIcon() {
+    if (hasLargeIcon()) {
+      return Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
+    }
+
+    return null;
+  }
 
   /**
    * Gets the light output for the notification
@@ -234,7 +239,8 @@ public class NotificationAndroidBundle {
   public @Nullable
   ArrayList<Integer> getLights() {
     if (mNotificationAndroidBundle.containsKey("lights")) {
-      ArrayList lightList = Objects.requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
+      ArrayList lightList = Objects
+        .requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
       String rawColor = (String) lightList.get(0);
 
       ArrayList<Integer> lights = new ArrayList<>(3);
@@ -289,6 +295,16 @@ public class NotificationAndroidBundle {
   }
 
   /**
+   * Gets an pressAction bundle for the notification
+   *
+   * @return Bundle or null
+   */
+  public @Nullable
+  Bundle getPressAction() {
+    return mNotificationAndroidBundle.getBundle("pressAction");
+  }
+
+  /**
    * JS uses the same API as importance for priority so we dont confuse users.
    * This maps importance to a priority flag.
    *
@@ -321,14 +337,11 @@ public class NotificationAndroidBundle {
   public @Nullable
   AndroidProgress getProgress() {
     if (mNotificationAndroidBundle.containsKey("progress")) {
-      Bundle progressBundle = Objects.requireNonNull(
-        mNotificationAndroidBundle.getBundle("progress")
-      );
+      Bundle progressBundle = Objects
+        .requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
-      return new AndroidProgress(
-        (int) progressBundle.getDouble("max"),
-        (int) progressBundle.getDouble("current"),
-        progressBundle.getBoolean("indeterminate", false)
+      return new AndroidProgress((int) progressBundle.getDouble("max"),
+        (int) progressBundle.getDouble("current"), progressBundle.getBoolean("indeterminate", false)
       );
     }
 
@@ -355,37 +368,40 @@ public class NotificationAndroidBundle {
   }
 
   /**
+   * Gets the small icon resource id from its string name, or null if the icon is missing from the device.
+   */
+  public @Nullable
+  Integer getSmallIcon() {
+    if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
+      return null;
+    }
+
+    String rawIcon = mNotificationAndroidBundle.getString("smallIcon");
+    int smallIconId = ResourceUtils.getImageResourceId(rawIcon);
+
+    if (smallIconId == 0) {
+      Logger.d("NotificationAndroidBundle",
+        String.format("Notification small icon '%s' could not be found", rawIcon)
+      );
+      return null;
+    }
+
+    return smallIconId;
+  }
+
+  /**
    * Gets the small icon & it's level, or null if the icon is missing from the device.
    *
    * @return ArrayList<Integer>
    */
-//  public @Nullable
-//  ArrayList<Integer> getSmallIcon() {
-//    if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
-//      return null;
-//    }
-//
-//    ArrayList smallIconList = Objects.requireNonNull(
-//      mNotificationAndroidBundle.getParcelableArrayList("smallIcon")
-//    );
-//
-//    String smallIconRaw = (String) smallIconList.get(0);
-//    int smallIconId = getImageResourceId(smallIconRaw);
-//
-//    if (smallIconId == 0) {
-//      Logger.d(
-//        "NotificationAndroidBundle",
-//        String.format("Notification small icon '%s' could not be found", smallIconRaw)
-//      );
-//      return null;
-//    }
-//
-//    ArrayList<Integer> smallIcon = new ArrayList<>(2);
-//    smallIcon.add(smallIconId);
-//    smallIcon.add((int) smallIconList.get(1));
-//
-//    return smallIcon;
-//  }
+  public @Nullable
+  Integer getSmallIconLevel() {
+    if (!mNotificationAndroidBundle.containsKey("smallIconLevel")) {
+      return null;
+    }
+
+    return mNotificationAndroidBundle.getInt("smallIconLevel");
+  }
 
   /**
    * Gets the sort key
@@ -411,17 +427,16 @@ public class NotificationAndroidBundle {
    *
    * @return Task<NotificationCompat.Style>
    */
-//  public Task<NotificationCompat.Style> getStyle() {
-//    if (!hasStyle()) {
-//      return Tasks.call(() -> null);
-//    }
-//
-//    NotifeeNotificationAndroidStyleBundle styleBundle = new NotifeeNotificationAndroidStyleBundle(
-//      mNotificationAndroidBundle.getBundle("style")
-//    );
-//
-//    return styleBundle.getStyle();
-//  }
+  public @Nullable
+  NotificationAndroidStyleBundle getStyle() {
+    if (!hasStyle()) {
+      return null;
+    }
+
+    return NotificationAndroidStyleBundle.fromBundle(
+      mNotificationAndroidBundle.getBundle("style")
+    );
+  }
 
   /**
    * Gets the ticker text
@@ -466,9 +481,8 @@ public class NotificationAndroidBundle {
       return new long[0];
     }
 
-    ArrayList vibrationPattern = Objects.requireNonNull(
-      mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern")
-    );
+    ArrayList vibrationPattern = Objects
+      .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern"));
 
     long[] vibrateArray = new long[vibrationPattern.size()];
 

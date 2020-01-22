@@ -18,11 +18,18 @@ class DatabaseNotificationEntity {
   @ColumnInfo(name = "tag")
   String tag;
 
+  @ColumnInfo(name = "status")
+  String status;
+
+  @ColumnInfo(name = "channel")
+  String channel;
+
   @ColumnInfo(name = "created_at")
   Long createdAt;
 
   @ColumnInfo(name = "modified_at")
   Long modifiedAt;
+
 
   // TODO just testing
   @ColumnInfo(name = "bundle")
