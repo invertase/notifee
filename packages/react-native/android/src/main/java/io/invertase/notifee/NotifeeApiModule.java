@@ -24,6 +24,11 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
     super(reactContext);
   }
 
+  @Override
+  public void onCatalystInstanceDestroy() {
+    NotifeeReactUtils.clearRunningHeadlessTasks();
+  }
+
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
     Notifee.getInstance().cancelNotification(notificationId, (e, aVoid) -> {

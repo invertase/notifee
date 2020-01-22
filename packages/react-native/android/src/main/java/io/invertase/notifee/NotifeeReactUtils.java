@@ -72,6 +72,14 @@ class NotifeeReactUtils {
     }
   }
 
+  static void clearRunningHeadlessTasks() {
+    for (int i = 0; i < headlessTasks.size(); i++) {
+      GenericCallback callback = headlessTasks.valueAt(i);
+      callback.call();
+      headlessTasks.remove(i);
+    }
+  }
+
   static void startHeadlessTask(
     String taskName, WritableMap taskData, long taskTimeout,
     @Nullable GenericCallback taskCompletionCallback

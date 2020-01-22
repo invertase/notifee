@@ -11,7 +11,7 @@ import {
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
 import { Notification, NotificationEventObserver } from '../types/Notification';
-import NotifeeNativeModule from './NotifeeNativeModule';
+import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
@@ -19,8 +19,22 @@ import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
 
 let onNotificationEventHeadlessTaskRegistered = false;
+let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
+  constructor(config: NativeModuleConfig) {
+    super(config);
+    AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
+      if (!registeredForegroundServiceTask) {
+        console.warn(
+          '[notifee] no registered foreground service has been set for displaying a foreground notification.',
+        );
+        return (): Promise<void> => Promise.resolve();
+      }
+      return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
+    });
+  }
+
   public cancelAllNotifications(): Promise<void> {
     return this.native.cancelAllNotifications();
   }
@@ -250,9 +264,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return;
     }
 
-    AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
-      return ({ notification }): Promise<void> => runner(notification);
-    });
+    registeredForegroundServiceTask = runner;
   }
 
   // TODO after iOS ready
