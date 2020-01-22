@@ -24,12 +24,12 @@ export default function validateAndroidPressAction(
     out.launchActivity = pressAction.launchActivity;
   }
 
-  if (!isUndefined(pressAction.reactComponent)) {
-    if (!isString(pressAction.reactComponent)) {
-      throw new Error("'reactComponent' expected a string value.");
+  if (!isUndefined(pressAction.mainComponent)) {
+    if (!isString(pressAction.mainComponent)) {
+      throw new Error("'mainComponent' expected a string value.");
     }
 
-    out.reactComponent = pressAction.reactComponent;
+    out.mainComponent = pressAction.mainComponent;
   }
 
   return out;

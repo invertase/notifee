@@ -21,6 +21,9 @@ public class NotificationEvent {
   @KeepForSdk
   public final static int TYPE_DELIVERED = 3;
 
+  @KeepForSdk
+  public final static int TYPE_SCHEDULED = 7;
+
   private final int type;
   private final Bundle extras;
   private final NotificationBundle notification;

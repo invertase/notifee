@@ -3,12 +3,22 @@ package app.notifee.core;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.concurrent.futures.ResolvableFuture;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.ListenableWorker;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
@@ -26,11 +36,13 @@ import app.notifee.core.bundles.NotificationAndroidActionBundle;
 import app.notifee.core.bundles.NotificationAndroidBundle;
 import app.notifee.core.bundles.NotificationAndroidStyleBundle;
 import app.notifee.core.bundles.NotificationBundle;
+import app.notifee.core.bundles.ScheduleBundle;
 import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.utils.ResourceUtils;
 import app.notifee.core.utils.TextUtils;
 
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
+import static app.notifee.core.Worker.WORK_TYPE_NOTIFICATION_SCHEDULE;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
@@ -291,17 +303,12 @@ class NotificationManager {
 
   static Task<Void> cancelNotification(@NonNull String notificationId) {
     return Tasks.call(() -> {
-      // TODO get notification by ID, and whether it's scheduled
-      Boolean scheduled = false;
+      NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat
+        .from(ContextHolder.getApplicationContext());
+      notificationManagerCompat.cancel(notificationId.hashCode());
 
-      if (scheduled == false) {
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat
-          .from(ContextHolder.getApplicationContext());
-        notificationManagerCompat.cancel(notificationId.hashCode());
-        // TODO Update DB
-      } else {
-        // TODO cancel a scheduled notification
-      }
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelUniqueWork("schedule:" + notificationId);
 
       return null;
     });
@@ -309,11 +316,13 @@ class NotificationManager {
 
   static Task<Void> cancelAllNotifications() {
     return Tasks.call(() -> {
-      // TODO delete database scheduled ones
       NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat
         .from(ContextHolder.getApplicationContext());
       notificationManagerCompat.cancelAll();
-      // TODO update DB?
+
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+        .cancelAllWorkByTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+
       return null;
     });
   }
@@ -338,5 +347,70 @@ class NotificationManager {
 
         return null;
       });
+  }
+
+  static Task<Void> scheduleNotification(Bundle notificationBundle, Bundle scheduleBundle) {
+    return Tasks.call(CACHED_THREAD_POOL, () -> {
+      NotificationBundle notification = NotificationBundle.fromBundle(notificationBundle);
+      ScheduleBundle schedule = ScheduleBundle.fromBundle(scheduleBundle);
+
+      Data workData = new Data.Builder()
+        .putString(Worker.KEY_WORK_TYPE, WORK_TYPE_NOTIFICATION_SCHEDULE)
+//        .putInt(schedule.)
+//        .putByteArray("notification", notificationBundle) // todo send serialized bundle
+        .build();
+
+      int timestamp = schedule.getTimestamp();
+      int interval = schedule.getInterval();
+      long delay = 0;
+
+
+      if (timestamp != -1) {
+        delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
+      }
+
+      // One time scheduled
+      if (interval == -1) {
+        OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
+        workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+        workRequestBuilder.setInputData(workData);
+        workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+
+        WorkManager.getInstance(ContextHolder.getApplicationContext())
+          .enqueueUniqueWork("schedule:" + notification.getId(), ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
+      } else {
+        PeriodicWorkRequest.Builder workRequestBuilder = new PeriodicWorkRequest.Builder(Worker.class, interval, TimeUnit.MINUTES);
+        workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+        workRequestBuilder.setInputData(workData);
+        workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+
+        WorkManager.getInstance(ContextHolder.getApplicationContext())
+          .enqueueUniquePeriodicWork("schedule:" + notification.getId(), ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+      }
+
+      EventBus.post(new NotificationEvent(NotificationEvent.TYPE_SCHEDULED, notification));
+
+      return null;
+    });
+  }
+
+  static void doScheduledWork(Data workData, final ResolvableFuture<ListenableWorker.Result> completer) {
+    String notificationString = workData.getString("notification");
+    String scheduleString = workData.getString("schedule");
+
+    if (notificationString == null || scheduleString == null) {
+      Logger.w(TAG, "Attempted to handle doScheduledWork but no notification or schedule data was found.");
+      completer.set(ListenableWorker.Result.success());
+      return;
+    }
+
+    NotificationBundle notificationBundle = NotificationBundle.fromJSONString(notificationString);
+    NotificationManager.displayNotification(notificationBundle).addOnCompleteListener(task -> {
+      completer.set(ListenableWorker.Result.success());
+      if (!task.isSuccessful()) {
+        Logger.e(TAG, "Failed to display scheduled notification", task.getException());
+      }
+    });
+
   }
 }

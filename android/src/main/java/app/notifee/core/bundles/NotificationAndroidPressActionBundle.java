@@ -36,7 +36,7 @@ public class NotificationAndroidPressActionBundle {
   }
 
   public @Nullable
-  String getReactComponent() {
-    return mNotificationAndroidPressActionBundle.getString("reactComponent");
+  String getMainComponent() {
+    return mNotificationAndroidPressActionBundle.getString("mainComponent");
   }
 }

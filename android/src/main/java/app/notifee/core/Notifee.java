@@ -18,6 +18,8 @@ import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
 import app.notifee.core.bundles.NotificationBundle;
 import app.notifee.core.database.Database;
+import app.notifee.core.events.InitialNotificationEvent;
+import app.notifee.core.events.MainComponentEvent;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
@@ -64,6 +66,17 @@ public class Notifee {
 
   static NotifeeConfig getNotifeeConfig() {
     return mNotifeeConfig;
+  }
+
+  @KeepForSdk
+  public @NonNull String getMainComponent(@NonNull String defaultComponent) {
+    MainComponentEvent event = EventBus.removeStickEvent(MainComponentEvent.class);
+
+    if (event == null) {
+      return defaultComponent;
+    }
+
+    return event.getMainComponent();
   }
 
   /**
@@ -285,8 +298,13 @@ public class Notifee {
       logLicenseWarningForMethod("getInitialNotification");
       result.onComplete(null, null);
     } else {
-      // TODO get initial notification
-      result.onComplete(null, null);
+      InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
+
+      if (event == null) {
+        result.onComplete(null, null);
+      } else {
+        result.onComplete(null, event.getNotificationBundle().toBundle());
+      }
     }
   }
 
@@ -324,6 +342,24 @@ public class Notifee {
 
       activity.runOnUiThread(() -> getContext().startActivity(intent));
       result.onComplete(null, null);
+    }
+  }
+
+  @KeepForSdk
+  public void scheduleNotification(
+    Bundle notificationBundle, Bundle scheduleBundle, MethodCallResult<Void> result
+  ) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("scheduleNotification");
+      result.onComplete(null, null);
+    } else {
+      NotificationManager.scheduleNotification(notificationBundle, scheduleBundle).addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+          result.onComplete(null, task.getResult());
+        } else {
+          result.onComplete(task.getException(), null);
+        }
+      });
     }
   }
 }

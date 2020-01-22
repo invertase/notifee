@@ -2,7 +2,7 @@ package com.invertase.testing;
 
 import com.facebook.react.ReactActivity;
 
-//import io.invertase.notifee.NotifeeNotification;
+import io.invertase.notifee.NotifeeApiModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,8 +12,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "testing";
-    // TODO
-//    return NotifeeNotification.getMainComponentName("testing");
+    return NotifeeApiModule.getMainComponent("testing");
   }
 }

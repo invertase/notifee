@@ -24,6 +24,10 @@ public class EventBus {
     return getInstance().getDefault().getStickyEvent(eventType);
   }
 
+  public static <T> T removeStickEvent(Class<T> eventType) {
+    return getInstance().getDefault().removeStickyEvent(eventType);
+  }
+
   public static void post(Object event) {
     getInstance().getDefault().post(event);
   }

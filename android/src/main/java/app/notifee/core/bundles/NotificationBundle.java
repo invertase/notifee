@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import app.notifee.core.KeepForSdk;
+import app.notifee.core.Logger;
 import app.notifee.core.utils.JSONUtils;
 
 @KeepForSdk
@@ -36,6 +37,7 @@ public class NotificationBundle {
       Bundle notificationBundle = JSONUtils.convertToBundle(jsonObject);
       return new NotificationBundle(notificationBundle);
     } catch (JSONException jsonException) {
+      Logger.e("JSON", "Failed to convert NotificationBundle from a JSON String.", jsonException);
       return null;
     }
   }
@@ -88,6 +90,7 @@ public class NotificationBundle {
     try {
       return JSONUtils.convertToJSON(mNotificationBundle).toString();
     } catch (JSONException e) {
+      Logger.e("JSON", "Failed to convert NotificationBundle to a JSON String.", e);
       return null;
     }
   }

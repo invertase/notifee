@@ -55,10 +55,6 @@ const channels = [
   },
 ];
 
-Notifee.onEvent(({ type, detail, headless }) => {
-
-});
-
 function onMessage(message: RemoteMessage): void {
   console.log('New FCM Message', message);
 }
@@ -127,26 +123,40 @@ function Root(): any {
 }
 
 function Video() {
+  useEffect(() => {
+    Notifee.getInitialNotification().then(n => {
+      console.log('getInitialNotification', n);
+    });
+  }, []);
+
   return (
     <View style={{ padding: 8 }}>
       <Button
-        title="Display Notification"
+        title="Display Notification!!!"
         onPress={() => {
           setTimeout(() => {
-            Notifee.displayNotification(videos['android-chronometer-down']).catch(console.error);
+            // Notifee.displayNotification(videos['android-chronometer-down']).catch(console.error);
             // Notifee.displayNotification({
             //   title: 'Uploading images...',
             //   android: {
             //     channelId: 'default',
-            //     asForegroundService: true,
-            //     progress: {
-            //       max: 10,
-            //       current: 0,
-            //     },
             //     color: '#553C9A',
+            //     pressAction: {
+            //       id: 'foo',
+            //     }
             //   },
             // });
-          }, 3000);
+            Notifee.scheduleNotification(
+              {
+                title: 'foo',
+                body: 'foo',
+                android: {
+                  channelId: 'default',
+                },
+              },
+              {},
+            );
+          }, 1);
         }}
       />
     </View>
@@ -177,29 +187,18 @@ const styles = StyleSheet.create({
   },
 });
 
+Notifee.onEvent(async ({ type, detail }) => {
+  console.log('!!!', type, detail);
+});
+
 // Notifee.registerForegroundService(notification => {
 //   return new Promise(resolve => {
-//     let interval: any = null;
-//     let i = 0;
-//
-//     interval = setInterval(() => {
-//       if (i === 5) {
-//         clearInterval(interval);
+//     Notifee.onEvent(({ detail }) => {
+//       console.log(detail);
+//       if (detail?.pressAction?.id === 'stop') {
 //         return resolve();
 //       }
-//
-//       i++;
-//       Notifee.displayNotification({
-//         ...notification,
-//         android: {
-//           ...notification.android,
-//           progress: {
-//             max: 10,
-//             current: i * 2,
-//           },
-//         },
-//       });
-//     }, 1500);
+//     });
 //   });
 // });
 

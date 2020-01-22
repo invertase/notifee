@@ -2,6 +2,7 @@ package io.invertase.notifee;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -12,7 +13,10 @@ import androidx.annotation.Nullable;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
@@ -42,6 +46,39 @@ class NotifeeReactUtils {
       }
     }
   };
+
+  static void promiseResolver(Promise promise, Exception e, Bundle bundle) {
+    if (e != null) {
+      // TODO custom error class with message/code
+      promise.reject(e);
+    } else if (bundle != null) {
+      promise.resolve(Arguments.fromBundle(bundle));
+    } else {
+      promise.resolve(null);
+    }
+  }
+
+  static void promiseResolver(Promise promise, Exception e, List<Bundle> bundleList) {
+    if (e != null) {
+      // TODO custom error class with message/code
+      promise.reject(e);
+    } else {
+      WritableArray writableArray = Arguments.createArray();
+      for (Bundle bundle : bundleList) {
+        writableArray.pushMap(Arguments.fromBundle(bundle));
+      }
+      promise.resolve(writableArray);
+    }
+  }
+
+  static void promiseResolver(Promise promise, Exception e) {
+    if (e != null) {
+      // TODO custom error class with message/code
+      promise.reject(e);
+    } else {
+      promise.resolve(null);
+    }
+  }
 
   private static @Nullable
   ReactContext getReactContext() {

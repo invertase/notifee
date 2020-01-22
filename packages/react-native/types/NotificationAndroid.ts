@@ -685,7 +685,7 @@ export interface AndroidAction {
  * using the default `launchActivity` for the application.
  *
  * When provided to a notification action, the action will only open the application if a `launchActivity`
- * and/or `reactComponent` is provided.
+ * and/or `mainComponent` is provided.
  *
  * @platform android
  */
@@ -729,7 +729,7 @@ export interface AndroidPressAction {
    *
    * TODO Guide
    */
-  reactComponent?: string;
+  mainComponent?: string;
 }
 
 /**

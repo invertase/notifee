@@ -10,7 +10,7 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
-import { Notification, NotificationEventObserver } from '../types/Notification';
+import { Notification, NotificationEventObserver, Schedule } from '../types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
@@ -267,25 +267,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     registeredForegroundServiceTask = runner;
   }
 
-  // TODO after iOS ready
-  // public scheduleNotification(
-  //   notification: NotificationBuilder,
-  //   schedule: NotificationSchedule,
-  // ): Promise<void> {
-  //   let notificationOptions;
-  //   try {
-  //     notificationOptions = validateNotification(notification);
-  //   } catch (e) {
-  //     throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
-  //   }
-  //
-  //   let scheduleOptions;
-  //   try {
-  //     scheduleOptions = validateSchedule(schedule);
-  //   } catch (e) {
-  //     throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
-  //   }
-  //
-  //   return this.native.scheduleNotification(notificationOptions, scheduleOptions);
-  // }
+  public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {
+    let notificationOptions;
+    try {
+      notificationOptions = validateNotification(notification);
+    } catch (e) {
+      throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
+    }
+
+    let scheduleOptions;
+    // try {
+    //   scheduleOptions = validateSchedule(schedule);
+    // } catch (e) {
+    //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
+    // }
+
+    return this.native.scheduleNotification(notificationOptions, scheduleOptions);
+  }
 }

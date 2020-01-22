@@ -17,6 +17,7 @@ class Worker extends ListenableWorker {
   static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
   static final String WORK_TYPE_LICENSE_VERIFY_LOCAL = "app.notifee.core.LicenseVerify.LOCAL";
   static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
+  static final String WORK_TYPE_NOTIFICATION_SCHEDULE = "app.notifee.core.NotificationManager.SCHEDULE";
 
   private ResolvableFuture<Result> mFuture;
 
@@ -58,6 +59,9 @@ class Worker extends ListenableWorker {
         break;
       case WORK_TYPE_LICENSE_VERIFY_REMOTE:
         LicenseManager.doRemoteWork(getInputData(), mFuture);
+        break;
+      case WORK_TYPE_NOTIFICATION_SCHEDULE:
+        NotificationManager.doScheduledWork(getInputData(), mFuture);
         break;
       default:
         Logger.d(TAG, "unknown work type received: " + workType);

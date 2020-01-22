@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Notification, NotificationEventObserver, NotificationEventType } from './Notification';
+import { Notification, NotificationEventObserver, NotificationEventType, Schedule } from './Notification';
 import {
   AndroidBadgeIconType,
   AndroidCategory,
@@ -167,6 +167,13 @@ export interface Module {
    * @platform android
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
+
+  /**
+   *
+   * @param notification
+   * @param schedule
+   */
+  scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
 }
 
 export interface ModuleStatics {
