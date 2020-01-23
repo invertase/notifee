@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
+
 import { Platform } from 'react-native';
 
 export * from './id';

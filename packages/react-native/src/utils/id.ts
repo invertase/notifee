@@ -1,10 +1,13 @@
-const AUTO_ID_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
+const CHARACTERS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
 export function generateId(): string {
-  let autoId = '';
-
+  let newId = '';
   for (let i = 0; i < 20; i++) {
-    autoId += AUTO_ID_CHARS.charAt(Math.floor(Math.random() * AUTO_ID_CHARS.length));
+    newId += CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length));
   }
-  return autoId;
+  return newId;
 }

@@ -2,25 +2,17 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Notification, NotificationEventObserver, NotificationEventType, Schedule } from './Notification';
+import { Notification, NotificationEventObserver, Schedule } from './Notification';
 import {
-  AndroidBadgeIconType,
-  AndroidCategory,
   AndroidChannel,
   AndroidChannelGroup,
-  AndroidColor,
-  AndroidDefaults,
-  AndroidGroupAlertBehavior,
-  AndroidImportance,
-  AndroidSemanticAction,
-  AndroidStyle,
-  AndroidVisibility,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
 
 export interface Module {
   cancelAllNotifications(): Promise<void>;
+
   cancelNotification(notificationId: string): Promise<void>;
 
   /**
@@ -176,17 +168,29 @@ export interface Module {
   scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
 }
 
+/**
+ * An interface describing the Android specific configuration properties for the `notifee.config.json` file.
+ */
+export interface JsonConfigAndroid {
+  license: string;
+}
+
+/**
+ * An interface describing the iOS specific configuration properties for the `notifee.config.json` file.
+ */
+export interface JsonConfigIOS {
+  license: string;
+}
+
+/**
+ * An interface describing the contents of a `notifee.config.json` file.
+ */
+export interface JsonConfig {
+  android?: JsonConfigAndroid;
+  ios?: JsonConfigIOS;
+}
+
 export interface ModuleStatics {
-  NotificationEventType: typeof NotificationEventType;
-  AndroidBadgeIconType: typeof AndroidBadgeIconType;
-  AndroidCategory: typeof AndroidCategory;
-  AndroidGroupAlertBehavior: typeof AndroidGroupAlertBehavior;
-  AndroidSemanticAction: typeof AndroidSemanticAction;
-  AndroidVisibility: typeof AndroidVisibility;
-  AndroidDefaults: typeof AndroidDefaults;
-  AndroidImportance: typeof AndroidImportance;
-  AndroidColor: typeof AndroidColor;
-  AndroidStyle: typeof AndroidStyle;
   SDK_VERSION: string;
 }
 

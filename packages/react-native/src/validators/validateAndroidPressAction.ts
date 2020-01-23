@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 import { AndroidPressAction } from '../../types/NotificationAndroid';
 import { isObject, isString, isUndefined } from '../utils';
 

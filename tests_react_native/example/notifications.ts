@@ -1,5 +1,5 @@
 import Notifee from '@notifee/react-native';
-import { Notification } from '@notifee/react-native/lib/types/Notification';
+import { Notification } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification }[] = [
   {

@@ -159,7 +159,7 @@ export interface Notification {
 }
 
 export interface NotificationEvent {
-  type: NotificationEventType;
+  type: EventType;
   headless: boolean;
   detail:
     | AndroidNotificationEvent
@@ -173,7 +173,7 @@ export type NotificationEventObserver = (event: NotificationEvent) => Promise<vo
 /**
  * An enum representing an event type for `onNotificationEvent` subscriptions.
  */
-export enum NotificationEventType {
+export enum EventType {
   /**
    * An unknown event was received.
    *

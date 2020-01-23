@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
+
 import { NativeError } from '../types/Library';
 
 export default class NotifeeNativeError extends Error implements NativeError {

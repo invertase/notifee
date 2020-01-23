@@ -9,7 +9,7 @@ import { AppRegistry, Button, ScrollView, StyleSheet, Text, View } from 'react-n
 import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
 
-import Notifee from '@notifee/react-native';
+import Notifee, { AndroidImportance } from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
@@ -30,28 +30,28 @@ const channels = [
   {
     name: 'Custom Sound',
     id: 'high',
-    importance: Notifee.AndroidImportance.HIGH,
+    importance: AndroidImportance.HIGH,
     sound: 'hollow.mp3',
   },
   {
     name: 'High Importance',
     id: 'high',
-    importance: Notifee.AndroidImportance.HIGH,
+    importance: AndroidImportance.HIGH,
   },
   {
     name: 'Default Importance',
     id: 'default',
-    importance: Notifee.AndroidImportance.DEFAULT,
+    importance: AndroidImportance.DEFAULT,
   },
   {
     name: 'Low Importance',
     id: 'low',
-    importance: Notifee.AndroidImportance.LOW,
+    importance: AndroidImportance.LOW,
   },
   {
     name: 'Min Importance',
     id: 'min',
-    importance: Notifee.AndroidImportance.MIN,
+    importance: AndroidImportance.MIN,
   },
 ];
 

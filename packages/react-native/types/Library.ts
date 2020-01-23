@@ -1,24 +1,6 @@
-/**
- * An interface describing the Android specific configuration properties for the `notifee.config.json` file.
+/*
+ * Copyright (c) 2016-present Invertase Limited
  */
-export interface JsonConfigAndroid {
-  license: string;
-}
-
-/**
- * An interface describing the iOS specific configuration properties for the `notifee.config.json` file.
- */
-export interface JsonConfigIOS {
-  license: string;
-}
-
-/**
- * An interface describing the contents of a `notifee.config.json` file.
- */
-export interface JsonConfig {
-  android?: JsonConfigAndroid;
-  ios?: JsonConfigIOS;
-}
 
 /**
  * An Error that has occurred in native Android or iOS code converted into a JavaScript Error.

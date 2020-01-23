@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 import { AndroidInput } from '../../types/NotificationAndroid';
 import { hasOwnProperty, isArrayOfStrings, isBoolean, isString } from '../utils';
 

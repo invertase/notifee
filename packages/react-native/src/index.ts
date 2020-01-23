@@ -4,18 +4,6 @@
 
 import NotifeeApiModule from './NotifeeApiModule';
 import { ModuleStatics, ModuleWithStatics } from '../types/Module';
-import {
-  AndroidBadgeIconType,
-  AndroidCategory,
-  AndroidColor,
-  AndroidDefaults,
-  AndroidGroupAlertBehavior,
-  AndroidImportance,
-  AndroidSemanticAction,
-  AndroidStyle,
-  AndroidVisibility,
-} from '../types/NotificationAndroid';
-import { NotificationEventType } from '../types/Notification';
 import { version as SDK_VERSION } from './version';
 
 const module = new NotifeeApiModule({
@@ -25,18 +13,13 @@ const module = new NotifeeApiModule({
 });
 
 const statics: ModuleStatics = {
-  AndroidVisibility,
-  AndroidSemanticAction,
-  AndroidBadgeIconType,
-  AndroidCategory,
-  AndroidGroupAlertBehavior,
-  NotificationEventType,
-  AndroidDefaults,
-  AndroidImportance,
-  AndroidColor,
-  AndroidStyle,
   SDK_VERSION,
 };
 
 const defaultExports: ModuleWithStatics = Object.assign(module, statics);
 export default defaultExports;
+
+export * from '../types/Library';
+export * from '../types/Notification';
+export * from '../types/NotificationIOS';
+export * from '../types/NotificationAndroid';
