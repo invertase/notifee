@@ -152,7 +152,8 @@ public class ReceiverService extends Service {
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      launchPendingIntentActivity(notificationBundle, launchActivity, mainComponent);
+      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationBundle, extras);
+      launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
     }
   }
 
@@ -195,16 +196,17 @@ public class ReceiverService extends Service {
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      launchPendingIntentActivity(notificationBundle, launchActivity, mainComponent);
+      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationBundle, extras);
+      launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
     }
   }
 
   /**
-   * @param notificationBundle
+   * @param initialNotificationEvent
    * @param launchActivity
    * @param mainComponent
    */
-  private void launchPendingIntentActivity(NotificationBundle notificationBundle, @Nullable String launchActivity, @Nullable String mainComponent) {
+  private void launchPendingIntentActivity(InitialNotificationEvent initialNotificationEvent, @Nullable String launchActivity, @Nullable String mainComponent) {
     Class launchActivityClass = getLaunchActivity(launchActivity);
 
     Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
@@ -215,14 +217,14 @@ public class ReceiverService extends Service {
 
     PendingIntent pendingContentIntent = PendingIntent.getActivity(
       getApplicationContext(),
-      notificationBundle.getHashCode(),
+      initialNotificationEvent.getNotificationBundle().getHashCode(),
       launchIntent,
       PendingIntent.FLAG_UPDATE_CURRENT
     );
 
     try {
       pendingContentIntent.send();
-      EventBus.postSticky(new InitialNotificationEvent(notificationBundle));
+      EventBus.postSticky(initialNotificationEvent);
 
       // Send sticky event to save the mainComponent
       if (mainComponent != null) {
@@ -231,7 +233,7 @@ public class ReceiverService extends Service {
     } catch (Exception e) {
       Logger.e(
         "ReceiverService",
-        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + notificationBundle.getId(),
+        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + initialNotificationEvent.getNotificationBundle().getId(),
         e
       );
     }

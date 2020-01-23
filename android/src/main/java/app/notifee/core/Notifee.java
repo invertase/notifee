@@ -299,11 +299,13 @@ public class Notifee {
       result.onComplete(null, null);
     } else {
       InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
-
       if (event == null) {
         result.onComplete(null, null);
       } else {
-        result.onComplete(null, event.getNotificationBundle().toBundle());
+        Bundle initialNotificationBundle = new Bundle();
+        initialNotificationBundle.putAll(event.getExtras());
+        initialNotificationBundle.putBundle("notification", event.getNotificationBundle().toBundle());
+        result.onComplete(null, initialNotificationBundle);
       }
     }
   }

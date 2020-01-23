@@ -10,8 +10,8 @@ import androidx.work.WorkerParameters;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
-class Worker extends ListenableWorker {
-  static final String TAG = "Worker";
+public class Worker extends ListenableWorker {
+  private static final String TAG = "Worker";
   static final String KEY_WORK_TYPE = "workType";
   static final String KEY_IS_PRIMARY = "isPrimaryKey";
   static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
