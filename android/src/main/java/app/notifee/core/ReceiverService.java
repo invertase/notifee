@@ -131,16 +131,22 @@ public class ReceiverService extends Service {
 
 
     NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
-    EventBus.post(new NotificationEvent(TYPE_PRESS, notificationBundle));
 
-    // Optional
     Bundle pressAction = intent.getBundleExtra("pressAction");
+    NotificationAndroidPressActionBundle pressActionBundle = null;
 
-    if (pressAction == null) {
-      return;
+    Bundle extras = new Bundle();
+
+    if (pressAction != null) {
+      pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
+      extras.putBundle("pressAction", pressActionBundle.toBundle());
     }
 
-    NotificationAndroidPressActionBundle pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
+    EventBus.post(new NotificationEvent(TYPE_PRESS, notificationBundle, extras));
+
+    if (pressActionBundle == null) {
+      return;
+    }
 
     String launchActivity = pressActionBundle.getLaunchActivity();
     String mainComponent = pressActionBundle.getMainComponent();
