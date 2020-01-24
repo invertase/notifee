@@ -2,7 +2,12 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Notification, NotificationEventObserver, Schedule } from './Notification';
+import {
+  InitialNotification,
+  Notification,
+  NotificationEventObserver,
+  Schedule,
+} from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
@@ -210,12 +215,38 @@ export interface Module {
    */
   getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
-  getInitialNotification(): Promise<Notification | null>;
-
-  onEvent(observer: NotificationEventObserver): void;
+  /**
+   * API used to fetch the notification which causes the application to open.
+   *
+   * This API can be used to fetch which notification & press action has caused the application to
+   * open. The call returns a `null` value when the application wasn't launched by a notification.
+   *
+   * Once the initial notification has been consumed by this API, it is removed and will no longer
+   * be available. It will also be removed if the user relaunches the application.
+   *
+   * View the [App open events](/react-native/docs/events#app-open-events) documentation for more
+   * information and example usage.
+   */
+  getInitialNotification(): Promise<InitialNotification | null>;
 
   /**
-   * Opens the Android System settings for the application.
+   * API used to subscribe to all events from Notifee.
+   *
+   * The `onEvent` subscriber can be registered in multiple places throughout the application. It is
+   * recommended to register this method early on outside of any React code to receive background/headless
+   * events.
+   *
+   * The method returns a function which can be used to unsubscribe from further events.
+   *
+   * View the [Events](/react-native/docs/events) documentation for more information and usage
+   * examples.
+   *
+   * @param observer The observer function called when a notification is received.
+   */
+  onEvent(observer: NotificationEventObserver): () => void;
+
+  /**
+   * API used to open the Android System settings for the application.
    *
    * If the API version is >= 26:
    * - With no `channelId`, the notification settings screen is displayed.
@@ -227,7 +258,7 @@ export interface Module {
    * If an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect
    * back to your application.
    *
-   * On iOS, this is a no-op.
+   * On iOS, this is a no-op & instantly resolves.
    *
    * @platform android
    * @param channelId
@@ -235,10 +266,19 @@ export interface Module {
   openNotificationSettings(channelId?: string): Promise<void>;
 
   /**
-   * Register a foreground service runner used to manage long running notifications.
+   * API used to register a foreground service on Android devices.
    *
-   * @param runner The runner function which runs for the duration of the service's lifetime.
+   * This method is used to register a long running task which can be used with Foreground Service
+   * notifications.
+   *
+   * Only a single foreground service can exist for the application, and calling this method more
+   * than once will update the existing task runner.
+   *
+   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for
+   * more information.
+   *
    * @platform android
+   * @param runner The runner function which runs for the duration of the service's lifetime.
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 

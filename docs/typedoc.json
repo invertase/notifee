@@ -1686,7 +1686,7 @@
 			]
 		},
 		{
-			"id": 252,
+			"id": 255,
 			"name": "EventType",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1698,7 +1698,7 @@
 			},
 			"children": [
 				{
-					"id": 256,
+					"id": 259,
 					"name": "ACTION_PRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1712,14 +1712,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 209,
+							"line": 215,
 							"character": 14
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 258,
+					"id": 261,
 					"name": "APP_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1739,14 +1739,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 231,
+							"line": 237,
 							"character": 13
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 259,
+					"id": 262,
 					"name": "CHANNEL_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1766,14 +1766,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 240,
+							"line": 246,
 							"character": 17
 						}
 					],
 					"defaultValue": "5"
 				},
 				{
-					"id": 260,
+					"id": 263,
 					"name": "CHANNEL_GROUP_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1793,14 +1793,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 249,
+							"line": 255,
 							"character": 23
 						}
 					],
 					"defaultValue": "6"
 				},
 				{
-					"id": 257,
+					"id": 260,
 					"name": "DELIVERED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1814,14 +1814,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 221,
+							"line": 227,
 							"character": 11
 						}
 					],
 					"defaultValue": "3"
 				},
 				{
-					"id": 254,
+					"id": 257,
 					"name": "DISMISSED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1835,14 +1835,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 193,
+							"line": 199,
 							"character": 11
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 255,
+					"id": 258,
 					"name": "PRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1856,14 +1856,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 202,
+							"line": 208,
 							"character": 7
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 261,
+					"id": 264,
 					"name": "SCHEDULED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1874,14 +1874,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 254,
+							"line": 260,
 							"character": 11
 						}
 					],
 					"defaultValue": "7"
 				},
 				{
-					"id": 253,
+					"id": 256,
 					"name": "UNKNOWN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1895,7 +1895,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 183,
+							"line": 189,
 							"character": 9
 						}
 					],
@@ -1907,28 +1907,28 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						256,
-						258,
 						259,
+						261,
+						262,
+						263,
 						260,
 						257,
-						254,
-						255,
-						261,
-						253
+						258,
+						264,
+						256
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 176,
+					"line": 182,
 					"character": 21
 				}
 			]
 		},
 		{
-			"id": 262,
+			"id": 265,
 			"name": "ScheduleUnit",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1937,7 +1937,7 @@
 			},
 			"children": [
 				{
-					"id": 263,
+					"id": 266,
 					"name": "DAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1947,13 +1947,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 258,
+							"line": 264,
 							"character": 5
 						}
 					]
 				},
 				{
-					"id": 264,
+					"id": 267,
 					"name": "HOUR",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1963,13 +1963,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 259,
+							"line": 265,
 							"character": 6
 						}
 					]
 				},
 				{
-					"id": 265,
+					"id": 268,
 					"name": "MINUTE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1979,7 +1979,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 260,
+							"line": 266,
 							"character": 8
 						}
 					]
@@ -1990,16 +1990,16 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						263,
-						264,
-						265
+						266,
+						267,
+						268
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 257,
+					"line": 263,
 					"character": 24
 				}
 			]
@@ -2162,7 +2162,7 @@
 			]
 		},
 		{
-			"id": 278,
+			"id": 281,
 			"name": "AndroidAppBlockedEvent",
 			"kind": 256,
 			"kindString": "Interface",
@@ -2171,7 +2171,7 @@
 			},
 			"children": [
 				{
-					"id": 279,
+					"id": 282,
 					"name": "blocked",
 					"kind": 1024,
 					"kindString": "Property",
@@ -2184,7 +2184,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 315,
+							"line": 321,
 							"character": 9
 						}
 					],
@@ -2199,14 +2199,14 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						279
+						282
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 311,
+					"line": 317,
 					"character": 39
 				}
 			]
@@ -3018,7 +3018,7 @@
 			]
 		},
 		{
-			"id": 274,
+			"id": 277,
 			"name": "AndroidChannelBlockedEvent",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3027,7 +3027,7 @@
 			},
 			"children": [
 				{
-					"id": 275,
+					"id": 278,
 					"name": "channel",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3042,7 +3042,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 298,
+							"line": 304,
 							"character": 9
 						}
 					],
@@ -3058,14 +3058,14 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						275
+						278
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 291,
+					"line": 297,
 					"character": 43
 				}
 			]
@@ -3204,7 +3204,7 @@
 			]
 		},
 		{
-			"id": 276,
+			"id": 279,
 			"name": "AndroidChannelGroupBlockedEvent",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3213,7 +3213,7 @@
 			},
 			"children": [
 				{
-					"id": 277,
+					"id": 280,
 					"name": "channelGroup",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3228,7 +3228,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 308,
+							"line": 314,
 							"character": 14
 						}
 					],
@@ -3244,14 +3244,14 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						277
+						280
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 301,
+					"line": 307,
 					"character": 48
 				}
 			]
@@ -3888,7 +3888,7 @@
 			]
 		},
 		{
-			"id": 270,
+			"id": 273,
 			"name": "AndroidNotificationEvent",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3897,7 +3897,7 @@
 			},
 			"children": [
 				{
-					"id": 273,
+					"id": 276,
 					"name": "input",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3918,7 +3918,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 288,
+							"line": 294,
 							"character": 7
 						}
 					],
@@ -3937,7 +3937,7 @@
 					}
 				},
 				{
-					"id": 271,
+					"id": 274,
 					"name": "notification",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3947,7 +3947,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 270,
+							"line": 276,
 							"character": 14
 						}
 					],
@@ -3958,7 +3958,7 @@
 					}
 				},
 				{
-					"id": 272,
+					"id": 275,
 					"name": "pressAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3973,7 +3973,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 278,
+							"line": 284,
 							"character": 13
 						}
 					],
@@ -3989,16 +3989,16 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						273,
-						271,
-						272
+						276,
+						274,
+						275
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 269,
+					"line": 275,
 					"character": 41
 				}
 			]
@@ -4758,7 +4758,77 @@
 			]
 		},
 		{
-			"id": 343,
+			"id": 248,
+			"name": "InitialNotification",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 249,
+					"name": "notification",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/types/Notification.ts",
+							"line": 162,
+							"character": 14
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Notification",
+						"id": 237
+					}
+				},
+				{
+					"id": 250,
+					"name": "pressAction",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/types/Notification.ts",
+							"line": 164,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "AndroidPressAction",
+						"id": 71
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						249,
+						250
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "packages/react-native/types/Notification.ts",
+					"line": 161,
+					"character": 36
+				}
+			]
+		},
+		{
+			"id": 348,
 			"name": "JsonConfig",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4770,7 +4840,7 @@
 			},
 			"children": [
 				{
-					"id": 344,
+					"id": 349,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4781,18 +4851,18 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 210,
+							"line": 311,
 							"character": 9
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "JsonConfigAndroid",
-						"id": 339
+						"id": 344
 					}
 				},
 				{
-					"id": 345,
+					"id": 350,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4803,14 +4873,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 211,
+							"line": 312,
 							"character": 5
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "JsonConfigIOS",
-						"id": 341
+						"id": 346
 					}
 				}
 			],
@@ -4819,21 +4889,21 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						344,
-						345
+						349,
+						350
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 209,
+					"line": 310,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 339,
+			"id": 344,
 			"name": "JsonConfigAndroid",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4845,7 +4915,7 @@
 			},
 			"children": [
 				{
-					"id": 340,
+					"id": 345,
 					"name": "license",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4855,7 +4925,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 196,
+							"line": 297,
 							"character": 9
 						}
 					],
@@ -4870,20 +4940,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						340
+						345
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 195,
+					"line": 296,
 					"character": 34
 				}
 			]
 		},
 		{
-			"id": 341,
+			"id": 346,
 			"name": "JsonConfigIOS",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4895,7 +4965,7 @@
 			},
 			"children": [
 				{
-					"id": 342,
+					"id": 347,
 					"name": "license",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4905,7 +4975,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 203,
+							"line": 304,
 							"character": 9
 						}
 					],
@@ -4920,20 +4990,20 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						342
+						347
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 202,
+					"line": 303,
 					"character": 30
 				}
 			]
 		},
 		{
-			"id": 284,
+			"id": 287,
 			"name": "Module",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4942,7 +5012,7 @@
 			},
 			"children": [
 				{
-					"id": 285,
+					"id": 288,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4951,7 +5021,7 @@
 					},
 					"signatures": [
 						{
-							"id": 286,
+							"id": 289,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -4975,13 +5045,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 23,
+							"line": 28,
 							"character": 24
 						}
 					]
 				},
 				{
-					"id": 287,
+					"id": 290,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -4990,7 +5060,7 @@
 					},
 					"signatures": [
 						{
-							"id": 288,
+							"id": 291,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5001,7 +5071,7 @@
 							},
 							"parameters": [
 								{
-									"id": 289,
+									"id": 292,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5030,13 +5100,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 37,
+							"line": 42,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 290,
+					"id": 293,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5045,24 +5115,30 @@
 					},
 					"signatures": [
 						{
-							"id": 291,
+							"id": 294,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).",
-								"text": "Once a channel has been created, only certain fields such as the name & description can be\nmodified. To change a groups settings, you must delete the group (via `deleteChannel`)\nand re-create it. Keep in mind the user always have final control over channel settings.\n\nCreating an existing notification channel with its original values performs no operation,\nso it's safe to call this code when starting an app.\n\nCreated channels can be viewed/managed under App Info -> Notifications.\n\n> On Android 8.0 (API 26) all notifications must be assigned to a channel.\n\nReturns the channel ID.\n\n#### Example\n\n```js\nconst channelId = await notifee.createChannel({\n  channelId: 'custom-channel',\n  name: 'Custom Channel',\n  description: 'A test channel',\n});\n\nawait notifee.displayNotification({\n  body: 'Test notification',\n  android: {\n    channelId, // 'custom-channel'\n  },\n});\n```\n"
+								"shortText": "API to create and update channels on supported Android devices.",
+								"text": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).\n\nBy providing a `groupId` property, channels can be assigned to groups created with\n[`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThe channel ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 292,
+									"id": 295,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "An `AndroidChannel` interface.\n"
+										"text": "The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -5086,13 +5162,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 76,
+							"line": 61,
 							"character": 15
 						}
 					]
 				},
 				{
-					"id": 296,
+					"id": 299,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5101,18 +5177,31 @@
 					},
 					"signatures": [
 						{
-							"id": 297,
+							"id": 300,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API to create or update a channel group on supported Android devices.",
+								"text": "Creates a new Android channel group. Groups are used to further organize the appearance of your\nchannels in the settings UI. Groups allow users to easily identify and control multiple\nnotification channels.\n\nChannels can be assigned to groups during creation using the\n[`createChannel`](/react-native/reference/createchannel) method.\n\nThe channel group ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 298,
+									"id": 301,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)\ninterface used to create/update a group.\n"
+									},
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
@@ -5135,13 +5224,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 87,
+							"line": 92,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 299,
+					"id": 302,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5150,18 +5239,31 @@
 					},
 					"signatures": [
 						{
-							"id": 300,
+							"id": 303,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API to create and update multiple channel groups on supported Android devices.",
+								"text": "This API is used to perform a single operation to create or update channel groups. See the\n[`createChannelGroup`](/react-native/reference/createchannelgroup) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 301,
+									"id": 304,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "An array of [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup) interfaces.\n"
+									},
 									"type": {
 										"type": "array",
 										"elementType": {
@@ -5187,13 +5289,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 89,
+							"line": 103,
 							"character": 21
 						}
 					]
 				},
 				{
-					"id": 293,
+					"id": 296,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5202,24 +5304,30 @@
 					},
 					"signatures": [
 						{
-							"id": 294,
+							"id": 297,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Creates multiple channels in a single operation.",
-								"text": "See `createChannel` for more information.\n"
+								"shortText": "API to create and update multiple channels on supported Android devices.",
+								"text": "This API is used to perform a single operation to create or update channels. See the\n[`createChannel`](/react-native/reference/createchannel) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 295,
+									"id": 298,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "An array of AndroidChannel interfaces.\n"
+										"text": "An array of [`AndroidChannel`](/react-native/reference/androidchannel) interfaces.\n"
 									},
 									"type": {
 										"type": "array",
@@ -5246,13 +5354,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 85,
+							"line": 72,
 							"character": 16
 						}
 					]
 				},
 				{
-					"id": 302,
+					"id": 305,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5261,24 +5369,30 @@
 					},
 					"signatures": [
 						{
-							"id": 303,
+							"id": 306,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Deletes a channel by ID.",
-								"text": "#### Example\n\n```js\nawait notifee.deleteChannel('custom-channel');\n```\n"
+								"shortText": "API used to delete a channel by ID on supported Android devices.",
+								"text": "Channels can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\n> When a channel is deleted, notifications assigned to that channel will fail to display.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 304,
+									"id": 307,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel ID to delete.\n"
+										"text": "The unique channel ID to delete.\n"
 									},
 									"type": {
 										"type": "intrinsic",
@@ -5301,13 +5415,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 102,
+							"line": 118,
 							"character": 15
 						}
 					]
 				},
 				{
-					"id": 305,
+					"id": 308,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5316,18 +5430,31 @@
 					},
 					"signatures": [
 						{
-							"id": 306,
+							"id": 309,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to delete a channel group by ID on supported Android devices.",
+								"text": "Channel groups can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\nDeleting a group does not delete channels which are assigned to the group, they will instead be\nunassigned the group and continue to function as expected.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 307,
+									"id": 310,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The unique channel group ID to delete.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -5349,13 +5476,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 104,
+							"line": 134,
 							"character": 20
 						}
 					]
 				},
 				{
-					"id": 308,
+					"id": 311,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5364,25 +5491,24 @@
 					},
 					"signatures": [
 						{
-							"id": 309,
+							"id": 312,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Displays a notification on the device.",
-								"text": "See `NotificationAndroid` and `NotificationIOS` for platform specific options.\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  title: 'Test',\n  body: 'Test notification body',\n  android: {\n    // Android specific options\n  },\n  ios: {\n    // iOS specific options\n  },\n});\n```\n",
-								"returns": "Promise<string> A promise that resolves the new notification id\n"
+								"shortText": "API used to immideatly display or update a notification on the users device.",
+								"text": "This API is used to display a notification on the users device. All\nchannels/categories should be created before triggering this method during the apps lifecycle.\n\nView the [Displaying a Notification](/react-native/docs/displaying-a-notification)\ndocumentation for more information.\n"
 							},
 							"parameters": [
 								{
-									"id": 310,
+									"id": 313,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "A `Notification` interface."
+										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -5406,13 +5532,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 129,
+							"line": 148,
 							"character": 21
 						}
 					]
 				},
 				{
-					"id": 311,
+					"id": 314,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5421,30 +5547,30 @@
 					},
 					"signatures": [
 						{
-							"id": 312,
+							"id": 315,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns a single `AndroidChannel` by id.",
-								"text": "Returns `null` if no channel could be matched to the given ID.\n",
+								"shortText": "API used to return a channel on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
 								"tags": [
 									{
 										"tag": "platform",
-										"text": "android\n"
+										"text": "android"
 									}
 								]
 							},
 							"parameters": [
 								{
-									"id": 313,
+									"id": 316,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel id."
+										"text": "The channel ID created with [`createChannel`](/react-native/reference/createchannel). If\na unknown channel ID is provided, `null` is returned.\n"
 									},
 									"type": {
 										"type": "intrinsic",
@@ -5477,13 +5603,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 139,
+							"line": 166,
 							"character": 12
 						}
 					]
 				},
 				{
-					"id": 316,
+					"id": 319,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5492,18 +5618,31 @@
 					},
 					"signatures": [
 						{
-							"id": 317,
+							"id": 320,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to return a channel group on supported Android devices.",
+								"text": "This API is used to return an `NativeAndroidChannelGroup`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 318,
+									"id": 321,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If\na unknown channel group ID is provided, `null` is returned.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -5535,13 +5674,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 148,
+							"line": 200,
 							"character": 17
 						}
 					]
 				},
 				{
-					"id": 319,
+					"id": 322,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5550,11 +5689,21 @@
 					},
 					"signatures": [
 						{
-							"id": 320,
+							"id": 323,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to return all channel groups on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannelGroup`. Returns an empty array if no channel\ngroups exist.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -5574,13 +5723,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 150,
+							"line": 216,
 							"character": 18
 						}
 					]
 				},
 				{
-					"id": 314,
+					"id": 317,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5589,13 +5738,14 @@
 					},
 					"signatures": [
 						{
-							"id": 315,
+							"id": 318,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device.",
+								"shortText": "API used to return all channels on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannel`. Returns an empty array if no channels\nexist.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -5622,13 +5772,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 146,
+							"line": 182,
 							"character": 13
 						}
 					]
 				},
 				{
-					"id": 321,
+					"id": 324,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5637,11 +5787,15 @@
 					},
 					"signatures": [
 						{
-							"id": 322,
+							"id": 325,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to fetch the notification which causes the application to open.",
+								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -5651,8 +5805,8 @@
 										"types": [
 											{
 												"type": "reference",
-												"name": "Notification",
-												"id": 237
+												"name": "InitialNotification",
+												"id": 248
 											},
 											{
 												"type": "intrinsic",
@@ -5667,13 +5821,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 152,
+							"line": 230,
 							"character": 24
 						}
 					]
 				},
 				{
-					"id": 323,
+					"id": 326,
 					"name": "onEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5682,41 +5836,74 @@
 					},
 					"signatures": [
 						{
-							"id": 324,
+							"id": 327,
 							"name": "onEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to subscribe to all events from Notifee.",
+								"text": "The `onEvent` subscriber can be registered in multiple places throughout the application. It is\nrecommended to register this method early on outside of any React code to receive background/headless\nevents.\n\nThe method returns a function which can be used to unsubscribe from further events.\n\nView the [Events](/react-native/docs/events) documentation for more information and usage\nexamples.\n"
+							},
 							"parameters": [
 								{
-									"id": 325,
+									"id": 328,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The observer function called when a notification is received.\n"
+									},
 									"type": {
 										"type": "reference",
 										"name": "NotificationEventObserver",
-										"id": 280
+										"id": 283
 									}
 								}
 							],
 							"type": {
-								"type": "intrinsic",
-								"name": "void"
+								"type": "reflection",
+								"declaration": {
+									"id": 329,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 330,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "packages/react-native/types/Module.ts",
+											"line": 246,
+											"character": 47
+										}
+									]
+								}
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 154,
+							"line": 246,
 							"character": 9
 						}
 					]
 				},
 				{
-					"id": 326,
+					"id": 331,
 					"name": "openNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5725,14 +5912,14 @@
 					},
 					"signatures": [
 						{
-							"id": 327,
+							"id": 332,
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Opens the Android System settings for the application.",
-								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op.\n",
+								"shortText": "API used to open the Android System settings for the application.",
+								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op & instantly resolves.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -5742,7 +5929,7 @@
 							},
 							"parameters": [
 								{
-									"id": 328,
+									"id": 333,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5782,13 +5969,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 174,
+							"line": 266,
 							"character": 26
 						}
 					]
 				},
 				{
-					"id": 329,
+					"id": 334,
 					"name": "registerForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5797,48 +5984,49 @@
 					},
 					"signatures": [
 						{
-							"id": 330,
+							"id": 335,
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Register a foreground service runner used to manage long running notifications.",
+								"shortText": "API used to register a foreground service on Android devices.",
+								"text": "This method is used to register a long running task which can be used with Foreground Service\nnotifications.\n\nOnly a single foreground service can exist for the application, and calling this method more\nthan once will update the existing task runner.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation for\nmore information.\n",
 								"tags": [
 									{
 										"tag": "platform",
-										"text": "android\n"
+										"text": "android"
 									}
 								]
 							},
 							"parameters": [
 								{
-									"id": 331,
+									"id": 336,
 									"name": "runner",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The runner function which runs for the duration of the service's lifetime."
+										"text": "The runner function which runs for the duration of the service's lifetime.\n"
 									},
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 332,
+											"id": 337,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 333,
+													"id": 338,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 334,
+															"id": 339,
 															"name": "notification",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -5865,7 +6053,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/types/Module.ts",
-													"line": 182,
+													"line": 283,
 													"character": 35
 												}
 											]
@@ -5882,13 +6070,13 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 182,
+							"line": 283,
 							"character": 27
 						}
 					]
 				},
 				{
-					"id": 335,
+					"id": 340,
 					"name": "scheduleNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -5897,7 +6085,7 @@
 					},
 					"signatures": [
 						{
-							"id": 336,
+							"id": 341,
 							"name": "scheduleNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -5905,7 +6093,7 @@
 							"comment": {},
 							"parameters": [
 								{
-									"id": 337,
+									"id": 342,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5918,7 +6106,7 @@
 									}
 								},
 								{
-									"id": 338,
+									"id": 343,
 									"name": "schedule",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -5929,7 +6117,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Schedule",
-										"id": 266
+										"id": 269
 									}
 								}
 							],
@@ -5948,7 +6136,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 189,
+							"line": 290,
 							"character": 22
 						}
 					]
@@ -5959,31 +6147,31 @@
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						285,
-						287,
+						288,
 						290,
-						296,
-						299,
 						293,
+						299,
 						302,
+						296,
 						305,
 						308,
 						311,
-						316,
-						319,
 						314,
-						321,
-						323,
+						319,
+						322,
+						317,
+						324,
 						326,
-						329,
-						335
+						331,
+						334,
+						340
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 13,
+					"line": 18,
 					"character": 23
 				}
 			],
@@ -5991,12 +6179,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 348
+					"id": 353
 				}
 			]
 		},
 		{
-			"id": 346,
+			"id": 351,
 			"name": "ModuleStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -6005,7 +6193,7 @@
 			},
 			"children": [
 				{
-					"id": 347,
+					"id": 352,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6015,7 +6203,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 215,
+							"line": 316,
 							"character": 13
 						}
 					],
@@ -6030,14 +6218,14 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						347
+						352
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 214,
+					"line": 315,
 					"character": 30
 				}
 			],
@@ -6045,12 +6233,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 348
+					"id": 353
 				}
 			]
 		},
 		{
-			"id": 348,
+			"id": 353,
 			"name": "ModuleWithStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -6059,7 +6247,7 @@
 			},
 			"children": [
 				{
-					"id": 403,
+					"id": 410,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -6069,7 +6257,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 215,
+							"line": 316,
 							"character": 13
 						}
 					],
@@ -6080,11 +6268,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.SDK_VERSION",
-						"id": 347
+						"id": 352
 					}
 				},
 				{
-					"id": 349,
+					"id": 354,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6093,7 +6281,7 @@
 					},
 					"signatures": [
 						{
-							"id": 350,
+							"id": 355,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6115,25 +6303,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelAllNotifications",
-								"id": 285
+								"id": 288
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 23,
+							"line": 28,
 							"character": 24
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelAllNotifications",
-						"id": 285
+						"id": 288
 					}
 				},
 				{
-					"id": 351,
+					"id": 356,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6142,7 +6330,7 @@
 					},
 					"signatures": [
 						{
-							"id": 352,
+							"id": 357,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -6153,7 +6341,7 @@
 							},
 							"parameters": [
 								{
-									"id": 353,
+									"id": 358,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6180,25 +6368,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelNotification",
-								"id": 287
+								"id": 290
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 37,
+							"line": 42,
 							"character": 20
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelNotification",
-						"id": 287
+						"id": 290
 					}
 				},
 				{
-					"id": 354,
+					"id": 359,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6207,24 +6395,30 @@
 					},
 					"signatures": [
 						{
-							"id": 355,
+							"id": 360,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).",
-								"text": "Once a channel has been created, only certain fields such as the name & description can be\nmodified. To change a groups settings, you must delete the group (via `deleteChannel`)\nand re-create it. Keep in mind the user always have final control over channel settings.\n\nCreating an existing notification channel with its original values performs no operation,\nso it's safe to call this code when starting an app.\n\nCreated channels can be viewed/managed under App Info -> Notifications.\n\n> On Android 8.0 (API 26) all notifications must be assigned to a channel.\n\nReturns the channel ID.\n\n#### Example\n\n```js\nconst channelId = await notifee.createChannel({\n  channelId: 'custom-channel',\n  name: 'Custom Channel',\n  description: 'A test channel',\n});\n\nawait notifee.displayNotification({\n  body: 'Test notification',\n  android: {\n    channelId, // 'custom-channel'\n  },\n});\n```\n"
+								"shortText": "API to create and update channels on supported Android devices.",
+								"text": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).\n\nBy providing a `groupId` property, channels can be assigned to groups created with\n[`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThe channel ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 356,
+									"id": 361,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "An `AndroidChannel` interface.\n"
+										"text": "The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -6246,25 +6440,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannel",
-								"id": 290
+								"id": 293
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 76,
+							"line": 61,
 							"character": 15
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannel",
-						"id": 290
+						"id": 293
 					}
 				},
 				{
-					"id": 360,
+					"id": 365,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6273,18 +6467,31 @@
 					},
 					"signatures": [
 						{
-							"id": 361,
+							"id": 366,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API to create or update a channel group on supported Android devices.",
+								"text": "Creates a new Android channel group. Groups are used to further organize the appearance of your\nchannels in the settings UI. Groups allow users to easily identify and control multiple\nnotification channels.\n\nChannels can be assigned to groups during creation using the\n[`createChannel`](/react-native/reference/createchannel) method.\n\nThe channel group ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 362,
+									"id": 367,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)\ninterface used to create/update a group.\n"
+									},
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
@@ -6305,25 +6512,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroup",
-								"id": 296
+								"id": 299
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 87,
+							"line": 92,
 							"character": 20
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroup",
-						"id": 296
+						"id": 299
 					}
 				},
 				{
-					"id": 363,
+					"id": 368,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6332,18 +6539,31 @@
 					},
 					"signatures": [
 						{
-							"id": 364,
+							"id": 369,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API to create and update multiple channel groups on supported Android devices.",
+								"text": "This API is used to perform a single operation to create or update channel groups. See the\n[`createChannelGroup`](/react-native/reference/createchannelgroup) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 365,
+									"id": 370,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "An array of [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup) interfaces.\n"
+									},
 									"type": {
 										"type": "array",
 										"elementType": {
@@ -6367,25 +6587,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroups",
-								"id": 299
+								"id": 302
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 89,
+							"line": 103,
 							"character": 21
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroups",
-						"id": 299
+						"id": 302
 					}
 				},
 				{
-					"id": 357,
+					"id": 362,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6394,24 +6614,30 @@
 					},
 					"signatures": [
 						{
-							"id": 358,
+							"id": 363,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Creates multiple channels in a single operation.",
-								"text": "See `createChannel` for more information.\n"
+								"shortText": "API to create and update multiple channels on supported Android devices.",
+								"text": "This API is used to perform a single operation to create or update channels. See the\n[`createChannel`](/react-native/reference/createchannel) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 359,
+									"id": 364,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "An array of AndroidChannel interfaces.\n"
+										"text": "An array of [`AndroidChannel`](/react-native/reference/androidchannel) interfaces.\n"
 									},
 									"type": {
 										"type": "array",
@@ -6436,25 +6662,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannels",
-								"id": 293
+								"id": 296
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 85,
+							"line": 72,
 							"character": 16
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannels",
-						"id": 293
+						"id": 296
 					}
 				},
 				{
-					"id": 366,
+					"id": 371,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6463,24 +6689,30 @@
 					},
 					"signatures": [
 						{
-							"id": 367,
+							"id": 372,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Deletes a channel by ID.",
-								"text": "#### Example\n\n```js\nawait notifee.deleteChannel('custom-channel');\n```\n"
+								"shortText": "API used to delete a channel by ID on supported Android devices.",
+								"text": "Channels can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\n> When a channel is deleted, notifications assigned to that channel will fail to display.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
 							},
 							"parameters": [
 								{
-									"id": 368,
+									"id": 373,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel ID to delete.\n"
+										"text": "The unique channel ID to delete.\n"
 									},
 									"type": {
 										"type": "intrinsic",
@@ -6501,25 +6733,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannel",
-								"id": 302
+								"id": 305
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 102,
+							"line": 118,
 							"character": 15
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannel",
-						"id": 302
+						"id": 305
 					}
 				},
 				{
-					"id": 369,
+					"id": 374,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6528,18 +6760,31 @@
 					},
 					"signatures": [
 						{
-							"id": 370,
+							"id": 375,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to delete a channel group by ID on supported Android devices.",
+								"text": "Channel groups can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\nDeleting a group does not delete channels which are assigned to the group, they will instead be\nunassigned the group and continue to function as expected.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 371,
+									"id": 376,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The unique channel group ID to delete.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -6559,25 +6804,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannelGroup",
-								"id": 305
+								"id": 308
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 104,
+							"line": 134,
 							"character": 20
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannelGroup",
-						"id": 305
+						"id": 308
 					}
 				},
 				{
-					"id": 372,
+					"id": 377,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6586,25 +6831,24 @@
 					},
 					"signatures": [
 						{
-							"id": 373,
+							"id": 378,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Displays a notification on the device.",
-								"text": "See `NotificationAndroid` and `NotificationIOS` for platform specific options.\n\n#### Example\n\n```js\nawait notifee.displayNotification({\n  title: 'Test',\n  body: 'Test notification body',\n  android: {\n    // Android specific options\n  },\n  ios: {\n    // iOS specific options\n  },\n});\n```\n",
-								"returns": "Promise<string> A promise that resolves the new notification id\n"
+								"shortText": "API used to immideatly display or update a notification on the users device.",
+								"text": "This API is used to display a notification on the users device. All\nchannels/categories should be created before triggering this method during the apps lifecycle.\n\nView the [Displaying a Notification](/react-native/docs/displaying-a-notification)\ndocumentation for more information.\n"
 							},
 							"parameters": [
 								{
-									"id": 374,
+									"id": 379,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "A `Notification` interface."
+										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -6626,25 +6870,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.displayNotification",
-								"id": 308
+								"id": 311
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 129,
+							"line": 148,
 							"character": 21
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.displayNotification",
-						"id": 308
+						"id": 311
 					}
 				},
 				{
-					"id": 375,
+					"id": 380,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6653,30 +6897,30 @@
 					},
 					"signatures": [
 						{
-							"id": 376,
+							"id": 381,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns a single `AndroidChannel` by id.",
-								"text": "Returns `null` if no channel could be matched to the given ID.\n",
+								"shortText": "API used to return a channel on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
 								"tags": [
 									{
 										"tag": "platform",
-										"text": "android\n"
+										"text": "android"
 									}
 								]
 							},
 							"parameters": [
 								{
-									"id": 377,
+									"id": 382,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The channel id."
+										"text": "The channel ID created with [`createChannel`](/react-native/reference/createchannel). If\na unknown channel ID is provided, `null` is returned.\n"
 									},
 									"type": {
 										"type": "intrinsic",
@@ -6707,25 +6951,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannel",
-								"id": 311
+								"id": 314
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 139,
+							"line": 166,
 							"character": 12
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannel",
-						"id": 311
+						"id": 314
 					}
 				},
 				{
-					"id": 380,
+					"id": 385,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6734,18 +6978,31 @@
 					},
 					"signatures": [
 						{
-							"id": 381,
+							"id": 386,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to return a channel group on supported Android devices.",
+								"text": "This API is used to return an `NativeAndroidChannelGroup`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android"
+									}
+								]
+							},
 							"parameters": [
 								{
-									"id": 382,
+									"id": 387,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If\na unknown channel group ID is provided, `null` is returned.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -6775,25 +7032,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroup",
-								"id": 316
+								"id": 319
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 148,
+							"line": 200,
 							"character": 17
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroup",
-						"id": 316
+						"id": 319
 					}
 				},
 				{
-					"id": 383,
+					"id": 388,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6802,11 +7059,21 @@
 					},
 					"signatures": [
 						{
-							"id": 384,
+							"id": 389,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to return all channel groups on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannelGroup`. Returns an empty array if no channel\ngroups exist.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "android\n"
+									}
+								]
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -6824,25 +7091,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroups",
-								"id": 319
+								"id": 322
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 150,
+							"line": 216,
 							"character": 18
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroups",
-						"id": 319
+						"id": 322
 					}
 				},
 				{
-					"id": 378,
+					"id": 383,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6851,13 +7118,14 @@
 					},
 					"signatures": [
 						{
-							"id": 379,
+							"id": 384,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Returns an array of `AndroidChannel` which are currently active on the device.",
+								"shortText": "API used to return all channels on supported Android devices.",
+								"text": "This API is used to return a `NativeAndroidChannel`. Returns an empty array if no channels\nexist.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -6882,25 +7150,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannels",
-								"id": 314
+								"id": 317
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 146,
+							"line": 182,
 							"character": 13
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannels",
-						"id": 314
+						"id": 317
 					}
 				},
 				{
-					"id": 385,
+					"id": 390,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6909,11 +7177,15 @@
 					},
 					"signatures": [
 						{
-							"id": 386,
+							"id": 391,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to fetch the notification which causes the application to open.",
+								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -6923,8 +7195,8 @@
 										"types": [
 											{
 												"type": "reference",
-												"name": "Notification",
-												"id": 237
+												"name": "InitialNotification",
+												"id": 248
 											},
 											{
 												"type": "intrinsic",
@@ -6937,25 +7209,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getInitialNotification",
-								"id": 321
+								"id": 324
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 152,
+							"line": 230,
 							"character": 24
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getInitialNotification",
-						"id": 321
+						"id": 324
 					}
 				},
 				{
-					"id": 387,
+					"id": 392,
 					"name": "onEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -6964,51 +7236,84 @@
 					},
 					"signatures": [
 						{
-							"id": 388,
+							"id": 393,
 							"name": "onEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to subscribe to all events from Notifee.",
+								"text": "The `onEvent` subscriber can be registered in multiple places throughout the application. It is\nrecommended to register this method early on outside of any React code to receive background/headless\nevents.\n\nThe method returns a function which can be used to unsubscribe from further events.\n\nView the [Events](/react-native/docs/events) documentation for more information and usage\nexamples.\n"
+							},
 							"parameters": [
 								{
-									"id": 389,
+									"id": 394,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The observer function called when a notification is received.\n"
+									},
 									"type": {
 										"type": "reference",
 										"name": "NotificationEventObserver",
-										"id": 280
+										"id": 283
 									}
 								}
 							],
 							"type": {
-								"type": "intrinsic",
-								"name": "void"
+								"type": "reflection",
+								"declaration": {
+									"id": 395,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 396,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "packages/react-native/types/Module.ts",
+											"line": 246,
+											"character": 47
+										}
+									]
+								}
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onEvent",
-								"id": 323
+								"id": 326
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 154,
+							"line": 246,
 							"character": 9
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onEvent",
-						"id": 323
+						"id": 326
 					}
 				},
 				{
-					"id": 390,
+					"id": 397,
 					"name": "openNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -7017,14 +7322,14 @@
 					},
 					"signatures": [
 						{
-							"id": 391,
+							"id": 398,
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Opens the Android System settings for the application.",
-								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op.\n",
+								"shortText": "API used to open the Android System settings for the application.",
+								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op & instantly resolves.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -7034,7 +7339,7 @@
 							},
 							"parameters": [
 								{
-									"id": 392,
+									"id": 399,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7072,25 +7377,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.openNotificationSettings",
-								"id": 326
+								"id": 331
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 174,
+							"line": 266,
 							"character": 26
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.openNotificationSettings",
-						"id": 326
+						"id": 331
 					}
 				},
 				{
-					"id": 393,
+					"id": 400,
 					"name": "registerForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -7099,48 +7404,49 @@
 					},
 					"signatures": [
 						{
-							"id": 394,
+							"id": 401,
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"comment": {
-								"shortText": "Register a foreground service runner used to manage long running notifications.",
+								"shortText": "API used to register a foreground service on Android devices.",
+								"text": "This method is used to register a long running task which can be used with Foreground Service\nnotifications.\n\nOnly a single foreground service can exist for the application, and calling this method more\nthan once will update the existing task runner.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation for\nmore information.\n",
 								"tags": [
 									{
 										"tag": "platform",
-										"text": "android\n"
+										"text": "android"
 									}
 								]
 							},
 							"parameters": [
 								{
-									"id": 395,
+									"id": 402,
 									"name": "runner",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The runner function which runs for the duration of the service's lifetime."
+										"text": "The runner function which runs for the duration of the service's lifetime.\n"
 									},
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 396,
+											"id": 403,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 397,
+													"id": 404,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 398,
+															"id": 405,
 															"name": "notification",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -7167,7 +7473,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/types/Module.ts",
-													"line": 182,
+													"line": 283,
 													"character": 35
 												}
 											]
@@ -7182,25 +7488,25 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.registerForegroundService",
-								"id": 329
+								"id": 334
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 182,
+							"line": 283,
 							"character": 27
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.registerForegroundService",
-						"id": 329
+						"id": 334
 					}
 				},
 				{
-					"id": 399,
+					"id": 406,
 					"name": "scheduleNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -7209,7 +7515,7 @@
 					},
 					"signatures": [
 						{
-							"id": 400,
+							"id": 407,
 							"name": "scheduleNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -7217,7 +7523,7 @@
 							"comment": {},
 							"parameters": [
 								{
-									"id": 401,
+									"id": 408,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7230,7 +7536,7 @@
 									}
 								},
 								{
-									"id": 402,
+									"id": 409,
 									"name": "schedule",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7241,7 +7547,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Schedule",
-										"id": 266
+										"id": 269
 									}
 								}
 							],
@@ -7258,21 +7564,21 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.scheduleNotification",
-								"id": 335
+								"id": 340
 							}
 						}
 					],
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 189,
+							"line": 290,
 							"character": 22
 						}
 					],
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.scheduleNotification",
-						"id": 335
+						"id": 340
 					}
 				}
 			],
@@ -7281,38 +7587,38 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						403
+						410
 					]
 				},
 				{
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						349,
-						351,
 						354,
-						360,
-						363,
-						357,
-						366,
-						369,
-						372,
-						375,
+						356,
+						359,
+						365,
+						368,
+						362,
+						371,
+						374,
+						377,
 						380,
-						383,
-						378,
 						385,
-						387,
+						388,
+						383,
 						390,
-						393,
-						399
+						392,
+						397,
+						400,
+						406
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 219,
+					"line": 320,
 					"character": 34
 				}
 			],
@@ -7320,12 +7626,12 @@
 				{
 					"type": "reference",
 					"name": "Module",
-					"id": 284
+					"id": 287
 				},
 				{
 					"type": "reference",
 					"name": "ModuleStatics",
-					"id": 346
+					"id": 351
 				}
 			]
 		},
@@ -9975,7 +10281,7 @@
 			]
 		},
 		{
-			"id": 248,
+			"id": 251,
 			"name": "NotificationEvent",
 			"kind": 256,
 			"kindString": "Interface",
@@ -9984,7 +10290,7 @@
 			},
 			"children": [
 				{
-					"id": 251,
+					"id": 254,
 					"name": "detail",
 					"kind": 1024,
 					"kindString": "Property",
@@ -9994,7 +10300,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 164,
+							"line": 170,
 							"character": 8
 						}
 					],
@@ -10004,28 +10310,28 @@
 							{
 								"type": "reference",
 								"name": "AndroidNotificationEvent",
-								"id": 270
+								"id": 273
 							},
 							{
 								"type": "reference",
 								"name": "AndroidChannelBlockedEvent",
-								"id": 274
+								"id": 277
 							},
 							{
 								"type": "reference",
 								"name": "AndroidChannelGroupBlockedEvent",
-								"id": 276
+								"id": 279
 							},
 							{
 								"type": "reference",
 								"name": "AndroidAppBlockedEvent",
-								"id": 278
+								"id": 281
 							}
 						]
 					}
 				},
 				{
-					"id": 250,
+					"id": 253,
 					"name": "headless",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10035,7 +10341,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 163,
+							"line": 169,
 							"character": 10
 						}
 					],
@@ -10045,7 +10351,7 @@
 					}
 				},
 				{
-					"id": 249,
+					"id": 252,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10055,14 +10361,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 162,
+							"line": 168,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "EventType",
-						"id": 252
+						"id": 255
 					}
 				}
 			],
@@ -10071,16 +10377,16 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						251,
-						250,
-						249
+						254,
+						253,
+						252
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 161,
+					"line": 167,
 					"character": 34
 				}
 			]
@@ -10388,7 +10694,7 @@
 			]
 		},
 		{
-			"id": 266,
+			"id": 269,
 			"name": "Schedule",
 			"kind": 256,
 			"kindString": "Interface",
@@ -10397,7 +10703,7 @@
 			},
 			"children": [
 				{
-					"id": 268,
+					"id": 271,
 					"name": "interval",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10408,7 +10714,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 265,
+							"line": 271,
 							"character": 10
 						}
 					],
@@ -10427,7 +10733,7 @@
 					}
 				},
 				{
-					"id": 267,
+					"id": 270,
 					"name": "timestamp",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10438,7 +10744,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 264,
+							"line": 270,
 							"character": 11
 						}
 					],
@@ -10457,7 +10763,7 @@
 					}
 				},
 				{
-					"id": 269,
+					"id": 272,
 					"name": "unit",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10468,14 +10774,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 266,
+							"line": 272,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "ScheduleUnit",
-						"id": 262
+						"id": 265
 					}
 				}
 			],
@@ -10484,22 +10790,22 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						268,
-						267,
-						269
+						271,
+						270,
+						272
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 263,
+					"line": 269,
 					"character": 25
 				}
 			]
 		},
 		{
-			"id": 280,
+			"id": 283,
 			"name": "NotificationEventObserver",
 			"kind": 4194304,
 			"kindString": "Type alias",
@@ -10509,28 +10815,28 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Notification.ts",
-					"line": 171,
+					"line": 177,
 					"character": 37
 				}
 			],
 			"type": {
 				"type": "reflection",
 				"declaration": {
-					"id": 281,
+					"id": 284,
 					"name": "__type",
 					"kind": 65536,
 					"kindString": "Type literal",
 					"flags": {},
 					"signatures": [
 						{
-							"id": 282,
+							"id": 285,
 							"name": "__call",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 283,
+									"id": 286,
 									"name": "event",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10538,7 +10844,7 @@
 									"type": {
 										"type": "reference",
 										"name": "NotificationEvent",
-										"id": 248
+										"id": 251
 									}
 								}
 							],
@@ -10557,7 +10863,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Notification.ts",
-							"line": 171,
+							"line": 177,
 							"character": 39
 						}
 					]
@@ -10579,8 +10885,8 @@
 				216,
 				228,
 				233,
-				252,
-				262
+				255,
+				265
 			]
 		},
 		{
@@ -10588,44 +10894,45 @@
 			"kind": 256,
 			"children": [
 				66,
-				278,
+				281,
 				81,
 				87,
 				118,
-				274,
+				277,
 				147,
-				276,
+				279,
 				92,
 				75,
 				97,
 				103,
-				270,
+				273,
 				107,
 				71,
 				114,
 				18,
 				22,
-				343,
-				339,
-				341,
-				284,
-				346,
+				248,
 				348,
+				344,
+				346,
+				287,
+				351,
+				353,
 				132,
 				151,
 				1,
 				237,
 				27,
-				248,
+				251,
 				9,
-				266
+				269
 			]
 		},
 		{
 			"title": "Type aliases",
 			"kind": 4194304,
 			"children": [
-				280
+				283
 			]
 		}
 	]
