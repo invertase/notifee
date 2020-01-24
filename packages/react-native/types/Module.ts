@@ -261,7 +261,8 @@ export interface Module {
    * On iOS, this is a no-op & instantly resolves.
    *
    * @platform android
-   * @param channelId
+   * @param channelId The ID of the channel which will be opened. Can be ignored/omitted to display the
+   * overall notification settings.
    */
   openNotificationSettings(channelId?: string): Promise<void>;
 
@@ -279,6 +280,7 @@ export interface Module {
    *
    * @platform android
    * @param runner The runner function which runs for the duration of the service's lifetime.
+   * See [`ForegroundServiceTask`](/react-native/reference/foregroundservicetask) for more information.
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 

@@ -176,6 +176,8 @@ export interface NotificationEvent {
 
 export type NotificationEventObserver = (event: NotificationEvent) => Promise<void>;
 
+export type ForegroundServiceTask = (notification: Notification) => Promise<void>;
+
 /**
  * An enum representing an event type for `onNotificationEvent` subscriptions.
  */

@@ -10,7 +10,13 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
-import { Notification, NotificationEventObserver, Schedule } from '../types/Notification';
+import {
+  ForegroundServiceTask,
+  InitialNotification,
+  Notification,
+  NotificationEventObserver,
+  Schedule,
+} from '../types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
@@ -212,8 +218,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getChannelGroups();
   }
 
-  // TODO is the return direct from native a valid RemoteNotification
-  public getInitialNotification(): Promise<Notification | null> {
+  public getInitialNotification(): Promise<InitialNotification | null> {
     return this.native.getInitialNotification();
   }
 
@@ -255,7 +260,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.openNotificationSettings(channelId || null);
   }
 
-  public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
+  public registerForegroundService(runner: ForegroundServiceTask): void {
     if (!isFunction(runner)) {
       throw new Error("notifee.registerForegroundService(_) 'runner' expected a function.");
     }
