@@ -7,12 +7,12 @@
  */
 export interface NativeError extends Error {
   /**
-   * Firebase error code, e.g. `auth/invalid-email`
+   * Error code, e.g. `invalid-parameter`
    */
   readonly code: string;
 
   /**
-   * Firebase error message
+   * Error message
    */
   readonly message: string;
 

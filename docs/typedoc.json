@@ -4781,7 +4781,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 189,
+							"line": 210,
 							"character": 9
 						}
 					],
@@ -4803,7 +4803,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 190,
+							"line": 211,
 							"character": 5
 						}
 					],
@@ -4827,7 +4827,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 188,
+					"line": 209,
 					"character": 27
 				}
 			]
@@ -4855,7 +4855,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 175,
+							"line": 196,
 							"character": 9
 						}
 					],
@@ -4877,7 +4877,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 174,
+					"line": 195,
 					"character": 34
 				}
 			]
@@ -4905,7 +4905,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 182,
+							"line": 203,
 							"character": 9
 						}
 					],
@@ -4927,7 +4927,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 181,
+					"line": 202,
 					"character": 30
 				}
 			]
@@ -4956,6 +4956,10 @@
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to cancel all notifications.",
+								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany notifications which have triggers set.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -4971,7 +4975,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 14,
+							"line": 23,
 							"character": 24
 						}
 					]
@@ -4991,6 +4995,10 @@
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to cancel a single notification.",
+								"text": "The `cancelNotification` API removes removes any displayed notifications or ones with triggers\nset for the specified ID.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+							},
 							"parameters": [
 								{
 									"id": 289,
@@ -4998,6 +5006,9 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -5019,7 +5030,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 16,
+							"line": 37,
 							"character": 20
 						}
 					]
@@ -5075,7 +5086,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 55,
+							"line": 76,
 							"character": 15
 						}
 					]
@@ -5124,7 +5135,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 66,
+							"line": 87,
 							"character": 20
 						}
 					]
@@ -5176,7 +5187,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 68,
+							"line": 89,
 							"character": 21
 						}
 					]
@@ -5235,7 +5246,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 64,
+							"line": 85,
 							"character": 16
 						}
 					]
@@ -5290,7 +5301,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 81,
+							"line": 102,
 							"character": 15
 						}
 					]
@@ -5338,7 +5349,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 83,
+							"line": 104,
 							"character": 20
 						}
 					]
@@ -5395,7 +5406,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 108,
+							"line": 129,
 							"character": 21
 						}
 					]
@@ -5466,7 +5477,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 118,
+							"line": 139,
 							"character": 12
 						}
 					]
@@ -5524,7 +5535,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 127,
+							"line": 148,
 							"character": 17
 						}
 					]
@@ -5563,7 +5574,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 129,
+							"line": 150,
 							"character": 18
 						}
 					]
@@ -5611,7 +5622,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 125,
+							"line": 146,
 							"character": 13
 						}
 					]
@@ -5656,7 +5667,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 131,
+							"line": 152,
 							"character": 24
 						}
 					]
@@ -5699,7 +5710,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 133,
+							"line": 154,
 							"character": 9
 						}
 					]
@@ -5771,7 +5782,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 153,
+							"line": 174,
 							"character": 26
 						}
 					]
@@ -5854,7 +5865,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/types/Module.ts",
-													"line": 161,
+													"line": 182,
 													"character": 35
 												}
 											]
@@ -5871,7 +5882,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 161,
+							"line": 182,
 							"character": 27
 						}
 					]
@@ -5937,7 +5948,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 168,
+							"line": 189,
 							"character": 22
 						}
 					]
@@ -6004,7 +6015,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 194,
+							"line": 215,
 							"character": 13
 						}
 					],
@@ -6026,7 +6037,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 193,
+					"line": 214,
 					"character": 30
 				}
 			],
@@ -6058,7 +6069,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 194,
+							"line": 215,
 							"character": 13
 						}
 					],
@@ -6087,6 +6098,10 @@
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to cancel all notifications.",
+								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany notifications which have triggers set.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+							},
 							"type": {
 								"type": "reference",
 								"name": "Promise",
@@ -6107,7 +6122,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 14,
+							"line": 23,
 							"character": 24
 						}
 					],
@@ -6132,6 +6147,10 @@
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
+							"comment": {
+								"shortText": "API used to cancel a single notification.",
+								"text": "The `cancelNotification` API removes removes any displayed notifications or ones with triggers\nset for the specified ID.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+							},
 							"parameters": [
 								{
 									"id": 353,
@@ -6139,6 +6158,9 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
+									"comment": {
+										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -6165,7 +6187,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 16,
+							"line": 37,
 							"character": 20
 						}
 					],
@@ -6231,7 +6253,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 55,
+							"line": 76,
 							"character": 15
 						}
 					],
@@ -6290,7 +6312,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 66,
+							"line": 87,
 							"character": 20
 						}
 					],
@@ -6352,7 +6374,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 68,
+							"line": 89,
 							"character": 21
 						}
 					],
@@ -6421,7 +6443,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 64,
+							"line": 85,
 							"character": 16
 						}
 					],
@@ -6486,7 +6508,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 81,
+							"line": 102,
 							"character": 15
 						}
 					],
@@ -6544,7 +6566,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 83,
+							"line": 104,
 							"character": 20
 						}
 					],
@@ -6611,7 +6633,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 108,
+							"line": 129,
 							"character": 21
 						}
 					],
@@ -6692,7 +6714,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 118,
+							"line": 139,
 							"character": 12
 						}
 					],
@@ -6760,7 +6782,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 127,
+							"line": 148,
 							"character": 17
 						}
 					],
@@ -6809,7 +6831,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 129,
+							"line": 150,
 							"character": 18
 						}
 					],
@@ -6867,7 +6889,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 125,
+							"line": 146,
 							"character": 13
 						}
 					],
@@ -6922,7 +6944,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 131,
+							"line": 152,
 							"character": 24
 						}
 					],
@@ -6975,7 +6997,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 133,
+							"line": 154,
 							"character": 9
 						}
 					],
@@ -7057,7 +7079,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 153,
+							"line": 174,
 							"character": 26
 						}
 					],
@@ -7145,7 +7167,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/types/Module.ts",
-													"line": 161,
+													"line": 182,
 													"character": 35
 												}
 											]
@@ -7167,7 +7189,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 161,
+							"line": 182,
 							"character": 27
 						}
 					],
@@ -7243,7 +7265,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/types/Module.ts",
-							"line": 168,
+							"line": 189,
 							"character": 22
 						}
 					],
@@ -7290,7 +7312,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/types/Module.ts",
-					"line": 198,
+					"line": 219,
 					"character": 34
 				}
 			],
@@ -8114,7 +8136,7 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Firebase error code, e.g. `auth/invalid-email`"
+						"shortText": "Error code, e.g. `invalid-parameter`"
 					},
 					"sources": [
 						{
@@ -8137,7 +8159,7 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Firebase error message"
+						"shortText": "Error message"
 					},
 					"sources": [
 						{

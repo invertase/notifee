@@ -11,8 +11,29 @@ import {
 } from './NotificationAndroid';
 
 export interface Module {
+  /**
+   * API used to cancel all notifications.
+   *
+   * The `cancelAllNotifications` API removes any displayed notifications from the users device and
+   * any notifications which have triggers set.
+   *
+   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * notifications.
+   */
   cancelAllNotifications(): Promise<void>;
 
+  /**
+   * API used to cancel a single notification.
+   *
+   * The `cancelNotification` API removes removes any displayed notifications or ones with triggers
+   * set for the specified ID.
+   *
+   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * notifications.
+   *
+   * @param notificationId The unique notification ID. This is automatically generated and returned
+   * when creating a notification, or has been set manually via the `id` property.
+   */
   cancelNotification(notificationId: string): Promise<void>;
 
   /**
