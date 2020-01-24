@@ -37,116 +37,177 @@ export interface Module {
   cancelNotification(notificationId: string): Promise<void>;
 
   /**
+   * API to create and update channels on supported Android devices.
+   *
    * Creates a new Android channel. Channels are used to collectively assign notifications to
    * a single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.
    * Channels can be further organized into groups (see `createChannelGroup`).
    *
-   * Once a channel has been created, only certain fields such as the name & description can be
-   * modified. To change a groups settings, you must delete the group (via `deleteChannel`)
-   * and re-create it. Keep in mind the user always have final control over channel settings.
+   * By providing a `groupId` property, channels can be assigned to groups created with
+   * [`createChannelGroup`](/react-native/reference/createchannelgroup).
    *
-   * Creating an existing notification channel with its original values performs no operation,
-   * so it's safe to call this code when starting an app.
+   * The channel ID is returned once the operation has completed.
    *
-   * Created channels can be viewed/managed under App Info -> Notifications.
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
    *
-   * > On Android 8.0 (API 26) all notifications must be assigned to a channel.
-   *
-   * Returns the channel ID.
-   *
-   * #### Example
-   *
-   * ```js
-   * const channelId = await notifee.createChannel({
-   *   channelId: 'custom-channel',
-   *   name: 'Custom Channel',
-   *   description: 'A test channel',
-   * });
-   *
-   * await notifee.displayNotification({
-   *   body: 'Test notification',
-   *   android: {
-   *     channelId, // 'custom-channel'
-   *   },
-   * });
-   * ```
-   *
-   * @param channel An `AndroidChannel` interface.
+   * @platform android
+   * @param channel The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.
    */
   createChannel(channel: AndroidChannel): Promise<string>;
 
   /**
-   * Creates multiple channels in a single operation.
+   * API to create and update multiple channels on supported Android devices.
    *
-   * See `createChannel` for more information.
+   * This API is used to perform a single operation to create or update channels. See the
+   * [`createChannel`](/react-native/reference/createchannel) documentation for more information.
    *
-   * @param channels An array of AndroidChannel interfaces.
+   * @platform android
+   * @param channels An array of [`AndroidChannel`](/react-native/reference/androidchannel) interfaces.
    */
   createChannels(channels: AndroidChannel[]): Promise<void>;
 
+  /**
+   * API to create or update a channel group on supported Android devices.
+   *
+   * Creates a new Android channel group. Groups are used to further organize the appearance of your
+   * channels in the settings UI. Groups allow users to easily identify and control multiple
+   * notification channels.
+   *
+   * Channels can be assigned to groups during creation using the
+   * [`createChannel`](/react-native/reference/createchannel) method.
+   *
+   * The channel group ID is returned once the operation has completed.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
+   * @platform android
+   * @param channelGroup The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)
+   * interface used to create/update a group.
+   */
   createChannelGroup(channelGroup: AndroidChannelGroup): Promise<string>;
 
+  /**
+   * API to create and update multiple channel groups on supported Android devices.
+   *
+   * This API is used to perform a single operation to create or update channel groups. See the
+   * [`createChannelGroup`](/react-native/reference/createchannelgroup) documentation for more information.
+   *
+   * @platform android
+   * @param channelGroups An array of [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup) interfaces.
+   */
   createChannelGroups(channelGroups: AndroidChannelGroup[]): Promise<void>;
 
   /**
-   * Deletes a channel by ID.
+   * API used to delete a channel by ID on supported Android devices.
    *
-   * #### Example
+   * Channels can be deleted using this API by providing the channel ID. Channel information (including
+   * the ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.
    *
-   * ```js
-   * await notifee.deleteChannel('custom-channel');
-   * ```
+   * > When a channel is deleted, notifications assigned to that channel will fail to display.
    *
-   * @param channelId The channel ID to delete.
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
+   * @platform android
+   * @param channelId The unique channel ID to delete.
    */
   deleteChannel(channelId: string): Promise<void>;
 
+  /**
+   * API used to delete a channel group by ID on supported Android devices.
+   *
+   * Channel groups can be deleted using this API by providing the channel ID. Channel information (including
+   * the ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.
+   *
+   * Deleting a group does not delete channels which are assigned to the group, they will instead be
+   * unassigned the group and continue to function as expected.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
+   * @platform android
+   * @param channelGroupId The unique channel group ID to delete.
+   */
   deleteChannelGroup(channelGroupId: string): Promise<void>;
 
   /**
-   * Displays a notification on the device.
+   * API used to immideatly display or update a notification on the users device.
    *
-   * See `NotificationAndroid` and `NotificationIOS` for platform specific options.
+   * This API is used to display a notification on the users device. All
+   * channels/categories should be created before triggering this method during the apps lifecycle.
    *
-   * #### Example
+   * View the [Displaying a Notification](/react-native/docs/displaying-a-notification)
+   * documentation for more information.
    *
-   * ```js
-   * await notifee.displayNotification({
-   *   title: 'Test',
-   *   body: 'Test notification body',
-   *   android: {
-   *     // Android specific options
-   *   },
-   *   ios: {
-   *     // iOS specific options
-   *   },
-   * });
-   * ```
-   *
-   * @param notification A `Notification` interface.
-   * @return Promise<string> A promise that resolves the new notification id
+   * @param notification The [`Notification`](/react-native/reference/notification) interfaced used
+   * to create a notification for both Android & iOS.
    */
   displayNotification(notification: Notification): Promise<string>;
 
   /**
-   * Returns a single `AndroidChannel` by id.
+   * API used to return a channel on supported Android devices.
    *
-   * Returns `null` if no channel could be matched to the given ID.
+   * This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to
+   * the given ID.
    *
-   * @param channelId The channel id.
+   * A "native channel" also includes additional properties about the channel at the time it's
+   * retrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)
+   * documentation for more information.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
    * @platform android
+   * @param channelId The channel ID created with [`createChannel`](/react-native/reference/createchannel). If
+   * a unknown channel ID is provided, `null` is returned.
    */
   getChannel(channelId: string): Promise<NativeAndroidChannel | null>;
 
   /**
-   * Returns an array of `AndroidChannel` which are currently active on the device.
+   * API used to return all channels on supported Android devices.
+   *
+   * This API is used to return a `NativeAndroidChannel`. Returns an empty array if no channels
+   * exist.
+   *
+   * A "native channel" also includes additional properties about the channel at the time it's
+   * retrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)
+   * documentation for more information.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
    *
    * @platform android
    */
   getChannels(): Promise<NativeAndroidChannel[]>;
 
+  /**
+   * API used to return a channel group on supported Android devices.
+   *
+   * This API is used to return an `NativeAndroidChannelGroup`. Returns `null` if no channel could be matched to
+   * the given ID.
+   *
+   * A "native channel group" also includes additional properties about the channel group at the time it's
+   * retrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)
+   * documentation for more information.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
+   * @platform android
+   * @param channelGroupId The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If
+   * a unknown channel group ID is provided, `null` is returned.
+   */
   getChannelGroup(channelGroupId: string): Promise<NativeAndroidChannelGroup | null>;
 
+  /**
+   * API used to return all channel groups on supported Android devices.
+   *
+   * This API is used to return a `NativeAndroidChannelGroup`. Returns an empty array if no channel
+   * groups exist.
+   *
+   * A "native channel group" also includes additional properties about the channel group at the time it's
+   * retrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)
+   * documentation for more information.
+   *
+   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   *
+   * @platform android
+   */
   getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
   getInitialNotification(): Promise<Notification | null>;
