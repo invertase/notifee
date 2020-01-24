@@ -2,7 +2,12 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Notification, NotificationEventObserver, Schedule } from './Notification';
+import {
+  InitialNotification,
+  Notification,
+  NotificationEventObserver,
+  Schedule,
+} from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
@@ -128,7 +133,7 @@ export interface Module {
 
   getChannelGroups(): Promise<NativeAndroidChannelGroup[]>;
 
-  getInitialNotification(): Promise<Notification | null>;
+  getInitialNotification(): Promise<InitialNotification | null>;
 
   onEvent(observer: NotificationEventObserver): void;
 

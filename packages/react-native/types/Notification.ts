@@ -158,6 +158,11 @@ export interface Notification {
   ios?: NotificationIOS;
 }
 
+export interface InitialNotification {
+  notification: Notification;
+  pressAction: AndroidPressAction;
+}
+
 export interface NotificationEvent {
   type: EventType;
   headless: boolean;
