@@ -273,20 +273,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {
-    let notificationOptions;
-    try {
-      notificationOptions = validateNotification(notification);
-    } catch (e) {
-      throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
-    }
-
-    let scheduleOptions;
+    return Promise.resolve();
+    // let notificationOptions;
     // try {
-    //   scheduleOptions = validateSchedule(schedule);
+    //   notificationOptions = validateNotification(notification);
     // } catch (e) {
-    //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
+    //   throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
     // }
-
-    return this.native.scheduleNotification(notificationOptions, scheduleOptions);
+    //
+    // let scheduleOptions;
+    // // try {
+    // //   scheduleOptions = validateSchedule(schedule);
+    // // } catch (e) {
+    // //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
+    // // }
+    //
+    // return this.native.scheduleNotification(notificationOptions, scheduleOptions);
   }
 }
