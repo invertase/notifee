@@ -63,3 +63,5 @@ android/.settings
 .circleci
 .eslintignore
 android/libs/notifee_core_debug.aar
+.editorconfig
+tsconfig.json
