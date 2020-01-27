@@ -18,7 +18,6 @@ import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;

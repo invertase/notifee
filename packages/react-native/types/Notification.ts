@@ -262,17 +262,18 @@ export enum EventType {
   SCHEDULED = 7,
 }
 
-export enum ScheduleUnit {
-  DAY,
-  HOUR,
-  MINUTE,
-}
-
-export interface Schedule {
-  timestamp?: number;
-  interval?: number;
-  unit?: ScheduleUnit;
-}
+// TODO
+// export enum ScheduleUnit {
+//   DAY,
+//   HOUR,
+//   MINUTE,
+// }
+//
+// export interface Schedule {
+//   timestamp?: number;
+//   interval?: number;
+//   unit?: ScheduleUnit;
+// }
 
 export interface AndroidNotificationEvent {
   notification: Notification;

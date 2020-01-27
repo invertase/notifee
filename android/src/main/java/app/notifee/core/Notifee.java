@@ -69,7 +69,8 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public @NonNull String getMainComponent(@NonNull String defaultComponent) {
+  public @NonNull
+  String getMainComponent(@NonNull String defaultComponent) {
     MainComponentEvent event = EventBus.removeStickEvent(MainComponentEvent.class);
 
     if (event == null) {

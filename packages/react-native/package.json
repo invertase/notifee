@@ -19,9 +19,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/invertase/notifee-public"
+    "url": "https://github.com/notifee/notifee"
   },
-  "license": "Restricted",
+  "license": "Apache-2.0",
   "keywords": [
     "react",
     "react-native",

@@ -7,12 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
-
-import java.security.spec.ECField;
-import java.util.concurrent.TimeUnit;
 
 import app.notifee.core.bundles.NotificationAndroidPressActionBundle;
 import app.notifee.core.bundles.NotificationBundle;

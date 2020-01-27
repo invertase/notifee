@@ -11,14 +11,13 @@ import androidx.work.WorkerParameters;
 import com.google.common.util.concurrent.ListenableFuture;
 
 public class Worker extends ListenableWorker {
-  private static final String TAG = "Worker";
   static final String KEY_WORK_TYPE = "workType";
   static final String KEY_IS_PRIMARY = "isPrimaryKey";
   static final String WORK_TYPE_BLOCK_STATE_RECEIVER = "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
   static final String WORK_TYPE_LICENSE_VERIFY_LOCAL = "app.notifee.core.LicenseVerify.LOCAL";
   static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
   static final String WORK_TYPE_NOTIFICATION_SCHEDULE = "app.notifee.core.NotificationManager.SCHEDULE";
-
+  private static final String TAG = "Worker";
   private ResolvableFuture<Result> mFuture;
 
   /**

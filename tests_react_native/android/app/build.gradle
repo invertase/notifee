@@ -158,8 +158,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 task buildNotifeeCore(type: GradleBuild) {
   buildFile = '../../../android/build.gradle'
-//  tasks = ['assembleRelease'] // change to assembleRelease to test release builds
-  tasks = ['assembleRelease'] // change to assembleRelease to test release builds
+  tasks = ['assembleRelease'] // change to assembleDebug to use debug builds
 }
 
 preBuild.dependsOn buildNotifeeCore

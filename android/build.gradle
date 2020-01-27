@@ -54,7 +54,7 @@ android.libraryVariants.all { variant ->
 
   task(copyTaskName, type: Copy, dependsOn: assembleTaskName, group: "build") {
     variant.outputs.each { output ->
-      def newOutputName = "notifee_core.aar"
+      def newOutputName = "notifee_core_" + output.name + ".aar"
       from(output.outputFile.parent) {
         include output.outputFile.name
         rename output.outputFile.name, newOutputName
@@ -76,7 +76,7 @@ dependencies {
   api "com.squareup.okhttp3:okhttp:4.3.1"
   api 'androidx.concurrent:concurrent-futures:1.0.0'
   api 'com.google.android.gms:play-services-tasks:17.0.0'
-  api 'androidx.work:work-runtime:2.3.0-rc01'
+  api 'androidx.work:work-runtime:2.3.0'
   api 'androidx.core:core:1.2.0-rc01'
   api "androidx.room:room-runtime:2.2.3"
   api 'org.greenrobot:eventbus:3.1.1'

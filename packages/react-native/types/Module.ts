@@ -6,7 +6,6 @@ import {
   InitialNotification,
   Notification,
   NotificationEventObserver,
-  Schedule,
 } from './Notification';
 import {
   AndroidChannel,
@@ -284,12 +283,12 @@ export interface Module {
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 
-  /**
-   *
-   * @param notification
-   * @param schedule
-   */
-  scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
+  // /**
+  //  *
+  //  * @param notification
+  //  * @param schedule
+  //  */
+  // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
 }
 
 /**
