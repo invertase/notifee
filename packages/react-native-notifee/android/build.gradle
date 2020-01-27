@@ -1,0 +1,84 @@
+buildscript {
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.5.2'
+  }
+}
+
+plugins {
+  id "io.invertase.gradle.build" version "1.3"
+}
+
+project.ext {
+  set('react-native', [
+    versions: [
+      android: [
+        minSdk    : 16,
+        targetSdk : 29,
+        compileSdk: 29,
+        // optional as gradle.buildTools comes with one by default
+        // overriding here though to match the version RN uses
+//        buildTools: "28.0.3"
+      ],
+    ],
+  ])
+}
+
+android {
+  defaultConfig {
+    multiDexEnabled true
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = [eventBusIndex: 'io.invertase.notifee.NotifeeEventBusIndex']
+      }
+    }
+  }
+  lintOptions {
+    disable 'GradleCompatible'
+    abortOnError false
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+repositories {
+  google()
+  jcenter()
+}
+
+dependencies {
+  implementation fileTree(include: ['notifee_core_release.aar'], dir: 'libs')
+  implementation 'androidx.concurrent:concurrent-futures:1.0.0'
+  implementation 'com.google.android.gms:play-services-tasks:17.0.0'
+  implementation 'androidx.work:work-runtime:2.3.0'
+  implementation 'androidx.core:core:1.2.0-rc01'
+  implementation "androidx.room:room-runtime:2.2.3"
+  implementation 'org.greenrobot:eventbus:3.1.1'
+
+  api 'io.jsonwebtoken:jjwt-api:0.10.7'
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'
+  runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.10.7') {
+    exclude group: 'org.json', module: 'json'
+  }
+
+  annotationProcessor "androidx.room:room-compiler:2.2.3"
+  annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+
+  debugImplementation("com.facebook.flipper:flipper:0.23.5") {
+    exclude group:'com.facebook.yoga'
+    exclude group:'com.facebook.flipper', module: 'fbjni'
+    exclude group:'com.facebook.litho', module: 'litho-annotations'
+  }
+}
+
+apply from: file("./notifee-json.gradle")
+
+ReactNative.shared.applyPackageVersion()
+ReactNative.shared.applyDefaultExcludes()
+ReactNative.module.applyAndroidVersions()
+ReactNative.module.applyReactNativeDependency("api")

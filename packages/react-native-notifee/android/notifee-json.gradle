@@ -1,0 +1,67 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+String jsonRoot = "android"
+String fileName = "notifee.config.json"
+
+File jsonFile = null
+File parentDir = rootProject.projectDir
+
+for (int i = 0; i <= 3; i++) {
+  if (parentDir == null) break
+  parentDir = parentDir.parentFile
+  if (parentDir != null) {
+    jsonFile = new File(parentDir, fileName)
+    if (jsonFile.exists()) break
+  }
+}
+
+if (jsonFile != null && jsonFile.exists()) {
+  rootProject.logger.info ":${project.name} notifee.config.json found at ${jsonFile.toString()}"
+  Object json = null
+
+  try {
+    json = new JsonSlurper().parseText(jsonFile.text)
+  } catch (Exception ignored) {
+    rootProject.logger.warn ":${project.name} failed to parse notifee.config.json found at ${jsonFile.toString()}."
+    rootProject.logger.warn ignored.toString()
+  }
+
+  if (json && json[jsonRoot]) {
+    String jsonStr = JsonOutput.toJson(JsonOutput.toJson(json[jsonRoot]))
+
+    rootProject.ext.notifeeJson = [
+      raw: json[jsonRoot],
+      isFlagEnabled: { key ->
+        return json[jsonRoot] != null && json[jsonRoot][key] == true
+      },
+      getStringValue: { key, defaultValue ->
+        if (json[jsonRoot] == null) return defaultValue
+        return json[jsonRoot][key] ? json[jsonRoot][key] : defaultValue
+      }
+    ]
+
+    rootProject.logger.info ":${project.name} found android json root in notifee.config.json, creating notifee build config"
+    android {
+      defaultConfig {
+        buildConfigField "String", "NOTIFEE_JSON_RAW", jsonStr
+      }
+    }
+  } else {
+    rootProject.ext.notifeeJson = false
+    rootProject.logger.info ":${project.name} notifee.config.json found with no android config, skipping"
+    android {
+      defaultConfig {
+        buildConfigField "String", "NOTIFEE_JSON_RAW", '"{}"'
+      }
+    }
+  }
+} else {
+  rootProject.ext.notifeeJson = false
+  rootProject.logger.info ":${project.name} no notifee.config.json found, skipping"
+  android {
+    defaultConfig {
+      buildConfigField "String", "NOTIFEE_JSON_RAW", '"{}"'
+    }
+  }
+}

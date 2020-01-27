@@ -1,0 +1,42 @@
+{
+  "name": "@notifee/react-native",
+  "version": "0.0.2",
+  "author": "Invertase <oss@invertase.io> (http://invertase.io)",
+  "description": "Notifee - a feature rich notifications library for React Native.",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "scripts": {
+    "build": "genversion --es6 --semi src/version.ts && tsc",
+    "build:core": "cd ../../android && ./gradlew assembleRelease",
+    "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf lib",
+    "build:watch": "tsc --watch",
+    "prepare": "yarn run build",
+    "prepublishOnly": "yarn run build:core"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.60.23"
+  },
+  "peerDependencies": {
+    "react-native": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notifee/notifee"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "react",
+    "react-native",
+    "scheduling",
+    "channels",
+    "android",
+    "ios",
+    "firebase",
+    "fcm",
+    "notifee",
+    "notifications"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
