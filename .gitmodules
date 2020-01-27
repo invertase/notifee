@@ -1,0 +1,4 @@
+[submodule "packages/react-native"]
+	path = packages/react-native
+	url = https://github.com/notifee/notifee
+	
