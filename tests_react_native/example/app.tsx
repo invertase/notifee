@@ -9,13 +9,11 @@ import { AppRegistry, Button, ScrollView, StyleSheet, Text, View } from 'react-n
 import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
 
-import Notifee, { AndroidImportance } from '@notifee/react-native';
+import Notifee, { AndroidChannel, AndroidImportance, EventType } from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import { Notification } from '@notifee/react-native/lib/types/Notification';
-
-import videos from './videos';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
@@ -26,7 +24,7 @@ const colors: { [key: string]: string } = {
   min: '#9e9e9e',
 };
 
-const channels = [
+const channels: AndroidChannel[] = [
   {
     name: 'Custom Sound',
     id: 'high',
@@ -122,47 +120,6 @@ function Root(): any {
   );
 }
 
-function Video() {
-  useEffect(() => {
-    Notifee.getInitialNotification().then(n => {
-      console.log('getInitialNotification', n);
-    });
-  }, []);
-
-  return (
-    <View style={{ padding: 8 }}>
-      <Button
-        title="Display Notification!!!"
-        onPress={() => {
-          setTimeout(() => {
-            // Notifee.displayNotification(videos['android-chronometer-down']).catch(console.error);
-            // Notifee.displayNotification({
-            //   title: 'Uploading images...',
-            //   android: {
-            //     channelId: 'default',
-            //     color: '#553C9A',
-            //     pressAction: {
-            //       id: 'foo',
-            //     }
-            //   },
-            // });
-            Notifee.scheduleNotification(
-              {
-                title: 'foo',
-                body: 'foo',
-                android: {
-                  channelId: 'default',
-                },
-              },
-              {},
-            );
-          }, 1);
-        }}
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -187,8 +144,56 @@ const styles = StyleSheet.create({
   },
 });
 
-Notifee.onEvent(async ({ type, detail }) => {
-  console.log('!!!', type, detail);
+Notifee.onEvent(async event => {
+  const { type, headless, detail } = event;
+
+  let eventTypeString;
+
+  switch (type) {
+    case EventType.UNKNOWN:
+      eventTypeString = 'UNKNOWN';
+      console.log('Notification Id', detail.notification.id);
+      break;
+    case EventType.DISMISSED:
+      eventTypeString = 'DISMISSED';
+      console.log('Notification Id', detail.notification.id);
+      break;
+    case EventType.PRESS:
+      eventTypeString = 'PRESS';
+      console.log('Action ID', detail.pressAction.id);
+      break;
+    case EventType.ACTION_PRESS:
+      eventTypeString = 'ACTION_PRESS';
+      console.log('Action ID', detail.pressAction.id);
+      break;
+    case EventType.DELIVERED:
+      eventTypeString = 'DELIVERED';
+      console.log('Notification Id', detail.notification.id);
+      break;
+    case EventType.APP_BLOCKED:
+      eventTypeString = 'APP_BLOCKED';
+      console.log('Blocked', detail.blocked);
+      break;
+    case EventType.CHANNEL_BLOCKED:
+      eventTypeString = 'CHANNEL_BLOCKED';
+      console.log('Channel', detail.channel);
+      break;
+    case EventType.CHANNEL_GROUP_BLOCKED:
+      eventTypeString = 'CHANNEL_GROUP_BLOCKED';
+      console.log('Channel Group', detail.channelGroup);
+      break;
+    case EventType.SCHEDULED:
+      eventTypeString = 'SCHEDULED';
+      break;
+    default:
+      eventTypeString = 'UNHANDLED_NATIVE_EVENT';
+  }
+
+  if (headless) {
+    console.warn(`Received a ${eventTypeString} event in headless mode.`);
+  } else {
+    console.warn(`Received a ${eventTypeString} event in JS mode.`);
+  }
 });
 
 // Notifee.registerForegroundService(notification => {
@@ -202,7 +207,7 @@ Notifee.onEvent(async ({ type, detail }) => {
 //   });
 // });
 
-AppRegistry.registerComponent('testing', () => Video);
+AppRegistry.registerComponent('testing', () => Root);
 
 function TestComponent(): any {
   return (

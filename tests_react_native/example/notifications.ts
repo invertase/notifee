@@ -1,4 +1,4 @@
-import Notifee from '@notifee/react-native';
+import { AndroidStyle } from '@notifee/react-native';
 import { Notification } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification }[] = [
@@ -88,7 +88,7 @@ export const notifications: { key: string; notification: Notification }[] = [
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
               id: 'second_action',
-              reactComponent: 'test_component',
+              mainComponent: 'test_component',
             },
             // input: {
             //   choices: ['You'],
@@ -116,7 +116,7 @@ export const notifications: { key: string; notification: Notification }[] = [
       android: {
         channelId: 'foo',
         style: {
-          type: Notifee.AndroidStyle.BIGPICTURE,
+          type: AndroidStyle.BIGPICTURE,
           picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
         },
       },

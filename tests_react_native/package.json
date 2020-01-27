@@ -7,7 +7,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
-    "@notifee/react-native": "0.0.1",
+    "@notifee/react-native": "*",
     "@react-native-firebase/app": "^6.2.0",
     "@react-native-firebase/messaging": "^6.2.0",
     "react": "16.9.0",
