@@ -1,10 +1,16 @@
 buildscript {
-  repositories {
-    google()
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.5.2'
+  // The Android Gradle plugin is only required when opening the android folder stand-alone.
+  // This avoids unnecessary downloads and potential conflicts when the library is included as a
+  // module dependency in an application project.
+  if (project == rootProject) {
+    repositories {
+      google()
+      jcenter()
+    }
+
+    dependencies {
+      classpath("com.android.tools.build:gradle:3.5.3")
+    }
   }
 }
 
@@ -21,7 +27,7 @@ project.ext {
         compileSdk: 29,
         // optional as gradle.buildTools comes with one by default
         // overriding here though to match the version RN uses
-//        buildTools: "28.0.3"
+        // buildTools: "29.0.2"
       ],
     ],
   ])
