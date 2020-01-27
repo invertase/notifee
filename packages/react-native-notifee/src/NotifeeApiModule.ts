@@ -10,12 +10,7 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from '../types/NotificationAndroid';
-import {
-  ForegroundServiceTask,
-  InitialNotification,
-  Notification,
-  NotificationEventObserver,
-} from '../types/Notification';
+import { InitialNotification, Notification, NotificationEvent } from '../types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
@@ -221,7 +216,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getInitialNotification();
   }
 
-  public onEvent(observer: NotificationEventObserver): () => void {
+  public onEvent(observer: (event: NotificationEvent) => Promise<void>): () => void {
     if (!isFunction(observer)) {
       throw new Error("notifee.onEvent(*) 'observer' expected a function.");
     }
@@ -259,7 +254,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.openNotificationSettings(channelId || null);
   }
 
-  public registerForegroundService(runner: ForegroundServiceTask): void {
+  public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
     if (!isFunction(runner)) {
       throw new Error("notifee.registerForegroundService(_) 'runner' expected a function.");
     }

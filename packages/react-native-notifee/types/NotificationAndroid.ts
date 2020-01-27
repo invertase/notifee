@@ -84,10 +84,12 @@ export interface NotificationAndroid {
    * The category may be used by the device for ranking and filtering.
    *
    * ```js
+   * import notifee, { AndroidCategory } from `@notifee/react-native`;
+   *
    * const notification = {
    *   body: 'Congratulations...',
    *   android: {
-   *     category: notifee.AndroidCategory.MESSAGE,
+   *     category: AndroidCategory.MESSAGE,
    *   },
    * };
    *
@@ -106,6 +108,8 @@ export interface NotificationAndroid {
    * #### Example
    *
    * ```js
+   * import notifee from `@notifee/react-native`;
+   *
    * const channelId = notifee.createChannel({
    *   channelId: 'my-custom-channel',
    *   name: 'Custom Notification Channel',
@@ -129,6 +133,9 @@ export interface NotificationAndroid {
    *
    * Setting a color will change key parts of a notification, such as the small icon, action text and
    * the input area background color.
+   *
+   * See our [Android Appearance guide](/react-native/docs/android/appearance#color) to learn
+   * more about this property.
    *
    * #### Example
    *
@@ -181,25 +188,12 @@ export interface NotificationAndroid {
    */
   defaults?: AndroidDefaults[];
 
-  fullScreenAction?: AndroidPressAction;
-
   /**
    * Set this notification to be part of a group of notifications sharing the same key. Grouped notifications may
    * display in a cluster or stack on devices which support such rendering.
    *
-   * To make this notification the summary for its group, set `groupSummary` to `true`.
-   *
-   * ![Grouped Notifications](https://developer.android.com/images/ui/notifications/notification-group_2x.png)
-   *
-   * ```js
-   * import notifee from '@notifee/react-native';
-   *
-   * await notifee.displayNotification({
-   *   android: {
-   *     groupId: message.group.id,
-   *   },
-   * });
-   * ```
+   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) to
+   * learn more about this property.
    */
   groupId?: string;
 
@@ -210,22 +204,8 @@ export interface NotificationAndroid {
    * you want to mute. For example, if you want only the summary of your group to make noise, all
    * children in the group should have the group alert behavior `AndroidGroupAlertBehavior.SUMMARY`.
    *
-   * See `AndroidGroupAlertBehavior` for more information on different behaviours.
-   *
-   * Defaults to `AndroidGroupAlertBehavior.ALL`.
-   *
-   * #### Example
-   *
-   * ```js
-   * import notifee, { AndroidGroupAlertBehavior } from '@notifee/react-native';
-   *
-   * await notifee.displayNotification({
-   *   android: {
-   *     groupId: message.group.id,
-   *     groupAlertBehavior: AndroidGroupAlertBehavior.CHILDREN,
-   *   },
-   * });
-   * ```
+   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour) to
+   * learn more about this property.
    */
   groupAlertBehavior?: AndroidGroupAlertBehavior;
 
@@ -252,9 +232,8 @@ export interface NotificationAndroid {
   /**
    * Sets a large icon on the notification.
    *
-   * ![Large Icon](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)
-   *
-   * TODO: example, URL?
+   * See our [Android Appearance guide](/react-native/docs/android/appearance#large-icons) to learn
+   * more about this property.
    */
   largeIcon?: string;
 
@@ -280,7 +259,6 @@ export interface NotificationAndroid {
   lights?: [AndroidColor | string, number, number];
 
   /**
-   * TODO
    * Description - if true, wont show on connected devices
    *
    * Defaults to `false`.
@@ -321,8 +299,11 @@ export interface NotificationAndroid {
    *
    * The notification will always open the application when an `pressAction` is provided. It is
    * however possible to provide advanced configuration to the press action to open custom
-   * activities or React components. See [AndroidPressAction](/react-native/reference/androidpressaction)
-   * for more information.
+   * activities or React components.
+   *
+   * See our [Android Interaction guide](/react-native/docs/android/interaction#press-action) to learn
+   * more about this property.
+   *
    */
   pressAction?: AndroidPressAction;
 
@@ -336,19 +317,8 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidImportance.DEFAULT`.
    *
-   * See [AndroidImportance](/react-native/reference/androidimportance) for descriptions of each importance level.
-   *
-   * #### Example
-   *
-   * Set this notification importance to high.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     importance: notifee.AndroidImportance.HIGH,
-   *   },
-   * });
-   * ```
+   * See our [Android Appearance guide](/react-native/docs/android/appearance#importance) to learn
+   * more about this property.
    *
    * @platform android API Level < 26
    */
@@ -406,11 +376,6 @@ export interface NotificationAndroid {
   progress?: AndroidProgress;
 
   /**
-   * TODO
-   */
-  publicVersion?: null;
-
-  /**
    * If this notification is duplicative of a Launcher shortcut, sets the id of the shortcut,
    * in case the Launcher wants to hide the shortcut.
    *
@@ -447,7 +412,8 @@ export interface NotificationAndroid {
   /**
    * The small icon to show in the heads-up notification.
    *
-   * TODO: How to add custom icons
+   * See our [Android Appearance guide](/react-native/docs/android/appearance#small-icons) to learn
+   * more about this property.
    *
    * Defaults to `ic_launcher`.
    *
@@ -455,7 +421,7 @@ export interface NotificationAndroid {
    *
    * ```js
    * await notifee.displayNotification({
-   *   bodyL: 'Custom small icon',
+   *   body: 'Custom small icon',
    *   android: {
    *     smallIcon: 'app-icon',
    *   },
@@ -465,7 +431,7 @@ export interface NotificationAndroid {
   smallIcon?: string;
 
   /**
-   * An additional level parameter for when the icon is an instance of a Android LevelListDrawable.
+   * An additional level parameter for when the icon is an instance of a Android `LevelListDrawable`.
    */
   smallIconLevel?: number;
 
@@ -476,31 +442,17 @@ export interface NotificationAndroid {
    * different priorities in addition to providing sort key may cause this value to be ignored.
    *
    * If a `group` has been set, the sort key can also be used to order members of a notification group.
+   *
+   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#sorting) to
+   * learn more about this property.
    */
   sortKey?: string;
 
   /**
    * Styled notifications provide users with more informative content and additional functionality.
-   * The current supported formats are:
    *
-   * 1. **Big Picture Style**: Shows a large picture when expanded. See `AndroidBigPictureStyle` for more information and examples.
-   * 2. **Big Text Style**: Shows a large volume of text when expanded. See `AndroidBigTextStyle` for more information and examples.
-   *
-   * #### Example - Big Picture Style
-   *
-   * #### Example - Big Text Style
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   body: 'Congratulations you have won a prize...',
-   *   android: {
-   *     style: {
-   *       type: notifee.AndroidStyle.BIGTEXT,
-   *       text: 'Congratulations you have won a prize. To claim the prize please login to your account...'
-   *     }
-   *   },
-   * });
-   * ```
+   * See our [Android Styles guide](/react-native/docs/android/grouping-and-sorting) to
+   * learn more about the various Android Notification styles that are supported.
    **/
   style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
 
@@ -593,7 +545,8 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidVisibility.PRIVATE`.
    *
-   * See `AndroidVisibility` for more information.
+   * See our [Android Appearance guide](/react-native/docs/android/appearance#visibility) to learn
+   * more about this property.
    */
   visibility?: AndroidVisibility;
 
@@ -866,7 +819,7 @@ export interface AndroidMessagingStyle {
   person: AndroidPerson;
 
   /**
-   * An array of messages to display inside of the notification.
+   * An array of messages to display inside the notification.
    */
   messages: AndroidMessagingStyleMessage[];
 
@@ -1032,6 +985,9 @@ export interface AndroidProgress {
  * Channels override any individual notification preferences (e.g. lights/vibration) and the user
  * has control over the setting.
  *
+ * See our [Android Channels & Groups guide](/react-native/docs/android/channels) to learn more
+ * about Channels.
+ *
  * > On Android 8.0 (API 26) each notification must be assigned to a channel.
  *
  * ![Android Channel](https://prismic-io.s3.amazonaws.com/invertase%2Fbb773539-581a-457d-ae43-687a7a7646a9_new+project+%2822%29.jpg)
@@ -1043,7 +999,6 @@ export interface AndroidProgress {
  *   id: 'alarms',
  *   name: 'Alarms & Timers',
  *   lightColor: '#3f51b5',
- *   vibrationPattern: [300, 400],
  * });
  * ```
  *
@@ -1125,8 +1080,6 @@ export interface AndroidChannel {
   /**
    * Sets the level of interruption of this notification channel.
    *
-   * See `AndroidImportance` for more details on the levels.
-   *
    * This setting can only be set to a lower importance level once set.
    */
   importance?: AndroidImportance;
@@ -1180,6 +1133,9 @@ export interface NativeAndroidChannel extends AndroidChannel {
 
 /**
  * Interface for an Android Channel Group.
+ *
+ * See our [Android Channels & Groups guide](/react-native/docs/android/introduction) to learn more
+ * about Channel Groups.
  *
  * ![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)
  *
@@ -1345,7 +1301,7 @@ export enum AndroidDefaults {
 }
 
 /**
- * TODO
+ * TODO docs
  *
  * @platform android
  */
@@ -1363,6 +1319,9 @@ export enum AndroidGroupAlertBehavior {
  *
  * The importance is used by the device to both change the visual prompt of a received notification
  * and also how it visually appears in the device notification shade.
+ *
+ * See our [Android Appearance guide](/react-native/docs/android/appearance#importance) to learn
+ * more about importance.
  *
  * @platform android
  */
@@ -1411,68 +1370,6 @@ export enum AndroidImportance {
    * in the application settings.
    */
   NONE = 0,
-}
-
-/**
- * TODO
- *
- * @platform android
- */
-export enum AndroidSemanticAction {
-  /**
-   * Archive the content associated with the notification. This could mean archiving an email, message, etc.
-   */
-  ARCHIVE = 5,
-
-  /**
-   * Call a contact, group, etc.
-   */
-  CALL = 10,
-
-  /**
-   * Delete the content associated with the notification. This could mean deleting an email, message, etc.
-   */
-  DELETE = 4,
-
-  /**
-   * Mark content as read.
-   */
-  MARK_AS_READ = 2,
-
-  /**
-   * Mark content as unread.
-   */
-  MARK_AS_UNREAD = 3,
-
-  /**
-   * Mute the content associated with the notification. This could mean silencing a conversation or currently playing media.
-   */
-  MUTE = 6,
-
-  /**
-   * No semantic action defined.
-   */
-  NONE = 0,
-
-  /**
-   * Reply to a conversation, chat, group, or wherever replies may be appropriate.
-   */
-  REPLY = 1,
-
-  /**
-   * Mark content with a thumbs down.
-   */
-  THUMBS_DOWN = 9,
-
-  /**
-   * Mark content with a thumbs up.
-   */
-  THUMBS_UP = 8,
-
-  /**
-   * Unmute the content associated with the notification. This could mean un-silencing a conversation or currently playing media.
-   */
-  UNMUTE = 7,
 }
 
 /**

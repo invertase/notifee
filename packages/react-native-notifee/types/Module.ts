@@ -2,11 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import {
-  InitialNotification,
-  Notification,
-  NotificationEventObserver,
-} from './Notification';
+import { InitialNotification, Notification, NotificationEvent } from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
@@ -242,7 +238,7 @@ export interface Module {
    *
    * @param observer The observer function called when a notification is received.
    */
-  onEvent(observer: NotificationEventObserver): () => void;
+  onEvent(observer: (event: NotificationEvent) => Promise<void>): () => void;
 
   /**
    * API used to open the Android System settings for the application.
@@ -279,15 +275,10 @@ export interface Module {
    *
    * @platform android
    * @param runner The runner function which runs for the duration of the service's lifetime.
-   * See [`ForegroundServiceTask`](/react-native/reference/foregroundservicetask) for more information.
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 
-  // /**
-  //  *
-  //  * @param notification
-  //  * @param schedule
-  //  */
+  // TODO
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
 }
 
