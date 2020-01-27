@@ -65,3 +65,4 @@ android/.settings
 android/libs/notifee_core_debug.aar
 .editorconfig
 tsconfig.json
+type-test.ts

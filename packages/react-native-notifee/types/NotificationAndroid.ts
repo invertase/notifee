@@ -63,8 +63,6 @@ export interface NotificationAndroid {
    *
    * This value might be ignored, for launchers that don't support badge icons.
    *
-   * ![Badges](https://developer.android.com/images/ui/notifications/badges-open_2x.png)
-   *
    * If the notification is shown as a badge, this option can be set to control how the badge icon
    * is shown:
    *
@@ -328,50 +326,8 @@ export interface NotificationAndroid {
    * A notification can show current progress of a task. The progress state can either be fixed or
    * indeterminate (unknown).
    *
-   * #### Example - Fixed Progress
-   *
-   * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   id: 'upload-task',
-   *   android: {
-   *     progress: {
-   *       max: 10,
-   *       current: 0,
-   *     }
-   *   },
-   * });
-   *
-   * // Sometime later... Set progress to 50%
-   * await notifee.displayNotification({
-   *   id: 'upload-task',
-   *   android: {
-   *     progress: {
-   *       max: 10,
-   *       current: 5,
-   *     }
-   *   },
-   * });
-   * ```
-   *
-   * #### Example - Indeterminate Progress
-   *
-   * Setting `indeterminate` to `true` overrides the `max`/`current` settings.
-   *
-   * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     progress: {
-   *       max: 10,
-   *       current: 5,
-   *       indeterminate: true,
-   *     }
-   *   },
-   * });
-   * ```
+   * See our [Android Progress Indicators guide](/react-native/docs/android/progress-indicators) to
+   * learn more about this property.
    */
   progress?: AndroidProgress;
 
@@ -391,21 +347,8 @@ export interface NotificationAndroid {
    *
    * If no `timestamp` is set, this field has no effect.
    *
-   * #### Example
-   *
-   * Assuming the current notification has delivered to the user 8 minutes ago, the timestamp
-   * will be displayed to the user in the notification, for example:
-   *
-   * ![When Timestamp](https://prismic-io.s3.amazonaws.com/invertase%2F3f2f803e-b9ae-4e6b-8b58-f0b8ab01aa52_new+project+%2819%29.jpg)
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     timestamp: Date.now(),
-   *     showTimestamp: true,
-   *   },
-   * });
-   * ```
+   * See our [Android Timestamps guide](/react-native/docs/android/timers#timestamps) to
+   * learn more about this property.
    */
   showTimestamp?: boolean;
 
@@ -503,19 +446,8 @@ export interface NotificationAndroid {
    *
    * Defaults to `false`.
    *
-   * #### Example
-   *
-   * Show a counter starting from 00:20.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   body: 'Limited time prize available',
-   *   android: {
-   *     timestamp: Date.now() - 20000,
-   *     showChronometer: true,
-   *   },
-   * });
-   * ```
+   * See our [Android Timers guide](/react-native/docs/android/timers#timers) to
+   * learn more about this property.
    */
   showChronometer?: boolean;
 
