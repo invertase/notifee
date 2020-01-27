@@ -2,16 +2,14 @@
   <a href="https://notifee.app">
     <img width="160px" src="https://notifee.app/logo-icon.png"><br/>
   </a>
-  <h2 align="center">Notifee Notifications</h2>
+  <h2 align="center">Notifee - React Native</h2>
 </p>
 
 ---
 
-## Notifee
-
-> Note: Notifee is currently in Alpha and only Android is available at the moment.
-
 A feature rich Android & iOS notifications library for React Native.
+
+> **Note**: Notifee is a **ALPHA** product with only Android support currently available. iOS is in progress.
 
 [> Learn More](https://notifee.app/)
 
@@ -23,19 +21,13 @@ yarn add @notifee/react-native
 
 ## Documentation
 
-- [Documentation Overview](https://notifee.app/react-native/docs/overview)
-- [License Keys](https://notifee.app/react-native/docs/license-keys)
+- [Overview](https://notifee.app/react-native/docs/overview)
+- [Licensing](https://notifee.app/react-native/docs/license-keys)
 - [Reference](https://notifee.app/react-native/reference)
 
 ### Android
 
-The APIs for Android allow for creating rich, styled and highly interactive notifications. Notifications are an important
-concept on Android, and frequently receive new updates with each new API version.
-
-Notifee has been designed to integrate with the latest API features, however also providing backwards compatibility for
-older Android devices (Android 4.1 (API 16)).
-
-The table below summarizes the various topics to read about to customize your notifications:
+The APIs for Android allow for creating rich, styled and highly interactive notifications. Below you'll find guides that cover the supported Android features.
 
 | Topic                                                                                    |                                                                                                                                   |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
