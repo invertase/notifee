@@ -42,7 +42,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
     Notifee.getInstance()
-      .cancelAllNotifictions((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+      .cancelAllNotifications((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
