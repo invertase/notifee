@@ -570,18 +570,6 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * vibrate
-   * TODO this should be on channels now?
-   */
-  // if (hasOwnProperty(android, 'vibrate')) {
-  //   if (!isBoolean(android.vibrate)) {
-  //     throw new Error("'notification.android.vibrate' expected a boolean value.");
-  //   }
-  //
-  //   out.vibrate = android.vibrate;
-  // }
-
-  /**
    * vibrationPattern
    */
   if (hasOwnProperty(android, 'vibrationPattern') && android.vibrationPattern != undefined) {

@@ -278,7 +278,7 @@ export interface Module {
    */
   registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
 
-  // TODO
+  // TODO introduce as part of iOS
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
 }
 

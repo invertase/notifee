@@ -100,7 +100,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * ios
    */
-  out.ios = validateiOSNotification(); // todo
+  out.ios = validateiOSNotification(notification.ios);
 
   return out;
 }

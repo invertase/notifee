@@ -579,15 +579,7 @@ export interface AndroidPressAction {
    * The unique ID for the action.
    *
    * The `id` property is used to differentiate between user press actions. When listening to notification
-   * events via `onEvent`, the ID can be read from the `event.action` object:
-   *
-   * ```js
-   * notifee.onEvent((eventType, event) => {
-   *   if (eventType === notifee.EventType.PRESS || eventType === notifee.EventType.ACTION_PRESS) {
-   *     console.log(`User press action id: ${event.action.id}`);
-   *   }
-   * });
-   * ```
+   * events via `onEvent`, the ID can be read from the `event.pressAction` object.
    */
   id: string;
 
@@ -599,9 +591,10 @@ export interface AndroidPressAction {
    *
    * If the action originated from the notification body, this value defaults to `default`, opening the
    * default Android Activity your application runs on. When providing a custom Activity class you must provide the
-   * full scope & the class must extend `ReactActivity`.
+   * full class name scope & the class must extend `ReactActivity`.
    *
-   * TODO Guide
+   * See our [Android Interaction guide](/react-native/docs/android/interaction#advanced-custom-activity) to
+   * learn more about this property.
    */
   launchActivity?: string;
 
@@ -609,16 +602,15 @@ export interface AndroidPressAction {
    * A custom registered React component to launch on press action.
    *
    * This property can be used to open a custom React component when the user performs a press action.
-   * For this to correctly function, a basic native code change is required. See [Android Actions](#)
-   * to learn more.
+   * For this to correctly function, a basic native code change is required.
    *
-   * TODO Guide
+   * See our [Android Interaction guide](/react-native/docs/android/interaction#advanced-custom-component) to
+   * learn more about this property.
    */
   mainComponent?: string;
 }
 
 /**
- * TODO
  *
  * @platform android
  */
@@ -667,13 +659,8 @@ export interface AndroidInput {
  * Notifications can show a large image when expanded, which is useful for apps with a heavy media
  * focus, such as Instagram.
  *
- * ![Big Picture Style](https://developer.android.com/images/ui/notifications/template-image_2x.png)
- *
- * #### Example
- *
- * ```js
- * TODO example
- * ```
+ * See our [Android Styles guide](/react-native/docs/android/styles#big-picture) to
+ * learn more about Big Picture styling.
  *
  * @platform android
  */
@@ -693,21 +680,8 @@ export interface AndroidBigPictureStyle {
  * truncated. Setting a `bigTextStyle` allows the notification to be expandable showing the full
  * text body.
  *
- * ![Big Text Style](https://developer.android.com/images/ui/notifications/template-large-text_2x.png)
- *
- * #### Example
- *
- * ```js
- * await notifee.displayNotification({
- *   body: 'Hello World',
- *   android: {
- *     style: {
- *       type: notifee.AndroidStyle.BIGTEXT,
- *       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis consectetur magna ut nulla blandit tristique.',
- *     },
- *   }
- * });
- * ```
+ * See our [Android Styles guide](/react-native/docs/android/styles#big-text) to
+ * learn more about Big Text styling.
  *
  * @platform android
  */
@@ -730,7 +704,12 @@ export interface AndroidBigTextStyle {
 }
 
 /**
- * TODO
+ * Inbox style notifications are used to display multiple lines of content inside of a single
+ * notification. Depending on space, the device will show as many lines of text as possible,
+ * and "hide" the remainder.
+ *
+ * See our [Android Styles guide](/react-native/docs/android/styles#inbox) to
+ * learn more about Inbox style.
  */
 export interface AndroidInboxStyle {
   type: AndroidStyle.INBOX;
@@ -740,7 +719,10 @@ export interface AndroidInboxStyle {
 }
 
 /**
+ * Message style notifications can be used when you wish to display the history of an ongoing chat.
  *
+ * See our [Android Styles guide](/react-native/docs/android/styles#messaging) to
+ * learn more about Messaging style.
  */
 export interface AndroidMessagingStyle {
   type: AndroidStyle.MESSAGING;
@@ -771,11 +753,8 @@ export interface AndroidMessagingStyle {
 /**
  * The interface for messages when constructing a Messaging Style notification.
  *
- * #### Example
- *
- * ```js
- *
- * ```
+ * See our [Android Styles guide](/react-native/docs/android/styles#messaging) to
+ * learn more about Messaging style.
  */
 export interface AndroidMessagingStyleMessage {
   /**
@@ -841,9 +820,12 @@ export interface AndroidPerson {
   icon?: string;
 
   /**
-   * TODO
+   * The URI for this person, which can be any of the following:
+   *  - The {@code String} representation of a contact URI, e.g. `android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI`
+   *  - A `mailto:` string
+   *  - A `tel:` string
    */
-  uri?: string; // todo - how?
+  uri?: string;
 }
 
 /**
@@ -1233,7 +1215,8 @@ export enum AndroidDefaults {
 }
 
 /**
- * TODO docs
+ * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour) to
+ * learn more about Group Alert Behavior.
  *
  * @platform android
  */
