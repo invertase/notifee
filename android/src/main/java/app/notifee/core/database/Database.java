@@ -13,7 +13,7 @@ import app.notifee.core.events.NotificationEvent;
 
 @androidx.room.Database(entities = {
   DatabaseNotificationEntity.class
-}, version = 1, exportSchema = false)
+}, version = 2, exportSchema = false)
 public abstract class Database extends RoomDatabase {
   public static String DB_NAME = "notifee";
   private static Database database = null;
