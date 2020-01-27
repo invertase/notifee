@@ -3,7 +3,6 @@
   package="io.invertase.notifee">
 
   <application>
-    <!-- Init Context Provider -->
     <provider
       android:name=".NotifeeInitProvider"
       android:authorities="${applicationId}.notifee-init-provider"

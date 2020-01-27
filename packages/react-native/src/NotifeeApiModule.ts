@@ -15,7 +15,6 @@ import {
   InitialNotification,
   Notification,
   NotificationEventObserver,
-  Schedule,
 } from '../types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
@@ -272,22 +271,22 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     registeredForegroundServiceTask = runner;
   }
 
-  public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {
-    return Promise.resolve();
-    // let notificationOptions;
-    // try {
-    //   notificationOptions = validateNotification(notification);
-    // } catch (e) {
-    //   throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
-    // }
-    //
-    // let scheduleOptions;
-    // // try {
-    // //   scheduleOptions = validateSchedule(schedule);
-    // // } catch (e) {
-    // //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
-    // // }
-    //
-    // return this.native.scheduleNotification(notificationOptions, scheduleOptions);
-  }
+  // public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {
+  //   return Promise.resolve();
+  // let notificationOptions;
+  // try {
+  //   notificationOptions = validateNotification(notification);
+  // } catch (e) {
+  //   throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
+  // }
+  //
+  // let scheduleOptions;
+  // // try {
+  // //   scheduleOptions = validateSchedule(schedule);
+  // // } catch (e) {
+  // //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
+  // // }
+  //
+  // return this.native.scheduleNotification(notificationOptions, scheduleOptions);
+  // }
 }
