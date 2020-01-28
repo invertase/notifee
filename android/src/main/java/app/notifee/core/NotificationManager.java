@@ -3,6 +3,8 @@ package app.notifee.core;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -123,6 +125,15 @@ class NotificationManager {
 
       if (androidBundle.getNumber() != null) {
         builder.setNumber(androidBundle.getNumber());
+      }
+
+      if (androidBundle.getSound() != null) {
+        Uri soundUri = ResourceUtils.getSoundUri(androidBundle.getSound());
+        if (soundUri != null) {
+          builder.setSound(soundUri);
+        } else {
+          Logger.w(TAG, "Unable to retrieve sound for notification, sound was specified as: " + androidBundle.getSound());
+        }
       }
 
       builder.setOngoing(androidBundle.getOngoing());

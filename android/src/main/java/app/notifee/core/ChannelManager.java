@@ -2,6 +2,8 @@ package app.notifee.core;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -17,10 +19,12 @@ import java.util.List;
 
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
+import app.notifee.core.utils.ResourceUtils;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
 
 public class ChannelManager {
+  private static String TAG = "ChannelManager";
 
   static Task<Void> createChannel(ChannelBundle channelBundle) {
     return Tasks.call(() -> {
@@ -52,10 +56,20 @@ public class ChannelManager {
         channel.setVibrationPattern(vibrationPattern);
       }
 
-      // TODO channel sound
-//      if (channelBundle.getSound()) {
-//        channel.setSound();
-//      }
+      if (channelBundle.getSound() != null) {
+        Uri soundUri = ResourceUtils.getSoundUri(channelBundle.getSound());
+        if (soundUri != null) {
+          AudioAttributes audioAttributes = new AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build();
+          channel.setSound(soundUri, audioAttributes);
+        } else {
+          Logger.w(TAG, "Unable to retrieve sound for channel, sound was specified as: " + channel.getSound());
+        }
+      } else {
+        channel.setSound(null, null);
+      }
 
       NotificationManagerCompat.from(ContextHolder.getApplicationContext())
         .createNotificationChannel(channel);

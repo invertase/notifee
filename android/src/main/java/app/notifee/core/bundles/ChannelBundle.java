@@ -103,8 +103,11 @@ public class ChannelBundle {
     return vibrateArray;
   }
 
-  // TODO
-  public void getSound() {
+  public @Nullable String getSound() {
+    if (!mChannelBundle.containsKey("sound")) {
+      return null;
+    }
 
+    return mChannelBundle.getString("sound");
   }
 }

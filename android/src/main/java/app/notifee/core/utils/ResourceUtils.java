@@ -1,10 +1,9 @@
 package app.notifee.core.utils;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.RingtoneManager;
 import android.net.Uri;
-import android.provider.OpenableColumns;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -173,40 +172,27 @@ public class ResourceUtils {
     }
   }
 
-  static String getFileNameFromUri(Uri uri) {
-    String result = null;
-    if (uri.getScheme() != null && uri.getScheme().equals("content")) {
-      Context context = ContextHolder.getApplicationContext();
-      Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-
-      try {
-        if (cursor != null && cursor.moveToFirst()) {
-          result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
-        }
-      } catch (Exception e) {
-        // ignore
-      } finally {
-        if (cursor != null) {
-          cursor.close();
-        }
+  public static @Nullable
+  Uri getSoundUri(String sound) {
+    Context context = ContextHolder.getApplicationContext();
+    if (sound == null) {
+      return null;
+    } else if (sound.contains("://")) {
+      return Uri.parse(sound);
+    } else if (sound.equalsIgnoreCase("default")) {
+      return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    } else {
+      int soundResourceId = getResourceIdByName(sound, "raw");
+      if (soundResourceId == 0) {
+        soundResourceId = getResourceIdByName(sound.substring(0, sound.lastIndexOf('.')), "raw");
       }
-    }
 
-    if (result == null) {
-      result = uri.getPath();
-      if (result != null) {
-        int cut = result.lastIndexOf('/');
-        if (cut != -1) {
-          result = result.substring(cut + 1);
-        } else {
-          result = "default";
-        }
+      if (soundResourceId == 0) {
+        return null;
       }
+
+      return Uri.parse("android.resource://" + context.getPackageName() + "/" + soundResourceId);
     }
-
-    if (result == null || result.equals("notification_sound")) result = "default";
-
-    return result;
   }
 
 }

@@ -1,12 +1,12 @@
-import { AndroidStyle } from '@notifee/react-native';
-import { Notification } from '@notifee/react-native';
+import { AndroidStyle, Notification } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification }[] = [
   {
     key: 'Empty',
     notification: {
       android: {
-        channelId: 'foo',
+        channelId: 'default',
+        sound: 'horse.mp3',
       },
     },
   },

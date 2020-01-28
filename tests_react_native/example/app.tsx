@@ -9,15 +9,20 @@ import { AppRegistry, Button, ScrollView, StyleSheet, Text, View } from 'react-n
 import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
 
-import Notifee, { AndroidChannel, AndroidImportance, EventType } from '@notifee/react-native';
+import Notifee, {
+  AndroidChannel,
+  AndroidImportance,
+  EventType,
+  Notification,
+} from '@notifee/react-native';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
-import { Notification } from '@notifee/react-native/lib/types/Notification';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
 const colors: { [key: string]: string } = {
+  custom_sound: '#f449ee',
   high: '#f44336',
   default: '#2196f3',
   low: '#ffb300',
@@ -26,15 +31,16 @@ const colors: { [key: string]: string } = {
 
 const channels: AndroidChannel[] = [
   {
-    name: 'Custom Sound',
-    id: 'high',
-    importance: AndroidImportance.HIGH,
-    sound: 'hollow.mp3',
-  },
-  {
     name: 'High Importance',
     id: 'high',
     importance: AndroidImportance.HIGH,
+    // sound: 'hollow',
+  },
+  {
+    name: '🐴 Sound',
+    id: 'custom_sound',
+    importance: AndroidImportance.HIGH,
+    sound: 'horse.mp3',
   },
   {
     name: 'Default Importance',
@@ -152,23 +158,23 @@ Notifee.onEvent(async event => {
   switch (type) {
     case EventType.UNKNOWN:
       eventTypeString = 'UNKNOWN';
-      console.log('Notification Id', detail.notification.id);
+      console.log('Notification Id', detail.notification?.id);
       break;
     case EventType.DISMISSED:
       eventTypeString = 'DISMISSED';
-      console.log('Notification Id', detail.notification.id);
+      console.log('Notification Id', detail.notification?.id);
       break;
     case EventType.PRESS:
       eventTypeString = 'PRESS';
-      console.log('Action ID', detail.pressAction.id);
+      console.log('Action ID', detail.pressAction?.id || 'N/A');
       break;
     case EventType.ACTION_PRESS:
       eventTypeString = 'ACTION_PRESS';
-      console.log('Action ID', detail.pressAction.id);
+      console.log('Action ID', detail.pressAction?.id || 'N/A');
       break;
     case EventType.DELIVERED:
       eventTypeString = 'DELIVERED';
-      console.log('Notification Id', detail.notification.id);
+      console.log('Notification Id', detail.notification?.id);
       break;
     case EventType.APP_BLOCKED:
       eventTypeString = 'APP_BLOCKED';

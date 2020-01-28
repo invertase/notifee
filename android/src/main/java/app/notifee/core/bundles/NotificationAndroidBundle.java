@@ -471,6 +471,15 @@ public class NotificationAndroidBundle {
     return mNotificationAndroidBundle.getBoolean("showChronometer", false);
   }
 
+  public @Nullable
+  String getSound() {
+    if (!mNotificationAndroidBundle.containsKey("sound")) {
+      return null;
+    }
+
+    return mNotificationAndroidBundle.getString("sound");
+  }
+
   /**
    * Gets an array vibration pattern for the notification, or empty if not provided
    *
