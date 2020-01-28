@@ -1,4 +1,3 @@
 package.json
-packages/**/node_modules/**
-tests_react_native/node_modules/**
-tests_react_native/app.playground.js
+node_modules
+dist

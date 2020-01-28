@@ -1,6 +1,6 @@
-src/version.js
-packages/**/node_modules/**
+version.ts
 node_modules
 scripts/
 coverage
 docs
+dist

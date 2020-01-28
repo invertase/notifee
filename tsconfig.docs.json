@@ -1,6 +1,6 @@
 {
   "include": [
-    "packages/react-native/types/**/*.ts"
+    "packages/react-native/src/types/**/*.ts"
   ],
   "compilerOptions": {
     "noEmit": true,
