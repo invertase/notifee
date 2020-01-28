@@ -511,6 +511,18 @@ export interface NotificationAndroid {
    * ```
    */
   timestamp?: number;
+
+  /**
+   * Overrides the sound the notification is displayed with.
+   *
+   * The default value is to play no sound. To play the default system sound use 'default'.
+   *
+   * This setting has no behaviour on Android after API level version 26, instead you can set the
+   * sound on the notification channels.
+   *
+   * @platform android API Level < 26
+   */
+  sound?: string | any;
 }
 
 /**
@@ -1026,11 +1038,11 @@ export interface AndroidChannel {
   /**
    * Overrides the sound the notification is displayed with.
    *
-   * The default value is `default`, which is the system default sound.
+   * The default value is to play no sound. To play the default system sound use 'default'.
    *
    * This setting cannot be overridden once the channel is created.
    */
-  sound?: string;
+  sound?: string | any;
 }
 
 export interface NativeAndroidChannel extends AndroidChannel {

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
+// @ts-ignore
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import {
   hasOwnProperty,
@@ -610,6 +613,30 @@ export default function validateAndroidNotification(
     }
 
     out.timestamp = android.timestamp;
+  }
+
+  /**
+   * sound
+   */
+  if (hasOwnProperty(android, 'sound')) {
+    let _sound = android.sound;
+
+    if (isObject(_sound)) {
+      // @ts-ignore
+      _sound = _sound.uri;
+    }
+
+    if (isNumber(_sound)) {
+      _sound = resolveAssetSource(_sound)?.uri || null;
+    }
+
+    if (!isString(_sound)) {
+      throw new Error(
+        "'notification.sound' expected a valid sound string or a resolvable Asset Source Object.",
+      );
+    }
+
+    out.sound = _sound;
   }
 
   return out;

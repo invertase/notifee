@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
+// @ts-ignore
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
-import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
+import { hasOwnProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
 import { AndroidChannel, AndroidImportance, AndroidVisibility } from '../types/NotificationAndroid';
@@ -159,15 +162,24 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
    * sound
    */
   if (hasOwnProperty(channel, 'sound')) {
-    if (!isString(channel.sound)) {
-      throw new Error("'channel.sound' expected a string value.");
+    let _sound = channel.sound;
+
+    if (isObject(_sound)) {
+      // @ts-ignore
+      _sound = _sound.uri;
     }
 
-    if (!channel.sound) {
-      throw new Error("'channel.sound' expected a valid sound string.");
+    if (isNumber(_sound)) {
+      _sound = resolveAssetSource(_sound)?.uri || null;
     }
 
-    out.sound = channel.sound;
+    if (!isString(_sound)) {
+      throw new Error(
+        "'channel.sound' expected a valid sound string or a resolvable Asset Source Object.",
+      );
+    }
+
+    out.sound = _sound;
   }
 
   /**

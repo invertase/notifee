@@ -16,11 +16,11 @@ notifee.onEvent(async event => {
       break;
     case EventType.PRESS:
       eventTypeString = 'PRESS';
-      console.log('Action ID', detail.pressAction?.id);
+      console.log('Action ID', detail.pressAction?.id || 'N/A');
       break;
     case EventType.ACTION_PRESS:
       eventTypeString = 'ACTION_PRESS';
-      console.log('Action ID', detail.pressAction?.id);
+      console.log('Action ID', detail.pressAction?.id || 'N/A');
       break;
     case EventType.DELIVERED:
       eventTypeString = 'DELIVERED';

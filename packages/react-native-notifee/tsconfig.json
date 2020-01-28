@@ -6,6 +6,8 @@
     "allowJs": false,
     "jsx": "react-native",
     "declaration": true,
+    "sourceMap": true,
+    "listEmittedFiles": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "removeComments": false,
