@@ -3,14 +3,14 @@
  */
 
 import { AppRegistry } from 'react-native';
-import { Module } from '../types/Module';
+import { Module } from './types/Module';
 import {
   AndroidChannel,
   AndroidChannelGroup,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
-} from '../types/NotificationAndroid';
-import { InitialNotification, Notification, NotificationEvent } from '../types/Notification';
+} from './types/NotificationAndroid';
+import { InitialNotification, Notification, NotificationEvent } from './types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';

@@ -3,7 +3,7 @@
  */
 
 import NotifeeApiModule from './NotifeeApiModule';
-import { ModuleStatics, ModuleWithStatics } from '../types/Module';
+import { ModuleStatics, ModuleWithStatics } from './types/Module';
 import { version as SDK_VERSION } from './version';
 
 const module = new NotifeeApiModule({
@@ -19,7 +19,7 @@ const statics: ModuleStatics = {
 const defaultExports: ModuleWithStatics = Object.assign(module, statics);
 export default defaultExports;
 
-export * from '../types/Library';
-export * from '../types/Notification';
-export * from '../types/NotificationIOS';
-export * from '../types/NotificationAndroid';
+export * from './types/Library';
+export * from './types/Notification';
+export * from './types/NotificationIOS';
+export * from './types/NotificationAndroid';

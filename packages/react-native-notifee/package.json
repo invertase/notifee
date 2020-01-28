@@ -3,18 +3,27 @@
   "version": "0.0.7",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "genversion --es6 --semi src/version.ts && tsc",
     "build:core": "cd ../../android && ./gradlew assembleRelease",
-    "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf lib",
+    "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf dist",
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
     "prepublishOnly": "yarn run build:core"
   },
   "devDependencies": {
-    "@types/react-native": "^0.60.23"
+    "@types/react-native": "^0.60.31",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "genversion": "^2.2.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^2.7.1",
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
     "react-native": "*"

@@ -10,7 +10,7 @@ import {
   NativeModules,
   NativeModulesStatic,
 } from 'react-native';
-import { JsonConfig } from '../types/Module';
+import { JsonConfig } from './types/Module';
 
 export interface NativeModuleConfig {
   version: string;

@@ -3,7 +3,7 @@
  */
 
 import { hasOwnProperty, isObject, isString } from '../utils';
-import { AndroidChannelGroup } from '../../types/NotificationAndroid';
+import { AndroidChannelGroup } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannelGroup(
   group: AndroidChannelGroup,

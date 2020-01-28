@@ -549,5 +549,5 @@ Pods/*
 
 # generated files
 src/version.ts
-lib
+dist
 android/libs/notifee_core_debug.aar

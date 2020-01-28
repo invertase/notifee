@@ -6,7 +6,7 @@ import { generateId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateiOSNotification from './validateiOSNotification';
-import { Notification } from '../../types/Notification';
+import { Notification } from '../types/Notification';
 
 export default function validateNotification(notification: Notification): Notification {
   if (!isObject(notification)) {

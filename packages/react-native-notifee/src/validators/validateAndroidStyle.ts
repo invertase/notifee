@@ -10,7 +10,7 @@ import {
   AndroidMessagingStyleMessage,
   AndroidPerson,
   AndroidStyle,
-} from '../../types/NotificationAndroid';
+} from '../types/NotificationAndroid';
 import { hasOwnProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 
 /**

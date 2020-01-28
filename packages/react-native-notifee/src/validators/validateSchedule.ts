@@ -7,7 +7,7 @@ export default function noop(): void {
 }
 
 // import { hasOwnProperty, isBoolean, isNumber, isObject } from '../utils';
-// import { NotificationRepeatInterval, NotificationSchedule } from '../../types/Notification';
+// import { NotificationRepeatInterval, NotificationSchedule } from '../types/Notification';
 //
 // export default function validateSchedule(schedule: NotificationSchedule): NotificationSchedule {
 //   if (!isObject(schedule)) {

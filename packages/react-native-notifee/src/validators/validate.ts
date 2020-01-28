@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { AndroidColor } from '../../types/NotificationAndroid';
+import { AndroidColor } from '../types/NotificationAndroid';
 import { isNumber } from '../utils';
 
 /**

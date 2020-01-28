@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { AndroidInput } from '../../types/NotificationAndroid';
+import { AndroidInput } from '../types/NotificationAndroid';
 import { hasOwnProperty, isArrayOfStrings, isBoolean, isString } from '../utils';
 
 export default function validateAndroidInput(input?: AndroidInput): AndroidInput {

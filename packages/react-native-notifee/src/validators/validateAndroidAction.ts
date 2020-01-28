@@ -4,7 +4,7 @@
 
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
-import { AndroidAction } from '../../types/NotificationAndroid';
+import { AndroidAction } from '../types/NotificationAndroid';
 import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidInput from './validateAndroidInput';
 

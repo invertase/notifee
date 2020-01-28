@@ -23,7 +23,7 @@ import {
   AndroidStyle,
   AndroidVisibility,
   NotificationAndroid,
-} from '../../types/NotificationAndroid';
+} from '../types/NotificationAndroid';
 
 import {
   isValidColor,
