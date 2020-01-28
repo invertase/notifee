@@ -89,6 +89,9 @@ public class ChannelManager {
         notificationChannelGroup.setDescription(channelGroupBundle.getDescription());
       }
 
+      NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+        .createNotificationChannelGroup(notificationChannelGroup);
+
       return null;
     });
   }
