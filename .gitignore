@@ -554,3 +554,7 @@ tests/ios/Firebase
 # generated file
 RNFBVersion.m
 /packages/react-native/src/version.ts
+ios/Pods
+ios/Podfile.lock
+ios/NotifeeCore.framework
+ios/NotifeeCore.xcworkspace
