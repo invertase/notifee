@@ -4285,7 +4285,8 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "An interface describing the contents of a `notifee.config.json` file."
+				"shortText": "An interface describing the contents of a `notifee.config.json` file.",
+				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"android: {\n    \"license\": \"...\"\n  },\n  \"ios\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
 			},
 			"children": [
 				{
@@ -4297,10 +4298,13 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "Android specific Notifee configuration."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 326,
+							"line": 374,
 							"character": 9
 						}
 					],
@@ -4319,10 +4323,13 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "iOS specific Notifee configuration."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 327,
+							"line": 379,
 							"character": 5
 						}
 					],
@@ -4346,7 +4353,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 325,
+					"line": 370,
 					"character": 27
 				}
 			]
@@ -4360,7 +4367,8 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "An interface describing the Android specific configuration properties for the `notifee.config.json` file."
+				"shortText": "An interface describing the Android specific configuration properties for the `notifee.config.json` file.",
+				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"android\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
 			},
 			"children": [
 				{
@@ -4371,10 +4379,14 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "The license key created via the Notifee account section. A valid license is required\nfor production usage with Notifee.",
+						"text": "The license must match your App ID when created.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 312,
+							"line": 328,
 							"character": 9
 						}
 					],
@@ -4396,7 +4408,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 311,
+					"line": 321,
 					"character": 34
 				}
 			]
@@ -4410,7 +4422,8 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "An interface describing the iOS specific configuration properties for the `notifee.config.json` file."
+				"shortText": "An interface describing the iOS specific configuration properties for the `notifee.config.json` file.",
+				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"ios\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
 			},
 			"children": [
 				{
@@ -4421,10 +4434,14 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "The license key created via the Notifee account section. A valid license is required\nfor production usage with Notifee.",
+						"text": "The license must match your Bundle ID when created.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 319,
+							"line": 351,
 							"character": 9
 						}
 					],
@@ -4446,7 +4463,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 318,
+					"line": 344,
 					"character": 30
 				}
 			]
@@ -5663,6 +5680,10 @@
 			"flags": {
 				"isExported": true
 			},
+			"comment": {
+				"shortText": "Interface describing the static properties available on the default `@notifee/react-native` export.",
+				"text": "```js\nimport notifee from `@notifee/react-native`;\n\nconsole.log(notifee.SDK_VERSION);\n```\n"
+			},
 			"children": [
 				{
 					"id": 327,
@@ -5672,10 +5693,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Returns the current Notifee SDK version in use."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 331,
+							"line": 395,
 							"character": 13
 						}
 					],
@@ -5697,7 +5721,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 330,
+					"line": 391,
 					"character": 30
 				}
 			],
@@ -5726,10 +5750,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Returns the current Notifee SDK version in use."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 331,
+							"line": 395,
 							"character": 13
 						}
 					],
@@ -7113,7 +7140,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 335,
+					"line": 399,
 					"character": 34
 				}
 			],
