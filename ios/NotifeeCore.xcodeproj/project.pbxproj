@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -14,6 +14,7 @@
 				27E8C36523E46FFE007568A4 /* ShellScript */,
 			);
 			dependencies = (
+				27E8C38A23E49744007568A4 /* PBXTargetDependency */,
 			);
 			name = Framework;
 			productName = Framework;
@@ -21,16 +22,30 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0D891CB533B67DE3C6F6AF1C /* libPods-NotifeeCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BDBB01144B2D020A101A3D7 /* libPods-NotifeeCore.a */; };
 		27E8C35B23E46BAB007568A4 /* NotifeeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E8C35923E46BAB007568A4 /* NotifeeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81284E32DB3B5FBEE4DD345F /* libPods-NotifeeCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E61DA4FCCA9C1DCF59947471 /* libPods-NotifeeCore.a */; };
+		27E8C36823E47C97007568A4 /* Notifee.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E8C36623E47C97007568A4 /* Notifee.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27E8C36923E47C97007568A4 /* Notifee.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C36723E47C97007568A4 /* Notifee.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27E8C38923E49744007568A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27E8C34D23E46BAB007568A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27E8C35523E46BAB007568A4;
+			remoteInfo = NotifeeCore;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		27E8C35623E46BAB007568A4 /* NotifeeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotifeeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E8C35923E46BAB007568A4 /* NotifeeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCore.h; sourceTree = "<group>"; };
 		27E8C35A23E46BAB007568A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27E8C36623E47C97007568A4 /* Notifee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifee.h; sourceTree = "<group>"; };
+		27E8C36723E47C97007568A4 /* Notifee.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Notifee.m; sourceTree = "<group>"; };
+		3BDBB01144B2D020A101A3D7 /* libPods-NotifeeCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotifeeCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A95FB0FA78577D940A5EBF /* Pods-NotifeeCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.debug.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.debug.xcconfig"; sourceTree = "<group>"; };
-		E61DA4FCCA9C1DCF59947471 /* libPods-NotifeeCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotifeeCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33965D550FD28BEF0E5D4F0 /* Pods-NotifeeCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.release.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81284E32DB3B5FBEE4DD345F /* libPods-NotifeeCore.a in Frameworks */,
+				0D891CB533B67DE3C6F6AF1C /* libPods-NotifeeCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,7 +64,7 @@
 		0906DD3AD5A655412EB8E14E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E61DA4FCCA9C1DCF59947471 /* libPods-NotifeeCore.a */,
+				3BDBB01144B2D020A101A3D7 /* libPods-NotifeeCore.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -77,6 +92,8 @@
 			children = (
 				27E8C35923E46BAB007568A4 /* NotifeeCore.h */,
 				27E8C35A23E46BAB007568A4 /* Info.plist */,
+				27E8C36623E47C97007568A4 /* Notifee.h */,
+				27E8C36723E47C97007568A4 /* Notifee.m */,
 			);
 			path = NotifeeCore;
 			sourceTree = "<group>";
@@ -98,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E8C35B23E46BAB007568A4 /* NotifeeCore.h in Headers */,
+				27E8C36823E47C97007568A4 /* Notifee.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +203,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\nOUTPUT_FOLDER=${PROJECT_DIR}/../packages/react-native/ios/NotifeeCore.framework\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions. This also include the full bitcode generation of framework\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" -UseModernBuildSystem=NO clean build\n\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" -UseModernBuildSystem=NO clean build\n\n\n# step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# step 3. Copy Swift modules (from iphonesimulator build) to the copied framework directory\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\n\n# step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n# step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${OUTPUT_FOLDER}\"\n\n# step 6. Convenience step to open the project's directory in Finder\n# open \"${OUTPUT_FOLDER}\"\n";
+			shellScript = "#!/bin/sh\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\nOUTPUT_FOLDER=${PROJECT_DIR}/../packages/react-native/ios/NotifeeCore.framework\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions. This also include the full bitcode generation of framework\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" -UseModernBuildSystem=NO clean build\n\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" -UseModernBuildSystem=NO clean build\n\n\n# step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# step 3. Copy Swift modules (from iphonesimulator build) to the copied framework directory\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\n\n# step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# step 5. Convenience step to copy the framework to the project's directory\nrm -rf \"${OUTPUT_FOLDER}\" && cp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${OUTPUT_FOLDER}\"\n\n# step 6. Convenience step to open the project's directory in Finder\n# open \"${OUTPUT_FOLDER}\"\n";
 		};
 		96DAE217ADF354B419126726 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -216,10 +234,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E8C36923E47C97007568A4 /* Notifee.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27E8C38A23E49744007568A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 27E8C35523E46BAB007568A4 /* NotifeeCore */;
+			targetProxy = 27E8C38923E49744007568A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		27E8C35C23E46BAB007568A4 /* Debug */ = {
