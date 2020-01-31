@@ -8,7 +8,7 @@ module.exports = {
       ios: {
         scriptPhases: [
           {
-            name: '[NOTIFEE] Configuration',
+            name: '[NOTIFEE] Config',
             path: './ios_config.sh',
             execution_position: 'after_compile',
           },

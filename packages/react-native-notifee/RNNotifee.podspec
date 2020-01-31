@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   s.source_files             = 'ios/RNNotifee/*.{h,m}'
   s.ios.vendored_frameworks = 'ios/NotifeeCore.framework'
 
-  # add all the dependencies
   s.dependency 'React'
   s.dependency 'AFNetworking'
   s.dependency 'PromisesObjC'

@@ -87,6 +87,3 @@ for plist in ${_TARGET_PLIST} ${_DSYM_PLIST} ; do
 done
 
 echo "info: <- NOTIFEE build script finished"
-
-
-
