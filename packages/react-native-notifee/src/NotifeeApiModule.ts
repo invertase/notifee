@@ -223,8 +223,12 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
       AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
-        return ({ type, detail }): Promise<void> => {
-          return observer({ type, detail });
+        return ({ type, detail, headless }): Promise<void> => {
+          if (headless) {
+            return observer({ type, detail });
+          }
+
+          return Promise.resolve();
         };
       });
       onNotificationEventHeadlessTaskRegistered = true;
@@ -238,8 +242,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     const subscriber = this.emitter.addListener(
       this.native.NOTIFICATION_EVENT_KEY,
-      ({ type, detail }) => {
-        observer({ type, detail });
+      ({ type, detail, headless }) => {
+        if (!headless) {
+          observer({ type, detail });
+        }
       },
     );
 
