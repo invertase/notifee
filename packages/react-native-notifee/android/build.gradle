@@ -36,11 +36,6 @@ project.ext {
 android {
   defaultConfig {
     multiDexEnabled true
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments = [eventBusIndex: 'io.invertase.notifee.NotifeeEventBusIndex']
-      }
-    }
   }
   lintOptions {
     disable 'GradleCompatible'
@@ -71,9 +66,6 @@ dependencies {
   runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.10.7') {
     exclude group: 'org.json', module: 'json'
   }
-
-  annotationProcessor "androidx.room:room-compiler:2.2.3"
-  annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 
   debugImplementation("com.facebook.flipper:flipper:0.23.5") {
     exclude group:'com.facebook.yoga'
