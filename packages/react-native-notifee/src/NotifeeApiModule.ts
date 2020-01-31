@@ -10,7 +10,7 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
-import { InitialNotification, Notification, NotificationEvent } from './types/Notification';
+import { InitialNotification, Notification, Event } from './types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
@@ -216,36 +216,30 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getInitialNotification();
   }
 
-  public onBackgroundEvent(observer: (event: NotificationEvent) => Promise<void>): void {
+  public onBackgroundEvent(observer: (event: Event) => Promise<void>): void {
     if (!isFunction(observer)) {
       throw new Error("notifee.onBackgroundEvent(*) 'observer' expected a function.");
     }
 
     if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
       AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
-        return ({ type, detail, headless }): Promise<void> => {
-          if (headless) {
-            return observer({ type, detail });
-          }
-
-          return Promise.resolve();
+        return ({ type, detail }): Promise<void> => {
+          return observer({ type, detail });
         };
       });
       onNotificationEventHeadlessTaskRegistered = true;
     }
   }
 
-  public onForegroundEvent(observer: (event: NotificationEvent) => void): () => void {
+  public onForegroundEvent(observer: (event: Event) => void): () => void {
     if (!isFunction(observer)) {
       throw new Error("notifee.onForegroundEvent(*) 'observer' expected a function.");
     }
 
     const subscriber = this.emitter.addListener(
       this.native.NOTIFICATION_EVENT_KEY,
-      ({ type, detail, headless }) => {
-        if (!headless) {
-          observer({ type, detail });
-        }
+      ({ type, detail }) => {
+        observer({ type, detail });
       },
     );
 

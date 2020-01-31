@@ -2,7 +2,12 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { InitialNotification, Notification, NotificationEvent } from './Notification';
+import {
+  ForegroundServiceTask,
+  InitialNotification,
+  Notification,
+  Event,
+} from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
@@ -224,9 +229,39 @@ export interface Module {
    */
   getInitialNotification(): Promise<InitialNotification | null>;
 
-  onBackgroundEvent(observer: (event: NotificationEvent) => Promise<void>): void;
+  /**
+   * API used to handle events when the application is in a background state.
+   *
+   * Applications in a background state will use an event handler registered by this API method
+   * to send events. The handler must return a Promise once complete and only a single event handler
+   * can be registered for the application.
+   *
+   * View the [Background events](/react-native/docs/events#background-events) documentation for more
+   * information and example usage.
+   *
+   * To listen to foreground events, see the [`onForegroundEvent`](/react-native/reference/onforegroundevent) documentation.
+   *
+   * @param observer A Function which returns a Promise, called on a new event when the application
+   * is in a background state.
+   */
+  onBackgroundEvent(observer: (event: Event) => Promise<void>): void;
 
-  onForegroundEvent(observer: (event: NotificationEvent) => void): () => void;
+  /**
+   * API used to handle events when the application is in a foreground state.
+   *
+   * Applications in a foreground state will use an event handler registered by this API method
+   * to send events. Multiple foreground observers can be registered throughout the applications
+   * lifecycle. The method returns a function, used to unsubscribe from further events,
+   *
+   * View the [Foreground events](/react-native/docs/events#foreground-events) documentation for more
+   * information and example usage.
+   *
+   * To listen to background events, see the [`onBackgroundEvent`](/react-native/reference/onbackgroundevent) documentation.
+   *
+   * @param observer A Function which returns a Promise, called on a new event when the application
+   * is in a foreground state.
+   */
+  onForegroundEvent(observer: (event: Event) => void): () => void;
 
   /**
    * API used to open the Android System settings for the application.
@@ -262,9 +297,9 @@ export interface Module {
    * more information.
    *
    * @platform android
-   * @param runner The runner function which runs for the duration of the service's lifetime.
+   * @param task The runner function which runs for the duration of the service's lifetime.
    */
-  registerForegroundService(runner: (notification: Notification) => Promise<void>): void;
+  registerForegroundService(task: ForegroundServiceTask): void;
 
   // TODO introduce as part of iOS
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
@@ -272,27 +307,91 @@ export interface Module {
 
 /**
  * An interface describing the Android specific configuration properties for the `notifee.config.json` file.
+ *
+ * View the [License Keys](/react-native/docs/license-keys) documentation for more information.
+ *
+ * ```json
+ * {
+ *   "android": {
+ *     "license": "..."
+ *   }
+ * }
+ * ```
  */
 export interface JsonConfigAndroid {
+  /**
+   * The license key created via the Notifee account section. A valid license is required
+   * for production usage with Notifee.
+   *
+   * The license must match your App ID when created.
+   */
   license: string;
 }
 
 /**
  * An interface describing the iOS specific configuration properties for the `notifee.config.json` file.
+ *
+ * View the [License Keys](/react-native/docs/license-keys) documentation for more information.
+ *
+ * ```json
+ * {
+ *   "ios": {
+ *     "license": "..."
+ *   }
+ * }
+ * ```
  */
 export interface JsonConfigIOS {
+  /**
+   * The license key created via the Notifee account section. A valid license is required
+   * for production usage with Notifee.
+   *
+   * The license must match your Bundle ID when created.
+   */
   license: string;
 }
 
 /**
  * An interface describing the contents of a `notifee.config.json` file.
+ *
+ * View the [License Keys](/react-native/docs/license-keys) documentation for more information.
+ *
+ * ```json
+ * {
+ *   "android: {
+ *     "license": "..."
+ *   },
+ *   "ios": {
+ *     "license": "..."
+ *   }
+ * }
+ * ```
  */
 export interface JsonConfig {
+  /**
+   * Android specific Notifee configuration.
+   */
   android?: JsonConfigAndroid;
+
+  /**
+   * iOS specific Notifee configuration.
+   */
   ios?: JsonConfigIOS;
 }
 
+/**
+ * Interface describing the static properties available on the default `@notifee/react-native` export.
+ *
+ * ```js
+ * import notifee from `@notifee/react-native`;
+ *
+ * console.log(notifee.SDK_VERSION);
+ * ```
+ */
 export interface ModuleStatics {
+  /**
+   * Returns the current Notifee SDK version in use.
+   */
   SDK_VERSION: string;
 }
 

@@ -5,26 +5,19 @@
 /**
  * The interface for Android specific options which are applied to a notification.
  *
- * #### Example
- *
- * ```js
- * const notification = {
- *   body: 'Hello World!',
- *   android: {
- *     color: '#3F51B5',
- *     autoCancel: false,
- *     ongoing: true,
- *   },
- * };
- *
- * await notifee.displayNotification(notification);
- * ```
+ * To learn more about Android notifications, view the [Android](/react-native/docs/android/overview)
+ * documentation for full examples and usage.
  *
  * @platform android
  */
 export interface NotificationAndroid {
   /**
+   * An array of [AndroidAction](/react-native/reference/androidaction) interfaces.
    *
+   * Adds quick actions to a notification. Quick Actions enable users to interact with your application
+   * directly from the notification body, providing an overall greater user experience.
+   *
+   * View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation for more information.
    */
   actions?: AndroidAction[];
 
@@ -38,37 +31,32 @@ export interface NotificationAndroid {
    * Ensure a foreground service runner function has been provided to `registerForegroundService`.
    * Without one, the notification will not be displayed.
    *
+   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+   *
    * Defaults to `false`.
    */
   asForegroundService?: boolean;
 
   /**
    * Setting this flag will make it so the notification is automatically canceled when the user
-   * clicks it in the panel.
+   * presses it in the panel.
    *
    * By default when the user taps a notification it is automatically removed from the notification
    * panel. Setting this to `false` will keep the notification in the panel.
    *
    * If `false`, the notification will persist in the notification panel after being pressed. It will
-   * remain there until the user removes it (e.g. swipes away) or is cancelled via `removeDeliveredNotification`.
+   * remain there until the user removes it (e.g. swipes away) or is cancelled via
+   * [`cancelNotification`](/react-native/reference/cancelNotification).
    *
    * Defaults to `true`.
    */
   autoCancel?: boolean;
 
   /**
-   * Starting with 8.0 (API level 26), notification badges (also known as notification dots) appear
-   * on a launcher icon when the associated app has an active notification. Users can long-press
-   * on the app icon to reveal the notifications (alongside any app shortcuts).
+   * Sets the type of badge used when the notification is being displayed in badge mode.
    *
-   * This value might be ignored, for launchers that don't support badge icons.
-   *
-   * If the notification is shown as a badge, this option can be set to control how the badge icon
-   * is shown:
-   *
-   * - `NONE`: Uses the default preference of the device launcher. Some launchers will display no icon, others will use the `largeIcon` (if provided).
-   * - `SMALL`: Uses the icon provided to `smallIcon`, if available.
-   * - `LARGE`: Uses the icon provided to `largeIcon`, if available.
+   * View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information
+   * and usage examples.
    *
    * Defaults to `AndroidBadgeIconType.LARGE`.
    *
@@ -79,47 +67,17 @@ export interface NotificationAndroid {
   /**
    * Assigns the notification to a category. Use the one which best describes the notification.
    *
-   * The category may be used by the device for ranking and filtering.
-   *
-   * ```js
-   * import notifee, { AndroidCategory } from `@notifee/react-native`;
-   *
-   * const notification = {
-   *   body: 'Congratulations...',
-   *   android: {
-   *     category: AndroidCategory.MESSAGE,
-   *   },
-   * };
-   *
-   * await notifee.displayNotification(notification);
-   * ```
+   * The category may be used by the device for ranking and filtering. It has no visual or behavioural
+   * impact.
    */
   category?: AndroidCategory;
 
   /**
-   * Specify the `AndroidChannel` which the notification will be delivered on.
+   * Specifies the `AndroidChannel` which the notification will be delivered on.
    *
-   * Channels override any notification options.
-   *
-   * > On Android 8.0 (API 26) the channel ID is required. Providing a invalid channel ID will throw an error.
-   *
-   * #### Example
-   *
-   * ```js
-   * import notifee from `@notifee/react-native`;
-   *
-   * const channelId = notifee.createChannel({
-   *   channelId: 'my-custom-channel',
-   *   name: 'Custom Notification Channel',
-   * });
-   *
-   * await notifee.displayNotification({
-   *   body: 'Notification with channel',
-   *   android: {
-   *     channelId,
-   *   },
-   * });
-   * ```
+   * On Android 8.0 (API 26) the channel ID is required. Providing a invalid channel ID will throw
+   * an error. View the [Channels & Groups](/react-native/docs/android/channels) documentation for
+   * more information and usage examples.
    */
   channelId?: string;
 
@@ -129,27 +87,7 @@ export interface NotificationAndroid {
    *
    * The color can be a predefined system `AndroidColor` or [hexadecimal](https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4).
    *
-   * Setting a color will change key parts of a notification, such as the small icon, action text and
-   * the input area background color.
-   *
-   * See our [Android Appearance guide](/react-native/docs/android/appearance#color) to learn
-   * more about this property.
-   *
-   * #### Example
-   *
-   * Using a predefined color.
-   *
-   * ```js
-   * import notifee, { AndroidColor } from '@notifee/react-native';
-   *
-   * await notifee.displayNotification({
-   *   android: {
-   *     color: AndroidColor.AQUA,
-   *     // or
-   *     color: '#2196f3', // material blue
-   *   },
-   * });
-   * ```
+   * View the [Color](/react-native/docs/android/appearance#color) documentation for more information.
    */
   color?: AndroidColor | string;
 
@@ -160,6 +98,8 @@ export interface NotificationAndroid {
    *
    * This should only be used for high priority ongoing tasks like navigation, an ongoing call,
    * or other similarly high-priority events for the user.
+   *
+   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
    *
    * Defaults to `false`.
    */
@@ -190,20 +130,22 @@ export interface NotificationAndroid {
    * Set this notification to be part of a group of notifications sharing the same key. Grouped notifications may
    * display in a cluster or stack on devices which support such rendering.
    *
-   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) to
-   * learn more about this property.
+   * On some devices, the system may automatically group notifications.
+   *
+   * View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) documentation to
+   * learn more.
    */
   groupId?: string;
 
   /**
    * Sets the group alert behavior for this notification. Use this method to mute this notification
    * if alerts for this notification's group should be handled by a different notification. This is
-   * only applicable for notifications that belong to a `group`. This must be called on all notifications
+   * only applicable for notifications that belong to a `groupId`. This must be called on all notifications
    * you want to mute. For example, if you want only the summary of your group to make noise, all
    * children in the group should have the group alert behavior `AndroidGroupAlertBehavior.SUMMARY`.
    *
-   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour) to
-   * learn more about this property.
+   * View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour)
+   * documentation to learn more.
    */
   groupAlertBehavior?: AndroidGroupAlertBehavior;
 
@@ -211,7 +153,7 @@ export interface NotificationAndroid {
    * Whether this notification should be a group summary.
    *
    * If `true`, Set this notification to be the group summary for a group of notifications. Grouped notifications may display in
-   * a cluster or stack on devices which support such rendering. Requires a `group` key to be set.
+   * a cluster or stack on devices which support such rendering. Requires a `groupId` key to be set.
    *
    * Defaults to `false`.
    */
@@ -230,7 +172,7 @@ export interface NotificationAndroid {
   /**
    * Sets a large icon on the notification.
    *
-   * See our [Android Appearance guide](/react-native/docs/android/appearance#large-icons) to learn
+   * View the [Android Appearance](/react-native/docs/android/appearance#large-icons) documentation to learn
    * more about this property.
    */
   largeIcon?: string;
@@ -242,22 +184,16 @@ export interface NotificationAndroid {
    * along with the number of milliseconds to show the light, and the number of milliseconds to
    * turn off the light. The light frequency pattern is repeated.
    *
-   * #### Example
-   *
-   * Show a red light, for 300ms and turn it off for 600ms.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     lights: ['#f44336', 300, 600],
-   *   },
-   * });
-   * ```
+   * View the [Lights](/react-native/docs/android/behaviour#lights) documentation for more information.
    */
   lights?: [AndroidColor | string, number, number];
 
   /**
-   * Description - if true, wont show on connected devices
+   * Sets whether the notification will only appear on the local device.
+   *
+   * Users who have connected devices which support notifications (such as a smart watch) will
+   * receive an alert for the notification on that device. If set to `true`, the notification will
+   * only alert on the main device.
    *
    * Defaults to `false`.
    */
@@ -276,8 +212,12 @@ export interface NotificationAndroid {
   /**
    * Set whether this is an on-going notification.
    *
+   * Setting this value to `true` changes the default behaviour of a notification:
+   *
    * - Ongoing notifications are sorted above the regular notifications in the notification panel.
    * - Ongoing notifications do not have an 'X' close button, and are not affected by the "Clear all" button.
+   *
+   * View the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.
    */
   ongoing?: boolean;
 
@@ -286,7 +226,9 @@ export interface NotificationAndroid {
    * however will still alert the user (for example, by making a sound).
    *
    * If this flag is set to `true`, notifications with the same `id` will only alert the user once whilst
-   * the notification is active.
+   * the notification is visible.
+   *
+   * This property is commonly used when frequently updating a notification (such as updating the progress bar).
    */
   onlyAlertOnce?: boolean;
 
@@ -295,13 +237,8 @@ export interface NotificationAndroid {
    * `pressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * The notification will always open the application when an `pressAction` is provided. It is
-   * however possible to provide advanced configuration to the press action to open custom
-   * activities or React components.
-   *
-   * See our [Android Interaction guide](/react-native/docs/android/interaction#press-action) to learn
-   * more about this property.
-   *
+   * View the  [Interaction](/react-native/docs/android/interaction) documentation to learn
+   * more.
    */
   pressAction?: AndroidPressAction;
 
@@ -315,8 +252,8 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidImportance.DEFAULT`.
    *
-   * See our [Android Appearance guide](/react-native/docs/android/appearance#importance) to learn
-   * more about this property.
+   * View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
+   * more.
    *
    * @platform android API Level < 26
    */
@@ -326,18 +263,10 @@ export interface NotificationAndroid {
    * A notification can show current progress of a task. The progress state can either be fixed or
    * indeterminate (unknown).
    *
-   * See our [Android Progress Indicators guide](/react-native/docs/android/progress-indicators) to
-   * learn more about this property.
+   * View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation
+   * to learn more.
    */
   progress?: AndroidProgress;
-
-  /**
-   * If this notification is duplicative of a Launcher shortcut, sets the id of the shortcut,
-   * in case the Launcher wants to hide the shortcut.
-   *
-   * Note: This field will be ignored by Launchers that don't support badging or shortcuts.
-   */
-  shortcutId?: string;
 
   /**
    * Sets whether the `timestamp` provided is shown in the notification.
@@ -347,29 +276,15 @@ export interface NotificationAndroid {
    *
    * If no `timestamp` is set, this field has no effect.
    *
-   * See our [Android Timestamps guide](/react-native/docs/android/timers#timestamps) to
-   * learn more about this property.
+   * View the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.
    */
   showTimestamp?: boolean;
 
   /**
    * The small icon to show in the heads-up notification.
    *
-   * See our [Android Appearance guide](/react-native/docs/android/appearance#small-icons) to learn
-   * more about this property.
-   *
-   * Defaults to `ic_launcher`.
-   *
-   * #### Example
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   body: 'Custom small icon',
-   *   android: {
-   *     smallIcon: 'app-icon',
-   *   },
-   * });
-   * ```
+   * View the [Icons](/react-native/docs/android/appearance#small-icons) documentation to learn
+   * more.
    */
   smallIcon?: string;
 
@@ -384,18 +299,20 @@ export interface NotificationAndroid {
    * this. Notifications will be sorted lexicographically using this value, although providing
    * different priorities in addition to providing sort key may cause this value to be ignored.
    *
-   * If a `group` has been set, the sort key can also be used to order members of a notification group.
+   * If a `groupId` has been set, the sort key can also be used to order members of a notification group.
    *
-   * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#sorting) to
-   * learn more about this property.
+   * View the [Android Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#sorting)
+   * documentation to learn more.
    */
   sortKey?: string;
 
   /**
    * Styled notifications provide users with more informative content and additional functionality.
    *
-   * See our [Android Styles guide](/react-native/docs/android/grouping-and-sorting) to
-   * learn more about the various Android Notification styles that are supported.
+   * Android supports different styles, however only one can be used with a notification.
+   *
+   * View the [Styles](/react-native/docs/android/styles) documentation to learn more
+   * view usage examples.
    **/
   style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
 
@@ -405,36 +322,12 @@ export interface NotificationAndroid {
    * (where it serves as an audible announcement of the notification's appearance).
    *
    * Ticker text does not show in the notification.
-   *
-   * #### Example
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     body: 'You have 1 new message',
-   *     ticker: 'A new message has been received',
-   *   },
-   * });
-   * ```
    */
   ticker?: string;
 
   /**
    * Sets the time in milliseconds at which the notification should be
-   * cancelled once displayed, if it is not already cancelled.
-   *
-   * #### Example
-   *
-   * Time out after 10 seconds.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   body: 'Show for 10 seconds',
-   *   android: {
-   *     timeoutAfter: 10000,
-   *   },
-   * });
-   * ```
+   * automatically cancelled once displayed, if it is not already cancelled.
    */
   timeoutAfter?: number;
 
@@ -446,28 +339,14 @@ export interface NotificationAndroid {
    *
    * Defaults to `false`.
    *
-   * See our [Android Timers guide](/react-native/docs/android/timers#timers) to
-   * learn more about this property.
+   * View the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.
    */
   showChronometer?: boolean;
 
   /**
-   * Enables and sets the vibrate pattern.
+   * Sets the vibration pattern the notification uses when displayed. Must be an even amount of numbers.
    *
-   * The pattern in milliseconds. Must be an even amount of numbers.
-   *
-   * #### Example
-   *
-   * Vibrate for 300ms with a 300ms delay.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   android: {
-   *     body: 'Vibrating notification',
-   *     vibrationPattern: [300, 300],
-   *   },
-   * });
-   * ```
+   * View the [Vibration](/react-native/docs/android/behaviour#vibration) documentation to learn more.
    */
   vibrationPattern?: number[];
 
@@ -477,38 +356,28 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidVisibility.PRIVATE`.
    *
-   * See our [Android Appearance guide](/react-native/docs/android/appearance#visibility) to learn
-   * more about this property.
+   * View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn
+   * more.
    */
   visibility?: AndroidVisibility;
 
   /**
-   * - tags
-   * - for querying notifications
-   * - has no visual impact on notifications
+   * Sets a tag on the notification.
+   *
+   * Tags can be used to query groups notifications by the tag value. Setting a tag has no
+   * impact on the notification itself.
    */
   tag?: string;
 
   /**
    * The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
    *
+   * The timestamp can be used with other properties to change the behaviour of a notification:
+   *
    * - Use with `showTimestamp` to show the timestamp to the users.
    * - Use with `showChronometer` to create a on-going timer.
    *
-   * #### Example
-   *
-   * Show the length of time the notification has been showing for.
-   *
-   * ```js
-   * await notifee.displayNotification({
-   *   body: 'Phone call in progress',
-   *   android: {
-   *     ongoing: true,
-   *     timestamp: Date.now(),
-   *     showChronometer: true,
-   *   },
-   * });
-   * ```
+   * View the [Timers](/react-native/docs/android/timers) documentation to learn more.
    */
   timestamp?: number;
 
@@ -520,20 +389,21 @@ export interface NotificationAndroid {
    * This setting has no behaviour on Android after API level version 26, instead you can set the
    * sound on the notification channels.
    *
+   * View the [Sound](/react-native/docs/android/behaviour#sound) documentation for more information.
+   *
    * @platform android API Level < 26
    */
-  sound?: string | any;
+  sound?: string;
 }
 
 /**
- * The interface used to describe a notification action.
+ * The interface used to describe a notification quick action.
  *
  * Notification actions allow users to interact with notifications, allowing you to handle events
  * within your application. When an action completes (e.g. pressing an action, or filling out an input
- * box) and event is sent and can be handled by a `onEvent` listener.
+ * box) and event is sent.
  *
- * When an action completes, it is up to you handle the event by either cancelling or updating the
- * notification.
+ * View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
  *
  * @platform android
  */
@@ -541,9 +411,9 @@ export interface AndroidAction {
   /**
    * The press action interface describing what happens when an action completes.
    *
-   * Note; unlike the `pressAction` in the notification body, an action is not required to open the application
+   * Note; unlike the `pressAction` in the notification body, an action does not need to open the application
    * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
-   * or [Android Actions](/react-native/docs/android/actions) for more information.
+   * or [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
    */
   pressAction: AndroidPressAction;
 
@@ -553,7 +423,7 @@ export interface AndroidAction {
   title: string;
 
   /**
-   * An remote http icon representing the action. Newer devices may not show the icon.
+   * An remote http or local icon path representing the action. Newer devices may not show the icon.
    *
    * Recommended icon size is 24x24 px.
    */
@@ -565,8 +435,8 @@ export interface AndroidAction {
    * If `true`, the user will be able to provide free text input when the action is pressed. This
    * property can be further configured for advanced inputs.
    *
-   * See the [AndroidInput](/react-native/reference/androidinput) reference
-   * or [Android Actions](/react-native/docs/android/actions) for more information.
+   * View the [Action input](/react-native/docs/android/interaction#action-input) documentation to
+   * learn more.
    */
   input?: true | AndroidInput;
 }
@@ -577,9 +447,6 @@ export interface AndroidAction {
  * There are various ways a user can interact with a notification, the most common being pressing
  * the notification, pressing an action or providing text input. This interface defines what happens
  * when a user performs such interaction.
- *
- * When provided to a notification `pressAction`, the application will always open (if not already)
- * using the default `launchActivity` for the application.
  *
  * When provided to a notification action, the action will only open the application if a `launchActivity`
  * and/or `mainComponent` is provided.
@@ -601,12 +468,7 @@ export interface AndroidPressAction {
    * This property can be used in advanced scenarios to launch a custom Android Activity when the user
    * performs a press action.
    *
-   * If the action originated from the notification body, this value defaults to `default`, opening the
-   * default Android Activity your application runs on. When providing a custom Activity class you must provide the
-   * full class name scope & the class must extend `ReactActivity`.
-   *
-   * See our [Android Interaction guide](/react-native/docs/android/interaction#advanced-custom-activity) to
-   * learn more about this property.
+   * View the [Interaction](/react-native/docs/android/interaction) to learn more.
    */
   launchActivity?: string;
 
@@ -616,20 +478,26 @@ export interface AndroidPressAction {
    * This property can be used to open a custom React component when the user performs a press action.
    * For this to correctly function, a basic native code change is required.
    *
-   * See our [Android Interaction guide](/react-native/docs/android/interaction#advanced-custom-component) to
-   * learn more about this property.
+   * View the [Press Action](/react-native/docs/android/interaction#press-action) document to learn more.
    */
   mainComponent?: string;
 }
 
 /**
+ * The interface used to enable advanced user input on a notification.
+ *
+ * View the [Action input](/react-native/docs/android/interaction#action-input) documentation to learn more.
  *
  * @platform android
  */
 export interface AndroidInput {
   /**
-   * If `true`, when an action is pressed this allows the user to type free form text into the input area.
-   * If `false`, you must provide an array of `choices` the user is allowed to use as the input.
+   * Sets whether the user can freely enter text into the input.
+   *
+   * This value changes the behaviour of the notification:
+   *
+   * - If `true`, when an action is pressed this allows the user to type free form text into the input area.
+   * - If `false`, you must provide an array of `choices` the user is allowed to use as the input.
    *
    * Defaults to `true`.
    */
@@ -668,75 +536,122 @@ export interface AndroidInput {
 }
 
 /**
- * Notifications can show a large image when expanded, which is useful for apps with a heavy media
- * focus, such as Instagram.
+ * The interface used when displaying a Big Picture Style notification.
  *
- * See our [Android Styles guide](/react-native/docs/android/styles#big-picture) to
- * learn more about Big Picture styling.
+ * <Vimeo id="android-style-bigpicture" caption="Android Big Picture Style" />
+ *
+ * View the [Big Picture](/react-native/docs/android/styles#big-picture) documentation to learn more.
  *
  * @platform android
  */
 export interface AndroidBigPictureStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
   type: AndroidStyle.BIGPICTURE;
+
+  /**
+   * A remote http or local file path to the picture to display.
+   *
+   * The image will be automatically resized depending on the device and it's size. If the image could
+   * not be found a blank space will appear.
+   */
   picture: string;
+
+  /**
+   * If set, overrides the main notification `title` when the notification is expanded.
+   */
   title?: string;
+
+  /**
+   * If set, overrides the main notification `largeIcon` when the notification is expanded.
+   */
   largeIcon?: string;
+
+  /**
+   * If set, overrides the main notification `summary` when the notification is expanded.
+   */
   summary?: string;
 }
 
 /**
- * Notifications can show a large amount of text when expanded, for example when displaying new
- * messages.
+ * The interface used when displaying a Big Text Style notification.
  *
- * By default, messages are not expanded, causing any overflowing notification `body` next to be
- * truncated. Setting a `bigTextStyle` allows the notification to be expandable showing the full
- * text body.
+ * <Vimeo id="android-style-bigtext" caption="Android Big Text Style" />
  *
- * See our [Android Styles guide](/react-native/docs/android/styles#big-text) to
- * learn more about Big Text styling.
+ * View the [Big Text](/react-native/docs/android/styles#big-text) documentation to learn more.
  *
  * @platform android
  */
 export interface AndroidBigTextStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
   type: AndroidStyle.BIGTEXT;
+
   /**
    * The text to display when the notification is expanded.
    */
   text: string;
 
   /**
-   * Overrides the notification title when expanded.
+   * If set, overrides the main notification `title` when the notification is expanded.
    */
   title?: string;
 
   /**
-   * Sets summary text when the notification is expanded.
+   * If set, overrides the main notification `summary` when the notification is expanded.
    */
   summary?: string;
 }
 
 /**
- * Inbox style notifications are used to display multiple lines of content inside of a single
- * notification. Depending on space, the device will show as many lines of text as possible,
- * and "hide" the remainder.
+ * The interface used when displaying a Inbox Style notification.
  *
- * See our [Android Styles guide](/react-native/docs/android/styles#inbox) to
- * learn more about Inbox style.
+ * <Vimeo id="android-style-inbox" caption="Android Inbox Style" />
+ *
+ * View the [Inbox](/react-native/docs/android/styles#inbox) documentation to learn more.
+ *
+ * @platform android
  */
 export interface AndroidInboxStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
   type: AndroidStyle.INBOX;
+
+  /**
+   * An array of messages to display, in order provided.
+   *
+   * The device will automatically handle displaying the lines visible depending on space in the notification
+   * shade.
+   */
   lines: string[];
+
+  /**
+   * If set, overrides the main notification `title` when the notification is expanded.
+   */
   title?: string;
+
+  /**
+   * If set, overrides the main notification `summary` when the notification is expanded.
+   */
   summary?: string;
 }
 
 /**
- * Message style notifications can be used when you wish to display the history of an ongoing chat.
+ * The interface used when displaying a Messaging Style notification.
  *
- * See our [Android Styles guide](/react-native/docs/android/styles#messaging) to
- * learn more about Messaging style.
+ * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
+ *
+ * View the [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+ *
+ * @platform android
  */
 export interface AndroidMessagingStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
   type: AndroidStyle.MESSAGING;
 
   /**
@@ -750,14 +665,12 @@ export interface AndroidMessagingStyle {
   messages: AndroidMessagingStyleMessage[];
 
   /**
-   * An optional conversation title, displayed at the top of the
-   * notification.
+   * If set, overrides the main notification `title` when the notification is expanded.
    */
   title?: string;
 
   /**
-   * Sets whether this conversation notification represents a group
-   * (3 or more persons).
+   * Sets whether this conversation notification represents a group (3 or more persons).
    */
   group?: boolean;
 }
@@ -765,8 +678,10 @@ export interface AndroidMessagingStyle {
 /**
  * The interface for messages when constructing a Messaging Style notification.
  *
- * See our [Android Styles guide](/react-native/docs/android/styles#messaging) to
- * learn more about Messaging style.
+ * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
+ *
+ * View the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference
+ * and [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
  */
 export interface AndroidMessagingStyleMessage {
   /**
@@ -780,16 +695,20 @@ export interface AndroidMessagingStyleMessage {
   timestamp: number;
 
   /**
-   * The sender of this message. See `AndroidPerson` reference for more information
-   * on the properties available.
+   * The sender of this message. See [`AndroidPerson`](/react-native/reference/androidperson) reference
+   * for more information on the properties available.
    *
-   * > This property should only be provided if the message is from an external person, and not the person receiving the message.
+   * This property should only be provided if the message is from an external person, and not the person receiving the message.
    */
   person?: AndroidPerson;
 }
 
 /**
- * The interface used to describe a person shown in notifications. Currently used with `AndroidMessagingStyle` notifications.
+ * The interface used to describe a person shown in notifications.
+ *
+ * Currently used with [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) notifications.
+ *
+ * @platform android
  */
 export interface AndroidPerson {
   /**
@@ -832,8 +751,11 @@ export interface AndroidPerson {
   icon?: string;
 
   /**
-   * The URI for this person, which can be any of the following:
-   *  - The {@code String} representation of a contact URI, e.g. `android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI`
+   * URI contact of the person.
+   *
+   * The URI can be any of the following:
+   *
+   *  - The representation of a contact URI, e.g. `android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI`
    *  - A `mailto:` string
    *  - A `tel:` string
    */
@@ -843,41 +765,9 @@ export interface AndroidPerson {
 /**
  * Interface for defining the progress of an Android Notification.
  *
- * A notification can show current progress of a task. The progress state can either be fixed or
- * indeterminate (unknown).
+ * <Vimeo id="android-progress-summary" caption="Android Progress (w/ Big Picture Style)" />
  *
- * #### Example - Fixed Progress
- *
- * ![Fixed Progress](https://miro.medium.com/max/480/1*OHOY45cU27NaYkF0MU3hrw.gif)
- *
- * ```js
- * await notifee.displayNotification({
- *   android: {
- *     progress: {
- *       max: 10,
- *       current: 5,
- *     }
- *   },
- * });
- * ```
- *
- * #### Example - Indeterminate Progress
- *
- * Setting `indeterminate` to `true` overrides the `max`/`current` settings.
- *
- * ![Progress](https://miro.medium.com/max/480/1*mW-_3PUxAG1unAZOf0IuoQ.gif)
- *
- * ```js
- * await notifee.displayNotification({
- *   android: {
- *     progress: {
- *       max: 10,
- *       current: 5,
- *       indeterminate: true,
- *     }
- *   },
- * });
- * ```
+ * View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation to learn more.
  *
  * @platform android
  */
@@ -890,7 +780,7 @@ export interface AndroidProgress {
   max?: number;
 
   /**
-   * The current progress.
+   * The current progress value.
    *
    * E.g. setting to `4` with a `max` value of `10` would set a fixed progress bar on the notification at 40% complete.
    */
@@ -909,24 +799,9 @@ export interface AndroidProgress {
  * An interface for describing an Android Channel.
  *
  * Channels override any individual notification preferences (e.g. lights/vibration) and the user
- * has control over the setting.
+ * has final control over the setting. Once created, only channel metadata can be updated (e.g. name).
  *
- * See our [Android Channels & Groups guide](/react-native/docs/android/channels) to learn more
- * about Channels.
- *
- * > On Android 8.0 (API 26) each notification must be assigned to a channel.
- *
- * ![Android Channel](https://prismic-io.s3.amazonaws.com/invertase%2Fbb773539-581a-457d-ae43-687a7a7646a9_new+project+%2822%29.jpg)
- *
- * #### Example
- *
- * ```js
- * await notifee.createChannel({
- *   id: 'alarms',
- *   name: 'Alarms & Timers',
- *   lightColor: '#3f51b5',
- * });
- * ```
+ * View the [Channels & Groups](/react-native/docs/android/channels) documentation to learn more.
  *
  * @platform android
  */
@@ -945,7 +820,9 @@ export interface AndroidChannel {
   name: string;
 
   /**
-   * Sets whether notifications posted to this channel can appear as application icon badges in a Launcher.
+   * Sets whether badges are enabled for the channel.
+   *
+   * View the [Badges](/react-native/docs/android/appearance#badges) documentation to learn more.
    *
    * Defaults to `true`.
    *
@@ -997,7 +874,7 @@ export interface AndroidChannel {
   /**
    * Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.
    *
-   * Create a group via `createChannelGroup()`.
+   * Groups can be created via via [`createChannelGroup`](/react-native/reference/createchannelgroup).
    *
    * This setting cannot be overridden once the channel is created.
    */
@@ -1006,12 +883,14 @@ export interface AndroidChannel {
   /**
    * Sets the level of interruption of this notification channel.
    *
+   * Defaults to `AndroidImportance.DEFAULT`.
+   *
    * This setting can only be set to a lower importance level once set.
    */
   importance?: AndroidImportance;
 
   /**
-   * If lights are enabled (via `enableLights`), sets/overrides the light color for notifications
+   * If lights are enabled (via `lights`), sets/overrides the light color for notifications
    * posted to this channel.
    *
    * This setting cannot be overridden once the channel is created.
@@ -1021,6 +900,8 @@ export interface AndroidChannel {
   /**
    * Sets whether notifications posted to this channel appear on the lockscreen or not,
    * and if so, whether they appear in a redacted form.
+   *
+   * Defaults to `AndroidVisibility.PRIVATE`.
    *
    * This setting cannot be overridden once the channel is created.
    */
@@ -1042,9 +923,16 @@ export interface AndroidChannel {
    *
    * This setting cannot be overridden once the channel is created.
    */
-  sound?: string | any;
+  sound?: string;
 }
 
+/**
+ * An interface which describes a channel which has been fetched from the device.
+ *
+ * Contains additional information which is only available when fetching the channel from the device.
+ *
+ * @platform android
+ */
 export interface NativeAndroidChannel extends AndroidChannel {
   /*
    * Returns whether or not notifications posted to this Channel group are
@@ -1052,18 +940,21 @@ export interface NativeAndroidChannel extends AndroidChannel {
    *
    * On API levels < 28, returns `false`.
    *
+   * View the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events)
+   * documentation to learn more about subscribing to when a channel is blocked by the user.
+   *
    * @platform android API Level >= 28
    */
   blocked: boolean;
 }
 
 /**
- * Interface for an Android Channel Group.
+ * An interface for describing an Android Channel Group.
  *
- * See our [Android Channels & Groups guide](/react-native/docs/android/introduction) to learn more
- * about Channel Groups.
+ * Channel groups have no impact on the notification, they are used to help group channels in the applications
+ * settings UI.
  *
- * ![Channel Group Example](https://prismic-io.s3.amazonaws.com/invertase%2F21fb6bbf-6932-47c3-8695-877e1d4f296b_new+project+%2821%29.jpg)
+ * View the [Channels & Groups](/react-native/docs/android/channels) documentation to learn more.
  *
  * @platform android API Level >= 26
  */
@@ -1092,7 +983,9 @@ export interface AndroidChannelGroup {
 }
 
 /**
- * Interface for a native Android Channel Group.
+ * An interface which describes a channel group which has been fetched from the device.
+ *
+ * Contains additional information which is only available when fetching the channel group from the device.
  *
  * @platform android API Level >= 26
  */
@@ -1102,6 +995,9 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
    * blocked by the user.
    *
    * On API levels < 28, returns `false`.
+   *
+   * View the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events)
+   * documentation to learn more about subscribing to when a channel is blocked by the user.
    *
    * @platform android API Level >= 28
    */
@@ -1114,8 +1010,9 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
 }
 
 /**
- * When a notification is being displayed as a badge, the `AndroidBadgeIconType` interface
- * describes how the badge icon is shown to the user.
+ * Enum used to define how a notification badge is displayed in badge mode.
+ *
+ * View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information.
  *
  * @platform android
  */
@@ -1126,22 +1023,24 @@ export enum AndroidBadgeIconType {
   NONE = 0,
 
   /**
-   * Shows the notification `smallIcon`.
+   * Shows the badge as the notifications `smallIcon`.
    */
   SMALL = 1,
 
   /**
-   * Shows the notification `largeIcon`.
+   * Shows the badge as the notifications `largeIcon` (if available).
+   *
+   * This is the default value used by a notification if not provided.
    */
   LARGE = 2,
 }
 
 /**
- * The category of a notification.
+ * Enum used to describe the category of a notification.
  *
  * Setting a category on a notification helps the device to understand what the notification is for,
  * or what impact it will have on the user. The category can be used for ranking and filtering
- * the notification.
+ * the notification, however has no visual impact on the notification.
  *
  * @platform android
  */
@@ -1160,12 +1059,18 @@ export enum AndroidCategory {
   SERVICE = 'service',
   SOCIAL = 'social',
   STATUS = 'status',
+
+  /**
+   * Avoid using - generally used by the system.
+   */
   SYSTEM = 'sys',
   TRANSPORT = 'transport',
 }
 
 /**
  * A set or predefined colors which can be used with Android Notifications.
+ *
+ * View the [Color](/react-native/docs/android/appearance#color) documentation to learn more.
  *
  * @platform android
  */
@@ -1206,7 +1111,7 @@ export enum AndroidColor {
  */
 export enum AndroidDefaults {
   /**
-   * All options will be used where possible.
+   * All options will be used, where possible.
    */
   ALL = -1,
 
@@ -1227,14 +1132,27 @@ export enum AndroidDefaults {
 }
 
 /**
- * See our [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour) to
- * learn more about Group Alert Behavior.
+ * Enum used to describe how a notification alerts the user when it apart of a group.
+ *
+ * View the [Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#group-behaviour) documentation to
+ * learn more.
  *
  * @platform android
  */
 export enum AndroidGroupAlertBehavior {
+  /**
+   * All notifications will alert.
+   */
   ALL = 0,
+
+  /**
+   * Only the summary notification will alert the user when displayed. The children of the group will not alert.
+   */
   SUMMARY = 1,
+
+  /**
+   * Children of a group will alert the user. The summary notification will not alert when displayed.
+   */
   CHILDREN = 2,
 }
 
@@ -1247,8 +1165,8 @@ export enum AndroidGroupAlertBehavior {
  * The importance is used by the device to both change the visual prompt of a received notification
  * and also how it visually appears in the device notification shade.
  *
- * See our [Android Appearance guide](/react-native/docs/android/appearance#importance) to learn
- * more about importance.
+ * View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
+ * more.
  *
  * @platform android
  */
@@ -1302,7 +1220,7 @@ export enum AndroidImportance {
 /**
  * Available Android Notification Styles.
  *
- * Used when providing a `style` to a notification builder with `displayNotification`.
+ * View the [Styles](/react-native/docs/android/styles) documentation to learn more with example usage.
  *
  * @platform android
  */
@@ -1317,6 +1235,8 @@ export enum AndroidStyle {
  * Interface used to define the visibility of an Android notification.
  *
  * Use with the `visibility` property on the notification.
+ *
+ * View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn more.
  *
  * Default value is `AndroidVisibility.PRIVATE`.
  *

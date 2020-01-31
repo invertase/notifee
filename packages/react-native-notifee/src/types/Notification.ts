@@ -13,25 +13,9 @@ import {
 /**
  * Interface for building a local notification for both Android & iOS devices.
  *
- * See our [Android notification guides](/react-native/docs/android/introduction) for
- * comprehensive examples.
+ * To learn more about displaying a notification, view the [Displaying a Notification](/react-native/docs/displaying-a-notification)
+ * documentation.
  *
- * #### Example
- *
- * ```js
- * const notification = {
- *   body: 'Hello World!',
- *   title: 'Welcome',
- *   data: {
- *     user: '123',
- *   },
- *   android: {
- *     color: '#3f51b5',
- *   },
- * };
- *
- * await notifee.displayNotification(notification);
- * ```
  */
 export interface Notification {
   /**
@@ -42,7 +26,10 @@ export interface Notification {
   /**
    * A unique identifier for your notification.
    *
-   * Defaults to a random string.
+   * Notifications with the same ID will be created as the same instance, allowing you to update
+   * a notification which already exists on the device.
+   *
+   * Defaults to a random string if not provided.
    */
   id?: string;
 
@@ -52,26 +39,29 @@ export interface Notification {
   title?: string;
 
   /**
-   * The notification subtitle, which appears on a new line below the title.
+   * The notification subtitle, which appears on a new line below/next the title.
    */
   subtitle?: string;
 
   /**
    * Additional data to store on the notification. Only `string` values can be stored.
+   *
+   * Data can be used to provide additional context to your notification which can be retrieved
+   * at a later point in time (e.g. via an event).
    */
   data?: { [key: string]: string };
 
   /**
-   * Android specific notification options. See the {@link NotificationAndroid} interface for more
-   * information and default options which are applied to a notification.
+   * Android specific notification options. See the [`NotificationAndroid`](/react-native/reference/notificationandroid)
+   * interface for more information and default options which are applied to a notification.
    *
    * @platform android
    */
   android?: NotificationAndroid;
 
   /**
-   * iOS specific notification options. See the {@link NotificationIOS} interface for more information
-   * and default options which are applied to a notification.
+   * iOS specific notification options. See the [`NotificationIOS`](/react-native/reference/notificationios)
+   * interface for more information and default options which are applied to a notification.
    *
    * @platform ios
    */
@@ -81,29 +71,56 @@ export interface Notification {
 /**
  * An interface representing a notification & action that launched the current app / activity.
  *
- * Returned from {@link Module.getInitialNotification}
+ * View the [App open events](/react-native/docs/events#app-open-events) documentation to learn more.
+ *
+ * This interface is returned from [`getInitialNotification`](/react-native/reference/getinitialnotification) when
+ * an initial notification is available.
  */
 export interface InitialNotification {
+  /**
+   * The notification which the user interacted with, which caused the application to open.
+   */
   notification: Notification;
+
+  /**
+   * The press action which the user interacted with, on the notification, which caused the application to open.
+   */
   pressAction: AndroidPressAction;
 }
 
 /**
  * An interface representing a Notifee event.
  *
- * Events can be listened to via {@link Module.onEvent}
+ * View the [Events](/react-native/docs/events) documentation to learn more about foreground and
+ * background events.
  */
-export interface NotificationEvent {
+export interface Event {
+  /**
+   * The type of notification event.
+   */
   type: EventType;
-  detail: NotificationEventDetail;
+
+  /**
+   * An object containing event detail.
+   */
+  detail: EventDetail;
 }
 
+/**
+ * A representation of a Foreground Service task registered via [`registerForegroundService`](/react-native/reference/registerforegroundservice).
+ *
+ * The task must resolve a promise once complete, and in turn removes the notification.
+ *
+ * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation to
+ * learn more.
+ */
 export type ForegroundServiceTask = (notification: Notification) => Promise<void>;
 
 /**
- * An enum representing an event type for `onNotificationEvent` subscriptions.
+ * An enum representing an event type, defined on [`Event`](/react-native/reference/event).
  *
- * The payload sent with this event is [NotificationEvent](/react-native/reference/notificationevent).
+ * View the [Events](/react-native/docs/events) documentation to learn more about foreground and
+ * background events.
  */
 export enum EventType {
   /**
@@ -119,7 +136,6 @@ export enum EventType {
    * the notification from the notification shade or performing "Clear all" notifications.
    *
    * This event is **not** sent when a notification is cancelled or times out.
-   *
    */
   DISMISSED = 0,
 
@@ -169,19 +185,24 @@ export enum EventType {
   /**
    * Event type is sent when a notification has been scheduled for displaying at a future date/time.
    */
-  SCHEDULED = 7,
+  // SCHEDULED = 7,
 }
 
-export interface NotificationEventDetail {
+/**
+ * An interface representing the different detail values which can be provided with a notification event.
+ *
+ * View the [Events](/react-native/docs/events) documentation to learn more.
+ */
+export interface EventDetail {
   /**
    * The notification this event relates to.
    *
-   * Available when `event.type` one of:
-   *  - {@link EventType.DISMISSED}
-   *  - {@link EventType.PRESS}
-   *  - {@link EventType.ACTION_PRESS}
-   *  - {@link EventType.DELIVERED}
-   *  - {@link EventType.SCHEDULED}
+   * The notification details is available when the [`EventType`](/react-native/reference/eventtype) is one of:
+   *
+   *  - [`EventType.DISMISSED`](/react-native/reference/eventtype#dismissed)
+   *  - [`EventType.PRESS`](/react-native/reference/eventtype#press)
+   *  - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
+   *  - [`EventType.DELIVERED`](/react-native/reference/eventtype#delivered)
    */
   notification?: Notification;
 
@@ -191,18 +212,20 @@ export interface NotificationEventDetail {
    * If a press action caused the event, this property will be available allowing you to retrieve the
    * action ID and perform logic.
    *
-   * Available when `event.type` is {@link EventType.PRESS} or {@link EventType.ACTION_PRESS}.
+   * The press action details is available when the [`EventType`](/react-native/reference/eventtype) is one of:
+   *
+   * - [`EventType.PRESS`](/react-native/reference/eventtype#press)
+   * - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
    */
   pressAction?: AndroidPressAction;
 
   /**
    * The input from a notification action.
    *
-   * Once an input has been received, the notification should be updated to remove the pending state
-   * of the notification action, by adding the input value to the `inputHistory` property.
+   * The input detail is available when the [`EventType`](/react-native/reference/eventtype) is:
    *
-   * Available when `event.type` is {@link EventType.ACTION_PRESS} and `input: true` is
-   * set on the action.
+   * - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
+   * - The notification quick action has input enabled. View [`AndroidInput`](/react-native/reference/androidinput) for more details.
    *
    * @platform android API Level >= 20
    */
@@ -211,10 +234,9 @@ export interface NotificationEventDetail {
   /**
    * The channel that had its block state changed.
    *
-   * Note that if the channel no longer exists during the time the event
-   * was sent the channel property will be undefined.
+   * Note that if the channel no longer exists during the time the event was sent the channel property will be undefined.
    *
-   * Available when `event.type` is {@link EventType.CHANNEL_BLOCKED}.
+   * The channel detail is available when the event type is [`EventType.CHANNEL_BLOCKED`](/react-native/reference/eventtype#channel_blocked).
    *
    * @platform android API Level >= 28
    */
@@ -223,10 +245,9 @@ export interface NotificationEventDetail {
   /**
    * The channel group that had its block state changed.
    *
-   * Note that if the channel group no longer exists during the time the event
-   * was sent the channelGroup property will be undefined.
+   * Note that if the channel no longer exists during the time the event was sent the channel group property will be undefined.
    *
-   * Available when `event.type` is {@link EventType.CHANNEL_GROUP_BLOCKED}.
+   * The channel group detail is available when the event type is [`EventType.CHANNEL_GROUP_BLOCKED`](/react-native/reference/eventtype#channel_group_blocked).
    *
    * @platform android API Level >= 28
    */
@@ -235,7 +256,7 @@ export interface NotificationEventDetail {
   /**
    * The notification blocked status of your entire application.
    *
-   * Available when `event.type` is {@link EventType.APP_BLOCKED}.
+   * The blocked detail is available when the event type is [`EventType.APP_BLOCKED`](/react-native/reference/eventtype#app_blocked).
    *
    * @platform android API Level >= 28
    */

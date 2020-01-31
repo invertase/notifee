@@ -161,25 +161,12 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * sound
    */
-  if (hasOwnProperty(channel, 'sound')) {
-    let _sound = channel.sound;
-
-    if (isObject(_sound)) {
-      // @ts-ignore
-      _sound = _sound.uri;
+  if (hasOwnProperty(channel, 'sound') && channel.sound != undefined) {
+    if (!isString(channel.sound)) {
+      throw new Error("'channel.sound' expected a string value.");
     }
 
-    if (isNumber(_sound)) {
-      _sound = resolveAssetSource(_sound)?.uri || null;
-    }
-
-    if (!isString(_sound)) {
-      throw new Error(
-        "'channel.sound' expected a valid sound string or a resolvable Asset Source Object.",
-      );
-    }
-
-    out.sound = _sound;
+    out.sound = channel.sound;
   }
 
   /**

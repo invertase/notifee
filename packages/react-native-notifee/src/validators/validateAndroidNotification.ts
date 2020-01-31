@@ -437,17 +437,6 @@ export default function validateAndroidNotification(
   }
 
   /**
-   * shortcutId
-   */
-  if (hasOwnProperty(android, 'shortcutId')) {
-    if (!isString(android.shortcutId)) {
-      throw new Error("'notification.android.shortcutId' expected a string value.");
-    }
-
-    out.shortcutId = android.shortcutId;
-  }
-
-  /**
    * showTimestamp
    */
   if (hasOwnProperty(android, 'showTimestamp')) {
@@ -618,25 +607,12 @@ export default function validateAndroidNotification(
   /**
    * sound
    */
-  if (hasOwnProperty(android, 'sound')) {
-    let _sound = android.sound;
-
-    if (isObject(_sound)) {
-      // @ts-ignore
-      _sound = _sound.uri;
+  if (hasOwnProperty(android, 'sound') && android.sound != undefined) {
+    if (!isString(android.sound)) {
+      throw new Error("'notification.sound' expected a valid sound string.");
     }
 
-    if (isNumber(_sound)) {
-      _sound = resolveAssetSource(_sound)?.uri || null;
-    }
-
-    if (!isString(_sound)) {
-      throw new Error(
-        "'notification.sound' expected a valid sound string or a resolvable Asset Source Object.",
-      );
-    }
-
-    out.sound = _sound;
+    out.sound = android.sound;
   }
 
   return out;
