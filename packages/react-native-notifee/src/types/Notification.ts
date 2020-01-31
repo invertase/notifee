@@ -95,7 +95,6 @@ export interface InitialNotification {
  */
 export interface NotificationEvent {
   type: EventType;
-  headless: boolean;
   detail: NotificationEventDetail;
 }
 

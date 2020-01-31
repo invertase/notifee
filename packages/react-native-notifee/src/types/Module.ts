@@ -224,21 +224,9 @@ export interface Module {
    */
   getInitialNotification(): Promise<InitialNotification | null>;
 
-  /**
-   * API used to subscribe to all events from Notifee.
-   *
-   * The `onEvent` subscriber can be registered in multiple places throughout the application. It is
-   * recommended to register this method early on outside of any React code to receive background/headless
-   * events.
-   *
-   * The method returns a function which can be used to unsubscribe from further events.
-   *
-   * View the [Events](/react-native/docs/events) documentation for more information and usage
-   * examples.
-   *
-   * @param observer The observer function called when a notification is received.
-   */
-  onEvent(observer: (event: NotificationEvent) => Promise<void>): () => void;
+  onBackgroundEvent(observer: (event: NotificationEvent) => Promise<void>): void;
+
+  onForegroundEvent(observer: (event: NotificationEvent) => void): () => void;
 
   /**
    * API used to open the Android System settings for the application.

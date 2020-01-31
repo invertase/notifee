@@ -216,26 +216,32 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getInitialNotification();
   }
 
-  public onEvent(observer: (event: NotificationEvent) => Promise<void>): () => void {
+  public onBackgroundEvent(observer: (event: NotificationEvent) => Promise<void>): void {
     if (!isFunction(observer)) {
-      throw new Error("notifee.onEvent(*) 'observer' expected a function.");
+      throw new Error("notifee.onBackgroundEvent(*) 'observer' expected a function.");
     }
-
-    const subscriber = this.emitter.addListener(
-      this.native.NOTIFICATION_EVENT_KEY,
-      ({ type, detail, headless }) => {
-        observer({ type, detail, headless });
-      },
-    );
 
     if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
       AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
-        return ({ type, detail, headless }): Promise<void> => {
-          return observer({ type, detail, headless });
+        return ({ type, detail }): Promise<void> => {
+          return observer({ type, detail });
         };
       });
       onNotificationEventHeadlessTaskRegistered = true;
     }
+  }
+
+  public onForegroundEvent(observer: (event: NotificationEvent) => void): () => void {
+    if (!isFunction(observer)) {
+      throw new Error("notifee.onForegroundEvent(*) 'observer' expected a function.");
+    }
+
+    const subscriber = this.emitter.addListener(
+      this.native.NOTIFICATION_EVENT_KEY,
+      ({ type, detail }) => {
+        observer({ type, detail });
+      },
+    );
 
     return (): void => {
       subscriber.remove();
