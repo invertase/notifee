@@ -68,3 +68,6 @@ type-test.ts
 .prettierrc
 .eslintrc.js
 .prettierignore
+
+# temporarily ignore iOS dir for npm
+ios
