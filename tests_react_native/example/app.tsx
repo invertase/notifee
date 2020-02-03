@@ -69,9 +69,10 @@ function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
-    const fcmToken = await firebase.messaging().getToken();
-    console.log({ fcmToken });
-    firebase.messaging().onMessage(onMessage);
+    // await firebase.messaging().registerForRemoteNotifications();
+    // const fcmToken = await firebase.messaging().getToken();
+    // console.log({ fcmToken });
+    // firebase.messaging().onMessage(onMessage);
     // const initialNotification = await notifee.getInitialNotification();
     // console.log({ initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));

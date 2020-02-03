@@ -7,5 +7,5 @@ target 'NotifeeCore' do
 
   # Pods for NotifeeCore
   pod 'AFNetworking'
-
+  pod 'PromisesObjC'
 end
