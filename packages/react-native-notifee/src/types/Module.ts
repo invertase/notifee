@@ -2,18 +2,14 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import {
-  ForegroundServiceTask,
-  InitialNotification,
-  Notification,
-  Event,
-} from './Notification';
+import { ForegroundServiceTask, InitialNotification, Notification, Event } from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
+import { IOSCategory, IOSPermissions } from './NotificationIOS';
 
 export interface Module {
   /**
@@ -40,6 +36,8 @@ export interface Module {
    * when creating a notification, or has been set manually via the `id` property.
    */
   cancelNotification(notificationId: string): Promise<void>;
+
+  createCategory(category: IOSCategory): Promise<string>;
 
   /**
    * API to create and update channels on supported Android devices.
@@ -300,6 +298,8 @@ export interface Module {
    * @param task The runner function which runs for the duration of the service's lifetime.
    */
   registerForegroundService(task: ForegroundServiceTask): void;
+
+  requestPermission(permissions: IOSPermissions): Promise<boolean>;
 
   // TODO introduce as part of iOS
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;

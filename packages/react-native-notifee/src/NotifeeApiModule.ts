@@ -17,6 +17,9 @@ import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './
 import validateNotification from './validators/validateNotification';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
+import { IOSCategory, IOSPermissions } from './types/NotificationIOS';
+import validateIOSCategory from './validators/validateIOSCategory';
+import validateIOSPermissions from './validators/validateIOSPermissions';
 
 let onNotificationEventHeadlessTaskRegistered = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
@@ -45,6 +48,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.cancelNotification(notificationId);
+  }
+
+  public createCategory(category: IOSCategory): Promise<string> {
+    let options: IOSCategory;
+    try {
+      options = validateIOSCategory(category);
+    } catch (e) {
+      throw new Error(`notifee.createCategory(*) ${e.message}`);
+    }
+
+    if (isAndroid) {
+      return Promise.resolve('');
+    }
+
+    return this.native.createCategory(options);
   }
 
   public createChannel(channel: AndroidChannel): Promise<string> {
@@ -258,6 +276,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.openNotificationSettings(channelId || null);
+  }
+
+  public requestPermission(permissions: IOSPermissions): Promise<boolean> {
+    if (isAndroid) {
+      return Promise.resolve(true);
+    }
+
+    let options: IOSPermissions;
+    try {
+      options = validateIOSPermissions(permissions);
+    } catch (e) {
+      throw new Error(`notifee.requestPermission(*) ${e.message}`);
+    }
+
+    return this.native.requestPermission(options);
   }
 
   public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {

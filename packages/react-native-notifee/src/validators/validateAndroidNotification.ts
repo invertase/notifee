@@ -120,6 +120,17 @@ export default function validateAndroidNotification(
   }
 
   /**
+   * badgeCount
+   */
+  if (hasOwnProperty(android, 'badgeCount')) {
+    if (!isNumber(android.badgeCount)) {
+      throw new Error("'notification.android.badgeCount' expected a number value.");
+    }
+
+    out.badgeCount = android.badgeCount;
+  }
+
+  /**
    * badgeIconType
    */
   if (hasOwnProperty(android, 'badgeIconType') && !isUndefined(android.badgeIconType)) {
@@ -317,17 +328,6 @@ export default function validateAndroidNotification(
     }
 
     out.localOnly = android.localOnly;
-  }
-
-  /**
-   * number
-   */
-  if (hasOwnProperty(android, 'number')) {
-    if (!isNumber(android.number)) {
-      throw new Error("'notification.android.number' expected a number value.");
-    }
-
-    out.number = android.number;
   }
 
   /**

@@ -43,7 +43,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
       try {
         out.input = validateAndroidInput(action.input);
       } catch (e) {
-        throw new Error(`'action' ${e.message}.`);
+        throw new Error(`'action.input' ${e.message}.`);
       }
     }
   }

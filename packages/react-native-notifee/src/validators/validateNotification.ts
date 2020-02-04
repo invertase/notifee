@@ -5,7 +5,7 @@
 import { generateId, hasOwnProperty, isObject, isString } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
-import validateiOSNotification from './validateiOSNotification';
+import validateIOSNotification from './validateiOSNotification';
 import { Notification } from '../types/Notification';
 
 export default function validateNotification(notification: Notification): Notification {
@@ -100,7 +100,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * ios
    */
-  out.ios = validateiOSNotification(notification.ios);
+  out.ios = validateIOSNotification(notification.ios);
 
   return out;
 }

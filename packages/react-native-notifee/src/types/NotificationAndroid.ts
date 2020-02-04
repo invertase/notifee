@@ -53,6 +53,13 @@ export interface NotificationAndroid {
   autoCancel?: boolean;
 
   /**
+   * Overrides the current number of active notifications shown on the device.
+   *
+   * If no number is provided, the system displays the current number of active notifications.
+   */
+  badgeCount?: number;
+
+  /**
    * Sets the type of badge used when the notification is being displayed in badge mode.
    *
    * View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information
@@ -198,16 +205,6 @@ export interface NotificationAndroid {
    * Defaults to `false`.
    */
   localOnly?: boolean;
-
-  /**
-   * Overrides the current number of active notifications shown on the device.
-   *
-   * The number of active notifications is shown in various locations (such as the notification badge tray)
-   * depending on your device and launcher type.
-   *
-   * If no number is provided, the system displays the current number of active notifications.
-   */
-  number?: number;
 
   /**
    * Set whether this is an on-going notification.

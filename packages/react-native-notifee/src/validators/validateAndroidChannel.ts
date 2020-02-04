@@ -24,7 +24,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
 
   // empty check
   if (!channel.id) {
-    throw new Error("'channel.id' expected a valid string channelId.");
+    throw new Error("'channel.id' expected a valid string id.");
   }
 
   /**

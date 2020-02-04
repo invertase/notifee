@@ -12,32 +12,69 @@ export interface NotificationIOS {
   /**
    * @platform ios iOS 10+
    */
-  attachment?: IOSAttachment;
+  attachments?: IOSAttachment[];
 
-  /**
-   * @platform ios iOS 9 Only
-   */
-  alertAction?: string;
+  badgeCount?: number;
 
-  badge?: number;
+  categories?: string[];
 
-  // todo ios categories?
-  category?: string;
+  groupId?: string;
 
-  /**
-   * @platform ios iOS 9 Only
-   */
-  hasAction?: boolean;
+  groupMessage?: string;
+
+  groupCount?: number;
 
   launchImage?: string;
 
-  /**
-   * @platform ios iOS 10+
-   */
-  threadIdentifier?: string;
+  sound?: string;
+}
 
-  // todo
-  complete?: Function;
+export interface IOSPermissions {
+  alert?: boolean; // true
+  badge?: boolean; // true
+  sound?: boolean; // true
+  carPlay?: boolean; // true
+  settings?: boolean; // true
+  provisional?: boolean; // false
+  announcement?: boolean; // true
+}
+
+export interface IOSCategory {
+  id: string;
+  actions: IOSAction[];
+}
+
+export interface IOSAction {
+  id: string;
+  title: string;
+  input?: true | IOSInput;
+  options?: IOSActionOptions;
+}
+
+export interface IOSInput {
+  /**
+   * Overrides the default button text "Send", next to the input box.
+   */
+  button?: string;
+
+  placeholder?: string;
+}
+
+export interface IOSActionOptions {
+  /**
+   * Makes text red
+   */
+  destructive?: boolean; // false
+
+  /**
+   * Launch the app into the foreground if true
+   */
+  launchApp?: boolean; // false
+
+  /**
+   * If true, requires the device to be unlocked to show the action
+   */
+  authentication?: boolean; // false
 }
 
 /**
