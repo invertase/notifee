@@ -269,8 +269,8 @@ public class NotificationAndroidBundle {
    * @return Integer
    */
   public Integer getNumber() {
-    if (mNotificationAndroidBundle.containsKey("number")) {
-      return (int) mNotificationAndroidBundle.getDouble("number");
+    if (mNotificationAndroidBundle.containsKey("badgeCount")) {
+      return (int) mNotificationAndroidBundle.getDouble("badgeCount");
     }
 
     return null;
