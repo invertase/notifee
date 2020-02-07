@@ -28,6 +28,7 @@
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
+  [[UIApplication sharedApplication] registerForRemoteNotifications];
   [FIRApp configureWithName:@"secondaryFromNative" options:[FIROptions defaultOptions]];
   NSURL *jsCodeLocation;
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
