@@ -13,25 +13,33 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-typedef void (^notifeeMethodVoidBlock) (NSError * _Nullable);
+typedef void (^notifeeMethodVoidBlock)(NSError *_Nullable);
 
-typedef void (^notifeeMethodNSDictionaryBlock) (NSError* _Nullable, NSDictionary *_Nullable);
+typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable, NSDictionary *_Nullable);
 
-typedef void (^notifeeMethodBooleanBlock) (NSError* _Nullable, BOOL);
+typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
+
+static NSString *kNotifeeWillPresentNotification = @"NotifeeWillPresentNotification";
+
+static NSString *kNotifeeOpenSettingsForNotification = @"NotifeeOpenSettingsForNotification";
+
+static NSString *kNotifeeDidReceiveNotificationResponse = @"NotifeeDidReceiveNotificationResponse";
 
 @interface Notifee : NSObject <UNUserNotificationCenterDelegate>
 
-@property(nonatomic, strong, nonnull) Notifee * instance;
+@property(nonatomic, strong, nonnull) Notifee *instance;
 
-+ (void) initialize:(NSString *)testString;
++ (instancetype)initialize:(NSString *)testString;
 
-+ (void) cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock) block;
++ (instancetype)instance;
 
-+ (void) displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock) block;
+- (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void) requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodBooleanBlock) block;
+- (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void) hasPermission:(NSDictionary *)permissions withBlock:(notifeeMethodBooleanBlock) block;
+- (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
+
+- (void)getNotificationSettings:(notifeeMethodNSDictionaryBlock)block;
 
 @end
 
