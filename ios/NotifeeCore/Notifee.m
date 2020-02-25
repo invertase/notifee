@@ -7,6 +7,7 @@
 //
 
 #import "Notifee.h"
+#import <Intents/INIntentIdentifiers.h>
 
 @import UserNotifications;
 
@@ -54,10 +55,9 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
   [[NSNotificationCenter defaultCenter]
       postNotificationName:kNotifeeDidReceiveNotificationResponse
-                    object:nil
+                    object:completionHandler
                   userInfo:@{@"response": response}
   ];
-  completionHandler();
 }
 
 // The method will be called on the delegate when the application is launched in response to the user's request to view
@@ -104,18 +104,6 @@
   content.categoryIdentifier = @"NOTIFEE";
 
 
-  UNNotificationAction *action1 = [UNNotificationAction actionWithIdentifier:@"ACCEPT" title:@"Yes mofo &#128517;" options:nil];
-
-  UNNotificationAction *action2 = [UNNotificationAction actionWithIdentifier:@"DECLINE" title:@"Nope" options:nil];
-
-  UNNotificationAction *action3 = [UNNotificationAction actionWithIdentifier:@"MAYBE" title:@"Maybe?????" options:nil];
-
-  UNTextInputNotificationAction *action4 = [UNTextInputNotificationAction actionWithIdentifier:@"REPLY" title:@"Reply..." options:nil textInputButtonTitle:nil textInputPlaceholder:nil];
-
-  UNNotificationCategory *category = [UNNotificationCategory categoryWithIdentifier:@"NOTIFEE" actions:@[] intentIdentifiers:@[] options:nil];
-
-  UNNotificationCategory *categoryExt = [UNNotificationCategory categoryWithIdentifier:@"notifee_ext" actions:@[] intentIdentifiers:@[] options:nil];
-
   UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger
       triggerWithTimeInterval:5 repeats:NO];
 
@@ -123,9 +111,83 @@
                                                                         content:content trigger:nil];
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-
-  [center setNotificationCategories:@[category, categoryExt]];
   [center addNotificationRequest:request withCompletionHandler:block];
+}
+
+- (void)getNotificationCategoriesWithBlock:(notifeeMethodNSArrayBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  [center getNotificationCategoriesWithCompletionHandler:^(NSSet<UNNotificationCategory *> *categories) {
+    // TODO parse into dictionary
+    block(nil, nil);
+  }];
+}
+
+- (void)setNotificationCategories:(NSArray<NSDictionary *> *)categories withBlock:(notifeeMethodVoidBlock)block {
+  NSMutableSet *UNNotificationCategories = [[NSMutableSet alloc] init];
+
+  for (NSDictionary *categoryDictionary in categories) {
+    UNNotificationCategory *category;
+
+    NSString *id = categoryDictionary[@"id"];
+    NSString *summaryFormat = categoryDictionary[@"summaryFormat"];
+    NSString *bodyPlaceHolder = categoryDictionary[@"hiddenPreviewsBodyPlaceholder"];
+
+    NSArray<UNNotificationAction *> *actions = [self _notificationActionsFromDictionaryArray:categoryDictionary[@"actions"]];
+    NSArray<NSString *> *intentIdentifiers = [self _intentIdentifiersFromNumberArray:categoryDictionary[@"intentIdentifiers"]];
+
+    UNNotificationCategoryOptions options = UNNotificationCategoryOptionCustomDismissAction;
+
+    if ([categoryDictionary[@"allowInCarPlay"] isEqual:@(YES)]) {
+      options |= UNNotificationCategoryOptionAllowInCarPlay;
+    }
+
+    if (@available(iOS 11.0, *)) {
+      if ([categoryDictionary[@"hiddenPreviewsShowTitle"] isEqual:@(YES)]) {
+        options |= UNNotificationCategoryOptionHiddenPreviewsShowTitle;
+      }
+
+      if ([categoryDictionary[@"hiddenPreviewsShowSubtitle"] isEqual:@(YES)]) {
+        options |= UNNotificationCategoryOptionHiddenPreviewsShowSubtitle;
+      }
+    }
+
+    if (@available(iOS 13.0, *)) {
+      if ([categoryDictionary[@"allowAnnouncement"] isEqual:@(YES)]) {
+        options |= UNNotificationCategoryOptionAllowAnnouncement;
+      }
+    }
+
+    if (@available(iOS 12.0, *)) {
+      category = [
+          UNNotificationCategory categoryWithIdentifier:id
+                                                actions:actions
+                                      intentIdentifiers:intentIdentifiers
+                          hiddenPreviewsBodyPlaceholder:bodyPlaceHolder
+                                  categorySummaryFormat:summaryFormat
+                                                options:options
+      ];
+    } else if (@available(iOS 11.0, *)) {
+      category = [
+          UNNotificationCategory categoryWithIdentifier:id
+                                                actions:actions
+                                      intentIdentifiers:intentIdentifiers
+                          hiddenPreviewsBodyPlaceholder:bodyPlaceHolder
+                                                options:options
+      ];
+    } else {
+      category = [
+          UNNotificationCategory categoryWithIdentifier:id
+                                                actions:actions
+                                      intentIdentifiers:intentIdentifiers
+                                                options:options
+      ];
+    }
+
+    [UNNotificationCategories addObject:category];
+  }
+
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  [center setNotificationCategories:UNNotificationCategories];
 }
 
 /**
@@ -153,7 +215,7 @@
   }
 
 
-  if ([permissions[@"settings"] isEqual:@(YES)]) {
+  if ([permissions[@"inAppNotificationSettings"] isEqual:@(YES)]) {
     if (@available(iOS 12.0, *)) {
       options |= UNAuthorizationOptionProvidesAppNotificationSettings;
     }
@@ -222,31 +284,31 @@
     }
 
     if (@available(iOS 13.0, *)) {
-      settingsDictionary[@"announcementSetting"] = [self _numberForUNNotificationSetting:settings.announcementSetting];
+      settingsDictionary[@"announcement"] = [self _numberForUNNotificationSetting:settings.announcementSetting];
     } else {
-      settingsDictionary[@"announcementSetting"] = @-1;
+      settingsDictionary[@"announcement"] = @-1;
     }
 
     if (@available(iOS 12.0, *)) {
-      settingsDictionary[@"criticalAlertSetting"] = [self _numberForUNNotificationSetting:settings.criticalAlertSetting];
+      settingsDictionary[@"criticalAlert"] = [self _numberForUNNotificationSetting:settings.criticalAlertSetting];
     } else {
-      settingsDictionary[@"criticalAlertSetting"] = @-1;
+      settingsDictionary[@"criticalAlert"] = @-1;
     }
 
     if (@available(iOS 12.0, *)) {
-      settingsDictionary[@"providesAppNotificationSettings"] = @(settings.providesAppNotificationSettings);
+      settingsDictionary[@"inAppNotificationSettings"] = settings.providesAppNotificationSettings ? @1 : @0;
     } else {
-      settingsDictionary[@"providesAppNotificationSettings"] = @-1;
+      settingsDictionary[@"inAppNotificationSettings"] = @-1;
     }
 
     settingsDictionary[@"showPreviews"] = showPreviews;
     settingsDictionary[@"authorizationStatus"] = authorizedStatus;
-    settingsDictionary[@"alertSetting"] = [self _numberForUNNotificationSetting:settings.alertSetting];
-    settingsDictionary[@"soundSetting"] = [self _numberForUNNotificationSetting:settings.soundSetting];
-    settingsDictionary[@"badgeSetting"] = [self _numberForUNNotificationSetting:settings.badgeSetting];
-    settingsDictionary[@"carPlaySetting"] = [self _numberForUNNotificationSetting:settings.carPlaySetting];
-    settingsDictionary[@"lockScreenSetting"] = [self _numberForUNNotificationSetting:settings.lockScreenSetting];
-    settingsDictionary[@"notificationCenterSetting"] = [self _numberForUNNotificationSetting:settings.notificationCenterSetting];
+    settingsDictionary[@"alert"] = [self _numberForUNNotificationSetting:settings.alertSetting];
+    settingsDictionary[@"badge"] = [self _numberForUNNotificationSetting:settings.badgeSetting];
+    settingsDictionary[@"sound"] = [self _numberForUNNotificationSetting:settings.soundSetting];
+    settingsDictionary[@"carPlay"] = [self _numberForUNNotificationSetting:settings.carPlaySetting];
+    settingsDictionary[@"lockScreen"] = [self _numberForUNNotificationSetting:settings.lockScreenSetting];
+    settingsDictionary[@"notificationCenter"] = [self _numberForUNNotificationSetting:settings.notificationCenterSetting];
 
     block(nil, settingsDictionary);
   }];
@@ -265,6 +327,135 @@
     asNumber = @1;
   }
   return asNumber;
+}
+
+- (NSMutableArray<UNNotificationAction *> *)_notificationActionsFromDictionaryArray:(NSArray<NSDictionary *> *)actionDictionaries {
+  NSMutableArray<UNNotificationAction *> *notificationActions = [[NSMutableArray alloc] init];
+
+  for (NSDictionary *actionDictionary in actionDictionaries) {
+    UNNotificationAction *notificationAction;
+
+    NSString *id = actionDictionary[@"id"];
+    NSString *title = actionDictionary[@"title"];
+
+    UNNotificationActionOptions options = 0;
+    if (actionDictionary[@"options"] != nil) {
+      NSDictionary *optionsDictionary = actionDictionary[@"options"];
+      if ([optionsDictionary[@"destructive"] isEqual:@(YES)]) {
+        options |= UNNotificationActionOptionDestructive;
+      }
+      if ([optionsDictionary[@"launchApp"] isEqual:@(YES)]) {
+        options |= UNNotificationActionOptionForeground;
+      }
+      if ([optionsDictionary[@"authentication"] isEqual:@(YES)]) {
+        options |= UNNotificationActionOptionAuthenticationRequired;
+      }
+    }
+
+    if (actionDictionary[@"input"] != nil) {
+      NSDictionary *inputDictionary = actionDictionary[@"input"];
+      NSString *buttonText = inputDictionary[@"buttonText"];
+      NSString *placeholderText = inputDictionary[@"placeholderText"];
+      notificationAction = [
+          UNTextInputNotificationAction actionWithIdentifier:id
+                                                       title:title
+                                                     options:options
+                                        textInputButtonTitle:buttonText
+                                        textInputPlaceholder:placeholderText
+      ];
+    } else {
+      notificationAction = [UNNotificationAction actionWithIdentifier:id title:title options:options];
+    }
+
+    [notificationActions addObject:notificationAction];
+  }
+
+  return notificationActions;
+}
+
+- (NSMutableArray<NSString *> *)_intentIdentifiersFromNumberArray:(NSArray<NSNumber *> *)identifiers {
+  NSMutableArray<NSString *> *intentIdentifiers = [[NSMutableArray alloc] init];
+
+  for (NSNumber *identifier in identifiers) {
+    if ([identifier isEqualToNumber:@0]) {
+      // IOSIntentIdentifier.START_AUDIO_CALL
+      [intentIdentifiers addObject:INStartAudioCallIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@1]) {
+      // IOSIntentIdentifier.START_VIDEO_CALL
+      [intentIdentifiers addObject:INStartVideoCallIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@2]) {
+      // IOSIntentIdentifier.SEARCH_CALL_HISTORY
+      [intentIdentifiers addObject:INSearchCallHistoryIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@3]) {
+      // IOSIntentIdentifier.SET_AUDIO_SOURCE_IN_CAR
+      [intentIdentifiers addObject:INSetAudioSourceInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@4]) {
+      // IOSIntentIdentifier.SET_CLIMATE_SETTINGS_IN_CAR
+      [intentIdentifiers addObject:INSetClimateSettingsInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@5]) {
+      // IOSIntentIdentifier.SET_DEFROSTER_SETTINGS_IN_CAR
+      [intentIdentifiers addObject:INSetDefrosterSettingsInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@6]) {
+      // IOSIntentIdentifier.SET_SEAT_SETTINGS_IN_CAR
+      [intentIdentifiers addObject:INSetSeatSettingsInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@7]) {
+      // IOSIntentIdentifier.SET_PROFILE_IN_CAR
+      [intentIdentifiers addObject:INSetProfileInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@8]) {
+      // IOSIntentIdentifier.SAVE_PROFILE_IN_CAR
+      [intentIdentifiers addObject:INSaveProfileInCarIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@9]) {
+      // IOSIntentIdentifier.START_WORKOUT
+      [intentIdentifiers addObject:INStartWorkoutIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@10]) {
+      // IOSIntentIdentifier.PAUSE_WORKOUT
+      [intentIdentifiers addObject:INPauseWorkoutIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@11]) {
+      // IOSIntentIdentifier.END_WORKOUT
+      [intentIdentifiers addObject:INEndWorkoutIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@12]) {
+      // IOSIntentIdentifier.CANCEL_WORKOUT
+      [intentIdentifiers addObject:INCancelWorkoutIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@13]) {
+      // IOSIntentIdentifier.RESUME_WORKOUT
+      [intentIdentifiers addObject:INResumeWorkoutIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@14]) {
+      // IOSIntentIdentifier.SET_RADIO_STATION
+      [intentIdentifiers addObject:INSetRadioStationIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@15]) {
+      // IOSIntentIdentifier.SEND_MESSAGE
+      [intentIdentifiers addObject:INSendMessageIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@16]) {
+      // IOSIntentIdentifier.SEARCH_FOR_MESSAGES
+      [intentIdentifiers addObject:INSearchForMessagesIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@17]) {
+      // IOSIntentIdentifier.SET_MESSAGE_ATTRIBUTE
+      [intentIdentifiers addObject:INSetMessageAttributeIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@18]) {
+      // IOSIntentIdentifier.SEND_PAYMENT
+      [intentIdentifiers addObject:INSendPaymentIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@19]) {
+      // IOSIntentIdentifier.REQUEST_PAYMENT
+      [intentIdentifiers addObject:INRequestPaymentIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@20]) {
+      // IOSIntentIdentifier.SEARCH_FOR_PHOTOS
+      [intentIdentifiers addObject:INSearchForPhotosIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@21]) {
+      // IOSIntentIdentifier.START_PHOTO_PLAYBACK
+      [intentIdentifiers addObject:INStartPhotoPlaybackIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@22]) {
+      // IOSIntentIdentifier.LIST_RIDE_OPTIONS
+      [intentIdentifiers addObject:INListRideOptionsIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@23]) {
+      // IOSIntentIdentifier.REQUEST_RIDE
+      [intentIdentifiers addObject:INRequestRideIntentIdentifier];
+    } else if ([identifier isEqualToNumber:@24]) {
+      // IOSIntentIdentifier.GET_RIDE_STATUS
+      [intentIdentifiers addObject:INGetRideStatusIntentIdentifier];
+    }
+  }
+
+  return intentIdentifiers;
 }
 
 @end

@@ -17,6 +17,8 @@ typedef void (^notifeeMethodVoidBlock)(NSError *_Nullable);
 
 typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable, NSDictionary *_Nullable);
 
+typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable, NSArray *_Nullable);
+
 typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 
 static NSString *kNotifeeWillPresentNotification = @"NotifeeWillPresentNotification";
@@ -38,6 +40,10 @@ static NSString *kNotifeeDidReceiveNotificationResponse = @"NotifeeDidReceiveNot
 - (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 
 - (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
+
+- (void)getNotificationCategoriesWithBlock:(notifeeMethodNSArrayBlock)block;
+
+- (void)setNotificationCategories:(NSArray<NSDictionary *> *)categories withBlock:(notifeeMethodVoidBlock)block;
 
 - (void)getNotificationSettings:(notifeeMethodNSDictionaryBlock)block;
 
