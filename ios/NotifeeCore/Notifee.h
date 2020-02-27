@@ -21,6 +21,8 @@ typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable, NSArray *_Nullable
 
 typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 
+static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
+
 static NSString *kNotifeeWillPresentNotification = @"NotifeeWillPresentNotification";
 
 static NSString *kNotifeeOpenSettingsForNotification = @"NotifeeOpenSettingsForNotification";
