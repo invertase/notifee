@@ -12,7 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 typedef void (^notifeeMethodVoidBlock)(NSError *_Nullable);
 
 typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable, NSDictionary *_Nullable);
@@ -31,7 +30,7 @@ static NSString *kNotifeeDidReceiveNotificationResponse = @"NotifeeDidReceiveNot
 
 @interface Notifee : NSObject <UNUserNotificationCenterDelegate>
 
-@property(nonatomic, strong, nonnull) Notifee *instance;
+@property(nonatomic, strong, nonnull) NSMutableDictionary *completionHandlers;
 
 + (instancetype)initialize:(NSString *)testString;
 
