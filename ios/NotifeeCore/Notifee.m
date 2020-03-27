@@ -24,6 +24,7 @@
   static Notifee *sharedInstance;
   dispatch_once(&once, ^{
     sharedInstance = [[Notifee alloc] init];
+    sharedInstance.completionHandlers = [NSMutableDictionary dictionary];
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = sharedInstance;
   });
@@ -65,6 +66,7 @@
 // in-app notification settings. Add UNAuthorizationOptionProvidesAppNotificationSettings as an option in
 // requestAuthorizationWithOptions:completionHandler: to add a button to inline notification settings view and the
 // notification settings view in Settings. The notification will be nil when opened from Settings.
+// TODO in RN Module; sub to above event and emit 'action' event to JS
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(nullable UNNotification *)notification {
   [[NSNotificationCenter defaultCenter]
       postNotificationName:kNotifeeOpenSettingsForNotification
