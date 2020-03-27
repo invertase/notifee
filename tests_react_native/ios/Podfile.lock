@@ -317,7 +317,7 @@ PODS:
     - Firebase/Messaging (~> 6.13.0)
     - React
     - RNFBApp
-  - RNNotifee (0.1.0):
+  - RNNotifee (0.2.0):
     - AFNetworking
     - PromisesObjC
     - React
@@ -357,7 +357,7 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - boost-for-react-native
     - Firebase
@@ -478,9 +478,9 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNFBApp: 5b215aacc09105a1761de31b9a0eb2abcce06253
   RNFBMessaging: be0b936394416ec5503add603f2c0a641c353063
-  RNNotifee: 589abb35f2ea783285ff31ac2418f33fdb9d8683
+  RNNotifee: 0f5336acc0b9a2b147aadf9a92a9759a3c268ac6
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: de8c4e2a2bd12b4ecb894d9d17e50b7e55bde4c0
+PODFILE CHECKSUM: bd8e1e9fc97b3accfac447dda0263e152e1fb59b
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.7.5

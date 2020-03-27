@@ -47,6 +47,7 @@
                     object:completionHandler
                   userInfo:@{@"notification": notification}
   ];
+    completionHandler(UNNotificationPresentationOptionAlert);
 }
 
 // The method will be called when the user responded to the notification by opening the application, dismissing the
@@ -116,10 +117,10 @@
   }
 
   // data
-  NSMutableDictionary *userInfo = [[NSMutableDictionary dictionary] initWithDictionary:notification[@"data"]];
-  // attach a copy of the original notification payload into the data object
-  userInfo[kNotifeeUserInfoNotification] = [notification copy];
-  content.userInfo = userInfo;
+//  NSMutableDictionary *userInfo = [[NSMutableDictionary dictionary] initWithDictionary:notification[@"data"]];
+//  // attach a copy of the original notification payload into the data object
+//  userInfo[kNotifeeUserInfoNotification] = [notification copy];
+//  content.userInfo = userInfo;
 
 
   // attachments
@@ -372,8 +373,18 @@
   if ([permissions[@"carPlay"] isEqual:@(YES)]) {
     options |= UNAuthorizationOptionCarPlay;
   }
+    
+  if ([permissions[@"criticalAlert"] isEqual:@(YES)]) {
+    if (@available(iOS 12.0, *)) {
+      options |= UNAuthorizationOptionCriticalAlert;
+    }
+  }
 
   id handler = ^(BOOL granted, NSError *_Nullable error) {
+      if (error != nil) {
+          NSLog(error.localizedDescription);
+      }
+      
     [self getNotificationSettings:block];
   };
 
