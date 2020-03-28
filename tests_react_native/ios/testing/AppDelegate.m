@@ -30,6 +30,7 @@
   }
   [[UIApplication sharedApplication] registerForRemoteNotifications];
   [FIRApp configureWithName:@"secondaryFromNative" options:[FIROptions defaultOptions]];
+  
   NSURL *jsCodeLocation;
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -43,6 +44,7 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
+  
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;

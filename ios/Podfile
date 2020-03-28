@@ -6,6 +6,6 @@ target 'NotifeeCore' do
   # use_frameworks!
 
   # Pods for NotifeeCore
-  pod 'AFNetworking'
-  pod 'PromisesObjC'
+  # pod 'AFNetworking'
+  # pod 'PromisesObjC'
 end

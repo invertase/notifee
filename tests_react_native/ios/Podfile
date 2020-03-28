@@ -1,6 +1,15 @@
 platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+# ----------------------------------------------------------------
+# set this to false to use the compile NotifeeCore framework
+# with this set to false this will be the same way the user would consume NotifeeCore framework
+# Note: you must pod install after changing this value
+
+$NotifeeCoreFromSources = true
+
+# ----------------------------------------------------------------
+
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'testing' do
@@ -32,9 +41,12 @@ target 'testing' do
    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  
 
-  use_native_modules!
+   if $NotifeeCoreFromSources
+     pod 'NotifeeCore', :path => "../../ios"
+   end
+
+   use_native_modules!
 end
 
 #target 'NotifeeContentExtension' do

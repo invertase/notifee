@@ -14,9 +14,9 @@
 
 @implementation Notifee
 
-+ (instancetype)initialize:(NSString *)testString {
-  NSLog(@"NotifeeInitialize, %@", testString);
-  return [self instance];
++ (void)initialize {
+  // TODO license check stuff here
+  [self instance];
 }
 
 + (instancetype)instance {
@@ -24,7 +24,6 @@
   static Notifee *sharedInstance;
   dispatch_once(&once, ^{
     sharedInstance = [[Notifee alloc] init];
-    sharedInstance.completionHandlers = [NSMutableDictionary dictionary];
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = sharedInstance;
   });
@@ -36,43 +35,81 @@
 
 // The method will be called on the delegate only if the application is in the foreground.
 // If the the handler is not called in a timely manner then the notification will not be presented.
-// The application can choose to have the notification presented as a sound, badge, alert and/or in the
+// The application can choose t o have the notification presented as a sound, badge, alert and/or in the
 // notification list. This decision should be based on whether the information in the notification is otherwise visible
 // to the user.
-// TODO in RN Module; sub to above event and call js method with value which when returned
-//  calls the completionHandler with the user defined UNNotificationPresentationOption's
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
-  [[NSNotificationCenter defaultCenter]
-      postNotificationName:kNotifeeWillPresentNotification
-                    object:completionHandler
-                  userInfo:@{@"notification": notification}
-  ];
-    completionHandler(UNNotificationPresentationOptionAlert);
+  NSDictionary *notifeeNotification = notification.request.content.userInfo[kNotifeeUserInfoNotification];
+
+  // we only care about notifications created through notifee
+  if (notifeeNotification != nil) {
+    UNNotificationPresentationOptions presentationOptions = 0;
+    NSNumber *importance = notifeeNotification[@"ios"][@"importance"];
+
+    if ([importance isEqualToNumber:@4]) { // HIGH
+      presentationOptions += UNNotificationPresentationOptionAlert + UNNotificationPresentationOptionSound;
+    } else if ([importance isEqualToNumber:@3]) { // DEFAULT
+      presentationOptions += UNNotificationPresentationOptionAlert;
+    }
+
+    if (notifeeNotification[@"ios"][@"badgeCount"] != nil) {
+      presentationOptions += UNNotificationPresentationOptionBadge;
+    }
+
+    completionHandler(presentationOptions);
+  }
 }
 
 // The method will be called when the user responded to the notification by opening the application, dismissing the
 // notification or choosing a UNNotificationAction. The delegate must be set before the application returns from
 // application:didFinishLaunchingWithOptions:.
-// TODO in RN Module; sub to above event and emit 'action' event to JS
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-  [[NSNotificationCenter defaultCenter]
-      postNotificationName:kNotifeeDidReceiveNotificationResponse
-                    object:completionHandler
-                  userInfo:@{@"response": response}
-  ];
-}
+  NSDictionary *notifeeNotification = response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-// The method will be called on the delegate when the application is launched in response to the user's request to view
-// in-app notification settings. Add UNAuthorizationOptionProvidesAppNotificationSettings as an option in
-// requestAuthorizationWithOptions:completionHandler: to add a button to inline notification settings view and the
-// notification settings view in Settings. The notification will be nil when opened from Settings.
-// TODO in RN Module; sub to above event and emit 'action' event to JS
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(nullable UNNotification *)notification {
-  [[NSNotificationCenter defaultCenter]
-      postNotificationName:kNotifeeOpenSettingsForNotification
-                    object:nil
-                  userInfo:@{@"notification": notification}
-  ];
+  // we only care about notifications created through notifee
+  if (notifeeNotification != nil) {
+    if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]) {
+      // TODO handle in a later version - sending a DISMISSED = 0 event to match Android
+      return;
+    }
+
+    NSNumber *eventType;
+    NSMutableDictionary *event = [NSMutableDictionary dictionary];
+    NSMutableDictionary *eventDetail = [NSMutableDictionary dictionary];
+    NSMutableDictionary *eventDetailPressAction = [NSMutableDictionary dictionary];
+
+    if ([response.actionIdentifier isEqualToString:UNNotificationDefaultActionIdentifier]) {
+      eventType = @1; // PRESS
+      // event.detail.pressAction.id
+      eventDetailPressAction[@"id"] = @"default";
+    } else {
+      eventType = @2; // ACTION_PRESS
+      // event.detail.pressAction.id
+      eventDetailPressAction[@"id"] = response.actionIdentifier;
+    }
+
+    if ([response isKindOfClass:UNTextInputNotificationResponse.class]) {
+      // event.detail.input
+      eventDetail[@"input"] = [(UNTextInputNotificationResponse *) response userText];
+    }
+
+    // event.type
+    event[@"type"] = eventType;
+
+    // event.detail.notification
+    eventDetail[@"notification"] = notifeeNotification;
+
+    // event.detail.pressAction
+    eventDetail[@"pressAction"] = eventDetailPressAction;
+
+    //event.detail
+    event[@"detail"] = eventDetail;
+
+    // post PRESS/ACTION_PRESS event
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotifeeOnEventNotification object:nil userInfo:event];
+
+    completionHandler();
+  }
 }
 
 # pragma mark - Library Methods
@@ -84,7 +121,6 @@
  * @param block notifeeMethodVoidBlock
  */
 - (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block {
-  NSLog(@"cancelNotification, %@", notificationId);
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   [center removeDeliveredNotificationsWithIdentifiers:@[notificationId]];
   [center removePendingNotificationRequestsWithIdentifiers:@[notificationId]];
@@ -117,14 +153,13 @@
   }
 
   // data
-//  NSMutableDictionary *userInfo = [[NSMutableDictionary dictionary] initWithDictionary:notification[@"data"]];
-//  // attach a copy of the original notification payload into the data object
-//  userInfo[kNotifeeUserInfoNotification] = [notification copy];
-//  content.userInfo = userInfo;
-
+  NSMutableDictionary *userInfo = [notification[@"data"] mutableCopy];
+  // attach a copy of the original notification payload into the data object, for internal use
+  userInfo[kNotifeeUserInfoNotification] = [notification mutableCopy];
+  content.userInfo = userInfo;
 
   // attachments
-  // TODO attachments handling
+  // TODO attachments handling in a later release
 
   // badgeCount - nil is an acceptable value so no need to check key existence
   content.badge = iosDict[@"badgeCount"];
@@ -207,7 +242,19 @@
 
   UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"] content:content trigger:nil];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  [center addNotificationRequest:request withCompletionHandler:block];
+  [center addNotificationRequest:request withCompletionHandler:^(NSError *error) {
+    if (error == nil) {
+      // post DELIVERED event
+      [[NSNotificationCenter defaultCenter] postNotificationName:kNotifeeOnEventNotification object:nil userInfo:@{
+          @"type": @3, // DELIVERED = 3
+          @"detail": @{
+              @"notification": notification,
+          }
+      }];
+    }
+
+    block(error);
+  }];
 }
 
 - (void)getNotificationCategoriesWithBlock:(notifeeMethodNSArrayBlock)block {
@@ -326,6 +373,7 @@
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   [center setNotificationCategories:UNNotificationCategories];
+  block(nil);
 }
 
 /**
@@ -373,7 +421,7 @@
   if ([permissions[@"carPlay"] isEqual:@(YES)]) {
     options |= UNAuthorizationOptionCarPlay;
   }
-    
+
   if ([permissions[@"criticalAlert"] isEqual:@(YES)]) {
     if (@available(iOS 12.0, *)) {
       options |= UNAuthorizationOptionCriticalAlert;
@@ -381,10 +429,10 @@
   }
 
   id handler = ^(BOOL granted, NSError *_Nullable error) {
-      if (error != nil) {
-          NSLog(error.localizedDescription);
-      }
-      
+    if (error != nil) {
+      // TODO send error to notifeeMethodNSDictionaryBlock
+    }
+
     [self getNotificationSettings:block];
   };
 
@@ -532,7 +580,7 @@
       options |= UNNotificationActionOptionAuthenticationRequired;
     }
 
-    if (actionDictionary[@"input"] != nil) {
+    if (actionDictionary[@"input"] != nil && [actionDictionary[@"input"] isKindOfClass:NSDictionary.class]) {
       NSDictionary *inputDictionary = actionDictionary[@"input"];
       NSString *buttonText = inputDictionary[@"buttonText"];
       NSString *placeholderText = inputDictionary[@"placeholderText"];
@@ -542,6 +590,12 @@
                                                      options:options
                                         textInputButtonTitle:buttonText
                                         textInputPlaceholder:placeholderText
+      ];
+    } else if (actionDictionary[@"input"] != nil) { // BOOL
+      notificationAction = [
+          UNTextInputNotificationAction actionWithIdentifier:id
+                                                       title:title
+                                                     options:options
       ];
     } else {
       notificationAction = [UNNotificationAction actionWithIdentifier:id title:title options:options];

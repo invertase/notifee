@@ -1,2 +1,2 @@
 // require('./app');
-import './example/app';
+import './example/ios-test';
