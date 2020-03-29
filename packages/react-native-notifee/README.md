@@ -9,7 +9,7 @@
 
 A feature rich Android & iOS notifications library for React Native.
 
-> **Note**: Notifee is a **ALPHA** product with only Android support currently available. iOS is in progress.
+> **Note**: Notifee is an **ALPHA** product.
 
 [> Learn More](https://notifee.app/)
 
@@ -43,7 +43,15 @@ The APIs for Android allow for creating rich, styled and highly interactive noti
 
 ### iOS
 
-> Coming soon.
+Below you'll find guides that cover the supported iOS features.
+
+| Topic                                                                                    |                                                                                                                                   |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| [Permissions](https://notifee.app/react-native/docs/ios/permissionse)                   | Manage and request permissions from your app users to display notifications.                                                        |
+
+
+
+> More iOS guides coming soon.
 
 ## License
 
