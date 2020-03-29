@@ -45,13 +45,13 @@ The APIs for Android allow for creating rich, styled and highly interactive noti
 
 Below you'll find guides that cover the supported iOS features.
 
-| Topic                                                                                    |                                                                                                                                   |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| [Permissions](https://notifee.app/react-native/docs/ios/permissionse)                   | Manage and request permissions from your app users to display notifications.                                                        |
+| Topic                                                             |                                                                          |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Appearance](https://notifee.app/react-native/docs/ios/appearance)           | Change now the notification is displayed to your users.       |
+| [Behaviour](https://notifee.app/react-native/docs/ios/behaviour)            | Control how notifications behave when they are displayed to a device; sound, crtitial alerts etc.  |
+| [Categories & Actions](https://notifee.app/react-native/docs/ios/categories-actions) | Create & assign categories to notifications to display actions.          |
+| [Permissions](https://notifee.app/react-native/docs/ios/permissions)                 | Request permission from your application users to display notifications. |                                                    |
 
-
-
-> More iOS guides coming soon.
 
 ## License
 
