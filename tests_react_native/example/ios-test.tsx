@@ -53,6 +53,11 @@ Notifee.onForegroundEvent(async event => {
   console.warn(event);
 });
 
+(async () => {
+  const initialNotification = await Notifee.getInitialNotification();
+  console.warn('INITIAL_NOTIFICATION', initialNotification);
+})();
+
 async function testRunner() {
   // const functionRunner = firebase.functions().httpsCallable('testFunctionDefaultRegion');
   // const response = await functionRunner();
