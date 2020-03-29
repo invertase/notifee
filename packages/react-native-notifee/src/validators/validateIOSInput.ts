@@ -1,10 +1,16 @@
 import { IOSInput } from '..';
-import { hasOwnProperty, isObject, isString, isUndefined } from '../utils';
+import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 export default function validateIOSInput(input?: IOSInput): IOSInput {
   const out: IOSInput = {};
 
+  // default value
   if (!input) {
+    return out;
+  }
+
+  // if true, empty object
+  if (isBoolean(input)) {
     return out;
   }
 
@@ -12,20 +18,20 @@ export default function validateIOSInput(input?: IOSInput): IOSInput {
     throw new Error('expected an object value.');
   }
 
-  if (hasOwnProperty(input, 'button') && !isUndefined(input.button)) {
-    if (!isString(input.button)) {
-      throw new Error("'button' expected a string value.");
+  if (hasOwnProperty(input, 'buttonText') && !isUndefined(input.buttonText)) {
+    if (!isString(input.buttonText)) {
+      throw new Error("'buttonText' expected a string value.");
     }
 
-    out.button = input.button;
+    out.buttonText = input.buttonText;
   }
 
-  if (hasOwnProperty(input, 'placeholder') && !isUndefined(input.placeholder)) {
-    if (!isString(input.placeholder)) {
-      throw new Error("'placeholder' expected a string value.");
+  if (hasOwnProperty(input, 'placeholderText') && !isUndefined(input.placeholderText)) {
+    if (!isString(input.placeholderText)) {
+      throw new Error("'placeholderText' expected a string value.");
     }
 
-    out.placeholder = input.placeholder;
+    out.placeholderText = input.placeholderText;
   }
 
   return out;

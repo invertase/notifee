@@ -2,14 +2,18 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { ForegroundServiceTask, InitialNotification, Notification, Event } from './Notification';
+import { Event, ForegroundServiceTask, InitialNotification, Notification } from './Notification';
 import {
   AndroidChannel,
   AndroidChannelGroup,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
-import { IOSCategory, IOSPermissions } from './NotificationIOS';
+import {
+  IOSNotificationCategory,
+  IOSNotificationSettings,
+  IOSNotificationPermissions,
+} from './NotificationIOS';
 
 export interface Module {
   /**
@@ -37,7 +41,7 @@ export interface Module {
    */
   cancelNotification(notificationId: string): Promise<void>;
 
-  createCategory(category: IOSCategory): Promise<string>;
+  createCategory(category: IOSNotificationCategory): Promise<string>;
 
   /**
    * API to create and update channels on supported Android devices.
@@ -132,7 +136,7 @@ export interface Module {
   deleteChannelGroup(channelGroupId: string): Promise<void>;
 
   /**
-   * API used to immideatly display or update a notification on the users device.
+   * API used to immediately display or update a notification on the users device.
    *
    * This API is used to display a notification on the users device. All
    * channels/categories should be created before triggering this method during the apps lifecycle.
@@ -299,7 +303,52 @@ export interface Module {
    */
   registerForegroundService(task: ForegroundServiceTask): void;
 
-  requestPermission(permissions: IOSPermissions): Promise<boolean>;
+  /**
+   * Request specific notification permissions for your application on the current device.
+   *
+   * Returns null on Android.
+   *
+   *   TODO better description
+   *
+   * @platform ios
+   * @param permissions
+   */
+  requestPermission(
+    permissions?: IOSNotificationPermissions,
+  ): Promise<IOSNotificationSettings | null>;
+
+  /**
+   * Set the notification categories to be used on this Apple device.
+   *
+   *   TODO better description
+   *
+   * @platform ios
+   *
+   * @param categories
+   */
+  setNotificationCategories(categories: IOSNotificationCategory[]): Promise<void>;
+
+  /**
+   * Gets the currently set notification categories on this Apple device.
+   *
+   * Returns an empty array on Android.
+   *
+   *   TODO better description
+   *
+   *@platform ios
+   */
+  getNotificationCategories(): Promise<IOSNotificationCategory[]>;
+
+  /**
+   * Get the current notification settings for this application on the current device.
+   *
+   * Returns null on Android.
+   *
+   *   TODO better description
+   *
+   * @platform ios
+   */
+  getNotificationSettings(): Promise<null | IOSNotificationSettings>;
 
   // TODO introduce as part of iOS
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;

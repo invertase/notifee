@@ -5,10 +5,11 @@
 // @ts-ignore
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
-import { hasOwnProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
+import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
-import { AndroidChannel, AndroidImportance, AndroidVisibility } from '../types/NotificationAndroid';
+import { Importance } from '..';
+import { AndroidChannel, AndroidVisibility } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannel(channel: AndroidChannel): AndroidChannel {
   if (!isObject(channel)) {
@@ -49,7 +50,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
     lights: true,
     vibration: true,
     badge: true,
-    importance: AndroidImportance.DEFAULT,
+    importance: Importance.DEFAULT,
     visibility: AndroidVisibility.PRIVATE,
   };
 
@@ -123,8 +124,8 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
    * importance
    */
   if (hasOwnProperty(channel, 'importance') && channel.importance != undefined) {
-    if (!Object.values(AndroidImportance).includes(channel.importance)) {
-      throw new Error("'channel.importance' expected an AndroidImportance value.");
+    if (!Object.values(Importance).includes(channel.importance)) {
+      throw new Error("'channel.importance' expected an Importance value.");
     }
 
     out.importance = channel.importance;

@@ -17,7 +17,11 @@ import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './
 import validateNotification from './validators/validateNotification';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
-import { IOSCategory, IOSPermissions } from './types/NotificationIOS';
+import {
+  IOSNotificationCategory,
+  IOSNotificationSettings,
+  IOSNotificationPermissions,
+} from './types/NotificationIOS';
 import validateIOSCategory from './validators/validateIOSCategory';
 import validateIOSPermissions from './validators/validateIOSPermissions';
 
@@ -27,15 +31,17 @@ let registeredForegroundServiceTask: (notification: Notification) => Promise<voi
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   constructor(config: NativeModuleConfig) {
     super(config);
-    AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
-      if (!registeredForegroundServiceTask) {
-        console.warn(
-          '[notifee] no registered foreground service has been set for displaying a foreground notification.',
-        );
-        return (): Promise<void> => Promise.resolve();
-      }
-      return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
-    });
+    if (isAndroid) {
+      AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
+        if (!registeredForegroundServiceTask) {
+          console.warn(
+            '[notifee] no registered foreground service has been set for displaying a foreground notification.',
+          );
+          return (): Promise<void> => Promise.resolve();
+        }
+        return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
+      });
+    }
   }
 
   public cancelAllNotifications(): Promise<void> {
@@ -50,8 +56,8 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.cancelNotification(notificationId);
   }
 
-  public createCategory(category: IOSCategory): Promise<string> {
-    let options: IOSCategory;
+  public createCategory(category: IOSNotificationCategory): Promise<string> {
+    let options: IOSNotificationCategory;
     try {
       options = validateIOSCategory(category);
     } catch (e) {
@@ -278,12 +284,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.openNotificationSettings(channelId || null);
   }
 
-  public requestPermission(permissions: IOSPermissions): Promise<boolean> {
+  public requestPermission(
+    permissions: IOSNotificationPermissions = {},
+  ): Promise<IOSNotificationSettings | null> {
     if (isAndroid) {
-      return Promise.resolve(true);
+      return Promise.resolve(null);
     }
 
-    let options: IOSPermissions;
+    let options: IOSNotificationPermissions;
     try {
       options = validateIOSPermissions(permissions);
     } catch (e) {
@@ -303,6 +311,47 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     registeredForegroundServiceTask = runner;
+  }
+
+  public setNotificationCategories(categories: IOSNotificationCategory[]): Promise<void> {
+    if (isAndroid) {
+      return Promise.resolve();
+    }
+
+    if (!isArray(categories)) {
+      throw new Error(
+        "notifee.setNotificationCategories(*) 'categories' expected an array of IOSCategory.",
+      );
+    }
+
+    const options = [];
+    try {
+      for (let i = 0; i < categories.length; i++) {
+        options[i] = validateIOSCategory(categories[i]);
+      }
+    } catch (e) {
+      throw new Error(
+        `notifee.setNotificationCategories(*) 'categories' a category is invalid: ${e.message}`,
+      );
+    }
+
+    return this.native.setNotificationCategories(categories);
+  }
+
+  public getNotificationCategories(): Promise<IOSNotificationCategory[]> {
+    if (isAndroid) {
+      return Promise.resolve([]);
+    }
+
+    return this.native.getNotificationCategories();
+  }
+
+  public getNotificationSettings(): Promise<null | IOSNotificationSettings> {
+    if (isAndroid) {
+      return Promise.resolve(null);
+    }
+
+    return this.native.getNotificationSettings();
   }
 
   // public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {

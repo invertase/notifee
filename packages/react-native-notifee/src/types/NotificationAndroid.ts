@@ -2,6 +2,8 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
+import { Importance, NotificationPressAction } from '..';
+
 /**
  * The interface for Android specific options which are applied to a notification.
  *
@@ -237,7 +239,7 @@ export interface NotificationAndroid {
    * View the  [Interaction](/react-native/docs/android/interaction) documentation to learn
    * more.
    */
-  pressAction?: AndroidPressAction;
+  pressAction?: NotificationPressAction;
 
   /**
    * Set a notification importance for devices without channel support.
@@ -247,14 +249,14 @@ export interface NotificationAndroid {
    * without channel support, set this property to directly assign an importance level to the incoming
    * notification.
    *
-   * Defaults to `AndroidImportance.DEFAULT`.
+   * Defaults to `Importance.DEFAULT`.
    *
    * View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
    * more.
    *
    * @platform android API Level < 26
    */
-  importance?: AndroidImportance;
+  importance?: Importance;
 
   /**
    * A notification can show current progress of a task. The progress state can either be fixed or
@@ -412,7 +414,7 @@ export interface AndroidAction {
    * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
    * or [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
    */
-  pressAction: AndroidPressAction;
+  pressAction: NotificationPressAction;
 
   /**
    * The title of the notification, e.g. "Reply", "Mark as read" etc.
@@ -436,48 +438,6 @@ export interface AndroidAction {
    * learn more.
    */
   input?: true | AndroidInput;
-}
-
-/**
- * The interface used to describe a press action for Android notifications.
- *
- * There are various ways a user can interact with a notification, the most common being pressing
- * the notification, pressing an action or providing text input. This interface defines what happens
- * when a user performs such interaction.
- *
- * When provided to a notification action, the action will only open the application if a `launchActivity`
- * and/or `mainComponent` is provided.
- *
- * @platform android
- */
-export interface AndroidPressAction {
-  /**
-   * The unique ID for the action.
-   *
-   * The `id` property is used to differentiate between user press actions. When listening to notification
-   * events via `onEvent`, the ID can be read from the `event.pressAction` object.
-   */
-  id: string;
-
-  /**
-   * The custom Android Activity to launch on a press action.
-   *
-   * This property can be used in advanced scenarios to launch a custom Android Activity when the user
-   * performs a press action.
-   *
-   * View the [Interaction](/react-native/docs/android/interaction) to learn more.
-   */
-  launchActivity?: string;
-
-  /**
-   * A custom registered React component to launch on press action.
-   *
-   * This property can be used to open a custom React component when the user performs a press action.
-   * For this to correctly function, a basic native code change is required.
-   *
-   * View the [Press Action](/react-native/docs/android/interaction#press-action) document to learn more.
-   */
-  mainComponent?: string;
 }
 
 /**
@@ -880,11 +840,11 @@ export interface AndroidChannel {
   /**
    * Sets the level of interruption of this notification channel.
    *
-   * Defaults to `AndroidImportance.DEFAULT`.
+   * Defaults to `Importance.DEFAULT`.
    *
    * This setting can only be set to a lower importance level once set.
    */
-  importance?: AndroidImportance;
+  importance?: Importance;
 
   /**
    * If lights are enabled (via `lights`), sets/overrides the light color for notifications
@@ -1151,67 +1111,6 @@ export enum AndroidGroupAlertBehavior {
    * Children of a group will alert the user. The summary notification will not alert when displayed.
    */
   CHILDREN = 2,
-}
-
-/**
- * The interface describing the importance levels of an incoming notification.
- *
- * A notification importance level can be set directly onto a notification channel for supported devices (API Level >= 26)
- * or directly onto the notification for devices which do not support channels.
- *
- * The importance is used by the device to both change the visual prompt of a received notification
- * and also how it visually appears in the device notification shade.
- *
- * View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
- * more.
- *
- * @platform android
- */
-export enum AndroidImportance {
-  /**
-   * The default importance applied to a channel/notification.
-   *
-   * The application small icon will show in the device statusbar. When the user pulls down the
-   * notification shade, the notification will show in it's expanded state (if applicable).
-   */
-  DEFAULT = 3,
-
-  /**
-   * The highest importance level applied to a channel/notification.
-   *
-   * Notifications will appear on-top of applications, allowing direct interaction without pulling
-   * down the notification shade. This level should only be used for urgent notifications, such as
-   * incoming phone calls, messages etc, which require immediate attention.
-   */
-  HIGH = 4,
-
-  /**
-   * A low importance level applied to a channel/notification.
-   *
-   * The application small icon will show in the device statusbar, however the notification will not alert
-   * the user (no sound or vibration). The notification will show in it's expanded state when the
-   * notification shade is pulled down.
-   */
-  LOW = 2,
-
-  /**
-   * The minimum importance level applied to a channel/notification.
-   *
-   * The application small icon will not show up in the statusbar, or alert the user. The notification
-   * will be in a collapsed state in the notification shade and placed at the bottom of the list.
-   *
-   * This level should be used when the notification requires no immediate attention. An example of this
-   * importance level is the Google app providing weather updates and only being visible when the
-   * user pulls the notification shade down,
-   *
-   */
-  MIN = 1,
-
-  /**
-   * The notification will not be shown. This has the same effect as the user disabling notifications
-   * in the application settings.
-   */
-  NONE = 0,
 }
 
 /**

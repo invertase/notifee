@@ -1,7 +1,7 @@
 import notifee, { EventType } from '@notifee/react-native';
 
-notifee.onEvent(async event => {
-  const { type, headless, detail } = event;
+notifee.onForegroundEvent(event => {
+  const { type, detail } = event;
 
   let eventTypeString;
 
@@ -38,16 +38,12 @@ notifee.onEvent(async event => {
       eventTypeString = 'CHANNEL_GROUP_BLOCKED';
       console.log('Channel Group', detail.channelGroup);
       break;
-    case EventType.SCHEDULED:
-      eventTypeString = 'SCHEDULED';
+      // case EventType.SCHEDULED:
+      //   eventTypeString = 'SCHEDULED';
       break;
     default:
       eventTypeString = 'UNHANDLED_NATIVE_EVENT';
   }
 
-  if (headless) {
-    console.warn(`Received a ${eventTypeString} event in headless mode.`);
-  } else {
-    console.warn(`Received a ${eventTypeString} event in JS mode.`);
-  }
+  console.warn(`Received a ${eventTypeString} foreground event in JS.`);
 });

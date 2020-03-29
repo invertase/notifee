@@ -2,7 +2,6 @@
 //  NotifeeCore.h
 //  NotifeeCore
 //
-//  Created by Mike on 31/01/2020.
 //  Copyright © 2020 Invertase. All rights reserved.
 //
 
@@ -14,6 +13,45 @@ FOUNDATION_EXPORT double NotifeeCoreVersionNumber;
 //! Project version string for NotifeeCore.
 FOUNDATION_EXPORT const unsigned char NotifeeCoreVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <NotifeeCore/PublicHeader.h>
+// Import all the public headers of your framework using statements like #import <NotifeeCore/PublicHeader.h>
+// #import <NotifeeCore/Example.h>
+// END public headers import
 
-#import <NotifeeCore/Notifee.h>
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^notifeeMethodVoidBlock)(NSError *_Nullable);
+
+typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable, NSDictionary *_Nullable);
+
+typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable, NSArray *_Nullable);
+
+typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
+
+@class NotifeeCore;
+
+@protocol NotifeeCoreDelegate <NSObject>
+@optional
+- (void) didReceiveNotifeeCoreEvent:(NSDictionary *_Nonnull)event;
+@end
+
+@interface NotifeeCore : NSObject
+
++ (void)setCoreDelegate:(id <NotifeeCoreDelegate>)coreDelegate;
+
++ (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
+
++ (void)getNotificationCategories:(notifeeMethodNSArrayBlock)block;
+
++ (void)setNotificationCategories:(NSArray<NSDictionary *> *)categories withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)getNotificationSettings:(notifeeMethodNSDictionaryBlock)block;
+
++ (void)getInitialNotification:(notifeeMethodNSDictionaryBlock)block;
+
+@end
+
+NS_ASSUME_NONNULL_END

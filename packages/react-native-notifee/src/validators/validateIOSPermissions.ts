@@ -1,15 +1,17 @@
-import { IOSPermissions } from '..';
+import { IOSNotificationPermissions } from '..';
 import { hasOwnProperty, isBoolean } from '../utils';
 
-export default function validateIOSPermissions(permissions: IOSPermissions): IOSPermissions {
-  const out: IOSPermissions = {
+export default function validateIOSPermissions(
+  permissions: IOSNotificationPermissions,
+): IOSNotificationPermissions {
+  const out: IOSNotificationPermissions = {
     alert: true,
     badge: true,
     sound: true,
     carPlay: true,
-    settings: true,
     provisional: false,
-    announcement: true,
+    announcement: false,
+    criticalAlert: false,
   };
 
   if (!permissions) {
@@ -48,14 +50,6 @@ export default function validateIOSPermissions(permissions: IOSPermissions): IOS
     out.carPlay = permissions.carPlay;
   }
 
-  if (hasOwnProperty(permissions, 'settings')) {
-    if (!isBoolean(permissions.settings)) {
-      throw new Error("'settings' expected a boolean value.");
-    }
-
-    out.settings = permissions.settings;
-  }
-
   if (hasOwnProperty(permissions, 'provisional')) {
     if (!isBoolean(permissions.provisional)) {
       throw new Error("'provisional' expected a boolean value.");
@@ -70,6 +64,14 @@ export default function validateIOSPermissions(permissions: IOSPermissions): IOS
     }
 
     out.announcement = permissions.announcement;
+  }
+
+  if (hasOwnProperty(permissions, 'criticalAlert')) {
+    if (!isBoolean(permissions.criticalAlert)) {
+      throw new Error("'criticalAlert' expected a boolean value.");
+    }
+
+    out.criticalAlert = permissions.criticalAlert;
   }
 
   return out;

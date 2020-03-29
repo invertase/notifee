@@ -16,12 +16,12 @@ import {
   isUndefined,
 } from '../utils';
 
+import { Importance } from '..';
 import {
   AndroidBadgeIconType,
   AndroidCategory,
   AndroidDefaults,
   AndroidGroupAlertBehavior,
-  AndroidImportance,
   AndroidProgress,
   AndroidStyle,
   AndroidVisibility,
@@ -60,7 +60,7 @@ export default function validateAndroidNotification(
     localOnly: false,
     ongoing: false,
     onlyAlertOnce: false,
-    importance: AndroidImportance.DEFAULT,
+    importance: Importance.DEFAULT,
     showTimestamp: false,
     smallIcon: 'ic_launcher',
     showChronometer: false,
@@ -367,8 +367,8 @@ export default function validateAndroidNotification(
    * importance
    */
   if (hasOwnProperty(android, 'importance') && !isUndefined(android.importance)) {
-    if (!Object.values(AndroidImportance).includes(android.importance)) {
-      throw new Error("'notification.android.importance' expected a valid AndroidImportance.");
+    if (!Object.values(Importance).includes(android.importance)) {
+      throw new Error("'notification.android.importance' expected a valid Importance.");
     }
 
     out.importance = android.importance;

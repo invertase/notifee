@@ -16,10 +16,13 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target   = '10.0'
   s.source_files             = 'ios/RNNotifee/*.{h,m}'
-  s.ios.vendored_frameworks = 'ios/NotifeeCore.framework'
-
   s.dependency 'React'
-  s.dependency 'AFNetworking'
-  s.dependency 'PromisesObjC'
 
+  if defined?($NotifeeCoreFromSources) && $NotifeeCoreFromSources == true
+    # internal dev flag used by Notifee devs, ignore
+    Pod::UI.warn "RNNotifee: Using NotifeeCore from sources."
+    s.dependency 'NotifeeCore'
+  else
+    s.ios.vendored_frameworks = 'ios/NotifeeCore.framework'
+  end
 end

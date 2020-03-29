@@ -4,7 +4,6 @@
 
 import { NotificationIOS } from './NotificationIOS';
 import {
-  AndroidPressAction,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
   NotificationAndroid,
@@ -18,11 +17,6 @@ import {
  *
  */
 export interface Notification {
-  /**
-   * The main body content of a notification.
-   */
-  body?: string;
-
   /**
    * A unique identifier for your notification.
    *
@@ -42,6 +36,11 @@ export interface Notification {
    * The notification subtitle, which appears on a new line below/next the title.
    */
   subtitle?: string;
+
+  /**
+   * The main body content of a notification.
+   */
+  body?: string;
 
   /**
    * Additional data to store on the notification. Only `string` values can be stored.
@@ -85,7 +84,7 @@ export interface InitialNotification {
   /**
    * The press action which the user interacted with, on the notification, which caused the application to open.
    */
-  pressAction: AndroidPressAction;
+  pressAction: NotificationPressAction;
 }
 
 /**
@@ -117,6 +116,50 @@ export interface Event {
 export type ForegroundServiceTask = (notification: Notification) => Promise<void>;
 
 /**
+ * The interface used to describe a press action for a notification.
+ *
+ * There are various ways a user can interact with a notification, the most common being pressing
+ * the notification, pressing an action or providing text input. This interface defines what happens
+ * when a user performs such interaction.
+ *
+ * On Android; when provided to a notification action, the action will only open you application if
+ * a `launchActivity` and/or a `mainComponent` is provided.
+ */
+export interface NotificationPressAction {
+  /**
+   * The unique ID for the action.
+   *
+   * The `id` property is used to differentiate between user press actions. When listening to notification
+   * events, the ID can be read from the `event.detail.pressAction` object.
+   */
+  id: string;
+
+  /**
+   * The custom Android Activity to launch on a press action.
+   *
+   * This property can be used in advanced scenarios to launch a custom Android Activity when the user
+   * performs a press action.
+   *
+   * View the [Android Interaction](/react-native/docs/android/interaction) docs to learn more.
+   *
+   * @platform android Android
+   */
+  launchActivity?: string;
+
+  /**
+   * A custom registered React component to launch on press action.
+   *
+   * This property can be used to open a custom React component when the user performs a press action.
+   * For this to correctly function on Android, a minor native code change is required.
+   *
+   * View the [Press Action](/react-native/docs/android/interaction#press-action) document to learn more.
+   *
+   * @platform android Android
+   */
+  mainComponent?: string;
+}
+
+/**
  * An enum representing an event type, defined on [`Event`](/react-native/reference/event).
  *
  * View the [Events](/react-native/docs/events) documentation to learn more about foreground and
@@ -136,6 +179,8 @@ export enum EventType {
    * the notification from the notification shade or performing "Clear all" notifications.
    *
    * This event is **not** sent when a notification is cancelled or times out.
+   *
+   * @platform android Android
    */
   DISMISSED = 0,
 
@@ -181,11 +226,6 @@ export enum EventType {
    * @platform android API Level >= 28
    */
   CHANNEL_GROUP_BLOCKED = 6,
-
-  /**
-   * Event type is sent when a notification has been scheduled for displaying at a future date/time.
-   */
-  // SCHEDULED = 7,
 }
 
 /**
@@ -217,7 +257,7 @@ export interface EventDetail {
    * - [`EventType.PRESS`](/react-native/reference/eventtype#press)
    * - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
    */
-  pressAction?: AndroidPressAction;
+  pressAction?: NotificationPressAction;
 
   /**
    * The input from a notification action.
@@ -261,4 +301,80 @@ export interface EventDetail {
    * @platform android API Level >= 28
    */
   blocked?: boolean;
+}
+
+/**
+ * The interface describing the importance levels of an incoming notification.
+ *
+ * On Android, the importance level can be set directly onto a notification channel for supported devices (API Level >= 26)
+ * or directly onto the notification for devices which do not support channels.
+ *
+ * On iOS, the importance level can be set directly onto the notification to control how it is displayed to users when the
+ * application is in the foreground.
+ *
+ * The importance is used to both change the visual prompt of a received notification
+ * and also how it visually appears on the device.
+ *
+ * View the [Android Appearance](/react-native/docs/android/appearance#importance) or [iOS Appearance](/react-native/docs/ios/appearance) documentation
+ * to learn more.
+ */
+export enum Importance {
+  /**
+   * The default importance applied to a channel/notification.
+   *
+   * On Android, the application small icon will show in the device statusbar. When the user pulls down the
+   * notification shade, the notification will show in it's expanded state (if applicable).
+   *
+   * On iOS, the notification will display in heads-up mode, showing on top of the current application. The notification
+   * however will not alert the user (e.g. via sound).
+   */
+  DEFAULT = 3,
+
+  /**
+   * The highest importance level applied to a channel/notification.
+   *
+   * On Android, the notifications will appear on-top of applications, allowing direct interaction without pulling
+   * down the notification shade. This level should only be used for urgent notifications, such as
+   * incoming phone calls, messages etc, which require immediate attention.
+   *
+   * On iOS, the notification will display in heads-up mode, showing on top of the current application. The notification
+   * will be displayed & alert the user (e.g. via sound).
+   */
+  HIGH = 4,
+
+  /**
+   * A low importance level applied to a channel/notification.
+   *
+   * On Android, the application small icon will show in the device statusbar, however the notification will not alert
+   * the user (no sound or vibration). The notification will show in it's expanded state when the
+   * notification shade is pulled down.
+   *
+   * On iOS, the notification will not display to the user or alert them. It will still be visible on the devices
+   * notification center.
+   */
+  LOW = 2,
+
+  /**
+   * The minimum importance level applied to a channel/notification.
+   *
+   * On Android, the application small icon will not show up in the statusbar, or alert the user. The notification
+   * will be in a collapsed state in the notification shade and placed at the bottom of the list.
+   *
+   * This level should be used when the notification requires no immediate attention. An example of this
+   * importance level is the Google app providing weather updates and only being visible when the
+   * user pulls the notification shade down,
+   *
+   * On iOS, the notification will not display to the user or alert them. It will still be visible on the devices
+   * notification center (same as `Importance.LOW`)
+   */
+  MIN = 1,
+
+  /**
+   * On Android, the notification will not be shown. This has the same effect as the user disabling notifications
+   * in the application settings.
+   *
+   * On iOS, the notification will not display to the user or alert them. It will still be visible on the devices
+   * notification center (same as `Importance.LOW`).
+   */
+  NONE = 0,
 }

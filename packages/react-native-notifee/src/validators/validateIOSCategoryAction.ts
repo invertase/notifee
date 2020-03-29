@@ -1,9 +1,10 @@
-import { IOSAction } from '..';
+import { IOSNotificationCategoryAction } from '..';
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 import validateIOSInput from './validateIOSInput';
-import validateIOSActionOptions from './validateIOSActionOptions';
 
-export default function validateIOSCategoryAction(action: IOSAction): IOSAction {
+export default function validateIOSCategoryAction(
+  action: IOSNotificationCategoryAction,
+): IOSNotificationCategoryAction {
   if (!isObject(action)) {
     throw new Error('"action" expected an object value');
   }
@@ -16,14 +17,17 @@ export default function validateIOSCategoryAction(action: IOSAction): IOSAction 
     throw new Error('"action.title" expected a valid string value.');
   }
 
-  const out: IOSAction = {
+  const out: IOSNotificationCategoryAction = {
     id: action.id,
     title: action.title,
+    destructive: false,
+    foreground: false,
+    authenticationRequired: false,
   };
 
   if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
     if (isBoolean(action.input) && action.input) {
-      out.input = validateIOSInput();
+      out.input = true;
     } else {
       try {
         out.input = validateIOSInput(action.input);
@@ -33,16 +37,28 @@ export default function validateIOSCategoryAction(action: IOSAction): IOSAction 
     }
   }
 
-  if (hasOwnProperty(action, 'options') && !isUndefined(action.options)) {
-    if (!isObject(action.options)) {
-      throw new Error('"action.options" expected an object value.');
+  if (hasOwnProperty(action, 'destructive')) {
+    if (!isBoolean(action.destructive)) {
+      throw new Error("'destructive' expected a boolean value.");
     }
 
-    try {
-      out.options = validateIOSActionOptions(action.options);
-    } catch (e) {
-      throw new Error(`"action.options" ${e.message}`);
+    out.destructive = action.destructive;
+  }
+
+  if (hasOwnProperty(action, 'foreground')) {
+    if (!isBoolean(action.foreground)) {
+      throw new Error("'foreground' expected a boolean value.");
     }
+
+    out.foreground = action.foreground;
+  }
+
+  if (hasOwnProperty(action, 'authenticationRequired')) {
+    if (!isBoolean(action.authenticationRequired)) {
+      throw new Error("'authenticationRequired' expected a boolean value.");
+    }
+
+    out.authenticationRequired = action.authenticationRequired;
   }
 
   return out;

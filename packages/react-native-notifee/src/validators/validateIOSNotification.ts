@@ -2,18 +2,13 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NotificationIOS } from '../types/NotificationIOS';
-import {
-  hasOwnProperty,
-  isArrayOfStrings,
-  isNumber,
-  isString,
-  isUndefined,
-} from '../utils';
+import { Importance } from '..';
+import { IOSNotificationSound, NotificationIOS } from '../types/NotificationIOS';
+import { hasOwnProperty, isBoolean, isNumber, isObject, isString, isUndefined } from '../utils';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
   const out: NotificationIOS = {
-    sound: 'default',
+    importance: Importance.DEFAULT,
   };
 
   if (isUndefined(ios)) {
@@ -22,6 +17,8 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
 
   /**
    * attachments
+   *
+   * TODO attachments
    */
   if (hasOwnProperty(ios, 'attachments')) {
     //   if (!isArray(ios.attachments)) {
@@ -40,6 +37,63 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   }
 
   /**
+   * sound
+   */
+  if (hasOwnProperty(ios, 'sound')) {
+    if (isString(ios.sound)) {
+      out.sound = {
+        name: ios.sound,
+      };
+    } else if (isObject(ios.sound)) {
+      const soundOut = {} as IOSNotificationSound;
+
+      // sound.name
+      if (!isString(ios.sound.name)) {
+        throw new Error("'notification.ios.sound.name' must be a string value.");
+      } else {
+        soundOut.name = ios.sound.name;
+      }
+
+      // sound.critical
+      if (hasOwnProperty(ios.sound, 'critical')) {
+        if (!isBoolean(ios.sound.critical)) {
+          throw new Error(
+            "'notification.ios.sound.critical' must be a boolean value if specified.",
+          );
+        } else {
+          soundOut.critical = ios.sound.critical;
+        }
+      }
+
+      // sound.criticalVolume
+      if (hasOwnProperty(ios.sound, 'criticalVolume')) {
+        if (!isNumber(ios.sound.criticalVolume)) {
+          throw new Error(
+            "'notification.ios.sound.criticalVolume' must be a number value if specified.",
+          );
+        } else {
+          if (ios.sound.criticalVolume < 0 || ios.sound.criticalVolume > 1) {
+            throw new Error(
+              "'notification.ios.sound.criticalVolume' must be a float value between 0.0 and 1.0.",
+            );
+          }
+          soundOut.criticalVolume = ios.sound.criticalVolume;
+        }
+      }
+
+      out.sound = soundOut;
+    } else {
+      throw new Error("'notification.ios.sound' must be a string or an object value if specified.");
+    }
+
+    if (!isNumber(ios.badgeCount) || ios.badgeCount < 0) {
+      throw new Error("'notification.ios.badgeCount' expected a positive number value.");
+    }
+
+    out.badgeCount = ios.badgeCount;
+  }
+
+  /**
    * badgeCount
    */
   if (hasOwnProperty(ios, 'badgeCount')) {
@@ -51,58 +105,71 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   }
 
   /**
-   * categories
+   * categoryId
    */
-  if (hasOwnProperty(ios, 'categories')) {
-    if (!isArrayOfStrings(ios.categories)) {
-      throw new Error("'notification.ios.categories' expected an array of string values.");
+  if (hasOwnProperty(ios, 'categoryId')) {
+    if (!isString(ios.categoryId)) {
+      throw new Error("'notification.ios.categoryId' expected a of string value");
     }
 
-    out.categories = ios.categories;
+    out.categoryId = ios.categoryId;
   }
 
   /**
    * groupId
    */
-  if (hasOwnProperty(ios, 'groupId')) {
-    if (!isString(ios.groupId)) {
-      throw new Error("'notification.ios.groupId' expected a string value.");
+  if (hasOwnProperty(ios, 'threadId')) {
+    if (!isString(ios.threadId)) {
+      throw new Error("'notification.ios.threadId' expected a string value.");
     }
 
-    out.groupId = ios.groupId;
+    out.threadId = ios.threadId;
   }
 
   /**
-   * groupMessage
+   * summaryArgument
    */
-  if (hasOwnProperty(ios, 'groupMessage')) {
-    if (!isString(ios.groupMessage)) {
-      throw new Error("'notification.ios.groupMessage' expected a string value.");
+  if (hasOwnProperty(ios, 'summaryArgument')) {
+    if (!isString(ios.summaryArgument)) {
+      throw new Error("'notification.ios.summaryArgument' expected a string value.");
     }
 
-    out.groupMessage = ios.groupMessage;
+    out.summaryArgument = ios.summaryArgument;
   }
 
   /**
-   * groupCount
+   * summaryArgumentCount
    */
-  if (hasOwnProperty(ios, 'groupCount')) {
-    if (!isNumber(ios.groupCount) || ios.groupCount < 0) {
-      throw new Error("'notification.ios.groupCount' expected a positive number value.");
+  if (hasOwnProperty(ios, 'summaryArgumentCount')) {
+    if (!isNumber(ios.summaryArgumentCount) || ios.summaryArgumentCount <= 0) {
+      throw new Error(
+        "'notification.ios.summaryArgumentCount' expected a positive number greater than 0.",
+      );
     }
 
-    out.badgeCount = ios.badgeCount;
+    out.summaryArgumentCount = ios.summaryArgumentCount;
   }
 
   /**
-   * launchImage
+   * launchImageName
    */
-  if (hasOwnProperty(ios, 'launchImage')) {
-    if (!isString(ios.launchImage)) {
-      throw new Error("'notification.ios.launchImage' expected a string value.");
+  if (hasOwnProperty(ios, 'launchImageName')) {
+    if (!isString(ios.launchImageName)) {
+      throw new Error("'notification.ios.launchImageName' expected a string value.");
     }
 
-    out.launchImage = ios.launchImage;
+    out.launchImageName = ios.launchImageName;
+  }
+
+  /**
+   * importance
+   */
+  if (hasOwnProperty(ios, 'importance') && !isUndefined(ios.importance)) {
+    if (!Object.values(Importance).includes(ios.importance)) {
+      throw new Error("'notification.ios.importance' expected a valid Importance.");
+    }
+
+    out.importance = ios.importance;
   }
 
   /**

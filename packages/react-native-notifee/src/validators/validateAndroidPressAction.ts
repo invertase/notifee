@@ -2,12 +2,12 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { AndroidPressAction } from '../types/NotificationAndroid';
+import { NotificationPressAction } from '../types/Notification';
 import { isObject, isString, isUndefined } from '../utils';
 
 export default function validateAndroidPressAction(
-  pressAction: AndroidPressAction,
-): AndroidPressAction {
+  pressAction: NotificationPressAction,
+): NotificationPressAction {
   if (!isObject(pressAction)) {
     throw new Error("'pressAction' expected an object value.");
   }
@@ -16,7 +16,7 @@ export default function validateAndroidPressAction(
     throw new Error("'id' expected a non-empty string value.");
   }
 
-  const out: AndroidPressAction = {
+  const out: NotificationPressAction = {
     id: pressAction.id,
   };
 
