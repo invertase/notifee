@@ -104,6 +104,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - NotifeeCore (1.0.0)
   - Protobuf (3.11.2)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -315,6 +316,7 @@ PODS:
     - React
     - RNFBApp
   - RNNotifee (0.2.0):
+    - NotifeeCore
     - React
   - Yoga (1.14.0)
 
@@ -324,6 +326,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - NotifeeCore (from `../../ios`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -384,6 +387,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  NotifeeCore:
+    :path: "../../ios"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -456,6 +461,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  NotifeeCore: 09a3968ccc16d2ef774f65a5bc1d8e4ea42e828a
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
@@ -479,9 +485,9 @@ SPEC CHECKSUMS:
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBFunctions: 6975565f0abcc68d9731d05b78778f003db0eca5
   RNFBMessaging: 51cc7f6beaf4c4feac6f18ea941bba5854e3d9c6
-  RNNotifee: 9e8c992d627ae8eecd8fa7f4f94b52c39b609d59
+  RNNotifee: bf8bf99926e8a02eaabe6f81c24e16ecc2f21353
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 865a81aa87a97e78616b48db81506bddda81dc98
+PODFILE CHECKSUM: f92143ea8b94827574e337285c3d3fdbf15fbe4e
 
 COCOAPODS: 1.8.4
