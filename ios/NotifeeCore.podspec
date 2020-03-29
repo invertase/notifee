@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.social_media_url    = 'http://twitter.com/notifee_app'
 
   s.ios.deployment_target   = '10.0'
-  s.source_files             = 'NotifeeCore/*.{h,m}'
+  s.source_files             = 'NotifeeCore/**/*.{h,m}'
 end
