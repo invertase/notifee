@@ -81,7 +81,7 @@
   }
 
   // critical, criticalVolume, sound
-  if (@available(iOS 12.0, *) && iosDict[@"critical"] != nil) {
+  if (iosDict[@"critical"] != nil) {
     UNNotificationSound *notificationSound;
     BOOL criticalSound = [iosDict[@"critical"] boolValue];
     NSNumber *criticalSoundVolume = iosDict[@"criticalVolume"];
@@ -89,20 +89,28 @@
 
     if ([soundName isEqualToString:@"default"]) {
       if (criticalSound) {
-        if (criticalSoundVolume != nil) {
-          notificationSound = [UNNotificationSound defaultCriticalSoundWithAudioVolume:[criticalSoundVolume floatValue]];
+        if (@available(iOS 12.0, *)) {
+          if (criticalSoundVolume != nil) {
+            notificationSound = [UNNotificationSound defaultCriticalSoundWithAudioVolume:[criticalSoundVolume floatValue]];
+          } else {
+            notificationSound = [UNNotificationSound defaultCriticalSound];
+          }
         } else {
-          notificationSound = [UNNotificationSound defaultCriticalSound];
+          notificationSound = [UNNotificationSound defaultSound];
         }
       } else {
         notificationSound = [UNNotificationSound defaultSound];
       }
     } else {
       if (criticalSound) {
-        if (criticalSoundVolume != nil) {
-          notificationSound = [UNNotificationSound criticalSoundNamed:soundName withAudioVolume:[criticalSoundVolume floatValue]];
+        if (@available(iOS 12.0, *)) {
+          if (criticalSoundVolume != nil) {
+            notificationSound = [UNNotificationSound criticalSoundNamed:soundName withAudioVolume:[criticalSoundVolume floatValue]];
+          } else {
+            notificationSound = [UNNotificationSound criticalSoundNamed:soundName];
+          }
         } else {
-          notificationSound = [UNNotificationSound criticalSoundNamed:soundName];
+          notificationSound = [UNNotificationSound soundNamed:soundName];
         }
       } else {
         notificationSound = [UNNotificationSound soundNamed:soundName];
