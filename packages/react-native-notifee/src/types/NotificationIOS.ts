@@ -37,11 +37,31 @@ export interface NotificationIOS {
   importance?: Importance;
 
   /**
-   * The sound that will be played for this notification.
+   * The name of the sound file to be played. The sound must be in the Library/Sounds folder of the
+   * app's data container or the Library/Sounds folder of an app group data container.
+   *
+   * If the file is not found in a container, the system will look in the app's bundle.
    *
    * Use 'default' to use the default system sound.
    */
-  sound?: string | IOSNotificationSound;
+  sound?: string;
+
+  /**
+   * If the notification is a critical alert set this property to true; critical alerts will bypass
+   * the mute switch and also bypass Do Not Disturb.
+   *
+   * @platform ios iOS >= 12
+   */
+  critical?: boolean;
+
+  /**
+   * The optional audio volume of the critical sound; a float value between 0.0 and 1.0.
+   *
+   * This property is not used unless the `critical: true` option is also set.
+   *
+   * @platform ios iOS >= 12
+   */
+  criticalVolume?: number;
 
   /**
    * A unique id for the thread or conversation related to this notification.
@@ -80,33 +100,6 @@ export interface NotificationIOS {
    * @platform ios iOS >= 13
    */
   targetContentId?: string;
-}
-
-export interface IOSNotificationSound {
-  /**
-   * The name of the sound file to be played. The sound must be in the Library/Sounds folder of the
-   * app's data container or the Library/Sounds folder of an app group data container.
-   *
-   * If the file is not found in a container, the system will look in the app's bundle.
-   *
-   * Use 'default' to use the default system sound.
-   */
-  name: string;
-
-  /**
-   * If the notification is a critical alert set this property to true; critical alerts will bypass
-   * the mute switch and also bypass Do Not Disturb.
-   *
-   * @platform ios iOS >= 12
-   */
-  critical?: boolean;
-
-  /**
-   * The optional audio volume of the critical sound; a float value between 0.0 and 1.0.
-   *
-   * @platform ios iOS >= 12
-   */
-  criticalVolume?: number;
 }
 
 /**

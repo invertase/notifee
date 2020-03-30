@@ -3,8 +3,8 @@
  */
 
 import { Importance } from '..';
-import { IOSNotificationSound, NotificationIOS } from '../types/NotificationIOS';
-import { hasOwnProperty, isBoolean, isNumber, isObject, isString, isUndefined } from '../utils';
+import { NotificationIOS } from '../types/NotificationIOS';
+import { hasOwnProperty, isBoolean, isNumber, isString, isUndefined } from '../utils';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
   const out: NotificationIOS = {
@@ -37,60 +37,41 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   }
 
   /**
+   * critical
+   */
+  if (hasOwnProperty(ios, 'critical')) {
+    if (!isBoolean(ios.critical)) {
+      throw new Error("'notification.ios.critical' must be a boolean value if specified.");
+    } else {
+      out.critical = ios.critical;
+    }
+  }
+
+  /**
+   * criticalVolume
+   */
+  if (hasOwnProperty(ios, 'criticalVolume')) {
+    if (!isNumber(ios.criticalVolume)) {
+      throw new Error("'notification.ios.criticalVolume' must be a number value if specified.");
+    } else {
+      if (ios.criticalVolume < 0 || ios.criticalVolume > 1) {
+        throw new Error(
+          "'notification.ios.criticalVolume' must be a float value between 0.0 and 1.0.",
+        );
+      }
+      out.criticalVolume = ios.criticalVolume;
+    }
+  }
+
+  /**
    * sound
    */
   if (hasOwnProperty(ios, 'sound')) {
     if (isString(ios.sound)) {
-      out.sound = {
-        name: ios.sound,
-      };
-    } else if (isObject(ios.sound)) {
-      const soundOut = {} as IOSNotificationSound;
-
-      // sound.name
-      if (!isString(ios.sound.name)) {
-        throw new Error("'notification.ios.sound.name' must be a string value.");
-      } else {
-        soundOut.name = ios.sound.name;
-      }
-
-      // sound.critical
-      if (hasOwnProperty(ios.sound, 'critical')) {
-        if (!isBoolean(ios.sound.critical)) {
-          throw new Error(
-            "'notification.ios.sound.critical' must be a boolean value if specified.",
-          );
-        } else {
-          soundOut.critical = ios.sound.critical;
-        }
-      }
-
-      // sound.criticalVolume
-      if (hasOwnProperty(ios.sound, 'criticalVolume')) {
-        if (!isNumber(ios.sound.criticalVolume)) {
-          throw new Error(
-            "'notification.ios.sound.criticalVolume' must be a number value if specified.",
-          );
-        } else {
-          if (ios.sound.criticalVolume < 0 || ios.sound.criticalVolume > 1) {
-            throw new Error(
-              "'notification.ios.sound.criticalVolume' must be a float value between 0.0 and 1.0.",
-            );
-          }
-          soundOut.criticalVolume = ios.sound.criticalVolume;
-        }
-      }
-
-      out.sound = soundOut;
+      out.sound = ios.sound;
     } else {
-      throw new Error("'notification.ios.sound' must be a string or an object value if specified.");
+      throw new Error("'notification.sound' must be a string value if specified.");
     }
-
-    if (!isNumber(ios.badgeCount) || ios.badgeCount < 0) {
-      throw new Error("'notification.ios.badgeCount' expected a positive number value.");
-    }
-
-    out.badgeCount = ios.badgeCount;
   }
 
   /**
@@ -98,7 +79,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
    */
   if (hasOwnProperty(ios, 'badgeCount')) {
     if (!isNumber(ios.badgeCount) || ios.badgeCount < 0) {
-      throw new Error("'notification.ios.badgeCount' expected a positive number value.");
+      throw new Error("'notification.ios.badgeCount' expected a number value >=0.");
     }
 
     out.badgeCount = ios.badgeCount;
