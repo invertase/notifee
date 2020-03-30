@@ -80,47 +80,48 @@
     content.launchImageName = iosDict[@"launchImageName"];
   }
 
-  // sound
-  if (iosDict[@"sound"] != nil) {
+  // critical, criticalVolume, sound
+  if (@available(iOS 12.0, *) && iosDict[@"critical"] != nil) {
     UNNotificationSound *notificationSound;
-    NSDictionary *soundDict = iosDict[@"notification"];
-    NSString *soundName = soundDict[@"name"];
+    BOOL criticalSound = [iosDict[@"critical"] boolValue];
+    NSNumber *criticalSoundVolume = iosDict[@"criticalVolume"];
+    NSString *soundName = iosDict[@"sound"] != nil ? iosDict[@"sound"] : @"default";
 
-    if (@available(iOS 12.0, *)) {
-      BOOL criticalSound = [soundDict[@"critical"] boolValue];
-      NSNumber *criticalSoundVolume = soundDict[@"criticalVolume"];
-
-      if ([soundName isEqualToString:@"default"]) {
-        if (criticalSound) {
-          if (criticalSoundVolume != nil) {
-            notificationSound = [UNNotificationSound defaultCriticalSoundWithAudioVolume:[criticalSoundVolume floatValue]];
-          } else {
-            notificationSound = [UNNotificationSound defaultCriticalSound];
-          }
+    if ([soundName isEqualToString:@"default"]) {
+      if (criticalSound) {
+        if (criticalSoundVolume != nil) {
+          notificationSound = [UNNotificationSound defaultCriticalSoundWithAudioVolume:[criticalSoundVolume floatValue]];
         } else {
-          notificationSound = [UNNotificationSound defaultSound];
+          notificationSound = [UNNotificationSound defaultCriticalSound];
         }
       } else {
-        if (criticalSound) {
-          if (criticalSoundVolume != nil) {
-            notificationSound = [UNNotificationSound criticalSoundNamed:soundName withAudioVolume:[criticalSoundVolume floatValue]];
-          } else {
-            notificationSound = [UNNotificationSound criticalSoundNamed:soundName];
-          }
-        } else {
-          notificationSound = [UNNotificationSound soundNamed:soundName];
-        }
+        notificationSound = [UNNotificationSound defaultSound];
       }
     } else {
-      if ([soundName isEqualToString:@"default"]) {
-        notificationSound = [UNNotificationSound defaultSound];
+      if (criticalSound) {
+        if (criticalSoundVolume != nil) {
+          notificationSound = [UNNotificationSound criticalSoundNamed:soundName withAudioVolume:[criticalSoundVolume floatValue]];
+        } else {
+          notificationSound = [UNNotificationSound criticalSoundNamed:soundName];
+        }
       } else {
         notificationSound = [UNNotificationSound soundNamed:soundName];
       }
     }
 
     content.sound = notificationSound;
-  } // sound
+  } else if (iosDict[@"sound"] != nil) {
+    UNNotificationSound *notificationSound;
+    NSString *soundName = iosDict[@"sound"];
+
+    if ([soundName isEqualToString:@"default"]) {
+      notificationSound = [UNNotificationSound defaultSound];
+    } else {
+      notificationSound = [UNNotificationSound soundNamed:soundName];
+    }
+
+    content.sound = notificationSound;
+  } // critical, criticalVolume, sound
 
   // threadId
   if (iosDict[@"threadId"] != nil) {
