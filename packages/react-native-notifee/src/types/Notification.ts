@@ -142,7 +142,7 @@ export interface NotificationPressAction {
    *
    * View the [Android Interaction](/react-native/docs/android/interaction) docs to learn more.
    *
-   * @platform android Android
+   * @platform android
    */
   launchActivity?: string;
 
@@ -154,7 +154,7 @@ export interface NotificationPressAction {
    *
    * View the [Press Action](/react-native/docs/android/interaction#press-action) document to learn more.
    *
-   * @platform android Android
+   * @platform android
    */
   mainComponent?: string;
 }
@@ -188,6 +188,8 @@ export enum EventType {
    * Event type is sent when a notification has been pressed by the user.
    *
    * On Android, notifications must include an `android.pressAction` property for this event to trigger.
+   *
+   * On iOS, this event is always sent when the user presses a notification.
    */
   PRESS = 1,
 

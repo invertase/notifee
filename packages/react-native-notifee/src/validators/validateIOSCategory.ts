@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-import { IOSNotificationCategory } from '../types/NotificationIOS';
-import { isArray, isObject, isString } from '../utils';
+import { IOSIntentIdentifier, IOSNotificationCategory, IOSNotificationCategoryAction } from '..';
+import { hasOwnProperty, isArray, isObject, isString, isBoolean } from '../utils';
 import validateIOSCategoryAction from './validateIOSCategoryAction';
 
 export default function validateIOSCategory(
@@ -24,20 +24,123 @@ export default function validateIOSCategory(
     throw new Error("'category.id' expected a valid string id.");
   }
 
-  if (!isArray(category.actions) || category.actions.length === 0) {
-    throw new Error("'category.actions' expected an array of actions.");
-  }
-
-  for (let i = 0; i < category.actions.length; i++) {
-    try {
-      category.actions[i] = validateIOSCategoryAction(category.actions[i]);
-    } catch (e) {
-      throw new Error(`'category.actions' invalid action at index "${i}". ${e}`);
-    }
-  }
-
-  return {
+  const out: IOSNotificationCategory = {
     id: category.id,
-    actions: category.actions,
-  } as IOSNotificationCategory;
+    allowInCarPlay: false,
+    allowAnnouncement: false,
+    hiddenPreviewsShowTitle: false,
+    hiddenPreviewsShowSubtitle: false,
+  };
+
+  /**
+   * summaryFormat
+   */
+  if (hasOwnProperty(category, 'summaryFormat')) {
+    if (!isString(category.summaryFormat)) {
+      throw new Error("'category.summaryFormat' expected a string value.");
+    }
+
+    out.summaryFormat = category.summaryFormat;
+  }
+
+  /**
+   * allowInCarPlay
+   */
+  if (hasOwnProperty(category, 'allowInCarPlay')) {
+    if (!isBoolean(category.allowInCarPlay)) {
+      throw new Error("'category.allowInCarPlay' expected a boolean value.");
+    }
+
+    out.allowInCarPlay = category.allowInCarPlay;
+  }
+
+  /**
+   * allowAnnouncement
+   */
+  if (hasOwnProperty(category, 'allowAnnouncement')) {
+    if (!isBoolean(category.allowAnnouncement)) {
+      throw new Error("'category.allowAnnouncement' expected a boolean value.");
+    }
+
+    out.allowAnnouncement = category.allowAnnouncement;
+  }
+
+  /**
+   * hiddenPreviewsShowTitle
+   */
+  if (hasOwnProperty(category, 'hiddenPreviewsShowTitle')) {
+    if (!isBoolean(category.hiddenPreviewsShowTitle)) {
+      throw new Error("'category.hiddenPreviewsShowTitle' expected a boolean value.");
+    }
+
+    out.hiddenPreviewsShowTitle = category.hiddenPreviewsShowTitle;
+  }
+
+  /**
+   * hiddenPreviewsShowSubtitle
+   */
+  if (hasOwnProperty(category, 'hiddenPreviewsShowSubtitle')) {
+    if (!isBoolean(category.hiddenPreviewsShowSubtitle)) {
+      throw new Error("'category.hiddenPreviewsShowSubtitle' expected a boolean value.");
+    }
+
+    out.hiddenPreviewsShowSubtitle = category.hiddenPreviewsShowSubtitle;
+  }
+
+  /**
+   * summaryFormat
+   */
+  if (hasOwnProperty(category, 'hiddenPreviewsBodyPlaceholder')) {
+    if (!isString(category.hiddenPreviewsBodyPlaceholder)) {
+      throw new Error("'category.hiddenPreviewsBodyPlaceholder' expected a string value.");
+    }
+
+    out.hiddenPreviewsBodyPlaceholder = category.hiddenPreviewsBodyPlaceholder;
+  }
+
+  /**
+   * intentIdentifiers
+   */
+  if (hasOwnProperty(category, 'intentIdentifiers')) {
+    if (!isArray(category.intentIdentifiers)) {
+      throw new Error("'category.intentIdentifiers' expected an array value.");
+    }
+
+    const identifiers = Object.values(IOSIntentIdentifier);
+
+    for (let i = 0; i < category.intentIdentifiers.length; i++) {
+      const intentIdentifier = category.intentIdentifiers[i];
+
+      if (!identifiers.includes(intentIdentifier)) {
+        throw new Error(
+          `'category.intentIdentifiers' unexpected intentIdentifier "${intentIdentifier}" at array index "${i}".`,
+        );
+      }
+    }
+
+    out.intentIdentifiers = category.intentIdentifiers;
+  }
+
+  /**
+   * actions
+   */
+  if (hasOwnProperty(category, 'actions')) {
+    if (!isArray(category.actions)) {
+      throw new Error("'category.actions' expected an array value.");
+    }
+
+    const actions: IOSNotificationCategoryAction[] = [];
+
+    for (let i = 0; i < category.actions.length; i++) {
+      try {
+        actions[i] = validateIOSCategoryAction(category.actions[i]);
+      } catch (e) {
+        throw new Error(`'category.actions' invalid action at index "${i}". ${e}`);
+      }
+    }
+
+    out.actions = actions;
+  }
+
+  return out;
 }

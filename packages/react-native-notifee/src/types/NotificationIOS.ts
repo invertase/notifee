@@ -345,7 +345,7 @@ export interface IOSNotificationCategory {
   hiddenPreviewsShowSubtitle?: boolean;
   hiddenPreviewsBodyPlaceholder?: string;
   intentIdentifiers?: IOSIntentIdentifier[];
-  actions: IOSNotificationCategoryAction[];
+  actions?: IOSNotificationCategoryAction[];
 }
 
 export interface IOSNotificationCategoryAction {
