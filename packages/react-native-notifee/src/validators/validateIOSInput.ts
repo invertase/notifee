@@ -1,4 +1,4 @@
-import { IOSInput } from '..';
+import { IOSInput } from '../types/NotificationIOS';
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 export default function validateIOSInput(input?: IOSInput): IOSInput {

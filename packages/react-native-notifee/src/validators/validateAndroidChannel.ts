@@ -1,14 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-// @ts-ignore
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
-import { Importance } from '..';
+import { Importance } from '../types/Notification';
 import { AndroidChannel, AndroidVisibility } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannel(channel: AndroidChannel): AndroidChannel {

@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Importance, NotificationPressAction } from '..';
+import { Importance, NotificationPressAction } from './Notification';
 
 /**
  * The interface for Android specific options which are applied to a notification.

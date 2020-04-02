@@ -16,7 +16,7 @@ import {
   isUndefined,
 } from '../utils';
 
-import { Importance } from '..';
+import { Importance } from '../types/Notification';
 import {
   AndroidBadgeIconType,
   AndroidCategory,

@@ -1,4 +1,4 @@
-import { IOSNotificationCategoryAction } from '..';
+import { IOSNotificationCategoryAction } from '../types/NotificationIOS';
 import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 import validateIOSInput from './validateIOSInput';
 

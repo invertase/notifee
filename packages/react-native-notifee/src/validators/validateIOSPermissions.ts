@@ -1,4 +1,4 @@
-import { IOSNotificationPermissions } from '..';
+import { IOSNotificationPermissions } from '../types/NotificationIOS';
 import { hasOwnProperty, isBoolean } from '../utils';
 
 export default function validateIOSPermissions(

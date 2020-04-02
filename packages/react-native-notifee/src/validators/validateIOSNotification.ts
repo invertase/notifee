@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Importance } from '..';
+import { Importance } from '../types/Notification';
 import { NotificationIOS } from '../types/NotificationIOS';
 import { hasOwnProperty, isBoolean, isNumber, isString, isUndefined } from '../utils';
 

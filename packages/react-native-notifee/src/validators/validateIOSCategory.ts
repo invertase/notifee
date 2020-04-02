@@ -1,7 +1,11 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-import { IOSIntentIdentifier, IOSNotificationCategory, IOSNotificationCategoryAction } from '..';
+import {
+  IOSIntentIdentifier,
+  IOSNotificationCategory,
+  IOSNotificationCategoryAction,
+} from '../types/NotificationIOS';
 import { hasOwnProperty, isArray, isObject, isString, isBoolean } from '../utils';
 import validateIOSCategoryAction from './validateIOSCategoryAction';
 
