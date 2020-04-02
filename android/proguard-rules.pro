@@ -68,14 +68,6 @@
 -keepnames class org.bouncycastle.** { *; }
 -dontwarn org.bouncycastle.**
 
-# Room
--keepclassmembers class * {
-  @androidx.room.* <methods>;
-}
--keep class * extends androidx.room.RoomDatabase
--dontwarn androidx.room.paging.**
-
-
 # EventBus
 -keepclassmembers class * {
     @org.greenrobot.eventbus.Subscribe <methods>;

@@ -17,7 +17,6 @@ import java.util.List;
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
 import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.database.Database;
 import app.notifee.core.events.InitialNotificationEvent;
 import app.notifee.core.events.MainComponentEvent;
 
@@ -57,7 +56,6 @@ public class Notifee {
       if (mNotifee != null) return;
       mNotifee = new Notifee();
       mNotifeeConfig = notifeeConfig;
-      Database.initialize();
       JSONConfig.initialize(notifeeConfig.getJsonConfig());
       EventSubscriber.register(notifeeConfig.getEventSubscriber());
       LicenseManager.initialize();
