@@ -7,7 +7,6 @@
 
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 
-#import "Public/NotifeeCore.h"
 #import "Private/NotifeeCoreUtil.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
 
@@ -85,9 +84,6 @@
       return;
     }
 
-    // store notification for getInitialNotification
-    _initialNotification = notifeeNotification;
-
     NSNumber *eventType;
     NSMutableDictionary *event = [NSMutableDictionary dictionary];
     NSMutableDictionary *eventDetail = [NSMutableDictionary dictionary];
@@ -119,6 +115,9 @@
 
     //event.detail
     event[@"detail"] = eventDetail;
+
+    // store notification for getInitialNotification
+    _initialNotification = [eventDetail copy];
 
     // post PRESS/ACTION_PRESS event
     [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:event];
