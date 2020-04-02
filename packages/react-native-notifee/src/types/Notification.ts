@@ -68,7 +68,7 @@ export interface Notification {
 }
 
 /**
- * An interface representing a notification & action that launched the current app / activity.
+ * An interface representing a notification & action that launched the current app / or Android activity.
  *
  * View the [App open events](/react-native/docs/events#app-open-events) documentation to learn more.
  *
@@ -85,6 +85,18 @@ export interface InitialNotification {
    * The press action which the user interacted with, on the notification, which caused the application to open.
    */
   pressAction: NotificationPressAction;
+
+  /**
+   * The input from a notification action.
+   *
+   * The input detail is available when the [`EventType`](/react-native/reference/eventtype) is:
+   *
+   * - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
+   * - The notification quick action has input enabled. View [`AndroidInput`](/react-native/reference/androidinput) for more details.
+   *
+   * @platform android API Level >= 20
+   */
+  input?: string;
 }
 
 /**
