@@ -11,6 +11,7 @@
 #import "Private/NotifeeCoreUtil.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
+#import <UIKit/UIKit.h>
 
 @implementation NotifeeCore
 
@@ -424,6 +425,34 @@
 
 + (void)getInitialNotification:(notifeeMethodNSDictionaryBlock)block {
   block(nil, [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification]);
+}
+
++ (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
+  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+  block(nil);
+}
+
++ (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
+  block(nil, [UIApplication sharedApplication].applicationIconBadgeNumber);
+}
+
++ (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
+  NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+  NSInteger newCount = currentCount + incrementBy;
+  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
+  block(nil);
+}
+
++ (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
+  NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+  NSInteger newCount = currentCount - decrementBy;
+  
+  if (newCount < 0) {
+    newCount = 0;
+  }
+    
+  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
+  block(nil);
 }
 
 @end
