@@ -20,9 +20,9 @@ export interface Module {
    * API used to cancel all notifications.
    *
    * The `cancelAllNotifications` API removes any displayed notifications from the users device and
-   * any notifications which have triggers set.
+   * any pending notification triggers.
    *
-   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
    * notifications.
    */
   cancelAllNotifications(): Promise<void>;
@@ -353,7 +353,7 @@ export interface Module {
    *
    * Returns `0` on Android.
    *
-   *  @platform ios
+   * @platform ios
    */
   getBadgeCount(): Promise<number>;
 
