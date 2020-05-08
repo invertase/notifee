@@ -58,6 +58,10 @@ typedef void (^notifeeMethodNSIntegerBlock)(NSError *_Nullable, NSInteger);
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block;
 
++ (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block;
+
 @end
 
 NS_ASSUME_NONNULL_END
