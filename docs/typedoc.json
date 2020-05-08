@@ -1,6 +1,6 @@
 {
 	"id": 0,
-	"name": "@notifee/react-native - v0.4.0",
+	"name": "@notifee/react-native - v0.5.1",
 	"kind": 0,
 	"flags": {},
 	"children": [
@@ -6702,7 +6702,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "API used to cancel all notifications.",
-								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany notifications which have triggers set.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany pending notification triggers.\n\nThis method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
@@ -7297,7 +7297,13 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Get the current badge count value for this application on the current device.",
-								"text": "Returns `0` on Android.\n\n @platform ios\n"
+								"text": "Returns `0` on Android.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "ios\n"
+									}
+								]
 							},
 							"type": {
 								"type": "reference",
@@ -8487,7 +8493,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "API used to cancel all notifications.",
-								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany notifications which have triggers set.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
+								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany pending notification triggers.\n\nThis method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
@@ -9182,7 +9188,13 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Get the current badge count value for this application on the current device.",
-								"text": "Returns `0` on Android.\n\n @platform ios\n"
+								"text": "Returns `0` on Android.\n",
+								"tags": [
+									{
+										"tag": "platform",
+										"text": "ios\n"
+									}
+								]
 							},
 							"type": {
 								"type": "reference",
