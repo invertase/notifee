@@ -150,6 +150,52 @@ RCT_EXPORT_METHOD(setNotificationCategories:
   }];
 }
 
+RCT_EXPORT_METHOD(setBadgeCount:
+  (NSInteger *) count
+      resolve:
+      (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore setBadgeCount:count withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(getBadgeCount:
+  (RCTPromiseResolveBlock) resolve
+  reject:
+  (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore getBadgeCount:^(NSError *_Nullable error, NSInteger count) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:@(count)];
+  }];
+}
+
+RCT_EXPORT_METHOD(incrementBadgeCount:
+  (NSInteger *) incrementBy
+  resolve:
+  (RCTPromiseResolveBlock) resolve
+  reject:
+  (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore incrementBadgeCount:incrementBy withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(decrementBadgeCount:
+  (NSInteger *) decrementBy
+  resolve:
+  (RCTPromiseResolveBlock) resolve
+  reject:
+  (RCTPromiseRejectBlock) reject
+) {
+   [NotifeeCore decrementBadgeCount:decrementBy withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
 # pragma mark - Internals
 
 - (void)resolve:(RCTPromiseResolveBlock)resolve orReject:(RCTPromiseRejectBlock)reject promiseWithError:(NSError *_Nullable)error orResult:(id _Nullable)result {

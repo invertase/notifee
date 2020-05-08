@@ -13,7 +13,7 @@ import {
 import { InitialNotification, Notification, Event } from './types/Notification';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 
-import { isAndroid, isArray, isFunction, isIOS, isString, isUndefined } from './utils';
+import { isAndroid, isArray, isFunction, isIOS, isNumber, isString, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
@@ -54,21 +54,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.cancelNotification(notificationId);
-  }
-
-  public createCategory(category: IOSNotificationCategory): Promise<string> {
-    let options: IOSNotificationCategory;
-    try {
-      options = validateIOSCategory(category);
-    } catch (e) {
-      throw new Error(`notifee.createCategory(*) ${e.message}`);
-    }
-
-    if (isAndroid) {
-      return Promise.resolve('');
-    }
-
-    return this.native.createCategory(options);
   }
 
   public createChannel(channel: AndroidChannel): Promise<string> {
@@ -352,6 +337,64 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getNotificationSettings();
+  }
+
+  public getBadgeCount(): Promise<number> {
+    if (isAndroid) {
+      return Promise.resolve(0);
+    }
+
+    return this.native.getBadgeCount();
+  }
+
+  public setBadgeCount(count: number): Promise<void> {
+    if (isAndroid) {
+      return Promise.resolve();
+    }
+
+    if (!isNumber(count) || count < 0) {
+      throw new Error("notifee.setBadgeCount(*) 'count' expected a number value greater than 0.");
+    }
+
+    return this.native.setBadgeCount(Math.round(count));
+  }
+
+  public incrementBadgeCount(incrementBy?: number): Promise<void> {
+    if (isAndroid) {
+      return Promise.resolve();
+    }
+
+    let value = 1;
+    if (!isUndefined(incrementBy)) {
+      if (!isNumber(incrementBy) || incrementBy < 1) {
+        throw new Error(
+          "notifee.decrementBadgeCount(*) 'incrementBy' expected a number value greater than 1.",
+        );
+      }
+
+      value = incrementBy;
+    }
+
+    return this.native.incrementBadgeCount(Math.round(value));
+  }
+
+  public decrementBadgeCount(decrementBy?: number): Promise<void> {
+    if (isAndroid) {
+      return Promise.resolve();
+    }
+
+    let value = 1;
+    if (!isUndefined(decrementBy)) {
+      if (!isNumber(decrementBy) || decrementBy < 1) {
+        throw new Error(
+          "notifee.decrementBadgeCount(*) 'decrementBy' expected a number value greater than 1.",
+        );
+      }
+
+      value = decrementBy;
+    }
+
+    return this.native.decrementBadgeCount(Math.round(value));
   }
 
   // public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {

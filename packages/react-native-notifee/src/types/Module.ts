@@ -41,8 +41,6 @@ export interface Module {
    */
   cancelNotification(notificationId: string): Promise<void>;
 
-  createCategory(category: IOSNotificationCategory): Promise<string>;
-
   /**
    * API to create and update channels on supported Android devices.
    *
@@ -349,6 +347,49 @@ export interface Module {
    * @platform ios
    */
   getNotificationSettings(): Promise<null | IOSNotificationSettings>;
+
+  /**
+   * Get the current badge count value for this application on the current device.
+   *
+   * Returns `0` on Android.
+   *
+   *  @platform ios
+   */
+  getBadgeCount(): Promise<number>;
+
+  /**
+   * Set the badge count value for this application on the current device.
+   *
+   * If set to zero, the badge count is removed from the device. The count must also
+   * be a positive number.
+   *
+   * @platform ios
+   *
+   * @param count The number value to set as the badge count.
+   */
+  setBadgeCount(count: number): Promise<void>;
+
+  /**
+   * Increments the badge count for this application on the current device by a specified
+   * value.
+   *
+   * Defaults to an increment of `1`.
+   *
+   * @platform ios
+   *
+   * @param incrementBy The value to increment the badge count by.
+   */
+  incrementBadgeCount(incrementBy?: number): Promise<void>;
+
+  /**
+   * Decrements the badge count for this application on the current device by a specified
+   * value.
+   *
+   * Defaults to an decrement of `1`.
+   *
+   * @platform ios
+   */
+  decrementBadgeCount(decrementBy?: number): Promise<void>;
 
   // TODO introduce as part of iOS
   // scheduleNotification(notification: Notification, schedule: Schedule): Promise<void>;
