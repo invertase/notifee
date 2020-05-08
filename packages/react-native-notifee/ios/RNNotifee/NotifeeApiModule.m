@@ -84,6 +84,16 @@ RCT_EXPORT_METHOD(cancelNotification:
   }];
 }
 
+RCT_EXPORT_METHOD(cancelAllNotifications:
+  (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore cancelAllNotifications:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
 RCT_EXPORT_METHOD(displayNotification:
   (NSDictionary *) notification
       resolve:

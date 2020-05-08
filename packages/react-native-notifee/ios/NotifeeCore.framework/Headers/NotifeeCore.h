@@ -42,6 +42,8 @@ typedef void (^notifeeMethodNSIntegerBlock)(NSError *_Nullable, NSInteger);
 
 + (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block;
 
++ (void)cancelAllNotifications:(notifeeMethodVoidBlock)block;
+
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
