@@ -27,6 +27,8 @@ typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable, NSArray *_Nullable
 
 typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 
+typedef void (^notifeeMethodNSIntegerBlock)(NSError *_Nullable, NSInteger);
+
 @class NotifeeCore;
 
 @protocol NotifeeCoreDelegate <NSObject>
@@ -51,6 +53,14 @@ typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 + (void)getNotificationSettings:(notifeeMethodNSDictionaryBlock)block;
 
 + (void)getInitialNotification:(notifeeMethodNSDictionaryBlock)block;
+
++ (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block;
+
++ (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block;
 
 @end
 
