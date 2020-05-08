@@ -35,6 +35,23 @@
 }
 
 /**
+ * Cancel all currently displayed or scheduled notifications.
+ *
+ * @param block notifeeMethodVoidBlock
+ */
++ (void)cancelAllNotifications:(notifeeMethodVoidBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  
+  // TODO cancel conditionally once scheduling API introduced, see roadmap comment
+  [center removeAllDeliveredNotifications];
+  
+  // TODO cancel conditionally once scheduling API introduced, see roadmap comment
+  [center removeAllPendingNotificationRequests];
+  block(nil);
+}
+
+
+/**
  * Display a local notification immediately.
  *
  * @param notification NSDictionary representation of UNMutableNotificationContent
@@ -53,7 +70,7 @@
   if (notification[@"subtitle"] != nil) {
     content.subtitle = notification[@"subtitle"];
   }
-
+  
   // body
   if (notification[@"body"] != nil) {
     content.body = notification[@"body"];

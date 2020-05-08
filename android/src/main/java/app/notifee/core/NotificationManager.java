@@ -328,8 +328,13 @@ class NotificationManager {
     return Tasks.call(() -> {
       NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat
         .from(ContextHolder.getApplicationContext());
+
+      // Displayed
+      // TODO cancel conditionally once scheduling API introduced, see roadmap comment
       notificationManagerCompat.cancelAll();
 
+      // Scheduled
+      // TODO cancel conditionally once scheduling API introduced, see roadmap comment
       WorkManager.getInstance(ContextHolder.getApplicationContext())
         .cancelAllWorkByTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
 
