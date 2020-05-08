@@ -66,13 +66,14 @@ android {
 
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
       proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
       signingConfig signingConfigs.release
       matchingFallbacks = ['release']
     }
     debug {
+      minifyEnabled false
       matchingFallbacks = ['debug']
     }
   }
@@ -116,12 +117,6 @@ android {
 dependencies {
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
-
-  debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
-    exclude group:'com.facebook.yoga'
-    exclude group:'com.facebook.flipper', module: 'fbjni'
-    exclude group:'com.facebook.litho', module: 'litho-annotations'
-  }
 
   if (enableHermes) {
     def hermesPath = "../../node_modules/hermes-engine/android/"
