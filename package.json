@@ -2,10 +2,13 @@
   "name": "@notifications/root",
   "private": true,
   "scripts": {
-    "prepare": "yarn run lerna:link && lerna run prepare",
+    "prepare": "yarn run lerna:link && lerna run prepare && yarn run tests_rn:ios:pod:install",
+    "build:core": "yarn run build:core:android && yarn run build:core:ios",
+    "build:core:android": "cd ./android && ./gradlew assembleRelease",
+    "build:core:ios": "cd ./ios && pod install && xcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=-fembed-bitcode -workspace NotifeeCore.xcworkspace -scheme NotifeeCore ONLY_ACTIVE_ARCH=NO -configuration Release -sdk iphoneos -UseModernBuildSystem=YES clean build | xcpretty",
     "build:all:clean": "rimraf android/build && rimraf android/.gradle && rimraf ios/build && lerna run build:clean",
-    "build:all:build": "lerna run build",
-    "build_rn:watch": "cd packages/react-native && yarn run build:watch",
+    "build:rn": "cd packages/react-native && yarn run build",
+    "build:rn:watch": "cd packages/react-native && yarn run build:watch",
     "validate:all:js": "eslint ./",
     "validate:all:ts": "tsc --project ./ && tslint --project tsconfig.json -c tslint.json packages/**/**/*.ts",
     "lerna:bootstrap": "lerna bootstrap",
@@ -20,9 +23,6 @@
     "tests_rn:ios:pod:install": "cd tests_react_native && cd ios && rm -rf ReactNativeFirebaseDemo.xcworkspace && pod install && cd .."
   },
   "devDependencies": {
-    "codecov": "^3.6.1",
-    "cross-env": "^6.0.3",
-    "detox": "14.5.1",
     "lerna": "^3.18.3",
     "typedoc": "^0.15.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
@@ -50,7 +50,7 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*",
+      "packages/react-native",
       "tests_react_native"
     ],
     "nohoist": [
