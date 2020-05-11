@@ -10,7 +10,7 @@
     "build:rn": "cd packages/react-native && yarn run build",
     "build:rn:watch": "cd packages/react-native && yarn run build:watch",
     "validate:all:js": "eslint ./",
-    "validate:all:ts": "tsc --project ./ && tslint --project tsconfig.json -c tslint.json packages/**/**/*.ts",
+    "validate:all:ts": "tsc --project ./",
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:link": "lerna link && lerna exec -- yarn link",
     "lerna:clean": "lerna clean",
@@ -30,6 +30,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.19.0",
     "prettier": "^1.19.1",
     "rimraf": "^2.7.1",
     "typescript": "^3.7.5"

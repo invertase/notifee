@@ -1,5 +1,5 @@
 {
-  "include": ["packages/**/lib/*.d.ts", "packages/**/type-test.ts"],
+  "include": ["packages/react-native/src/**/*.ts"],
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
@@ -23,8 +23,6 @@
   },
   "exclude": [
     "node_modules",
-    "jet",
-    "**/*.spec.ts",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"

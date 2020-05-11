@@ -2,8 +2,10 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve, join } = require('path');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createBlacklist } = require('metro');
 
 const rootDir = resolve(__dirname, '..');
