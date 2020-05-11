@@ -8,7 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Keep;
-import androidx.concurrent.futures.ResolvableFuture;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker.Result;
@@ -17,8 +17,9 @@ import androidx.work.WorkManager;
 
 import java.util.concurrent.TimeUnit;
 
-import app.notifee.core.events.BlockStateEvent;
-import app.notifee.core.utils.ObjectUtils;
+import app.notifee.core.event.BlockStateEvent;
+import app.notifee.core.interfaces.MethodCallResult;
+import app.notifee.core.utility.ObjectUtils;
 
 import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 
@@ -33,7 +34,7 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
   }
 
   static void doWork(
-    Data workData, ResolvableFuture<Result> completer
+    Data workData, CallbackToFutureAdapter.Completer<Result> completer
   ) {
     Logger.v(TAG, "starting background work");
 

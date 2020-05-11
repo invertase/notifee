@@ -7,7 +7,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.concurrent.futures.ResolvableFuture;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -146,7 +146,7 @@ class LicenseManager {
    * @param completer
    */
   static void doLocalWork(
-    ResolvableFuture<ListenableWorker.Result> completer
+    CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer
   ) {
     Logger.d(TAG, "Local verification started.");
     // mark local verification as pending while we try verify the license
@@ -244,7 +244,7 @@ class LicenseManager {
    * @param completer
    */
   static void doRemoteWork(
-    Data workData, final ResolvableFuture<ListenableWorker.Result> completer
+    Data workData, final CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer
   ) {
     Logger.d(TAG, "Remote verification started.");
     boolean isPrimaryKey = workData.getBoolean(Worker.KEY_IS_PRIMARY, false);

@@ -304,18 +304,20 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - RNFBApp (6.3.4):
+  - RNFBApp (6.7.1):
     - Firebase/Core (~> 6.13.0)
     - React
-  - RNFBFunctions (6.3.4):
+  - RNFBFunctions (6.8.1):
+    - Firebase/Core (~> 6.13.0)
     - Firebase/Functions (~> 6.13.0)
     - React
     - RNFBApp
-  - RNFBMessaging (6.3.4):
+  - RNFBMessaging (6.7.1):
+    - Firebase/Core (~> 6.13.0)
     - Firebase/Messaging (~> 6.13.0)
     - React
     - RNFBApp
-  - RNNotifee (0.4.0):
+  - RNNotifee (0.5.1):
     - NotifeeCore
     - React
   - Yoga (1.14.0)
@@ -482,12 +484,12 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
-  RNFBFunctions: 6975565f0abcc68d9731d05b78778f003db0eca5
-  RNFBMessaging: 51cc7f6beaf4c4feac6f18ea941bba5854e3d9c6
-  RNNotifee: f3f6b72c9e4122a48c80ff3ee4683396cde37c86
+  RNFBApp: 7b539bb25520fa73d6a240f5c6ea569e27683645
+  RNFBFunctions: 095a760299c21f413e5fed53f5251d914d07b69c
+  RNFBMessaging: c55142d3b2d34d706bf12bd5eef9ef35254c2df1
+  RNNotifee: 8e481e418e316442157469ca800184fc0e8fea91
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: f92143ea8b94827574e337285c3d3fdbf15fbe4e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

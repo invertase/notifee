@@ -1,8 +1,0 @@
---recursive
---timeout 260000
---reporter spec
---slow 2000
---retries 0
---bail
---exit
---require node_modules/@notifee/jet/platform/node

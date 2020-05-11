@@ -69,27 +69,18 @@
       "tests_react_native"
     ],
     "nohoist": [
-      "detox",
-      "**/detox",
-      "**/detox/**",
-      "**/react-native-port-patcher/**",
+      "**/cavy",
+      "**/cavy/**",
+      "**/cavy-native-reporter",
+      "**/cavy-native-reporter/**",
+      "**/prop-types",
       "**/prop-types/**",
-      "**/@react-native-firebase/private-tests-helpers",
-      "**/@react-native-firebase/private-tests-helpers/**",
-      "**/babel-plugin-istanbul",
-      "**/babel-plugin-istanbul/**",
       "**/patch-package",
       "**/patch-package/**",
-      "**/jet",
-      "**/jet/**",
-      "**/nyc",
-      "**/nyc/**",
       "**/react",
       "**/react/**",
       "**/react-native",
-      "**/react-native/**",
-      "**/stacktrace-js",
-      "**/stacktrace-js/**"
+      "**/react-native/**"
     ]
   },
   "dependencies": {

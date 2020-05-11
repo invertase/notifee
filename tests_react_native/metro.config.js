@@ -39,11 +39,7 @@ const config = {
       },
     ),
   },
-  watchFolders: [
-    // resolve(__dirname, '.'),
-    resolve(__dirname, './../packages/react-native'),
-    resolve(__dirname, './../packages/jet'),
-  ],
+  watchFolders: [resolve(__dirname, './../packages/react-native')],
 };
 
 module.exports = config;

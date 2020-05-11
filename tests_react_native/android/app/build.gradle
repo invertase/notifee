@@ -3,8 +3,10 @@ apply plugin: 'com.android.application'
 import com.android.build.OutputFile
 
 project.ext.react = [
-  entryFile   : "index.ts",
-  enableHermes: false,  // clean and rebuild if changing
+  entryFile   : "index.js",
+  entryFileRelease   : "index.test.js",
+  entryFileTest   : "index.test.js",
+  enableHermes: true,  // clean and rebuild if changing
 ]
 
 // up to mono root
@@ -35,16 +37,13 @@ android {
   defaultConfig {
     applicationId "com.invertase.testing"
 
-    minSdkVersion 18
+    minSdkVersion 21
     targetSdkVersion 29
     versionCode 1
     versionName "1.0"
-    ndk {
-      abiFilters "armeabi-v7a", "x86"
-    }
 
     testBuildType System.getProperty('testBuildType', 'debug')
-    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
   splits {
     abi {
@@ -128,12 +127,9 @@ dependencies {
     implementation 'org.webkit:android-jsc:+'
   }
 
-
-  /* ------------------------
-   *  TESTING SDKS/LIBRARIES
-   * ------------------------ */
-//  androidTestImplementation('com.wix:detox:+') { transitive = true }
-//  androidTestImplementation 'junit:junit:4.12'
+  androidTestImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test:runner:1.2.0'
+  androidTestImplementation 'androidx.test:rules:1.2.0'
 }
 
 // Run this once to be able to run the application with BUCK
@@ -143,12 +139,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
   into 'libs'
 }
 
-task buildNotifeeCore(type: GradleBuild) {
-  buildFile = '../../../android/build.gradle'
-  tasks = ['assembleRelease'] // change to assembleDebug to use debug builds
-}
-
-preBuild.dependsOn buildNotifeeCore
+//task buildNotifeeCore(type: GradleBuild) {
+//  buildFile = '../../../android/build.gradle'
+//  tasks = ['assembleRelease'] // change to assembleDebug to use debug builds
+//}
+//
+//preBuild.dependsOn buildNotifeeCore
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply plugin: 'com.google.gms.google-services'

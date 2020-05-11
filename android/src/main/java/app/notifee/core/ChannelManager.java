@@ -17,47 +17,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import app.notifee.core.bundles.ChannelBundle;
-import app.notifee.core.bundles.ChannelGroupBundle;
-import app.notifee.core.utils.ResourceUtils;
+import app.notifee.core.model.ChannelModel;
+import app.notifee.core.model.ChannelGroupModel;
+import app.notifee.core.utility.ResourceUtils;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
 
 public class ChannelManager {
   private static String TAG = "ChannelManager";
 
-  static Task<Void> createChannel(ChannelBundle channelBundle) {
+  static Task<Void> createChannel(ChannelModel channelModel) {
     return Tasks.call(() -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
 
       NotificationChannel channel = new NotificationChannel(
-        channelBundle.getId(),
-        channelBundle.getName(),
-        channelBundle.getImportance()
+        channelModel.getId(),
+        channelModel.getName(),
+        channelModel.getImportance()
       );
 
-      channel.setShowBadge(channelBundle.getBadge());
-      channel.setBypassDnd(channelBundle.getBypassDnd());
-      channel.setDescription(channelBundle.getDescription());
-      channel.setGroup(channelBundle.getGroupId());
-      channel.enableLights(channelBundle.getLights());
+      channel.setShowBadge(channelModel.getBadge());
+      channel.setBypassDnd(channelModel.getBypassDnd());
+      channel.setDescription(channelModel.getDescription());
+      channel.setGroup(channelModel.getGroupId());
+      channel.enableLights(channelModel.getLights());
 
-      if (channelBundle.getLightColor() != null) {
-        channel.setLightColor(channelBundle.getLightColor());
+      if (channelModel.getLightColor() != null) {
+        channel.setLightColor(channelModel.getLightColor());
       }
 
-      channel.setLockscreenVisibility(channelBundle.getVisibility());
-      channel.enableVibration(channelBundle.getVibration());
+      channel.setLockscreenVisibility(channelModel.getVisibility());
+      channel.enableVibration(channelModel.getVibration());
 
-      long[] vibrationPattern = channelBundle.getVibrationPattern();
+      long[] vibrationPattern = channelModel.getVibrationPattern();
       if (vibrationPattern.length > 0) {
         channel.setVibrationPattern(vibrationPattern);
       }
 
-      if (channelBundle.getSound() != null) {
-        Uri soundUri = ResourceUtils.getSoundUri(channelBundle.getSound());
+      if (channelModel.getSound() != null) {
+        Uri soundUri = ResourceUtils.getSoundUri(channelModel.getSound());
         if (soundUri != null) {
           AudioAttributes audioAttributes = new AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_NOTIFICATION)
@@ -78,29 +78,29 @@ public class ChannelManager {
     });
   }
 
-  static Task<Void> createChannels(List<ChannelBundle> channelBundles) {
+  static Task<Void> createChannels(List<ChannelModel> channelModels) {
     return Tasks.call(() -> {
-      for (ChannelBundle channelBundle : channelBundles) {
-        Tasks.await(createChannel(channelBundle));
+      for (ChannelModel channelModel : channelModels) {
+        Tasks.await(createChannel(channelModel));
       }
 
       return null;
     });
   }
 
-  static Task<Void> createChannelGroup(ChannelGroupBundle channelGroupBundle) {
+  static Task<Void> createChannelGroup(ChannelGroupModel channelGroupModel) {
     return Tasks.call(() -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
 
       NotificationChannelGroup notificationChannelGroup = new NotificationChannelGroup(
-        channelGroupBundle.getId(),
-        channelGroupBundle.getName()
+        channelGroupModel.getId(),
+        channelGroupModel.getName()
       );
 
-      if (Build.VERSION.SDK_INT >= 28 && channelGroupBundle.getDescription() != null) {
-        notificationChannelGroup.setDescription(channelGroupBundle.getDescription());
+      if (Build.VERSION.SDK_INT >= 28 && channelGroupModel.getDescription() != null) {
+        notificationChannelGroup.setDescription(channelGroupModel.getDescription());
       }
 
       NotificationManagerCompat.from(ContextHolder.getApplicationContext())
@@ -110,14 +110,14 @@ public class ChannelManager {
     });
   }
 
-  static Task<Void> createChannelGroups(List<ChannelGroupBundle> channelGroupBundles) {
+  static Task<Void> createChannelGroups(List<ChannelGroupModel> channelGroupModels) {
     return Tasks.call(() -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
 
-      for (ChannelGroupBundle channelGroupBundle : channelGroupBundles) {
-        Tasks.await(createChannelGroup(channelGroupBundle));
+      for (ChannelGroupModel channelGroupModel : channelGroupModels) {
+        Tasks.await(createChannelGroup(channelGroupModel));
       }
 
       return null;

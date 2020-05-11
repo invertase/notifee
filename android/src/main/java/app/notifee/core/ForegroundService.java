@@ -10,8 +10,9 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 
-import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.events.ForegroundServiceEvent;
+import app.notifee.core.interfaces.MethodCallResult;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.event.ForegroundServiceEvent;
 
 public class ForegroundService extends Service {
 
@@ -45,10 +46,10 @@ public class ForegroundService extends Service {
       Bundle bundle = extras.getBundle("notificationBundle");
 
       if (notification != null & bundle != null) {
-        NotificationBundle notificationBundle = NotificationBundle.fromBundle(bundle);
+        NotificationModel notificationModel = NotificationModel.fromBundle(bundle);
 
         if (mCurrentNotificationId == null) {
-          mCurrentNotificationId = notificationBundle.getId();
+          mCurrentNotificationId = notificationModel.getId();
           startForeground(hashCode, notification);
 
           // On headless task complete
@@ -58,12 +59,12 @@ public class ForegroundService extends Service {
           };
 
           ForegroundServiceEvent foregroundServiceEvent = new ForegroundServiceEvent(
-            notificationBundle,
+            notificationModel,
             methodCallResult
           );
 
           EventBus.post(foregroundServiceEvent);
-        } else if (mCurrentNotificationId.equals(notificationBundle.getId())) {
+        } else if (mCurrentNotificationId.equals(notificationModel.getId())) {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .notify(hashCode, notification);
         }

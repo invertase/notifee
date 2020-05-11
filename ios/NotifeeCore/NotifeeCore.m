@@ -60,7 +60,7 @@
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block {
   NSDictionary *iosDict = notification[@"ios"];
   UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-
+  
   // title
   if (notification[@"title"] != nil) {
     content.title = notification[@"title"];

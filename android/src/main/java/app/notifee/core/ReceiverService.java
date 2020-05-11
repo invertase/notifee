@@ -10,16 +10,16 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
 
-import app.notifee.core.bundles.NotificationAndroidPressActionBundle;
-import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.events.InitialNotificationEvent;
-import app.notifee.core.events.MainComponentEvent;
-import app.notifee.core.events.NotificationEvent;
+import app.notifee.core.model.NotificationAndroidPressActionModel;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.event.InitialNotificationEvent;
+import app.notifee.core.event.MainComponentEvent;
+import app.notifee.core.event.NotificationEvent;
 
 import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
-import static app.notifee.core.events.NotificationEvent.TYPE_ACTION_PRESS;
-import static app.notifee.core.events.NotificationEvent.TYPE_DISMISSED;
-import static app.notifee.core.events.NotificationEvent.TYPE_PRESS;
+import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
+import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
+import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 
 public class ReceiverService extends Service {
   public static final String REMOTE_INPUT_RECEIVER_KEY = "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
@@ -104,8 +104,8 @@ public class ReceiverService extends Service {
       return;
     }
 
-    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
-    EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationBundle));
+    NotificationModel notificationModel = NotificationModel.fromBundle(notification);
+    EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationModel));
   }
 
   /**
@@ -126,19 +126,19 @@ public class ReceiverService extends Service {
     }
 
 
-    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
+    NotificationModel notificationModel = NotificationModel.fromBundle(notification);
 
     Bundle pressAction = intent.getBundleExtra("pressAction");
-    NotificationAndroidPressActionBundle pressActionBundle = null;
+    NotificationAndroidPressActionModel pressActionBundle = null;
 
     Bundle extras = new Bundle();
 
     if (pressAction != null) {
-      pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
+      pressActionBundle = NotificationAndroidPressActionModel.fromBundle(pressAction);
       extras.putBundle("pressAction", pressActionBundle.toBundle());
     }
 
-    EventBus.post(new NotificationEvent(TYPE_PRESS, notificationBundle, extras));
+    EventBus.post(new NotificationEvent(TYPE_PRESS, notificationModel, extras));
 
     if (pressActionBundle == null) {
       return;
@@ -148,7 +148,7 @@ public class ReceiverService extends Service {
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationBundle, extras);
+      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationModel, extras);
       launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
     }
   }
@@ -172,8 +172,8 @@ public class ReceiverService extends Service {
       return;
     }
 
-    NotificationBundle notificationBundle = NotificationBundle.fromBundle(notification);
-    NotificationAndroidPressActionBundle pressActionBundle = NotificationAndroidPressActionBundle.fromBundle(pressAction);
+    NotificationModel notificationModel = NotificationModel.fromBundle(notification);
+    NotificationAndroidPressActionModel pressActionBundle = NotificationAndroidPressActionModel.fromBundle(pressAction);
 
     Bundle extras = new Bundle();
     extras.putBundle("pressAction", pressActionBundle.toBundle());
@@ -186,13 +186,13 @@ public class ReceiverService extends Service {
       }
     }
 
-    EventBus.post(new NotificationEvent(TYPE_ACTION_PRESS, notificationBundle, extras));
+    EventBus.post(new NotificationEvent(TYPE_ACTION_PRESS, notificationModel, extras));
 
     String launchActivity = pressActionBundle.getLaunchActivity();
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationBundle, extras);
+      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationModel, extras);
       launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
     }
   }
@@ -213,7 +213,7 @@ public class ReceiverService extends Service {
 
     PendingIntent pendingContentIntent = PendingIntent.getActivity(
       getApplicationContext(),
-      initialNotificationEvent.getNotificationBundle().getHashCode(),
+      initialNotificationEvent.getNotificationModel().getHashCode(),
       launchIntent,
       PendingIntent.FLAG_UPDATE_CURRENT
     );
@@ -229,7 +229,7 @@ public class ReceiverService extends Service {
     } catch (Exception e) {
       Logger.e(
         "ReceiverService",
-        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + initialNotificationEvent.getNotificationBundle().getId(),
+        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + initialNotificationEvent.getNotificationModel().getId(),
         e
       );
     }

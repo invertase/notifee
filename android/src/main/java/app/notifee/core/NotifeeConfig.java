@@ -1,5 +1,7 @@
 package app.notifee.core;
 
+import app.notifee.core.interfaces.EventListener;
+
 @KeepForSdk
 public class NotifeeConfig {
   private String mJsonConfig;
