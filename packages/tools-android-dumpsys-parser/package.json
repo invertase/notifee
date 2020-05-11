@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "tools-android-dumpsys-parser",
   "engines": {
-    "node": ">= 10.13 <13"
+    "node": ">= 10.13"
   },
   "main": "src/",
   "devDependencies": {

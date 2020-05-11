@@ -16,176 +16,199 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.ChannelGroupModel;
+import app.notifee.core.model.ChannelModel;
 import app.notifee.core.utility.ResourceUtils;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
 
 public class ChannelManager {
   private static String TAG = "ChannelManager";
+  private static ExecutorService executorService = Executors.newCachedThreadPool();
 
   static Task<Void> createChannel(ChannelModel channelModel) {
-    return Tasks.call(() -> {
-      if (Build.VERSION.SDK_INT < 26) {
-        return null;
-      }
+    return Tasks.call(
+        executorService,
+        () -> {
+          if (Build.VERSION.SDK_INT < 26) {
+            return null;
+          }
 
-      NotificationChannel channel = new NotificationChannel(
-        channelModel.getId(),
-        channelModel.getName(),
-        channelModel.getImportance()
-      );
+          NotificationChannel channel =
+              new NotificationChannel(
+                  channelModel.getId(), channelModel.getName(), channelModel.getImportance());
 
-      channel.setShowBadge(channelModel.getBadge());
-      channel.setBypassDnd(channelModel.getBypassDnd());
-      channel.setDescription(channelModel.getDescription());
-      channel.setGroup(channelModel.getGroupId());
-      channel.enableLights(channelModel.getLights());
+          channel.setShowBadge(channelModel.getBadge());
+          channel.setBypassDnd(channelModel.getBypassDnd());
+          channel.setDescription(channelModel.getDescription());
+          channel.setGroup(channelModel.getGroupId());
+          channel.enableLights(channelModel.getLights());
 
-      if (channelModel.getLightColor() != null) {
-        channel.setLightColor(channelModel.getLightColor());
-      }
+          if (channelModel.getLightColor() != null) {
+            channel.setLightColor(channelModel.getLightColor());
+          }
 
-      channel.setLockscreenVisibility(channelModel.getVisibility());
-      channel.enableVibration(channelModel.getVibration());
+          channel.setLockscreenVisibility(channelModel.getVisibility());
+          channel.enableVibration(channelModel.getVibration());
 
-      long[] vibrationPattern = channelModel.getVibrationPattern();
-      if (vibrationPattern.length > 0) {
-        channel.setVibrationPattern(vibrationPattern);
-      }
+          long[] vibrationPattern = channelModel.getVibrationPattern();
+          if (vibrationPattern.length > 0) {
+            channel.setVibrationPattern(vibrationPattern);
+          }
 
-      if (channelModel.getSound() != null) {
-        Uri soundUri = ResourceUtils.getSoundUri(channelModel.getSound());
-        if (soundUri != null) {
-          AudioAttributes audioAttributes = new AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build();
-          channel.setSound(soundUri, audioAttributes);
-        } else {
-          Logger.w(TAG, "Unable to retrieve sound for channel, sound was specified as: " + channel.getSound());
-        }
-      } else {
-        channel.setSound(null, null);
-      }
+          if (channelModel.getSound() != null) {
+            Uri soundUri = ResourceUtils.getSoundUri(channelModel.getSound());
+            if (soundUri != null) {
+              AudioAttributes audioAttributes =
+                  new AudioAttributes.Builder()
+                      .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                      .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                      .build();
+              channel.setSound(soundUri, audioAttributes);
+            } else {
+              Logger.w(
+                  TAG,
+                  "Unable to retrieve sound for channel, sound was specified as: "
+                      + channel.getSound());
+            }
+          } else {
+            channel.setSound(null, null);
+          }
 
-      NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .createNotificationChannel(channel);
+          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+              .createNotificationChannel(channel);
 
-      return null;
-    });
+          return null;
+        });
   }
 
   static Task<Void> createChannels(List<ChannelModel> channelModels) {
-    return Tasks.call(() -> {
-      for (ChannelModel channelModel : channelModels) {
-        Tasks.await(createChannel(channelModel));
-      }
+    return Tasks.call(
+        executorService,
+        () -> {
+          for (ChannelModel channelModel : channelModels) {
+            Tasks.await(createChannel(channelModel));
+          }
 
-      return null;
-    });
+          return null;
+        });
   }
 
   static Task<Void> createChannelGroup(ChannelGroupModel channelGroupModel) {
-    return Tasks.call(() -> {
-      if (Build.VERSION.SDK_INT < 26) {
-        return null;
-      }
+    return Tasks.call(
+        executorService,
+        () -> {
+          if (Build.VERSION.SDK_INT < 26) {
+            return null;
+          }
 
-      NotificationChannelGroup notificationChannelGroup = new NotificationChannelGroup(
-        channelGroupModel.getId(),
-        channelGroupModel.getName()
-      );
+          NotificationChannelGroup notificationChannelGroup =
+              new NotificationChannelGroup(channelGroupModel.getId(), channelGroupModel.getName());
 
-      if (Build.VERSION.SDK_INT >= 28 && channelGroupModel.getDescription() != null) {
-        notificationChannelGroup.setDescription(channelGroupModel.getDescription());
-      }
+          if (Build.VERSION.SDK_INT >= 28 && channelGroupModel.getDescription() != null) {
+            notificationChannelGroup.setDescription(channelGroupModel.getDescription());
+          }
 
-      NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .createNotificationChannelGroup(notificationChannelGroup);
+          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+              .createNotificationChannelGroup(notificationChannelGroup);
 
-      return null;
-    });
+          return null;
+        });
   }
 
   static Task<Void> createChannelGroups(List<ChannelGroupModel> channelGroupModels) {
-    return Tasks.call(() -> {
-      if (Build.VERSION.SDK_INT < 26) {
-        return null;
-      }
+    return Tasks.call(
+        executorService,
+        () -> {
+          if (Build.VERSION.SDK_INT < 26) {
+            return null;
+          }
 
-      for (ChannelGroupModel channelGroupModel : channelGroupModels) {
-        Tasks.await(createChannelGroup(channelGroupModel));
-      }
+          for (ChannelGroupModel channelGroupModel : channelGroupModels) {
+            Tasks.await(createChannelGroup(channelGroupModel));
+          }
 
-      return null;
-    });
+          return null;
+        });
   }
 
   static void deleteChannel(@NonNull String channelId) {
     NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-      .deleteNotificationChannel(channelId);
+        .deleteNotificationChannel(channelId);
   }
 
   static void deleteChannelGroup(@NonNull String channelGroupId) {
     NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-      .deleteNotificationChannelGroup(channelGroupId);
+        .deleteNotificationChannelGroup(channelGroupId);
   }
 
   static Task<List<Bundle>> getAllChannels() {
-    return Tasks.call(() -> {
-      List<NotificationChannel> channels = NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .getNotificationChannels();
+    return Tasks.call(
+        executorService,
+        () -> {
+          List<NotificationChannel> channels =
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .getNotificationChannels();
 
-      if (channels.size() == 0 || Build.VERSION.SDK_INT < 26) {
-        return Collections.emptyList();
-      }
+          if (channels.size() == 0 || Build.VERSION.SDK_INT < 26) {
+            return Collections.emptyList();
+          }
 
-      ArrayList<Bundle> channelBundles = new ArrayList<>(channels.size());
-      for (NotificationChannel channel : channels) {
-        channelBundles.add(convertChannelToBundle(channel));
-      }
+          ArrayList<Bundle> channelBundles = new ArrayList<>(channels.size());
+          for (NotificationChannel channel : channels) {
+            channelBundles.add(convertChannelToBundle(channel));
+          }
 
-      return channelBundles;
-    });
+          return channelBundles;
+        });
   }
 
   static Task<Bundle> getChannel(String channelId) {
-    return Tasks.call(() -> {
-      NotificationChannel channel = NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .getNotificationChannel(channelId);
+    return Tasks.call(
+        executorService,
+        () -> {
+          NotificationChannel channel =
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .getNotificationChannel(channelId);
 
-      return convertChannelToBundle(channel);
-    });
+          return convertChannelToBundle(channel);
+        });
   }
 
   static Task<List<Bundle>> getAllChannelGroups() {
-    return Tasks.call(() -> {
-      List<NotificationChannelGroup> channelGroups = NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .getNotificationChannelGroups();
+    return Tasks.call(
+        executorService,
+        () -> {
+          List<NotificationChannelGroup> channelGroups =
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .getNotificationChannelGroups();
 
-      if (channelGroups.size() == 0 || Build.VERSION.SDK_INT < 26) {
-        return Collections.emptyList();
-      }
+          if (channelGroups.size() == 0 || Build.VERSION.SDK_INT < 26) {
+            return Collections.emptyList();
+          }
 
-      ArrayList<Bundle> channelGroupBundles = new ArrayList<>(channelGroups.size());
-      for (NotificationChannelGroup channelGroup : channelGroups) {
-        channelGroupBundles.add(convertChannelGroupToBundle(channelGroup));
-      }
+          ArrayList<Bundle> channelGroupBundles = new ArrayList<>(channelGroups.size());
+          for (NotificationChannelGroup channelGroup : channelGroups) {
+            channelGroupBundles.add(convertChannelGroupToBundle(channelGroup));
+          }
 
-      return channelGroupBundles;
-    });
+          return channelGroupBundles;
+        });
   }
 
   static Task<Bundle> getChannelGroup(String channelGroupId) {
-    return Tasks.call(() -> {
-      NotificationChannelGroup channelGroup = NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-        .getNotificationChannelGroup(channelGroupId);
+    return Tasks.call(
+        executorService,
+        () -> {
+          NotificationChannelGroup channelGroup =
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .getNotificationChannelGroup(channelGroupId);
 
-      return convertChannelGroupToBundle(channelGroup);
-    });
+          return convertChannelGroupToBundle(channelGroup);
+        });
   }
 
   private static Bundle convertChannelToBundle(NotificationChannel channel) {

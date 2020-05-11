@@ -69,6 +69,8 @@
       "tests_react_native"
     ],
     "nohoist": [
+      "**/chai",
+      "**/chai/**",
       "**/cavy",
       "**/cavy/**",
       "**/cavy-native-reporter",
