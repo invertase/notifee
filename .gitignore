@@ -46,6 +46,9 @@ captures/
 .idea/libraries
 .idea/caches
 
+# VS Code
+.vscode/
+
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
 #*.jks
