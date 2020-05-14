@@ -1,11 +1,6 @@
 import { validateAndroidBigPictureStyle } from '@notifee/react-native/src/validators/validateAndroidStyle';
 import {
   AndroidBigPictureStyle,
-  // AndroidBigTextStyle,
-  // AndroidInboxStyle,
-  // AndroidMessagingStyle,
-  // AndroidMessagingStyleMessage,
-  // AndroidPerson,
   AndroidStyle,
 } from '@notifee/react-native/src/types/NotificationAndroid';
 

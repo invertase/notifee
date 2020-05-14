@@ -1,8 +1,8 @@
 import validateIOSCategory from '@notifee/react-native/src/validators/validateIOSCategory';
 import { IOSNotificationCategory } from '@notifee/react-native/src/types/NotificationIOS';
 
-describe('Validate Android Style', () => {
-  describe('validateAndroidBigPictureStyle()', () => {
+describe('Validate IOS Category', () => {
+  describe('validateIOSCategory()', () => {
     test('returns valid ', async () => {
       const category: IOSNotificationCategory = {
         id: 'id',
