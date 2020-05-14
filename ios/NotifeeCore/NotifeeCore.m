@@ -162,7 +162,7 @@
 
     // summaryArgumentCount
     if (iosDict[@"summaryArgumentCount"] != nil) {
-      content.summaryArgument = iosDict[@"summaryArgumentCount"];
+      content.summaryArgumentCount = iosDict[@"summaryArgumentCount"];
     }
   }
 
