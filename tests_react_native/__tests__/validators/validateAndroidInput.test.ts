@@ -3,7 +3,7 @@ import { AndroidInput } from '@notifee/react-native/src/types/NotificationAndroi
 
 describe('Validate Android Channel Group', () => {
   describe('validateAndroidChannelGroup()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const androidInput: AndroidInput = {
         allowFreeFormInput: false,
         allowGeneratedReplies: false,
@@ -20,7 +20,7 @@ describe('Validate Android Channel Group', () => {
       expect($.placeholder).toEqual('placeholder');
     });
 
-    test('throws an error with an invalid input ', async () => {
+    test('throws an error with an invalid input ', () => {
       const $ = validateAndroidInput();
 
       expect($.allowFreeFormInput).toEqual(true);

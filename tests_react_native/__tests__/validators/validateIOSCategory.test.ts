@@ -3,7 +3,7 @@ import { IOSNotificationCategory } from '@notifee/react-native/src/types/Notific
 
 describe('Validate IOS Category', () => {
   describe('validateIOSCategory()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         summaryFormat: 'summaryFormat',
@@ -24,7 +24,7 @@ describe('Validate IOS Category', () => {
       expect($.hiddenPreviewsBodyPlaceholder).toEqual('hiddenPreviewsBodyPlaceholder');
     });
 
-    test('throws an error with an invalid largeIcon param', async () => {
+    test('throws an error with an invalid largeIcon param', () => {
       const category: IOSNotificationCategory = [] as any;
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -32,7 +32,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid largeIcon param', async () => {
+    test('throws an error with an invalid largeIcon param', () => {
       const category: IOSNotificationCategory = { id: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -40,7 +40,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid largeIcon param', async () => {
+    test('throws an error with an invalid largeIcon param', () => {
       const category: IOSNotificationCategory = { id: '' as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -48,7 +48,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid summaryFormat param', async () => {
+    test('throws an error with an invalid summaryFormat param', () => {
       const category: IOSNotificationCategory = { id: 'id', summaryFormat: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -56,7 +56,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid allowInCarPlay param', async () => {
+    test('throws an error with an invalid allowInCarPlay param', () => {
       const category: IOSNotificationCategory = { id: 'id', allowInCarPlay: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -64,7 +64,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid allowAnnouncement param', async () => {
+    test('throws an error with an invalid allowAnnouncement param', () => {
       const category: IOSNotificationCategory = { id: 'id', allowAnnouncement: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -72,7 +72,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid hiddenPreviewsShowTitle param', async () => {
+    test('throws an error with an invalid hiddenPreviewsShowTitle param', () => {
       const category: IOSNotificationCategory = { id: 'id', hiddenPreviewsShowTitle: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -80,7 +80,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid hiddenPreviewsShowSubtitle param', async () => {
+    test('throws an error with an invalid hiddenPreviewsShowSubtitle param', () => {
       const category: IOSNotificationCategory = { id: 'id', hiddenPreviewsShowSubtitle: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -88,7 +88,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid hiddenPreviewsBodyPlaceholder param', async () => {
+    test('throws an error with an invalid hiddenPreviewsBodyPlaceholder param', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         hiddenPreviewsBodyPlaceholder: [] as any,
@@ -99,7 +99,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid intentIdentifiers param', async () => {
+    test('throws an error with an invalid intentIdentifiers param', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         intentIdentifiers: {} as any,
@@ -110,7 +110,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid intentIdentifiers param', async () => {
+    test('throws an error with an invalid intentIdentifiers param', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         intentIdentifiers: ['test'] as any,
@@ -121,7 +121,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid actions param', async () => {
+    test('throws an error with an invalid actions param', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         actions: {} as any,
@@ -132,7 +132,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid actions array param', async () => {
+    test('throws an error with an invalid actions array param', () => {
       const category: IOSNotificationCategory = {
         id: 'id',
         actions: ['test'] as any,

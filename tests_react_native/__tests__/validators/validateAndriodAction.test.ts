@@ -3,7 +3,7 @@ import { AndroidAction } from '@notifee/react-native/src/types/NotificationAndro
 
 describe('Validate Android Action', () => {
   describe('validateAndroidAction()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id' },
         title: 'title',
@@ -14,13 +14,13 @@ describe('Validate Android Action', () => {
       expect(title).toEqual('title');
     });
 
-    test('returns invalid if not a valid object ', async () => {
+    test('returns invalid if not a valid object ', () => {
       expect(() => validateAndroidAction([] as any)).toThrowError(
         "'action' expected an object value.",
       );
     });
 
-    test('returns invalid if pressAction not a valid object ', async () => {
+    test('returns invalid if pressAction not a valid object ', () => {
       const action: AndroidAction = {
         pressAction: [] as any,
         title: 'title',
@@ -31,7 +31,7 @@ describe('Validate Android Action', () => {
       );
     });
 
-    test('returns invalid if id not a valid string ', async () => {
+    test('returns invalid if id not a valid string ', () => {
       const action: AndroidAction = {
         pressAction: { id: 0 as any },
         title: 'title',
@@ -42,7 +42,7 @@ describe('Validate Android Action', () => {
       );
     });
 
-    test('returns valid with launch activity ', async () => {
+    test('returns valid with launch activity ', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id', launchActivity: 'launchActivity' },
         title: 'title',
@@ -53,7 +53,7 @@ describe('Validate Android Action', () => {
       expect(title).toEqual('title');
     });
 
-    test('returns invalid with non string based launch activity', async () => {
+    test('returns invalid with non string based launch activity', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id', launchActivity: 0 as any },
         title: 'title',
@@ -64,7 +64,7 @@ describe('Validate Android Action', () => {
       );
     });
 
-    test('returns valid with main component', async () => {
+    test('returns valid with main component', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id', mainComponent: 'mainComponent' },
         title: 'title',
@@ -75,7 +75,7 @@ describe('Validate Android Action', () => {
       expect(title).toEqual('title');
     });
 
-    test('returns invalid with non string based main component', async () => {
+    test('returns invalid with non string based main component', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id', mainComponent: 0 as any },
         title: 'title',
@@ -86,7 +86,7 @@ describe('Validate Android Action', () => {
       );
     });
 
-    test('returns valid with action icon', async () => {
+    test('returns valid with action icon', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id' },
         title: 'title',
@@ -99,7 +99,7 @@ describe('Validate Android Action', () => {
       expect(title).toEqual('title');
     });
 
-    test('returns invalid with non string based icon', async () => {
+    test('returns invalid with non string based icon', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id' },
         title: 'title',
@@ -110,7 +110,7 @@ describe('Validate Android Action', () => {
         "'action.icon' expected a string value.",
       );
     });
-    test('returns valid with action input', async () => {
+    test('returns valid with action input', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id' },
         title: 'title',
@@ -123,7 +123,7 @@ describe('Validate Android Action', () => {
       expect(input).toEqual({ allowFreeFormInput: true, allowGeneratedReplies: true });
     });
 
-    test('throws an error with invalid input', async () => {
+    test('throws an error with invalid input', () => {
       const action: AndroidAction = {
         pressAction: { id: 'id' },
         title: 'title',

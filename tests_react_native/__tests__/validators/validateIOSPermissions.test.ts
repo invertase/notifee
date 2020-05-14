@@ -3,7 +3,7 @@ import { IOSNotificationPermissions } from '@notifee/react-native/src/types/Noti
 
 describe('Validate IOS Input', () => {
   describe('validateIOSInput()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const permissions: IOSNotificationPermissions = {
         alert: false,
         criticalAlert: false,
@@ -25,7 +25,7 @@ describe('Validate IOS Input', () => {
       expect($.announcement).toEqual(false);
     });
 
-    test('returns valid when no value is provided', async () => {
+    test('returns valid when no value is provided', () => {
       const $ = validateIOSPermissions(null as any);
 
       expect($.alert).toEqual(true);
@@ -37,7 +37,7 @@ describe('Validate IOS Input', () => {
       expect($.announcement).toEqual(false);
     });
 
-    test('returns invalid when an invalid critical property is provided', async () => {
+    test('returns invalid when an invalid critical property is provided', () => {
       const notification: IOSNotificationPermissions = {
         alert: [] as any,
       };
@@ -47,7 +47,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid alert property is provided', async () => {
+    test('returns invalid when an invalid alert property is provided', () => {
       const notification: IOSNotificationPermissions = {
         alert: [] as any,
       };
@@ -57,7 +57,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid sound property is provided', async () => {
+    test('returns invalid when an invalid sound property is provided', () => {
       const notification: IOSNotificationPermissions = {
         sound: [] as any,
       };
@@ -67,7 +67,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid carPlay property is provided', async () => {
+    test('returns invalid when an invalid carPlay property is provided', () => {
       const notification: IOSNotificationPermissions = {
         carPlay: [] as any,
       };
@@ -77,7 +77,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid provisional property is provided', async () => {
+    test('returns invalid when an invalid provisional property is provided', () => {
       const notification: IOSNotificationPermissions = {
         provisional: [] as any,
       };
@@ -87,7 +87,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid announcement property is provided', async () => {
+    test('returns invalid when an invalid announcement property is provided', () => {
       const notification: IOSNotificationPermissions = {
         announcement: [] as any,
       };
@@ -97,7 +97,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid criticalAlert property is provided', async () => {
+    test('returns invalid when an invalid criticalAlert property is provided', () => {
       const notification: IOSNotificationPermissions = {
         criticalAlert: [] as any,
       };

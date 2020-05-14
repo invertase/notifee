@@ -3,7 +3,7 @@ import { AndroidChannelGroup } from '@notifee/react-native/src/types/Notificatio
 
 describe('Validate Android Channel Group', () => {
   describe('validateAndroidChannelGroup()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const channelGroup: AndroidChannelGroup = {
         id: 'id',
         name: 'name',
@@ -16,13 +16,13 @@ describe('Validate Android Channel Group', () => {
       expect($.description).toEqual('description');
     });
 
-    test('throws an error with an invalid channel ', async () => {
+    test('throws an error with an invalid channel ', () => {
       expect(() => validateAndroidChannelGroup([] as any)).toThrowError(
         "'group' expected an object value.",
       );
     });
 
-    test('throws an error with an invalid id ', async () => {
+    test('throws an error with an invalid id ', () => {
       const channelGroup: AndroidChannelGroup = {
         id: [] as any,
         name: 'name',
@@ -34,7 +34,7 @@ describe('Validate Android Channel Group', () => {
       );
     });
 
-    test('throws an error with an invalid name ', async () => {
+    test('throws an error with an invalid name ', () => {
       const channelGroup: AndroidChannelGroup = {
         id: 'id',
         name: [] as any,
@@ -46,7 +46,7 @@ describe('Validate Android Channel Group', () => {
       );
     });
 
-    test('throws an error with an invalid description ', async () => {
+    test('throws an error with an invalid description ', () => {
       const channelGroup: AndroidChannelGroup = {
         id: 'id',
         name: 'name',

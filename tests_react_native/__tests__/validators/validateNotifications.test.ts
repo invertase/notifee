@@ -3,7 +3,7 @@ import { Notification } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate Notification', () => {
   describe('validateNotification()', () => {
-    test('returns valid android', async () => {
+    test('returns valid android', () => {
       const permissions: Notification = {
         id: 'id',
         title: 'title',
@@ -30,7 +30,7 @@ describe('Validate Notification', () => {
       // expect($.ios).toEqual({});
     });
 
-    test('returns valid ios', async () => {
+    test('returns valid ios', () => {
       const permissions: Notification = {
         id: 'id',
         title: 'title',
@@ -54,7 +54,7 @@ describe('Validate Notification', () => {
       // expect($.ios).toEqual({});
     });
 
-    test('returns valid when no value is provided', async () => {
+    test('returns valid when no value is provided', () => {
       const $ = validateNotification({} as any);
 
       expect($.id).toBeDefined();
@@ -64,7 +64,7 @@ describe('Validate Notification', () => {
       expect($.data).toEqual({});
     });
 
-    test('returns invalid when an invalid id property is provided', async () => {
+    test('returns invalid when an invalid id property is provided', () => {
       const notification: Notification = {
         id: null as any,
       };
@@ -74,7 +74,7 @@ describe('Validate Notification', () => {
       );
     });
 
-    test('returns invalid when an invalid title property is provided', async () => {
+    test('returns invalid when an invalid title property is provided', () => {
       const notification: Notification = {
         title: null as any,
       };
@@ -84,7 +84,7 @@ describe('Validate Notification', () => {
       );
     });
 
-    test('returns invalid when an invalid body property is provided', async () => {
+    test('returns invalid when an invalid body property is provided', () => {
       const notification: Notification = {
         body: null as any,
       };
@@ -94,7 +94,7 @@ describe('Validate Notification', () => {
       );
     });
 
-    test('returns invalid when an invalid subtitle property is provided', async () => {
+    test('returns invalid when an invalid subtitle property is provided', () => {
       const notification: Notification = {
         subtitle: null as any,
       };
@@ -104,7 +104,7 @@ describe('Validate Notification', () => {
       );
     });
 
-    test('returns invalid when an invalid data property is provided', async () => {
+    test('returns invalid when an invalid data property is provided', () => {
       const notification: Notification = {
         data: [] as any,
       };
@@ -114,7 +114,7 @@ describe('Validate Notification', () => {
       );
     });
 
-    test('returns invalid when an invalid data properties are provided', async () => {
+    test('returns invalid when an invalid data properties are provided', () => {
       const notification: Notification = {
         data: { id: 0 as any },
       };

@@ -5,7 +5,7 @@ import { Importance } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate IOS Input', () => {
   describe('validateIOSInput()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const notification: NotificationIOS = {
         attachments: [],
         badgeCount: 0,
@@ -36,12 +36,12 @@ describe('Validate IOS Input', () => {
       //   expect($.targetContentId).toEqual('targetContentId');
     });
 
-    test('returns valid when no value is provided', async () => {
+    test('returns valid when no value is provided', () => {
       const $ = validateIOSNotification();
       expect($).toEqual({ importance: Importance.DEFAULT });
     });
 
-    test('returns invalid when an invalid critical property is provided', async () => {
+    test('returns invalid when an invalid critical property is provided', () => {
       const notification: NotificationIOS = {
         critical: {} as any,
       };
@@ -51,7 +51,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid criticalVolume property is provided', async () => {
+    test('returns invalid when an invalid criticalVolume property is provided', () => {
       const notification: NotificationIOS = {
         criticalVolume: {} as any,
       };
@@ -61,7 +61,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid sound property is provided', async () => {
+    test('returns invalid when an invalid sound property is provided', () => {
       const notification: NotificationIOS = {
         sound: {} as any,
       };
@@ -71,7 +71,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid badgeCount property is provided', async () => {
+    test('returns invalid when an invalid badgeCount property is provided', () => {
       const notification: NotificationIOS = {
         badgeCount: [] as any,
       };
@@ -81,7 +81,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid categoryId property is provided', async () => {
+    test('returns invalid when an invalid categoryId property is provided', () => {
       const notification: NotificationIOS = {
         categoryId: {} as any,
       };
@@ -91,7 +91,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid threadId property is provided', async () => {
+    test('returns invalid when an invalid threadId property is provided', () => {
       const notification: NotificationIOS = {
         threadId: {} as any,
       };
@@ -101,7 +101,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid summaryArgument property is provided', async () => {
+    test('returns invalid when an invalid summaryArgument property is provided', () => {
       const notification: NotificationIOS = {
         summaryArgument: {} as any,
       };
@@ -111,7 +111,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid launchImageName property is provided', async () => {
+    test('returns invalid when an invalid launchImageName property is provided', () => {
       const notification: NotificationIOS = {
         launchImageName: {} as any,
       };
@@ -121,7 +121,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid importance property is provided', async () => {
+    test('returns invalid when an invalid importance property is provided', () => {
       const notification: NotificationIOS = {
         importance: ['test'] as any,
       };
@@ -131,7 +131,7 @@ describe('Validate IOS Input', () => {
       );
     });
 
-    test('returns invalid when an invalid sound property is provided', async () => {
+    test('returns invalid when an invalid sound property is provided', () => {
       const notification: NotificationIOS = {
         sound: [] as any,
       };

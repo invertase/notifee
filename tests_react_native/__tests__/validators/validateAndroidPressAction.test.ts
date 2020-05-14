@@ -3,7 +3,7 @@ import { NotificationPressAction } from '@notifee/react-native/src/types/Notific
 
 describe('Validate Android Press Action', () => {
   describe('validateAndroidPressAction()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const pressAction: NotificationPressAction = {
         id: 'id',
         launchActivity: 'launchActivity',
@@ -16,13 +16,13 @@ describe('Validate Android Press Action', () => {
       expect($.mainComponent).toEqual('mainComponent');
     });
 
-    test('throws an error with an invalid param', async () => {
+    test('throws an error with an invalid param', () => {
       expect(() => validateAndroidPressAction([] as any)).toThrowError(
         "'pressAction' expected an object value.",
       );
     });
 
-    test('throws an error with an invalid id', async () => {
+    test('throws an error with an invalid id', () => {
       const pressAction: NotificationPressAction = {
         id: [] as any,
       };
@@ -32,7 +32,7 @@ describe('Validate Android Press Action', () => {
       );
     });
 
-    test('throws an error with an invalid launch activity', async () => {
+    test('throws an error with an invalid launch activity', () => {
       const pressAction: NotificationPressAction = {
         id: 'id',
         launchActivity: {} as any,
@@ -43,7 +43,7 @@ describe('Validate Android Press Action', () => {
       );
     });
 
-    test('throws an error with an invalid main component', async () => {
+    test('throws an error with an invalid main component', () => {
       const pressAction: NotificationPressAction = {
         id: 'id',
         mainComponent: {} as any,

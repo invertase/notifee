@@ -6,7 +6,7 @@ import {
 
 describe('Validate Android Style', () => {
   describe('validateAndroidBigPictureStyle()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const pictureStyle: AndroidBigPictureStyle = {
         type: AndroidStyle.BIGPICTURE,
         picture: 'picture',
@@ -23,7 +23,7 @@ describe('Validate Android Style', () => {
       expect($.summary).toEqual('summary');
     });
 
-    test('throws an error with an invalid largeIcon param', async () => {
+    test('throws an error with an invalid largeIcon param', () => {
       const pictureStyle: AndroidBigPictureStyle = {
         type: AndroidStyle.BIGPICTURE,
         picture: 'picture',
@@ -35,7 +35,7 @@ describe('Validate Android Style', () => {
       );
     });
 
-    test('throws an error with an invalid title param', async () => {
+    test('throws an error with an invalid title param', () => {
       const pictureStyle: AndroidBigPictureStyle = {
         type: AndroidStyle.BIGPICTURE,
         picture: 'picture',
@@ -47,7 +47,7 @@ describe('Validate Android Style', () => {
       );
     });
 
-    test('throws an error with an invalid summary param', async () => {
+    test('throws an error with an invalid summary param', () => {
       const pictureStyle: AndroidBigPictureStyle = {
         type: AndroidStyle.BIGPICTURE,
         picture: 'picture',

@@ -3,7 +3,7 @@ import { IOSNotificationCategoryAction } from '@notifee/react-native/src/types/N
 
 describe('Validate IOS Catgeory Action', () => {
   describe('validateIOSCategoryAction()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const categoryAction: IOSNotificationCategoryAction = {
         id: 'id',
         title: 'title',
@@ -16,7 +16,7 @@ describe('Validate IOS Catgeory Action', () => {
       expect($.input).toEqual(true);
     });
 
-    test('throws an error with an invalid input param', async () => {
+    test('throws an error with an invalid input param', () => {
       const categoryAction: IOSNotificationCategoryAction = {
         id: 'id',
         title: 'title',
@@ -28,7 +28,7 @@ describe('Validate IOS Catgeory Action', () => {
       );
     });
 
-    test('throws an error with an invalid destructive param', async () => {
+    test('throws an error with an invalid destructive param', () => {
       const categoryAction: IOSNotificationCategoryAction = {
         id: 'id',
         title: 'title',
@@ -40,7 +40,7 @@ describe('Validate IOS Catgeory Action', () => {
       );
     });
 
-    test('throws an error with an invalid foreground param', async () => {
+    test('throws an error with an invalid foreground param', () => {
       const categoryAction: IOSNotificationCategoryAction = {
         id: 'id',
         title: 'title',
@@ -52,7 +52,7 @@ describe('Validate IOS Catgeory Action', () => {
       );
     });
 
-    test('throws an error with an invalid authenticationRequired param', async () => {
+    test('throws an error with an invalid authenticationRequired param', () => {
       const categoryAction: IOSNotificationCategoryAction = {
         id: 'id',
         title: 'title',

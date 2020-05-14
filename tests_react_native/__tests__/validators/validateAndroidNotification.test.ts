@@ -10,7 +10,7 @@ import { Importance } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate Android Notification', () => {
   describe('validateAndroidNotification()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const androidInput: NotificationAndroid = {
         autoCancel: true,
         asForegroundService: false,
@@ -50,7 +50,7 @@ describe('Validate Android Notification', () => {
       expect($.channelId).toEqual('channelId');
     });
 
-    test('returns default values when no params provided ', async () => {
+    test('returns default values when no params provided ', () => {
       const $ = validateAndroidNotification();
 
       expect($.autoCancel).toEqual(true);
@@ -70,13 +70,13 @@ describe('Validate Android Notification', () => {
       expect($.visibility).toEqual(AndroidVisibility.PRIVATE);
     });
 
-    test('throws an error with an invalid param ', async () => {
+    test('throws an error with an invalid param ', () => {
       expect(() => validateAndroidNotification([] as any)).toThrowError(
         "'notification.android' expected an object value.",
       );
     });
 
-    test('throws an error when actions is not a valid array', async () => {
+    test('throws an error when actions is not a valid array', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         actions: {} as any,
@@ -87,7 +87,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when actions contains an invalid android action', async () => {
+    test('throws an error when actions contains an invalid android action', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         actions: ['test'] as any,
@@ -98,7 +98,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when asForegroundService is invalid', async () => {
+    test('throws an error when asForegroundService is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         asForegroundService: [] as any,
@@ -109,7 +109,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when autoCancel is invalid', async () => {
+    test('throws an error when autoCancel is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         autoCancel: [] as any,
@@ -119,7 +119,7 @@ describe('Validate Android Notification', () => {
         "'notification.android.autoCancel' expected a boolean value.",
       );
     });
-    test('throws an error when badgeCount is invalid', async () => {
+    test('throws an error when badgeCount is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         badgeCount: [] as any,
@@ -130,7 +130,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when badgeIconType is invalid', async () => {
+    test('throws an error when badgeIconType is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         badgeIconType: [] as any,
@@ -141,7 +141,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when category is invalid', async () => {
+    test('throws an error when category is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         category: [] as any,
@@ -152,7 +152,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when color is invalid', async () => {
+    test('throws an error when color is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         color: [] as any,
@@ -163,7 +163,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when color is an invalid selection', async () => {
+    test('throws an error when color is an invalid selection', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         color: 'unknown',
@@ -174,7 +174,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when colorized is invalud', async () => {
+    test('throws an error when colorized is invalud', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         colorized: [] as any,
@@ -185,7 +185,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when chronometerDirection is invalud', async () => {
+    test('throws an error when chronometerDirection is invalud', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         chronometerDirection: [] as any,
@@ -196,7 +196,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when chronometerDirection is not up or down', async () => {
+    test('throws an error when chronometerDirection is not up or down', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         chronometerDirection: '' as any,
@@ -207,7 +207,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when defaults is invalid', async () => {
+    test('throws an error when defaults is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         defaults: {} as any,
@@ -218,7 +218,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when defaults is an empty array', async () => {
+    test('throws an error when defaults is an empty array', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         defaults: [] as any,
@@ -229,7 +229,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when groupId is invalid', async () => {
+    test('throws an error when groupId is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         groupId: [] as any,
@@ -240,7 +240,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when groupAlertBehavior contains an invalid groupAlertBehavior', async () => {
+    test('throws an error when groupAlertBehavior contains an invalid groupAlertBehavior', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         groupAlertBehavior: ['test'] as any,
@@ -251,7 +251,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when groupSummary is invalid', async () => {
+    test('throws an error when groupSummary is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         groupSummary: [] as any,
@@ -262,7 +262,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when inputHistory is invalid', async () => {
+    test('throws an error when inputHistory is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         inputHistory: {} as any,
@@ -273,7 +273,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when largeIcon is invalid', async () => {
+    test('throws an error when largeIcon is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         largeIcon: [] as any,
@@ -284,7 +284,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when lights is invalid', async () => {
+    test('throws an error when lights is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         lights: {} as any,
@@ -295,7 +295,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when lights color property is invalid', async () => {
+    test('throws an error when lights color property is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         lights: ['unknown' as any, 0, 0],
@@ -306,7 +306,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when lights on property is invalid', async () => {
+    test('throws an error when lights on property is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         lights: ['blue', -1, 0],
@@ -317,7 +317,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when lights off property is invalid', async () => {
+    test('throws an error when lights off property is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         lights: ['blue', 1, -1],
@@ -328,7 +328,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when localOnly is invalid', async () => {
+    test('throws an error when localOnly is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         localOnly: [] as any,
@@ -339,7 +339,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when ongoing is invalid', async () => {
+    test('throws an error when ongoing is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         ongoing: [] as any,
@@ -350,7 +350,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when onlyAlertOnce is invalid', async () => {
+    test('throws an error when onlyAlertOnce is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         onlyAlertOnce: [] as any,
@@ -361,7 +361,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when pressAction is invalid', async () => {
+    test('throws an error when pressAction is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         pressAction: [] as any,
@@ -372,7 +372,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when importance value is invalid', async () => {
+    test('throws an error when importance value is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         importance: '' as any,
@@ -383,7 +383,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress is invalid', async () => {
+    test('throws an error when progress is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: [] as any,
@@ -394,7 +394,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress indeterminate is invalid', async () => {
+    test('throws an error when progress indeterminate is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: { indeterminate: [] as any },
@@ -405,7 +405,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress max is a negative number', async () => {
+    test('throws an error when progress max is a negative number', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: { max: -1 },
@@ -416,7 +416,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when current is a negative number', async () => {
+    test('throws an error when current is a negative number', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: { current: -1 },
@@ -427,7 +427,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when no max value has been provided with a current value', async () => {
+    test('throws an error when no max value has been provided with a current value', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: { current: 1, max: null as any },
@@ -438,7 +438,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when current value is more than max', async () => {
+    test('throws an error when current value is more than max', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         progress: { current: 3, max: 2 },
@@ -449,7 +449,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress showTimestamp is invalid', async () => {
+    test('throws an error when progress showTimestamp is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         showTimestamp: [] as any,
@@ -460,7 +460,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress showTimestamp is invalid', async () => {
+    test('throws an error when progress showTimestamp is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         smallIcon: [] as any,
@@ -471,7 +471,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress sortKey is invalid', async () => {
+    test('throws an error when progress sortKey is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         sortKey: [] as any,
@@ -482,7 +482,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress style is invalid', async () => {
+    test('throws an error when progress style is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         style: [] as any,
@@ -494,18 +494,18 @@ describe('Validate Android Notification', () => {
     });
 
     // TODO
-    xtest('returns valid with big pictures style', async () => {});
+    xtest('returns valid with big pictures style', () => {});
 
     // TODO
-    xtest('returns valid with big text style', async () => {});
+    xtest('returns valid with big text style', () => {});
 
     // TODO
-    xtest('returns valid with big inbox style', async () => {});
+    xtest('returns valid with big inbox style', () => {});
 
     // TODO
-    xtest('returns valid with big inbox messaging', async () => {});
+    xtest('returns valid with big inbox messaging', () => {});
 
-    test('throws an error when tag is invalid', async () => {
+    test('throws an error when tag is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         tag: [] as any,
@@ -516,7 +516,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when tag contains a pipe operator', async () => {
+    test('throws an error when tag contains a pipe operator', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         tag: '|',
@@ -527,7 +527,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when ticker is invalid', async () => {
+    test('throws an error when ticker is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         ticker: [] as any,
@@ -538,7 +538,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when timeoutAfter is non numeric', async () => {
+    test('throws an error when timeoutAfter is non numeric', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         timeoutAfter: [] as any,
@@ -549,7 +549,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when timeoutAfter is an invalid timestamp', async () => {
+    test('throws an error when timeoutAfter is an invalid timestamp', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         timeoutAfter: -1,
@@ -560,7 +560,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when showChronometer is an invalid boolean', async () => {
+    test('throws an error when showChronometer is an invalid boolean', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         showChronometer: [] as any,
@@ -571,7 +571,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when vibrationPattern is an invalid type', async () => {
+    test('throws an error when vibrationPattern is an invalid type', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         vibrationPattern: {} as any,
@@ -582,7 +582,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when vibrationPattern is an invalid vibration pattern', async () => {
+    test('throws an error when vibrationPattern is an invalid vibration pattern', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         vibrationPattern: ['test', -1, -1] as any,
@@ -593,7 +593,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when visibility is an invalid type', async () => {
+    test('throws an error when visibility is an invalid type', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         visibility: [] as any,
@@ -604,7 +604,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when timestamp is not valid', async () => {
+    test('throws an error when timestamp is not valid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         timestamp: [] as any,
@@ -615,7 +615,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when timestamp is a not a future date', async () => {
+    test('throws an error when timestamp is a not a future date', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         timestamp: -1,
@@ -626,7 +626,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when sound is an invalid type', async () => {
+    test('throws an error when sound is an invalid type', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         sound: [] as any,

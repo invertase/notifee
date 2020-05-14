@@ -7,7 +7,7 @@ import { Importance } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate Android Channel', () => {
   describe('validateAndroidChannel()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -30,13 +30,13 @@ describe('Validate Android Channel', () => {
       expect($.visibility).toEqual(AndroidVisibility.PRIVATE);
     });
 
-    test('throws an error with an invalid channel ', async () => {
+    test('throws an error with an invalid channel ', () => {
       expect(() => validateAndroidChannel([] as any)).toThrowError(
         "'channel' expected an object value.",
       );
     });
 
-    test('throws an error with an invalid id ', async () => {
+    test('throws an error with an invalid id ', () => {
       const channel: AndroidChannel = {
         id: 0 as any,
         name: 'name',
@@ -47,7 +47,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid id ', async () => {
+    test('throws an error with an invalid id ', () => {
       const channel: AndroidChannel = {
         id: '' as any,
         name: 'name',
@@ -58,7 +58,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid name', async () => {
+    test('throws an error with an invalid name', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 0 as any,
@@ -69,7 +69,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid name ', async () => {
+    test('throws an error with an invalid name ', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: '' as any,
@@ -80,7 +80,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non boolean badge', async () => {
+    test('throws an error with a non boolean badge', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -92,7 +92,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non boolean bypassDnd', async () => {
+    test('throws an error with a non boolean bypassDnd', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -104,7 +104,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non string description', async () => {
+    test('throws an error with a non string description', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -116,7 +116,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non string description', async () => {
+    test('throws an error with a non string description', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -128,7 +128,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non boolean lights property', async () => {
+    test('throws an error with a non boolean lights property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -140,7 +140,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non boolean vibration property', async () => {
+    test('throws an error with a non boolean vibration property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -152,7 +152,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non string groupId property', async () => {
+    test('throws an error with a non string groupId property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -164,7 +164,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid importance property', async () => {
+    test('throws an error with an invalid importance property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -176,7 +176,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non string lightColor property', async () => {
+    test('throws an error with a non string lightColor property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -188,7 +188,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid lightColor property', async () => {
+    test('throws an error with an invalid lightColor property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -200,7 +200,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an invalid visability property', async () => {
+    test('throws an error with an invalid visability property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -212,7 +212,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with a non string sound property', async () => {
+    test('throws an error with a non string sound property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -224,7 +224,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an non array based vibrationPattern property', async () => {
+    test('throws an error with an non array based vibrationPattern property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
@@ -236,7 +236,7 @@ describe('Validate Android Channel', () => {
       );
     });
 
-    test('throws an error with an non even array vibrationPattern property', async () => {
+    test('throws an error with an non even array vibrationPattern property', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',

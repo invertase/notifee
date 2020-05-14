@@ -3,7 +3,7 @@ import { IOSInput } from '@notifee/react-native/src/types/NotificationIOS';
 
 describe('Validate IOS Input', () => {
   describe('validateIOSInput()', () => {
-    test('returns valid ', async () => {
+    test('returns valid ', () => {
       const input: IOSInput = {
         buttonText: 'buttonText',
         placeholderText: 'placeholderText',
@@ -14,17 +14,17 @@ describe('Validate IOS Input', () => {
       expect($.placeholderText).toEqual('placeholderText');
     });
 
-    test('returns valid when no value is provided', async () => {
+    test('returns valid when no value is provided', () => {
       const $ = validateIOSInput();
       expect($).toEqual({});
     });
 
-    test('returns valid when a boolean value is provided', async () => {
+    test('returns valid when a boolean value is provided', () => {
       const $ = validateIOSInput(false as any);
       expect($).toEqual({});
     });
 
-    test('throws an error with an invalid buttonText param', async () => {
+    test('throws an error with an invalid buttonText param', () => {
       const input: IOSInput = {
         buttonText: [] as any,
         placeholderText: 'placeholderText',
@@ -33,7 +33,7 @@ describe('Validate IOS Input', () => {
       expect(() => validateIOSInput(input)).toThrowError("'buttonText' expected a string value.");
     });
 
-    test('throws an error with an invalid placeholderText param', async () => {
+    test('throws an error with an invalid placeholderText param', () => {
       const input: IOSInput = {
         buttonText: 'buttonText',
         placeholderText: [] as any,
