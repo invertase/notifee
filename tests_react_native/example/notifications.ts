@@ -56,7 +56,6 @@ export const notifications: { key: string; notification: Notification }[] = [
       },
     },
   },
-
   {
     key: 'Actions (event only)',
     notification: {
@@ -108,6 +107,30 @@ export const notifications: { key: string; notification: Notification }[] = [
       },
     },
   },
+  {
+    key: 'Service',
+    notification: {
+      title: 'Service',
+      body: 'Notification Service',
+      android: {
+        autoCancel: true,
+        color: '#9c27b0',
+        onlyAlertOnce: true,
+        asForegroundService: true,
+        actions: [
+          {
+            title: 'Stop',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+            pressAction: {
+              id: 'stop',
+            },
+          },
+        ],
+        channelId: 'foo',
+      },
+    },
+  },
+
   {
     key: 'Big Picture Style',
     notification: {

@@ -11,9 +11,9 @@ import '@react-native-firebase/messaging';
 
 import Notifee, {
   AndroidChannel,
-  AndroidImportance,
-  EventType,
+  Importance,
   Notification,
+  EventType,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -33,29 +33,29 @@ const channels: AndroidChannel[] = [
   {
     name: 'High Importance',
     id: 'high',
-    importance: AndroidImportance.HIGH,
+    importance: Importance.HIGH,
     // sound: 'hollow',
   },
   {
     name: '🐴 Sound',
     id: 'custom_sound',
-    importance: AndroidImportance.HIGH,
+    importance: Importance.HIGH,
     sound: 'horse.mp3',
   },
   {
     name: 'Default Importance',
     id: 'default',
-    importance: AndroidImportance.DEFAULT,
+    importance: Importance.DEFAULT,
   },
   {
     name: 'Low Importance',
     id: 'low',
-    importance: AndroidImportance.LOW,
+    importance: Importance.LOW,
   },
   {
     name: 'Min Importance',
     id: 'min',
-    importance: AndroidImportance.MIN,
+    importance: Importance.MIN,
   },
 ];
 
@@ -127,32 +127,8 @@ function Root(): any {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    fontSize: 16,
-    padding: 8,
-    marginBottom: 8,
-    fontWeight: 'bold',
-  },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 8,
-    paddingBottom: 20,
-    borderBottomColor: '#c1c1c1',
-    borderBottomWidth: 1,
-  },
-  rowItem: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 8,
-  },
-});
-
-Notifee.onEvent(async event => {
-  const { type, headless, detail } = event;
+function logEvent(state: string, event: any): void {
+  const { type, detail } = event;
 
   let eventTypeString;
 
@@ -189,30 +165,70 @@ Notifee.onEvent(async event => {
       eventTypeString = 'CHANNEL_GROUP_BLOCKED';
       console.log('Channel Group', detail.channelGroup);
       break;
-    case EventType.SCHEDULED:
-      eventTypeString = 'SCHEDULED';
-      break;
     default:
       eventTypeString = 'UNHANDLED_NATIVE_EVENT';
   }
 
-  if (headless) {
-    console.warn(`Received a ${eventTypeString} event in headless mode.`);
-  } else {
-    console.warn(`Received a ${eventTypeString} event in JS mode.`);
+  console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`);
+}
+
+Notifee.onForegroundEvent(event => {
+  logEvent('Foreground', event);
+});
+
+Notifee.onBackgroundEvent(async ({ type, detail }) => {
+  logEvent('Background', { type, detail });
+
+  const { notification, pressAction } = detail;
+
+  // Check if the user pressed a cancel action
+  if (
+    type === EventType.ACTION_PRESS &&
+    ['first_action', 'second_action'].includes(pressAction?.id)
+  ) {
+    // Remove the notification
+    await Notifee.cancelNotification(notification.id);
+    console.warn('Notification Cancelled', pressAction.id);
   }
 });
 
-// Notifee.registerForegroundService(notification => {
-//   return new Promise(resolve => {
-//     Notifee.onEvent(({ detail }) => {
-//       console.log(detail);
-//       if (detail?.pressAction?.id === 'stop') {
-//         return resolve();
-//       }
-//     });
-//   });
-// });
+Notifee.registerForegroundService(notification => {
+  return new Promise(resolve => {
+    Notifee.onForegroundEvent(async ({ type, detail }) => {
+      logEvent('Foreground Service', { type, detail });
+
+      if (detail?.pressAction?.id === 'stop') {
+        console.warn('Notification Service Stopped for', notification.id);
+        await Notifee.cancelNotification(notification.id);
+        return resolve();
+      }
+    });
+  });
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    fontSize: 16,
+    padding: 8,
+    marginBottom: 8,
+    fontWeight: 'bold',
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 8,
+    paddingBottom: 20,
+    borderBottomColor: '#c1c1c1',
+    borderBottomWidth: 1,
+  },
+  rowItem: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 8,
+  },
+});
 
 AppRegistry.registerComponent('testing', () => Root);
 
