@@ -56,16 +56,23 @@
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = 0;
     NSNumber *importance = notifeeNotification[@"ios"][@"importance"];
-
-    if ([importance isEqualToNumber:@4]) { // HIGH
-      presentationOptions += UNNotificationPresentationOptionAlert + UNNotificationPresentationOptionSound;
-    } else if ([importance isEqualToNumber:@3]) { // DEFAULT
-      presentationOptions += UNNotificationPresentationOptionAlert;
-    }
-
-    if (notifeeNotification[@"ios"][@"badgeCount"] != nil) {
-      presentationOptions += UNNotificationPresentationOptionBadge;
-    }
+    NSDictionary * foregroundPresentationOptions = notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
+      
+    BOOL alert = foregroundPresentationOptions[@"alert"];
+    BOOL badge = foregroundPresentationOptions[@"badge"];
+    BOOL sound = foregroundPresentationOptions[@"sound"];
+      
+      if(badge){
+        presentationOptions += UNNotificationPresentationOptionBadge;
+      }
+      
+      if(sound){
+        presentationOptions += UNNotificationPresentationOptionSound;
+      }
+      
+      if(alert){
+        presentationOptions += UNNotificationPresentationOptionAlert;
+      }
 
     completionHandler(presentationOptions);
   }
