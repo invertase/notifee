@@ -11,21 +11,28 @@ describe('Validate Android Channel', () => {
       const channel: AndroidChannel = {
         id: 'id',
         name: 'name',
+        description: 'description',
+        lightColor: 'blue',
+        groupId: 'groupId',
         bypassDnd: false,
         lights: true,
+        sound: 'sound',
         vibration: true,
         badge: true,
         importance: Importance.DEFAULT,
         visibility: AndroidVisibility.PRIVATE,
+        vibrationPattern: [],
       };
 
       const $ = validateAndroidChannel(channel);
       expect($.id).toEqual('id');
       expect($.name).toEqual('name');
+      expect($.description).toEqual('description');
+      expect($.lightColor).toEqual('blue');
       expect($.bypassDnd).toEqual(false);
       expect($.lights).toEqual(true);
       expect($.vibration).toEqual(true);
-      expect($.vibration).toEqual(true);
+      expect($.vibrationPattern).toEqual([]);
       expect($.importance).toEqual(Importance.DEFAULT);
       expect($.visibility).toEqual(AndroidVisibility.PRIVATE);
     });

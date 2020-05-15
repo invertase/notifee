@@ -5,11 +5,22 @@ import {
   AndroidBadgeIconType,
   AndroidDefaults,
   AndroidGroupAlertBehavior,
+  AndroidAction,
+  AndroidCategory,
+  AndroidProgress,
 } from '@notifee/react-native/src/types/NotificationAndroid';
-import { Importance } from '@notifee/react-native/src/types/Notification';
+import { Importance, NotificationPressAction } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate Android Notification', () => {
   describe('validateAndroidNotification()', () => {
+    const pressAction: NotificationPressAction = { id: 'id' };
+    const androidProgress: AndroidProgress = { indeterminate: false };
+
+    const androidAction: AndroidAction = {
+      pressAction,
+      title: 'title',
+    };
+
     test('returns valid ', () => {
       const androidInput: NotificationAndroid = {
         autoCancel: true,
@@ -29,6 +40,23 @@ describe('Validate Android Notification', () => {
         showChronometer: false,
         visibility: AndroidVisibility.PRIVATE,
         channelId: 'channelId',
+        actions: [androidAction],
+        category: AndroidCategory.ALARM,
+        badgeCount: 0,
+        color: 'blue',
+        groupId: 'groupId',
+        inputHistory: ['test'],
+        largeIcon: 'largeIcon',
+        lights: ['blue', 1, 1],
+        progress: androidProgress,
+        smallIconLevel: 1,
+        sortKey: 'sortkey',
+        tag: 'tag',
+        ticker: 'ticker',
+        timeoutAfter: 5,
+        vibrationPattern: [1, 1],
+        timestamp: 111,
+        sound: 'sound',
       };
 
       const $ = validateAndroidNotification(androidInput);
@@ -48,6 +76,19 @@ describe('Validate Android Notification', () => {
       expect($.showChronometer).toEqual(false);
       expect($.visibility).toEqual(AndroidVisibility.PRIVATE);
       expect($.channelId).toEqual('channelId');
+      expect($.color).toEqual('blue');
+      expect($.groupId).toEqual('groupId');
+      expect($.inputHistory).toEqual(['test']);
+      expect($.largeIcon).toEqual('largeIcon');
+      expect($.lights).toEqual(['blue', 1, 1]);
+      expect($.smallIconLevel).toEqual(1);
+      expect($.sortKey).toEqual('sortkey');
+      expect($.tag).toEqual('tag');
+      expect($.ticker).toEqual('ticker');
+      expect($.timeoutAfter).toEqual(5);
+      expect($.vibrationPattern).toEqual([1, 1]);
+      expect($.timestamp).toEqual(111);
+      expect($.sound).toEqual('sound');
     });
 
     test('returns default values when no params provided ', () => {
@@ -493,6 +534,16 @@ describe('Validate Android Notification', () => {
       );
     });
 
+    test('throws an error when channel is an invalid type', () => {
+      const channelGroup: NotificationAndroid = {
+        channelId: {} as any,
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.channelId' expected a string value.",
+      );
+    });
+
     // TODO
     xtest('returns valid with big pictures style', () => {});
 
@@ -634,6 +685,42 @@ describe('Validate Android Notification', () => {
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
         "'notification.sound' expected a valid sound string.",
+      );
+    });
+
+    test('throws an error when defaults is an invalid type', () => {
+      const channelGroup: NotificationAndroid = {
+        channelId: 'channelId',
+        defaults: ['' as any],
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.defaults' invalid array value, expected an AndroidDefaults value.",
+      );
+    });
+
+    test('throws an error when defaults is an invalid type', () => {
+      const progress: AndroidProgress = { indeterminate: false, max: 10, current: null as any };
+
+      const channelGroup: NotificationAndroid = {
+        channelId: 'channelId',
+        progress,
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.progress.max' when providing a max value, you must also specify a current value.",
+      );
+    });
+
+    test('throws an error when defaults is an invalid smallIconLevel', () => {
+      const channelGroup: NotificationAndroid = {
+        channelId: 'channelId',
+        smallIconLevel: {} as any,
+        smallIcon: 'smallIcon',
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.smallIconLevel' expected value to be a number.",
       );
     });
   });
