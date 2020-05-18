@@ -56,23 +56,23 @@
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = 0;
     NSNumber *importance = notifeeNotification[@"ios"][@"importance"];
-    NSDictionary * foregroundPresentationOptions = notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
+    NSDictionary *foregroundPresentationOptions = notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
       
     BOOL alert = foregroundPresentationOptions[@"alert"];
     BOOL badge = foregroundPresentationOptions[@"badge"];
     BOOL sound = foregroundPresentationOptions[@"sound"];
       
-      if(badge){
-        presentationOptions += UNNotificationPresentationOptionBadge;
-      }
-      
-      if(sound){
-        presentationOptions += UNNotificationPresentationOptionSound;
-      }
-      
-      if(alert){
-        presentationOptions += UNNotificationPresentationOptionAlert;
-      }
+    if(badge) {
+      presentationOptions += UNNotificationPresentationOptionBadge;
+    }
+    
+    if(sound) {
+      presentationOptions += UNNotificationPresentationOptionSound;
+    }
+    
+    if(alert) {
+      presentationOptions += UNNotificationPresentationOptionAlert;
+    }
 
     completionHandler(presentationOptions);
   }
