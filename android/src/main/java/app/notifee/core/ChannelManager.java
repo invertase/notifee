@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
@@ -24,6 +26,7 @@ import app.notifee.core.utils.ResourceUtils;
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
 
 public class ChannelManager {
+  private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
   private static String TAG = "ChannelManager";
 
   static Task<Void> createChannel(ChannelBundle channelBundle) {
@@ -79,7 +82,7 @@ public class ChannelManager {
   }
 
   static Task<Void> createChannels(List<ChannelBundle> channelBundles) {
-    return Tasks.call(() -> {
+    return Tasks.call(CACHED_THREAD_POOL, () -> {
       for (ChannelBundle channelBundle : channelBundles) {
         Tasks.await(createChannel(channelBundle));
       }
@@ -111,7 +114,7 @@ public class ChannelManager {
   }
 
   static Task<Void> createChannelGroups(List<ChannelGroupBundle> channelGroupBundles) {
-    return Tasks.call(() -> {
+    return Tasks.call(CACHED_THREAD_POOL, () -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
