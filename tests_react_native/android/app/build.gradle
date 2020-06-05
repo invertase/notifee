@@ -64,16 +64,25 @@ android {
   }
 
   buildTypes {
+    debug {
+      minifyEnabled false
+      matchingFallbacks = ['debug']
+      applicationIdSuffix ".dev"
+      versionNameSuffix "Dev"
+      buildConfigField 'String', 'NOTIFEE_API_KEY', DEV_NOTIFEE_API_KEY
+    }
+    staging {
+      minifyEnabled false
+      matchingFallbacks = ['debug']
+      applicationIdSuffix ".staging"
+      versionNameSuffix "Staging"
+    }
     release {
       minifyEnabled true
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
       proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
       signingConfig signingConfigs.release
       matchingFallbacks = ['release']
-    }
-    debug {
-      minifyEnabled false
-      matchingFallbacks = ['debug']
     }
   }
 
