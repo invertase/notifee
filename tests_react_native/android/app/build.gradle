@@ -55,6 +55,12 @@ android {
   }
 
   signingConfigs {
+    staging {
+      storeFile file("keystore.jks")
+      storePassword "12345678"
+      keyAlias "key0"
+      keyPassword "12345678"
+    }
     release {
       storeFile file("keystore.jks")
       storePassword "12345678"
@@ -69,13 +75,15 @@ android {
       matchingFallbacks = ['debug']
       applicationIdSuffix ".dev"
       versionNameSuffix "Dev"
-      buildConfigField 'String', 'NOTIFEE_API_KEY', DEV_NOTIFEE_API_KEY
     }
     staging {
       minifyEnabled false
       matchingFallbacks = ['debug']
       applicationIdSuffix ".staging"
       versionNameSuffix "Staging"
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+      proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
+      signingConfig signingConfigs.staging
     }
     release {
       minifyEnabled true
@@ -98,6 +106,7 @@ android {
       // https://developer.android.com/studio/build/configure-apk-splits.html
       def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
       def abi = output.getFilter(OutputFile.ABI)
+
       if (abi != null) {  // null for the universal-debug, universal-release variants
         output.versionCodeOverride =
           versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
@@ -156,4 +165,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 //preBuild.dependsOn buildNotifeeCore
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+apply from: file('../../node_modules/@notifee/react-native/android/notifee-json.gradle')
 apply plugin: 'com.google.gms.google-services'

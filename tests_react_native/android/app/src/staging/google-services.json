@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:383739936153:android:1af7777643b3cae33c2708",
         "android_client_info": {
-          "package_name": "com.invertase.testing.dev"
+          "package_name": "com.invertase.testing.staging"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "383739936153-erne6alisa6qm97kiftc5b1e9fm5iqoj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.invertase.testing.dev",
+            "package_name": "com.invertase.testing.staging",
             "certificate_hash": "939efbe8eaa5aaf50396b19fe980ef4a8df1c6e7"
           }
         },
