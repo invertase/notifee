@@ -4,7 +4,7 @@
     "--no-lockfile"
   ],
   "packages": [
-    "packages/*",
+    "packages/react-native",
     "tests_react_native"
   ],
   "useWorkspaces": true,

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
-import androidx.concurrent.futures.ResolvableFuture;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.ListenableWorker;
 import androidx.work.WorkerParameters;
 
@@ -18,7 +18,7 @@ public class Worker extends ListenableWorker {
   static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
   static final String WORK_TYPE_NOTIFICATION_SCHEDULE = "app.notifee.core.NotificationManager.SCHEDULE";
   private static final String TAG = "Worker";
-  private ResolvableFuture<Result> mFuture;
+  private CallbackToFutureAdapter.Completer<Result> mCompleter;
 
   /**
    * @param appContext   The application {@link Context}
@@ -33,41 +33,43 @@ public class Worker extends ListenableWorker {
 
   @Override
   public void onStopped() {
-    if (mFuture != null) mFuture.set(Result.failure());
-    mFuture = null;
+    if (mCompleter != null) mCompleter.set(Result.failure());
+    mCompleter = null;
   }
 
   @NonNull
   @Override
   public ListenableFuture<Result> startWork() {
-    mFuture = ResolvableFuture.create();
-    String workType = getInputData().getString(KEY_WORK_TYPE);
-    if (workType == null) {
-      Logger.d(TAG, "received task with no input key type.");
-      mFuture.set(Result.success());
-      return mFuture;
-    }
+    return CallbackToFutureAdapter.getFuture(completer -> {
+      mCompleter = completer;
+      String workType = getInputData().getString(KEY_WORK_TYPE);
+      if (workType == null) {
+        Logger.d(TAG, "received task with no input key type.");
+        completer.set(Result.success());
+        return "Worker.startWork operation cancelled - no input.";
+      }
 
-    switch (workType) {
-      case WORK_TYPE_BLOCK_STATE_RECEIVER:
-        Logger.d(TAG, "received task with type " + workType);
-        BlockStateBroadcastReceiver.doWork(getInputData(), mFuture);
-        break;
-      case WORK_TYPE_LICENSE_VERIFY_LOCAL:
-        LicenseManager.doLocalWork(mFuture);
-        break;
-      case WORK_TYPE_LICENSE_VERIFY_REMOTE:
-        LicenseManager.doRemoteWork(getInputData(), mFuture);
-        break;
-      case WORK_TYPE_NOTIFICATION_SCHEDULE:
-        NotificationManager.doScheduledWork(getInputData(), mFuture);
-        break;
-      default:
-        Logger.d(TAG, "unknown work type received: " + workType);
-        mFuture.set(Result.success());
-        break;
-    }
+      switch (workType) {
+        case WORK_TYPE_BLOCK_STATE_RECEIVER:
+          Logger.d(TAG, "received task with type " + workType);
+          BlockStateBroadcastReceiver.doWork(getInputData(), completer);
+          break;
+        case WORK_TYPE_LICENSE_VERIFY_LOCAL:
+          LicenseManager.doLocalWork(completer);
+          break;
+        case WORK_TYPE_LICENSE_VERIFY_REMOTE:
+          LicenseManager.doRemoteWork(getInputData(), completer);
+          break;
+        case WORK_TYPE_NOTIFICATION_SCHEDULE:
+          NotificationManager.doScheduledWork(getInputData(), completer);
+          break;
+        default:
+          Logger.d(TAG, "unknown work type received: " + workType);
+          completer.set(Result.success());
+          return "Worker.startWork operation cancelled - unknown work type.";
+      }
 
-    return mFuture;
+      return "Worker.startWork operation created successfully.";
+    });
   }
 }

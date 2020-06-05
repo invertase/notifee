@@ -2,8 +2,10 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve, join } = require('path');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createBlacklist } = require('metro');
 
 const rootDir = resolve(__dirname, '..');
@@ -39,11 +41,7 @@ const config = {
       },
     ),
   },
-  watchFolders: [
-    // resolve(__dirname, '.'),
-    resolve(__dirname, './../packages/react-native'),
-    resolve(__dirname, './../packages/jet'),
-  ],
+  watchFolders: [resolve(__dirname, './../packages/react-native')],
 };
 
 module.exports = config;

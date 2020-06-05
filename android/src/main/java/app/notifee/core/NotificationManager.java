@@ -2,13 +2,13 @@ package app.notifee.core;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.concurrent.futures.ResolvableFuture;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
@@ -33,14 +33,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import app.notifee.core.bundles.NotificationAndroidActionBundle;
-import app.notifee.core.bundles.NotificationAndroidBundle;
-import app.notifee.core.bundles.NotificationAndroidStyleBundle;
-import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.bundles.ScheduleBundle;
-import app.notifee.core.events.NotificationEvent;
-import app.notifee.core.utils.ResourceUtils;
-import app.notifee.core.utils.TextUtils;
+import app.notifee.core.model.NotificationAndroidActionModel;
+import app.notifee.core.model.NotificationAndroidModel;
+import app.notifee.core.model.NotificationAndroidStyleModel;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.model.ScheduleModel;
+import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.utility.ObjectUtils;
+import app.notifee.core.utility.ResourceUtils;
+import app.notifee.core.utility.TextUtils;
 
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 import static app.notifee.core.Worker.WORK_TYPE_NOTIFICATION_SCHEDULE;
@@ -50,110 +51,110 @@ class NotificationManager {
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
-    NotificationBundle notificationBundle
+    NotificationModel notificationModel
   ) {
-    final NotificationAndroidBundle androidBundle = notificationBundle.getAndroidBundle();
+    final NotificationAndroidModel androidModel = notificationModel.getAndroid();
 
     /*
      * Construct the initial NotificationCompat.Builder instance
      */
     Callable<NotificationCompat.Builder> builderCallable = () -> {
       NotificationCompat.Builder builder = new NotificationCompat.Builder(
-        ContextHolder.getApplicationContext(), androidBundle.getChannelId());
+        ContextHolder.getApplicationContext(), androidModel.getChannelId());
 
       // must always keep at top
-      builder.setExtras(notificationBundle.getData());
+      builder.setExtras(notificationModel.getData());
 
       builder.setDeleteIntent(ReceiverService
         .createIntent(ReceiverService.DELETE_INTENT, new String[]{"notification"},
-          notificationBundle.toBundle()
+          notificationModel.toBundle()
         ));
 
       builder.setContentIntent(ReceiverService
         .createIntent(
           ReceiverService.PRESS_INTENT,
           new String[]{"notification", "pressAction"},
-          notificationBundle.toBundle(),
-          androidBundle.getPressAction()
+          notificationModel.toBundle(),
+          androidModel.getPressAction()
         ));
 
-      if (notificationBundle.getTitle() != null) {
-        builder.setContentTitle(TextUtils.fromHtml(notificationBundle.getTitle()));
+      if (notificationModel.getTitle() != null) {
+        builder.setContentTitle(TextUtils.fromHtml(notificationModel.getTitle()));
       }
 
-      if (notificationBundle.getSubTitle() != null) {
-        builder.setSubText(TextUtils.fromHtml(notificationBundle.getSubTitle()));
+      if (notificationModel.getSubTitle() != null) {
+        builder.setSubText(TextUtils.fromHtml(notificationModel.getSubTitle()));
       }
 
-      if (notificationBundle.getBody() != null) {
-        builder.setContentText(TextUtils.fromHtml(notificationBundle.getBody()));
+      if (notificationModel.getBody() != null) {
+        builder.setContentText(TextUtils.fromHtml(notificationModel.getBody()));
       }
 
-      if (androidBundle.getBadgeIconType() != null) {
-        builder.setBadgeIconType(androidBundle.getBadgeIconType());
+      if (androidModel.getBadgeIconType() != null) {
+        builder.setBadgeIconType(androidModel.getBadgeIconType());
       }
 
-      if (androidBundle.getCategory() != null) {
-        builder.setCategory(androidBundle.getCategory());
+      if (androidModel.getCategory() != null) {
+        builder.setCategory(androidModel.getCategory());
       }
 
-      if (androidBundle.getColor() != null) {
-        builder.setColor(androidBundle.getColor());
+      if (androidModel.getColor() != null) {
+        builder.setColor(androidModel.getColor());
       }
 
-      builder.setColorized(androidBundle.getColorized());
-      builder.setChronometerCountDown(androidBundle.getChronometerCountDown());
-      builder.setDefaults(androidBundle.getDefaults());
+      builder.setColorized(androidModel.getColorized());
+      builder.setChronometerCountDown(androidModel.getChronometerCountDown());
+      builder.setDefaults(androidModel.getDefaults());
 
-      if (androidBundle.getGroup() != null) {
-        builder.setGroup(androidBundle.getGroup());
+      if (androidModel.getGroup() != null) {
+        builder.setGroup(androidModel.getGroup());
       }
 
-      builder.setGroupAlertBehavior(androidBundle.getGroupAlertBehaviour());
-      builder.setGroupSummary(androidBundle.getGroupSummary());
+      builder.setGroupAlertBehavior(androidModel.getGroupAlertBehaviour());
+      builder.setGroupSummary(androidModel.getGroupSummary());
 
-      if (androidBundle.getInputHistory() != null) {
-        builder.setRemoteInputHistory(androidBundle.getInputHistory());
+      if (androidModel.getInputHistory() != null) {
+        builder.setRemoteInputHistory(androidModel.getInputHistory());
       }
 
-      if (androidBundle.getLights() != null) {
-        ArrayList<Integer> lights = androidBundle.getLights();
+      if (androidModel.getLights() != null) {
+        ArrayList<Integer> lights = androidModel.getLights();
         builder.setLights(lights.get(0), lights.get(1), lights.get(2));
       }
 
-      builder.setLocalOnly(androidBundle.getLocalOnly());
+      builder.setLocalOnly(androidModel.getLocalOnly());
 
-      if (androidBundle.getNumber() != null) {
-        builder.setNumber(androidBundle.getNumber());
+      if (androidModel.getNumber() != null) {
+        builder.setNumber(androidModel.getNumber());
       }
 
-      if (androidBundle.getSound() != null) {
-        Uri soundUri = ResourceUtils.getSoundUri(androidBundle.getSound());
+      if (androidModel.getSound() != null) {
+        Uri soundUri = ResourceUtils.getSoundUri(androidModel.getSound());
         if (soundUri != null) {
           builder.setSound(soundUri);
         } else {
-          Logger.w(TAG, "Unable to retrieve sound for notification, sound was specified as: " + androidBundle.getSound());
+          Logger.w(TAG, "Unable to retrieve sound for notification, sound was specified as: " + androidModel.getSound());
         }
       }
 
-      builder.setOngoing(androidBundle.getOngoing());
-      builder.setOnlyAlertOnce(androidBundle.getOnlyAlertOnce());
-      builder.setPriority(androidBundle.getPriority());
+      builder.setOngoing(androidModel.getOngoing());
+      builder.setOnlyAlertOnce(androidModel.getOnlyAlertOnce());
+      builder.setPriority(androidModel.getPriority());
 
-      NotificationAndroidBundle.AndroidProgress progress = androidBundle.getProgress();
+      NotificationAndroidModel.AndroidProgress progress = androidModel.getProgress();
       if (progress != null) {
         builder.setProgress(progress.getMax(), progress.getCurrent(), progress.getIndeterminate());
       }
 
-      if (androidBundle.getShortcutId() != null) {
-        builder.setShortcutId(androidBundle.getShortcutId());
+      if (androidModel.getShortcutId() != null) {
+        builder.setShortcutId(androidModel.getShortcutId());
       }
 
-      builder.setShowWhen(androidBundle.getShowTimestamp());
+      builder.setShowWhen(androidModel.getShowTimestamp());
 
-      Integer smallIconId = androidBundle.getSmallIcon();
+      Integer smallIconId = androidModel.getSmallIcon();
       if (smallIconId != null) {
-        Integer smallIconLevel = androidBundle.getSmallIconLevel();
+        Integer smallIconLevel = androidModel.getSmallIconLevel();
         if (smallIconLevel != null) {
           builder.setSmallIcon(smallIconId, smallIconLevel);
         } else {
@@ -161,29 +162,29 @@ class NotificationManager {
         }
       }
 
-      if (androidBundle.getSortKey() != null) {
-        builder.setSortKey(androidBundle.getSortKey());
+      if (androidModel.getSortKey() != null) {
+        builder.setSortKey(androidModel.getSortKey());
       }
 
-      if (androidBundle.getTicker() != null) {
-        builder.setTicker(androidBundle.getTicker());
+      if (androidModel.getTicker() != null) {
+        builder.setTicker(androidModel.getTicker());
       }
 
-      if (androidBundle.getTimeoutAfter() != null) {
-        builder.setTimeoutAfter(androidBundle.getTimeoutAfter());
+      if (androidModel.getTimeoutAfter() != null) {
+        builder.setTimeoutAfter(androidModel.getTimeoutAfter());
       }
 
-      builder.setUsesChronometer(androidBundle.getShowChronometer());
+      builder.setUsesChronometer(androidModel.getShowChronometer());
 
-      long[] vibrationPattern = androidBundle.getVibrationPattern();
+      long[] vibrationPattern = androidModel.getVibrationPattern();
       if (vibrationPattern.length > 0) builder.setVibrate(vibrationPattern);
 
-      builder.setVisibility(androidBundle.getVisibility());
+      builder.setVisibility(androidModel.getVisibility());
 
-      long timestamp = androidBundle.getTimestamp();
+      long timestamp = androidModel.getTimestamp();
       if (timestamp > -1) builder.setWhen(timestamp);
 
-      builder.setAutoCancel(androidBundle.getAutoCancel());
+      builder.setAutoCancel(androidModel.getAutoCancel());
 
       return builder;
     };
@@ -194,8 +195,8 @@ class NotificationManager {
     Continuation<NotificationCompat.Builder, NotificationCompat.Builder> largeIconContinuation = task -> {
       NotificationCompat.Builder builder = task.getResult();
 
-      if (androidBundle.hasLargeIcon()) {
-        String largeIcon = androidBundle.getLargeIcon();
+      if (androidModel.hasLargeIcon()) {
+        String largeIcon = androidModel.getLargeIcon();
         Bitmap largeIconBitmap = null;
 
         try {
@@ -223,18 +224,18 @@ class NotificationManager {
      */
     Continuation<NotificationCompat.Builder, NotificationCompat.Builder> actionsContinuation = task -> {
       NotificationCompat.Builder builder = task.getResult();
-      ArrayList<NotificationAndroidActionBundle> actionBundles = androidBundle.getActions();
+      ArrayList<NotificationAndroidActionModel> actionBundles = androidModel.getActions();
 
       if (actionBundles == null) {
         return builder;
       }
 
-      for (NotificationAndroidActionBundle actionBundle : actionBundles) {
+      for (NotificationAndroidActionModel actionBundle : actionBundles) {
         PendingIntent pendingIntent = ReceiverService
           .createIntent(
             ACTION_PRESS_INTENT,
             new String[]{"notification", "pressAction"},
-            notificationBundle.toBundle(),
+            notificationModel.toBundle(),
             actionBundle.getPressAction().toBundle()
           );
 
@@ -282,7 +283,7 @@ class NotificationManager {
      */
     Continuation<NotificationCompat.Builder, NotificationCompat.Builder> styleContinuation = task -> {
       NotificationCompat.Builder builder = task.getResult();
-      NotificationAndroidStyleBundle androidStyleBundle = androidBundle.getStyle();
+      NotificationAndroidStyleModel androidStyleBundle = androidModel.getStyle();
       if (androidStyleBundle == null) {
         return builder;
       }
@@ -342,90 +343,108 @@ class NotificationManager {
     });
   }
 
-
-  static Task<Void> displayNotification(NotificationBundle notificationBundle) {
-    return notificationBundleToBuilder(notificationBundle)
+  private static Task<Void> displayNotification(
+    NotificationModel notificationModel
+  ) {
+    return notificationBundleToBuilder(notificationModel)
       .continueWith(CACHED_THREAD_POOL, (task) -> {
         NotificationCompat.Builder builder = task.getResult();
-        NotificationAndroidBundle androidBundle = notificationBundle.getAndroidBundle();
+        NotificationAndroidModel androidBundle = notificationModel.getAndroid();
         Notification notification = Objects.requireNonNull(builder).build();
-        int hashCode = notificationBundle.getHashCode();
+        int hashCode = notificationModel.getHashCode();
 
         if (androidBundle.getAsForegroundService()) {
-          ForegroundService.start(hashCode, notification, notificationBundle.toBundle());
+          ForegroundService.start(hashCode, notification, notificationModel.toBundle());
         } else {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .notify(hashCode, notification);
         }
 
-        EventBus.post(new NotificationEvent(NotificationEvent.TYPE_DELIVERED, notificationBundle));
+        EventBus.post(new NotificationEvent(NotificationEvent.TYPE_DELIVERED, notificationModel));
 
         return null;
       });
   }
 
-  static Task<Void> scheduleNotification(Bundle notificationBundle, Bundle scheduleBundle) {
+  static Task<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
+    if (triggerBundle == null) return displayNotification(notificationModel);
+
     return Tasks.call(CACHED_THREAD_POOL, () -> {
-      NotificationBundle notification = NotificationBundle.fromBundle(notificationBundle);
-      ScheduleBundle schedule = ScheduleBundle.fromBundle(scheduleBundle);
+      ScheduleModel schedule = ScheduleModel.fromBundle(triggerBundle);
 
-      Data workData = new Data.Builder()
-        .putString(Worker.KEY_WORK_TYPE, WORK_TYPE_NOTIFICATION_SCHEDULE)
-//        .putInt(schedule.)
-//        .putByteArray("notification", notificationBundle) // todo send serialized bundle
-        .build();
+      String uniqueWorkName = "schedule:" + notificationModel.getId();
+      WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
 
-      int timestamp = schedule.getTimestamp();
+      double delay = 0;
+      double timestamp = schedule.getTimestamp();
       int interval = schedule.getInterval();
-      long delay = 0;
 
+      Data.Builder workDataBuilder = new Data.Builder()
+        .putString(Worker.KEY_WORK_TYPE, WORK_TYPE_NOTIFICATION_SCHEDULE)
+        .putByteArray("schedule", ObjectUtils.bundleToBytes(triggerBundle))
+        .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
 
-      if (timestamp != -1) {
-        delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
+      if (timestamp > 0) {
+        delay = Math.round(timestamp - (System.currentTimeMillis() / 1000.0));
       }
 
       // One time scheduled
       if (interval == -1) {
         OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
         workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
-        workRequestBuilder.setInputData(workData);
-        workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
-
-        WorkManager.getInstance(ContextHolder.getApplicationContext())
-          .enqueueUniqueWork("schedule:" + notification.getId(), ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
+        workRequestBuilder.setInputData(workDataBuilder.build());
+        workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
+        workManager
+          .enqueueUniqueWork(
+            uniqueWorkName,
+            ExistingWorkPolicy.REPLACE,
+            workRequestBuilder.build()
+          );
       } else {
-        PeriodicWorkRequest.Builder workRequestBuilder = new PeriodicWorkRequest.Builder(Worker.class, interval, TimeUnit.MINUTES);
+        PeriodicWorkRequest.Builder workRequestBuilder = new PeriodicWorkRequest.Builder(
+          Worker.class, interval, TimeUnit.MINUTES
+        );
         workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
-        workRequestBuilder.setInputData(workData);
-        workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
-
-        WorkManager.getInstance(ContextHolder.getApplicationContext())
-          .enqueueUniquePeriodicWork("schedule:" + notification.getId(), ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+        workRequestBuilder.setInputData(workDataBuilder.build());
+        workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
+        workManager
+          .enqueueUniquePeriodicWork(
+            uniqueWorkName,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            workRequestBuilder.build()
+          );
       }
 
-      EventBus.post(new NotificationEvent(NotificationEvent.TYPE_SCHEDULED, notification));
+      EventBus.post(new NotificationEvent(NotificationEvent.TYPE_SCHEDULED, notificationModel));
 
       return null;
     });
   }
 
-  static void doScheduledWork(Data workData, final ResolvableFuture<ListenableWorker.Result> completer) {
-    String notificationString = workData.getString("notification");
-    String scheduleString = workData.getString("schedule");
+  static void doScheduledWork(
+    Data workData,
+    CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer
+  ) {
+    byte[] scheduleBytes = workData.getByteArray("schedule");
+    byte[] notificationBytes = workData.getByteArray("notification");
 
-    if (notificationString == null || scheduleString == null) {
+    if (notificationBytes == null || scheduleBytes == null) {
       Logger.w(TAG, "Attempted to handle doScheduledWork but no notification or schedule data was found.");
       completer.set(ListenableWorker.Result.success());
       return;
     }
 
-    NotificationBundle notificationBundle = NotificationBundle.fromJSONString(notificationString);
-    NotificationManager.displayNotification(notificationBundle).addOnCompleteListener(task -> {
-      completer.set(ListenableWorker.Result.success());
-      if (!task.isSuccessful()) {
-        Logger.e(TAG, "Failed to display scheduled notification", task.getException());
-      }
-    });
+    NotificationModel notificationModel = NotificationModel.fromBundle(
+      ObjectUtils.bytesToBundle(notificationBytes)
+    );
 
+    NotificationManager
+      .displayNotification(notificationModel)
+      .addOnCompleteListener(task -> {
+        completer.set(ListenableWorker.Result.success());
+        if (!task.isSuccessful()) {
+          Logger.e(TAG, "Failed to display scheduled notification", task.getException());
+        }
+      });
   }
 }

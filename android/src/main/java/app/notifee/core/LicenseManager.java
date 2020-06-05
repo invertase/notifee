@@ -1,5 +1,6 @@
 package app.notifee.core;
 
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Build;
@@ -7,7 +8,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.concurrent.futures.ResolvableFuture;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -21,6 +22,7 @@ import androidx.work.WorkManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -141,19 +143,50 @@ class LicenseManager {
   }
 
   /**
+   * Returns a value from BuildConfig.
+   * If missing, returns null.
+   * @param fieldName
+   * @return
+   */
+  private static String getBuildConfigValue(String fieldName) {
+    try {
+      Class<?> clazz = Class.forName(ContextHolder.getApplicationContext().getPackageName() + ".BuildConfig");
+      Field field = clazz.getField(fieldName);
+      return field.get(null).toString();
+    } catch (Exception e) {
+      Logger.d(TAG, " value for field "+ fieldName + " cannot be found");
+    }
+    return null;
+  }
+
+  /**
+   * Returns Android license key
+   * either from BuildConfig or JSONConfig
+   *
+   * @return
+   */
+  private static String getLicenseKey() {
+    String androidLicenseKey = getBuildConfigValue("NOTIFEE_API_KEY");
+    if (androidLicenseKey == null)  androidLicenseKey =  JSONConfig.getInstance().getString("license", null);
+    return androidLicenseKey;
+  }
+
+  /**
    * Local/offline license validation via JWT.
    *
    * @param completer
    */
   static void doLocalWork(
-    ResolvableFuture<ListenableWorker.Result> completer
+    CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer
   ) {
     Logger.d(TAG, "Local verification started.");
     // mark local verification as pending while we try verify the license
     Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.PENDING);
 
+    // get license key from BuildConfig or JSONConfig
+    String androidLicenseKey = getLicenseKey();
+
     // check a license key has been specified
-    String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
     if (androidLicenseKey == null) {
       // mark local verification as no license found, when we in debug builds this status is ignored
       // as a license is not required in debug
@@ -244,12 +277,15 @@ class LicenseManager {
    * @param completer
    */
   static void doRemoteWork(
-    Data workData, final ResolvableFuture<ListenableWorker.Result> completer
+    Data workData, final CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer
   ) {
     Logger.d(TAG, "Remote verification started.");
     boolean isPrimaryKey = workData.getBoolean(Worker.KEY_IS_PRIMARY, false);
 
-    String androidLicenseKey = JSONConfig.getInstance().getString("license", null);
+    // get license key from BuildConfig or JSONConfig
+    String androidLicenseKey = getLicenseKey();
+
+    // check a license key has been specified either by NOTIFEE_API_KEY or JSONConfig
     if (androidLicenseKey == null) {
       Logger.d(TAG, "Remote verification skipped as license key not found.");
       completer.set(ListenableWorker.Result.success());

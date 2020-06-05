@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import app.notifee.core.events.LogEvent;
+import app.notifee.core.event.LogEvent;
 
 public class Logger {
   private static final String TAG = "NOTIFEE";

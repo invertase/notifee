@@ -14,11 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import app.notifee.core.bundles.ChannelBundle;
-import app.notifee.core.bundles.ChannelGroupBundle;
-import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.events.InitialNotificationEvent;
-import app.notifee.core.events.MainComponentEvent;
+import app.notifee.core.interfaces.MethodCallResult;
+import app.notifee.core.model.ChannelModel;
+import app.notifee.core.model.ChannelGroupModel;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.event.InitialNotificationEvent;
+import app.notifee.core.event.MainComponentEvent;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
@@ -117,8 +118,8 @@ public class Notifee {
       logLicenseWarningForMethod("createChannel");
       result.onComplete(null, null);
     } else {
-      ChannelBundle channelBundle = ChannelBundle.fromBundle(channelMap);
-      ChannelManager.createChannel(channelBundle).addOnCompleteListener(task -> {
+      ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
+      ChannelManager.createChannel(channelModel).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, task.getResult());
         } else {
@@ -134,12 +135,12 @@ public class Notifee {
       logLicenseWarningForMethod("createChannels");
       result.onComplete(null, null);
     } else {
-      ArrayList<ChannelBundle> channelBundles = new ArrayList<>(channelsList.size());
+      ArrayList<ChannelModel> channelModels = new ArrayList<>(channelsList.size());
       for (Bundle bundle : channelsList) {
-        channelBundles.add(ChannelBundle.fromBundle(bundle));
+        channelModels.add(ChannelModel.fromBundle(bundle));
       }
 
-      ChannelManager.createChannels(channelBundles).addOnCompleteListener(task -> {
+      ChannelManager.createChannels(channelModels).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, task.getResult());
         } else {
@@ -155,8 +156,8 @@ public class Notifee {
       logLicenseWarningForMethod("createChannelGroup");
       result.onComplete(null, null);
     } else {
-      ChannelGroupBundle channelGroupBundle = ChannelGroupBundle.fromBundle(channelGroupMap);
-      ChannelManager.createChannelGroup(channelGroupBundle).addOnCompleteListener(task -> {
+      ChannelGroupModel channelGroupModel = ChannelGroupModel.fromBundle(channelGroupMap);
+      ChannelManager.createChannelGroup(channelGroupModel).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, task.getResult());
         } else {
@@ -172,12 +173,12 @@ public class Notifee {
       logLicenseWarningForMethod("createChannelGroups");
       result.onComplete(null, null);
     } else {
-      ArrayList<ChannelGroupBundle> channelGroupBundles = new ArrayList<>(channelGroupsList.size());
+      ArrayList<ChannelGroupModel> channelGroupModels = new ArrayList<>(channelGroupsList.size());
       for (Bundle bundle : channelGroupsList) {
-        channelGroupBundles.add(ChannelGroupBundle.fromBundle(bundle));
+        channelGroupModels.add(ChannelGroupModel.fromBundle(bundle));
       }
 
-      ChannelManager.createChannelGroups(channelGroupBundles).addOnCompleteListener(task -> {
+      ChannelManager.createChannelGroups(channelGroupModels).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, task.getResult());
         } else {
@@ -210,13 +211,13 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
+  public void displayNotification(Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("displayNotification");
       result.onComplete(null, null);
     } else {
-      NotificationBundle notificationBundle = NotificationBundle.fromBundle(notificationMap);
-      NotificationManager.displayNotification(notificationBundle).addOnCompleteListener(task -> {
+      NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
+      NotificationManager.displayNotification(notificationModel, triggerMap).addOnCompleteListener(task -> {
         if (task.isSuccessful()) {
           result.onComplete(null, null);
         } else {
@@ -303,7 +304,7 @@ public class Notifee {
       } else {
         Bundle initialNotificationBundle = new Bundle();
         initialNotificationBundle.putAll(event.getExtras());
-        initialNotificationBundle.putBundle("notification", event.getNotificationBundle().toBundle());
+        initialNotificationBundle.putBundle("notification", event.getNotificationModel().toBundle());
         result.onComplete(null, initialNotificationBundle);
       }
     }
@@ -343,24 +344,6 @@ public class Notifee {
 
       activity.runOnUiThread(() -> getContext().startActivity(intent));
       result.onComplete(null, null);
-    }
-  }
-
-  @KeepForSdk
-  public void scheduleNotification(
-    Bundle notificationBundle, Bundle scheduleBundle, MethodCallResult<Void> result
-  ) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("scheduleNotification");
-      result.onComplete(null, null);
-    } else {
-      NotificationManager.scheduleNotification(notificationBundle, scheduleBundle).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
     }
   }
 }

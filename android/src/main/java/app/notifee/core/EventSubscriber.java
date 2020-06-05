@@ -3,14 +3,16 @@ package app.notifee.core;
 import android.content.Context;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import app.notifee.core.events.BlockStateEvent;
-import app.notifee.core.events.ForegroundServiceEvent;
-import app.notifee.core.events.LogEvent;
-import app.notifee.core.events.NotificationEvent;
+import app.notifee.core.event.BlockStateEvent;
+import app.notifee.core.event.ForegroundServiceEvent;
+import app.notifee.core.event.LogEvent;
+import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.interfaces.EventListener;
 
 @KeepForSdk
 public class EventSubscriber {
@@ -36,28 +38,28 @@ public class EventSubscriber {
     return ContextHolder.getApplicationContext();
   }
 
-  @Subscribe
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onNotificationEvent(NotificationEvent notificationEvent) {
     for (EventListener eventListener : mListeners) {
       eventListener.onNotificationEvent(notificationEvent);
     }
   }
 
-  @Subscribe
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onLogEvent(LogEvent logEvent) {
     for (EventListener eventListener : mListeners) {
       eventListener.onLogEvent(logEvent);
     }
   }
 
-  @Subscribe
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
     for (EventListener eventListener : mListeners) {
       eventListener.onBlockStateEvent(blockStateEvent);
     }
   }
 
-  @Subscribe
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onForegroundServiceEvent(ForegroundServiceEvent foregroundServiceEvent) {
     for (EventListener eventListener : mListeners) {
       eventListener.onForegroundServiceEvent(foregroundServiceEvent);
