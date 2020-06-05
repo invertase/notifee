@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
+import { checkForProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 import { AndroidAction } from '../types/NotificationAndroid';
 import validateAndroidPressAction from './validateAndroidPressAction';
@@ -28,7 +28,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
     title: action.title,
   };
 
-  if (hasOwnProperty(action, 'icon') && !isUndefined(action.icon)) {
+  if (checkForProperty(action, 'icon') && !isUndefined(action.icon)) {
     if (!isString(action.icon) || !action.icon) {
       throw new Error("'action.icon' expected a string value.");
     }
@@ -36,7 +36,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
     out.icon = action.icon;
   }
 
-  if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
+  if (checkForProperty(action, 'input') && !isUndefined(action.input)) {
     if (isBoolean(action.input) && action.input) {
       out.input = validateAndroidInput();
     } else {

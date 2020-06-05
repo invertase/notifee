@@ -34,43 +34,42 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void cancelNotification(String notificationId, Promise promise) {
-    Notifee.getInstance().cancelNotification(notificationId,
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
+    Notifee.getInstance()
+        .cancelNotification(
+            notificationId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
     Notifee.getInstance()
-      .cancelAllNotifications((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+        .cancelAllNotifications((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void createChannel(ReadableMap channelMap, Promise promise) {
-    Notifee.getInstance().createChannel(Arguments.toBundle(channelMap),
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
+    Notifee.getInstance()
+        .createChannel(
+            Arguments.toBundle(channelMap),
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void createChannels(ReadableArray channelsArray, Promise promise) {
     ArrayList<Bundle> channels = new ArrayList<>(channelsArray.size());
-
     for (int i = 0; i < channelsArray.size(); i++) {
-      channels.add(Arguments.toBundle(
-        channelsArray.getMap(i)
-      ));
+      channels.add(Arguments.toBundle(channelsArray.getMap(i)));
     }
 
     Notifee.getInstance()
-      .createChannels(channels, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+        .createChannels(channels, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void createChannelGroup(ReadableMap channelGroupMap, Promise promise) {
-    Notifee.getInstance().createChannelGroup(Arguments.toBundle(channelGroupMap),
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
+    Notifee.getInstance()
+        .createChannelGroup(
+            Arguments.toBundle(channelGroupMap),
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
@@ -78,82 +77,78 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
     ArrayList<Bundle> channelGroups = new ArrayList<>(channelGroupsArray.size());
 
     for (int i = 0; i < channelGroupsArray.size(); i++) {
-      channelGroups.add(Arguments.toBundle(
-        channelGroupsArray.getMap(i)
-      ));
+      channelGroups.add(Arguments.toBundle(channelGroupsArray.getMap(i)));
     }
 
-    Notifee.getInstance().createChannelGroups(channelGroups,
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
+    Notifee.getInstance()
+        .createChannelGroups(
+            channelGroups, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void deleteChannel(String channelId, Promise promise) {
     Notifee.getInstance()
-      .deleteChannel(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+        .deleteChannel(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void deleteChannelGroup(String channelId, Promise promise) {
     Notifee.getInstance()
-      .deleteChannelGroup(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+        .deleteChannelGroup(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
-  public void displayNotification(ReadableMap notificationMap, Promise promise) {
-    Notifee.getInstance().displayNotification(Arguments.toBundle(notificationMap),
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
+  public void displayNotification(
+      ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
+    Notifee.getInstance()
+        .displayNotification(
+            Arguments.toBundle(notificationMap),
+            Arguments.toBundle(triggerMap),
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void getAllChannels(Promise promise) {
-    Notifee.getInstance().getAllChannels(
-      (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
+    Notifee.getInstance()
+        .getAllChannels(
+            (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getChannel(String channelId, Promise promise) {
-    Notifee.getInstance().getChannel(channelId,
-      (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle)
-    );
+    Notifee.getInstance()
+        .getChannel(
+            channelId, (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void getAllChannelGroups(Promise promise) {
-    Notifee.getInstance().getAllChannelGroups(
-      (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
+    Notifee.getInstance()
+        .getAllChannelGroups(
+            (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getChannelGroup(String channelGroupId, Promise promise) {
-    Notifee.getInstance().getChannel(channelGroupId,
-      (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle)
-    );
+    Notifee.getInstance()
+        .getChannel(
+            channelGroupId, (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void getInitialNotification(Promise promise) {
-    Notifee.getInstance().getInitialNotification(
-      (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+    Notifee.getInstance()
+        .getInitialNotification(
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void openNotificationSettings(String channelId, Promise promise) {
-    Notifee.getInstance().openNotificationSettings(channelId, getCurrentActivity(),
-      (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-    );
-  }
-
-  @ReactMethod
-  public void scheduleNotification(
-    ReadableMap notification, ReadableMap schedule, Promise promise
-  ) {
     Notifee.getInstance()
-      .scheduleNotification(Arguments.toBundle(notification), Arguments.toBundle(schedule),
-        (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e)
-      );
+        .openNotificationSettings(
+            channelId,
+            getCurrentActivity(),
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @NonNull
@@ -167,9 +162,9 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
     Map<String, Object> constants = new HashMap<>();
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
     constants.put("NOTIFICATION_EVENT_KEY", NotifeeEventSubscriber.NOTIFICATION_EVENT_KEY);
-    constants.put("FOREGROUND_NOTIFICATION_TASK_KEY",
-      NotifeeEventSubscriber.FOREGROUND_NOTIFICATION_TASK_KEY
-    );
+    constants.put(
+        "FOREGROUND_NOTIFICATION_TASK_KEY",
+        NotifeeEventSubscriber.FOREGROUND_NOTIFICATION_TASK_KEY);
     return constants;
   }
 }

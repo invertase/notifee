@@ -1,5 +1,5 @@
 import { IOSInput } from '../types/NotificationIOS';
-import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
+import { checkForProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 
 export default function validateIOSInput(input?: IOSInput): IOSInput {
   const out: IOSInput = {};
@@ -18,7 +18,7 @@ export default function validateIOSInput(input?: IOSInput): IOSInput {
     throw new Error('expected an object value.');
   }
 
-  if (hasOwnProperty(input, 'buttonText') && !isUndefined(input.buttonText)) {
+  if (checkForProperty(input, 'buttonText') && !isUndefined(input.buttonText)) {
     if (!isString(input.buttonText)) {
       throw new Error("'buttonText' expected a string value.");
     }
@@ -26,7 +26,7 @@ export default function validateIOSInput(input?: IOSInput): IOSInput {
     out.buttonText = input.buttonText;
   }
 
-  if (hasOwnProperty(input, 'placeholderText') && !isUndefined(input.placeholderText)) {
+  if (checkForProperty(input, 'placeholderText') && !isUndefined(input.placeholderText)) {
     if (!isString(input.placeholderText)) {
       throw new Error("'placeholderText' expected a string value.");
     }

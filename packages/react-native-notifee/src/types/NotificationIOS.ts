@@ -84,7 +84,7 @@ export interface NotificationIOS {
    * For example if a messages app sends one notification for 3 new messages in a group chat,
    * the summaryArgument could be the name of the group chat and the summaryArgumentCount should be 3.
    *
-   * Defaults to 1 and cannot be 0.
+   * If set, value cannot be 0 or less.
    *
    * See `IOSCategory.summaryFormat`.
    *
@@ -100,6 +100,29 @@ export interface NotificationIOS {
    * @platform ios iOS >= 13
    */
   targetContentId?: string;
+
+  foregroundPresentationOptions?: ForegroundPresentationOptionsIOS;
+}
+
+export interface ForegroundPresentationOptionsIOS {
+  /**
+   * App in foreground dialog box which indicates when a decision has to be made
+   *
+   * Defaults to false
+   */
+  alert?: boolean;
+  /**
+   * App in foreground notification sound
+   *
+   * Defaults to false
+   */
+  sound?: boolean;
+  /**
+   * App in foreground badge update
+   *
+   * Defaults to true
+   */
+  badge?: boolean;
 }
 
 /**

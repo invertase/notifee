@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-      classpath("com.android.tools.build:gradle:3.5.3")
+      classpath("com.android.tools.build:gradle:3.6.3")
     }
   }
 }
@@ -50,6 +50,8 @@ android {
       consumerProguardFiles 'proguard-rules.pro'
     }
   }
+  compileSdkVersion = 29
+  buildToolsVersion = '29.0.2'
 }
 
 repositories {
@@ -58,7 +60,11 @@ repositories {
 }
 
 dependencies {
-  implementation fileTree(include: ['notifee_core_release.aar'], dir: 'libs')
+  if (findProject(':notifee_core')) {
+    implementation findProject(':notifee_core')
+  } else {
+    implementation fileTree(include: ['notifee_core_release.aar'], dir: 'libs')
+  }
   implementation 'androidx.concurrent:concurrent-futures:1.0.0'
   implementation 'com.google.android.gms:play-services-tasks:17.0.2'
   implementation 'androidx.work:work-runtime:2.3.4'
@@ -70,8 +76,6 @@ dependencies {
     exclude group: 'org.json', module: 'json'
   }
 }
-
-apply from: file("./notifee-json.gradle")
 
 ReactNative.shared.applyPackageVersion()
 ReactNative.shared.applyDefaultExcludes()

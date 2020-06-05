@@ -1,5 +1,5 @@
 import { IOSNotificationCategoryAction } from '../types/NotificationIOS';
-import { hasOwnProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
+import { checkForProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
 import validateIOSInput from './validateIOSInput';
 
 export default function validateIOSCategoryAction(
@@ -25,7 +25,7 @@ export default function validateIOSCategoryAction(
     authenticationRequired: false,
   };
 
-  if (hasOwnProperty(action, 'input') && !isUndefined(action.input)) {
+  if (checkForProperty(action, 'input') && !isUndefined(action.input)) {
     if (isBoolean(action.input) && action.input) {
       out.input = true;
     } else {
@@ -37,7 +37,7 @@ export default function validateIOSCategoryAction(
     }
   }
 
-  if (hasOwnProperty(action, 'destructive')) {
+  if (checkForProperty(action, 'destructive')) {
     if (!isBoolean(action.destructive)) {
       throw new Error("'destructive' expected a boolean value.");
     }
@@ -45,7 +45,7 @@ export default function validateIOSCategoryAction(
     out.destructive = action.destructive;
   }
 
-  if (hasOwnProperty(action, 'foreground')) {
+  if (checkForProperty(action, 'foreground')) {
     if (!isBoolean(action.foreground)) {
       throw new Error("'foreground' expected a boolean value.");
     }
@@ -53,7 +53,7 @@ export default function validateIOSCategoryAction(
     out.foreground = action.foreground;
   }
 
-  if (hasOwnProperty(action, 'authenticationRequired')) {
+  if (checkForProperty(action, 'authenticationRequired')) {
     if (!isBoolean(action.authenticationRequired)) {
       throw new Error("'authenticationRequired' expected a boolean value.");
     }

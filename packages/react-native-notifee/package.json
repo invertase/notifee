@@ -7,11 +7,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "genversion --es6 --semi src/version.ts && tsc",
-    "build:core": "cd ../../android && ./gradlew assembleRelease",
     "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf dist",
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
-    "prepublishOnly": "yarn run build:core"
+    "prepublishOnly": "cd ../.. && yarn run build:core"
   },
   "devDependencies": {
     "@types/react-native": "^0.60.31",
@@ -22,8 +21,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "genversion": "^2.2.0",
     "prettier": "^1.19.1",
-    "rimraf": "^2.7.1",
-    "typescript": "^3.7.5"
+    "rimraf": "^2.7.1"
   },
   "peerDependencies": {
     "react-native": "*"

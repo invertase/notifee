@@ -66,9 +66,11 @@ export function isValidLightPattern(pattern: LightPattern): ValidLightPattern {
   if (!isValidColor(color)) {
     return [false, 'color'];
   }
+
   if (!isNumber(onMs)) {
     return [false, 'onMs'];
   }
+
   if (!isNumber(offMs)) {
     return [false, 'offMs'];
   }

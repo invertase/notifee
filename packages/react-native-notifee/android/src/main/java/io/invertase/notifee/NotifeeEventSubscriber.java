@@ -7,12 +7,12 @@ import androidx.annotation.Keep;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
-import app.notifee.core.EventListener;
-import app.notifee.core.bundles.NotificationBundle;
-import app.notifee.core.events.BlockStateEvent;
-import app.notifee.core.events.ForegroundServiceEvent;
-import app.notifee.core.events.LogEvent;
-import app.notifee.core.events.NotificationEvent;
+import app.notifee.core.interfaces.EventListener;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.event.BlockStateEvent;
+import app.notifee.core.event.ForegroundServiceEvent;
+import app.notifee.core.event.LogEvent;
+import app.notifee.core.event.NotificationEvent;
 
 import static io.invertase.notifee.NotifeeReactUtils.isAppInForeground;
 
@@ -107,7 +107,7 @@ public class NotifeeEventSubscriber implements EventListener {
 
   @Override
   public void onForegroundServiceEvent(ForegroundServiceEvent foregroundServiceEvent) {
-    NotificationBundle notificationBundle = foregroundServiceEvent.getNotification();
+    NotificationModel notificationBundle = foregroundServiceEvent.getNotification();
 
     WritableMap eventMap = Arguments.createMap();
     eventMap.putMap(KEY_NOTIFICATION, Arguments.fromBundle(notificationBundle.toBundle()));

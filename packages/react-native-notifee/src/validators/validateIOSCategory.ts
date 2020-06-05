@@ -6,7 +6,7 @@ import {
   IOSNotificationCategory,
   IOSNotificationCategoryAction,
 } from '../types/NotificationIOS';
-import { hasOwnProperty, isArray, isObject, isString, isBoolean } from '../utils';
+import { checkForProperty, isArray, isObject, isString, isBoolean } from '../utils';
 import validateIOSCategoryAction from './validateIOSCategoryAction';
 
 export default function validateIOSCategory(
@@ -39,7 +39,7 @@ export default function validateIOSCategory(
   /**
    * summaryFormat
    */
-  if (hasOwnProperty(category, 'summaryFormat')) {
+  if (checkForProperty(category, 'summaryFormat')) {
     if (!isString(category.summaryFormat)) {
       throw new Error("'category.summaryFormat' expected a string value.");
     }
@@ -50,7 +50,7 @@ export default function validateIOSCategory(
   /**
    * allowInCarPlay
    */
-  if (hasOwnProperty(category, 'allowInCarPlay')) {
+  if (checkForProperty(category, 'allowInCarPlay')) {
     if (!isBoolean(category.allowInCarPlay)) {
       throw new Error("'category.allowInCarPlay' expected a boolean value.");
     }
@@ -61,7 +61,7 @@ export default function validateIOSCategory(
   /**
    * allowAnnouncement
    */
-  if (hasOwnProperty(category, 'allowAnnouncement')) {
+  if (checkForProperty(category, 'allowAnnouncement')) {
     if (!isBoolean(category.allowAnnouncement)) {
       throw new Error("'category.allowAnnouncement' expected a boolean value.");
     }
@@ -72,7 +72,7 @@ export default function validateIOSCategory(
   /**
    * hiddenPreviewsShowTitle
    */
-  if (hasOwnProperty(category, 'hiddenPreviewsShowTitle')) {
+  if (checkForProperty(category, 'hiddenPreviewsShowTitle')) {
     if (!isBoolean(category.hiddenPreviewsShowTitle)) {
       throw new Error("'category.hiddenPreviewsShowTitle' expected a boolean value.");
     }
@@ -83,7 +83,7 @@ export default function validateIOSCategory(
   /**
    * hiddenPreviewsShowSubtitle
    */
-  if (hasOwnProperty(category, 'hiddenPreviewsShowSubtitle')) {
+  if (checkForProperty(category, 'hiddenPreviewsShowSubtitle')) {
     if (!isBoolean(category.hiddenPreviewsShowSubtitle)) {
       throw new Error("'category.hiddenPreviewsShowSubtitle' expected a boolean value.");
     }
@@ -94,7 +94,7 @@ export default function validateIOSCategory(
   /**
    * summaryFormat
    */
-  if (hasOwnProperty(category, 'hiddenPreviewsBodyPlaceholder')) {
+  if (checkForProperty(category, 'hiddenPreviewsBodyPlaceholder')) {
     if (!isString(category.hiddenPreviewsBodyPlaceholder)) {
       throw new Error("'category.hiddenPreviewsBodyPlaceholder' expected a string value.");
     }
@@ -105,7 +105,7 @@ export default function validateIOSCategory(
   /**
    * intentIdentifiers
    */
-  if (hasOwnProperty(category, 'intentIdentifiers')) {
+  if (checkForProperty(category, 'intentIdentifiers')) {
     if (!isArray(category.intentIdentifiers)) {
       throw new Error("'category.intentIdentifiers' expected an array value.");
     }
@@ -128,7 +128,7 @@ export default function validateIOSCategory(
   /**
    * actions
    */
-  if (hasOwnProperty(category, 'actions')) {
+  if (checkForProperty(category, 'actions')) {
     if (!isArray(category.actions)) {
       throw new Error("'category.actions' expected an array value.");
     }

@@ -6,7 +6,7 @@ export default function noop(): void {
   return;
 }
 
-// import { hasOwnProperty, isBoolean, isNumber, isObject } from '../utils';
+// import { checkForProperty, isBoolean, isNumber, isObject } from '../utils';
 // import { NotificationRepeatInterval, NotificationSchedule } from '../types/Notification';
 //
 // export default function validateSchedule(schedule: NotificationSchedule): NotificationSchedule {
@@ -29,7 +29,7 @@ export default function noop(): void {
 //     exact: false,
 //   };
 //
-//   if (hasOwnProperty(schedule, 'exact')) {
+//   if (checkForProperty(schedule, 'exact')) {
 //     if (!isBoolean(schedule.exact)) {
 //       throw new Error("'schedule.exact' expected a boolean value.");
 //     }
@@ -37,7 +37,7 @@ export default function noop(): void {
 //     out.exact = !!schedule.exact;
 //   }
 //
-//   if (hasOwnProperty(schedule, 'repeatInterval') && schedule.repeatInterval != undefined) {
+//   if (checkForProperty(schedule, 'repeatInterval') && schedule.repeatInterval != undefined) {
 //     if (!Object.values(NotificationRepeatInterval).includes(schedule.repeatInterval)) {
 //       throw new Error("'schedule.repeatInterval' expected a valid NotificationRepeatInterval.");
 //     }

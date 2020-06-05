@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isObject, isString } from '../utils';
+import { checkForProperty, isObject, isString } from '../utils';
 import { AndroidChannelGroup } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannelGroup(
@@ -37,7 +37,7 @@ export default function validateAndroidChannelGroup(
   /**
    * description
    */
-  if (hasOwnProperty(group, 'description')) {
+  if (checkForProperty(group, 'description')) {
     if (!isString(group.description)) {
       throw new Error("'group.description' expected a string value.");
     }

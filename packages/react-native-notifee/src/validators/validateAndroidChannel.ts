@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { hasOwnProperty, isArray, isBoolean, isObject, isString } from '../utils';
+import { checkForProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
 import { Importance } from '../types/Notification';
@@ -54,7 +54,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * badge
    */
-  if (hasOwnProperty(channel, 'badge')) {
+  if (checkForProperty(channel, 'badge')) {
     if (!isBoolean(channel.badge)) {
       throw new Error("'channel.badge' expected a boolean value.");
     }
@@ -65,7 +65,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * bypassDnd
    */
-  if (hasOwnProperty(channel, 'bypassDnd')) {
+  if (checkForProperty(channel, 'bypassDnd')) {
     if (!isBoolean(channel.bypassDnd)) {
       throw new Error("'channel.bypassDnd' expected a boolean value.");
     }
@@ -76,7 +76,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * description
    */
-  if (hasOwnProperty(channel, 'description')) {
+  if (checkForProperty(channel, 'description')) {
     if (!isString(channel.description)) {
       throw new Error("'channel.description' expected a string value.");
     }
@@ -87,7 +87,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * lights
    */
-  if (hasOwnProperty(channel, 'lights')) {
+  if (checkForProperty(channel, 'lights')) {
     if (!isBoolean(channel.lights)) {
       throw new Error("'channel.lights' expected a boolean value.");
     }
@@ -98,7 +98,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * vibration
    */
-  if (hasOwnProperty(channel, 'vibration')) {
+  if (checkForProperty(channel, 'vibration')) {
     if (!isBoolean(channel.vibration)) {
       throw new Error("'channel.vibration' expected a boolean value.");
     }
@@ -109,7 +109,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * groupId
    */
-  if (hasOwnProperty(channel, 'groupId')) {
+  if (checkForProperty(channel, 'groupId')) {
     if (!isString(channel.groupId)) {
       throw new Error("'channel.groupId' expected a string value.");
     }
@@ -120,7 +120,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * importance
    */
-  if (hasOwnProperty(channel, 'importance') && channel.importance != undefined) {
+  if (checkForProperty(channel, 'importance') && channel.importance != undefined) {
     if (!Object.values(Importance).includes(channel.importance)) {
       throw new Error("'channel.importance' expected an Importance value.");
     }
@@ -131,7 +131,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * lightColor
    */
-  if (hasOwnProperty(channel, 'lightColor') && channel.lightColor != undefined) {
+  if (checkForProperty(channel, 'lightColor') && channel.lightColor != undefined) {
     if (!isString(channel.lightColor)) {
       throw new Error("'channel.lightColor' expected a string value.");
     }
@@ -148,7 +148,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * visibility
    */
-  if (hasOwnProperty(channel, 'visibility') && channel.visibility != undefined) {
+  if (checkForProperty(channel, 'visibility') && channel.visibility != undefined) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
       throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
@@ -159,7 +159,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * sound
    */
-  if (hasOwnProperty(channel, 'sound') && channel.sound != undefined) {
+  if (checkForProperty(channel, 'sound') && channel.sound != undefined) {
     if (!isString(channel.sound)) {
       throw new Error("'channel.sound' expected a string value.");
     }
@@ -170,7 +170,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * vibrationPattern
    */
-  if (hasOwnProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
+  if (checkForProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
     if (!isArray(channel.vibrationPattern)) {
       throw new Error("'channel.vibrationPattern' expected an array.");
     }

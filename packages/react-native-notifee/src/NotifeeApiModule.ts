@@ -11,7 +11,7 @@ import {
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
 import { InitialNotification, Notification, Event } from './types/Notification';
-import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
+import NotifeeNativeModule from './NotifeeNativeModule';
 
 import { isAndroid, isArray, isFunction, isIOS, isNumber, isString, isUndefined } from './utils';
 import validateNotification from './validators/validateNotification';
@@ -28,22 +28,19 @@ import validateIOSPermissions from './validators/validateIOSPermissions';
 let onNotificationEventHeadlessTaskRegistered = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
-export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
-  constructor(config: NativeModuleConfig) {
-    super(config);
-    if (isAndroid) {
-      AppRegistry.registerHeadlessTask(this.native.FOREGROUND_NOTIFICATION_TASK_KEY, () => {
-        if (!registeredForegroundServiceTask) {
-          console.warn(
-            '[notifee] no registered foreground service has been set for displaying a foreground notification.',
-          );
-          return (): Promise<void> => Promise.resolve();
-        }
-        return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
-      });
+if (isAndroid) {
+  AppRegistry.registerHeadlessTask('app.notifee.notification.event', () => {
+    if (!registeredForegroundServiceTask) {
+      console.warn(
+        '[notifee] no registered foreground service has been set for displaying a foreground notification.',
+      );
+      return (): Promise<void> => Promise.resolve();
     }
-  }
+    return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
+  });
+}
 
+export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   public cancelAllNotifications(): Promise<void> {
     return this.native.cancelAllNotifications();
   }
@@ -168,12 +165,20 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.deleteChannelGroup(channelGroupId);
   }
 
-  public displayNotification(notification: Notification): Promise<string> {
+  // TODO(salakar) Trigger types
+  public displayNotification(notification: Notification, trigger?: any): Promise<string> {
     let options: Notification;
     try {
       options = validateNotification(notification);
     } catch (e) {
       throw new Error(`notifee.displayNotification(*) ${e.message}`);
+    }
+
+    // TODO(salakar) only android triggers currently implemented
+    if (isAndroid) {
+      return this.native.displayNotification(options, trigger).then((): string => {
+        return options.id as string;
+      });
     }
 
     return this.native.displayNotification(options).then((): string => {
@@ -271,9 +276,24 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   public requestPermission(
     permissions: IOSNotificationPermissions = {},
-  ): Promise<IOSNotificationSettings | null> {
+  ): Promise<IOSNotificationSettings> {
     if (isAndroid) {
-      return Promise.resolve(null);
+      // Android doesn't require permission, so instead we
+      // return a dummy response to allow the permissions
+      // flow work the same on both iOS & Android
+      return Promise.resolve({
+        alert: 1,
+        badge: 1,
+        criticalAlert: 1,
+        showPreviews: 1,
+        sound: 1,
+        carPlay: 1,
+        lockScreen: 1,
+        announcement: 1,
+        notificationCenter: 1,
+        inAppNotificationSettings: 1,
+        authorizationStatus: 1,
+      } as IOSNotificationSettings);
     }
 
     let options: IOSNotificationPermissions;
@@ -396,23 +416,4 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     return this.native.decrementBadgeCount(Math.round(value));
   }
-
-  // public scheduleNotification(notification: Notification, schedule: Schedule): Promise<void> {
-  //   return Promise.resolve();
-  // let notificationOptions;
-  // try {
-  //   notificationOptions = validateNotification(notification);
-  // } catch (e) {
-  //   throw new Error(`notifee.scheduleNotification(*) ${e.message}`);
-  // }
-  //
-  // let scheduleOptions;
-  // // try {
-  // //   scheduleOptions = validateSchedule(schedule);
-  // // } catch (e) {
-  // //   throw new Error(`notifee.scheduleNotification(_, *) ${e.message}`);
-  // // }
-  //
-  // return this.native.scheduleNotification(notificationOptions, scheduleOptions);
-  // }
 }
