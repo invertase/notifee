@@ -1,12 +1,20 @@
 module.exports = {
-  maxConcurrency: 10,
-  preset: './node_modules/react-native/jest-preset.js',
+  maxConcurrency: 30,
+  preset: './tests_react_native/node_modules/react-native/jest-preset.js',
   transform: {
     '^.+\\.(js)$': 'babel-jest',
     '\\.(ts|tsx)$': 'ts-jest',
   },
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  modulePaths: ['node_modules', '../node_modules'],
-  moduleDirectories: ['node_modules', '../node_modules'],
+  rootDir: '..',
+  testMatch: ['<rootDir>/tests_react_native/__tests__/**/*.test.ts'],
+  modulePaths: ['node_modules', '<rootDir>/tests_react_native/node_modules'],
+  collectCoverage: true,
+
+  collectCoverageFrom: [
+    '<rootDir>/packages/react-native/src/**/*.{ts,tsx}',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+  ],
+
   moduleFileExtensions: ['ts', 'tsx', 'js'],
 };
