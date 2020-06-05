@@ -54,11 +54,12 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void createChannels(ReadableArray channelsArray, Promise promise) {
-    ArrayList<Object> rawChannelsArray = channelsArray.toArrayList();
-    ArrayList<Bundle> channels = new ArrayList<>(rawChannelsArray.size());
+    ArrayList<Bundle> channels = new ArrayList<>(channelsArray.size());
 
-    for (Object o : rawChannelsArray) {
-      channels.add((Bundle) o);
+    for (int i = 0; i < channelsArray.size(); i++) {
+      channels.add(Arguments.toBundle(
+        channelsArray.getMap(i)
+      ));
     }
 
     Notifee.getInstance()
@@ -74,11 +75,12 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void createChannelGroups(ReadableArray channelGroupsArray, Promise promise) {
-    ArrayList<Object> rawChannelGroupsArray = channelGroupsArray.toArrayList();
     ArrayList<Bundle> channelGroups = new ArrayList<>(channelGroupsArray.size());
 
-    for (Object o : rawChannelGroupsArray) {
-      channelGroups.add((Bundle) o);
+    for (int i = 0; i < channelGroupsArray.size(); i++) {
+      channelGroups.add(Arguments.toBundle(
+        channelGroupsArray.getMap(i)
+      ));
     }
 
     Notifee.getInstance().createChannelGroups(channelGroups,
