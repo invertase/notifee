@@ -4,8 +4,6 @@
  * Copyright (c) 2016-present Invertase Limited.
  */
 
-import { Importance } from './Notification';
-
 export interface NotificationIOS {
   /**
    * Optional array of attachments
@@ -27,14 +25,6 @@ export interface NotificationIOS {
    * The launch image that will be used when the app is opened from this notification.
    */
   launchImageName?: string;
-
-  /**
-   * The importance level applied to the notification. This controls how the notification is presented
-   * to the user whilst the application is in the foreground.
-   *
-   * Defaults to `Importance.DEFAULT`.
-   */
-  importance?: Importance;
 
   /**
    * The name of the sound file to be played. The sound must be in the Library/Sounds folder of the
@@ -101,10 +91,10 @@ export interface NotificationIOS {
    */
   targetContentId?: string;
 
-  foregroundPresentationOptions?: ForegroundPresentationOptionsIOS;
+  foregroundPresentationOptions?: IOSForegroundPresentationOptions;
 }
 
-export interface ForegroundPresentationOptionsIOS {
+export interface IOSForegroundPresentationOptions {
   /**
    * App in foreground dialog box which indicates when a decision has to be made
    *

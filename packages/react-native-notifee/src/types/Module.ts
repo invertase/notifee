@@ -359,13 +359,14 @@ export interface Module {
   /**
    * Get the current notification settings for this application on the current device.
    *
-   * Returns null on Android.
+   * On Android, all of the properties on the `IOSNotificationSettings` interface response return
+   * as `AUTHORIZED`.
    *
    *   TODO better description
    *
    * @platform ios
    */
-  getNotificationSettings(): Promise<null | IOSNotificationSettings>;
+  getNotificationSettings(): Promise<IOSNotificationSettings>;
 
   /**
    * Get the current badge count value for this application on the current device.

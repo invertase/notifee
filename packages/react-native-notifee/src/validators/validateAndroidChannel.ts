@@ -2,10 +2,10 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { checkForProperty, isArray, isBoolean, isObject, isString } from '../utils';
+import { objectHasProperty, isArray, isBoolean, isObject, isString } from '../utils';
 import { isValidColor, isValidVibratePattern } from './validate';
 
-import { Importance } from '../types/Notification';
+import { AndroidImportance } from '../types/NotificationAndroid';
 import { AndroidChannel, AndroidVisibility } from '../types/NotificationAndroid';
 
 export default function validateAndroidChannel(channel: AndroidChannel): AndroidChannel {
@@ -47,14 +47,14 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
     lights: true,
     vibration: true,
     badge: true,
-    importance: Importance.DEFAULT,
+    importance: AndroidImportance.DEFAULT,
     visibility: AndroidVisibility.PRIVATE,
   };
 
   /**
    * badge
    */
-  if (checkForProperty(channel, 'badge')) {
+  if (objectHasProperty(channel, 'badge')) {
     if (!isBoolean(channel.badge)) {
       throw new Error("'channel.badge' expected a boolean value.");
     }
@@ -65,7 +65,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * bypassDnd
    */
-  if (checkForProperty(channel, 'bypassDnd')) {
+  if (objectHasProperty(channel, 'bypassDnd')) {
     if (!isBoolean(channel.bypassDnd)) {
       throw new Error("'channel.bypassDnd' expected a boolean value.");
     }
@@ -76,7 +76,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * description
    */
-  if (checkForProperty(channel, 'description')) {
+  if (objectHasProperty(channel, 'description')) {
     if (!isString(channel.description)) {
       throw new Error("'channel.description' expected a string value.");
     }
@@ -87,7 +87,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * lights
    */
-  if (checkForProperty(channel, 'lights')) {
+  if (objectHasProperty(channel, 'lights')) {
     if (!isBoolean(channel.lights)) {
       throw new Error("'channel.lights' expected a boolean value.");
     }
@@ -98,7 +98,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * vibration
    */
-  if (checkForProperty(channel, 'vibration')) {
+  if (objectHasProperty(channel, 'vibration')) {
     if (!isBoolean(channel.vibration)) {
       throw new Error("'channel.vibration' expected a boolean value.");
     }
@@ -109,7 +109,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * groupId
    */
-  if (checkForProperty(channel, 'groupId')) {
+  if (objectHasProperty(channel, 'groupId')) {
     if (!isString(channel.groupId)) {
       throw new Error("'channel.groupId' expected a string value.");
     }
@@ -120,8 +120,8 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * importance
    */
-  if (checkForProperty(channel, 'importance') && channel.importance != undefined) {
-    if (!Object.values(Importance).includes(channel.importance)) {
+  if (objectHasProperty(channel, 'importance') && channel.importance != undefined) {
+    if (!Object.values(AndroidImportance).includes(channel.importance)) {
       throw new Error("'channel.importance' expected an Importance value.");
     }
 
@@ -131,7 +131,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * lightColor
    */
-  if (checkForProperty(channel, 'lightColor') && channel.lightColor != undefined) {
+  if (objectHasProperty(channel, 'lightColor') && channel.lightColor != undefined) {
     if (!isString(channel.lightColor)) {
       throw new Error("'channel.lightColor' expected a string value.");
     }
@@ -148,7 +148,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * visibility
    */
-  if (checkForProperty(channel, 'visibility') && channel.visibility != undefined) {
+  if (objectHasProperty(channel, 'visibility') && channel.visibility != undefined) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
       throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
@@ -159,7 +159,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * sound
    */
-  if (checkForProperty(channel, 'sound') && channel.sound != undefined) {
+  if (objectHasProperty(channel, 'sound') && channel.sound != undefined) {
     if (!isString(channel.sound)) {
       throw new Error("'channel.sound' expected a string value.");
     }
@@ -170,7 +170,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * vibrationPattern
    */
-  if (checkForProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
+  if (objectHasProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
     if (!isArray(channel.vibrationPattern)) {
       throw new Error("'channel.vibrationPattern' expected an array.");
     }

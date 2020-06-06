@@ -15,7 +15,7 @@ export function isError(value: object): boolean {
   return value instanceof Error;
 }
 
-export function checkForProperty<T>(
+export function objectHasProperty<T>(
   target: T,
   property: string | number | symbol,
 ): property is keyof T {

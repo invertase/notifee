@@ -14,7 +14,7 @@ import {
   AndroidPerson,
   AndroidStyle,
 } from '../types/NotificationAndroid';
-import { checkForProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
+import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 
 /**
  * Validates a BigPictureStyle
@@ -43,7 +43,7 @@ export function validateAndroidBigPictureStyle(
     out.picture = image.uri;
   }
 
-  if (checkForProperty(style, 'largeIcon')) {
+  if (objectHasProperty(style, 'largeIcon')) {
     if (!isString(style.largeIcon) && !isNumber(style.largeIcon) && !isObject(style.largeIcon)) {
       throw new Error(
         "'notification.android.style' BigPictureStyle: 'largeIcon' expected a React Native ImageResource value or a valid string URL.",
@@ -58,7 +58,7 @@ export function validateAndroidBigPictureStyle(
     }
   }
 
-  if (checkForProperty(style, 'title')) {
+  if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
       throw new Error(
         "'notification.android.style' BigPictureStyle: 'title' expected a string value.",
@@ -68,7 +68,7 @@ export function validateAndroidBigPictureStyle(
     out.title = style.title;
   }
 
-  if (checkForProperty(style, 'summary')) {
+  if (objectHasProperty(style, 'summary')) {
     if (!isString(style.summary)) {
       throw new Error(
         "'notification.android.style' BigPictureStyle: 'summary' expected a string value.",
@@ -97,7 +97,7 @@ export function validateAndroidBigTextStyle(style: AndroidBigTextStyle): Android
     text: style.text,
   };
 
-  if (checkForProperty(style, 'title')) {
+  if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
       throw new Error(
         "'notification.android.style' BigTextStyle: 'title' expected a string value.",
@@ -107,7 +107,7 @@ export function validateAndroidBigTextStyle(style: AndroidBigTextStyle): Android
     out.title = style.title;
   }
 
-  if (checkForProperty(style, 'summary')) {
+  if (objectHasProperty(style, 'summary')) {
     if (!isString(style.summary)) {
       throw new Error(
         "'notification.android.style' BigTextStyle: 'summary' expected a string value.",
@@ -143,7 +143,7 @@ export function validateAndroidInboxStyle(style: AndroidInboxStyle): AndroidInbo
     lines: style.lines,
   };
 
-  if (checkForProperty(style, 'title')) {
+  if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
       throw new Error("'notification.android.style' InboxStyle: 'title' expected a string value.");
     }
@@ -151,7 +151,7 @@ export function validateAndroidInboxStyle(style: AndroidInboxStyle): AndroidInbo
     out.title = style.title;
   }
 
-  if (checkForProperty(style, 'summary')) {
+  if (objectHasProperty(style, 'summary')) {
     if (!isString(style.summary)) {
       throw new Error(
         "'notification.android.style' InboxStyle: 'summary' expected a string value.",
@@ -178,7 +178,7 @@ export function validateAndroidPerson(person: AndroidPerson): AndroidPerson {
     important: false,
   };
 
-  if (checkForProperty(person, 'id')) {
+  if (objectHasProperty(person, 'id')) {
     if (!isString(person.id)) {
       throw new Error("'person.id' expected a string value.");
     }
@@ -186,7 +186,7 @@ export function validateAndroidPerson(person: AndroidPerson): AndroidPerson {
     out.id = person.id;
   }
 
-  if (checkForProperty(person, 'bot')) {
+  if (objectHasProperty(person, 'bot')) {
     if (!isBoolean(person.bot)) {
       throw new Error("'person.bot' expected a boolean value.");
     }
@@ -194,7 +194,7 @@ export function validateAndroidPerson(person: AndroidPerson): AndroidPerson {
     out.bot = person.bot;
   }
 
-  if (checkForProperty(person, 'important')) {
+  if (objectHasProperty(person, 'important')) {
     if (!isBoolean(person.important)) {
       throw new Error("'person.important' expected a boolean value.");
     }
@@ -202,7 +202,7 @@ export function validateAndroidPerson(person: AndroidPerson): AndroidPerson {
     out.important = person.important;
   }
 
-  if (checkForProperty(person, 'icon')) {
+  if (objectHasProperty(person, 'icon')) {
     if (!isString(person.icon)) {
       throw new Error("'person.icon' expected a string value.");
     }
@@ -210,7 +210,7 @@ export function validateAndroidPerson(person: AndroidPerson): AndroidPerson {
     out.icon = person.icon;
   }
 
-  if (checkForProperty(person, 'uri')) {
+  if (objectHasProperty(person, 'uri')) {
     if (!isString(person.uri)) {
       throw new Error("'person.uri' expected a string value.");
     }
@@ -238,7 +238,7 @@ export function validateAndroidMessagingStyleMessage(
     timestamp: message.timestamp,
   };
 
-  if (checkForProperty(message, 'person') && message.person != undefined) {
+  if (objectHasProperty(message, 'person') && message.person != undefined) {
     try {
       out.person = validateAndroidPerson(message.person);
     } catch (e) {
@@ -289,7 +289,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
     group: false,
   };
 
-  if (checkForProperty(style, 'title')) {
+  if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
       throw new Error(
         "'notification.android.style' MessagingStyle: 'title' expected a string value.",
@@ -299,7 +299,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
     out.title = style.title;
   }
 
-  if (checkForProperty(style, 'group')) {
+  if (objectHasProperty(style, 'group')) {
     if (!isBoolean(style.group)) {
       throw new Error(
         "'notification.android.style' MessagingStyle: 'group' expected a boolean value.",

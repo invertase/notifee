@@ -2,16 +2,14 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { Importance } from '../types/Notification';
-import { NotificationIOS, ForegroundPresentationOptionsIOS } from '../types/NotificationIOS';
-import { checkForProperty, isBoolean, isNumber, isString, isUndefined, isObject } from '../utils';
+import { NotificationIOS, IOSForegroundPresentationOptions } from '../types/NotificationIOS';
+import { objectHasProperty, isBoolean, isNumber, isString, isUndefined, isObject } from '../utils';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
   const out: NotificationIOS & {
-    foregroundPresentationOptions: ForegroundPresentationOptionsIOS;
+    foregroundPresentationOptions: IOSForegroundPresentationOptions;
   } = {
-    importance: Importance.DEFAULT,
-    foregroundPresentationOptions: { alert: false, badge: true, sound: false },
+    foregroundPresentationOptions: { alert: true, badge: true, sound: true },
   };
 
   if (isUndefined(ios)) {
@@ -23,7 +21,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
    *
    * TODO attachments
    */
-  if (checkForProperty(ios, 'attachments')) {
+  if (objectHasProperty(ios, 'attachments')) {
     //   if (!isArray(ios.attachments)) {
     //     throw new Error("'notification.android.attachments' expected an array value.");
     //   }
@@ -42,7 +40,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * critical
    */
-  if (checkForProperty(ios, 'critical')) {
+  if (objectHasProperty(ios, 'critical')) {
     if (!isBoolean(ios.critical)) {
       throw new Error("'notification.ios.critical' must be a boolean value if specified.");
     } else {
@@ -53,7 +51,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * criticalVolume
    */
-  if (checkForProperty(ios, 'criticalVolume')) {
+  if (objectHasProperty(ios, 'criticalVolume')) {
     if (!isNumber(ios.criticalVolume)) {
       throw new Error("'notification.ios.criticalVolume' must be a number value if specified.");
     } else {
@@ -69,7 +67,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * sound
    */
-  if (checkForProperty(ios, 'sound')) {
+  if (objectHasProperty(ios, 'sound')) {
     if (isString(ios.sound)) {
       out.sound = ios.sound;
     } else {
@@ -80,7 +78,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * badgeCount
    */
-  if (checkForProperty(ios, 'badgeCount')) {
+  if (objectHasProperty(ios, 'badgeCount')) {
     if (!isNumber(ios.badgeCount) || ios.badgeCount < 0) {
       throw new Error("'notification.ios.badgeCount' expected a number value >=0.");
     }
@@ -91,7 +89,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * categoryId
    */
-  if (checkForProperty(ios, 'categoryId')) {
+  if (objectHasProperty(ios, 'categoryId')) {
     if (!isString(ios.categoryId)) {
       throw new Error("'notification.ios.categoryId' expected a of string value");
     }
@@ -102,7 +100,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * groupId
    */
-  if (checkForProperty(ios, 'threadId')) {
+  if (objectHasProperty(ios, 'threadId')) {
     if (!isString(ios.threadId)) {
       throw new Error("'notification.ios.threadId' expected a string value.");
     }
@@ -113,7 +111,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * summaryArgument
    */
-  if (checkForProperty(ios, 'summaryArgument')) {
+  if (objectHasProperty(ios, 'summaryArgument')) {
     if (!isString(ios.summaryArgument)) {
       throw new Error("'notification.ios.summaryArgument' expected a string value.");
     }
@@ -124,7 +122,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * summaryArgumentCount
    */
-  if (checkForProperty(ios, 'summaryArgumentCount')) {
+  if (objectHasProperty(ios, 'summaryArgumentCount')) {
     if (!isNumber(ios.summaryArgumentCount) || ios.summaryArgumentCount <= 0) {
       throw new Error(
         "'notification.ios.summaryArgumentCount' expected a positive number greater than 0.",
@@ -137,7 +135,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * launchImageName
    */
-  if (checkForProperty(ios, 'launchImageName')) {
+  if (objectHasProperty(ios, 'launchImageName')) {
     if (!isString(ios.launchImageName)) {
       throw new Error("'notification.ios.launchImageName' expected a string value.");
     }
@@ -146,20 +144,9 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   }
 
   /**
-   * importance
-   */
-  if (checkForProperty(ios, 'importance') && !isUndefined(ios.importance)) {
-    if (!Object.values(Importance).includes(ios.importance)) {
-      throw new Error("'notification.ios.importance' expected a valid Importance.");
-    }
-
-    out.importance = ios.importance;
-  }
-
-  /**
    * sound
    */
-  if (checkForProperty(ios, 'sound')) {
+  if (objectHasProperty(ios, 'sound')) {
     if (!isString(ios.sound)) {
       throw new Error("'notification.ios.sound' expected a string value.");
     }
@@ -170,15 +157,15 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * ForegroundPresentationOptions
    */
-  if (checkForProperty(ios, 'foregroundPresentationOptions')) {
+  if (objectHasProperty(ios, 'foregroundPresentationOptions')) {
     if (!isObject(ios.foregroundPresentationOptions)) {
       throw new Error(
-        "'notification.ios.foregroundPresentationOptions' expected a valid ForegroundPresentationOptionsIOS object.",
+        "'notification.ios.foregroundPresentationOptions' expected a valid IOSForegroundPresentationOptions object.",
       );
     }
 
     if (
-      checkForProperty<ForegroundPresentationOptionsIOS>(ios.foregroundPresentationOptions, 'alert')
+      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'alert')
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.alert)) {
         throw new Error(
@@ -190,7 +177,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      checkForProperty<ForegroundPresentationOptionsIOS>(ios.foregroundPresentationOptions, 'sound')
+      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'sound')
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.sound)) {
         throw new Error(
@@ -202,7 +189,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      checkForProperty<ForegroundPresentationOptionsIOS>(ios.foregroundPresentationOptions, 'badge')
+      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'badge')
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.badge)) {
         throw new Error(

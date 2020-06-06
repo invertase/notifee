@@ -351,9 +351,24 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.getNotificationCategories();
   }
 
-  public getNotificationSettings(): Promise<null | IOSNotificationSettings> {
+  public getNotificationSettings(): Promise<IOSNotificationSettings> {
     if (isAndroid) {
-      return Promise.resolve(null);
+      // Android doesn't support this, so instead we
+      // return a dummy response to allow the permissions
+      // flow work the same on both iOS & Android
+      return Promise.resolve({
+        alert: 1,
+        badge: 1,
+        criticalAlert: 1,
+        showPreviews: 1,
+        sound: 1,
+        carPlay: 1,
+        lockScreen: 1,
+        announcement: 1,
+        notificationCenter: 1,
+        inAppNotificationSettings: 1,
+        authorizationStatus: 1,
+      } as IOSNotificationSettings);
     }
 
     return this.native.getNotificationSettings();

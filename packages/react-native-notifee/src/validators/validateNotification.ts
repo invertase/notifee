@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateId, checkForProperty, isObject, isString, isAndroid, isIOS } from '../utils';
+import { generateId, objectHasProperty, isObject, isString, isAndroid, isIOS } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateIOSNotification from './validateIOSNotification';
@@ -32,7 +32,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * id
    */
-  if (checkForProperty(notification, 'id')) {
+  if (objectHasProperty(notification, 'id')) {
     if (!isString(notification.id) || !notification.id) {
       throw new Error("'notification.id' invalid notification ID, expected a unique string value.");
     }
@@ -45,7 +45,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * title
    */
-  if (checkForProperty(notification, 'title')) {
+  if (objectHasProperty(notification, 'title')) {
     if (!isString(notification.title)) {
       throw new Error("'notification.title' expected a string value.");
     }
@@ -56,7 +56,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * body
    */
-  if (checkForProperty(notification, 'body')) {
+  if (objectHasProperty(notification, 'body')) {
     if (!isString(notification.body)) {
       throw new Error("'notification.body' expected a string value.");
     }
@@ -67,7 +67,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * subtitle
    */
-  if (checkForProperty(notification, 'subtitle')) {
+  if (objectHasProperty(notification, 'subtitle')) {
     if (!isString(notification.subtitle)) {
       throw new Error("'notification.subtitle' expected a string value.");
     }
@@ -78,7 +78,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * data
    */
-  if (checkForProperty(notification, 'data') && notification.data != undefined) {
+  if (objectHasProperty(notification, 'data') && notification.data != undefined) {
     if (!isObject(notification.data)) {
       throw new Error("'notification.data' expected an object value containing key/value pairs.");
     }

@@ -6,7 +6,7 @@
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import {
-  checkForProperty,
+  objectHasProperty,
   isArray,
   isArrayOfStrings,
   isBoolean,
@@ -16,7 +16,7 @@ import {
   isUndefined,
 } from '../utils';
 
-import { Importance } from '../types/Notification';
+import { AndroidImportance } from '../types/NotificationAndroid';
 import {
   AndroidBadgeIconType,
   AndroidCategory,
@@ -60,7 +60,7 @@ export default function validateAndroidNotification(
     localOnly: false,
     ongoing: false,
     onlyAlertOnce: false,
-    importance: Importance.DEFAULT,
+    importance: AndroidImportance.DEFAULT,
     showTimestamp: false,
     smallIcon: 'ic_launcher',
     showChronometer: false,
@@ -78,7 +78,7 @@ export default function validateAndroidNotification(
   /**
    * actions
    */
-  if (checkForProperty(android, 'actions') && android.actions != undefined) {
+  if (objectHasProperty(android, 'actions') && android.actions != undefined) {
     if (!isArray(android.actions)) {
       throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
     }
@@ -100,7 +100,7 @@ export default function validateAndroidNotification(
   /**
    * asForegroundService
    */
-  if (checkForProperty(android, 'asForegroundService')) {
+  if (objectHasProperty(android, 'asForegroundService')) {
     if (!isBoolean(android.asForegroundService)) {
       throw new Error("'notification.android.asForegroundService' expected a boolean value.");
     }
@@ -111,7 +111,7 @@ export default function validateAndroidNotification(
   /**
    * autoCancel
    */
-  if (checkForProperty(android, 'autoCancel')) {
+  if (objectHasProperty(android, 'autoCancel')) {
     if (!isBoolean(android.autoCancel)) {
       throw new Error("'notification.android.autoCancel' expected a boolean value.");
     }
@@ -122,7 +122,7 @@ export default function validateAndroidNotification(
   /**
    * badgeCount
    */
-  if (checkForProperty(android, 'badgeCount')) {
+  if (objectHasProperty(android, 'badgeCount')) {
     if (!isNumber(android.badgeCount)) {
       throw new Error("'notification.android.badgeCount' expected a number value.");
     }
@@ -133,7 +133,7 @@ export default function validateAndroidNotification(
   /**
    * badgeIconType
    */
-  if (checkForProperty(android, 'badgeIconType') && !isUndefined(android.badgeIconType)) {
+  if (objectHasProperty(android, 'badgeIconType') && !isUndefined(android.badgeIconType)) {
     if (!Object.values(AndroidBadgeIconType).includes(android.badgeIconType)) {
       throw new Error(
         "'notification.android.badgeIconType' expected a valid AndroidBadgeIconType.",
@@ -146,7 +146,7 @@ export default function validateAndroidNotification(
   /**
    * category
    */
-  if (checkForProperty(android, 'category') && !isUndefined(android.category)) {
+  if (objectHasProperty(android, 'category') && !isUndefined(android.category)) {
     if (!Object.values(AndroidCategory).includes(android.category)) {
       throw new Error("'notification.android.category' expected a valid AndroidCategory.");
     }
@@ -166,7 +166,7 @@ export default function validateAndroidNotification(
   /**
    * color
    */
-  if (checkForProperty(android, 'color') && !isUndefined(android.color)) {
+  if (objectHasProperty(android, 'color') && !isUndefined(android.color)) {
     if (!isString(android.color)) {
       throw new Error("'notification.android.color' expected a string value.");
     }
@@ -183,7 +183,7 @@ export default function validateAndroidNotification(
   /**
    * colorized
    */
-  if (checkForProperty(android, 'colorized')) {
+  if (objectHasProperty(android, 'colorized')) {
     if (!isBoolean(android.colorized)) {
       throw new Error("'notification.android.colorized' expected a boolean value.");
     }
@@ -194,7 +194,7 @@ export default function validateAndroidNotification(
   /**
    * chronometerDirection
    */
-  if (checkForProperty(android, 'chronometerDirection')) {
+  if (objectHasProperty(android, 'chronometerDirection')) {
     if (!isString(android.chronometerDirection)) {
       throw new Error("'notification.android.chronometerDirection' expected a string value.");
     }
@@ -209,7 +209,7 @@ export default function validateAndroidNotification(
   /**
    * defaults
    */
-  if (checkForProperty(android, 'defaults') && !isUndefined(android.defaults)) {
+  if (objectHasProperty(android, 'defaults') && !isUndefined(android.defaults)) {
     if (!isArray(android.defaults)) {
       throw new Error("'notification.android.defaults' expected an array.");
     }
@@ -236,7 +236,7 @@ export default function validateAndroidNotification(
   /**
    * groupId
    */
-  if (checkForProperty(android, 'groupId')) {
+  if (objectHasProperty(android, 'groupId')) {
     if (!isString(android.groupId)) {
       throw new Error("'notification.android.groupId' expected a string value.");
     }
@@ -247,7 +247,7 @@ export default function validateAndroidNotification(
   /**
    * groupAlertBehavior
    */
-  if (checkForProperty(android, 'groupAlertBehavior') && !isUndefined(android.groupAlertBehavior)) {
+  if (objectHasProperty(android, 'groupAlertBehavior') && !isUndefined(android.groupAlertBehavior)) {
     if (!Object.values(AndroidGroupAlertBehavior).includes(android.groupAlertBehavior)) {
       throw new Error(
         "'notification.android.groupAlertBehavior' expected a valid AndroidGroupAlertBehavior.",
@@ -260,7 +260,7 @@ export default function validateAndroidNotification(
   /**
    * groupSummary
    */
-  if (checkForProperty(android, 'groupSummary')) {
+  if (objectHasProperty(android, 'groupSummary')) {
     if (!isBoolean(android.groupSummary)) {
       throw new Error("'notification.android.groupSummary' expected a boolean value.");
     }
@@ -268,7 +268,7 @@ export default function validateAndroidNotification(
     out.groupSummary = android.groupSummary;
   }
 
-  if (checkForProperty(android, 'inputHistory')) {
+  if (objectHasProperty(android, 'inputHistory')) {
     if (!isArrayOfStrings(android.inputHistory)) {
       throw new Error("'notification.android.inputHistory' expected an array of string values.");
     }
@@ -279,7 +279,7 @@ export default function validateAndroidNotification(
   /**
    * largeIcon
    */
-  if (checkForProperty(android, 'largeIcon')) {
+  if (objectHasProperty(android, 'largeIcon')) {
     if (
       (!isNumber(android.largeIcon) &&
         !isString(android.largeIcon) &&
@@ -302,7 +302,7 @@ export default function validateAndroidNotification(
   /**
    * lights
    */
-  if (checkForProperty(android, 'lights') && !isUndefined(android.lights)) {
+  if (objectHasProperty(android, 'lights') && !isUndefined(android.lights)) {
     if (!isArray(android.lights)) {
       throw new Error(
         "'notification.android.lights' expected an array value containing the color, on ms and off ms.",
@@ -334,7 +334,7 @@ export default function validateAndroidNotification(
   /**
    * localOnly
    */
-  if (checkForProperty(android, 'localOnly')) {
+  if (objectHasProperty(android, 'localOnly')) {
     if (!isBoolean(android.localOnly)) {
       throw new Error("'notification.android.localOnly' expected a boolean value.");
     }
@@ -345,7 +345,7 @@ export default function validateAndroidNotification(
   /**
    * ongoing
    */
-  if (checkForProperty(android, 'ongoing')) {
+  if (objectHasProperty(android, 'ongoing')) {
     if (!isBoolean(android.ongoing)) {
       throw new Error("'notification.android.ongoing' expected a boolean value.");
     }
@@ -356,7 +356,7 @@ export default function validateAndroidNotification(
   /**
    * onlyAlertOnce
    */
-  if (checkForProperty(android, 'onlyAlertOnce')) {
+  if (objectHasProperty(android, 'onlyAlertOnce')) {
     if (!isBoolean(android.onlyAlertOnce)) {
       throw new Error("'notification.android.onlyAlertOnce' expected a boolean value.");
     }
@@ -367,7 +367,7 @@ export default function validateAndroidNotification(
   /**
    * pressAction
    */
-  if (checkForProperty(android, 'pressAction') && !isUndefined(android.pressAction)) {
+  if (objectHasProperty(android, 'pressAction') && !isUndefined(android.pressAction)) {
     try {
       out.pressAction = validateAndroidPressAction(android.pressAction);
     } catch (e) {
@@ -378,8 +378,8 @@ export default function validateAndroidNotification(
   /**
    * importance
    */
-  if (checkForProperty(android, 'importance') && !isUndefined(android.importance)) {
-    if (!Object.values(Importance).includes(android.importance)) {
+  if (objectHasProperty(android, 'importance') && !isUndefined(android.importance)) {
+    if (!Object.values(AndroidImportance).includes(android.importance)) {
       throw new Error("'notification.android.importance' expected a valid Importance.");
     }
 
@@ -389,7 +389,7 @@ export default function validateAndroidNotification(
   /**
    * progress
    */
-  if (checkForProperty(android, 'progress') && !isUndefined(android.progress)) {
+  if (objectHasProperty(android, 'progress') && !isUndefined(android.progress)) {
     if (!isObject(android.progress)) {
       throw new Error("'notification.android.progress' expected an object value.");
     }
@@ -398,7 +398,7 @@ export default function validateAndroidNotification(
       indeterminate: false,
     };
 
-    if (checkForProperty(android.progress, 'indeterminate')) {
+    if (objectHasProperty(android.progress, 'indeterminate')) {
       if (!isBoolean(android.progress.indeterminate)) {
         throw new Error("'notification.android.progress.indeterminate' expected a boolean value.");
       }
@@ -451,7 +451,7 @@ export default function validateAndroidNotification(
   /**
    * showTimestamp
    */
-  if (checkForProperty(android, 'showTimestamp')) {
+  if (objectHasProperty(android, 'showTimestamp')) {
     if (!isBoolean(android.showTimestamp)) {
       throw new Error("'notification.android.showTimestamp' expected a boolean value.");
     }
@@ -462,7 +462,7 @@ export default function validateAndroidNotification(
   /**
    * smallIcon
    */
-  if (checkForProperty(android, 'smallIcon') && !isUndefined(android.smallIcon)) {
+  if (objectHasProperty(android, 'smallIcon') && !isUndefined(android.smallIcon)) {
     if (!isString(android.smallIcon)) {
       throw new Error("'notification.android.smallIcon' expected value to be a string.");
     }
@@ -473,7 +473,7 @@ export default function validateAndroidNotification(
   /**
    * smallIconLevel
    */
-  if (checkForProperty(android, 'smallIconLevel') && !isUndefined(android.smallIcon)) {
+  if (objectHasProperty(android, 'smallIconLevel') && !isUndefined(android.smallIcon)) {
     if (!isNumber(android.smallIconLevel)) {
       throw new Error("'notification.android.smallIconLevel' expected value to be a number.");
     }
@@ -484,7 +484,7 @@ export default function validateAndroidNotification(
   /**
    * sortKey
    */
-  if (checkForProperty(android, 'sortKey')) {
+  if (objectHasProperty(android, 'sortKey')) {
     if (!isString(android.sortKey)) {
       throw new Error("'notification.android.sortKey' expected a string value.");
     }
@@ -496,7 +496,7 @@ export default function validateAndroidNotification(
    * style
    */
 
-  if (checkForProperty(android, 'style') && !isUndefined(android.style)) {
+  if (objectHasProperty(android, 'style') && !isUndefined(android.style)) {
     if (!isObject(android.style)) {
       throw new Error("'notification.android.style' expected an object value.");
     }
@@ -524,7 +524,7 @@ export default function validateAndroidNotification(
   /**
    * tag
    */
-  if (checkForProperty(android, 'tag') && android.tag != undefined) {
+  if (objectHasProperty(android, 'tag') && android.tag != undefined) {
     if (!isString(android.tag)) {
       throw new Error("'notification.android.tag' expected a string value.");
     }
@@ -539,7 +539,7 @@ export default function validateAndroidNotification(
   /**
    * ticker
    */
-  if (checkForProperty(android, 'ticker')) {
+  if (objectHasProperty(android, 'ticker')) {
     if (!isString(android.ticker)) {
       throw new Error("'notification.android.ticker' expected a string value.");
     }
@@ -550,7 +550,7 @@ export default function validateAndroidNotification(
   /**
    * timeoutAfter
    */
-  if (checkForProperty(android, 'timeoutAfter') && android.timeoutAfter != undefined) {
+  if (objectHasProperty(android, 'timeoutAfter') && android.timeoutAfter != undefined) {
     if (!isNumber(android.timeoutAfter)) {
       throw new Error("'notification.android.timeoutAfter' expected a number value.");
     }
@@ -565,7 +565,7 @@ export default function validateAndroidNotification(
   /**
    * showChronometer
    */
-  if (checkForProperty(android, 'showChronometer')) {
+  if (objectHasProperty(android, 'showChronometer')) {
     if (!isBoolean(android.showChronometer)) {
       throw new Error("'notification.android.showChronometer' expected a boolean value.");
     }
@@ -576,7 +576,7 @@ export default function validateAndroidNotification(
   /**
    * vibrationPattern
    */
-  if (checkForProperty(android, 'vibrationPattern') && android.vibrationPattern != undefined) {
+  if (objectHasProperty(android, 'vibrationPattern') && android.vibrationPattern != undefined) {
     if (!isArray(android.vibrationPattern) || !isValidVibratePattern(android.vibrationPattern)) {
       throw new Error(
         "'notification.android.vibrationPattern' expected an array containing an even number of positive values.",
@@ -589,7 +589,7 @@ export default function validateAndroidNotification(
   /**
    * visibility
    */
-  if (checkForProperty(android, 'visibility') && android.visibility != undefined) {
+  if (objectHasProperty(android, 'visibility') && android.visibility != undefined) {
     if (!Object.values(AndroidVisibility).includes(android.visibility)) {
       throw new Error(
         "'notification.android.visibility' expected a valid AndroidVisibility value.",
@@ -602,7 +602,7 @@ export default function validateAndroidNotification(
   /**
    * timestamp
    */
-  if (checkForProperty(android, 'timestamp') && android.timestamp != undefined) {
+  if (objectHasProperty(android, 'timestamp') && android.timestamp != undefined) {
     if (!isNumber(android.timestamp)) {
       throw new Error("'notification.android.timestamp' expected a number value.");
     }
@@ -619,7 +619,7 @@ export default function validateAndroidNotification(
   /**
    * sound
    */
-  if (checkForProperty(android, 'sound') && android.sound != undefined) {
+  if (objectHasProperty(android, 'sound') && android.sound != undefined) {
     if (!isString(android.sound)) {
       throw new Error("'notification.sound' expected a valid sound string.");
     }

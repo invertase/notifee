@@ -3,7 +3,7 @@
  */
 
 import { AndroidInput } from '../types/NotificationAndroid';
-import { checkForProperty, isArrayOfStrings, isBoolean, isString } from '../utils';
+import { objectHasProperty, isArrayOfStrings, isBoolean, isString } from '../utils';
 
 export default function validateAndroidInput(input?: AndroidInput): AndroidInput {
   const out: AndroidInput = {
@@ -15,7 +15,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     return out;
   }
 
-  if (checkForProperty(input, 'allowFreeFormInput')) {
+  if (objectHasProperty(input, 'allowFreeFormInput')) {
     if (!isBoolean(input.allowFreeFormInput)) {
       throw new Error("'input.allowFreeFormInput' expected a boolean value.");
     }
@@ -23,7 +23,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     out.allowFreeFormInput = input.allowFreeFormInput;
   }
 
-  if (checkForProperty(input, 'allowGeneratedReplies')) {
+  if (objectHasProperty(input, 'allowGeneratedReplies')) {
     if (!isBoolean(input.allowGeneratedReplies)) {
       throw new Error("'input.allowGeneratedReplies' expected a boolean value.");
     }
@@ -35,7 +35,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     throw new Error("'input.allowFreeFormInput' when false, you must provide at least one choice.");
   }
 
-  if (checkForProperty(input, 'choices')) {
+  if (objectHasProperty(input, 'choices')) {
     if (!isArrayOfStrings(input.choices) || input.choices.length === 0) {
       throw new Error("'input.choices' expected an array of string values.");
     }
@@ -43,7 +43,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     out.choices = input.choices;
   }
 
-  if (checkForProperty(input, 'editableChoices')) {
+  if (objectHasProperty(input, 'editableChoices')) {
     if (!isBoolean(input.editableChoices)) {
       throw new Error("'input.editableChoices' expected a boolean value.");
     }
@@ -51,7 +51,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     out.editableChoices = input.editableChoices;
   }
 
-  if (checkForProperty(input, 'placeholder')) {
+  if (objectHasProperty(input, 'placeholder')) {
     if (!isString(input.placeholder)) {
       throw new Error("'input.placeholder' expected a string value.");
     }
