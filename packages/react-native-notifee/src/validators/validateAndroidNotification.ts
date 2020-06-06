@@ -247,7 +247,10 @@ export default function validateAndroidNotification(
   /**
    * groupAlertBehavior
    */
-  if (objectHasProperty(android, 'groupAlertBehavior') && !isUndefined(android.groupAlertBehavior)) {
+  if (
+    objectHasProperty(android, 'groupAlertBehavior') &&
+    !isUndefined(android.groupAlertBehavior)
+  ) {
     if (!Object.values(AndroidGroupAlertBehavior).includes(android.groupAlertBehavior)) {
       throw new Error(
         "'notification.android.groupAlertBehavior' expected a valid AndroidGroupAlertBehavior.",

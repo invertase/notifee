@@ -165,7 +165,10 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'alert')
+      objectHasProperty<IOSForegroundPresentationOptions>(
+        ios.foregroundPresentationOptions,
+        'alert',
+      )
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.alert)) {
         throw new Error(
@@ -177,7 +180,10 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'sound')
+      objectHasProperty<IOSForegroundPresentationOptions>(
+        ios.foregroundPresentationOptions,
+        'sound',
+      )
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.sound)) {
         throw new Error(
@@ -189,7 +195,10 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'badge')
+      objectHasProperty<IOSForegroundPresentationOptions>(
+        ios.foregroundPresentationOptions,
+        'badge',
+      )
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.badge)) {
         throw new Error(
