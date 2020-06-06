@@ -342,7 +342,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
-  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
+  - RNNotifee (from `../../packages/react-native`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -421,7 +421,7 @@ EXTERNAL SOURCES:
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNNotifee:
-    :path: "../node_modules/@notifee/react-native"
+    :path: "../../packages/react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 

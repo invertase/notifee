@@ -1,8 +1,6 @@
 import validateIOSNotification from '@notifee/react-native/src/validators/validateIOSNotification';
 import { NotificationIOS } from '@notifee/react-native/src/types/NotificationIOS';
 
-import { Importance } from '@notifee/react-native/src/types/Notification';
-
 describe('Validate IOS Input', () => {
   describe('validateIOSInput()', () => {
     test('returns valid ', () => {
@@ -11,7 +9,6 @@ describe('Validate IOS Input', () => {
         badgeCount: 0,
         categoryId: 'categoryId',
         launchImageName: 'launchImageName',
-        importance: Importance.NONE,
         sound: 'placeholderText',
         critical: true,
         criticalVolume: 0,
@@ -26,7 +23,6 @@ describe('Validate IOS Input', () => {
       expect($.badgeCount).toEqual(0);
       expect($.categoryId).toEqual('categoryId');
       expect($.launchImageName).toEqual('launchImageName');
-      expect($.importance).toEqual(Importance.NONE);
       expect($.sound).toEqual('placeholderText');
       expect($.critical).toEqual(true);
       expect($.criticalVolume).toEqual(0);
@@ -38,7 +34,9 @@ describe('Validate IOS Input', () => {
 
     test('returns valid when no value is provided', () => {
       const $ = validateIOSNotification();
-      expect($).toEqual({ importance: Importance.DEFAULT });
+      expect($).toEqual({
+        foregroundPresentationOptions: { alert: true, badge: true, sound: true },
+      });
     });
 
     test('returns invalid when an invalid critical property is provided', () => {
@@ -118,16 +116,6 @@ describe('Validate IOS Input', () => {
 
       expect(() => validateIOSNotification(notification)).toThrowError(
         "'notification.ios.launchImageName' expected a string value.",
-      );
-    });
-
-    test('returns invalid when an invalid importance property is provided', () => {
-      const notification: NotificationIOS = {
-        importance: ['test'] as any,
-      };
-
-      expect(() => validateIOSNotification(notification)).toThrowError(
-        "'notification.ios.importance' expected a valid Importance.",
       );
     });
 

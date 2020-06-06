@@ -31,7 +31,7 @@ describe('Validate Android Style', () => {
       };
 
       expect(() => validateAndroidBigPictureStyle(pictureStyle)).toThrowError(
-        "'notification.android.style' BigPictureStyle: 'largeIcon' expected a string value.",
+        "'notification.android.style' BigPictureStyle: 'largeIcon' expected a React Native ImageResource value or a valid string URL.",
       );
     });
 

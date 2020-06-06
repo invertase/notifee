@@ -8,8 +8,9 @@ import {
   AndroidAction,
   AndroidCategory,
   AndroidProgress,
+  AndroidImportance,
 } from '@notifee/react-native/src/types/NotificationAndroid';
-import { Importance, NotificationPressAction } from '@notifee/react-native/src/types/Notification';
+import { NotificationPressAction } from '@notifee/react-native/src/types/Notification';
 
 describe('Validate Android Notification', () => {
   describe('validateAndroidNotification()', () => {
@@ -34,7 +35,7 @@ describe('Validate Android Notification', () => {
         localOnly: false,
         ongoing: false,
         onlyAlertOnce: false,
-        importance: Importance.DEFAULT,
+        importance: AndroidImportance.DEFAULT,
         showTimestamp: false,
         smallIcon: 'ic_launcher',
         showChronometer: false,
@@ -70,7 +71,7 @@ describe('Validate Android Notification', () => {
       expect($.groupSummary).toEqual(false);
       expect($.ongoing).toEqual(false);
       expect($.onlyAlertOnce).toEqual(false);
-      expect($.importance).toEqual(Importance.DEFAULT);
+      expect($.importance).toEqual(AndroidImportance.DEFAULT);
       expect($.showTimestamp).toEqual(false);
       expect($.smallIcon).toEqual('ic_launcher');
       expect($.showChronometer).toEqual(false);
@@ -104,7 +105,7 @@ describe('Validate Android Notification', () => {
       expect($.groupSummary).toEqual(false);
       expect($.ongoing).toEqual(false);
       expect($.onlyAlertOnce).toEqual(false);
-      expect($.importance).toEqual(Importance.DEFAULT);
+      expect($.importance).toEqual(AndroidImportance.DEFAULT);
       expect($.showTimestamp).toEqual(false);
       expect($.smallIcon).toEqual('ic_launcher');
       expect($.showChronometer).toEqual(false);
@@ -321,7 +322,7 @@ describe('Validate Android Notification', () => {
       };
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
-        "'notification.android.largeIcon' expected a string value.",
+        "'notification.android.largeIcon' expected a React Native ImageResource value or a valid string URL.",
       );
     });
 

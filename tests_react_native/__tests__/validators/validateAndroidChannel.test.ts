@@ -3,7 +3,7 @@ import {
   AndroidChannel,
   AndroidVisibility,
 } from '@notifee/react-native/src/types/NotificationAndroid';
-import { Importance } from '@notifee/react-native/src/types/Notification';
+import { AndroidImportance } from '@notifee/react-native/src/types/NotificationAndroid';
 
 describe('Validate Android Channel', () => {
   describe('validateAndroidChannel()', () => {
@@ -19,7 +19,7 @@ describe('Validate Android Channel', () => {
         sound: 'sound',
         vibration: true,
         badge: true,
-        importance: Importance.DEFAULT,
+        importance: AndroidImportance.DEFAULT,
         visibility: AndroidVisibility.PRIVATE,
         vibrationPattern: [],
       };
@@ -33,7 +33,7 @@ describe('Validate Android Channel', () => {
       expect($.lights).toEqual(true);
       expect($.vibration).toEqual(true);
       expect($.vibrationPattern).toEqual([]);
-      expect($.importance).toEqual(Importance.DEFAULT);
+      expect($.importance).toEqual(AndroidImportance.DEFAULT);
       expect($.visibility).toEqual(AndroidVisibility.PRIVATE);
     });
 

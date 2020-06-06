@@ -11,9 +11,10 @@ import '@react-native-firebase/messaging';
 
 import Notifee, {
   AndroidChannel,
-  Importance,
+  AndroidImportance,
   Notification,
   EventType,
+  IOSAuthorizationStatus,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -33,33 +34,33 @@ const channels: AndroidChannel[] = [
   {
     name: 'High Importance',
     id: 'high',
-    importance: Importance.HIGH,
+    importance: AndroidImportance.HIGH,
     // sound: 'hollow',
   },
   {
     name: '🐴 Sound',
     id: 'custom_sound',
-    importance: Importance.HIGH,
+    importance: AndroidImportance.HIGH,
     sound: 'horse.mp3',
   },
   {
     name: 'Default Importance',
     id: 'default',
-    importance: Importance.DEFAULT,
+    importance: AndroidImportance.DEFAULT,
   },
   {
     name: 'Low Importance',
     id: 'low',
-    importance: Importance.LOW,
+    importance: AndroidImportance.LOW,
   },
   {
     name: 'Min Importance',
     id: 'min',
-    importance: Importance.MIN,
+    importance: AndroidImportance.MIN,
   },
 ];
 
-function onMessage(message: RemoteMessage): void {
+async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
 }
 
@@ -69,12 +70,11 @@ function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
-    // await firebase.messaging().registerForRemoteNotifications();
-    // const fcmToken = await firebase.messaging().getToken();
-    // console.log({ fcmToken });
-    // firebase.messaging().onMessage(onMessage);
-    // const initialNotification = await notifee.getInitialNotification();
-    // console.log({ initialNotification });
+    const fcmToken = await firebase.messaging().getToken();
+    console.log({ fcmToken });
+    firebase.messaging().onMessage(onMessage);
+    const initialNotification = await Notifee.getInitialNotification();
+    console.log({ initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
   }
 
@@ -82,9 +82,14 @@ function Root(): any {
     init().catch(console.error);
   }, []);
 
-  function displayNotification(notification: Notification, channelId: string): void {
+  async function displayNotification(notification: Notification, channelId: string): Promise<void> {
     if (!notification.android) notification.android = {};
     notification.android.channelId = channelId;
+
+    const currentPermissions = await Notifee.getNotificationSettings();
+    if (currentPermissions.authorizationStatus != IOSAuthorizationStatus.AUTHORIZED) {
+      await Notifee.requestPermission();
+    }
 
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);

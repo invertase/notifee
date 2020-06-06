@@ -55,12 +55,11 @@
   // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = 0;
-    NSNumber *importance = notifeeNotification[@"ios"][@"importance"];
     NSDictionary *foregroundPresentationOptions = notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
       
-    BOOL alert = foregroundPresentationOptions[@"alert"];
-    BOOL badge = foregroundPresentationOptions[@"badge"];
-    BOOL sound = foregroundPresentationOptions[@"sound"];
+    BOOL alert = [foregroundPresentationOptions[@"alert"] boolValue];
+    BOOL badge = [foregroundPresentationOptions[@"badge"] boolValue];
+    BOOL sound = [foregroundPresentationOptions[@"sound"] boolValue];
       
     if(badge) {
       presentationOptions += UNNotificationPresentationOptionBadge;
