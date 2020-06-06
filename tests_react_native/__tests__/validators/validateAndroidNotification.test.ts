@@ -545,18 +545,6 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    // TODO
-    xtest('returns valid with big pictures style', () => {});
-
-    // TODO
-    xtest('returns valid with big text style', () => {});
-
-    // TODO
-    xtest('returns valid with big inbox style', () => {});
-
-    // TODO
-    xtest('returns valid with big inbox messaging', () => {});
-
     test('throws an error when tag is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
