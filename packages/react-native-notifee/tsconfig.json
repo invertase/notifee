@@ -15,7 +15,8 @@
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"],
   "include": ["./src"]
