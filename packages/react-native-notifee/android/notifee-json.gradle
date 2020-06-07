@@ -195,7 +195,7 @@ def registerJsonTaskForProjectVariant(jsonFile, targetProject, targetVariant) {
 
   task.setBuildType(targetVariant.getBuildType().name)
 
-  task.setBuildFlavor(targetVariant.flavorName ? targetVariant.flavorName : null)
+  task.setBuildFlavor(targetVariant.flavorName ? targetVariant.flavorName : "")
 
   task.setOutputDirectory(outputDir)
 
