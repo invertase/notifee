@@ -1,23 +1,28 @@
-import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 class NotifeeJsonTask extends DefaultTask {
-  private final static String LOG_PREFIX = ":Notifee:"
-  private final static String JSON_FILE_NAME = "notifee.config"
-  private final static String OUTPUT_FILE_NAME = "notifee.xml"
+  private final static String OUTPUT_FILE_NAME = "config.xml"
 
-  private File intermediateDir
-  private String rootDir
   private String buildType
+  private String buildFlavor
+  private String rootProjectDirectory
+
+  private File jsonFile
+  private File outputDirectory
 
   @OutputDirectory
-  File getIntermediateDir() {
-    return intermediateDir
+  File getOutputDirectory() {
+    return outputDirectory
+  }
+
+  @InputFile
+  File getJsonFile() {
+    return jsonFile
   }
 
   @Input
-  String getRootDir() {
-    return rootDir
+  String getRootProjectDirectory() {
+    return rootProjectDirectory
   }
 
   @Input
@@ -25,108 +30,130 @@ class NotifeeJsonTask extends DefaultTask {
     return buildType
   }
 
-  void setIntermediateDir(File intermediateDir) {
-    this.intermediateDir = intermediateDir
+  @Input
+  String getBuildFlavor() {
+    return buildFlavor
   }
 
-  void setRootDir(String rootDir) {
-    this.rootDir = rootDir
+  void setOutputDirectory(File outputDirectory) {
+    this.outputDirectory = outputDirectory
+  }
+
+  void setJsonFile(File jsonFile) {
+    this.jsonFile = jsonFile
+  }
+
+  void setRootProjectDirectory(String rootProjectDirectory) {
+    this.rootProjectDirectory = rootProjectDirectory
   }
 
   void setBuildType(String buildType) {
     this.buildType = buildType
   }
 
+  void setBuildFlavor(String buildFlavor) {
+    this.buildFlavor = buildFlavor
+  }
+
   @TaskAction
   void action() {
-    String searchedLocation = System.lineSeparator()
-    String filePath = "${rootDir}${JSON_FILE_NAME}.${buildType}.json"
-
-    File jsonFile = getProject().file(filePath)
-    searchedLocation = searchedLocation + filePath + System.lineSeparator()
-
-    if (jsonFile == null) {
-      filePath = "${rootDir}${JSON_FILE_NAME}.json"
-      jsonFile = getProject().file(filePath)
-      searchedLocation = searchedLocation + filePath
+    deleteFolder(outputDirectory)
+    if (!outputDirectory.mkdirs()) {
+      logWarning("Failed to create folder: ${outputDirectory}")
     }
 
-    if (!jsonFile.isFile()) {
-      project.logger.info "${LOG_PREFIX}No notifee.config.json found, skipping."
-      project.logger.info "${LOG_PREFIX}Searched Location: ${searchedLocation}"
-
-      return
-    }
-
-    project.logger.info "${LOG_PREFIX}notifee.config.json found at ${jsonFile.toString()}"
-
-    deleteFolder(intermediateDir)
-
-    if (!intermediateDir.mkdirs()) {
-      project.logger.log(LogLevel.WARN, "${LOG_PREFIX}Failed to create folder: ${intermediateDir}")
-    }
-
-    Object json = null
-
+    Map json
     try {
       json = new JsonSlurper().parseText(jsonFile.text)
     } catch (Exception ignored) {
-      project.logger.log(LogLevel.WARN, "${LOG_PREFIX}Failed to parse notifee.config.json found at ${jsonFile.toString()}.")
-      project.logger.log(LogLevel.WARN, "${LOG_PREFIX}${ignored.toString()}")
-    }
-
-    if (json && json.android) {
-      Map<String, String> resValues = new TreeMap<>()
-      Map<String, Map<String, String>> resAttributes = new TreeMap<>()
-
-      Object androidObject  = json.android
-
-      if (androidObject != null) {
-        handleLicense(androidObject, resValues)
-      } else {
-        project.logger.info "${LOG_PREFIX}notifee.config.json found with no android config, skipping"
-      }
-
-      File values = new File(intermediateDir, "values")
-      if (!values.exists() && !values.mkdirs()) {
-        project.logger.log(LogLevel.WARN, "Failed to create folder: ${values}")
-      }
-
-      project.logger.info "${LOG_PREFIX}Android json root in notifee.config.json, creating notifee.xml"
-      new File(values, OUTPUT_FILE_NAME).write(getValuesContent(resValues, resAttributes))
-    } else {
-      project.logger.info "${LOG_PREFIX}Notifee.config.json found with no android config, skipping"
-    }
-  }
-
-  private void handleLicense(Object androidObject, Map<String, String> resValues) {
-    String license = androidObject.get('license')
-
-    if (license != null) {
-      String jsonConfig = JsonOutput.toJson(JsonOutput.toJson(androidObject))
-      resValues.put("notifee_json", jsonConfig)
+      logWarning("Failed to parse notifee.config.json found at ${jsonFile.toString()}.")
+      logWarning(ignored.toString())
       return
     }
 
-    project.logger.log(LogLevel.WARN, "${LOG_PREFIX}Missing license string")
+    if (!(json instanceof Map)) {
+      logWarning("Invalid notifee.config.json at ${jsonFile.toString()} - the JSON root must be a map value.")
+      return
+    }
+
+    if (json.android == null) {
+      logWarning("The notifee.config.json file at ${jsonFile.toString()} does not contain an 'android'" +
+        " map of properties and so importing config will be skipped. If this build is a release build then" +
+        " this is most likely not the intended behaviour and you may have issues with licensing.")
+      return
+    }
+
+    if (!(json.android instanceof Map)) {
+      logWarning("Invalid notifee.config.json at ${jsonFile.toString()} - the 'android' key value must be a map value.")
+      return
+    }
+
+    Map androidMap = json.android
+    Map<String, Object> resValues = new TreeMap<>()
+
+    copyPrimitiveValuesFromMap(androidMap, resValues)
+
+    if (androidMap.containsKey(buildType)) {
+      copyPrimitiveValuesFromMap(androidMap.get(buildType), resValues)
+    }
+
+    if (buildFlavor != null && buildFlavor.length() > 0 && androidMap.containsKey(buildFlavor)) {
+      Map valuesForBuildFlavor = androidMap.get(buildFlavor)
+      if (valuesForBuildFlavor instanceof Map) {
+        copyPrimitiveValuesFromMap(valuesForBuildFlavor, resValues)
+        if (valuesForBuildFlavor.containsKey(buildType)) {
+          copyPrimitiveValuesFromMap(valuesForBuildFlavor.get(buildType), resValues)
+        }
+      }
+    }
+
+    if (resValues.isEmpty()) {
+      return
+    }
+
+    File values = new File(outputDirectory, "values")
+    if (!values.exists() && !values.mkdirs()) {
+      logWarning("Failed to create folder: ${values}")
+    }
+
+    new File(values, OUTPUT_FILE_NAME).write(generateResourcesXmlString(resValues))
   }
 
-  private static String getValuesContent(
-    Map<String, String> values, Map<String, Map<String, String>> attributes) {
+  private void copyPrimitiveValuesFromMap(Map<String, Object> sourceMap, TreeMap targetMap) {
+    if (!(sourceMap instanceof Map)) return
+    for (Map.Entry<String, Object> entry : sourceMap.entrySet()) {
+      String key = entry.key
+      Object value = entry.value
+
+      if (value instanceof String) {
+        targetMap.put(key, value)
+      } else if (value instanceof Map) {
+        // Ignore Maps (as these could be build type or flavor specific objects.
+      } else {
+        logWarning("Key '$key' in notifee.config.json is an invalid type, skipping value.")
+      }
+    }
+  }
+
+  private void logWarning(String message) {
+    getProject().logger.log(LogLevel.WARN, "WARNING:NOTIFEE: ${message}")
+  }
+
+  private void logInfo(String message) {
+    getProject().logger.log(LogLevel.INFO, "NOTIFEE: ${message}")
+  }
+
+  private static String generateResourcesXmlString(
+    Map<String, String> values
+  ) {
     StringBuilder sb = new StringBuilder(256)
 
     sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + "<resources>\n")
 
     for (Map.Entry<String, String> entry : values.entrySet()) {
       String name = entry.getKey()
+      name = "notifee_config_$name"
       sb.append("    <string name=\"").append(name).append("\" translatable=\"false\"")
-
-      if (attributes.containsKey(name)) {
-        for (Map.Entry<String, String> attr : attributes.get(name).entrySet()) {
-          sb.append(" ").append(attr.getKey()).append("=\"").append(attr.getValue()).append("\"")
-        }
-      }
-
       sb.append(">").append(entry.getValue()).append("</string>\n")
     }
 
@@ -135,9 +162,8 @@ class NotifeeJsonTask extends DefaultTask {
     return sb.toString()
   }
 
-  private static void deleteFolder(final File folder) {
+  private void deleteFolder(final File folder) {
     if (!folder.exists()) return
-
     File[] files = folder.listFiles()
 
     if (files != null) {
@@ -146,36 +172,94 @@ class NotifeeJsonTask extends DefaultTask {
           deleteFolder(file)
         } else {
           if (!file.delete()) {
-            getProject().logger.log(LogLevel.WARN, "${LOG_PREFIX}Failed to delete: ${file}")
+            logWarning("Failed to delete: ${file}")
           }
         }
       }
     }
 
     if (!folder.delete()) {
-      getProject().logger.log(LogLevel.WARN, "${LOG_PREFIX}Failed to delete: ${folder}")
+      logWarning("Failed to delete: ${folder}")
     }
   }
 }
 
-android.applicationVariants.all { variant ->
-  File outputDir = project.file("$project.buildDir/generated/res/notifee/$variant.dirName")
+def registerJsonTaskForProjectVariant(jsonFile, targetProject, targetVariant) {
+  File outputDir = targetProject.file("$targetProject.buildDir/generated/res/notifee/$targetVariant.dirName")
 
-  NotifeeJsonTask task = project.tasks.create("process${variant.name.capitalize()}NotifeeJson", NotifeeJsonTask)
+  NotifeeJsonTask task = targetProject.tasks.create("process${targetVariant.name.capitalize()}NotifeeJson", NotifeeJsonTask)
 
-  task.setIntermediateDir(outputDir)
-  task.setRootDir(rootProject.projectDir.toString() + '/../')
-  task.setBuildType(variant.getBuildType().name)
+  task.setBuildType(targetVariant.getBuildType().name)
 
-  if (variant.respondsTo("registerGeneratedResFolders")) {
-    task.ext.generatedResFolders = project.files(outputDir).builtBy(task)
-    variant.registerGeneratedResFolders(task.generatedResFolders)
-    if (variant.respondsTo("getMergeResourcesProvider")) {
-      variant.mergeResourcesProvider.configure { dependsOn(task) }
+  task.setBuildFlavor(targetVariant.flavorName ? targetVariant.flavorName : null)
+
+  task.setOutputDirectory(outputDir)
+
+  task.setJsonFile(jsonFile)
+
+  task.setRootProjectDirectory(rootProject.projectDir.toString())
+
+  if (targetVariant.respondsTo("registerGeneratedResFolders")) {
+    task.ext.generatedResFolders = targetProject.files(outputDir).builtBy(task)
+    targetVariant.registerGeneratedResFolders(task.generatedResFolders)
+    if (targetVariant.respondsTo("getMergeResourcesProvider")) {
+      targetVariant.mergeResourcesProvider.configure { dependsOn(task) }
     } else {
-      variant.mergeResources.dependsOn(task)
+      targetVariant.mergeResources.dependsOn(task)
     }
   } else {
-    variant.registerResGeneratingTask(task, outputDir)
+    targetVariant.registerResGeneratingTask(task, outputDir)
   }
+}
+
+def findJsonFileFromRoot() {
+  File jsonFile = null
+  String fileName = "notifee.config.json"
+  File parentDir = rootProject.projectDir
+
+  for (int i = 0; i <= 3; i++) {
+    if (parentDir == null) break
+    parentDir = parentDir.parentFile
+    if (parentDir != null) {
+      jsonFile = new File(parentDir, fileName)
+      if (jsonFile.exists()) break
+      else {
+        jsonFile = null
+      }
+    }
+  }
+
+  return jsonFile
+}
+
+File configJsonFile = findJsonFileFromRoot()
+
+if (configJsonFile != null) {
+  if (project.properties.get('NOTIFEE')) {
+    afterEvaluate {
+      def appProject
+      if (findProject(':app')) {
+        appProject = findProject(':app')
+      } else if (rootProject.getSubprojects()[0].hasProperty('android') &&
+        rootProject.getSubprojects()[0].android.hasProperty('applicationVariants')
+      ) {
+        appProject = rootProject.getSubprojects()[0]
+      } else {
+        gradle.buildFinished {
+          project.logger.warn("Notifee WARNING: Could not find your 'app' gradle project automatically, you may need to manually apply the notifee-json.gradle script.")
+        }
+      }
+      if (appProject) {
+        appProject.android.applicationVariants.all { variant ->
+          registerJsonTaskForProjectVariant(configJsonFile, appProject, variant)
+        }
+      }
+    }
+  } else {
+    android.applicationVariants.all { variant ->
+      registerJsonTaskForProjectVariant(configJsonFile, project, variant)
+    }
+  }
+} else {
+  rootProject.logger.info ":${project.name} no notifee.config.json found, skipping configuration tasks."
 }
