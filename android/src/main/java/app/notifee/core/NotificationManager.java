@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -103,7 +104,11 @@ class NotificationManager {
       }
 
       builder.setColorized(androidModel.getColorized());
-      builder.setChronometerCountDown(androidModel.getChronometerCountDown());
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        builder.setChronometerCountDown(androidModel.getChronometerCountDown());
+      }
+
       builder.setDefaults(androidModel.getDefaults());
 
       if (androidModel.getGroup() != null) {
