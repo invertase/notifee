@@ -29,7 +29,7 @@ _PLIST_ENTRY_VALUES=()
 
 function setPlistValue {
   echo "info:      setting plist entry '$1' of type '$2' in file '$4'"
-  ${_PLIST_BUDDY} -c "Add :$1 $2 '$3'" $4 || echo "info:      '$1' already exists"
+  ${_PLIST_BUDDY} -c "Add :$1 $2 '$3'" "$4" || echo "info:      '$1' already exists"
 }
 
 echo "info: -> NOTIFEE build script started"
@@ -76,7 +76,7 @@ for i in "${!_PLIST_ENTRY_KEYS[@]}"; do
   echo "    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}" "${_PLIST_ENTRY_TYPES[$i]}" "${_PLIST_ENTRY_VALUES[$i]}"
 done
 
-for plist in ${_TARGET_PLIST} ${_DSYM_PLIST} ; do
+for plist in "${_TARGET_PLIST}" "${_DSYM_PLIST}" ; do
   if [[ -f ${plist} ]]; then
     for i in "${!_PLIST_ENTRY_KEYS[@]}"; do
       setPlistValue "${_PLIST_ENTRY_KEYS[$i]}" "${_PLIST_ENTRY_TYPES[$i]}" "${_PLIST_ENTRY_VALUES[$i]}" "${plist}"
