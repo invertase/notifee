@@ -77,7 +77,7 @@ repositories {
 dependencies {
   api "com.squareup.okhttp3:okhttp:4.3.1"
   api 'androidx.concurrent:concurrent-futures:1.0.0'
-  api 'com.google.android.gms:play-services-tasks:17.0.2'
+  api 'com.google.android.gms:play-services-tasks:17.1.0'
   api 'androidx.work:work-runtime:2.3.4'
   api 'org.greenrobot:eventbus:3.1.1'
   api 'com.facebook.fresco:fresco:2.1.0'

@@ -57,7 +57,6 @@ public class Notifee {
       if (mNotifee != null) return;
       mNotifee = new Notifee();
       mNotifeeConfig = notifeeConfig;
-      JSONConfig.initialize(notifeeConfig.getJsonConfig());
       EventSubscriber.register(notifeeConfig.getEventSubscriber());
       LicenseManager.initialize();
     }

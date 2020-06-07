@@ -165,6 +165,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 //preBuild.dependsOn buildNotifeeCore
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-apply from: file('../../node_modules/@notifee/react-native/android/notifee-json.gradle')
 apply plugin: 'com.google.gms.google-services'
