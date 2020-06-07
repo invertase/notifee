@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 package io.invertase.notifee;
 
 import android.os.Bundle;

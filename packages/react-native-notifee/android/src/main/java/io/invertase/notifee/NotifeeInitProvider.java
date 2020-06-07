@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 package io.invertase.notifee;
 
 import com.facebook.react.modules.systeminfo.ReactNativeVersion;
@@ -7,8 +11,6 @@ import java.util.Map;
 import app.notifee.core.InitProvider;
 import app.notifee.core.Notifee;
 import app.notifee.core.NotifeeConfig;
-import android.content.Context;
-import android.content.res.Resources;
 
 public class NotifeeInitProvider extends InitProvider {
   @Override

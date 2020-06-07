@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 package io.invertase.notifee;
 
 import android.os.Bundle;
@@ -7,12 +11,12 @@ import androidx.annotation.Keep;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
-import app.notifee.core.interfaces.EventListener;
-import app.notifee.core.model.NotificationModel;
 import app.notifee.core.event.BlockStateEvent;
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.LogEvent;
 import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.interfaces.EventListener;
+import app.notifee.core.model.NotificationModel;
 
 import static io.invertase.notifee.NotifeeReactUtils.isAppInForeground;
 
@@ -36,9 +40,8 @@ public class NotifeeEventSubscriber implements EventListener {
     WritableMap eventDetailMap = Arguments.createMap();
     eventMap.putInt(KEY_TYPE, notificationEvent.getType());
 
-    eventDetailMap.putMap(KEY_NOTIFICATION,
-      Arguments.fromBundle(notificationEvent.getNotification().toBundle())
-    );
+    eventDetailMap.putMap(
+        KEY_NOTIFICATION, Arguments.fromBundle(notificationEvent.getNotification().toBundle()));
 
     Bundle extras = notificationEvent.getExtras();
     if (extras != null) {
@@ -78,13 +81,13 @@ public class NotifeeEventSubscriber implements EventListener {
 
     int type = blockStateEvent.getType();
 
-    if (type == BlockStateEvent.TYPE_CHANNEL_BLOCKED ||
-      type == BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED) {
+    if (type == BlockStateEvent.TYPE_CHANNEL_BLOCKED
+        || type == BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED) {
       String mapKey = type == BlockStateEvent.TYPE_CHANNEL_BLOCKED ? "channel" : "channelGroup";
       Bundle channelOrGroupBundle = blockStateEvent.getChannelOrGroupBundle();
       if (channelOrGroupBundle != null) {
-        eventDetailMap
-          .putMap(mapKey, Arguments.fromBundle(blockStateEvent.getChannelOrGroupBundle()));
+        eventDetailMap.putMap(
+            mapKey, Arguments.fromBundle(blockStateEvent.getChannelOrGroupBundle()));
       }
     }
 
@@ -99,9 +102,8 @@ public class NotifeeEventSubscriber implements EventListener {
       NotifeeReactUtils.sendEvent(NOTIFICATION_EVENT_KEY, eventMap);
     } else {
       eventMap.putBoolean(KEY_HEADLESS, true);
-      NotifeeReactUtils.startHeadlessTask(NOTIFICATION_EVENT_KEY, eventMap, 0,
-        blockStateEvent::setCompletionResult
-      );
+      NotifeeReactUtils.startHeadlessTask(
+          NOTIFICATION_EVENT_KEY, eventMap, 0, blockStateEvent::setCompletionResult);
     }
   }
 
@@ -112,8 +114,7 @@ public class NotifeeEventSubscriber implements EventListener {
     WritableMap eventMap = Arguments.createMap();
     eventMap.putMap(KEY_NOTIFICATION, Arguments.fromBundle(notificationBundle.toBundle()));
 
-    NotifeeReactUtils.startHeadlessTask(FOREGROUND_NOTIFICATION_TASK_KEY, eventMap, 0,
-      foregroundServiceEvent::setCompletionResult
-    );
+    NotifeeReactUtils.startHeadlessTask(
+        FOREGROUND_NOTIFICATION_TASK_KEY, eventMap, 0, foregroundServiceEvent::setCompletionResult);
   }
 }

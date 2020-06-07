@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-present Invertase Limited
+ */
+
 package io.invertase.notifee;
 
 import android.app.ActivityManager;
@@ -30,22 +34,22 @@ import app.notifee.core.EventSubscriber;
 
 class NotifeeReactUtils {
   private static final SparseArray<GenericCallback> headlessTasks = new SparseArray<>();
-  private static final HeadlessJsTaskEventListener headlessTasksListener = new HeadlessJsTaskEventListener() {
-    @Override
-    public void onHeadlessJsTaskStart(int taskId) {
-    }
+  private static final HeadlessJsTaskEventListener headlessTasksListener =
+      new HeadlessJsTaskEventListener() {
+        @Override
+        public void onHeadlessJsTaskStart(int taskId) {}
 
-    @Override
-    public void onHeadlessJsTaskFinish(int taskId) {
-      synchronized (headlessTasks) {
-        GenericCallback callback = headlessTasks.get(taskId);
-        if (callback != null) {
-          headlessTasks.remove(taskId);
-          callback.call();
+        @Override
+        public void onHeadlessJsTaskFinish(int taskId) {
+          synchronized (headlessTasks) {
+            GenericCallback callback = headlessTasks.get(taskId);
+            if (callback != null) {
+              headlessTasks.remove(taskId);
+              callback.call();
+            }
+          }
         }
-      }
-    }
-  };
+      };
 
   static void promiseResolver(Promise promise, Exception e, Bundle bundle) {
     if (e != null) {
@@ -80,29 +84,27 @@ class NotifeeReactUtils {
     }
   }
 
-  private static @Nullable
-  ReactContext getReactContext() {
-    ReactNativeHost reactNativeHost = ((ReactApplication) EventSubscriber.getContext())
-      .getReactNativeHost();
+  private static @Nullable ReactContext getReactContext() {
+    ReactNativeHost reactNativeHost =
+        ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
     ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
     return reactInstanceManager.getCurrentReactContext();
   }
 
   private static void initializeReactContext(GenericCallback callback) {
-    ReactNativeHost reactNativeHost = (
-      (ReactApplication) EventSubscriber.getContext()
-    ).getReactNativeHost();
+    ReactNativeHost reactNativeHost =
+        ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
 
     ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
 
-    reactInstanceManager
-      .addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-        @Override
-        public void onReactContextInitialized(final ReactContext reactContext) {
-          reactInstanceManager.removeReactInstanceEventListener(this);
-          new Handler(Looper.getMainLooper()).postDelayed(callback::call, 100);
-        }
-      });
+    reactInstanceManager.addReactInstanceEventListener(
+        new ReactInstanceManager.ReactInstanceEventListener() {
+          @Override
+          public void onReactContextInitialized(final ReactContext reactContext) {
+            reactInstanceManager.removeReactInstanceEventListener(this);
+            new Handler(Looper.getMainLooper()).postDelayed(callback::call, 100);
+          }
+        });
 
     if (!reactInstanceManager.hasStartedCreatingInitialContext()) {
       reactInstanceManager.createReactContextInBackground();
@@ -118,32 +120,35 @@ class NotifeeReactUtils {
   }
 
   static void startHeadlessTask(
-    String taskName, WritableMap taskData, long taskTimeout,
-    @Nullable GenericCallback taskCompletionCallback
-  ) {
-    GenericCallback callback = () -> {
-      HeadlessJsTaskContext taskContext = HeadlessJsTaskContext.getInstance(getReactContext());
-      HeadlessJsTaskConfig taskConfig = new HeadlessJsTaskConfig(taskName, taskData, taskTimeout,
-        true
-      );
+      String taskName,
+      WritableMap taskData,
+      long taskTimeout,
+      @Nullable GenericCallback taskCompletionCallback) {
+    GenericCallback callback =
+        () -> {
+          HeadlessJsTaskContext taskContext = HeadlessJsTaskContext.getInstance(getReactContext());
+          HeadlessJsTaskConfig taskConfig =
+              new HeadlessJsTaskConfig(taskName, taskData, taskTimeout, true);
 
-      synchronized (headlessTasks) {
-        if (headlessTasks.size() == 0) {
-          taskContext.addTaskEventListener(headlessTasksListener);
-        }
-      }
-
-      headlessTasks.put(taskContext.startTask(taskConfig), () -> {
-        synchronized (headlessTasks) {
-          if (headlessTasks.size() == 0) {
-            taskContext.removeTaskEventListener(headlessTasksListener);
+          synchronized (headlessTasks) {
+            if (headlessTasks.size() == 0) {
+              taskContext.addTaskEventListener(headlessTasksListener);
+            }
           }
-        }
-        if (taskCompletionCallback != null) {
-          taskCompletionCallback.call();
-        }
-      });
-    };
+
+          headlessTasks.put(
+              taskContext.startTask(taskConfig),
+              () -> {
+                synchronized (headlessTasks) {
+                  if (headlessTasks.size() == 0) {
+                    taskContext.removeTaskEventListener(headlessTasksListener);
+                  }
+                }
+                if (taskCompletionCallback != null) {
+                  taskCompletionCallback.call();
+                }
+              });
+        };
 
     if (getReactContext() == null) {
       initializeReactContext(callback);
@@ -160,8 +165,9 @@ class NotifeeReactUtils {
         return;
       }
 
-      reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-        .emit(eventName, eventMap);
+      reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+          .emit(eventName, eventMap);
 
     } catch (Exception e) {
       Log.e("SEND_EVENT", "", e);
@@ -171,18 +177,18 @@ class NotifeeReactUtils {
   static boolean isAppInForeground() {
     Context context = EventSubscriber.getContext();
 
-    ActivityManager activityManager = (ActivityManager) context
-      .getSystemService(Context.ACTIVITY_SERVICE);
+    ActivityManager activityManager =
+        (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
     if (activityManager == null) return false;
 
-    List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
-      .getRunningAppProcesses();
+    List<ActivityManager.RunningAppProcessInfo> appProcesses =
+        activityManager.getRunningAppProcesses();
     if (appProcesses == null) return false;
 
     final String packageName = context.getPackageName();
     for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-      if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
-        appProcess.processName.equals(packageName)) {
+      if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+          && appProcess.processName.equals(packageName)) {
         ReactContext reactContext;
 
         try {
