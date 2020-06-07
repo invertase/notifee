@@ -22,7 +22,6 @@ import androidx.work.WorkManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -142,34 +141,8 @@ class LicenseManager {
     return mInstance;
   }
 
-  /**
-   * Returns a value from BuildConfig. If missing, returns null.
-   *
-   * @param fieldName
-   * @return
-   */
-  private static String getBuildConfigValue(String fieldName) {
-    try {
-      Class<?> clazz =
-          Class.forName(ContextHolder.getApplicationContext().getPackageName() + ".BuildConfig");
-      Field field = clazz.getField(fieldName);
-      return field.get(null).toString();
-    } catch (Exception e) {
-      Logger.d(TAG, " value for field " + fieldName + " cannot be found");
-    }
-    return null;
-  }
-
-  /**
-   * Returns Android license key either from BuildConfig or JSONConfig
-   */
+  /** Returns Android license key either from String resources. */
   private static String getLicenseKey() {
-    String androidLicenseKey = getBuildConfigValue("NOTIFEE_API_KEY");
-
-    if (androidLicenseKey != null) {
-      return androidLicenseKey;
-    }
-
     Resources resources = ContextHolder.getApplicationContext().getResources();
     String packageName = ContextHolder.getApplicationContext().getPackageName();
     int identifier = resources.getIdentifier("notifee_config_license", "string", packageName);
@@ -182,9 +155,7 @@ class LicenseManager {
     return null;
   }
 
-  /**
-   * Local/offline license validation via JWT.
-   */
+  /** Local/offline license validation via JWT. */
   static void doLocalWork(CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
     Logger.d(TAG, "Local verification started.");
     // mark local verification as pending while we try verify the license
@@ -275,12 +246,7 @@ class LicenseManager {
     completer.set(ListenableWorker.Result.success());
   }
 
-  /**
-   * Remote/online license validation, calls the Notifee API verification endpoint.
-   *
-   * @param workData
-   * @param completer
-   */
+  /** Remote/online license validation, calls the Notifee API verification endpoint. */
   static void doRemoteWork(
       Data workData, final CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
     Logger.d(TAG, "Remote verification started.");
@@ -410,10 +376,6 @@ class LicenseManager {
   /**
    * Create a periodic work request that runs every few days to validate the license with the remote
    * notifee api. Work request will only run when internet connectivity is detected.
-   *
-   * @param daysInterval
-   * @param isPrimaryKey
-   * @param existingPeriodicWorkPolicy
    */
   private static void scheduleRemoteWork(
       long daysInterval,
@@ -446,12 +408,7 @@ class LicenseManager {
             workRequestBuilder.build());
   }
 
-  /**
-   * Builds a remote validation request JWT payload.
-   *
-   * @param jwtLicenseKey
-   * @return
-   */
+  /** Builds a remote validation request JWT payload. */
   private static String buildVerifyLicenseRequestToken(String jwtLicenseKey) {
     JwtBuilder jwtBuilder = Jwts.builder();
     long nowMillis = System.currentTimeMillis();
@@ -494,11 +451,7 @@ class LicenseManager {
         .getPackageInfo(ContextHolder.getApplicationContext().getPackageName(), 0);
   }
 
-  /**
-   * Returns a boolean of whether the current license is valid.
-   *
-   * @return
-   */
+  /** Returns a boolean of whether the current license is valid. */
   static boolean isLicenseInvalid() {
     boolean isDebug =
         (0
@@ -564,19 +517,19 @@ class LicenseManager {
     return jwt;
   }
 
-  private class LicensePlatform {
+  private static class LicensePlatform {
     static final int ANDROID = 0;
     static final int IOS = 1;
   }
 
-  private class LocalVerificationStatus {
+  private static class LocalVerificationStatus {
     static final int OK = 0;
     static final int PENDING = 1;
     static final int NO_LICENSE = 2;
     static final int INVALID_LICENSE = 3;
   }
 
-  private class RemoteVerificationStatus {
+  private static class RemoteVerificationStatus {
     static final int OK = 0;
     static final int PENDING = 1;
     static final int BAD_REQUEST_TOKEN = 2;
