@@ -143,10 +143,6 @@ class NotifeeJsonTask extends DefaultTask {
     getProject().logger.log(LogLevel.WARN, "WARNING:NOTIFEE: ${message}")
   }
 
-  private void logInfo(String message) {
-    getProject().logger.log(LogLevel.INFO, "NOTIFEE: ${message}")
-  }
-
   private static String generateResourcesXmlString(
     Map<String, String> values
   ) {
