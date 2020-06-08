@@ -1,7 +1,7 @@
 ---
 title: Events
 description: Handling notification and device events.
-next: /react-native/docs/debugging
+next: /react-native/docs/triggers
 previous: /react-native/docs/displaying-a-notification
 ---
 

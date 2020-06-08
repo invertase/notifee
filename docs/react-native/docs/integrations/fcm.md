@@ -2,7 +2,7 @@
 title: Firebase Cloud Messaging (FCM)
 description: Integrate Firebase Cloud Messaging and display notifications with Notifee.
 next: /react-native/docs/integrations/onesignal
-previous: /react-native/docs/scheduling
+previous: /react-native/docs/triggers
 ---
 
 [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) (FCM) is a messaging solution
@@ -141,7 +141,7 @@ function onMessageReceived(message) {
 Integrating Notifee with an FCM payload comes down to personal preference. You could send an entire Notification object
 with the message, or use it to construct your own message.
 
-Data payloads via the messaging API only accept a string, key/value pairs where the value is always a `string` type. Please bear in mind, 
+Data payloads via the messaging API only accept a string, key/value pairs where the value is always a `string` type. Please bear in mind,
 each property in the `data` object sent via FCM must be a string as noted below.
 
 ### Server creation
