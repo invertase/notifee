@@ -1,4 +1,4 @@
-import { AndroidStyle, Notification } from '@notifee/react-native';
+import { AndroidStyle, Notification, AndroidLaunchActivityFlag } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification }[] = [
   {
@@ -138,6 +138,26 @@ export const notifications: { key: string; notification: Notification }[] = [
       body: 'Expand for a cat',
       android: {
         channelId: 'foo',
+        style: {
+          type: AndroidStyle.BIGPICTURE,
+          picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+        },
+      },
+    },
+  },
+  {
+    key: 'Android Launch Activity Flags',
+    notification: {
+      title: 'Testing SINGLE_TOP launch.',
+      body: 'Expand for a cat!',
+      android: {
+        channelId: 'foo',
+        pressAction: {
+          id: 'default',
+          launchActivity: 'default',
+          launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
+        },
+        lights: ['#ffffff', 25, 50],
         style: {
           type: AndroidStyle.BIGPICTURE,
           picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',

@@ -28,11 +28,10 @@ public class NotificationAndroidModel {
     return new NotificationAndroidModel(bundle);
   }
 
-  public @Nullable
-  ArrayList<NotificationAndroidActionModel> getActions() {
+  public @Nullable ArrayList<NotificationAndroidActionModel> getActions() {
     if (mNotificationAndroidBundle.containsKey("actions")) {
-      ArrayList<Bundle> actionBundles = Objects
-        .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
+      ArrayList<Bundle> actionBundles =
+          Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("actions"));
       ArrayList<NotificationAndroidActionModel> actions = new ArrayList<>(actionBundles.size());
 
       for (Bundle actionBundle : actionBundles) {
@@ -68,8 +67,7 @@ public class NotificationAndroidModel {
    *
    * @return Integer
    */
-  public @Nullable
-  Integer getBadgeIconType() {
+  public @Nullable Integer getBadgeIconType() {
     if (mNotificationAndroidBundle.containsKey("badgeIconType")) {
       return (int) mNotificationAndroidBundle.getDouble("badgeIconType");
     }
@@ -82,8 +80,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @NonNull
-  String getChannelId() {
+  public @NonNull String getChannelId() {
     if (mNotificationAndroidBundle.containsKey("channelId")) {
       return Objects.requireNonNull(mNotificationAndroidBundle.getString("channelId"));
     }
@@ -96,8 +93,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @Nullable
-  String getCategory() {
+  public @Nullable String getCategory() {
     return mNotificationAndroidBundle.getString("category");
   }
 
@@ -106,8 +102,7 @@ public class NotificationAndroidModel {
    *
    * @return Integer
    */
-  public @Nullable
-  Integer getColor() {
+  public @Nullable Integer getColor() {
     if (mNotificationAndroidBundle.containsKey("color")) {
       return Color.parseColor(mNotificationAndroidBundle.getString("color"));
     }
@@ -167,8 +162,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @Nullable
-  String getGroup() {
+  public @Nullable String getGroup() {
     return mNotificationAndroidBundle.getString("groupId");
   }
 
@@ -199,13 +193,12 @@ public class NotificationAndroidModel {
    *
    * @return CharSequence[]
    */
-  public @Nullable
-  CharSequence[] getInputHistory() {
+  public @Nullable CharSequence[] getInputHistory() {
     if (mNotificationAndroidBundle.containsKey("inputHistory")) {
-      ArrayList<String> inputHistoryArray = mNotificationAndroidBundle
-        .getStringArrayList("inputHistory");
+      ArrayList<String> inputHistoryArray =
+          mNotificationAndroidBundle.getStringArrayList("inputHistory");
       return Objects.requireNonNull(inputHistoryArray)
-        .toArray(new CharSequence[inputHistoryArray.size()]);
+          .toArray(new CharSequence[inputHistoryArray.size()]);
     }
 
     return null;
@@ -220,9 +213,7 @@ public class NotificationAndroidModel {
     return mNotificationAndroidBundle.containsKey("largeIcon");
   }
 
-  /**
-   * Returns the large icon string
-   */
+  /** Returns the large icon string */
   public String getLargeIcon() {
     if (hasLargeIcon()) {
       return Objects.requireNonNull(mNotificationAndroidBundle.getString("largeIcon"));
@@ -236,17 +227,16 @@ public class NotificationAndroidModel {
    *
    * @return ArrayList<Integer>
    */
-  public @Nullable
-  ArrayList<Integer> getLights() {
+  public @Nullable ArrayList<Integer> getLights() {
     if (mNotificationAndroidBundle.containsKey("lights")) {
-      ArrayList lightList = Objects
-        .requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
+      ArrayList<?> lightList =
+          Objects.requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
       String rawColor = (String) lightList.get(0);
 
       ArrayList<Integer> lights = new ArrayList<>(3);
       lights.add(Color.parseColor(rawColor));
-      lights.add((int) lightList.get(1));
-      lights.add((int) lightList.get(2));
+      lights.add((Integer) lightList.get(1));
+      lights.add((Integer) lightList.get(2));
 
       return lights;
     }
@@ -299,14 +289,13 @@ public class NotificationAndroidModel {
    *
    * @return Bundle or null
    */
-  public @Nullable
-  Bundle getPressAction() {
+  public @Nullable Bundle getPressAction() {
     return mNotificationAndroidBundle.getBundle("pressAction");
   }
 
   /**
-   * JS uses the same API as importance for priority so we dont confuse users.
-   * This maps importance to a priority flag.
+   * JS uses the same API as importance for priority so we dont confuse users. This maps importance
+   * to a priority flag.
    *
    * @return int
    */
@@ -334,14 +323,15 @@ public class NotificationAndroidModel {
    *
    * @return AndroidProgress
    */
-  public @Nullable
-  AndroidProgress getProgress() {
+  public @Nullable AndroidProgress getProgress() {
     if (mNotificationAndroidBundle.containsKey("progress")) {
-      Bundle progressBundle = Objects
-        .requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
+      Bundle progressBundle =
+          Objects.requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
-      return new AndroidProgress((int) progressBundle.getDouble("max"),
-        (int) progressBundle.getDouble("current"), progressBundle.getBoolean("indeterminate", false)
+      return new AndroidProgress(
+        (int) progressBundle.getDouble("max"),
+        (int) progressBundle.getDouble("current"),
+        progressBundle.getBoolean("indeterminate", false)
       );
     }
 
@@ -353,8 +343,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @Nullable
-  String getShortcutId() {
+  public @Nullable String getShortcutId() {
     return mNotificationAndroidBundle.getString("shortcutId");
   }
 
@@ -368,10 +357,10 @@ public class NotificationAndroidModel {
   }
 
   /**
-   * Gets the small icon resource id from its string name, or null if the icon is missing from the device.
+   * Gets the small icon resource id from its string name, or null if the icon is missing from the
+   * device.
    */
-  public @Nullable
-  Integer getSmallIcon() {
+  public @Nullable Integer getSmallIcon() {
     if (!mNotificationAndroidBundle.containsKey("smallIcon")) {
       return null;
     }
@@ -380,9 +369,9 @@ public class NotificationAndroidModel {
     int smallIconId = ResourceUtils.getImageResourceId(rawIcon);
 
     if (smallIconId == 0) {
-      Logger.d("NotificationAndroidModel",
-        String.format("Notification small icon '%s' could not be found", rawIcon)
-      );
+      Logger.d(
+          "NotificationAndroidModel",
+          String.format("Notification small icon '%s' could not be found", rawIcon));
       return null;
     }
 
@@ -394,8 +383,7 @@ public class NotificationAndroidModel {
    *
    * @return ArrayList<Integer>
    */
-  public @Nullable
-  Integer getSmallIconLevel() {
+  public @Nullable Integer getSmallIconLevel() {
     if (!mNotificationAndroidBundle.containsKey("smallIconLevel")) {
       return null;
     }
@@ -408,8 +396,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @Nullable
-  String getSortKey() {
+  public @Nullable String getSortKey() {
     return mNotificationAndroidBundle.getString("sortKey");
   }
 
@@ -427,15 +414,12 @@ public class NotificationAndroidModel {
    *
    * @return Task<NotificationCompat.Style>
    */
-  public @Nullable
-  NotificationAndroidStyleModel getStyle() {
+  public @Nullable NotificationAndroidStyleModel getStyle() {
     if (!hasStyle()) {
       return null;
     }
 
-    return NotificationAndroidStyleModel.fromBundle(
-      mNotificationAndroidBundle.getBundle("style")
-    );
+    return NotificationAndroidStyleModel.fromBundle(mNotificationAndroidBundle.getBundle("style"));
   }
 
   /**
@@ -443,8 +427,7 @@ public class NotificationAndroidModel {
    *
    * @return String
    */
-  public @Nullable
-  String getTicker() {
+  public @Nullable String getTicker() {
     return mNotificationAndroidBundle.getString("ticker");
   }
 
@@ -453,8 +436,7 @@ public class NotificationAndroidModel {
    *
    * @return long
    */
-  public @Nullable
-  Long getTimeoutAfter() {
+  public @Nullable Long getTimeoutAfter() {
     if (mNotificationAndroidBundle.containsKey("timeoutAfter")) {
       return (long) mNotificationAndroidBundle.getDouble("timeoutAfter");
     }
@@ -471,8 +453,7 @@ public class NotificationAndroidModel {
     return mNotificationAndroidBundle.getBoolean("showChronometer", false);
   }
 
-  public @Nullable
-  String getSound() {
+  public @Nullable String getSound() {
     if (!mNotificationAndroidBundle.containsKey("sound")) {
       return null;
     }
@@ -490,8 +471,9 @@ public class NotificationAndroidModel {
       return new long[0];
     }
 
-    ArrayList vibrationPattern = Objects
-      .requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern"));
+    ArrayList<?> vibrationPattern =
+        Objects.requireNonNull(
+            mNotificationAndroidBundle.getParcelableArrayList("vibrationPattern"));
 
     long[] vibrateArray = new long[vibrationPattern.size()];
 
@@ -529,7 +511,7 @@ public class NotificationAndroidModel {
     return -1;
   }
 
-  public class AndroidProgress {
+  public static class AndroidProgress {
     int max;
     int current;
     boolean indeterminate;

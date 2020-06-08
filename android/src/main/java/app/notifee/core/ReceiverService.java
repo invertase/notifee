@@ -10,11 +10,11 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
 
-import app.notifee.core.model.NotificationAndroidPressActionModel;
-import app.notifee.core.model.NotificationModel;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.model.NotificationAndroidPressActionModel;
+import app.notifee.core.model.NotificationModel;
 
 import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
@@ -22,7 +22,8 @@ import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
 import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 
 public class ReceiverService extends Service {
-  public static final String REMOTE_INPUT_RECEIVER_KEY = "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
+  public static final String REMOTE_INPUT_RECEIVER_KEY =
+      "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
 
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
@@ -31,14 +32,12 @@ public class ReceiverService extends Service {
   /**
    * Creates a PendingIntent, which when sent triggers this class.
    *
-   * @param action       An Action - matches up with the JS EventType Enum.
-   * @param extraKeys    Array of strings
+   * @param action An Action - matches up with the JS EventType Enum.
+   * @param extraKeys Array of strings
    * @param extraBundles One or more bundles
-   * @return
    */
   public static PendingIntent createIntent(
-    String action, String[] extraKeys, Bundle... extraBundles
-  ) {
+      String action, String[] extraKeys, Bundle... extraBundles) {
     Context context = ContextHolder.getApplicationContext();
     Intent intent = new Intent(context, ReceiverService.class);
     intent.setAction(action);
@@ -87,11 +86,7 @@ public class ReceiverService extends Service {
     return START_NOT_STICKY;
   }
 
-  /**
-   * Handle users delete/dismiss intents
-   *
-   * @param intent
-   */
+  /** Handle users delete/dismiss intents */
   private void onDeleteIntent(Intent intent) {
     Bundle notification = intent.getBundleExtra("notification");
 
@@ -108,11 +103,7 @@ public class ReceiverService extends Service {
     EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationModel));
   }
 
-  /**
-   * Handle user notification press
-   *
-   * @param intent
-   */
+  /** Handle user notification press */
   private void onPressIntent(Intent intent) {
     Bundle notification = intent.getBundleExtra("notification");
 
@@ -124,7 +115,6 @@ public class ReceiverService extends Service {
       logLicenseWarningForEvent("notification press");
       return;
     }
-
 
     NotificationModel notificationModel = NotificationModel.fromBundle(notification);
 
@@ -148,17 +138,17 @@ public class ReceiverService extends Service {
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationModel, extras);
-      launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
+      InitialNotificationEvent initialNotificationEvent =
+          new InitialNotificationEvent(notificationModel, extras);
+      launchPendingIntentActivity(
+          initialNotificationEvent,
+          launchActivity,
+          mainComponent,
+          pressActionBundle.getLaunchActivityFlags());
     }
   }
 
-
-  /**
-   * Handle action intents
-   *
-   * @param intent
-   */
+  /** Handle action intents */
   private void onActionPressIntent(Intent intent) {
     Bundle notification = intent.getBundleExtra("notification");
     Bundle pressAction = intent.getBundleExtra("pressAction");
@@ -173,7 +163,8 @@ public class ReceiverService extends Service {
     }
 
     NotificationModel notificationModel = NotificationModel.fromBundle(notification);
-    NotificationAndroidPressActionModel pressActionBundle = NotificationAndroidPressActionModel.fromBundle(pressAction);
+    NotificationAndroidPressActionModel pressActionBundle =
+        NotificationAndroidPressActionModel.fromBundle(pressAction);
 
     Bundle extras = new Bundle();
     extras.putBundle("pressAction", pressActionBundle.toBundle());
@@ -192,31 +183,39 @@ public class ReceiverService extends Service {
     String mainComponent = pressActionBundle.getMainComponent();
 
     if (launchActivity != null || mainComponent != null) {
-      InitialNotificationEvent initialNotificationEvent = new InitialNotificationEvent(notificationModel, extras);
-      launchPendingIntentActivity(initialNotificationEvent, launchActivity, mainComponent);
+      InitialNotificationEvent initialNotificationEvent =
+          new InitialNotificationEvent(notificationModel, extras);
+      launchPendingIntentActivity(
+          initialNotificationEvent,
+          launchActivity,
+          mainComponent,
+          pressActionBundle.getLaunchActivityFlags());
     }
   }
 
-  /**
-   * @param initialNotificationEvent
-   * @param launchActivity
-   * @param mainComponent
-   */
-  private void launchPendingIntentActivity(InitialNotificationEvent initialNotificationEvent, @Nullable String launchActivity, @Nullable String mainComponent) {
-    Class launchActivityClass = getLaunchActivity(launchActivity);
+  private void launchPendingIntentActivity(
+      InitialNotificationEvent initialNotificationEvent,
+      @Nullable String launchActivity,
+      @Nullable String mainComponent,
+      int launchActivityFlags) {
+    Class<?> launchActivityClass = getLaunchActivity(launchActivity);
 
     Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
+
+    if (launchActivityFlags != -1) {
+      launchIntent.addFlags(launchActivityFlags);
+    }
 
     if (mainComponent != null) {
       launchIntent.putExtra("mainComponent", mainComponent);
     }
 
-    PendingIntent pendingContentIntent = PendingIntent.getActivity(
-      getApplicationContext(),
-      initialNotificationEvent.getNotificationModel().getHashCode(),
-      launchIntent,
-      PendingIntent.FLAG_UPDATE_CURRENT
-    );
+    PendingIntent pendingContentIntent =
+        PendingIntent.getActivity(
+            getApplicationContext(),
+            initialNotificationEvent.getNotificationModel().getHashCode(),
+            launchIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT);
 
     try {
       pendingContentIntent.send();
@@ -228,18 +227,14 @@ public class ReceiverService extends Service {
       }
     } catch (Exception e) {
       Logger.e(
-        "ReceiverService",
-        "Failed to send PendingIntent from launchPendingIntentActivity for notification " + initialNotificationEvent.getNotificationModel().getId(),
-        e
-      );
+          "ReceiverService",
+          "Failed to send PendingIntent from launchPendingIntentActivity for notification "
+              + initialNotificationEvent.getNotificationModel().getId(),
+          e);
     }
   }
 
-  /**
-   * @param launchActivity
-   * @return
-   */
-  private Class getLaunchActivity(@Nullable String launchActivity) {
+  private Class<?> getLaunchActivity(@Nullable String launchActivity) {
     String activity;
 
     if (launchActivity != null && !launchActivity.equals("default")) {
@@ -249,32 +244,23 @@ public class ReceiverService extends Service {
     }
 
     if (activity == null) {
-      Logger.e(
-        "ReceiverService",
-        "Launch Activity for notification could not be found."
-      );
+      Logger.e("ReceiverService", "Launch Activity for notification could not be found.");
       return null;
     }
 
-    Class launchActivityClass = getClassForName(activity);
+    Class<?> launchActivityClass = getClassForName(activity);
 
     if (launchActivityClass == null) {
       Logger.e(
-        "ReceiverService",
-        String.format("Launch Activity for notification does not exist ('%s').", launchActivity)
-      );
+          "ReceiverService",
+          String.format("Launch Activity for notification does not exist ('%s').", launchActivity));
       return null;
     }
 
     return launchActivityClass;
   }
 
-  /**
-   * @param className
-   * @return
-   */
-  private @Nullable
-  Class getClassForName(String className) {
+  private @Nullable Class<?> getClassForName(String className) {
     try {
       return Class.forName(className);
     } catch (ClassNotFoundException e) {
@@ -282,13 +268,10 @@ public class ReceiverService extends Service {
     }
   }
 
-  /**
-   * @return
-   */
-  private @Nullable
-  String getMainActivityClassName() {
+  private @Nullable String getMainActivityClassName() {
     String packageName = getApplicationContext().getPackageName();
-    Intent launchIntent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
+    Intent launchIntent =
+        getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
 
     if (launchIntent == null || launchIntent.getComponent() == null) {
       return null;
