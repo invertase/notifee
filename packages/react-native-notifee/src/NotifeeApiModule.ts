@@ -29,7 +29,7 @@ let onNotificationEventHeadlessTaskRegistered = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 if (isAndroid) {
-  AppRegistry.registerHeadlessTask('app.notifee.notification.event', () => {
+  AppRegistry.registerHeadlessTask('app.notifee.foreground.task', () => {
     if (!registeredForegroundServiceTask) {
       console.warn(
         '[notifee] no registered foreground service has been set for displaying a foreground notification.',
