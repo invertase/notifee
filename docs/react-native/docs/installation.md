@@ -31,9 +31,3 @@ npx react-native run-ios
 # For Android
 npx react-native run-android
 ```
-
-## Manual linking
-
-If you're using an older version of React Native without autolinking support, or wish to integrate
-into an existing project, you can follow the manual installation steps for [iOS](/react-native/docs/installation/ios)
-and [Android](/react-native/docs/installation/android).
