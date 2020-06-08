@@ -1220,3 +1220,119 @@ export enum AndroidImportance {
    */
   NONE = 0,
 }
+
+/**
+ * An enum representing the various flags that can be passed along to `launchActivityFlags` on `NotificationPressAction`.
+ *
+ * These flags are added to the Android [Intent](https://developer.android.com/reference/android/content/Intent.html) that launches your activity.
+ *
+ * These are only required if you need to customise the behaviour of your activities, in most cases you might not need these.
+ *
+ * @platform android
+ */
+export enum AndroidLaunchActivityFlag {
+  /**
+   * See [FLAG_ACTIVITY_NO_HISTORY](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NO_HISTORY) on the official Android documentation for more information.
+   */
+  NO_HISTORY = 0,
+
+  /**
+   * See [FLAG_ACTIVITY_SINGLE_TOP](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_SINGLE_TOP) on the official Android documentation for more information.
+   */
+  SINGLE_TOP = 1,
+
+  /**
+   * See [FLAG_ACTIVITY_NEW_TASK](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK) on the official Android documentation for more information.
+   */
+  NEW_TASK = 2,
+
+  /**
+   * See [FLAG_ACTIVITY_MULTIPLE_TASK](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_MULTIPLE_TASK) on the official Android documentation for more information.
+   */
+  MULTIPLE_TASK = 3,
+
+  /**
+   * See [FLAG_ACTIVITY_CLEAR_TOP](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP) on the official Android documentation for more information.
+   */
+  CLEAR_TOP = 4,
+
+  /**
+   * See [FLAG_ACTIVITY_FORWARD_RESULT](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_FORWARD_RESULT) on the official Android documentation for more information.
+   */
+  FORWARD_RESULT = 5,
+
+  /**
+   * See [FLAG_ACTIVITY_PREVIOUS_IS_TOP](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_PREVIOUS_IS_TOP) on the official Android documentation for more information.
+   */
+  PREVIOUS_IS_TOP = 6,
+
+  /**
+   * See [FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS) on the official Android documentation for more information.
+   */
+  EXCLUDE_FROM_RECENTS = 7,
+
+  /**
+   * See [FLAG_ACTIVITY_BROUGHT_TO_FRONT](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_BROUGHT_TO_FRONT) on the official Android documentation for more information.
+   */
+  BROUGHT_TO_FRONT = 8,
+
+  /**
+   * See [FLAG_ACTIVITY_RESET_TASK_IF_NEEDED](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_RESET_TASK_IF_NEEDED) on the official Android documentation for more information.
+   */
+  RESET_TASK_IF_NEEDED = 9,
+
+  /**
+   * See [FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) on the official Android documentation for more information.
+   */
+  LAUNCHED_FROM_HISTORY = 10,
+
+  /**
+   * See [FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET) on the official Android documentation for more information.
+   */
+  CLEAR_WHEN_TASK_RESET = 11,
+
+  /**
+   * See [FLAG_ACTIVITY_NEW_DOCUMENT](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_DOCUMENT) on the official Android documentation for more information.
+   */
+  NEW_DOCUMENT = 12,
+
+  /**
+   * See [FLAG_ACTIVITY_NO_USER_ACTION](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NO_USER_ACTION) on the official Android documentation for more information.
+   */
+  NO_USER_ACTION = 13,
+
+  /**
+   * See [FLAG_ACTIVITY_REORDER_TO_FRONT](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_REORDER_TO_FRONT) on the official Android documentation for more information.
+   */
+  REORDER_TO_FRONT = 14,
+
+  /**
+   * See [FLAG_ACTIVITY_NO_ANIMATION](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NO_ANIMATION) on the official Android documentation for more information.
+   */
+  NO_ANIMATION = 15,
+
+  /**
+   * See [FLAG_ACTIVITY_CLEAR_TASK](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK) on the official Android documentation for more information.
+   */
+  CLEAR_TASK = 16,
+
+  /**
+   * See [FLAG_ACTIVITY_TASK_ON_HOME](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_TASK_ON_HOME) on the official Android documentation for more information.
+   */
+  TASK_ON_HOME = 17,
+
+  /**
+   * See [FLAG_ACTIVITY_RETAIN_IN_RECENTS](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_RETAIN_IN_RECENTS) on the official Android documentation for more information.
+   */
+  RETAIN_IN_RECENTS = 18,
+
+  /**
+   * See [FLAG_ACTIVITY_LAUNCH_ADJACENT](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_LAUNCH_ADJACENT) on the official Android documentation for more information.
+   */
+  LAUNCH_ADJACENT = 19,
+
+  /**
+   * See [FLAG_ACTIVITY_MATCH_EXTERNAL](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_MATCH_EXTERNAL) on the official Android documentation for more information.
+   */
+  MATCH_EXTERNAL = 20,
+}

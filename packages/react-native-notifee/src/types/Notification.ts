@@ -7,6 +7,7 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
   NotificationAndroid,
+  AndroidLaunchActivityFlag,
 } from './NotificationAndroid';
 
 /**
@@ -157,6 +158,15 @@ export interface NotificationPressAction {
    * @platform android
    */
   launchActivity?: string;
+
+  /**
+   * Custom flags that are added to the Android [Intent](https://developer.android.com/reference/android/content/Intent.html) that launches your Activity.
+   *
+   * These are only required if you need to customise the behaviour of how your activities are launched; by default these are not required.
+   *
+   * @platform android
+   */
+  launchActivityFlags?: AndroidLaunchActivityFlag[];
 
   /**
    * A custom registered React component to launch on press action.
