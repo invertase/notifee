@@ -354,6 +354,9 @@ export interface IOSNotificationCategory {
   actions?: IOSNotificationCategoryAction[];
 }
 
+/**
+ * TODO docs
+ */
 export interface IOSNotificationCategoryAction {
   id: string;
   title: string;
@@ -374,6 +377,9 @@ export interface IOSNotificationCategoryAction {
   authenticationRequired?: boolean; // false
 }
 
+/**
+ * TODO docs
+ */
 export interface IOSInput {
   /**
    * Overrides the default button text "Send", next to the input box.
@@ -386,6 +392,9 @@ export interface IOSInput {
   placeholderText?: string;
 }
 
+/**
+ * TODO docs
+ */
 export interface IOSNotificationAttachment {
   identifier: string;
   url: string;
@@ -393,6 +402,9 @@ export interface IOSNotificationAttachment {
   options?: IOSAttachmentOptions;
 }
 
+/**
+ * TODO docs
+ */
 export interface IOSAttachmentOptions {
   typeHint: string;
   thumbnailHidden?: boolean;

@@ -337,8 +337,6 @@ export interface Module {
   /**
    * Set the notification categories to be used on this Apple device.
    *
-   *   TODO better description
-   *
    * @platform ios
    *
    * @param categories
@@ -350,8 +348,6 @@ export interface Module {
    *
    * Returns an empty array on Android.
    *
-   *   TODO better description
-   *
    *@platform ios
    */
   getNotificationCategories(): Promise<IOSNotificationCategory[]>;
@@ -361,8 +357,6 @@ export interface Module {
    *
    * On Android, all of the properties on the `IOSNotificationSettings` interface response return
    * as `AUTHORIZED`.
-   *
-   *   TODO better description
    *
    * @platform ios
    */
