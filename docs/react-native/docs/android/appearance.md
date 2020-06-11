@@ -208,12 +208,12 @@ On devices with [channel](/react-native/docs/android/channels) support, the impo
 without channel support, the importance can be set directly on the notification:
 
 ```js
-import notifee, { Importance } from '@notifee/react-native';
+import notifee, { AndroidImportance } from '@notifee/react-native';
 
 const channelId = await notifee.createChannel({
   id: 'important',
   name: 'Important Notifications',
-  importance: Importance.HIGH,
+  importance: AndroidImportance.HIGH,
 });
 
 await notifee.displayNotification({
@@ -221,7 +221,7 @@ await notifee.displayNotification({
   body: 'You are overdue payment on one or more of your accounts!',
   android: {
     channelId,
-    importance: Importance.HIGH,
+    importance: AndroidImportance.HIGH,
   },
 });
 ```

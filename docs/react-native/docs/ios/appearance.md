@@ -8,7 +8,7 @@ previous: /react-native/docs/ios/introduction
 # Importance
 
 The importance of a notification controls how your notification is presented (in a "heads-up" format) to users whilst your
-application is the foreground. Importance has no effect on background notifications, for customising notification behaviour
+application is the foreground. `IOSForegroundPresentationOptions` has no effect on background notifications, for customising notification behaviour
 whilst your app is backgrounded use the [Permissions API](/react-native/docs/ios/permissions).
 
 You should always choose an appropriate importance level for the type of notification. Showing an irrelevant or meta
@@ -18,13 +18,13 @@ for your entire application.
 Notifications can be assigned an importance level by setting the `importance` property on each notification you create:
 
 ```js
-import notifee, { Importance } from '@notifee/react-native';
+import notifee, { IOSForegroundPresentationOptions } from '@notifee/react-native';
 
 await notifee.displayNotification({
   title: 'Your account requires attention',
   body: 'You are overdue payment on one or more of your accounts!',
   ios: {
-    importance: Importance.HIGH,
+    importance: IOSForegroundPresentationOptions.HIGH,
   },
 });
 ```
