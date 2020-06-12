@@ -1,6 +1,6 @@
 {
 	"id": 0,
-	"name": "@notifee/react-native - v0.6.2",
+	"name": "@notifee/react-native - v0.7.1",
 	"kind": 0,
 	"flags": {},
 	"children": [
@@ -5447,6 +5447,9 @@
 			"flags": {
 				"isExported": true
 			},
+			"comment": {
+				"shortText": "TODO docs"
+			},
 			"children": [
 				{
 					"id": 113,
@@ -5460,7 +5463,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 399,
+							"line": 411,
 							"character": 23
 						}
 					],
@@ -5490,7 +5493,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 398,
+							"line": 410,
 							"character": 17
 						}
 					],
@@ -5523,7 +5526,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 400,
+							"line": 412,
 							"character": 15
 						}
 					],
@@ -5543,7 +5546,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 397,
+							"line": 409,
 							"character": 10
 						}
 					],
@@ -5568,7 +5571,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 396,
+					"line": 408,
 					"character": 37
 				}
 			]
@@ -5724,6 +5727,9 @@
 			"flags": {
 				"isExported": true
 			},
+			"comment": {
+				"shortText": "TODO docs"
+			},
 			"children": [
 				{
 					"id": 104,
@@ -5740,7 +5746,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 381,
+							"line": 387,
 							"character": 12
 						}
 					],
@@ -5773,7 +5779,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 386,
+							"line": 392,
 							"character": 17
 						}
 					],
@@ -5805,7 +5811,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 377,
+					"line": 383,
 					"character": 25
 				}
 			]
@@ -5817,6 +5823,9 @@
 			"kindString": "Interface",
 			"flags": {
 				"isExported": true
+			},
+			"comment": {
+				"shortText": "TODO docs"
 			},
 			"children": [
 				{
@@ -5830,7 +5839,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 390,
+							"line": 399,
 							"character": 12
 						}
 					],
@@ -5851,7 +5860,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 393,
+							"line": 402,
 							"character": 9
 						}
 					],
@@ -5872,7 +5881,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 391,
+							"line": 400,
 							"character": 5
 						}
 					],
@@ -5896,7 +5905,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 389,
+					"line": 398,
 					"character": 42
 				}
 			]
@@ -6213,6 +6222,9 @@
 			"flags": {
 				"isExported": true
 			},
+			"comment": {
+				"shortText": "TODO docs"
+			},
 			"children": [
 				{
 					"id": 102,
@@ -6229,7 +6241,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 374,
+							"line": 377,
 							"character": 24
 						}
 					],
@@ -6266,7 +6278,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 364,
+							"line": 367,
 							"character": 13
 						}
 					],
@@ -6303,7 +6315,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 369,
+							"line": 372,
 							"character": 12
 						}
 					],
@@ -6336,7 +6348,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 358,
+							"line": 361,
 							"character": 4
 						}
 					],
@@ -6357,7 +6369,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 360,
+							"line": 363,
 							"character": 7
 						}
 					],
@@ -6387,7 +6399,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 359,
+							"line": 362,
 							"character": 7
 						}
 					],
@@ -6414,7 +6426,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 357,
+					"line": 360,
 					"character": 46
 				}
 			]
@@ -7149,7 +7161,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 481,
+							"line": 475,
 							"character": 9
 						}
 					],
@@ -7174,7 +7186,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 486,
+							"line": 480,
 							"character": 5
 						}
 					],
@@ -7198,7 +7210,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 477,
+					"line": 471,
 					"character": 27
 				}
 			]
@@ -7231,7 +7243,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 435,
+							"line": 429,
 							"character": 9
 						}
 					],
@@ -7253,7 +7265,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 428,
+					"line": 422,
 					"character": 34
 				}
 			]
@@ -7286,7 +7298,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 458,
+							"line": 452,
 							"character": 9
 						}
 					],
@@ -7308,7 +7320,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 451,
+					"line": 445,
 					"character": 30
 				}
 			]
@@ -7734,7 +7746,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 412,
+							"line": 406,
 							"character": 21
 						}
 					]
@@ -7973,7 +7985,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 378,
+							"line": 372,
 							"character": 15
 						}
 					]
@@ -8284,7 +8296,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Gets the currently set notification categories on this Apple device.",
-								"text": "Returns an empty array on Android.\n\n  TODO better description\n",
+								"text": "Returns an empty array on Android.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -8311,7 +8323,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 357,
+							"line": 353,
 							"character": 27
 						}
 					]
@@ -8333,7 +8345,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Get the current notification settings for this application on the current device.",
-								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n\n  TODO better description\n",
+								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -8357,7 +8369,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 369,
+							"line": 363,
 							"character": 25
 						}
 					]
@@ -8429,7 +8441,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 402,
+							"line": 396,
 							"character": 21
 						}
 					]
@@ -8893,7 +8905,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 390,
+							"line": 384,
 							"character": 15
 						}
 					]
@@ -8915,7 +8927,6 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Set the notification categories to be used on this Apple device.",
-								"text": "  TODO better description\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -8958,7 +8969,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 346,
+							"line": 344,
 							"character": 27
 						}
 					]
@@ -9040,7 +9051,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 502,
+							"line": 496,
 							"character": 13
 						}
 					],
@@ -9062,7 +9073,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 498,
+					"line": 492,
 					"character": 30
 				}
 			],
@@ -9097,7 +9108,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 502,
+							"line": 496,
 							"character": 13
 						}
 					],
@@ -9588,7 +9599,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 412,
+							"line": 406,
 							"character": 21
 						}
 					],
@@ -9867,7 +9878,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 378,
+							"line": 372,
 							"character": 15
 						}
 					],
@@ -10233,7 +10244,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Gets the currently set notification categories on this Apple device.",
-								"text": "Returns an empty array on Android.\n\n  TODO better description\n",
+								"text": "Returns an empty array on Android.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -10265,7 +10276,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 357,
+							"line": 353,
 							"character": 27
 						}
 					],
@@ -10292,7 +10303,7 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Get the current notification settings for this application on the current device.",
-								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n\n  TODO better description\n",
+								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -10321,7 +10332,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 369,
+							"line": 363,
 							"character": 25
 						}
 					],
@@ -10403,7 +10414,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 402,
+							"line": 396,
 							"character": 21
 						}
 					],
@@ -10927,7 +10938,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 390,
+							"line": 384,
 							"character": 15
 						}
 					],
@@ -10954,7 +10965,6 @@
 							"flags": {},
 							"comment": {
 								"shortText": "Set the notification categories to be used on this Apple device.",
-								"text": "  TODO better description\n",
 								"tags": [
 									{
 										"tag": "platform",
@@ -11002,7 +11012,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 346,
+							"line": 344,
 							"character": 27
 						}
 					],
@@ -11057,7 +11067,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 506,
+					"line": 500,
 					"character": 34
 				}
 			],
