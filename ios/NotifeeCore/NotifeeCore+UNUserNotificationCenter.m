@@ -62,15 +62,15 @@
     BOOL sound = [foregroundPresentationOptions[@"sound"] boolValue];
       
     if(badge) {
-      presentationOptions += UNNotificationPresentationOptionBadge;
+      presentationOptions |= UNNotificationPresentationOptionBadge;
     }
     
     if(sound) {
-      presentationOptions += UNNotificationPresentationOptionSound;
+      presentationOptions |= UNNotificationPresentationOptionSound;
     }
     
     if(alert) {
-      presentationOptions += UNNotificationPresentationOptionAlert;
+      presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
     completionHandler(presentationOptions);
