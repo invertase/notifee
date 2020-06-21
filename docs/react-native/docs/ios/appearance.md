@@ -70,3 +70,43 @@ documentation.
 
 > This functionality is only available on iOS >= 12.
 
+# Attachments
+
+Using the `attachments` property on a notification,
+you can attach a media file which can be viewed when the user expands
+the notification.
+When the notification is collapsed, a thumbnail will be shown.
+It's possible to attach audio, image, or video files.
+
+Only one media file is shown on the notification, so if you provide many, the first attachment that can be successfully resolved will be displayed.
+
+To add attachments, we provide the `attachments` array to the `ios` object:
+
+```js
+import notifee from '@notifee/react-native';
+
+notifee.displayNotification({
+  title: 'Image uploaded',
+  body: 'Your image has been successfully uploaded',
+  ios: {
+    attachments: [
+      {
+        // iOS resource
+        url: 'local-image.png',
+        // optional
+        thumbnailClippingRect: {
+          x: 0.1,
+          y: 0.1,
+          width: 0.1,
+          height: 0.1,
+        },
+      },
+      {
+        // local file path
+        url: '/Path/on/device/to/local/file.mp4',
+        thumbnailTime: 3, // optional
+      },
+    ],
+  },
+});
+```
