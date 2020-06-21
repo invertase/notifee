@@ -143,6 +143,53 @@ export const notifications: { key: string; notification: Notification }[] = [
           picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
         },
       },
+      ios: {
+        attachments: [
+          {
+            id: 'image',
+            url: 'media/cat.png',
+            thumbnailHidden: true,
+            thumbnailClippingRect: {
+              x: 0.1,
+              y: 0.1,
+              width: 0.1,
+              height: 0.1,
+            },
+          },
+        ],
+      },
+    },
+  },
+  {
+    key: 'iOS Video',
+    notification: {
+      title: 'iOS Attachments: Video',
+      body: 'Expand to see a video',
+      ios: {
+        attachments: [
+          {
+            id: 'video',
+            url: 'media/movie.mp4',
+            thumbnailTime: 1,
+          },
+        ],
+      },
+    },
+  },
+  {
+    key: 'iOS GIF',
+    notification: {
+      title: 'iOS Attachments: GIF',
+      body: 'Expand to see a gif',
+      ios: {
+        attachments: [
+          {
+            id: 'gif',
+            url: 'media/back.gif',
+            thumbnailTime: 6,
+          },
+        ],
+      },
     },
   },
   {

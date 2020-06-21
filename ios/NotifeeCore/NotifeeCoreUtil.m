@@ -107,6 +107,99 @@
   return notificationActions;
 }
 
+/**
+* Builds the notification attachments
+* If no attachments are resolved, an empty array will be returned
+*
+* @param attachment NSDictionary
+* @return NSArray<UNNotificationAttachment *> *
+*/
++ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:(NSArray<NSDictionary *> *)attachmentDictionaries {
+  NSMutableArray<UNNotificationAttachment *> *attachments = [[NSMutableArray alloc] init];
+
+  for (NSDictionary *attachmentDict in attachmentDictionaries) {
+    NSDictionary *options = [NSMutableDictionary dictionary];
+    NSURL *attachmentURL = nil;
+    UNNotificationAttachment *attachment = [self attachmentFromDictionary:attachmentDict];
+      if (attachment) {
+          [attachments addObject:attachment];
+     }
+  }
+  return attachments;
+}
+
+/**
+* Returns an UNNotificationAttachment from a file path or local resource
+*
+* @param attachment NSDictionary
+* @return UNNotificationAttachment or null if the attachment fails to resolve
+*/
++ (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict
+{
+  NSString *id = attachmentDict[@"id"] ?: @""; // DEFAULT empty string
+  NSString *urlString = attachmentDict[@"url"];
+  NSURL *url;
+
+  if ([urlString hasPrefix:@"http://"] || [urlString hasPrefix:@"https://"]) {
+    // TODO: Add support for remote urls
+    return nil;
+  } else if ([urlString hasPrefix:@"/"]) {
+    // handle absolute file path
+    url = [NSURL URLWithString:urlString];
+  } else {
+    // try to resolve local resource
+    url = [[NSBundle mainBundle] URLForResource:attachmentDict[@"url"] withExtension:nil];
+  }
+
+  if (url) {
+    NSError *error = nil;
+    UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:id URL:url options:[self attachmentOptionsFromDictionary:attachmentDict] error:&error];
+    if (error) {
+      NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an attachment %@: %@", attachmentDict, error);
+      return nil;
+    }
+
+    return attachment;
+  }
+   
+  NSLog(@"NotifeeCore: Unable to resolve url for attachment: %@", attachmentDict);
+  return nil;
+}
+
+/**
+* Returns a NSDictionary representation of options related to the attached file
+*
+* @param optionsDict NSDictionary
+*/
++ (NSDictionary *)attachmentOptionsFromDictionary:(NSDictionary *)optionsDict
+{
+  NSMutableDictionary *options = [NSMutableDictionary new];
+  if (optionsDict[@"typeHint"] != nil) {
+    options[UNNotificationAttachmentOptionsTypeHintKey] = optionsDict[@"typeHint"];
+  }
+
+  if (optionsDict[@"thumbnailHidden"] != nil) {
+    options[UNNotificationAttachmentOptionsThumbnailHiddenKey] = optionsDict[@"thumbnailHidden"];
+  }
+
+  if (optionsDict[@"thumbnailClippingRect"] != nil) {
+    NSDictionary *area = optionsDict[@"thumbnailClipArea"];
+    NSNumber *x = area[@"x"];
+    NSNumber *y = area[@"y"];
+    NSNumber *width =  area[@"width"];
+    NSNumber *height = area[@"height"];
+    CGRect areaRect = CGRectMake([x doubleValue], [y doubleValue], [width doubleValue], [height doubleValue]);
+    options[UNNotificationAttachmentOptionsThumbnailClippingRectKey] = (__bridge id _Nullable)(CGRectCreateDictionaryRepresentation(areaRect));
+  }
+
+  if (optionsDict[@"thumbnailTime"] != nil) {
+    options[UNNotificationAttachmentOptionsThumbnailTimeKey] = optionsDict[@"thumbnailTime"];
+  }
+
+  return options;
+}
+
+
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers {
   NSMutableArray<NSNumber *> *intentIdentifiers = [[NSMutableArray alloc] init];
 
