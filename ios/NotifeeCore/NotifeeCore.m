@@ -82,8 +82,7 @@
   userInfo[kNotifeeUserInfoNotification] = [notification mutableCopy];
   content.userInfo = userInfo;
 
-  // attachments
-  // TODO attachments handling in a later release
+
 
   // badgeCount - nil is an acceptable value so no need to check key existence
   content.badge = iosDict[@"badgeCount"];
@@ -172,16 +171,21 @@
       content.targetContentIdentifier = iosDict[@"targetContentId"];
     }
   }
-
+    
+  // attachments
+  if (iosDict[@"attachments"] != nil) {
+    content.attachments = [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
+  }
+  
   UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"] content:content trigger:nil];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   [center addNotificationRequest:request withCompletionHandler:^(NSError *error) {
     if (error == nil) {
       [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-          @"type": @3, // DELIVERED = 3
-          @"detail": @{
-              @"notification": notification,
-          }
+        @"type": @3, // DELIVERED = 3
+        @"detail": @{
+          @"notification": notification,
+        }
       }];
     }
     block(error);

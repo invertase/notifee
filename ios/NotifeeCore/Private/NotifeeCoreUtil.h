@@ -22,6 +22,8 @@ static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
 
 + (NSMutableArray<UNNotificationAction *> *)notificationActionsFromDictionaryArray:(NSArray<NSDictionary *> *)actionDictionaries;
 
++ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:(NSArray<NSDictionary *> *)attachmentDictionaries;
+
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers;
 
 + (NSMutableArray<NSString *> *)intentIdentifiersFromNumberArray:(NSArray<NSNumber *> *)identifiers;
