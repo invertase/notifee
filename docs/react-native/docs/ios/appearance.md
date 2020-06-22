@@ -44,7 +44,7 @@ documentation.
 
 > This functionality is only available on iOS >= 12.
 
-# Attachments
+## Attachments
 
 Using the `attachments` property on a notification,
 you can attach a media file which can be viewed when the user expands
@@ -52,7 +52,7 @@ the notification.
 When the notification is collapsed, a thumbnail will be shown.
 It's possible to attach audio, image, or video files.
 
-Only one media file is shown on the notification, so if you provide many, the first attachment that can be successfully resolved will be displayed.
+Only a single media file can be shown on the notification, so if you provide many, the first attachment that can be successfully resolved will be displayed.
 
 To add attachments, we provide the `attachments` array to the `ios` object:
 

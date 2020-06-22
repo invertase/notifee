@@ -8,6 +8,7 @@
 
 #import "Private/NotifeeCoreUtil.h"
 
+#include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
 
 @implementation NotifeeCoreUtil
@@ -111,15 +112,12 @@
 * Builds the notification attachments
 * If no attachments are resolved, an empty array will be returned
 *
-* @param attachment NSDictionary
 * @return NSArray<UNNotificationAttachment *> *
 */
 + (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:(NSArray<NSDictionary *> *)attachmentDictionaries {
   NSMutableArray<UNNotificationAttachment *> *attachments = [[NSMutableArray alloc] init];
 
   for (NSDictionary *attachmentDict in attachmentDictionaries) {
-    NSDictionary *options = [NSMutableDictionary dictionary];
-    NSURL *attachmentURL = nil;
     UNNotificationAttachment *attachment = [self attachmentFromDictionary:attachmentDict];
       if (attachment) {
           [attachments addObject:attachment];
@@ -131,7 +129,6 @@
 /**
 * Returns an UNNotificationAttachment from a file path or local resource
 *
-* @param attachment NSDictionary
 * @return UNNotificationAttachment or null if the attachment fails to resolve
 */
 + (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict
@@ -161,7 +158,7 @@
 
     return attachment;
   }
-   
+
   NSLog(@"NotifeeCore: Unable to resolve url for attachment: %@", attachmentDict);
   return nil;
 }
@@ -183,7 +180,7 @@
   }
 
   if (optionsDict[@"thumbnailClippingRect"] != nil) {
-    NSDictionary *area = optionsDict[@"thumbnailClipArea"];
+    NSDictionary *area = optionsDict[@"thumbnailClippingRect"];
     NSNumber *x = area[@"x"];
     NSNumber *y = area[@"y"];
     NSNumber *width =  area[@"width"];
