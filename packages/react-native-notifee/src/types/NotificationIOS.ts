@@ -11,7 +11,7 @@ export interface NotificationIOS {
    * Attachments allow audio, image, or video content to be displayed with the notification, enriching the user's experience.
    *
    * View the [Attachments](/react-native/docs/ios/appearances#attachments) documentation for more information
-   * and usage examples.s
+   * and usage examples.
    */
   attachments?: IOSNotificationAttachment[];
 
@@ -424,7 +424,10 @@ export interface IOSNotificationAttachment {
   url: string;
 
   /**
-   * An optional hint about an attachment’s file type.
+   * An optional hint about an attachment’s file type, as as Uniform Type Identifier (UTI).
+   *
+   * A list of UTI values can be found [here](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html) e.g. for JPEG you'd use `public.jpeg` as the `typeHint` value.
+   *
    * If you do not include this key, the attachment’s filename extension is used to determine its type.
    */
   typeHint?: string;

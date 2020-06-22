@@ -2,10 +2,22 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { objectHasProperty, isBoolean, isObject, isString, isUndefined, isNumber } from '../utils';
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+
 import {
-  IOSNotificationAttachment,
+  generateId,
+  isBoolean,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+  objectHasProperty,
+} from '../utils';
+import {
   IOSAttachmentThumbnailClippingRect,
+  IOSNotificationAttachment,
 } from '../types/NotificationIOS';
 
 export default function validateIOSAttachment(
@@ -20,19 +32,27 @@ export default function validateIOSAttachment(
     (isString(attachment.url) && !attachment.url.length)
   ) {
     throw new Error(
-      "'attachment.url: expected a number or object created using the 'require()' method or a valid string URL.",
+      "'attachment.url' expected a React Native ImageResource value or a valid string URL.",
     );
   }
 
   const out: IOSNotificationAttachment = {
     url: attachment.url,
+    thumbnailHidden: false,
   };
+
+  if (isNumber(attachment.url) || isObject(attachment.url)) {
+    const image = resolveAssetSource(attachment.url);
+    out.url = image.uri;
+  }
 
   if (objectHasProperty(attachment, 'id') && !isUndefined(attachment.id)) {
     if (!isString(attachment.id)) {
       throw new Error("'attachment.id' expected a string value.");
     }
     out.id = attachment.id;
+  } else {
+    out.id = generateId();
   }
 
   if (objectHasProperty(attachment, 'typeHint') && !isUndefined(attachment.typeHint)) {
@@ -60,9 +80,9 @@ export default function validateIOSAttachment(
   ) {
     if (!isBoolean(attachment.thumbnailHidden)) {
       throw new Error("'attachment.thumbnailHidden' must be a boolean value if specified.");
-    } else {
-      out.thumbnailHidden = attachment.thumbnailHidden;
     }
+
+    out.thumbnailHidden = attachment.thumbnailHidden;
   }
 
   if (objectHasProperty(attachment, 'thumbnailTime') && !isUndefined(attachment.thumbnailTime)) {
@@ -107,12 +127,10 @@ export function validateThumbnailClippingRect(
   }
 
   // Defaults
-  const out: IOSAttachmentThumbnailClippingRect = {
+  return {
     x: thumbnailClippingRect.x,
     y: thumbnailClippingRect.y,
     height: thumbnailClippingRect.height,
     width: thumbnailClippingRect.width,
   };
-
-  return out;
 }
