@@ -1,0 +1,25 @@
+{
+  "name": "notifee-docs",
+  "version": "1.0.0",
+  "description": "📚 Documentation source for Notifee.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notifee/documentation.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/notifee/documentation/issues"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
+  "homepage": "https://github.com/notifee/documentation#readme"
+}

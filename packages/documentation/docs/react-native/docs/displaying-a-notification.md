@@ -1,0 +1,122 @@
+---
+title: Displaying a Notification
+description: Display your first cross-platform notification with Notifee.
+next: /react-native/docs/events
+previous: /react-native/docs/usage
+---
+
+# Notification Title & Body
+
+Notifications in their basic form contain a title and a main body of text. Let's go ahead and display a
+basic notification inside of a React Native app when a button is pressed.
+
+Import the library and display a basic view with a [Button](https://facebook.github.io/react-native/docs/button):
+
+```js
+import React from 'react';
+import { View, Button } from 'react-native';
+import notifee from '@notifee/react-native';
+
+function Screen() {
+  return (
+    <View>
+      <Button title="Display Notification" onPress={() => {}} />
+    </View>
+  );
+}
+```
+
+Now the button is in place, create a function to handle the button press and display a notification:
+
+```js
+function Screen() {
+  async function onDisplayNotification() {
+    // Create a channel
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+
+    // Display a notification
+    await notifee.displayNotification({
+      title: 'Notification Title',
+      body: 'Main body content of the notification',
+      android: {
+        channelId,
+      },
+    });
+  }
+
+  return (
+    <View>
+      <Button title="Display Notification" onPress={() => onDisplayNotification()} />
+    </View>
+  );
+}
+```
+
+When the button is pressed, we perform two tasks: creating a channel & displaying a notification.
+
+Channels are an Android only concept used to categorize and allow users to control how notifications are handled
+on their devices. Channels are created with sensible default settings and are created or updated each time a
+call to `createChannel` is performed, so it is safe to keep calling this method.
+
+Once the channel has been created, the `displayNotification` method is called passing in a `title` and `body`. The required
+`channelId` is also passed inside of the `android` property object to assign the notification to the channel. On iOS
+platform, the call to `createChannel` resolves instantly & gracefully (iOS has no concept of a channel), then calls `displayNotification`.
+
+> To learn more about channels, view the [Android Channels](/react-native/docs/android/channels) documentation.
+
+Go ahead and press the button! A notification icon will appear on your device and will be visible when pulling down the
+notification shade.
+
+# Updating a notification
+
+When notifications are created, a random unique ID is assigned to them. These IDs can later be used to update any
+notification which is still present on the user's device. It is also possible to provide a custom notification ID by passing
+a string value to the `id` field inside of `displayNotification`:
+
+```js
+async function onDisplayNotification() {
+  const channelId = await notifee.createChannel({
+    id: 'default',
+    name: 'Default Channel',
+  });
+
+  const notificationId = await notifee.displayNotification({
+    id: '123',
+    title: 'Notification Title',
+    body: 'Main body content of the notification',
+    android: {
+      channelId,
+    },
+  });
+
+  // Sometime later...
+  await notifee.displayNotification({
+    id: '123',
+    title: 'Updated Notification Title',
+    body: 'Updated main body content of the notification',
+    android: {
+      channelId,
+    },
+  });
+}
+```
+
+When updating a notification, you must pass a brand new notification options payload to `displayNotification`, rather
+than the specific property you want to update.
+
+# Cancelling a notification
+
+There may be situations whereby you wish to cancel and remove the notification from the device, for example the notification
+is no longer relevant or has expired.
+
+To cancel a notification, the `cancelNotification` method can be called with the unique notification ID which was used
+when created:
+
+```js
+async function cancel(notificationId) {
+  await notifee.cancelNotification(notificationId);
+}
+```
