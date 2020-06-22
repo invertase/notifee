@@ -2,8 +2,21 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NotificationIOS, IOSForegroundPresentationOptions } from '../types/NotificationIOS';
-import { objectHasProperty, isBoolean, isNumber, isString, isUndefined, isObject } from '../utils';
+import {
+  NotificationIOS,
+  IOSForegroundPresentationOptions,
+  IOSNotificationAttachment,
+} from '../types/NotificationIOS';
+import {
+  objectHasProperty,
+  isBoolean,
+  isNumber,
+  isString,
+  isUndefined,
+  isObject,
+  isArray,
+} from '../utils';
+import validateIOSAttachment from './validateIOSAttachment';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
   const out: NotificationIOS & {
@@ -18,23 +31,27 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
 
   /**
    * attachments
-   *
-   * TODO attachments
    */
   if (objectHasProperty(ios, 'attachments')) {
-    //   if (!isArray(ios.attachments)) {
-    //     throw new Error("'notification.android.attachments' expected an array value.");
-    //   }
-    //
-    //   for (let i = 0; i < ios.attachments.length; i++) {
-    //     try {
-    //       validateIOSAttachment(ios.attachments[i]);
-    //     } catch (e) {
-    //       // todo error
-    //     }
-    //   }
-    //
-    //   out.groupId = android.groupId;
+    if (!isArray(ios.attachments)) {
+      throw new Error("'notification.ios.attachments' expected an array value.");
+    }
+
+    const attachments: IOSNotificationAttachment[] = [];
+
+    for (let i = 0; i < ios.attachments.length; i++) {
+      try {
+        attachments.push(validateIOSAttachment(ios.attachments[i]));
+      } catch (e) {
+        throw new Error(
+          `'notification.ios.attachments' invalid IOSNotificationAttachment. ${e.message}.`,
+        );
+      }
+    }
+
+    if (attachments.length) {
+      out.attachments = attachments;
+    }
   }
 
   /**

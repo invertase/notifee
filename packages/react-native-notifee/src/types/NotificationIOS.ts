@@ -6,7 +6,12 @@
 
 export interface NotificationIOS {
   /**
-   * Optional array of attachments
+   * Optional array of [IOSNotificationAttachment](/react-native/reference/iosnotificationattachment) interfaces.
+   *
+   * Attachments allow audio, image, or video content to be displayed with the notification, enriching the user's experience.
+   *
+   * View the [Attachments](/react-native/docs/ios/appearances#attachments) documentation for more information
+   * and usage examples.s
    */
   attachments?: IOSNotificationAttachment[];
 
@@ -393,21 +398,71 @@ export interface IOSInput {
 }
 
 /**
- * TODO docs
+ * An interface for describing an iOS Notification Attachment.
+ *
+ * View the [Attachments](/react-native/docs/ios/appearance#attachments) documentation to learn more.
+ *
+ * @platform ios
  */
 export interface IOSNotificationAttachment {
-  identifier: string;
+  /**
+   * A optional unique identifier of the attachment.
+   * If no `id` is provided, a unique id is created for you.
+   */
+  id?: string;
+
+  /**
+   * A URL to the media file to display.
+   *
+   * The value can be any of the following:
+   *
+   *  - An absolute path to a file on the device
+   *  - iOS resource
+   *
+   * For a list of supported file types, see [Supported File Types](https://developer.apple.com/documentation/usernotifications/unnotificationattachment#1682051) on the official Apple documentation for more information.
+   */
   url: string;
-  // TODO move options inline here
-  options?: IOSAttachmentOptions;
+
+  /**
+   * An optional hint about an attachment’s file type.
+   * If you do not include this key, the attachment’s filename extension is used to determine its type.
+   */
+  typeHint?: string;
+
+  /**
+   * When set to `true` the thumbnail will be hidden.
+   * Defaults to `false`.
+   */
+  thumbnailHidden?: boolean;
+
+  /**
+   * An optional clipping rectangle for a thumbnail image.
+   */
+  thumbnailClippingRect?: IOSAttachmentThumbnailClippingRect;
+
+  /**
+   * The frame number of an animation to use as the thumbnail.
+   *
+   * For a video, it is the time (in seconds) into the video from which to
+   * grab the thumbnail image.
+   *
+   * For a GIF, it is the frame number of the animation to use
+   * as a thumbnail image.
+   */
+  thumbnailTime?: number;
 }
 
 /**
- * TODO docs
+ * The interface used to specify the portion of your image that you want to be displayed as the thumbnail
+ *
+ * Values are in the range 0.0 to 1.0.
+ *
+ * For example, specifying an origin (x,y) of (0.25, 0.25) and a size (width, height) of (0.5, 0.5)
+ * defines a clipping rectangle that shows only the center portion of the image.
  */
-export interface IOSAttachmentOptions {
-  typeHint: string;
-  thumbnailHidden?: boolean;
-  thumbnailClippingRect?: object;
-  thumbnailTime: number;
+export interface IOSAttachmentThumbnailClippingRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
