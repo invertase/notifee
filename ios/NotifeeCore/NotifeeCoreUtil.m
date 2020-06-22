@@ -133,7 +133,7 @@
 */
 + (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict
 {
-  NSString *id = attachmentDict[@"id"] ?: @""; // DEFAULT empty string
+  NSString *identifier = attachmentDict[@"id"];
   NSString *urlString = attachmentDict[@"url"];
   NSURL *url;
 
@@ -142,18 +142,20 @@
     return nil;
   } else if ([urlString hasPrefix:@"/"]) {
     // handle absolute file path
-    url = [NSURL URLWithString:urlString];
+    url = [NSURL fileURLWithPath:urlString];
   } else {
     // try to resolve local resource
     url = [[NSBundle mainBundle] URLForResource:attachmentDict[@"url"] withExtension:nil];
   }
 
   if (url) {
-    NSError *error = nil;
-    UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:id URL:url options:[self attachmentOptionsFromDictionary:attachmentDict] error:&error];
-    if (error) {
+    NSError *error;
+    UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:identifier URL:url options:[self attachmentOptionsFromDictionary:attachmentDict] error:&error];
+    if (error != nil) {
       NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an attachment %@: %@", attachmentDict, error);
       return nil;
+    } else if (attachment == nil) {
+      NSLog(@"NotifeeCore: Failed resolving an attachment %@: data at URL is not a supported type.", attachmentDict);
     }
 
     return attachment;
