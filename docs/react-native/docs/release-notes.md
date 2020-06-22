@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.8.0
+
+ - **[iOS]**: Add support for iOS notification attachments. See [iOS Attachments](https://notifee.app/react-native/docs/ios/appearance#attachments).
+
 ## 0.7.2
 
  - **[iOS]**: Fixed an issue where notifications would sometimes not appear in the foreground.
