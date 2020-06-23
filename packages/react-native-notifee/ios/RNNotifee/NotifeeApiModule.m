@@ -17,7 +17,8 @@
 
 #import "NotifeeApiModule.h"
 
-static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notification.event";
+static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notification-event";
+static NSString *kReactNativeNotifeeNotificationBackgroundEvent = @"app.notifee.notification-event-background";
 
 @implementation NotifeeApiModule {
   bool hasListeners;
@@ -41,19 +42,13 @@ RCT_EXPORT_MODULE();
 }
 
 - (NSArray<NSString *> *)supportedEvents {
-  return @[kReactNativeNotifeeNotificationEvent];
-}
-
-- (NSDictionary *)constantsToExport {
-  return @{
-      @"NOTIFICATION_EVENT_KEY": kReactNativeNotifeeNotificationEvent,
-  };
+  return @[kReactNativeNotifeeNotificationEvent, kReactNativeNotifeeNotificationBackgroundEvent];
 }
 
 - (void)startObserving {
   hasListeners = YES;
   for (NSDictionary* eventBody in pendingCoreEvents) {
-    [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
+    [self sendNotifeeCoreEvent:eventBody];
   }
   [pendingCoreEvents removeAllObjects];
 }
@@ -70,9 +65,17 @@ RCT_EXPORT_MODULE();
 
 - (void)didReceiveNotifeeCoreEvent:(NSDictionary *_Nonnull)event {
   if (hasListeners) {
-    [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:event];
+    [self sendNotifeeCoreEvent:event];
   } else {
     [pendingCoreEvents addObject:event];
+  }
+}
+
+- (void)sendNotifeeCoreEvent:(NSDictionary *_Nonnull)eventBody {
+  if (RCTRunningInAppExtension() || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+    [self sendEventWithName:kReactNativeNotifeeNotificationBackgroundEvent body:eventBody];
+  } else {
+    [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
   }
 }
 

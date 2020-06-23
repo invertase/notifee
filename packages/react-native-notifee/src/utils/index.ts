@@ -29,3 +29,10 @@ export const isAndroid = Platform.OS === 'android';
 export function noop(): void {
   // noop-🐈
 }
+export const kReactNativeNotifeeForegroundServiceHeadlessTask =
+  'app.notifee.foreground-service-headless-task';
+
+export const kReactNativeNotifeeNotificationEvent = 'app.notifee.notification-event';
+
+export const kReactNativeNotifeeNotificationBackgroundEvent =
+  'app.notifee.notification-event-background';

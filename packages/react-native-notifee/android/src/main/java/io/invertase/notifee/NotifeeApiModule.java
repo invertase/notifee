@@ -165,10 +165,6 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
-    constants.put("NOTIFICATION_EVENT_KEY", NotifeeEventSubscriber.NOTIFICATION_EVENT_KEY);
-    constants.put(
-        "FOREGROUND_NOTIFICATION_TASK_KEY",
-        NotifeeEventSubscriber.FOREGROUND_NOTIFICATION_TASK_KEY);
     return constants;
   }
 }

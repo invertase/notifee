@@ -22,8 +22,8 @@ import static io.invertase.notifee.NotifeeReactUtils.isAppInForeground;
 
 @Keep
 public class NotifeeEventSubscriber implements EventListener {
-  static final String NOTIFICATION_EVENT_KEY = "app.notifee.notification.event";
-  static final String FOREGROUND_NOTIFICATION_TASK_KEY = "app.notifee.foreground.task";
+  static final String NOTIFICATION_EVENT_KEY = "app.notifee.notification-event";
+  static final String FOREGROUND_NOTIFICATION_TASK_KEY = "app.notifee.foreground-service-headless-task";
 
   private static final String KEY_TYPE = "type";
   private static final String KEY_DETAIL = "detail";

@@ -13,7 +13,18 @@ import {
 import { InitialNotification, Notification, Event } from './types/Notification';
 import NotifeeNativeModule from './NotifeeNativeModule';
 
-import { isAndroid, isArray, isFunction, isIOS, isNumber, isString, isUndefined } from './utils';
+import {
+  isAndroid,
+  isArray,
+  isFunction,
+  isIOS,
+  isNumber,
+  isString,
+  isUndefined,
+  kReactNativeNotifeeForegroundServiceHeadlessTask,
+  kReactNativeNotifeeNotificationBackgroundEvent,
+  kReactNativeNotifeeNotificationEvent,
+} from './utils';
 import validateNotification from './validators/validateNotification';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
@@ -25,11 +36,11 @@ import {
 import validateIOSCategory from './validators/validateIOSCategory';
 import validateIOSPermissions from './validators/validateIOSPermissions';
 
-let onNotificationEventHeadlessTaskRegistered = false;
+let onNotificationBackgroundEventListenerRegistered = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 if (isAndroid) {
-  AppRegistry.registerHeadlessTask('app.notifee.foreground.task', () => {
+  AppRegistry.registerHeadlessTask(kReactNativeNotifeeForegroundServiceHeadlessTask, () => {
     if (!registeredForegroundServiceTask) {
       console.warn(
         '[notifee] no registered foreground service has been set for displaying a foreground notification.',
@@ -235,13 +246,23 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.onBackgroundEvent(*) 'observer' expected a function.");
     }
 
-    if (isAndroid && !onNotificationEventHeadlessTaskRegistered) {
-      AppRegistry.registerHeadlessTask(this.native.NOTIFICATION_EVENT_KEY, () => {
+    if (isAndroid && !onNotificationBackgroundEventListenerRegistered) {
+      AppRegistry.registerHeadlessTask(kReactNativeNotifeeNotificationEvent, () => {
         return ({ type, detail }): Promise<void> => {
           return observer({ type, detail });
         };
       });
-      onNotificationEventHeadlessTaskRegistered = true;
+      onNotificationBackgroundEventListenerRegistered = true;
+    }
+
+    if (isIOS && !onNotificationBackgroundEventListenerRegistered) {
+      this.emitter.addListener(
+        kReactNativeNotifeeNotificationBackgroundEvent,
+        ({ type, detail }) => {
+          observer({ type, detail });
+        },
+      );
+      onNotificationBackgroundEventListenerRegistered = true;
     }
   }
 
@@ -251,7 +272,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     const subscriber = this.emitter.addListener(
-      this.native.NOTIFICATION_EVENT_KEY,
+      kReactNativeNotifeeNotificationEvent,
       ({ type, detail }) => {
         observer({ type, detail });
       },
