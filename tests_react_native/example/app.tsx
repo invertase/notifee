@@ -14,6 +14,7 @@ import Notifee, {
   AndroidImportance,
   Notification,
   EventType,
+  Event,
   IOSAuthorizationStatus,
 } from '@notifee/react-native';
 
@@ -190,7 +191,7 @@ function logEvent(state: string, event: any): void {
   }
 
   console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`);
-  console.warn(JSON.stringify(event));
+  // console.warn(JSON.stringify(event));
 }
 
 Notifee.onForegroundEvent(event => {
@@ -214,25 +215,48 @@ Notifee.onBackgroundEvent(async ({ type, detail }) => {
 });
 
 Notifee.registerForegroundService(notification => {
+  console.warn('Foreground service started.');
   return new Promise(resolve => {
-    Notifee.onForegroundEvent(async ({ type, detail }) => {
-      logEvent('Foreground Service', { type, detail });
+    /**
+     * Cancel the notification and resolve the service promise so the Headless task quits.
+     */
+    async function stopService(): Promise<void> {
+      console.warn('Stopping service.');
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      await Notifee.cancelNotification(notification?.id);
+      return resolve();
+    }
 
+    /**
+     * Cancel our long running task if the user presses the 'stop' action.
+     */
+    async function handleStopActionEvent({ type, detail }: Event): Promise<void> {
+      if (type != EventType.ACTION_PRESS) return;
       if (detail?.pressAction?.id === 'stop') {
-        console.warn('Notification Service Stopped for', notification.id);
-        await Notifee.cancelNotification(notification?.id || 'N/A');
-        return resolve();
+        console.warn('Stop action was pressed');
+        await stopService();
       }
-    });
-    Notifee.onBackgroundEvent(async ({ type, detail }) => {
-      logEvent('Foreground Service in Background', { type, detail });
+    }
 
-      if (detail?.pressAction?.id === 'stop') {
-        console.warn('Notification Service Stopped for', notification.id);
-        await Notifee.cancelNotification(notification?.id || 'N/A');
-        return resolve();
-      }
-    });
+    Notifee.onForegroundEvent(handleStopActionEvent);
+    Notifee.onBackgroundEvent(handleStopActionEvent);
+
+    // A fake progress updater.
+    let current = 1;
+    const interval = setInterval(async () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      notification.android.progress.current = current;
+      await Notifee.displayNotification(notification);
+      current++;
+    }, 125);
+
+    setTimeout(async () => {
+      clearInterval(interval);
+      console.warn('Background work has completed.');
+      await stopService();
+    }, 15000);
   });
 });
 

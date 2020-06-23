@@ -113,13 +113,17 @@ export const notifications: { key: string; notification: Notification }[] = [
   {
     key: 'Service',
     notification: {
-      title: 'Service',
-      body: 'Notification Service',
+      title: 'Background Task',
+      body: 'Doing some work...',
       android: {
         autoCancel: true,
         color: '#9c27b0',
         onlyAlertOnce: true,
         asForegroundService: true,
+        progress: {
+          max: 120,
+          current: 0,
+        },
         actions: [
           {
             title: 'Stop',
