@@ -61,6 +61,9 @@ export const notifications: { key: string; notification: Notification }[] = [
     notification: {
       title: 'Actions',
       body: 'Notification with actions',
+      ios: {
+        categoryId: 'actions',
+      },
       android: {
         autoCancel: true,
         color: '#9c27b0',

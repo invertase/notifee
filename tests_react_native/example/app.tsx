@@ -76,6 +76,21 @@ function Root(): any {
     const initialNotification = await Notifee.getInitialNotification();
     console.log({ initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
+    await Notifee.setNotificationCategories([
+      {
+        id: 'actions',
+        actions: [
+          {
+            id: 'like',
+            title: 'Like Post',
+          },
+          {
+            id: 'dislike',
+            title: 'Dislike Post',
+          },
+        ],
+      },
+    ]);
   }
 
   useEffect(() => {
@@ -175,6 +190,7 @@ function logEvent(state: string, event: any): void {
   }
 
   console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`);
+  console.warn(JSON.stringify(event));
 }
 
 Notifee.onForegroundEvent(event => {
@@ -189,11 +205,11 @@ Notifee.onBackgroundEvent(async ({ type, detail }) => {
   // Check if the user pressed a cancel action
   if (
     type === EventType.ACTION_PRESS &&
-    ['first_action', 'second_action'].includes(pressAction?.id)
+    ['first_action', 'second_action'].includes(pressAction?.id || 'N/A')
   ) {
     // Remove the notification
-    await Notifee.cancelNotification(notification.id);
-    console.warn('Notification Cancelled', pressAction.id);
+    await Notifee.cancelNotification(notification?.id || 'N/A');
+    console.warn('Notification Cancelled', pressAction?.id);
   }
 });
 
@@ -204,7 +220,16 @@ Notifee.registerForegroundService(notification => {
 
       if (detail?.pressAction?.id === 'stop') {
         console.warn('Notification Service Stopped for', notification.id);
-        await Notifee.cancelNotification(notification.id);
+        await Notifee.cancelNotification(notification?.id || 'N/A');
+        return resolve();
+      }
+    });
+    Notifee.onBackgroundEvent(async ({ type, detail }) => {
+      logEvent('Foreground Service in Background', { type, detail });
+
+      if (detail?.pressAction?.id === 'stop') {
+        console.warn('Notification Service Stopped for', notification.id);
+        await Notifee.cancelNotification(notification?.id || 'N/A');
         return resolve();
       }
     });
