@@ -37,6 +37,7 @@ import validateIOSCategory from './validators/validateIOSCategory';
 import validateIOSPermissions from './validators/validateIOSPermissions';
 
 let onNotificationBackgroundEventListenerRegistered = false;
+let isRunningForegroundServiceTask = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 if (isAndroid) {
@@ -47,6 +48,7 @@ if (isAndroid) {
       );
       return (): Promise<void> => Promise.resolve();
     }
+    isRunningForegroundServiceTask = true;
     return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
   });
 }
@@ -246,7 +248,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.onBackgroundEvent(*) 'observer' expected a function.");
     }
 
-    if (isAndroid && !onNotificationBackgroundEventListenerRegistered) {
+    if (
+      isAndroid &&
+      (isRunningForegroundServiceTask || !onNotificationBackgroundEventListenerRegistered)
+    ) {
       AppRegistry.registerHeadlessTask(kReactNativeNotifeeNotificationEvent, () => {
         return ({ type, detail }): Promise<void> => {
           return observer({ type, detail });
