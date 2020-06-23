@@ -21,6 +21,7 @@ static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notificati
 
 @implementation NotifeeApiModule {
   bool hasListeners;
+  NSMutableArray* pendingCoreEvents;
 }
 
 #pragma mark - Module Setup
@@ -33,6 +34,7 @@ RCT_EXPORT_MODULE();
 
 - (id)init {
   if (self = [super init]) {
+    pendingCoreEvents = [[NSMutableArray alloc] init];
     [NotifeeCore setCoreDelegate:self];
   }
   return self;
@@ -50,6 +52,10 @@ RCT_EXPORT_MODULE();
 
 - (void)startObserving {
   hasListeners = YES;
+  for (NSDictionary* eventBody in pendingCoreEvents) {
+    [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
+  }
+  [pendingCoreEvents removeAllObjects];
 }
 
 - (void)stopObserving {
@@ -66,7 +72,7 @@ RCT_EXPORT_MODULE();
   if (hasListeners) {
     [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:event];
   } else {
-    // TODO pool events until hasListeners = YES
+    [pendingCoreEvents addObject:event];
   }
 }
 
@@ -210,8 +216,7 @@ RCT_EXPORT_METHOD(decrementBadgeCount:
 
 - (void)resolve:(RCTPromiseResolveBlock)resolve orReject:(RCTPromiseRejectBlock)reject promiseWithError:(NSError *_Nullable)error orResult:(id _Nullable)result {
   if (error != nil) {
-    // TODO codes & messages
-    reject(@"todo", @"todo", error);
+    reject(@"unknown", error.localizedDescription, error);
   } else {
     resolve(result);
   }
