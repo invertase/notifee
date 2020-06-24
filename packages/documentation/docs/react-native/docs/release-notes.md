@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.9.0
+
+- **[iOS]**: Add support for iOS `onBackgroundEvent`.
+- **[iOS]**: Pool JS events until RN Bridge is ready.
+- **[Android]**: Allow multiple `onBackgroundEvent` observers when inside a foreground service task.
+
 ## 0.8.0
 
 - **[iOS]**: Add support for iOS notification attachments. See [iOS Attachments](https://notifee.app/react-native/docs/ios/appearance#attachments).
