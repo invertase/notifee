@@ -1,6 +1,6 @@
 import { AndroidStyle, Notification, AndroidLaunchActivityFlag } from '@notifee/react-native';
 
-export const notifications: { key: string; notification: Notification }[] = [
+export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {
     key: 'Empty',
     notification: {
@@ -8,9 +8,12 @@ export const notifications: { key: string; notification: Notification }[] = [
         channelId: 'default',
         sound: 'horse.mp3',
       },
+      ios: {
+        // sound: 'Beacon',
+        sound: 'media/kick.wav',
+      },
     },
   },
-
   {
     key: 'Basic',
     notification: {
@@ -32,7 +35,6 @@ export const notifications: { key: string; notification: Notification }[] = [
       },
     },
   },
-
   {
     key: 'Subtitle',
     notification: {
@@ -51,11 +53,13 @@ export const notifications: { key: string; notification: Notification }[] = [
       title: 'Color',
       body: 'Only the small icon should change color',
       android: {
-        color: '#9c27b0',
+        smallIcon: 'ic_small_icon',
+        color: '#553c9a',
         channelId: 'foo',
       },
     },
   },
+
   {
     key: 'Actions (event only)',
     notification: {
@@ -137,7 +141,6 @@ export const notifications: { key: string; notification: Notification }[] = [
       },
     },
   },
-
   {
     key: 'Big Picture Style',
     notification: {
@@ -176,7 +179,7 @@ export const notifications: { key: string; notification: Notification }[] = [
         attachments: [
           {
             id: 'video',
-            url: 'media/movie.mp4',
+            url: 'media/dog.mp4',
             thumbnailTime: 1,
           },
         ],
@@ -218,5 +221,54 @@ export const notifications: { key: string; notification: Notification }[] = [
         },
       },
     },
+  },
+  {
+    key: 'Chronometer',
+    notification: {
+      android: {
+        color: '#9c27b0',
+        channelId: 'foo',
+        showChronometer: true,
+        chronometerDirection: 'down',
+        timestamp: Date.now() + 200000,
+      },
+    },
+  },
+  {
+    key: 'Dismiss',
+    notification: [
+      {
+        id: 'personal', // important
+        title: 'Personal Chat',
+        android: {
+          channelId: 'default',
+          groupSummary: true,
+          groupId: 'Personal',
+        },
+      },
+      {
+        title: 'Dismiss',
+        body: 'Notification with dismiss',
+        ios: {
+          categoryId: 'dismiss',
+        },
+        android: {
+          autoCancel: true,
+          color: '#9c27b0',
+          onlyAlertOnce: true,
+          actions: [
+            {
+              title: 'Dismiss',
+              icon: 'https://invertase.io/icons/icon-48x48.png',
+              pressAction: {
+                id: 'dismiss',
+              },
+            },
+          ],
+          channelId: 'default',
+          groupId: 'Personal',
+        },
+      },
+    ],
   },
 ];

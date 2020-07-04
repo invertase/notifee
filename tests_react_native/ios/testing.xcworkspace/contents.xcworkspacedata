@@ -5,6 +5,9 @@
       location = "group:testing.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Pods/Target Support Files/Pods-testing-NotifeeContentExtension/Pods-testing-NotifeeContentExtension.release.xcconfig">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
