@@ -10,6 +10,8 @@ previous: /react-native/docs/ios/introduction
 Using the `attachments` property on a notification, you can attach a media file which can be viewed when the user expands
 the notification or as a thumbnail on the notification itself.
 
+<Vimeo id="ios-attachments" caption="iOS Attachments Example" />
+
 When a notification is collapsed, a thumbnail will be shown in the notification, unless `thumbnailHidden` is set to true.
 
 Only a single media file can be shown on the notification, if you provide many then the first attachment that can be successfully resolved will be displayed.

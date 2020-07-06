@@ -54,11 +54,16 @@ of device compatibility and format:
 1. Using Android Studio, open your projects `android` directory.
 1. Open the `app/main` directory in the file tree.
 1. Right click on the `main` directory & select `New -> Image Asset`.
-1. Select the "Notification Icons" icon type, and follow the wizard by creating your new icon.
+1. Select the "Notification Icons" icon type, and follow the wizard by creating your new icon.![android-small-icon-1](https://user-images.githubusercontent.com/14185925/86519506-52347300-be33-11ea-800b-45019ca83c1e.png)
 1. Once finished, Android Studio will inject multiple icon files into your projects resource (`res`) directory.
+   ![android-small-icon-2](https://user-images.githubusercontent.com/14185925/86519517-67a99d00-be33-11ea-9ecb-c0b413d5acd0.png)
 
 To set the small icon, reference the name you provided whilst creating a notification, for example if created with the name
-`ic_app_icon`:
+`ic_small_icon`:
+
+<Vimeo id="android-small-icon" caption="Android Small Icon Example" />
+
+The code for the example video:
 
 ```js
 notifee.displayNotification({
@@ -66,10 +71,15 @@ notifee.displayNotification({
   body: 'A notification using the small icon!.',
   android: {
     // Reference the name created
-    smallIcon: 'ic_app_icon',
+    smallIcon: 'ic_small_icon',
+
+    // Optional (Defaults to white)
+    color: '#9c27b0',
   },
 });
 ```
+
+The image file used in the example can be downloaded [here](https://user-images.githubusercontent.com/14185925/86519462-cde1f000-be32-11ea-8ae6-cdec95754866.png).
 
 ## Large Icons
 
