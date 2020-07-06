@@ -223,7 +223,7 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
-    key: 'Chronometer',
+    key: 'Chronometer', // See git issue #53
     notification: {
       android: {
         color: '#9c27b0',
@@ -235,10 +235,10 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
-    key: 'Dismiss',
+    key: 'Dismiss', // See git issue #62
     notification: [
       {
-        id: 'personal', // important
+        id: 'personal',
         title: 'Personal Chat',
         android: {
           channelId: 'default',
