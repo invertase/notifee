@@ -381,6 +381,11 @@ class LicenseManager {
       long daysInterval,
       boolean isPrimaryKey,
       ExistingPeriodicWorkPolicy existingPeriodicWorkPolicy) {
+    // Don't verify on older devices (JWT signing issue).
+    if (android.os.Build.VERSION.SDK_INT <= 20) {
+      return;
+    }
+
     Constraints constraints =
         new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
 
@@ -458,8 +463,9 @@ class LicenseManager {
             != (ContextHolder.getApplicationContext().getApplicationInfo().flags
                 & ApplicationInfo.FLAG_DEBUGGABLE));
 
-    // free to use in development
-    if (isDebug) {
+    // Free to use in development.
+    // Don't verify on older devices (JWT signing issue).
+    if (isDebug || android.os.Build.VERSION.SDK_INT <= 20) {
       return false;
     }
 
