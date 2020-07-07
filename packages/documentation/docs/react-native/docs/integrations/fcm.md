@@ -36,13 +36,17 @@ React Native Firebase provides two methods for subscribing to messages and both 
 - `onMessage`: Handles FCM messages when the application is alive/in the foreground.
 - `setBackgroundMessageHandler`: Handles FCM messages when the app is in a killed state.
 
+Both expect an async message handling function (or a function that returns a Promise) as an argument.
+
 For the purpose of this guide, we'll set both subscribers up to trigger
 the same function when called so we don't have to worry about the applications state:
 
 ```js
 import messaging from '@react-native-firebase/messaging';
 
-function onMessageReceived(message) {
+// Note that an async function or a function that returns a Promise 
+// is required for both subscribers.
+async function onMessageReceived(message) {
   // Do something
 }
 
