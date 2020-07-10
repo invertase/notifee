@@ -10,7 +10,8 @@ public class ForegroundServiceEvent {
   private MethodCallResult<Void> result;
   private boolean completed = false;
 
-  public ForegroundServiceEvent(NotificationModel notificationModel, MethodCallResult<Void> result) {
+  public ForegroundServiceEvent(
+      NotificationModel notificationModel, MethodCallResult<Void> result) {
     this.notification = notificationModel;
     this.result = result;
   }

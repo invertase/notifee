@@ -1,7 +1,6 @@
 package app.notifee.core.event;
 
 import android.os.Bundle;
-
 import app.notifee.core.model.NotificationModel;
 
 public class InitialNotificationEvent {

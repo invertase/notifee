@@ -1,11 +1,10 @@
 package app.notifee.core.model;
 
-import android.os.Bundle;
+import static org.junit.Assert.assertEquals;
 
+import android.os.Bundle;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ScheduleModelTest {
   private ScheduleModel mScheduleModel = null;
@@ -25,7 +24,6 @@ public class ScheduleModelTest {
     scheduleComponents.putInt("weekOfYear", 24);
     // The week number of the months.
     scheduleComponents.putInt("weekOfMonth", 2);
-
 
     schedule.putBundle("components", scheduleComponents);
     mScheduleModel = ScheduleModel.fromBundle(schedule);

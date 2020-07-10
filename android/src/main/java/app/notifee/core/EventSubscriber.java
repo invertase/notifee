@@ -1,18 +1,15 @@
 package app.notifee.core;
 
 import android.content.Context;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import app.notifee.core.event.BlockStateEvent;
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.LogEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.interfaces.EventListener;
+import java.util.HashSet;
+import java.util.Set;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 @KeepForSdk
 public class EventSubscriber {

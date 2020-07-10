@@ -3,18 +3,15 @@ package app.notifee.core.model;
 import android.app.Notification;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import java.util.ArrayList;
-import java.util.Objects;
-
 import app.notifee.core.Logger;
 import app.notifee.core.utility.ResourceUtils;
+import java.util.ArrayList;
+import java.util.Objects;
 
 @Keep
 public class NotificationAndroidModel {
@@ -333,10 +330,9 @@ public class NotificationAndroidModel {
           Objects.requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
       return new AndroidProgress(
-        (int) progressBundle.getDouble("max"),
-        (int) progressBundle.getDouble("current"),
-        progressBundle.getBoolean("indeterminate", false)
-      );
+          (int) progressBundle.getDouble("max"),
+          (int) progressBundle.getDouble("current"),
+          progressBundle.getBoolean("indeterminate", false));
     }
 
     return null;

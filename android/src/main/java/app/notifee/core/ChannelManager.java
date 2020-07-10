@@ -1,29 +1,25 @@
 package app.notifee.core;
 
+import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
+
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
-
+import app.notifee.core.model.ChannelGroupModel;
+import app.notifee.core.model.ChannelModel;
+import app.notifee.core.utility.ResourceUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import app.notifee.core.model.ChannelGroupModel;
-import app.notifee.core.model.ChannelModel;
-import app.notifee.core.utility.ResourceUtils;
-
-import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
 
 public class ChannelManager {
   private static String TAG = "ChannelManager";

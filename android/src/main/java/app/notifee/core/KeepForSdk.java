@@ -6,5 +6,4 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 @Documented
-public @interface KeepForSdk {
-}
+public @interface KeepForSdk {}

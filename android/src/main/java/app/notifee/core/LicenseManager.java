@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
@@ -18,9 +17,11 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
-
-import org.jetbrains.annotations.NotNull;
-
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.IOException;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -30,12 +31,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -43,6 +38,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 
 class LicenseManager {
   private static final String TAG = "License";

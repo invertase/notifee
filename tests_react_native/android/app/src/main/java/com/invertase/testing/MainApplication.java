@@ -1,39 +1,34 @@
 package com.invertase.testing;
 
 import android.app.Application;
-import android.content.Context;
-
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
-    new ReactNativeHost(this) {
-      @Override
-      public boolean getUseDeveloperSupport() {
-        return BuildConfig.DEBUG;
-      }
+      new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+          return BuildConfig.DEBUG;
+        }
 
-      @Override
-      protected List<ReactPackage> getPackages() {
-        @SuppressWarnings("UnnecessaryLocalVariable")
-        List<ReactPackage> packages = new PackageList(this).getPackages();
-        return packages;
-      }
+        @Override
+        protected List<ReactPackage> getPackages() {
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          return packages;
+        }
 
-      @Override
-      protected String getJSMainModuleName() {
-        return "index";
-      }
-    };
+        @Override
+        protected String getJSMainModuleName() {
+          return "index";
+        }
+      };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
@@ -45,16 +40,16 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     //    // TODO move to jet
-//    DevInternalSettings settings = (DevInternalSettings) getReactNativeHost()
-//      .getReactInstanceManager()
-//      .getDevSupportManager()
-//      .getDevSettings();
-//
-//    if (settings != null) {
-//      settings.setRemoteJSDebugEnabled(false);
-//      settings.setJSDevModeEnabled(false);
-//      settings.setHotModuleReplacementEnabled(false);
-//      settings.setBundleDeltasEnabled(false);
-//    }
+    //    DevInternalSettings settings = (DevInternalSettings) getReactNativeHost()
+    //      .getReactInstanceManager()
+    //      .getDevSupportManager()
+    //      .getDevSettings();
+    //
+    //    if (settings != null) {
+    //      settings.setRemoteJSDebugEnabled(false);
+    //      settings.setJSDevModeEnabled(false);
+    //      settings.setHotModuleReplacementEnabled(false);
+    //      settings.setBundleDeltasEnabled(false);
+    //    }
   }
 }

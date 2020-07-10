@@ -1,7 +1,6 @@
 package app.notifee.core.model;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 
 public class ScheduleModel {
@@ -30,5 +29,4 @@ public class ScheduleModel {
 
     return -1;
   }
-
 }

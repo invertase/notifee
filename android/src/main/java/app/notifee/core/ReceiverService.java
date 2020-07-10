@@ -1,25 +1,23 @@
 package app.notifee.core;
 
+import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
+import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
+import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
+import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
+
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
-
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
-
-import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
-import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
-import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
-import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 
 public class ReceiverService extends Service {
   public static final String REMOTE_INPUT_RECEIVER_KEY =

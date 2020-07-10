@@ -1,7 +1,6 @@
 package app.notifee.core.interfaces;
 
 import androidx.annotation.Nullable;
-
 import app.notifee.core.KeepForSdk;
 
 @KeepForSdk

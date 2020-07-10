@@ -6,17 +6,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
-
+import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.NotificationModel;
-import app.notifee.core.event.ForegroundServiceEvent;
 
 public class ForegroundService extends Service {
 
-  public static final String START_FOREGROUND_SERVICE_ACTION = "app.notifee.core.ForegroundService.START";
+  public static final String START_FOREGROUND_SERVICE_ACTION =
+      "app.notifee.core.ForegroundService.START";
 
   public static String mCurrentNotificationId = null;
 
@@ -53,20 +52,19 @@ public class ForegroundService extends Service {
           startForeground(hashCode, notification);
 
           // On headless task complete
-          final MethodCallResult<Void> methodCallResult = (e, aVoid) -> {
-            stopForeground(true);
-            mCurrentNotificationId = null;
-          };
+          final MethodCallResult<Void> methodCallResult =
+              (e, aVoid) -> {
+                stopForeground(true);
+                mCurrentNotificationId = null;
+              };
 
-          ForegroundServiceEvent foregroundServiceEvent = new ForegroundServiceEvent(
-            notificationModel,
-            methodCallResult
-          );
+          ForegroundServiceEvent foregroundServiceEvent =
+              new ForegroundServiceEvent(notificationModel, methodCallResult);
 
           EventBus.post(foregroundServiceEvent);
         } else if (mCurrentNotificationId.equals(notificationModel.getId())) {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-            .notify(hashCode, notification);
+              .notify(hashCode, notification);
         }
       }
     }

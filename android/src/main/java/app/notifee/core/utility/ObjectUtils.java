@@ -2,10 +2,8 @@ package app.notifee.core.utility;
 
 import android.os.Bundle;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -14,8 +12,7 @@ import java.util.Objects;
 
 public class ObjectUtils {
 
-  public static @Nullable
-  Class getClassForName(String className) {
+  public static @Nullable Class getClassForName(String className) {
     try {
       return Class.forName(className);
     } catch (ClassNotFoundException e) {
@@ -23,8 +20,7 @@ public class ObjectUtils {
     }
   }
 
-  public static @Nullable
-  Object getClassInstanceFromDefaultConstructor(@Nullable Class clazz) {
+  public static @Nullable Object getClassInstanceFromDefaultConstructor(@Nullable Class clazz) {
     Object classInstance = null;
     if (clazz == null) return null;
     try {
