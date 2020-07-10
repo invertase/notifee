@@ -18,6 +18,8 @@ plugins {
   id "io.invertase.gradle.build" version "1.3"
 }
 
+project.evaluationDependsOn(':app')
+
 project.ext {
   set('react-native', [
     versions: [
