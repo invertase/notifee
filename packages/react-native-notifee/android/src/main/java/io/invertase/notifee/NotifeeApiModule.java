@@ -5,9 +5,8 @@
 package io.invertase.notifee;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-
+import app.notifee.core.Notifee;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -15,12 +14,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import app.notifee.core.Notifee;
 
 public class NotifeeApiModule extends ReactContextBaseJavaModule {
   public NotifeeApiModule(@NonNull ReactApplicationContext reactContext) {

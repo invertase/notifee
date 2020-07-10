@@ -4,26 +4,24 @@
 
 package io.invertase.notifee;
 
+import static io.invertase.notifee.NotifeeReactUtils.isAppInForeground;
+
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
-
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableMap;
-
 import app.notifee.core.event.BlockStateEvent;
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.LogEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.interfaces.EventListener;
 import app.notifee.core.model.NotificationModel;
-
-import static io.invertase.notifee.NotifeeReactUtils.isAppInForeground;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
 
 @Keep
 public class NotifeeEventSubscriber implements EventListener {
   static final String NOTIFICATION_EVENT_KEY = "app.notifee.notification-event";
-  static final String FOREGROUND_NOTIFICATION_TASK_KEY = "app.notifee.foreground-service-headless-task";
+  static final String FOREGROUND_NOTIFICATION_TASK_KEY =
+      "app.notifee.foreground-service-headless-task";
 
   private static final String KEY_TYPE = "type";
   private static final String KEY_DETAIL = "detail";

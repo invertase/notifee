@@ -4,13 +4,11 @@
 
 package io.invertase.notifee;
 
-import com.facebook.react.modules.systeminfo.ReactNativeVersion;
-
-import java.util.Map;
-
 import app.notifee.core.InitProvider;
 import app.notifee.core.Notifee;
 import app.notifee.core.NotifeeConfig;
+import com.facebook.react.modules.systeminfo.ReactNativeVersion;
+import java.util.Map;
 
 public class NotifeeInitProvider extends InitProvider {
   @Override
