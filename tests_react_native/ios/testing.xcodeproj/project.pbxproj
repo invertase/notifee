@@ -11,7 +11,6 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		271CB185206AFCD300EBADF4 /* GoogleService-Info1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 271CB184206AFCD300EBADF4 /* GoogleService-Info1.plist */; };
 		3323F06104C7189BEC46D8B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3323FFA47718EA67C36AD776 /* Images.xcassets */; };
 		7910D559249ECDBC0038C85E /* media in Resources */ = {isa = PBXBuildFile; fileRef = 7910D558249ECDBC0038C85E /* media */; };
 		79BB07E024B0E1830099C5B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */; };
@@ -53,7 +52,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = testing/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = testing/main.m; sourceTree = "<group>"; };
 		27034D93212869A1004B697E /* testing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = testing.entitlements; path = testing/testing.entitlements; sourceTree = "<group>"; };
-		271CB184206AFCD300EBADF4 /* GoogleService-Info1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info1.plist"; sourceTree = "<group>"; };
 		27468FB523EDC35A0057D8FA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		27468FB723EDC35A0057D8FA /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		27468FBA23EDC35A0057D8FA /* NotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				7910D558249ECDBC0038C85E /* media */,
 				27034D93212869A1004B697E /* testing.entitlements */,
 				79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */,
-				271CB184206AFCD300EBADF4 /* GoogleService-Info1.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -313,7 +310,6 @@
 				7910D559249ECDBC0038C85E /* media in Resources */,
 				79BB07E024B0E1830099C5B8 /* GoogleService-Info.plist in Resources */,
 				79DEB94724B0EE7E00CE31D4 /* Images.xcassets in Resources */,
-				271CB185206AFCD300EBADF4 /* GoogleService-Info1.plist in Resources */,
 				3323F06104C7189BEC46D8B5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
