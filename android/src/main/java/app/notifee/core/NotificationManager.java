@@ -109,8 +109,6 @@ class NotificationManager {
         builder.setChronometerCountDown(androidModel.getChronometerCountDown());
       }
 
-      builder.setDefaults(androidModel.getDefaults());
-
       if (androidModel.getGroup() != null) {
         builder.setGroup(androidModel.getGroup());
       }
@@ -141,6 +139,8 @@ class NotificationManager {
           Logger.w(TAG, "Unable to retrieve sound for notification, sound was specified as: " + androidModel.getSound());
         }
       }
+
+      builder.setDefaults(androidModel.getDefaults());
 
       builder.setOngoing(androidModel.getOngoing());
       builder.setOnlyAlertOnce(androidModel.getOnlyAlertOnce());

@@ -154,6 +154,10 @@ public class NotificationAndroidModel {
       if (defaults != null) return defaults;
     }
 
+    if (mNotificationAndroidBundle.containsKey("sound")) {
+      return Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+    }
+
     return Notification.DEFAULT_ALL;
   }
 
