@@ -47,6 +47,7 @@ const channels: AndroidChannel[] = [
   {
     name: 'Default Importance',
     id: 'default',
+
     importance: AndroidImportance.DEFAULT,
   },
   {
@@ -63,10 +64,11 @@ const channels: AndroidChannel[] = [
 
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
+
+  Notifee.displayNotification(JSON.parse(message.data.notifee));
 }
 
 firebase.messaging().setBackgroundMessageHandler(onMessage);
-
 function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
@@ -74,6 +76,7 @@ function Root(): any {
     const fcmToken = await firebase.messaging().getToken();
     console.log({ fcmToken });
     firebase.messaging().onMessage(onMessage);
+
     const initialNotification = await Notifee.getInitialNotification();
     console.log({ initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
@@ -88,6 +91,17 @@ function Root(): any {
           {
             id: 'dislike',
             title: 'Dislike Post',
+          },
+        ],
+      },
+    ]);
+    await Notifee.setNotificationCategories([
+      {
+        id: 'dismiss',
+        actions: [
+          {
+            id: 'dismiss',
+            title: 'Dismiss',
           },
         ],
       },

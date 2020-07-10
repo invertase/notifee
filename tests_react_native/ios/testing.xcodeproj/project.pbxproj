@@ -11,9 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		271CB185206AFCD300EBADF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 271CB184206AFCD300EBADF4 /* GoogleService-Info.plist */; };
 		3323F06104C7189BEC46D8B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3323FFA47718EA67C36AD776 /* Images.xcassets */; };
 		7910D559249ECDBC0038C85E /* media in Resources */ = {isa = PBXBuildFile; fileRef = 7910D558249ECDBC0038C85E /* media */; };
+		79BB07E024B0E1830099C5B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */; };
+		79DEB94724B0EE7E00CE31D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79DEB94624B0EE7E00CE31D4 /* Images.xcassets */; };
 		9EE0C106906B7DE80C0DBADF /* libPods-testing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3DD45DBEA04EE478439472 /* libPods-testing.a */; };
 		E61966457CF26A53ABFFC75A /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -51,7 +52,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = testing/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = testing/main.m; sourceTree = "<group>"; };
 		27034D93212869A1004B697E /* testing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = testing.entitlements; path = testing/testing.entitlements; sourceTree = "<group>"; };
-		271CB184206AFCD300EBADF4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27468FB523EDC35A0057D8FA /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		27468FB723EDC35A0057D8FA /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		27468FBA23EDC35A0057D8FA /* NotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		652DEF5E464638B192E83F20 /* Pods-testing-NotifeeContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testing-NotifeeContentExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-testing-NotifeeContentExtension/Pods-testing-NotifeeContentExtension.release.xcconfig"; sourceTree = "<group>"; };
 		78B0E372306B6EFE53BFA0C5 /* Pods-testing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testing.release.xcconfig"; path = "Pods/Target Support Files/Pods-testing/Pods-testing.release.xcconfig"; sourceTree = "<group>"; };
 		7910D558249ECDBC0038C85E /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = testing/media; sourceTree = "<group>"; };
+		79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		79DEB94624B0EE7E00CE31D4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = testing/Images.xcassets; sourceTree = "<group>"; };
 		7F3DD45DBEA04EE478439472 /* libPods-testing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,9 +121,10 @@
 		13B07FAE1A68108700A75B9A /* testing */ = {
 			isa = PBXGroup;
 			children = (
+				79DEB94624B0EE7E00CE31D4 /* Images.xcassets */,
 				7910D558249ECDBC0038C85E /* media */,
 				27034D93212869A1004B697E /* testing.entitlements */,
-				271CB184206AFCD300EBADF4 /* GoogleService-Info.plist */,
+				79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -305,7 +308,8 @@
 			files = (
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				7910D559249ECDBC0038C85E /* media in Resources */,
-				271CB185206AFCD300EBADF4 /* GoogleService-Info.plist in Resources */,
+				79BB07E024B0E1830099C5B8 /* GoogleService-Info.plist in Resources */,
+				79DEB94724B0EE7E00CE31D4 /* Images.xcassets in Resources */,
 				3323F06104C7189BEC46D8B5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,7 +442,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = io.invertase.testing;
 				PRODUCT_NAME = Notifee;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,7 +473,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.invertase.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = io.invertase.testing;
 				PRODUCT_NAME = Notifee;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
