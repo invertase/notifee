@@ -2,25 +2,21 @@ package app.notifee.core.model;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
-
+import app.notifee.core.Logger;
+import app.notifee.core.utility.ResourceUtils;
+import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import app.notifee.core.Logger;
-import app.notifee.core.utility.ResourceUtils;
-import app.notifee.core.utility.TextUtils;
 
 @Keep
 public class NotificationAndroidStyleModel {
@@ -42,49 +38,56 @@ public class NotificationAndroidStyleModel {
    * @return
    */
   private static Task<Person> getPerson(Executor executor, Bundle personBundle) {
-    return Tasks.call(executor, () -> {
-      Person.Builder personBuilder = new Person.Builder();
+    return Tasks.call(
+        executor,
+        () -> {
+          Person.Builder personBuilder = new Person.Builder();
 
-      personBuilder.setName(personBundle.getString("name"));
+          personBuilder.setName(personBundle.getString("name"));
 
-      if (personBundle.containsKey("id")) {
-        personBuilder.setKey(personBundle.getString("id"));
-      }
+          if (personBundle.containsKey("id")) {
+            personBuilder.setKey(personBundle.getString("id"));
+          }
 
-      if (personBundle.containsKey("bot")) {
-        personBuilder.setBot(personBundle.getBoolean("bot"));
-      }
+          if (personBundle.containsKey("bot")) {
+            personBuilder.setBot(personBundle.getBoolean("bot"));
+          }
 
-      if (personBundle.containsKey("important")) {
-        personBuilder.setImportant(personBundle.getBoolean("important"));
-      }
+          if (personBundle.containsKey("important")) {
+            personBuilder.setImportant(personBundle.getBoolean("important"));
+          }
 
-      if (personBundle.containsKey("icon")) {
-        String personIcon = Objects.requireNonNull(personBundle.getString("icon"));
-        Bitmap personIconBitmap = null;
+          if (personBundle.containsKey("icon")) {
+            String personIcon = Objects.requireNonNull(personBundle.getString("icon"));
+            Bitmap personIconBitmap = null;
 
-        try {
-          personIconBitmap = Tasks.await(
-            ResourceUtils.getImageBitmapFromUrl(personIcon),
-            10, TimeUnit.SECONDS
-          );
-        } catch (TimeoutException e) {
-          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a person icon: " + personIcon, e);
-        } catch (Exception e) {
-          Logger.e(TAG, "An error occurred whilst trying to retrieve a person icon: " + personIcon, e);
-        }
+            try {
+              personIconBitmap =
+                  Tasks.await(
+                      ResourceUtils.getImageBitmapFromUrl(personIcon), 10, TimeUnit.SECONDS);
+            } catch (TimeoutException e) {
+              Logger.e(
+                  TAG,
+                  "Timeout occurred whilst trying to retrieve a person icon: " + personIcon,
+                  e);
+            } catch (Exception e) {
+              Logger.e(
+                  TAG,
+                  "An error occurred whilst trying to retrieve a person icon: " + personIcon,
+                  e);
+            }
 
-        if (personIconBitmap != null) {
-          personBuilder.setIcon(IconCompat.createWithAdaptiveBitmap(personIconBitmap));
-        }
-      }
+            if (personIconBitmap != null) {
+              personBuilder.setIcon(IconCompat.createWithAdaptiveBitmap(personIconBitmap));
+            }
+          }
 
-      if (personBundle.containsKey("uri")) {
-        personBuilder.setUri(personBundle.getString("uri"));
-      }
+          if (personBundle.containsKey("uri")) {
+            personBuilder.setUri(personBundle.getString("uri"));
+          }
 
-      return personBuilder.build();
-    });
+          return personBuilder.build();
+        });
   }
 
   public Bundle toBundle() {
@@ -120,59 +123,80 @@ public class NotificationAndroidStyleModel {
    * @return
    */
   private Task<NotificationCompat.Style> getBigPictureStyleTask(Executor executor) {
-    return Tasks.call(executor, () -> {
-      NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
+    return Tasks.call(
+        executor,
+        () -> {
+          NotificationCompat.BigPictureStyle bigPictureStyle =
+              new NotificationCompat.BigPictureStyle();
 
-      if (mNotificationAndroidStyleBundle.containsKey("picture")) {
-        String picture = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"));
-        Bitmap pictureBitmap = null;
+          if (mNotificationAndroidStyleBundle.containsKey("picture")) {
+            String picture =
+                Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("picture"));
+            Bitmap pictureBitmap = null;
 
-        try {
-          pictureBitmap = Tasks.await(
-            ResourceUtils.getImageBitmapFromUrl(picture),
-            10, TimeUnit.SECONDS
-          );
-        } catch (TimeoutException e) {
-          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a big picture style image: " + picture, e);
-        } catch (Exception e) {
-          Logger.e(TAG, "An error occurred whilst trying to retrieve a big picture style image: " + picture, e);
-        }
+            try {
+              pictureBitmap =
+                  Tasks.await(ResourceUtils.getImageBitmapFromUrl(picture), 10, TimeUnit.SECONDS);
+            } catch (TimeoutException e) {
+              Logger.e(
+                  TAG,
+                  "Timeout occurred whilst trying to retrieve a big picture style image: "
+                      + picture,
+                  e);
+            } catch (Exception e) {
+              Logger.e(
+                  TAG,
+                  "An error occurred whilst trying to retrieve a big picture style image: "
+                      + picture,
+                  e);
+            }
 
-        if (pictureBitmap != null) {
-          bigPictureStyle.bigPicture(pictureBitmap);
-        }
-      }
+            if (pictureBitmap != null) {
+              bigPictureStyle.bigPicture(pictureBitmap);
+            }
+          }
 
-      if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
-        String largeIcon = Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
-        Bitmap largeIconBitmap = null;
+          if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
+            String largeIcon =
+                Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
+            Bitmap largeIconBitmap = null;
 
-        try {
-          largeIconBitmap = Tasks.await(
-            ResourceUtils.getImageBitmapFromUrl(largeIcon),
-            10, TimeUnit.SECONDS
-          );
-        } catch (TimeoutException e) {
-          Logger.e(TAG, "Timeout occurred whilst trying to retrieve a big picture style large icon: " + largeIcon, e);
-        } catch (Exception e) {
-          Logger.e(TAG, "An error occurred whilst trying to retrieve a big picture style large icon: " + largeIcon, e);
-        }
+            try {
+              largeIconBitmap =
+                  Tasks.await(ResourceUtils.getImageBitmapFromUrl(largeIcon), 10, TimeUnit.SECONDS);
+            } catch (TimeoutException e) {
+              Logger.e(
+                  TAG,
+                  "Timeout occurred whilst trying to retrieve a big picture style large icon: "
+                      + largeIcon,
+                  e);
+            } catch (Exception e) {
+              Logger.e(
+                  TAG,
+                  "An error occurred whilst trying to retrieve a big picture style large icon: "
+                      + largeIcon,
+                  e);
+            }
 
-        if (largeIconBitmap != null) {
-          bigPictureStyle.bigLargeIcon(largeIconBitmap);
-        }
-      }
+            if (largeIconBitmap != null) {
+              bigPictureStyle.bigLargeIcon(largeIconBitmap);
+            }
+          }
 
-      if (mNotificationAndroidStyleBundle.containsKey("title")) {
-        bigPictureStyle = bigPictureStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
-      }
+          if (mNotificationAndroidStyleBundle.containsKey("title")) {
+            bigPictureStyle =
+                bigPictureStyle.setBigContentTitle(
+                    TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
+          }
 
-      if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-        bigPictureStyle = bigPictureStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
-      }
+          if (mNotificationAndroidStyleBundle.containsKey("summary")) {
+            bigPictureStyle =
+                bigPictureStyle.setSummaryText(
+                    TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
+          }
 
-      return bigPictureStyle;
-    });
+          return bigPictureStyle;
+        });
   }
 
   /**
@@ -184,15 +208,21 @@ public class NotificationAndroidStyleModel {
     NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
 
     if (mNotificationAndroidStyleBundle.containsKey("text")) {
-      bigTextStyle = bigTextStyle.bigText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("text")));
+      bigTextStyle =
+          bigTextStyle.bigText(
+              TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("text")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("title")) {
-      bigTextStyle = bigTextStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
+      bigTextStyle =
+          bigTextStyle.setBigContentTitle(
+              TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-      bigTextStyle = bigTextStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
+      bigTextStyle =
+          bigTextStyle.setSummaryText(
+              TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
     }
 
     return bigTextStyle;
@@ -207,11 +237,15 @@ public class NotificationAndroidStyleModel {
     NotificationCompat.InboxStyle inputStyle = new NotificationCompat.InboxStyle();
 
     if (mNotificationAndroidStyleBundle.containsKey("title")) {
-      inputStyle = inputStyle.setBigContentTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
+      inputStyle =
+          inputStyle.setBigContentTitle(
+              TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
     }
 
     if (mNotificationAndroidStyleBundle.containsKey("summary")) {
-      inputStyle = inputStyle.setSummaryText(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
+      inputStyle =
+          inputStyle.setSummaryText(
+              TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("summary")));
     }
 
     ArrayList<String> lines = mNotificationAndroidStyleBundle.getStringArrayList("lines");
@@ -224,44 +258,56 @@ public class NotificationAndroidStyleModel {
     return inputStyle;
   }
 
-  /**
-   * Gets a MessagingStyle for a notification
-   */
+  /** Gets a MessagingStyle for a notification */
   private Task<NotificationCompat.Style> getMessagingStyleTask(Executor executor) {
-    return Tasks.call(executor, () -> {
-      Person person = Tasks.await(
-        getPerson(executor, Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
-        , 20, TimeUnit.SECONDS
-      );
+    return Tasks.call(
+        executor,
+        () -> {
+          Person person =
+              Tasks.await(
+                  getPerson(
+                      executor,
+                      Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person"))),
+                  20,
+                  TimeUnit.SECONDS);
 
-      NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle(person);
+          NotificationCompat.MessagingStyle messagingStyle =
+              new NotificationCompat.MessagingStyle(person);
 
-      if (mNotificationAndroidStyleBundle.containsKey("title")) {
-        messagingStyle = messagingStyle.setConversationTitle(TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
-      }
+          if (mNotificationAndroidStyleBundle.containsKey("title")) {
+            messagingStyle =
+                messagingStyle.setConversationTitle(
+                    TextUtils.fromHtml(mNotificationAndroidStyleBundle.getString("title")));
+          }
 
-      if (mNotificationAndroidStyleBundle.containsKey("group")) {
-        messagingStyle = messagingStyle.setGroupConversation(mNotificationAndroidStyleBundle.getBoolean("group"));
-      }
+          if (mNotificationAndroidStyleBundle.containsKey("group")) {
+            messagingStyle =
+                messagingStyle.setGroupConversation(
+                    mNotificationAndroidStyleBundle.getBoolean("group"));
+          }
 
-      ArrayList<Bundle> messages = mNotificationAndroidStyleBundle.getParcelableArrayList("messages");
+          ArrayList<Bundle> messages =
+              mNotificationAndroidStyleBundle.getParcelableArrayList("messages");
 
-      for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
-        Bundle message = messages.get(i);
-        Person messagePerson = null;
-        long timestamp = (long) message.getDouble("timestamp");
+          for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
+            Bundle message = messages.get(i);
+            Person messagePerson = null;
+            long timestamp = (long) message.getDouble("timestamp");
 
-        if (message.containsKey("person")) {
-          messagePerson = Tasks.await(
-            getPerson(executor, Objects.requireNonNull(message.getBundle("person")))
-            , 20, TimeUnit.SECONDS
-          );
-        }
+            if (message.containsKey("person")) {
+              messagePerson =
+                  Tasks.await(
+                      getPerson(executor, Objects.requireNonNull(message.getBundle("person"))),
+                      20,
+                      TimeUnit.SECONDS);
+            }
 
-        messagingStyle = messagingStyle.addMessage(TextUtils.fromHtml(message.getString("text")), timestamp, messagePerson);
-      }
+            messagingStyle =
+                messagingStyle.addMessage(
+                    TextUtils.fromHtml(message.getString("text")), timestamp, messagePerson);
+          }
 
-      return messagingStyle;
-    });
+          return messagingStyle;
+        });
   }
 }

@@ -2,12 +2,10 @@ package app.notifee.core.model;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,13 +21,11 @@ public class ChannelModel {
     return new ChannelModel(bundle);
   }
 
-  public @NonNull
-  String getId() {
+  public @NonNull String getId() {
     return Objects.requireNonNull(mChannelBundle.getString("id"));
   }
 
-  public @NonNull
-  String getName() {
+  public @NonNull String getName() {
     return Objects.requireNonNull(mChannelBundle.getString("name"));
   }
 
@@ -41,8 +37,7 @@ public class ChannelModel {
     return mChannelBundle.getBoolean("bypassDnd", false);
   }
 
-  public @Nullable
-  String getDescription() {
+  public @Nullable String getDescription() {
     return mChannelBundle.getString("description");
   }
 
@@ -54,8 +49,7 @@ public class ChannelModel {
     return mChannelBundle.getBoolean("vibration", true);
   }
 
-  public @Nullable
-  String getGroupId() {
+  public @Nullable String getGroupId() {
     return mChannelBundle.getString("groupId");
   }
 
@@ -67,8 +61,7 @@ public class ChannelModel {
     return NotificationManagerCompat.IMPORTANCE_DEFAULT;
   }
 
-  public @Nullable
-  Integer getLightColor() {
+  public @Nullable Integer getLightColor() {
     if (mChannelBundle.containsKey("lightColor")) {
       return Color.parseColor(mChannelBundle.getString("lightColor"));
     }
@@ -89,9 +82,8 @@ public class ChannelModel {
       return new long[0];
     }
 
-    ArrayList vibrationPattern = Objects.requireNonNull(
-      mChannelBundle.getParcelableArrayList("vibrationPattern")
-    );
+    ArrayList vibrationPattern =
+        Objects.requireNonNull(mChannelBundle.getParcelableArrayList("vibrationPattern"));
 
     long[] vibrateArray = new long[vibrationPattern.size()];
 
@@ -103,8 +95,7 @@ public class ChannelModel {
     return vibrateArray;
   }
 
-  public @Nullable
-  String getSound() {
+  public @Nullable String getSound() {
     if (!mChannelBundle.containsKey("sound")) {
       return null;
     }

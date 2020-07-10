@@ -1,28 +1,25 @@
 package app.notifee.core;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import app.notifee.core.event.InitialNotificationEvent;
+import app.notifee.core.event.MainComponentEvent;
+import app.notifee.core.interfaces.MethodCallResult;
+import app.notifee.core.model.ChannelGroupModel;
+import app.notifee.core.model.ChannelModel;
+import app.notifee.core.model.NotificationModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import app.notifee.core.interfaces.MethodCallResult;
-import app.notifee.core.model.ChannelModel;
-import app.notifee.core.model.ChannelGroupModel;
-import app.notifee.core.model.NotificationModel;
-import app.notifee.core.event.InitialNotificationEvent;
-import app.notifee.core.event.MainComponentEvent;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
 
 @KeepForSdk
 public class Notifee {
@@ -36,15 +33,12 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public static @Nullable
-  Context getContext() {
+  public static @Nullable Context getContext() {
     return ContextHolder.getApplicationContext();
   }
 
   @KeepForSdk
-  public static void configure(
-    @NonNull NotifeeConfig notifeeConfig
-  ) {
+  public static void configure(@NonNull NotifeeConfig notifeeConfig) {
     synchronized (Notifee.class) {
       if (mNotifee == null) {
         initialize(notifeeConfig);
@@ -67,8 +61,7 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public @NonNull
-  String getMainComponent(@NonNull String defaultComponent) {
+  public @NonNull String getMainComponent(@NonNull String defaultComponent) {
     MainComponentEvent event = EventBus.removeStickEvent(MainComponentEvent.class);
 
     if (event == null) {
@@ -86,13 +79,15 @@ public class Notifee {
    */
   @KeepForSdk
   public void cancelNotification(String notificationId, MethodCallResult<Void> result) {
-    NotificationManager.cancelNotification(notificationId).addOnCompleteListener(task -> {
-      if (task.isSuccessful()) {
-        result.onComplete(null, task.getResult());
-      } else {
-        result.onComplete(task.getException(), null);
-      }
-    });
+    NotificationManager.cancelNotification(notificationId)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   /**
@@ -102,13 +97,15 @@ public class Notifee {
    */
   @KeepForSdk
   public void cancelAllNotifications(MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications().addOnCompleteListener(task -> {
-      if (task.isSuccessful()) {
-        result.onComplete(null, task.getResult());
-      } else {
-        result.onComplete(task.getException(), null);
-      }
-    });
+    NotificationManager.cancelAllNotifications()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
@@ -118,13 +115,15 @@ public class Notifee {
       result.onComplete(null, null);
     } else {
       ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
-      ChannelManager.createChannel(channelModel).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.createChannel(channelModel)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -139,13 +138,15 @@ public class Notifee {
         channelModels.add(ChannelModel.fromBundle(bundle));
       }
 
-      ChannelManager.createChannels(channelModels).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.createChannels(channelModels)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -156,13 +157,15 @@ public class Notifee {
       result.onComplete(null, null);
     } else {
       ChannelGroupModel channelGroupModel = ChannelGroupModel.fromBundle(channelGroupMap);
-      ChannelManager.createChannelGroup(channelGroupModel).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.createChannelGroup(channelGroupModel)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -177,13 +180,15 @@ public class Notifee {
         channelGroupModels.add(ChannelGroupModel.fromBundle(bundle));
       }
 
-      ChannelManager.createChannelGroups(channelGroupModels).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.createChannelGroups(channelGroupModels)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -210,20 +215,23 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void displayNotification(Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
+  public void displayNotification(
+      Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("displayNotification");
       result.onComplete(null, null);
     } else {
       NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.displayNotification(notificationModel, triggerMap).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, null);
-        } else {
-          Logger.e(TAG, "displayNotification", task.getException());
-          result.onComplete(task.getException(), null);
-        }
-      });
+      NotificationManager.displayNotification(notificationModel, triggerMap)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, null);
+                } else {
+                  Logger.e(TAG, "displayNotification", task.getException());
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -233,13 +241,15 @@ public class Notifee {
       logLicenseWarningForMethod("getAllChannels");
       result.onComplete(null, Collections.emptyList());
     } else {
-      ChannelManager.getAllChannels().addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.getAllChannels()
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -249,13 +259,15 @@ public class Notifee {
       logLicenseWarningForMethod("getChannel");
       result.onComplete(null, null);
     } else {
-      ChannelManager.getChannel(channelId).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.getChannel(channelId)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -265,13 +277,15 @@ public class Notifee {
       logLicenseWarningForMethod("getAllChannelGroups");
       result.onComplete(null, Collections.emptyList());
     } else {
-      ChannelManager.getAllChannelGroups().addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.getAllChannelGroups()
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -281,13 +295,15 @@ public class Notifee {
       logLicenseWarningForMethod("getChannelGroup");
       result.onComplete(null, null);
     } else {
-      ChannelManager.getChannelGroup(channelGroupId).addOnCompleteListener(task -> {
-        if (task.isSuccessful()) {
-          result.onComplete(null, task.getResult());
-        } else {
-          result.onComplete(task.getException(), null);
-        }
-      });
+      ChannelManager.getChannelGroup(channelGroupId)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
     }
   }
 
@@ -303,7 +319,8 @@ public class Notifee {
       } else {
         Bundle initialNotificationBundle = new Bundle();
         initialNotificationBundle.putAll(event.getExtras());
-        initialNotificationBundle.putBundle("notification", event.getNotificationModel().toBundle());
+        initialNotificationBundle.putBundle(
+            "notification", event.getNotificationModel().toBundle());
         result.onComplete(null, initialNotificationBundle);
       }
     }
@@ -311,17 +328,15 @@ public class Notifee {
 
   @KeepForSdk
   public void openNotificationSettings(
-    @Nullable String channelId, Activity activity, MethodCallResult<Void> result
-  ) {
+      @Nullable String channelId, Activity activity, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("openNotificationSettings");
       result.onComplete(null, null);
     } else {
       if (getContext() == null || activity == null) {
         Logger.d(
-          "openNotificationSettings",
-          "attempted to start activity but no current activity or context was available."
-        );
+            "openNotificationSettings",
+            "attempted to start activity but no current activity or context was available.");
         result.onComplete(null, null);
         return;
       }
@@ -346,5 +361,3 @@ public class Notifee {
     }
   }
 }
-
-

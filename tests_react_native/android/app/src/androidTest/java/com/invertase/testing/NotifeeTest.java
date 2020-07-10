@@ -1,19 +1,16 @@
 package com.invertase.testing;
 
+import static org.junit.Assert.assertTrue;
+
 import androidx.test.rule.ActivityTestRule;
-
 import com.cavynativereporter.RNCavyNativeReporterModule;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Objects;
-
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class NotifeeTest {

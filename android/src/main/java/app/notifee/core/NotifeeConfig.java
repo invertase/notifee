@@ -9,9 +9,10 @@ public class NotifeeConfig {
   private EventListener mEventSubscriber;
 
   private NotifeeConfig(
-    String mJsonConfig, String mProductVersion, String mFrameworkVersion,
-    EventListener mEventSubscriber
-  ) {
+      String mJsonConfig,
+      String mProductVersion,
+      String mFrameworkVersion,
+      EventListener mEventSubscriber) {
     this.mProductVersion = mProductVersion;
     this.mFrameworkVersion = mFrameworkVersion;
     this.mEventSubscriber = mEventSubscriber;

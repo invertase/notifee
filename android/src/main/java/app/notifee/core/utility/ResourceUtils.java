@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import app.notifee.core.ContextHolder;
+import app.notifee.core.Logger;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -18,12 +18,8 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import app.notifee.core.ContextHolder;
-import app.notifee.core.Logger;
 
 public class ResourceUtils {
   private static final String TAG = "ResourceUtils";
@@ -58,10 +54,10 @@ public class ResourceUtils {
 
   public static Uri getResourceDrawableUri(@Nullable String name) {
     int resId = getResourceIdByName(name, "drawable");
-    return resId > 0 ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId))
-      .build() : Uri.EMPTY;
+    return resId > 0
+        ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build()
+        : Uri.EMPTY;
   }
-
 
   /**
    * Returns a Bitmap from any given HTTP image URL, or local resource.
@@ -87,23 +83,25 @@ public class ResourceUtils {
 
     ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(imageUri).build();
 
-    DataSource<CloseableReference<CloseableImage>> dataSource = Fresco.getImagePipeline()
-      .fetchDecodedImage(imageRequest, ContextHolder.getApplicationContext());
+    DataSource<CloseableReference<CloseableImage>> dataSource =
+        Fresco.getImagePipeline()
+            .fetchDecodedImage(imageRequest, ContextHolder.getApplicationContext());
 
-    dataSource.subscribe(new BaseBitmapDataSubscriber() {
-      @Override
-      protected void onNewResultImpl(@Nullable Bitmap bitmap) {
-        bitmapTCS.setResult(bitmap);
-      }
+    dataSource.subscribe(
+        new BaseBitmapDataSubscriber() {
+          @Override
+          protected void onNewResultImpl(@Nullable Bitmap bitmap) {
+            bitmapTCS.setResult(bitmap);
+          }
 
-      @Override
-      protected void onFailureImpl(
-        @NonNull DataSource<CloseableReference<CloseableImage>> dataSource
-      ) {
-        Logger.e(TAG, "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
-        bitmapTCS.setResult(null);
-      }
-    }, CallerThreadExecutor.getInstance());
+          @Override
+          protected void onFailureImpl(
+              @NonNull DataSource<CloseableReference<CloseableImage>> dataSource) {
+            Logger.e(TAG, "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
+            bitmapTCS.setResult(null);
+          }
+        },
+        CallerThreadExecutor.getInstance());
 
     return bitmapTask;
   }
@@ -125,8 +123,13 @@ public class ResourceUtils {
       return null;
     }
 
-    return resourceId > 0 ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME)
-      .path(String.valueOf(resourceId)).build().toString() : Uri.EMPTY.toString();
+    return resourceId > 0
+        ? new Uri.Builder()
+            .scheme(LOCAL_RESOURCE_SCHEME)
+            .path(String.valueOf(resourceId))
+            .build()
+            .toString()
+        : Uri.EMPTY.toString();
   }
 
   /**
@@ -144,10 +147,7 @@ public class ResourceUtils {
     return resourceId;
   }
 
-
-  /**
-   * Attempts to find a resource id by name and type
-   */
+  /** Attempts to find a resource id by name and type */
   private static int getResourceIdByName(String name, String type) {
     if (name == null || name.isEmpty()) {
       return 0;
@@ -172,8 +172,7 @@ public class ResourceUtils {
     }
   }
 
-  public static @Nullable
-  Uri getSoundUri(String sound) {
+  public static @Nullable Uri getSoundUri(String sound) {
     Context context = ContextHolder.getApplicationContext();
     if (sound == null) {
       return null;

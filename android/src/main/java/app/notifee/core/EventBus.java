@@ -1,7 +1,7 @@
 package app.notifee.core;
 
 public class EventBus {
-  private final static EventBus instance = new EventBus();
+  private static final EventBus instance = new EventBus();
   private org.greenrobot.eventbus.EventBus eventBus;
 
   private EventBus() {

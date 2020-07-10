@@ -1,21 +1,15 @@
 package app.notifee.core.event;
 
 import androidx.annotation.NonNull;
-
 import app.notifee.core.KeepForSdk;
 
 @KeepForSdk
 public class LogEvent {
-  @KeepForSdk
-  public static final String LEVEL_ERROR = "error";
-  @KeepForSdk
-  public static final String LEVEL_WARN = "warn";
-  @KeepForSdk
-  public static final String LEVEL_INFO = "info";
-  @KeepForSdk
-  public static final String LEVEL_VERBOSE = "verbose";
-  @KeepForSdk
-  public static final String LEVEL_DEBUG = "debug";
+  @KeepForSdk public static final String LEVEL_ERROR = "error";
+  @KeepForSdk public static final String LEVEL_WARN = "warn";
+  @KeepForSdk public static final String LEVEL_INFO = "info";
+  @KeepForSdk public static final String LEVEL_VERBOSE = "verbose";
+  @KeepForSdk public static final String LEVEL_DEBUG = "debug";
 
   private final String tag;
   private final String level;

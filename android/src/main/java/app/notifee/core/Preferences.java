@@ -54,8 +54,9 @@ class Preferences {
 
   private SharedPreferences getPreferences() {
     if (preferences != null) return preferences;
-    preferences = ContextHolder.getApplicationContext()
-      .getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    preferences =
+        ContextHolder.getApplicationContext()
+            .getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
     return preferences;
   }
 }

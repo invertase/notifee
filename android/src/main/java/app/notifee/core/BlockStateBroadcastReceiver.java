@@ -1,12 +1,13 @@
 package app.notifee.core;
 
+import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
+
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Data;
@@ -14,66 +15,58 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker.Result;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
-
-import java.util.concurrent.TimeUnit;
-
 import app.notifee.core.event.BlockStateEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.utility.ObjectUtils;
-
-import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
+import java.util.concurrent.TimeUnit;
 
 public class BlockStateBroadcastReceiver extends BroadcastReceiver {
-  private final static String TAG = "BlockState";
-  private final static String KEY_TYPE = "type";
-  private final static String KEY_BLOCKED = "blocked";
-  private final static String KEY_CHANNEL_GROUP = "channelOrGroupId";
+  private static final String TAG = "BlockState";
+  private static final String KEY_TYPE = "type";
+  private static final String KEY_BLOCKED = "blocked";
+  private static final String KEY_CHANNEL_GROUP = "channelOrGroupId";
 
   @Keep
-  public BlockStateBroadcastReceiver() {
-  }
+  public BlockStateBroadcastReceiver() {}
 
-  static void doWork(
-    Data workData, CallbackToFutureAdapter.Completer<Result> completer
-  ) {
+  static void doWork(Data workData, CallbackToFutureAdapter.Completer<Result> completer) {
     Logger.v(TAG, "starting background work");
 
     final boolean blocked = workData.getBoolean(KEY_BLOCKED, false);
     final int type = workData.getInt(KEY_TYPE, BlockStateEvent.TYPE_APP_BLOCKED);
-    final ObjectUtils.TypedCallback<Bundle> sendEventCallback = bundle -> {
-      final MethodCallResult<Void> methodCallResult = (e, aVoid) -> {
-        if (e != null) {
-          Logger.e(TAG, "background work failed with error: ", e);
-          completer.set(Result.failure());
-        } else {
-          Logger.v(TAG, "background work completed successfully");
-          completer.set(Result.success());
-        }
-      };
+    final ObjectUtils.TypedCallback<Bundle> sendEventCallback =
+        bundle -> {
+          final MethodCallResult<Void> methodCallResult =
+              (e, aVoid) -> {
+                if (e != null) {
+                  Logger.e(TAG, "background work failed with error: ", e);
+                  completer.set(Result.failure());
+                } else {
+                  Logger.v(TAG, "background work completed successfully");
+                  completer.set(Result.success());
+                }
+              };
 
-      BlockStateEvent blockStateEvent = new BlockStateEvent(
-        type,
-        bundle,
-        blocked,
-        methodCallResult
-      );
+          BlockStateEvent blockStateEvent =
+              new BlockStateEvent(type, bundle, blocked, methodCallResult);
 
-      EventBus.post(blockStateEvent);
-    };
+          EventBus.post(blockStateEvent);
+        };
 
     if (type == BlockStateEvent.TYPE_APP_BLOCKED) {
       sendEventCallback.call(null);
       return;
     }
 
-    MethodCallResult<Bundle> methodCallResult = (e, aBundle) -> {
-      if (e != null) {
-        Logger.e(TAG, "Failed getting channel or channel group bundle, received error: ", e);
-        completer.set(Result.success());
-      } else {
-        sendEventCallback.call(aBundle);
-      }
-    };
+    MethodCallResult<Bundle> methodCallResult =
+        (e, aBundle) -> {
+          if (e != null) {
+            Logger.e(TAG, "Failed getting channel or channel group bundle, received error: ", e);
+            completer.set(Result.success());
+          } else {
+            sendEventCallback.call(aBundle);
+          }
+        };
 
     String channelOrGroupId = workData.getString(KEY_CHANNEL_GROUP);
     if (type == BlockStateEvent.TYPE_CHANNEL_BLOCKED) {
@@ -118,8 +111,8 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
         break;
       case NotificationManager.ACTION_NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED:
         workDataBuilder.putInt(KEY_TYPE, BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED);
-        String channelGroupId = intent
-          .getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_GROUP_ID);
+        String channelGroupId =
+            intent.getStringExtra(NotificationManager.EXTRA_NOTIFICATION_CHANNEL_GROUP_ID);
         workDataBuilder.putString(KEY_CHANNEL_GROUP, channelGroupId);
         uniqueWorkId += "." + channelGroupId;
         break;
@@ -128,16 +121,17 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
         return;
     }
 
-    workDataBuilder.putBoolean(KEY_BLOCKED,
-      intent.getBooleanExtra(NotificationManager.EXTRA_BLOCKED_STATE, false)
-    );
+    workDataBuilder.putBoolean(
+        KEY_BLOCKED, intent.getBooleanExtra(NotificationManager.EXTRA_BLOCKED_STATE, false));
 
     // a second delay to debounce events coming from a user spam toggling block states
-    OneTimeWorkRequest.Builder builder = new OneTimeWorkRequest.Builder(Worker.class)
-      .setInitialDelay(1, TimeUnit.SECONDS).setInputData(workDataBuilder.build());
+    OneTimeWorkRequest.Builder builder =
+        new OneTimeWorkRequest.Builder(Worker.class)
+            .setInitialDelay(1, TimeUnit.SECONDS)
+            .setInputData(workDataBuilder.build());
 
     WorkManager.getInstance(ContextHolder.getApplicationContext())
-      .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
+        .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
 
     Logger.v(TAG, "scheduled new background work with id " + uniqueWorkId);
   }

@@ -1,9 +1,7 @@
 package app.notifee.core;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import app.notifee.core.event.LogEvent;
 
 public class Logger {
