@@ -133,12 +133,16 @@ public class NotificationAndroidModel {
   /**
    * Gets the notification defaults (for API < 26)
    *
+   * @param hasCustomSound A flag to indicate if notificaiton has a custom sound and has successfuly
+   *     resolved
    * @return Integer
    */
-  public Integer getDefaults() {
+  public Integer getDefaults(Boolean hasCustomSound) {
+    String TAG = "NotificationManager";
+    Integer defaults = null;
+
     if (mNotificationAndroidBundle.containsKey("defaults")) {
       ArrayList<Integer> defaultsArray = mNotificationAndroidBundle.getIntegerArrayList("defaults");
-      Integer defaults = null;
 
       for (Integer integer : Objects.requireNonNull(defaultsArray)) {
         if (defaults == null) {
@@ -147,15 +151,23 @@ public class NotificationAndroidModel {
           defaults |= integer;
         }
       }
-
-      if (defaults != null) return defaults;
+    } else {
+      defaults = Notification.DEFAULT_ALL;
     }
 
-    if (mNotificationAndroidBundle.containsKey("sound")) {
-      return Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+    if (hasCustomSound) {
+      defaults &= ~Notification.DEFAULT_SOUND;
     }
 
-    return Notification.DEFAULT_ALL;
+    if (!mNotificationAndroidBundle.containsKey("vibrationPattern")) {
+      defaults &= ~Notification.DEFAULT_VIBRATE;
+    }
+
+    if (mNotificationAndroidBundle.containsKey("lights")) {
+      defaults &= ~Notification.DEFAULT_LIGHTS;
+    }
+
+    return defaults;
   }
 
   /**

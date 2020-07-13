@@ -55,6 +55,7 @@ class NotificationManager {
      */
     Callable<NotificationCompat.Builder> builderCallable =
         () -> {
+          Boolean hasCustomSound = false;
           NotificationCompat.Builder builder =
               new NotificationCompat.Builder(
                   ContextHolder.getApplicationContext(), androidModel.getChannelId());
@@ -130,6 +131,7 @@ class NotificationManager {
           if (androidModel.getSound() != null) {
             Uri soundUri = ResourceUtils.getSoundUri(androidModel.getSound());
             if (soundUri != null) {
+              hasCustomSound = true;
               builder.setSound(soundUri);
             } else {
               Logger.w(
@@ -139,8 +141,7 @@ class NotificationManager {
             }
           }
 
-          builder.setDefaults(androidModel.getDefaults());
-
+          builder.setDefaults(androidModel.getDefaults(hasCustomSound));
           builder.setOngoing(androidModel.getOngoing());
           builder.setOnlyAlertOnce(androidModel.getOnlyAlertOnce());
           builder.setPriority(androidModel.getPriority());

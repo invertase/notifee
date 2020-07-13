@@ -182,7 +182,7 @@ public class ResourceUtils {
       return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     } else {
       int soundResourceId = getResourceIdByName(sound, "raw");
-      if (soundResourceId == 0) {
+      if (soundResourceId == 0 && sound.contains(".")) {
         soundResourceId = getResourceIdByName(sound.substring(0, sound.lastIndexOf('.')), "raw");
       }
 
