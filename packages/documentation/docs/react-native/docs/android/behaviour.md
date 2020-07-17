@@ -68,9 +68,20 @@ with an array of numbers.
 
 The pattern must be an even amount of numbers and follows a "vibrate and delay" schema. Each number is the amount of
 milliseconds. For example, "300ms vibrate" then "500ms delay" would be `[300, 500]`. The pattern can be passed to the
-`vibrationPattern` property:
+`vibrationPattern` property.
+
+Android devices on 8.0 (API level 26) set the pattern directly on a channel, whilst devices on lower API versions set the pattern directly on the notification:
 
 ```js
+// Android >= 8.0 (API level 26)
+notifee.createChannel({
+  id: 'custom-vibration',
+  title: 'Channel with custom vibration',
+  vibration: true,
+  vibrationPattern: [300, 500],
+});
+
+// Android < 8.0 (API level 26)
 notifee.displayNotification({
   body: 'Custom vibration',
   android: {
@@ -81,16 +92,24 @@ notifee.displayNotification({
 
 # Lights
 
-Some devices come with an rgba light, which can be used to alert users of a new notification. On supported devices, the
-`lights` property can be used to change the color and flashing pattern. The channel/notification must have lights
-enabled for this property to take effect.
+Some devices come with an rgba light, which can be used to alert users of a new notification. On supported devices, the lights property can be used to change the color and flashing pattern.
 
-The property accepts an array, with the first item being the light color, and the other items following a "on and off"
-schema. For example, to show a "red" light which shows for 300ms and stays off for 600ms:
+Android devices on 8.0 or higher (API level 26) there are two properties to configure directly on a channel, `lights` and `lightColor`.
+
+For devices on lower API versions the `lights` property accepts an array, with the first item being the light color, and the other items following a "on and off"
+schema. For example, "red" light which shows for 300ms and stays off for 600ms:
 
 ```js
 import notifee, { AndroidColor } from '@notifee/react-native';
+// Android >= 8.0 (API level 26)
+notifee.createChannel({
+  id: 'custom-lights',
+  title: 'Channel with custom lights',
+  lights: true,
+  lightColor: AndroidColor.RED,
+});
 
+// Android < 8.0 (API level 26)
 notifee.displayNotification({
   body: 'Custom lights',
   android: {
