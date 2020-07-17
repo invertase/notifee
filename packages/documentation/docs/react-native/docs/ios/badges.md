@@ -7,6 +7,8 @@ On iOS devices, the application icon on the device home screen is able to displa
 circle with a number at the top right of the icon. This number indicates how many unread notifications the application
 currently has.
 
+![ios-badges](https://user-images.githubusercontent.com/14185925/87808464-a555ef00-c851-11ea-999c-a5afea19e6f1.png)
+
 The device does not keep track of how many unread notifications are currently on the device, therefore it is up to you
 to control the badge count.
 
