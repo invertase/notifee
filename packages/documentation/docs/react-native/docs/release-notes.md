@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.10.0
+
+- **[Android]**: Fixed an issue with sounds for Android versions < 8.0 (API level 26)
+- **[Android]**: Fixed an issue with `notifee.config.json` where sometimes the script could not find the 'app' gradle project automatically.
+
 ## 0.9.0
 
 - **[iOS]**: Add support for iOS `onBackgroundEvent`.
