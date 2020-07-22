@@ -73,11 +73,13 @@ RCT_EXPORT_MODULE();
 }
 
 - (void)sendNotifeeCoreEvent:(NSDictionary *_Nonnull)eventBody {
-  if (RCTRunningInAppExtension() || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-    [self sendEventWithName:kReactNativeNotifeeNotificationBackgroundEvent body:eventBody];
-  } else {
-    [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
-  }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (RCTRunningInAppExtension() || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+            [self sendEventWithName:kReactNativeNotifeeNotificationBackgroundEvent body:eventBody];
+        } else {
+            [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
+        }
+    });
 }
 
 # pragma mark - React Native Methods
