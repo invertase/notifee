@@ -108,9 +108,9 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getAllChannels(Promise promise) {
+  public void getChannels(Promise promise) {
     Notifee.getInstance()
-        .getAllChannels(
+        .getChannels(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
@@ -122,9 +122,9 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getAllChannelGroups(Promise promise) {
+  public void getChannelGroups(Promise promise) {
     Notifee.getInstance()
-        .getAllChannelGroups(
+        .getChannelGroups(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
