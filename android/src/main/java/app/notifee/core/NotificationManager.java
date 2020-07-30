@@ -21,7 +21,6 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidActionModel;
@@ -35,11 +34,7 @@ import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.common.util.concurrent.ListenableFuture;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -353,11 +348,13 @@ class NotificationManager {
           NotificationManagerCompat notificationManagerCompat =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext());
 
-          if (notificationType == NOTIFICATION_TYPE_DELIVERED || notificationType == NOTIFICATION_TYPE_ALL) {
+          if (notificationType == NOTIFICATION_TYPE_DELIVERED
+              || notificationType == NOTIFICATION_TYPE_ALL) {
             notificationManagerCompat.cancelAll();
           }
 
-          if (notificationType == NOTIFICATION_TYPE_SCHEDULED || notificationType == NOTIFICATION_TYPE_ALL) {
+          if (notificationType == NOTIFICATION_TYPE_SCHEDULED
+              || notificationType == NOTIFICATION_TYPE_ALL) {
             WorkManager.getInstance(ContextHolder.getApplicationContext())
                 .cancelAllWorkByTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
           }
