@@ -96,8 +96,8 @@ public class Notifee {
    * @param result
    */
   @KeepForSdk
-  public void cancelAllNotifications(int cancelType, MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications(cancelType)
+  public void cancelAllNotifications(int notificationType, MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotifications(notificationType)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
@@ -255,8 +255,27 @@ public class Notifee {
     }
   }
 
+  // TODO getScheduledNotifications
+  // @KeepForSdk
+  // public void getScheduledNotifications(MethodCallResult<List<Bundle>> result) {
+  //   if (LicenseManager.isLicenseInvalid()) {
+  //     logLicenseWarningForMethod("getAllNotifications");
+  //     result.onComplete(null, Collections.emptyList());
+  //   } else {
+  //     NotificationManager.getScheduledNotifications()
+  //         .addOnCompleteListener(
+  //             task -> {
+  //               if (task.isSuccessful()) {
+  //                 result.onComplete(null, task.getResult());
+  //               } else {
+  //                 result.onComplete(task.getException(), null);
+  //               }
+  //             });
+  //   }
+  // }
+
   @KeepForSdk
-    public void getChannels(MethodCallResult<List<Bundle>> result) {
+  public void getChannels(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getChannels");
       result.onComplete(null, Collections.emptyList());

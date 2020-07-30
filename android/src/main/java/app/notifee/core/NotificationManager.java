@@ -21,6 +21,7 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidActionModel;
@@ -34,7 +35,11 @@ import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -45,9 +50,9 @@ import java.util.concurrent.TimeoutException;
 class NotificationManager {
   private static final String TAG = "NotificationManager";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
-  private static final int CANCEL_TYPE_DELIVERED = 1;
-  private static final int CANCEL_TYPE_SCHEDULED = 2;
-  private static final int CANCEL_TYPE_ALL = 0;
+  private static final int NOTIFICATION_TYPE_DELIVERED = 1;
+  private static final int NOTIFICATION_TYPE_SCHEDULED = 2;
+  private static final int NOTIFICATION_TYPE_ALL = 0;
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
       NotificationModel notificationModel) {
@@ -342,17 +347,17 @@ class NotificationManager {
         });
   }
 
-  static Task<Void> cancelAllNotifications(@NonNull int cancelType) {
+  static Task<Void> cancelAllNotifications(@NonNull int notificationType) {
     return Tasks.call(
         () -> {
           NotificationManagerCompat notificationManagerCompat =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext());
 
-          if (cancelType == CANCEL_TYPE_DELIVERED || cancelType == CANCEL_TYPE_ALL) {
+          if (notificationType == NOTIFICATION_TYPE_DELIVERED || notificationType == NOTIFICATION_TYPE_ALL) {
             notificationManagerCompat.cancelAll();
           }
 
-          if (cancelType == CANCEL_TYPE_SCHEDULED || cancelType == CANCEL_TYPE_ALL) {
+          if (notificationType == NOTIFICATION_TYPE_SCHEDULED || notificationType == NOTIFICATION_TYPE_ALL) {
             WorkManager.getInstance(ContextHolder.getApplicationContext())
                 .cancelAllWorkByTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
           }
