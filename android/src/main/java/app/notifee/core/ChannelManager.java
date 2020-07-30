@@ -141,7 +141,7 @@ public class ChannelManager {
         .deleteNotificationChannelGroup(channelGroupId);
   }
 
-  static Task<List<Bundle>> getAllChannels() {
+  static Task<List<Bundle>> getChannels() {
     return Tasks.call(
         executorService,
         () -> {
@@ -174,7 +174,7 @@ public class ChannelManager {
         });
   }
 
-  static Task<List<Bundle>> getAllChannelGroups() {
+  static Task<List<Bundle>> getChannelGroups() {
     return Tasks.call(
         executorService,
         () -> {
