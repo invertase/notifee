@@ -96,8 +96,8 @@ public class Notifee {
    * @param result
    */
   @KeepForSdk
-  public void cancelAllNotifications(MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications()
+  public void cancelAllNotifications(int cancelType, MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotifications(cancelType)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
@@ -215,14 +215,13 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void displayNotification(
-      Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
+  public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("displayNotification");
       result.onComplete(null, null);
     } else {
       NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.displayNotification(notificationModel, triggerMap)
+      NotificationManager.displayNotification(notificationModel)
           .addOnCompleteListener(
               task -> {
                 if (task.isSuccessful()) {
@@ -236,7 +235,28 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void getChannels(MethodCallResult<List<Bundle>> result) {
+  public void scheduleNotification(
+      Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("scheduleNotification");
+      result.onComplete(null, null);
+    } else {
+      NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
+      NotificationManager.scheduleNotification(notificationModel, triggerMap)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, null);
+                } else {
+                  Logger.e(TAG, "scheduleNotification", task.getException());
+                  result.onComplete(task.getException(), null);
+                }
+              });
+    }
+  }
+
+  @KeepForSdk
+    public void getChannels(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getChannels");
       result.onComplete(null, Collections.emptyList());
