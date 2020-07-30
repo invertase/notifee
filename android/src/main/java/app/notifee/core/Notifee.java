@@ -236,12 +236,12 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void getAllChannels(MethodCallResult<List<Bundle>> result) {
+  public void getChannels(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getAllChannels");
+      logLicenseWarningForMethod("getChannels");
       result.onComplete(null, Collections.emptyList());
     } else {
-      ChannelManager.getAllChannels()
+      ChannelManager.getChannels()
           .addOnCompleteListener(
               task -> {
                 if (task.isSuccessful()) {
@@ -272,12 +272,12 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void getAllChannelGroups(MethodCallResult<List<Bundle>> result) {
+  public void getChannelGroups(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getAllChannelGroups");
+      logLicenseWarningForMethod("getChannelGroups");
       result.onComplete(null, Collections.emptyList());
     } else {
-      ChannelManager.getAllChannelGroups()
+      ChannelManager.getChannelGroups()
           .addOnCompleteListener(
               task -> {
                 if (task.isSuccessful()) {
