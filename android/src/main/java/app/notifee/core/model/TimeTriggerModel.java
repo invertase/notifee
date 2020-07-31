@@ -2,6 +2,7 @@ package app.notifee.core.model;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import app.notifee.core.Logger;
 import java.util.concurrent.TimeUnit;
 
 public class TimeTriggerModel {
@@ -32,23 +33,22 @@ public class TimeTriggerModel {
   public TimeUnit getIntervalTimeUnit() {
     TimeUnit timeUnit = TimeUnit.MINUTES;
     if (mTimeTriggerBundle.containsKey("repeatIntervalTimeUnit")) {
-      //      String repeatIntervalTimeUnit = mScheduleBundle.getInt("repeatIntervalTimeUnit");
-      //      try {
-      //        timeUnit = TimeUnit.valueOf(repeatIntervalTimeUnit);
-      //      } catch (IllegalArgumentException e) {
-      //        Logger.e(
-      //            TAG,
-      //            "An error occurred whilst trying to convert interval time unit: " +
-      // repeatIntervalTimeUnit,
-      //            e);
-      //      }
+      String repeatIntervalTimeUnit = mTimeTriggerBundle.getString("repeatIntervalTimeUnit");
+      try {
+        timeUnit = TimeUnit.valueOf(repeatIntervalTimeUnit);
+      } catch (IllegalArgumentException e) {
+        Logger.e(
+            TAG,
+            "An error occurred whilst trying to convert interval time unit: " + repeatIntervalTimeUnit,
+            e);
+      }
     }
 
     return timeUnit;
   }
 
   public int getInterval() {
-    if (mTimeTriggerBundle.containsKey("repeatInterval")) {
+    if (mTimeTriggerBundle.containsKey("repeatInterval") ) {
       Double d = mTimeTriggerBundle.getDouble("repeatInterval");
       return d.intValue();
     }
