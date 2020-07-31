@@ -235,20 +235,20 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void scheduleNotification(
+  public void createNotificationTrigger(
       Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("scheduleNotification");
+      logLicenseWarningForMethod("createNotificationTrigger");
       result.onComplete(null, null);
     } else {
       NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.scheduleNotification(notificationModel, triggerMap)
+      NotificationManager.createNotificationTrigger(notificationModel, triggerMap)
           .addOnCompleteListener(
               task -> {
                 if (task.isSuccessful()) {
                   result.onComplete(null, null);
                 } else {
-                  Logger.e(TAG, "scheduleNotification", task.getException());
+                  Logger.e(TAG, "createNotificationTrigger", task.getException());
                   result.onComplete(task.getException(), null);
                 }
               });

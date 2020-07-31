@@ -15,8 +15,8 @@ public class Worker extends ListenableWorker {
       "app.notifee.core.BlockStateBroadcastReceiver.WORKER";
   static final String WORK_TYPE_LICENSE_VERIFY_LOCAL = "app.notifee.core.LicenseVerify.LOCAL";
   static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
-  static final String WORK_TYPE_NOTIFICATION_SCHEDULE =
-      "app.notifee.core.NotificationManager.SCHEDULE";
+  static final String WORK_TYPE_NOTIFICATION_TRIGGER =
+      "app.notifee.core.NotificationManager.TRIGGER";
   private static final String TAG = "Worker";
   private CallbackToFutureAdapter.Completer<Result> mCompleter;
 
@@ -59,7 +59,7 @@ public class Worker extends ListenableWorker {
             case WORK_TYPE_LICENSE_VERIFY_REMOTE:
               LicenseManager.doRemoteWork(getInputData(), completer);
               break;
-            case WORK_TYPE_NOTIFICATION_SCHEDULE:
+            case WORK_TYPE_NOTIFICATION_TRIGGER:
               NotificationManager.doScheduledWork(getInputData(), completer);
               break;
             default:
