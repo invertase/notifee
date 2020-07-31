@@ -33,23 +33,24 @@ public class ScheduleModel {
   public TimeUnit getIntervalTimeUnit() {
     TimeUnit timeUnit = TimeUnit.MINUTES;
     if (mScheduleBundle.containsKey("repeatIntervalTimeUnit")) {
-      String repeatIntervalTimeUnit = mScheduleBundle.getString("repeatIntervalTimeUnit");
-      try {
-        timeUnit = TimeUnit.valueOf(repeatIntervalTimeUnit);
-      } catch (IllegalArgumentException e) {
-        Logger.e(
-            TAG,
-            "An error occurred whilst trying to convert interval time unit: " + repeatIntervalTimeUnit,
-            e);
-      }
+//      String repeatIntervalTimeUnit = mScheduleBundle.getInt("repeatIntervalTimeUnit");
+//      try {
+//        timeUnit = TimeUnit.valueOf(repeatIntervalTimeUnit);
+//      } catch (IllegalArgumentException e) {
+//        Logger.e(
+//            TAG,
+//            "An error occurred whilst trying to convert interval time unit: " + repeatIntervalTimeUnit,
+//            e);
+//      }
     }
 
     return timeUnit;
   }
 
   public int getInterval() {
-    if (mScheduleBundle.containsKey("repeatInterval")) {
-      return mScheduleBundle.getInt("repeatInterval");
+    if (mScheduleBundle.containsKey("repeatInterval") ) {
+      Double d = mScheduleBundle.getDouble("repeatInterval");
+      return d.intValue();
     }
 
     return -1;
