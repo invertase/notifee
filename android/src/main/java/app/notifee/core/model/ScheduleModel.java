@@ -32,14 +32,14 @@ public class ScheduleModel {
 
   public TimeUnit getIntervalTimeUnit() {
     TimeUnit timeUnit = TimeUnit.MINUTES;
-    if (mScheduleBundle.containsKey("invervalTimeUnit")) {
-      String invervalTimeUnit = mScheduleBundle.getString("invervalTimeUnit");
+    if (mScheduleBundle.containsKey("repeatIntervalTimeUnit")) {
+      String repeatIntervalTimeUnit = mScheduleBundle.getString("repeatIntervalTimeUnit");
       try {
-        timeUnit = TimeUnit.valueOf(invervalTimeUnit);
+        timeUnit = TimeUnit.valueOf(repeatIntervalTimeUnit);
       } catch (IllegalArgumentException e) {
         Logger.e(
             TAG,
-            "An error occurred whilst trying to convert interval time unit: " + invervalTimeUnit,
+            "An error occurred whilst trying to convert interval time unit: " + repeatIntervalTimeUnit,
             e);
       }
     }
@@ -48,8 +48,8 @@ public class ScheduleModel {
   }
 
   public int getInterval() {
-    if (mScheduleBundle.containsKey("interval")) {
-      return mScheduleBundle.getInt("interval");
+    if (mScheduleBundle.containsKey("repeatInterval")) {
+      return mScheduleBundle.getInt("repeatInterval");
     }
 
     return -1;
