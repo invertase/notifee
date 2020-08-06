@@ -1,7 +1,6 @@
 package app.notifee.core;
 
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-import static app.notifee.core.Worker.WORK_TYPE_NOTIFICATION_SCHEDULE;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -21,13 +20,15 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
+import androidx.work.WorkQuery;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidActionModel;
 import app.notifee.core.model.NotificationAndroidModel;
 import app.notifee.core.model.NotificationAndroidStyleModel;
 import app.notifee.core.model.NotificationModel;
-import app.notifee.core.model.ScheduleModel;
+import app.notifee.core.model.TimeTriggerModel;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
@@ -35,6 +36,9 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -45,6 +49,9 @@ import java.util.concurrent.TimeoutException;
 class NotificationManager {
   private static final String TAG = "NotificationManager";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
+  private static final int NOTIFICATION_TYPE_ALL = 0;
+  private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
+  private static final int NOTIFICATION_TYPE_TRIGGER = 2;
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
       NotificationModel notificationModel) {
@@ -339,26 +346,33 @@ class NotificationManager {
         });
   }
 
-  static Task<Void> cancelAllNotifications() {
+  static Task<Void> cancelAllNotifications(@NonNull int notificationType) {
     return Tasks.call(
         () -> {
           NotificationManagerCompat notificationManagerCompat =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext());
 
-          // Displayed
-          // TODO cancel conditionally once scheduling API introduced, see roadmap comment
-          notificationManagerCompat.cancelAll();
+          if (notificationType == NOTIFICATION_TYPE_DISPLAYED
+              || notificationType == NOTIFICATION_TYPE_ALL) {
+            notificationManagerCompat.cancelAll();
+          }
 
-          // Scheduled
-          // TODO cancel conditionally once scheduling API introduced, see roadmap comment
-          WorkManager.getInstance(ContextHolder.getApplicationContext())
-              .cancelAllWorkByTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+          if (notificationType == NOTIFICATION_TYPE_TRIGGER
+              || notificationType == NOTIFICATION_TYPE_ALL) {
+            WorkManager workManager =
+                WorkManager.getInstance(ContextHolder.getApplicationContext());
+            workManager.cancelAllWorkByTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+
+            // Remove all cancelled and finished work from its internal database
+            // states include SUCCEEDED, FAILED and CANCELLED
+            workManager.pruneWork();
+          }
 
           return null;
         });
   }
 
-  private static Task<Void> displayNotification(NotificationModel notificationModel) {
+  static Task<Void> displayNotification(NotificationModel notificationModel) {
     return notificationBundleToBuilder(notificationModel)
         .continueWith(
             CACHED_THREAD_POOL,
@@ -382,66 +396,103 @@ class NotificationManager {
             });
   }
 
-  static Task<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
+  static Task<Void> createTriggerNotification(
+      NotificationModel notificationModel, Bundle triggerBundle) {
     if (triggerBundle == null) return displayNotification(notificationModel);
 
     return Tasks.call(
         CACHED_THREAD_POOL,
         () -> {
-          ScheduleModel schedule = ScheduleModel.fromBundle(triggerBundle);
+          TimeTriggerModel trigger = TimeTriggerModel.fromBundle(triggerBundle);
 
-          String uniqueWorkName = "schedule:" + notificationModel.getId();
+          String uniqueWorkName = "trigger:" + notificationModel.getId();
           WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
 
-          double delay = 0;
-          double timestamp = schedule.getTimestamp();
-          int interval = schedule.getInterval();
+          double delay = trigger.getDelay();
+          int interval = trigger.getInterval();
 
           Data.Builder workDataBuilder =
               new Data.Builder()
-                  .putString(Worker.KEY_WORK_TYPE, WORK_TYPE_NOTIFICATION_SCHEDULE)
-                  .putByteArray("schedule", ObjectUtils.bundleToBytes(triggerBundle))
+                  .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
+                  .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
                   .putByteArray(
                       "notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
 
-          if (timestamp > 0) {
-            delay = Math.round(timestamp - (System.currentTimeMillis() / 1000.0));
-          }
-
-          // One time scheduled
+          // One time trigger
           if (interval == -1) {
             OneTimeWorkRequest.Builder workRequestBuilder =
                 new OneTimeWorkRequest.Builder(Worker.class);
-            workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+            workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+            workRequestBuilder.addTag(uniqueWorkName);
             workRequestBuilder.setInputData(workDataBuilder.build());
             workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
             workManager.enqueueUniqueWork(
                 uniqueWorkName, ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
           } else {
             PeriodicWorkRequest.Builder workRequestBuilder =
-                new PeriodicWorkRequest.Builder(Worker.class, interval, TimeUnit.MINUTES);
-            workRequestBuilder.addTag(WORK_TYPE_NOTIFICATION_SCHEDULE);
+                new PeriodicWorkRequest.Builder(
+                    Worker.class, interval, trigger.getIntervalTimeUnit());
+
+            workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+            workRequestBuilder.addTag(uniqueWorkName);
             workRequestBuilder.setInputData(workDataBuilder.build());
             workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
+            PeriodicWorkRequest request = workRequestBuilder.build();
             workManager.enqueueUniquePeriodicWork(
-                uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+                uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, request);
           }
 
-          EventBus.post(new NotificationEvent(NotificationEvent.TYPE_SCHEDULED, notificationModel));
+          EventBus.post(
+              new NotificationEvent(
+                  NotificationEvent.TYPE_TRIGGER_NOTIFICATION_CREATED, notificationModel));
 
           return null;
         });
   }
 
+  static Task<List<String>> getTriggerNotificationIds() {
+    return Tasks.call(
+        () -> {
+          WorkQuery.Builder query =
+              WorkQuery.Builder.fromTags(Arrays.asList(Worker.WORK_TYPE_NOTIFICATION_TRIGGER));
+          query.addStates(Arrays.asList(WorkInfo.State.ENQUEUED));
+
+          List<WorkInfo> workInfos =
+              WorkManager.getInstance(ContextHolder.getApplicationContext())
+                  .getWorkInfos(query.build())
+                  .get();
+
+          if (workInfos.size() == 0) {
+            return Collections.emptyList();
+          }
+
+          ArrayList<String> triggerNotificationIds = new ArrayList<String>(workInfos.size());
+          for (WorkInfo workInfo : workInfos) {
+            List<String> tags = new ArrayList<String>(workInfo.getTags());
+
+            for (int i = 0; i < tags.size(); i = i + 1) {
+              String uniqueName = tags.get(i);
+              if (uniqueName.contains("trigger")) {
+                String notificationId = uniqueName.replace("trigger:", "");
+                triggerNotificationIds.add(notificationId);
+                break;
+              }
+            }
+          }
+
+          return triggerNotificationIds;
+        });
+  }
+
   static void doScheduledWork(
       Data workData, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
-    byte[] scheduleBytes = workData.getByteArray("schedule");
+    byte[] triggerBytes = workData.getByteArray("trigger");
     byte[] notificationBytes = workData.getByteArray("notification");
 
-    if (notificationBytes == null || scheduleBytes == null) {
+    if (notificationBytes == null || triggerBytes == null) {
       Logger.w(
           TAG,
-          "Attempted to handle doScheduledWork but no notification or schedule data was found.");
+          "Attempted to handle doScheduledWork but no notification or trigger data was found.");
       completer.set(ListenableWorker.Result.success());
       return;
     }
@@ -454,7 +505,7 @@ class NotificationManager {
             task -> {
               completer.set(ListenableWorker.Result.success());
               if (!task.isSuccessful()) {
-                Logger.e(TAG, "Failed to display scheduled notification", task.getException());
+                Logger.e(TAG, "Failed to display notification", task.getException());
               }
             });
   }

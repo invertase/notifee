@@ -96,8 +96,8 @@ public class Notifee {
    * @param result
    */
   @KeepForSdk
-  public void cancelAllNotifications(MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications()
+  public void cancelAllNotifications(int notificationType, MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotifications(notificationType)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
@@ -215,20 +215,58 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void displayNotification(
-      Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
+  public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("displayNotification");
       result.onComplete(null, null);
     } else {
       NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.displayNotification(notificationModel, triggerMap)
+      NotificationManager.displayNotification(notificationModel)
           .addOnCompleteListener(
               task -> {
                 if (task.isSuccessful()) {
                   result.onComplete(null, null);
                 } else {
                   Logger.e(TAG, "displayNotification", task.getException());
+                  result.onComplete(task.getException(), null);
+                }
+              });
+    }
+  }
+
+  @KeepForSdk
+  public void createTriggerNotification(
+      Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("createTriggerNotification");
+      result.onComplete(null, null);
+    } else {
+      NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
+      NotificationManager.createTriggerNotification(notificationModel, triggerMap)
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, null);
+                } else {
+                  Logger.e(TAG, "createTriggerNotification", task.getException());
+                  result.onComplete(task.getException(), null);
+                }
+              });
+    }
+  }
+
+  @KeepForSdk
+  public void getTriggerNotificationIds(MethodCallResult<List<String>> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("getTriggerNotificationIds");
+      result.onComplete(null, Collections.emptyList());
+    } else {
+      NotificationManager.getTriggerNotificationIds()
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
                   result.onComplete(task.getException(), null);
                 }
               });
