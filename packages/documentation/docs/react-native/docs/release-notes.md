@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.11.0
+
+- **[Android]**: Add support for Trigger Notifications on Android. See [Triggers](https://notifee.app/react-native/docs/triggers).
+- **[Android]**: Fixed an issue with `getChannels` and `getChannelGroups` where the methods were throwing an error
+- **[iOS]**: Fixed an issue with iOS 14 where sometimes the app would freeze briefly when receiving an push notification
+
 ## 0.10.0
 
 - **[Android]**: Fixed an issue with sounds for Android versions < 8.0 (API level 26)
