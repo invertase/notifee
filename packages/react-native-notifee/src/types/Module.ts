@@ -161,7 +161,7 @@ export interface Module {
    * View the [Displaying a Notification](/react-native/docs/displaying-a-notification)
    * documentation for more information.
    *
-   * @param notification The [`Notification`](/react-native/reference/notification) interfaced used
+   * @param notification The [`Notification`](/react-native/reference/notification) interface used
    * to create a notification for both Android & iOS.
    */
   displayNotification(notification: Notification): Promise<string>;
@@ -173,10 +173,10 @@ export interface Module {
    *
    * View the [Triggers](/react-native/docs/triggers) documentation for more information.
    *
-   * @param notification The [`Notification`](/react-native/reference/notification) interfaced used
+   * @param notification The [`Notification`](/react-native/reference/notification) interface used
    * to create a notification.
    *
-   * @param trigger The [`Trigger`](/react-native/reference/trigger) interfaced used
+   * @param trigger The [`Trigger`](/react-native/reference/trigger) interface used
    * to create a trigger.
    *
    * Currently only supported on Android.
