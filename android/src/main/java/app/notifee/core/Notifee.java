@@ -255,24 +255,23 @@ public class Notifee {
     }
   }
 
-  // TODO getTriggerNotifications
-  // @KeepForSdk
-  // public void getScheduledNotifications(MethodCallResult<List<Bundle>> result) {
-  //   if (LicenseManager.isLicenseInvalid()) {
-  //     logLicenseWarningForMethod("getAllNotifications");
-  //     result.onComplete(null, Collections.emptyList());
-  //   } else {
-  //     NotificationManager.getScheduledNotifications()
-  //         .addOnCompleteListener(
-  //             task -> {
-  //               if (task.isSuccessful()) {
-  //                 result.onComplete(null, task.getResult());
-  //               } else {
-  //                 result.onComplete(task.getException(), null);
-  //               }
-  //             });
-  //   }
-  // }
+  @KeepForSdk
+  public void getTriggerNotificationIds(MethodCallResult<List<String>> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("getTriggerNotificationIds");
+      result.onComplete(null, Collections.emptyList());
+    } else {
+      NotificationManager.getTriggerNotificationIds()
+          .addOnCompleteListener(
+              task -> {
+                if (task.isSuccessful()) {
+                  result.onComplete(null, task.getResult());
+                } else {
+                  result.onComplete(task.getException(), null);
+                }
+              });
+    }
+  }
 
   @KeepForSdk
   public void getChannels(MethodCallResult<List<Bundle>> result) {

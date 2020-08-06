@@ -20,7 +20,9 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
+import androidx.work.WorkQuery;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidActionModel;
 import app.notifee.core.model.NotificationAndroidModel;
@@ -34,6 +36,9 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -354,8 +359,13 @@ class NotificationManager {
 
           if (notificationType == NOTIFICATION_TYPE_TRIGGER
               || notificationType == NOTIFICATION_TYPE_ALL) {
-            WorkManager.getInstance(ContextHolder.getApplicationContext())
-                .cancelAllWorkByTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+            WorkManager workManager =
+                WorkManager.getInstance(ContextHolder.getApplicationContext());
+            workManager.cancelAllWorkByTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+
+            // Remove all cancelled and finished work from its internal database
+            // states include SUCCEEDED, FAILED and CANCELLED
+            workManager.pruneWork();
           }
 
           return null;
@@ -413,6 +423,7 @@ class NotificationManager {
             OneTimeWorkRequest.Builder workRequestBuilder =
                 new OneTimeWorkRequest.Builder(Worker.class);
             workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+            workRequestBuilder.addTag(uniqueWorkName);
             workRequestBuilder.setInputData(workDataBuilder.build());
             workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
             workManager.enqueueUniqueWork(
@@ -421,11 +432,14 @@ class NotificationManager {
             PeriodicWorkRequest.Builder workRequestBuilder =
                 new PeriodicWorkRequest.Builder(
                     Worker.class, interval, trigger.getIntervalTimeUnit());
+
             workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+            workRequestBuilder.addTag(uniqueWorkName);
             workRequestBuilder.setInputData(workDataBuilder.build());
             workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
+            PeriodicWorkRequest request = workRequestBuilder.build();
             workManager.enqueueUniquePeriodicWork(
-                uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+                uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, request);
           }
 
           EventBus.post(
@@ -433,6 +447,40 @@ class NotificationManager {
                   NotificationEvent.TYPE_TRIGGER_NOTIFICATION_CREATED, notificationModel));
 
           return null;
+        });
+  }
+
+  static Task<List<String>> getTriggerNotificationIds() {
+    return Tasks.call(
+        () -> {
+          WorkQuery.Builder query =
+              WorkQuery.Builder.fromTags(Arrays.asList(Worker.WORK_TYPE_NOTIFICATION_TRIGGER));
+          query.addStates(Arrays.asList(WorkInfo.State.ENQUEUED));
+
+          List<WorkInfo> workInfos =
+              WorkManager.getInstance(ContextHolder.getApplicationContext())
+                  .getWorkInfos(query.build())
+                  .get();
+
+          if (workInfos.size() == 0) {
+            return Collections.emptyList();
+          }
+
+          ArrayList<String> triggerNotificationIds = new ArrayList<String>(workInfos.size());
+          for (WorkInfo workInfo : workInfos) {
+            List<String> tags = new ArrayList<String>(workInfo.getTags());
+
+            for (int i = 0; i < tags.size(); i = i + 1) {
+              String uniqueName = tags.get(i);
+              if (uniqueName.contains("trigger")) {
+                String notificationId = uniqueName.replace("trigger:", "");
+                triggerNotificationIds.add(notificationId);
+                break;
+              }
+            }
+          }
+
+          return triggerNotificationIds;
         });
   }
 
