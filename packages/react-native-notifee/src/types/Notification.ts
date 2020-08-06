@@ -221,8 +221,8 @@ export enum EventType {
   ACTION_PRESS = 2,
 
   /**
-   * Event type sent when a notification has been delivered to the device. For scheduled notifications,
-   * this event is sent at the point when the schedule executes, not when a the schedule is created.
+   * Event type sent when a notification has been delivered to the device. For trigger notifications,
+   * this event is sent at the point when the trigger executes, not when a the trigger notification is created.
    *
    * It's important to note even though a notification has been delivered, it may not be shown to the
    * user. For example, they may have notifications disabled on the device/channel/app.
@@ -250,6 +250,11 @@ export enum EventType {
    * @platform android API Level >= 28
    */
   CHANNEL_GROUP_BLOCKED = 6,
+
+  /**
+   * Event type is sent when a notification trigger is created.
+   */
+  TRIGGER_NOTIFICATION_CREATED = 7,
 }
 
 /**
@@ -267,6 +272,7 @@ export interface EventDetail {
    *  - [`EventType.PRESS`](/react-native/reference/eventtype#press)
    *  - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
    *  - [`EventType.DELIVERED`](/react-native/reference/eventtype#delivered)
+   *  - [`EventType.TRIGGER_NOTIFICATION_CREATED`](/react-native/reference/eventtype#trigger_notification_created)
    */
   notification?: Notification;
 

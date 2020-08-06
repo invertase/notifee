@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NotifeeApiModule extends ReactContextBaseJavaModule {
+  private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
+  private static final int NOTIFICATION_TYPE_TRIGGER = 2;
+  private static final int NOTIFICATION_TYPE_ALL = 0;
+
   public NotifeeApiModule(@NonNull ReactApplicationContext reactContext) {
     super(reactContext);
   }
@@ -42,7 +46,31 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
     Notifee.getInstance()
-        .cancelAllNotifications((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+        .cancelAllNotifications(
+            NOTIFICATION_TYPE_ALL, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void cancelDisplayedNotifications(Promise promise) {
+    Notifee.getInstance()
+        .cancelAllNotifications(
+            NOTIFICATION_TYPE_DISPLAYED,
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void cancelTriggerNotifications(Promise promise) {
+    Notifee.getInstance()
+        .cancelAllNotifications(
+            NOTIFICATION_TYPE_TRIGGER, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void getTriggerNotificationIds(Promise promise) {
+    Notifee.getInstance()
+        .getTriggerNotificationIds(
+            (e, aStringList) ->
+                NotifeeReactUtils.promiseStringListResolver(promise, e, aStringList));
   }
 
   @ReactMethod
@@ -98,10 +126,18 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void displayNotification(
-      ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
+  public void displayNotification(ReadableMap notificationMap, Promise promise) {
     Notifee.getInstance()
         .displayNotification(
+            Arguments.toBundle(notificationMap),
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void createTriggerNotification(
+      ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
+    Notifee.getInstance()
+        .createTriggerNotification(
             Arguments.toBundle(notificationMap),
             Arguments.toBundle(triggerMap),
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));

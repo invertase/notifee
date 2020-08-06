@@ -11,8 +11,8 @@ import {
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
 import { InitialNotification, Notification, Event } from './types/Notification';
+import { Trigger } from './types/trigger';
 import NotifeeNativeModule from './NotifeeNativeModule';
-
 import {
   isAndroid,
   isArray,
@@ -26,6 +26,7 @@ import {
   kReactNativeNotifeeNotificationEvent,
 } from './utils';
 import validateNotification from './validators/validateNotification';
+import validateTrigger from './validators/validateTrigger';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
 import {
@@ -54,8 +55,29 @@ if (isAndroid) {
 }
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
+  public getTriggerNotificationIds(): Promise<string[]> {
+    if (isIOS) {
+      return Promise.resolve([]);
+    }
+    return this.native.getTriggerNotificationIds();
+  }
+
   public cancelAllNotifications(): Promise<void> {
     return this.native.cancelAllNotifications();
+  }
+
+  public cancelDisplayedNotifications(): Promise<void> {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.cancelDisplayedNotifications();
+  }
+
+  public cancelTriggerNotifications(): Promise<void> {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.cancelTriggerNotifications();
   }
 
   public cancelNotification(notificationId: string): Promise<void> {
@@ -178,8 +200,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.deleteChannelGroup(channelGroupId);
   }
 
-  // TODO(salakar) Trigger types
-  public displayNotification(notification: Notification, trigger?: any): Promise<string> {
+  public displayNotification(notification: Notification): Promise<string> {
     let options: Notification;
     try {
       options = validateNotification(notification);
@@ -187,14 +208,32 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.displayNotification(*) ${e.message}`);
     }
 
-    // TODO(salakar) only android triggers currently implemented
-    if (isAndroid) {
-      return this.native.displayNotification(options, trigger).then((): string => {
-        return options.id as string;
-      });
+    return this.native.displayNotification(options).then((): string => {
+      return options.id as string;
+    });
+  }
+
+  public createTriggerNotification(notification: Notification, trigger: Trigger): Promise<string> {
+    let options: Notification;
+    let triggerOptions: Trigger;
+
+    if (isIOS) {
+      return Promise.resolve('');
     }
 
-    return this.native.displayNotification(options).then((): string => {
+    try {
+      options = validateNotification(notification);
+    } catch (e) {
+      throw new Error(`notifee.createTriggerNotification(*) ${e.message}`);
+    }
+
+    try {
+      triggerOptions = validateTrigger(trigger);
+    } catch (e) {
+      throw new Error(`notifee.createTriggerNotification(*) ${e.message}`);
+    }
+
+    return this.native.createTriggerNotification(options, triggerOptions).then((): string => {
       return options.id as string;
     });
   }

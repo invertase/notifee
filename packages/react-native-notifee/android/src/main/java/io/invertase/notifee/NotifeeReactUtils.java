@@ -71,6 +71,19 @@ class NotifeeReactUtils {
     }
   }
 
+  static void promiseStringListResolver(Promise promise, Exception e, List<String> stringList) {
+    if (e != null) {
+      // TODO custom error class with message/code
+      promise.reject(e);
+    } else {
+      WritableArray writableArray = Arguments.createArray();
+      for (String string : stringList) {
+        writableArray.pushString(string);
+      }
+      promise.resolve(writableArray);
+    }
+  }
+
   static void promiseResolver(Promise promise, Exception e) {
     if (e != null) {
       // TODO custom error class with message/code

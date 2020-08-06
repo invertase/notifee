@@ -3,6 +3,7 @@
  */
 
 import { Event, ForegroundServiceTask, InitialNotification, Notification } from './Notification';
+import { Trigger } from './Trigger';
 import {
   AndroidChannel,
   AndroidChannelGroup,
@@ -20,12 +21,30 @@ export interface Module {
    * API used to cancel all notifications.
    *
    * The `cancelAllNotifications` API removes any displayed notifications from the users device and
-   * any pending notification triggers.
+   * any pending trigger notifications.
    *
    * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
    * notifications.
    */
   cancelAllNotifications(): Promise<void>;
+
+  /**
+   * API used to cancel any displayed notifications.
+   *
+   * Currently only supported on Android.
+   *
+   * @platform android
+   */
+  cancelDisplayedNotifications(): Promise<void>;
+
+  /**
+   * API used to cancel any trigger notifications.
+   *
+   * Currently only supported on Android.
+   *
+   * @platform android
+   */
+  cancelTriggerNotifications(): Promise<void>;
 
   /**
    * API used to cancel a single notification.
@@ -144,10 +163,38 @@ export interface Module {
    *
    * @param notification The [`Notification`](/react-native/reference/notification) interfaced used
    * to create a notification for both Android & iOS.
-   * @param trigger TODO(salakar) Trigger types
    */
-  // TODO(salakar) Trigger types
-  displayNotification(notification: Notification, trigger?: any): Promise<string>;
+  displayNotification(notification: Notification): Promise<string>;
+
+  /**
+   * API used to create a trigger notification.
+   *
+   * All channels/categories should be created before calling this method during the apps lifecycle.
+   *
+   * View the [Triggers](/react-native/docs/triggers) documentation for more information.
+   *
+   * @param notification The [`Notification`](/react-native/reference/notification) interfaced used
+   * to create a notification.
+   *
+   * @param trigger The [`Trigger`](/react-native/reference/trigger) interfaced used
+   * to create a trigger.
+   *
+   * Currently only supported on Android.
+   *
+   * @platform android
+   */
+  createTriggerNotification(notification: Notification, trigger: Trigger): Promise<string>;
+
+  /**
+   * API used to return the ids of trigger notifications that are pending.
+   *
+   * View the [Triggers](/react-native/docs/triggers) documentation for more information.
+   *
+   * Currently only supported on Android.
+   *
+   * @platform android
+   */
+  getTriggerNotificationIds(): Promise<string[]>;
 
   /**
    * API used to return a channel on supported Android devices.

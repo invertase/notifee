@@ -81,3 +81,11 @@ const IS_VALID_URL_REGEX = /^(http|https):\/\/[^ "]+$/;
 export function isValidUrl(url: string): boolean {
   return IS_VALID_URL_REGEX.test(url);
 }
+
+export function isValidEnum(value: any, enumType: Record<string, any>): boolean {
+  if (!Object.values(enumType).includes(value)) {
+    return false;
+  }
+
+  return true;
+}
