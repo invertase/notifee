@@ -94,4 +94,4 @@ There may be situations whereby you may want to cancel the trigger notification 
 
 To cancel a trigger notification, the [`cancelNotification`](/react-native/docs/displaying-a-notification#cancelling-a-notification) method can be called with the unique notification ID.
 
-It's also possible to cancel all of your trigger notifications, by calling [cancelTriggerNotifications]('https://notifee.app/react-native/reference/canceltriggernotifications') or [cancelAllNotifications]('https://notifee.app/react-native/reference/cancelallnotifications).
+It's also possible to cancel all of your trigger notifications, by calling [cancelTriggerNotifications](/react-native/reference/canceltriggernotifications) or [cancelAllNotifications](/react-native/reference/cancelallnotifications).
