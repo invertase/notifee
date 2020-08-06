@@ -8100,7 +8100,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification.\n"
+										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -8115,7 +8115,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Trigger`](/react-native/reference/trigger) interfaced used\nto create a trigger.\n\nCurrently only supported on Android.\n"
+										"text": "The [`Trigger`](/react-native/reference/trigger) interface used\nto create a trigger.\n\nCurrently only supported on Android.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -8362,7 +8362,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification for both Android & iOS.\n"
+										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -10171,7 +10171,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification.\n"
+										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -10186,7 +10186,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Trigger`](/react-native/reference/trigger) interfaced used\nto create a trigger.\n\nCurrently only supported on Android.\n"
+										"text": "The [`Trigger`](/react-native/reference/trigger) interface used\nto create a trigger.\n\nCurrently only supported on Android.\n"
 									},
 									"type": {
 										"type": "reference",
@@ -10473,7 +10473,7 @@
 									"kindString": "Parameter",
 									"flags": {},
 									"comment": {
-										"text": "The [`Notification`](/react-native/reference/notification) interfaced used\nto create a notification for both Android & iOS.\n"
+										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
