@@ -77,7 +77,7 @@ After a number of unread notifications have been delivered to the device, iOS wi
 application. The notification on the top of the stack by default will display the summary text, letting the user know how many
 unread notifications are available:
 
-![Default summary text](https://images.prismic.io/invertase/8d3cc19e-5cb9-41a4-9c55-1d03c975043e_ios-summary-text-default.png?auto=compress,format)
+<Vimeo id="ios-summary-text" caption="Default Summary Text Example" />
 
 It is possible to override this default text by providing `summaryArgument` & `summaryArgumentCount` fields
 on the notification body combined with a [Category](/react-native/docs/ios/categories) `summaryFormat`.
