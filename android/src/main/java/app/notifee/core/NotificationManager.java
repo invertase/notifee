@@ -44,9 +44,9 @@ import java.util.concurrent.TimeoutException;
 class NotificationManager {
   private static final String TAG = "NotificationManager";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
-  private static final int NOTIFICATION_TYPE_DELIVERED = 1;
-  private static final int NOTIFICATION_TYPE_TRIGGER = 2;
   private static final int NOTIFICATION_TYPE_ALL = 0;
+  private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
+  private static final int NOTIFICATION_TYPE_TRIGGER = 2;
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
       NotificationModel notificationModel) {
@@ -347,7 +347,7 @@ class NotificationManager {
           NotificationManagerCompat notificationManagerCompat =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext());
 
-          if (notificationType == NOTIFICATION_TYPE_DELIVERED
+          if (notificationType == NOTIFICATION_TYPE_DISPLAYED
               || notificationType == NOTIFICATION_TYPE_ALL) {
             notificationManagerCompat.cancelAll();
           }
@@ -386,7 +386,7 @@ class NotificationManager {
             });
   }
 
-  static Task<Void> createNotificationTrigger(
+  static Task<Void> createTriggerNotification(
       NotificationModel notificationModel, Bundle triggerBundle) {
     if (triggerBundle == null) return displayNotification(notificationModel);
 
@@ -429,7 +429,8 @@ class NotificationManager {
           }
 
           EventBus.post(
-              new NotificationEvent(NotificationEvent.TYPE_TRIGGER_CREATED, notificationModel));
+              new NotificationEvent(
+                  NotificationEvent.TYPE_TRIGGER_NOTIFICATION_CREATED, notificationModel));
 
           return null;
         });
@@ -442,7 +443,8 @@ class NotificationManager {
 
     if (notificationBytes == null || triggerBytes == null) {
       Logger.w(
-          TAG, "Attempted to handle doTriggerWork but no notification or trigger data was found.");
+          TAG,
+          "Attempted to handle doScheduledWork but no notification or trigger data was found.");
       completer.set(ListenableWorker.Result.success());
       return;
     }

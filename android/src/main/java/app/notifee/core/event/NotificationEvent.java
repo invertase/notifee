@@ -15,7 +15,7 @@ public class NotificationEvent {
 
   @KeepForSdk public static final int TYPE_DELIVERED = 3;
 
-  @KeepForSdk public static final int TYPE_TRIGGER_CREATED = 7;
+  @KeepForSdk public static final int TYPE_TRIGGER_NOTIFICATION_CREATED = 7;
 
   private final int type;
   private final Bundle extras;

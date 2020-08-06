@@ -21,9 +21,9 @@ public class TimeTriggerModel {
     double delay = 0;
 
     if (mTimeTriggerBundle.containsKey("timestamp")) {
-      double timestmap = mTimeTriggerBundle.getDouble("timestamp");
-      if (timestmap > 0) {
-        delay = Math.round((timestmap - System.currentTimeMillis()) / 1000);
+      double timestamp = mTimeTriggerBundle.getDouble("timestamp");
+      if (timestamp > 0) {
+        delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
       }
     }
 
@@ -39,7 +39,8 @@ public class TimeTriggerModel {
       } catch (IllegalArgumentException e) {
         Logger.e(
             TAG,
-            "An error occurred whilst trying to convert interval time unit: " + repeatIntervalTimeUnit,
+            "An error occurred whilst trying to convert interval time unit: "
+                + repeatIntervalTimeUnit,
             e);
       }
     }
@@ -48,7 +49,7 @@ public class TimeTriggerModel {
   }
 
   public int getInterval() {
-    if (mTimeTriggerBundle.containsKey("repeatInterval") ) {
+    if (mTimeTriggerBundle.containsKey("repeatInterval")) {
       Double d = mTimeTriggerBundle.getDouble("repeatInterval");
       return d.intValue();
     }
