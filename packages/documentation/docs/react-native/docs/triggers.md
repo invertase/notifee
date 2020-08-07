@@ -16,9 +16,12 @@ For example, you may wish to notify your user when they have a meeting at work.
 # Creating a trigger notification
 
 ```js
+import React from 'react';
+import { View, Button } from 'react-native';
+import notifee, { TimeTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
+
 function Screen() {
   async function onCreateTriggerNotification() {
-    import notifee, { TimeTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
     // Create a time-based trigger
     const trigger: TimeTrigger = {
       type: TriggerType.TIME,
@@ -31,7 +34,7 @@ function Screen() {
         title: 'Meeting with Jane',
         body: 'Today at 11:20am',
         android: {
-          channelId,
+          channelId: 'your-channel-id',
         },
       },
       trigger,
@@ -59,30 +62,30 @@ Trigger notifications work in the same way as any other notification. They have 
 Let's update our trigger we created previously, but this time your user wants to be reminded each week when they have a meeting with Jane! For this, we will use the `repeatInterval` and `repeatIntervalTimeUnit`:
 
 ```js
+import notifee, { TimeTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
+
 async function onCreateTriggerNotification() {
-  import notifee, { TimeTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
+  const date = new Date(Date.now() + 600000);
+  date.setDate(date.getDate() + 7); // initial trigger notification next week
 
-   const date = new Date(Date.now() + 600000);
-   date.setDate(date.getDate() + 7); // initial trigger notification next week
+  const trigger: TimeTrigger = {
+    type: TriggerType.TIME,
+    timestamp: date.getTime(),
+    repeatInterval: 7,
+    repeatIntervalTimeUnit: TimeUnit.DAYS,
+  };
 
-   const trigger: TimeTrigger = {
-     type: TriggerType.TIME,
-     timestamp: date,
-     repeatInterval: 7,
-     repeatIntervalTimeUnit: TimeUnit.DAYS
-   };
-
-  await notifee.createTriggerNotification({
-   {
-        id: '123',
-        title: 'Meeting with Jane',
-        body: 'Today at 11:20am',
-        android: {
-          channelId,
-        },
+  await notifee.createTriggerNotification(
+    {
+      id: '123',
+      title: 'Meeting with Jane',
+      body: 'Today at 11:20am',
+      android: {
+        channelId: 'your-channel-id',
       },
-      trigger,
-  });
+    },
+    trigger,
+  );
 }
 ```
 
