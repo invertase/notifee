@@ -11,6 +11,11 @@
 #import "Private/NotifeeCoreDelegateHolder.h"
 
 @implementation NotifeeCoreUNUserNotificationCenter
+struct {
+  unsigned int willPresentNotification:1;
+  unsigned int didReceiveNotificationResponse:1;
+  unsigned int openSettingsForNotification:1;
+} originalUNCDelegateRespondsTo;
 
 + (instancetype)instance {
   static dispatch_once_t once;
@@ -27,8 +32,14 @@
   __weak NotifeeCoreUNUserNotificationCenter *weakSelf = self;
   dispatch_once(&once, ^{
     NotifeeCoreUNUserNotificationCenter *strongSelf = weakSelf;
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    center.delegate = strongSelf;
+   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+      if (center.delegate != nil) {
+          _originalDelegate = center.delegate;
+        originalUNCDelegateRespondsTo.openSettingsForNotification = (unsigned int) [_originalDelegate respondsToSelector:@selector(userNotificationCenter:openSettingsForNotification:)];
+        originalUNCDelegateRespondsTo.willPresentNotification = (unsigned int) [_originalDelegate respondsToSelector:@selector(userNotificationCenter:willPresentNotification:withCompletionHandler:)];
+        originalUNCDelegateRespondsTo.didReceiveNotificationResponse = (unsigned int) [_originalDelegate respondsToSelector:@selector(userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)];
+      }
+      center.delegate = strongSelf;
   });
 }
 
@@ -46,7 +57,7 @@
 
 // The method will be called on the delegate only if the application is in the foreground.
 // If the the handler is not called in a timely manner then the notification will not be presented.
-// The application can choose t o have the notification presented as a sound, badge, alert and/or in the
+// The application can choose to have the notification presented as a sound, badge, alert and/or in the
 // notification list. This decision should be based on whether the information in the notification is otherwise visible
 // to the user.
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
@@ -74,6 +85,9 @@
     }
 
     completionHandler(presentationOptions);
+
+  } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.willPresentNotification) {
+    [_originalDelegate userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
   }
 }
 
@@ -132,6 +146,9 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (15 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
       completionHandler();
     });
+
+  } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.didReceiveNotificationResponse) {
+     [_originalDelegate userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
   }
 }
 
