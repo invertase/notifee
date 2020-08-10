@@ -152,4 +152,10 @@ struct {
   }
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(nullable UNNotification *)notification {
+  if (_originalDelegate != nil && originalUNCDelegateRespondsTo.openSettingsForNotification) {
+    [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+  }
+}
+
 @end
