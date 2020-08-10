@@ -340,7 +340,7 @@ class NotificationManager {
           notificationManagerCompat.cancel(notificationId.hashCode());
 
           WorkManager.getInstance(ContextHolder.getApplicationContext())
-              .cancelUniqueWork("schedule:" + notificationId);
+              .cancelUniqueWork("trigger:" + notificationId);
 
           return null;
         });
