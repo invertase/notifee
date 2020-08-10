@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.11.1
+
+- **[Android]**: Fixed an issue with `cancelNotification` for trigger notifications.
+- **[Android]**: Fixed an issue with remote verification on devices <= 20
+- **[iOS]**: Call original delegate when intercepting notification response on iOS
+
 ## 0.11.0
 
 - **[Android]**: Add support for Trigger Notifications on Android. See [Triggers](https://notifee.app/react-native/docs/triggers).
