@@ -28,7 +28,7 @@
     // Application
     // ObjC -> Initialize other delegates & observers
     [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(application_onDidFinishLaunchingNotification:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(customNotificationHook:) name:@"customNotificationHook" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(messaging_didReceiveRemoteNotification:) name:@"RNFBMessagingDidReceiveRemoteNotification" object:nil];
   });
 }
 
@@ -46,7 +46,7 @@
   [[NotifeeCoreUNUserNotificationCenter instance] observe];
 }
 
-- (void)customNotificationHook:(nonnull NSNotification *)notification {
+- (void)messaging_didReceiveRemoteNotification:(nonnull NSNotification *)notification {
     // update me with logic
 }
 
