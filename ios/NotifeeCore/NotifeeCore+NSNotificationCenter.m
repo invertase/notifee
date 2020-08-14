@@ -28,6 +28,7 @@
     // Application
     // ObjC -> Initialize other delegates & observers
     [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(application_onDidFinishLaunchingNotification:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(customNotificationHook:) name:@"customNotificationHook" object:nil];
   });
 }
 
@@ -43,6 +44,10 @@
   // setup our delegates after app finishes launching
   // these methods are idempotent so can safely be called multiple times
   [[NotifeeCoreUNUserNotificationCenter instance] observe];
+}
+
+- (void)customNotificationHook:(nonnull NSNotification *)notification {
+    // update me with logic
 }
 
 @end
