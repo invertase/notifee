@@ -27,12 +27,21 @@
     NotifeeCoreNSNotificationCenter *strongSelf = weakSelf;
     // Application
     // ObjC -> Initialize other delegates & observers
-    [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(application_onDidFinishLaunchingNotification:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(messaging_didReceiveRemoteNotification:) name:@"RNFBMessagingDidReceiveRemoteNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:strongSelf
+           selector:@selector(application_onDidFinishLaunchingNotification:)
+               name:UIApplicationDidFinishLaunchingNotification
+             object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:strongSelf
+           selector:@selector(messaging_didReceiveRemoteNotification:)
+               name:@"RNFBMessagingDidReceiveRemoteNotification"
+             object:nil];
   });
 }
 
-// start observing immediately on class load - specifically for UIApplicationDidFinishLaunchingNotification
+// start observing immediately on class load - specifically for
+// UIApplicationDidFinishLaunchingNotification
 + (void)load {
   [[self instance] observe];
 }
@@ -47,7 +56,7 @@
 }
 
 - (void)messaging_didReceiveRemoteNotification:(nonnull NSNotification *)notification {
-    // update me with logic
+  // update me with logic
 }
 
 @end

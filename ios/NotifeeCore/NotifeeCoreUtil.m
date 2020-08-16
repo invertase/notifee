@@ -25,7 +25,8 @@
   return asNumber;
 }
 
-+ (NSMutableArray<NSDictionary *> *)notificationActionsToDictionaryArray:(NSArray<UNNotificationAction *> *)notificationActions {
++ (NSMutableArray<NSDictionary *> *)notificationActionsToDictionaryArray:
+    (NSArray<UNNotificationAction *> *)notificationActions {
   NSMutableArray<NSDictionary *> *notificationActionDicts = [[NSMutableArray alloc] init];
 
   for (UNNotificationAction *notificationAction in notificationActions) {
@@ -34,13 +35,18 @@
     notificationActionDict[@"id"] = notificationAction.identifier;
     notificationActionDict[@"title"] = notificationAction.title;
 
-    notificationActionDict[@"destructive"] = @(((notificationAction.options & UNNotificationActionOptionDestructive) != 0));
-    notificationActionDict[@"foreground"] = @(((notificationAction.options & UNNotificationActionOptionForeground) != 0));
-    notificationActionDict[@"authenticationRequired"] = @(((notificationAction.options & UNNotificationActionOptionAuthenticationRequired) != 0));
+    notificationActionDict[@"destructive"] =
+        @(((notificationAction.options & UNNotificationActionOptionDestructive) != 0));
+    notificationActionDict[@"foreground"] =
+        @(((notificationAction.options & UNNotificationActionOptionForeground) != 0));
+    notificationActionDict[@"authenticationRequired"] =
+        @(((notificationAction.options & UNNotificationActionOptionAuthenticationRequired) != 0));
 
     if ([[notificationAction class] isKindOfClass:[UNTextInputNotificationAction class]]) {
-      UNTextInputNotificationAction *notificationInputAction = (UNTextInputNotificationAction *) notificationAction;
-      if ([notificationInputAction textInputButtonTitle] == nil && [notificationInputAction textInputPlaceholder] == nil) {
+      UNTextInputNotificationAction *notificationInputAction =
+          (UNTextInputNotificationAction *)notificationAction;
+      if ([notificationInputAction textInputButtonTitle] == nil &&
+          [notificationInputAction textInputPlaceholder] == nil) {
         notificationActionDict[@"input"] = @(YES);
       } else {
         NSMutableDictionary *inputDict = [NSMutableDictionary dictionary];
@@ -58,7 +64,8 @@
   return notificationActionDicts;
 }
 
-+ (NSMutableArray<UNNotificationAction *> *)notificationActionsFromDictionaryArray:(NSArray<NSDictionary *> *)actionDictionaries {
++ (NSMutableArray<UNNotificationAction *> *)notificationActionsFromDictionaryArray:
+    (NSArray<NSDictionary *> *)actionDictionaries {
   NSMutableArray<UNNotificationAction *> *notificationActions = [[NSMutableArray alloc] init];
 
   for (NSDictionary *actionDictionary in actionDictionaries) {
@@ -81,25 +88,24 @@
       options |= UNNotificationActionOptionAuthenticationRequired;
     }
 
-    if (actionDictionary[@"input"] != nil && [actionDictionary[@"input"] isKindOfClass:NSDictionary.class]) {
+    if (actionDictionary[@"input"] != nil &&
+        [actionDictionary[@"input"] isKindOfClass:NSDictionary.class]) {
       NSDictionary *inputDictionary = actionDictionary[@"input"];
       NSString *buttonText = inputDictionary[@"buttonText"];
       NSString *placeholderText = inputDictionary[@"placeholderText"];
-      notificationAction = [
-          UNTextInputNotificationAction actionWithIdentifier:id
-                                                       title:title
-                                                     options:options
-                                        textInputButtonTitle:buttonText
-                                        textInputPlaceholder:placeholderText
-      ];
-    } else if (actionDictionary[@"input"] != nil) { // BOOL
-      notificationAction = [
-          UNTextInputNotificationAction actionWithIdentifier:id
-                                                       title:title
-                                                     options:options
-      ];
+      notificationAction = [UNTextInputNotificationAction actionWithIdentifier:id
+                                                                         title:title
+                                                                       options:options
+                                                          textInputButtonTitle:buttonText
+                                                          textInputPlaceholder:placeholderText];
+    } else if (actionDictionary[@"input"] != nil) {  // BOOL
+      notificationAction = [UNTextInputNotificationAction actionWithIdentifier:id
+                                                                         title:title
+                                                                       options:options];
     } else {
-      notificationAction = [UNNotificationAction actionWithIdentifier:id title:title options:options];
+      notificationAction = [UNNotificationAction actionWithIdentifier:id
+                                                                title:title
+                                                              options:options];
     }
 
     [notificationActions addObject:notificationAction];
@@ -109,30 +115,30 @@
 }
 
 /**
-* Builds the notification attachments
-* If no attachments are resolved, an empty array will be returned
-*
-* @return NSArray<UNNotificationAttachment *> *
-*/
-+ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:(NSArray<NSDictionary *> *)attachmentDictionaries {
+ * Builds the notification attachments
+ * If no attachments are resolved, an empty array will be returned
+ *
+ * @return NSArray<UNNotificationAttachment *> *
+ */
++ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:
+    (NSArray<NSDictionary *> *)attachmentDictionaries {
   NSMutableArray<UNNotificationAttachment *> *attachments = [[NSMutableArray alloc] init];
 
   for (NSDictionary *attachmentDict in attachmentDictionaries) {
     UNNotificationAttachment *attachment = [self attachmentFromDictionary:attachmentDict];
-      if (attachment) {
-          [attachments addObject:attachment];
-     }
+    if (attachment) {
+      [attachments addObject:attachment];
+    }
   }
   return attachments;
 }
 
 /**
-* Returns an UNNotificationAttachment from a file path or local resource
-*
-* @return UNNotificationAttachment or null if the attachment fails to resolve
-*/
-+ (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict
-{
+ * Returns an UNNotificationAttachment from a file path or local resource
+ *
+ * @return UNNotificationAttachment or null if the attachment fails to resolve
+ */
++ (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict {
   NSString *identifier = attachmentDict[@"id"];
   NSString *urlString = attachmentDict[@"url"];
   NSURL *url;
@@ -150,12 +156,18 @@
 
   if (url) {
     NSError *error;
-    UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:identifier URL:url options:[self attachmentOptionsFromDictionary:attachmentDict] error:&error];
+    UNNotificationAttachment *attachment = [UNNotificationAttachment
+        attachmentWithIdentifier:identifier
+                             URL:url
+                         options:[self attachmentOptionsFromDictionary:attachmentDict]
+                           error:&error];
     if (error != nil) {
-      NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an attachment %@: %@", attachmentDict, error);
+      NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an attachment %@: %@",
+            attachmentDict, error);
       return nil;
     } else if (attachment == nil) {
-      NSLog(@"NotifeeCore: Failed resolving an attachment %@: data at URL is not a supported type.", attachmentDict);
+      NSLog(@"NotifeeCore: Failed resolving an attachment %@: data at URL is not a supported type.",
+            attachmentDict);
     }
 
     return attachment;
@@ -166,12 +178,11 @@
 }
 
 /**
-* Returns a NSDictionary representation of options related to the attached file
-*
-* @param optionsDict NSDictionary
-*/
-+ (NSDictionary *)attachmentOptionsFromDictionary:(NSDictionary *)optionsDict
-{
+ * Returns a NSDictionary representation of options related to the attached file
+ *
+ * @param optionsDict NSDictionary
+ */
++ (NSDictionary *)attachmentOptionsFromDictionary:(NSDictionary *)optionsDict {
   NSMutableDictionary *options = [NSMutableDictionary new];
   if (optionsDict[@"typeHint"] != nil) {
     options[UNNotificationAttachmentOptionsTypeHintKey] = optionsDict[@"typeHint"];
@@ -185,10 +196,12 @@
     NSDictionary *area = optionsDict[@"thumbnailClippingRect"];
     NSNumber *x = area[@"x"];
     NSNumber *y = area[@"y"];
-    NSNumber *width =  area[@"width"];
+    NSNumber *width = area[@"width"];
     NSNumber *height = area[@"height"];
-    CGRect areaRect = CGRectMake([x doubleValue], [y doubleValue], [width doubleValue], [height doubleValue]);
-    options[UNNotificationAttachmentOptionsThumbnailClippingRectKey] = (__bridge id _Nullable)(CGRectCreateDictionaryRepresentation(areaRect));
+    CGRect areaRect =
+        CGRectMake([x doubleValue], [y doubleValue], [width doubleValue], [height doubleValue]);
+    options[UNNotificationAttachmentOptionsThumbnailClippingRectKey] =
+        (__bridge id _Nullable)(CGRectCreateDictionaryRepresentation(areaRect));
   }
 
   if (optionsDict[@"thumbnailTime"] != nil) {
@@ -198,8 +211,8 @@
   return options;
 }
 
-
-+ (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers {
++ (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:
+    (NSArray<NSString *> *)identifiers {
   NSMutableArray<NSNumber *> *intentIdentifiers = [[NSMutableArray alloc] init];
 
   for (NSString *identifier in identifiers) {
@@ -284,7 +297,8 @@
   return intentIdentifiers;
 }
 
-+ (NSMutableArray<NSString *> *)intentIdentifiersFromNumberArray:(NSArray<NSNumber *> *)identifiers {
++ (NSMutableArray<NSString *> *)intentIdentifiersFromNumberArray:
+    (NSArray<NSNumber *> *)identifiers {
   NSMutableArray<NSString *> *intentIdentifiers = [[NSMutableArray alloc] init];
 
   for (NSNumber *identifier in identifiers) {
@@ -368,6 +382,5 @@
 
   return intentIdentifiers;
 }
-
 
 @end
