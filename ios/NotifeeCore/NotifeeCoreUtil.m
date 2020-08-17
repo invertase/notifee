@@ -211,6 +211,76 @@
   return options;
 }
 
+/**
+ * Returns an UNNotificationTrigger from NSDictionary representing a trigger
+ *
+ * @param triggerDict NSDictionary
+ * @return UNNotificationTrigger or null if trigger type is not recognised
+ */
++ (UNNotificationTrigger *)triggerFromDictionary:(NSDictionary *)triggerDict {
+  UNNotificationTrigger *trigger;
+  NSInteger triggerType = [triggerDict[@"type"] integerValue];
+
+  if (triggerType == NotifeeCoreTriggerTypeTimestamp) {
+    trigger = [self timestampTriggerFromDictionary:triggerDict];
+  } else if (triggerType == NotifeeCoreTriggerTypeInterval) {
+    trigger = [self intervalTriggerFromDictionary:triggerDict];
+  } else {
+    NSLog(@"NotifeeCore: Failed to parse trigger with unknown trigger type: %ld",
+          (long)triggerType);
+  }
+
+  return trigger;
+}
+
+/**
+ * Returns an UNNotificationTrigger from NSDictionary representing a
+ * TimestampTrigger
+ *
+ * @param triggerDict NSDictionary
+ */
++ (UNNotificationTrigger *)timestampTriggerFromDictionary:(NSDictionary *)triggerDict {
+  NSNumber *timestampMillis = triggerDict[@"timestamp"];
+  NSInteger timestamp = [timestampMillis doubleValue] / 1000;
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+
+  return [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:[date timeIntervalSinceNow]
+                                                            repeats:false];
+}
+
+/**
+ * Returns an UNNotificationTrigger from NSDictionary representing an
+ * IntervalTrigger
+ *
+ * @param triggerDict NSDictionary
+ */
++ (UNNotificationTrigger *)intervalTriggerFromDictionary:(NSDictionary *)triggerDict {
+  double intervalNumber = [triggerDict[@"interval"] doubleValue];
+  NSString *timeUnit = triggerDict[@"timeUnit"];
+
+  NSTimeInterval intervalInSeconds = 0;
+
+  if ([timeUnit isEqualToString:kNotifeeCoreTimeUnitSeconds]) {
+    intervalInSeconds = intervalNumber;
+  } else if ([timeUnit isEqualToString:kNotifeeCoreTimeUnitMinutes]) {
+    // multiply by the number of seconds in 1 minute
+    intervalInSeconds = intervalNumber * 60;
+  } else if ([timeUnit isEqualToString:kNotifeeCoreTimeUnitHours]) {
+    // multiply by the number of seconds in 1 hour
+    intervalInSeconds = intervalNumber * 3600;
+  } else if ([timeUnit isEqualToString:kNotifeeCoreTimeUnitDays]) {
+    // multiply by the number of seconds in 1 day
+    intervalInSeconds = intervalNumber * 86400;
+  } else {
+    NSLog(@"NotifeeCore: Failed to parse IntervalTrigger with unknown "
+          @"timeUnit: %@",
+          timeUnit);
+    return nil;
+  }
+
+  return [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:intervalInSeconds repeats:true];
+}
+
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:
     (NSArray<NSString *> *)identifiers {
   NSMutableArray<NSNumber *> *intentIdentifiers = [[NSMutableArray alloc] init];
