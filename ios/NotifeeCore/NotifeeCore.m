@@ -22,7 +22,7 @@
 }
 
 /**
- * Cancel a currently displayed or scheduled notification.
+ * Cancel a currently displayed or pending trigger notification.
  *
  * @param notificationId NSString id of the notification to cancel
  * @param block notifeeMethodVoidBlock
@@ -35,8 +35,9 @@
 }
 
 /**
- * Cancel all currently displayed notifications.
+ * Cancel all currently displayed or pending trigger notifications.
  *
+ * @param notificationType NSInteger
  * @param block notifeeMethodVoidBlock
  */
 + (void)cancelAllNotifications:(NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block {
