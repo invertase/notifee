@@ -234,8 +234,7 @@
 }
 
 /**
- * Returns an UNNotificationTrigger from NSDictionary representing a
- * TimestampTrigger
+ * Returns an UNNotificationTrigger from NSDictionary representing a TimestampTrigger
  *
  * @param triggerDict NSDictionary
  */
@@ -249,8 +248,7 @@
 }
 
 /**
- * Returns an UNNotificationTrigger from NSDictionary representing an
- * IntervalTrigger
+ * Returns an UNNotificationTrigger from NSDictionary representing an IntervalTrigger
  *
  * @param triggerDict NSDictionary
  */
