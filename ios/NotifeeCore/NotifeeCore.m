@@ -79,8 +79,7 @@
 /**
  * Display a local notification immediately.
  *
- * @param notification NSDictionary representation of
- * UNMutableNotificationContent
+ * @param notification NSDictionary representation of UNMutableNotificationContent
  * @param block notifeeMethodVoidBlock
  */
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block {
@@ -167,8 +166,7 @@
 
   // data
   NSMutableDictionary *userInfo = [notification[@"data"] mutableCopy];
-  // attach a copy of the original notification payload into the data object,
-  // for internal use
+  // attach a copy of the original notification payload into the data object, for internal use
   userInfo[kNotifeeUserInfoNotification] = [notification mutableCopy];
   content.userInfo = userInfo;
 
@@ -327,8 +325,7 @@
 }
 
 /**
- * Builds and replaces the existing notification categories on
- * UNUserNotificationCenter
+ * Builds and replaces the existing notification categories on UNUserNotificationCenter
  *
  * @param categories NSArray<NSDictionary *> *
  * @param block notifeeMethodVoidBlock
