@@ -21,6 +21,10 @@
 static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notification-event";
 static NSString *kReactNativeNotifeeNotificationBackgroundEvent = @"app.notifee.notification-event-background";
 
+static NSInteger kReactNativeNotifeeNotificationTypeDisplayed = 1;
+static NSInteger kReactNativeNotifeeNotificationTypeTrigger = 2;
+static NSInteger kReactNativeNotifeeNotificationTypeAll = 0;
+
 @implementation NotifeeApiModule {
   bool hasListeners;
   NSMutableArray* pendingCoreEvents;
@@ -97,12 +101,56 @@ RCT_EXPORT_METHOD(cancelNotification:
 }
 
 RCT_EXPORT_METHOD(cancelAllNotifications:
-  (RCTPromiseResolveBlock) resolve
+  (RCTPromiseResolveBlock)resolve
       reject:
-      (RCTPromiseRejectBlock) reject
+      RCTPromiseRejectBlock)reject
 ) {
-  [NotifeeCore cancelAllNotifications:^(NSError *_Nullable error) {
+   [NotifeeCore cancelAllNotifications:kReactNativeNotifeeNotificationTypeAll withBlock:^(NSError *_Nullable error) {
+     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(cancelDisplayedNotifications:
+  (RCTPromiseResolveBlock)resolve
+      reject:
+      (RCTPromiseRejectBlock)reject
+) {
+  [NotifeeCore cancelAllNotifications:kReactNativeNotifeeNotificationTypeDisplayed withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(cancelTriggerNotifications:
+  (RCTPromiseResolveBlock)resolve
+      reject:
+      (RCTPromiseRejectBlock)reject
+) {
+   [NotifeeCore cancelAllNotifications:kReactNativeNotifeeNotificationTypeTrigger withBlock:^(NSError *_Nullable error) {
+     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(createTriggerNotification:
+  (NSDictionary *)notification
+      trigger:
+      (NSDictionary *)trigger
+      resolve:
+      (RCTPromiseResolveBlock)resolve
+      reject:
+      (RCTPromiseRejectBlock)reject
+) {
+  [NotifeeCore createTriggerNotification:notification withTrigger:trigger withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(getTriggerNotificationIds:
+  RCTPromiseResolveBlock)resolve
+     reject:
+     (RCTPromiseRejectBlock)reject
+) {
+  [NotifeeCore getTriggerNotificationIds:^(NSError *_Nullable error, NSArray<NSDictionary *> *notifications) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:notifications];
   }];
 }
 

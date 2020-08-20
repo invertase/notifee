@@ -3,7 +3,13 @@
  */
 
 import { objectHasProperty, isNumber, isObject, isValidEnum } from '../utils';
-import { Trigger, TimeUnit, TimeTrigger, TriggerType } from '../types/Trigger';
+import {
+  Trigger,
+  TimeUnit,
+  TimestampTrigger,
+  IntervalTrigger,
+  TriggerType,
+} from '../types/Trigger';
 
 const MINIMUM_INTERVAL = 15;
 
@@ -27,52 +33,52 @@ export default function validateTrigger(trigger: Trigger): Trigger {
   }
 
   switch (trigger.type) {
-    case TriggerType.TIME:
-      return validateTimeTrigger(trigger);
+    case TriggerType.TIMESTAMP:
+      return validateTimestampTrigger(trigger);
+    case TriggerType.INTERVAL:
+      return validateIntervalTrigger(trigger);
     default:
       throw new Error('Unknown trigger type');
   }
 }
 
-function validateTimeTrigger(trigger: TimeTrigger): TimeTrigger {
+function validateTimestampTrigger(trigger: TimestampTrigger): TimestampTrigger {
   if (!isNumber(trigger.timestamp)) {
     throw new Error("'trigger.timestamp' expected a number value.");
   }
 
   const now = Date.now();
-
   if (trigger.timestamp <= now) {
     throw new Error("'trigger.timestamp' date must be in the future.");
   }
 
-  const out: TimeTrigger = {
+  return {
     type: trigger.type,
     timestamp: trigger.timestamp,
-    repeatInterval: -1,
-    repeatIntervalTimeUnit: TimeUnit.MINUTES,
+  };
+}
+
+function validateIntervalTrigger(trigger: IntervalTrigger): IntervalTrigger {
+  if (!isNumber(trigger.interval)) {
+    throw new Error("'trigger.interval' expected a number value.");
+  }
+
+  const out: IntervalTrigger = {
+    type: trigger.type,
+    interval: trigger.interval,
+    timeUnit: TimeUnit.SECONDS,
   };
 
-  if (objectHasProperty(trigger, 'repeatInterval')) {
-    if (!isNumber(trigger.repeatInterval)) {
-      throw new Error("'trigger.repeatInterval' must be a number value.");
+  if (objectHasProperty(trigger, 'timeUnit')) {
+    if (!isValidEnum(trigger.timeUnit, TimeUnit)) {
+      throw new Error("'trigger.timeUnit' expected a TimeUnit value.");
     }
-
-    if (!Number.isInteger(trigger.repeatInterval)) {
-      throw new Error("'trigger.repeatInterval' must be a integer value.");
-    }
-
-    if (objectHasProperty(trigger, 'repeatIntervalTimeUnit')) {
-      if (!isValidEnum(trigger.repeatIntervalTimeUnit, TimeUnit)) {
-        throw new Error("'trigger.repeatIntervalTimeUnit' expected a TimeUnit value.");
-      }
-      out.repeatIntervalTimeUnit = trigger.repeatIntervalTimeUnit;
-    }
-
-    if (!isMinimumInterval(trigger.repeatInterval, out.repeatIntervalTimeUnit)) {
-      throw new Error("'trigger.repeatInterval' expected to be at least 15 minutes.");
-    }
-
-    out.repeatInterval = trigger.repeatInterval;
+    out.timeUnit = trigger.timeUnit;
   }
+
+  if (!isMinimumInterval(trigger.interval, out.timeUnit)) {
+    throw new Error("'trigger.interval' expected to be at least 15 minutes.");
+  }
+
   return out;
 }

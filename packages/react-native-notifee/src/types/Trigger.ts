@@ -1,52 +1,53 @@
 /**
- * Interface for building a trigger based on time.
+ * Interface for building a trigger with a timestamp.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
- *
- * Currently only supported on Android.
- *
- * @platform android
  */
-export interface TimeTrigger {
+export interface TimestampTrigger {
   /**
    * Constant enum value used to identify the trigger type.
    */
-  type: TriggerType.TIME;
+  type: TriggerType.TIMESTAMP;
   /**
    * The timestamp when the notification should first be shown, in milliseconds since 1970.
    */
   timestamp: number;
+}
+
+/**
+ * Interface for building a trigger that repeats.
+ *
+ * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ */
+export interface IntervalTrigger {
+  /**
+   * Constant enum value used to identify the trigger type.
+   */
+  type: TriggerType.INTERVAL;
 
   /**
    * How frequently the notification should be repeated.
    *
-   * If not present, the notification will be displayed once.
-   *
    * For example, if set to 30, the notification will be displayed every 30 minutes.
    *
    * Must be set to a minimum of 15 minutes.
-   *
    */
-  repeatInterval?: number;
+  interval: number;
 
   /**
-   * The unit of time that the `repeatInterval` is measured in.
+   * The unit of time that the `interval` is measured in.
    *
    * For example, if set to `TimeUnit.DAYS` and repeat interval is set to 3, the notification will repeat every 3 days.
    *
-   * Defaults to `TimeUnit.MINUTES`
+   * Defaults to `TimeUnit.SECONDS`
    */
-  repeatIntervalTimeUnit?: TimeUnit | TimeUnit.MINUTES;
+  timeUnit?: TimeUnit | TimeUnit.SECONDS;
 }
 
 /**
  * An interface representing the different units of time which can be used with `TimeTrigger.repeatIntervalTimeUnit`.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
- *
- * Currently only supported on Android.
- *
- * @platform android
  */
 export enum TimeUnit {
   SECONDS = 'SECONDS',
@@ -59,13 +60,10 @@ export enum TimeUnit {
  * Available Trigger Types.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more with example usage.
- *
- * Currently only supported on Android.
- *
- * @platform android
  */
 export enum TriggerType {
-  TIME = 0,
+  TIMESTAMP = 0,
+  INTERVAL = 1,
 }
 
-export declare type Trigger = TimeTrigger;
+export declare type Trigger = TimestampTrigger | IntervalTrigger;

@@ -56,9 +56,6 @@ if (isAndroid) {
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
   public getTriggerNotificationIds(): Promise<string[]> {
-    if (isIOS) {
-      return Promise.resolve([]);
-    }
     return this.native.getTriggerNotificationIds();
   }
 
@@ -67,16 +64,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public cancelDisplayedNotifications(): Promise<void> {
-    if (isIOS) {
-      return Promise.resolve();
-    }
     return this.native.cancelDisplayedNotifications();
   }
 
   public cancelTriggerNotifications(): Promise<void> {
-    if (isIOS) {
-      return Promise.resolve();
-    }
     return this.native.cancelTriggerNotifications();
   }
 
@@ -216,10 +207,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   public createTriggerNotification(notification: Notification, trigger: Trigger): Promise<string> {
     let options: Notification;
     let triggerOptions: Trigger;
-
-    if (isIOS) {
-      return Promise.resolve('');
-    }
 
     try {
       options = validateNotification(notification);

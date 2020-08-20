@@ -29,6 +29,12 @@ typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 
 typedef void (^notifeeMethodNSIntegerBlock)(NSError *_Nullable, NSInteger);
 
+typedef NS_ENUM(NSInteger, NotifeeCoreNotificationType) {
+  NotifeeCoreNotificationTypeAll = 0,
+  NotifeeCoreNotificationTypeDisplayed = 1,
+  NotifeeCoreNotificationTypeTrigger = 2
+};
+
 @class NotifeeCore;
 
 @protocol NotifeeCoreDelegate <NSObject>
@@ -42,9 +48,14 @@ typedef void (^notifeeMethodNSIntegerBlock)(NSError *_Nullable, NSInteger);
 
 + (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void)cancelAllNotifications:(notifeeMethodVoidBlock)block;
++ (void)cancelAllNotifications:(NSInteger)notificationType
+                     withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)createTriggerNotification:(NSDictionary *)notification withTrigger: (NSDictionary *)trigger withBlock:(notifeeMethodVoidBlock)block;
+
++ (void)getTriggerNotificationIds:(notifeeMethodNSArrayBlock)block;
 
 + (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
 
