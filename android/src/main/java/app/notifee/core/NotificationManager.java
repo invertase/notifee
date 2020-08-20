@@ -24,11 +24,12 @@ import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
 import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.model.IntervalTriggerModel;
 import app.notifee.core.model.NotificationAndroidActionModel;
 import app.notifee.core.model.NotificationAndroidModel;
 import app.notifee.core.model.NotificationAndroidStyleModel;
 import app.notifee.core.model.NotificationModel;
-import app.notifee.core.model.TimeTriggerModel;
+import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
@@ -398,48 +399,18 @@ class NotificationManager {
 
   static Task<Void> createTriggerNotification(
       NotificationModel notificationModel, Bundle triggerBundle) {
-    if (triggerBundle == null) return displayNotification(notificationModel);
-
     return Tasks.call(
         CACHED_THREAD_POOL,
         () -> {
-          TimeTriggerModel trigger = TimeTriggerModel.fromBundle(triggerBundle);
-
-          String uniqueWorkName = "trigger:" + notificationModel.getId();
-          WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
-
-          double delay = trigger.getDelay();
-          int interval = trigger.getInterval();
-
-          Data.Builder workDataBuilder =
-              new Data.Builder()
-                  .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
-                  .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
-                  .putByteArray(
-                      "notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
-
-          // One time trigger
-          if (interval == -1) {
-            OneTimeWorkRequest.Builder workRequestBuilder =
-                new OneTimeWorkRequest.Builder(Worker.class);
-            workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
-            workRequestBuilder.addTag(uniqueWorkName);
-            workRequestBuilder.setInputData(workDataBuilder.build());
-            workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
-            workManager.enqueueUniqueWork(
-                uniqueWorkName, ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
-          } else {
-            PeriodicWorkRequest.Builder workRequestBuilder =
-                new PeriodicWorkRequest.Builder(
-                    Worker.class, interval, trigger.getIntervalTimeUnit());
-
-            workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
-            workRequestBuilder.addTag(uniqueWorkName);
-            workRequestBuilder.setInputData(workDataBuilder.build());
-            workRequestBuilder.setInitialDelay((long) delay, TimeUnit.SECONDS);
-            PeriodicWorkRequest request = workRequestBuilder.build();
-            workManager.enqueueUniquePeriodicWork(
-                uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, request);
+          int triggerType = (int) triggerBundle.getDouble("type");
+  
+          switch (triggerType) {
+            case 0:
+              createTimestampTriggerNotification(notificationModel, triggerBundle);
+              break;
+            case 1:
+              createIntervalTriggerNotification(notificationModel, triggerBundle);
+              break;
           }
 
           EventBus.post(
@@ -448,6 +419,55 @@ class NotificationManager {
 
           return null;
         });
+  }
+
+  static void createIntervalTriggerNotification(
+      NotificationModel notificationModel, Bundle triggerBundle) {
+    IntervalTriggerModel trigger = IntervalTriggerModel.fromBundle(triggerBundle);
+    String uniqueWorkName = "trigger:" + notificationModel.getId();
+    WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+    Data.Builder workDataBuilder =
+        new Data.Builder()
+            .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
+            .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
+            .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
+
+    long interval = trigger.getInterval();
+
+    PeriodicWorkRequest.Builder workRequestBuilder;
+    workRequestBuilder =
+        new PeriodicWorkRequest.Builder(Worker.class, interval, trigger.getTimeUnit());
+
+    workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+    workRequestBuilder.addTag(uniqueWorkName);
+    workRequestBuilder.setInputData(workDataBuilder.build());
+    workManager.enqueueUniquePeriodicWork(
+        uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+  }
+
+  static void createTimestampTriggerNotification(
+      NotificationModel notificationModel, Bundle triggerBundle) {
+    TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
+
+    String uniqueWorkName = "trigger:" + notificationModel.getId();
+    WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+
+    long delay = trigger.getDelay();
+
+    Data.Builder workDataBuilder =
+        new Data.Builder()
+            .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
+            .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
+            .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
+
+    // One time trigger
+    OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
+    workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+    workRequestBuilder.addTag(uniqueWorkName);
+    workRequestBuilder.setInputData(workDataBuilder.build());
+    workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+    workManager.enqueueUniqueWork(
+        uniqueWorkName, ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
   }
 
   static Task<List<String>> getTriggerNotificationIds() {

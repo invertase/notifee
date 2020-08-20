@@ -22,7 +22,7 @@
 }
 
 /**
- * Cancel a currently displayed or scheduled notification.
+ * Cancel a currently displayed or pending trigger notification.
  *
  * @param notificationId NSString id of the notification to cancel
  * @param block notifeeMethodVoidBlock
@@ -35,19 +35,45 @@
 }
 
 /**
- * Cancel all currently displayed or scheduled notifications.
+ * Cancel all currently displayed or pending trigger notifications.
  *
+ * @param notificationType NSInteger
  * @param block notifeeMethodVoidBlock
  */
-+ (void)cancelAllNotifications:(notifeeMethodVoidBlock)block {
++ (void)cancelAllNotifications:(NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
-  // TODO cancel conditionally once scheduling API introduced, see roadmap comment
-  [center removeAllDeliveredNotifications];
+  // cancel displayed notifications
+  if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+    [center removeAllDeliveredNotifications];
 
-  // TODO cancel conditionally once scheduling API introduced, see roadmap comment
-  [center removeAllPendingNotificationRequests];
+  // cancel trigger notifications
+  if (notificationType == NotifeeCoreNotificationTypeTrigger ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+      [center removeAllPendingNotificationRequests];
   block(nil);
+}
+
+/**
+ * Retrieve a NSArray of pending UNNotificationRequest for the application.
+ * Resolves a NSArray of UNNotificationRequest identifiers.
+ *
+ * @param block notifeeMethodNSArrayBlock
+ */
++ (void)getTriggerNotificationIds:(notifeeMethodNSArrayBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  [center getPendingNotificationRequestsWithCompletionHandler:^(
+              NSArray<UNNotificationRequest *> *_Nonnull requests) {
+    NSMutableArray<NSString *> *idsArray = [[NSMutableArray alloc] init];
+
+    for (UNNotificationRequest *request in requests) {
+      NSString *notificationId = request.identifier;
+      [idsArray addObject:notificationId];
+    }
+
+    block(nil, idsArray);
+  }];
 }
 
 /**
@@ -57,6 +83,69 @@
  * @param block notifeeMethodVoidBlock
  */
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block {
+  UNMutableNotificationContent *content = [self buildNotificationContent:notification];
+
+  UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
+                                                                        content:content
+                                                                        trigger:nil];
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  [center addNotificationRequest:request
+           withCompletionHandler:^(NSError *error) {
+             if (error == nil) {
+               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+                 @"type" : @3,  // DELIVERED = 3
+                 @"detail" : @{
+                   @"notification" : notification,
+                 }
+               }];
+             }
+             block(error);
+           }];
+}
+
+/* Create a trigger notification .
+ *
+ * @param notification NSDictionary representation of UNMutableNotificationContent
+ * @param block notifeeMethodVoidBlock
+ */
++ (void)createTriggerNotification:(NSDictionary *)notification
+                      withTrigger:(NSDictionary *)trigger
+                        withBlock:(notifeeMethodVoidBlock)block {
+  UNMutableNotificationContent *content = [self buildNotificationContent:notification];
+  UNNotificationTrigger *unTrigger = [NotifeeCoreUtil triggerFromDictionary:trigger];
+
+  if (unTrigger == nil) {
+    // do nothing if trigger is null
+    return block(nil);
+  }
+
+  UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
+                                                                        content:content
+                                                                        trigger:unTrigger];
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  [center addNotificationRequest:request
+           withCompletionHandler:^(NSError *error) {
+             if (error == nil) {
+               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+                 @"type" : @7,  // TRIGGER_NOTIFICATION_CREATED = 7
+                 @"detail" : @{
+                   @"notification" : notification,
+                 }
+               }];
+             }
+             block(error);
+           }];
+}
+
+/**
+ * Builds a UNMutableNotificationContent from a NSDictionary.
+ *
+ * @param notification NSDictionary representation of UNNotificationContent
+ */
+
++ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification {
   NSDictionary *iosDict = notification[@"ios"];
   UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
 
@@ -133,7 +222,6 @@
         notificationSound = [UNNotificationSound soundNamed:soundName];
       }
     }
-
     content.sound = notificationSound;
   } else if (iosDict[@"sound"] != nil) {
     UNNotificationSound *notificationSound;
@@ -146,6 +234,7 @@
     }
 
     content.sound = notificationSound;
+
   }  // critical, criticalVolume, sound
 
   // threadId
@@ -178,22 +267,7 @@
         [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
   }
 
-  UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
-                                                                        content:content
-                                                                        trigger:nil];
-  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  [center addNotificationRequest:request
-           withCompletionHandler:^(NSError *error) {
-             if (error == nil) {
-               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @3,  // DELIVERED = 3
-                 @"detail" : @{
-                   @"notification" : notification,
-                 }
-               }];
-             }
-             block(error);
-           }];
+  return content;
 }
 
 + (void)getNotificationCategories:(notifeeMethodNSArrayBlock)block {
@@ -461,7 +535,6 @@
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.lockScreenSetting];
         settingsDictionary[@"notificationCenter"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.notificationCenterSetting];
-
         block(nil, settingsDictionary);
       }];
 }

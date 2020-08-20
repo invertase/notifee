@@ -14,6 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
 
+// TimeUnit constants for IntervalTrigger
+static NSString *kNotifeeCoreTimeUnitSeconds = @"SECONDS";
+static NSString *kNotifeeCoreTimeUnitMinutes = @"MINUTES";
+static NSString *kNotifeeCoreTimeUnitHours = @"HOURS";
+static NSString *kNotifeeCoreTimeUnitDays = @"DAYS";
+
+// Enum representing trigger notification types
+typedef NS_ENUM(NSInteger, NotifeeCoreTriggerType) {
+  NotifeeCoreTriggerTypeTimestamp = 0,
+  NotifeeCoreTriggerTypeInterval = 1
+};
+
 @interface NotifeeCoreUtil : NSObject
 
 + (NSNumber *)numberForUNNotificationSetting:(UNNotificationSetting)setting;
@@ -27,6 +39,8 @@ static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers;
 
 + (NSMutableArray<NSString *> *)intentIdentifiersFromNumberArray:(NSArray<NSNumber *> *)identifiers;
+
++ (UNNotificationTrigger *)triggerFromDictionary:(NSDictionary *)triggerDict;
 
 @end
 
