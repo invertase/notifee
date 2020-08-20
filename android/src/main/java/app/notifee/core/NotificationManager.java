@@ -402,8 +402,8 @@ class NotificationManager {
     return Tasks.call(
         CACHED_THREAD_POOL,
         () -> {
-          int triggerType = triggerBundle.getInt("type");
-
+          int triggerType = (int) triggerBundle.getDouble("type");
+  
           switch (triggerType) {
             case 0:
               createTimestampTriggerNotification(notificationModel, triggerBundle);
