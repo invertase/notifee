@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.util.TypedValue;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import app.notifee.core.ContextHolder;
@@ -170,6 +171,26 @@ public class ResourceUtils {
       getResourceIdCache().put(key, id);
       return id;
     }
+  }
+
+  public static @Nullable String geSoundName(Uri sound) {
+    if (sound == null) return null;
+    if (sound.toString().contains("android.resource")) {
+      int resourceId = Integer.valueOf(sound.getLastPathSegment());
+      if (resourceId != 0) {
+        TypedValue value = new TypedValue();
+        Context context = ContextHolder.getApplicationContext();
+        context.getResources().getValue(resourceId, value, true);
+
+        CharSequence soundString = value.string;
+        if (soundString != null || soundString.length() > 0) {
+          return soundString.toString().replace("res/raw/", "");
+        }
+      }
+    }
+
+    // TODO parse system sounds
+    return null;
   }
 
   public static @Nullable Uri getSoundUri(String sound) {
