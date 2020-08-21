@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.12.0
+
+- **[Android]**: `lightColor` and `sound` are now returned when calling `getChannel` or `getChannels`.
+- **BREAKING**: `TimeTrigger` has been removed, in favour of `TimestampTrigger` and `IntervalTrigger`.
+- **[iOS]**: Trigger Notifications are now supported on `iOS`. See [Triggers](https://notifee.app/react-native/docs/triggers).
+
 ## 0.11.1
 
 - **[Android]**: Fixed an issue with `cancelNotification` for trigger notifications.
