@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
+import app.notifee.core.utility.ColorUtils;
 import app.notifee.core.utility.ResourceUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -233,8 +234,17 @@ public class ChannelManager {
     channelBundle.putBoolean("vibration", channel.shouldVibrate());
     channelBundle.putBoolean("blocked", channel.getImportance() == IMPORTANCE_NONE);
 
-    channelBundle.putString("sound", ""); // TODO convert sound to string
-    channelBundle.putString("lightColor", ""); // TODO convert light color
+    // can be null, don't include if null
+    if (channel.getSound() != null) {
+      // try to parse uri
+      String soundValue = ResourceUtils.getSoundName(channel.getSound());
+      if (soundValue != null) channelBundle.putString("sound", soundValue);
+    }
+
+    // optional, can be 0
+    if (channel.getLightColor() != 0) {
+      channelBundle.putString("lightColor", ColorUtils.getColorString(channel.getLightColor()));
+    }
 
     // getVibrationPattern can be null
     long[] vibrationPattern = channel.getVibrationPattern();

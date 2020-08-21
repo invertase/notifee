@@ -403,7 +403,6 @@ class NotificationManager {
         CACHED_THREAD_POOL,
         () -> {
           int triggerType = (int) triggerBundle.getDouble("type");
-  
           switch (triggerType) {
             case 0:
               createTimestampTriggerNotification(notificationModel, triggerBundle);
