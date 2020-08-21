@@ -173,7 +173,7 @@ public class ResourceUtils {
     }
   }
 
-  public static @Nullable String geSoundName(Uri sound) {
+  public static @Nullable String getSoundName(Uri sound) {
     if (sound == null) return null;
     if (sound.toString().contains("android.resource")) {
       int resourceId = Integer.valueOf(sound.getLastPathSegment());
