@@ -103,7 +103,7 @@ RCT_EXPORT_METHOD(cancelNotification:
 RCT_EXPORT_METHOD(cancelAllNotifications:
   (RCTPromiseResolveBlock)resolve
       reject:
-      RCTPromiseRejectBlock)reject
+      (RCTPromiseRejectBlock)reject
 ) {
    [NotifeeCore cancelAllNotifications:kReactNativeNotifeeNotificationTypeAll withBlock:^(NSError *_Nullable error) {
      [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
@@ -145,7 +145,7 @@ RCT_EXPORT_METHOD(createTriggerNotification:
 }
 
 RCT_EXPORT_METHOD(getTriggerNotificationIds:
-  RCTPromiseResolveBlock)resolve
+  (RCTPromiseResolveBlock)resolve
      reject:
      (RCTPromiseRejectBlock)reject
 ) {
