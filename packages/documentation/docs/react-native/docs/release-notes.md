@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.12.1
+
+- **[iOS]**: Fixed an issue with the iOS module that prevented the library from compiling.
+
 ## 0.12.0
 
 - **[Android]**: `lightColor` and `sound` are now returned when calling `getChannel` or `getChannels`.
