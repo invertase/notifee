@@ -95,6 +95,17 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
+    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
+    if (notifeeTrigger != nil) {
+      // post DELIVERED event
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+        @"type" : @3,  // DELIVERED = 3
+        @"detail" : @{
+          @"notification" : notifeeNotification,
+        }
+      }];
+    }
+
     completionHandler(presentationOptions);
 
   } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.willPresentNotification) {
