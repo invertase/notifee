@@ -84,7 +84,7 @@ import notifee from '@notifee/react-native';
 
 await notifee.setNotificationCategories([
   {
-    id: 'message',
+    id: 'post',
     summaryFormat: 'You have %u+ unread messages from %@.',
     actions: [
       {
