@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
+static NSString *kNotifeeUserInfoTrigger = @"__notifee_trigger";
 
 // TimeUnit constants for IntervalTrigger
 static NSString *kNotifeeCoreTimeUnitSeconds = @"SECONDS";

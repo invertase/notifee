@@ -95,7 +95,7 @@
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @3,  // DELIVERED = 3
+                 @"type" : @(NotifeeCoreEventTypeDelivered),
                  @"detail" : @{
                    @"notification" : notification,
                  }
@@ -131,7 +131,7 @@
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @7,  // TRIGGER_NOTIFICATION_CREATED = 7
+                 @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
                  @"detail" : @{
                    @"notification" : notification,
                  }

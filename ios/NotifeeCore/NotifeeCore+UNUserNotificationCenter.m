@@ -99,7 +99,7 @@ struct {
     if (notifeeTrigger != nil) {
       // post DELIVERED event
       [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-        @"type" : @3,  // DELIVERED = 3
+        @"type" : @(NotifeeCoreEventTypeDelivered),
         @"detail" : @{
           @"notification" : notifeeNotification,
         }
