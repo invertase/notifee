@@ -51,7 +51,7 @@
   // cancel trigger notifications
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
       notificationType == NotifeeCoreNotificationTypeAll)
-      [center removeAllPendingNotificationRequests];
+    [center removeAllPendingNotificationRequests];
   block(nil);
 }
 
@@ -83,7 +83,8 @@
  * @param block notifeeMethodVoidBlock
  */
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block {
-  UNMutableNotificationContent *content = [self buildNotificationContent:notification];
+  UNMutableNotificationContent *content = [self buildNotificationContent:notification
+                                                             withTrigger:nil];
 
   UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
                                                                         content:content
@@ -94,7 +95,7 @@
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @3,  // DELIVERED = 3
+                 @"type" : @(NotifeeCoreEventTypeDelivered),
                  @"detail" : @{
                    @"notification" : notification,
                  }
@@ -112,7 +113,8 @@
 + (void)createTriggerNotification:(NSDictionary *)notification
                       withTrigger:(NSDictionary *)trigger
                         withBlock:(notifeeMethodVoidBlock)block {
-  UNMutableNotificationContent *content = [self buildNotificationContent:notification];
+  UNMutableNotificationContent *content = [self buildNotificationContent:notification
+                                                             withTrigger:trigger];
   UNNotificationTrigger *unTrigger = [NotifeeCoreUtil triggerFromDictionary:trigger];
 
   if (unTrigger == nil) {
@@ -129,7 +131,7 @@
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @7,  // TRIGGER_NOTIFICATION_CREATED = 7
+                 @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
                  @"detail" : @{
                    @"notification" : notification,
                  }
@@ -145,7 +147,8 @@
  * @param notification NSDictionary representation of UNNotificationContent
  */
 
-+ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification {
++ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification
+                                               withTrigger:(NSDictionary *)trigger {
   NSDictionary *iosDict = notification[@"ios"];
   UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
 
@@ -166,8 +169,13 @@
 
   // data
   NSMutableDictionary *userInfo = [notification[@"data"] mutableCopy];
+
   // attach a copy of the original notification payload into the data object, for internal use
   userInfo[kNotifeeUserInfoNotification] = [notification mutableCopy];
+  if (trigger != nil) {
+    userInfo[kNotifeeUserInfoTrigger] = [trigger mutableCopy];
+  }
+
   content.userInfo = userInfo;
 
   // badgeCount - nil is an acceptable value so no need to check key existence
