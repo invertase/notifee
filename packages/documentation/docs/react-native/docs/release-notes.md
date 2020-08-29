@@ -7,6 +7,11 @@ previous: /react-native/docs/license-keys
 
 ## 0.12.1
 
+- **[iOS]**: Fixed an issue where the `DELIVERED` foreground event wasn't being sent for trigger notifications.
+- **[iOS]**: Fixed an issue with the iOS module that sent events before the JS bundle was ready.
+
+## 0.12.1
+
 - **[iOS]**: Fixed an issue with the iOS module that prevented the library from compiling.
 
 ## 0.12.0
