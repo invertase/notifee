@@ -15,7 +15,7 @@ export interface TimestampTrigger {
 }
 
 /**
- * Interface for building a trigger that repeats.
+ * Interface for building a trigger that repeats at a specified interval.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
  */
@@ -45,7 +45,7 @@ export interface IntervalTrigger {
 }
 
 /**
- * An interface representing the different units of time which can be used with `TimeTrigger.repeatIntervalTimeUnit`.
+ * An interface representing the different units of time which can be used with `IntervalTrigger.timeUnit`.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
  */
