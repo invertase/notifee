@@ -9,8 +9,6 @@
 
 A feature rich Android & iOS notifications library for React Native.
 
-> **Note**: Notifee is an **ALPHA** product.
-
 [> Learn More](https://notifee.app/)
 
 ## Installation
