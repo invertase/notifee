@@ -5,6 +5,9 @@
 import { NotificationPressAction } from '../types/Notification';
 import { isObject, isString, isUndefined, isArray, isNumber } from '../utils';
 
+const LAUNCH_ACTIVITY_DEFAULT_VALUE = 'default';
+const PRESS_ACTION_DEFAULT_VALUE = 'default';
+
 // TODO name wrong - this is no longer 'Android' specific - is used on android also
 export default function validateAndroidPressAction(
   pressAction: NotificationPressAction,
@@ -27,6 +30,9 @@ export default function validateAndroidPressAction(
     }
 
     out.launchActivity = pressAction.launchActivity;
+  } else if (pressAction.id === PRESS_ACTION_DEFAULT_VALUE) {
+    // Set default value for launchActivity
+    out.launchActivity = LAUNCH_ACTIVITY_DEFAULT_VALUE;
   }
 
   if (!isUndefined(pressAction.launchActivityFlags)) {
