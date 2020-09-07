@@ -460,8 +460,6 @@ class NotificationManager {
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
             .putString("id", notificationModel.getId());
 
-    // Populate the database in the background.
-    // If you want to start with more words, just add them.
     WorkDataRepository workDataRepository =
         new WorkDataRepository(ContextHolder.getApplicationContext());
 
