@@ -23,6 +23,8 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
+import app.notifee.core.database.WorkDataEntity;
+import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.IntervalTriggerModel;
 import app.notifee.core.model.NotificationAndroidActionModel;
@@ -42,6 +44,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -450,15 +453,25 @@ class NotificationManager {
 
     String uniqueWorkName = "trigger:" + notificationModel.getId();
     WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
-
     long delay = trigger.getDelay();
 
     Data.Builder workDataBuilder =
         new Data.Builder()
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
-            .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
-            .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
+            .putString("id", notificationModel.getId());
 
+    // Populate the database in the background.
+    // If you want to start with more words, just add them.
+    WorkDataRepository workDataRepository =
+        new WorkDataRepository(ContextHolder.getApplicationContext());
+
+    WorkDataEntity workData =
+        new WorkDataEntity(
+            notificationModel.getId(),
+            ObjectUtils.bundleToBytes(notificationModel.toBundle()),
+            ObjectUtils.bundleToBytes(triggerBundle));
+
+    workDataRepository.insert(workData);
     // One time trigger
     OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
     workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
@@ -504,22 +517,35 @@ class NotificationManager {
   }
 
   static void doScheduledWork(
-      Data workData, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
-    byte[] triggerBytes = workData.getByteArray("trigger");
-    byte[] notificationBytes = workData.getByteArray("notification");
+      Data workData, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer)
+      throws ExecutionException, InterruptedException {
+    WorkDataRepository workDataRepository =
+        new WorkDataRepository(ContextHolder.getApplicationContext());
 
-    if (notificationBytes == null || triggerBytes == null) {
-      Logger.w(
-          TAG,
-          "Attempted to handle doScheduledWork but no notification or trigger data was found.");
-      completer.set(ListenableWorker.Result.success());
-      return;
-    }
+    Continuation<WorkDataEntity, Task<Void>> workContinuation =
+        task -> {
+          WorkDataEntity workDataEntity = task.getResult();
 
-    NotificationModel notificationModel =
-        NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
+          byte[] triggerBytes = workDataEntity.getTrigger();
+          byte[] notificationBytes = workDataEntity.getNotification();
 
-    NotificationManager.displayNotification(notificationModel)
+          if (notificationBytes == null || triggerBytes == null) {
+            Logger.w(
+                TAG,
+                "Attempted to handle doScheduledWork but no notification or trigger data was"
+                    + " found.");
+            completer.set(ListenableWorker.Result.success());
+            return null;
+          }
+
+          NotificationModel notificationModel =
+              NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
+          return NotificationManager.displayNotification(notificationModel);
+        };
+
+    workDataRepository
+        .getWorkDataById(workData.getString("id"))
+        .continueWithTask(CACHED_THREAD_POOL, workContinuation)
         .addOnCompleteListener(
             task -> {
               completer.set(ListenableWorker.Result.success());

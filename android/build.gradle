@@ -75,6 +75,7 @@ repositories {
 }
 
 dependencies {
+
   api "com.squareup.okhttp3:okhttp:+"
   api 'androidx.concurrent:concurrent-futures:1.0.0'
   api 'com.google.android.gms:play-services-tasks:17.1.0'
@@ -83,9 +84,14 @@ dependencies {
   api 'com.facebook.fresco:fresco:2.1.0'
   api 'io.jsonwebtoken:jjwt-api:0.10.7'
 
+  def room_version = "2.2.5"
+  implementation "androidx.room:room-runtime:$room_version"
+  annotationProcessor "androidx.room:room-compiler:$room_version"
+
   annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'androidx.test.ext:junit:1.1.1'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }
