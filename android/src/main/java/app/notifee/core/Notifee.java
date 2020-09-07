@@ -17,6 +17,8 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.AutoStartPermissionUtils;
+import app.notifee.core.utility.PowerSavingModeUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -362,6 +364,40 @@ public class Notifee {
         result.onComplete(null, initialNotificationBundle);
       }
     }
+  }
+
+  @KeepForSdk
+  public void isAutoStartPermissionAvailable(MethodCallResult<Bundle> result) {
+    Bundle bundle = new Bundle();
+    bundle.putBoolean(
+        "isAutoStartPermissionAvailable",
+        AutoStartPermissionUtils.isAutoStartPermissionAvailable(
+            ContextHolder.getApplicationContext()));
+    result.onComplete(null, bundle);
+  }
+
+  @KeepForSdk
+  public void getAutoStartPermission(MethodCallResult<Bundle> result) {
+
+    AutoStartPermissionHelper.getInstance()
+        .getAutoStartPermission(ContextHolder.getApplicationContext());
+
+    Boolean isSuccess =
+        AutoStartPermissionUtils.getAutoStartPermission(ContextHolder.getApplicationContext());
+    Bundle bundle = new Bundle();
+    bundle.putBoolean("getAutoStartPermission", isSuccess);
+    result.onComplete(null, bundle);
+  }
+
+  @KeepForSdk
+  public void isPowerSavingMode(MethodCallResult<Bundle> result) {
+    Bundle bundle = new Bundle();
+
+    bundle.putBoolean(
+        "isPowerSavingMode",
+        PowerSavingModeUtils.isPowerSavingMode(ContextHolder.getApplicationContext()));
+
+    result.onComplete(null, bundle);
   }
 
   @KeepForSdk
