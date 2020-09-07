@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.12.3
+
+- **[Android]**: Fixed an issue where `pressAction` with the `default` id failed to open the app when the notification was pressed.
+- **[Android]**: Fixed an issue with gradle plugin 4.1 and `Build.VERSION_NAME` which prevented the app from building.
+
 ## 0.12.2
 
 - **[iOS]**: Fixed an issue where the `DELIVERED` foreground event wasn't being sent for trigger notifications.
