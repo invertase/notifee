@@ -346,6 +346,8 @@ class NotificationManager {
           WorkManager.getInstance(ContextHolder.getApplicationContext())
               .cancelUniqueWork("trigger:" + notificationId);
 
+          //TODO: delete data from database
+
           return null;
         });
   }
@@ -370,6 +372,8 @@ class NotificationManager {
             // Remove all cancelled and finished work from its internal database
             // states include SUCCEEDED, FAILED and CANCELLED
             workManager.pruneWork();
+
+            //TODO: delete data from database
           }
 
           return null;
@@ -428,6 +432,8 @@ class NotificationManager {
     IntervalTriggerModel trigger = IntervalTriggerModel.fromBundle(triggerBundle);
     String uniqueWorkName = "trigger:" + notificationModel.getId();
     WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+
+    //TODO: save data to database instead
     Data.Builder workDataBuilder =
         new Data.Builder()
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
