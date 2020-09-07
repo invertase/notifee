@@ -4,6 +4,10 @@
 
 package io.invertase.notifee;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import app.notifee.core.InitProvider;
 import app.notifee.core.Notifee;
 import app.notifee.core.NotifeeConfig;
@@ -16,12 +20,28 @@ public class NotifeeInitProvider extends InitProvider {
     boolean onCreate = super.onCreate();
 
     NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
-    configBuilder.setProductVersion(BuildConfig.VERSION_NAME);
+    configBuilder.setProductVersion(getApplicationVersionString());
     configBuilder.setFrameworkVersion(getReactNativeVersionString());
     configBuilder.setEventSubscriber(new NotifeeEventSubscriber());
 
     Notifee.configure(configBuilder.build());
     return onCreate;
+  }
+
+  private String getApplicationVersionString() {
+    String version = "unknown";
+    Context context = this.getContext();
+    if (context != null) {
+      PackageManager pm = context.getPackageManager();
+      try {
+        PackageInfo pInfo = pm.getPackageInfo(context.getPackageName(), 0);
+        version = pInfo.versionName;
+      } catch (Exception e) {
+        // is there anything useful to log the unbelievably unexpected inability to get package info?
+      }
+    }
+
+    return version;
   }
 
   private String getReactNativeVersionString() {
