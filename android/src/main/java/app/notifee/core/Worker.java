@@ -17,7 +17,11 @@ public class Worker extends ListenableWorker {
   static final String WORK_TYPE_LICENSE_VERIFY_REMOTE = "app.notifee.core.LicenseVerify.REMOTE";
   static final String WORK_TYPE_NOTIFICATION_TRIGGER =
       "app.notifee.core.NotificationManager.TRIGGER";
+  static final String WORK_REQUEST_ONE_TIME = "OneTime";
+  static final String WORK_REQUEST_PERIODIC = "Periodic";
+  static final String KEY_WORK_REQUEST = "workRequestType";
   private static final String TAG = "Worker";
+
   private CallbackToFutureAdapter.Completer<Result> mCompleter;
 
   /**

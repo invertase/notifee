@@ -23,6 +23,8 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
+import app.notifee.core.database.WorkDataEntity;
+import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.IntervalTriggerModel;
 import app.notifee.core.model.NotificationAndroidActionModel;
@@ -343,6 +345,9 @@ class NotificationManager {
           WorkManager.getInstance(ContextHolder.getApplicationContext())
               .cancelUniqueWork("trigger:" + notificationId);
 
+          // delete notification entry from database
+          WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+              .deleteById(notificationId);
           return null;
         });
   }
@@ -367,6 +372,9 @@ class NotificationManager {
             // Remove all cancelled and finished work from its internal database
             // states include SUCCEEDED, FAILED and CANCELLED
             workManager.pruneWork();
+
+            // delete all from database
+            WorkDataRepository.getInstance(ContextHolder.getApplicationContext()).deleteAll();
           }
 
           return null;
@@ -425,11 +433,15 @@ class NotificationManager {
     IntervalTriggerModel trigger = IntervalTriggerModel.fromBundle(triggerBundle);
     String uniqueWorkName = "trigger:" + notificationModel.getId();
     WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+
     Data.Builder workDataBuilder =
         new Data.Builder()
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
-            .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
-            .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
+            .putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_PERIODIC)
+            .putString("id", notificationModel.getId());
+
+    WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+        .insertTriggerNotification(notificationModel, triggerBundle);
 
     long interval = trigger.getInterval();
 
@@ -450,14 +462,15 @@ class NotificationManager {
 
     String uniqueWorkName = "trigger:" + notificationModel.getId();
     WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
-
     long delay = trigger.getDelay();
 
     Data.Builder workDataBuilder =
         new Data.Builder()
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
-            .putByteArray("trigger", ObjectUtils.bundleToBytes(triggerBundle))
-            .putByteArray("notification", ObjectUtils.bundleToBytes(notificationModel.toBundle()));
+            .putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_ONE_TIME)
+            .putString("id", notificationModel.getId());
+
+    WorkDataRepository.getInstance(ContextHolder.getApplicationContext()).insertTriggerNotification(notificationModel, triggerBundle);
 
     // One time trigger
     OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
@@ -504,27 +517,45 @@ class NotificationManager {
   }
 
   static void doScheduledWork(
-      Data workData, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
-    byte[] triggerBytes = workData.getByteArray("trigger");
-    byte[] notificationBytes = workData.getByteArray("notification");
+      Data data, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
 
-    if (notificationBytes == null || triggerBytes == null) {
-      Logger.w(
-          TAG,
-          "Attempted to handle doScheduledWork but no notification or trigger data was found.");
-      completer.set(ListenableWorker.Result.success());
-      return;
-    }
+    String id = data.getString("id");
+    WorkDataRepository workDataRepository =
+        new WorkDataRepository(ContextHolder.getApplicationContext());
 
-    NotificationModel notificationModel =
-        NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
+    Continuation<WorkDataEntity, Task<Void>> workContinuation =
+        task -> {
+          WorkDataEntity workDataEntity = task.getResult();
+          if (workDataEntity == null || workDataEntity.getNotification() == null) {
+            Logger.w(
+                TAG,
+                "Attempted to handle doScheduledWork but no notification data was" + " found.");
+            completer.set(ListenableWorker.Result.success());
+            return null;
+          }
 
-    NotificationManager.displayNotification(notificationModel)
+          NotificationModel notificationModel =
+              NotificationModel.fromBundle(
+                  ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
+
+          return NotificationManager.displayNotification(notificationModel);
+        };
+
+    workDataRepository
+        .getWorkDataById(data.getString("id"))
+        .continueWithTask(CACHED_THREAD_POOL, workContinuation)
         .addOnCompleteListener(
             task -> {
               completer.set(ListenableWorker.Result.success());
+
               if (!task.isSuccessful()) {
                 Logger.e(TAG, "Failed to display notification", task.getException());
+              } else {
+                if (data.getString(Worker.KEY_WORK_REQUEST).equals(Worker.WORK_REQUEST_ONE_TIME)) {
+                  // delete database entry if work is a one-time request
+                  WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+                      .deleteById(id);
+                }
               }
             });
   }
