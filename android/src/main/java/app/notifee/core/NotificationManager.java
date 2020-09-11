@@ -552,7 +552,7 @@ class NotificationManager {
                 Logger.e(TAG, "Failed to display notification", task.getException());
               } else {
                 if (data.getString(Worker.KEY_WORK_REQUEST).equals(Worker.WORK_REQUEST_ONE_TIME)) {
-                  // delete notification if notification is a one-time request
+                  // delete database entry if work is a one-time request
                   WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
                       .deleteById(id);
                 }
