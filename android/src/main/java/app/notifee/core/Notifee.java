@@ -11,14 +11,14 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
-import app.notifee.core.utility.AutoStartPermissionUtils;
-import app.notifee.core.utility.PowerSavingModeUtils;
+import app.notifee.core.utility.PowerSaveUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -366,36 +366,50 @@ public class Notifee {
     }
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.M)
   @KeepForSdk
-  public void isAutoStartPermissionAvailable(MethodCallResult<Bundle> result) {
+  public void isPowerOptimizationsDisabled(MethodCallResult<Bundle> result) {
     Bundle bundle = new Bundle();
     bundle.putBoolean(
-        "isAutoStartPermissionAvailable",
-        AutoStartPermissionUtils.isAutoStartPermissionAvailable(
-            ContextHolder.getApplicationContext()));
+        "isPowerOptimizationsDisabled",
+        PowerSaveUtils.isPowerOptimizationsDisabled(ContextHolder.getApplicationContext()));
+    result.onComplete(null, bundle);
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.M)
+  @KeepForSdk
+  public void requestDisablePowerOptimizations(MethodCallResult<Bundle> result) {
+    Bundle bundle = new Bundle();
+    bundle.putBoolean(
+        "requestDisablePowerOptimizations", PowerSaveUtils.requestDisablePowerOptimizations());
+    result.onComplete(null, bundle);
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.M)
+  @KeepForSdk
+  public void openPowerOptimizationSettings(Activity activity, MethodCallResult<Bundle> result) {
+
+    Boolean isSuccess = PowerSaveUtils.openPowerOptimizationSettings(activity);
+    Bundle bundle = new Bundle();
+    bundle.putBoolean("openPowerOptimizationSettings", isSuccess);
     result.onComplete(null, bundle);
   }
 
   @KeepForSdk
-  public void getAutoStartPermission(MethodCallResult<Bundle> result) {
+  public void openPowerModeSettings(Activity activity, MethodCallResult<Bundle> result) {
 
-    AutoStartPermissionHelper.getInstance()
-        .getAutoStartPermission(ContextHolder.getApplicationContext());
-
-    Boolean isSuccess =
-        AutoStartPermissionUtils.getAutoStartPermission(ContextHolder.getApplicationContext());
+    Boolean isSuccess = PowerSaveUtils.openPowerModeSettings(activity);
     Bundle bundle = new Bundle();
-    bundle.putBoolean("getAutoStartPermission", isSuccess);
+    bundle.putBoolean("openPowerModeSettings", isSuccess);
     result.onComplete(null, bundle);
   }
 
   @KeepForSdk
-  public void isPowerSavingMode(MethodCallResult<Bundle> result) {
+  public void isPowerSaveMode(MethodCallResult<Bundle> result) {
     Bundle bundle = new Bundle();
 
     bundle.putBoolean(
-        "isPowerSavingMode",
-        PowerSavingModeUtils.isPowerSavingMode(ContextHolder.getApplicationContext()));
+        "isPowerSaveMode", PowerSaveUtils.isPowerSaveMode(ContextHolder.getApplicationContext()));
 
     result.onComplete(null, bundle);
   }
