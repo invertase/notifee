@@ -11,14 +11,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
-import app.notifee.core.utility.PowerSaveUtils;
+import app.notifee.core.utility.PowerManagerUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -366,52 +365,19 @@ public class Notifee {
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.M)
   @KeepForSdk
-  public void isPowerOptimizationsDisabled(MethodCallResult<Bundle> result) {
+  public void isBatteryOptimizationEnabled(MethodCallResult<Bundle> result) {
     Bundle bundle = new Bundle();
     bundle.putBoolean(
-        "isPowerOptimizationsDisabled",
-        PowerSaveUtils.isPowerOptimizationsDisabled(ContextHolder.getApplicationContext()));
-    result.onComplete(null, bundle);
-  }
-
-  @RequiresApi(api = Build.VERSION_CODES.M)
-  @KeepForSdk
-  public void requestDisablePowerOptimizations(MethodCallResult<Bundle> result) {
-    Bundle bundle = new Bundle();
-    bundle.putBoolean(
-        "requestDisablePowerOptimizations", PowerSaveUtils.requestDisablePowerOptimizations());
-    result.onComplete(null, bundle);
-  }
-
-  @RequiresApi(api = Build.VERSION_CODES.M)
-  @KeepForSdk
-  public void openPowerOptimizationSettings(Activity activity, MethodCallResult<Bundle> result) {
-
-    Boolean isSuccess = PowerSaveUtils.openPowerOptimizationSettings(activity);
-    Bundle bundle = new Bundle();
-    bundle.putBoolean("openPowerOptimizationSettings", isSuccess);
+        "isBatteryOptimizationEnabled",
+        PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext()));
     result.onComplete(null, bundle);
   }
 
   @KeepForSdk
-  public void openPowerModeSettings(Activity activity, MethodCallResult<Bundle> result) {
-
-    Boolean isSuccess = PowerSaveUtils.openPowerModeSettings(activity);
-    Bundle bundle = new Bundle();
-    bundle.putBoolean("openPowerModeSettings", isSuccess);
-    result.onComplete(null, bundle);
-  }
-
-  @KeepForSdk
-  public void isPowerSaveMode(MethodCallResult<Bundle> result) {
-    Bundle bundle = new Bundle();
-
-    bundle.putBoolean(
-        "isPowerSaveMode", PowerSaveUtils.isPowerSaveMode(ContextHolder.getApplicationContext()));
-
-    result.onComplete(null, bundle);
+  public void openBatteryOptimizationSettings(Activity activity, MethodCallResult<Bundle> result) {
+    PowerManagerUtils.openBatteryOptimizationSettings(activity);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
