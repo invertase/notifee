@@ -527,9 +527,9 @@ class NotificationManager {
         task -> {
           WorkDataEntity workDataEntity = task.getResult();
 
-          byte[] notificationBytes = workDataEntity.getNotification();
+          byte[] notificationBytes;
 
-          if (workDataEntity == null || notificationBytes == null) {
+          if (workDataEntity == null || workDataEntity.getNotification() == null) {
             // check if notification bundle is stored with Work Manager
             notificationBytes = data.getByteArray("notification");
             if (notificationBytes != null) {
@@ -543,6 +543,8 @@ class NotificationManager {
               completer.set(ListenableWorker.Result.success());
               return null;
             }
+          } else {
+            notificationBytes = workDataEntity.getNotification();
           }
 
           NotificationModel notificationModel =
