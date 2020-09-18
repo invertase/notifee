@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target   = '10.0'
   s.source_files             = 'ios/RNNotifee/*.{h,m}'
-  s.dependency 'React'
+  s.dependency 'React-Core'
 
   if defined?($NotifeeCoreFromSources) && $NotifeeCoreFromSources == true
     # internal dev flag used by Notifee devs, ignore
