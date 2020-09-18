@@ -526,17 +526,28 @@ class NotificationManager {
     Continuation<WorkDataEntity, Task<Void>> workContinuation =
         task -> {
           WorkDataEntity workDataEntity = task.getResult();
-          if (workDataEntity == null || workDataEntity.getNotification() == null) {
-            Logger.w(
+
+          byte[] notificationBytes = workDataEntity.getNotification();
+
+          if (workDataEntity == null || notificationBytes == null) {
+            // check if notification bundle is stored with Work Manager
+            notificationBytes = data.getByteArray("notification");
+            if (notificationBytes != null) {
+              Logger.w(
                 TAG,
-                "Attempted to handle doScheduledWork but no notification data was" + " found.");
-            completer.set(ListenableWorker.Result.success());
-            return null;
+                "The trigger notification was created using an older version, please consider recreating the notification.");
+            } else {
+              Logger.w(
+                TAG,
+                "Attempted to handle doScheduledWork but no notification data was found.");
+              completer.set(ListenableWorker.Result.success());
+              return null;
+            }
           }
 
           NotificationModel notificationModel =
               NotificationModel.fromBundle(
-                  ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
+                  ObjectUtils.bytesToBundle(notificationBytes));
 
           return NotificationManager.displayNotification(notificationModel);
         };
