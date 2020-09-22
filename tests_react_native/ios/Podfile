@@ -78,6 +78,11 @@ end
 #    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 #end
 
+target 'NotificationServiceExtension' do
+#  pod 'Firebase/Messaging', '~> 6.30.0' # eg 6.31.0
+  pod 'RNNotifee/NotifeeExtensionHelper', :path => "../../packages/react-native"
+end
+
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|

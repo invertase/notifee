@@ -12,6 +12,7 @@
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
 #import "Private/NotifeeCoreUtil.h"
+#import "Private/NotifeeCoreExtensionHelper.h"
 
 @implementation NotifeeCore
 
@@ -565,21 +566,25 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
-  // If count is 0, set to -1 instead to avoid notifications in tray being
-  // cleared
+   if (![NotifeeCoreUtil isAppExtension]) {
+  // If count is 0, set to -1 instead to avoid notifications in tray being cleared
   NSInteger newCount = count == 0 ? -1 : count;
 
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
+   }
   block(nil);
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
+      if (![NotifeeCoreUtil isAppExtension]) {
   NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
 
   block(nil, badgeCount == -1 ? 0 : badgeCount);
+      }
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
+         if (![NotifeeCoreUtil isAppExtension]) {
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
   // If count is -1, set currentCount to 0 before incrementing
   if (currentCount == -1) {
@@ -590,20 +595,32 @@
 
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
   block(nil);
+         }
 }
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
-  NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
-  NSInteger newCount = currentCount - decrementBy;
-
-  // If count is 0 or less, set to -1 instead to avoid notifications in tray
-  // being cleared
+  if (![NotifeeCoreUtil isAppExtension]) {
+    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    NSInteger currentCount = application.applicationIconBadgeNumber;
+    NSInteger newCount = currentCount - decrementBy;
+  // If count is 0 or less, set to -1 instead to avoid notifications in tray being cleared
   if (newCount < 1) {
     newCount = -1;
   }
+    [application setApplicationIconBadgeNumber:newCount];
+  }
 
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
   block(nil);
 }
+
++ (nullable instancetype)notifeeUIApplication {
+  return  [NotifeeCoreUtil notifeeUIApplication];
+};
+
++ (void)populateNotificationContent:(UNMutableNotificationContent *)content
+                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
+    return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
+                                                            withContentHandler:contentHandler ];
+};
 
 @end
