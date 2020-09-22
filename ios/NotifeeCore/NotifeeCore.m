@@ -12,6 +12,7 @@
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
 #import "Private/NotifeeCoreUtil.h"
+#import "Private/NotifeeCoreExtensionHelper.h"
 
 @implementation NotifeeCore
 
@@ -552,31 +553,54 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+      if (![NotifeeCoreUtil isAppExtension]) {
+    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+        [application setApplicationIconBadgeNumber:count];
+    }
   block(nil);
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
-  block(nil, [UIApplication sharedApplication].applicationIconBadgeNumber);
+    if (![NotifeeCoreUtil isAppExtension]) {
+    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+  block(nil, application.applicationIconBadgeNumber);
+    }
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
-  NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
-  NSInteger newCount = currentCount + incrementBy;
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
-  block(nil);
+       if (![NotifeeCoreUtil isAppExtension]) {
+            UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+          NSInteger currentCount = application.applicationIconBadgeNumber;
+          NSInteger newCount = currentCount + incrementBy;
+            [application setApplicationIconBadgeNumber:newCount];
+          block(nil);
+       }
 }
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
-  NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
-  NSInteger newCount = currentCount - decrementBy;
+  if (![NotifeeCoreUtil isAppExtension]) {
+    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    NSInteger currentCount = application.applicationIconBadgeNumber;
+    NSInteger newCount = currentCount - decrementBy;
 
-  if (newCount < 0) {
-    newCount = 0;
+    if (newCount < 0) {
+      newCount = 0;
+    }
+
+    [application setApplicationIconBadgeNumber:newCount];
   }
 
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
   block(nil);
 }
+
++ (nullable instancetype)notifeeUIApplication {
+  return  [NotifeeCoreUtil notifeeUIApplication];
+};
+
++ (void)populateNotificationContent:(UNMutableNotificationContent *)content
+                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
+    return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
+                                                            withContentHandler:contentHandler ];
+};
 
 @end
