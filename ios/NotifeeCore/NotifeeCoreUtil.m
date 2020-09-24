@@ -561,38 +561,42 @@
 + (NSString *)generateCachedFileName:(int)length {
   return [[NSUUID UUID] UUIDString];
 }
+
 /**
-* Returns a shared instance of [UIApplication sharedApplication]
-* Needed to prevent compile errors for App extensions when calling [UIApplication sharedApplication]
-*
-* @return instancetype
-*/
+ * Returns a shared instance of [UIApplication sharedApplication]
+ * Needed to prevent compile errors for App extensions when calling [UIApplication
+ * sharedApplication]
+ *
+ * @return instancetype
+ */
 + (nullable instancetype)notifeeUIApplication {
   static dispatch_once_t once;
   static UIApplication *_Nullable sharedInstance;
-    dispatch_once(&once, ^{
-      static Class applicationClass = nil;
-       if (![self isAppExtension]) {
-         Class cls = NSClassFromString(@"UIApplication");
-         if (cls && [cls respondsToSelector:NSSelectorFromString(@"sharedApplication")]) {
-           applicationClass = cls;
-         }
-       }
-        sharedInstance = [applicationClass sharedApplication];
-    });
-    return sharedInstance;
+  dispatch_once(&once, ^{
+    static Class applicationClass = nil;
+    if (![self isAppExtension]) {
+      Class cls = NSClassFromString(@"UIApplication");
+      if (cls && [cls respondsToSelector:NSSelectorFromString(@"sharedApplication")]) {
+        applicationClass = cls;
+      }
+    }
+
+    sharedInstance = [applicationClass sharedApplication];
+  });
+
+  return sharedInstance;
 }
 
 /**
  * Checks if the current application is an extension
  */
 + (BOOL)isAppExtension {
- #if TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_WATCH
+#if TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_WATCH
   BOOL appExtension = [[[NSBundle mainBundle] bundlePath] hasSuffix:@".appex"];
   return appExtension;
- #elif TARGET_OS_OSX
+#elif TARGET_OS_OSX
   return NO;
- #endif
+#endif
 }
 
 @end
