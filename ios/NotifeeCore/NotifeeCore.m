@@ -11,8 +11,8 @@
 #import <UIKit/UIKit.h>
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
-#import "Private/NotifeeCoreUtil.h"
 #import "Private/NotifeeCoreExtensionHelper.h"
+#import "Private/NotifeeCoreUtil.h"
 
 @implementation NotifeeCore
 
@@ -553,28 +553,28 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
-      if (![NotifeeCoreUtil isAppExtension]) {
+  if (![NotifeeCoreUtil isAppExtension]) {
     UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
-        [application setApplicationIconBadgeNumber:count];
-    }
+    [application setApplicationIconBadgeNumber:count];
+  }
   block(nil);
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
-    if (![NotifeeCoreUtil isAppExtension]) {
+  if (![NotifeeCoreUtil isAppExtension]) {
     UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
-  block(nil, application.applicationIconBadgeNumber);
-    }
+    block(nil, application.applicationIconBadgeNumber);
+  }
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
-       if (![NotifeeCoreUtil isAppExtension]) {
-            UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
-          NSInteger currentCount = application.applicationIconBadgeNumber;
-          NSInteger newCount = currentCount + incrementBy;
-            [application setApplicationIconBadgeNumber:newCount];
-          block(nil);
-       }
+  if (![NotifeeCoreUtil isAppExtension]) {
+    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    NSInteger currentCount = application.applicationIconBadgeNumber;
+    NSInteger newCount = currentCount + incrementBy;
+    [application setApplicationIconBadgeNumber:newCount];
+    block(nil);
+  }
 }
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
@@ -594,13 +594,13 @@
 }
 
 + (nullable instancetype)notifeeUIApplication {
-  return  [NotifeeCoreUtil notifeeUIApplication];
+  return [NotifeeCoreUtil notifeeUIApplication];
 };
 
 + (void)populateNotificationContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
-    return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
-                                                            withContentHandler:contentHandler ];
+  return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
+                                                         withContentHandler:contentHandler];
 };
 
 @end
