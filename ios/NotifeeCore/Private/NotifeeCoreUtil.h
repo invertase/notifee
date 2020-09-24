@@ -27,6 +27,13 @@ typedef NS_ENUM(NSInteger, NotifeeCoreTriggerType) {
   NotifeeCoreTriggerTypeInterval = 1
 };
 
+// Enum representing repeat frequency for TimestampTrigger
+typedef NS_ENUM(NSInteger, NotifeeCoreRepeatFrequency) {
+    NotifeeCoreRepeatFrequencyHourly = 0,
+    NotifeeCoreRepeatFrequencyDaily = 1,
+    NotifeeCoreRepeatFrequencyWeekly = 2
+};
+
 @interface NotifeeCoreUtil : NSObject
 
 + (NSNumber *)numberForUNNotificationSetting:(UNNotificationSetting)setting;
