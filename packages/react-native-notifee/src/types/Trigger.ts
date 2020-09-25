@@ -12,6 +12,28 @@ export interface TimestampTrigger {
    * The timestamp when the notification should first be shown, in milliseconds since 1970.
    */
   timestamp: number;
+
+  /**
+   * The frequency at which the trigger repeats.
+   * If unset, the notification will only be displayed once.
+   *
+   * For example:
+   *  if set to `RepeatFrequency.HOURLY`, the notification will repeat every hour from the timestamp specified.
+   *  if set to `RepeatFrequency.DAILY`, the notification will repeat every day from the timestamp specified.
+   *  if set to `RepeatFrequency.WEEKLY`, the notification will repeat every week from the timestamp specified.
+   */
+  repeatFrequency?: RepeatFrequency;
+}
+
+/**
+ * An interface representing the different frequencies which can be used with `TimestampTrigger.repeatFrequency`.
+ *
+ * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ */
+export enum RepeatFrequency {
+  HOURLY = 0,
+  DAILY = 1,
+  WEEKLY = 2,
 }
 
 /**

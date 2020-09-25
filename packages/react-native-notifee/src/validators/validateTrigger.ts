@@ -6,6 +6,7 @@ import { objectHasProperty, isNumber, isObject, isValidEnum } from '../utils';
 import {
   Trigger,
   TimeUnit,
+  RepeatFrequency,
   TimestampTrigger,
   IntervalTrigger,
   TriggerType,
@@ -52,10 +53,20 @@ function validateTimestampTrigger(trigger: TimestampTrigger): TimestampTrigger {
     throw new Error("'trigger.timestamp' date must be in the future.");
   }
 
-  return {
+  const out: TimestampTrigger = {
     type: trigger.type,
     timestamp: trigger.timestamp,
+    repeatFrequency: -1,
   };
+
+  if (objectHasProperty(trigger, 'repeatFrequency')) {
+    if (!isValidEnum(trigger.repeatFrequency, RepeatFrequency)) {
+      throw new Error("'trigger.repeatFrequency' expected a RepeatFrequency value.");
+    }
+    out.repeatFrequency = trigger.repeatFrequency;
+  }
+
+  return out;
 }
 
 function validateIntervalTrigger(trigger: IntervalTrigger): IntervalTrigger {
