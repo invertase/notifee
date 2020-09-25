@@ -22,10 +22,14 @@ import notifee, { TimestampTrigger, TriggerType } from '@notifee/react-native';
 
 function Screen() {
   async function onCreateTriggerNotification() {
+    const date = new Date(Date.now());
+    date.setHours(11);
+    date.setMinutes(10);
+
     // Create a time-based trigger
     const trigger: TimestampTrigger = {
       type: TriggerType.TIMESTAMP,
-      timestamp: Date.now() + 600000, // 10 minutes
+      timestamp: date.getTime(), // fire at 11:10am (10 minutes before meeting)
     };
 
     // Create a trigger notification
@@ -59,22 +63,27 @@ Go ahead and press the button! A notification will appear in 10 minutes, giving 
 
 Trigger notifications work in the same way as any other notification. They have a random unique ID assigned to them which can be used to update pending trigger notifications. If there is no trigger with that ID, a new one will be created.
 
-Let's update our trigger we created previously, but this time the meeting with Jane is in 3 hours.
+Let's update our trigger we created previously to occur weekly.
 
 ```js
 import notifee, { TimestampTrigger, TriggerType } from '@notifee/react-native';
 
 async function onCreateTriggerNotification() {
+    const date = new Date(Date.now());
+    date.setHours(11);
+    date.setMinutes(10);
+
     const trigger: TimestampTrigger = {
       type: TriggerType.TIMESTAMP,
-      timestamp: Date.now() + 10800, // 3 hours
+      timestamp: date.getTime(),
+      repeatFrequency: RepeatFrequency.WEEKLY
     };
 
   await notifee.createTriggerNotification(
     {
       id: '123',
       title: 'Meeting with Jane',
-      body: 'Today at 2:20pm',
+      body: 'Today at 11:20am',
       android: {
         channelId: 'your-channel-id',
       },
@@ -106,20 +115,23 @@ It's also possible to cancel all of your trigger notifications, by calling [canc
 
 ## Timestamp Trigger
 
-The [`TimestampTrigger`](/react-native/reference/timestamptrigger) allows you to create a trigger that displays a notification once at a specific time and date, using the property `timestamp`:
+The [`TimestampTrigger`](/react-native/reference/timestamptrigger) allows you to create a trigger that displays a notification at a specific time and date, using the property `timestamp` and an optional `repeatFrequency` property:
 
 ```js
 import notifee, { TimestampTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
 
 const trigger: TimestampTrigger = {
   type: TriggerType.TIMESTAMP,
-  timestamp: Date.now() + 10800, // 3 hours
+  timestamp: Date.now() + 10800, // fire in 3 hours
+  repeatFrequency: RepeatFrequency.WEEKLY, // repeat once a week
 };
 ```
 
 ## Interval Trigger
 
 The [`IntervalTrigger`](/react-native/reference/intervaltrigger) allows you to create a trigger that repeats at a specific interval. The trigger accepts two properties, an `interval` and an optional `timeUnit`.
+
+This trigger can be used to implement timers.
 
 For example, to set a trigger to repeat every 30 minutes from now:
 
