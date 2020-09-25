@@ -72,6 +72,9 @@ dependencies {
   implementation 'androidx.work:work-runtime:2.4.0'
   implementation 'org.greenrobot:eventbus:3.1.1'
 
+  // needed to enforce version and avoid clashes
+  implementation 'com.squareup.okhttp3:okhttp:3.12.12'
+
   api 'io.jsonwebtoken:jjwt-api:0.10.7'
   runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'
   runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.10.7') {
