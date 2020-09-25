@@ -187,6 +187,20 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
+  @ReactMethod
+  public void openBatteryOptimizationSettings(Promise promise) {
+    Notifee.getInstance()
+        .openBatteryOptimizationSettings(
+            getCurrentActivity(), (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void isBatteryOptimizationEnabled(Promise promise) {
+    Notifee.getInstance()
+        .isBatteryOptimizationEnabled(
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+  }
+
   @NonNull
   @Override
   public String getName() {

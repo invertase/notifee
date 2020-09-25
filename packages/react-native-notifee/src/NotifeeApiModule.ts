@@ -483,4 +483,19 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     return this.native.decrementBadgeCount(Math.round(value));
   }
+
+  public isBatteryOptimizationEnabled(): Promise<boolean> {
+    if (isIOS) {
+      return Promise.resolve(false);
+    }
+
+    return this.native.isBatteryOptimizationEnabled();
+  }
+
+  public openBatteryOptimizationSettings(): Promise<void> {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.openBatteryOptimizationSettings();
+  }
 }

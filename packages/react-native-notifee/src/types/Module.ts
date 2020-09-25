@@ -190,9 +190,6 @@ export interface Module {
    *
    * View the [Triggers](/react-native/docs/triggers) documentation for more information.
    *
-   * Currently only supported on Android.
-   *
-   * @platform android
    */
   getTriggerNotificationIds(): Promise<string[]>;
 
@@ -451,6 +448,25 @@ export interface Module {
    * @platform ios
    */
   decrementBadgeCount(decrementBy?: number): Promise<void>;
+
+  /**
+   * API used to open the Android System settings for the application.
+   *
+   * If the API version is >= 23, the battery optimization settings screen is displayed, otherwise,
+   * this is a no-op & instantly resolves.
+   *
+   * @platform android
+   */
+  openBatteryOptimizationSettings(): Promise<void>;
+
+  /**
+   * API used to check if battery optimization is enabled for your application.
+   *
+   * Supports API versions >= 23.
+   *
+   * @platform android
+   */
+  isBatteryOptimizationEnabled(): Promise<boolean>;
 }
 
 /**
