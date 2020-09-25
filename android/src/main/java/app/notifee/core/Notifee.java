@@ -17,6 +17,7 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.PowerManagerUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -362,6 +363,21 @@ public class Notifee {
         result.onComplete(null, initialNotificationBundle);
       }
     }
+  }
+
+  @KeepForSdk
+  public void isBatteryOptimizationEnabled(MethodCallResult<Bundle> result) {
+    Bundle bundle = new Bundle();
+    bundle.putBoolean(
+        "isBatteryOptimizationEnabled",
+        PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext()));
+    result.onComplete(null, bundle);
+  }
+
+  @KeepForSdk
+  public void openBatteryOptimizationSettings(Activity activity, MethodCallResult<Bundle> result) {
+    PowerManagerUtils.openBatteryOptimizationSettings(activity);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
