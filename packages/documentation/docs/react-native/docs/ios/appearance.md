@@ -40,6 +40,10 @@ notifee.displayNotification({
         // React Native asset.
         url: require('./assets/my-image.gif'),
       },
+      {
+        // Remote image
+        url: 'https://my-cdn.com/images/123456.png',
+      },
     ],
   },
 });

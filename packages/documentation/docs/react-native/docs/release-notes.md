@@ -5,6 +5,14 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.13.0
+
+- **[All]**: Added support for `repeatFrequency` on `TimestampTrigger` to be able to create hourly, daily or weekly trigger notifications. See [Triggers](https://notifee.app/react-native/docs/triggers).
+- **[Android]**: Implemented support to help with background restrictions on Android, includes two methods `isBatteryOptimizationEnabled` and `openBatteryOptimizationSettings`. See [Background Restrictions](https://notifee.app/react-native/docs/android/behaviour#background-restrictions).
+- **[Android]**: Fixed an issue when creating a trigger notification, where sometimes the input data would reach the maximum number of bytes allowed.
+- **[iOS]**: Added support to handle remote urls for [Attachments](https://notifee.app/react-native/docs/ios/appearance#attachments).
+
+
 ## 0.12.3
 
 - **[Android]**: Fixed an issue where `pressAction` with the `default` id failed to open the app when the notification was pressed.
