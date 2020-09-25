@@ -463,23 +463,41 @@ class NotificationManager {
     String uniqueWorkName = "trigger:" + notificationModel.getId();
     WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
     long delay = trigger.getDelay();
+    int interval = trigger.getInterval();
 
     Data.Builder workDataBuilder =
         new Data.Builder()
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
-            .putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_ONE_TIME)
             .putString("id", notificationModel.getId());
 
-    WorkDataRepository.getInstance(ContextHolder.getApplicationContext()).insertTriggerNotification(notificationModel, triggerBundle);
+    WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+        .insertTriggerNotification(notificationModel, triggerBundle);
 
     // One time trigger
-    OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
-    workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
-    workRequestBuilder.addTag(uniqueWorkName);
-    workRequestBuilder.setInputData(workDataBuilder.build());
-    workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
-    workManager.enqueueUniqueWork(
-        uniqueWorkName, ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
+    if (interval == -1) {
+      OneTimeWorkRequest.Builder workRequestBuilder = new OneTimeWorkRequest.Builder(Worker.class);
+      workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+      workRequestBuilder.addTag(uniqueWorkName);
+      workDataBuilder.putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_ONE_TIME);
+      workRequestBuilder.setInputData(workDataBuilder.build());
+      workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+      workManager.enqueueUniqueWork(
+          uniqueWorkName, ExistingWorkPolicy.REPLACE, workRequestBuilder.build());
+    } else {
+      PeriodicWorkRequest.Builder workRequestBuilder;
+
+      workRequestBuilder =
+          new PeriodicWorkRequest.Builder(
+              Worker.class, trigger.getInterval(), trigger.getTimeUnit());
+
+      workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
+      workRequestBuilder.addTag(uniqueWorkName);
+      workRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+      workDataBuilder.putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_PERIODIC);
+      workRequestBuilder.setInputData(workDataBuilder.build());
+      workManager.enqueueUniquePeriodicWork(
+          uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+    }
   }
 
   static Task<List<String>> getTriggerNotificationIds() {

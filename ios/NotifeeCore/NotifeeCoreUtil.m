@@ -298,14 +298,46 @@
  * @param triggerDict NSDictionary
  */
 + (UNNotificationTrigger *)timestampTriggerFromDictionary:(NSDictionary *)triggerDict {
+  UNNotificationTrigger *trigger;
+  Boolean repeats = false;
+  NSCalendarUnit calendarUnit;
+
+  NSInteger repeatFrequency = [triggerDict[@"repeatFrequency"] integerValue];
   NSNumber *timestampMillis = triggerDict[@"timestamp"];
+
+  // convert timestamp to a NSDate
   NSInteger timestamp = [timestampMillis doubleValue] / 1000;
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
 
-  return [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:[date timeIntervalSinceNow]
-                                                            repeats:false];
-}
+  if (repeatFrequency != -1) {
+    repeats = true;
 
+    if (repeatFrequency == NotifeeCoreRepeatFrequencyHourly) {
+      // match by minute and second
+      calendarUnit = NSCalendarUnitMinute | NSCalendarUnitSecond;
+    } else if (repeatFrequency == NotifeeCoreRepeatFrequencyDaily) {
+      // match by hour, minute and second
+      calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    } else if (repeatFrequency == NotifeeCoreRepeatFrequencyWeekly) {
+      // match by day, hour, minute, and second
+      calendarUnit = NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    } else {
+      NSLog(@"NotifeeCore: Failed to parse TimestampTrigger with unknown "
+            @"repeatFrequency: %@",
+            (long)repeatFrequency);
+
+      return nil;
+    }
+  } else {
+    // Needs to match exactly to the second
+    calendarUnit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+  }
+
+  NSDateComponents *components = [[NSCalendar currentCalendar] components:calendarUnit fromDate:date];
+  trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:repeats];
+
+  return trigger;
+}
 /**
  * Returns an UNNotificationTrigger from NSDictionary representing an IntervalTrigger
  *
