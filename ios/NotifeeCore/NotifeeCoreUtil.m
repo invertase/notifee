@@ -10,6 +10,7 @@
 
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
+#import "Private/NotifeeCore+NSURLSession.h"
 
 @implementation NotifeeCoreUtil
 
@@ -144,8 +145,8 @@
   NSURL *url;
 
   if ([urlString hasPrefix:@"http://"] || [urlString hasPrefix:@"https://"]) {
-    // TODO: Add support for remote urls
-    return nil;
+    // handle remote url by attempting to download attachement synchronously
+    url = [self downloadMediaSynchronously:urlString];
   } else if ([urlString hasPrefix:@"/"]) {
     // handle absolute file path
     url = [NSURL fileURLWithPath:urlString];
@@ -175,6 +176,64 @@
 
   NSLog(@"NotifeeCore: Unable to resolve url for attachment: %@", attachmentDict);
   return nil;
+}
+
+/*
+ * Downloads a media file, syncronously to the NSCachesDirectory
+ *
+ * @param urlString NSString
+ * @return NSURL or nil
+ */
++ (NSURL *)downloadMediaSynchronously:(NSString *)urlString {
+  NSURL *url = [NSURL URLWithString:urlString];
+
+  NSString *newCachedFileName = [self generateCachedFileName:15];
+
+  NSArray *localDirectoryPaths =
+      NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+  NSString *tempDestination =
+      [localDirectoryPaths[0] stringByAppendingPathComponent:newCachedFileName];
+
+  @try {
+    NSError *error;
+
+    // Apple gives us a suggested file name which can be used to infer the file extension
+    NSString *suggestedFilename = [NotifeeCoreNSURLSession downloadItemAtURL:url
+                                                                      toFile:tempDestination
+                                                                       error:&error];
+
+    if (error) {
+      NSLog(@"NotifeeCore: Failed to download attachement with URL %@: %@", urlString, error);
+      return nil;
+    }
+
+    // Rename the recently downloaded file to include its file extension
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSString *fileExtension = [NSString stringWithFormat:@".%@", [suggestedFilename pathExtension]];
+
+    if (!fileExtension || [fileExtension isEqualToString:@""]) {
+      NSLog(@"NotifeeCore: Failed to determine file extension for attachment with URL %@: %@",
+            urlString, error);
+      return nil;
+    }
+
+    NSString *localFilePath =
+        [localDirectoryPaths[0] stringByAppendingPathComponent:newCachedFileName];
+
+    localFilePath = [localFilePath stringByAppendingString:fileExtension];
+    NSURL *localURL = [NSURL fileURLWithPath:localFilePath];
+
+    [fileManager moveItemAtPath:tempDestination toPath:localFilePath error:&error];
+
+    // Returns the local cached path to attachment
+    return localURL;
+  } @catch (NSException *exception) {
+    NSLog(@"NotifeeCore: An exception occured while attempting to download attachment with URL %@: "
+          @"%@",
+          urlString, exception);
+    return nil;
+  }
 }
 
 /**
@@ -449,6 +508,15 @@
   }
 
   return intentIdentifiers;
+}
+
+/**
+ * Returns a random string using UUID
+ *
+ * @param length int
+ */
++ (NSString *)generateCachedFileName:(int)length {
+  return [[NSUUID UUID] UUIDString];
 }
 
 @end
