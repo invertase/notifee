@@ -25,16 +25,17 @@
     "tests_rn:ios:pod:install": "cd tests_react_native && cd ios && rm -rf ReactNativeFirebaseDemo.xcworkspace && pod install && cd .."
   },
   "devDependencies": {
-    "lerna": "^3.18.3",
-    "typedoc": "^0.15.0",
+    "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.19.0",
+    "lerna": "^3.18.3",
     "prettier": "^1.19.1",
     "rimraf": "^2.7.1",
+    "typedoc": "^0.15.0",
     "typescript": "^3.7.5"
   },
   "lint-staged": {

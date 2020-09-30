@@ -323,7 +323,7 @@
       calendarUnit = NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     } else {
       NSLog(@"NotifeeCore: Failed to parse TimestampTrigger with unknown "
-            @"repeatFrequency: %@",
+            @"repeatFrequency: %ld",
             (long)repeatFrequency);
 
       return nil;
