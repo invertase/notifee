@@ -538,6 +538,7 @@ class NotificationManager {
       Data data, CallbackToFutureAdapter.Completer<ListenableWorker.Result> completer) {
 
     String id = data.getString("id");
+
     WorkDataRepository workDataRepository =
         new WorkDataRepository(ContextHolder.getApplicationContext());
 
@@ -552,12 +553,12 @@ class NotificationManager {
             notificationBytes = data.getByteArray("notification");
             if (notificationBytes != null) {
               Logger.w(
-                TAG,
-                "The trigger notification was created using an older version, please consider recreating the notification.");
+                  TAG,
+                  "The trigger notification was created using an older version, please consider"
+                      + " recreating the notification.");
             } else {
               Logger.w(
-                TAG,
-                "Attempted to handle doScheduledWork but no notification data was found.");
+                  TAG, "Attempted to handle doScheduledWork but no notification data was found.");
               completer.set(ListenableWorker.Result.success());
               return null;
             }
@@ -566,14 +567,13 @@ class NotificationManager {
           }
 
           NotificationModel notificationModel =
-              NotificationModel.fromBundle(
-                  ObjectUtils.bytesToBundle(notificationBytes));
+              NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
 
           return NotificationManager.displayNotification(notificationModel);
         };
 
     workDataRepository
-        .getWorkDataById(data.getString("id"))
+        .getWorkDataById(id)
         .continueWithTask(CACHED_THREAD_POOL, workContinuation)
         .addOnCompleteListener(
             task -> {
@@ -582,7 +582,9 @@ class NotificationManager {
               if (!task.isSuccessful()) {
                 Logger.e(TAG, "Failed to display notification", task.getException());
               } else {
-                if (data.getString(Worker.KEY_WORK_REQUEST).equals(Worker.WORK_REQUEST_ONE_TIME)) {
+                String workerRequestType = data.getString(Worker.KEY_WORK_REQUEST);
+                if (workerRequestType != null
+                    && workerRequestType.equals(Worker.WORK_REQUEST_ONE_TIME)) {
                   // delete database entry if work is a one-time request
                   WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
                       .deleteById(id);
