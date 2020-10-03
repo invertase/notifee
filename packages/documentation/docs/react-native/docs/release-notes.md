@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.13.2
+
+- **[Android]**: Fixes an issue where if an trigger notification was created with a version before 0.13.0, when displayed it would cause the app to crash.
+
 ## 0.13.1
 
 - **[iOS]**: Added support to handle remote urls for [Attachments](https://notifee.app/react-native/docs/ios/appearance#attachments).
