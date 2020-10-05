@@ -367,7 +367,8 @@ public class Notifee {
 
   @KeepForSdk
   public void isBatteryOptimizationEnabled(MethodCallResult<Boolean> result) {
-    Boolean isBatteryOptimizationEnabled = PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext());
+    Boolean isBatteryOptimizationEnabled =
+        PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext());
     result.onComplete(null, isBatteryOptimizationEnabled);
   }
 
