@@ -380,6 +380,19 @@ public class Notifee {
   }
 
   @KeepForSdk
+  public void isPowerManagerAvailable(MethodCallResult<Boolean> result) {
+    Boolean isPowerManagerAvailable =
+        PowerManagerUtils.isPowerManagerAvailable(ContextHolder.getApplicationContext());
+    result.onComplete(null, isPowerManagerAvailable);
+  }
+
+  @KeepForSdk
+  public void openPowerManager(MethodCallResult<Boolean> result) {
+    Boolean didOpen = PowerManagerUtils.openPowerManager(ContextHolder.getApplicationContext());
+    result.onComplete(null, didOpen);
+  }
+
+  @KeepForSdk
   public void openNotificationSettings(
       @Nullable String channelId, Activity activity, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
