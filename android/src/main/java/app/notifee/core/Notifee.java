@@ -366,16 +366,14 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void isBatteryOptimizationEnabled(MethodCallResult<Bundle> result) {
-    Bundle bundle = new Bundle();
-    bundle.putBoolean(
-        "isBatteryOptimizationEnabled",
-        PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext()));
-    result.onComplete(null, bundle);
+  public void isBatteryOptimizationEnabled(MethodCallResult<Boolean> result) {
+    Boolean isBatteryOptimizationEnabled =
+        PowerManagerUtils.isBatteryOptimizationEnabled(ContextHolder.getApplicationContext());
+    result.onComplete(null, isBatteryOptimizationEnabled);
   }
 
   @KeepForSdk
-  public void openBatteryOptimizationSettings(Activity activity, MethodCallResult<Bundle> result) {
+  public void openBatteryOptimizationSettings(Activity activity, MethodCallResult<Void> result) {
     PowerManagerUtils.openBatteryOptimizationSettings(activity);
     result.onComplete(null, null);
   }
