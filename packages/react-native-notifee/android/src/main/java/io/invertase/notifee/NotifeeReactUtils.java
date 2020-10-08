@@ -71,6 +71,15 @@ class NotifeeReactUtils {
     }
   }
 
+  static void promiseBooleanResolver(Promise promise, Exception e,  Boolean bool) {
+    if (e != null) {
+      // TODO custom error class with message/code
+      promise.reject(e);
+    } else {
+      promise.resolve(bool);
+    }
+  }
+
   static void promiseStringListResolver(Promise promise, Exception e, List<String> stringList) {
     if (e != null) {
       // TODO custom error class with message/code
