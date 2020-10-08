@@ -29,6 +29,11 @@ public class IntentUtils {
   }
 
   public static void startActivityOnUiThread(Activity activity, Intent intent) {
+    if (activity == null || intent == null) {
+      Logger.e(TAG, "Activity or intent is null when calling startActivityOnUiThread()");
+      return;
+    }
+
     activity.runOnUiThread(
       () -> {
         try {
