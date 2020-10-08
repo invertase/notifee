@@ -26,7 +26,9 @@ public class PowerManagerUtils {
       if (activity != null) {
         Boolean isAvailableOnDevice =
           IntentUtils.isAvailableOnDevice(ContextHolder.getApplicationContext(), intent);
+
         if (!isAvailableOnDevice) {
+          Logger.d(TAG, "battery optimization settings is not available on device");
           return;
         }
 
