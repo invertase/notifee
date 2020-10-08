@@ -171,7 +171,7 @@ struct {
 
     // TODO figure out if this is needed or if we can just complete immediately
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)),
-                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                   dispatch_get_main_queue(), ^{
                      completionHandler();
                    });
 
