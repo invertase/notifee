@@ -127,7 +127,13 @@ struct {
   // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
     if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]) {
-      // TODO handle in a later version - sending a DISMISSED = 0 event to match Android
+        // post DISMISSED event, only triggers if notification has a categoryId
+        [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+            @"type" : @(NotifeeCoreEventTypeDismissed),
+            @"detail" : @{
+              @"notification" : notifeeNotification,
+            }
+          }];
       return;
     }
 

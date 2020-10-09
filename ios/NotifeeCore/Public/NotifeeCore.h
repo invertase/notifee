@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreNotificationType) {
 };
 
 typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
+  NotifeeCoreEventTypeDismissed = 0,
   NotifeeCoreEventTypeDelivered = 3,
   NotifeeCoreEventTypeTriggerNotificationCreated = 7,
 };
