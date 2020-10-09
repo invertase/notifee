@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.util.Log;
 import android.util.TypedValue;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,13 +84,14 @@ public class ResourceUtils {
 
     ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(imageUri).build();
 
+    // TODO(helenaford): handle destroying of fresco after use in background state
     // Needed when the app is killed, and the Fresco hasn't yet been initialized by React Native
-    if (!Fresco.hasBeenInitialized()) {
-      Log.w(TAG, "Fresco initializing natively by Notifee");
-
-      // TODO(helenaford): expand on this to initialize with a custom imagePipelineConfig
-      Fresco.initialize(ContextHolder.getApplicationContext());
-    }
+    //    if (!Fresco.hasBeenInitialized()) {
+    //      Log.w(TAG, "Fresco initializing natively by Notifee");
+    //
+    //      // TODO(helenaford): expand on this to initialize with a custom imagePipelineConfig
+    //      Fresco.initialize(ContextHolder.getApplicationContext());
+    //    }
 
     DataSource<CloseableReference<CloseableImage>> dataSource =
         Fresco.getImagePipeline()
