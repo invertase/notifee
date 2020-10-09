@@ -5,9 +5,15 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.14.0
+
+- **[Android]**: Fixed an issue where `isBatteryOptimizationEnabled` was returning the result as an object instead of a boolean.
+- **[Android]**: Fixed an issue where `openBatteryOptimizationSettings` was sometimes throwing an exception for Samsung and Oppo phones on Android versions 6.0.
+- **[iOS]**: Fixed an issue when a notification is pressed while the app is in the background on iOS 14, which sometimes would cause the app to crash.
+  
 ## 0.13.2
 
-- **[Android]**: Fixes an issue where if an trigger notification was created with a version before 0.13.0, when displayed it would cause the app to crash.
+- **[Android]**: Fixed an issue where trigger notifications created with v0.12.x and below would cause the app to crash when upgrading to v0.13.x.
 
 ## 0.13.1
 
