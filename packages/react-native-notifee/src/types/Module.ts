@@ -31,15 +31,13 @@ export interface Module {
   /**
    * API used to cancel any displayed notifications.
    *
-   * Currently only supported on Android.
-   *
+   * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
+   * notifications.
    */
   cancelDisplayedNotifications(): Promise<void>;
 
   /**
    * API used to cancel any trigger notifications.
-   *
-   * Currently only supported on Android.
    *
    */
   cancelTriggerNotifications(): Promise<void>;
