@@ -33,7 +33,6 @@ export interface Module {
    *
    * Currently only supported on Android.
    *
-   * @platform android
    */
   cancelDisplayedNotifications(): Promise<void>;
 
@@ -42,7 +41,6 @@ export interface Module {
    *
    * Currently only supported on Android.
    *
-   * @platform android
    */
   cancelTriggerNotifications(): Promise<void>;
 
