@@ -54,12 +54,14 @@ To create a new channel, call the `createChannel` method. The only required fiel
 channel will be created with sensible defaults, for example:
 
 ```js
+import notifee, { AndroidImportance } from '@notifee/react-native';
+
 await notifee.createChannel({
   id: 'alarm',
   name: 'Firing alarms & timers',
   lights: false,
   vibration: true,
-  importance: notifee.Importance.DEFAULT,
+  importance: AndroidImportance.DEFAULT,
 });
 ```
 

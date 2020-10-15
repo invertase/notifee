@@ -43,6 +43,7 @@ function Screen() {
       body: 'Main body content of the notification',
       android: {
         channelId,
+        smallIcon: 'name-of-a-small-icon', // optional, defaults to `ic_launcher`.
       },
     });
   }
@@ -57,7 +58,7 @@ function Screen() {
 
 When the button is pressed, we perform two tasks: creating a channel & displaying a notification.
 
-Channels are an Android only concept used to categorize and allow users to control how notifications are handled
+Channels are an Android-only concept used to categorize and allow users to control how notifications are handled
 on their devices. Channels are created with sensible default settings and are created or updated each time a
 call to `createChannel` is performed, so it is safe to keep calling this method.
 
@@ -65,7 +66,9 @@ Once the channel has been created, the `displayNotification` method is called pa
 `channelId` is also passed inside of the `android` property object to assign the notification to the channel. On iOS
 platform, the call to `createChannel` resolves instantly & gracefully (iOS has no concept of a channel), then calls `displayNotification`.
 
-> To learn more about channels, view the [Android Channels](/react-native/docs/android/channels) documentation.
+In addition to channels, small icons are also an Android-only concept and are required to display a notification. Notifee will fallback to `ic_launcher` if not set.
+
+> To learn more about channels and small icons, view the [Android Channels](/react-native/docs/android/channels) and [Small Icon](/react-native/docs/android/smallIcon) documentation.
 
 Go ahead and press the button! A notification icon will appear on your device and will be visible when pulling down the
 notification shade.

@@ -48,36 +48,36 @@ Notifications can be shown with two types of icons; small & large. Each icon typ
 
 ## Small Icons
 
-To set a small icon on a notification, you must add the resource directly from Android studio, which will take care
-of device compatibility and format:
+Small Icons are primarily used for users to identify your app, typically matching your app's logo. Or, they can be used to reflect the content type of the notification. For example, Google has a `TV` small icon to represent notifications about Films and TV Shows.
+
+The small icon must be opaque white, otherwise Android will display a white square.
+
+To create a small icon, you must add the resource directly from Android studio, which will take care of device compatibility and format:
 
 1. Using Android Studio, open your projects `android` directory.
-1. Open the `app/main` directory in the file tree.
-1. Right click on the `main` directory & select `New -> Image Asset`.
-1. Select the "Notification Icons" icon type, and follow the wizard by creating your new icon.![android-small-icon-1](https://user-images.githubusercontent.com/14185925/86519506-52347300-be33-11ea-800b-45019ca83c1e.png)
-1. Once finished, Android Studio will inject multiple icon files into your projects resource (`res`) directory.
+2. Open the `app/main` directory in the file tree.
+3. Right click on the `main` directory & select `New -> Image Asset`.
+4. Select the "Notification Icons" icon type, and follow the wizard by creating your new icon.![android-small-icon-1](https://user-images.githubusercontent.com/14185925/86519506-52347300-be33-11ea-800b-45019ca83c1e.png)
+5. Once finished, Android Studio will inject multiple icon files into your projects resource (`res`) directory.
    ![android-small-icon-2](https://user-images.githubusercontent.com/14185925/86519517-67a99d00-be33-11ea-9ecb-c0b413d5acd0.png)
 
-To set the small icon, reference the name you provided whilst creating a notification, for example if created with the name
-`ic_small_icon`:
-
-<Vimeo id="android-small-icon" caption="Android Small Icon Example" />
-
-The code for the example video:
+To set a small icon, add a `smallIcon` property to the notification body:
 
 ```js
 notifee.displayNotification({
   title: 'Small Icon',
   body: 'A notification using the small icon!.',
   android: {
-    // Reference the name created
+    // Reference the name created (Optional, defaults to 'ic_launcher')
     smallIcon: 'ic_small_icon',
 
-    // Optional (Defaults to white)
+    // Set color of icon (Optional, defaults to white)
     color: '#9c27b0',
   },
 });
 ```
+
+<Vimeo id="android-small-icon" caption="Android Small Icon Example" />
 
 The image file used in the example can be downloaded [here](https://user-images.githubusercontent.com/14185925/86519462-cde1f000-be32-11ea-8ae6-cdec95754866.png).
 
