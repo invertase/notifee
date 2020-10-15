@@ -248,8 +248,19 @@ public class ChannelManager {
 
     // getVibrationPattern can be null
     long[] vibrationPattern = channel.getVibrationPattern();
+
     if (vibrationPattern != null && vibrationPattern.length > 0) {
-      channelBundle.putLongArray("vibrationPattern", vibrationPattern);
+      try {
+        int[] convertedVibrationPattern = new int[vibrationPattern.length];
+        // cast to int array
+        for (int i = 0; i < vibrationPattern.length; i++) {
+          convertedVibrationPattern[i] = (int) vibrationPattern[i];
+        }
+
+        channelBundle.putIntArray("vibrationPattern", convertedVibrationPattern);
+      } catch (Exception e) {
+        Logger.e(TAG, "Unable to convert Vibration Pattern to Channel Bundle", e);
+      }
     }
 
     // Unless the user manually changes this in app settings, it is always -1000.
