@@ -335,15 +335,23 @@ class NotificationManager {
         .continueWith(CACHED_THREAD_POOL, styleContinuation);
   }
 
-  static Task<Void> cancelNotification(@NonNull String notificationId) {
+  static Task<Void> cancelNotification(
+      @NonNull String notificationId, @NonNull int notificationType) {
     return Tasks.call(
         () -> {
           NotificationManagerCompat notificationManagerCompat =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext());
-          notificationManagerCompat.cancel(notificationId.hashCode());
 
-          WorkManager.getInstance(ContextHolder.getApplicationContext())
-              .cancelUniqueWork("trigger:" + notificationId);
+          if (notificationType == NOTIFICATION_TYPE_DISPLAYED
+              || notificationType == NOTIFICATION_TYPE_ALL) {
+            notificationManagerCompat.cancel(notificationId.hashCode());
+          }
+
+          if (notificationType == NOTIFICATION_TYPE_TRIGGER
+              || notificationType == NOTIFICATION_TYPE_ALL) {
+            WorkManager.getInstance(ContextHolder.getApplicationContext())
+                .cancelUniqueWork("trigger:" + notificationId);
+          }
 
           // delete notification entry from database
           WorkDataRepository.getInstance(ContextHolder.getApplicationContext())

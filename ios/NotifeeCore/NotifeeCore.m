@@ -27,10 +27,17 @@
  * @param notificationId NSString id of the notification to cancel
  * @param block notifeeMethodVoidBlock
  */
-+ (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block {
++ (void)cancelNotification:(NSString *)notificationId withNotificationType: (NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  [center removeDeliveredNotificationsWithIdentifiers:@[ notificationId ]];
-  [center removePendingNotificationRequestsWithIdentifiers:@[ notificationId ]];
+   // cancel displayed notification
+  if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+   [center removeDeliveredNotificationsWithIdentifiers:@[ notificationId ]];
+
+  // cancel trigger notification
+  if (notificationType == NotifeeCoreNotificationTypeTrigger ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+   [center removePendingNotificationRequestsWithIdentifiers:@[ notificationId ]];
   block(nil);
 }
 
