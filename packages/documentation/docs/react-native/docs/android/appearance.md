@@ -48,7 +48,7 @@ Notifications can be shown with two types of icons; small & large. Each icon typ
 
 ## Small Icons
 
-Small Icons are primarily used for users to identify your app, typically matching your app's logo. Or, they can be used to reflect the content type of the notification. For example, Google uses a TV icon to represent notifications about Films and TV Shows.
+Small Icons are primarily used for users to identify your app, typically matching your app's logo. Alternatively, they can be used to reflect the content type of the notification. For example, Google uses a TV icon to represent notifications about Films and TV Shows.
 
 The small icon must have a transparent background, otherwise Android will display a solid square.
 

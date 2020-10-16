@@ -66,9 +66,9 @@ Once the channel has been created, the `displayNotification` method is called pa
 `channelId` is also passed inside of the `android` property object to assign the notification to the channel. On iOS
 platform, the call to `createChannel` resolves instantly & gracefully (iOS has no concept of a channel), then calls `displayNotification`.
 
-In addition to channels, small icons are also an Android-only concept and are required to display a notification. If no icon is specified, Notifee will fallback to the default launcher icon (`ic_launcher`).
+In addition to channels, small icons are an Android-only concept and are required to display a notification. If no icon is specified, Notifee will fallback to the default launcher icon (`ic_launcher`).
 
-> To learn more about channels and small icons, view the [Android Channels](/react-native/docs/android/channels) and [Small Icon](/react-native/docs/android/smallIcon) documentation.
+> To learn more about channels and small icons, view the [Android Channels](/react-native/docs/android/channels) and [Small Icon](/react-native/docs/android/appearance#small-icons) documentation.
 
 Go ahead and press the button! A notification icon will appear on your device and will be visible when pulling down the
 notification shade.
