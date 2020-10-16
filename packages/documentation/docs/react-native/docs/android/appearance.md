@@ -48,13 +48,13 @@ Notifications can be shown with two types of icons; small & large. Each icon typ
 
 ## Small Icons
 
-Small Icons are primarily used for users to identify your app, typically matching your app's logo. Or, they can be used to reflect the content type of the notification. For example, Google has a `TV` small icon to represent notifications about Films and TV Shows.
+Small Icons are primarily used for users to identify your app, typically matching your app's logo. Or, they can be used to reflect the content type of the notification. For example, Google uses a TV icon to represent notifications about Films and TV Shows.
 
-The small icon must be opaque white, otherwise Android will display a white square.
+The small icon must have a transparent background, otherwise Android will display a solid square.
 
 To create a small icon, you must add the resource directly from Android studio, which will take care of device compatibility and format:
 
-1. Using Android Studio, open your projects `android` directory.
+1. Using Android Studio, open your project's `android` directory.
 2. Open the `app/main` directory in the file tree.
 3. Right click on the `main` directory & select `New -> Image Asset`.
 4. Select the "Notification Icons" icon type, and follow the wizard by creating your new icon.![android-small-icon-1](https://user-images.githubusercontent.com/14185925/86519506-52347300-be33-11ea-800b-45019ca83c1e.png)

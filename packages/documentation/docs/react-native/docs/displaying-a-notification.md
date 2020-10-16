@@ -43,7 +43,7 @@ function Screen() {
       body: 'Main body content of the notification',
       android: {
         channelId,
-        smallIcon: 'name-of-a-small-icon', // optional, defaults to `ic_launcher`.
+        smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
       },
     });
   }
@@ -66,7 +66,7 @@ Once the channel has been created, the `displayNotification` method is called pa
 `channelId` is also passed inside of the `android` property object to assign the notification to the channel. On iOS
 platform, the call to `createChannel` resolves instantly & gracefully (iOS has no concept of a channel), then calls `displayNotification`.
 
-In addition to channels, small icons are also an Android-only concept and are required to display a notification. Notifee will fallback to `ic_launcher` if not set.
+In addition to channels, small icons are also an Android-only concept and are required to display a notification. If no icon is specified, Notifee will fallback to the default launcher icon (`ic_launcher`).
 
 > To learn more about channels and small icons, view the [Android Channels](/react-native/docs/android/channels) and [Small Icon](/react-native/docs/android/smallIcon) documentation.
 
