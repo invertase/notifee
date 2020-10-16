@@ -95,7 +95,31 @@ RCT_EXPORT_METHOD(cancelNotification:
       reject:
       (RCTPromiseRejectBlock) reject
 ) {
-  [NotifeeCore cancelNotification:notificationId withBlock:^(NSError *_Nullable error) {
+  [NotifeeCore cancelNotification:notificationId withNotificationType:kReactNativeNotifeeNotificationTypeAll withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(cancelDisplayedNotification:
+  (NSString *) notificationId
+      resolve:
+      (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore cancelNotification:notificationId withNotificationType:kReactNativeNotifeeNotificationTypeDisplayed withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(cancelTriggerNotification:
+  (NSString *) notificationId
+      resolve:
+      (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore cancelNotification:notificationId withNotificationType:kReactNativeNotifeeNotificationTypeTrigger withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }

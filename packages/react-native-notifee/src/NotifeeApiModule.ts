@@ -79,6 +79,22 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.cancelNotification(notificationId);
   }
 
+  public cancelDisplayedNotification(notificationId: string): Promise<void> {
+    if (!isString(notificationId)) {
+      throw new Error("notifee.cancelDisplayedNotification(*) 'notificationId' expected a string value.");
+    }
+
+    return this.native.cancelDisplayedNotification(notificationId);
+  }
+
+  public cancelTriggerNotification(notificationId: string): Promise<void> {
+    if (!isString(notificationId)) {
+      throw new Error("notifee.cancelTriggerNotification(*) 'notificationId' expected a string value.");
+    }
+
+    return this.native.cancelTriggerNotification(notificationId);
+  }
+
   public createChannel(channel: AndroidChannel): Promise<string> {
     let options: AndroidChannel;
     try {

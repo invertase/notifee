@@ -40,7 +40,27 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   public void cancelNotification(String notificationId, Promise promise) {
     Notifee.getInstance()
         .cancelNotification(
-            notificationId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+            notificationId,
+            NOTIFICATION_TYPE_ALL,
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void cancelDisplayedNotification(String notificationId, Promise promise) {
+    Notifee.getInstance()
+        .cancelNotification(
+            notificationId,
+            NOTIFICATION_TYPE_DISPLAYED,
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
+  public void cancelTriggerNotification(String notificationId, Promise promise) {
+    Notifee.getInstance()
+        .cancelNotification(
+            notificationId,
+            NOTIFICATION_TYPE_TRIGGER,
+            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod

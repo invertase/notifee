@@ -57,6 +57,27 @@ export interface Module {
   cancelNotification(notificationId: string): Promise<void>;
 
   /**
+   * API used to cancel a single displayed notification.
+   *
+   *
+   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * notifications.
+   *
+   * @param notificationId The unique notification ID. This is automatically generated and returned
+   * when creating a notification, or has been set manually via the `id` property.
+   */
+  cancelDisplayedNotification(notificationId: string): Promise<void>;
+
+  /**
+   * API used to cancel a single trigger notification.
+   *
+   *
+   * @param notificationId The unique notification ID. This is automatically generated and returned
+   * when creating a notification, or has been set manually via the `id` property.
+   */
+  cancelTriggerNotification(notificationId: string): Promise<void>;
+
+  /**
    * API to create and update channels on supported Android devices.
    *
    * Creates a new Android channel. Channels are used to collectively assign notifications to

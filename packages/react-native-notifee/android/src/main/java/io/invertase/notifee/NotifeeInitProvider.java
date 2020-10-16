@@ -7,7 +7,6 @@ package io.invertase.notifee;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-
 import app.notifee.core.InitProvider;
 import app.notifee.core.Notifee;
 import app.notifee.core.NotifeeConfig;
@@ -37,7 +36,8 @@ public class NotifeeInitProvider extends InitProvider {
         PackageInfo pInfo = pm.getPackageInfo(context.getPackageName(), 0);
         version = pInfo.versionName;
       } catch (Exception e) {
-        // is there anything useful to log the unbelievably unexpected inability to get package info?
+        // is there anything useful to log the unbelievably unexpected inability to get package
+        // info?
       }
     }
 
