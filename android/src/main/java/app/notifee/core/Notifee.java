@@ -79,8 +79,9 @@ public class Notifee {
    * @param result
    */
   @KeepForSdk
-  public void cancelNotification(String notificationId, MethodCallResult<Void> result) {
-    NotificationManager.cancelNotification(notificationId)
+  public void cancelNotification(
+      String notificationId, int notificationType, MethodCallResult<Void> result) {
+    NotificationManager.cancelNotification(notificationId, notificationType)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
