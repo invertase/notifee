@@ -380,16 +380,16 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void isPowerManagerAvailable(MethodCallResult<Boolean> result) {
-    Boolean isPowerManagerAvailable =
-        PowerManagerUtils.isPowerManagerAvailable(ContextHolder.getApplicationContext());
-    result.onComplete(null, isPowerManagerAvailable);
+  public void getPowerManagerInfo(MethodCallResult<Bundle> result) {
+    PowerManagerUtils.PowerManagerInfo info = PowerManagerUtils.getPowerManagerInfo();
+    result.onComplete(null, info.toBundle());
   }
 
   @KeepForSdk
-  public void openPowerManager(MethodCallResult<Boolean> result) {
-    Boolean didOpen = PowerManagerUtils.openPowerManager(ContextHolder.getApplicationContext());
-    result.onComplete(null, didOpen);
+  public void openPowerManagerSettings(Activity activity, MethodCallResult<Void> result) {
+    PowerManagerUtils.openPowerManagerSettings(activity);
+    result.onComplete(null, null);
+    return;
   }
 
   @KeepForSdk
