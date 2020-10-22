@@ -38,7 +38,6 @@ export interface Module {
 
   /**
    * API used to cancel any trigger notifications.
-   *
    */
   cancelTriggerNotifications(): Promise<void>;
 
@@ -195,10 +194,6 @@ export interface Module {
    *
    * @param trigger The [`Trigger`](/react-native/reference/trigger) interface used
    * to create a trigger.
-   *
-   * Currently only supported on Android.
-   *
-   * @platform android
    */
   createTriggerNotification(notification: Notification, trigger: Trigger): Promise<string>;
 
@@ -206,7 +201,6 @@ export interface Module {
    * API used to return the ids of trigger notifications that are pending.
    *
    * View the [Triggers](/react-native/docs/triggers) documentation for more information.
-   *
    */
   getTriggerNotificationIds(): Promise<string[]>;
 
