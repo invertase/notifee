@@ -32,6 +32,11 @@ public class PowerManagerUtils {
     }
   }
 
+  /**
+   * Attempts to open the device's battery optimization settings
+   *
+   * @param activity
+   */
   public static void openBatteryOptimizationSettings(Activity activity) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       return;
@@ -58,6 +63,11 @@ public class PowerManagerUtils {
     }
   }
 
+  /**
+   * Returns true if the app has battery optimization enabled
+   *
+   * @param context
+   */
   public static Boolean isBatteryOptimizationEnabled(Context context) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       return false;
@@ -66,6 +76,11 @@ public class PowerManagerUtils {
     return !pm.isIgnoringBatteryOptimizations(context.getPackageName());
   }
 
+  /**
+   * Retrieves information about the device and its Power Manager Settings
+   *
+   * @return PowerManagerInfo
+   */
   public static PowerManagerInfo getPowerManagerInfo() {
     String activityName;
 
@@ -73,10 +88,15 @@ public class PowerManagerUtils {
     activityName = IntentUtils.getActivityName(intent);
 
     PowerManagerInfo result =
-        new PowerManagerInfo(Build.BRAND, Build.MODEL, Build.VERSION.RELEASE, activityName);
+        new PowerManagerInfo(Build.MANUFACTURER, Build.MODEL, Build.VERSION.RELEASE, activityName);
     return result;
   }
 
+  /**
+   * Attempts to open the device's Power Manager settings
+   *
+   * @param activity
+   */
   public static void openPowerManagerSettings(Activity activity) {
     Intent intent = getPowerManagerIntent();
     if (intent == null) {
@@ -97,7 +117,7 @@ public class PowerManagerUtils {
   }
 
   private static Intent findPowerManagerIntent(Context context) {
-    String manufacturerName = Build.BRAND.toLowerCase(Locale.getDefault());
+    String manufacturerName = Build.BRAND.toLowerCase(Locale.US);
     List<Intent> possibleIntents = getManufacturerPowerManagerIntents(manufacturerName);
 
     for (int i = 0; i < possibleIntents.size(); i++) {

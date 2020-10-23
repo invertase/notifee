@@ -33,12 +33,16 @@ public class IntentUtils {
       return null;
     }
 
-    String className = intent.getComponent().getClassName();
+    try {
+      String className = intent.getComponent().getClassName();
+      int index = className.lastIndexOf(".");
 
-    int index = className.lastIndexOf(".");
+      if (index != -1) {
+        return className.substring(index + 1);
+      }
 
-    if (index != -1) {
-      return className.substring(index + 1);
+    } catch (Exception e) {
+      // noop
     }
 
     return null;
