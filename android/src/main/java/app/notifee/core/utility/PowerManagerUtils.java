@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
 import app.notifee.core.ContextHolder;
 import app.notifee.core.Logger;
 import java.util.ArrayList;
@@ -93,8 +92,7 @@ public class PowerManagerUtils {
             TAG, "Unable to start activity: " + IntentUtils.getActivityName(intent), exception);
       }
     } else {
-      Logger.w(
-        TAG, "Unable to find an activity to open the device's power manager");
+      Logger.w(TAG, "Unable to find an activity to open the device's power manager");
     }
   }
 
