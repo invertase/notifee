@@ -11,6 +11,7 @@ import {
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
 import { InitialNotification, Notification, Event } from './types/Notification';
+import { PowerManagerInfo } from './types/PowerManagerInfo';
 import { Trigger } from './types/trigger';
 import NotifeeNativeModule from './NotifeeNativeModule';
 import {
@@ -514,4 +515,27 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
     return this.native.openBatteryOptimizationSettings();
   }
+
+   public getPowerManagerInfo(): Promise<PowerManagerInfo> {
+
+    if (isIOS) {
+      // iOS doesn't support this, so instead we
+      // return a dummy response to allow the power manager
+      // flow work the same on both iOS & Android
+      return Promise.resolve({
+        manufacturer: 'apple',
+        activity: null
+      } as PowerManagerInfo);
+    }
+
+    return this.native.getPowerManagerInfo();
+  }
+
+  public openPowerManagerSettings(): Promise<void> {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.openPowerManagerSettings();
+  }
+
 }

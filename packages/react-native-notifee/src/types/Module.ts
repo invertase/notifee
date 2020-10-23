@@ -15,6 +15,7 @@ import {
   IOSNotificationSettings,
   IOSNotificationPermissions,
 } from './NotificationIOS';
+import { PowerManagerInfo } from './PowerManagerInfo';
 
 export interface Module {
   /**
@@ -466,6 +467,8 @@ export interface Module {
    * If the API version is >= 23, the battery optimization settings screen is displayed, otherwise,
    * this is a no-op & instantly resolves.
    *
+   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   *
    * @platform android
    */
   openBatteryOptimizationSettings(): Promise<void>;
@@ -475,9 +478,63 @@ export interface Module {
    *
    * Supports API versions >= 23.
    *
+   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   *
    * @platform android
    */
   isBatteryOptimizationEnabled(): Promise<boolean>;
+
+  /**
+   * API used to get information about the device and its power manager settings, including manufacturer, model, version and activity.
+   *
+   * If activity is null, openPowerManagerSettings() will be noop.
+   *
+   * On iOS, an instance of PowerManagerInfo will be returned with activity set to null.
+   *
+   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   *
+   * ```js
+   * import notifee from `@notifee/react-native`;
+   *
+   * PowerManagerInfo powerManagerInfo = await notifee.getPowerManagerInfo
+   *
+   * if (powerManagerInfo.activity) {
+   *  // 1. ask the user to adjust their Power Manager settings
+   *  // ...
+   *
+   *  // 2. open settings
+   *  await openPowerManagerSettings();
+   * }
+   * ```
+   *
+   * @platform android
+   */
+  getPowerManagerInfo(): Promise<PowerManagerInfo>;
+
+  /**
+   * API used to navigate to the appropriate Android System settings for the device.
+   *
+   * Call `getPowerManagerInfo()` first to find out if the user's device is supported.
+   *
+   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   *
+   * ```js
+   * import notifee from `@notifee/react-native`;
+   *
+   * PowerManagerInfo powerManagerInfo = await notifee.getPowerManagerInfo
+   *
+   * if (powerManagerInfo.activity) {
+   * // 1. ask the user to adjust their Power Manager settings
+   * // ...
+   *
+   * // 2. if yes, navigate them to settings
+   * await openPowerManagerSettings();
+   * }
+   * ```
+   *
+   * @platform android
+   */
+  openPowerManagerSettings(): Promise<void>;
 }
 
 /**

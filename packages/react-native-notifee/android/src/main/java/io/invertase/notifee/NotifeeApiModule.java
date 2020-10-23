@@ -221,6 +221,20 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
             (e, aBool) -> NotifeeReactUtils.promiseBooleanResolver(promise, e, aBool));
   }
 
+  @ReactMethod
+  public void getPowerManagerInfo(Promise promise) {
+    Notifee.getInstance()
+        .getPowerManagerInfo(
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+  }
+
+  @ReactMethod
+  public void openPowerManagerSettings(Promise promise) {
+    Notifee.getInstance()
+        .openPowerManagerSettings(
+            getCurrentActivity(), (e, avoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
   @NonNull
   @Override
   public String getName() {
