@@ -48,7 +48,8 @@
           ["/react-native/docs/android/interaction", "Interaction"],
           ["/react-native/docs/android/progress-indicators", "Progress Indicators"],
           ["/react-native/docs/android/styles", "Styles"],
-          ["/react-native/docs/android/timers", "Timers"]
+          ["/react-native/docs/android/timers", "Timers"],
+          ["/react-native/docs/android/background-restrictions", "Background Restrictions"]
         ]
       },
       {

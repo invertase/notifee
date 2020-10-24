@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.15.0
+
+- **[Android]**: Implemented additional support to help with background restrictions on Android, includes two new methods `getPowerManagerInfo` and `openPowerManagerSettings`.
+- **[Android]**: Fixed an issue with subtitle where the default value was causing two dots on some devices.
+- **[Android/iOS]**: Added support to cancel either a displayed or a trigger notification.
+
 ## 0.14.0
 
 - **[Android]**: Fixed an issue where `isBatteryOptimizationEnabled` was returning the result as an object instead of a boolean.
