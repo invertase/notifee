@@ -487,23 +487,23 @@ export interface Module {
   /**
    * API used to get information about the device and its power manager settings, including manufacturer, model, version and activity.
    *
-   * If activity is null, openPowerManagerSettings() will be noop.
+   * If `activity` is `null`, `openPowerManagerSettings()` will be noop.
    *
-   * On iOS, an instance of PowerManagerInfo will be returned with activity set to null.
+   * On iOS, an instance of `PowerManagerInfo` will be returned with `activity` set to `null`.
    *
-   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.
    *
    * ```js
    * import notifee from `@notifee/react-native`;
    *
-   * PowerManagerInfo powerManagerInfo = await notifee.getPowerManagerInfo
+   * const powerManagerInfo = await notifee.getPowerManagerInfo();
    *
    * if (powerManagerInfo.activity) {
    *  // 1. ask the user to adjust their Power Manager settings
    *  // ...
    *
    *  // 2. open settings
-   *  await openPowerManagerSettings();
+   *  await notifee.openPowerManagerSettings();
    * }
    * ```
    *
@@ -516,19 +516,19 @@ export interface Module {
    *
    * Call `getPowerManagerInfo()` first to find out if the user's device is supported.
    *
-   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.
    *
    * ```js
    * import notifee from `@notifee/react-native`;
    *
-   * PowerManagerInfo powerManagerInfo = await notifee.getPowerManagerInfo
+   * const powerManagerInfo = await notifee.getPowerManagerInfo
    *
    * if (powerManagerInfo.activity) {
    * // 1. ask the user to adjust their Power Manager settings
    * // ...
    *
    * // 2. if yes, navigate them to settings
-   * await openPowerManagerSettings();
+   * await notifee.openPowerManagerSettings();
    * }
    * ```
    *
