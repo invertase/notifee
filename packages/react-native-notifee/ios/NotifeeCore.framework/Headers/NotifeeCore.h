@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreNotificationType) {
 };
 
 typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
+  NotifeeCoreEventTypeDismissed = 0,
   NotifeeCoreEventTypeDelivered = 3,
   NotifeeCoreEventTypeTriggerNotificationCreated = 7,
 };
@@ -51,7 +52,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 
 + (void)setCoreDelegate:(id <NotifeeCoreDelegate>)coreDelegate;
 
-+ (void)cancelNotification:(NSString *)notificationId withBlock:(notifeeMethodVoidBlock)block;
++ (void)cancelNotification:(NSString *)notificationId withNotificationType: (NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)cancelAllNotifications:(NSInteger)notificationType
                      withBlock:(notifeeMethodVoidBlock)block;
