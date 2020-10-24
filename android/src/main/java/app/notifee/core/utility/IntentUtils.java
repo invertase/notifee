@@ -28,6 +28,26 @@ public class IntentUtils {
     }
   }
 
+  public static String getActivityName(Intent intent) {
+    if (intent == null) {
+      return null;
+    }
+
+    try {
+      String className = intent.getComponent().getClassName();
+      int index = className.lastIndexOf(".");
+
+      if (index != -1) {
+        return className.substring(index + 1);
+      }
+
+    } catch (Exception e) {
+      // noop
+    }
+
+    return null;
+  }
+
   public static void startActivityOnUiThread(Activity activity, Intent intent) {
     if (activity == null || intent == null) {
       Logger.w(TAG, "Activity or intent is null when calling startActivityOnUiThread()");
@@ -40,12 +60,12 @@ public class IntentUtils {
     }
 
     activity.runOnUiThread(
-      () -> {
-        try {
-          ctx.startActivity(intent);
-        } catch (Exception e) {
-          Logger.e(TAG, "An error occurred whilst trying to start activity on Ui Thread", e);
-        }
-      });
+        () -> {
+          try {
+            ctx.startActivity(intent);
+          } catch (Exception e) {
+            Logger.e(TAG, "An error occurred whilst trying to start activity on Ui Thread", e);
+          }
+        });
   }
 }
