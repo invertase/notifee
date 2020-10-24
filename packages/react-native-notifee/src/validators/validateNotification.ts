@@ -17,7 +17,6 @@ export default function validateNotification(notification: Notification): Notifi
   const out: Notification = {
     id: '',
     title: '',
-    subtitle: '',
     body: '',
     data: {},
   };
