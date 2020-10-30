@@ -27,6 +27,7 @@ public class ResourceUtils {
   private static final String LOCAL_RESOURCE_SCHEME = "res";
   private static volatile Map<String, Integer> sResourceIdCache;
 
+
   public static Map<String, Integer> getResourceIdCache() {
     if (sResourceIdCache == null) {
       synchronized (ResourceUtils.class) {
@@ -86,12 +87,12 @@ public class ResourceUtils {
 
     // TODO(helenaford): handle destroying of fresco after use in background state
     // Needed when the app is killed, and the Fresco hasn't yet been initialized by React Native
-    //    if (!Fresco.hasBeenInitialized()) {
-    //      Log.w(TAG, "Fresco initializing natively by Notifee");
-    //
-    //      // TODO(helenaford): expand on this to initialize with a custom imagePipelineConfig
-    //      Fresco.initialize(ContextHolder.getApplicationContext());
-    //    }
+    if (!Fresco.hasBeenInitialized()) {
+      Logger.w(TAG, "Fresco initializing natively by Notifee");
+
+      // TODO(helenaford): expand on this to initialize with a custom imagePipelineConfig
+      Fresco.initialize(ContextHolder.getApplicationContext());
+    }
 
     DataSource<CloseableReference<CloseableImage>> dataSource =
         Fresco.getImagePipeline()
