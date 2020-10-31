@@ -34,7 +34,7 @@ If you are using a custom sound file, it must be less than 30 seconds in length,
 # Critical Notifications
 
 In some scenarios you may wish to alert the user to a notification and bypass the users preferences such as the
-mute switch or Do Not Disturb mode. To do this, you can set the `crtitial` flag on the notification:
+mute switch or Do Not Disturb mode. To do this, you can set the `critical` flag on the notification:
 
 ```js
 // iOS > 10
@@ -67,3 +67,5 @@ notifee.displayNotification({
 ```
 
 The `criticalVolume` value accepts a float value between `0.0` & `1.0`, with `1.0` representing full volume.
+
+> Critical notifications require a special entitlement issued by Apple. A request can be submitted at https://developer.apple.com/contact/request/notifications-critical-alerts-entitlement.
