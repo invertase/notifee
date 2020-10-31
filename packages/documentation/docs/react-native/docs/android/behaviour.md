@@ -40,19 +40,21 @@ sound directly on the notification:
 notifee.createChannel({
   id: 'custom-sound',
   title: 'Channel with custom sound',
-  sound: 'hollow',
+  sound: 'hollow.mp3',
 });
 
 // Android < 8.0 (API level 26)
 notifee.displayNotification({
   body: 'Custom sound',
   android: {
-    sound: 'hollow',
+    sound: 'hollow.mp3',
   },
 });
 ```
 
-The file extension does not need to be provided. If the file could not be found, the default system sound will be used instead.
+The file extension is optional unlike on iOS. If the file could not be found, the default system sound will be used instead.
+
+> To use custom sounds on iOS, view the [iOS Sound](/react-native/docs/ios/behaviour#sound) documentation for details.
 
 # Auto Cancelling
 
