@@ -8,7 +8,6 @@ import { isObject, isString, isUndefined, isArray, isNumber } from '../utils';
 const LAUNCH_ACTIVITY_DEFAULT_VALUE = 'default';
 const PRESS_ACTION_DEFAULT_VALUE = 'default';
 
-// TODO name wrong - this is no longer 'Android' specific - is used on android also
 export default function validateAndroidPressAction(
   pressAction: NotificationPressAction,
 ): NotificationPressAction {
