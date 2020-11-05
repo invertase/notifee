@@ -125,6 +125,8 @@ export interface Event {
  *
  * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation to
  * learn more.
+ *
+ * @platform android
  */
 export type ForegroundServiceTask = (notification: Notification) => Promise<void>;
 

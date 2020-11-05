@@ -7,7 +7,7 @@ import { NotificationPressAction } from './Notification';
 /**
  * The interface for Android specific options which are applied to a notification.
  *
- * To learn more about Android notifications, view the [Android](/react-native/docs/android/overview)
+ * To learn more about Android notifications, view the [Android](/react-native/docs/android/introduction)
  * documentation for full examples and usage.
  *
  * @platform android
@@ -238,7 +238,7 @@ export interface NotificationAndroid {
    * `pressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * View the  [Interaction](/react-native/docs/android/interaction) documentation to learn
+   * View the [Interaction](/react-native/docs/android/interaction) documentation to learn
    * more.
    */
   pressAction?: NotificationPressAction;
@@ -398,11 +398,11 @@ export interface NotificationAndroid {
 }
 
 /**
- * The interface used to describe a notification quick action.
+ * The interface used to describe a notification quick action for Android.
  *
  * Notification actions allow users to interact with notifications, allowing you to handle events
  * within your application. When an action completes (e.g. pressing an action, or filling out an input
- * box) and event is sent.
+ * box) an event is sent.
  *
  * View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
  *
@@ -419,7 +419,7 @@ export interface AndroidAction {
   pressAction: NotificationPressAction;
 
   /**
-   * The title of the notification, e.g. "Reply", "Mark as read" etc.
+   * The title of the action, e.g. "Reply", "Mark as read" etc.
    */
   title: string;
 
@@ -436,7 +436,7 @@ export interface AndroidAction {
    * If `true`, the user will be able to provide free text input when the action is pressed. This
    * property can be further configured for advanced inputs.
    *
-   * View the [Action input](/react-native/docs/android/interaction#action-input) documentation to
+   * View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to
    * learn more.
    */
   input?: true | AndroidInput;
@@ -445,7 +445,7 @@ export interface AndroidAction {
 /**
  * The interface used to enable advanced user input on a notification.
  *
- * View the [Action input](/react-native/docs/android/interaction#action-input) documentation to learn more.
+ * View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to learn more.
  *
  * @platform android
  */
@@ -643,6 +643,8 @@ export interface AndroidMessagingStyle {
  *
  * View the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference
  * and [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+ *
+ * @platform android
  */
 export interface AndroidMessagingStyleMessage {
   /**
@@ -1171,6 +1173,8 @@ export enum AndroidVisibility {
  * and also how it visually appears on the device.
  *
  * View the [Android Appearance](/react-native/docs/android/appearance#importance) documentation to learn more.
+ *
+ * @platform android
  */
 export enum AndroidImportance {
   /**

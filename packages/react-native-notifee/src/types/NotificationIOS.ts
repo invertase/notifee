@@ -4,6 +4,14 @@
  * Copyright (c) 2016-present Invertase Limited.
  */
 
+/**
+* The interface for iOS specific options which are applied to a notification.
+*
+* To learn more about iOS notifications, view the [iOS](/react-native/docs/iOS/introduction)
+* documentation for full examples and usage.
+*
+* @platform ios
+*/
 export interface NotificationIOS {
   /**
    * Optional array of [IOSNotificationAttachment](/react-native/reference/iosnotificationattachment) interfaces.
@@ -96,9 +104,24 @@ export interface NotificationIOS {
    */
   targetContentId?: string;
 
+  /**
+   * Optional property to customise how notifications are presented when the app is in the foreground.
+   *
+   * By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
+   */
   foregroundPresentationOptions?: IOSForegroundPresentationOptions;
 }
 
+/**
+ * An interface to customise how notifications are shown when the app is in the foreground.
+ *
+ * By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
+ *
+ * View the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) to learn
+ * more.
+ *
+ * @platform ios
+ */
 export interface IOSForegroundPresentationOptions {
   /**
    * App in foreground dialog box which indicates when a decision has to be made
@@ -122,7 +145,12 @@ export interface IOSForegroundPresentationOptions {
 
 /**
  * An interface representing all the available permissions that can be requested by your app via
- * the `requestPermission` API.
+ * the [`requestPermission`](/react-native/reference/requestpermission) API.
+ *
+ * View the [Permissions](/react-native/docs/ios/permissions) to learn
+ * more.
+ *
+ * @platform ios
  */
 export interface IOSNotificationPermissions {
   /**
@@ -132,9 +160,15 @@ export interface IOSNotificationPermissions {
    */
   alert?: boolean;
 
-  // TODO add support, look into whether using UNAuthorizationOptionCriticalAlert without entitlement
-  //    will cause an app review failure.
-  criticalAlert?: boolean; // false
+  /**
+   * Request permission to display critical notifications.
+   *
+   * View the [Critical Notifications](/react-native/docs/ios/behaviour#critical-notifications) documentation for more information
+   * and usage examples.
+   *
+   * Defaults to false.
+   */
+  criticalAlert?: boolean;
 
   /**
    * Request permission to update the application badge.
@@ -194,6 +228,8 @@ export interface IOSNotificationPermissions {
  *
  * Value is truthy if authorized, compare against an exact status (e.g. PROVISIONAL) for a more
  * granular status.
+ *
+ * @platform ios
  */
 export enum IOSAuthorizationStatus {
   /**
@@ -224,6 +260,8 @@ export enum IOSAuthorizationStatus {
  *
  * Value is truthy if previews are to be shown, compare against an exact value
  * (e.g. WHEN_AUTHENTICATED) for more granular control.
+ *
+ * @platform ios
  */
 export enum IOSShowPreviewsSetting {
   /**
@@ -253,6 +291,8 @@ export enum IOSShowPreviewsSetting {
  *
  * Value is truthy if setting enabled, compare against an exact value (e.g. NOT_SUPPORTED) for more
  * granular control.
+ *
+ * @platform ios
  */
 export enum IOSNotificationSetting {
   /**
@@ -273,24 +313,77 @@ export enum IOSNotificationSetting {
 }
 
 /**
- * TODO docs
+ * An interface representing the current authorization status and notification-related settings for your app.
+ *
+ * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
+ * and [`getNotificationSettings`](/reference/getnotificationsettings).
+ *
+ * View the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.
+ *
+ * @platform ios
  */
 export interface IOSNotificationSettings {
+  /**
+   * Enum describing if notifications will alert the user.
+   */
   alert: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notifications can update the application badge.
+   */
   badge: IOSNotificationSetting;
+
+  /**
+   * Enum describing if critical notifications are allowed.
+   */
   criticalAlert: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notification previews will be shown.
+   */
   showPreviews: IOSShowPreviewsSetting;
+
+  /**
+   * Enum describing if notifications can trigger a sound.
+   */
   sound: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notifications can be displayed in a CarPlay environment.
+   */
   carPlay: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notifications will be displayed on the lock screen.
+   */
   lockScreen: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notifications can be announced to the user
+   * via 3rd party services such as Siri.
+   *
+   * For example, if the notification can be automatically read by Siri
+   * while the user is wearing AirPods.
+   */
   announcement: IOSNotificationSetting;
+
+  /**
+   * Enum describing if notifications will be displayed in the notification center.
+   */
   notificationCenter: IOSNotificationSetting;
+
   inAppNotificationSettings: IOSNotificationSetting;
+
+  /**
+   * Overall notification authorization status for the application.
+   */
   authorizationStatus: IOSAuthorizationStatus;
 }
 
 /**
  * TODO docs, used to provide context to Siri
+ *
+ * @platform ios
  */
 export enum IOSIntentIdentifier {
   START_AUDIO_CALL = 0,
@@ -345,27 +438,111 @@ export enum IOSIntentIdentifier {
 }
 
 /**
- * TODO docs
+ * A interface representing a notification category created via [`setNotificationCategories`](/react-native/reference/setnotificationcategories).
+ *
+ * At minimum, a category must be created with a unique identifier, all other properties are optional.
+ *
+ * View the [Categories](/react-native/docs/ios/categories) documentation to learn more.
+ *
+ * @platform ios
  */
 export interface IOSNotificationCategory {
+  /**
+   * The unique ID for the category.
+   */
   id: string;
+
+  /**
+   * Specify a custom format for the summary text, which is visible when notifications are grouped together.
+   *
+   * View the [Summary Text](/react-native/docs/ios/categories#category-summary-text) documentation to learn more.
+   */
   summaryFormat?: string;
+
+  /**
+   * Allow notifications in this category to be displayed in a CarPlay environment.
+   *
+   * Defaults to `false`.
+   */
   allowInCarPlay?: boolean;
+
+  /*
+   * Allow notifications in this category to be announced to the user
+   * via 3rd party services such as Siri.
+   *
+   * For example, if the notification can be automatically read by Siri
+   * while the user is wearing AirPods.
+   *
+   * Defaults to `false`.
+   */
   allowAnnouncement?: boolean;
+
+  /*
+   * Show the notification's title, even if the user has disabled notification previews for the app
+   *
+   * Defaults to `false`.
+   */
   hiddenPreviewsShowTitle?: boolean;
+
+  /*
+   * Show the notification's subtitle, even if the user has disabled notification previews for the app
+   *
+   * Defaults to `false`.
+   */
   hiddenPreviewsShowSubtitle?: boolean;
+
+  /*
+   * Show the notification's body, even if the user has disabled notification previews for the app
+   *
+   * Defaults to `false`.
+   */
   hiddenPreviewsBodyPlaceholder?: string;
+
   intentIdentifiers?: IOSIntentIdentifier[];
+
+  /*
+   * An array of [IOSNotificationCategoryAction](/react-native/reference/iosnotificationcategoryaction) interfaces.
+   *
+   * Adds quick actions to a notification. Quick Actions enable users to interact with your application
+   * directly from the notification body, providing an overall greater user experience.
+   *
+   * View the [Quick Actions](react-native/docs/ios/interaction#quick-actions) documentation for more information.
+   */
   actions?: IOSNotificationCategoryAction[];
 }
 
 /**
- * TODO docs
+ * The interface used to describe a notification quick action for iOS.
+ *
+ * Quick actions allow users to interact with notifications, allowing you to handle events
+ * within your application. When an action completes (e.g. pressing an action, or filling out an input
+ * box) an event is sent.
+ *
+ * View the [Quick Actions](/react-native/docs/ios/interaction#quick-actions) documentation to learn more.
+ *
+ * @platform ios
  */
 export interface IOSNotificationCategoryAction {
   id: string;
+
+  /**
+   * The title of the action, e.g. "Reply", "Mark as read" etc.
+   */
   title: string;
+
+  /**
+   * If provided, the action accepts custom user input.
+   *
+   * If `true`, the user will be able to provide free text input when the action is pressed.
+   *
+   * The placeholder and button text can be customized by providing an object
+   * of type [`IOSInput`](/react-native/reference/iosinput).
+   *
+   * View the [Action Input](/react-native/docs/ios/interaction#action-input) documentation to
+   * learn more.
+   */
   input?: true | IOSInput;
+
   /**
    * Makes the action red, indicating that the action is destructive.
    */
@@ -383,7 +560,11 @@ export interface IOSNotificationCategoryAction {
 }
 
 /**
- * TODO docs
+ * The interface used to enable advanced user input on a notification.
+ *
+ * View the [Action input](/react-native/docs/ios/interaction#action-input) documentation to learn more.
+ *
+ * @platform ios
  */
 export interface IOSInput {
   /**
@@ -462,6 +643,8 @@ export interface IOSNotificationAttachment {
  *
  * For example, specifying an origin (x,y) of (0.25, 0.25) and a size (width, height) of (0.5, 0.5)
  * defines a clipping rectangle that shows only the center portion of the image.
+ *
+ * @platform ios
  */
 export interface IOSAttachmentThumbnailClippingRect {
   x: number;
