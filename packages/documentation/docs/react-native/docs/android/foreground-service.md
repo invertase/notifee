@@ -134,8 +134,7 @@ notification can exist for your application at any one time.
 ## Handling interactions
 
 Much like other notifications, we can subscribe to [events](/react-native/docs/events) when the user interacts with the
-Foreground Service notification. The service task runs in it's own context, allowing us to subscribe to events within
-itself.
+Foreground Service notification. The service task runs in its own context, allowing us to subscribe to events within itself.
 
 For example, to stop the foreground service when a user presses an action, we can subscribe to the event inside of the
 task:
@@ -175,3 +174,5 @@ notifee.displayNotification({
   },
 });
 ```
+
+It's important to note, for background events there can only be only a single handler registered at one time. It's recommended to listen to your service events in your application's main [`onBackgroundEvent`](/react-native/docs/events#background-events) callback handler so you can continue to listen to other events outside of the service.
