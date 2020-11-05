@@ -1,6 +1,6 @@
 {
 	"id": 0,
-	"name": "@notifee/react-native - v0.14.0",
+	"name": "@notifee/react-native - v0.15.0",
 	"kind": 0,
 	"flags": {},
 	"children": [
@@ -38,7 +38,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 996,
+							"line": 998,
 							"character": 7
 						}
 					],
@@ -58,7 +58,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 984,
+							"line": 986,
 							"character": 6
 						}
 					],
@@ -78,7 +78,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 989,
+							"line": 991,
 							"character": 7
 						}
 					],
@@ -99,7 +99,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 980,
+					"line": 982,
 					"character": 32
 				}
 			]
@@ -134,7 +134,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1009,
+							"line": 1011,
 							"character": 7
 						}
 					],
@@ -151,7 +151,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1010,
+							"line": 1012,
 							"character": 6
 						}
 					],
@@ -168,7 +168,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1011,
+							"line": 1013,
 							"character": 7
 						}
 					],
@@ -185,7 +185,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1012,
+							"line": 1014,
 							"character": 7
 						}
 					],
@@ -202,7 +202,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1013,
+							"line": 1015,
 							"character": 7
 						}
 					],
@@ -219,7 +219,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1014,
+							"line": 1016,
 							"character": 9
 						}
 					],
@@ -236,7 +236,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1015,
+							"line": 1017,
 							"character": 12
 						}
 					],
@@ -253,7 +253,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1016,
+							"line": 1018,
 							"character": 10
 						}
 					],
@@ -270,7 +270,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1017,
+							"line": 1019,
 							"character": 7
 						}
 					],
@@ -287,7 +287,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1018,
+							"line": 1020,
 							"character": 16
 						}
 					],
@@ -304,7 +304,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1019,
+							"line": 1021,
 							"character": 10
 						}
 					],
@@ -321,7 +321,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1020,
+							"line": 1022,
 							"character": 9
 						}
 					],
@@ -338,7 +338,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1021,
+							"line": 1023,
 							"character": 8
 						}
 					],
@@ -355,7 +355,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1022,
+							"line": 1024,
 							"character": 8
 						}
 					],
@@ -375,7 +375,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1027,
+							"line": 1029,
 							"character": 8
 						}
 					],
@@ -392,7 +392,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1028,
+							"line": 1030,
 							"character": 11
 						}
 					],
@@ -426,7 +426,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1008,
+					"line": 1010,
 					"character": 27
 				}
 			]
@@ -461,7 +461,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1052,
+							"line": 1054,
 							"character": 6
 						}
 					],
@@ -478,7 +478,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1042,
+							"line": 1044,
 							"character": 7
 						}
 					],
@@ -495,7 +495,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1040,
+							"line": 1042,
 							"character": 6
 						}
 					],
@@ -512,7 +512,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1044,
+							"line": 1046,
 							"character": 6
 						}
 					],
@@ -529,7 +529,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1048,
+							"line": 1050,
 							"character": 10
 						}
 					],
@@ -546,7 +546,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1051,
+							"line": 1053,
 							"character": 10
 						}
 					],
@@ -563,7 +563,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1053,
+							"line": 1055,
 							"character": 9
 						}
 					],
@@ -580,7 +580,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1049,
+							"line": 1051,
 							"character": 6
 						}
 					],
@@ -597,7 +597,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1041,
+							"line": 1043,
 							"character": 7
 						}
 					],
@@ -614,7 +614,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1047,
+							"line": 1049,
 							"character": 11
 						}
 					],
@@ -631,7 +631,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1050,
+							"line": 1052,
 							"character": 11
 						}
 					],
@@ -648,7 +648,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1054,
+							"line": 1056,
 							"character": 6
 						}
 					],
@@ -665,7 +665,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1045,
+							"line": 1047,
 							"character": 9
 						}
 					],
@@ -682,7 +682,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1055,
+							"line": 1057,
 							"character": 8
 						}
 					],
@@ -699,7 +699,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1056,
+							"line": 1058,
 							"character": 6
 						}
 					],
@@ -716,7 +716,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1057,
+							"line": 1059,
 							"character": 7
 						}
 					],
@@ -733,7 +733,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1058,
+							"line": 1060,
 							"character": 8
 						}
 					],
@@ -750,7 +750,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1039,
+							"line": 1041,
 							"character": 5
 						}
 					],
@@ -767,7 +767,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1059,
+							"line": 1061,
 							"character": 8
 						}
 					],
@@ -784,7 +784,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1060,
+							"line": 1062,
 							"character": 6
 						}
 					],
@@ -801,7 +801,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1043,
+							"line": 1045,
 							"character": 7
 						}
 					],
@@ -818,7 +818,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1046,
+							"line": 1048,
 							"character": 8
 						}
 					],
@@ -858,7 +858,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1038,
+					"line": 1040,
 					"character": 24
 				}
 			]
@@ -896,7 +896,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1077,
+							"line": 1079,
 							"character": 5
 						}
 					],
@@ -916,7 +916,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1082,
+							"line": 1084,
 							"character": 8
 						}
 					],
@@ -936,7 +936,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1087,
+							"line": 1089,
 							"character": 7
 						}
 					],
@@ -956,7 +956,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1092,
+							"line": 1094,
 							"character": 9
 						}
 					],
@@ -978,7 +978,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1073,
+					"line": 1075,
 					"character": 27
 				}
 			]
@@ -1016,7 +1016,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1107,
+							"line": 1109,
 							"character": 5
 						}
 					],
@@ -1036,7 +1036,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1117,
+							"line": 1119,
 							"character": 10
 						}
 					],
@@ -1056,7 +1056,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1112,
+							"line": 1114,
 							"character": 9
 						}
 					],
@@ -1077,7 +1077,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1103,
+					"line": 1105,
 					"character": 37
 				}
 			]
@@ -1092,7 +1092,13 @@
 			},
 			"comment": {
 				"shortText": "The interface describing the importance levels of an incoming notification.",
-				"text": "The importance level can be set directly onto a notification channel for supported devices (API Level >= 26)\nor directly onto the notification for devices which do not support channels.\n\nThe importance is used to both change the visual prompt of a received notification\nand also how it visually appears on the device.\n\nView the [Android Appearance](/react-native/docs/android/appearance#importance) documentation to learn more.\n"
+				"text": "The importance level can be set directly onto a notification channel for supported devices (API Level >= 26)\nor directly onto the notification for devices which do not support channels.\n\nThe importance is used to both change the visual prompt of a received notification\nand also how it visually appears on the device.\n\nView the [Android Appearance](/react-native/docs/android/appearance#importance) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -1110,7 +1116,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1182,
+							"line": 1186,
 							"character": 9
 						}
 					],
@@ -1131,7 +1137,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1191,
+							"line": 1195,
 							"character": 6
 						}
 					],
@@ -1152,7 +1158,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1203,
+							"line": 1207,
 							"character": 5
 						}
 					],
@@ -1173,7 +1179,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1215,
+							"line": 1219,
 							"character": 5
 						}
 					],
@@ -1193,7 +1199,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1221,
+							"line": 1225,
 							"character": 6
 						}
 					],
@@ -1216,7 +1222,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1175,
+					"line": 1179,
 					"character": 29
 				}
 			]
@@ -1254,7 +1260,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1277,
+							"line": 1281,
 							"character": 18
 						}
 					],
@@ -1274,7 +1280,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1317,
+							"line": 1321,
 							"character": 12
 						}
 					],
@@ -1294,7 +1300,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1257,
+							"line": 1261,
 							"character": 11
 						}
 					],
@@ -1314,7 +1320,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1292,
+							"line": 1296,
 							"character": 23
 						}
 					],
@@ -1334,7 +1340,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1272,
+							"line": 1276,
 							"character": 22
 						}
 					],
@@ -1354,7 +1360,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1262,
+							"line": 1266,
 							"character": 16
 						}
 					],
@@ -1374,7 +1380,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1287,
+							"line": 1291,
 							"character": 23
 						}
 					],
@@ -1394,7 +1400,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1332,
+							"line": 1336,
 							"character": 17
 						}
 					],
@@ -1414,7 +1420,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1337,
+							"line": 1341,
 							"character": 16
 						}
 					],
@@ -1434,7 +1440,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1252,
+							"line": 1256,
 							"character": 15
 						}
 					],
@@ -1454,7 +1460,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1297,
+							"line": 1301,
 							"character": 14
 						}
 					],
@@ -1474,7 +1480,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1247,
+							"line": 1251,
 							"character": 10
 						}
 					],
@@ -1494,7 +1500,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1312,
+							"line": 1316,
 							"character": 14
 						}
 					],
@@ -1514,7 +1520,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1237,
+							"line": 1241,
 							"character": 12
 						}
 					],
@@ -1534,7 +1540,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1302,
+							"line": 1306,
 							"character": 16
 						}
 					],
@@ -1554,7 +1560,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1267,
+							"line": 1271,
 							"character": 17
 						}
 					],
@@ -1574,7 +1580,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1307,
+							"line": 1311,
 							"character": 18
 						}
 					],
@@ -1594,7 +1600,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1282,
+							"line": 1286,
 							"character": 22
 						}
 					],
@@ -1614,7 +1620,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1327,
+							"line": 1331,
 							"character": 19
 						}
 					],
@@ -1634,7 +1640,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1242,
+							"line": 1246,
 							"character": 12
 						}
 					],
@@ -1654,7 +1660,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1322,
+							"line": 1326,
 							"character": 14
 						}
 					],
@@ -1693,7 +1699,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1233,
+					"line": 1237,
 					"character": 37
 				}
 			]
@@ -1728,7 +1734,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1128,
+							"line": 1130,
 							"character": 12
 						}
 					],
@@ -1745,7 +1751,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1129,
+							"line": 1131,
 							"character": 9
 						}
 					],
@@ -1762,7 +1768,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1130,
+							"line": 1132,
 							"character": 7
 						}
 					],
@@ -1779,7 +1785,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1131,
+							"line": 1133,
 							"character": 11
 						}
 					],
@@ -1801,7 +1807,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1127,
+					"line": 1129,
 					"character": 24
 				}
 			]
@@ -1839,7 +1845,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1149,
+							"line": 1151,
 							"character": 9
 						}
 					],
@@ -1859,7 +1865,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1154,
+							"line": 1156,
 							"character": 8
 						}
 					],
@@ -1880,7 +1886,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1161,
+							"line": 1163,
 							"character": 8
 						}
 					],
@@ -1901,7 +1907,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1145,
+					"line": 1147,
 					"character": 29
 				}
 			]
@@ -1933,7 +1939,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 221,
+							"line": 223,
 							"character": 14
 						}
 					],
@@ -1959,7 +1965,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 238,
+							"line": 240,
 							"character": 13
 						}
 					],
@@ -1985,7 +1991,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 245,
+							"line": 247,
 							"character": 17
 						}
 					],
@@ -2011,7 +2017,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 252,
+							"line": 254,
 							"character": 23
 						}
 					],
@@ -2032,7 +2038,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 230,
+							"line": 232,
 							"character": 11
 						}
 					],
@@ -2059,7 +2065,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 207,
+							"line": 209,
 							"character": 11
 						}
 					],
@@ -2080,7 +2086,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 216,
+							"line": 218,
 							"character": 7
 						}
 					],
@@ -2100,7 +2106,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 257,
+							"line": 259,
 							"character": 30
 						}
 					],
@@ -2121,7 +2127,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 197,
+							"line": 199,
 							"character": 9
 						}
 					],
@@ -2148,7 +2154,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Notification.ts",
-					"line": 190,
+					"line": 192,
 					"character": 21
 				}
 			]
@@ -2163,7 +2169,13 @@
 			},
 			"comment": {
 				"shortText": "An enum representing the notification authorization status for this app on the device.",
-				"text": "Value is truthy if authorized, compare against an exact status (e.g. PROVISIONAL) for a more\ngranular status.\n"
+				"text": "Value is truthy if authorized, compare against an exact status (e.g. PROVISIONAL) for a more\ngranular status.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2180,7 +2192,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 213,
+							"line": 249,
 							"character": 12
 						}
 					],
@@ -2200,7 +2212,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 208,
+							"line": 244,
 							"character": 8
 						}
 					],
@@ -2220,7 +2232,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 203,
+							"line": 239,
 							"character": 16
 						}
 					],
@@ -2246,7 +2258,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 219,
+							"line": 255,
 							"character": 13
 						}
 					],
@@ -2268,7 +2280,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 198,
+					"line": 234,
 					"character": 34
 				}
 			]
@@ -2282,7 +2294,13 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO docs, used to provide context to Siri"
+				"shortText": "TODO docs, used to provide context to Siri",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2296,7 +2314,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 320,
+							"line": 413,
 							"character": 16
 						}
 					],
@@ -2313,7 +2331,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 318,
+							"line": 411,
 							"character": 13
 						}
 					],
@@ -2330,7 +2348,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 344,
+							"line": 437,
 							"character": 17
 						}
 					],
@@ -2347,7 +2365,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 340,
+							"line": 433,
 							"character": 19
 						}
 					],
@@ -2364,7 +2382,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 316,
+							"line": 409,
 							"character": 15
 						}
 					],
@@ -2381,7 +2399,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 334,
+							"line": 427,
 							"character": 17
 						}
 					],
@@ -2398,7 +2416,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 342,
+							"line": 435,
 							"character": 14
 						}
 					],
@@ -2415,7 +2433,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 322,
+							"line": 415,
 							"character": 16
 						}
 					],
@@ -2432,7 +2450,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 312,
+							"line": 405,
 							"character": 21
 						}
 					],
@@ -2449,7 +2467,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 300,
+							"line": 393,
 							"character": 21
 						}
 					],
@@ -2466,7 +2484,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 328,
+							"line": 421,
 							"character": 21
 						}
 					],
@@ -2483,7 +2501,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 336,
+							"line": 429,
 							"character": 19
 						}
 					],
@@ -2500,7 +2518,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 326,
+							"line": 419,
 							"character": 14
 						}
 					],
@@ -2517,7 +2535,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 332,
+							"line": 425,
 							"character": 14
 						}
 					],
@@ -2534,7 +2552,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 302,
+							"line": 395,
 							"character": 25
 						}
 					],
@@ -2551,7 +2569,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 304,
+							"line": 397,
 							"character": 29
 						}
 					],
@@ -2568,7 +2586,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 306,
+							"line": 399,
 							"character": 31
 						}
 					],
@@ -2585,7 +2603,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 330,
+							"line": 423,
 							"character": 23
 						}
 					],
@@ -2602,7 +2620,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 310,
+							"line": 403,
 							"character": 20
 						}
 					],
@@ -2619,7 +2637,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 324,
+							"line": 417,
 							"character": 19
 						}
 					],
@@ -2636,7 +2654,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 308,
+							"line": 401,
 							"character": 26
 						}
 					],
@@ -2653,7 +2671,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 296,
+							"line": 389,
 							"character": 18
 						}
 					],
@@ -2670,7 +2688,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 338,
+							"line": 431,
 							"character": 22
 						}
 					],
@@ -2687,7 +2705,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 298,
+							"line": 391,
 							"character": 18
 						}
 					],
@@ -2704,7 +2722,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 314,
+							"line": 407,
 							"character": 15
 						}
 					],
@@ -2747,7 +2765,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 295,
+					"line": 388,
 					"character": 31
 				}
 			]
@@ -2762,7 +2780,13 @@
 			},
 			"comment": {
 				"shortText": "An enum representing a notification setting for this app on the device.",
-				"text": "Value is truthy if setting enabled, compare against an exact value (e.g. NOT_SUPPORTED) for more\ngranular control.\n"
+				"text": "Value is truthy if setting enabled, compare against an exact value (e.g. NOT_SUPPORTED) for more\ngranular control.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2779,7 +2803,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 267,
+							"line": 307,
 							"character": 10
 						}
 					],
@@ -2799,7 +2823,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 272,
+							"line": 312,
 							"character": 9
 						}
 					],
@@ -2819,7 +2843,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 262,
+							"line": 302,
 							"character": 15
 						}
 					],
@@ -2840,7 +2864,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 257,
+					"line": 297,
 					"character": 34
 				}
 			]
@@ -2855,7 +2879,13 @@
 			},
 			"comment": {
 				"shortText": "An enum representing the show previews notification setting for this app on the device.",
-				"text": "Value is truthy if previews are to be shown, compare against an exact value\n(e.g. WHEN_AUTHENTICATED) for more granular control.\n"
+				"text": "Value is truthy if previews are to be shown, compare against an exact value\n(e.g. WHEN_AUTHENTICATED) for more granular control.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -2872,7 +2902,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 243,
+							"line": 281,
 							"character": 8
 						}
 					],
@@ -2892,7 +2922,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 238,
+							"line": 276,
 							"character": 7
 						}
 					],
@@ -2912,7 +2942,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 233,
+							"line": 271,
 							"character": 15
 						}
 					],
@@ -2932,7 +2962,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 248,
+							"line": 286,
 							"character": 20
 						}
 					],
@@ -2954,7 +2984,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 228,
+					"line": 266,
 					"character": 34
 				}
 			]
@@ -3220,8 +3250,8 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "The interface used to describe a notification quick action.",
-				"text": "Notification actions allow users to interact with notifications, allowing you to handle events\nwithin your application. When an action completes (e.g. pressing an action, or filling out an input\nbox) and event is sent.\n\nView the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.\n",
+				"shortText": "The interface used to describe a notification quick action for Android.",
+				"text": "Notification actions allow users to interact with notifications, allowing you to handle events\nwithin your application. When an action completes (e.g. pressing an action, or filling out an input\nbox) an event is sent.\n\nView the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.\n",
 				"tags": [
 					{
 						"tag": "platform",
@@ -3275,7 +3305,7 @@
 					},
 					"comment": {
 						"shortText": "If provided, the action accepts user input.",
-						"text": "If `true`, the user will be able to provide free text input when the action is pressed. This\nproperty can be further configured for advanced inputs.\n\nView the [Action input](/react-native/docs/android/interaction#action-input) documentation to\nlearn more.\n"
+						"text": "If `true`, the user will be able to provide free text input when the action is pressed. This\nproperty can be further configured for advanced inputs.\n\nView the [Action Input](/react-native/docs/android/interaction#action-input) documentation to\nlearn more.\n"
 					},
 					"sources": [
 						{
@@ -3333,7 +3363,7 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "The title of the notification, e.g. \"Reply\", \"Mark as read\" etc."
+						"shortText": "The title of the action, e.g. \"Reply\", \"Mark as read\" etc."
 					},
 					"sources": [
 						{
@@ -3762,7 +3792,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 792,
+							"line": 794,
 							"character": 7
 						}
 					],
@@ -3806,7 +3836,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 804,
+							"line": 806,
 							"character": 11
 						}
 					],
@@ -3850,7 +3880,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 815,
+							"line": 817,
 							"character": 13
 						}
 					],
@@ -3884,7 +3914,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 842,
+							"line": 844,
 							"character": 9
 						}
 					],
@@ -3916,7 +3946,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 773,
+							"line": 775,
 							"character": 4
 						}
 					],
@@ -3941,7 +3971,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 851,
+							"line": 853,
 							"character": 12
 						}
 					],
@@ -3967,7 +3997,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 859,
+							"line": 861,
 							"character": 12
 						}
 					],
@@ -4002,7 +4032,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 824,
+							"line": 826,
 							"character": 8
 						}
 					],
@@ -4039,7 +4069,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 781,
+							"line": 783,
 							"character": 6
 						}
 					],
@@ -4064,7 +4094,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 887,
+							"line": 889,
 							"character": 7
 						}
 					],
@@ -4098,7 +4128,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 833,
+							"line": 835,
 							"character": 11
 						}
 					],
@@ -4136,7 +4166,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 878,
+							"line": 880,
 							"character": 18
 						}
 					],
@@ -4164,7 +4194,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 869,
+							"line": 871,
 							"character": 12
 						}
 					],
@@ -4199,7 +4229,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 769,
+					"line": 771,
 					"character": 31
 				}
 			],
@@ -4252,7 +4282,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 943,
+							"line": 945,
 							"character": 13
 						}
 					],
@@ -4284,7 +4314,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 926,
+							"line": 928,
 							"character": 4
 						}
 					],
@@ -4308,7 +4338,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 934,
+							"line": 936,
 							"character": 6
 						}
 					],
@@ -4332,7 +4362,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 922,
+					"line": 924,
 					"character": 36
 				}
 			],
@@ -4511,7 +4541,7 @@
 			},
 			"comment": {
 				"shortText": "The interface used to enable advanced user input on a notification.",
-				"text": "View the [Action input](/react-native/docs/android/interaction#action-input) documentation to learn more.\n",
+				"text": "View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to learn more.\n",
 				"tags": [
 					{
 						"tag": "platform",
@@ -4913,7 +4943,13 @@
 			},
 			"comment": {
 				"shortText": "The interface for messages when constructing a Messaging Style notification.",
-				"text": "<Vimeo id=\"android-style-messaging\" caption=\"Android Messaging Style\" />\n\nView the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference\nand [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.\n"
+				"text": "<Vimeo id=\"android-style-messaging\" caption=\"Android Messaging Style\" />\n\nView the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference\nand [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -4932,7 +4968,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 664,
+							"line": 666,
 							"character": 8
 						}
 					],
@@ -4956,7 +4992,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 651,
+							"line": 653,
 							"character": 6
 						}
 					],
@@ -4979,7 +5015,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 656,
+							"line": 658,
 							"character": 11
 						}
 					],
@@ -5003,7 +5039,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 647,
+					"line": 649,
 					"character": 45
 				}
 			]
@@ -5043,7 +5079,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 693,
+							"line": 695,
 							"character": 5
 						}
 					],
@@ -5081,7 +5117,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 712,
+							"line": 714,
 							"character": 6
 						}
 					],
@@ -5114,7 +5150,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 686,
+							"line": 688,
 							"character": 4
 						}
 					],
@@ -5148,7 +5184,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 704,
+							"line": 706,
 							"character": 11
 						}
 					],
@@ -5185,7 +5221,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 680,
+							"line": 682,
 							"character": 6
 						}
 					],
@@ -5210,7 +5246,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 723,
+							"line": 725,
 							"character": 5
 						}
 					],
@@ -5246,7 +5282,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 674,
+					"line": 676,
 					"character": 30
 				}
 			]
@@ -5286,7 +5322,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 748,
+							"line": 750,
 							"character": 9
 						}
 					],
@@ -5320,7 +5356,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 756,
+							"line": 758,
 							"character": 15
 						}
 					],
@@ -5358,7 +5394,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 741,
+							"line": 743,
 							"character": 5
 						}
 					],
@@ -5391,7 +5427,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 735,
+					"line": 737,
 					"character": 32
 				}
 			]
@@ -5511,7 +5547,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 333,
+							"line": 335,
 							"character": 9
 						}
 					],
@@ -5555,7 +5591,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 313,
+							"line": 315,
 							"character": 9
 						}
 					],
@@ -5587,7 +5623,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 324,
+							"line": 326,
 							"character": 14
 						}
 					],
@@ -5619,7 +5655,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 302,
+							"line": 304,
 							"character": 7
 						}
 					],
@@ -5653,7 +5689,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 277,
+							"line": 279,
 							"character": 14
 						}
 					],
@@ -5679,7 +5715,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 290,
+							"line": 292,
 							"character": 13
 						}
 					],
@@ -5707,7 +5743,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Notification.ts",
-					"line": 265,
+					"line": 267,
 					"character": 28
 				}
 			]
@@ -5722,7 +5758,13 @@
 			},
 			"comment": {
 				"shortText": "The interface used to specify the portion of your image that you want to be displayed as the thumbnail",
-				"text": "Values are in the range 0.0 to 1.0.\n\nFor example, specifying an origin (x,y) of (0.25, 0.25) and a size (width, height) of (0.5, 0.5)\ndefines a clipping rectangle that shows only the center portion of the image.\n"
+				"text": "Values are in the range 0.0 to 1.0.\n\nFor example, specifying an origin (x,y) of (0.25, 0.25) and a size (width, height) of (0.5, 0.5)\ndefines a clipping rectangle that shows only the center portion of the image.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -5736,7 +5778,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 470,
+							"line": 653,
 							"character": 8
 						}
 					],
@@ -5756,7 +5798,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 469,
+							"line": 652,
 							"character": 7
 						}
 					],
@@ -5776,7 +5818,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 467,
+							"line": 650,
 							"character": 3
 						}
 					],
@@ -5796,7 +5838,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 468,
+							"line": 651,
 							"character": 3
 						}
 					],
@@ -5821,7 +5863,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 466,
+					"line": 649,
 					"character": 51
 				}
 			]
@@ -5833,6 +5875,16 @@
 			"kindString": "Interface",
 			"flags": {
 				"isExported": true
+			},
+			"comment": {
+				"shortText": "An interface to customise how notifications are shown when the app is in the foreground.",
+				"text": "By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.\n\nView the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) to learn\nmore.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -5851,7 +5903,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 108,
+							"line": 131,
 							"character": 7
 						}
 					],
@@ -5889,7 +5941,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 120,
+							"line": 143,
 							"character": 7
 						}
 					],
@@ -5927,7 +5979,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 114,
+							"line": 137,
 							"character": 7
 						}
 					],
@@ -5964,7 +6016,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 102,
+					"line": 125,
 					"character": 49
 				}
 			]
@@ -5978,7 +6030,14 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO docs"
+				"shortText": "The interface used to enable advanced user input on a notification.",
+				"text": "View the [Action input](/react-native/docs/ios/interaction#action-input) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -5996,7 +6055,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 392,
+							"line": 573,
 							"character": 12
 						}
 					],
@@ -6029,7 +6088,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 397,
+							"line": 578,
 							"character": 17
 						}
 					],
@@ -6061,7 +6120,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 388,
+					"line": 569,
 					"character": 25
 				}
 			]
@@ -6100,7 +6159,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 412,
+							"line": 593,
 							"character": 4
 						}
 					],
@@ -6133,7 +6192,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 444,
+							"line": 625,
 							"character": 23
 						}
 					],
@@ -6158,7 +6217,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 439,
+							"line": 620,
 							"character": 17
 						}
 					],
@@ -6196,7 +6255,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 455,
+							"line": 636,
 							"character": 15
 						}
 					],
@@ -6230,7 +6289,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 433,
+							"line": 614,
 							"character": 10
 						}
 					],
@@ -6263,7 +6322,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 424,
+							"line": 605,
 							"character": 5
 						}
 					],
@@ -6290,7 +6349,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 407,
+					"line": 588,
 					"character": 42
 				}
 			]
@@ -6304,7 +6363,14 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO docs"
+				"shortText": "A interface representing a notification category created via [`setNotificationCategories`](/react-native/reference/setnotificationcategories).",
+				"text": "At minimum, a category must be created with a unique identifier, all other properties are optional.\n\nView the [Categories](/react-native/docs/ios/categories) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -6319,7 +6385,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 359,
+							"line": 511,
 							"character": 9
 						}
 					],
@@ -6344,7 +6410,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 354,
+							"line": 478,
 							"character": 19
 						}
 					],
@@ -6375,10 +6441,14 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "Allow notifications in this category to be displayed in a CarPlay environment.",
+						"text": "Defaults to `false`.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 353,
+							"line": 467,
 							"character": 16
 						}
 					],
@@ -6412,7 +6482,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 357,
+							"line": 499,
 							"character": 31
 						}
 					],
@@ -6442,7 +6512,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 356,
+							"line": 492,
 							"character": 28
 						}
 					],
@@ -6476,7 +6546,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 355,
+							"line": 485,
 							"character": 25
 						}
 					],
@@ -6506,10 +6576,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "The unique ID for the category."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 351,
+							"line": 453,
 							"character": 4
 						}
 					],
@@ -6530,7 +6603,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 358,
+							"line": 501,
 							"character": 19
 						}
 					],
@@ -6552,10 +6625,14 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "Specify a custom format for the summary text, which is visible when notifications are grouped together.",
+						"text": "View the [Summary Text](/react-native/docs/ios/categories#category-summary-text) documentation to learn more.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 352,
+							"line": 460,
 							"character": 15
 						}
 					],
@@ -6594,7 +6671,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 350,
+					"line": 449,
 					"character": 40
 				}
 			]
@@ -6608,7 +6685,14 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO docs"
+				"shortText": "The interface used to describe a notification quick action for iOS.",
+				"text": "Quick actions allow users to interact with notifications, allowing you to handle events\nwithin your application. When an action completes (e.g. pressing an action, or filling out an input\nbox) an event is sent.\n\nView the [Quick Actions](/react-native/docs/ios/interaction#quick-actions) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -6626,7 +6710,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 382,
+							"line": 559,
 							"character": 24
 						}
 					],
@@ -6663,7 +6747,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 372,
+							"line": 549,
 							"character": 13
 						}
 					],
@@ -6700,7 +6784,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 377,
+							"line": 554,
 							"character": 12
 						}
 					],
@@ -6733,7 +6817,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 366,
+							"line": 526,
 							"character": 4
 						}
 					],
@@ -6751,10 +6835,14 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "If provided, the action accepts custom user input.",
+						"text": "If `true`, the user will be able to provide free text input when the action is pressed.\n\nThe placeholder and button text can be customized by providing an object\nof type [`IOSInput`](/react-native/reference/iosinput).\n\nView the [Action Input](/react-native/docs/ios/interaction#action-input) documentation to\nlearn more.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 368,
+							"line": 544,
 							"character": 7
 						}
 					],
@@ -6781,10 +6869,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "The title of the action, e.g. \"Reply\", \"Mark as read\" etc."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 367,
+							"line": 531,
 							"character": 7
 						}
 					],
@@ -6811,7 +6902,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 365,
+					"line": 525,
 					"character": 46
 				}
 			]
@@ -6825,7 +6916,14 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "An interface representing all the available permissions that can be requested by your app via\nthe `requestPermission` API."
+				"shortText": "An interface representing all the available permissions that can be requested by your app via\nthe [`requestPermission`](/react-native/reference/requestpermission) API.",
+				"text": "View the [Permissions](/react-native/docs/ios/permissions) to learn\nmore.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -6844,7 +6942,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 133,
+							"line": 161,
 							"character": 7
 						}
 					],
@@ -6888,7 +6986,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 176,
+							"line": 210,
 							"character": 14
 						}
 					],
@@ -6926,7 +7024,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 144,
+							"line": 178,
 							"character": 7
 						}
 					],
@@ -6964,7 +7062,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 158,
+							"line": 192,
 							"character": 9
 						}
 					],
@@ -6995,10 +7093,14 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "Request permission to display critical notifications.",
+						"text": "View the [Critical Notifications](/react-native/docs/ios/behaviour#critical-notifications) documentation for more information\nand usage examples.\n\nDefaults to false.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 137,
+							"line": 171,
 							"character": 15
 						}
 					],
@@ -7042,7 +7144,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 167,
+							"line": 201,
 							"character": 13
 						}
 					],
@@ -7080,7 +7182,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 151,
+							"line": 185,
 							"character": 7
 						}
 					],
@@ -7121,7 +7223,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 127,
+					"line": 155,
 					"character": 43
 				}
 			]
@@ -7135,7 +7237,14 @@
 				"isExported": true
 			},
 			"comment": {
-				"shortText": "TODO docs"
+				"shortText": "An interface representing the current authorization status and notification-related settings for your app.",
+				"text": "This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)\nand [`getNotificationSettings`](/reference/getnotificationsettings).\n\nView the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
 			},
 			"children": [
 				{
@@ -7146,10 +7255,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications will alert the user."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 279,
+							"line": 329,
 							"character": 7
 						}
 					],
@@ -7167,10 +7279,14 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications can be announced to the user\nvia 3rd party services such as Siri.",
+						"text": "For example, if the notification can be automatically read by Siri\nwhile the user is wearing AirPods.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 286,
+							"line": 368,
 							"character": 14
 						}
 					],
@@ -7188,10 +7304,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Overall notification authorization status for the application."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 289,
+							"line": 380,
 							"character": 21
 						}
 					],
@@ -7209,10 +7328,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications can update the application badge."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 280,
+							"line": 334,
 							"character": 7
 						}
 					],
@@ -7230,10 +7352,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications can be displayed in a CarPlay environment."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 284,
+							"line": 354,
 							"character": 9
 						}
 					],
@@ -7251,10 +7376,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if critical notifications are allowed."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 281,
+							"line": 339,
 							"character": 15
 						}
 					],
@@ -7275,7 +7403,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 288,
+							"line": 375,
 							"character": 27
 						}
 					],
@@ -7293,10 +7421,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications will be displayed on the lock screen."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 285,
+							"line": 359,
 							"character": 12
 						}
 					],
@@ -7314,10 +7445,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications will be displayed in the notification center."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 287,
+							"line": 373,
 							"character": 20
 						}
 					],
@@ -7335,10 +7469,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notification previews will be shown."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 282,
+							"line": 344,
 							"character": 14
 						}
 					],
@@ -7356,10 +7493,13 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Enum describing if notifications can trigger a sound."
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 283,
+							"line": 349,
 							"character": 7
 						}
 					],
@@ -7392,7 +7532,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 278,
+					"line": 325,
 					"character": 40
 				}
 			]
@@ -12669,7 +12809,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 792,
+							"line": 794,
 							"character": 7
 						}
 					],
@@ -12707,7 +12847,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 909,
+							"line": 911,
 							"character": 9
 						}
 					],
@@ -12738,7 +12878,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 804,
+							"line": 806,
 							"character": 11
 						}
 					],
@@ -12787,7 +12927,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 815,
+							"line": 817,
 							"character": 13
 						}
 					],
@@ -12826,7 +12966,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 842,
+							"line": 844,
 							"character": 9
 						}
 					],
@@ -12863,7 +13003,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 773,
+							"line": 775,
 							"character": 4
 						}
 					],
@@ -12893,7 +13033,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 851,
+							"line": 853,
 							"character": 12
 						}
 					],
@@ -12924,7 +13064,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 859,
+							"line": 861,
 							"character": 12
 						}
 					],
@@ -12964,7 +13104,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 824,
+							"line": 826,
 							"character": 8
 						}
 					],
@@ -13006,7 +13146,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 781,
+							"line": 783,
 							"character": 6
 						}
 					],
@@ -13036,7 +13176,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 887,
+							"line": 889,
 							"character": 7
 						}
 					],
@@ -13075,7 +13215,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 833,
+							"line": 835,
 							"character": 11
 						}
 					],
@@ -13118,7 +13258,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 878,
+							"line": 880,
 							"character": 18
 						}
 					],
@@ -13151,7 +13291,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 869,
+							"line": 871,
 							"character": 12
 						}
 					],
@@ -13192,7 +13332,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 897,
+					"line": 899,
 					"character": 37
 				}
 			],
@@ -13244,7 +13384,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 965,
+							"line": 967,
 							"character": 9
 						}
 					],
@@ -13267,7 +13407,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 970,
+							"line": 972,
 							"character": 10
 						}
 					],
@@ -13302,7 +13442,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 943,
+							"line": 945,
 							"character": 13
 						}
 					],
@@ -13339,7 +13479,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 926,
+							"line": 928,
 							"character": 4
 						}
 					],
@@ -13368,7 +13508,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 934,
+							"line": 936,
 							"character": 6
 						}
 					],
@@ -13399,7 +13539,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 953,
+					"line": 955,
 					"character": 42
 				}
 			],
@@ -13944,7 +14084,7 @@
 			},
 			"comment": {
 				"shortText": "The interface for Android specific options which are applied to a notification.",
-				"text": "To learn more about Android notifications, view the [Android](/react-native/docs/android/overview)\ndocumentation for full examples and usage.\n",
+				"text": "To learn more about Android notifications, view the [Android](/react-native/docs/android/introduction)\ndocumentation for full examples and usage.\n",
 				"tags": [
 					{
 						"tag": "platform",
@@ -14695,7 +14835,7 @@
 					},
 					"comment": {
 						"shortText": "By default notifications have no behaviour when a user presses them. The\n`pressAction` property allows you to set what happens when a user presses\nthe notification.",
-						"text": "View the  [Interaction](/react-native/docs/android/interaction) documentation to learn\nmore.\n"
+						"text": "View the [Interaction](/react-native/docs/android/interaction) documentation to learn\nmore.\n"
 					},
 					"sources": [
 						{
@@ -15249,6 +15389,16 @@
 			"flags": {
 				"isExported": true
 			},
+			"comment": {
+				"shortText": "The interface for iOS specific options which are applied to a notification.",
+				"text": "To learn more about iOS notifications, view the [iOS](/react-native/docs/iOS/introduction)\ndocumentation for full examples and usage.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "ios\n"
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 10,
@@ -15266,7 +15416,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 16,
+							"line": 24,
 							"character": 13
 						}
 					],
@@ -15294,7 +15444,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 21,
+							"line": 29,
 							"character": 12
 						}
 					],
@@ -15327,7 +15477,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 27,
+							"line": 35,
 							"character": 12
 						}
 					],
@@ -15366,7 +15516,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 50,
+							"line": 58,
 							"character": 10
 						}
 					],
@@ -15410,7 +15560,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 59,
+							"line": 67,
 							"character": 16
 						}
 					],
@@ -15437,10 +15587,14 @@
 						"isExported": true,
 						"isOptional": true
 					},
+					"comment": {
+						"shortText": "Optional property to customise how notifications are presented when the app is in the foreground.",
+						"text": "By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.\n"
+					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 99,
+							"line": 112,
 							"character": 31
 						}
 					],
@@ -15465,7 +15619,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 32,
+							"line": 40,
 							"character": 17
 						}
 					],
@@ -15499,7 +15653,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 42,
+							"line": 50,
 							"character": 7
 						}
 					],
@@ -15539,7 +15693,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 74,
+							"line": 82,
 							"character": 17
 						}
 					],
@@ -15579,7 +15733,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 88,
+							"line": 96,
 							"character": 22
 						}
 					],
@@ -15619,7 +15773,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 97,
+							"line": 105,
 							"character": 17
 						}
 					],
@@ -15652,7 +15806,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-							"line": 65,
+							"line": 73,
 							"character": 10
 						}
 					],
@@ -15694,7 +15848,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationIOS.ts",
-					"line": 7,
+					"line": 15,
 					"character": 32
 				}
 			]
@@ -15727,7 +15881,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 148,
+							"line": 150,
 							"character": 4
 						}
 					],
@@ -15758,7 +15912,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 160,
+							"line": 162,
 							"character": 16
 						}
 					],
@@ -15798,7 +15952,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 169,
+							"line": 171,
 							"character": 21
 						}
 					],
@@ -15833,7 +15987,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 181,
+							"line": 183,
 							"character": 15
 						}
 					],
@@ -15867,7 +16021,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Notification.ts",
-					"line": 141,
+					"line": 143,
 					"character": 40
 				}
 			]
@@ -15882,7 +16036,7 @@
 			},
 			"comment": {
 				"shortText": "The interface that represents the information returned from `getPowerManagerInfo()`.",
-				"text": "View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation to learn more.\n",
+				"text": "View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation to learn more.\n",
 				"tags": [
 					{
 						"tag": "platform",
@@ -16164,12 +16318,18 @@
 			},
 			"comment": {
 				"shortText": "A representation of a Foreground Service task registered via [`registerForegroundService`](/react-native/reference/registerforegroundservice).",
-				"text": "The task must resolve a promise once complete, and in turn removes the notification.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation to\nlearn more.\n"
+				"text": "The task must resolve a promise once complete, and in turn removes the notification.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation to\nlearn more.\n",
+				"tags": [
+					{
+						"tag": "platform",
+						"text": "android\n"
+					}
+				]
 			},
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Notification.ts",
-					"line": 129,
+					"line": 131,
 					"character": 33
 				}
 			],
@@ -16217,7 +16377,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
-							"line": 129,
+							"line": 131,
 							"character": 35
 						}
 					]
