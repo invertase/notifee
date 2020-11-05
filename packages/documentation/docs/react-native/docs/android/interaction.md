@@ -185,7 +185,7 @@ options:
 ```js
 notifee.displayNotification({
   title: '08:00am Alarm',
-  description: 'The alarm you set for 08:00am requires attention!',
+  body: 'The alarm you set for 08:00am requires attention!',
   android: {
     channelId: 'alarms',
     actions: [
@@ -232,7 +232,7 @@ chat conversation. To trigger the application to open (if it is not already), th
 ```js
 notifee.displayNotification({
   title: 'New message',
-  description: 'You have a new message from Sarah!',
+  body: 'You have a new message from Sarah!',
   data: {
     chatId: '123',
   },
@@ -266,7 +266,7 @@ To allow free text input on a notification action, set the `input` property on t
 ```js
 notifee.displayNotification({
   title: 'New message',
-  description: 'You have a new message from Sarah!',
+  body: 'You have a new message from Sarah!',
   android: {
     channelId: 'messages',
     actions: [
@@ -300,7 +300,7 @@ to `false`, and provide an array of choices to the property `choices`:
 ```js
 notifee.displayNotification({
   title: 'New message',
-  description: 'You have a new message from Sarah!',
+  body: 'You have a new message from Sarah!',
   android: {
     channelId: 'messages',
     actions: [

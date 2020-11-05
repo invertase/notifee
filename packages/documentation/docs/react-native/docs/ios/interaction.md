@@ -4,7 +4,7 @@ description: Handle user interaction with the notification and quick actions.
 ---
 
 Users can interact with notifications in a number of ways; via the Notification Center, when they display in
-[heads-up mode]() or via [Quick Actions](#quick-actions).
+heads-up mode or via [Quick Actions](#quick-actions).
 
 # Press Action
 
@@ -71,7 +71,7 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 
 ## Foreground Action
 
-The default behaviour when a user interacts with an action is to trigger an event via the `setMessageBackgroundHandler` method
+The default behaviour when a user interacts with an action is to trigger an event via the `onBackgroundEvent` method
 and remove the notification from the device (marking as read). You can however force the action to open the application
 into the foreground by setting the `foreground` property to `true`:
 

@@ -8,7 +8,7 @@ previous: /
 # Sound
 
 When a notification is about to be displayed on a device, the permissions requested from the user will be read by the device
-(see [`requestPermision`](/react-native/reference/requestpermission)). If sound permission has been granted, the device
+(see [`requestPermission`](/react-native/reference/requestpermission)). If sound permission has been granted, the device
 will alert the user to the notification audibly with sound. The sound used will be whatever the user has selected within
 the device settings.
 
@@ -33,10 +33,17 @@ If you are using a custom sound file, it must be less than 30 seconds in length,
 
 # Critical Notifications
 
-In some scenarios you may wish to alert the user to a notification and bypass the users preferences such as the
-mute switch or Do Not Disturb mode. To do this, you can set the `critical` flag on the notification:
+In some scenarios you may wish to alert the user to a notification and bypass the users preferences such as the mute switch or Do Not Disturb mode.
+
+To do this, request `criticalAlert` permission via [`requestPermission`](/react-native/reference/requestpermission) and set the `critical` flag on the notification:
 
 ```js
+// iOS > 12
+notifee.requestPermission({
+  //...,
+  criticalAlert: true
+});
+
 // iOS > 10
 notifee.displayNotification({
   title: 'ALERT!',
