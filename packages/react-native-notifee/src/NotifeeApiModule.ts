@@ -13,7 +13,7 @@ import {
 import { InitialNotification, Notification, Event } from './types/Notification';
 import { PowerManagerInfo } from './types/PowerManagerInfo';
 import { Trigger } from './types/trigger';
-import NotifeeNativeModule from './NotifeeNativeModule';
+import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
   isAndroid,
   isArray,
@@ -38,11 +38,13 @@ import {
 import validateIOSCategory from './validators/validateIOSCategory';
 import validateIOSPermissions from './validators/validateIOSPermissions';
 
-let onNotificationBackgroundEventListenerRegistered = false;
+let backgroundEventHandler: (event: Event) => Promise<void>;
+
 let isRunningForegroundServiceTask = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 if (isAndroid) {
+  // Register foreground service
   AppRegistry.registerHeadlessTask(kReactNativeNotifeeForegroundServiceHeadlessTask, () => {
     if (!registeredForegroundServiceTask) {
       console.warn(
@@ -56,6 +58,40 @@ if (isAndroid) {
 }
 
 export default class NotifeeApiModule extends NotifeeNativeModule implements Module {
+  constructor(config: NativeModuleConfig) {
+    super(config);
+    if (isAndroid) {
+      // Register background handler
+      AppRegistry.registerHeadlessTask(kReactNativeNotifeeNotificationEvent, () => {
+        return (event: Event): Promise<void> => {
+          if (!backgroundEventHandler) {
+            // eslint-disable-next-line no-console
+            console.warn(
+              '[notifee] no background event handler has been set. Set a handler via the "onBackgroundEvent" method.',
+            );
+            return Promise.resolve();
+          }
+          return backgroundEventHandler(event);
+        };
+      });
+    } else if (isIOS) {
+      this.emitter.addListener(
+        kReactNativeNotifeeNotificationBackgroundEvent,
+        (event: Event): Promise<void> => {
+          if (!backgroundEventHandler) {
+            // eslint-disable-next-line no-console
+            console.warn(
+              '[notifee] no background event handler has been set. Set a handler via the "onBackgroundEvent" method.',
+            );
+            return Promise.resolve();
+          }
+
+          return backgroundEventHandler(event);
+        },
+      );
+    }
+  }
+
   public getTriggerNotificationIds(): Promise<string[]> {
     return this.native.getTriggerNotificationIds();
   }
@@ -291,27 +327,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error("notifee.onBackgroundEvent(*) 'observer' expected a function.");
     }
 
-    if (
-      isAndroid &&
-      (isRunningForegroundServiceTask || !onNotificationBackgroundEventListenerRegistered)
-    ) {
-      AppRegistry.registerHeadlessTask(kReactNativeNotifeeNotificationEvent, () => {
-        return ({ type, detail }): Promise<void> => {
-          return observer({ type, detail });
-        };
-      });
-      onNotificationBackgroundEventListenerRegistered = true;
-    }
-
-    if (isIOS && !onNotificationBackgroundEventListenerRegistered) {
-      this.emitter.addListener(
-        kReactNativeNotifeeNotificationBackgroundEvent,
-        ({ type, detail }) => {
-          observer({ type, detail });
-        },
-      );
-      onNotificationBackgroundEventListenerRegistered = true;
-    }
+    backgroundEventHandler = observer;
   }
 
   public onForegroundEvent(observer: (event: Event) => void): () => void {
@@ -516,7 +532,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.openBatteryOptimizationSettings();
   }
 
-   public getPowerManagerInfo(): Promise<PowerManagerInfo> {
+  public getPowerManagerInfo(): Promise<PowerManagerInfo> {
 
     if (isIOS) {
       // iOS doesn't support this, so instead we
