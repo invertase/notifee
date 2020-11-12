@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.15.1
+
+- **[Android]**: Fixed an issue where sometimes the `largeIcon` wouldn't show when the app is closed.
+- **[Android/iOS]**: Fixed an issue to show a more descriptive warning if the background event handler isn't set via `onBackgroundEvent`.
+
 ## 0.15.0
 
 - **[Android]**: Implemented additional support to help with background restrictions on Android, includes two new methods `getPowerManagerInfo` and `openPowerManagerSettings`.
