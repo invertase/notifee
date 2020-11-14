@@ -39,7 +39,7 @@ sound directly on the notification:
 // Android >= 8.0 (API level 26)
 notifee.createChannel({
   id: 'custom-sound',
-  title: 'Channel with custom sound',
+  name: 'Channel with custom sound',
   sound: 'hollow.mp3',
 });
 
@@ -78,7 +78,7 @@ Android devices on 8.0 (API level 26) set the pattern directly on a channel, whi
 // Android >= 8.0 (API level 26)
 notifee.createChannel({
   id: 'custom-vibration',
-  title: 'Channel with custom vibration',
+  name: 'Channel with custom vibration',
   vibration: true,
   vibrationPattern: [300, 500],
 });
@@ -106,7 +106,7 @@ import notifee, { AndroidColor } from '@notifee/react-native';
 // Android >= 8.0 (API level 26)
 notifee.createChannel({
   id: 'custom-lights',
-  title: 'Channel with custom lights',
+  name: 'Channel with custom lights',
   lights: true,
   lightColor: AndroidColor.RED,
 });
