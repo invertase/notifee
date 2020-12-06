@@ -11,7 +11,7 @@ describe('Validate', () => {
       expect(isValidColor('blue')).toBe(true);
     });
 
-    test('returns invalid with a invalud text color', () => {
+    test('returns invalid with a invalid text color', () => {
       expect(isValidColor('foobar')).toBe(false);
     });
 

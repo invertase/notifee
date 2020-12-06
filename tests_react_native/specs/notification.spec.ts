@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { TestScope } from 'cavy';
-import notifee, { AndroidChannel, EventType, Event, Importance } from '@notifee/react-native';
+import notifee, { AndroidChannel, EventType, Event, AndroidImportance } from '@notifee/react-native';
 
 export function NotificationSpec(spec: TestScope): void {
   spec.beforeEach(async () => {
@@ -8,34 +8,34 @@ export function NotificationSpec(spec: TestScope): void {
       {
         name: 'High Importance',
         id: 'high',
-        importance: Importance.HIGH,
+        importance: AndroidImportance.HIGH,
       },
       {
         name: '🐴 Sound',
         id: 'custom_sound',
-        importance: Importance.HIGH,
+        importance: AndroidImportance.HIGH,
         sound: 'horse.mp3',
       },
       {
         name: 'Default Importance',
         id: 'default',
-        importance: Importance.DEFAULT,
+        importance: AndroidImportance.DEFAULT,
       },
       {
         name: 'Low Importance',
         id: 'low',
-        importance: Importance.LOW,
+        importance: AndroidImportance.LOW,
       },
       {
         name: 'Min Importance',
         id: 'min',
-        importance: Importance.MIN,
+        importance: AndroidImportance.MIN,
       },
     ];
 
     await notifee.createChannels(channels);
     // TODO doesn't work in tests as blocks with a UI prompt
-    // await notifee.requestPermission();
+    await notifee.requestPermission();
   });
 
   spec.describe('displayNotification', function() {
@@ -56,9 +56,6 @@ export function NotificationSpec(spec: TestScope): void {
         return notifee.displayNotification({
           title: 'Hello',
           body: 'World',
-          ios: {
-            importance: Importance.HIGH,
-          },
           android: {
             channelId: 'high',
           },

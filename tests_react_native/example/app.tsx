@@ -65,7 +65,7 @@ const channels: AndroidChannel[] = [
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
 
-  Notifee.displayNotification(JSON.parse(message.data.notifee));
+  Notifee.displayNotification({ id: message.collapseKey, title: 'hello', body: 'world', android: { channelId: 'default', tag: "hello1" } });
 }
 
 firebase.messaging().setBackgroundMessageHandler(onMessage);
@@ -82,7 +82,7 @@ function Root(): any {
     await Promise.all(channels.map($ => Notifee.createChannel($)));
     await Notifee.setNotificationCategories([
       {
-        id: 'actions',
+        id: 'actions1',
         actions: [
           {
             id: 'like',
@@ -91,6 +91,17 @@ function Root(): any {
           {
             id: 'dislike',
             title: 'Dislike Post',
+          },
+        ],
+      },
+    ]);
+    await Notifee.setNotificationCategories([
+      {
+        id: 'stop',
+        actions: [
+          {
+            id: 'stop',
+            title: 'Dismiss',
           },
         ],
       },
@@ -116,14 +127,29 @@ function Root(): any {
     if (!notification.android) notification.android = {};
     notification.android.channelId = channelId;
 
-    const currentPermissions = await Notifee.getNotificationSettings();
+    let currentPermissions = await Notifee.getNotificationSettings();
     if (currentPermissions.authorizationStatus != IOSAuthorizationStatus.AUTHORIZED) {
-      await Notifee.requestPermission();
+      await Notifee.requestPermission({ sound: true, criticalAlert: true }).then(props => console.log('fullfilled,', props));
     }
-
+    currentPermissions = await Notifee.getNotificationSettings();
+    console.log('currentPermissions', currentPermissions)
+    await Notifee.setNotificationCategories([
+      {
+        id: 'stop',
+        actions: [
+          {
+            id: 'stop',
+            title: 'Dismiss',
+          },
+        ],
+      },
+    ]);
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {
+      const date = new Date(Date.now());
+      date.setSeconds(date.getSeconds() + 5);
+      //, { type: 0, timestamp: date.getTime() }
       Notifee.displayNotification(notification)
         .then(id => setId(id))
         .catch(console.error);
@@ -140,6 +166,61 @@ function Root(): any {
               if (id != null) Notifee.cancelNotification(id);
             }}
           />
+          <Button
+            title={`Cancel trigger ${id}`}
+            onPress={(): void => {
+              if (id != null) Notifee.cancelTriggerNotification(id);
+            }}
+          />
+          <Button
+            title={`Cancel displayed ${id}`}
+            onPress={(): void => {
+              if (id != null) Notifee.cancelDisplayedNotification(id);
+            }}
+          />
+          <Button
+            title={`get notifications`}
+            onPress={async () => {
+              console.log(await Notifee.getTriggerNotificationIds());
+            }}
+          />
+          <Button
+            title={`get power manager info`}
+            onPress={async () => {
+              console.log(await Notifee.getPowerManagerInfo());
+            }}
+          />
+          <Button
+            title={`open power manager `}
+            onPress={async () => {
+              console.log(await Notifee.openPowerManagerSettings());
+            }}
+          />
+          {/* <Button
+            title={`cancel notification`}
+            onPress={async () => {
+              await Notifee.cancelNotification(id);
+            }}
+          />
+           <Button
+            title={`cancel trigger notification`}
+            onPress={async () => {
+              await Notifee.cancelTriggerNotification(id);
+       
+            }}
+          /> */}
+          <Button
+            title={`get channels`}
+            onPress={async () => {
+              const channels = await Notifee.getChannels();
+              channels.forEach(res => {
+                if (res.id === 'custom-vibrationsouttt') {
+                  console.log('res', res);
+                }
+              }
+              );
+            }}
+          />
         </View>
       )}
       {notifications.map(({ key, notification }): any => (
@@ -149,7 +230,7 @@ function Root(): any {
             {channels.map(channel => (
               <View key={channel.id + key} style={styles.rowItem}>
                 <Button
-                  title={`>`}
+                  title={`>.`}
                   onPress={(): any => displayNotification(notification, channel.id)}
                   color={colors[channel.id]}
                 />
@@ -179,6 +260,7 @@ function logEvent(state: string, event: any): void {
     case EventType.PRESS:
       eventTypeString = 'PRESS';
       console.log('Action ID', detail.pressAction?.id || 'N/A');
+      console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`, event);
       break;
     case EventType.ACTION_PRESS:
       eventTypeString = 'ACTION_PRESS';
@@ -186,7 +268,6 @@ function logEvent(state: string, event: any): void {
       break;
     case EventType.DELIVERED:
       eventTypeString = 'DELIVERED';
-      console.log('Notification Id', detail.notification?.id);
       break;
     case EventType.APP_BLOCKED:
       eventTypeString = 'APP_BLOCKED';
@@ -204,8 +285,8 @@ function logEvent(state: string, event: any): void {
       eventTypeString = 'UNHANDLED_NATIVE_EVENT';
   }
 
-  console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`);
-  // console.warn(JSON.stringify(event));
+  console.warn(`Received a ${eventTypeString} ${state} event in JS mode.`, event);
+  console.warn(JSON.stringify(event));
 }
 
 Notifee.onForegroundEvent(event => {
@@ -213,6 +294,7 @@ Notifee.onForegroundEvent(event => {
 });
 
 Notifee.onBackgroundEvent(async ({ type, detail }) => {
+  console.log('onBackgroundEvent');
   logEvent('Background', { type, detail });
 
   const { notification, pressAction } = detail;
@@ -229,15 +311,16 @@ Notifee.onBackgroundEvent(async ({ type, detail }) => {
 });
 
 Notifee.registerForegroundService(notification => {
-  console.warn('Foreground service started.');
+  console.warn('Foreground service started.', notification);
   return new Promise(resolve => {
     /**
      * Cancel the notification and resolve the service promise so the Headless task quits.
      */
-    async function stopService(): Promise<void> {
-      console.warn('Stopping service.');
+    async function stopService(id: String): Promise<void> {
+      console.warn('Stopping service.', notification?.id);
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
+      clearInterval(interval);
       await Notifee.cancelNotification(notification?.id);
       return resolve();
     }
@@ -246,10 +329,14 @@ Notifee.registerForegroundService(notification => {
      * Cancel our long running task if the user presses the 'stop' action.
      */
     async function handleStopActionEvent({ type, detail }: Event): Promise<void> {
+      console.log('handleStopActionEvent1 type:', type, 'pressactionid', detail?.pressAction?.id);
+
       if (type != EventType.ACTION_PRESS) return;
+      console.log('handleStopActionEvent2 type:', type, 'pressactionid', detail?.pressAction?.id);
+
       if (detail?.pressAction?.id === 'stop') {
         console.warn('Stop action was pressed');
-        await stopService();
+        await stopService(detail?.notification?.id);
       }
     }
 
@@ -262,14 +349,14 @@ Notifee.registerForegroundService(notification => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       notification.android.progress.current = current;
-      await Notifee.displayNotification(notification);
+      Notifee.displayNotification(notification);
       current++;
     }, 125);
 
     setTimeout(async () => {
       clearInterval(interval);
       console.warn('Background work has completed.');
-      await stopService();
+      await stopService(notification);
     }, 15000);
   });
 });
@@ -298,7 +385,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('testing', () => Root);
+// AppRegistry.registerComponent('testing', () => Root);
 
 function TestComponent(): any {
   return (
@@ -309,3 +396,5 @@ function TestComponent(): any {
 }
 
 AppRegistry.registerComponent('test_component', () => TestComponent);
+
+export default Root;

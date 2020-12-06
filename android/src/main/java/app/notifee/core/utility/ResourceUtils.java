@@ -27,7 +27,6 @@ public class ResourceUtils {
   private static final String LOCAL_RESOURCE_SCHEME = "res";
   private static volatile Map<String, Integer> sResourceIdCache;
 
-
   public static Map<String, Integer> getResourceIdCache() {
     if (sResourceIdCache == null) {
       synchronized (ResourceUtils.class) {
