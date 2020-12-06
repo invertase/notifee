@@ -10,7 +10,7 @@ import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
 import '@react-native-firebase/functions';
 
-import Notifee, { EventType, Importance } from '@notifee/react-native';
+import Notifee, { EventType } from '@notifee/react-native';
 
 Notifee.onForegroundEvent(async event => {
   switch (event.type) {
@@ -86,7 +86,7 @@ async function testRunner() {
     body: 'world',
     ios: {
       categoryId: 'test_category',
-      importance: Importance.HIGH,
+
     },
   });
   console.log('Pressed');
@@ -99,8 +99,8 @@ function TestComponent(): any {
     >
       <Text>Test Component</Text>
       <Button
-        title={`Press Me`}
-        style={{ width: 300, height: 100 }}
+        title={`Press Mee`}
+        // style={{ width: 300, height: 100 }}
         onPress={async () => {
           await testRunner();
         }}

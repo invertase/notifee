@@ -59,7 +59,7 @@ describe('Validate Notification', () => {
 
       expect($.id).toBeDefined();
       expect($.title).toEqual('');
-      expect($.subtitle).toEqual('');
+      expect($.subtitle).toEqual(undefined);
       expect($.body).toEqual('');
       expect($.data).toEqual({});
     });

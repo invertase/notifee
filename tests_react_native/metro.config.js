@@ -6,7 +6,8 @@
 const { resolve, join } = require('path');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { createBlacklist } = require('metro');
+const blacklist = require('metro-config/src/defaults/blacklist');
+
 
 const rootDir = resolve(__dirname, '..');
 
@@ -14,7 +15,7 @@ const config = {
   projectRoot: __dirname,
   resolver: {
     useWatchman: !process.env.TEAMCITY_VERSION,
-    blackListRE: createBlacklist([
+    blackListRE: blacklist([
       /.*\/__fixtures__\/.*/,
       /.*\/template\/project\/node_modules\/react-native\/.*/,
       new RegExp(`^${escape(resolve(rootDir, 'docs'))}\\/.*$`),

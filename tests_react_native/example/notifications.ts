@@ -1,15 +1,16 @@
-import { AndroidStyle, Notification, AndroidLaunchActivityFlag } from '@notifee/react-native';
+import { AndroidStyle, Notification, AndroidLaunchActivityFlag, NotificationIOS } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {
     key: 'Empty',
     notification: {
       android: {
-        channelId: 'default',
-        sound: 'horse.mp3',
+        channelId: 'custom_sound',
+        pressAction: {
+          id: 'default'
+        }
       },
       ios: {
-        // sound: 'Beacon',
         sound: 'media/kick.wav',
       },
     },
@@ -18,20 +19,10 @@ export const notifications: { key: string; notification: Notification | Notifica
     key: 'Basic',
     notification: {
       title: 'Title',
-      body: 'Body of the notification',
       android: {
-        // ongoing: true,
+        showTimestamp: true,
         channelId: 'foo',
-
-        // style: {
-        //   type: 1,
-        //   text: 'Helllllllo World!!!!!!!!',
-        // },
-
-        // pressAction: {
-        //   id: 'testing',
-        //   reactComponent: 'test_component',
-        // },
+        largeIcon: 'https://storage.googleapis.com/static.invertase.io/assets/avatars/female.png',
       },
     },
   },
@@ -44,6 +35,9 @@ export const notifications: { key: string; notification: Notification | Notifica
       android: {
         channelId: 'foo',
       },
+      ios: {
+        sound: 'Beacon'
+      }
     },
   },
 
@@ -57,6 +51,11 @@ export const notifications: { key: string; notification: Notification | Notifica
         color: '#553c9a',
         channelId: 'foo',
       },
+      ios: {
+        critical: true,
+        criticalVolume: 1.0,
+        sound: 'Beacon'
+      }
     },
   },
 
@@ -66,7 +65,7 @@ export const notifications: { key: string; notification: Notification | Notifica
       title: 'Actions',
       body: 'Notification with actions',
       ios: {
-        categoryId: 'actions',
+        categoryId: 'actions1',
       },
       android: {
         autoCancel: true,
@@ -139,7 +138,11 @@ export const notifications: { key: string; notification: Notification | Notifica
         ],
         channelId: 'foo',
       },
+      ios: {
+        categoryId: 'stop'
+      }
     },
+
   },
   {
     key: 'Big Picture Style',
