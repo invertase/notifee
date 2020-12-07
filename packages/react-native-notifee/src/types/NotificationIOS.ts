@@ -5,13 +5,13 @@
  */
 
 /**
-* The interface for iOS specific options which are applied to a notification.
-*
-* To learn more about iOS notifications, view the [iOS](/react-native/docs/iOS/introduction)
-* documentation for full examples and usage.
-*
-* @platform ios
-*/
+ * The interface for iOS specific options which are applied to a notification.
+ *
+ * To learn more about iOS notifications, view the [iOS](/react-native/docs/iOS/introduction)
+ * documentation for full examples and usage.
+ *
+ * @platform ios
+ */
 export interface NotificationIOS {
   /**
    * Optional array of [IOSNotificationAttachment](/react-native/reference/iosnotificationattachment) interfaces.

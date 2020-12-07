@@ -6,6 +6,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "validate:all:ts": "tsc --project ./",
     "build": "genversion --es6 --semi src/version.ts && tsc",
     "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf dist",
     "build:watch": "tsc --watch",

@@ -40,7 +40,6 @@ import validateIOSPermissions from './validators/validateIOSPermissions';
 
 let backgroundEventHandler: (event: Event) => Promise<void>;
 
-let isRunningForegroundServiceTask = false;
 let registeredForegroundServiceTask: (notification: Notification) => Promise<void>;
 
 if (isAndroid) {
@@ -52,7 +51,7 @@ if (isAndroid) {
       );
       return (): Promise<void> => Promise.resolve();
     }
-    isRunningForegroundServiceTask = true;
+
     return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
   });
 }
@@ -94,19 +93,19 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   public getTriggerNotificationIds = (): Promise<string[]> => {
     return this.native.getTriggerNotificationIds();
-  }
+  };
 
   public cancelAllNotifications = (): Promise<void> => {
     return this.native.cancelAllNotifications();
-  }
+  };
 
   public cancelDisplayedNotifications = (): Promise<void> => {
     return this.native.cancelDisplayedNotifications();
-  }
+  };
 
   public cancelTriggerNotifications = (): Promise<void> => {
     return this.native.cancelTriggerNotifications();
-  }
+  };
 
   public cancelNotification = (notificationId: string): Promise<void> => {
     if (!isString(notificationId)) {
@@ -114,23 +113,27 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.cancelNotification(notificationId);
-  }
+  };
 
   public cancelDisplayedNotification = (notificationId: string): Promise<void> => {
     if (!isString(notificationId)) {
-      throw new Error("notifee.cancelDisplayedNotification(*) 'notificationId' expected a string value.");
+      throw new Error(
+        "notifee.cancelDisplayedNotification(*) 'notificationId' expected a string value.",
+      );
     }
 
     return this.native.cancelDisplayedNotification(notificationId);
-  }
+  };
 
   public cancelTriggerNotification = (notificationId: string): Promise<void> => {
     if (!isString(notificationId)) {
-      throw new Error("notifee.cancelTriggerNotification(*) 'notificationId' expected a string value.");
+      throw new Error(
+        "notifee.cancelTriggerNotification(*) 'notificationId' expected a string value.",
+      );
     }
 
     return this.native.cancelTriggerNotification(notificationId);
-  }
+  };
 
   public createChannel = (channel: AndroidChannel): Promise<string> => {
     let options: AndroidChannel;
@@ -151,7 +154,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.createChannel(options).then(() => {
       return options.id;
     });
-  }
+  };
 
   public createChannels = (channels: AndroidChannel[]): Promise<void> => {
     if (!isArray(channels)) {
@@ -172,7 +175,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.createChannels(options);
-  }
+  };
 
   public createChannelGroup = (channelGroup: AndroidChannelGroup): Promise<string> => {
     let options: AndroidChannelGroup;
@@ -193,7 +196,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.createChannelGroup(options).then(() => {
       return options.id;
     });
-  }
+  };
 
   public createChannelGroups = (channelGroups: AndroidChannelGroup[]): Promise<void> => {
     if (!isArray(channelGroups)) {
@@ -218,7 +221,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.createChannelGroups(options);
-  }
+  };
 
   public deleteChannel = (channelId: string): Promise<void> => {
     if (!isString(channelId)) {
@@ -230,7 +233,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.deleteChannel(channelId);
-  }
+  };
 
   public deleteChannelGroup = (channelGroupId: string): Promise<void> => {
     if (!isString(channelGroupId)) {
@@ -242,7 +245,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.deleteChannelGroup(channelGroupId);
-  }
+  };
 
   public displayNotification = (notification: Notification): Promise<string> => {
     let options: Notification;
@@ -255,9 +258,12 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.displayNotification(options).then((): string => {
       return options.id as string;
     });
-  }
+  };
 
-  public createTriggerNotification = (notification: Notification, trigger: Trigger): Promise<string> => {
+  public createTriggerNotification = (
+    notification: Notification,
+    trigger: Trigger,
+  ): Promise<string> => {
     let options: Notification;
     let triggerOptions: Trigger;
 
@@ -276,7 +282,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.createTriggerNotification(options, triggerOptions).then((): string => {
       return options.id as string;
     });
-  }
+  };
 
   public getChannel = (channelId: string): Promise<NativeAndroidChannel | null> => {
     if (!isString(channelId)) {
@@ -288,7 +294,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getChannel(channelId);
-  }
+  };
 
   public getChannels = (): Promise<NativeAndroidChannel[]> => {
     if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
@@ -296,7 +302,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getChannels();
-  }
+  };
 
   public getChannelGroup = (channelGroupId: string): Promise<NativeAndroidChannelGroup | null> => {
     if (!isString(channelGroupId)) {
@@ -308,7 +314,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getChannelGroup(channelGroupId);
-  }
+  };
 
   public getChannelGroups = (): Promise<NativeAndroidChannelGroup[]> => {
     if (isIOS || this.native.ANDROID_API_LEVEL < 26) {
@@ -316,11 +322,11 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getChannelGroups();
-  }
+  };
 
   public getInitialNotification = (): Promise<InitialNotification | null> => {
     return this.native.getInitialNotification();
-  }
+  };
 
   public onBackgroundEvent = (observer: (event: Event) => Promise<void>): void => {
     if (!isFunction(observer)) {
@@ -328,9 +334,9 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     backgroundEventHandler = observer;
-  }
+  };
 
-  public onForegroundEvent = (observer: (event: Event) => void): () => void => {
+  public onForegroundEvent = (observer: (event: Event) => void): (() => void) => {
     if (!isFunction(observer)) {
       throw new Error("notifee.onForegroundEvent(*) 'observer' expected a function.");
     }
@@ -345,7 +351,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return (): void => {
       subscriber.remove();
     };
-  }
+  };
 
   public openNotificationSettings = (channelId?: string): Promise<void> => {
     if (!isUndefined(channelId) && !isString(channelId)) {
@@ -357,7 +363,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.openNotificationSettings(channelId || null);
-  }
+  };
 
   public requestPermission = (
     permissions: IOSNotificationPermissions = {},
@@ -389,7 +395,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.requestPermission(options);
-  }
+  };
 
   public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
     if (!isFunction(runner)) {
@@ -426,7 +432,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.setNotificationCategories(categories);
-  }
+  };
 
   public getNotificationCategories = (): Promise<IOSNotificationCategory[]> => {
     if (isAndroid) {
@@ -434,7 +440,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getNotificationCategories();
-  }
+  };
 
   public getNotificationSettings = (): Promise<IOSNotificationSettings> => {
     if (isAndroid) {
@@ -457,7 +463,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getNotificationSettings();
-  }
+  };
 
   public getBadgeCount = (): Promise<number> => {
     if (isAndroid) {
@@ -465,7 +471,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.getBadgeCount();
-  }
+  };
 
   public setBadgeCount = (count: number): Promise<void> => {
     if (isAndroid) {
@@ -477,7 +483,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.setBadgeCount(Math.round(count));
-  }
+  };
 
   public incrementBadgeCount = (incrementBy?: number): Promise<void> => {
     if (isAndroid) {
@@ -496,7 +502,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.incrementBadgeCount(Math.round(value));
-  }
+  };
 
   public decrementBadgeCount = (decrementBy?: number): Promise<void> => {
     if (isAndroid) {
@@ -515,7 +521,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.decrementBadgeCount(Math.round(value));
-  }
+  };
 
   public isBatteryOptimizationEnabled = (): Promise<boolean> => {
     if (isIOS) {
@@ -523,34 +529,33 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     return this.native.isBatteryOptimizationEnabled();
-  }
+  };
 
   public openBatteryOptimizationSettings = (): Promise<void> => {
     if (isIOS) {
       return Promise.resolve();
     }
     return this.native.openBatteryOptimizationSettings();
-  }
+  };
 
   public getPowerManagerInfo = (): Promise<PowerManagerInfo> => {
-
     if (isIOS) {
       // iOS doesn't support this, so instead we
       // return a dummy response to allow the power manager
       // flow work the same on both iOS & Android
       return Promise.resolve({
         manufacturer: 'apple',
-        activity: null
+        activity: null,
       } as PowerManagerInfo);
     }
 
     return this.native.getPowerManagerInfo();
-  }
+  };
 
   public openPowerManagerSettings = (): Promise<void> => {
     if (isIOS) {
       return Promise.resolve();
     }
     return this.native.openPowerManagerSettings();
-  }
+  };
 }
