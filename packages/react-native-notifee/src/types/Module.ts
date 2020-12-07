@@ -627,5 +627,4 @@ export interface ModuleStatics {
   SDK_VERSION: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ModuleWithStatics extends Module, ModuleStatics {}

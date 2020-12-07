@@ -77,7 +77,7 @@ export default function validateNotification(notification: Notification): Notifi
   /**
    * data
    */
-  if (objectHasProperty(notification, 'data') && notification.data != undefined) {
+  if (objectHasProperty(notification, 'data') && notification.data !== undefined) {
     if (!isObject(notification.data)) {
       throw new Error("'notification.data' expected an object value containing key/value pairs.");
     }

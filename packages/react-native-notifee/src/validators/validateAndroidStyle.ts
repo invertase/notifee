@@ -239,7 +239,7 @@ export function validateAndroidMessagingStyleMessage(
     timestamp: message.timestamp,
   };
 
-  if (objectHasProperty(message, 'person') && message.person != undefined) {
+  if (objectHasProperty(message, 'person') && message.person !== undefined) {
     try {
       out.person = validateAndroidPerson(message.person);
     } catch (e) {

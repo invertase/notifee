@@ -39,7 +39,7 @@ export function isArrayOfStrings(value: any): value is Array<string> {
 }
 
 export function isUndefined(value: any): value is undefined {
-  return value == undefined;
+  return value === undefined;
 }
 
 export function objectKeyValuesAreStrings(value: object): value is { [key: string]: string } {
@@ -50,8 +50,8 @@ export function objectKeyValuesAreStrings(value: object): value is { [key: strin
   const entries = Object.entries(value);
 
   for (let i = 0; i < entries.length; i++) {
-    const [key, value] = entries[i];
-    if (!isString(key) || !isString(value)) {
+    const [key, entryValue] = entries[i];
+    if (!isString(key) || !isString(entryValue)) {
       return false;
     }
   }

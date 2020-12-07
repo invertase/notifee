@@ -59,7 +59,7 @@ export default function validateAndroidInput(input?: AndroidInput): AndroidInput
     out.placeholder = input.placeholder;
   }
 
-  if (out.editableChoices == true && !out.allowFreeFormInput) {
+  if (out.editableChoices && !out.allowFreeFormInput) {
     throw new Error("'input.editableChoices' when true, allowFreeFormInput must also be true.");
   }
 

@@ -78,7 +78,7 @@ export default function validateAndroidNotification(
   /**
    * actions
    */
-  if (objectHasProperty(android, 'actions') && android.actions != undefined) {
+  if (objectHasProperty(android, 'actions') && android.actions !== undefined) {
     if (!isArray(android.actions)) {
       throw new Error("'notification.android.actions' expected an array of AndroidAction types.");
     }
@@ -322,11 +322,11 @@ export default function validateAndroidNotification(
           );
         case 'onMs':
           throw new Error(
-            `'notification.android.lights\' invalid "on" millisecond value, expected a number greater than 0.`,
+            `'notification.android.lights' invalid "on" millisecond value, expected a number greater than 0.`,
           );
         case 'offMs':
           throw new Error(
-            `notification.android.lights\' invalid "off" millisecond value, expected a number greater than 0.`,
+            `notification.android.lights' invalid "off" millisecond value, expected a number greater than 0.`,
           );
       }
     }
@@ -527,7 +527,7 @@ export default function validateAndroidNotification(
   /**
    * tag
    */
-  if (objectHasProperty(android, 'tag') && android.tag != undefined) {
+  if (objectHasProperty(android, 'tag') && android.tag !== undefined) {
     if (!isString(android.tag)) {
       throw new Error("'notification.android.tag' expected a string value.");
     }
@@ -553,7 +553,7 @@ export default function validateAndroidNotification(
   /**
    * timeoutAfter
    */
-  if (objectHasProperty(android, 'timeoutAfter') && android.timeoutAfter != undefined) {
+  if (objectHasProperty(android, 'timeoutAfter') && android.timeoutAfter !== undefined) {
     if (!isNumber(android.timeoutAfter)) {
       throw new Error("'notification.android.timeoutAfter' expected a number value.");
     }
@@ -579,7 +579,7 @@ export default function validateAndroidNotification(
   /**
    * vibrationPattern
    */
-  if (objectHasProperty(android, 'vibrationPattern') && android.vibrationPattern != undefined) {
+  if (objectHasProperty(android, 'vibrationPattern') && android.vibrationPattern !== undefined) {
     if (!isArray(android.vibrationPattern) || !isValidVibratePattern(android.vibrationPattern)) {
       throw new Error(
         "'notification.android.vibrationPattern' expected an array containing an even number of positive values.",
@@ -592,7 +592,7 @@ export default function validateAndroidNotification(
   /**
    * visibility
    */
-  if (objectHasProperty(android, 'visibility') && android.visibility != undefined) {
+  if (objectHasProperty(android, 'visibility') && android.visibility !== undefined) {
     if (!Object.values(AndroidVisibility).includes(android.visibility)) {
       throw new Error(
         "'notification.android.visibility' expected a valid AndroidVisibility value.",
@@ -605,7 +605,7 @@ export default function validateAndroidNotification(
   /**
    * timestamp
    */
-  if (objectHasProperty(android, 'timestamp') && android.timestamp != undefined) {
+  if (objectHasProperty(android, 'timestamp') && android.timestamp !== undefined) {
     if (!isNumber(android.timestamp)) {
       throw new Error("'notification.android.timestamp' expected a number value.");
     }
@@ -622,7 +622,7 @@ export default function validateAndroidNotification(
   /**
    * sound
    */
-  if (objectHasProperty(android, 'sound') && android.sound != undefined) {
+  if (objectHasProperty(android, 'sound') && android.sound !== undefined) {
     if (!isString(android.sound)) {
       throw new Error("'notification.sound' expected a valid sound string.");
     }

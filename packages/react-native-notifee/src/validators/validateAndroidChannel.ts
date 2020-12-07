@@ -120,7 +120,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * importance
    */
-  if (objectHasProperty(channel, 'importance') && channel.importance != undefined) {
+  if (objectHasProperty(channel, 'importance') && channel.importance !== undefined) {
     if (!Object.values(AndroidImportance).includes(channel.importance)) {
       throw new Error("'channel.importance' expected an Importance value.");
     }
@@ -131,7 +131,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * lightColor
    */
-  if (objectHasProperty(channel, 'lightColor') && channel.lightColor != undefined) {
+  if (objectHasProperty(channel, 'lightColor') && channel.lightColor !== undefined) {
     if (!isString(channel.lightColor)) {
       throw new Error("'channel.lightColor' expected a string value.");
     }
@@ -148,7 +148,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * visibility
    */
-  if (objectHasProperty(channel, 'visibility') && channel.visibility != undefined) {
+  if (objectHasProperty(channel, 'visibility') && channel.visibility !== undefined) {
     if (!Object.values(AndroidVisibility).includes(channel.visibility)) {
       throw new Error("'channel.visibility' expected visibility to be an AndroidVisibility value.");
     }
@@ -159,7 +159,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * sound
    */
-  if (objectHasProperty(channel, 'sound') && channel.sound != undefined) {
+  if (objectHasProperty(channel, 'sound') && channel.sound !== undefined) {
     if (!isString(channel.sound)) {
       throw new Error("'channel.sound' expected a string value.");
     }
@@ -170,7 +170,7 @@ export default function validateAndroidChannel(channel: AndroidChannel): Android
   /**
    * vibrationPattern
    */
-  if (objectHasProperty(channel, 'vibrationPattern') && channel.vibrationPattern != undefined) {
+  if (objectHasProperty(channel, 'vibrationPattern') && channel.vibrationPattern !== undefined) {
     if (!isArray(channel.vibrationPattern)) {
       throw new Error("'channel.vibrationPattern' expected an array.");
     }
