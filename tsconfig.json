@@ -1,5 +1,9 @@
 {
-  "include": ["packages/react-native/src/**/*.ts"],
+  "include": [
+    "packages/react-native/src/**/*.ts",
+    "tests_react_native/__tests__",
+    "tests_react_native/example"
+  ],
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
@@ -19,12 +23,14 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["es6"]
+    "lib": [
+      "es6"
+    ]
   },
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"
+    "jest.config.js",
   ]
 }
