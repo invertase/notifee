@@ -1,4 +1,4 @@
-import { AndroidStyle, Notification, AndroidLaunchActivityFlag, NotificationIOS } from '@notifee/react-native';
+import { AndroidStyle, Notification, AndroidLaunchActivityFlag } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {
@@ -7,8 +7,8 @@ export const notifications: { key: string; notification: Notification | Notifica
       android: {
         channelId: 'custom_sound',
         pressAction: {
-          id: 'default'
-        }
+          id: 'default',
+        },
       },
       ios: {
         sound: 'media/kick.wav',
@@ -36,8 +36,8 @@ export const notifications: { key: string; notification: Notification | Notifica
         channelId: 'foo',
       },
       ios: {
-        sound: 'Beacon'
-      }
+        sound: 'Beacon',
+      },
     },
   },
 
@@ -54,8 +54,8 @@ export const notifications: { key: string; notification: Notification | Notifica
       ios: {
         critical: true,
         criticalVolume: 1.0,
-        sound: 'Beacon'
-      }
+        sound: 'Beacon',
+      },
     },
   },
 
@@ -139,10 +139,9 @@ export const notifications: { key: string; notification: Notification | Notifica
         channelId: 'foo',
       },
       ios: {
-        categoryId: 'stop'
-      }
+        categoryId: 'stop',
+      },
     },
-
   },
   {
     key: 'Big Picture Style',

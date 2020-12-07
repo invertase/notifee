@@ -1,6 +1,7 @@
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
+    '@react-native-community',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
@@ -19,9 +20,14 @@ module.exports = {
     },
   },
   rules: {
-    camelcase: 'off',
-    '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    camelcase: 'off',
+    '@typescript-eslint/camelcase': 'off',
+    'react/jsx-uses-vars': 1,
+    'jest/no-identical-title': 0,
+    'eslint-comments/no-unlimited-disable': 0,
+    // off for validation tests
+    '@typescript-eslint/ban-ts-ignore': 'off',
   },
 };

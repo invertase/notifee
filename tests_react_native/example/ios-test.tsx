@@ -86,7 +86,6 @@ async function testRunner() {
     body: 'world',
     ios: {
       categoryId: 'test_category',
-
     },
   });
   console.log('Pressed');

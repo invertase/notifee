@@ -355,7 +355,7 @@ describe('Validate Android Notification', () => {
       };
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
-        `'notification.android.lights\' invalid "on" millisecond value, expected a number greater than 0.`,
+        `'notification.android.lights' invalid "on" millisecond value, expected a number greater than 0.`,
       );
     });
 
@@ -366,7 +366,7 @@ describe('Validate Android Notification', () => {
       };
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
-        `notification.android.lights\' invalid "off" millisecond value, expected a number greater than 0.`,
+        `notification.android.lights' invalid "off" millisecond value, expected a number greater than 0.`,
       );
     });
 
@@ -472,7 +472,7 @@ describe('Validate Android Notification', () => {
     test('throws an error when no max value has been provided with a current value', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
-        progress: { current: 1, max: null as any },
+        progress: { current: 1, max: undefined as any },
       };
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
@@ -502,7 +502,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when progress showTimestamp is invalid', () => {
+    test('throws an error when progress smallIcon is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         smallIcon: [] as any,
@@ -688,8 +688,12 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when defaults is an invalid type', () => {
-      const progress: AndroidProgress = { indeterminate: false, max: 10, current: null as any };
+    test('throws an error when providing a max value for progress without setting a current value', () => {
+      const progress: AndroidProgress = {
+        indeterminate: false,
+        max: 10,
+        current: undefined as any,
+      };
 
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',

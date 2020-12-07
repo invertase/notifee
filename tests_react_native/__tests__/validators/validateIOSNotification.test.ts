@@ -60,8 +60,16 @@ describe('Validate IOS Input', () => {
     });
 
     test('returns invalid when an invalid sound property is provided', () => {
-      const notification: NotificationIOS = {
+      let notification: NotificationIOS = {
         sound: {} as any,
+      };
+
+      expect(() => validateIOSNotification(notification)).toThrowError(
+        "'notification.sound' must be a string value if specified.",
+      );
+
+      notification = {
+        sound: [] as any,
       };
 
       expect(() => validateIOSNotification(notification)).toThrowError(
@@ -116,16 +124,6 @@ describe('Validate IOS Input', () => {
 
       expect(() => validateIOSNotification(notification)).toThrowError(
         "'notification.ios.launchImageName' expected a string value.",
-      );
-    });
-
-    test('returns invalid when an invalid sound property is provided', () => {
-      const notification: NotificationIOS = {
-        sound: [] as any,
-      };
-
-      expect(() => validateIOSNotification(notification)).toThrowError(
-        "'notification.sound' must be a string value if specified.",
       );
     });
   });

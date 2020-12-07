@@ -24,7 +24,7 @@ describe('Validate IOS Category', () => {
       expect($.hiddenPreviewsBodyPlaceholder).toEqual('hiddenPreviewsBodyPlaceholder');
     });
 
-    test('throws an error with an invalid largeIcon param', () => {
+    test('throws an error with an invalid category', () => {
       const category: IOSNotificationCategory = [] as any;
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -32,7 +32,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid largeIcon param', () => {
+    test('throws an error with an invalid category id', () => {
       const category: IOSNotificationCategory = { id: [] as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -40,7 +40,7 @@ describe('Validate IOS Category', () => {
       );
     });
 
-    test('throws an error with an invalid largeIcon param', () => {
+    test('throws an error when category id is an empty string', () => {
       const category: IOSNotificationCategory = { id: '' as any };
 
       expect(() => validateIOSCategory(category)).toThrowError(
@@ -100,7 +100,7 @@ describe('Validate IOS Category', () => {
     });
 
     test('throws an error with an invalid intentIdentifiers param', () => {
-      const category: IOSNotificationCategory = {
+      let category: IOSNotificationCategory = {
         id: 'id',
         intentIdentifiers: {} as any,
       };
@@ -108,10 +108,8 @@ describe('Validate IOS Category', () => {
       expect(() => validateIOSCategory(category)).toThrowError(
         "'category.intentIdentifiers' expected an array value.",
       );
-    });
 
-    test('throws an error with an invalid intentIdentifiers param', () => {
-      const category: IOSNotificationCategory = {
+      category = {
         id: 'id',
         intentIdentifiers: ['test'] as any,
       };
