@@ -4,10 +4,8 @@
 
 /* eslint-disable */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve, join } = require('path');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const blacklist = require('metro-config/src/defaults/blacklist');
 
 const rootDir = resolve(__dirname, '..');

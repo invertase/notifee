@@ -9,7 +9,7 @@
     "build:all:clean": "rimraf android/build && rimraf android/.gradle && rimraf ios/build && lerna run build:clean",
     "build:rn": "cd packages/react-native && yarn run build",
     "build:rn:watch": "cd packages/react-native && yarn run build:watch",
-    "validate:all:js": "eslint ./",
+    "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx",
     "validate:all:ts": "tsc --project ./",
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:link": "lerna link && lerna exec -- yarn link",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^14.11.2",
+    "@react-native-community/eslint-config": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
     "eslint": "^6.8.0",

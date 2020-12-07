@@ -44,7 +44,7 @@ describe('Validate Android Channel', () => {
     });
 
     test('throws an error with an invalid id ', () => {
-      const channel: AndroidChannel = {
+      let channel: AndroidChannel = {
         id: 0 as any,
         name: 'name',
       };
@@ -52,10 +52,8 @@ describe('Validate Android Channel', () => {
       expect(() => validateAndroidChannel(channel)).toThrowError(
         "'channel.id' expected a string value.",
       );
-    });
 
-    test('throws an error with an invalid id ', () => {
-      const channel: AndroidChannel = {
+      channel = {
         id: '' as any,
         name: 'name',
       };
@@ -108,18 +106,6 @@ describe('Validate Android Channel', () => {
 
       expect(() => validateAndroidChannel(channel)).toThrowError(
         "'channel.bypassDnd' expected a boolean value.",
-      );
-    });
-
-    test('throws an error with a non string description', () => {
-      const channel: AndroidChannel = {
-        id: 'id',
-        name: 'name',
-        description: [] as any,
-      };
-
-      expect(() => validateAndroidChannel(channel)).toThrowError(
-        "'channel.description' expected a string value.",
       );
     });
 

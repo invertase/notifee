@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     '@react-native-community',
@@ -14,20 +15,17 @@ module.exports = {
       jsx: true, // Allows for the parsing of JSX
     },
   },
+  plugins: ['@typescript-eslint'],
   settings: {
     react: {
       version: 'latest',
     },
   },
   rules: {
-    '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
     camelcase: 'off',
     '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'react/jsx-uses-vars': 1,
-    'jest/no-identical-title': 0,
-    'eslint-comments/no-unlimited-disable': 0,
-    // off for validation tests
-    '@typescript-eslint/ban-ts-ignore': 'off',
   },
 };

@@ -2,7 +2,6 @@
  *  Copyright (c) 2016-present Invertase Limited
  */
 
-/* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import { AppRegistry, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -64,8 +63,14 @@ const channels: AndroidChannel[] = [
 
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
+  const ii = 'hello';
 
-  Notifee.displayNotification({ id: message.collapseKey, title: 'hello', body: 'world', android: { channelId: 'default', tag: "hello1" } });
+  Notifee.displayNotification({
+    id: message.collapseKey,
+    title: 'hello',
+    body: 'world',
+    android: { channelId: 'default', tag: 'hello1' },
+  });
 }
 
 firebase.messaging().setBackgroundMessageHandler(onMessage);
@@ -123,16 +128,18 @@ function Root(): any {
     init().catch(console.error);
   }, []);
 
-  async function displayNotification(notification: Notification, channelId: string): Promise<void> {
-    if (!notification.android) notification.android = {};
-    notification.android.channelId = channelId;
-
+  async function displayNotification(
+    notification: Notification | Notification[],
+    channelId: string,
+  ): Promise<void> {
     let currentPermissions = await Notifee.getNotificationSettings();
-    if (currentPermissions.authorizationStatus != IOSAuthorizationStatus.AUTHORIZED) {
-      await Notifee.requestPermission({ sound: true, criticalAlert: true }).then(props => console.log('fullfilled,', props));
+    if (currentPermissions.authorizationStatus !== IOSAuthorizationStatus.AUTHORIZED) {
+      await Notifee.requestPermission({ sound: true, criticalAlert: true }).then(props =>
+        console.log('fullfilled,', props),
+      );
     }
     currentPermissions = await Notifee.getNotificationSettings();
-    console.log('currentPermissions', currentPermissions)
+    console.log('currentPermissions', currentPermissions);
     await Notifee.setNotificationCategories([
       {
         id: 'stop',
@@ -147,11 +154,13 @@ function Root(): any {
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {
+      if (!notification.android) notification.android = {};
+      notification.android.channelId = channelId;
+
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      //, { type: 0, timestamp: date.getTime() }
       Notifee.displayNotification(notification)
-        .then(id => setId(id))
+        .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
   }
@@ -180,19 +189,20 @@ function Root(): any {
           />
           <Button
             title={`get notifications`}
-            onPress={async () => {
-              console.log(await Notifee.getTriggerNotificationIds());
+            onPress={async (): Promise<void> => {
+              const ids = await Notifee.getTriggerNotificationIds();
+              console.log(ids);
             }}
           />
           <Button
             title={`get power manager info`}
-            onPress={async () => {
+            onPress={async (): Promise<void> => {
               console.log(await Notifee.getPowerManagerInfo());
             }}
           />
           <Button
             title={`open power manager `}
-            onPress={async () => {
+            onPress={async (): Promise<void> => {
               console.log(await Notifee.openPowerManagerSettings());
             }}
           />
@@ -211,14 +221,13 @@ function Root(): any {
           /> */}
           <Button
             title={`get channels`}
-            onPress={async () => {
+            onPress={async (): Promise<void> => {
               const channels = await Notifee.getChannels();
               channels.forEach(res => {
                 if (res.id === 'custom-vibrationsouttt') {
                   console.log('res', res);
                 }
-              }
-              );
+              });
             }}
           />
         </View>
@@ -316,10 +325,8 @@ Notifee.registerForegroundService(notification => {
     /**
      * Cancel the notification and resolve the service promise so the Headless task quits.
      */
-    async function stopService(id: String): Promise<void> {
+    async function stopService(id: string): Promise<void> {
       console.warn('Stopping service.', notification?.id);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       clearInterval(interval);
       await Notifee.cancelNotification(notification?.id);
       return resolve();
@@ -346,8 +353,6 @@ Notifee.registerForegroundService(notification => {
     // A fake progress updater.
     let current = 1;
     const interval = setInterval(async () => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       notification.android.progress.current = current;
       Notifee.displayNotification(notification);
       current++;
