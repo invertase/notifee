@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <a href="https://invertase.io">
     <img width="140px" src="https://static.invertase.io/assets/invertase-logo.png"><br/>
@@ -5,12 +6,14 @@
   <h3 align="center">Notifee Notifications Product</h3>
 </p>
 
+<hr/>
 
----
+<!-- markdownlint-disable MD041 -->
 
 ## Getting Started
 
 ### Step 1: Clone the repository
+
 Ensure you call `git clone` with the `recursive` flag to ensure submodules (packages/react-native) are included:
 
 ```bash
@@ -25,16 +28,18 @@ yarn
 yarn tests_rn:ios:pod:install
 ```
 
-### Step 3: Start React Native packager:
+### Step 3: Start React Native packager
+
 ```bash
-yarn run tests_rn:packager
+yarn tests_rn:packager
 ```
 
-### Step 4:
+### Step 4
+
 Ensure you have TypeScript compiler running to listen to `react-native` submodule changes:
 
 ```bash
-yarn run build:rn:watch
+yarn build:rn:watch
 ```
 
 ## Testing Code
@@ -49,17 +54,12 @@ The following package scripts are exported to help you run tests;
 
 ### End-to-end Testing
 
-Install Cavy CLI if not already installed
-
- ```yarn global add cavy-cli```
-
 Tests can be found in the `tests_react_native/specs` directory.
 
-To run end-to-end tests for `Android`, please run:
-- `yarn tests_rn:android:test`
+To run tests, use these commands:
 
-To run end-to-end tests for `iOS`, please run:
-- `yarn tests_rn:ios:test`
+- `Android`: run `yarn tests_rn:android:test`
+- `iOS`: run `yarn tests_rn:ios:test`
 
 ### Linting & type checking files
 
