@@ -48,10 +48,10 @@ export function NotificationSpec(spec: TestScope): void {
       return new Promise(async resolve => {
         const unsubscribe = notifee.onForegroundEvent((event: Event) => {
           if (event.type === EventType.DELIVERED) {
-            expect(event.detail.notification).not.toBe(undefined);
+            expect(event.detail.notification).not.equal(undefined);
             if (event.detail.notification) {
-              expect(event.detail.notification.title).toEqual('Hello');
-              expect(event.detail.notification.body).toEqual('World');
+              expect(event.detail.notification.title).equals('Hello');
+              expect(event.detail.notification.body).equals('World');
             }
             unsubscribe();
             resolve();
