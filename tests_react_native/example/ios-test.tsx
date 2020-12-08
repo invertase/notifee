@@ -2,11 +2,9 @@
  *  Copyright (c) 2016-present Invertase Limited
  */
 
-/* eslint-disable no-console */
 import React from 'react';
 import { AppRegistry, Button, Text, View } from 'react-native';
 
-import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
 import '@react-native-firebase/functions';
 
@@ -53,12 +51,12 @@ Notifee.onForegroundEvent(async event => {
   console.warn(event);
 });
 
-(async () => {
+(async (): Promise<void> => {
   const initialNotification = await Notifee.getInitialNotification();
   console.warn('INITIAL_NOTIFICATION', initialNotification);
 })();
 
-async function testRunner() {
+async function testRunner(): Promise<void> {
   // const functionRunner = firebase.functions().httpsCallable('testFunctionDefaultRegion');
   // const response = await functionRunner();
   // console.warn(response);
@@ -94,13 +92,14 @@ async function testRunner() {
 function TestComponent(): any {
   return (
     <View
+      // eslint-disable-next-line react-native/no-inline-styles
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'pizza' }}
     >
       <Text>Test Component</Text>
       <Button
         title={`Press Mee`}
         // style={{ width: 300, height: 100 }}
-        onPress={async () => {
+        onPress={async (): Promise<void> => {
           await testRunner();
         }}
       />

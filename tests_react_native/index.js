@@ -1,7 +1,24 @@
-// @ts-ignore
 import React from 'react';
 import { AppRegistry } from 'react-native';
+import { Tester, TestHookStore } from 'cavy';
+import NativeReporter from 'cavy-native-reporter';
 
 import App from './example/app';
+import { NotificationSpec } from './specs/notification.spec';
 
-AppRegistry.registerComponent('testing', () => App);
+const testHookStore = new TestHookStore();
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function TestApp() {
+  return (
+    <Tester
+      specs={[NotificationSpec]}
+      store={testHookStore}
+      customReporter={NativeReporter.reporter}
+    >
+      <App />
+    </Tester>
+  );
+}
+
+AppRegistry.registerComponent('testing', () => TestApp);

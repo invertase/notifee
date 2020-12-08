@@ -2,50 +2,36 @@
  *  Copyright (c) 2016-present Invertase Limited
  */
 
-/* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import {
-  AppRegistry,
-  Button,
   ScrollView,
   StyleSheet,
   Text,
   View,
-  Alert,
   Dimensions,
   Image,
   TouchableOpacity,
 } from 'react-native';
 
 import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/messaging';
+import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 
-import Notifee, {
-  Notification,
-  EventType,
-  Event,
-  IOSAuthorizationStatus,
-  TriggerType,
-} from '@notifee/react-native';
+import Notifee, { EventType, Event, IOSAuthorizationStatus } from '@notifee/react-native';
 
-import { notifications } from './notifications';
-
-const colors: { [key: string]: string } = {
-  custom_sound: '#f449ee',
-  high: '#f44336',
-  default: '#2196f3',
-  low: '#ffb300',
-  min: '#9e9e9e',
-};
+type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
 
-  Notifee.displayNotification(JSON.parse(message.data.notifee));
+  if (message.data) {
+    Notifee.displayNotification(JSON.parse(message.data?.notifee));
+  }
 }
 
+// @ts-ignore FIXME what is Root and why doesn't typescript like it?
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Root(): any {
-  const [id, setId] = React.useState<string | null>(null);
+  // const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
     const fcmToken = await firebase.messaging().getToken();
@@ -98,10 +84,11 @@ function Root(): any {
         <TouchableOpacity
           onPress={async (): Promise<void> => {
             const currentPermissions = await Notifee.getNotificationSettings();
-            if (currentPermissions.authorizationStatus != IOSAuthorizationStatus.AUTHORIZED) {
+            if (currentPermissions.authorizationStatus !== IOSAuthorizationStatus.AUTHORIZED) {
               await Notifee.requestPermission();
             }
             Notifee.displayNotification({
+              // @ts-ignore FIXME what is key and why doesn't typescript like this line?
               key: 'Big Picture Style',
               notification: {
                 title: 'Big Picture Style',
@@ -144,6 +131,7 @@ function Root(): any {
           }}
         >
           <View style={styles.button}>
+            {/* eslint-disable-next-line react-native/no-inline-styles */}
             <Text style={{ color: '#2c8be6' }}>Display Notification</Text>
           </View>
         </TouchableOpacity>
@@ -230,9 +218,9 @@ Notifee.registerForegroundService(notification => {
      */
     async function stopService(): Promise<void> {
       console.warn('Stopping service.');
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      await Notifee.cancelNotification(notification?.id);
+      if (notification.id) {
+        await Notifee.cancelNotification(notification?.id);
+      }
       return resolve();
     }
 
@@ -240,7 +228,7 @@ Notifee.registerForegroundService(notification => {
      * Cancel our long running task if the user presses the 'stop' action.
      */
     async function handleStopActionEvent({ type, detail }: Event): Promise<void> {
-      if (type != EventType.ACTION_PRESS) return;
+      if (type !== EventType.ACTION_PRESS) return;
       if (detail?.pressAction?.id === 'stop') {
         console.warn('Stop action was pressed');
         await stopService();
@@ -253,9 +241,9 @@ Notifee.registerForegroundService(notification => {
     // A fake progress updater.
     let current = 1;
     const interval = setInterval(async () => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      notification.android.progress.current = current;
+      notification.android = {
+        progress: { current: current },
+      };
       await Notifee.displayNotification(notification);
       current++;
     }, 125);
@@ -266,28 +254,4 @@ Notifee.registerForegroundService(notification => {
       await stopService();
     }, 15000);
   });
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    fontSize: 16,
-    padding: 8,
-    marginBottom: 8,
-    fontWeight: 'bold',
-  },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 8,
-    paddingBottom: 20,
-    borderBottomColor: '#c1c1c1',
-    borderBottomWidth: 1,
-  },
-  rowItem: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 8,
-  },
 });
