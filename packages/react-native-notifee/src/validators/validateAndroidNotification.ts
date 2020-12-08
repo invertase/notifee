@@ -326,7 +326,7 @@ export default function validateAndroidNotification(
           );
         case 'offMs':
           throw new Error(
-            `notification.android.lights' invalid "off" millisecond value, expected a number greater than 0.`,
+            `'notification.android.lights' invalid "off" millisecond value, expected a number greater than 0.`,
           );
       }
     }

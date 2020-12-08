@@ -64,7 +64,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       AppRegistry.registerHeadlessTask(kReactNativeNotifeeNotificationEvent, () => {
         return (event: Event): Promise<void> => {
           if (!backgroundEventHandler) {
-            // eslint-disable-next-line no-console
             console.warn(
               '[notifee] no background event handler has been set. Set a handler via the "onBackgroundEvent" method.',
             );
@@ -78,7 +77,6 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         kReactNativeNotifeeNotificationBackgroundEvent,
         (event: Event): Promise<void> => {
           if (!backgroundEventHandler) {
-            // eslint-disable-next-line no-console
             console.warn(
               '[notifee] no background event handler has been set. Set a handler via the "onBackgroundEvent" method.',
             );
