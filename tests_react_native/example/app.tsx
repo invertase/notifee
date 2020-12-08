@@ -63,8 +63,6 @@ const channels: AndroidChannel[] = [
 
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message);
-  const ii = 'hello';
-
   Notifee.displayNotification({
     id: message.collapseKey,
     title: 'hello',
@@ -222,8 +220,8 @@ function Root(): any {
           <Button
             title={`get channels`}
             onPress={async (): Promise<void> => {
-              const channels = await Notifee.getChannels();
-              channels.forEach(res => {
+              const buttonChannels = await Notifee.getChannels();
+              buttonChannels.forEach(res => {
                 if (res.id === 'custom-vibrationsouttt') {
                   console.log('res', res);
                 }
@@ -325,10 +323,12 @@ Notifee.registerForegroundService(notification => {
     /**
      * Cancel the notification and resolve the service promise so the Headless task quits.
      */
-    async function stopService(id: string): Promise<void> {
-      console.warn('Stopping service.', notification?.id);
+    async function stopService(id?: string): Promise<void> {
+      console.warn('Stopping service, using notification id: ' + id);
       clearInterval(interval);
-      await Notifee.cancelNotification(notification?.id);
+      if (id) {
+        await Notifee.cancelNotification(id);
+      }
       return resolve();
     }
 
@@ -338,12 +338,12 @@ Notifee.registerForegroundService(notification => {
     async function handleStopActionEvent({ type, detail }: Event): Promise<void> {
       console.log('handleStopActionEvent1 type:', type, 'pressactionid', detail?.pressAction?.id);
 
-      if (type != EventType.ACTION_PRESS) return;
+      if (type !== EventType.ACTION_PRESS) return;
       console.log('handleStopActionEvent2 type:', type, 'pressactionid', detail?.pressAction?.id);
 
       if (detail?.pressAction?.id === 'stop') {
         console.warn('Stop action was pressed');
-        await stopService(detail?.notification?.id);
+        await stopService(detail.notification?.id);
       }
     }
 
@@ -353,7 +353,9 @@ Notifee.registerForegroundService(notification => {
     // A fake progress updater.
     let current = 1;
     const interval = setInterval(async () => {
-      notification.android.progress.current = current;
+      notification.android = {
+        progress: { current: current },
+      };
       Notifee.displayNotification(notification);
       current++;
     }, 125);
@@ -361,7 +363,7 @@ Notifee.registerForegroundService(notification => {
     setTimeout(async () => {
       clearInterval(interval);
       console.warn('Background work has completed.');
-      await stopService(notification);
+      await stopService(notification.id);
     }, 15000);
   });
 });
@@ -394,6 +396,7 @@ const styles = StyleSheet.create({
 
 function TestComponent(): any {
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Test Component</Text>
     </View>
