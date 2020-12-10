@@ -165,6 +165,10 @@ class LicenseManager {
       // mark local verification as no license found, when we in debug builds this status is ignored
       // as a license is not required in debug
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE);
+      Logger.e(
+          TAG,
+          "No license was found. Please ensure you have a created a 'notifee.config.json'"
+              + "file at the root of your project with a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -176,6 +180,7 @@ class LicenseManager {
     if (verifiedJwt == null) {
       // mark local verification as invalid license
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
+      Logger.e(TAG, "Your license key is invalid. Please ensure you have a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -186,6 +191,7 @@ class LicenseManager {
     if (!jwtBody.containsKey(JWT_KEY_APP_ID)) {
       // mark local verification as invalid license
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
+      Logger.e(TAG, "Your license key is invalid. Please ensure you have a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -237,7 +243,14 @@ class LicenseManager {
     // mark local verification a valid license
     Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK);
 
-    Logger.d(TAG, "Local verification succeeded.");
+    String shortLicenseKey = androidLicenseKey.substring(androidLicenseKey.length() - 10);
+
+    Logger.d(
+        TAG,
+        "Local verification succeeded for your application with package name "
+            + jwtAppId
+            + " and license key ending in "
+            + shortLicenseKey);
 
     completer.set(ListenableWorker.Result.success());
   }

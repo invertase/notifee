@@ -17,7 +17,7 @@
     "gen:reference": "node scripts/generate-typedoc.js",
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
     "tests_rn:packager:reset-cache": "cd tests_react_native && npx react-native start --reset-cache",
-    "run:android": "cd tests_react_native && npx react-native run-android --appIdSuffix dev",
+    "run:android": "cd tests_react_native && npx react-native run-android  --variant 'debug' --appIdSuffix dev",
     "run:ios": "cd tests_react_native && npx react-native run-ios --scheme=Notifee",
     "tests_rn:test": "cd tests_react_native && jest",
     "tests_rn:test-watch": "cd tests_react_native && jest --watch",
