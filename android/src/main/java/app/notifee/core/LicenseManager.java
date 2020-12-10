@@ -144,7 +144,7 @@ class LicenseManager {
     int identifier = resources.getIdentifier("notifee_config_license", "string", packageName);
     if (identifier != 0) {
       String key = resources.getString(identifier);
-      Log.d(TAG, "License key found from resources: " + key);
+      Logger.d(TAG, "License key found from resources: " + key);
       return key;
     }
 
@@ -452,7 +452,7 @@ class LicenseManager {
     try {
       jwtBuilder.signWith(loadPrivateKey(mInstance.mClientPrivateKey), SignatureAlgorithm.RS384);
     } catch (Exception e) {
-      Log.e(TAG, "", e);
+      Logger.e(TAG, "", e);
       return "";
     }
 
