@@ -174,7 +174,8 @@ class LicenseManager {
       return;
     }
 
-    String shortLicenseKey = androidLicenseKey.substring(androidLicenseKey.length() - 10);
+    // get last 10 characters of the license key
+    String shortLicenseKey = getShortLicenseKey(androidLicenseKey);
 
     // verify the jwt token
     Jws<Claims> verifiedJwt = getInstance().verifyToken(androidLicenseKey);
@@ -505,6 +506,17 @@ class LicenseManager {
 
   private static int getRemoteStatus() {
     return Preferences.getSharedInstance().getIntValue("rvs", RemoteVerificationStatus.PENDING);
+  }
+
+  private static String getShortLicenseKey(String androidLicenseKey) {
+    String shortLicenseKey = androidLicenseKey;
+    int keyLength = androidLicenseKey.length();
+
+    if (keyLength > 10) {
+      shortLicenseKey = shortLicenseKey.substring(keyLength - 10);
+    }
+
+    return shortLicenseKey;
   }
 
   private static PublicKey loadPublicKey(String publicKeyStr) throws Exception {
