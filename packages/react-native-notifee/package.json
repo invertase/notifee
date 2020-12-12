@@ -1,6 +1,6 @@
 {
   "name": "@notifee/react-native",
-  "version": "0.15.1",
+  "version": "0.15.2-0",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "dist/index.js",
