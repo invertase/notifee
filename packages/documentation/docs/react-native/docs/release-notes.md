@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.15.2
+
+- **[Android]**: Added additional logs to help with debugging license validation issues.
+- **[Android/iOS]**: Fixed an issue where sometimes the `NotifeeApiModule` would fail to resolve `this.native` due to the context changing.
+
 ## 0.15.1
 
 - **[Android]**: Fixed an issue where sometimes the `largeIcon` wouldn't show when the app is closed.
