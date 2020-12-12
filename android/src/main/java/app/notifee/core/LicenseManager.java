@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Base64;
-import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
@@ -144,7 +143,7 @@ class LicenseManager {
     int identifier = resources.getIdentifier("notifee_config_license", "string", packageName);
     if (identifier != 0) {
       String key = resources.getString(identifier);
-      Log.d(TAG, "License key found from resources: " + key);
+      Logger.d(TAG, "License key found from resources: " + key);
       return key;
     }
 
@@ -165,17 +164,29 @@ class LicenseManager {
       // mark local verification as no license found, when we in debug builds this status is ignored
       // as a license is not required in debug
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.NO_LICENSE);
+      Logger.e(
+          TAG,
+          "No license was found. Please ensure you have a created a 'notifee.config.json'"
+              + "file at the root of your project with a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
       return;
     }
 
+    // get last 10 characters of the license key
+    String shortLicenseKey = getShortLicenseKey(androidLicenseKey);
+
     // verify the jwt token
     Jws<Claims> verifiedJwt = getInstance().verifyToken(androidLicenseKey);
     if (verifiedJwt == null) {
       // mark local verification as invalid license
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
+      Logger.e(
+          TAG,
+          "Your license key ending in "
+              + shortLicenseKey
+              + " is invalid. Please ensure you have a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -186,6 +197,11 @@ class LicenseManager {
     if (!jwtBody.containsKey(JWT_KEY_APP_ID)) {
       // mark local verification as invalid license
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
+      Logger.e(
+          TAG,
+          "Your license key ending in "
+              + shortLicenseKey
+              + " is invalid. Please ensure you have a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -200,7 +216,9 @@ class LicenseManager {
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
       Logger.e(
           TAG,
-          "Your license key is not for this application, expected application to be "
+          "Your license key ending in "
+              + shortLicenseKey
+              + " is not for this application, expected application to be "
               + jwtAppId
               + " but found "
               + packageName);
@@ -215,7 +233,9 @@ class LicenseManager {
     if (jwtPlatform != LicensePlatform.ANDROID) {
       // mark local verification as invalid license as its not for this platform
       Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.INVALID_LICENSE);
-      Logger.e(TAG, "Your license key is not for this platform (Android)");
+      Logger.e(
+          TAG,
+          "Your license key ending in " + shortLicenseKey + " is not for this platform (Android)");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
@@ -237,7 +257,12 @@ class LicenseManager {
     // mark local verification a valid license
     Preferences.getSharedInstance().setIntValue("lvs", LocalVerificationStatus.OK);
 
-    Logger.d(TAG, "Local verification succeeded.");
+    Logger.d(
+        TAG,
+        "Local verification succeeded for your application with package name "
+            + jwtAppId
+            + " and license key ending in "
+            + shortLicenseKey);
 
     completer.set(ListenableWorker.Result.success());
   }
@@ -439,7 +464,7 @@ class LicenseManager {
     try {
       jwtBuilder.signWith(loadPrivateKey(mInstance.mClientPrivateKey), SignatureAlgorithm.RS384);
     } catch (Exception e) {
-      Log.e(TAG, "", e);
+      Logger.e(TAG, "", e);
       return "";
     }
 
@@ -481,6 +506,17 @@ class LicenseManager {
 
   private static int getRemoteStatus() {
     return Preferences.getSharedInstance().getIntValue("rvs", RemoteVerificationStatus.PENDING);
+  }
+
+  private static String getShortLicenseKey(String androidLicenseKey) {
+    String shortLicenseKey = androidLicenseKey;
+    int keyLength = androidLicenseKey.length();
+
+    if (keyLength > 10) {
+      shortLicenseKey = shortLicenseKey.substring(keyLength - 10);
+    }
+
+    return shortLicenseKey;
   }
 
   private static PublicKey loadPublicKey(String publicKeyStr) throws Exception {
