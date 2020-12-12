@@ -143,7 +143,6 @@ class LicenseManager {
     int identifier = resources.getIdentifier("notifee_config_license", "string", packageName);
     if (identifier != 0) {
       String key = resources.getString(identifier);
-      Logger.d(TAG, "License key found from resources: " + key);
       return key;
     }
 
@@ -167,7 +166,7 @@ class LicenseManager {
       Logger.e(
           TAG,
           "No license was found. Please ensure you have a created a 'notifee.config.json'"
-              + "file at the root of your project with a valid license key.");
+              + " file at the root of your project with a valid license key.");
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .cancelUniqueWork(Worker.WORK_TYPE_LICENSE_VERIFY_REMOTE);
       completer.set(ListenableWorker.Result.success());
