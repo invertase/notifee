@@ -1,0 +1,6 @@
+framework module NotifeeCore {
+  umbrella header "NotifeeCore.h"
+
+  export *
+  module * { export * }
+}
