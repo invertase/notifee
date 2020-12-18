@@ -17,19 +17,19 @@ mkdir "${FRAMEWORK_FOLDER_NAME}"
 echo "Created ${FRAMEWORK_FOLDER_NAME}"
 
 echo "Archiving for iOS Simulator"
-xcodebuild archive -project "./NotifeeCore.xcodeproj" -scheme ${BUILD_SCHEME} \
+xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}" \
-  -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES -quiet | xcpretty
+  -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
 echo "Archiving for iOS"
-xcodebuild archive -project "./NotifeeCore.xcodeproj" -scheme ${BUILD_SCHEME} \
+xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" \
-  -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES -quiet | xcpretty
+  -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
 echo "Archiving for Mac Catalyst"
-xcodebuild archive -project "./NotifeeCore.xcodeproj" -scheme ${BUILD_SCHEME} \
+xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination='platform=macOS,arch=x86_64,variant=Mac Catalyst' -archivePath "${CATALYST_ARCHIVE_PATH}" \
-  SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES -quiet | xcpretty
+  SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
 echo "Packaging archives into ${FRAMEWORK_NAME}.xcframework bundle"
 xcodebuild -create-xcframework \
@@ -44,7 +44,7 @@ rm -rf "${CATALYST_ARCHIVE_PATH}"
 
 echo "Installing framework into packages/react-native submodule"
 rm -rf "${OUTPUT_FOLDER}/${FRAMEWORK_NAME}.xcframework" && \
-  cp -R "${FRAMEWORK_PATH}" "${OUTPUT_FOLDER}"
+  cp -a "${FRAMEWORK_PATH}" "${OUTPUT_FOLDER}"
 
 echo "Cleaning up intermediate files"
 rm -rf "${WORKING_DIR:?}/${FRAMEWORK_FOLDER_NAME}"
