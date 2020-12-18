@@ -77,7 +77,6 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - NotifeeCore (1.0.0)
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
   - RCTRequired (0.63.3)
@@ -324,7 +323,6 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - NotifeeCore (from `../../ios`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -380,8 +378,6 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
-  NotifeeCore:
-    :path: "../../ios"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -448,7 +444,6 @@ SPEC CHECKSUMS:
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  NotifeeCore: 25a78c64105bb86356aa5924e6886e2e8b7ce7fd
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
@@ -473,9 +468,9 @@ SPEC CHECKSUMS:
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   RNFBApp: 804b98033f45c3a3e35b56de8c894f85ef5e4388
   RNFBMessaging: 9287cbf850ed3524c9f915f5b3daaf1cfaabbf06
-  RNNotifee: ef8f9c849a95b37f5e295640e1791e4cb321fe0e
+  RNNotifee: 5cc0289edc9a314778b5692340edae81a39f6dc9
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
 
-PODFILE CHECKSUM: b89228684b16f84b7119a9ad96edde04cfec341f
+PODFILE CHECKSUM: 1ed26d601fdd644362f6ca2bb0e7649f265f238c
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
