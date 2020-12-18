@@ -45,3 +45,6 @@ rm -rf "${CATALYST_ARCHIVE_PATH}"
 echo "Installing framework into packages/react-native submodule"
 rm -rf "${OUTPUT_FOLDER}/${FRAMEWORK_NAME}.xcframework" && \
   cp -R "${FRAMEWORK_PATH}" "${OUTPUT_FOLDER}"
+
+echo "Cleaning up intermediate files"
+rm -rf "${WORKING_DIR:?}/${FRAMEWORK_FOLDER_NAME}"
