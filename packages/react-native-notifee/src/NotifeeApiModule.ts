@@ -12,7 +12,7 @@ import {
 } from './types/NotificationAndroid';
 import { InitialNotification, Notification, Event } from './types/Notification';
 import { PowerManagerInfo } from './types/PowerManagerInfo';
-import { Trigger } from './types/trigger';
+import { Trigger } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
   isAndroid,
