@@ -14,7 +14,7 @@
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:link": "lerna link && lerna exec -- yarn link",
     "lerna:clean": "lerna clean",
-    "gen:reference": "node scripts/generate-typedoc.js",
+    "gen:reference": "rimraf docs/typedoc.json docs/typdoc.min.json && node scripts/generate-typedoc.js",
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
     "tests_rn:packager:reset-cache": "cd tests_react_native && npx react-native start --reset-cache",
     "run:android": "cd tests_react_native && npx react-native run-android  --variant 'debug' --appIdSuffix dev",
