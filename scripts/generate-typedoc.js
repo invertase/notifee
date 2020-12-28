@@ -16,6 +16,7 @@ const { inputFiles } = app.bootstrap({
   mode: 'file',
   includeDeclarations: true,
   excludeExternals: true,
+  exclude: '**/node_modules/**',
   tsconfig: path.resolve(process.cwd(), 'tsconfig.docs.json'),
 });
 
