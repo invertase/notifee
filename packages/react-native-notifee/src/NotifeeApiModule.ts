@@ -46,7 +46,6 @@ if (isAndroid) {
   // Register foreground service
   AppRegistry.registerHeadlessTask(kReactNativeNotifeeForegroundServiceHeadlessTask, () => {
     if (!registeredForegroundServiceTask) {
-      // eslint-disable-next-line no-console
       console.warn(
         '[notifee] no registered foreground service has been set for displaying a foreground notification.',
       );
