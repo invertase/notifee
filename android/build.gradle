@@ -1,3 +1,5 @@
+import org.gradle.internal.jvm.Jvm
+
 buildscript {
   repositories {
     google()
@@ -10,6 +12,31 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+
+
+ext {
+
+  jvmVersion = Jvm.current().javaVersion.majorVersion
+  if (jvmVersion != "8" && jvmVersion != "11" && jvmVersion != "14") {
+    println "\n\n\n"
+    println "**************************************************************************************************************"
+    println "\n\n\n"
+    println "ERROR: Notifee builds with JVM LTS and current releases (currently major version 8, 11, or 14)."
+    println "  Incompatible major version detected: '" + jvmVersion + "'"
+    println "\n\n\n"
+    println "**************************************************************************************************************"
+    println "\n\n\n"
+    System.exit(1)
+  }
+  ciBuild = System.getenv("CI") == "true" // works for Travis CI or Github Actions
+
+  // Virtualized Environment like CI may report host CPU counts vs guest, but runs 2 cores
+  // everyone else gets 50% of cores to account for SMT which doesn't help this workload
+  gradleTestMaxParallelForks = 1
+  if (!ciBuild) {
+    gradleTestMaxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+  }
+}
 
 android {
   compileSdkVersion 30
@@ -45,6 +72,21 @@ android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  testOptions.unitTests.all {
+    testLogging {
+      events "failed", "skipped"
+      showStackTraces = true
+      exceptionFormat = "full"
+    }
+
+    maxParallelForks = gradleTestMaxParallelForks
+    forkEvery = 40
+    maxHeapSize = "2048m"
+    minHeapSize = "1024m"
+    systemProperties['junit.jupiter.execution.parallel.enabled'] = true
+    systemProperties['junit.jupiter.execution.parallel.mode.default'] = "concurrent"
   }
 }
 
