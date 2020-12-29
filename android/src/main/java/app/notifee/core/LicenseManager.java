@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Base64;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
@@ -37,7 +38,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.jetbrains.annotations.NotNull;
 
 class LicenseManager {
   private static final String TAG = "License";
@@ -297,7 +297,7 @@ class LicenseManager {
         .enqueue(
             new Callback() {
               @Override
-              public void onFailure(@NotNull Call call, @NotNull IOException e) {
+              public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Logger.e(TAG, "Remote license verification request failed.", e);
                 // schedule to try again sooner if request failed,
                 // remote status will remain as pending until verified
@@ -306,7 +306,7 @@ class LicenseManager {
               }
 
               @Override
-              public void onResponse(@NotNull Call call, @NotNull Response response) {
+              public void onResponse(@NonNull Call call, @NonNull Response response) {
                 Logger.d(TAG, "Remote verification API responded.");
                 try {
                   String responseBody = null;
