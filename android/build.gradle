@@ -12,14 +12,13 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 29
-  buildToolsVersion "29.0.2"
+  compileSdkVersion 30
   testOptions {
     unitTests.returnDefaultValues = true
   }
   defaultConfig {
     minSdkVersion 16
-    targetSdkVersion 29
+    targetSdkVersion 30
     versionCode 1
     versionName "1.0"
 
@@ -77,22 +76,24 @@ repositories {
 dependencies {
 
   api 'androidx.annotation:annotation:1.1.0' // https://developer.android.com/jetpack/androidx/releases/annotation
-  api "com.squareup.okhttp3:okhttp:+"
-  api 'androidx.concurrent:concurrent-futures:1.0.0'
-  api 'com.google.android.gms:play-services-tasks:17.1.0'
-  api 'androidx.work:work-runtime:2.4.0'
-  api 'org.greenrobot:eventbus:3.1.1'
-  api 'com.facebook.fresco:fresco:2.1.0'
-  api 'io.jsonwebtoken:jjwt-api:0.10.7'
+  api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
+  api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
+  api 'com.google.android.gms:play-services-tasks:17.2.0' // https://developers.google.com/android/guides/releases
+  api 'androidx.work:work-runtime:2.4.0' // https://developer.android.com/jetpack/androidx/releases/work
+  // Fresco 2.3.0+ may not be react-native compatible until https://github.com/facebook/react-native/pull/30061
+  api 'com.facebook.fresco:fresco:2.2.0' // https://github.com/facebook/fresco/releases
+  api 'io.jsonwebtoken:jjwt-api:0.11.2' // https://github.com/jwtk/jjwt/releases
 
-  def room_version = "2.2.5"
+  def room_version = '2.2.6' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"
   annotationProcessor "androidx.room:room-compiler:$room_version"
 
-  annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+  def eventbus_version = '3.2.0' // https://github.com/greenrobot/EventBus/releases
+  api "org.greenrobot:eventbus:$eventbus_version"
+  annotationProcessor "org.greenrobot:eventbus-annotation-processor:$eventbus_version"
 
-  testImplementation 'junit:junit:4.12'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+  testImplementation 'junit:junit:4.13.1' // https://github.com/junit-team/junit4/releases
+  androidTestImplementation 'androidx.test.ext:junit:1.1.2' // https://developer.android.com/jetpack/androidx/releases/test
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0' // see above
 
 }
