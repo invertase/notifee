@@ -76,6 +76,7 @@ repositories {
 
 dependencies {
 
+  api 'androidx.annotation:annotation:1.1.0' // https://developer.android.com/jetpack/androidx/releases/annotation
   api "com.squareup.okhttp3:okhttp:+"
   api 'androidx.concurrent:concurrent-futures:1.0.0'
   api 'com.google.android.gms:play-services-tasks:17.1.0'
