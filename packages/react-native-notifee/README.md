@@ -51,6 +51,37 @@ Below you'll find guides that cover the supported iOS features.
 | [Interaction](https://notifee.app/react-native/docs/ios/interaction)                 | Handle user interaction with your notifications. |                                                    |
 | [Permissions](https://notifee.app/react-native/docs/ios/permissions)                 | Request permission from your application users to display notifications. |                                                    |
 
+### Jest Testing
+
+To run jest tests after integrating this module, you will need to mock out the native parts of Notifee or you will get an error that looks like:
+
+```
+ ● Test suite failed to run
+
+    Notifee native module not found.
+
+      59 |     this._nativeModule = NativeModules[this._moduleConfig.nativeModuleName];
+      60 |     if (this._nativeModule == null) {
+    > 61 |       throw new Error('Notifee native module not found.');
+         |             ^
+      62 |     }
+      63 |
+      64 |     return this._nativeModule;
+```
+
+We distribute a generic mock file you may use so that your jest tests will work successfully.
+
+In your Jest config file, add an entry to the `setupFilesAfterEnv` array, perhaps like so if you use the `jest.config.js` configuration style:
+
+```javascript
+module.exports = {
+  // ... other directives
+  setupFilesAfterEnv: [
+    'node_modules/@notifee/react-native/jest-mock.js'
+  ],
+  // ... other directives
+}
+```
 
 ## License
 
