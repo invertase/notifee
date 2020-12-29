@@ -1,13 +1,14 @@
 package app.notifee.core.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import android.os.Bundle;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TimeTriggerModelTest {
-  private TimeTriggerModel mTimeTriggerModel = null;
+public class TimestampTriggerModelTest {
+  private TimestampTriggerModel mTimestampTriggerModel = null;
 
   @Before
   public void before() {
@@ -26,11 +27,13 @@ public class TimeTriggerModelTest {
     triggerComponents.putInt("weekOfMonth", 2);
 
     trigger.putBundle("components", triggerComponents);
-    mTimeTriggerModel = TimeTriggerModel.fromBundle(trigger);
+    mTimestampTriggerModel = TimestampTriggerModel.fromBundle(trigger);
   }
 
   @Test
-  public void addition_isCorrect() {
-    assertEquals(4, 2 + 2);
+  public void testBundleValues() {
+    assertEquals("with no 'repeatFrequency', interval should be -1", -1, mTimestampTriggerModel.getInterval());
+    assertNull("with no 'repeatFrequency', TimeUnit should be null", mTimestampTriggerModel.getTimeUnit());
+    assertEquals("with no 'repeatFrequency', delay should be 0", 0, mTimestampTriggerModel.getDelay());
   }
 }
