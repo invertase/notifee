@@ -3,14 +3,10 @@ name: JUnit Tests
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - '**'
     paths:
       - '.github/workflows/*.yml'
       - 'android/**'
   push:
-    branches:
-      - '**'
     paths:
       - '.github/workflows/*.yml'
       - 'android/**'
