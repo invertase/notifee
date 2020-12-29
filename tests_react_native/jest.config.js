@@ -16,5 +16,7 @@ module.exports = {
     '!**/vendor/**',
   ],
 
+  setupFilesAfterEnv: ['<rootDir>/packages/react-native/jest-mock.js'],
+
   moduleFileExtensions: ['ts', 'tsx', 'js'],
 };
