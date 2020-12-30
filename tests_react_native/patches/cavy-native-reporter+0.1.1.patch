@@ -1,0 +1,36 @@
+diff --git a/node_modules/cavy-native-reporter/ios/CavyNativeReporter.podspec b/node_modules/cavy-native-reporter/ios/CavyNativeReporter.podspec
+index 7b40bfd..bd2c477 100644
+--- a/node_modules/cavy-native-reporter/ios/CavyNativeReporter.podspec
++++ b/node_modules/cavy-native-reporter/ios/CavyNativeReporter.podspec
+@@ -1,22 +1,16 @@
++package = JSON.parse(File.read(File.join(__dir__, (File.join('..', 'package.json')))))
+ 
+ Pod::Spec.new do |s|
+   s.name         = "CavyNativeReporter"
+-  s.version      = "0.1.0"
+-  s.summary      = "CavyNativeReporter"
+-  s.description  = <<-DESC
+-                  CavyNativeReporter - A native test reporter for Cavy
+-                   DESC
++  s.version      = package["version"]
++  s.description  = package["description"]
++  s.summary      = s.name
+   s.homepage     = "https://github.com/pixielabs/cavy-native-reporter"
+-  s.license      = "MIT"
+-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+-  s.author             = { "author" => "author@domain.cn" }
++  s.license      = package["license"]
++  s.author       = { "author" => "hello@pixielabs.io" }
+   s.platform     = :ios, "7.0"
+-  s.source       = { :git => "https://github.com/author/CavyNativeReporter.git", :tag => "master" }
+-  s.source_files  = "CavyNativeReporter/**/*.{h,m}"
++  s.source       = { :git => "https://github.com/pixielabs/cavy-native-reporter.git", :tag => "v#{s.version}" }
++  s.source_files  = "*.{h,m}"
+   s.requires_arc = true
+-
+-
+-  s.dependency "React"
+-  #s.dependency "others"
+-
++  s.dependency "React-Core"
+ end

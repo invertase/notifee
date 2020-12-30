@@ -18,7 +18,7 @@
     "lerna:link": "lerna link && lerna exec -- yarn link",
     "lerna:clean": "lerna clean",
     "gen:reference": "rimraf docs/typedoc.json docs/typdoc.min.json && node scripts/generate-typedoc.js",
-    "test:all": "yarn test:core:android && yarn tests_rn:test && yarn tests_rn:android:test && (yarn tests_rn:ios:test || true)",
+    "test:all": "yarn test:core:android && yarn tests_rn:test && yarn tests_rn:android:test && yarn tests_rn:ios:test",
     "test:core:android": "cd android && ./gradlew testDebugUnit",
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
     "tests_rn:packager:reset-cache": "cd tests_react_native && npx react-native start --reset-cache",
