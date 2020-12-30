@@ -502,9 +502,11 @@ class LicenseManager {
     int localStatus = getLocalStatus();
     int remoteStatus = getRemoteStatus();
 
-    // if remote & local statuses are either OK or PENDING then assume the license is valid
+    // if local statuses are either OK or PENDING then assume the license is valid
+    // if remote is OK, PENDING or is a device that is known to fail remote validation the license is valid
     return (remoteStatus != RemoteVerificationStatus.PENDING
-            && remoteStatus != RemoteVerificationStatus.OK)
+            && remoteStatus != RemoteVerificationStatus.OK
+            && !failsRemoteValidation())
         || (localStatus != LocalVerificationStatus.PENDING
             && localStatus != LocalVerificationStatus.OK);
   }
@@ -512,6 +514,12 @@ class LicenseManager {
   // Android 4.x devices fail all validation
   boolean failsAllValidation() {
     return getBuildVersion() <= Build.VERSION_CODES.KITKAT_WATCH;
+  }
+
+  // Remote verification fails on some Android 6 devices
+  // JWT signing issue https://github.com/notifee/react-native-notifee/issues/87
+  boolean failsRemoteValidation() {
+    return getBuildVersion() <= Build.VERSION_CODES.M;
   }
 
   int getBuildVersion() {
