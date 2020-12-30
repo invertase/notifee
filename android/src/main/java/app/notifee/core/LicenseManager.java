@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Constraints;
 import androidx.work.Data;
@@ -476,16 +477,25 @@ class LicenseManager {
         .getPackageInfo(ContextHolder.getApplicationContext().getPackageName(), 0);
   }
 
+  @VisibleForTesting
+  protected boolean isDebug() {
+    return
+      (0
+        != (ContextHolder.getApplicationContext().getApplicationInfo().flags
+        & ApplicationInfo.FLAG_DEBUGGABLE));
+  }
+
   /** Returns a boolean of whether the current license is valid. */
   static boolean isLicenseInvalid() {
-    boolean isDebug =
-        (0
-            != (ContextHolder.getApplicationContext().getApplicationInfo().flags
-                & ApplicationInfo.FLAG_DEBUGGABLE));
+    return getInstance().isLicenseInvalidInstance();
+  }
+
+  @VisibleForTesting
+  protected boolean isLicenseInvalidInstance() {
 
     // Free to use in development.
     // Don't verify on older devices (JWT signing issue).
-    if (isDebug || android.os.Build.VERSION.SDK_INT <= 20) {
+    if (isDebug() || failsAllValidation()) {
       return false;
     }
 
@@ -499,11 +509,20 @@ class LicenseManager {
             && localStatus != LocalVerificationStatus.OK);
   }
 
-  private static int getLocalStatus() {
+  // Android 4.x devices fail all validation
+  boolean failsAllValidation() {
+    return getBuildVersion() <= Build.VERSION_CODES.KITKAT_WATCH;
+  }
+
+  int getBuildVersion() {
+    return Build.VERSION.SDK_INT;
+  }
+
+  int getLocalStatus() {
     return Preferences.getSharedInstance().getIntValue("lvs", LocalVerificationStatus.PENDING);
   }
 
-  private static int getRemoteStatus() {
+  int getRemoteStatus() {
     return Preferences.getSharedInstance().getIntValue("rvs", RemoteVerificationStatus.PENDING);
   }
 
@@ -554,19 +573,19 @@ class LicenseManager {
     return jwt;
   }
 
-  private static class LicensePlatform {
+  static class LicensePlatform {
     static final int ANDROID = 0;
     static final int IOS = 1;
   }
 
-  private static class LocalVerificationStatus {
+  static class LocalVerificationStatus {
     static final int OK = 0;
     static final int PENDING = 1;
     static final int NO_LICENSE = 2;
     static final int INVALID_LICENSE = 3;
   }
 
-  private static class RemoteVerificationStatus {
+  static class RemoteVerificationStatus {
     static final int OK = 0;
     static final int PENDING = 1;
     static final int BAD_REQUEST_TOKEN = 2;
