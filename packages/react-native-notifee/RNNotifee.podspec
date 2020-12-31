@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
     Pod::UI.warn "RNNotifee: Using NotifeeCore from sources."
     s.dependency 'NotifeeCore'
   else
-    s.ios.vendored_frameworks = 'ios/NotifeeCore.framework'
+    s.ios.vendored_frameworks = 'ios/NotifeeCore.xcframework'
+    s.preserve_paths = 'ios/NotifeeCore.xcframework'
   end
 end
