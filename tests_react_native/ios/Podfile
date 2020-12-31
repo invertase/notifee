@@ -42,8 +42,8 @@ target 'testing' do
    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-   if $NotifeeCoreFromSources
-     pod 'NotifeeCore', :path => "../../ios"
+   if defined?($NotifeeCoreFromSources) && $NotifeeCoreFromSources == true
+      pod 'NotifeeCore', :path => "../../ios"
    end
 
    use_native_modules!
