@@ -8,7 +8,6 @@ import { NotificationSpec } from './specs/notification.spec';
 
 const testHookStore = new TestHookStore();
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function TestApp() {
   return (
     <Tester

@@ -43,8 +43,8 @@ export function NotificationSpec(spec: TestScope): void {
     await notifee.requestPermission();
   });
 
-  spec.describe('displayNotification', function() {
-    spec.it('displays a notification', async function() {
+  spec.describe('displayNotification', function () {
+    spec.it('displays a notification', async function () {
       return new Promise(async resolve => {
         const unsubscribe = notifee.onForegroundEvent((event: Event) => {
           if (event.type === EventType.DELIVERED) {
