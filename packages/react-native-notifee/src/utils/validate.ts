@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/ban-types */
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-
 export function isNull(value: any): value is null {
   return value === null;
 }

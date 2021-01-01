@@ -7,6 +7,7 @@ import { Platform } from 'react-native';
 export * from './id';
 export * from './validate';
 
+/* eslint-disable-next-line @typescript-eslint/ban-types */
 export function isError(value: object): boolean {
   if (Object.prototype.toString.call(value) === '[object Error]') {
     return true;

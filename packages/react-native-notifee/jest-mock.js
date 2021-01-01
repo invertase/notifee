@@ -6,7 +6,6 @@ jest.doMock('react-native', () => {
     {
       Platform: {
         OS: 'android',
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         select: () => {
           /* do nothing */
         },

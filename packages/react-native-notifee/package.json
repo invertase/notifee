@@ -15,15 +15,15 @@
     "prepublishOnly": "cd ../.. && yarn run build:core"
   },
   "devDependencies": {
-    "@types/react-native": "^0.60.31",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "@types/react-native": "0.63.34",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
     "genversion": "^2.2.0",
-    "prettier": "^1.19.1",
-    "rimraf": "^2.7.1"
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2"
   },
   "peerDependencies": {
     "react-native": "*"
