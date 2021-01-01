@@ -28,6 +28,6 @@ module.exports = {
     'jest/no-identical-title': 0,
     'eslint-comments/no-unlimited-disable': 0,
     // off for validation tests
-    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };
