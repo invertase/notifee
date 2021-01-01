@@ -92,6 +92,7 @@ There are a number of different ways to display a large icon:
 
 - Remote image URL.
 - Local image (e.g. `require('./image.jpg')`).
+- Absolute file path (e.g. `file:///xxxx/xxxx/xxxx.jpg`).
 - Android resources (checks mipmap first, then drawable).
 
 The image will be automatically scaled to fit inside of the notification. It is
@@ -109,6 +110,9 @@ notifee.displayNotification({
 
     // Local image
     largeIcon: require('../assets/user.jpg'),
+
+    // Absolute file path
+    largeIcon: file:///xxxx/xxxx/xxxx.jpg,
 
     // Android resource (mipmap or drawable)
     largeIcon: 'large_icon',

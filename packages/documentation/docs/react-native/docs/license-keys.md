@@ -62,3 +62,79 @@ npx react-native run-ios
 # For Android
 npx react-native run-android
 ```
+
+## Supporting Multiple Environments
+
+On Android, if you have multiple license keys, one per product flavor and/or build type, you can structure your `notifee.config.json` like below:
+
+```json
+{
+  "android": {
+    "debug": {
+      "license": "debug.license"
+    },
+    "staging": {
+       "license": "staging.license"
+    },
+     "production": {
+       "license": "production.license"
+    },
+    "full": {
+      "debug": {
+        "license": "full.debug.license"
+      },
+      "license": "full.license"
+    },
+    "license": "android.license"
+  },
+  "ios": {...}
+}
+```
+
+If a license key isn't found for a product flavour or build type, it will fallback to the license key in the next level up. For example, a full debug build will fallback to `full.license` if `full.debug.license` wasn't specified. If there was no license specified for `full.license`, it will fallback to `android.license`.
+
+## Debugging
+
+### Android
+
+Notifee will output logs during the license verification process to help determine if your config is setup correctly and if your license is valid.
+
+A positive debug message is printed if the verification is successful, or an error message will be printed if unsuccessful.
+
+Example log output when license verification succeeds :
+```bash
+D/NOTIFEE: (License): Local verification started.
+D/NOTIFEE: (License): Local verification succeeded for your application with package name com.app.dev and license key ending in ATnPwEZoN2
+```
+
+Example log output when license verification fails:
+- `notifee.config.json` missing:
+```bash
+D/NOTIFEE: (License): Local verification started.
+E/NOTIFEE: (License): No license was found. Please ensure you have a created a 'notifee.config.json' file at the root of your project with a valid license key.
+```
+
+- License key is invalid:
+```bash
+D/NOTIFEE: (License): Local verification started.
+E/NOTIFEE: (License): Your license key ending in ATnPwEZoWe is invalid. Please ensure you have a valid license key.
+```
+- License key is for the wrong application:
+```bash
+D/NOTIFEE: (License): Local verification started.
+E/NOTIFEE: (License): Your license key ending in ATnPwEZoWe is not for this application, expected application to be com.notifee.app.dev but found com.notifee.app.staging
+```
+
+- License key is for the wrong platform:
+```bash
+D/NOTIFEE: (License): Local verification started.
+E/NOTIFEE: (License): Your license key ending in ATnPwEZoP1 is not for this platform (Android):
+```
+
+Helpful Debugging Commands:
+ - To turn on Android debug logs during release mode:
+
+`adb shell setprop log.tag.NOTIFEE DEBUG`
+- To quickly view Android logs in the terminal:
+
+`adb logcat '*:S' NOTIFEE:D`
