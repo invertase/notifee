@@ -557,6 +557,7 @@ RNFBVersion.m
 ios/Pods
 ios/Podfile.lock
 ios/NotifeeCore.framework
+ios/NotifeeCore_XCFramework
 ios/NotifeeCore.xcworkspace
 
 
