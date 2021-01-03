@@ -559,12 +559,17 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
-  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+  // If count is 0, set to -1 instead to avoid notifications in tray being cleared
+  NSInteger newCount = count == 0 ? -1 : count;
+
+  [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
   block(nil);
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
-  block(nil, [UIApplication sharedApplication].applicationIconBadgeNumber);
+   NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+
+  block(nil, badgeCount == -1 ? 0 : badgeCount);
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
@@ -578,8 +583,9 @@
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
   NSInteger newCount = currentCount - decrementBy;
 
-  if (newCount < 0) {
-    newCount = 0;
+  // If count is 0 or less, set to -1 instead to avoid notifications in tray being cleared
+  if (newCount < 1) {
+    newCount = -1;
   }
 
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
