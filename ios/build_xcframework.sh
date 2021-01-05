@@ -19,24 +19,24 @@ echo "Created ${FRAMEWORK_FOLDER_NAME}"
 echo "Archiving for iOS Simulator"
 xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}" \
-  -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+  -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty -k
 
 echo "Archiving for iOS"
 xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination="iOS" -archivePath "${IOS_DEVICE_ARCHIVE_PATH}" \
-  -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+  -sdk iphoneos SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty -k
 
 echo "Archiving for Mac Catalyst"
 xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
   -destination='platform=macOS,arch=x86_64,variant=Mac Catalyst' -archivePath "${CATALYST_ARCHIVE_PATH}" \
-  SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+  SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty -k
 
 echo "Packaging archives into ${FRAMEWORK_NAME}.xcframework bundle"
 xcodebuild -create-xcframework \
   -framework "${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
   -framework "${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
   -framework "${CATALYST_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
-  -output "${FRAMEWORK_PATH}"
+  -output "${FRAMEWORK_PATH}" | xcpretty
 
 rm -rf "${SIMULATOR_ARCHIVE_PATH}"
 rm -rf "${IOS_DEVICE_ARCHIVE_PATH}"
