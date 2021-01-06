@@ -6,6 +6,8 @@
 //  Copyright © 2020 Invertase. All rights reserved.
 //
 
+#include <TargetConditionals.h>
+
 #import "Private/NotifeeCoreUtil.h"
 
 #include <CoreGraphics/CGGeometry.h>
@@ -26,6 +28,7 @@
   return asNumber;
 }
 
+#if !TARGET_OS_TV
 + (NSMutableArray<NSDictionary *> *)notificationActionsToDictionaryArray:
     (NSArray<UNNotificationAction *> *)notificationActions {
   NSMutableArray<NSDictionary *> *notificationActionDicts = [[NSMutableArray alloc] init];
@@ -177,6 +180,7 @@
   NSLog(@"NotifeeCore: Unable to resolve url for attachment: %@", attachmentDict);
   return nil;
 }
+#endif
 
 /*
  * Downloads a media file, syncronously to the NSCachesDirectory
@@ -236,6 +240,7 @@
   }
 }
 
+#if !TARGET_OS_TV
 /**
  * Returns a NSDictionary representation of options related to the attached file
  *
@@ -269,6 +274,7 @@
 
   return options;
 }
+#endif
 
 /**
  * Returns an UNNotificationTrigger from NSDictionary representing a trigger
@@ -374,16 +380,33 @@
     (NSArray<NSString *> *)identifiers {
   NSMutableArray<NSNumber *> *intentIdentifiers = [[NSMutableArray alloc] init];
 
+#if !TARGET_OS_TV && TARGET_OS_IPHONE
   for (NSString *identifier in identifiers) {
-    if ([identifier isEqualToString:INStartAudioCallIntentIdentifier]) {
-      // IOSIntentIdentifier.START_AUDIO_CALL
-      [intentIdentifiers addObject:@0];
-    } else if ([identifier isEqualToString:INStartVideoCallIntentIdentifier]) {
-      // IOSIntentIdentifier.START_VIDEO_CALL
-      [intentIdentifiers addObject:@1];
-    } else if ([identifier isEqualToString:INSearchCallHistoryIntentIdentifier]) {
+
+    // Handle deprecation of separate audio and video symbols / new single "call" symbol
+    if (@available(ios 13, macOS 13, watchOS 6, *)) {
+      if ([identifier isEqualToString:INStartCallIntentIdentifier]) {
+        // IOSIntentIdentifier.START_CALL
+        [intentIdentifiers addObject:@0];
+      }
+    } else {
+// Guarding with '@available' does not remove deprecation warning unfortunately. Pragma it is
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+      if ([identifier isEqualToString:INStartAudioCallIntentIdentifier]) {
+        // IOSIntentIdentifier.START_AUDIO_CALL
+        [intentIdentifiers addObject:@0];
+      } else if ([identifier isEqualToString:INStartVideoCallIntentIdentifier]) {
+        // IOSIntentIdentifier.START_VIDEO_CALL
+        [intentIdentifiers addObject:@1];
+      }
+#pragma clang diagnostic pop
+    }
+    
+    if ([identifier isEqualToString:INSearchCallHistoryIntentIdentifier]) {
       // IOSIntentIdentifier.SEARCH_CALL_HISTORY
       [intentIdentifiers addObject:@2];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToString:INSetAudioSourceInCarIntentIdentifier]) {
       // IOSIntentIdentifier.SET_AUDIO_SOURCE_IN_CAR
       [intentIdentifiers addObject:@3];
@@ -402,6 +425,7 @@
     } else if ([identifier isEqualToString:INSaveProfileInCarIntentIdentifier]) {
       // IOSIntentIdentifier.SAVE_PROFILE_IN_CAR
       [intentIdentifiers addObject:@8];
+#endif
     } else if ([identifier isEqualToString:INStartWorkoutIntentIdentifier]) {
       // IOSIntentIdentifier.START_WORKOUT
       [intentIdentifiers addObject:@9];
@@ -417,18 +441,22 @@
     } else if ([identifier isEqualToString:INResumeWorkoutIntentIdentifier]) {
       // IOSIntentIdentifier.RESUME_WORKOUT
       [intentIdentifiers addObject:@13];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToString:INSetRadioStationIntentIdentifier]) {
       // IOSIntentIdentifier.SET_RADIO_STATION
       [intentIdentifiers addObject:@14];
+#endif
     } else if ([identifier isEqualToString:INSendMessageIntentIdentifier]) {
       // IOSIntentIdentifier.SEND_MESSAGE
       [intentIdentifiers addObject:@15];
     } else if ([identifier isEqualToString:INSearchForMessagesIntentIdentifier]) {
       // IOSIntentIdentifier.SEARCH_FOR_MESSAGES
       [intentIdentifiers addObject:@16];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToString:INSetMessageAttributeIntentIdentifier]) {
       // IOSIntentIdentifier.SET_MESSAGE_ATTRIBUTE
       [intentIdentifiers addObject:@17];
+#endif
     } else if ([identifier isEqualToString:INSendPaymentIntentIdentifier]) {
       // IOSIntentIdentifier.SEND_PAYMENT
       [intentIdentifiers addObject:@18];
@@ -452,6 +480,7 @@
       [intentIdentifiers addObject:@24];
     }
   }
+#endif
 
   return intentIdentifiers;
 }
@@ -460,16 +489,33 @@
     (NSArray<NSNumber *> *)identifiers {
   NSMutableArray<NSString *> *intentIdentifiers = [[NSMutableArray alloc] init];
 
+#if !TARGET_OS_TV && TARGET_OS_IPHONE
   for (NSNumber *identifier in identifiers) {
-    if ([identifier isEqualToNumber:@0]) {
-      // IOSIntentIdentifier.START_AUDIO_CALL
-      [intentIdentifiers addObject:INStartAudioCallIntentIdentifier];
-    } else if ([identifier isEqualToNumber:@1]) {
-      // IOSIntentIdentifier.START_VIDEO_CALL
-      [intentIdentifiers addObject:INStartVideoCallIntentIdentifier];
-    } else if ([identifier isEqualToNumber:@2]) {
+
+    // Handle deprecation of separate audio and video symbols / new single "call" symbol
+    if (@available(ios 13, macOS 13, watchOS 6, *)) {
+      if ([identifier isEqualToNumber:@0]) {
+        // IOSIntentIdentifier.START_CALL
+        [intentIdentifiers addObject:INStartCallIntentIdentifier];
+      }
+    } else {
+// Guarding with '@available' does not remove deprecation warning unfortunately. Pragma it is
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+      if ([identifier isEqualToNumber:@0]) {
+        // IOSIntentIdentifier.START_AUDIO_CALL
+        [intentIdentifiers addObject:INStartAudioCallIntentIdentifier];
+      } else if ([identifier isEqualToNumber:@1]) {
+        // IOSIntentIdentifier.START_VIDEO_CALL
+        [intentIdentifiers addObject:INStartVideoCallIntentIdentifier];
+      }
+#pragma clang diagnostic pop
+    }
+    
+    if ([identifier isEqualToNumber:@2]) {
       // IOSIntentIdentifier.SEARCH_CALL_HISTORY
       [intentIdentifiers addObject:INSearchCallHistoryIntentIdentifier];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToNumber:@3]) {
       // IOSIntentIdentifier.SET_AUDIO_SOURCE_IN_CAR
       [intentIdentifiers addObject:INSetAudioSourceInCarIntentIdentifier];
@@ -488,6 +534,7 @@
     } else if ([identifier isEqualToNumber:@8]) {
       // IOSIntentIdentifier.SAVE_PROFILE_IN_CAR
       [intentIdentifiers addObject:INSaveProfileInCarIntentIdentifier];
+#endif
     } else if ([identifier isEqualToNumber:@9]) {
       // IOSIntentIdentifier.START_WORKOUT
       [intentIdentifiers addObject:INStartWorkoutIntentIdentifier];
@@ -503,18 +550,22 @@
     } else if ([identifier isEqualToNumber:@13]) {
       // IOSIntentIdentifier.RESUME_WORKOUT
       [intentIdentifiers addObject:INResumeWorkoutIntentIdentifier];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToNumber:@14]) {
       // IOSIntentIdentifier.SET_RADIO_STATION
       [intentIdentifiers addObject:INSetRadioStationIntentIdentifier];
+#endif
     } else if ([identifier isEqualToNumber:@15]) {
       // IOSIntentIdentifier.SEND_MESSAGE
       [intentIdentifiers addObject:INSendMessageIntentIdentifier];
     } else if ([identifier isEqualToNumber:@16]) {
       // IOSIntentIdentifier.SEARCH_FOR_MESSAGES
       [intentIdentifiers addObject:INSearchForMessagesIntentIdentifier];
+#if !TARGET_OS_WATCH
     } else if ([identifier isEqualToNumber:@17]) {
       // IOSIntentIdentifier.SET_MESSAGE_ATTRIBUTE
       [intentIdentifiers addObject:INSetMessageAttributeIntentIdentifier];
+#endif
     } else if ([identifier isEqualToNumber:@18]) {
       // IOSIntentIdentifier.SEND_PAYMENT
       [intentIdentifiers addObject:INSendPaymentIntentIdentifier];
@@ -538,6 +589,7 @@
       [intentIdentifiers addObject:INGetRideStatusIntentIdentifier];
     }
   }
+#endif
 
   return intentIdentifiers;
 }

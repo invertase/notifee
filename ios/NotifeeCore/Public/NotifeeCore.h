@@ -45,29 +45,31 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 
 @protocol NotifeeCoreDelegate <NSObject>
 @optional
-- (void) didReceiveNotifeeCoreEvent:(NSDictionary *_Nonnull)event;
+- (void)didReceiveNotifeeCoreEvent:(NSDictionary *_Nonnull)event;
 @end
 
 @interface NotifeeCore : NSObject
 
-+ (void)setCoreDelegate:(id <NotifeeCoreDelegate>)coreDelegate;
++ (void)setCoreDelegate:(id<NotifeeCoreDelegate>)coreDelegate;
 
-+ (void)cancelNotification:(NSString *)notificationId withNotificationType: (NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block;
++ (void)cancelNotification:(NSString *)notificationId withNotificationType:(NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)cancelAllNotifications:(NSInteger)notificationType
                      withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void)createTriggerNotification:(NSDictionary *)notification withTrigger: (NSDictionary *)trigger withBlock:(notifeeMethodVoidBlock)block;
++ (void)createTriggerNotification:(NSDictionary *)notification withTrigger:(NSDictionary *)trigger withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)getTriggerNotificationIds:(notifeeMethodNSArrayBlock)block;
 
 + (void)requestPermission:(NSDictionary *)permissions withBlock:(notifeeMethodNSDictionaryBlock)block;
 
+#if !TARGET_OS_TV
 + (void)getNotificationCategories:(notifeeMethodNSArrayBlock)block;
 
 + (void)setNotificationCategories:(NSArray<NSDictionary *> *)categories withBlock:(notifeeMethodVoidBlock)block;
+#endif
 
 + (void)getNotificationSettings:(notifeeMethodNSDictionaryBlock)block;
 

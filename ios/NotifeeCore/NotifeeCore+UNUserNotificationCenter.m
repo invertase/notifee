@@ -70,8 +70,10 @@ struct {
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:
              (void (^)(UNNotificationPresentationOptions options))completionHandler {
-  NSDictionary *notifeeNotification =
-      notification.request.content.userInfo[kNotifeeUserInfoNotification];
+  NSDictionary *notifeeNotification = nil;
+#if !TARGET_OS_TV
+  notifeeNotification = notification.request.content.userInfo[kNotifeeUserInfoNotification];
+#endif
 
   // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
@@ -92,10 +94,22 @@ struct {
     }
 
     if (alert) {
-      presentationOptions |= UNNotificationPresentationOptionAlert;
+      if (@available(ios 14, macOS 11, macCatalyst 14, tvOS 14, watchOS 7, *)) {
+        presentationOptions |= UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner;
+      } else {
+// Guarding with '@available' does not remove deprecation warning unfortunately. Pragma it is
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        presentationOptions |= UNNotificationPresentationOptionAlert;
+#pragma clang diagnostic pop
+      }
     }
 
-    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
+    NSDictionary *notifeeTrigger = nil;
+#if !TARGET_OS_TV
+    notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
+#endif
+
     if (notifeeTrigger != nil) {
       // post DELIVERED event
       [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
@@ -118,6 +132,7 @@ struct {
 // The method will be called when the user responded to the notification by opening the application,
 // dismissing the notification or choosing a UNNotificationAction. The delegate must be set before
 // the application returns from application:didFinishLaunchingWithOptions:.
+#if !TARGET_OS_TV
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
@@ -188,12 +203,19 @@ struct {
                         withCompletionHandler:completionHandler];
   }
 }
+#endif
 
+#if !TARGET_OS_TV && !TARGET_OS_WATCH
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     openSettingsForNotification:(nullable UNNotification *)notification {
   if (_originalDelegate != nil && originalUNCDelegateRespondsTo.openSettingsForNotification) {
-    [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+      if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, *)) {
+          [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+      } else {
+          // Fallback on earlier versions
+      }
   }
 }
+#endif
 
 @end

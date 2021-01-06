@@ -8,7 +8,13 @@
 
 #import "Public/NotifeeCore.h"
 
-#import <UIKit/UIKit.h>
+#include <TargetConditionals.h>
+#if TARGET_OS_IPHONE
+    @import UIKit;
+#else
+    @import AppKit;
+#endif
+
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 #import "Private/NotifeeCoreDelegateHolder.h"
 #import "Private/NotifeeCoreUtil.h"
@@ -31,8 +37,11 @@
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
    // cancel displayed notification
   if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
-      notificationType == NotifeeCoreNotificationTypeAll)
+      notificationType == NotifeeCoreNotificationTypeAll) {
+#if !TARGET_OS_TV
    [center removeDeliveredNotificationsWithIdentifiers:@[ notificationId ]];
+#endif
+  }
 
   // cancel trigger notification
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
@@ -52,8 +61,11 @@
 
   // cancel displayed notifications
   if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
-      notificationType == NotifeeCoreNotificationTypeAll)
+      notificationType == NotifeeCoreNotificationTypeAll) {
+#if !TARGET_OS_TV
     [center removeAllDeliveredNotifications];
+#endif
+  }
 
   // cancel trigger notifications
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
@@ -159,6 +171,10 @@
   NSDictionary *iosDict = notification[@"ios"];
   UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
 
+  // badgeCount - nil is an acceptable value so no need to check key existence
+  content.badge = iosDict[@"badgeCount"];
+
+#if !TARGET_OS_TV
   // title
   if (notification[@"title"] != nil) {
     content.title = notification[@"title"];
@@ -185,29 +201,30 @@
 
   content.userInfo = userInfo;
 
-  // badgeCount - nil is an acceptable value so no need to check key existence
-  content.badge = iosDict[@"badgeCount"];
-
   // categoryId
   if (iosDict[@"categoryId"] != nil) {
     content.categoryIdentifier = iosDict[@"categoryId"];
   }
 
+#if TARGET_OS_IPHONE
   // launchImageName
   if (iosDict[@"launchImageName"] != nil) {
     content.launchImageName = iosDict[@"launchImageName"];
   }
+#endif
 
   // critical, criticalVolume, sound
   if (iosDict[@"critical"] != nil) {
     UNNotificationSound *notificationSound;
     BOOL criticalSound = [iosDict[@"critical"] boolValue];
     NSNumber *criticalSoundVolume = iosDict[@"criticalVolume"];
-    NSString *soundName = iosDict[@"sound"] != nil ? iosDict[@"sound"] : @"default";
 
+#if !TARGET_OS_WATCH
+    NSString *soundName = iosDict[@"sound"] != nil ? iosDict[@"sound"] : @"default";
     if ([soundName isEqualToString:@"default"]) {
+#endif
       if (criticalSound) {
-        if (@available(iOS 12.0, *)) {
+        if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, watchOS 5, *)) {
           if (criticalSoundVolume != nil) {
             notificationSound = [UNNotificationSound
                 defaultCriticalSoundWithAudioVolume:[criticalSoundVolume floatValue]];
@@ -220,9 +237,10 @@
       } else {
         notificationSound = [UNNotificationSound defaultSound];
       }
+#if !TARGET_OS_WATCH
     } else {
       if (criticalSound) {
-        if (@available(iOS 12.0, *)) {
+        if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, watchOS 5, *)) {
           if (criticalSoundVolume != nil) {
             notificationSound =
                 [UNNotificationSound criticalSoundNamed:soundName
@@ -237,16 +255,21 @@
         notificationSound = [UNNotificationSound soundNamed:soundName];
       }
     }
+#endif
     content.sound = notificationSound;
   } else if (iosDict[@"sound"] != nil) {
     UNNotificationSound *notificationSound;
-    NSString *soundName = iosDict[@"sound"];
 
+#if !TARGET_OS_WATCH
+    NSString *soundName = iosDict[@"sound"];
     if ([soundName isEqualToString:@"default"]) {
+#endif
       notificationSound = [UNNotificationSound defaultSound];
+#if !TARGET_OS_WATCH
     } else {
       notificationSound = [UNNotificationSound soundNamed:soundName];
     }
+#endif
 
     content.sound = notificationSound;
 
@@ -257,7 +280,8 @@
     content.threadIdentifier = iosDict[@"threadId"];
   }
 
-  if (@available(iOS 12.0, *)) {
+#if !TARGET_OS_WATCH
+  if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, *)) {
     // summaryArgument
     if (iosDict[@"summaryArgument"] != nil) {
       content.summaryArgument = iosDict[@"summaryArgument"];
@@ -268,8 +292,9 @@
       content.summaryArgumentCount = [iosDict[@"summaryArgumentCount"] unsignedIntValue];
     }
   }
+#endif
 
-  if (@available(iOS 13.0, *)) {
+  if (@available(iOS 13.0, macOS 10.15, macCatalyst 13, tvOS 13, watchOS 6, *)) {
     // targetContentId
     if (iosDict[@"targetContentId"] != nil) {
       content.targetContentIdentifier = iosDict[@"targetContentId"];
@@ -281,10 +306,12 @@
     content.attachments =
         [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
   }
+#endif
 
   return content;
 }
 
+#if !TARGET_OS_TV
 + (void)getNotificationCategories:(notifeeMethodNSArrayBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   [center getNotificationCategoriesWithCompletionHandler:^(
@@ -295,10 +322,13 @@
       NSMutableDictionary *categoryDictionary = [NSMutableDictionary dictionary];
 
       categoryDictionary[@"id"] = notificationCategory.identifier;
+#if TARGET_OS_IPHONE
       categoryDictionary[@"allowInCarPlay"] =
           @(((notificationCategory.options & UNNotificationCategoryOptionAllowInCarPlay) != 0));
+#endif
 
-      if (@available(iOS 11.0, *)) {
+#if !TARGET_OS_WATCH
+      if (@available(iOS 11.0, macOS 10.14, macCatalyst 13, *)) {
         categoryDictionary[@"hiddenPreviewsShowTitle"] =
             @(((notificationCategory.options &
                 UNNotificationCategoryOptionHiddenPreviewsShowTitle) != 0));
@@ -310,22 +340,26 @@
               notificationCategory.hiddenPreviewsBodyPlaceholder;
         }
       } else {
+#endif
         categoryDictionary[@"hiddenPreviewsShowTitle"] = @(NO);
         categoryDictionary[@"hiddenPreviewsShowSubtitle"] = @(NO);
+#if !TARGET_OS_WATCH
       }
 
-      if (@available(iOS 12.0, *)) {
+      if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, *)) {
         if (notificationCategory.categorySummaryFormat != nil) {
           categoryDictionary[@"summaryFormat"] = notificationCategory.categorySummaryFormat;
         }
       }
+#endif
 
-      if (@available(iOS 13.0, *)) {
+      categoryDictionary[@"allowAnnouncement"] = @(NO);
+#if TARGET_OS_IPHONE
+      if (@available(iOS 13.0, macCatalyst 13, watchOS 6, *)) {
         categoryDictionary[@"allowAnnouncement"] = @(
             ((notificationCategory.options & UNNotificationCategoryOptionAllowAnnouncement) != 0));
-      } else {
-        categoryDictionary[@"allowAnnouncement"] = @(NO);
       }
+#endif
 
       categoryDictionary[@"actions"] =
           [NotifeeCoreUtil notificationActionsToDictionaryArray:notificationCategory.actions];
@@ -353,8 +387,6 @@
     UNNotificationCategory *category;
 
     NSString *id = categoryDictionary[@"id"];
-    NSString *summaryFormat = categoryDictionary[@"summaryFormat"];
-    NSString *bodyPlaceHolder = categoryDictionary[@"hiddenPreviewsBodyPlaceholder"];
 
     NSArray<UNNotificationAction *> *actions =
         [NotifeeCoreUtil notificationActionsFromDictionaryArray:categoryDictionary[@"actions"]];
@@ -363,11 +395,14 @@
 
     UNNotificationCategoryOptions options = UNNotificationCategoryOptionCustomDismissAction;
 
+#if TARGET_OS_IPHONE
     if ([categoryDictionary[@"allowInCarPlay"] isEqual:@(YES)]) {
       options |= UNNotificationCategoryOptionAllowInCarPlay;
     }
+#endif
 
-    if (@available(iOS 11.0, *)) {
+#if !TARGET_OS_WATCH
+    if (@available(iOS 11.0, macOS 10.14, macCatalyst 13, *)) {
       if ([categoryDictionary[@"hiddenPreviewsShowTitle"] isEqual:@(YES)]) {
         options |= UNNotificationCategoryOptionHiddenPreviewsShowTitle;
       }
@@ -376,14 +411,20 @@
         options |= UNNotificationCategoryOptionHiddenPreviewsShowSubtitle;
       }
     }
+#endif
 
-    if (@available(iOS 13.0, *)) {
+#if TARGET_OS_IPHONE
+    if (@available(iOS 13.0, macCatalyst 13, watchOS 6, *)) {
       if ([categoryDictionary[@"allowAnnouncement"] isEqual:@(YES)]) {
         options |= UNNotificationCategoryOptionAllowAnnouncement;
       }
     }
+#endif
 
-    if (@available(iOS 12.0, *)) {
+#if !TARGET_OS_WATCH
+    NSString *summaryFormat = categoryDictionary[@"summaryFormat"];
+    NSString *bodyPlaceHolder = categoryDictionary[@"hiddenPreviewsBodyPlaceholder"];
+    if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, *)) {
       category = [UNNotificationCategory categoryWithIdentifier:id
                                                         actions:actions
                                               intentIdentifiers:intentIdentifiers
@@ -397,11 +438,14 @@
                                   hiddenPreviewsBodyPlaceholder:bodyPlaceHolder
                                                         options:options];
     } else {
+#endif
       category = [UNNotificationCategory categoryWithIdentifier:id
                                                         actions:actions
                                               intentIdentifiers:intentIdentifiers
                                                         options:options];
+#if !TARGET_OS_WATCH
     }
+#endif
 
     [UNNotificationCategories addObject:category];
   }
@@ -410,6 +454,7 @@
   [center setNotificationCategories:UNNotificationCategories];
   block(nil);
 }
+#endif
 
 /**
  * Request UNAuthorizationOptions for user notifications.
@@ -443,23 +488,25 @@
   }
 
   if ([permissions[@"provisional"] isEqual:@(YES)]) {
-    if (@available(iOS 12.0, *)) {
+    if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, tvOS 12, watchOS 5, *)) {
       options |= UNAuthorizationOptionProvisional;
     }
   }
 
+#if !TARGET_OS_TV && TARGET_OS_IPHONE
   if ([permissions[@"announcement"] isEqual:@(YES)]) {
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 13.0, macCatalyst 13, watchOS 6, *)) {
       options |= UNAuthorizationOptionAnnouncement;
     }
   }
+#endif
 
   if ([permissions[@"carPlay"] isEqual:@(YES)]) {
     options |= UNAuthorizationOptionCarPlay;
   }
 
   if ([permissions[@"criticalAlert"] isEqual:@(YES)]) {
-    if (@available(iOS 12.0, *)) {
+    if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, tvOS 12, watchOS 5, *)) {
       options |= UNAuthorizationOptionCriticalAlert;
     }
   }
@@ -498,14 +545,15 @@
           authorizedStatus = @1;
         }
 
-        if (@available(iOS 12.0, *)) {
+        if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, tvOS 12, watchOS 5, *)) {
           if (settings.authorizationStatus == UNAuthorizationStatusProvisional) {
             authorizedStatus = @2;
           }
         }
 
+#if !TARGET_OS_TV && !TARGET_OS_WATCH
         NSNumber *showPreviews = @-1;
-        if (@available(iOS 11.0, *)) {
+        if (@available(iOS 11.0, macOS 10.14, macCatalyst 13, *)) {
           if (settings.showPreviewsSetting == UNShowPreviewsSettingNever) {
             showPreviews = @0;
           } else if (settings.showPreviewsSetting == UNShowPreviewsSettingAlways) {
@@ -515,21 +563,22 @@
           }
         }
 
-        if (@available(iOS 13.0, *)) {
+        settingsDictionary[@"announcement"] = @-1;
+#if TARGET_OS_IPHONE
+        if (@available(iOS 13.0, macCatalyst 13, watchOS 6, *)) {
           settingsDictionary[@"announcement"] =
               [NotifeeCoreUtil numberForUNNotificationSetting:settings.announcementSetting];
-        } else {
-          settingsDictionary[@"announcement"] = @-1;
         }
+#endif
 
-        if (@available(iOS 12.0, *)) {
+        if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, watchOS 5, *)) {
           settingsDictionary[@"criticalAlert"] =
               [NotifeeCoreUtil numberForUNNotificationSetting:settings.criticalAlertSetting];
         } else {
           settingsDictionary[@"criticalAlert"] = @-1;
         }
 
-        if (@available(iOS 12.0, *)) {
+        if (@available(iOS 12.0, macOS 10.14, macCatalyst 13, tvOS 12, watchOS 5, *)) {
           settingsDictionary[@"inAppNotificationSettings"] =
               settings.providesAppNotificationSettings ? @1 : @0;
         } else {
@@ -544,12 +593,15 @@
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.badgeSetting];
         settingsDictionary[@"sound"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.soundSetting];
+#if TARGET_OS_IPHONE
         settingsDictionary[@"carPlay"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.carPlaySetting];
+#endif
         settingsDictionary[@"lockScreen"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.lockScreenSetting];
         settingsDictionary[@"notificationCenter"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.notificationCenterSetting];
+#endif
         block(nil, settingsDictionary);
       }];
 }
@@ -559,22 +611,46 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
+#if !TARGET_OS_WATCH && TARGET_OS_IPHONE
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+#endif
+#if !TARGET_OS_IPHONE
+  NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+  [tile setBadgeLabel:[NSString stringWithFormat:@"%d", (int)count]];
+  block(nil);
+#endif
   block(nil);
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
+#if !TARGET_OS_WATCH && TARGET_OS_IPHONE
   block(nil, [UIApplication sharedApplication].applicationIconBadgeNumber);
+#endif
+#if !TARGET_OS_IPHONE
+  NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+  NSString *currentCountString = [tile badgeLabel];
+  NSInteger currentCount = [currentCountString integerValue]; // value is zero if not a valid integer: serves as reasonable init
+  block(nil, currentCount);
+#endif
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
+#if !TARGET_OS_WATCH && TARGET_OS_IPHONE
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
   NSInteger newCount = currentCount + incrementBy;
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
+#endif
+#if !TARGET_OS_IPHONE
+  NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+  NSString *currentCountString = [tile badgeLabel];
+  NSInteger currentCount = [currentCountString integerValue]; // value is zero if not a valid integer: serves as reasonable init
+  [tile setBadgeLabel:[NSString stringWithFormat:@"%d", (int)(currentCount + 1)]];
+#endif
   block(nil);
 }
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
+#if !TARGET_OS_WATCH && TARGET_OS_IPHONE
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
   NSInteger newCount = currentCount - decrementBy;
 
@@ -583,6 +659,18 @@
   }
 
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
+#endif
+#if !TARGET_OS_IPHONE
+  NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+  NSString *currentCountString = [tile badgeLabel];
+  NSInteger currentCount = [currentCountString integerValue]; // value is zero if not a valid integer: serves as reasonable init
+  NSInteger newCount = currentCount - decrementBy;
+  if (newCount < 0) {
+    newCount = 0;
+  }
+
+  [tile setBadgeLabel:[NSString stringWithFormat:@"%d", (int)newCount]];
+#endif
   block(nil);
 }
 

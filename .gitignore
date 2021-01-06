@@ -558,7 +558,7 @@ ios/Pods
 ios/Podfile.lock
 ios/NotifeeCore.framework
 ios/NotifeeCore.xcworkspace
-
+ios/build
 
 ### Flutter ###
 # Flutter/Dart/Pub related

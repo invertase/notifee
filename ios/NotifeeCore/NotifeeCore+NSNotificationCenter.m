@@ -5,7 +5,13 @@
 //  Copyright © 2020 Invertase. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#include <TargetConditionals.h>
+#if TARGET_OS_IPHONE
+    @import UIKit;
+#else
+    @import AppKit;
+#endif
+
 #import "Private/NotifeeCore+NSNotificationCenter.h"
 #import "Private/NotifeeCore+UNUserNotificationCenter.h"
 
@@ -27,10 +33,26 @@
     NotifeeCoreNSNotificationCenter *strongSelf = weakSelf;
     // Application
     // ObjC -> Initialize other delegates & observers
+#if TARGET_OS_IPHONE
+#if !TARGET_OS_WATCH
     [[NSNotificationCenter defaultCenter]
         addObserver:strongSelf
            selector:@selector(application_onDidFinishLaunchingNotification:)
                name:UIApplicationDidFinishLaunchingNotification
+             object:nil];
+#endif
+    [[NSNotificationCenter defaultCenter]
+        addObserver:strongSelf
+           selector:@selector(messaging_didReceiveRemoteNotification:)
+               name:@"RNFBMessagingDidReceiveRemoteNotification"
+             object:nil];
+  });
+#endif
+#if !TARGET_OS_IPHONE
+    [[NSNotificationCenter defaultCenter]
+        addObserver:strongSelf
+           selector:@selector(application_onDidFinishLaunchingNotification:)
+               name:NSApplicationDidFinishLaunchingNotification
              object:nil];
     [[NSNotificationCenter defaultCenter]
         addObserver:strongSelf
@@ -38,6 +60,7 @@
                name:@"RNFBMessagingDidReceiveRemoteNotification"
              object:nil];
   });
+#endif
 }
 
 // start observing immediately on class load - specifically for
