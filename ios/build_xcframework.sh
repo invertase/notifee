@@ -6,7 +6,7 @@ FRAMEWORK_FOLDER_NAME="Notifee_XCFramework"
 FRAMEWORK_NAME="NotifeeCore"
 FRAMEWORK_PATH="${WORKING_DIR}/${FRAMEWORK_FOLDER_NAME}/${FRAMEWORK_NAME}.xcframework"
 BUILD_SCHEME="NotifeeCore"
-SIMULATOR_ARCHIVE_PATH="${WORKING_DIR}/${FRAMEWORK_FOLDER_NAME}/simulator.xcarchive"
+IOS_SIMULATOR_ARCHIVE_PATH="${WORKING_DIR}/${FRAMEWORK_FOLDER_NAME}/iOS_simulator.xcarchive"
 IOS_DEVICE_ARCHIVE_PATH="${WORKING_DIR}/${FRAMEWORK_FOLDER_NAME}/iOS.xcarchive"
 CATALYST_ARCHIVE_PATH="${WORKING_DIR}/${FRAMEWORK_FOLDER_NAME}/catalyst.xcarchive"
 OUTPUT_FOLDER=${WORKING_DIR}/../packages/react-native/ios/
@@ -18,7 +18,7 @@ echo "Created ${FRAMEWORK_FOLDER_NAME}"
 
 echo "Archiving for iOS Simulator"
 xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_SCHEME} -configuration Release \
-  -destination="iOS Simulator" -archivePath "${SIMULATOR_ARCHIVE_PATH}" \
+  -destination="iOS Simulator" -archivePath "${IOS_SIMULATOR_ARCHIVE_PATH}" \
   -sdk iphonesimulator SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty -k
 
 echo "Archiving for iOS"
@@ -35,12 +35,12 @@ xcodebuild archive -workspace "./${FRAMEWORK_NAME}.xcworkspace" -scheme ${BUILD_
 
 echo "Packaging archives into ${FRAMEWORK_NAME}.xcframework bundle"
 xcodebuild -create-xcframework \
-  -framework "${SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
+  -framework "${IOS_SIMULATOR_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
   -framework "${IOS_DEVICE_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
   -framework "${CATALYST_ARCHIVE_PATH}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework" \
   -output "${FRAMEWORK_PATH}" | xcpretty
 
-rm -rf "${SIMULATOR_ARCHIVE_PATH}"
+rm -rf "${IOS_SIMULATOR_ARCHIVE_PATH}"
 rm -rf "${IOS_DEVICE_ARCHIVE_PATH}"
 rm -rf "${CATALYST_ARCHIVE_PATH}"
 
