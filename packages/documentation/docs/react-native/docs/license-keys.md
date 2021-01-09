@@ -91,7 +91,7 @@ On Android, if you have multiple license keys, one per product flavor and/or bui
 }
 ```
 
-If a license key isn't found for a product flavour or build type, it will fallback to the license key in the next level up. For example, a full debug build will fallback to `full.license` if `full.debug.license` wasn't specified. If there was no license specified for `full.license`, it will fallback to `android.license`.
+If a license key isn't found for a product flavor or build type, it will fallback to the license key in the next level up. For example, a full debug build will fallback to `full.license` if `full.debug.license` wasn't specified. If there was no license specified for `full.license`, it will fallback to `android.license`.
 
 ## Debugging
 
@@ -101,7 +101,7 @@ Notifee will output logs during the license verification process to help determi
 
 A positive debug message is printed if the verification is successful, or an error message will be printed if unsuccessful.
 
-Example log output when license verification succeeds :
+Example log output when license verification succeeds:
 ```bash
 D/NOTIFEE: (License): Local verification started.
 D/NOTIFEE: (License): Local verification succeeded for your application with package name com.app.dev and license key ending in ATnPwEZoN2

@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 0.16.0
+
+- **[Android]**: Fixed an issue with license validation on Android 6 (Fixes [#87](https://github.com/notifee/react-native-notifee/issues/87))
+- **[iOS]**: Added support for Apple Silicon (arm64) and Mac Catalyst builds (Fixes [#162](https://github.com/notifee/react-native-notifee/issues/162), [#215](https://github.com/notifee/react-native-notifee/issues/215))
+
 ## 0.15.2
 
 - **[Android]**: Added additional logs to help with debugging license validation issues.
