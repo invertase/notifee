@@ -567,14 +567,20 @@
 }
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
-   NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+  NSInteger badgeCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
 
   block(nil, badgeCount == -1 ? 0 : badgeCount);
 }
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
+  // If count is -1, set currentCount to 0 before incrementing
+  if (currentCount == -1) {
+    currentCount = 0;
+  }
+
   NSInteger newCount = currentCount + incrementBy;
+
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
   block(nil);
 }
