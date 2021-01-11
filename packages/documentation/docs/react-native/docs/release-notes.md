@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.0.0
+
+- **NOTE**: Version bump.
+
 ## 0.16.0
 
 - **[Android]**: Fixed an issue with license validation on Android 6 (Fixes [#87](https://github.com/notifee/react-native-notifee/issues/87))
