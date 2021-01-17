@@ -1,21 +1,18 @@
 package app.notifee.core.model;
 
+import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
+
 import android.app.PendingIntent;
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
 import androidx.core.graphics.drawable.IconCompat;
-
+import app.notifee.core.R;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import app.notifee.core.R;
-
-import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
 
 @Keep
 public class NotificationAndroidActionModel {
@@ -61,11 +58,12 @@ public class NotificationAndroidActionModel {
   /**
    * Gets the Action.Builder instance for this Media Style action.
    *
-   * Sets default values for title and icon if none are specified
+   * <p>Sets default values for title and icon if none are specified
    *
    * @return NotificationCompat.Action.Builder
    */
-  public @Nullable NotificationCompat.Action.Builder getMediaStyleActionBuilder(IconCompat iconCompat, PendingIntent pendingIntent) {
+  public @Nullable NotificationCompat.Action.Builder getMediaStyleActionBuilder(
+      IconCompat iconCompat, PendingIntent pendingIntent) {
     NotificationCompat.Action.Builder actionBuilder;
     String defaultMediaTitle = "";
     int defaultMediaIcon = R.drawable.play;

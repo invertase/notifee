@@ -2,7 +2,6 @@ package app.notifee.core.model;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,19 +9,16 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.media.app.NotificationCompat.MediaStyle;
-
+import app.notifee.core.Logger;
+import app.notifee.core.utility.ResourceUtils;
+import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import app.notifee.core.Logger;
-import app.notifee.core.utility.ResourceUtils;
-import app.notifee.core.utility.TextUtils;
 
 @Keep
 public class NotificationAndroidStyleModel {
