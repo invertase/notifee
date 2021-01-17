@@ -1,15 +1,21 @@
 package app.notifee.core.model;
 
-import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
-
+import android.app.PendingIntent;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
+import androidx.core.graphics.drawable.IconCompat;
+
 import java.util.ArrayList;
 import java.util.Objects;
+
+import app.notifee.core.R;
+
+import static app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY;
 
 @Keep
 public class NotificationAndroidActionModel {
@@ -50,6 +56,62 @@ public class NotificationAndroidActionModel {
   public @NonNull NotificationAndroidPressActionModel getPressAction() {
     Bundle pressActionBundle = mNotificationAndroidActionBundle.getBundle("pressAction");
     return NotificationAndroidPressActionModel.fromBundle(pressActionBundle);
+  }
+
+  /**
+   * Gets the Action.Builder instance for this Media Style action.
+   *
+   * Sets default values for title and icon if none are specified
+   *
+   * @return NotificationCompat.Action.Builder
+   */
+  public @Nullable NotificationCompat.Action.Builder getMediaStyleActionBuilder(IconCompat iconCompat, PendingIntent pendingIntent) {
+    NotificationCompat.Action.Builder actionBuilder;
+    String defaultMediaTitle = "";
+    int defaultMediaIcon = R.drawable.play;
+
+    String title = getTitle();
+
+    if (iconCompat == null || title == null) {
+      NotificationAndroidPressActionModel pressActionBundle = getPressAction();
+
+      if (pressActionBundle != null) {
+        switch (pressActionBundle.getId()) {
+          case "play":
+            defaultMediaTitle = "play";
+            defaultMediaIcon = R.drawable.play;
+            break;
+          case "pause":
+            defaultMediaTitle = "pause";
+            defaultMediaIcon = R.drawable.pause;
+            break;
+          case "stop":
+            defaultMediaTitle = "stop";
+            defaultMediaIcon = R.drawable.stop;
+            break;
+          case "next":
+            defaultMediaTitle = "next";
+            defaultMediaIcon = R.drawable.next;
+            break;
+          case "previous":
+            defaultMediaTitle = "previous";
+            defaultMediaIcon = R.drawable.previous;
+            break;
+        }
+      }
+    }
+
+    if (title == null) {
+      title = defaultMediaTitle;
+    }
+
+    if (iconCompat == null) {
+      actionBuilder = new NotificationCompat.Action.Builder(defaultMediaIcon, title, pendingIntent);
+    } else {
+      actionBuilder = new NotificationCompat.Action.Builder(iconCompat, title, pendingIntent);
+    }
+
+    return actionBuilder;
   }
 
   /**

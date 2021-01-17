@@ -1,13 +1,12 @@
 package app.notifee.core;
 
-import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
@@ -23,6 +22,22 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.event.NotificationEvent;
@@ -35,19 +50,8 @@ import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+
+import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
@@ -96,6 +100,10 @@ class NotificationManager {
 
           if (notificationModel.getBody() != null) {
             builder.setContentText(TextUtils.fromHtml(notificationModel.getBody()));
+          }
+
+          if (androidModel.getBadgeIconType() != null) {
+            builder.setBadgeIconType(androidModel.getBadgeIconType());
           }
 
           if (androidModel.getBadgeIconType() != null) {
@@ -253,16 +261,19 @@ class NotificationManager {
           }
 
           for (NotificationAndroidActionModel actionBundle : actionBundles) {
-            PendingIntent pendingIntent =
-                ReceiverService.createIntent(
-                    ACTION_PRESS_INTENT,
-                    new String[] {"notification", "pressAction"},
-                    notificationModel.toBundle(),
-                    actionBundle.getPressAction().toBundle());
-
             String icon = actionBundle.getIcon();
             Bitmap iconBitmap = null;
+            NotificationCompat.Action.Builder actionBuilder = null;
 
+            /* Handle Press Action */
+            PendingIntent pendingIntent =
+              ReceiverService.createIntent(
+                ACTION_PRESS_INTENT,
+                new String[] {"notification", "pressAction"},
+                notificationModel.toBundle(),
+                actionBundle.getPressAction().toBundle());
+
+            /* Handle Icon */
             if (icon != null) {
               try {
                 iconBitmap =
@@ -284,15 +295,26 @@ class NotificationManager {
               iconCompat = IconCompat.createWithAdaptiveBitmap(iconBitmap);
             }
 
-            NotificationCompat.Action.Builder actionBuilder =
-                new NotificationCompat.Action.Builder(
-                    iconCompat, TextUtils.fromHtml(actionBundle.getTitle()), pendingIntent);
 
-            RemoteInput remoteInput = actionBundle.getRemoteInput(actionBuilder);
-            if (remoteInput != null) {
-              actionBuilder.addRemoteInput(remoteInput);
+            Boolean isMediaStyle = false;
+
+            if (notificationModel.getAndroid().hasStyle() && notificationModel.getAndroid().getStyle().getType() == 4) {
+              isMediaStyle = true;
             }
 
+            if (isMediaStyle) {
+              actionBuilder = actionBundle.getMediaStyleActionBuilder(iconCompat, pendingIntent);
+            } else {
+              /* Handle actions for non-media style notifications */
+              actionBuilder =
+                new NotificationCompat.Action.Builder(
+                  iconCompat, TextUtils.fromHtml(actionBundle.getTitle()), pendingIntent);
+
+              RemoteInput remoteInput = actionBundle.getRemoteInput(actionBuilder);
+              if (remoteInput != null) {
+                actionBuilder.addRemoteInput(remoteInput);
+              }
+            }
             builder.addAction(actionBuilder.build());
           }
 
@@ -307,21 +329,21 @@ class NotificationManager {
     Continuation<NotificationCompat.Builder, NotificationCompat.Builder> styleContinuation =
         task -> {
           NotificationCompat.Builder builder = task.getResult();
-          NotificationAndroidStyleModel androidStyleBundle = androidModel.getStyle();
-          if (androidStyleBundle == null) {
-            return builder;
-          }
+           NotificationAndroidStyleModel androidStyleBundle = androidModel.getStyle();
+           if (androidStyleBundle == null) {
+             return builder;
+           }
 
-          Task<NotificationCompat.Style> styleTask =
-              androidStyleBundle.getStyleTask(CACHED_THREAD_POOL);
-          if (styleTask == null) {
-            return builder;
-          }
+           Task<NotificationCompat.Style> styleTask =
+               androidStyleBundle.getStyleTask(CACHED_THREAD_POOL);
+           if (styleTask == null) {
+             return builder;
+           }
 
-          NotificationCompat.Style style = Tasks.await(styleTask);
-          if (style != null) {
-            builder.setStyle(style);
-          }
+           NotificationCompat.Style style = Tasks.await(styleTask);
+           if (style != null) {
+             builder.setStyle(style);
+           }
 
           return builder;
         };

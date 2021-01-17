@@ -2,21 +2,27 @@ package app.notifee.core.model;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
-import app.notifee.core.Logger;
-import app.notifee.core.utility.ResourceUtils;
-import app.notifee.core.utility.TextUtils;
+import androidx.media.app.NotificationCompat.MediaStyle;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import app.notifee.core.Logger;
+import app.notifee.core.utility.ResourceUtils;
+import app.notifee.core.utility.TextUtils;
 
 @Keep
 public class NotificationAndroidStyleModel {
@@ -29,6 +35,15 @@ public class NotificationAndroidStyleModel {
 
   public static NotificationAndroidStyleModel fromBundle(Bundle styleBundle) {
     return new NotificationAndroidStyleModel(styleBundle);
+  }
+
+  /**
+   * Returns style type
+   *
+   * @return int
+   */
+  public @NonNull int getType() {
+    return (int) mNotificationAndroidStyleBundle.getDouble("type");
   }
 
   /**
@@ -96,7 +111,7 @@ public class NotificationAndroidStyleModel {
 
   @Nullable
   public Task<NotificationCompat.Style> getStyleTask(Executor executor) {
-    int type = (int) mNotificationAndroidStyleBundle.getDouble("type");
+    int type = getType();
     Task<NotificationCompat.Style> styleTask = null;
 
     switch (type) {
@@ -111,6 +126,9 @@ public class NotificationAndroidStyleModel {
         break;
       case 3:
         styleTask = getMessagingStyleTask(executor);
+        break;
+      case 4:
+        styleTask = Tasks.forResult(getMediaStyle());
         break;
     }
 
@@ -256,6 +274,21 @@ public class NotificationAndroidStyleModel {
     }
 
     return inputStyle;
+  }
+
+  /**
+   * Gets a MediaStyle for a notification
+   *
+   * @return NotificationCompat.MediaStyle
+   */
+  private MediaStyle getMediaStyle() {
+    MediaStyle mediaStyle = new MediaStyle();
+
+    if (mNotificationAndroidStyleBundle.containsKey("compactActions")) {
+      // TODO
+    }
+
+    return mediaStyle;
   }
 
   /** Gets a MessagingStyle for a notification */
