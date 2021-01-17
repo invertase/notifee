@@ -126,6 +126,8 @@ dependencies {
   api 'com.facebook.fresco:fresco:2.2.0' // https://github.com/facebook/fresco/releases
   api 'io.jsonwebtoken:jjwt-api:0.11.2' // https://github.com/jwtk/jjwt/releases
 
+  implementation 'androidx.media:media:1.2.1' // https://developer.android.com/jetpack/androidx/releases/media
+
   def room_version = '2.2.6' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"
   annotationProcessor "androidx.room:room-compiler:$room_version"
