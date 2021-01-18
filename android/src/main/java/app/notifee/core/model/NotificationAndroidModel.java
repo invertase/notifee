@@ -235,6 +235,12 @@ public class NotificationAndroidModel {
     return null;
   }
 
+  /** Returns the large icon string */
+  public Boolean getCircularLargeIcon() {
+    return Objects.requireNonNull(
+        mNotificationAndroidBundle.getBoolean("circularLargeIcon", false));
+  }
+
   /**
    * Gets the light output for the notification
    *
