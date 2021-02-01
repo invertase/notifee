@@ -1,11 +1,11 @@
 {
 	"id": 0,
-	"name": "@notifee/react-native - v0.16.0",
+	"name": "@notifee/react-native - v1.1.0",
 	"kind": 0,
 	"flags": {},
 	"children": [
 		{
-			"id": 242,
+			"id": 243,
 			"name": "AndroidBadgeIconType",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -24,7 +24,7 @@
 			},
 			"children": [
 				{
-					"id": 245,
+					"id": 246,
 					"name": "LARGE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -38,14 +38,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1001,
+							"line": 1010,
 							"character": 7
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 243,
+					"id": 244,
 					"name": "NONE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -58,14 +58,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 989,
+							"line": 998,
 							"character": 6
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 244,
+					"id": 245,
 					"name": "SMALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -78,7 +78,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 994,
+							"line": 1003,
 							"character": 7
 						}
 					],
@@ -90,22 +90,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						245,
-						243,
-						244
+						246,
+						244,
+						245
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 985,
+					"line": 994,
 					"character": 32
 				}
 			]
 		},
 		{
-			"id": 246,
+			"id": 247,
 			"name": "AndroidCategory",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -124,7 +124,7 @@
 			},
 			"children": [
 				{
-					"id": 247,
+					"id": 248,
 					"name": "ALARM",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -134,14 +134,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1014,
+							"line": 1023,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"alarm\""
 				},
 				{
-					"id": 248,
+					"id": 249,
 					"name": "CALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -151,14 +151,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1015,
+							"line": 1024,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"call\""
 				},
 				{
-					"id": 249,
+					"id": 250,
 					"name": "EMAIL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -168,14 +168,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1016,
+							"line": 1025,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"email\""
 				},
 				{
-					"id": 250,
+					"id": 251,
 					"name": "ERROR",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -185,14 +185,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1017,
+							"line": 1026,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"error\""
 				},
 				{
-					"id": 251,
+					"id": 252,
 					"name": "EVENT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -202,14 +202,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1018,
+							"line": 1027,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"event\""
 				},
 				{
-					"id": 252,
+					"id": 253,
 					"name": "MESSAGE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -219,14 +219,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1019,
+							"line": 1028,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"msg\""
 				},
 				{
-					"id": 253,
+					"id": 254,
 					"name": "NAVIGATION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -236,14 +236,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1020,
+							"line": 1029,
 							"character": 12
 						}
 					],
 					"defaultValue": "\"navigation\""
 				},
 				{
-					"id": 254,
+					"id": 255,
 					"name": "PROGRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -253,14 +253,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1021,
+							"line": 1030,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"progress\""
 				},
 				{
-					"id": 255,
+					"id": 256,
 					"name": "PROMO",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -270,14 +270,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1022,
+							"line": 1031,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"promo\""
 				},
 				{
-					"id": 256,
+					"id": 257,
 					"name": "RECOMMENDATION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -287,14 +287,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1023,
+							"line": 1032,
 							"character": 16
 						}
 					],
 					"defaultValue": "\"recommendation\""
 				},
 				{
-					"id": 257,
+					"id": 258,
 					"name": "REMINDER",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -304,14 +304,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1024,
+							"line": 1033,
 							"character": 10
 						}
 					],
 					"defaultValue": "\"reminder\""
 				},
 				{
-					"id": 258,
+					"id": 259,
 					"name": "SERVICE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -321,14 +321,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1025,
+							"line": 1034,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"service\""
 				},
 				{
-					"id": 259,
+					"id": 260,
 					"name": "SOCIAL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -338,14 +338,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1026,
+							"line": 1035,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"social\""
 				},
 				{
-					"id": 260,
+					"id": 261,
 					"name": "STATUS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -355,14 +355,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1027,
+							"line": 1036,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"status\""
 				},
 				{
-					"id": 261,
+					"id": 262,
 					"name": "SYSTEM",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -375,14 +375,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1032,
+							"line": 1041,
 							"character": 8
 						}
 					],
 					"defaultValue": "\"sys\""
 				},
 				{
-					"id": 262,
+					"id": 263,
 					"name": "TRANSPORT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -392,7 +392,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1033,
+							"line": 1042,
 							"character": 11
 						}
 					],
@@ -404,7 +404,6 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						247,
 						248,
 						249,
 						250,
@@ -419,20 +418,21 @@
 						259,
 						260,
 						261,
-						262
+						262,
+						263
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1013,
+					"line": 1022,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 263,
+			"id": 264,
 			"name": "AndroidColor",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -451,7 +451,7 @@
 			},
 			"children": [
 				{
-					"id": 277,
+					"id": 278,
 					"name": "AQUA",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -461,14 +461,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1057,
+							"line": 1066,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"aqua\""
 				},
 				{
-					"id": 267,
+					"id": 268,
 					"name": "BLACK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -478,100 +478,15 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1047,
+							"line": 1056,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"black\""
 				},
 				{
-					"id": 265,
+					"id": 266,
 					"name": "BLUE",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1045,
-							"character": 6
-						}
-					],
-					"defaultValue": "\"blue\""
-				},
-				{
-					"id": 269,
-					"name": "CYAN",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1049,
-							"character": 6
-						}
-					],
-					"defaultValue": "\"cyan\""
-				},
-				{
-					"id": 273,
-					"name": "DARKGRAY",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1053,
-							"character": 10
-						}
-					],
-					"defaultValue": "\"darkgray\""
-				},
-				{
-					"id": 276,
-					"name": "DARKGREY",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1056,
-							"character": 10
-						}
-					],
-					"defaultValue": "\"darkgrey\""
-				},
-				{
-					"id": 278,
-					"name": "FUCHSIA",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1058,
-							"character": 9
-						}
-					],
-					"defaultValue": "\"fuchsia\""
-				},
-				{
-					"id": 274,
-					"name": "GRAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
 					"flags": {
@@ -584,10 +499,95 @@
 							"character": 6
 						}
 					],
+					"defaultValue": "\"blue\""
+				},
+				{
+					"id": 270,
+					"name": "CYAN",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1058,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"cyan\""
+				},
+				{
+					"id": 274,
+					"name": "DARKGRAY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1062,
+							"character": 10
+						}
+					],
+					"defaultValue": "\"darkgray\""
+				},
+				{
+					"id": 277,
+					"name": "DARKGREY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1065,
+							"character": 10
+						}
+					],
+					"defaultValue": "\"darkgrey\""
+				},
+				{
+					"id": 279,
+					"name": "FUCHSIA",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1067,
+							"character": 9
+						}
+					],
+					"defaultValue": "\"fuchsia\""
+				},
+				{
+					"id": 275,
+					"name": "GRAY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1063,
+							"character": 6
+						}
+					],
 					"defaultValue": "\"gray\""
 				},
 				{
-					"id": 266,
+					"id": 267,
 					"name": "GREEN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -597,14 +597,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1046,
+							"line": 1055,
 							"character": 7
 						}
 					],
 					"defaultValue": "\"green\""
 				},
 				{
-					"id": 272,
+					"id": 273,
 					"name": "LIGHTGRAY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -614,14 +614,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1052,
+							"line": 1061,
 							"character": 11
 						}
 					],
 					"defaultValue": "\"lightgray\""
 				},
 				{
-					"id": 275,
+					"id": 276,
 					"name": "LIGHTGREY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -631,14 +631,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1055,
+							"line": 1064,
 							"character": 11
 						}
 					],
 					"defaultValue": "\"lightgrey\""
 				},
 				{
-					"id": 279,
+					"id": 280,
 					"name": "LIME",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -648,14 +648,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1059,
+							"line": 1068,
 							"character": 6
 						}
 					],
 					"defaultValue": "\"lime\""
 				},
 				{
-					"id": 270,
+					"id": 271,
 					"name": "MAGENTA",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -665,15 +665,151 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1050,
+							"line": 1059,
 							"character": 9
 						}
 					],
 					"defaultValue": "\"magenta\""
 				},
 				{
-					"id": 280,
+					"id": 281,
 					"name": "MAROON",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1069,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"maroon\""
+				},
+				{
+					"id": 282,
+					"name": "NAVY",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1070,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"navy\""
+				},
+				{
+					"id": 283,
+					"name": "OLIVE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1071,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"olive\""
+				},
+				{
+					"id": 284,
+					"name": "PURPLE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1072,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"purple\""
+				},
+				{
+					"id": 265,
+					"name": "RED",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1053,
+							"character": 5
+						}
+					],
+					"defaultValue": "\"red\""
+				},
+				{
+					"id": 285,
+					"name": "SILVER",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1073,
+							"character": 8
+						}
+					],
+					"defaultValue": "\"silver\""
+				},
+				{
+					"id": 286,
+					"name": "TEAL",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1074,
+							"character": 6
+						}
+					],
+					"defaultValue": "\"teal\""
+				},
+				{
+					"id": 269,
+					"name": "WHITE",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 1057,
+							"character": 7
+						}
+					],
+					"defaultValue": "\"white\""
+				},
+				{
+					"id": 272,
+					"name": "YELLOW",
 					"kind": 16,
 					"kindString": "Enumeration member",
 					"flags": {
@@ -686,142 +822,6 @@
 							"character": 8
 						}
 					],
-					"defaultValue": "\"maroon\""
-				},
-				{
-					"id": 281,
-					"name": "NAVY",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1061,
-							"character": 6
-						}
-					],
-					"defaultValue": "\"navy\""
-				},
-				{
-					"id": 282,
-					"name": "OLIVE",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1062,
-							"character": 7
-						}
-					],
-					"defaultValue": "\"olive\""
-				},
-				{
-					"id": 283,
-					"name": "PURPLE",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1063,
-							"character": 8
-						}
-					],
-					"defaultValue": "\"purple\""
-				},
-				{
-					"id": 264,
-					"name": "RED",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1044,
-							"character": 5
-						}
-					],
-					"defaultValue": "\"red\""
-				},
-				{
-					"id": 284,
-					"name": "SILVER",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1064,
-							"character": 8
-						}
-					],
-					"defaultValue": "\"silver\""
-				},
-				{
-					"id": 285,
-					"name": "TEAL",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1065,
-							"character": 6
-						}
-					],
-					"defaultValue": "\"teal\""
-				},
-				{
-					"id": 268,
-					"name": "WHITE",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1048,
-							"character": 7
-						}
-					],
-					"defaultValue": "\"white\""
-				},
-				{
-					"id": 271,
-					"name": "YELLOW",
-					"kind": 16,
-					"kindString": "Enumeration member",
-					"flags": {
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1051,
-							"character": 8
-						}
-					],
 					"defaultValue": "\"yellow\""
 				}
 			],
@@ -830,41 +830,41 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						278,
+						268,
+						266,
+						270,
+						274,
 						277,
+						279,
+						275,
 						267,
-						265,
-						269,
 						273,
 						276,
-						278,
-						274,
-						266,
-						272,
-						275,
-						279,
-						270,
 						280,
+						271,
 						281,
 						282,
 						283,
-						264,
 						284,
+						265,
 						285,
-						268,
-						271
+						286,
+						269,
+						272
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1043,
+					"line": 1052,
 					"character": 24
 				}
 			]
 		},
 		{
-			"id": 286,
+			"id": 287,
 			"name": "AndroidDefaults",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -883,7 +883,7 @@
 			},
 			"children": [
 				{
-					"id": 287,
+					"id": 288,
 					"name": "ALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -896,14 +896,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1082,
+							"line": 1091,
 							"character": 5
 						}
 					],
 					"defaultValue": " -1"
 				},
 				{
-					"id": 288,
+					"id": 289,
 					"name": "LIGHTS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -916,14 +916,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1087,
+							"line": 1096,
 							"character": 8
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 289,
+					"id": 290,
 					"name": "SOUND",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -936,14 +936,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1092,
+							"line": 1101,
 							"character": 7
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 290,
+					"id": 291,
 					"name": "VIBRATE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -956,7 +956,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1097,
+							"line": 1106,
 							"character": 9
 						}
 					],
@@ -968,23 +968,23 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						287,
 						288,
 						289,
-						290
+						290,
+						291
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1078,
+					"line": 1087,
 					"character": 27
 				}
 			]
 		},
 		{
-			"id": 291,
+			"id": 292,
 			"name": "AndroidGroupAlertBehavior",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1003,7 +1003,7 @@
 			},
 			"children": [
 				{
-					"id": 292,
+					"id": 293,
 					"name": "ALL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1016,14 +1016,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1112,
+							"line": 1121,
 							"character": 5
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 294,
+					"id": 295,
 					"name": "CHILDREN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1036,14 +1036,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1122,
+							"line": 1131,
 							"character": 10
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 293,
+					"id": 294,
 					"name": "SUMMARY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1056,7 +1056,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1117,
+							"line": 1126,
 							"character": 9
 						}
 					],
@@ -1068,22 +1068,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						292,
-						294,
-						293
+						293,
+						295,
+						294
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1108,
+					"line": 1117,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 304,
+			"id": 305,
 			"name": "AndroidImportance",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1102,7 +1102,7 @@
 			},
 			"children": [
 				{
-					"id": 305,
+					"id": 306,
 					"name": "DEFAULT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1116,14 +1116,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1189,
+							"line": 1198,
 							"character": 9
 						}
 					],
 					"defaultValue": "3"
 				},
 				{
-					"id": 306,
+					"id": 307,
 					"name": "HIGH",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1137,14 +1137,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1198,
+							"line": 1207,
 							"character": 6
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 307,
+					"id": 308,
 					"name": "LOW",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1158,14 +1158,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1210,
+							"line": 1219,
 							"character": 5
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 308,
+					"id": 309,
 					"name": "MIN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1179,14 +1179,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1222,
+							"line": 1231,
 							"character": 5
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 309,
+					"id": 310,
 					"name": "NONE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1199,7 +1199,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1228,
+							"line": 1237,
 							"character": 6
 						}
 					],
@@ -1211,24 +1211,24 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						305,
 						306,
 						307,
 						308,
-						309
+						309,
+						310
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1182,
+					"line": 1191,
 					"character": 29
 				}
 			]
 		},
 		{
-			"id": 310,
+			"id": 311,
 			"name": "AndroidLaunchActivityFlag",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1247,7 +1247,7 @@
 			},
 			"children": [
 				{
-					"id": 319,
+					"id": 320,
 					"name": "BROUGHT_TO_FRONT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1260,14 +1260,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1284,
+							"line": 1293,
 							"character": 18
 						}
 					],
 					"defaultValue": "8"
 				},
 				{
-					"id": 327,
+					"id": 328,
 					"name": "CLEAR_TASK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1280,14 +1280,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1324,
+							"line": 1333,
 							"character": 12
 						}
 					],
 					"defaultValue": "16"
 				},
 				{
-					"id": 315,
+					"id": 316,
 					"name": "CLEAR_TOP",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1300,14 +1300,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1264,
+							"line": 1273,
 							"character": 11
 						}
 					],
 					"defaultValue": "4"
 				},
 				{
-					"id": 322,
+					"id": 323,
 					"name": "CLEAR_WHEN_TASK_RESET",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1320,14 +1320,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1299,
+							"line": 1308,
 							"character": 23
 						}
 					],
 					"defaultValue": "11"
 				},
 				{
-					"id": 318,
+					"id": 319,
 					"name": "EXCLUDE_FROM_RECENTS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1340,14 +1340,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1279,
+							"line": 1288,
 							"character": 22
 						}
 					],
 					"defaultValue": "7"
 				},
 				{
-					"id": 316,
+					"id": 317,
 					"name": "FORWARD_RESULT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1360,14 +1360,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1269,
+							"line": 1278,
 							"character": 16
 						}
 					],
 					"defaultValue": "5"
 				},
 				{
-					"id": 321,
+					"id": 322,
 					"name": "LAUNCHED_FROM_HISTORY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1380,14 +1380,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1294,
+							"line": 1303,
 							"character": 23
 						}
 					],
 					"defaultValue": "10"
 				},
 				{
-					"id": 330,
+					"id": 331,
 					"name": "LAUNCH_ADJACENT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1400,14 +1400,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1339,
+							"line": 1348,
 							"character": 17
 						}
 					],
 					"defaultValue": "19"
 				},
 				{
-					"id": 331,
+					"id": 332,
 					"name": "MATCH_EXTERNAL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1420,14 +1420,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1344,
+							"line": 1353,
 							"character": 16
 						}
 					],
 					"defaultValue": "20"
 				},
 				{
-					"id": 314,
+					"id": 315,
 					"name": "MULTIPLE_TASK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1440,14 +1440,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1259,
+							"line": 1268,
 							"character": 15
 						}
 					],
 					"defaultValue": "3"
 				},
 				{
-					"id": 323,
+					"id": 324,
 					"name": "NEW_DOCUMENT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1460,14 +1460,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1304,
+							"line": 1313,
 							"character": 14
 						}
 					],
 					"defaultValue": "12"
 				},
 				{
-					"id": 313,
+					"id": 314,
 					"name": "NEW_TASK",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1480,14 +1480,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1254,
+							"line": 1263,
 							"character": 10
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 326,
+					"id": 327,
 					"name": "NO_ANIMATION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1500,14 +1500,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1319,
+							"line": 1328,
 							"character": 14
 						}
 					],
 					"defaultValue": "15"
 				},
 				{
-					"id": 311,
+					"id": 312,
 					"name": "NO_HISTORY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1520,14 +1520,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1244,
+							"line": 1253,
 							"character": 12
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 324,
+					"id": 325,
 					"name": "NO_USER_ACTION",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1540,14 +1540,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1309,
+							"line": 1318,
 							"character": 16
 						}
 					],
 					"defaultValue": "13"
 				},
 				{
-					"id": 317,
+					"id": 318,
 					"name": "PREVIOUS_IS_TOP",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1560,14 +1560,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1274,
+							"line": 1283,
 							"character": 17
 						}
 					],
 					"defaultValue": "6"
 				},
 				{
-					"id": 325,
+					"id": 326,
 					"name": "REORDER_TO_FRONT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1580,14 +1580,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1314,
+							"line": 1323,
 							"character": 18
 						}
 					],
 					"defaultValue": "14"
 				},
 				{
-					"id": 320,
+					"id": 321,
 					"name": "RESET_TASK_IF_NEEDED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1600,14 +1600,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1289,
+							"line": 1298,
 							"character": 22
 						}
 					],
 					"defaultValue": "9"
 				},
 				{
-					"id": 329,
+					"id": 330,
 					"name": "RETAIN_IN_RECENTS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1620,14 +1620,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1334,
+							"line": 1343,
 							"character": 19
 						}
 					],
 					"defaultValue": "18"
 				},
 				{
-					"id": 312,
+					"id": 313,
 					"name": "SINGLE_TOP",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1640,14 +1640,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1249,
+							"line": 1258,
 							"character": 12
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 328,
+					"id": 329,
 					"name": "TASK_ON_HOME",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1660,7 +1660,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1329,
+							"line": 1338,
 							"character": 14
 						}
 					],
@@ -1672,40 +1672,40 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						319,
-						327,
-						315,
-						322,
-						318,
+						320,
+						328,
 						316,
+						323,
+						319,
+						317,
+						322,
+						331,
+						332,
+						315,
+						324,
+						314,
+						327,
+						312,
+						325,
+						318,
+						326,
 						321,
 						330,
-						331,
-						314,
-						323,
 						313,
-						326,
-						311,
-						324,
-						317,
-						325,
-						320,
-						329,
-						312,
-						328
+						329
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1240,
+					"line": 1249,
 					"character": 37
 				}
 			]
 		},
 		{
-			"id": 295,
+			"id": 296,
 			"name": "AndroidStyle",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1724,7 +1724,7 @@
 			},
 			"children": [
 				{
-					"id": 296,
+					"id": 297,
 					"name": "BIGPICTURE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1734,14 +1734,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1133,
+							"line": 1142,
 							"character": 12
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 297,
+					"id": 298,
 					"name": "BIGTEXT",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1751,14 +1751,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1134,
+							"line": 1143,
 							"character": 9
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 298,
+					"id": 299,
 					"name": "INBOX",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1768,14 +1768,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1135,
+							"line": 1144,
 							"character": 7
 						}
 					],
 					"defaultValue": "2"
 				},
 				{
-					"id": 299,
+					"id": 300,
 					"name": "MESSAGING",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1785,7 +1785,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1136,
+							"line": 1145,
 							"character": 11
 						}
 					],
@@ -1797,23 +1797,23 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						296,
 						297,
 						298,
-						299
+						299,
+						300
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1132,
+					"line": 1141,
 					"character": 24
 				}
 			]
 		},
 		{
-			"id": 300,
+			"id": 301,
 			"name": "AndroidVisibility",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1832,7 +1832,7 @@
 			},
 			"children": [
 				{
-					"id": 301,
+					"id": 302,
 					"name": "PRIVATE",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1845,14 +1845,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1154,
+							"line": 1163,
 							"character": 9
 						}
 					],
 					"defaultValue": "0"
 				},
 				{
-					"id": 302,
+					"id": 303,
 					"name": "PUBLIC",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1865,14 +1865,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1159,
+							"line": 1168,
 							"character": 8
 						}
 					],
 					"defaultValue": "1"
 				},
 				{
-					"id": 303,
+					"id": 304,
 					"name": "SECRET",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1886,7 +1886,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 1166,
+							"line": 1175,
 							"character": 8
 						}
 					],
@@ -1898,22 +1898,22 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						301,
 						302,
-						303
+						303,
+						304
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 1150,
+					"line": 1159,
 					"character": 29
 				}
 			]
 		},
 		{
-			"id": 355,
+			"id": 356,
 			"name": "EventType",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -1926,7 +1926,7 @@
 			},
 			"children": [
 				{
-					"id": 359,
+					"id": 360,
 					"name": "ACTION_PRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1946,7 +1946,7 @@
 					"defaultValue": "2"
 				},
 				{
-					"id": 361,
+					"id": 362,
 					"name": "APP_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1972,7 +1972,7 @@
 					"defaultValue": "4"
 				},
 				{
-					"id": 362,
+					"id": 363,
 					"name": "CHANNEL_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -1998,7 +1998,7 @@
 					"defaultValue": "5"
 				},
 				{
-					"id": 363,
+					"id": 364,
 					"name": "CHANNEL_GROUP_BLOCKED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2024,7 +2024,7 @@
 					"defaultValue": "6"
 				},
 				{
-					"id": 360,
+					"id": 361,
 					"name": "DELIVERED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2045,7 +2045,7 @@
 					"defaultValue": "3"
 				},
 				{
-					"id": 357,
+					"id": 358,
 					"name": "DISMISSED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2072,7 +2072,7 @@
 					"defaultValue": "0"
 				},
 				{
-					"id": 358,
+					"id": 359,
 					"name": "PRESS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2093,7 +2093,7 @@
 					"defaultValue": "1"
 				},
 				{
-					"id": 364,
+					"id": 365,
 					"name": "TRIGGER_NOTIFICATION_CREATED",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2113,7 +2113,7 @@
 					"defaultValue": "7"
 				},
 				{
-					"id": 356,
+					"id": 357,
 					"name": "UNKNOWN",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -2139,15 +2139,15 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						359,
-						361,
+						360,
 						362,
 						363,
-						360,
-						357,
-						358,
 						364,
-						356
+						361,
+						358,
+						359,
+						365,
+						357
 					]
 				}
 			],
@@ -2990,7 +2990,7 @@
 			]
 		},
 		{
-			"id": 380,
+			"id": 381,
 			"name": "RepeatFrequency",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -3003,7 +3003,7 @@
 			},
 			"children": [
 				{
-					"id": 382,
+					"id": 383,
 					"name": "DAILY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3020,7 +3020,7 @@
 					"defaultValue": "1"
 				},
 				{
-					"id": 381,
+					"id": 382,
 					"name": "HOURLY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3037,7 +3037,7 @@
 					"defaultValue": "0"
 				},
 				{
-					"id": 383,
+					"id": 384,
 					"name": "WEEKLY",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3059,9 +3059,9 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						383,
 						382,
-						381,
-						383
+						384
 					]
 				}
 			],
@@ -3074,7 +3074,7 @@
 			]
 		},
 		{
-			"id": 388,
+			"id": 389,
 			"name": "TimeUnit",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -3087,7 +3087,7 @@
 			},
 			"children": [
 				{
-					"id": 392,
+					"id": 393,
 					"name": "DAYS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3104,7 +3104,7 @@
 					"defaultValue": "\"DAYS\""
 				},
 				{
-					"id": 391,
+					"id": 392,
 					"name": "HOURS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3121,7 +3121,7 @@
 					"defaultValue": "\"HOURS\""
 				},
 				{
-					"id": 390,
+					"id": 391,
 					"name": "MINUTES",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3138,7 +3138,7 @@
 					"defaultValue": "\"MINUTES\""
 				},
 				{
-					"id": 389,
+					"id": 390,
 					"name": "SECONDS",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3160,10 +3160,10 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
+						393,
 						392,
 						391,
-						390,
-						389
+						390
 					]
 				}
 			],
@@ -3176,7 +3176,7 @@
 			]
 		},
 		{
-			"id": 393,
+			"id": 394,
 			"name": "TriggerType",
 			"kind": 4,
 			"kindString": "Enumeration",
@@ -3189,7 +3189,7 @@
 			},
 			"children": [
 				{
-					"id": 395,
+					"id": 396,
 					"name": "INTERVAL",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3206,7 +3206,7 @@
 					"defaultValue": "1"
 				},
 				{
-					"id": 394,
+					"id": 395,
 					"name": "TIMESTAMP",
 					"kind": 16,
 					"kindString": "Enumeration member",
@@ -3228,8 +3228,8 @@
 					"title": "Enumeration members",
 					"kind": 16,
 					"children": [
-						395,
-						394
+						396,
+						395
 					]
 				}
 			],
@@ -3242,7 +3242,7 @@
 			]
 		},
 		{
-			"id": 155,
+			"id": 156,
 			"name": "AndroidAction",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3261,7 +3261,7 @@
 			},
 			"children": [
 				{
-					"id": 158,
+					"id": 159,
 					"name": "icon",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3276,7 +3276,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 432,
+							"line": 441,
 							"character": 6
 						}
 					],
@@ -3295,7 +3295,7 @@
 					}
 				},
 				{
-					"id": 159,
+					"id": 160,
 					"name": "input",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3310,7 +3310,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 443,
+							"line": 452,
 							"character": 7
 						}
 					],
@@ -3324,13 +3324,13 @@
 							{
 								"type": "reference",
 								"name": "AndroidInput",
-								"id": 160
+								"id": 161
 							}
 						]
 					}
 				},
 				{
-					"id": 156,
+					"id": 157,
 					"name": "pressAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3344,18 +3344,18 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 420,
+							"line": 429,
 							"character": 13
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "NotificationPressAction",
-						"id": 350
+						"id": 351
 					}
 				},
 				{
-					"id": 157,
+					"id": 158,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3368,7 +3368,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 425,
+							"line": 434,
 							"character": 7
 						}
 					],
@@ -3383,23 +3383,23 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						158,
 						159,
-						156,
-						157
+						160,
+						157,
+						158
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 412,
+					"line": 421,
 					"character": 30
 				}
 			]
 		},
 		{
-			"id": 166,
+			"id": 167,
 			"name": "AndroidBigPictureStyle",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3418,7 +3418,7 @@
 			},
 			"children": [
 				{
-					"id": 170,
+					"id": 171,
 					"name": "largeIcon",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3433,7 +3433,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 533,
+							"line": 542,
 							"character": 11
 						}
 					],
@@ -3456,7 +3456,7 @@
 					}
 				},
 				{
-					"id": 168,
+					"id": 169,
 					"name": "picture",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3470,7 +3470,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 520,
+							"line": 529,
 							"character": 9
 						}
 					],
@@ -3493,7 +3493,7 @@
 					}
 				},
 				{
-					"id": 171,
+					"id": 172,
 					"name": "summary",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3507,7 +3507,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 538,
+							"line": 547,
 							"character": 9
 						}
 					],
@@ -3526,7 +3526,7 @@
 					}
 				},
 				{
-					"id": 169,
+					"id": 170,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3540,7 +3540,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 525,
+							"line": 534,
 							"character": 7
 						}
 					],
@@ -3559,7 +3559,7 @@
 					}
 				},
 				{
-					"id": 167,
+					"id": 168,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3572,14 +3572,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 511,
+							"line": 520,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "BIGPICTURE",
-						"id": 296
+						"id": 297
 					}
 				}
 			],
@@ -3588,24 +3588,24 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						170,
-						168,
 						171,
 						169,
-						167
+						172,
+						170,
+						168
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 507,
+					"line": 516,
 					"character": 39
 				}
 			]
 		},
 		{
-			"id": 172,
+			"id": 173,
 			"name": "AndroidBigTextStyle",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3624,7 +3624,7 @@
 			},
 			"children": [
 				{
-					"id": 176,
+					"id": 177,
 					"name": "summary",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3638,7 +3638,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 569,
+							"line": 578,
 							"character": 9
 						}
 					],
@@ -3657,7 +3657,7 @@
 					}
 				},
 				{
-					"id": 174,
+					"id": 175,
 					"name": "text",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3670,7 +3670,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 559,
+							"line": 568,
 							"character": 6
 						}
 					],
@@ -3680,7 +3680,7 @@
 					}
 				},
 				{
-					"id": 175,
+					"id": 176,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3694,7 +3694,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 564,
+							"line": 573,
 							"character": 7
 						}
 					],
@@ -3713,7 +3713,7 @@
 					}
 				},
 				{
-					"id": 173,
+					"id": 174,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3726,14 +3726,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 554,
+							"line": 563,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "BIGTEXT",
-						"id": 297
+						"id": 298
 					}
 				}
 			],
@@ -3742,23 +3742,23 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						176,
-						174,
+						177,
 						175,
-						173
+						176,
+						174
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 550,
+					"line": 559,
 					"character": 36
 				}
 			]
 		},
 		{
-			"id": 203,
+			"id": 204,
 			"name": "AndroidChannel",
 			"kind": 256,
 			"kindString": "Interface",
@@ -3777,7 +3777,7 @@
 			},
 			"children": [
 				{
-					"id": 206,
+					"id": 207,
 					"name": "badge",
 					"kind": 1024,
 					"kindString": "Property",
@@ -3792,52 +3792,8 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 797,
+							"line": 806,
 							"character": 7
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "false"
-							},
-							{
-								"type": "intrinsic",
-								"name": "true"
-							}
-						]
-					}
-				},
-				{
-					"id": 207,
-					"name": "bypassDnd",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets whether or not notifications posted to this channel can interrupt the user in\n'Do Not Disturb' mode.",
-						"text": "Defaults to `false`.\n\nThis setting cannot be overridden once the channel is created.\n",
-						"tags": [
-							{
-								"tag": "platform",
-								"text": "android API Level >= 29\n"
-							}
-						]
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 809,
-							"character": 11
 						}
 					],
 					"type": {
@@ -3860,7 +3816,7 @@
 				},
 				{
 					"id": 208,
-					"name": "description",
+					"name": "bypassDnd",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -3868,267 +3824,19 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "Sets the user visible description of this channel.",
-						"text": "The recommended maximum length is 300 characters; the value may be truncated if it is too long.\n\nThis setting can be updated after creation.\n",
+						"shortText": "Sets whether or not notifications posted to this channel can interrupt the user in\n'Do Not Disturb' mode.",
+						"text": "Defaults to `false`.\n\nThis setting cannot be overridden once the channel is created.\n",
 						"tags": [
 							{
 								"tag": "platform",
-								"text": "android API Level >= 28\n"
+								"text": "android API Level >= 29\n"
 							}
 						]
 					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 820,
-							"character": 13
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 211,
-					"name": "groupId",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.",
-						"text": "Groups can be created via via [`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThis setting cannot be overridden once the channel is created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 847,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 204,
-					"name": "id",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "The unique channel ID."
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 778,
-							"character": 4
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 212,
-					"name": "importance",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets the level of interruption of this notification channel.",
-						"text": "Defaults to `AndroidImportance.DEFAULT`.\n\nThis setting can only be set to a lower importance level once set.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 856,
-							"character": 12
-						}
-					],
-					"type": {
-						"type": "reference",
-						"name": "AndroidImportance",
-						"id": 304
-					}
-				},
-				{
-					"id": 213,
-					"name": "lightColor",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "If lights are enabled (via `lights`), sets/overrides the light color for notifications\nposted to this channel.",
-						"text": "This setting cannot be overridden once the channel is created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 864,
-							"character": 12
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "reference",
-								"name": "AndroidColor",
-								"id": 263
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 209,
-					"name": "lights",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets whether notifications posted to this channel should display notification lights, on devices that support that feature.",
-						"text": "Defaults to `true`.\n\nThis setting cannot be overridden once the channel is created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 829,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "false"
-							},
-							{
-								"type": "intrinsic",
-								"name": "true"
-							}
-						]
-					}
-				},
-				{
-					"id": 205,
-					"name": "name",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "The channel name. This is shown to the user so must be descriptive and relate to the notifications\nwhich will be delivered under this channel.",
-						"text": "This setting can be updated after creation.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 786,
-							"character": 6
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				},
-				{
-					"id": 216,
-					"name": "sound",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Overrides the sound the notification is displayed with.",
-						"text": "The default value is to play no sound. To play the default system sound use 'default'.\n\nThis setting cannot be overridden once the channel is created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 892,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 210,
-					"name": "vibration",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets whether notification posted to this channel should vibrate.",
-						"text": "Defaults to `true`.\n\nThis setting cannot be overridden once the channel is created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 838,
+							"line": 818,
 							"character": 11
 						}
 					],
@@ -4151,7 +3859,299 @@
 					}
 				},
 				{
-					"id": 215,
+					"id": 209,
+					"name": "description",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets the user visible description of this channel.",
+						"text": "The recommended maximum length is 300 characters; the value may be truncated if it is too long.\n\nThis setting can be updated after creation.\n",
+						"tags": [
+							{
+								"tag": "platform",
+								"text": "android API Level >= 28\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 829,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 212,
+					"name": "groupId",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.",
+						"text": "Groups can be created via via [`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThis setting cannot be overridden once the channel is created.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 856,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 205,
+					"name": "id",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The unique channel ID."
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 787,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 213,
+					"name": "importance",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets the level of interruption of this notification channel.",
+						"text": "Defaults to `AndroidImportance.DEFAULT`.\n\nThis setting can only be set to a lower importance level once set.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 865,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "AndroidImportance",
+						"id": 305
+					}
+				},
+				{
+					"id": 214,
+					"name": "lightColor",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "If lights are enabled (via `lights`), sets/overrides the light color for notifications\nposted to this channel.",
+						"text": "This setting cannot be overridden once the channel is created.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 873,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "AndroidColor",
+								"id": 264
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 210,
+					"name": "lights",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets whether notifications posted to this channel should display notification lights, on devices that support that feature.",
+						"text": "Defaults to `true`.\n\nThis setting cannot be overridden once the channel is created.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 838,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
+					"id": 206,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "The channel name. This is shown to the user so must be descriptive and relate to the notifications\nwhich will be delivered under this channel.",
+						"text": "This setting can be updated after creation.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 795,
+							"character": 6
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 217,
+					"name": "sound",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Overrides the sound the notification is displayed with.",
+						"text": "The default value is to play no sound. To play the default system sound use 'default'.\n\nThis setting cannot be overridden once the channel is created.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 901,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 211,
+					"name": "vibration",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets whether notification posted to this channel should vibrate.",
+						"text": "Defaults to `true`.\n\nThis setting cannot be overridden once the channel is created.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 847,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
+					"id": 216,
 					"name": "vibrationPattern",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4166,7 +4166,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 883,
+							"line": 892,
 							"character": 18
 						}
 					],
@@ -4179,7 +4179,7 @@
 					}
 				},
 				{
-					"id": 214,
+					"id": 215,
 					"name": "visibility",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4194,14 +4194,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 874,
+							"line": 883,
 							"character": 12
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 300
+						"id": 301
 					}
 				}
 			],
@@ -4210,26 +4210,26 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						206,
 						207,
 						208,
-						211,
-						204,
-						212,
-						213,
 						209,
+						212,
 						205,
-						216,
+						213,
+						214,
 						210,
-						215,
-						214
+						206,
+						217,
+						211,
+						216,
+						215
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 774,
+					"line": 783,
 					"character": 31
 				}
 			],
@@ -4237,12 +4237,12 @@
 				{
 					"type": "reference",
 					"name": "NativeAndroidChannel",
-					"id": 217
+					"id": 218
 				}
 			]
 		},
 		{
-			"id": 232,
+			"id": 233,
 			"name": "AndroidChannelGroup",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4261,7 +4261,7 @@
 			},
 			"children": [
 				{
-					"id": 235,
+					"id": 236,
 					"name": "description",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4282,7 +4282,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 948,
+							"line": 957,
 							"character": 13
 						}
 					],
@@ -4301,7 +4301,7 @@
 					}
 				},
 				{
-					"id": 233,
+					"id": 234,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4314,7 +4314,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 931,
+							"line": 940,
 							"character": 4
 						}
 					],
@@ -4324,7 +4324,7 @@
 					}
 				},
 				{
-					"id": 234,
+					"id": 235,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4338,7 +4338,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 939,
+							"line": 948,
 							"character": 6
 						}
 					],
@@ -4353,16 +4353,16 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						235,
-						233,
-						234
+						236,
+						234,
+						235
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 927,
+					"line": 936,
 					"character": 36
 				}
 			],
@@ -4370,12 +4370,12 @@
 				{
 					"type": "reference",
 					"name": "NativeAndroidChannelGroup",
-					"id": 236
+					"id": 237
 				}
 			]
 		},
 		{
-			"id": 177,
+			"id": 178,
 			"name": "AndroidInboxStyle",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4394,7 +4394,7 @@
 			},
 			"children": [
 				{
-					"id": 179,
+					"id": 180,
 					"name": "lines",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4408,7 +4408,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 593,
+							"line": 602,
 							"character": 7
 						}
 					],
@@ -4421,7 +4421,7 @@
 					}
 				},
 				{
-					"id": 181,
+					"id": 182,
 					"name": "summary",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4435,7 +4435,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 603,
+							"line": 612,
 							"character": 9
 						}
 					],
@@ -4454,7 +4454,7 @@
 					}
 				},
 				{
-					"id": 180,
+					"id": 181,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4468,7 +4468,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 598,
+							"line": 607,
 							"character": 7
 						}
 					],
@@ -4487,7 +4487,7 @@
 					}
 				},
 				{
-					"id": 178,
+					"id": 179,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4500,14 +4500,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 585,
+							"line": 594,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "INBOX",
-						"id": 298
+						"id": 299
 					}
 				}
 			],
@@ -4516,23 +4516,23 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						179,
-						181,
 						180,
-						178
+						182,
+						181,
+						179
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 581,
+					"line": 590,
 					"character": 34
 				}
 			]
 		},
 		{
-			"id": 160,
+			"id": 161,
 			"name": "AndroidInput",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4551,7 +4551,7 @@
 			},
 			"children": [
 				{
-					"id": 161,
+					"id": 162,
 					"name": "allowFreeFormInput",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4566,7 +4566,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 464,
+							"line": 473,
 							"character": 20
 						}
 					],
@@ -4589,7 +4589,7 @@
 					}
 				},
 				{
-					"id": 162,
+					"id": 163,
 					"name": "allowGeneratedReplies",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4604,7 +4604,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 474,
+							"line": 483,
 							"character": 23
 						}
 					],
@@ -4627,7 +4627,7 @@
 					}
 				},
 				{
-					"id": 163,
+					"id": 164,
 					"name": "choices",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4642,7 +4642,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 481,
+							"line": 490,
 							"character": 9
 						}
 					],
@@ -4655,7 +4655,7 @@
 					}
 				},
 				{
-					"id": 164,
+					"id": 165,
 					"name": "editableChoices",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4670,7 +4670,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 490,
+							"line": 499,
 							"character": 17
 						}
 					],
@@ -4693,7 +4693,7 @@
 					}
 				},
 				{
-					"id": 165,
+					"id": 166,
 					"name": "placeholder",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4707,7 +4707,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 495,
+							"line": 504,
 							"character": 13
 						}
 					],
@@ -4731,24 +4731,24 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						161,
 						162,
 						163,
 						164,
-						165
+						165,
+						166
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 453,
+					"line": 462,
 					"character": 29
 				}
 			]
 		},
 		{
-			"id": 182,
+			"id": 183,
 			"name": "AndroidMessagingStyle",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4767,7 +4767,7 @@
 			},
 			"children": [
 				{
-					"id": 187,
+					"id": 188,
 					"name": "group",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4781,7 +4781,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 639,
+							"line": 648,
 							"character": 7
 						}
 					],
@@ -4804,7 +4804,7 @@
 					}
 				},
 				{
-					"id": 185,
+					"id": 186,
 					"name": "messages",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4817,7 +4817,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 629,
+							"line": 638,
 							"character": 10
 						}
 					],
@@ -4826,12 +4826,12 @@
 						"elementType": {
 							"type": "reference",
 							"name": "AndroidMessagingStyleMessage",
-							"id": 188
+							"id": 189
 						}
 					}
 				},
 				{
-					"id": 184,
+					"id": 185,
 					"name": "person",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4844,18 +4844,18 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 624,
+							"line": 633,
 							"character": 8
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidPerson",
-						"id": 192
+						"id": 193
 					}
 				},
 				{
-					"id": 186,
+					"id": 187,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4869,7 +4869,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 634,
+							"line": 643,
 							"character": 7
 						}
 					],
@@ -4888,7 +4888,7 @@
 					}
 				},
 				{
-					"id": 183,
+					"id": 184,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4901,14 +4901,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 619,
+							"line": 628,
 							"character": 6
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "MESSAGING",
-						"id": 299
+						"id": 300
 					}
 				}
 			],
@@ -4917,24 +4917,24 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						187,
-						185,
-						184,
+						188,
 						186,
-						183
+						185,
+						187,
+						184
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 615,
+					"line": 624,
 					"character": 38
 				}
 			]
 		},
 		{
-			"id": 188,
+			"id": 189,
 			"name": "AndroidMessagingStyleMessage",
 			"kind": 256,
 			"kindString": "Interface",
@@ -4953,7 +4953,7 @@
 			},
 			"children": [
 				{
-					"id": 191,
+					"id": 192,
 					"name": "person",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4968,18 +4968,18 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 669,
+							"line": 678,
 							"character": 8
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidPerson",
-						"id": 192
+						"id": 193
 					}
 				},
 				{
-					"id": 189,
+					"id": 190,
 					"name": "text",
 					"kind": 1024,
 					"kindString": "Property",
@@ -4992,7 +4992,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 656,
+							"line": 665,
 							"character": 6
 						}
 					],
@@ -5002,7 +5002,7 @@
 					}
 				},
 				{
-					"id": 190,
+					"id": 191,
 					"name": "timestamp",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5015,7 +5015,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 661,
+							"line": 670,
 							"character": 11
 						}
 					],
@@ -5030,22 +5030,22 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						191,
-						189,
-						190
+						192,
+						190,
+						191
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 652,
+					"line": 661,
 					"character": 45
 				}
 			]
 		},
 		{
-			"id": 192,
+			"id": 193,
 			"name": "AndroidPerson",
 			"kind": 256,
 			"kindString": "Interface",
@@ -5064,7 +5064,7 @@
 			},
 			"children": [
 				{
-					"id": 195,
+					"id": 196,
 					"name": "bot",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5079,7 +5079,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 698,
+							"line": 707,
 							"character": 5
 						}
 					],
@@ -5102,7 +5102,7 @@
 					}
 				},
 				{
-					"id": 197,
+					"id": 198,
 					"name": "icon",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5117,7 +5117,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 717,
+							"line": 726,
 							"character": 6
 						}
 					],
@@ -5136,7 +5136,7 @@
 					}
 				},
 				{
-					"id": 194,
+					"id": 195,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5150,7 +5150,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 691,
+							"line": 700,
 							"character": 4
 						}
 					],
@@ -5169,7 +5169,7 @@
 					}
 				},
 				{
-					"id": 196,
+					"id": 197,
 					"name": "important",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5184,7 +5184,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 709,
+							"line": 718,
 							"character": 11
 						}
 					],
@@ -5207,7 +5207,7 @@
 					}
 				},
 				{
-					"id": 193,
+					"id": 194,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5221,7 +5221,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 685,
+							"line": 694,
 							"character": 6
 						}
 					],
@@ -5231,7 +5231,7 @@
 					}
 				},
 				{
-					"id": 198,
+					"id": 199,
 					"name": "uri",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5246,7 +5246,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 728,
+							"line": 737,
 							"character": 5
 						}
 					],
@@ -5270,25 +5270,25 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						196,
+						198,
 						195,
 						197,
 						194,
-						196,
-						193,
-						198
+						199
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 679,
+					"line": 688,
 					"character": 30
 				}
 			]
 		},
 		{
-			"id": 199,
+			"id": 200,
 			"name": "AndroidProgress",
 			"kind": 256,
 			"kindString": "Interface",
@@ -5307,7 +5307,7 @@
 			},
 			"children": [
 				{
-					"id": 201,
+					"id": 202,
 					"name": "current",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5322,7 +5322,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 753,
+							"line": 762,
 							"character": 9
 						}
 					],
@@ -5341,7 +5341,7 @@
 					}
 				},
 				{
-					"id": 202,
+					"id": 203,
 					"name": "indeterminate",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5356,7 +5356,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 761,
+							"line": 770,
 							"character": 15
 						}
 					],
@@ -5379,7 +5379,7 @@
 					}
 				},
 				{
-					"id": 200,
+					"id": 201,
 					"name": "max",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5394,7 +5394,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 746,
+							"line": 755,
 							"character": 5
 						}
 					],
@@ -5418,22 +5418,22 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						201,
 						202,
-						200
+						203,
+						201
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 740,
+					"line": 749,
 					"character": 32
 				}
 			]
 		},
 		{
-			"id": 347,
+			"id": 348,
 			"name": "Event",
 			"kind": 256,
 			"kindString": "Interface",
@@ -5446,7 +5446,7 @@
 			},
 			"children": [
 				{
-					"id": 349,
+					"id": 350,
 					"name": "detail",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5466,11 +5466,11 @@
 					"type": {
 						"type": "reference",
 						"name": "EventDetail",
-						"id": 365
+						"id": 366
 					}
 				},
 				{
-					"id": 348,
+					"id": 349,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5490,7 +5490,7 @@
 					"type": {
 						"type": "reference",
 						"name": "EventType",
-						"id": 355
+						"id": 356
 					}
 				}
 			],
@@ -5499,8 +5499,8 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						349,
-						348
+						350,
+						349
 					]
 				}
 			],
@@ -5513,7 +5513,7 @@
 			]
 		},
 		{
-			"id": 365,
+			"id": 366,
 			"name": "EventDetail",
 			"kind": 256,
 			"kindString": "Interface",
@@ -5526,7 +5526,7 @@
 			},
 			"children": [
 				{
-					"id": 371,
+					"id": 372,
 					"name": "blocked",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5570,7 +5570,7 @@
 					}
 				},
 				{
-					"id": 369,
+					"id": 370,
 					"name": "channel",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5598,11 +5598,11 @@
 					"type": {
 						"type": "reference",
 						"name": "NativeAndroidChannel",
-						"id": 217
+						"id": 218
 					}
 				},
 				{
-					"id": 370,
+					"id": 371,
 					"name": "channelGroup",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5630,11 +5630,11 @@
 					"type": {
 						"type": "reference",
 						"name": "NativeAndroidChannelGroup",
-						"id": 236
+						"id": 237
 					}
 				},
 				{
-					"id": 368,
+					"id": 369,
 					"name": "input",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5674,7 +5674,7 @@
 					}
 				},
 				{
-					"id": 366,
+					"id": 367,
 					"name": "notification",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5696,11 +5696,11 @@
 					"type": {
 						"type": "reference",
 						"name": "Notification",
-						"id": 332
+						"id": 333
 					}
 				},
 				{
-					"id": 367,
+					"id": 368,
 					"name": "pressAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -5722,7 +5722,7 @@
 					"type": {
 						"type": "reference",
 						"name": "NotificationPressAction",
-						"id": 350
+						"id": 351
 					}
 				}
 			],
@@ -5731,12 +5731,12 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						372,
+						370,
 						371,
 						369,
-						370,
-						368,
-						366,
-						367
+						367,
+						368
 					]
 				}
 			],
@@ -7538,7 +7538,7 @@
 			]
 		},
 		{
-			"id": 343,
+			"id": 344,
 			"name": "InitialNotification",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7551,7 +7551,7 @@
 			},
 			"children": [
 				{
-					"id": 346,
+					"id": 347,
 					"name": "input",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7591,7 +7591,7 @@
 					}
 				},
 				{
-					"id": 344,
+					"id": 345,
 					"name": "notification",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7611,11 +7611,11 @@
 					"type": {
 						"type": "reference",
 						"name": "Notification",
-						"id": 332
+						"id": 333
 					}
 				},
 				{
-					"id": 345,
+					"id": 346,
 					"name": "pressAction",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7635,7 +7635,7 @@
 					"type": {
 						"type": "reference",
 						"name": "NotificationPressAction",
-						"id": 350
+						"id": 351
 					}
 				}
 			],
@@ -7644,9 +7644,9 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						346,
-						344,
-						345
+						347,
+						345,
+						346
 					]
 				}
 			],
@@ -7659,7 +7659,7 @@
 			]
 		},
 		{
-			"id": 384,
+			"id": 385,
 			"name": "IntervalTrigger",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7672,7 +7672,7 @@
 			},
 			"children": [
 				{
-					"id": 386,
+					"id": 387,
 					"name": "interval",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7696,7 +7696,7 @@
 					}
 				},
 				{
-					"id": 387,
+					"id": 388,
 					"name": "timeUnit",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7721,18 +7721,18 @@
 							{
 								"type": "reference",
 								"name": "TimeUnit",
-								"id": 388
+								"id": 389
 							},
 							{
 								"type": "reference",
 								"name": "SECONDS",
-								"id": 389
+								"id": 390
 							}
 						]
 					}
 				},
 				{
-					"id": 385,
+					"id": 386,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7752,7 +7752,7 @@
 					"type": {
 						"type": "reference",
 						"name": "INTERVAL",
-						"id": 395
+						"id": 396
 					}
 				}
 			],
@@ -7761,9 +7761,9 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						386,
 						387,
-						385
+						388,
+						386
 					]
 				}
 			],
@@ -7776,7 +7776,7 @@
 			]
 		},
 		{
-			"id": 510,
+			"id": 511,
 			"name": "JsonConfig",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7789,7 +7789,7 @@
 			},
 			"children": [
 				{
-					"id": 511,
+					"id": 512,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7810,11 +7810,11 @@
 					"type": {
 						"type": "reference",
 						"name": "JsonConfigAndroid",
-						"id": 506
+						"id": 507
 					}
 				},
 				{
-					"id": 512,
+					"id": 513,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7835,7 +7835,7 @@
 					"type": {
 						"type": "reference",
 						"name": "JsonConfigIOS",
-						"id": 508
+						"id": 509
 					}
 				}
 			],
@@ -7844,8 +7844,8 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						511,
-						512
+						512,
+						513
 					]
 				}
 			],
@@ -7858,7 +7858,7 @@
 			]
 		},
 		{
-			"id": 506,
+			"id": 507,
 			"name": "JsonConfigAndroid",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7871,7 +7871,7 @@
 			},
 			"children": [
 				{
-					"id": 507,
+					"id": 508,
 					"name": "license",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7900,7 +7900,7 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						507
+						508
 					]
 				}
 			],
@@ -7913,7 +7913,7 @@
 			]
 		},
 		{
-			"id": 508,
+			"id": 509,
 			"name": "JsonConfigIOS",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7926,7 +7926,7 @@
 			},
 			"children": [
 				{
-					"id": 509,
+					"id": 510,
 					"name": "license",
 					"kind": 1024,
 					"kindString": "Property",
@@ -7955,7 +7955,7 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						509
+						510
 					]
 				}
 			],
@@ -7968,7 +7968,7 @@
 			]
 		},
 		{
-			"id": 402,
+			"id": 403,
 			"name": "Module",
 			"kind": 256,
 			"kindString": "Interface",
@@ -7977,7 +7977,7 @@
 			},
 			"children": [
 				{
-					"id": 403,
+					"id": 404,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -7986,7 +7986,7 @@
 					},
 					"signatures": [
 						{
-							"id": 404,
+							"id": 405,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8016,7 +8016,7 @@
 					]
 				},
 				{
-					"id": 412,
+					"id": 413,
 					"name": "cancelDisplayedNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8025,7 +8025,7 @@
 					},
 					"signatures": [
 						{
-							"id": 413,
+							"id": 414,
 							"name": "cancelDisplayedNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8036,7 +8036,7 @@
 							},
 							"parameters": [
 								{
-									"id": 414,
+									"id": 415,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8071,7 +8071,7 @@
 					]
 				},
 				{
-					"id": 405,
+					"id": 406,
 					"name": "cancelDisplayedNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8080,7 +8080,7 @@
 					},
 					"signatures": [
 						{
-							"id": 406,
+							"id": 407,
 							"name": "cancelDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8110,7 +8110,7 @@
 					]
 				},
 				{
-					"id": 409,
+					"id": 410,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8119,7 +8119,7 @@
 					},
 					"signatures": [
 						{
-							"id": 410,
+							"id": 411,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8130,7 +8130,7 @@
 							},
 							"parameters": [
 								{
-									"id": 411,
+									"id": 412,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8165,7 +8165,7 @@
 					]
 				},
 				{
-					"id": 415,
+					"id": 416,
 					"name": "cancelTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8174,7 +8174,7 @@
 					},
 					"signatures": [
 						{
-							"id": 416,
+							"id": 417,
 							"name": "cancelTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8184,7 +8184,7 @@
 							},
 							"parameters": [
 								{
-									"id": 417,
+									"id": 418,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8219,7 +8219,7 @@
 					]
 				},
 				{
-					"id": 407,
+					"id": 408,
 					"name": "cancelTriggerNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8228,7 +8228,7 @@
 					},
 					"signatures": [
 						{
-							"id": 408,
+							"id": 409,
 							"name": "cancelTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8257,7 +8257,7 @@
 					]
 				},
 				{
-					"id": 418,
+					"id": 419,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8266,7 +8266,7 @@
 					},
 					"signatures": [
 						{
-							"id": 419,
+							"id": 420,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8283,7 +8283,7 @@
 							},
 							"parameters": [
 								{
-									"id": 420,
+									"id": 421,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8294,7 +8294,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannel",
-										"id": 203
+										"id": 204
 									}
 								}
 							],
@@ -8319,7 +8319,7 @@
 					]
 				},
 				{
-					"id": 424,
+					"id": 425,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8328,7 +8328,7 @@
 					},
 					"signatures": [
 						{
-							"id": 425,
+							"id": 426,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8345,7 +8345,7 @@
 							},
 							"parameters": [
 								{
-									"id": 426,
+									"id": 427,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8356,7 +8356,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
-										"id": 232
+										"id": 233
 									}
 								}
 							],
@@ -8381,7 +8381,7 @@
 					]
 				},
 				{
-					"id": 427,
+					"id": 428,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8390,7 +8390,7 @@
 					},
 					"signatures": [
 						{
-							"id": 428,
+							"id": 429,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8407,7 +8407,7 @@
 							},
 							"parameters": [
 								{
-									"id": 429,
+									"id": 430,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8420,7 +8420,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 232
+											"id": 233
 										}
 									}
 								}
@@ -8446,7 +8446,7 @@
 					]
 				},
 				{
-					"id": 421,
+					"id": 422,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8455,7 +8455,7 @@
 					},
 					"signatures": [
 						{
-							"id": 422,
+							"id": 423,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8472,7 +8472,7 @@
 							},
 							"parameters": [
 								{
-									"id": 423,
+									"id": 424,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8485,7 +8485,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannel",
-											"id": 203
+											"id": 204
 										}
 									}
 								}
@@ -8511,7 +8511,7 @@
 					]
 				},
 				{
-					"id": 439,
+					"id": 440,
 					"name": "createTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8520,7 +8520,7 @@
 					},
 					"signatures": [
 						{
-							"id": 440,
+							"id": 441,
 							"name": "createTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8531,7 +8531,7 @@
 							},
 							"parameters": [
 								{
-									"id": 441,
+									"id": 442,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8542,11 +8542,11 @@
 									"type": {
 										"type": "reference",
 										"name": "Notification",
-										"id": 332
+										"id": 333
 									}
 								},
 								{
-									"id": 442,
+									"id": 443,
 									"name": "trigger",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8557,7 +8557,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Trigger",
-										"id": 396
+										"id": 397
 									}
 								}
 							],
@@ -8582,7 +8582,7 @@
 					]
 				},
 				{
-					"id": 495,
+					"id": 496,
 					"name": "decrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8591,7 +8591,7 @@
 					},
 					"signatures": [
 						{
-							"id": 496,
+							"id": 497,
 							"name": "decrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8608,7 +8608,7 @@
 							},
 							"parameters": [
 								{
-									"id": 497,
+									"id": 498,
 									"name": "decrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8651,7 +8651,7 @@
 					]
 				},
 				{
-					"id": 430,
+					"id": 431,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8660,7 +8660,7 @@
 					},
 					"signatures": [
 						{
-							"id": 431,
+							"id": 432,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8677,7 +8677,7 @@
 							},
 							"parameters": [
 								{
-									"id": 432,
+									"id": 433,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8712,7 +8712,7 @@
 					]
 				},
 				{
-					"id": 433,
+					"id": 434,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8721,7 +8721,7 @@
 					},
 					"signatures": [
 						{
-							"id": 434,
+							"id": 435,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8738,7 +8738,7 @@
 							},
 							"parameters": [
 								{
-									"id": 435,
+									"id": 436,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8773,7 +8773,7 @@
 					]
 				},
 				{
-					"id": 436,
+					"id": 437,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8782,7 +8782,7 @@
 					},
 					"signatures": [
 						{
-							"id": 437,
+							"id": 438,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8793,7 +8793,7 @@
 							},
 							"parameters": [
 								{
-									"id": 438,
+									"id": 439,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8804,7 +8804,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Notification",
-										"id": 332
+										"id": 333
 									}
 								}
 							],
@@ -8829,7 +8829,7 @@
 					]
 				},
 				{
-					"id": 487,
+					"id": 488,
 					"name": "getBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8838,7 +8838,7 @@
 					},
 					"signatures": [
 						{
-							"id": 488,
+							"id": 489,
 							"name": "getBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8874,7 +8874,7 @@
 					]
 				},
 				{
-					"id": 445,
+					"id": 446,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8883,7 +8883,7 @@
 					},
 					"signatures": [
 						{
-							"id": 446,
+							"id": 447,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8900,7 +8900,7 @@
 							},
 							"parameters": [
 								{
-									"id": 447,
+									"id": 448,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8924,7 +8924,7 @@
 											{
 												"type": "reference",
 												"name": "NativeAndroidChannel",
-												"id": 217
+												"id": 218
 											},
 											{
 												"type": "intrinsic",
@@ -8945,7 +8945,7 @@
 					]
 				},
 				{
-					"id": 450,
+					"id": 451,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -8954,7 +8954,7 @@
 					},
 					"signatures": [
 						{
-							"id": 451,
+							"id": 452,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -8971,7 +8971,7 @@
 							},
 							"parameters": [
 								{
-									"id": 452,
+									"id": 453,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -8995,7 +8995,7 @@
 											{
 												"type": "reference",
 												"name": "NativeAndroidChannelGroup",
-												"id": 236
+												"id": 237
 											},
 											{
 												"type": "intrinsic",
@@ -9016,7 +9016,7 @@
 					]
 				},
 				{
-					"id": 453,
+					"id": 454,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9025,7 +9025,7 @@
 					},
 					"signatures": [
 						{
-							"id": 454,
+							"id": 455,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9049,7 +9049,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "NativeAndroidChannelGroup",
-											"id": 236
+											"id": 237
 										}
 									}
 								]
@@ -9065,7 +9065,7 @@
 					]
 				},
 				{
-					"id": 448,
+					"id": 449,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9074,7 +9074,7 @@
 					},
 					"signatures": [
 						{
-							"id": 449,
+							"id": 450,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9098,7 +9098,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "NativeAndroidChannel",
-											"id": 217
+											"id": 218
 										}
 									}
 								]
@@ -9114,7 +9114,7 @@
 					]
 				},
 				{
-					"id": 455,
+					"id": 456,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9123,7 +9123,7 @@
 					},
 					"signatures": [
 						{
-							"id": 456,
+							"id": 457,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9142,7 +9142,7 @@
 											{
 												"type": "reference",
 												"name": "InitialNotification",
-												"id": 343
+												"id": 344
 											},
 											{
 												"type": "intrinsic",
@@ -9163,7 +9163,7 @@
 					]
 				},
 				{
-					"id": 483,
+					"id": 484,
 					"name": "getNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9172,7 +9172,7 @@
 					},
 					"signatures": [
 						{
-							"id": 484,
+							"id": 485,
 							"name": "getNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9212,7 +9212,7 @@
 					]
 				},
 				{
-					"id": 485,
+					"id": 486,
 					"name": "getNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9221,7 +9221,7 @@
 					},
 					"signatures": [
 						{
-							"id": 486,
+							"id": 487,
 							"name": "getNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9258,7 +9258,7 @@
 					]
 				},
 				{
-					"id": 502,
+					"id": 503,
 					"name": "getPowerManagerInfo",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9267,7 +9267,7 @@
 					},
 					"signatures": [
 						{
-							"id": 503,
+							"id": 504,
 							"name": "getPowerManagerInfo",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9289,7 +9289,7 @@
 									{
 										"type": "reference",
 										"name": "PowerManagerInfo",
-										"id": 397
+										"id": 398
 									}
 								]
 							}
@@ -9304,7 +9304,7 @@
 					]
 				},
 				{
-					"id": 443,
+					"id": 444,
 					"name": "getTriggerNotificationIds",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9313,7 +9313,7 @@
 					},
 					"signatures": [
 						{
-							"id": 444,
+							"id": 445,
 							"name": "getTriggerNotificationIds",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9346,7 +9346,7 @@
 					]
 				},
 				{
-					"id": 492,
+					"id": 493,
 					"name": "incrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9355,7 +9355,7 @@
 					},
 					"signatures": [
 						{
-							"id": 493,
+							"id": 494,
 							"name": "incrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9372,7 +9372,7 @@
 							},
 							"parameters": [
 								{
-									"id": 494,
+									"id": 495,
 									"name": "incrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9418,7 +9418,7 @@
 					]
 				},
 				{
-					"id": 500,
+					"id": 501,
 					"name": "isBatteryOptimizationEnabled",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9427,7 +9427,7 @@
 					},
 					"signatures": [
 						{
-							"id": 501,
+							"id": 502,
 							"name": "isBatteryOptimizationEnabled",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9463,7 +9463,7 @@
 					]
 				},
 				{
-					"id": 457,
+					"id": 458,
 					"name": "onBackgroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9472,7 +9472,7 @@
 					},
 					"signatures": [
 						{
-							"id": 458,
+							"id": 459,
 							"name": "onBackgroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9483,7 +9483,7 @@
 							},
 							"parameters": [
 								{
-									"id": 459,
+									"id": 460,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9494,21 +9494,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 460,
+											"id": 461,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 461,
+													"id": 462,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 462,
+															"id": 463,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -9516,7 +9516,7 @@
 															"type": {
 																"type": "reference",
 																"name": "Event",
-																"id": 347
+																"id": 348
 															}
 														}
 													],
@@ -9558,7 +9558,7 @@
 					]
 				},
 				{
-					"id": 463,
+					"id": 464,
 					"name": "onForegroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9567,7 +9567,7 @@
 					},
 					"signatures": [
 						{
-							"id": 464,
+							"id": 465,
 							"name": "onForegroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9578,7 +9578,7 @@
 							},
 							"parameters": [
 								{
-									"id": 465,
+									"id": 466,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9589,21 +9589,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 466,
+											"id": 467,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 467,
+													"id": 468,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 468,
+															"id": 469,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -9611,7 +9611,7 @@
 															"type": {
 																"type": "reference",
 																"name": "Event",
-																"id": 347
+																"id": 348
 															}
 														}
 													],
@@ -9635,14 +9635,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 469,
+									"id": 470,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"signatures": [
 										{
-											"id": 470,
+											"id": 471,
 											"name": "__call",
 											"kind": 4096,
 											"kindString": "Call signature",
@@ -9673,7 +9673,7 @@
 					]
 				},
 				{
-					"id": 498,
+					"id": 499,
 					"name": "openBatteryOptimizationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9682,7 +9682,7 @@
 					},
 					"signatures": [
 						{
-							"id": 499,
+							"id": 500,
 							"name": "openBatteryOptimizationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9718,7 +9718,7 @@
 					]
 				},
 				{
-					"id": 471,
+					"id": 472,
 					"name": "openNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9727,7 +9727,7 @@
 					},
 					"signatures": [
 						{
-							"id": 472,
+							"id": 473,
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9744,7 +9744,7 @@
 							},
 							"parameters": [
 								{
-									"id": 473,
+									"id": 474,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9790,7 +9790,7 @@
 					]
 				},
 				{
-					"id": 504,
+					"id": 505,
 					"name": "openPowerManagerSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9799,7 +9799,7 @@
 					},
 					"signatures": [
 						{
-							"id": 505,
+							"id": 506,
 							"name": "openPowerManagerSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9835,7 +9835,7 @@
 					]
 				},
 				{
-					"id": 474,
+					"id": 475,
 					"name": "registerForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9844,7 +9844,7 @@
 					},
 					"signatures": [
 						{
-							"id": 475,
+							"id": 476,
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9861,7 +9861,7 @@
 							},
 							"parameters": [
 								{
-									"id": 476,
+									"id": 477,
 									"name": "task",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9872,7 +9872,7 @@
 									"type": {
 										"type": "reference",
 										"name": "ForegroundServiceTask",
-										"id": 372
+										"id": 373
 									}
 								}
 							],
@@ -9891,7 +9891,7 @@
 					]
 				},
 				{
-					"id": 477,
+					"id": 478,
 					"name": "requestPermission",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9900,7 +9900,7 @@
 					},
 					"signatures": [
 						{
-							"id": 478,
+							"id": 479,
 							"name": "requestPermission",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9917,7 +9917,7 @@
 							},
 							"parameters": [
 								{
-									"id": 479,
+									"id": 480,
 									"name": "permissions",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -9956,7 +9956,7 @@
 					]
 				},
 				{
-					"id": 489,
+					"id": 490,
 					"name": "setBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -9965,7 +9965,7 @@
 					},
 					"signatures": [
 						{
-							"id": 490,
+							"id": 491,
 							"name": "setBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -9982,7 +9982,7 @@
 							},
 							"parameters": [
 								{
-									"id": 491,
+									"id": 492,
 									"name": "count",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10017,7 +10017,7 @@
 					]
 				},
 				{
-					"id": 480,
+					"id": 481,
 					"name": "setNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10026,7 +10026,7 @@
 					},
 					"signatures": [
 						{
-							"id": 481,
+							"id": 482,
 							"name": "setNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10042,7 +10042,7 @@
 							},
 							"parameters": [
 								{
-									"id": 482,
+									"id": 483,
 									"name": "categories",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10086,42 +10086,42 @@
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						403,
-						412,
-						405,
-						409,
-						415,
-						407,
-						418,
-						424,
-						427,
-						421,
-						439,
-						495,
-						430,
-						433,
-						436,
-						487,
-						445,
-						450,
-						453,
-						448,
-						455,
-						483,
-						485,
-						502,
-						443,
-						492,
-						500,
-						457,
-						463,
-						498,
-						471,
-						504,
-						474,
-						477,
-						489,
-						480
+						404,
+						413,
+						406,
+						410,
+						416,
+						408,
+						419,
+						425,
+						428,
+						422,
+						440,
+						496,
+						431,
+						434,
+						437,
+						488,
+						446,
+						451,
+						454,
+						449,
+						456,
+						484,
+						486,
+						503,
+						444,
+						493,
+						501,
+						458,
+						464,
+						499,
+						472,
+						505,
+						475,
+						478,
+						490,
+						481
 					]
 				}
 			],
@@ -10136,12 +10136,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 515
+					"id": 516
 				}
 			]
 		},
 		{
-			"id": 513,
+			"id": 514,
 			"name": "ModuleStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -10154,7 +10154,7 @@
 			},
 			"children": [
 				{
-					"id": 514,
+					"id": 515,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10182,7 +10182,7 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						514
+						515
 					]
 				}
 			],
@@ -10197,12 +10197,12 @@
 				{
 					"type": "reference",
 					"name": "ModuleWithStatics",
-					"id": 515
+					"id": 516
 				}
 			]
 		},
 		{
-			"id": 515,
+			"id": 516,
 			"name": "ModuleWithStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -10211,7 +10211,7 @@
 			},
 			"children": [
 				{
-					"id": 619,
+					"id": 620,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10235,11 +10235,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "ModuleStatics.SDK_VERSION",
-						"id": 514
+						"id": 515
 					}
 				},
 				{
-					"id": 516,
+					"id": 517,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10248,7 +10248,7 @@
 					},
 					"signatures": [
 						{
-							"id": 517,
+							"id": 518,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10270,7 +10270,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelAllNotifications",
-								"id": 403
+								"id": 404
 							}
 						}
 					],
@@ -10284,11 +10284,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelAllNotifications",
-						"id": 403
+						"id": 404
 					}
 				},
 				{
-					"id": 525,
+					"id": 526,
 					"name": "cancelDisplayedNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10297,7 +10297,7 @@
 					},
 					"signatures": [
 						{
-							"id": 526,
+							"id": 527,
 							"name": "cancelDisplayedNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10308,7 +10308,7 @@
 							},
 							"parameters": [
 								{
-									"id": 527,
+									"id": 528,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10335,7 +10335,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelDisplayedNotification",
-								"id": 412
+								"id": 413
 							}
 						}
 					],
@@ -10349,11 +10349,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelDisplayedNotification",
-						"id": 412
+						"id": 413
 					}
 				},
 				{
-					"id": 518,
+					"id": 519,
 					"name": "cancelDisplayedNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10362,7 +10362,7 @@
 					},
 					"signatures": [
 						{
-							"id": 519,
+							"id": 520,
 							"name": "cancelDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10384,7 +10384,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelDisplayedNotifications",
-								"id": 405
+								"id": 406
 							}
 						}
 					],
@@ -10398,11 +10398,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelDisplayedNotifications",
-						"id": 405
+						"id": 406
 					}
 				},
 				{
-					"id": 522,
+					"id": 523,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10411,7 +10411,7 @@
 					},
 					"signatures": [
 						{
-							"id": 523,
+							"id": 524,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10422,7 +10422,7 @@
 							},
 							"parameters": [
 								{
-									"id": 524,
+									"id": 525,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10449,7 +10449,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelNotification",
-								"id": 409
+								"id": 410
 							}
 						}
 					],
@@ -10463,11 +10463,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelNotification",
-						"id": 409
+						"id": 410
 					}
 				},
 				{
-					"id": 528,
+					"id": 529,
 					"name": "cancelTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10476,7 +10476,7 @@
 					},
 					"signatures": [
 						{
-							"id": 529,
+							"id": 530,
 							"name": "cancelTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10486,7 +10486,7 @@
 							},
 							"parameters": [
 								{
-									"id": 530,
+									"id": 531,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10513,7 +10513,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelTriggerNotification",
-								"id": 415
+								"id": 416
 							}
 						}
 					],
@@ -10527,11 +10527,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelTriggerNotification",
-						"id": 415
+						"id": 416
 					}
 				},
 				{
-					"id": 520,
+					"id": 521,
 					"name": "cancelTriggerNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10540,7 +10540,7 @@
 					},
 					"signatures": [
 						{
-							"id": 521,
+							"id": 522,
 							"name": "cancelTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10561,7 +10561,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.cancelTriggerNotifications",
-								"id": 407
+								"id": 408
 							}
 						}
 					],
@@ -10575,11 +10575,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.cancelTriggerNotifications",
-						"id": 407
+						"id": 408
 					}
 				},
 				{
-					"id": 531,
+					"id": 532,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10588,7 +10588,7 @@
 					},
 					"signatures": [
 						{
-							"id": 532,
+							"id": 533,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10605,7 +10605,7 @@
 							},
 							"parameters": [
 								{
-									"id": 533,
+									"id": 534,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10616,7 +10616,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannel",
-										"id": 203
+										"id": 204
 									}
 								}
 							],
@@ -10633,7 +10633,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannel",
-								"id": 418
+								"id": 419
 							}
 						}
 					],
@@ -10647,11 +10647,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannel",
-						"id": 418
+						"id": 419
 					}
 				},
 				{
-					"id": 537,
+					"id": 538,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10660,7 +10660,7 @@
 					},
 					"signatures": [
 						{
-							"id": 538,
+							"id": 539,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10677,7 +10677,7 @@
 							},
 							"parameters": [
 								{
-									"id": 539,
+									"id": 540,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10688,7 +10688,7 @@
 									"type": {
 										"type": "reference",
 										"name": "AndroidChannelGroup",
-										"id": 232
+										"id": 233
 									}
 								}
 							],
@@ -10705,7 +10705,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroup",
-								"id": 424
+								"id": 425
 							}
 						}
 					],
@@ -10719,11 +10719,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroup",
-						"id": 424
+						"id": 425
 					}
 				},
 				{
-					"id": 540,
+					"id": 541,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10732,7 +10732,7 @@
 					},
 					"signatures": [
 						{
-							"id": 541,
+							"id": 542,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10749,7 +10749,7 @@
 							},
 							"parameters": [
 								{
-									"id": 542,
+									"id": 543,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10762,7 +10762,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannelGroup",
-											"id": 232
+											"id": 233
 										}
 									}
 								}
@@ -10780,7 +10780,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannelGroups",
-								"id": 427
+								"id": 428
 							}
 						}
 					],
@@ -10794,11 +10794,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannelGroups",
-						"id": 427
+						"id": 428
 					}
 				},
 				{
-					"id": 534,
+					"id": 535,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10807,7 +10807,7 @@
 					},
 					"signatures": [
 						{
-							"id": 535,
+							"id": 536,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10824,7 +10824,7 @@
 							},
 							"parameters": [
 								{
-									"id": 536,
+									"id": 537,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10837,7 +10837,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "AndroidChannel",
-											"id": 203
+											"id": 204
 										}
 									}
 								}
@@ -10855,7 +10855,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createChannels",
-								"id": 421
+								"id": 422
 							}
 						}
 					],
@@ -10869,11 +10869,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createChannels",
-						"id": 421
+						"id": 422
 					}
 				},
 				{
-					"id": 552,
+					"id": 553,
 					"name": "createTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10882,7 +10882,7 @@
 					},
 					"signatures": [
 						{
-							"id": 553,
+							"id": 554,
 							"name": "createTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10893,7 +10893,7 @@
 							},
 							"parameters": [
 								{
-									"id": 554,
+									"id": 555,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10904,11 +10904,11 @@
 									"type": {
 										"type": "reference",
 										"name": "Notification",
-										"id": 332
+										"id": 333
 									}
 								},
 								{
-									"id": 555,
+									"id": 556,
 									"name": "trigger",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -10919,7 +10919,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Trigger",
-										"id": 396
+										"id": 397
 									}
 								}
 							],
@@ -10936,7 +10936,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.createTriggerNotification",
-								"id": 439
+								"id": 440
 							}
 						}
 					],
@@ -10950,11 +10950,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.createTriggerNotification",
-						"id": 439
+						"id": 440
 					}
 				},
 				{
-					"id": 608,
+					"id": 609,
 					"name": "decrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10963,7 +10963,7 @@
 					},
 					"signatures": [
 						{
-							"id": 609,
+							"id": 610,
 							"name": "decrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -10980,7 +10980,7 @@
 							},
 							"parameters": [
 								{
-									"id": 610,
+									"id": 611,
 									"name": "decrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11015,7 +11015,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.decrementBadgeCount",
-								"id": 495
+								"id": 496
 							}
 						}
 					],
@@ -11029,11 +11029,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.decrementBadgeCount",
-						"id": 495
+						"id": 496
 					}
 				},
 				{
-					"id": 543,
+					"id": 544,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11042,7 +11042,7 @@
 					},
 					"signatures": [
 						{
-							"id": 544,
+							"id": 545,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11059,7 +11059,7 @@
 							},
 							"parameters": [
 								{
-									"id": 545,
+									"id": 546,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11086,7 +11086,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannel",
-								"id": 430
+								"id": 431
 							}
 						}
 					],
@@ -11100,11 +11100,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannel",
-						"id": 430
+						"id": 431
 					}
 				},
 				{
-					"id": 546,
+					"id": 547,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11113,7 +11113,7 @@
 					},
 					"signatures": [
 						{
-							"id": 547,
+							"id": 548,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11130,7 +11130,7 @@
 							},
 							"parameters": [
 								{
-									"id": 548,
+									"id": 549,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11157,7 +11157,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.deleteChannelGroup",
-								"id": 433
+								"id": 434
 							}
 						}
 					],
@@ -11171,11 +11171,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.deleteChannelGroup",
-						"id": 433
+						"id": 434
 					}
 				},
 				{
-					"id": 549,
+					"id": 550,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11184,7 +11184,7 @@
 					},
 					"signatures": [
 						{
-							"id": 550,
+							"id": 551,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11195,7 +11195,7 @@
 							},
 							"parameters": [
 								{
-									"id": 551,
+									"id": 552,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11206,7 +11206,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Notification",
-										"id": 332
+										"id": 333
 									}
 								}
 							],
@@ -11223,7 +11223,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.displayNotification",
-								"id": 436
+								"id": 437
 							}
 						}
 					],
@@ -11237,11 +11237,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.displayNotification",
-						"id": 436
+						"id": 437
 					}
 				},
 				{
-					"id": 600,
+					"id": 601,
 					"name": "getBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11250,7 +11250,7 @@
 					},
 					"signatures": [
 						{
-							"id": 601,
+							"id": 602,
 							"name": "getBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11278,7 +11278,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getBadgeCount",
-								"id": 487
+								"id": 488
 							}
 						}
 					],
@@ -11292,11 +11292,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getBadgeCount",
-						"id": 487
+						"id": 488
 					}
 				},
 				{
-					"id": 558,
+					"id": 559,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11305,7 +11305,7 @@
 					},
 					"signatures": [
 						{
-							"id": 559,
+							"id": 560,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11322,7 +11322,7 @@
 							},
 							"parameters": [
 								{
-									"id": 560,
+									"id": 561,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11346,7 +11346,7 @@
 											{
 												"type": "reference",
 												"name": "NativeAndroidChannel",
-												"id": 217
+												"id": 218
 											},
 											{
 												"type": "intrinsic",
@@ -11359,7 +11359,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannel",
-								"id": 445
+								"id": 446
 							}
 						}
 					],
@@ -11373,11 +11373,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannel",
-						"id": 445
+						"id": 446
 					}
 				},
 				{
-					"id": 563,
+					"id": 564,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11386,7 +11386,7 @@
 					},
 					"signatures": [
 						{
-							"id": 564,
+							"id": 565,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11403,7 +11403,7 @@
 							},
 							"parameters": [
 								{
-									"id": 565,
+									"id": 566,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11427,7 +11427,7 @@
 											{
 												"type": "reference",
 												"name": "NativeAndroidChannelGroup",
-												"id": 236
+												"id": 237
 											},
 											{
 												"type": "intrinsic",
@@ -11440,7 +11440,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroup",
-								"id": 450
+								"id": 451
 							}
 						}
 					],
@@ -11454,11 +11454,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroup",
-						"id": 450
+						"id": 451
 					}
 				},
 				{
-					"id": 566,
+					"id": 567,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11467,7 +11467,7 @@
 					},
 					"signatures": [
 						{
-							"id": 567,
+							"id": 568,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11491,7 +11491,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "NativeAndroidChannelGroup",
-											"id": 236
+											"id": 237
 										}
 									}
 								]
@@ -11499,7 +11499,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannelGroups",
-								"id": 453
+								"id": 454
 							}
 						}
 					],
@@ -11513,11 +11513,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannelGroups",
-						"id": 453
+						"id": 454
 					}
 				},
 				{
-					"id": 561,
+					"id": 562,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11526,7 +11526,7 @@
 					},
 					"signatures": [
 						{
-							"id": 562,
+							"id": 563,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11550,7 +11550,7 @@
 										"elementType": {
 											"type": "reference",
 											"name": "NativeAndroidChannel",
-											"id": 217
+											"id": 218
 										}
 									}
 								]
@@ -11558,7 +11558,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getChannels",
-								"id": 448
+								"id": 449
 							}
 						}
 					],
@@ -11572,11 +11572,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getChannels",
-						"id": 448
+						"id": 449
 					}
 				},
 				{
-					"id": 568,
+					"id": 569,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11585,7 +11585,7 @@
 					},
 					"signatures": [
 						{
-							"id": 569,
+							"id": 570,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11604,7 +11604,7 @@
 											{
 												"type": "reference",
 												"name": "InitialNotification",
-												"id": 343
+												"id": 344
 											},
 											{
 												"type": "intrinsic",
@@ -11617,7 +11617,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getInitialNotification",
-								"id": 455
+								"id": 456
 							}
 						}
 					],
@@ -11631,11 +11631,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getInitialNotification",
-						"id": 455
+						"id": 456
 					}
 				},
 				{
-					"id": 596,
+					"id": 597,
 					"name": "getNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11644,7 +11644,7 @@
 					},
 					"signatures": [
 						{
-							"id": 597,
+							"id": 598,
 							"name": "getNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11676,7 +11676,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getNotificationCategories",
-								"id": 483
+								"id": 484
 							}
 						}
 					],
@@ -11690,11 +11690,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getNotificationCategories",
-						"id": 483
+						"id": 484
 					}
 				},
 				{
-					"id": 598,
+					"id": 599,
 					"name": "getNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11703,7 +11703,7 @@
 					},
 					"signatures": [
 						{
-							"id": 599,
+							"id": 600,
 							"name": "getNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11732,7 +11732,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getNotificationSettings",
-								"id": 485
+								"id": 486
 							}
 						}
 					],
@@ -11746,11 +11746,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getNotificationSettings",
-						"id": 485
+						"id": 486
 					}
 				},
 				{
-					"id": 615,
+					"id": 616,
 					"name": "getPowerManagerInfo",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11759,7 +11759,7 @@
 					},
 					"signatures": [
 						{
-							"id": 616,
+							"id": 617,
 							"name": "getPowerManagerInfo",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11781,14 +11781,14 @@
 									{
 										"type": "reference",
 										"name": "PowerManagerInfo",
-										"id": 397
+										"id": 398
 									}
 								]
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getPowerManagerInfo",
-								"id": 502
+								"id": 503
 							}
 						}
 					],
@@ -11802,11 +11802,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getPowerManagerInfo",
-						"id": 502
+						"id": 503
 					}
 				},
 				{
-					"id": 556,
+					"id": 557,
 					"name": "getTriggerNotificationIds",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11815,7 +11815,7 @@
 					},
 					"signatures": [
 						{
-							"id": 557,
+							"id": 558,
 							"name": "getTriggerNotificationIds",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11840,7 +11840,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.getTriggerNotificationIds",
-								"id": 443
+								"id": 444
 							}
 						}
 					],
@@ -11854,11 +11854,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.getTriggerNotificationIds",
-						"id": 443
+						"id": 444
 					}
 				},
 				{
-					"id": 605,
+					"id": 606,
 					"name": "incrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11867,7 +11867,7 @@
 					},
 					"signatures": [
 						{
-							"id": 606,
+							"id": 607,
 							"name": "incrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11884,7 +11884,7 @@
 							},
 							"parameters": [
 								{
-									"id": 607,
+									"id": 608,
 									"name": "incrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11922,7 +11922,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.incrementBadgeCount",
-								"id": 492
+								"id": 493
 							}
 						}
 					],
@@ -11936,11 +11936,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.incrementBadgeCount",
-						"id": 492
+						"id": 493
 					}
 				},
 				{
-					"id": 613,
+					"id": 614,
 					"name": "isBatteryOptimizationEnabled",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11949,7 +11949,7 @@
 					},
 					"signatures": [
 						{
-							"id": 614,
+							"id": 615,
 							"name": "isBatteryOptimizationEnabled",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11977,7 +11977,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.isBatteryOptimizationEnabled",
-								"id": 500
+								"id": 501
 							}
 						}
 					],
@@ -11991,11 +11991,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.isBatteryOptimizationEnabled",
-						"id": 500
+						"id": 501
 					}
 				},
 				{
-					"id": 570,
+					"id": 571,
 					"name": "onBackgroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12004,7 +12004,7 @@
 					},
 					"signatures": [
 						{
-							"id": 571,
+							"id": 572,
 							"name": "onBackgroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12015,7 +12015,7 @@
 							},
 							"parameters": [
 								{
-									"id": 572,
+									"id": 573,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12026,21 +12026,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 573,
+											"id": 574,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 574,
+													"id": 575,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 575,
+															"id": 576,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -12048,7 +12048,7 @@
 															"type": {
 																"type": "reference",
 																"name": "Event",
-																"id": 347
+																"id": 348
 															}
 														}
 													],
@@ -12082,7 +12082,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onBackgroundEvent",
-								"id": 457
+								"id": 458
 							}
 						}
 					],
@@ -12096,11 +12096,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onBackgroundEvent",
-						"id": 457
+						"id": 458
 					}
 				},
 				{
-					"id": 576,
+					"id": 577,
 					"name": "onForegroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12109,7 +12109,7 @@
 					},
 					"signatures": [
 						{
-							"id": 577,
+							"id": 578,
 							"name": "onForegroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12120,7 +12120,7 @@
 							},
 							"parameters": [
 								{
-									"id": 578,
+									"id": 579,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12131,21 +12131,21 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 579,
+											"id": 580,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
 											"flags": {},
 											"signatures": [
 												{
-													"id": 580,
+													"id": 581,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
 													"flags": {},
 													"parameters": [
 														{
-															"id": 581,
+															"id": 582,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -12153,7 +12153,7 @@
 															"type": {
 																"type": "reference",
 																"name": "Event",
-																"id": 347
+																"id": 348
 															}
 														}
 													],
@@ -12177,14 +12177,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 582,
+									"id": 583,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"signatures": [
 										{
-											"id": 583,
+											"id": 584,
 											"name": "__call",
 											"kind": 4096,
 											"kindString": "Call signature",
@@ -12207,7 +12207,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.onForegroundEvent",
-								"id": 463
+								"id": 464
 							}
 						}
 					],
@@ -12221,11 +12221,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.onForegroundEvent",
-						"id": 463
+						"id": 464
 					}
 				},
 				{
-					"id": 611,
+					"id": 612,
 					"name": "openBatteryOptimizationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12234,7 +12234,7 @@
 					},
 					"signatures": [
 						{
-							"id": 612,
+							"id": 613,
 							"name": "openBatteryOptimizationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12262,7 +12262,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.openBatteryOptimizationSettings",
-								"id": 498
+								"id": 499
 							}
 						}
 					],
@@ -12276,11 +12276,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.openBatteryOptimizationSettings",
-						"id": 498
+						"id": 499
 					}
 				},
 				{
-					"id": 584,
+					"id": 585,
 					"name": "openNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12289,7 +12289,7 @@
 					},
 					"signatures": [
 						{
-							"id": 585,
+							"id": 586,
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12306,7 +12306,7 @@
 							},
 							"parameters": [
 								{
-									"id": 586,
+									"id": 587,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12344,7 +12344,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.openNotificationSettings",
-								"id": 471
+								"id": 472
 							}
 						}
 					],
@@ -12358,11 +12358,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.openNotificationSettings",
-						"id": 471
+						"id": 472
 					}
 				},
 				{
-					"id": 617,
+					"id": 618,
 					"name": "openPowerManagerSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12371,7 +12371,7 @@
 					},
 					"signatures": [
 						{
-							"id": 618,
+							"id": 619,
 							"name": "openPowerManagerSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12399,7 +12399,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.openPowerManagerSettings",
-								"id": 504
+								"id": 505
 							}
 						}
 					],
@@ -12413,11 +12413,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.openPowerManagerSettings",
-						"id": 504
+						"id": 505
 					}
 				},
 				{
-					"id": 587,
+					"id": 588,
 					"name": "registerForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12426,7 +12426,7 @@
 					},
 					"signatures": [
 						{
-							"id": 588,
+							"id": 589,
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12443,7 +12443,7 @@
 							},
 							"parameters": [
 								{
-									"id": 589,
+									"id": 590,
 									"name": "task",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12454,7 +12454,7 @@
 									"type": {
 										"type": "reference",
 										"name": "ForegroundServiceTask",
-										"id": 372
+										"id": 373
 									}
 								}
 							],
@@ -12465,7 +12465,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.registerForegroundService",
-								"id": 474
+								"id": 475
 							}
 						}
 					],
@@ -12479,11 +12479,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.registerForegroundService",
-						"id": 474
+						"id": 475
 					}
 				},
 				{
-					"id": 590,
+					"id": 591,
 					"name": "requestPermission",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12492,7 +12492,7 @@
 					},
 					"signatures": [
 						{
-							"id": 591,
+							"id": 592,
 							"name": "requestPermission",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12509,7 +12509,7 @@
 							},
 							"parameters": [
 								{
-									"id": 592,
+									"id": 593,
 									"name": "permissions",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12540,7 +12540,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.requestPermission",
-								"id": 477
+								"id": 478
 							}
 						}
 					],
@@ -12554,11 +12554,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.requestPermission",
-						"id": 477
+						"id": 478
 					}
 				},
 				{
-					"id": 602,
+					"id": 603,
 					"name": "setBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12567,7 +12567,7 @@
 					},
 					"signatures": [
 						{
-							"id": 603,
+							"id": 604,
 							"name": "setBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12584,7 +12584,7 @@
 							},
 							"parameters": [
 								{
-									"id": 604,
+									"id": 605,
 									"name": "count",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12611,7 +12611,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.setBadgeCount",
-								"id": 489
+								"id": 490
 							}
 						}
 					],
@@ -12625,11 +12625,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.setBadgeCount",
-						"id": 489
+						"id": 490
 					}
 				},
 				{
-					"id": 593,
+					"id": 594,
 					"name": "setNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12638,7 +12638,7 @@
 					},
 					"signatures": [
 						{
-							"id": 594,
+							"id": 595,
 							"name": "setNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12654,7 +12654,7 @@
 							},
 							"parameters": [
 								{
-									"id": 595,
+									"id": 596,
 									"name": "categories",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12685,7 +12685,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "Module.setNotificationCategories",
-								"id": 480
+								"id": 481
 							}
 						}
 					],
@@ -12699,7 +12699,7 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "Module.setNotificationCategories",
-						"id": 480
+						"id": 481
 					}
 				}
 			],
@@ -12708,49 +12708,49 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						619
+						620
 					]
 				},
 				{
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						516,
-						525,
-						518,
-						522,
-						528,
-						520,
-						531,
-						537,
-						540,
-						534,
-						552,
-						608,
-						543,
-						546,
-						549,
-						600,
-						558,
-						563,
-						566,
-						561,
-						568,
-						596,
-						598,
-						615,
-						556,
-						605,
-						613,
-						570,
-						576,
-						611,
-						584,
-						617,
-						587,
-						590,
-						602,
-						593
+						517,
+						526,
+						519,
+						523,
+						529,
+						521,
+						532,
+						538,
+						541,
+						535,
+						553,
+						609,
+						544,
+						547,
+						550,
+						601,
+						559,
+						564,
+						567,
+						562,
+						569,
+						597,
+						599,
+						616,
+						557,
+						606,
+						614,
+						571,
+						577,
+						612,
+						585,
+						618,
+						588,
+						591,
+						603,
+						594
 					]
 				}
 			],
@@ -12765,17 +12765,17 @@
 				{
 					"type": "reference",
 					"name": "Module",
-					"id": 402
+					"id": 403
 				},
 				{
 					"type": "reference",
 					"name": "ModuleStatics",
-					"id": 513
+					"id": 514
 				}
 			]
 		},
 		{
-			"id": 217,
+			"id": 218,
 			"name": "NativeAndroidChannel",
 			"kind": 256,
 			"kindString": "Interface",
@@ -12794,7 +12794,7 @@
 			},
 			"children": [
 				{
-					"id": 221,
+					"id": 222,
 					"name": "badge",
 					"kind": 1024,
 					"kindString": "Property",
@@ -12809,7 +12809,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 797,
+							"line": 806,
 							"character": 7
 						}
 					],
@@ -12833,11 +12833,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.badge",
-						"id": 206
+						"id": 207
 					}
 				},
 				{
-					"id": 218,
+					"id": 219,
 					"name": "blocked",
 					"kind": 1024,
 					"kindString": "Property",
@@ -12847,7 +12847,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 914,
+							"line": 923,
 							"character": 9
 						}
 					],
@@ -12857,7 +12857,7 @@
 					}
 				},
 				{
-					"id": 222,
+					"id": 223,
 					"name": "bypassDnd",
 					"kind": 1024,
 					"kindString": "Property",
@@ -12878,7 +12878,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 809,
+							"line": 818,
 							"character": 11
 						}
 					],
@@ -12902,11 +12902,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.bypassDnd",
-						"id": 207
+						"id": 208
 					}
 				},
 				{
-					"id": 223,
+					"id": 224,
 					"name": "description",
 					"kind": 1024,
 					"kindString": "Property",
@@ -12927,7 +12927,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 820,
+							"line": 829,
 							"character": 13
 						}
 					],
@@ -12947,11 +12947,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.description",
-						"id": 208
+						"id": 209
 					}
 				},
 				{
-					"id": 226,
+					"id": 227,
 					"name": "groupId",
 					"kind": 1024,
 					"kindString": "Property",
@@ -12966,7 +12966,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 847,
+							"line": 856,
 							"character": 9
 						}
 					],
@@ -12986,11 +12986,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.groupId",
-						"id": 211
+						"id": 212
 					}
 				},
 				{
-					"id": 219,
+					"id": 220,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13003,7 +13003,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 778,
+							"line": 787,
 							"character": 4
 						}
 					],
@@ -13014,11 +13014,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.id",
-						"id": 204
+						"id": 205
 					}
 				},
 				{
-					"id": 227,
+					"id": 228,
 					"name": "importance",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13033,23 +13033,23 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 856,
+							"line": 865,
 							"character": 12
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidImportance",
-						"id": 304
+						"id": 305
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.importance",
-						"id": 212
+						"id": 213
 					}
 				},
 				{
-					"id": 228,
+					"id": 229,
 					"name": "lightColor",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13064,7 +13064,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 864,
+							"line": 873,
 							"character": 12
 						}
 					],
@@ -13074,7 +13074,7 @@
 							{
 								"type": "reference",
 								"name": "AndroidColor",
-								"id": 263
+								"id": 264
 							},
 							{
 								"type": "intrinsic",
@@ -13085,11 +13085,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.lightColor",
-						"id": 213
+						"id": 214
 					}
 				},
 				{
-					"id": 224,
+					"id": 225,
 					"name": "lights",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13104,7 +13104,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 829,
+							"line": 838,
 							"character": 8
 						}
 					],
@@ -13128,11 +13128,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.lights",
-						"id": 209
+						"id": 210
 					}
 				},
 				{
-					"id": 220,
+					"id": 221,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13146,7 +13146,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 786,
+							"line": 795,
 							"character": 6
 						}
 					],
@@ -13157,11 +13157,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.name",
-						"id": 205
+						"id": 206
 					}
 				},
 				{
-					"id": 231,
+					"id": 232,
 					"name": "sound",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13176,7 +13176,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 892,
+							"line": 901,
 							"character": 7
 						}
 					],
@@ -13196,11 +13196,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.sound",
-						"id": 216
+						"id": 217
 					}
 				},
 				{
-					"id": 225,
+					"id": 226,
 					"name": "vibration",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13215,7 +13215,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 838,
+							"line": 847,
 							"character": 11
 						}
 					],
@@ -13239,11 +13239,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.vibration",
-						"id": 210
+						"id": 211
 					}
 				},
 				{
-					"id": 230,
+					"id": 231,
 					"name": "vibrationPattern",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13258,7 +13258,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 883,
+							"line": 892,
 							"character": 18
 						}
 					],
@@ -13272,11 +13272,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.vibrationPattern",
-						"id": 215
+						"id": 216
 					}
 				},
 				{
-					"id": 229,
+					"id": 230,
 					"name": "visibility",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13291,19 +13291,19 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 874,
+							"line": 883,
 							"character": 12
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 300
+						"id": 301
 					},
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannel.visibility",
-						"id": 214
+						"id": 215
 					}
 				}
 			],
@@ -13312,27 +13312,27 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						221,
-						218,
 						222,
-						223,
-						226,
 						219,
-						227,
-						228,
+						223,
 						224,
+						227,
 						220,
-						231,
+						228,
+						229,
 						225,
-						230,
-						229
+						221,
+						232,
+						226,
+						231,
+						230
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 902,
+					"line": 911,
 					"character": 37
 				}
 			],
@@ -13340,12 +13340,12 @@
 				{
 					"type": "reference",
 					"name": "AndroidChannel",
-					"id": 203
+					"id": 204
 				}
 			]
 		},
 		{
-			"id": 236,
+			"id": 237,
 			"name": "NativeAndroidChannelGroup",
 			"kind": 256,
 			"kindString": "Interface",
@@ -13364,7 +13364,7 @@
 			},
 			"children": [
 				{
-					"id": 237,
+					"id": 238,
 					"name": "blocked",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13384,7 +13384,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 970,
+							"line": 979,
 							"character": 9
 						}
 					],
@@ -13394,7 +13394,7 @@
 					}
 				},
 				{
-					"id": 238,
+					"id": 239,
 					"name": "channels",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13407,7 +13407,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 975,
+							"line": 984,
 							"character": 10
 						}
 					],
@@ -13416,12 +13416,12 @@
 						"elementType": {
 							"type": "reference",
 							"name": "NativeAndroidChannel",
-							"id": 217
+							"id": 218
 						}
 					}
 				},
 				{
-					"id": 241,
+					"id": 242,
 					"name": "description",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13442,7 +13442,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 948,
+							"line": 957,
 							"character": 13
 						}
 					],
@@ -13462,11 +13462,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannelGroup.description",
-						"id": 235
+						"id": 236
 					}
 				},
 				{
-					"id": 239,
+					"id": 240,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13479,7 +13479,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 931,
+							"line": 940,
 							"character": 4
 						}
 					],
@@ -13490,11 +13490,11 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannelGroup.id",
-						"id": 233
+						"id": 234
 					}
 				},
 				{
-					"id": 240,
+					"id": 241,
 					"name": "name",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13508,7 +13508,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 939,
+							"line": 948,
 							"character": 6
 						}
 					],
@@ -13519,7 +13519,7 @@
 					"inheritedFrom": {
 						"type": "reference",
 						"name": "AndroidChannelGroup.name",
-						"id": 234
+						"id": 235
 					}
 				}
 			],
@@ -13528,18 +13528,18 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						237,
 						238,
-						241,
 						239,
-						240
+						242,
+						240,
+						241
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-					"line": 958,
+					"line": 967,
 					"character": 42
 				}
 			],
@@ -13547,7 +13547,7 @@
 				{
 					"type": "reference",
 					"name": "AndroidChannelGroup",
-					"id": 232
+					"id": 233
 				}
 			]
 		},
@@ -13777,7 +13777,7 @@
 			]
 		},
 		{
-			"id": 332,
+			"id": 333,
 			"name": "Notification",
 			"kind": 256,
 			"kindString": "Interface",
@@ -13790,7 +13790,7 @@
 			},
 			"children": [
 				{
-					"id": 341,
+					"id": 342,
 					"name": "android",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13821,7 +13821,7 @@
 					}
 				},
 				{
-					"id": 336,
+					"id": 337,
 					"name": "body",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13854,7 +13854,7 @@
 					}
 				},
 				{
-					"id": 337,
+					"id": 338,
 					"name": "data",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13883,21 +13883,21 @@
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 338,
+									"id": 339,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"indexSignature": [
 										{
-											"id": 339,
+											"id": 340,
 											"name": "__index",
 											"kind": 8192,
 											"kindString": "Index signature",
 											"flags": {},
 											"parameters": [
 												{
-													"id": 340,
+													"id": 341,
 													"name": "key",
 													"kind": 32768,
 													"kindString": "Parameter",
@@ -13920,7 +13920,7 @@
 					}
 				},
 				{
-					"id": 333,
+					"id": 334,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13954,7 +13954,7 @@
 					}
 				},
 				{
-					"id": 342,
+					"id": 343,
 					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
@@ -13985,7 +13985,7 @@
 					}
 				},
 				{
-					"id": 335,
+					"id": 336,
 					"name": "subtitle",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14018,7 +14018,7 @@
 					}
 				},
 				{
-					"id": 334,
+					"id": 335,
 					"name": "title",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14056,13 +14056,13 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						341,
-						336,
-						337,
-						333,
 						342,
-						335,
-						334
+						337,
+						338,
+						334,
+						343,
+						336,
+						335
 					]
 				}
 			],
@@ -14118,7 +14118,7 @@
 						"elementType": {
 							"type": "reference",
 							"name": "AndroidAction",
-							"id": 155
+							"id": 156
 						}
 					}
 				},
@@ -14261,7 +14261,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidBadgeIconType",
-						"id": 242
+						"id": 243
 					}
 				},
 				{
@@ -14287,7 +14287,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidCategory",
-						"id": 246
+						"id": 247
 					}
 				},
 				{
@@ -14359,6 +14359,44 @@
 					}
 				},
 				{
+					"id": 135,
+					"name": "circularLargeIcon",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Whether the large icon should be circular.",
+						"text": "If `true`, the large icon will be rounded in the shape of a circle.\n\nDefaults to `false`.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 199,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
 					"id": 126,
 					"name": "color",
 					"kind": 1024,
@@ -14384,7 +14422,7 @@
 							{
 								"type": "reference",
 								"name": "AndroidColor",
-								"id": 263
+								"id": 264
 							},
 							{
 								"type": "intrinsic",
@@ -14462,7 +14500,7 @@
 						"elementType": {
 							"type": "reference",
 							"name": "AndroidDefaults",
-							"id": 286
+							"id": 287
 						}
 					}
 				},
@@ -14489,7 +14527,7 @@
 					"type": {
 						"type": "reference",
 						"name": "AndroidGroupAlertBehavior",
-						"id": 291
+						"id": 292
 					}
 				},
 				{
@@ -14565,7 +14603,7 @@
 					}
 				},
 				{
-					"id": 140,
+					"id": 141,
 					"name": "importance",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14586,14 +14624,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 262,
+							"line": 271,
 							"character": 12
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidImportance",
-						"id": 304
+						"id": 305
 					}
 				},
 				{
@@ -14663,7 +14701,7 @@
 					}
 				},
 				{
-					"id": 135,
+					"id": 136,
 					"name": "lights",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14678,7 +14716,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 201,
+							"line": 210,
 							"character": 8
 						}
 					],
@@ -14691,7 +14729,7 @@
 									{
 										"type": "reference",
 										"name": "AndroidColor",
-										"id": 263
+										"id": 264
 									},
 									{
 										"type": "intrinsic",
@@ -14711,7 +14749,7 @@
 					}
 				},
 				{
-					"id": 136,
+					"id": 137,
 					"name": "localOnly",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14726,46 +14764,8 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 212,
+							"line": 221,
 							"character": 11
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "false"
-							},
-							{
-								"type": "intrinsic",
-								"name": "true"
-							}
-						]
-					}
-				},
-				{
-					"id": 137,
-					"name": "ongoing",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Set whether this is an on-going notification.",
-						"text": "Setting this value to `true` changes the default behaviour of a notification:\n\n- Ongoing notifications are sorted above the regular notifications in the notification panel.\n- Ongoing notifications do not have an 'X' close button, and are not affected by the \"Clear all\" button.\n\nView the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 224,
-							"character": 9
 						}
 					],
 					"type": {
@@ -14788,7 +14788,7 @@
 				},
 				{
 					"id": 138,
-					"name": "onlyAlertOnce",
+					"name": "ongoing",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -14796,14 +14796,14 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "Notifications with the same `id` will only show a single instance at any one time on your device,\nhowever will still alert the user (for example, by making a sound).",
-						"text": "If this flag is set to `true`, notifications with the same `id` will only alert the user once whilst\nthe notification is visible.\n\nThis property is commonly used when frequently updating a notification (such as updating the progress bar).\n"
+						"shortText": "Set whether this is an on-going notification.",
+						"text": "Setting this value to `true` changes the default behaviour of a notification:\n\n- Ongoing notifications are sorted above the regular notifications in the notification panel.\n- Ongoing notifications do not have an 'X' close button, and are not affected by the \"Clear all\" button.\n\nView the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.\n"
 					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 235,
-							"character": 15
+							"line": 233,
+							"character": 9
 						}
 					],
 					"type": {
@@ -14826,7 +14826,7 @@
 				},
 				{
 					"id": 139,
-					"name": "pressAction",
+					"name": "onlyAlertOnce",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -14834,103 +14834,13 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "By default notifications have no behaviour when a user presses them. The\n`pressAction` property allows you to set what happens when a user presses\nthe notification.",
-						"text": "View the [Interaction](/react-native/docs/android/interaction) documentation to learn\nmore.\n"
+						"shortText": "Notifications with the same `id` will only show a single instance at any one time on your device,\nhowever will still alert the user (for example, by making a sound).",
+						"text": "If this flag is set to `true`, notifications with the same `id` will only alert the user once whilst\nthe notification is visible.\n\nThis property is commonly used when frequently updating a notification (such as updating the progress bar).\n"
 					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 245,
-							"character": 13
-						}
-					],
-					"type": {
-						"type": "reference",
-						"name": "NotificationPressAction",
-						"id": 350
-					}
-				},
-				{
-					"id": 141,
-					"name": "progress",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "A notification can show current progress of a task. The progress state can either be fixed or\nindeterminate (unknown).",
-						"text": "View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation\nto learn more.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 271,
-							"character": 10
-						}
-					],
-					"type": {
-						"type": "reference",
-						"name": "AndroidProgress",
-						"id": 199
-					}
-				},
-				{
-					"id": 149,
-					"name": "showChronometer",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Shows a counting timer on the notification, useful for on-going notifications such as a phone call.",
-						"text": "If no `timestamp` is provided, a counter will display on the notification starting from 00:00. If a `timestamp` is\nprovided, the number of hours/minutes/seconds since that have elapsed since that value will be shown instead.\n\nDefaults to `false`.\n\nView the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 346,
-							"character": 17
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "false"
-							},
-							{
-								"type": "intrinsic",
-								"name": "true"
-							}
-						]
-					}
-				},
-				{
-					"id": 142,
-					"name": "showTimestamp",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets whether the `timestamp` provided is shown in the notification.",
-						"text": "Setting this field is useful for notifications which are more informative with a timestamp,\nsuch as an E-Mail.\n\nIf no `timestamp` is set, this field has no effect.\n\nView the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 283,
+							"line": 244,
 							"character": 15
 						}
 					],
@@ -14953,7 +14863,135 @@
 					}
 				},
 				{
+					"id": 140,
+					"name": "pressAction",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "By default notifications have no behaviour when a user presses them. The\n`pressAction` property allows you to set what happens when a user presses\nthe notification.",
+						"text": "View the [Interaction](/react-native/docs/android/interaction) documentation to learn\nmore.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 254,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "NotificationPressAction",
+						"id": 351
+					}
+				},
+				{
+					"id": 142,
+					"name": "progress",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "A notification can show current progress of a task. The progress state can either be fixed or\nindeterminate (unknown).",
+						"text": "View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation\nto learn more.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 280,
+							"character": 10
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "AndroidProgress",
+						"id": 200
+					}
+				},
+				{
+					"id": 150,
+					"name": "showChronometer",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Shows a counting timer on the notification, useful for on-going notifications such as a phone call.",
+						"text": "If no `timestamp` is provided, a counter will display on the notification starting from 00:00. If a `timestamp` is\nprovided, the number of hours/minutes/seconds since that have elapsed since that value will be shown instead.\n\nDefaults to `false`.\n\nView the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 355,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
 					"id": 143,
+					"name": "showTimestamp",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets whether the `timestamp` provided is shown in the notification.",
+						"text": "Setting this field is useful for notifications which are more informative with a timestamp,\nsuch as an E-Mail.\n\nIf no `timestamp` is set, this field has no effect.\n\nView the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 292,
+							"character": 15
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "false"
+							},
+							{
+								"type": "intrinsic",
+								"name": "true"
+							}
+						]
+					}
+				},
+				{
+					"id": 144,
 					"name": "smallIcon",
 					"kind": 1024,
 					"kindString": "Property",
@@ -14968,7 +15006,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 291,
+							"line": 300,
 							"character": 11
 						}
 					],
@@ -14987,7 +15025,7 @@
 					}
 				},
 				{
-					"id": 144,
+					"id": 145,
 					"name": "smallIconLevel",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15001,7 +15039,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 296,
+							"line": 305,
 							"character": 16
 						}
 					],
@@ -15020,7 +15058,7 @@
 					}
 				},
 				{
-					"id": 145,
+					"id": 146,
 					"name": "sortKey",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15035,7 +15073,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 309,
+							"line": 318,
 							"character": 9
 						}
 					],
@@ -15054,7 +15092,7 @@
 					}
 				},
 				{
-					"id": 154,
+					"id": 155,
 					"name": "sound",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15075,88 +15113,8 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 398,
+							"line": 407,
 							"character": 7
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							},
-							{
-								"type": "intrinsic",
-								"name": "string"
-							}
-						]
-					}
-				},
-				{
-					"id": 146,
-					"name": "style",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Styled notifications provide users with more informative content and additional functionality.",
-						"text": "Android supports different styles, however only one can be used with a notification.\n\nView the [Styles](/react-native/docs/android/styles) documentation to learn more\nview usage examples.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 319,
-							"character": 7
-						}
-					],
-					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "reference",
-								"name": "AndroidBigPictureStyle",
-								"id": 166
-							},
-							{
-								"type": "reference",
-								"name": "AndroidBigTextStyle",
-								"id": 172
-							},
-							{
-								"type": "reference",
-								"name": "AndroidInboxStyle",
-								"id": 177
-							},
-							{
-								"type": "reference",
-								"name": "AndroidMessagingStyle",
-								"id": 182
-							}
-						]
-					}
-				},
-				{
-					"id": 152,
-					"name": "tag",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Sets a tag on the notification.",
-						"text": "Tags can be used to query groups notifications by the tag value. Setting a tag has no\nimpact on the notification itself.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 372,
-							"character": 5
 						}
 					],
 					"type": {
@@ -15175,7 +15133,7 @@
 				},
 				{
 					"id": 147,
-					"name": "ticker",
+					"name": "style",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -15183,14 +15141,60 @@
 						"isOptional": true
 					},
 					"comment": {
-						"shortText": "Text that summarizes this notification for accessibility services. As of the Android L release, this\ntext is no longer shown on screen, but it is still useful to accessibility services\n(where it serves as an audible announcement of the notification's appearance).",
-						"text": "Ticker text does not show in the notification.\n"
+						"shortText": "Styled notifications provide users with more informative content and additional functionality.",
+						"text": "Android supports different styles, however only one can be used with a notification.\n\nView the [Styles](/react-native/docs/android/styles) documentation to learn more\nview usage examples.\n"
 					},
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
 							"line": 328,
-							"character": 8
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "AndroidBigPictureStyle",
+								"id": 167
+							},
+							{
+								"type": "reference",
+								"name": "AndroidBigTextStyle",
+								"id": 173
+							},
+							{
+								"type": "reference",
+								"name": "AndroidInboxStyle",
+								"id": 178
+							},
+							{
+								"type": "reference",
+								"name": "AndroidMessagingStyle",
+								"id": 183
+							}
+						]
+					}
+				},
+				{
+					"id": 153,
+					"name": "tag",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Sets a tag on the notification.",
+						"text": "Tags can be used to query groups notifications by the tag value. Setting a tag has no\nimpact on the notification itself.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 381,
+							"character": 5
 						}
 					],
 					"type": {
@@ -15209,6 +15213,40 @@
 				},
 				{
 					"id": 148,
+					"name": "ticker",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"comment": {
+						"shortText": "Text that summarizes this notification for accessibility services. As of the Android L release, this\ntext is no longer shown on screen, but it is still useful to accessibility services\n(where it serves as an audible announcement of the notification's appearance).",
+						"text": "Ticker text does not show in the notification.\n"
+					},
+					"sources": [
+						{
+							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
+							"line": 337,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					}
+				},
+				{
+					"id": 149,
 					"name": "timeoutAfter",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15222,7 +15260,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 334,
+							"line": 343,
 							"character": 14
 						}
 					],
@@ -15241,7 +15279,7 @@
 					}
 				},
 				{
-					"id": 153,
+					"id": 154,
 					"name": "timestamp",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15256,7 +15294,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 384,
+							"line": 393,
 							"character": 11
 						}
 					],
@@ -15275,7 +15313,7 @@
 					}
 				},
 				{
-					"id": 150,
+					"id": 151,
 					"name": "vibrationPattern",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15290,7 +15328,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 353,
+							"line": 362,
 							"character": 18
 						}
 					],
@@ -15303,7 +15341,7 @@
 					}
 				},
 				{
-					"id": 151,
+					"id": 152,
 					"name": "visibility",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15318,14 +15356,14 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/NotificationAndroid.ts",
-							"line": 364,
+							"line": 373,
 							"character": 12
 						}
 					],
 					"type": {
 						"type": "reference",
 						"name": "AndroidVisibility",
-						"id": 300
+						"id": 301
 					}
 				}
 			],
@@ -15342,34 +15380,35 @@
 						124,
 						125,
 						128,
+						135,
 						126,
 						127,
 						129,
 						131,
 						130,
 						132,
-						140,
+						141,
 						133,
 						134,
-						135,
 						136,
 						137,
 						138,
 						139,
-						141,
-						149,
+						140,
 						142,
+						150,
 						143,
 						144,
 						145,
-						154,
 						146,
-						152,
+						155,
 						147,
-						148,
 						153,
-						150,
-						151
+						148,
+						149,
+						154,
+						151,
+						152
 					]
 				}
 			],
@@ -15854,7 +15893,7 @@
 			]
 		},
 		{
-			"id": 350,
+			"id": 351,
 			"name": "NotificationPressAction",
 			"kind": 256,
 			"kindString": "Interface",
@@ -15867,7 +15906,7 @@
 			},
 			"children": [
 				{
-					"id": 351,
+					"id": 352,
 					"name": "id",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15891,7 +15930,7 @@
 					}
 				},
 				{
-					"id": 352,
+					"id": 353,
 					"name": "launchActivity",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15931,7 +15970,7 @@
 					}
 				},
 				{
-					"id": 353,
+					"id": 354,
 					"name": "launchActivityFlags",
 					"kind": 1024,
 					"kindString": "Property",
@@ -15961,12 +16000,12 @@
 						"elementType": {
 							"type": "reference",
 							"name": "AndroidLaunchActivityFlag",
-							"id": 310
+							"id": 311
 						}
 					}
 				},
 				{
-					"id": 354,
+					"id": 355,
 					"name": "mainComponent",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16011,10 +16050,10 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						351,
 						352,
 						353,
-						354
+						354,
+						355
 					]
 				}
 			],
@@ -16027,7 +16066,7 @@
 			]
 		},
 		{
-			"id": 397,
+			"id": 398,
 			"name": "PowerManagerInfo",
 			"kind": 256,
 			"kindString": "Interface",
@@ -16046,7 +16085,7 @@
 			},
 			"children": [
 				{
-					"id": 401,
+					"id": 402,
 					"name": "activity",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16080,7 +16119,7 @@
 					}
 				},
 				{
-					"id": 398,
+					"id": 399,
 					"name": "manufacturer",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16114,7 +16153,7 @@
 					}
 				},
 				{
-					"id": 399,
+					"id": 400,
 					"name": "model",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16148,7 +16187,7 @@
 					}
 				},
 				{
-					"id": 400,
+					"id": 401,
 					"name": "version",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16187,10 +16226,10 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						401,
-						398,
+						402,
 						399,
-						400
+						400,
+						401
 					]
 				}
 			],
@@ -16203,7 +16242,7 @@
 			]
 		},
 		{
-			"id": 376,
+			"id": 377,
 			"name": "TimestampTrigger",
 			"kind": 256,
 			"kindString": "Interface",
@@ -16216,7 +16255,7 @@
 			},
 			"children": [
 				{
-					"id": 379,
+					"id": 380,
 					"name": "repeatFrequency",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16238,11 +16277,11 @@
 					"type": {
 						"type": "reference",
 						"name": "RepeatFrequency",
-						"id": 380
+						"id": 381
 					}
 				},
 				{
-					"id": 378,
+					"id": 379,
 					"name": "timestamp",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16265,7 +16304,7 @@
 					}
 				},
 				{
-					"id": 377,
+					"id": 378,
 					"name": "type",
 					"kind": 1024,
 					"kindString": "Property",
@@ -16285,7 +16324,7 @@
 					"type": {
 						"type": "reference",
 						"name": "TIMESTAMP",
-						"id": 394
+						"id": 395
 					}
 				}
 			],
@@ -16294,9 +16333,9 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
+						380,
 						379,
-						378,
-						377
+						378
 					]
 				}
 			],
@@ -16309,7 +16348,7 @@
 			]
 		},
 		{
-			"id": 372,
+			"id": 373,
 			"name": "ForegroundServiceTask",
 			"kind": 4194304,
 			"kindString": "Type alias",
@@ -16336,21 +16375,21 @@
 			"type": {
 				"type": "reflection",
 				"declaration": {
-					"id": 373,
+					"id": 374,
 					"name": "__type",
 					"kind": 65536,
 					"kindString": "Type literal",
 					"flags": {},
 					"signatures": [
 						{
-							"id": 374,
+							"id": 375,
 							"name": "__call",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 375,
+									"id": 376,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -16358,7 +16397,7 @@
 									"type": {
 										"type": "reference",
 										"name": "Notification",
-										"id": 332
+										"id": 333
 									}
 								}
 							],
@@ -16385,7 +16424,7 @@
 			}
 		},
 		{
-			"id": 396,
+			"id": 397,
 			"name": "Trigger",
 			"kind": 4194304,
 			"kindString": "Type alias",
@@ -16405,12 +16444,12 @@
 					{
 						"type": "reference",
 						"name": "TimestampTrigger",
-						"id": 376
+						"id": 377
 					},
 					{
 						"type": "reference",
 						"name": "IntervalTrigger",
-						"id": 384
+						"id": 385
 					}
 				]
 			}
@@ -16421,42 +16460,42 @@
 			"title": "Enumerations",
 			"kind": 4,
 			"children": [
-				242,
-				246,
-				263,
-				286,
-				291,
-				304,
-				310,
-				295,
-				300,
-				355,
+				243,
+				247,
+				264,
+				287,
+				292,
+				305,
+				311,
+				296,
+				301,
+				356,
 				34,
 				60,
 				44,
 				39,
-				380,
-				388,
-				393
+				381,
+				389,
+				394
 			]
 		},
 		{
 			"title": "Interfaces",
 			"kind": 256,
 			"children": [
-				155,
-				166,
-				172,
-				203,
-				232,
-				177,
-				160,
-				182,
-				188,
-				192,
-				199,
-				347,
-				365,
+				156,
+				167,
+				173,
+				204,
+				233,
+				178,
+				161,
+				183,
+				189,
+				193,
+				200,
+				348,
+				366,
 				113,
 				22,
 				103,
@@ -16465,31 +16504,31 @@
 				96,
 				26,
 				48,
-				343,
-				384,
-				510,
-				506,
-				508,
-				402,
-				513,
-				515,
-				217,
-				236,
+				344,
+				385,
+				511,
+				507,
+				509,
+				403,
+				514,
+				516,
+				218,
+				237,
 				1,
-				332,
+				333,
 				118,
 				9,
-				350,
-				397,
-				376
+				351,
+				398,
+				377
 			]
 		},
 		{
 			"title": "Type aliases",
 			"kind": 4194304,
 			"children": [
-				372,
-				396
+				373,
+				397
 			]
 		}
 	]
