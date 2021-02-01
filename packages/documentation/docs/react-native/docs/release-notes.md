@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.1.0
+
+- **[Android]**: Implemented support for `circularLargeIcon` on `NotificationAndroid` (Feature enhancement [#199](https://github.com/notifee/react-native-notifee/issues/199)).
+- **[iOS]**: Prevent badge count from clearing notifications from the tray when it reaches 0 (Fixes [#214](https://github.com/notifee/react-native-notifee/issues/214)).
+
 ## 1.0.0
 
 - **NOTE**: Version bump.
