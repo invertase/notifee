@@ -232,6 +232,10 @@ class NotificationManager {
             }
 
             if (largeIconBitmap != null) {
+              if (androidModel.getCircularLargeIcon()) {
+                largeIconBitmap = ResourceUtils.getCircularBitmap(largeIconBitmap);
+              }
+
               builder.setLargeIcon(largeIconBitmap);
             }
           }

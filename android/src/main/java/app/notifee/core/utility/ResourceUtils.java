@@ -2,6 +2,12 @@ package app.notifee.core.utility;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.util.TypedValue;
@@ -58,6 +64,50 @@ public class ResourceUtils {
     return resId > 0
         ? new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build()
         : Uri.EMPTY;
+  }
+
+  /**
+   * Returns a circular Bitmap from another bitmap. The original bitmap can be any shape.
+   *
+   * @param bitmap
+   * @return Bitmap
+   */
+  public static Bitmap getCircularBitmap(Bitmap bitmap) {
+    Bitmap output;
+    Rect srcRect, dstRect;
+    float r;
+    final int width = bitmap.getWidth();
+    final int height = bitmap.getHeight();
+
+    if (width > height) {
+      output = Bitmap.createBitmap(height, height, Bitmap.Config.ARGB_8888);
+      int left = (width - height) / 2;
+      int right = left + height;
+      srcRect = new Rect(left, 0, right, height);
+      dstRect = new Rect(0, 0, height, height);
+      r = height / 2;
+    } else {
+      output = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
+      int top = (height - width) / 2;
+      int bottom = top + width;
+      srcRect = new Rect(0, top, width, bottom);
+      dstRect = new Rect(0, 0, width, width);
+      r = width / 2;
+    }
+
+    final Canvas canvas = new Canvas(output);
+
+    final int color = Color.RED;
+    final Paint paint = new Paint();
+
+    paint.setAntiAlias(true);
+    canvas.drawARGB(0, 0, 0, 0);
+    paint.setColor(color);
+    canvas.drawCircle(r, r, r, paint);
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+    canvas.drawBitmap(bitmap, srcRect, dstRect, paint);
+
+    return output;
   }
 
   /**
