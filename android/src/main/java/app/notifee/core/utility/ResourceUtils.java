@@ -67,6 +67,12 @@ public class ResourceUtils {
         : Uri.EMPTY;
   }
 
+  /**
+   * Returns a circular Bitmap from another bitmap.
+   *
+   * @param bitmap
+   * @return Bitmap
+   */
   public static Bitmap getCircularBitmap(Bitmap bitmap) {
     final Bitmap output =
         Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
@@ -84,8 +90,6 @@ public class ResourceUtils {
 
     paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
     canvas.drawBitmap(bitmap, rect, rect, paint);
-
-    //    bitmap.recycle();  // causes error Canvas: trying to use a recycled bitmap
 
     return output;
   }
