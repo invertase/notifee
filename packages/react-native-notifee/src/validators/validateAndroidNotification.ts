@@ -65,6 +65,7 @@ export default function validateAndroidNotification(
     smallIcon: 'ic_launcher',
     showChronometer: false,
     visibility: AndroidVisibility.PRIVATE,
+    circularLargeIcon: false,
   };
 
   if (isUndefined(android)) {
@@ -299,6 +300,10 @@ export default function validateAndroidNotification(
       out.largeIcon = image.uri;
     } else {
       out.largeIcon = android.largeIcon;
+    }
+
+    if (isBoolean(android.circularLargeIcon)) {
+      out.circularLargeIcon = android.circularLargeIcon;
     }
   }
 

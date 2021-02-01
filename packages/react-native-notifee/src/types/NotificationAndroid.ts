@@ -190,6 +190,15 @@ export interface NotificationAndroid {
   largeIcon?: string | number | object;
 
   /**
+   * Whether the large icon should be circular.
+   *
+   * If `true`, the large icon will be rounded in the shape of a circle.
+   *
+   * Defaults to `false`.
+   */
+  circularLargeIcon?: boolean;
+
+  /**
    * Sets the color and frequency of the light pattern. This only has effect on supported devices.
    *
    * The option takes an array containing a hexadecimal color value or predefined `AndroidColor`,
