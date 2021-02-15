@@ -90,6 +90,12 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
       return;
     }
 
+    // To prevent a race condition
+    // See https:github.com/notifee/react-native-notifee/issues/237
+    if (ContextHolder.getApplicationContext() == null) {
+      ContextHolder.setApplicationContext(context.getApplicationContext());
+    }
+
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForEvent("block state");
       return;
