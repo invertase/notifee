@@ -31,7 +31,7 @@ are able to create two types of keys; Primary & Secondary. Choose the key type y
 | Primary Keys   | Used on production release build applications.                                                                              |
 | Secondary Keys | Used on release build applications which are not intended for production use, for example, staging or testing applications. |
 
-> When creating a key, ensure that the Application ID (Android) matches matches that of your application. A license key for iOS is not currently required. 
+> When creating a key, ensure that the Application ID (Android) matches that of your application. A license key for iOS is not currently required.
 
 Secondary keys are subject to more frequent checks on their validation. They are designed for non-production applications
 only and may unexpectedly be invalidated if used on high traffic applications.
@@ -46,7 +46,7 @@ Copy and add the key to this file, for example:
 {
   "android": {
     "license": "XXXX.YYYY.ZZZZ"
-  },
+  }
 }
 ```
 
