@@ -479,10 +479,9 @@ class LicenseManager {
 
   @VisibleForTesting
   protected boolean isDebug() {
-    return
-      (0
+    return (0
         != (ContextHolder.getApplicationContext().getApplicationInfo().flags
-        & ApplicationInfo.FLAG_DEBUGGABLE));
+            & ApplicationInfo.FLAG_DEBUGGABLE));
   }
 
   /** Returns a boolean of whether the current license is valid. */
@@ -503,7 +502,8 @@ class LicenseManager {
     int remoteStatus = getRemoteStatus();
 
     // if local statuses are either OK or PENDING then assume the license is valid
-    // if remote is OK, PENDING or is a device that is known to fail remote validation the license is valid
+    // if remote is OK, PENDING or is a device that is known to fail remote validation the license
+    // is valid
     return (remoteStatus != RemoteVerificationStatus.PENDING
             && remoteStatus != RemoteVerificationStatus.OK
             && !failsRemoteValidation())
