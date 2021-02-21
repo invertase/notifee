@@ -1,6 +1,6 @@
 ---
 title: License Keys
-description: Release builds require a valid license key. Learn how to add yours to the project.
+description: Release builds require a valid license key, learn how to add yours to the project.
 next: /react-native/docs/release-notes
 previous: /react-native/docs/installation
 ---
@@ -17,7 +17,6 @@ Notifee will deem a license key to be invalid under the following scenarios:
 
 - No key is provided in the `notifee.config.json` file (see below).
 - [Android] The Application ID does not match the provided ID when generating the key.
-- [iOS] The Bundle ID does not match the provided ID when generating the key.
 - The key is no longer valid (e.g. key has been removed via the dashboard).
 
 ## Creating a key
@@ -32,7 +31,7 @@ are able to create two types of keys; Primary & Secondary. Choose the key type y
 | Primary Keys   | Used on production release build applications.                                                                              |
 | Secondary Keys | Used on release build applications which are not intended for production use, for example, staging or testing applications. |
 
-> When creating a key, ensure that the Application ID (Android) or Bundle ID (iOS) matches that of your application.
+> When creating a key, ensure that the Application ID (Android) matches matches that of your application. A license key for iOS is not currently required. 
 
 Secondary keys are subject to more frequent checks on their validation. They are designed for non-production applications
 only and may unexpectedly be invalidated if used on high traffic applications.
@@ -40,32 +39,27 @@ only and may unexpectedly be invalidated if used on high traffic applications.
 ## Using a key
 
 To use a license key with your application, first create a file called `notifee.config.json` in the root of your project.
-This file accepts keys for both Android & iOS. Copy and add the key to this file, for example:
+
+Copy and add the key to this file, for example:
 
 ```json
 {
   "android": {
     "license": "XXXX.YYYY.ZZZZ"
   },
-  "ios": {
-    "license": "XXXX.YYYY.ZZZZ"
-  }
 }
 ```
 
-Now rebuild your project, the keys will be validated when the application is launched:
+Now rebuild your project, the key will be validated when the application is launched:
 
 ```bash
-# For iOS
-npx react-native run-ios
-
 # For Android
 npx react-native run-android
 ```
 
 ## Supporting Multiple Environments
 
-On Android, if you have multiple license keys, one per product flavor and/or build type, you can structure your `notifee.config.json` like below:
+If you have multiple license keys, one per product flavor and/or build type, you can structure your `notifee.config.json` like below:
 
 ```json
 {
@@ -86,16 +80,13 @@ On Android, if you have multiple license keys, one per product flavor and/or bui
       "license": "full.license"
     },
     "license": "android.license"
-  },
-  "ios": {...}
+  }
 }
 ```
 
 If a license key isn't found for a product flavor or build type, it will fallback to the license key in the next level up. For example, a full debug build will fallback to `full.license` if `full.debug.license` wasn't specified. If there was no license specified for `full.license`, it will fallback to `android.license`.
 
 ## Debugging
-
-### Android
 
 Notifee will output logs during the license verification process to help determine if your config is setup correctly and if your license is valid.
 
