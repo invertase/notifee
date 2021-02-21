@@ -91,7 +91,7 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
     }
 
     // To prevent a race condition
-    // See https:github.com/notifee/react-native-notifee/issues/237
+    // See https://github.com/notifee/react-native-notifee/issues/237
     if (ContextHolder.getApplicationContext() == null) {
       ContextHolder.setApplicationContext(context.getApplicationContext());
     }
