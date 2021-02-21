@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.1.1
+- **[Android]**: Includes a solution to fix an error due to a potential race condition that occurs when the user changes the notification blocked state for either a channel or the entire application (Fixes [#237](https://github.com/notifee/react-native-notifee/issues/237)).
+
 ## 1.1.0
 
 - **[Android]**: Implemented support for `circularLargeIcon` on `NotificationAndroid` (Feature enhancement [#199](https://github.com/notifee/react-native-notifee/issues/199)).
