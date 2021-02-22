@@ -14,7 +14,8 @@ Pod::Spec.new do |s|
   s.source              = { :git => "https://github.com/notifee/react-native-notifee", :tag => "v#{s.version}" }
   s.social_media_url    = 'http://twitter.com/notifee_app'
 
-  s.ios.deployment_target   = '10.0'
+  s.cocoapods_version        = '>= 1.10.0'
+  s.ios.deployment_target    = '10.0'
   s.source_files             = 'ios/RNNotifee/*.{h,m}'
   s.dependency 'React-Core'
 
