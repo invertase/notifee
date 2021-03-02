@@ -19,7 +19,8 @@
 #import <React/RCTUtils.h>
 
 static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notification-event";
-static NSString *kReactNativeNotifeeNotificationBackgroundEvent = @"app.notifee.notification-event-background";
+static NSString *kReactNativeNotifeeNotificationBackgroundEvent =
+    @"app.notifee.notification-event-background";
 
 static NSInteger kReactNativeNotifeeNotificationTypeDisplayed = 1;
 static NSInteger kReactNativeNotifeeNotificationTypeTrigger = 2;
@@ -27,7 +28,7 @@ static NSInteger kReactNativeNotifeeNotificationTypeAll = 0;
 
 @implementation NotifeeApiModule {
   bool hasListeners;
-  NSMutableArray* pendingCoreEvents;
+  NSMutableArray *pendingCoreEvents;
 }
 
 #pragma mark - Module Setup
@@ -47,12 +48,12 @@ RCT_EXPORT_MODULE();
 }
 
 - (NSArray<NSString *> *)supportedEvents {
-  return @[kReactNativeNotifeeNotificationEvent, kReactNativeNotifeeNotificationBackgroundEvent];
+  return @[ kReactNativeNotifeeNotificationEvent, kReactNativeNotifeeNotificationBackgroundEvent ];
 }
 
 - (void)startObserving {
   hasListeners = YES;
-  for (NSDictionary* eventBody in pendingCoreEvents) {
+  for (NSDictionary *eventBody in pendingCoreEvents) {
     [self sendNotifeeCoreEvent:eventBody];
   }
   [pendingCoreEvents removeAllObjects];
@@ -66,7 +67,7 @@ RCT_EXPORT_MODULE();
   return YES;
 }
 
-# pragma mark - Events
+#pragma mark - Events
 
 - (void)didReceiveNotifeeCoreEvent:(NSDictionary *_Nonnull)event {
   if (hasListeners) {
@@ -77,14 +78,19 @@ RCT_EXPORT_MODULE();
 }
 
 - (void)sendNotifeeCoreEvent:(NSDictionary *_Nonnull)eventBody {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (RCTRunningInAppExtension() || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-            [self sendEventWithName:kReactNativeNotifeeNotificationBackgroundEvent body:eventBody];
+  dispatch_after(
+      dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (RCTRunningInAppExtension() ||
+            [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+          [self sendEventWithName:kReactNativeNotifeeNotificationBackgroundEvent body:eventBody];
         } else {
-            [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
+          [self sendEventWithName:kReactNativeNotifeeNotificationEvent body:eventBody];
         }
-    });
+      });
 }
+
+// TODO(helenaford): look into a custom format style for React Native Method signatures
+// clang-format off
 
 # pragma mark - React Native Methods
 
@@ -290,15 +296,19 @@ RCT_EXPORT_METHOD(decrementBadgeCount:
   }];
 }
 
-# pragma mark - Internals
+// clang-format on
 
-- (void)resolve:(RCTPromiseResolveBlock)resolve orReject:(RCTPromiseRejectBlock)reject promiseWithError:(NSError *_Nullable)error orResult:(id _Nullable)result {
+#pragma mark - Internals
+
+- (void)resolve:(RCTPromiseResolveBlock)resolve
+            orReject:(RCTPromiseRejectBlock)reject
+    promiseWithError:(NSError *_Nullable)error
+            orResult:(id _Nullable)result {
   if (error != nil) {
     reject(@"unknown", error.localizedDescription, error);
   } else {
     resolve(result);
   }
 }
-
 
 @end
