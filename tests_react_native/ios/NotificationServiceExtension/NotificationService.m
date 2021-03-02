@@ -23,8 +23,8 @@
     self.bestAttemptContent = [request.content mutableCopy];
     
     // Modify the notification content here...
-    // TODO(helenaford): remove once implementation is done
-    self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
+    // // TODO(helenaford): remove once implementation is done
+    // self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
   
     [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent withContentHandler:contentHandler];
 }
