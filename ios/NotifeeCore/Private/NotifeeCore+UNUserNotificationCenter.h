@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NotifeeCoreUNUserNotificationCenter : NSObject <UNUserNotificationCenterDelegate>
 
-@property(nonatomic, nullable, weak) id <UNUserNotificationCenterDelegate> originalDelegate;
+@property(nonatomic, nullable, weak) id<UNUserNotificationCenterDelegate> originalDelegate;
 
-@property (strong, nullable) NSDictionary* initialNotification;
+@property(strong, nullable) NSDictionary *initialNotification;
 
 + (_Nonnull instancetype)instance;
 

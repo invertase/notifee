@@ -29,20 +29,23 @@ typedef NS_ENUM(NSInteger, NotifeeCoreTriggerType) {
 
 // Enum representing repeat frequency for TimestampTrigger
 typedef NS_ENUM(NSInteger, NotifeeCoreRepeatFrequency) {
-    NotifeeCoreRepeatFrequencyHourly = 0,
-    NotifeeCoreRepeatFrequencyDaily = 1,
-    NotifeeCoreRepeatFrequencyWeekly = 2
+  NotifeeCoreRepeatFrequencyHourly = 0,
+  NotifeeCoreRepeatFrequencyDaily = 1,
+  NotifeeCoreRepeatFrequencyWeekly = 2
 };
 
 @interface NotifeeCoreUtil : NSObject
 
 + (NSNumber *)numberForUNNotificationSetting:(UNNotificationSetting)setting;
 
-+ (NSMutableArray<NSDictionary *> *)notificationActionsToDictionaryArray:(NSArray<UNNotificationAction *> *)notificationActions;
++ (NSMutableArray<NSDictionary *> *)notificationActionsToDictionaryArray:
+    (NSArray<UNNotificationAction *> *)notificationActions;
 
-+ (NSMutableArray<UNNotificationAction *> *)notificationActionsFromDictionaryArray:(NSArray<NSDictionary *> *)actionDictionaries;
++ (NSMutableArray<UNNotificationAction *> *)notificationActionsFromDictionaryArray:
+    (NSArray<NSDictionary *> *)actionDictionaries;
 
-+ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:(NSArray<NSDictionary *> *)attachmentDictionaries;
++ (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:
+    (NSArray<NSDictionary *> *)attachmentDictionaries;
 
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers;
 

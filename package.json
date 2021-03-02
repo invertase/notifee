@@ -11,6 +11,8 @@
     "build:all:clean": "rimraf android/build && rimraf android/.gradle && rimraf ios/build && lerna run build:clean",
     "build:rn": "cd packages/react-native && yarn build",
     "build:rn:watch": "cd packages/react-native && yarn build:watch",
+    "format:ios": "cd ios && npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
+    "format:rn":  "cd packages/react-native/ios && clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
     "validate:all": "yarn validate:all:js && yarn validate:all:ts && yarn gen:reference",
     "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx --resolve-plugins-relative-to .",
     "validate:all:ts": "tsc --project ./",
@@ -44,7 +46,8 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.19.2",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "clang-format": "^1.5.0"
   },
   "lint-staged": {
     "packages/**/*.js": [

@@ -163,11 +163,13 @@
                          options:[self attachmentOptionsFromDictionary:attachmentDict]
                            error:&error];
     if (error != nil) {
-      NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an attachment %@: %@",
+      NSLog(@"NotifeeCore: An error occurred whilst trying to resolve an "
+            @"attachment %@: %@",
             attachmentDict, error);
       return nil;
     } else if (attachment == nil) {
-      NSLog(@"NotifeeCore: Failed resolving an attachment %@: data at URL is not a supported type.",
+      NSLog(@"NotifeeCore: Failed resolving an attachment %@: data at URL is "
+            @"not a supported type.",
             attachmentDict);
     }
 
@@ -197,7 +199,8 @@
   @try {
     NSError *error;
 
-    // Apple gives us a suggested file name which can be used to infer the file extension
+    // Apple gives us a suggested file name which can be used to infer the file
+    // extension
     NSString *suggestedFilename = [NotifeeCoreNSURLSession downloadItemAtURL:url
                                                                       toFile:tempDestination
                                                                        error:&error];
@@ -213,7 +216,8 @@
     NSString *fileExtension = [NSString stringWithFormat:@".%@", [suggestedFilename pathExtension]];
 
     if (!fileExtension || [fileExtension isEqualToString:@""]) {
-      NSLog(@"NotifeeCore: Failed to determine file extension for attachment with URL %@: %@",
+      NSLog(@"NotifeeCore: Failed to determine file extension for attachment "
+            @"with URL %@: %@",
             urlString, error);
       return nil;
     }
@@ -229,7 +233,8 @@
     // Returns the local cached path to attachment
     return localURL;
   } @catch (NSException *exception) {
-    NSLog(@"NotifeeCore: An exception occured while attempting to download attachment with URL %@: "
+    NSLog(@"NotifeeCore: An exception occured while attempting to download "
+          @"attachment with URL %@: "
           @"%@",
           urlString, exception);
     return nil;
@@ -293,7 +298,8 @@
 }
 
 /**
- * Returns an UNNotificationTrigger from NSDictionary representing a TimestampTrigger
+ * Returns an UNNotificationTrigger from NSDictionary representing a
+ * TimestampTrigger
  *
  * @param triggerDict NSDictionary
  */
@@ -320,7 +326,8 @@
       calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     } else if (repeatFrequency == NotifeeCoreRepeatFrequencyWeekly) {
       // match by day, hour, minute, and second
-      calendarUnit = NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+      calendarUnit =
+          NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     } else {
       NSLog(@"NotifeeCore: Failed to parse TimestampTrigger with unknown "
             @"repeatFrequency: %ld",
@@ -330,16 +337,20 @@
     }
   } else {
     // Needs to match exactly to the second
-    calendarUnit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    calendarUnit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay |
+                   NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
   }
 
-  NSDateComponents *components = [[NSCalendar currentCalendar] components:calendarUnit fromDate:date];
-  trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:repeats];
+  NSDateComponents *components = [[NSCalendar currentCalendar] components:calendarUnit
+                                                                 fromDate:date];
+  trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components
+                                                                     repeats:repeats];
 
   return trigger;
 }
 /**
- * Returns an UNNotificationTrigger from NSDictionary representing an IntervalTrigger
+ * Returns an UNNotificationTrigger from NSDictionary representing an
+ * IntervalTrigger
  *
  * @param triggerDict NSDictionary
  */

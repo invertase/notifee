@@ -12,21 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 #define MAX_DOWNLOAD_ATTACHMENT_SIZE 50000000
 
 @interface NotifeeCoreDownloadDelegate : NSObject <NSURLSessionDataDelegate> {
-    NSError* error;
-    NSURLResponse* response;
-    BOOL done;
-    NSFileHandle* outputHandle;
+  NSError *error;
+  NSURLResponse *response;
+  BOOL done;
+  NSFileHandle *outputHandle;
 }
 
-@property (readonly, getter=isDone) BOOL done;
-@property (readonly) NSError* error;
-@property (readonly) NSURLResponse* response;
+@property(readonly, getter=isDone) BOOL done;
+@property(readonly) NSError *error;
+@property(readonly) NSURLResponse *response;
 
-- (id)initWithFilePath:(NSString*)path;
+- (id)initWithFilePath:(NSString *)path;
 
 @end
 
-
-
 NS_ASSUME_NONNULL_END
-
