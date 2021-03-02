@@ -12,7 +12,7 @@
     "build:rn": "cd packages/react-native && yarn build",
     "build:rn:watch": "cd packages/react-native && yarn build:watch",
     "format:ios": "cd ios && npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
-    "format:rn":  "cd packages/react-native/ios && clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
+    "format:rn":  "cd packages/react-native/ios && npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
     "validate:all": "yarn validate:all:js && yarn validate:all:ts && yarn gen:reference",
     "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx --resolve-plugins-relative-to .",
     "validate:all:ts": "tsc --project ./",
