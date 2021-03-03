@@ -32,35 +32,31 @@ static NSString *const kImagePathPrefix = @"image/";
 
   // fcm: apns: { payload: {notifee_options: {} } }
   NSMutableDictionary *options = [self.bestAttemptContent.userInfo[@"notifee_options"] mutableCopy];
-    
+
   // Convert options to Notification
-    if (options[@"data"] == nil) {
-//        [options setObject:[NSDictionary dictionary] forKey:@"data"];
-        options[@"data"] = [NSDictionary dictionary];
-    }
-    
-    if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil) {
-        options[@"ios"][@"attachments"] = nil;
-    }
+  if (options[@"data"] == nil) {
+    //        [options setObject:[NSDictionary dictionary] forKey:@"data"];
+    options[@"data"] = [NSDictionary dictionary];
+  }
 
+  if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil) {
+    options[@"ios"][@"attachments"] = nil;
+  }
 
-      if (options[@"title"] == nil && content.title != nil) {
-          NSLog(@"notifee title1: contenttitle: %@",
-                content.title);
-          options[@"title"]  = self.bestAttemptContent.title;
-//          [options setObject:self.bestAttemptContent.title forKey:@"title"];
-      }
+  if (options[@"title"] == nil && content.title != nil) {
+    NSLog(@"notifee title1: contenttitle: %@", content.title);
+    options[@"title"] = self.bestAttemptContent.title;
+    //          [options setObject:self.bestAttemptContent.title forKey:@"title"];
+  }
 
-    if (options[@"body"] == nil) {
-        NSLog(@"notifee body: contenttitle: %@",
-              content.body);
-//        [options setObject:self.bestAttemptContent.body forKey:@"body"];
-        options[@"body"]  = self.bestAttemptContent.body;
-    }
+  if (options[@"body"] == nil) {
+    NSLog(@"notifee body: contenttitle: %@", content.body);
+    //        [options setObject:self.bestAttemptContent.body forKey:@"body"];
+    options[@"body"] = self.bestAttemptContent.body;
+  }
 
-  self.bestAttemptContent = [NotifeeCore buildNotificationContent:options withTrigger: nil];
-    NSLog(@"notifee body: contenttitle: %@",
-          self.bestAttemptContent.sound);
+  self.bestAttemptContent = [NotifeeCore buildNotificationContent:options withTrigger:nil];
+  NSLog(@"notifee body: contenttitle: %@", self.bestAttemptContent.sound);
   NSString *currentImageURL = content.userInfo[kPayloadOptionsName][kPayloadOptionsImageURLName];
   if (!currentImageURL) {
     [self deliverNotification];
@@ -70,15 +66,13 @@ static NSString *const kImagePathPrefix = @"image/";
   NSURL *attachmentURL = [NSURL URLWithString:currentImageURL];
   if (attachmentURL) {
     [self loadAttachmentForURL:attachmentURL
-                 completionHandler:^(UNNotificationAttachment *attachment) {
-       
-  
-       if (attachment != nil) {
-         self.bestAttemptContent.attachments = @[ attachment ];
-       }
-      
-       [self deliverNotification];
-     }];
+             completionHandler:^(UNNotificationAttachment *attachment) {
+               if (attachment != nil) {
+                 self.bestAttemptContent.attachments = @[ attachment ];
+               }
+
+               [self deliverNotification];
+             }];
   } else {
     [self deliverNotification];
   }
@@ -106,9 +100,10 @@ static NSString *const kImagePathPrefix = @"image/";
       downloadTaskWithURL:attachmentURL
         completionHandler:^(NSURL *temporaryFileLocation, NSURLResponse *response, NSError *error) {
           if (error != nil) {
-              NSLog(@"NotifeeCoreExtensionHelper: An exception occured while attempting to download image with URL %@: "
-                    @"%@",
-                    attachmentURL, error);
+            NSLog(@"NotifeeCoreExtensionHelper: An exception occured while attempting to download "
+                  @"image with URL %@: "
+                  @"%@",
+                  attachmentURL, error);
             completionHandler(attachment);
             return;
           }
@@ -119,8 +114,9 @@ static NSString *const kImagePathPrefix = @"image/";
               fileURLWithPath:[temporaryFileLocation.path stringByAppendingString:fileExtension]];
           [fileManager moveItemAtURL:temporaryFileLocation toURL:localURL error:&error];
           if (error) {
-              NSLog(@"NotifeeCoreExtensionHelper: Failed to move the image file to local location: %@, error %@",
-                    localURL, error);
+            NSLog(@"NotifeeCoreExtensionHelper: Failed to move the image file to local location: "
+                  @"%@, error %@",
+                  localURL, error);
             completionHandler(attachment);
             return;
           }
@@ -130,8 +126,8 @@ static NSString *const kImagePathPrefix = @"image/";
                                                                   options:nil
                                                                     error:&error];
           if (error) {
-              NSLog(@"NotifeeCoreExtensionHelper: Failed to create attachment with URL: %@, error %@",
-                    localURL, error);
+            NSLog(@"NotifeeCoreExtensionHelper: Failed to create attachment with URL: %@, error %@",
+                  localURL, error);
             completionHandler(attachment);
             return;
           }

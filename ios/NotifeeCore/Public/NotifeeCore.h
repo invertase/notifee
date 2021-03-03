@@ -21,11 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^notifeeMethodVoidBlock)(NSError *_Nullable);
 
-typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable,
-                                               NSDictionary *_Nullable);
+typedef void (^notifeeMethodNSDictionaryBlock)(NSError *_Nullable, NSDictionary *_Nullable);
 
-typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable,
-                                          NSArray *_Nullable);
+typedef void (^notifeeMethodNSArrayBlock)(NSError *_Nullable, NSArray *_Nullable);
 
 typedef void (^notifeeMethodBooleanBlock)(NSError *_Nullable, BOOL);
 
@@ -60,8 +58,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 
 + (void)cancelAllNotifications:(NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void)displayNotification:(NSDictionary *)notification
-                  withBlock:(notifeeMethodVoidBlock)block;
++ (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)createTriggerNotification:(NSDictionary *)notification
                       withTrigger:(NSDictionary *)trigger
@@ -85,21 +82,17 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block;
 
-+ (void)incrementBadgeCount:(NSInteger)incrementBy
-                  withBlock:(notifeeMethodVoidBlock)block;
++ (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void)decrementBadgeCount:(NSInteger)decrementBy
-                  withBlock:(notifeeMethodVoidBlock)block;
++ (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block;
 
 + (nullable instancetype)notifeeUIApplication;
 
-+ (UNMutableNotificationContent *)
-    buildNotificationContent:(NSDictionary *)notification
-                 withTrigger:(NSDictionary *)trigger;
++ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification
+                                               withTrigger:(NSDictionary *)trigger;
 
 + (void)populateNotificationContent:(UNMutableNotificationContent *)content
-                 withContentHandler:
-                     (void (^)(UNNotificationContent *_Nonnull))contentHandler;
+                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 
 @end
 
