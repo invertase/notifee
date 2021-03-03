@@ -1783,11 +1783,6 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@notifee/react-native@*":
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-0.15.2.tgz#06d7ea6362938a0a2bfec5da7dede5fd3b5ca03e"
-  integrity sha512-9vAJrZUnm1BZPCdSufwo7TsErNJl7gyk2JR7pZYGGutNuKWXI/GafKVKixjnofH36lomK7W8v/eA/2opesg62Q==
-
 "@octokit/auth-token@^2.4.0":
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-2.4.4.tgz#ee31c69b01d0378c12fd3ffe406030f3d94d3b56"
@@ -2796,6 +2791,11 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
+async@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+  integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
+
 async@^2.4.0:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
@@ -3324,6 +3324,15 @@ cjs-module-lexer@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-0.6.0.tgz#4186fcca0eae175970aee870b9fe2d6cf8d5655f"
   integrity sha512-uc2Vix1frTfnuzxxu1Hp4ktSvM3QaI4oXl4ZUqL1wjTu/BGki9TrCWoqLTg/drR1KwAEarXuRFCG2Svr1GxPFw==
+
+clang-format@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/clang-format/-/clang-format-1.5.0.tgz#1bd4c47b66a1a02556b192b93f5505e7ccec84fb"
+  integrity sha512-C1LucFX7E+ABVYcPEbBHM4PYQ2+WInXsqsLpFlQ9cmRfSbk7A7b1I06h/nE4bQ3MsyEkb31jY2gC0Dtc76b4IA==
+  dependencies:
+    async "^1.5.2"
+    glob "^7.0.0"
+    resolve "^1.1.6"
 
 class-utils@^0.3.5:
   version "0.3.6"

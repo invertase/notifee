@@ -22,8 +22,8 @@
      completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
   response = aResponse;
   long long expectedLength = response.expectedContentLength;
-  if (expectedLength >
-      MAX_DOWNLOAD_ATTACHMENT_SIZE) {  // Cancel download task if attachment is more than allowed
+  if (expectedLength > MAX_DOWNLOAD_ATTACHMENT_SIZE) {  // Cancel download task if attachment is
+                                                        // more than allowed
     completionHandler(NSURLSessionResponseCancel);
     return;
   }

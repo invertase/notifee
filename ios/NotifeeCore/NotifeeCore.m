@@ -27,17 +27,19 @@
  * @param notificationId NSString id of the notification to cancel
  * @param block notifeeMethodVoidBlock
  */
-+ (void)cancelNotification:(NSString *)notificationId withNotificationType: (NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block {
++ (void)cancelNotification:(NSString *)notificationId
+      withNotificationType:(NSInteger)notificationType
+                 withBlock:(notifeeMethodVoidBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-   // cancel displayed notification
+  // cancel displayed notification
   if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
       notificationType == NotifeeCoreNotificationTypeAll)
-   [center removeDeliveredNotificationsWithIdentifiers:@[ notificationId ]];
+    [center removeDeliveredNotificationsWithIdentifiers:@[ notificationId ]];
 
   // cancel trigger notification
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
       notificationType == NotifeeCoreNotificationTypeAll)
-   [center removePendingNotificationRequestsWithIdentifiers:@[ notificationId ]];
+    [center removePendingNotificationRequestsWithIdentifiers:@[ notificationId ]];
   block(nil);
 }
 
@@ -86,7 +88,8 @@
 /**
  * Display a local notification immediately.
  *
- * @param notification NSDictionary representation of UNMutableNotificationContent
+ * @param notification NSDictionary representation of
+ * UNMutableNotificationContent
  * @param block notifeeMethodVoidBlock
  */
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block {
@@ -114,7 +117,8 @@
 
 /* Create a trigger notification .
  *
- * @param notification NSDictionary representation of UNMutableNotificationContent
+ * @param notification NSDictionary representation of
+ * UNMutableNotificationContent
  * @param block notifeeMethodVoidBlock
  */
 + (void)createTriggerNotification:(NSDictionary *)notification
@@ -177,7 +181,8 @@
   // data
   NSMutableDictionary *userInfo = [notification[@"data"] mutableCopy];
 
-  // attach a copy of the original notification payload into the data object, for internal use
+  // attach a copy of the original notification payload into the data object,
+  // for internal use
   userInfo[kNotifeeUserInfoNotification] = [notification mutableCopy];
   if (trigger != nil) {
     userInfo[kNotifeeUserInfoTrigger] = [trigger mutableCopy];
@@ -340,7 +345,8 @@
 }
 
 /**
- * Builds and replaces the existing notification categories on UNUserNotificationCenter
+ * Builds and replaces the existing notification categories on
+ * UNUserNotificationCenter
  *
  * @param categories NSArray<NSDictionary *> *
  * @param block notifeeMethodVoidBlock
@@ -559,7 +565,8 @@
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
-  // If count is 0, set to -1 instead to avoid notifications in tray being cleared
+  // If count is 0, set to -1 instead to avoid notifications in tray being
+  // cleared
   NSInteger newCount = count == 0 ? -1 : count;
 
   [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newCount];
@@ -589,7 +596,8 @@
   NSInteger currentCount = [UIApplication sharedApplication].applicationIconBadgeNumber;
   NSInteger newCount = currentCount - decrementBy;
 
-  // If count is 0 or less, set to -1 instead to avoid notifications in tray being cleared
+  // If count is 0 or less, set to -1 instead to avoid notifications in tray
+  // being cleared
   if (newCount < 1) {
     newCount = -1;
   }
