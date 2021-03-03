@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E34622C11F51D4BC8FD91AD /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		0E34622C11F51D4BC8FD91AD /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -16,7 +16,7 @@
 		79BB07E024B0E1830099C5B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */; };
 		79DEB94724B0EE7E00CE31D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79DEB94624B0EE7E00CE31D4 /* Images.xcassets */; };
 		9EE0C106906B7DE80C0DBADF /* libPods-testing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3DD45DBEA04EE478439472 /* libPods-testing.a */; };
-		E61966457CF26A53ABFFC75A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		E61966457CF26A53ABFFC75A /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +84,7 @@
 		7910D558249ECDBC0038C85E /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = testing/media; sourceTree = "<group>"; };
 		79BB07DF24B0E1830099C5B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79DEB94624B0EE7E00CE31D4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = testing/Images.xcassets; sourceTree = "<group>"; };
+		79ECA00025EF1EB5009AE069 /* NotifeeRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NotifeeRelease.entitlements; path = testing/NotifeeRelease.entitlements; sourceTree = "<group>"; };
 		7F3DD45DBEA04EE478439472 /* libPods-testing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,8 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E61966457CF26A53ABFFC75A /* BuildFile in Frameworks */,
-				0E34622C11F51D4BC8FD91AD /* BuildFile in Frameworks */,
+				E61966457CF26A53ABFFC75A /* (null) in Frameworks */,
+				0E34622C11F51D4BC8FD91AD /* (null) in Frameworks */,
 				9EE0C106906B7DE80C0DBADF /* libPods-testing.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +122,7 @@
 		13B07FAE1A68108700A75B9A /* testing */ = {
 			isa = PBXGroup;
 			children = (
+				79ECA00025EF1EB5009AE069 /* NotifeeRelease.entitlements */,
 				79DEB94624B0EE7E00CE31D4 /* Images.xcassets */,
 				7910D558249ECDBC0038C85E /* media */,
 				27034D93212869A1004B697E /* testing.entitlements */,
@@ -460,7 +462,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.invertase.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifee.testing;
 				PRODUCT_NAME = Notifee;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,7 +475,7 @@
 			baseConfigurationReference = 78B0E372306B6EFE53BFA0C5 /* Pods-testing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = testing/testing.entitlements;
+				CODE_SIGN_ENTITLEMENTS = testing/NotifeeRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YYX2P3XVJ7;
@@ -491,7 +493,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.invertase.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notifee.testing;
 				PRODUCT_NAME = Notifee;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

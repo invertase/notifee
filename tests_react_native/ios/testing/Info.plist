@@ -33,7 +33,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.invertase.testing</string>
+			<string>com.notifee.testing</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>invertase</string>
