@@ -1,4 +1,4 @@
-package com.invertase.testing;
+package com.notifee.testing;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

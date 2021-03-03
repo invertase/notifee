@@ -35,7 +35,7 @@ def enableHermes = project.ext.react.get("enableHermes", false)
 android {
   compileSdkVersion 29
   defaultConfig {
-    applicationId "com.invertase.testing"
+    applicationId "com.notifee.testing"
 
     minSdkVersion 16
     targetSdkVersion 29

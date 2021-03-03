@@ -1,0 +1,92 @@
+{
+  "project_info": {
+    "project_number": "383739936153",
+    "firebase_url": "https://notifee-test-app.firebaseio.com",
+    "project_id": "notifee-test-app",
+    "storage_bucket": "notifee-test-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383739936153:android:0cf5ebe46dc14d8c3c2708",
+        "android_client_info": {
+          "package_name": "com.notifee.testing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383739936153-5goo1u81crnro4p0hkt7s5690l5p775s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notifee.testing",
+            "certificate_hash": "29142b8612b4b6a0ba0fefd1dbf65ab565fb2cbd"
+          }
+        },
+        {
+          "client_id": "383739936153-la370p7tqgjmnibj3u2ko0vbuo8qv50d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5sKoAjttsbAFGTsl1areIRXeNSL8bx1M"
+        }
+      ]
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383739936153:android:56f2b9226c9c86a43c2708",
+        "android_client_info": {
+          "package_name": "com.notifee.testing.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383739936153-nom09qk2crrihc74i8i5de21apgupj20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notifee.testing.dev",
+            "certificate_hash": "29142b8612b4b6a0ba0fefd1dbf65ab565fb2cbd"
+          }
+        },
+        {
+          "client_id": "383739936153-la370p7tqgjmnibj3u2ko0vbuo8qv50d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5sKoAjttsbAFGTsl1areIRXeNSL8bx1M"
+        }
+      ]
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383739936153:android:9b8ff8754d77c6603c2708",
+        "android_client_info": {
+          "package_name": "com.notifee.testing.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383739936153-tc09j9h3c944me7vd11gatb6h1brk0at.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notifee.testing.staging",
+            "certificate_hash": "29142b8612b4b6a0ba0fefd1dbf65ab565fb2cbd"
+          }
+        },
+        {
+          "client_id": "383739936153-la370p7tqgjmnibj3u2ko0vbuo8qv50d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5sKoAjttsbAFGTsl1areIRXeNSL8bx1M"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}

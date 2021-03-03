@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.invertase.testing">
+  package="com.notifee.testing">
 
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.VIBRATE" />
@@ -8,7 +8,7 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
   <application
-    android:name="com.invertase.testing.MainApplication"
+    android:name="com.notifee.testing.MainApplication"
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -17,7 +17,7 @@
     tools:targetApi="m"
     tools:ignore="GoogleAppIndexingWarning">
     <activity
-      android:name="com.invertase.testing.MainActivity"
+      android:name="com.notifee.testing.MainActivity"
       android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
       android:label="@string/app_name"
       android:windowSoftInputMode="adjustResize">

@@ -1,4 +1,4 @@
-package com.invertase.testing;
+package com.notifee.testing;
 
 import com.facebook.react.ReactActivity;
 import io.invertase.notifee.NotifeeApiModule;

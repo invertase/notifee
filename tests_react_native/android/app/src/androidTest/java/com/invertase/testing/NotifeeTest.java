@@ -1,4 +1,4 @@
-package com.invertase.testing;
+package com.notifee.testing;
 
 import static org.junit.Assert.assertTrue;
 
