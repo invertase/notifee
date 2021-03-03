@@ -79,7 +79,6 @@ end
 #end
 
 target 'NotificationServiceExtension' do
-#  pod 'Firebase/Messaging', '~> 6.30.0' # eg 6.31.0
   pod 'RNNotifee/NotifeeExtensionHelper', :path => "../../packages/react-native"
 end
 
