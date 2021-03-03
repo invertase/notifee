@@ -21,11 +21,7 @@
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     self.contentHandler = contentHandler;
     self.bestAttemptContent = [request.content mutableCopy];
-    
-    // Modify the notification content here...
-    // // TODO(helenaford): remove once implementation is done
-    // self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
-  
+
     [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent withContentHandler:contentHandler];
 }
 

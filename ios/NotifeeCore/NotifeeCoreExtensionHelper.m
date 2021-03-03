@@ -33,9 +33,8 @@ static NSString *const kImagePathPrefix = @"image/";
   // fcm: apns: { payload: {notifee_options: {} } }
   NSMutableDictionary *options = [self.bestAttemptContent.userInfo[@"notifee_options"] mutableCopy];
 
-  // Convert options to Notification
+  // Convert options to Notification and set defaults
   if (options[@"data"] == nil) {
-    //        [options setObject:[NSDictionary dictionary] forKey:@"data"];
     options[@"data"] = [NSDictionary dictionary];
   }
 
@@ -44,25 +43,23 @@ static NSString *const kImagePathPrefix = @"image/";
   }
 
   if (options[@"title"] == nil && content.title != nil) {
-    NSLog(@"notifee title1: contenttitle: %@", content.title);
     options[@"title"] = self.bestAttemptContent.title;
-    //          [options setObject:self.bestAttemptContent.title forKey:@"title"];
   }
 
   if (options[@"body"] == nil) {
-    NSLog(@"notifee body: contenttitle: %@", content.body);
-    //        [options setObject:self.bestAttemptContent.body forKey:@"body"];
     options[@"body"] = self.bestAttemptContent.body;
   }
 
   self.bestAttemptContent = [NotifeeCore buildNotificationContent:options withTrigger:nil];
-  NSLog(@"notifee body: contenttitle: %@", self.bestAttemptContent.sound);
+
+  // Check if image url is in payload
   NSString *currentImageURL = content.userInfo[kPayloadOptionsName][kPayloadOptionsImageURLName];
   if (!currentImageURL) {
     [self deliverNotification];
     return;
   }
 
+  // Attempt to download image
   NSURL *attachmentURL = [NSURL URLWithString:currentImageURL];
   if (attachmentURL) {
     [self loadAttachmentForURL:attachmentURL
@@ -100,7 +97,7 @@ static NSString *const kImagePathPrefix = @"image/";
       downloadTaskWithURL:attachmentURL
         completionHandler:^(NSURL *temporaryFileLocation, NSURLResponse *response, NSError *error) {
           if (error != nil) {
-            NSLog(@"NotifeeCoreExtensionHelper: An exception occured while attempting to download "
+            NSLog(@"NotifeeCoreExtensionHelper: An exception occurred while attempting to download "
                   @"image with URL %@: "
                   @"%@",
                   attachmentURL, error);
