@@ -12,15 +12,12 @@ When a notification is about to be displayed on a device, the permissions reques
 will alert the user to the notification audibly with sound. The sound used will be whatever the user has selected within
 the device settings.
 
-You can however customise the sound played by providing a string value of an iOS resource or one of the iOS ringtone names, for example:
+You can however customise the sound played by providing a string value of an iOS resource, for example:
 
 ```js
 notifee.displayNotification({
   body: 'Custom sound',
   ios: {
-    // iOS ringtone name
-    sound: 'Beacon',
-
     // iOS resource (.wav, aiff, .caf)
     sound: 'local.wav',
   },
@@ -50,7 +47,7 @@ notifee.displayNotification({
   body: 'This is a critical notification!',
   ios: {
     critical: true,
-    sound: 'Beacon',
+    sound: 'local.wav',
   },
 });
 ```
@@ -65,7 +62,7 @@ notifee.displayNotification({
   body: 'This is a critical notification!',
   ios: {
     critical: true,
-    sound: 'Beacon',
+    sound: 'local.wav',
     // iOS > 12
     // play at 90% sound volume
     criticalVolume: 0.9,
