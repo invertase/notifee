@@ -77,8 +77,6 @@ await notifee.createChannel({
 
 # Auto Cancelling
 
-This documentation is a work in progress.
-
 When a notification is pressed, the notification is automatically canceled by default. This behaviour can be turned off by setting [`autoCancel`](/react-native/reference/notificationandroid#autocancel) to false:
 
 ```js
