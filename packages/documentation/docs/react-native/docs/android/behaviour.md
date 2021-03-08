@@ -23,8 +23,7 @@ If required, you can also provide a custom `.mp3` sound or use a different devic
 
 Customs sounds must be local `.mp3` files. Unfortunately, it is not possible to use remote sound files at this time.
 
-Go ahead and download your sound file locally. The file needs to be place inside & bundled with your Android project inside
-of a `raw` directory in the project resources. For example:
+Go ahead and download your sound file locally. The file needs to be place inside & bundled with your Android project inside of a `raw` directory in the project resources. For example:
 
 `/android/app/src/main/res/raw/hollow.mp3`
 
@@ -56,9 +55,40 @@ The file extension is optional unlike on iOS. If the file could not be found, th
 
 > To use custom sounds on iOS, view the [iOS Sound](/react-native/docs/ios/behaviour#sound) documentation for details.
 
+## Device Sound
+
+To use a device sound, you will need the file location of where it is stored. It's easy with the help of [`react-native-notification-sounds`](https://www.npmjs.com/package/react-native-notification-sounds) to get this information, for example:
+
+```js
+import NotificationSounds from 'react-native-notification-sounds';
+import notifee from '@notifee/react-native';
+
+// Retrieve a list of system notification sounds
+const soundsList = await NotificationSounds.getNotifications('notification');
+
+await notifee.createChannel({
+       id: "custom-sound",
+       name: "System Sound",
+       // Set sound to Aldebaran
+       // (url: "content://media/internal/audio/media/30")
+       sound: soundsList[0].url,
+  });
+```
+
 # Auto Cancelling
 
 This documentation is a work in progress.
+
+When a notification is pressed, the notification is automatically canceled by default. This behaviour can be turned off by setting [`autoCancel`](/react-native/reference/notificationandroid#autocancel) to false:
+
+```js
+await notifee.displayNotification({
+  title: 'Disable auto cancel',
+  android: {
+    autoCancel: false, // Defaults to true
+  },
+});
+```
 
 # Vibration
 
