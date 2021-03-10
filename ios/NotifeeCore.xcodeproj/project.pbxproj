@@ -33,6 +33,8 @@
 		27D187D4243040270067FE5A /* NotifeeCoreUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 27D187D2243040270067FE5A /* NotifeeCoreUtil.h */; };
 		27D187D5243040270067FE5A /* NotifeeCoreUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D187D3243040270067FE5A /* NotifeeCoreUtil.m */; };
 		27E8C36923E47C97007568A4 /* NotifeeCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C36723E47C97007568A4 /* NotifeeCore.m */; };
+		7988438025F8466900B2027F /* NotifeeCoreExtensionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7988437F25F8466900B2027F /* NotifeeCoreExtensionHelper.h */; };
+		7988438425F8468600B2027F /* NotifeeCoreExtensionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7988438325F8468600B2027F /* NotifeeCoreExtensionHelper.m */; };
 		79F8C7A02524C955000B7FFE /* NotifeeCore+NSURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */; };
 		79F8C7AC2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */; };
 		79F8C8102524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */; };
@@ -64,6 +66,8 @@
 		27E8C35A23E46BAB007568A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27E8C36723E47C97007568A4 /* NotifeeCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeCore.m; sourceTree = "<group>"; };
 		35B24B37182E4764B6AB847B /* Pods-NotifeeCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.debug.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.debug.xcconfig"; sourceTree = "<group>"; };
+		7988437F25F8466900B2027F /* NotifeeCoreExtensionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreExtensionHelper.h; sourceTree = "<group>"; };
+		7988438325F8468600B2027F /* NotifeeCoreExtensionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreExtensionHelper.m; sourceTree = "<group>"; };
 		79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotifeeCore+NSURLSession.m"; sourceTree = "<group>"; };
 		79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSURLSession.h"; sourceTree = "<group>"; };
 		79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDownloadDelegate.h; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 		277A3BD524302E930001EA96 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				7988437F25F8466900B2027F /* NotifeeCoreExtensionHelper.h */,
 				27D187D2243040270067FE5A /* NotifeeCoreUtil.h */,
 				277A3BD124302E530001EA96 /* NotifeeCoreDelegateHolder.h */,
 				79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */,
@@ -135,6 +140,7 @@
 				79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */,
 				277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */,
 				27D187D3243040270067FE5A /* NotifeeCoreUtil.m */,
+				7988438325F8468600B2027F /* NotifeeCoreExtensionHelper.m */,
 			);
 			path = NotifeeCore;
 			sourceTree = "<group>";
@@ -165,6 +171,7 @@
 			files = (
 				277A3BD324302E530001EA96 /* NotifeeCoreDelegateHolder.h in Headers */,
 				27CB379124301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h in Headers */,
+				7988438025F8466900B2027F /* NotifeeCoreExtensionHelper.h in Headers */,
 				79F8C7AC2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h in Headers */,
 				79F8C8102524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h in Headers */,
 				27D187D4243040270067FE5A /* NotifeeCoreUtil.h in Headers */,
@@ -295,6 +302,7 @@
 				79F8C7A02524C955000B7FFE /* NotifeeCore+NSURLSession.m in Sources */,
 				27E8C36923E47C97007568A4 /* NotifeeCore.m in Sources */,
 				27CB379224301F38008DC2DC /* NotifeeCore+NSNotificationCenter.m in Sources */,
+				7988438425F8468600B2027F /* NotifeeCoreExtensionHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

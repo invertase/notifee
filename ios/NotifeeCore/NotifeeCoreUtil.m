@@ -7,7 +7,7 @@
 //
 
 #import "Private/NotifeeCoreUtil.h"
-
+#import <UIKit/UIKit.h>
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
 #import "Private/NotifeeCore+NSURLSession.h"
