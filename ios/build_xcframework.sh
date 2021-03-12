@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 WORKING_DIR=$(pwd)
 FRAMEWORK_FOLDER_NAME="Notifee_XCFramework"
