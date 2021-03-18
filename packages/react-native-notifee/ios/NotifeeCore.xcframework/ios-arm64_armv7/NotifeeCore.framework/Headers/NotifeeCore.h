@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 //! Project version number for NotifeeCore.
 FOUNDATION_EXPORT double NotifeeCoreVersionNumber;
+#import <UserNotifications/UserNotifications.h>
 
 //! Project version string for NotifeeCore.
 FOUNDATION_EXPORT const unsigned char NotifeeCoreVersionString[];
@@ -85,6 +85,14 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block;
+
++ (nullable instancetype)notifeeUIApplication;
+
++ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification
+                                               withTrigger:(NSDictionary *)trigger;
+
++ (void)populateNotificationContent:(UNMutableNotificationContent *)content
+                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 
 @end
 
