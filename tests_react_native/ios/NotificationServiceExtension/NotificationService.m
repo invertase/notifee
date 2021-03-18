@@ -2,8 +2,8 @@
 //  NotificationService.m
 //  NotificationServiceExtension
 //
-//  Created by Helena Ford on 22/09/2020.
-//  Copyright © 2020 Invertase. All rights reserved.
+//  Created by Helena Ford on 08/03/2021.
+//  Copyright © 2021 Invertase. All rights reserved.
 //
 
 #import "NotificationService.h"
@@ -21,7 +21,7 @@
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     self.contentHandler = contentHandler;
     self.bestAttemptContent = [request.content mutableCopy];
-
+    
     [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent withContentHandler:contentHandler];
 }
 

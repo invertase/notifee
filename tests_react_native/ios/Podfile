@@ -7,6 +7,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 # Note: you must pod install after changing this value
 
 $NotifeeCoreFromSources = true
+$NotifeeExtension = true
 
 # ----------------------------------------------------------------
 
@@ -79,7 +80,7 @@ end
 #end
 
 target 'NotificationServiceExtension' do
-  pod 'RNNotifee/NotifeeExtensionHelper', :path => "../../packages/react-native"
+  pod 'RNNotifeeCore', :path => "../../packages/react-native"
 end
 
 post_install do |installer|
