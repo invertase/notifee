@@ -17,6 +17,7 @@
 
 #import "NotifeeApiModule.h"
 #import <React/RCTUtils.h>
+#import <UIKit/UIKit.h>
 
 static NSString *kReactNativeNotifeeNotificationEvent = @"app.notifee.notification-event";
 static NSString *kReactNativeNotifeeNotificationBackgroundEvent =
