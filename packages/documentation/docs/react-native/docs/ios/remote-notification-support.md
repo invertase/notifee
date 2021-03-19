@@ -52,9 +52,9 @@ At this point everything should still be running normally. This is the final ste
 ```
 #import "NotificationService.h"
 + #import "NotifeeExtensionHelper.h"
-```
+```objectivec
 * then replace everything from line 25 to 28 with the extension helper
-```
+```objectivec
 - // Modify the notification content here...
 - self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
     
