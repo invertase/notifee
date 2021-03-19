@@ -1,5 +1,5 @@
 ---
-title: iOS Notifications
+title: Permissions
 description: iOS devices require that permission is granted from users before notifications can be displayed on the device.
 next: /react-native/docs/ios/remote-notification-support
 previous: /react-native/docs/ios/interaction
