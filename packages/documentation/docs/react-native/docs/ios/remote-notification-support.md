@@ -27,7 +27,7 @@ Ensure that your new extension has access to `NotifeeExtensionHelper` by adding 
 * From the Navigator open the Podfile: Pods > Podfile
 * Scroll down to the bottom of the file and add
 
-```yaml
+```ruby
 $NotifeeExtension = true
 
 target 'NotifeeNotificationService' do
@@ -49,7 +49,7 @@ At this point everything should still be running normally. This is the final ste
 * From the navigator select your extension
 * Open the NotificationService.m file
 * At the top of the file import NotifeeExtensionHelper.h right after the NotificationService.h as shown below
-```
+```objective-c
 #import "NotificationService.h"
 + #import "NotifeeExtensionHelper.h"
 ```
@@ -68,7 +68,7 @@ Before, moving to the next step, run the app and check it builds successfully â€
 ## Edit the payload
 Now everything is setup in your app, you can alter your notification payload to include `notifee_options`:
 
-```js
+```json
 // FCM
 {
     notification: {
