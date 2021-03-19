@@ -49,7 +49,7 @@ At this point everything should still be running normally. This is the final ste
 * From the navigator select your extension
 * Open the NotificationService.m file
 * At the top of the file import NotifeeExtensionHelper.h right after the NotificationService.h as shown below
-```objective-c
+```
 #import "NotificationService.h"
 + #import "NotifeeExtensionHelper.h"
 ```
