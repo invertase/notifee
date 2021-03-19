@@ -6,7 +6,8 @@ previous: /react-native/docs/license-keys
 ---
 
 ## 1.2.0
-- **[iOS]**:  Includes a Notification Service Extension Helper to take advantage of Notifee with remote notifications.
+- **[iOS]**:  Includes a Notification Service Extension Helper to take advantage of Notifee with remote notifications. To learn more, view the [`Remote Notification Support`](/react-native/docs/ios/remote-notification-support) documentation.
+
 
 ## 1.1.2
 - **[iOS]**:  Enforce v1.10+ of CocoaPods (Fixes [#230](https://github.com/notifee/react-native-notifee/issues/230)).

@@ -18,3 +18,4 @@ includes support for many of the latest features available.
 | [Categories & Actions](/react-native/docs/ios/categories) | Create & assign categories to notifications to display actions.          |
 | [Interaction](/react-native/docs/ios/interaction)         | Handle user interaction with the notification and quick actions.         |
 | [Permissions](/react-native/docs/ios/permissions)         | Request permission from your application users to display notifications. |
+| [Remote Notification Support](/react-native/docs/ios/remote-notification-support)         | Utilise the power of Notifee with remote notifications. |
