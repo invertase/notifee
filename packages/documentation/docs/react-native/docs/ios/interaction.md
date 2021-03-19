@@ -1,6 +1,8 @@
 ---
 title: Interaction
 description: Handle user interaction with the notification and quick actions.
+next: /react-native/docs/ios/permissions
+previous: /react-native/docs/ios/categories
 ---
 
 Users can interact with notifications in a number of ways; via the Notification Center, when they display in

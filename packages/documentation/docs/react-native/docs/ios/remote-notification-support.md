@@ -2,7 +2,7 @@
 title: Remote Notification support
 description:  Utilise the power of Notifee with remote notifications.
 next: /
-previous: /
+previous: /react-native/docs/ios/permissions
 ---
 
 ## Remote Notification Support
@@ -46,7 +46,7 @@ end
 
 At this point everything should still be running normally. This is the final step which is invoking the extension helper.
 
-* From the navigator select your NotifeeNotificationService extension
+* From the navigator select your extension
 * Open the NotificationService.m file
 * At the top of the file import NotifeeExtensionHelper.h right after the NotificationService.h as shown below
 ```
@@ -86,7 +86,7 @@ Now everything is setup in your app, you can alter your notification payload to 
                 ios: {
                     sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
                     categoryId: 'post', // A category that's already been created by your app
-                    ... // any other api properties for [`NotificationIOS`](https://notifee.app/react-native/reference/notificationios)
+                    ... // any other api properties for NotificationIOS
                 },
             },
         },

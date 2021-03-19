@@ -1,8 +1,8 @@
 ---
 title: Categories
 description: Create categories on a device and assign notifications.
-next: /
-previous: /
+next: /react-native/docs/ios/interaction
+previous: /react-native/docs/ios/behaviour
 ---
 
 Notifications can be categorized into groups, allowing you to control how the system displays them. Categories also

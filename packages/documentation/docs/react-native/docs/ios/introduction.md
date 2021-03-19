@@ -2,7 +2,7 @@
 title: iOS Notifications
 description: Learn about integrating iOS notifications with Notifee.
 next: /react-native/docs/ios/appearance
-previous: /react-native/docs/android/timers
+previous: /react-native/docs/android/background-restrictions
 ---
 
 The iOS API allows for creating interactive notifications. Notifee supports devices running iOS 10+ and

@@ -1,7 +1,7 @@
 ---
 title: Appearance
 description: Customising the appearance of your iOS notifications with Notifee.
-next: /react-native/docs/ios/behaviour
+next: /react-native/docs/ios/badges
 previous: /react-native/docs/ios/introduction
 ---
 

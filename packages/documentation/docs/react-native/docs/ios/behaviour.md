@@ -1,8 +1,8 @@
 ---
 title: Behaviour
 description: Control how notifications behave when they are displayed to your users.
-next: /
-previous: /
+next: /react-native/docs/ios/categories
+previous: /react-native/docs/ios/badges
 ---
 
 # Sound

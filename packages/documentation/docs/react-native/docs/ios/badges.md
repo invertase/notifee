@@ -1,6 +1,8 @@
 ---
 title: Badges
 description: Manage the badge count on your application.
+next: /react-native/docs/ios/behaviour
+previous: /react-native/docs/ios/appearance
 ---
 
 On iOS devices, the application icon on the device home screen is able to display a badge count, which appears as a red
