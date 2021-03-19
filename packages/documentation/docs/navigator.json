@@ -61,7 +61,8 @@
           ["/react-native/docs/ios/behaviour", "Behaviour"],
           ["/react-native/docs/ios/categories", "Categories"],
           ["/react-native/docs/ios/interaction", "Interaction"],
-          ["/react-native/docs/ios/permissions", "Permissions"]
+          ["/react-native/docs/ios/permissions", "Permissions"],
+          ["/react-native/docs/ios/remote-notification-support", "Remote Notification Support"]
         ]
       }
     ]
