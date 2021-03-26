@@ -224,7 +224,7 @@ export interface IOSNotificationPermissions {
 /**
  * An enum representing the notification authorization status for this app on the device.
  *
- * Value is truthy if authorized, compare against an exact status (e.g. PROVISIONAL) for a more
+ * Value is greater than 0 if authorized, compare against an exact status (e.g. PROVISIONAL) for a more
  * granular status.
  *
  * @platform ios
@@ -256,7 +256,7 @@ export enum IOSAuthorizationStatus {
 /**
  * An enum representing the show previews notification setting for this app on the device.
  *
- * Value is truthy if previews are to be shown, compare against an exact value
+ * Value is greater than 0 if previews are to be shown, compare against an exact value
  * (e.g. WHEN_AUTHENTICATED) for more granular control.
  *
  * @platform ios
@@ -287,7 +287,7 @@ export enum IOSShowPreviewsSetting {
 /**
  * An enum representing a notification setting for this app on the device.
  *
- * Value is truthy if setting enabled, compare against an exact value (e.g. NOT_SUPPORTED) for more
+ * Value is greater than 0 if setting enabled, compare against an exact value (e.g. NOT_SUPPORTED) for more
  * granular control.
  *
  * @platform ios
