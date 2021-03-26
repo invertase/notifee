@@ -2169,7 +2169,7 @@
 			},
 			"comment": {
 				"shortText": "An enum representing the notification authorization status for this app on the device.",
-				"text": "Value is truthy if authorized, compare against an exact status (e.g. PROVISIONAL) for a more\ngranular status.\n",
+				"text": "Value is greater than 0 if authorized, compare against an exact status (e.g. PROVISIONAL) for a more\ngranular status.\n",
 				"tags": [
 					{
 						"tag": "platform",
