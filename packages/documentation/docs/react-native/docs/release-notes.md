@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.2.1
+- **[Android]**: Fixed an issue with Notifee's build script where sometimes an error would occur that the target variant task already existed. 
+
 ## 1.2.0
 - **[iOS]**:  Includes a Notification Service Extension Helper to take advantage of Notifee with remote notifications. To learn more, view the [Remote Notification Support](/react-native/docs/ios/remote-notification-support) documentation.
 
