@@ -187,11 +187,19 @@ class NotifeeJsonTask extends DefaultTask {
 def registerJsonTaskForProjectVariant(jsonFile, targetProject, targetVariant) {
   File outputDir = targetProject.file("$targetProject.buildDir/generated/res/notifee/$targetVariant.dirName")
 
-  NotifeeJsonTask task = targetProject.tasks.create("process${targetVariant.name.capitalize()}NotifeeJson", NotifeeJsonTask)
+  String variantTaskName = "process${targetVariant.name.capitalize()}NotifeeJson";
+  String buildTypeName = targetVariant.getBuildType().name;
+  String buildFlavorName = targetVariant.flavorName ? targetVariant.flavorName : "";
 
-  task.setBuildType(targetVariant.getBuildType().name)
+  NotifeeJsonTask task = targetProject.tasks.findByName(variantTaskName);
 
-  task.setBuildFlavor(targetVariant.flavorName ? targetVariant.flavorName : "")
+  if (!task) {
+    task = targetProject.tasks.create(variantTaskName, NotifeeJsonTask)
+  }
+
+  task.setBuildType(buildTypeName)
+
+  task.setBuildFlavor(buildFlavorName)
 
   task.setOutputDirectory(outputDir)
 
