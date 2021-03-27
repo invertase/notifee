@@ -426,4 +426,11 @@ public class Notifee {
       result.onComplete(null, null);
     }
   }
+
+  @KeepForSdk
+  public void stopForegroundService(MethodCallResult<Void> result) {
+    ForegroundService.stop();
+    result.onComplete(null, null);
+    return;
+  }
 }

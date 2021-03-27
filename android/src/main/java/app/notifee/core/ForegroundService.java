@@ -13,9 +13,11 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.NotificationModel;
 
 public class ForegroundService extends Service {
-
+  private static final String TAG = "ForegroundService";
   public static final String START_FOREGROUND_SERVICE_ACTION =
       "app.notifee.core.ForegroundService.START";
+  public static final String STOP_FOREGROUND_SERVICE_ACTION =
+      "app.notifee.core.ForegroundService.STOP";
 
   public static String mCurrentNotificationId = null;
 
@@ -34,8 +36,31 @@ public class ForegroundService extends Service {
     }
   }
 
+  static void stop() {
+    Intent intent = new Intent(ContextHolder.getApplicationContext(), ForegroundService.class);
+    intent.setAction(STOP_FOREGROUND_SERVICE_ACTION);
+
+    try {
+      // Call start service first with stop action
+      ContextHolder.getApplicationContext().startService(intent);
+    } catch (IllegalStateException illegalStateException) {
+      // try to stop with stopService command
+      ContextHolder.getApplicationContext().stopService(intent);
+    } catch (Exception exception) {
+      Logger.e(TAG, "Unable to stop foreground service", exception);
+    }
+  }
+
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    String action = intent.getAction();
+    // Check if action is to stop the foreground service
+    if (action != null && action.equals(STOP_FOREGROUND_SERVICE_ACTION)) {
+      stopSelf();
+      mCurrentNotificationId = null;
+      return 0;
+    }
+
     Bundle extras = intent.getExtras();
 
     if (extras != null) {
