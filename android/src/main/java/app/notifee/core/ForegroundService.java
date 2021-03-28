@@ -55,7 +55,7 @@ public class ForegroundService extends Service {
   public int onStartCommand(Intent intent, int flags, int startId) {
     String action = intent.getAction();
     // Check if action is to stop the foreground service
-    if (action != null && action.equals(STOP_FOREGROUND_SERVICE_ACTION)) {
+    if (STOP_FOREGROUND_SERVICE_ACTION.equals(action)) {
       stopSelf();
       mCurrentNotificationId = null;
       return 0;
