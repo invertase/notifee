@@ -121,6 +121,8 @@ of an [`async function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 returns an implicit Promise once complete. If you are not using `async`, ensure your handler callback returns a promise
 once complete.
 
+> Please note, for iOS, the `DELIVERED` event is not fired for trigger notifications when the app is in the background.
+
 # App open events
 
 If user interaction on a notification has caused your application to open, you may want to obtain the notification which
