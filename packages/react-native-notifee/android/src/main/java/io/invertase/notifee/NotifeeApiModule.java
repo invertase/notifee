@@ -235,6 +235,12 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
             getCurrentActivity(), (e, avoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
+  @ReactMethod
+  public void stopForegroundService(Promise promise) {
+    Notifee.getInstance()
+        .stopForegroundService((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
   @NonNull
   @Override
   public String getName() {

@@ -360,6 +360,14 @@ export interface Module {
   registerForegroundService(task: ForegroundServiceTask): void;
 
   /**
+   * Call this to stop the foreground service that is running
+   *
+   * @platform android
+   *
+   */
+  stopForegroundService(): Promise<void>;
+
+  /**
    * Request specific notification permissions for your application on the current device.
    *
    * Both iOS & Android return an `IOSNotificationSettings` interface. To check whether overall

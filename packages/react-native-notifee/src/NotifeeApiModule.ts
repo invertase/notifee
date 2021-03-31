@@ -51,6 +51,7 @@ if (isAndroid) {
       );
       return (): Promise<void> => Promise.resolve();
     }
+
     return ({ notification }): Promise<void> => registeredForegroundServiceTask(notification);
   });
 }
@@ -554,5 +555,12 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return Promise.resolve();
     }
     return this.native.openPowerManagerSettings();
+  };
+
+  public stopForegroundService = (): Promise<void> => {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.stopForegroundService();
   };
 }
