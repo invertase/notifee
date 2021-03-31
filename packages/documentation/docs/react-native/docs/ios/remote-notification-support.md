@@ -49,10 +49,11 @@ At this point everything should still be running normally. This is the final ste
 * From the navigator select your extension
 * Open the NotificationService.m file
 * At the top of the file import NotifeeExtensionHelper.h right after the NotificationService.h as shown below
-```
+```objectivec
 #import "NotificationService.h"
 + #import "NotifeeExtensionHelper.h"
-```objectivec
+```
+
 * then replace everything from line 25 to 28 with the extension helper
 ```objectivec
 - // Modify the notification content here...

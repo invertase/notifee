@@ -39,6 +39,8 @@ async function setCategories() {
 To view more about the `actions` property, view the [Quick Actions](/react-native/docs/ios/interaction#quick-actions)
 documentation.
 
+> It is also possible to group notifications via [threadId](/react-native/reference/notificationios#threadid)).
+
 # Assigning a category
 
 Once created, a notification can then be displayed using the `categoryId` identifier on the notification. For example,
