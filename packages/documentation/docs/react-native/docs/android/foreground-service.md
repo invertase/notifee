@@ -34,14 +34,12 @@ a notification object when called.
 ```js
 import notifee from '@notifee/react-native';
 
-notifee.registerForegroundService(() => {
-  return new Promise(resolve => {
-    // Long running task...
-  });
+notifee.registerForegroundService(async (notification) => {
+    // Add your long running task...
 });
 ```
 
-Whenever the runner resolves, the foreground service will close and the notification will be removed. The service can be
+Whenever you call `stopForegroundService`, the foreground service will close and the notification will be removed. The service can be
 stopped by the device (e.g. low memory) or if the user force quits from the application settings.
 
 ## Attach a notification
@@ -74,20 +72,17 @@ which is not possible on standard notifications.
 
 ## Building a long lived task
 
-To simplify the experience for developers, a long lived task will continuously run until the runner function resolves a
-promise. This allows us to create intervals, or subscribe to events which we can use to update the notification.
+To simplify the experience for developers, a long lived task will continuously run until you call `stopForegroundService`. This allows us to create intervals, or subscribe to events which we can use to update the notification.
 
 For example, we could build a task which subscribes to an event handler:
 
 ```js
-notifee.registerForegroundService(() => {
-  return new Promise(resolve => {
-    // Example task subscriber
-    onTaskUpdate(task => {
-      if (task.complete) {
-        return resolve();
-      }
-    });
+notifee.registerForegroundService(async () => {
+  // Example task subscriber
+  onTaskUpdate(task => {
+    if (task.complete) {
+        await notifee.stopForegroundService()
+    }
   });
 });
 ```
@@ -101,28 +96,26 @@ Foreground notifications behave like any other notification, and can display any
 Whilst our service is running, we can also update the current notification to display different content:
 
 ```js
-notifee.registerForegroundService(notification => {
-  return new Promise(resolve => {
-    // Example task subscriber
-    onTaskUpdate(task => {
-      if (task.update) {
-        notifee.displayNotification({
-          id: notification.id,
-          body: notification.body,
-          android: {
-            ...notification.android,
-            progress: {
-              max: task.update.total,
-              current: task.update.current,
-            },
+notifee.registerForegroundService(async (notification) => {
+  // Example task subscriber
+  onTaskUpdate(task => {
+    if (task.update) {
+      notifee.displayNotification({
+        id: notification.id,
+        body: notification.body,
+        android: {
+          ...notification.android,
+          progress: {
+            max: task.update.total,
+            current: task.update.current,
           },
-        });
-      }
+        },
+      });
+    }
 
-      if (task.complete) {
-        return resolve();
-      }
-    });
+    if (task.complete) {
+      await notifee.stopForegroundService()
+    }
   });
 });
 ```
@@ -143,13 +136,11 @@ task:
 import notifee, { EventType } from '@notifee/react-native';
 
 // Create the task runner
-notifee.registerForegroundService(notification => {
-  return new Promise(resolve => {
-    notifee.onForegroundEvent(({ type, detail }) => {
-      if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'stop') {
-        return resolve();
-      }
-    });
+notifee.registerForegroundService(async (notification) => {
+  notifee.onForegroundEvent(({ type, detail }) => {
+    if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'stop') {
+      await notifee.stopForegroundService()
+    }
   });
 });
 ```
