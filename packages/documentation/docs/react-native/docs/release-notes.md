@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.3.0
+- **[Android]**: Fixed an issue where sometimes the foreground service failed to stop when calling `resolve` due to an issue with hot reloading. It can be stopped by `notifee.stopForegroundService()`. 
+
 ## 1.2.1
 - **[Android]**: Fixed an issue with Notifee's build script where sometimes an error would occur that the target variant task already existed. 
 

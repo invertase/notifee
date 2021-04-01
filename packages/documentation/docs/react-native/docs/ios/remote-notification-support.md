@@ -5,8 +5,6 @@ next: /
 previous: /react-native/docs/ios/permissions
 ---
 
-## Remote Notification Support
-
 It's possible to display a notification with Notifee features from outside the app using remote notifications (a.k.a push notifications).
 
 By adding a custom key `notifee_options` in the message payload, the notification will be modified by Notifee before it is finally displayed to the end user.

@@ -26,7 +26,9 @@ try {
 ## Android
 
 - Enable native logs in release mode by running:
+
 `adb shell setprop log.tag.NOTIFEE DEBUG`
 
 - To quickly view Android logs in the terminal:
+
 `adb logcat '*:S' NOTIFEE:D`
