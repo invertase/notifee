@@ -1,13 +1,12 @@
 package app.notifee.core;
 
-import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
-
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.work.Data;
@@ -15,10 +14,14 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker.Result;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
+
+import java.util.concurrent.TimeUnit;
+
 import app.notifee.core.event.BlockStateEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.utility.ObjectUtils;
-import java.util.concurrent.TimeUnit;
+
+import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 
 public class BlockStateBroadcastReceiver extends BroadcastReceiver {
   private static final String TAG = "BlockState";
@@ -136,8 +139,18 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
             .setInitialDelay(1, TimeUnit.SECONDS)
             .setInputData(workDataBuilder.build());
 
-    WorkManager.getInstance(ContextHolder.getApplicationContext())
-        .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
+    // On-going issue with WorkManager.getInstance(context)
+    // https://issuetracker.google.com/issues/138465476
+    try {
+      WorkManager.getInstance(ContextHolder.getApplicationContext())
+          .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
+    } catch (IllegalStateException e) {
+      Logger.e(TAG, "Error while calling WorkManager.getInstance", e);
+
+      if (ContextHolder.getApplicationContext() == null) {
+        Logger.e(TAG, "Application Context is null");
+      }
+    }
 
     Logger.v(TAG, "scheduled new background work with id " + uniqueWorkId);
   }
