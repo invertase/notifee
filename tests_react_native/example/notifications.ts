@@ -42,6 +42,26 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
+    key: 'BubbleAction',
+    notification: {
+      title: 'Bubble',
+      android: {
+        asForegroundService: false,
+        channelId: 'high',
+        autoCancel: false,
+        category: AndroidCategory.CALL,
+        importance: AndroidImportance.HIGH,
+        fullScreenAction: {
+          id: 'default',
+          launchActivity: 'default',
+          // launchActivity: 'com.notifee.testing.BubbleActivity',
+          // launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
+          mainComponent: 'custom-component',
+        },
+      },
+    },
+  },
+  {
     key: 'Basic',
     notification: {
       title: 'Title',

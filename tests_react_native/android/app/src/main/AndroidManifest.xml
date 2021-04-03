@@ -33,5 +33,10 @@
       android:showWhenLocked="true"
       android:turnScreenOn="true"
     />
+    <activity
+      android:name="com.notifee.testing.BubbleActivity"
+      android:showWhenLocked="true"
+      android:turnScreenOn="true"
+    />
   </application>
 </manifest>
