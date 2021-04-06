@@ -1,9 +1,11 @@
 package app.notifee.core;
 
+import static app.notifee.core.ContextHolder.getApplicationContext;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -25,13 +27,16 @@ import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
+import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.IntervalTriggerModel;
 import app.notifee.core.model.NotificationAndroidActionModel;
 import app.notifee.core.model.NotificationAndroidModel;
+import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationAndroidStyleModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
+import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
@@ -67,8 +72,7 @@ class NotificationManager {
         () -> {
           Boolean hasCustomSound = false;
           NotificationCompat.Builder builder =
-              new NotificationCompat.Builder(
-                  ContextHolder.getApplicationContext(), androidModel.getChannelId());
+              new NotificationCompat.Builder(getApplicationContext(), androidModel.getChannelId());
 
           // must always keep at top
           builder.setExtras(notificationModel.getData());
@@ -244,6 +248,42 @@ class NotificationManager {
         };
 
     /*
+     * A task continuation for full-screen action, if specified.
+     */
+    Continuation<NotificationCompat.Builder, NotificationCompat.Builder>
+        fullScreenActionContinuation =
+            task -> {
+              NotificationCompat.Builder builder = task.getResult();
+              if (androidModel.hasFullScreenAction()) {
+                NotificationAndroidPressActionModel fullScreenActionBundle =
+                    androidModel.getFullScreenAction();
+
+                String launchActivity = fullScreenActionBundle.getLaunchActivity();
+                Class launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
+                Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
+                if (fullScreenActionBundle.getLaunchActivityFlags() != -1) {
+                  launchIntent.addFlags(fullScreenActionBundle.getLaunchActivityFlags());
+                }
+
+                if (fullScreenActionBundle.getMainComponent() != null) {
+                  launchIntent.putExtra("mainComponent", fullScreenActionBundle.getMainComponent());
+                  EventBus.postSticky(
+                      new MainComponentEvent(fullScreenActionBundle.getMainComponent()));
+                }
+
+                PendingIntent fullScreenPendingIntent =
+                    PendingIntent.getActivity(
+                        getApplicationContext(),
+                        notificationModel.getHashCode(),
+                        launchIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setFullScreenIntent(fullScreenPendingIntent, true);
+              }
+
+              return builder;
+            };
+
+    /*
      * A task continuation that builds all actions, if any. Additionally fetches
      * icon bitmaps through Fresco.
      */
@@ -333,6 +373,8 @@ class NotificationManager {
     return Tasks.call(CACHED_THREAD_POOL, builderCallable)
         // get a large image bitmap if largeIcon is set
         .continueWith(CACHED_THREAD_POOL, largeIconContinuation)
+        // set full screen action, if fullScreenAction is set
+        .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation)
         // build notification actions, tasks based to allow image fetching
         .continueWith(CACHED_THREAD_POOL, actionsContinuation)
         // build notification style, tasks based to allow image fetching
@@ -344,7 +386,7 @@ class NotificationManager {
     return Tasks.call(
         () -> {
           NotificationManagerCompat notificationManagerCompat =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext());
+              NotificationManagerCompat.from(getApplicationContext());
 
           if (notificationType == NOTIFICATION_TYPE_DISPLAYED
               || notificationType == NOTIFICATION_TYPE_ALL) {
@@ -353,13 +395,12 @@ class NotificationManager {
 
           if (notificationType == NOTIFICATION_TYPE_TRIGGER
               || notificationType == NOTIFICATION_TYPE_ALL) {
-            WorkManager.getInstance(ContextHolder.getApplicationContext())
+            WorkManager.getInstance(getApplicationContext())
                 .cancelUniqueWork("trigger:" + notificationId);
           }
 
           // delete notification entry from database
-          WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
-              .deleteById(notificationId);
+          WorkDataRepository.getInstance(getApplicationContext()).deleteById(notificationId);
           return null;
         });
   }
@@ -368,7 +409,7 @@ class NotificationManager {
     return Tasks.call(
         () -> {
           NotificationManagerCompat notificationManagerCompat =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext());
+              NotificationManagerCompat.from(getApplicationContext());
 
           if (notificationType == NOTIFICATION_TYPE_DISPLAYED
               || notificationType == NOTIFICATION_TYPE_ALL) {
@@ -377,8 +418,7 @@ class NotificationManager {
 
           if (notificationType == NOTIFICATION_TYPE_TRIGGER
               || notificationType == NOTIFICATION_TYPE_ALL) {
-            WorkManager workManager =
-                WorkManager.getInstance(ContextHolder.getApplicationContext());
+            WorkManager workManager = WorkManager.getInstance(getApplicationContext());
             workManager.cancelAllWorkByTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
 
             // Remove all cancelled and finished work from its internal database
@@ -386,7 +426,7 @@ class NotificationManager {
             workManager.pruneWork();
 
             // delete all from database
-            WorkDataRepository.getInstance(ContextHolder.getApplicationContext()).deleteAll();
+            WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
           }
 
           return null;
@@ -406,7 +446,7 @@ class NotificationManager {
               if (androidBundle.getAsForegroundService()) {
                 ForegroundService.start(hashCode, notification, notificationModel.toBundle());
               } else {
-                NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                NotificationManagerCompat.from(getApplicationContext())
                     .notify(hashCode, notification);
               }
 
@@ -444,7 +484,7 @@ class NotificationManager {
       NotificationModel notificationModel, Bundle triggerBundle) {
     IntervalTriggerModel trigger = IntervalTriggerModel.fromBundle(triggerBundle);
     String uniqueWorkName = "trigger:" + notificationModel.getId();
-    WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+    WorkManager workManager = WorkManager.getInstance(getApplicationContext());
 
     Data.Builder workDataBuilder =
         new Data.Builder()
@@ -452,7 +492,7 @@ class NotificationManager {
             .putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_PERIODIC)
             .putString("id", notificationModel.getId());
 
-    WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+    WorkDataRepository.getInstance(getApplicationContext())
         .insertTriggerNotification(notificationModel, triggerBundle);
 
     long interval = trigger.getInterval();
@@ -473,7 +513,7 @@ class NotificationManager {
     TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
 
     String uniqueWorkName = "trigger:" + notificationModel.getId();
-    WorkManager workManager = WorkManager.getInstance(ContextHolder.getApplicationContext());
+    WorkManager workManager = WorkManager.getInstance(getApplicationContext());
     long delay = trigger.getDelay();
     int interval = trigger.getInterval();
 
@@ -482,7 +522,7 @@ class NotificationManager {
             .putString(Worker.KEY_WORK_TYPE, Worker.WORK_TYPE_NOTIFICATION_TRIGGER)
             .putString("id", notificationModel.getId());
 
-    WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
+    WorkDataRepository.getInstance(getApplicationContext())
         .insertTriggerNotification(notificationModel, triggerBundle);
 
     // One time trigger
@@ -520,9 +560,7 @@ class NotificationManager {
           query.addStates(Arrays.asList(WorkInfo.State.ENQUEUED));
 
           List<WorkInfo> workInfos =
-              WorkManager.getInstance(ContextHolder.getApplicationContext())
-                  .getWorkInfos(query.build())
-                  .get();
+              WorkManager.getInstance(getApplicationContext()).getWorkInfos(query.build()).get();
 
           if (workInfos.size() == 0) {
             return Collections.emptyList();
@@ -551,8 +589,7 @@ class NotificationManager {
 
     String id = data.getString("id");
 
-    WorkDataRepository workDataRepository =
-        new WorkDataRepository(ContextHolder.getApplicationContext());
+    WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
     Continuation<WorkDataEntity, Task<Void>> workContinuation =
         task -> {
@@ -598,8 +635,7 @@ class NotificationManager {
                 if (workerRequestType != null
                     && workerRequestType.equals(Worker.WORK_REQUEST_ONE_TIME)) {
                   // delete database entry if work is a one-time request
-                  WorkDataRepository.getInstance(ContextHolder.getApplicationContext())
-                      .deleteById(id);
+                  WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
                 }
               }
             });

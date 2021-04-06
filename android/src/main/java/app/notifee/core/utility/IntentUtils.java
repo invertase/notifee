@@ -1,11 +1,13 @@
 package app.notifee.core.utility;
 
+import static app.notifee.core.ContextHolder.getApplicationContext;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import app.notifee.core.ContextHolder;
+import androidx.annotation.Nullable;
 import app.notifee.core.Logger;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class IntentUtils {
       return;
     }
 
-    Context ctx = ContextHolder.getApplicationContext();
+    Context ctx = getApplicationContext();
     if (ctx == null) {
       Logger.w(TAG, "Unable to get application context when calling startActivityOnUiThread()");
     }
@@ -67,5 +69,51 @@ public class IntentUtils {
             Logger.e(TAG, "An error occurred whilst trying to start activity on Ui Thread", e);
           }
         });
+  }
+
+  public static Class<?> getLaunchActivity(@Nullable String launchActivity) {
+    String activity;
+
+    if (launchActivity != null && !launchActivity.equals("default")) {
+      activity = launchActivity;
+    } else {
+      activity = getMainActivityClassName();
+    }
+
+    if (activity == null) {
+      Logger.e("ReceiverService", "Launch Activity for notification could not be found.");
+      return null;
+    }
+
+    Class<?> launchActivityClass = getClassForName(activity);
+
+    if (launchActivityClass == null) {
+      Logger.e(
+          "ReceiverService",
+          String.format("Launch Activity for notification does not exist ('%s').", launchActivity));
+      return null;
+    }
+
+    return launchActivityClass;
+  }
+
+  private @Nullable static Class<?> getClassForName(String className) {
+    try {
+      return Class.forName(className);
+    } catch (ClassNotFoundException e) {
+      return null;
+    }
+  }
+
+  private @Nullable static String getMainActivityClassName() {
+    String packageName = getApplicationContext().getPackageName();
+    Intent launchIntent =
+        getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
+
+    if (launchIntent == null || launchIntent.getComponent() == null) {
+      return null;
+    }
+
+    return launchIntent.getComponent().getClassName();
   }
 }

@@ -415,4 +415,15 @@ function TestComponent(): any {
 
 AppRegistry.registerComponent('test_component', () => TestComponent);
 
+function FullScreenComponent(): any {
+  return (
+    // eslint-disable-next-line react-native/no-inline-styles
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>FullScreen Component</Text>
+    </View>
+  );
+}
+
+AppRegistry.registerComponent('full_screen', () => FullScreenComponent);
+
 export default Root;

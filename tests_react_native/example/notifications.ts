@@ -1,4 +1,10 @@
-import { AndroidStyle, Notification, AndroidLaunchActivityFlag } from '@notifee/react-native';
+import {
+  AndroidStyle,
+  Notification,
+  AndroidLaunchActivityFlag,
+  AndroidCategory,
+  AndroidImportance,
+} from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {
@@ -16,13 +22,31 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
+    key: 'FullScreenAction',
+    notification: {
+      title: 'Full-screen',
+      android: {
+        asForegroundService: false,
+        channelId: 'high',
+        autoCancel: false,
+        category: AndroidCategory.CALL,
+        importance: AndroidImportance.HIGH,
+        fullScreenAction: {
+          id: 'default',
+          launchActivity: 'default',
+          // launchActivity: 'com.notifee.testing.FullScreenActivity',
+          // launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
+          mainComponent: 'full_screen',
+        },
+      },
+    },
+  },
+  {
     key: 'Basic',
     notification: {
       title: 'Title',
       android: {
-        showTimestamp: true,
-        channelId: 'foo',
-        largeIcon: 'https://storage.googleapis.com/static.invertase.io/assets/avatars/female.png',
+        channelId: 'high',
       },
     },
   },

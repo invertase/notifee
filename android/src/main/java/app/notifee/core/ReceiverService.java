@@ -18,6 +18,7 @@ import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.IntentUtils;
 
 public class ReceiverService extends Service {
   public static final String REMOTE_INPUT_RECEIVER_KEY =
@@ -196,7 +197,7 @@ public class ReceiverService extends Service {
       @Nullable String launchActivity,
       @Nullable String mainComponent,
       int launchActivityFlags) {
-    Class<?> launchActivityClass = getLaunchActivity(launchActivity);
+    Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
 
     Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
 
@@ -230,51 +231,5 @@ public class ReceiverService extends Service {
               + initialNotificationEvent.getNotificationModel().getId(),
           e);
     }
-  }
-
-  private Class<?> getLaunchActivity(@Nullable String launchActivity) {
-    String activity;
-
-    if (launchActivity != null && !launchActivity.equals("default")) {
-      activity = launchActivity;
-    } else {
-      activity = getMainActivityClassName();
-    }
-
-    if (activity == null) {
-      Logger.e("ReceiverService", "Launch Activity for notification could not be found.");
-      return null;
-    }
-
-    Class<?> launchActivityClass = getClassForName(activity);
-
-    if (launchActivityClass == null) {
-      Logger.e(
-          "ReceiverService",
-          String.format("Launch Activity for notification does not exist ('%s').", launchActivity));
-      return null;
-    }
-
-    return launchActivityClass;
-  }
-
-  private @Nullable Class<?> getClassForName(String className) {
-    try {
-      return Class.forName(className);
-    } catch (ClassNotFoundException e) {
-      return null;
-    }
-  }
-
-  private @Nullable String getMainActivityClassName() {
-    String packageName = getApplicationContext().getPackageName();
-    Intent launchIntent =
-        getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
-
-    if (launchIntent == null || launchIntent.getComponent() == null) {
-      return null;
-    }
-
-    return launchIntent.getComponent().getClassName();
   }
 }
