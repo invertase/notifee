@@ -7,10 +7,11 @@
 //
 
 #import "Private/NotifeeCoreUtil.h"
-#import <UIKit/UIKit.h>
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
+#import <UIKit/UIKit.h>
 #import "Private/NotifeeCore+NSURLSession.h"
+#import "Private/NotifeeCoreDelegateHolder.h"
 
 @implementation NotifeeCoreUtil
 
@@ -560,6 +561,21 @@
  */
 + (NSString *)generateCachedFileName:(int)length {
   return [[NSUUID UUID] UUIDString];
+}
+
+/**
+ * Util to send an event with the foreground status of the application
+ */
++ (void)didReceiveNotifeeCoreEvent:(NSDictionary *)event {
+  [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:event
+                                                        foreground:[self isInForeground]];
+}
+
+/**
+ * Determines if application is in the foreground or not
+ */
++ (BOOL)isInForeground {
+  return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
 /**

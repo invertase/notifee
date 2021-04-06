@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)instance;
 
-- (void)didReceiveNotifeeCoreEvent:(NSDictionary *)event;
+- (void)didReceiveNotifeeCoreEvent:(NSDictionary *)event foreground:(BOOL)foreground;
 
 @end
 
