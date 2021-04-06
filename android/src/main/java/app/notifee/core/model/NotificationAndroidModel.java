@@ -3,15 +3,18 @@ package app.notifee.core.model;
 import android.app.Notification;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import app.notifee.core.Logger;
-import app.notifee.core.utility.ResourceUtils;
+
 import java.util.ArrayList;
 import java.util.Objects;
+
+import app.notifee.core.Logger;
+import app.notifee.core.utility.ResourceUtils;
 
 @Keep
 public class NotificationAndroidModel {
@@ -313,6 +316,16 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Returns true if the notification has a bubbleAction
+   *
+   * @return Boolean
+   */
+  public Boolean hasBubbleAction() {
+    return mNotificationAndroidBundle.containsKey("bubbleAction");
+  }
+
+
+  /**
    * Gets an pressAction bundle for the notification
    *
    * @return Bundle or null
@@ -333,6 +346,20 @@ public class NotificationAndroidModel {
 
     return NotificationAndroidPressActionModel.fromBundle(
         mNotificationAndroidBundle.getBundle("fullScreenAction"));
+  }
+
+  /**
+   * Returns a notification bubble action
+   *
+   * @return NotificationAndroidBubbleActionModel
+   */
+  public @Nullable NotificationAndroidBubbleActionModel getBubbleAction() {
+    if (!hasBubbleAction()) {
+      return null;
+    }
+
+    return NotificationAndroidBubbleActionModel.fromBundle(
+      mNotificationAndroidBundle.getBundle("bubbleAction"));
   }
 
   /**
@@ -461,6 +488,19 @@ public class NotificationAndroidModel {
     }
 
     return NotificationAndroidStyleModel.fromBundle(mNotificationAndroidBundle.getBundle("style"));
+  }
+
+  /**
+   * Returns a person
+   *
+   * @return AndroidPerson
+   */
+  public @Nullable NotificationAndroidPersonModel getPerson() {
+    if (mNotificationAndroidBundle.containsKey("person")) {
+      return null;
+    }
+
+    return NotificationAndroidPersonModel.fromBundle(mNotificationAndroidBundle.getBundle("person"));
   }
 
   /**

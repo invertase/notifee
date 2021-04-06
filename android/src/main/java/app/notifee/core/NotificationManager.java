@@ -1,8 +1,5 @@
 package app.notifee.core;
 
-import static app.notifee.core.ContextHolder.getApplicationContext;
-import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -10,10 +7,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.Person;
 import androidx.core.app.RemoteInput;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.work.Data;
@@ -25,24 +24,11 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 import androidx.work.WorkQuery;
-import app.notifee.core.database.WorkDataEntity;
-import app.notifee.core.database.WorkDataRepository;
-import app.notifee.core.event.MainComponentEvent;
-import app.notifee.core.event.NotificationEvent;
-import app.notifee.core.model.IntervalTriggerModel;
-import app.notifee.core.model.NotificationAndroidActionModel;
-import app.notifee.core.model.NotificationAndroidModel;
-import app.notifee.core.model.NotificationAndroidPressActionModel;
-import app.notifee.core.model.NotificationAndroidStyleModel;
-import app.notifee.core.model.NotificationModel;
-import app.notifee.core.model.TimestampTriggerModel;
-import app.notifee.core.utility.IntentUtils;
-import app.notifee.core.utility.ObjectUtils;
-import app.notifee.core.utility.ResourceUtils;
-import app.notifee.core.utility.TextUtils;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,6 +39,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import app.notifee.core.database.WorkDataEntity;
+import app.notifee.core.database.WorkDataRepository;
+import app.notifee.core.event.MainComponentEvent;
+import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.model.IntervalTriggerModel;
+import app.notifee.core.model.NotificationAndroidActionModel;
+import app.notifee.core.model.NotificationAndroidBubbleActionModel;
+import app.notifee.core.model.NotificationAndroidModel;
+import app.notifee.core.model.NotificationAndroidPersonModel;
+import app.notifee.core.model.NotificationAndroidPressActionModel;
+import app.notifee.core.model.NotificationAndroidStyleModel;
+import app.notifee.core.model.NotificationModel;
+import app.notifee.core.model.TimestampTriggerModel;
+import app.notifee.core.utility.IntentUtils;
+import app.notifee.core.utility.ObjectUtils;
+import app.notifee.core.utility.ResourceUtils;
+import app.notifee.core.utility.TextUtils;
+
+import static app.notifee.core.ContextHolder.getApplicationContext;
+import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
@@ -344,6 +351,31 @@ class NotificationManager {
         };
 
     /*
+     * A task continuation that builds the notification bubble action, if any.
+     */
+    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> bubbleActionContinuation =
+      task -> {
+        NotificationCompat.Builder builder = task.getResult();
+        NotificationAndroidBubbleActionModel androidBubbleActionBundle = androidModel.getBubbleAction();
+        if (androidBubbleActionBundle == null) {
+          return builder;
+        }
+
+        Task<NotificationCompat.BubbleMetadata> bubbleActionTask =
+          androidBubbleActionBundle.getBubbleActionTask(CACHED_THREAD_POOL, notificationModel);
+        if (bubbleActionTask == null) {
+          return builder;
+        }
+
+        NotificationCompat.BubbleMetadata bubbleMetadata = Tasks.await(bubbleActionTask);
+        if (bubbleMetadata != null) {
+          builder.setBubbleMetadata(bubbleMetadata);
+        }
+
+        return builder;
+      };
+
+    /*
      * A task continuation that builds the notification style, if any. Additionally
      * fetches any image bitmaps (e.g. Person image, or BigPicture image) through
      * Fresco.
@@ -370,11 +402,44 @@ class NotificationManager {
           return builder;
         };
 
+
+    /*
+     * A task continuation that builds the notification style, if any. Additionally
+     * fetches any image bitmaps (e.g. Person image, or BigPicture image) through
+     * Fresco.
+     */
+    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> personContinuation =
+      task -> {
+        NotificationCompat.Builder builder = task.getResult();
+        NotificationAndroidPersonModel androidPersonBundle = androidModel.getPerson();
+        if (androidPersonBundle == null) {
+          return builder;
+        }
+
+        Task<Person> personTask =
+          androidPersonBundle.buildPersonTask(CACHED_THREAD_POOL);
+        if (personTask == null) {
+          return builder;
+        }
+
+        Person person = Tasks.await(personTask);
+        if (person != null) {
+         // https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=zh-cn#addPerson(androidx.core.app.Person)
+          builder.addPerson(person);
+        }
+
+        return builder;
+      };
+
     return Tasks.call(CACHED_THREAD_POOL, builderCallable)
         // get a large image bitmap if largeIcon is set
         .continueWith(CACHED_THREAD_POOL, largeIconContinuation)
+        // set a person, if person is set
+        .continueWith(CACHED_THREAD_POOL, personContinuation)
         // set full screen action, if fullScreenAction is set
         .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation)
+        // set bubble action, if bubbleAction is set
+        .continueWith(CACHED_THREAD_POOL, bubbleActionContinuation)
         // build notification actions, tasks based to allow image fetching
         .continueWith(CACHED_THREAD_POOL, actionsContinuation)
         // build notification style, tasks based to allow image fetching

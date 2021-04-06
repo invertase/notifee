@@ -35,8 +35,9 @@
     />
     <activity
       android:name="com.notifee.testing.BubbleActivity"
-      android:showWhenLocked="true"
-      android:turnScreenOn="true"
+      android:allowEmbedded="true"
+      android:documentLaunchMode="always"
+      android:resizeableActivity="true" 
     />
   </application>
 </manifest>

@@ -41,9 +41,9 @@ const colors: { [key: string]: string } = {
 const channels: AndroidChannel[] = [
   {
     name: 'High Importance',
-    id: 'high',
+    id: 'highh',
     importance: AndroidImportance.HIGH,
-    // sound: 'hollow',
+    sound: 'hollow',
   },
   {
     name: '🐴 Sound',
@@ -164,8 +164,8 @@ function Root(): any {
       notification.android.channelId = channelId;
 
       const date = new Date(Date.now());
-      date.setSeconds(date.getSeconds() + 5);
-      Notifee.displayNotification(notification)
+      date.setSeconds(date.getSeconds() + 2);
+      Notifee.createTriggerNotification(notification, { type: 0, timestamp: date.getTime() })
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
@@ -335,7 +335,7 @@ Notifee.registerForegroundService(notification => {
      */
     async function stopService(id?: string): Promise<void> {
       console.warn('Stopping service, using notification id: ' + id);
-      clearInterval(interval);
+      // clearInterval(interval);
       if (id) {
         await Notifee.cancelNotification(id);
       }
@@ -361,20 +361,20 @@ Notifee.registerForegroundService(notification => {
     Notifee.onBackgroundEvent(handleStopActionEvent);
 
     // A fake progress updater.
-    let current = 1;
-    const interval = setInterval(async () => {
-      notification.android = {
-        progress: { current: current },
-      };
-      Notifee.displayNotification(notification);
-      current++;
-    }, 125);
+    // let current = 1;
+    // const interval = setInterval(async () => {
+    //   notification.android = {
+    //     progress: { current: current },
+    //   };
+    //   Notifee.displayNotification(notification);
+    //   current++;
+    // }, 125);
 
-    setTimeout(async () => {
-      clearInterval(interval);
-      console.warn('Background work has completed.');
-      await stopService(notification.id);
-    }, 15000);
+    // setTimeout(async () => {
+    //   clearInterval(interval);
+    //   console.warn('Background work has completed.');
+    //   await stopService(notification.id);
+    // }, 15000);
   });
 });
 
@@ -424,6 +424,25 @@ function FullScreenComponent(): any {
   );
 }
 
+function CustomComponent() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>custom component</Text>
+    </View>
+  );
+}
+
 AppRegistry.registerComponent('full_screen', () => FullScreenComponent);
+AppRegistry.registerComponent('custom-component', () => CustomComponent);
+
+function BubbleTest() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Bubbling Component</Text>
+    </View>
+  );
+}
+
+AppRegistry.registerComponent('bubble', () => BubbleTest);
 
 export default Root;

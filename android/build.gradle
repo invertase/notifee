@@ -116,7 +116,12 @@ repositories {
 }
 
 dependencies {
+  // For NotificationCompact.Builder.addPerson(person)
+  def core_version = "1.5.0-rc01"
 
+  // Java language implementation
+  implementation "androidx.core:core:$core_version"
+  implementation "androidx.core:app:$core_version"
   api 'androidx.annotation:annotation:1.1.0' // https://developer.android.com/jetpack/androidx/releases/annotation
   api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent

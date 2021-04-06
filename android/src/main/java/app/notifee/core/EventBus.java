@@ -32,7 +32,7 @@ public class EventBus {
     getInstance().getDefault().post(event);
   }
 
-  static void postSticky(Object event) {
+  public static void postSticky(Object event) {
     getInstance().getDefault().postSticky(event);
   }
 
