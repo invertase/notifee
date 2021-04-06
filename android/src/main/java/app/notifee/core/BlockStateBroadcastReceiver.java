@@ -140,7 +140,7 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
             .setInputData(workDataBuilder.build());
 
     // On-going issue with WorkManager.getInstance(context)
-    // https://issuetracker.google.com/issues/138465476
+    // https://issuetracker.google.com/issues/135858602
     try {
       WorkManager.getInstance(ContextHolder.getApplicationContext())
           .enqueueUniqueWork(uniqueWorkId, ExistingWorkPolicy.REPLACE, builder.build());
