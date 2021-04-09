@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.3.1
+- **[Android]**: Fixed an issue where sometimes the app would throw an exception when the user changes the notification blocked state for either a channel or the entire application (Fixes [#237](https://github.com/notifee/react-native-notifee/issues/237)).
+
 ## 1.3.0
 - **[Android]**: Fixed an issue where sometimes the foreground service failed to stop when calling `resolve` due to an issue with hot reloading. It can be stopped by `notifee.stopForegroundService()`. To learn more, view the [Foreground Service](/react-native/docs/android/foreground-service) documentation.
 
