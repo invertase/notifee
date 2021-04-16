@@ -12,7 +12,9 @@
     "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf dist",
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
-    "prepublishOnly": "cd ../.. && yarn run build:core"
+    "prepublishOnly": "cd ../.. && yarn run build:core",
+    "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
+    "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google"
   },
   "devDependencies": {
     "@types/react-native": "0.63.34",
