@@ -304,12 +304,35 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Returns true if the notification has a fullScreenAction
+   *
+   * @return Boolean
+   */
+  public Boolean hasFullScreenAction() {
+    return mNotificationAndroidBundle.containsKey("fullScreenAction");
+  }
+
+  /**
    * Gets an pressAction bundle for the notification
    *
    * @return Bundle or null
    */
   public @Nullable Bundle getPressAction() {
     return mNotificationAndroidBundle.getBundle("pressAction");
+  }
+
+  /**
+   * Returns a notification full screen action
+   *
+   * @return NotificationAndroidFullScreenActionModel
+   */
+  public @Nullable NotificationAndroidPressActionModel getFullScreenAction() {
+    if (!hasFullScreenAction()) {
+      return null;
+    }
+
+    return NotificationAndroidPressActionModel.fromBundle(
+        mNotificationAndroidBundle.getBundle("fullScreenAction"));
   }
 
   /**
