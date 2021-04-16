@@ -167,3 +167,20 @@ notifee.displayNotification({
 ```
 
 It's important to note, for background events there can only be only a single handler registered at one time. It's recommended to listen to your service events in your application's main [`onBackgroundEvent`](/react-native/docs/events#background-events) callback handler so you can continue to listen to other events outside of the service.
+
+## Specifying foreground service types
+
+You may need access to either location, camera or microphone information in your foreground service.
+
+To specify which service types you require, add `notifee`'s foreground service to your `AndroidManifest.xml`:
+
+```xml
+<manifest>
+    ...
+    <!-- For example, with one service type -->
+    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location" />
+
+     <!-- Or, with multiple service types -->
+    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" />
+</manifest>
+```
