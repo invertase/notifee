@@ -184,6 +184,59 @@ export interface NotificationPressAction {
 }
 
 /**
+ * The interface used to describe a full-screen action for a notification.
+ *
+ * By setting a `fullScreenAction`, when the notification is displayed, it will launch a full-screen intent.
+ *
+ * On Android; when provided to a notification action, the action will only open you application if
+ * a `launchActivity` and/or a `mainComponent` is provided.
+ *
+ * Please see the [FullScreen Action](/react-native/docs/android/behaviour#full-screen-action) document to learn more.
+ */
+export interface NotificationFullScreenAction {
+  /**
+   * The unique ID for the action.
+   *
+   * The `id` property is used to differentiate between full-screen actions. When listening to notification
+   * events, the ID can be read from the `event.detail.notification.android.fullScreenAction` object.
+   */
+  id: string;
+
+  /**
+   * The custom Android Activity to launch on a full-screen action.
+   *
+   * This property can be used in advanced scenarios to launch a custom Android Activity when the user
+   * performs a full-screen action.
+   *
+   * View the [Android Full Screen](/react-native/docs/android/behviour#full-screen-action) docs to learn more.
+   *
+   * @platform android
+   */
+  launchActivity?: string;
+
+  /**
+   * Custom flags that are added to the Android [Intent](https://developer.android.com/reference/android/content/Intent.html) that launches your Activity.
+   *
+   * These are only required if you need to customise the behaviour of how your activities are launched; by default these are not required.
+   *
+   * @platform android
+   */
+  launchActivityFlags?: AndroidLaunchActivityFlag[];
+
+  /**
+   * A custom registered React component to launch on press action.
+   *
+   * This property can be used to open a custom React component when the notification is displayed.
+   * For this to correctly function on Android, a minor native code change is required.
+   *
+   * View the [Full-screen Action](/react-native/docs/android/behviour#full-screen-action) document to learn more.
+   *
+   * @platform android
+   */
+  mainComponent?: string;
+}
+
+/**
  * An enum representing an event type, defined on [`Event`](/react-native/reference/event).
  *
  * View the [Events](/react-native/docs/events) documentation to learn more about foreground and

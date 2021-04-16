@@ -42,6 +42,7 @@ import {
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
 import validateAndroidPressAction from './validateAndroidPressAction';
+import validateAndroidFullScreenAction from './validateAndroidFullScreenAction';
 import validateAndroidAction from './validateAndroidAction';
 
 export default function validateAndroidNotification(
@@ -380,6 +381,17 @@ export default function validateAndroidNotification(
       out.pressAction = validateAndroidPressAction(android.pressAction);
     } catch (e) {
       throw new Error(`'notification.android.pressAction' ${e.message}`);
+    }
+  }
+
+  /**
+   * fullScreenAction
+   */
+  if (objectHasProperty(android, 'fullScreenAction') && !isUndefined(android.fullScreenAction)) {
+    try {
+      out.fullScreenAction = validateAndroidFullScreenAction(android.fullScreenAction);
+    } catch (e) {
+      throw new Error(`'notification.android.fullScreenAction' ${e.message}`);
     }
   }
 

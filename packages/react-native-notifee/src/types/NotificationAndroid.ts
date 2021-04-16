@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NotificationPressAction } from './Notification';
+import { NotificationPressAction, NotificationFullScreenAction } from './Notification';
 
 /**
  * The interface for Android specific options which are applied to a notification.
@@ -252,6 +252,15 @@ export interface NotificationAndroid {
    * more.
    */
   pressAction?: NotificationPressAction;
+
+  /**
+   * The `fullScreenAction` property allows you to show a custom UI
+   * in full screen when the notification is displayed.
+   *
+   * View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen-action) documentation to learn
+   * more.
+   */
+  fullScreenAction?: NotificationFullScreenAction;
 
   /**
    * Set a notification importance for devices without channel support.
