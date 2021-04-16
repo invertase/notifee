@@ -191,7 +191,7 @@ notifee.displayNotification({
 });
 ```
 
-And, add `showWhenLocked` and `turnScreenOn` to your activity:
+and, by adding `showWhenLocked` and `turnScreenOn` to your activity:
 ```xml
   <activity
     ...
@@ -202,7 +202,7 @@ And, add `showWhenLocked` and `turnScreenOn` to your activity:
 
 Running this code, Notifee will attempt to launch the activity when the notification is displayed.
 
-> The notification may be shown as a heads-up notification, instead of a full-screen notification, while the user is using the device.
+> Please note that the notification may be shown as a heads-up notification, instead of a full-screen notification, while the user is using the device.
 
 Full-screen actions have the same properties as press actions, with the same `Advanced` concepts of specifying a Custom Component or an Android Custom Activity: 
 
