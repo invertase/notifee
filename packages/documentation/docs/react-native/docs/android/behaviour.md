@@ -169,3 +169,72 @@ notifee.displayNotification({
   },
 });
 ```
+
+# Full-screen
+
+You may want to display a full-screen notification for time-sensitive, urgent notifications. For example, an ongoing alarm or an incoming call.
+
+It's possible by setting the `fullScreenAction` property:
+
+```js
+notifee.displayNotification({
+  body: 'Full-screen notification',
+  android: {
+    // Recommended to set a category
+    category: AndroidCategory.CALL,
+    // Recommended to set importance to high
+    importance: AndroidImportance.HIGH,
+    fullScreenAction: {
+      id: 'default',
+    },
+  },
+});
+```
+
+And, add `showWhenLocked` and `turnScreenOn` to your activity:
+```xml
+  <activity
+    ...
+    android:showWhenLocked="true"
+    android:turnScreenOn="true"
+  />
+```
+
+Running this code, Notifee will attempt to launch the activity when the notification is displayed.
+
+> The notification may be shown as a heads-up notification, instead of a full-screen notification, while the user is using the device.
+
+Full-screen actions have the same properties as press actions, with the same `Advanced` concepts of specifying a Custom Component or an Android Custom Activity: 
+
+```js
+notifee.displayNotification({
+  body: 'Full-screen notification',
+  android: {
+    fullScreenAction: {
+      // For custom component:
+      id: 'default',
+      mainComponent: 'custom-component',
+
+      // For Android Activity other than the default:
+      id: 'full-screen',
+      launchActivity: 'com.awesome.app.FullScreenActivity',
+    },
+  },
+})
+```
+
+To learn more about these concepts, view the [Press Action](/react-native/docs/android/interaction#press-action) documentation.
+
+You can also associate the notification with a foreground service. This is useful in some situations such as an incoming phone call:
+
+```js
+notifee.displayNotification({
+  body: 'Full-screen notification',
+  android: {
+    fullScreenAction: {
+      id: 'default',
+    },
+    asForegroundService: true,
+  },
+});
+```
