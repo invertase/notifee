@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.4.0
+- **[Android]**: Added support for `fullScreenAction` on `NotificationAndroid` (Feature enhancement [#45](https://github.com/notifee/react-native-notifee/issues/45)).
+
 ## 1.3.1
 - **[Android]**: Fixed an issue where sometimes the app would throw an exception when the user changes the notification blocked state for either a channel or the entire application (Fixes [#237](https://github.com/notifee/react-native-notifee/issues/237)).
 
