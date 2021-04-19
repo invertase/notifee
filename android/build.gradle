@@ -7,7 +7,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.1.1'
+    classpath 'com.android.tools.build:gradle:4.1.3'
   }
 }
 
@@ -111,18 +111,18 @@ android.libraryVariants.all { variant ->
 
 repositories {
   google()
-  jcenter()
   mavenCentral()
+  jcenter()
 }
 
 dependencies {
 
-  api 'androidx.annotation:annotation:1.1.0' // https://developer.android.com/jetpack/androidx/releases/annotation
+  api 'androidx.annotation:annotation:1.2.0' // https://developer.android.com/jetpack/androidx/releases/annotation
   api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-  api 'com.google.android.gms:play-services-tasks:17.2.0' // https://developers.google.com/android/guides/releases
+  api 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
   api 'androidx.work:work-runtime:2.5.0' // https://developer.android.com/jetpack/androidx/releases/work
-  // Fresco 2.3.0+ may not be react-native compatible until https://github.com/facebook/react-native/pull/30061
+  // Fresco 2.3.0+ may not be react-native compatible until 0.65.x with this: https://github.com/facebook/react-native/pull/30061
   api 'com.facebook.fresco:fresco:2.2.0' // https://github.com/facebook/fresco/releases
   api 'io.jsonwebtoken:jjwt-api:0.11.2' // https://github.com/jwtk/jjwt/releases
 
@@ -134,7 +134,7 @@ dependencies {
   api "org.greenrobot:eventbus:$eventbus_version"
   annotationProcessor "org.greenrobot:eventbus-annotation-processor:$eventbus_version"
 
-  testImplementation 'junit:junit:4.13.1' // https://github.com/junit-team/junit4/releases
+  testImplementation 'junit:junit:4.13.2' // https://github.com/junit-team/junit4/releases
   androidTestImplementation 'androidx.test.ext:junit:1.1.2' // https://developer.android.com/jetpack/androidx/releases/test
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0' // see above
 }
