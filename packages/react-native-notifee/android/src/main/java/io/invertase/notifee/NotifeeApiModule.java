@@ -241,6 +241,11 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
         .stopForegroundService((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
+  @ReactMethod
+  public void hideNotificationDrawer() {
+    NotifeeReactUtils.hideNotificationDrawer();
+  }
+
   @NonNull
   @Override
   public String getName() {

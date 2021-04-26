@@ -563,4 +563,11 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
     return this.native.stopForegroundService();
   };
+
+  public hideNotificationDrawer = (): void => {
+    if (isIOS) {
+      return;
+    }
+    return this.native.hideNotificationDrawer();
+  };
 }

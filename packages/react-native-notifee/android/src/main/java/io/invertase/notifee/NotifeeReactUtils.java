@@ -4,15 +4,18 @@
 
 package io.invertase.notifee;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
+
 import androidx.annotation.Nullable;
-import app.notifee.core.EventSubscriber;
+
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -26,7 +29,11 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.jstasks.HeadlessJsTaskContext;
 import com.facebook.react.jstasks.HeadlessJsTaskEventListener;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+
+import java.lang.reflect.Method;
 import java.util.List;
+
+import app.notifee.core.EventSubscriber;
 
 class NotifeeReactUtils {
   private static final SparseArray<GenericCallback> headlessTasks = new SparseArray<>();
@@ -220,6 +227,22 @@ class NotifeeReactUtils {
     }
 
     return false;
+  }
+
+  static void hideNotificationDrawer() {
+    Context context = EventSubscriber.getContext();
+
+    try {
+      @SuppressLint("WrongConstant")
+      Object service = context.getSystemService("statusbar");
+      Class<?> statusbarManager = Class.forName("android.app.StatusBarManager");
+      Method collapse =
+          statusbarManager.getMethod((Build.VERSION.SDK_INT >= 17) ? "collapsePanels" : "collapse");
+      collapse.setAccessible(true);
+      collapse.invoke(service);
+    } catch (Exception e) {
+      Log.e("HIDE_NOTIF_DRAWER", "", e);
+    }
   }
 
   interface GenericCallback {
