@@ -93,7 +93,7 @@ There are a number of different ways to display a large icon:
 - Remote image URL.
 - Local image (e.g. `require('./image.jpg')`).
 - Absolute file path (e.g. `file:///xxxx/xxxx/xxxx.jpg`).
-- Android resources (checks mipmap first, then drawable).
+- Android resources (checks mipmap first, then drawable - Note there appears to be an Android limitation where if the mipmap folder contains any xml files, the icon will not load).
 
 The image will be automatically scaled to fit inside of the notification. It is
 recommended you use images a minimum size of 192x192 pixels to handle all device resolutions.
