@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.5.0
+- **[Android]**: Implemented support for `notifee.hideNotificationDrawer` (Feature enhancement [#200](https://github.com/notifee/react-native-notifee/issues/200)).
+
 ## 1.4.0
 - **[Android]**: Added support for `fullScreenAction` on `NotificationAndroid` (Feature enhancement [#45](https://github.com/notifee/react-native-notifee/issues/45)).
 
