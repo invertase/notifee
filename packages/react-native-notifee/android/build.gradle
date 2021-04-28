@@ -76,10 +76,11 @@ dependencies {
   // https://github.com/square/okhttp/blob/master/docs/changelog_3x.md
   implementation 'com.squareup.okhttp3:okhttp:3.12.12' // okhttp must stay on 3.12.x to support minSdkVersion < 21
 
-def jwt_version = '0.11.2' // https://github.com/jwtk/jjwt/releases
-  api "io.jsonwebtoken:jjwt-api:$jwt_version"
-  runtimeOnly("io.jsonwebtoken:jjwt-api:$jwt_version") {
-    exclude group: 'org.json', module: 'json'
+  // https://github.com/jwtk/jjwt/releases
+  api 'io.jsonwebtoken:jjwt-api:0.11.2'
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+  runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.11.2') {
+    exclude group: 'org.json', module: 'json' //provided by Android natively
   }
 }
 
