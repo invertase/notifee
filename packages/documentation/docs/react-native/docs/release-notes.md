@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.6.0
+- **[Android]**: Fixed an issue with jwt gradle build dependency.
+
 ## 1.5.0
 - **[Android]**: Implemented support for `notifee.hideNotificationDrawer` (Feature enhancement [#200](https://github.com/notifee/react-native-notifee/issues/200)).
 
