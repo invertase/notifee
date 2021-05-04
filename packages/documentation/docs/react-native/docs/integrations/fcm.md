@@ -39,7 +39,7 @@ React Native Firebase provides two methods for subscribing to messages and both 
 Both expect an async message handling function (or a function that returns a Promise) as an argument.
 
 For the purpose of this guide, we'll set both subscribers up to trigger
-the same function when called so we don't have to worry about the applications state:
+the same function when called so we don't have to worry about the application's state:
 
 ```js
 import messaging from '@react-native-firebase/messaging';
@@ -88,7 +88,7 @@ async function onAppBootstrap() {
 }
 ```
 
-If required, you can also listen for [token refreshes](https://invertase.io/oss/react-native-firebase/v6/messaging/reference/module#onTokenRefresh)
+If required, you can also listen for [token refreshes](https://rnfirebase.io/reference/messaging#onTokenRefresh)
 whilst the application is open in-case a token changes.
 
 ### Using tokens
