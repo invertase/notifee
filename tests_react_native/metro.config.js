@@ -6,7 +6,7 @@
 
 const { resolve, join } = require('path');
 
-const blacklist = require('metro-config/src/defaults/blacklist');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
 
 const rootDir = resolve(__dirname, '..');
 
@@ -14,7 +14,7 @@ const config = {
   projectRoot: __dirname,
   resolver: {
     useWatchman: !process.env.TEAMCITY_VERSION,
-    blackListRE: blacklist([
+    blockList: exclusionList([
       /.*\/__fixtures__\/.*/,
       /.*\/template\/project\/node_modules\/react-native\/.*/,
       new RegExp(`^${escape(resolve(rootDir, 'docs'))}\\/.*$`),
@@ -40,6 +40,14 @@ const config = {
         },
       },
     ),
+  },
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
+      },
+    }),
   },
   watchFolders: [resolve(__dirname, './../packages/react-native')],
 };
