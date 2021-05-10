@@ -1,24 +1,27 @@
 /* eslint-disable no-undef */
-import * as ReactNative from 'react-native';
 
-jest.doMock('react-native', () => {
-  return Object.setPrototypeOf(
-    {
-      Platform: {
-        OS: 'android',
-        select: () => {
-          /* do nothing */
-        },
-      },
-      NativeModules: {
-        ...ReactNative.NativeModules,
-        NotifeeApiModule: {
-          addListener: jest.fn(),
-          eventsAddListener: jest.fn(),
-          eventsNotifyReady: jest.fn(),
-        },
-      },
-    },
-    ReactNative,
-  );
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+
+  RN.NativeModules.NotifeeApiModule = {};
+
+  RN.Platform = jest.fn().mockImplementation(() => ({
+  ...RN.Platform,
+  OS: "android",
+  Version: 123,
+}));
+  return RN;
 });
+
+//github.com/testing-library/native-testing-library/issues/85
+jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () => {
+  const { EventEmitter } = require('events');
+  return EventEmitter;
+});
+
+jest.mock('react-native/Libraries/vendor/emitter/EventEmitter', () => {
+  const { EventEmitter } = require('events');
+  return EventEmitter;
+});
+
+jest.mock('react-native/Libraries/LogBox/LogBox');
