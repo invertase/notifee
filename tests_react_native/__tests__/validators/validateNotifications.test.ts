@@ -1,10 +1,12 @@
 import validateNotification from '@notifee/react-native/src/validators/validateNotification';
 import { Notification } from '@notifee/react-native/src/types/Notification';
+import { setPlatform } from '../testSetup';
 
 describe('Validate Notification', () => {
   describe('validateNotification()', () => {
     test('returns valid android', () => {
-      const permissions: Notification = {
+      setPlatform('android');
+      const notification: Notification = {
         id: 'id',
         title: 'title',
         subtitle: 'subtitle',
@@ -16,22 +18,39 @@ describe('Validate Notification', () => {
         },
       };
 
-      const $ = validateNotification(permissions);
+      const $ = validateNotification(notification);
 
       expect($.id).toEqual('id');
       expect($.title).toEqual('title');
       expect($.subtitle).toEqual('subtitle');
       expect($.body).toEqual('body');
       expect($.data).toEqual({ test: 'test' });
-
-      // TODO Figure out why IOS / Android returns undefined
-
-      // expect($.android).toEqual({ channelId: 'channelId' });
-      // expect($.ios).toEqual({});
+      expect($.android).toEqual({
+        asForegroundService: false,
+        autoCancel: true,
+        badgeIconType: 2,
+        channelId: 'channelId',
+        chronometerDirection: 'up',
+        circularLargeIcon: false,
+        colorized: false,
+        defaults: [-1],
+        groupAlertBehavior: 0,
+        groupSummary: false,
+        importance: 3,
+        localOnly: false,
+        ongoing: false,
+        onlyAlertOnce: false,
+        showChronometer: false,
+        showTimestamp: false,
+        smallIcon: 'ic_launcher',
+        visibility: 0,
+      });
+      expect($.ios).toEqual(undefined);
     });
 
     test('returns valid ios', () => {
-      const permissions: Notification = {
+      setPlatform('ios');
+      const notification: Notification = {
         id: 'id',
         title: 'title',
         subtitle: 'subtitle',
@@ -40,18 +59,21 @@ describe('Validate Notification', () => {
         ios: {},
       };
 
-      const $ = validateNotification(permissions);
+      const $ = validateNotification(notification);
 
       expect($.id).toEqual('id');
       expect($.title).toEqual('title');
       expect($.subtitle).toEqual('subtitle');
       expect($.body).toEqual('body');
       expect($.data).toEqual({ test: 'test' });
-
-      // TODO Figure out why IOS / Android returns undefined
-
-      // expect($.android).toEqual({ channelId: 'channelId' });
-      // expect($.ios).toEqual({});
+      expect($.android).toEqual(undefined);
+      expect($.ios).toEqual({
+        foregroundPresentationOptions: {
+          alert: true,
+          badge: true,
+          sound: true,
+        },
+      });
     });
 
     test('returns valid when no value is provided', () => {
