@@ -28,6 +28,7 @@
     "cavy-native-reporter": "^0.1.1",
     "chai": "^4.2.0",
     "jest": "^26.3.3",
+    "metro-react-native-babel-preset": "^0.66.0",
     "patch-package": "^6.1.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3"
