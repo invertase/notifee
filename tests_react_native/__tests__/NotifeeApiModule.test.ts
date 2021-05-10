@@ -45,20 +45,6 @@ describe('Notifee Api Module', () => {
     expect(mockNotifeeNativeModule.cancelAllNotifications).toBeCalledTimes(1);
   });
 
-  test('cancelAllNotifications', async () => {
-    const res = await apiModule.cancelAllNotifications();
-
-    expect(res).toBe(undefined);
-    expect(mockNotifeeNativeModule.cancelAllNotifications).toBeCalledTimes(1);
-  });
-
-  test('cancelAllNotifications', async () => {
-    const res = await apiModule.cancelAllNotifications();
-
-    expect(res).toBe(undefined);
-    expect(mockNotifeeNativeModule.cancelAllNotifications).toBeCalledTimes(1);
-  });
-
   test('cancelDisplayedNotifications', async () => {
     const res = await apiModule.cancelDisplayedNotifications();
 
