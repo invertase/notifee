@@ -14,6 +14,7 @@ import {
   isObject,
   isString,
   isUndefined,
+  isIOS,
 } from '../utils';
 
 import { AndroidImportance } from '../types/NotificationAndroid';
@@ -68,6 +69,9 @@ export default function validateAndroidNotification(
     visibility: AndroidVisibility.PRIVATE,
     circularLargeIcon: false,
   };
+
+  /* Skip validating if iOS in release */
+  if (isIOS && !__DEV__) return out;
 
   if (isUndefined(android)) {
     return out;

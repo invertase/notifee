@@ -15,6 +15,7 @@ import {
   isUndefined,
   isObject,
   isArray,
+  isAndroid,
 } from '../utils';
 import validateIOSAttachment from './validateIOSAttachment';
 
@@ -22,12 +23,19 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   const out: NotificationIOS & {
     foregroundPresentationOptions: IOSForegroundPresentationOptions;
   } = {
-    foregroundPresentationOptions: { alert: true, badge: true, sound: true },
+    foregroundPresentationOptions: {
+      alert: true,
+      badge: true,
+      sound: true,
+    },
   };
 
   if (isUndefined(ios)) {
     return out;
   }
+
+  /* Skip validating if Android in release */
+  if (isAndroid && !__DEV__) return out;
 
   /**
    * attachments
