@@ -97,8 +97,7 @@ async function testRunner(): Promise<void> {
     body: '',
   });
 
-   await Notifee.displayNotification({
-  });
+  await Notifee.displayNotification({});
   console.log('Pressed');
 }
 

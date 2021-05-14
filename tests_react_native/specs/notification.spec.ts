@@ -70,33 +70,35 @@ export function NotificationSpec(spec: TestScope): void {
 
     spec.it('displays a empty notification', async function () {
       return new Promise(async resolve => {
-
-        return notifee.displayNotification({
-          title: undefined,
-          body: undefined,
-          android: {
-            channelId: 'high',
-          },
-        }).then((id) => {
-           expect(id).equals(id);
-              resolve();
-        });
+        return notifee
+          .displayNotification({
+            title: undefined,
+            body: undefined,
+            android: {
+              channelId: 'high',
+            },
+          })
+          .then(id => {
+            expect(id).equals(id);
+            resolve();
+          });
       });
     });
 
     spec.it('displays a empty notification', async function () {
       return new Promise(async resolve => {
-
-        return notifee.displayNotification({
-          title: '',
-          body: '',
-          android: {
-            channelId: 'high',
-          },
-        }).then((id) => {
-           expect(id).equals(id);
-              resolve();
-        });
+        return notifee
+          .displayNotification({
+            title: '',
+            body: '',
+            android: {
+              channelId: 'high',
+            },
+          })
+          .then(id => {
+            expect(id).equals(id);
+            resolve();
+          });
       });
     });
   });
