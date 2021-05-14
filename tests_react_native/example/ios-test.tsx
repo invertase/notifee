@@ -86,6 +86,19 @@ async function testRunner(): Promise<void> {
       categoryId: 'test_category',
     },
   });
+
+  await Notifee.displayNotification({
+    title: undefined,
+    body: undefined,
+  });
+
+  await Notifee.displayNotification({
+    title: '',
+    body: '',
+  });
+
+   await Notifee.displayNotification({
+  });
   console.log('Pressed');
 }
 

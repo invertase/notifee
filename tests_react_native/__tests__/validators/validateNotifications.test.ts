@@ -80,9 +80,9 @@ describe('Validate Notification', () => {
       const $ = validateNotification({} as any);
 
       expect($.id).toBeDefined();
-      expect($.title).toEqual('');
+      expect($.title).toEqual(undefined);
       expect($.subtitle).toEqual(undefined);
-      expect($.body).toEqual('');
+      expect($.body).toEqual(undefined);
       expect($.data).toEqual({});
     });
 
@@ -102,7 +102,7 @@ describe('Validate Notification', () => {
       };
 
       expect(() => validateNotification(notification)).toThrowError(
-        "'notification.title' expected a string value.",
+        "'notification.title' expected a string value or undefined.",
       );
     });
 
@@ -112,7 +112,7 @@ describe('Validate Notification', () => {
       };
 
       expect(() => validateNotification(notification)).toThrowError(
-        "'notification.body' expected a string value.",
+        "'notification.body' expected a string value or undefined.",
       );
     });
 
@@ -122,7 +122,7 @@ describe('Validate Notification', () => {
       };
 
       expect(() => validateNotification(notification)).toThrowError(
-        "'notification.subtitle' expected a string value.",
+        "'notification.subtitle' expected a string value or undefined.",
       );
     });
 
