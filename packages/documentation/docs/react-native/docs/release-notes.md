@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.7.0
+- **[Android/iOS]**: Allows title, body, and subtitle to be set to undefined in addition to string values to prevent an empty space on Android.
+
 ## 1.6.0
 - **[Android]**: Fixed an issue with jwt gradle build dependency.
 
