@@ -31,17 +31,17 @@ export interface Notification {
   /**
    * The notification title which appears above the body text.
    */
-  title?: string;
+  title?: string |  undefined;
 
   /**
    * The notification subtitle, which appears on a new line below/next the title.
    */
-  subtitle?: string;
+  subtitle?: string | undefined;
 
   /**
    * The main body content of a notification.
    */
-  body?: string;
+  body?: string | undefined;
 
   /**
    * Additional data to store on the notification. Only `string` values can be stored.
