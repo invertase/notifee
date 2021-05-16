@@ -7,6 +7,8 @@ previous: /react-native/docs/license-keys
 
 ## 1.7.0
 - **[Android/iOS]**: Allows title, body, and subtitle to be set to undefined in addition to string values to prevent an empty space on Android.
+- **[Android/iOS]**: Updated validation to only throw an error for platform-specific properties if the app is running the same platform (Feature enhancement [#297](https://github.com/notifee/react-native-notifee/issues/297)).
+- **[iOS]**: Xcode 12.5 is required on iOS.
 
 ## 1.6.0
 - **[Android]**: Fixed an issue with jwt gradle build dependency.
