@@ -103,7 +103,7 @@ const trigger = {
 
 ## Other APIs
 
-You can customise which API is called when pressing the button labelled 'Test Notifee API Action' by editing the code in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L18)
+You can customise which API is called when pressing the button labelled 'Test Notifee API Action' by editing the code in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L63)
 
 ```js
 const onAPIPress = async () => {
@@ -116,7 +116,7 @@ const onAPIPress = async () => {
 
 ## Requesting Permissions
 
-On iOS, it's required to request permissions to be able to display a notification, this is called in `App.tsx`:
+On iOS, it's required to request permissions to be able to display a notification, this is called in [App.tsx](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/App.tsx):
 
 ```js
   useEffect(() => {
