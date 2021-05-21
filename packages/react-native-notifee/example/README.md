@@ -35,7 +35,7 @@ The app consists of 3 buttons:
 
 ### Notifications
 
-You can customise which notification is displayed by choosing from the [example notification payloads](https://github.com/notifee/react-native-notifee/blob/%40helenaford/example-app/example/src/utils/notifications.ts) in `src/utils/notifications` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L15)
+You can customise which notification is displayed by choosing from the [example notification payloads](https://github.com/notifee/react-native-notifee/blob/master/example/src/utils/notifications.ts) in `src/utils/notifications` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/master/example/src/content.tsx)
 
 ```js
 // const notification = notifications.basic;
@@ -60,7 +60,7 @@ https://user-images.githubusercontent.com/14185925/119170236-e19e4100-ba5a-11eb-
 
 ## Triggers
 
-You can customise which trigger is displayed by choosing from the [example trigger payloads](https://github.com/notifee/react-native-notifee/blob/%40helenaford/example-app/example/src/utils/triggerrs.ts) in `src/utils/triggers` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L18)
+You can customise which trigger is displayed by choosing from the [example trigger payloads](https://github.com/notifee/react-native-notifee/blob/master/example/src/utils/triggers.ts) in `src/utils/triggers` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L18)
 
 ```js
 // const triggerType = triggers.timestamp;
