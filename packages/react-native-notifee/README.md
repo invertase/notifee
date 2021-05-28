@@ -55,7 +55,7 @@ Below you'll find guides that cover the supported iOS features.
 
 To run jest tests after integrating this module, you will need to mock out the native parts of Notifee or you will get an error that looks like:
 
-```
+```bash
  ● Test suite failed to run
 
     Notifee native module not found.
@@ -69,19 +69,36 @@ To run jest tests after integrating this module, you will need to mock out the n
       64 |     return this._nativeModule;
 ```
 
-We distribute a generic mock file you may use so that your jest tests will work successfully.
+Add this a setup file in. your project e.g. `jestSetup.js` 
 
-In your Jest config file, add an entry to the `setupFilesAfterEnv` array, perhaps like so if you use the `jest.config.js` configuration style:
+```js
+NativeModules.NotifeeApiModule = {}
+```
 
-```javascript
-module.exports = {
-  // ... other directives
-  setupFilesAfterEnv: [
-    'node_modules/@notifee/react-native/jest-mock.js'
-  ],
-  // ... other directives
+On our roadmap will be a `jest-mock.js` file where you can import it in your project, it is not ready for exteneral use yet.
+
+### Detox Testing
+
+To utilise Detox's functionality to mock a local notification and trigger notifee's event handlers, you will need a payload with a key `__notifee_notification`:
+
+```js
+{
+  title: 'test',
+  body: 'Body',
+  payload: {
+    __notifee_notification: {
+      ios: {
+        foregroundPresentationOptions: {
+          alert: true,
+        },
+      },
+      data: {}
+    },
+  },
 }
 ```
+
+The important part is to make sure you have a `__notifee_notification` object under `payload` with the default properties.
 
 ## License
 
