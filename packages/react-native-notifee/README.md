@@ -69,7 +69,7 @@ To run jest tests after integrating this module, you will need to mock out the n
       64 |     return this._nativeModule;
 ```
 
-Add this a setup file in. your project e.g. `jestSetup.js` 
+Add this to a setup file in your project e.g. `jestSetup.js`:
 
 ```js
 NativeModules.NotifeeApiModule = {}
