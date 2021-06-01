@@ -101,5 +101,36 @@ export function NotificationSpec(spec: TestScope): void {
           });
       });
     });
+
+    spec.describe('displayNotification with quick actions', function () {
+      spec.it(
+        'displays a notification with a quick action with input set to true',
+        async function () {
+          return new Promise(async resolve => {
+            return notifee
+              .displayNotification({
+                title: '',
+                body: '',
+                android: {
+                  channelId: 'high',
+                  actions: [
+                    {
+                      title: 'First Action',
+                      pressAction: {
+                        id: 'first_action',
+                      },
+                      input: true,
+                    },
+                  ],
+                },
+              })
+              .then(id => {
+                expect(id).equals(id);
+                resolve();
+              });
+          });
+        },
+      );
+    });
   });
 }
