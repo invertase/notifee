@@ -99,7 +99,7 @@ export default function validateAndroidNotification(
     }
 
     if (actions.length) {
-      out.actions = android.actions;
+      out.actions = actions;
     }
   }
 
