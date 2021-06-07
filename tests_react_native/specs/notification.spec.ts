@@ -147,9 +147,9 @@ export function NotificationSpec(spec: TestScope): void {
 
                 // Check next trigger has been set
                 const triggerNotificationIds = await notifee.getTriggerNotificationIds();
-                console.log('triggerNotificationIds', triggerNotificationIds);
+
                 expect(triggerNotificationIds.length).equals(1);
-                expect(triggerNotificationIds.includes(notification.id)).true;
+                expect(triggerNotificationIds.includes(notification.id)).equals(true);
 
                 await notifee.cancelTriggerNotifications();
 
@@ -161,7 +161,6 @@ export function NotificationSpec(spec: TestScope): void {
             await notifee.createTriggerNotification(notification, trigger);
 
             const triggerNotificationIds = await notifee.getTriggerNotificationIds();
-            console.log('1triggerNotificationIds', triggerNotificationIds);
           });
         });
       });
