@@ -18,10 +18,14 @@ public class WorkDataEntity {
   @ColumnInfo(name = "trigger", typeAffinity = ColumnInfo.BLOB)
   private byte[] trigger;
 
-  public WorkDataEntity(String id, byte[] notification, byte[] trigger) {
+  @ColumnInfo(name = "with_alarm_manager", defaultValue = "false")
+  private boolean withAlarmManager;
+
+  public WorkDataEntity(String id, byte[] notification, byte[] trigger, boolean withAlarmManager) {
     this.id = id;
     this.notification = notification;
     this.trigger = trigger;
+    this.withAlarmManager = withAlarmManager;
   }
 
   public String getId() {
@@ -34,5 +38,9 @@ public class WorkDataEntity {
 
   public byte[] getTrigger() {
     return this.trigger;
+  }
+
+  public boolean getWithAlarmManager() {
+    return this.withAlarmManager;
   }
 }

@@ -46,7 +46,13 @@ export const notifications: { key: string; notification: Notification | Notifica
     notification: {
       title: 'Title',
       android: {
-        channelId: 'high',
+        channelId: 'highh',
+        pressAction: {
+          id: 'doFancyStuff',
+          launchActivity: 'default',
+        },
+        autoCancel: false,
+        asForegroundService: true,
       },
     },
   },
@@ -143,14 +149,14 @@ export const notifications: { key: string; notification: Notification | Notifica
       title: 'Background Task',
       body: 'Doing some work...',
       android: {
-        autoCancel: true,
+        // autoCancel: true,
         color: '#9c27b0',
-        onlyAlertOnce: true,
+        // onlyAlertOnce: true,
         asForegroundService: true,
-        progress: {
-          max: 120,
-          current: 0,
-        },
+        // progress: {
+        //   max: 120,
+        //   current: 0,
+        // },
         actions: [
           {
             title: 'Stop',
@@ -296,5 +302,15 @@ export const notifications: { key: string; notification: Notification | Notifica
         },
       },
     ],
+  },
+  {
+    key: 'alarm manager', // See git issue #62
+    notification: {
+      id: 'alarm-manager',
+      title: 'alarm manager',
+      android: {
+        channelId: 'default',
+      },
+    },
   },
 ];

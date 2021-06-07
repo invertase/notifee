@@ -41,7 +41,7 @@ const colors: { [key: string]: string } = {
 const channels: AndroidChannel[] = [
   {
     name: 'High Importance',
-    id: 'high',
+    id: 'highh',
     importance: AndroidImportance.HIGH,
     // sound: 'hollow',
   },
@@ -165,7 +165,11 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      Notifee.displayNotification(notification)
+      Notifee.createTriggerNotification(notification, {
+        type: 0,
+        timestamp: date.getTime(),
+        alarmManager: true,
+      })
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
@@ -268,11 +272,11 @@ function logEvent(state: string, event: any): void {
   switch (type) {
     case EventType.UNKNOWN:
       eventTypeString = 'UNKNOWN';
-      console.log('Notification Id', detail.notification?.id);
+      console.log(' UNKNOWN Notification Id', detail.notification?.id);
       break;
     case EventType.DISMISSED:
       eventTypeString = 'DISMISSED';
-      console.log('Notification Id', detail.notification?.id);
+      console.log(' DISMISSED Notification Id', detail.notification?.id);
       break;
     case EventType.PRESS:
       eventTypeString = 'PRESS';
@@ -281,10 +285,11 @@ function logEvent(state: string, event: any): void {
       break;
     case EventType.ACTION_PRESS:
       eventTypeString = 'ACTION_PRESS';
-      console.log('Action ID', detail.pressAction?.id || 'N/A');
+      console.log('ACTION_PRESS Action ID', detail.pressAction?.id || 'N/A');
       break;
     case EventType.DELIVERED:
       eventTypeString = 'DELIVERED';
+      console.log('DELIVERED', detail.notification.id);
       break;
     case EventType.APP_BLOCKED:
       eventTypeString = 'APP_BLOCKED';
@@ -335,11 +340,11 @@ Notifee.registerForegroundService(notification => {
      */
     async function stopService(id?: string): Promise<void> {
       console.warn('Stopping service, using notification id: ' + id);
-      clearInterval(interval);
+      // clearInterval(interval);
       if (id) {
         await Notifee.cancelNotification(id);
       }
-      return resolve();
+      await Notifee.stopForegroundService();
     }
 
     /**
@@ -362,19 +367,13 @@ Notifee.registerForegroundService(notification => {
 
     // A fake progress updater.
     let current = 1;
-    const interval = setInterval(async () => {
-      notification.android = {
-        progress: { current: current },
-      };
-      Notifee.displayNotification(notification);
-      current++;
-    }, 125);
-
-    setTimeout(async () => {
-      clearInterval(interval);
-      console.warn('Background work has completed.');
-      await stopService(notification.id);
-    }, 15000);
+    // const interval = setInterval(async () => {
+    //   notification.android = {
+    //     progress: { current: current },
+    //   };
+    //   Notifee.displayNotification(notification);
+    //   current++;
+    // }, 125);
   });
 });
 

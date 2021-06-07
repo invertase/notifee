@@ -1,9 +1,12 @@
 package app.notifee.core.database;
 
 import android.content.Context;
+import androidx.annotation.VisibleForTesting;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,11 +16,24 @@ import java.util.concurrent.Executors;
     exportSchema = false)
 public abstract class NotifeeCoreDatabase extends RoomDatabase {
 
-  public abstract WorkDataDao wordDao();
+  public abstract WorkDataDao workDao();
 
   private static volatile NotifeeCoreDatabase INSTANCE;
 
   static final ExecutorService databaseWriteExecutor = Executors.newCachedThreadPool();
+
+  /**
+   * Migrate from: version 1 to version 2 - where the {@link WorkDataEntity}
+   * has an extra field: alert
+   */
+  @VisibleForTesting
+  static final Migration MIGRATION_1_2 =
+      new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+          database.execSQL("ALTER TABLE work_data " + " ADD COLUMN alarm_manager BOOLEAN");
+        }
+      };
 
   static NotifeeCoreDatabase getDatabase(final Context context) {
     if (INSTANCE == null) {
