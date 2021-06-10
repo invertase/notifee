@@ -69,13 +69,27 @@ To run jest tests after integrating this module, you will need to mock out the n
       64 |     return this._nativeModule;
 ```
 
-Add this to a setup file in your project e.g. `jestSetup.js`:
+Add this to a setup file in your project e.g. `jest.setup.js`:
+
+If you don't already have a Jest setup file configured, please add the following to your Jest configuration file and create the new jest.setup.js file in project root:
 
 ```js
-NativeModules.NotifeeApiModule = {}
+setupFiles: ['<rootDir>/jest.setup.js'],
 ```
 
-On our roadmap will be a `jest-mock.js` file where you can import it in your project, it is not ready for exteneral use yet.
+You can then add the following line to that setup file to mock `notifee`:
+
+```js
+jest.mock('@notifee/react-native', () => require('@notifee/react-native/jest-mock'))
+```
+
+You will also need to add `@notifee` to `transformIgnorePatterns` in your setup file (`jest.setup.js`):
+
+```bash
+transformIgnorePatterns: [
+    'node_modules/(?!(jest-)?react-native|@react-native|@notifee)'
+]
+```
 
 ### Detox Testing
 

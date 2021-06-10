@@ -1,3 +1,21 @@
+/**
+ * Mock implementation for test runners.
+ *
+ * Example:
+ *
+ * ```js
+ * jest.mock('@notifee/react-native', () => require('@notifee/react-native/jest-mock'));
+ * ```
+ */
+
+import { version as SDK_VERSION }  from './dist/version';
+
+export * from './dist/types/Library';
+export * from './dist/types/Notification';
+export * from './dist/types/Trigger';
+export * from './dist/types/NotificationIOS';
+export * from './dist/types/NotificationAndroid';
+
 export const testNotification = {
   id: 'test-id',
   title: 'test-title',
@@ -56,6 +74,7 @@ export const testPowerManagerSettings = {
 };
 
 export default {
+  SDK_VERSION,
   displayNotification: jest.fn(async notification => notification?.id || testNotification.id),
   createTriggerNotification: jest.fn(
     async (notification, _) => notification?.id || testNotification.id,
