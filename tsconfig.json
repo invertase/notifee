@@ -31,6 +31,6 @@
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js",
+    "tests_react_native/jest.config.js",
   ]
 }
