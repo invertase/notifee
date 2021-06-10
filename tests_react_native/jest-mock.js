@@ -6,10 +6,10 @@ jest.mock('react-native', () => {
   RN.NativeModules.NotifeeApiModule = {};
 
   RN.Platform = jest.fn().mockImplementation(() => ({
-  ...RN.Platform,
-  OS: "android",
-  Version: 123,
-}));
+    ...RN.Platform,
+    OS: 'android',
+    Version: 123,
+  }));
   return RN;
 });
 
