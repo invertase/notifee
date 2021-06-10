@@ -5,6 +5,16 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.9.0-alpha.0
+- **[Android]**: Support Alarm Manager for trigger notifications.
+
+## 1.8.1
+- **[Android/iOS]**: Fix npm bundle to exclude example app
+  
+## 1.8.0
+- **[Android/iOS]**: Include support for jest tests by including a `jest-mock.js` file.
+- **[Android]**: Add an extra safety check to prevent app from crashing if a `launchActivity` property is set to an invalid activity class.
+
 ## 1.7.0
 - **[Android/iOS]**: Allows title, body, and subtitle to be set to undefined in addition to string values to prevent an empty space on Android.
 - **[Android/iOS]**: Updated validation to only throw an error for platform-specific properties if the app is running the same platform (Feature enhancement [#297](https://github.com/notifee/react-native-notifee/issues/297)).
