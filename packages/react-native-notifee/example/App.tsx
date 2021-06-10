@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {Component, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {AppRegistry, Platform, StyleSheet, Text, View} from 'react-native';
 import notifee, {
   EventType,
