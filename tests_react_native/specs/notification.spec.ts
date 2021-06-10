@@ -102,6 +102,49 @@ export function NotificationSpec(spec: TestScope): void {
       });
     });
 
+    spec.describe('displayNotification with pressAction', function () {
+      spec.it('displays a notification with a pressAction with id `default`', async function () {
+        return new Promise(async resolve => {
+          return notifee
+            .displayNotification({
+              title: '',
+              body: '',
+              android: {
+                channelId: 'high',
+                pressAction: {
+                  id: 'default',
+                },
+              },
+            })
+            .then(id => {
+              expect(id).equals(id);
+              resolve();
+            });
+        });
+      });
+
+      spec.it('silently fails if `launchActivity` does not exist', async function () {
+        return new Promise(async resolve => {
+          return notifee
+            .displayNotification({
+              title: '',
+              body: '',
+              android: {
+                channelId: 'high',
+                pressAction: {
+                  id: 'default',
+                  launchActivity: 'com.app.invalid',
+                },
+              },
+            })
+            .then(id => {
+              expect(id).equals(id);
+              resolve();
+            });
+        });
+      });
+    });
+
     spec.describe('displayNotification with quick actions', function () {
       spec.it(
         'displays a notification with a quick action with input set to true',

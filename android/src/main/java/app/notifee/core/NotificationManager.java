@@ -260,6 +260,11 @@ class NotificationManager {
 
                 String launchActivity = fullScreenActionBundle.getLaunchActivity();
                 Class launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
+                 if (launchActivityClass == null) {
+                    Logger.e(TAG, String.format("Launch Activity for full-screen action does not exist ('%s').", launchActivity));
+                    return builder;
+                 }
+
                 Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
                 if (fullScreenActionBundle.getLaunchActivityFlags() != -1) {
                   launchIntent.addFlags(fullScreenActionBundle.getLaunchActivityFlags());

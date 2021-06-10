@@ -21,6 +21,7 @@ import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
 
 public class ReceiverService extends Service {
+  private static final String TAG = "ReceiverService";
   public static final String REMOTE_INPUT_RECEIVER_KEY =
       "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
 
@@ -198,6 +199,10 @@ public class ReceiverService extends Service {
       @Nullable String mainComponent,
       int launchActivityFlags) {
     Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
+    if (launchActivityClass == null) {
+      Logger.e(TAG, "Failed to get launch activity");
+      return;
+    }
 
     Intent launchIntent = new Intent(getApplicationContext(), launchActivityClass);
 
