@@ -7,11 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
-    "postinstall": "cd node_modules/@notifee/react-native && yarn"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@notifee/react-native": "github:notifee/react-native-notifee",
+    "@notifee/react-native": "1.8.1",
     "react": "17.0.1",
     "react-native": "0.64.1"
   },

@@ -68,3 +68,4 @@ type-test.ts
 .prettierrc
 .eslintrc.js
 .prettierignore
+example/
