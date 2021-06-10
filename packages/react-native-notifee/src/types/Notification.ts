@@ -31,7 +31,7 @@ export interface Notification {
   /**
    * The notification title which appears above the body text.
    */
-  title?: string |  undefined;
+  title?: string | undefined;
 
   /**
    * The notification subtitle, which appears on a new line below/next the title.

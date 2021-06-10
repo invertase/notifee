@@ -73,7 +73,7 @@ export default function validateNotification(notification: Notification): Notifi
    * title
    */
   if (objectHasProperty(notification, 'title')) {
-    if (notification.title !== undefined  && !isString(notification.title)) {
+    if (notification.title !== undefined && !isString(notification.title)) {
       throw new Error("'notification.title' expected a string value or undefined.");
     }
 
@@ -84,7 +84,7 @@ export default function validateNotification(notification: Notification): Notifi
    * body
    */
   if (objectHasProperty(notification, 'body')) {
-    if (notification.body !== undefined  && !isString(notification.body)) {
+    if (notification.body !== undefined && !isString(notification.body)) {
       throw new Error("'notification.body' expected a string value or undefined.");
     }
 
@@ -95,7 +95,7 @@ export default function validateNotification(notification: Notification): Notifi
    * subtitle
    */
   if (objectHasProperty(notification, 'subtitle')) {
-    if (notification.subtitle !== undefined  && !isString(notification.subtitle)) {
+    if (notification.subtitle !== undefined && !isString(notification.subtitle)) {
       throw new Error("'notification.subtitle' expected a string value or undefined.");
     }
 

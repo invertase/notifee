@@ -35,7 +35,9 @@ notifee.onBackgroundEvent(async ({type, detail}) => {
     console.log('[onBackgroundEvent] ACTION_PRESS: first_action_reply');
 
     // Remove the notification
-    if (notification?.id) await notifee.cancelNotification(notification?.id);
+    if (notification?.id) {
+      await notifee.cancelNotification(notification?.id);
+    }
   }
 });
 
@@ -84,8 +86,9 @@ function App() {
 
           if (detail.pressAction?.id === 'first_action_reply') {
             // perform any server calls here and cancel notification
-            if (notification?.id)
+            if (notification?.id) {
               await notifee.cancelDisplayedNotification(notification.id);
+            }
           }
           break;
       }
