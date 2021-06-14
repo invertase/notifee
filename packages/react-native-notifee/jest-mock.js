@@ -8,14 +8,16 @@
  * ```
  */
 
-import { version as SDK_VERSION }  from './dist/version';
+import { version as SDK_VERSION } from './dist/version';
 
 export * from './dist/types/Library';
 export * from './dist/types/Notification';
 export * from './dist/types/Trigger';
 export * from './dist/types/NotificationIOS';
 export * from './dist/types/NotificationAndroid';
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-undef */
 export const testNotification = {
   id: 'test-id',
   title: 'test-title',

@@ -20,7 +20,7 @@ import { NotificationIOS } from '..';
 export const validatePlatformSpecificNotification = (
   out: Notification,
   specifiedPlatform: string,
-) => {
+): NotificationAndroid | NotificationIOS => {
   try {
     if (specifiedPlatform === 'ios') {
       return validateIOSNotification(out.ios);
