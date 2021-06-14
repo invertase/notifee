@@ -1,12 +1,20 @@
 buildscript {
+  ext {
+    buildToolsVersion = '30.0.3'
+    ndkVersion = '20.1.5948944'
+    minSdkVersion = 21
+    compileSdkVersion = 29
+    targetSdkVersion = 29
+  }
+
   repositories {
     google()
-    jcenter()
     mavenCentral()
+    jcenter()
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:4.1.1'
-    classpath 'com.google.gms:google-services:4.3.4'
+    classpath 'com.google.gms:google-services:4.3.8'
   }
 }
 
@@ -37,9 +45,24 @@ allprojects {
 subprojects {
   task listAllDependencies(type: DependencyReportTask) {}
   ext {
-    compileSdk = 29
-    minSdk = 21
-    targetSdk = 29
+    compileSdk = rootProject.ext.compileSdkVersion
+    buildTools = rootProject.ext.buildToolsVersion
+    minSdk = rootProject.ext.minSdkVersion
+    targetSdk = rootProject.ext.targetSdkVersion
+  }
+
+  // Set up all other sub-projects - from other react-native modules, to use our versions
+  afterEvaluate { project ->
+    if (!project.name.equalsIgnoreCase('app') && project.hasProperty('android')) {
+      android {
+        compileSdkVersion compileSdk
+        buildToolsVersion buildTools
+        defaultConfig {
+          minSdkVersion minSdk
+          targetSdkVersion targetSdk
+        }
+      }
+    }
   }
 }
 

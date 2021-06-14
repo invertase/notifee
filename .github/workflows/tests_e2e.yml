@@ -64,7 +64,7 @@ jobs:
       - name: Configure JDK 1.11
         uses: actions/setup-java@v1
         with:
-          java-version: "11" # ubuntu-latest is about to default to 11, force it everywhere
+          java-version: '11' # ubuntu-latest is about to default to 11, force it everywhere
 
       - name: Verify JDK11
         # Default JDK varies depending on different runner flavors, make sure we are on 11
@@ -78,7 +78,7 @@ jobs:
           timeout_minutes: 10
           retry_wait_seconds: 60
           max_attempts: 3
-          command: cd tests_react_native/android && ./gradlew assembleDebug assembleDebugAndroidTest -DtestBuildType=debug -Dorg.gradle.daemon=false
+          command: cd tests_react_native/android && ./gradlew assembleDebug -DtestBuildType=debug -Dorg.gradle.daemon=false
 
       - name: Pre-fetch Javascript bundle
         # Prebuild the bundle so that's fast when the app starts.
