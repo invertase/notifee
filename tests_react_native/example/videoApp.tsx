@@ -97,8 +97,7 @@ function Root(): any {
                   attachments: [
                     {
                       id: 'image',
-                      url:
-                        'https://github.githubassets.com/images/modules/open_graph/github-mark.png',
+                      url: 'https://github.githubassets.com/images/modules/open_graph/github-mark.png',
                       thumbnailHidden: false,
                       thumbnailClippingRect: {
                         x: 0.1,

@@ -59,8 +59,7 @@ export default {
   'android-text-styling': {
     title: '<p style="color: #4caf50;"><b>Styled HTMLTitle</span></p></b></p> &#128576;',
     subtitle: '&#129395;',
-    body:
-      'The <p style="text-decoration: line-through">body can</p> also be <p style="color: #ffffff; background-color: #9c27b0"><i>styled too</i></p> &#127881;!',
+    body: 'The <p style="text-decoration: line-through">body can</p> also be <p style="color: #ffffff; background-color: #9c27b0"><i>styled too</i></p> &#127881;!',
     android: {
       channelId: 'default',
       color: '#4caf50',

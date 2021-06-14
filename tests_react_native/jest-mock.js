@@ -15,11 +15,13 @@ jest.mock('react-native', () => {
 
 //github.com/testing-library/native-testing-library/issues/85
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { EventEmitter } = require('events');
   return EventEmitter;
 });
 
 jest.mock('react-native/Libraries/vendor/emitter/EventEmitter', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { EventEmitter } = require('events');
   return EventEmitter;
 });

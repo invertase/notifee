@@ -26,7 +26,7 @@ describe('Notifee Api Module', () => {
     expect(NotifeeApiModule).toBeDefined();
   });
   test('Constructor', () => {
-    expect(apiModule).not.toBeNull;
+    expect(apiModule).not.toBeNull();
   });
 
   test('getTriggerNotificationIds', async () => {
