@@ -28,6 +28,7 @@ export default class NotifeeNativeModule {
     this._nativeModule = null;
     this._notifeeConfig = null;
     this._moduleConfig = Object.assign({}, config);
+    // @ts-ignore - change here needs resolution https://github.com/DefinitelyTyped/DefinitelyTyped/pull/49560/files
     this._nativeEmitter = new NativeEventEmitter(this.native as EventSubscriptionVendor);
     for (let i = 0; i < config.nativeEvents.length; i++) {
       const eventName = config.nativeEvents[i];

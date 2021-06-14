@@ -17,14 +17,14 @@
     "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google"
   },
   "devDependencies": {
-    "@types/react-native": "0.63.34",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
-    "eslint": "^7.16.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.3.0",
-    "genversion": "^2.2.0",
-    "prettier": "^2.2.1",
+    "@types/react-native": "0.64.10",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "genversion": "^3.0.0",
+    "prettier": "^2.3.1",
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
