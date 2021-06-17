@@ -49,6 +49,10 @@ cd ios && pod install && cd ..
 # remove App.js in favour of our custom App.tsx
 rm App.js
 
+# We use typescript and there are linter collisions with transitive dependencies on old versions
+# Merge the result of a PR we made upstream so lint is clean even with our 3-deep layer of packages
+yarn add @react-native-community/eslint-config@^3
+
 rm -f ios/Podfile??
 
 yarn
