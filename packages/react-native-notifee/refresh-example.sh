@@ -51,12 +51,6 @@ rm App.js
 
 rm -f ios/Podfile??
 
-# Patch the app/build.gradle to enable the JS bundle in debug - this is important
-# For testing because iOS9 and Android API<18 can't do port-forwarding so they can't
-# see a local dev bundle server, they have to have the bundle packaged and in the app
-sed -i -e $'s/^project.ext.react = \[/project.ext.react = \[\\\n    bundleInDebug: true,/' android/app/build.gradle
-rm -f android/app/build.gradle??
-
 yarn
 
 # Copy the important files back in
