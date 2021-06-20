@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "prepare": "yarn lerna:link && lerna run prepare && (yarn tests_rn:ios:pod:install || true)",
-    "precommit": "yarn build:all:clean && yarn prepare && yarn build:all && yarn validate:all && yarn test:all",
+    "precommit": "yarn build:all:clean && yarn prepare && yarn build:all && yarn gen:reference && yarn validate:all && yarn test:all",
     "build:all": "yarn build:core && yarn build:rn",
     "build:core": "yarn build:core:android && yarn build:core:ios",
     "build:core:android": "cd ./android && ./gradlew assembleRelease compileDebugJavaWithJavac compileDebugUnitTestJavaWithJavac",
@@ -53,8 +53,8 @@
     "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
-    "typedoc": "^0.19",
-    "typescript": "^4.3.3"
+    "typedoc": "^0.15.0",
+    "typescript": "^3.7.5"
   },
   "resolutions": {
     "@types/node": "^14"
