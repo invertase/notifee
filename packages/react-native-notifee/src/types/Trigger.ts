@@ -24,10 +24,29 @@ export interface TimestampTrigger {
    */
   repeatFrequency?: RepeatFrequency;
 
+  /**
+   * Choose to schedule your trigger notification with Android's AlarmManager API.
+   *
+   * By default, trigger notifications are created with Android's WorkManager API.
+   *
+   * @platform android
+   */
   alarmManager?: boolean | TimestampTriggerAlarmManager | undefined;
 }
 
+/**
+ * Interface to specify additional options for the AlarmManager which can be used with `TimestampTrigger.alarmManager`.
+ *
+ * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ *
+ * @platform android
+ */
 export interface TimestampTriggerAlarmManager {
+  /**
+   * Sets whether your trigger notification should be displayed even when the system is in low-power idle modes.
+   *
+   * Defaults to `false`.
+   */
   allowWhileIdle?: boolean;
 }
 
