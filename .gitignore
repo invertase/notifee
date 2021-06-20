@@ -618,3 +618,4 @@ flutter_export_environment.sh
 
 #tests_react_native
 /tests_react_native/playgrounds
+/tests_react_native/packages

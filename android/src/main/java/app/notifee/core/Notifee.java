@@ -263,15 +263,7 @@ public class Notifee {
       logLicenseWarningForMethod("getTriggerNotificationIds");
       result.onComplete(null, Collections.emptyList());
     } else {
-      NotificationManager.getTriggerNotificationIds()
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
+      NotificationManager.getTriggerNotificationIds(result);
     }
   }
 

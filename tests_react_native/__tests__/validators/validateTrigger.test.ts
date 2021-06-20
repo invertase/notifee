@@ -111,6 +111,67 @@ describe('Validate Trigger', () => {
         expect($.repeatFrequency).toEqual(2);
         expect($.timestamp).toEqual(date.getTime());
       });
+
+      describe('alarmManager', () => {
+        test('ignores property when false', () => {
+          const date = new Date(Date.now());
+          date.setSeconds(date.getSeconds() + 10);
+
+          const trigger: TimestampTrigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: date.getTime(),
+            repeatFrequency: 2,
+            alarmManager: false,
+          };
+
+          const $ = validateTrigger(trigger) as TimestampTrigger;
+
+          // expect($.).toEqual(date.getTime());
+          expect($.repeatFrequency).toEqual(2);
+          expect($.timestamp).toEqual(date.getTime());
+          expect($.alarmManager).not.toBeDefined();
+        });
+
+        test('parses property to the default values', () => {
+          const date = new Date(Date.now());
+          date.setSeconds(date.getSeconds() + 10);
+
+          const trigger: TimestampTrigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: date.getTime(),
+            repeatFrequency: 2,
+            alarmManager: true,
+          };
+
+          const $ = validateTrigger(trigger) as TimestampTrigger;
+
+          // expect($.).toEqual(date.getTime());
+          expect($.repeatFrequency).toEqual(2);
+          expect($.timestamp).toEqual(date.getTime());
+          expect($.alarmManager).toEqual({ allowWhileIdle: false });
+        });
+
+        test('parses property to an object with allowIdle as true', () => {
+          const date = new Date(Date.now());
+          date.setSeconds(date.getSeconds() + 10);
+
+          const trigger: TimestampTrigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: date.getTime(),
+            repeatFrequency: 2,
+            alarmManager: {
+              allowWhileIdle: true,
+            },
+          };
+
+          const $ = validateTrigger(trigger) as TimestampTrigger;
+
+          // expect($.).toEqual(date.getTime());
+          expect($.repeatFrequency).toEqual(2);
+          expect($.timestamp).toEqual(date.getTime());
+          expect($.alarmManager).toEqual({ allowWhileIdle: true });
+        });
+      });
     });
 
     describe('validateIntervalTrigger()', () => {
