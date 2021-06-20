@@ -5,8 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
-## 1.9.0-alpha.0
+## 1.9.0
 - **[Android]**: Support Alarm Manager for trigger notifications.
+- **[iOS]**: Xcode 12.4 and above is now supported
 
 ## 1.8.1
 - **[Android/iOS]**: Fix npm bundle to exclude example app
