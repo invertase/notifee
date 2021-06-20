@@ -15,7 +15,7 @@
     "format:rn": "yarn format:rn:android && yarn format:rn:ios",
     "format:rn:android": "cd packages/react-native/android && yarn format:android",
     "format:rn:ios": "cd packages/react-native/ios && yarn format:ios",
-    "format:core": "yarn build:core:android && yarn build:core:ios",
+    "format:core": "yarn format:core:android && yarn format:core:ios",
     "format:core:android": "cd android && yarn format:android",
     "format:core:ios": "cd ios && yarn format:ios",
     "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",

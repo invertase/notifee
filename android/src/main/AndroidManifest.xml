@@ -20,6 +20,23 @@
       android:name=".ForegroundService"
       android:exported="false" />
 
+      <receiver android:name=".RebootBroadcastReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+        </intent-filter>
+    </receiver>
+
+
+    <receiver android:name=".NotificationAlarmReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+      </intent-filter>
+    </receiver>
+
     <!-- Broadcast Receiver -->
     <receiver
       android:name=".BlockStateBroadcastReceiver"

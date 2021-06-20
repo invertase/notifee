@@ -32,8 +32,13 @@ public class TimestampTriggerModelTest {
 
   @Test
   public void testBundleValues() {
-    assertEquals("with no 'repeatFrequency', interval should be -1", -1, mTimestampTriggerModel.getInterval());
-    assertNull("with no 'repeatFrequency', TimeUnit should be null", mTimestampTriggerModel.getTimeUnit());
-    assertEquals("with no 'repeatFrequency', delay should be 0", 0, mTimestampTriggerModel.getDelay());
+    assertEquals(
+        "with no 'repeatFrequency', interval should be -1",
+        -1,
+        mTimestampTriggerModel.getInterval());
+    assertNull(
+        "with no 'repeatFrequency', TimeUnit should be null", mTimestampTriggerModel.getTimeUnit());
+    assertEquals(
+        "with no 'repeatFrequency', delay should be 0", 0, mTimestampTriggerModel.getDelay());
   }
 }

@@ -1,73 +1,87 @@
 package app.notifee.core;
 
-import android.os.Build;
-
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import android.os.Build;
+import org.junit.Test;
 
 public class LicenseManagerTest {
 
   @Test
   public void testInvalidLicenseInDebug() {
-    LicenseManager licenseManager = getLicenseManager(
-      true,
-      LicenseManager.LocalVerificationStatus.NO_LICENSE,
-      LicenseManager.RemoteVerificationStatus.PENDING,
-      28);
+    LicenseManager licenseManager =
+        getLicenseManager(
+            true,
+            LicenseManager.LocalVerificationStatus.NO_LICENSE,
+            LicenseManager.RemoteVerificationStatus.PENDING,
+            28);
     assertFalse("Invalid license valid in debug", licenseManager.isLicenseInvalidInstance());
   }
 
   @Test
   public void testInvalidLicenseInRelease() {
-    LicenseManager licenseManager = getLicenseManager(
-      false,
-      LicenseManager.LocalVerificationStatus.NO_LICENSE,
-      LicenseManager.RemoteVerificationStatus.PENDING,
-      28);
+    LicenseManager licenseManager =
+        getLicenseManager(
+            false,
+            LicenseManager.LocalVerificationStatus.NO_LICENSE,
+            LicenseManager.RemoteVerificationStatus.PENDING,
+            28);
     assertTrue("Invalid license not valid in release", licenseManager.isLicenseInvalidInstance());
   }
 
   @Test
   public void testRemoteLicenseFailure() {
-    LicenseManager licenseManager = getLicenseManager(
-      false,
-      LicenseManager.LocalVerificationStatus.OK,
-      LicenseManager.RemoteVerificationStatus.BAD_REQUEST_TOKEN,
-      Build.VERSION_CODES.P);
-    assertTrue("Remote license failure detected on Android > API23", licenseManager.isLicenseInvalidInstance());
+    LicenseManager licenseManager =
+        getLicenseManager(
+            false,
+            LicenseManager.LocalVerificationStatus.OK,
+            LicenseManager.RemoteVerificationStatus.BAD_REQUEST_TOKEN,
+            Build.VERSION_CODES.P);
+    assertTrue(
+        "Remote license failure detected on Android > API23",
+        licenseManager.isLicenseInvalidInstance());
   }
 
   @Test
   public void testRemoteLicenseFailurePreNougat() {
-    LicenseManager licenseManager = getLicenseManager(
-      false,
-      LicenseManager.LocalVerificationStatus.OK,
-      // https://github.com/notifee/react-native-notifee/issues/87 indicates old Android returns BAD_REQUEST_TOKEN
-      LicenseManager.RemoteVerificationStatus.BAD_REQUEST_TOKEN,
-      Build.VERSION_CODES.M);
-    assertFalse("Remote license failure ignored on Android <= API23", licenseManager.isLicenseInvalidInstance());
+    LicenseManager licenseManager =
+        getLicenseManager(
+            false,
+            LicenseManager.LocalVerificationStatus.OK,
+            // https://github.com/notifee/react-native-notifee/issues/87 indicates old Android
+            // returns BAD_REQUEST_TOKEN
+            LicenseManager.RemoteVerificationStatus.BAD_REQUEST_TOKEN,
+            Build.VERSION_CODES.M);
+    assertFalse(
+        "Remote license failure ignored on Android <= API23",
+        licenseManager.isLicenseInvalidInstance());
   }
 
   @Test
   public void testLocalLicenseFailure() {
-    LicenseManager licenseManager = getLicenseManager(
-      false,
-      LicenseManager.LocalVerificationStatus.INVALID_LICENSE,
-      LicenseManager.RemoteVerificationStatus.PENDING,
-      Build.VERSION_CODES.P);
-    assertTrue("Local license failure detected on Android > API20", licenseManager.isLicenseInvalidInstance());
+    LicenseManager licenseManager =
+        getLicenseManager(
+            false,
+            LicenseManager.LocalVerificationStatus.INVALID_LICENSE,
+            LicenseManager.RemoteVerificationStatus.PENDING,
+            Build.VERSION_CODES.P);
+    assertTrue(
+        "Local license failure detected on Android > API20",
+        licenseManager.isLicenseInvalidInstance());
   }
 
   @Test
   public void testLocalLicenseFailurePreLollipop() {
-    LicenseManager licenseManager = getLicenseManager(
-      false,
-      LicenseManager.LocalVerificationStatus.INVALID_LICENSE,
-      LicenseManager.RemoteVerificationStatus.PENDING,
-      Build.VERSION_CODES.KITKAT_WATCH);
-    assertFalse("Local license failure ignored on Android <= API20", licenseManager.isLicenseInvalidInstance());
+    LicenseManager licenseManager =
+        getLicenseManager(
+            false,
+            LicenseManager.LocalVerificationStatus.INVALID_LICENSE,
+            LicenseManager.RemoteVerificationStatus.PENDING,
+            Build.VERSION_CODES.KITKAT_WATCH);
+    assertFalse(
+        "Local license failure ignored on Android <= API20",
+        licenseManager.isLicenseInvalidInstance());
   }
 
   public TestLicenseManager getLicenseManager(boolean debug, int local, int remote, int sdk) {

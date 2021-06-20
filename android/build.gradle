@@ -53,9 +53,16 @@ android {
 
     javaCompileOptions {
       annotationProcessorOptions {
-        arguments = [eventBusIndex: 'app.notifee.core.EventBusIndex']
+        arguments = ["room.schemaLocation":
+                             "$projectDir/schemas".toString(),
+                             eventBusIndex: 'app.notifee.core.EventBusIndex']
       }
     }
+  }
+
+  sourceSets {
+      // Adds exported schema location as test app assets.
+      androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
   }
 
   buildTypes {
@@ -137,4 +144,6 @@ dependencies {
   testImplementation 'junit:junit:4.13.2' // https://github.com/junit-team/junit4/releases
   androidTestImplementation 'androidx.test.ext:junit:1.1.2' // https://developer.android.com/jetpack/androidx/releases/test
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0' // see above
+  androidTestImplementation "androidx.room:room-testing:$room_version"
+  androidTestImplementation "androidx.test:monitor:1.2.0"
 }
