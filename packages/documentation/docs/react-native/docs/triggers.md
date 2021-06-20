@@ -127,7 +127,27 @@ const trigger: TimestampTrigger = {
 };
 ```
 
-Please note that for iOS, a trigger with a repeat frequency of `DAILY` will fire based on the time and not the date. For example, if it is January 1 at 10 AM and you schedule a daily recurring notification for January 2 at 11 AM, it will fire on January 1 at 11 AM and every day thereafter. For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
+On Android, you have the option to create your trigger notification with Android's AlarmManger API:
+
+```js
+const trigger: TimestampTrigger = {
+  //...
+  alarmManager: true
+};
+```
+
+If you want to allow the notification to display when in low-power idle modes, set `allowWhileIdle`:
+
+```js
+const trigger: TimestampTrigger = {
+  //...
+  alarmManager: {
+    allowWhileIdle: true,
+  }
+};
+```
+
+Please note that for iOS, a trigger with a repeat frequency will fire based on the time and not the date. For example, if it is January 1 at 10 AM and you schedule a daily recurring notification for January 2 at 11 AM, it will fire on January 1 at 11 AM and every day thereafter. For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
 
 ## Interval Trigger
 
