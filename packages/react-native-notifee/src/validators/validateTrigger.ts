@@ -2,7 +2,14 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { objectHasProperty, isNumber, isObject, isValidEnum } from '../utils';
+import {
+  objectHasProperty,
+  isNumber,
+  isObject,
+  isValidEnum,
+  isUndefined,
+  isBoolean,
+} from '../utils';
 import {
   Trigger,
   TimeUnit,
@@ -10,6 +17,7 @@ import {
   TimestampTrigger,
   IntervalTrigger,
   TriggerType,
+  TimestampTriggerAlarmManager,
 } from '../types/Trigger';
 
 const MINIMUM_INTERVAL = 15;
@@ -59,11 +67,42 @@ function validateTimestampTrigger(trigger: TimestampTrigger): TimestampTrigger {
     repeatFrequency: -1,
   };
 
-  if (objectHasProperty(trigger, 'repeatFrequency')) {
+  if (objectHasProperty(trigger, 'repeatFrequency') && !isUndefined(trigger.repeatFrequency)) {
     if (!isValidEnum(trigger.repeatFrequency, RepeatFrequency)) {
       throw new Error("'trigger.repeatFrequency' expected a RepeatFrequency value.");
     }
+
     out.repeatFrequency = trigger.repeatFrequency;
+  }
+
+  if (objectHasProperty(trigger, 'alarmManager') && !isUndefined(trigger.alarmManager)) {
+    if (isBoolean(trigger.alarmManager)) {
+      if (trigger.alarmManager) {
+        out.alarmManager = validateTimestampAlarmManager();
+      }
+    } else {
+      try {
+        out.alarmManager = validateTimestampAlarmManager(trigger.alarmManager);
+      } catch (e) {
+        throw new Error(`'trigger.alarmManager' ${e.message}.`);
+      }
+    }
+  }
+
+  return out;
+}
+
+function validateTimestampAlarmManager(
+  alarmManager?: TimestampTriggerAlarmManager,
+): TimestampTriggerAlarmManager {
+  const out: TimestampTriggerAlarmManager = {
+    allowWhileIdle: false,
+  };
+  if (!alarmManager) {
+    return out;
+  }
+  if (isBoolean(alarmManager.allowWhileIdle) && alarmManager.allowWhileIdle) {
+    out.allowWhileIdle = true;
   }
 
   return out;
@@ -80,7 +119,7 @@ function validateIntervalTrigger(trigger: IntervalTrigger): IntervalTrigger {
     timeUnit: TimeUnit.SECONDS,
   };
 
-  if (objectHasProperty(trigger, 'timeUnit')) {
+  if (objectHasProperty(trigger, 'timeUnit') && !isUndefined(trigger.timeUnit)) {
     if (!isValidEnum(trigger.timeUnit, TimeUnit)) {
       throw new Error("'trigger.timeUnit' expected a TimeUnit value.");
     }

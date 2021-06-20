@@ -23,6 +23,12 @@ export interface TimestampTrigger {
    *  if set to `RepeatFrequency.WEEKLY`, the notification will repeat every week from the timestamp specified.
    */
   repeatFrequency?: RepeatFrequency;
+
+  alarmManager?: boolean | TimestampTriggerAlarmManager | undefined;
+}
+
+export interface TimestampTriggerAlarmManager {
+  allowWhileIdle?: boolean;
 }
 
 /**
