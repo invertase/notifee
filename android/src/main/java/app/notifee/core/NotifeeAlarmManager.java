@@ -25,6 +25,9 @@ class NotifeeAlarmManager {
   private static final ExecutorService alarmManagerExecutor = Executors.newCachedThreadPool();
 
   static void displayScheduledNotification(Bundle alarmManagerNotification) {
+    if (alarmManagerNotification == null) {
+      return;
+    }
     String id = alarmManagerNotification.getString(NOTIFICATION_ID_INTENT_KEY);
 
     if (id == null) {
