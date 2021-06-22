@@ -1,8 +1,9 @@
 {
 	"id": 0,
-	"name": "@notifee/react-native - v1.9.0",
+	"name": "@notifee/react-native",
 	"kind": 0,
 	"flags": {},
+	"originalName": "",
 	"children": [
 		{
 			"id": 244,
@@ -900,7 +901,7 @@
 							"character": 5
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				},
 				{
 					"id": 290,
@@ -1890,7 +1891,7 @@
 							"character": 8
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				}
 			],
 			"groups": [
@@ -2131,7 +2132,7 @@
 							"character": 9
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				}
 			],
 			"groups": [
@@ -2236,7 +2237,7 @@
 							"character": 16
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				},
 				{
 					"id": 38,
@@ -2847,7 +2848,7 @@
 							"character": 15
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				}
 			],
 			"groups": [
@@ -2946,7 +2947,7 @@
 							"character": 15
 						}
 					],
-					"defaultValue": " -1"
+					"defaultValue": "-1"
 				},
 				{
 					"id": 43,
@@ -3323,8 +3324,8 @@
 							},
 							{
 								"type": "reference",
-								"name": "AndroidInput",
-								"id": 162
+								"id": 162,
+								"name": "AndroidInput"
 							}
 						]
 					}
@@ -3350,8 +3351,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationPressAction",
-						"id": 352
+						"id": 352,
+						"name": "NotificationPressAction"
 					}
 				},
 				{
@@ -3578,8 +3579,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "BIGPICTURE",
-						"id": 298
+						"id": 298,
+						"name": "BIGPICTURE"
 					}
 				}
 			],
@@ -3732,8 +3733,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "BIGTEXT",
-						"id": 299
+						"id": 299,
+						"name": "BIGTEXT"
 					}
 				}
 			],
@@ -3977,8 +3978,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidImportance",
-						"id": 306
+						"id": 306,
+						"name": "AndroidImportance"
 					}
 				},
 				{
@@ -4006,8 +4007,8 @@
 						"types": [
 							{
 								"type": "reference",
-								"name": "AndroidColor",
-								"id": 265
+								"id": 265,
+								"name": "AndroidColor"
 							},
 							{
 								"type": "intrinsic",
@@ -4200,8 +4201,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidVisibility",
-						"id": 302
+						"id": 302,
+						"name": "AndroidVisibility"
 					}
 				}
 			],
@@ -4236,8 +4237,8 @@
 			"extendedBy": [
 				{
 					"type": "reference",
-					"name": "NativeAndroidChannel",
-					"id": 219
+					"id": 219,
+					"name": "NativeAndroidChannel"
 				}
 			]
 		},
@@ -4369,8 +4370,8 @@
 			"extendedBy": [
 				{
 					"type": "reference",
-					"name": "NativeAndroidChannelGroup",
-					"id": 238
+					"id": 238,
+					"name": "NativeAndroidChannelGroup"
 				}
 			]
 		},
@@ -4506,8 +4507,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "INBOX",
-						"id": 300
+						"id": 300,
+						"name": "INBOX"
 					}
 				}
 			],
@@ -4825,8 +4826,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "AndroidMessagingStyleMessage",
-							"id": 190
+							"id": 190,
+							"name": "AndroidMessagingStyleMessage"
 						}
 					}
 				},
@@ -4850,8 +4851,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidPerson",
-						"id": 194
+						"id": 194,
+						"name": "AndroidPerson"
 					}
 				},
 				{
@@ -4907,8 +4908,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "MESSAGING",
-						"id": 301
+						"id": 301,
+						"name": "MESSAGING"
 					}
 				}
 			],
@@ -4974,8 +4975,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidPerson",
-						"id": 194
+						"id": 194,
+						"name": "AndroidPerson"
 					}
 				},
 				{
@@ -5465,8 +5466,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "EventDetail",
-						"id": 372
+						"id": 372,
+						"name": "EventDetail"
 					}
 				},
 				{
@@ -5489,8 +5490,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "EventType",
-						"id": 362
+						"id": 362,
+						"name": "EventType"
 					}
 				}
 			],
@@ -5597,8 +5598,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NativeAndroidChannel",
-						"id": 219
+						"id": 219,
+						"name": "NativeAndroidChannel"
 					}
 				},
 				{
@@ -5629,8 +5630,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NativeAndroidChannelGroup",
-						"id": 238
+						"id": 238,
+						"name": "NativeAndroidChannelGroup"
 					}
 				},
 				{
@@ -5695,8 +5696,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "Notification",
-						"id": 334
+						"id": 334,
+						"name": "Notification"
 					}
 				},
 				{
@@ -5721,8 +5722,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationPressAction",
-						"id": 352
+						"id": 352,
+						"name": "NotificationPressAction"
 					}
 				}
 			],
@@ -6198,8 +6199,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSAttachmentThumbnailClippingRect",
-						"id": 113
+						"id": 113,
+						"name": "IOSAttachmentThumbnailClippingRect"
 					}
 				},
 				{
@@ -6393,8 +6394,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "IOSNotificationCategoryAction",
-							"id": 96
+							"id": 96,
+							"name": "IOSNotificationCategoryAction"
 						}
 					}
 				},
@@ -6611,8 +6612,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "IOSIntentIdentifier",
-							"id": 60
+							"id": 60,
+							"name": "IOSIntentIdentifier"
 						}
 					}
 				},
@@ -6855,8 +6856,8 @@
 							},
 							{
 								"type": "reference",
-								"name": "IOSInput",
-								"id": 103
+								"id": 103,
+								"name": "IOSInput"
 							}
 						]
 					}
@@ -7267,8 +7268,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7292,8 +7293,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7316,8 +7317,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSAuthorizationStatus",
-						"id": 34
+						"id": 34,
+						"name": "IOSAuthorizationStatus"
 					}
 				},
 				{
@@ -7340,8 +7341,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7364,8 +7365,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7388,8 +7389,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7409,8 +7410,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7433,8 +7434,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7457,8 +7458,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				},
 				{
@@ -7481,8 +7482,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSShowPreviewsSetting",
-						"id": 39
+						"id": 39,
+						"name": "IOSShowPreviewsSetting"
 					}
 				},
 				{
@@ -7505,8 +7506,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSNotificationSetting",
-						"id": 44
+						"id": 44,
+						"name": "IOSNotificationSetting"
 					}
 				}
 			],
@@ -7610,8 +7611,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "Notification",
-						"id": 334
+						"id": 334,
+						"name": "Notification"
 					}
 				},
 				{
@@ -7634,8 +7635,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationPressAction",
-						"id": 352
+						"id": 352,
+						"name": "NotificationPressAction"
 					}
 				}
 			],
@@ -7720,13 +7721,13 @@
 						"types": [
 							{
 								"type": "reference",
-								"name": "TimeUnit",
-								"id": 398
+								"id": 398,
+								"name": "TimeUnit"
 							},
 							{
 								"type": "reference",
-								"name": "SECONDS",
-								"id": 399
+								"id": 399,
+								"name": "SECONDS"
 							}
 						]
 					}
@@ -7751,8 +7752,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "INTERVAL",
-						"id": 405
+						"id": 405,
+						"name": "INTERVAL"
 					}
 				}
 			],
@@ -7809,8 +7810,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "JsonConfigAndroid",
-						"id": 520
+						"id": 520,
+						"name": "JsonConfigAndroid"
 					}
 				},
 				{
@@ -7834,8 +7835,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "JsonConfigIOS",
-						"id": 522
+						"id": 522,
+						"name": "JsonConfigIOS"
 					}
 				}
 			],
@@ -7990,20 +7991,22 @@
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel all notifications.",
 								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany pending trigger notifications.\n\nThis method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8029,7 +8032,9 @@
 							"name": "cancelDisplayedNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single displayed notification.",
 								"text": "This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
@@ -8040,7 +8045,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -8052,13 +8059,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8084,20 +8091,22 @@
 							"name": "cancelDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel any displayed notifications.",
 								"text": "This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8123,7 +8132,9 @@
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single notification.",
 								"text": "The `cancelNotification` API removes removes any displayed notifications or ones with triggers\nset for the specified ID.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
@@ -8134,7 +8145,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -8146,13 +8159,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8178,7 +8191,9 @@
 							"name": "cancelTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single trigger notification."
 							},
@@ -8188,7 +8203,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -8200,13 +8217,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8232,19 +8249,21 @@
 							"name": "cancelTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel any trigger notifications."
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8270,7 +8289,9 @@
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update channels on supported Android devices.",
 								"text": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).\n\nBy providing a `groupId` property, channels can be assigned to groups created with\n[`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThe channel ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8287,26 +8308,28 @@
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "AndroidChannel",
-										"id": 205
+										"id": 205,
+										"name": "AndroidChannel"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8332,7 +8355,9 @@
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create or update a channel group on supported Android devices.",
 								"text": "Creates a new Android channel group. Groups are used to further organize the appearance of your\nchannels in the settings UI. Groups allow users to easily identify and control multiple\nnotification channels.\n\nChannels can be assigned to groups during creation using the\n[`createChannel`](/react-native/reference/createchannel) method.\n\nThe channel group ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8349,26 +8374,28 @@
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)\ninterface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "AndroidChannelGroup",
-										"id": 234
+										"id": 234,
+										"name": "AndroidChannelGroup"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8394,7 +8421,9 @@
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update multiple channel groups on supported Android devices.",
 								"text": "This API is used to perform a single operation to create or update channel groups. See the\n[`createChannelGroup`](/react-native/reference/createchannelgroup) documentation for more information.\n",
@@ -8411,7 +8440,9 @@
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "An array of [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup) interfaces.\n"
 									},
@@ -8419,21 +8450,21 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "AndroidChannelGroup",
-											"id": 234
+											"id": 234,
+											"name": "AndroidChannelGroup"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8459,7 +8490,9 @@
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update multiple channels on supported Android devices.",
 								"text": "This API is used to perform a single operation to create or update channels. See the\n[`createChannel`](/react-native/reference/createchannel) documentation for more information.\n",
@@ -8476,7 +8509,9 @@
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "An array of [`AndroidChannel`](/react-native/reference/androidchannel) interfaces.\n"
 									},
@@ -8484,21 +8519,21 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "AndroidChannel",
-											"id": 205
+											"id": 205,
+											"name": "AndroidChannel"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8524,7 +8559,9 @@
 							"name": "createTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to create a trigger notification.",
 								"text": "All channels/categories should be created before calling this method during the apps lifecycle.\n\nView the [Triggers](/react-native/docs/triggers) documentation for more information.\n"
@@ -8535,14 +8572,16 @@
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Notification",
-										"id": 334
+										"id": 334,
+										"name": "Notification"
 									}
 								},
 								{
@@ -8550,26 +8589,28 @@
 									"name": "trigger",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Trigger`](/react-native/reference/trigger) interface used\nto create a trigger.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Trigger",
-										"id": 406
+										"id": 406,
+										"name": "Trigger"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8595,7 +8636,9 @@
 							"name": "decrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Decrements the badge count for this application on the current device by a specified\nvalue.",
 								"text": "Defaults to an decrement of `1`.\n",
@@ -8613,6 +8656,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"type": {
@@ -8632,13 +8676,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8664,7 +8708,9 @@
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to delete a channel by ID on supported Android devices.",
 								"text": "Channels can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\n> When a channel is deleted, notifications assigned to that channel will fail to display.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8681,7 +8727,9 @@
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique channel ID to delete.\n"
 									},
@@ -8693,13 +8741,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8725,7 +8773,9 @@
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to delete a channel group by ID on supported Android devices.",
 								"text": "Channel groups can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\nDeleting a group does not delete channels which are assigned to the group, they will instead be\nunassigned the group and continue to function as expected.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8742,7 +8792,9 @@
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique channel group ID to delete.\n"
 									},
@@ -8754,13 +8806,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8786,7 +8838,9 @@
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to immediately display or update a notification on the users device.",
 								"text": "This API is used to display a notification on the users device. All\nchannels/categories should be created before triggering this method during the apps lifecycle.\n\nView the [Displaying a Notification](/react-native/docs/displaying-a-notification)\ndocumentation for more information.\n"
@@ -8797,26 +8851,28 @@
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Notification",
-										"id": 334
+										"id": 334,
+										"name": "Notification"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8842,7 +8898,9 @@
 							"name": "getBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Get the current badge count value for this application on the current device.",
 								"text": "Returns `0` on Android.\n",
@@ -8855,13 +8913,13 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "number"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8887,7 +8945,9 @@
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return a channel on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8904,7 +8964,9 @@
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The channel ID created with [`createChannel`](/react-native/reference/createchannel). If\na unknown channel ID is provided, `null` is returned.\n"
 									},
@@ -8916,15 +8978,14 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "NativeAndroidChannel",
-												"id": 219
+												"id": 219,
+												"name": "NativeAndroidChannel"
 											},
 											{
 												"type": "intrinsic",
@@ -8932,7 +8993,8 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -8958,7 +9020,9 @@
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return a channel group on supported Android devices.",
 								"text": "This API is used to return an `NativeAndroidChannelGroup`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -8975,7 +9039,9 @@
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If\na unknown channel group ID is provided, `null` is returned.\n"
 									},
@@ -8987,15 +9053,14 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "NativeAndroidChannelGroup",
-												"id": 238
+												"id": 238,
+												"name": "NativeAndroidChannelGroup"
 											},
 											{
 												"type": "intrinsic",
@@ -9003,7 +9068,8 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9029,7 +9095,9 @@
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return all channel groups on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannelGroup`. Returns an empty array if no channel\ngroups exist.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -9042,17 +9110,17 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "NativeAndroidChannelGroup",
-											"id": 238
+											"id": 238,
+											"name": "NativeAndroidChannelGroup"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9078,7 +9146,9 @@
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return all channels on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannel`. Returns an empty array if no channels\nexist.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -9091,17 +9161,17 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "NativeAndroidChannel",
-											"id": 219
+											"id": 219,
+											"name": "NativeAndroidChannel"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9127,22 +9197,23 @@
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to fetch the notification which causes the application to open.",
 								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "InitialNotification",
-												"id": 345
+												"id": 345,
+												"name": "InitialNotification"
 											},
 											{
 												"type": "intrinsic",
@@ -9150,7 +9221,8 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9176,7 +9248,9 @@
 							"name": "getNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Gets the currently set notification categories on this Apple device.",
 								"text": "Returns an empty array on Android.\n",
@@ -9189,17 +9263,17 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "IOSNotificationCategory",
-											"id": 86
+											"id": 86,
+											"name": "IOSNotificationCategory"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9225,7 +9299,9 @@
 							"name": "getNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Get the current notification settings for this application on the current device.",
 								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
@@ -9238,14 +9314,14 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "IOSNotificationSettings",
-										"id": 48
+										"id": 48,
+										"name": "IOSNotificationSettings"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9271,7 +9347,9 @@
 							"name": "getPowerManagerInfo",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to get information about the device and its power manager settings, including manufacturer, model, version and activity.",
 								"text": "If `activity` is `null`, `openPowerManagerSettings()` will be noop.\n\nOn iOS, an instance of `PowerManagerInfo` will be returned with `activity` set to `null`.\n\nView the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.\n\n```js\nimport notifee from `@notifee/react-native`;\n\nconst powerManagerInfo = await notifee.getPowerManagerInfo();\n\nif (powerManagerInfo.activity) {\n // 1. ask the user to adjust their Power Manager settings\n // ...\n\n // 2. open settings\n await notifee.openPowerManagerSettings();\n}\n```\n",
@@ -9284,14 +9362,14 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "PowerManagerInfo",
-										"id": 407
+										"id": 407,
+										"name": "PowerManagerInfo"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9317,14 +9395,15 @@
 							"name": "getTriggerNotificationIds",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return the ids of trigger notifications that are pending.",
 								"text": "View the [Triggers](/react-native/docs/triggers) documentation for more information.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
@@ -9333,7 +9412,8 @@
 											"name": "string"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9359,7 +9439,9 @@
 							"name": "hideNotificationDrawer",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to hide the notification drawer, for example,\nwhen the user presses one of the quick actions on the notification, you may wish to hide the drawer.",
 								"text": "Please use this functionality carefully as it could potentially be quite intrusive to the user.\n\nRequires the following permission to be added to your `AndroidManifest.xml`:\n```xml\n<uses-permission android:name=\"android.permission.EXPAND_STATUS_BAR\" />\n```\n\n```js\nimport notifee from `@notifee/react-native`;\n\nnotifee.hideNotificationDrawer();\n```\n",
@@ -9398,7 +9480,9 @@
 							"name": "incrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Increments the badge count for this application on the current device by a specified\nvalue.",
 								"text": "Defaults to an increment of `1`.\n",
@@ -9416,6 +9500,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -9438,13 +9523,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9470,7 +9555,9 @@
 							"name": "isBatteryOptimizationEnabled",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to check if battery optimization is enabled for your application.",
 								"text": "Supports API versions >= 23.\n\nView the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.\n",
@@ -9483,13 +9570,13 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "boolean"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9515,7 +9602,9 @@
 							"name": "onBackgroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to handle events when the application is in a background state.",
 								"text": "Applications in a background state will use an event handler registered by this API method\nto send events. The handler must return a Promise once complete and only a single event handler\ncan be registered for the application.\n\nView the [Background events](/react-native/docs/events#background-events) documentation for more\ninformation and example usage.\n\nTo listen to foreground events, see the [`onForegroundEvent`](/react-native/reference/onforegroundevent) documentation.\n"
@@ -9526,7 +9615,9 @@
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "A Function which returns a Promise, called on a new event when the application\nis in a background state.\n"
 									},
@@ -9537,37 +9628,43 @@
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"signatures": [
 												{
 													"id": 471,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
-													"flags": {},
+													"flags": {
+														"isExported": true
+													},
 													"parameters": [
 														{
 															"id": 472,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
-															"flags": {},
+															"flags": {
+																"isExported": true
+															},
 															"type": {
 																"type": "reference",
-																"name": "Event",
-																"id": 349
+																"id": 349,
+																"name": "Event"
 															}
 														}
 													],
 													"type": {
 														"type": "reference",
-														"name": "Promise",
 														"typeArguments": [
 															{
 																"type": "intrinsic",
 																"name": "void"
 															}
-														]
+														],
+														"name": "Promise"
 													}
 												}
 											],
@@ -9610,7 +9707,9 @@
 							"name": "onForegroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to handle events when the application is in a foreground state.",
 								"text": "Applications in a foreground state will use an event handler registered by this API method\nto send events. Multiple foreground observers can be registered throughout the applications\nlifecycle. The method returns a function, used to unsubscribe from further events,\n\nView the [Foreground events](/react-native/docs/events#foreground-events) documentation for more\ninformation and example usage.\n\nTo listen to background events, see the [`onBackgroundEvent`](/react-native/reference/onbackgroundevent) documentation.\n"
@@ -9621,7 +9720,9 @@
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "A Function which returns a Promise, called on a new event when the application\nis in a foreground state.\n"
 									},
@@ -9632,25 +9733,31 @@
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"signatures": [
 												{
 													"id": 477,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
-													"flags": {},
+													"flags": {
+														"isExported": true
+													},
 													"parameters": [
 														{
 															"id": 478,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
-															"flags": {},
+															"flags": {
+																"isExported": true
+															},
 															"type": {
 																"type": "reference",
-																"name": "Event",
-																"id": 349
+																"id": 349,
+																"name": "Event"
 															}
 														}
 													],
@@ -9678,14 +9785,18 @@
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"signatures": [
 										{
 											"id": 480,
 											"name": "__call",
 											"kind": 4096,
 											"kindString": "Call signature",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"type": {
 												"type": "intrinsic",
 												"name": "void"
@@ -9725,7 +9836,9 @@
 							"name": "openBatteryOptimizationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to open the Android System settings for the application.",
 								"text": "If the API version is >= 23, the battery optimization settings screen is displayed, otherwise,\nthis is a no-op & instantly resolves.\n\nView the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.\n",
@@ -9738,13 +9851,13 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9770,7 +9883,9 @@
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to open the Android System settings for the application.",
 								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op & instantly resolves.\n",
@@ -9788,6 +9903,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -9810,13 +9926,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9842,7 +9958,9 @@
 							"name": "openPowerManagerSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to navigate to the appropriate Android System settings for the device.",
 								"text": "Call `getPowerManagerInfo()` first to find out if the user's device is supported.\n\nView the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.\n\n```js\nimport notifee from `@notifee/react-native`;\n\nconst powerManagerInfo = await notifee.getPowerManagerInfo\n\nif (powerManagerInfo.activity) {\n// 1. ask the user to adjust their Power Manager settings\n// ...\n\n// 2. if yes, navigate them to settings\nawait notifee.openPowerManagerSettings();\n}\n```\n",
@@ -9855,13 +9973,13 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -9887,7 +10005,9 @@
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to register a foreground service on Android devices.",
 								"text": "This method is used to register a long running task which can be used with Foreground Service\nnotifications.\n\nOnly a single foreground service can exist for the application, and calling this method more\nthan once will update the existing task runner.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation for\nmore information.\n",
@@ -9904,14 +10024,16 @@
 									"name": "task",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The runner function which runs for the duration of the service's lifetime.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "ForegroundServiceTask",
-										"id": 379
+										"id": 379,
+										"name": "ForegroundServiceTask"
 									}
 								}
 							],
@@ -9943,7 +10065,9 @@
 							"name": "requestPermission",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Request specific notification permissions for your application on the current device.",
 								"text": "Both iOS & Android return an `IOSNotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { IOSAuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === IOSAuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === IOSAuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === IOSAuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nUse the other `IOSNotificationSettings` properties to view which specific permissions were\nallowed.\n\nOn Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
@@ -9961,6 +10085,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -9968,21 +10093,21 @@
 									},
 									"type": {
 										"type": "reference",
-										"name": "IOSNotificationPermissions",
-										"id": 26
+										"id": 26,
+										"name": "IOSNotificationPermissions"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "IOSNotificationSettings",
-										"id": 48
+										"id": 48,
+										"name": "IOSNotificationSettings"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -10008,7 +10133,9 @@
 							"name": "setBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Set the badge count value for this application on the current device.",
 								"text": "If set to zero, the badge count is removed from the device. The count must also\nbe a positive number.\n",
@@ -10025,7 +10152,9 @@
 									"name": "count",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The number value to set as the badge count.\n"
 									},
@@ -10037,13 +10166,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -10069,7 +10198,9 @@
 							"name": "setNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Set the notification categories to be used on this Apple device.",
 								"tags": [
@@ -10085,7 +10216,9 @@
 									"name": "categories",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "\n"
 									},
@@ -10093,21 +10226,21 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "IOSNotificationCategory",
-											"id": 86
+											"id": 86,
+											"name": "IOSNotificationCategory"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -10133,7 +10266,9 @@
 							"name": "stopForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Call this to stop the foreground service that is running",
 								"tags": [
@@ -10145,13 +10280,13 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -10220,8 +10355,8 @@
 			"extendedBy": [
 				{
 					"type": "reference",
-					"name": "ModuleWithStatics",
-					"id": 529
+					"id": 529,
+					"name": "ModuleWithStatics"
 				}
 			]
 		},
@@ -10281,8 +10416,8 @@
 			"extendedBy": [
 				{
 					"type": "reference",
-					"name": "ModuleWithStatics",
-					"id": 529
+					"id": 529,
+					"name": "ModuleWithStatics"
 				}
 			]
 		},
@@ -10319,8 +10454,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "ModuleStatics.SDK_VERSION",
-						"id": 528
+						"id": 528,
+						"name": "ModuleStatics.SDK_VERSION"
 					}
 				},
 				{
@@ -10337,25 +10472,27 @@
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel all notifications.",
 								"text": "The `cancelAllNotifications` API removes any displayed notifications from the users device and\nany pending trigger notifications.\n\nThis method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelAllNotifications",
-								"id": 413
+								"id": 413,
+								"name": "Module.cancelAllNotifications"
 							}
 						}
 					],
@@ -10368,8 +10505,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelAllNotifications",
-						"id": 413
+						"id": 413,
+						"name": "Module.cancelAllNotifications"
 					}
 				},
 				{
@@ -10386,7 +10523,9 @@
 							"name": "cancelDisplayedNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single displayed notification.",
 								"text": "This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
@@ -10397,7 +10536,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -10409,18 +10550,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelDisplayedNotification",
-								"id": 422
+								"id": 422,
+								"name": "Module.cancelDisplayedNotification"
 							}
 						}
 					],
@@ -10433,8 +10574,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelDisplayedNotification",
-						"id": 422
+						"id": 422,
+						"name": "Module.cancelDisplayedNotification"
 					}
 				},
 				{
@@ -10451,25 +10592,27 @@
 							"name": "cancelDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel any displayed notifications.",
 								"text": "This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelDisplayedNotifications",
-								"id": 415
+								"id": 415,
+								"name": "Module.cancelDisplayedNotifications"
 							}
 						}
 					],
@@ -10482,8 +10625,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelDisplayedNotifications",
-						"id": 415
+						"id": 415,
+						"name": "Module.cancelDisplayedNotifications"
 					}
 				},
 				{
@@ -10500,7 +10643,9 @@
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single notification.",
 								"text": "The `cancelNotification` API removes removes any displayed notifications or ones with triggers\nset for the specified ID.\n\nThis method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)\nnotifications.\n"
@@ -10511,7 +10656,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -10523,18 +10670,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelNotification",
-								"id": 419
+								"id": 419,
+								"name": "Module.cancelNotification"
 							}
 						}
 					],
@@ -10547,8 +10694,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelNotification",
-						"id": 419
+						"id": 419,
+						"name": "Module.cancelNotification"
 					}
 				},
 				{
@@ -10565,7 +10712,9 @@
 							"name": "cancelTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel a single trigger notification."
 							},
@@ -10575,7 +10724,9 @@
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique notification ID. This is automatically generated and returned\nwhen creating a notification, or has been set manually via the `id` property.\n"
 									},
@@ -10587,18 +10738,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelTriggerNotification",
-								"id": 425
+								"id": 425,
+								"name": "Module.cancelTriggerNotification"
 							}
 						}
 					],
@@ -10611,8 +10762,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelTriggerNotification",
-						"id": 425
+						"id": 425,
+						"name": "Module.cancelTriggerNotification"
 					}
 				},
 				{
@@ -10629,24 +10780,26 @@
 							"name": "cancelTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to cancel any trigger notifications."
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.cancelTriggerNotifications",
-								"id": 417
+								"id": 417,
+								"name": "Module.cancelTriggerNotifications"
 							}
 						}
 					],
@@ -10659,8 +10812,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.cancelTriggerNotifications",
-						"id": 417
+						"id": 417,
+						"name": "Module.cancelTriggerNotifications"
 					}
 				},
 				{
@@ -10677,7 +10830,9 @@
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update channels on supported Android devices.",
 								"text": "Creates a new Android channel. Channels are used to collectively assign notifications to\na single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.\nChannels can be further organized into groups (see `createChannelGroup`).\n\nBy providing a `groupId` property, channels can be assigned to groups created with\n[`createChannelGroup`](/react-native/reference/createchannelgroup).\n\nThe channel ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -10694,31 +10849,33 @@
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "AndroidChannel",
-										"id": 205
+										"id": 205,
+										"name": "AndroidChannel"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.createChannel",
-								"id": 428
+								"id": 428,
+								"name": "Module.createChannel"
 							}
 						}
 					],
@@ -10731,8 +10888,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.createChannel",
-						"id": 428
+						"id": 428,
+						"name": "Module.createChannel"
 					}
 				},
 				{
@@ -10749,7 +10906,9 @@
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create or update a channel group on supported Android devices.",
 								"text": "Creates a new Android channel group. Groups are used to further organize the appearance of your\nchannels in the settings UI. Groups allow users to easily identify and control multiple\nnotification channels.\n\nChannels can be assigned to groups during creation using the\n[`createChannel`](/react-native/reference/createchannel) method.\n\nThe channel group ID is returned once the operation has completed.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -10766,31 +10925,33 @@
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)\ninterface used to create/update a group.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "AndroidChannelGroup",
-										"id": 234
+										"id": 234,
+										"name": "AndroidChannelGroup"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.createChannelGroup",
-								"id": 434
+								"id": 434,
+								"name": "Module.createChannelGroup"
 							}
 						}
 					],
@@ -10803,8 +10964,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.createChannelGroup",
-						"id": 434
+						"id": 434,
+						"name": "Module.createChannelGroup"
 					}
 				},
 				{
@@ -10821,7 +10982,9 @@
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update multiple channel groups on supported Android devices.",
 								"text": "This API is used to perform a single operation to create or update channel groups. See the\n[`createChannelGroup`](/react-native/reference/createchannelgroup) documentation for more information.\n",
@@ -10838,7 +11001,9 @@
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "An array of [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup) interfaces.\n"
 									},
@@ -10846,26 +11011,26 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "AndroidChannelGroup",
-											"id": 234
+											"id": 234,
+											"name": "AndroidChannelGroup"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.createChannelGroups",
-								"id": 437
+								"id": 437,
+								"name": "Module.createChannelGroups"
 							}
 						}
 					],
@@ -10878,8 +11043,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.createChannelGroups",
-						"id": 437
+						"id": 437,
+						"name": "Module.createChannelGroups"
 					}
 				},
 				{
@@ -10896,7 +11061,9 @@
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API to create and update multiple channels on supported Android devices.",
 								"text": "This API is used to perform a single operation to create or update channels. See the\n[`createChannel`](/react-native/reference/createchannel) documentation for more information.\n",
@@ -10913,7 +11080,9 @@
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "An array of [`AndroidChannel`](/react-native/reference/androidchannel) interfaces.\n"
 									},
@@ -10921,26 +11090,26 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "AndroidChannel",
-											"id": 205
+											"id": 205,
+											"name": "AndroidChannel"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.createChannels",
-								"id": 431
+								"id": 431,
+								"name": "Module.createChannels"
 							}
 						}
 					],
@@ -10953,8 +11122,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.createChannels",
-						"id": 431
+						"id": 431,
+						"name": "Module.createChannels"
 					}
 				},
 				{
@@ -10971,7 +11140,9 @@
 							"name": "createTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to create a trigger notification.",
 								"text": "All channels/categories should be created before calling this method during the apps lifecycle.\n\nView the [Triggers](/react-native/docs/triggers) documentation for more information.\n"
@@ -10982,14 +11153,16 @@
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Notification",
-										"id": 334
+										"id": 334,
+										"name": "Notification"
 									}
 								},
 								{
@@ -10997,31 +11170,33 @@
 									"name": "trigger",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Trigger`](/react-native/reference/trigger) interface used\nto create a trigger.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Trigger",
-										"id": 406
+										"id": 406,
+										"name": "Trigger"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.createTriggerNotification",
-								"id": 449
+								"id": 449,
+								"name": "Module.createTriggerNotification"
 							}
 						}
 					],
@@ -11034,8 +11209,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.createTriggerNotification",
-						"id": 449
+						"id": 449,
+						"name": "Module.createTriggerNotification"
 					}
 				},
 				{
@@ -11052,7 +11227,9 @@
 							"name": "decrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Decrements the badge count for this application on the current device by a specified\nvalue.",
 								"text": "Defaults to an decrement of `1`.\n",
@@ -11070,6 +11247,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"type": {
@@ -11089,18 +11267,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.decrementBadgeCount",
-								"id": 507
+								"id": 507,
+								"name": "Module.decrementBadgeCount"
 							}
 						}
 					],
@@ -11113,8 +11291,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.decrementBadgeCount",
-						"id": 507
+						"id": 507,
+						"name": "Module.decrementBadgeCount"
 					}
 				},
 				{
@@ -11131,7 +11309,9 @@
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to delete a channel by ID on supported Android devices.",
 								"text": "Channels can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\n> When a channel is deleted, notifications assigned to that channel will fail to display.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11148,7 +11328,9 @@
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique channel ID to delete.\n"
 									},
@@ -11160,18 +11342,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.deleteChannel",
-								"id": 440
+								"id": 440,
+								"name": "Module.deleteChannel"
 							}
 						}
 					],
@@ -11184,8 +11366,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.deleteChannel",
-						"id": 440
+						"id": 440,
+						"name": "Module.deleteChannel"
 					}
 				},
 				{
@@ -11202,7 +11384,9 @@
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to delete a channel group by ID on supported Android devices.",
 								"text": "Channel groups can be deleted using this API by providing the channel ID. Channel information (including\nthe ID) can be retrieved from the [`getChannels`](/react-native/reference/getchannels) API.\n\nDeleting a group does not delete channels which are assigned to the group, they will instead be\nunassigned the group and continue to function as expected.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11219,7 +11403,9 @@
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The unique channel group ID to delete.\n"
 									},
@@ -11231,18 +11417,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.deleteChannelGroup",
-								"id": 443
+								"id": 443,
+								"name": "Module.deleteChannelGroup"
 							}
 						}
 					],
@@ -11255,8 +11441,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.deleteChannelGroup",
-						"id": 443
+						"id": 443,
+						"name": "Module.deleteChannelGroup"
 					}
 				},
 				{
@@ -11273,7 +11459,9 @@
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to immediately display or update a notification on the users device.",
 								"text": "This API is used to display a notification on the users device. All\nchannels/categories should be created before triggering this method during the apps lifecycle.\n\nView the [Displaying a Notification](/react-native/docs/displaying-a-notification)\ndocumentation for more information.\n"
@@ -11284,31 +11472,33 @@
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The [`Notification`](/react-native/reference/notification) interface used\nto create a notification for both Android & iOS.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "Notification",
-										"id": 334
+										"id": 334,
+										"name": "Notification"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "string"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.displayNotification",
-								"id": 446
+								"id": 446,
+								"name": "Module.displayNotification"
 							}
 						}
 					],
@@ -11321,8 +11511,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.displayNotification",
-						"id": 446
+						"id": 446,
+						"name": "Module.displayNotification"
 					}
 				},
 				{
@@ -11339,7 +11529,9 @@
 							"name": "getBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Get the current badge count value for this application on the current device.",
 								"text": "Returns `0` on Android.\n",
@@ -11352,18 +11544,18 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "number"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getBadgeCount",
-								"id": 499
+								"id": 499,
+								"name": "Module.getBadgeCount"
 							}
 						}
 					],
@@ -11376,8 +11568,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getBadgeCount",
-						"id": 499
+						"id": 499,
+						"name": "Module.getBadgeCount"
 					}
 				},
 				{
@@ -11394,7 +11586,9 @@
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return a channel on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11411,7 +11605,9 @@
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The channel ID created with [`createChannel`](/react-native/reference/createchannel). If\na unknown channel ID is provided, `null` is returned.\n"
 									},
@@ -11423,15 +11619,14 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "NativeAndroidChannel",
-												"id": 219
+												"id": 219,
+												"name": "NativeAndroidChannel"
 											},
 											{
 												"type": "intrinsic",
@@ -11439,12 +11634,13 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getChannel",
-								"id": 455
+								"id": 455,
+								"name": "Module.getChannel"
 							}
 						}
 					],
@@ -11457,8 +11653,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getChannel",
-						"id": 455
+						"id": 455,
+						"name": "Module.getChannel"
 					}
 				},
 				{
@@ -11475,7 +11671,9 @@
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return a channel group on supported Android devices.",
 								"text": "This API is used to return an `NativeAndroidChannelGroup`. Returns `null` if no channel could be matched to\nthe given ID.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11492,7 +11690,9 @@
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If\na unknown channel group ID is provided, `null` is returned.\n"
 									},
@@ -11504,15 +11704,14 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "NativeAndroidChannelGroup",
-												"id": 238
+												"id": 238,
+												"name": "NativeAndroidChannelGroup"
 											},
 											{
 												"type": "intrinsic",
@@ -11520,12 +11719,13 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getChannelGroup",
-								"id": 460
+								"id": 460,
+								"name": "Module.getChannelGroup"
 							}
 						}
 					],
@@ -11538,8 +11738,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getChannelGroup",
-						"id": 460
+						"id": 460,
+						"name": "Module.getChannelGroup"
 					}
 				},
 				{
@@ -11556,7 +11756,9 @@
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return all channel groups on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannelGroup`. Returns an empty array if no channel\ngroups exist.\n\nA \"native channel group\" also includes additional properties about the channel group at the time it's\nretrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11569,22 +11771,22 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "NativeAndroidChannelGroup",
-											"id": 238
+											"id": 238,
+											"name": "NativeAndroidChannelGroup"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getChannelGroups",
-								"id": 463
+								"id": 463,
+								"name": "Module.getChannelGroups"
 							}
 						}
 					],
@@ -11597,8 +11799,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getChannelGroups",
-						"id": 463
+						"id": 463,
+						"name": "Module.getChannelGroups"
 					}
 				},
 				{
@@ -11615,7 +11817,9 @@
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return all channels on supported Android devices.",
 								"text": "This API is used to return a `NativeAndroidChannel`. Returns an empty array if no channels\nexist.\n\nA \"native channel\" also includes additional properties about the channel at the time it's\nretrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)\ndocumentation for more information.\n\nView the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.\n",
@@ -11628,22 +11832,22 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "NativeAndroidChannel",
-											"id": 219
+											"id": 219,
+											"name": "NativeAndroidChannel"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getChannels",
-								"id": 458
+								"id": 458,
+								"name": "Module.getChannels"
 							}
 						}
 					],
@@ -11656,8 +11860,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getChannels",
-						"id": 458
+						"id": 458,
+						"name": "Module.getChannels"
 					}
 				},
 				{
@@ -11674,22 +11878,23 @@
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to fetch the notification which causes the application to open.",
 								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "union",
 										"types": [
 											{
 												"type": "reference",
-												"name": "InitialNotification",
-												"id": 345
+												"id": 345,
+												"name": "InitialNotification"
 											},
 											{
 												"type": "intrinsic",
@@ -11697,12 +11902,13 @@
 											}
 										]
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getInitialNotification",
-								"id": 465
+								"id": 465,
+								"name": "Module.getInitialNotification"
 							}
 						}
 					],
@@ -11715,8 +11921,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getInitialNotification",
-						"id": 465
+						"id": 465,
+						"name": "Module.getInitialNotification"
 					}
 				},
 				{
@@ -11733,7 +11939,9 @@
 							"name": "getNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Gets the currently set notification categories on this Apple device.",
 								"text": "Returns an empty array on Android.\n",
@@ -11746,22 +11954,22 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "IOSNotificationCategory",
-											"id": 86
+											"id": 86,
+											"name": "IOSNotificationCategory"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getNotificationCategories",
-								"id": 495
+								"id": 495,
+								"name": "Module.getNotificationCategories"
 							}
 						}
 					],
@@ -11774,8 +11982,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getNotificationCategories",
-						"id": 495
+						"id": 495,
+						"name": "Module.getNotificationCategories"
 					}
 				},
 				{
@@ -11792,7 +12000,9 @@
 							"name": "getNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Get the current notification settings for this application on the current device.",
 								"text": "On Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
@@ -11805,19 +12015,19 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "IOSNotificationSettings",
-										"id": 48
+										"id": 48,
+										"name": "IOSNotificationSettings"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getNotificationSettings",
-								"id": 497
+								"id": 497,
+								"name": "Module.getNotificationSettings"
 							}
 						}
 					],
@@ -11830,8 +12040,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getNotificationSettings",
-						"id": 497
+						"id": 497,
+						"name": "Module.getNotificationSettings"
 					}
 				},
 				{
@@ -11848,7 +12058,9 @@
 							"name": "getPowerManagerInfo",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to get information about the device and its power manager settings, including manufacturer, model, version and activity.",
 								"text": "If `activity` is `null`, `openPowerManagerSettings()` will be noop.\n\nOn iOS, an instance of `PowerManagerInfo` will be returned with `activity` set to `null`.\n\nView the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.\n\n```js\nimport notifee from `@notifee/react-native`;\n\nconst powerManagerInfo = await notifee.getPowerManagerInfo();\n\nif (powerManagerInfo.activity) {\n // 1. ask the user to adjust their Power Manager settings\n // ...\n\n // 2. open settings\n await notifee.openPowerManagerSettings();\n}\n```\n",
@@ -11861,19 +12073,19 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "PowerManagerInfo",
-										"id": 407
+										"id": 407,
+										"name": "PowerManagerInfo"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getPowerManagerInfo",
-								"id": 514
+								"id": 514,
+								"name": "Module.getPowerManagerInfo"
 							}
 						}
 					],
@@ -11886,8 +12098,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getPowerManagerInfo",
-						"id": 514
+						"id": 514,
+						"name": "Module.getPowerManagerInfo"
 					}
 				},
 				{
@@ -11904,14 +12116,15 @@
 							"name": "getTriggerNotificationIds",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to return the ids of trigger notifications that are pending.",
 								"text": "View the [Triggers](/react-native/docs/triggers) documentation for more information.\n"
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "array",
@@ -11920,12 +12133,13 @@
 											"name": "string"
 										}
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.getTriggerNotificationIds",
-								"id": 453
+								"id": 453,
+								"name": "Module.getTriggerNotificationIds"
 							}
 						}
 					],
@@ -11938,8 +12152,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.getTriggerNotificationIds",
-						"id": 453
+						"id": 453,
+						"name": "Module.getTriggerNotificationIds"
 					}
 				},
 				{
@@ -11956,7 +12170,9 @@
 							"name": "hideNotificationDrawer",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to hide the notification drawer, for example,\nwhen the user presses one of the quick actions on the notification, you may wish to hide the drawer.",
 								"text": "Please use this functionality carefully as it could potentially be quite intrusive to the user.\n\nRequires the following permission to be added to your `AndroidManifest.xml`:\n```xml\n<uses-permission android:name=\"android.permission.EXPAND_STATUS_BAR\" />\n```\n\n```js\nimport notifee from `@notifee/react-native`;\n\nnotifee.hideNotificationDrawer();\n```\n",
@@ -11973,8 +12189,8 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.hideNotificationDrawer",
-								"id": 518
+								"id": 518,
+								"name": "Module.hideNotificationDrawer"
 							}
 						}
 					],
@@ -11987,8 +12203,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.hideNotificationDrawer",
-						"id": 518
+						"id": 518,
+						"name": "Module.hideNotificationDrawer"
 					}
 				},
 				{
@@ -12005,7 +12221,9 @@
 							"name": "incrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Increments the badge count for this application on the current device by a specified\nvalue.",
 								"text": "Defaults to an increment of `1`.\n",
@@ -12023,6 +12241,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -12045,18 +12264,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.incrementBadgeCount",
-								"id": 504
+								"id": 504,
+								"name": "Module.incrementBadgeCount"
 							}
 						}
 					],
@@ -12069,8 +12288,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.incrementBadgeCount",
-						"id": 504
+						"id": 504,
+						"name": "Module.incrementBadgeCount"
 					}
 				},
 				{
@@ -12087,7 +12306,9 @@
 							"name": "isBatteryOptimizationEnabled",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to check if battery optimization is enabled for your application.",
 								"text": "Supports API versions >= 23.\n\nView the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.\n",
@@ -12100,18 +12321,18 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "boolean"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.isBatteryOptimizationEnabled",
-								"id": 512
+								"id": 512,
+								"name": "Module.isBatteryOptimizationEnabled"
 							}
 						}
 					],
@@ -12124,8 +12345,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.isBatteryOptimizationEnabled",
-						"id": 512
+						"id": 512,
+						"name": "Module.isBatteryOptimizationEnabled"
 					}
 				},
 				{
@@ -12142,7 +12363,9 @@
 							"name": "onBackgroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to handle events when the application is in a background state.",
 								"text": "Applications in a background state will use an event handler registered by this API method\nto send events. The handler must return a Promise once complete and only a single event handler\ncan be registered for the application.\n\nView the [Background events](/react-native/docs/events#background-events) documentation for more\ninformation and example usage.\n\nTo listen to foreground events, see the [`onForegroundEvent`](/react-native/reference/onforegroundevent) documentation.\n"
@@ -12153,7 +12376,9 @@
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "A Function which returns a Promise, called on a new event when the application\nis in a background state.\n"
 									},
@@ -12164,37 +12389,43 @@
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"signatures": [
 												{
 													"id": 588,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
-													"flags": {},
+													"flags": {
+														"isExported": true
+													},
 													"parameters": [
 														{
 															"id": 589,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
-															"flags": {},
+															"flags": {
+																"isExported": true
+															},
 															"type": {
 																"type": "reference",
-																"name": "Event",
-																"id": 349
+																"id": 349,
+																"name": "Event"
 															}
 														}
 													],
 													"type": {
 														"type": "reference",
-														"name": "Promise",
 														"typeArguments": [
 															{
 																"type": "intrinsic",
 																"name": "void"
 															}
-														]
+														],
+														"name": "Promise"
 													}
 												}
 											],
@@ -12215,8 +12446,8 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.onBackgroundEvent",
-								"id": 467
+								"id": 467,
+								"name": "Module.onBackgroundEvent"
 							}
 						}
 					],
@@ -12229,8 +12460,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.onBackgroundEvent",
-						"id": 467
+						"id": 467,
+						"name": "Module.onBackgroundEvent"
 					}
 				},
 				{
@@ -12247,7 +12478,9 @@
 							"name": "onForegroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to handle events when the application is in a foreground state.",
 								"text": "Applications in a foreground state will use an event handler registered by this API method\nto send events. Multiple foreground observers can be registered throughout the applications\nlifecycle. The method returns a function, used to unsubscribe from further events,\n\nView the [Foreground events](/react-native/docs/events#foreground-events) documentation for more\ninformation and example usage.\n\nTo listen to background events, see the [`onBackgroundEvent`](/react-native/reference/onbackgroundevent) documentation.\n"
@@ -12258,7 +12491,9 @@
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "A Function which returns a Promise, called on a new event when the application\nis in a foreground state.\n"
 									},
@@ -12269,25 +12504,31 @@
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"signatures": [
 												{
 													"id": 594,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
-													"flags": {},
+													"flags": {
+														"isExported": true
+													},
 													"parameters": [
 														{
 															"id": 595,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
-															"flags": {},
+															"flags": {
+																"isExported": true
+															},
 															"type": {
 																"type": "reference",
-																"name": "Event",
-																"id": 349
+																"id": 349,
+																"name": "Event"
 															}
 														}
 													],
@@ -12315,14 +12556,18 @@
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"signatures": [
 										{
 											"id": 597,
 											"name": "__call",
 											"kind": 4096,
 											"kindString": "Call signature",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"type": {
 												"type": "intrinsic",
 												"name": "void"
@@ -12340,8 +12585,8 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.onForegroundEvent",
-								"id": 473
+								"id": 473,
+								"name": "Module.onForegroundEvent"
 							}
 						}
 					],
@@ -12354,8 +12599,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.onForegroundEvent",
-						"id": 473
+						"id": 473,
+						"name": "Module.onForegroundEvent"
 					}
 				},
 				{
@@ -12372,7 +12617,9 @@
 							"name": "openBatteryOptimizationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to open the Android System settings for the application.",
 								"text": "If the API version is >= 23, the battery optimization settings screen is displayed, otherwise,\nthis is a no-op & instantly resolves.\n\nView the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.\n",
@@ -12385,18 +12632,18 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.openBatteryOptimizationSettings",
-								"id": 510
+								"id": 510,
+								"name": "Module.openBatteryOptimizationSettings"
 							}
 						}
 					],
@@ -12409,8 +12656,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.openBatteryOptimizationSettings",
-						"id": 510
+						"id": 510,
+						"name": "Module.openBatteryOptimizationSettings"
 					}
 				},
 				{
@@ -12427,7 +12674,9 @@
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to open the Android System settings for the application.",
 								"text": "If the API version is >= 26:\n- With no `channelId`, the notification settings screen is displayed.\n- With a `channelId`, the notification settings screen for the specific channel is displayed.\n\nIf the API version is < 26, the application settings screen is displayed. The `channelId`\nis ignored.\n\nIf an invalid `channelId` is provided (e.g. does not exist), the settings screen will redirect\nback to your application.\n\nOn iOS, this is a no-op & instantly resolves.\n",
@@ -12445,6 +12694,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -12467,18 +12717,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.openNotificationSettings",
-								"id": 481
+								"id": 481,
+								"name": "Module.openNotificationSettings"
 							}
 						}
 					],
@@ -12491,8 +12741,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.openNotificationSettings",
-						"id": 481
+						"id": 481,
+						"name": "Module.openNotificationSettings"
 					}
 				},
 				{
@@ -12509,7 +12759,9 @@
 							"name": "openPowerManagerSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to navigate to the appropriate Android System settings for the device.",
 								"text": "Call `getPowerManagerInfo()` first to find out if the user's device is supported.\n\nView the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.\n\n```js\nimport notifee from `@notifee/react-native`;\n\nconst powerManagerInfo = await notifee.getPowerManagerInfo\n\nif (powerManagerInfo.activity) {\n// 1. ask the user to adjust their Power Manager settings\n// ...\n\n// 2. if yes, navigate them to settings\nawait notifee.openPowerManagerSettings();\n}\n```\n",
@@ -12522,18 +12774,18 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.openPowerManagerSettings",
-								"id": 516
+								"id": 516,
+								"name": "Module.openPowerManagerSettings"
 							}
 						}
 					],
@@ -12546,8 +12798,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.openPowerManagerSettings",
-						"id": 516
+						"id": 516,
+						"name": "Module.openPowerManagerSettings"
 					}
 				},
 				{
@@ -12564,7 +12816,9 @@
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "API used to register a foreground service on Android devices.",
 								"text": "This method is used to register a long running task which can be used with Foreground Service\nnotifications.\n\nOnly a single foreground service can exist for the application, and calling this method more\nthan once will update the existing task runner.\n\nView the [Foreground Service](/react-native/docs/android/foreground-service) documentation for\nmore information.\n",
@@ -12581,14 +12835,16 @@
 									"name": "task",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The runner function which runs for the duration of the service's lifetime.\n"
 									},
 									"type": {
 										"type": "reference",
-										"name": "ForegroundServiceTask",
-										"id": 379
+										"id": 379,
+										"name": "ForegroundServiceTask"
 									}
 								}
 							],
@@ -12598,8 +12854,8 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.registerForegroundService",
-								"id": 484
+								"id": 484,
+								"name": "Module.registerForegroundService"
 							}
 						}
 					],
@@ -12612,8 +12868,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.registerForegroundService",
-						"id": 484
+						"id": 484,
+						"name": "Module.registerForegroundService"
 					}
 				},
 				{
@@ -12630,7 +12886,9 @@
 							"name": "requestPermission",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Request specific notification permissions for your application on the current device.",
 								"text": "Both iOS & Android return an `IOSNotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { IOSAuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === IOSAuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === IOSAuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === IOSAuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nUse the other `IOSNotificationSettings` properties to view which specific permissions were\nallowed.\n\nOn Android, all of the properties on the `IOSNotificationSettings` interface response return\nas `AUTHORIZED`.\n",
@@ -12648,6 +12906,7 @@
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {
+										"isExported": true,
 										"isOptional": true
 									},
 									"comment": {
@@ -12655,26 +12914,26 @@
 									},
 									"type": {
 										"type": "reference",
-										"name": "IOSNotificationPermissions",
-										"id": 26
+										"id": 26,
+										"name": "IOSNotificationPermissions"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "reference",
-										"name": "IOSNotificationSettings",
-										"id": 48
+										"id": 48,
+										"name": "IOSNotificationSettings"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.requestPermission",
-								"id": 489
+								"id": 489,
+								"name": "Module.requestPermission"
 							}
 						}
 					],
@@ -12687,8 +12946,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.requestPermission",
-						"id": 489
+						"id": 489,
+						"name": "Module.requestPermission"
 					}
 				},
 				{
@@ -12705,7 +12964,9 @@
 							"name": "setBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Set the badge count value for this application on the current device.",
 								"text": "If set to zero, the badge count is removed from the device. The count must also\nbe a positive number.\n",
@@ -12722,7 +12983,9 @@
 									"name": "count",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "The number value to set as the badge count.\n"
 									},
@@ -12734,18 +12997,18 @@
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.setBadgeCount",
-								"id": 501
+								"id": 501,
+								"name": "Module.setBadgeCount"
 							}
 						}
 					],
@@ -12758,8 +13021,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.setBadgeCount",
-						"id": 501
+						"id": 501,
+						"name": "Module.setBadgeCount"
 					}
 				},
 				{
@@ -12776,7 +13039,9 @@
 							"name": "setNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Set the notification categories to be used on this Apple device.",
 								"tags": [
@@ -12792,7 +13057,9 @@
 									"name": "categories",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"comment": {
 										"text": "\n"
 									},
@@ -12800,26 +13067,26 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"name": "IOSNotificationCategory",
-											"id": 86
+											"id": 86,
+											"name": "IOSNotificationCategory"
 										}
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.setNotificationCategories",
-								"id": 492
+								"id": 492,
+								"name": "Module.setNotificationCategories"
 							}
 						}
 					],
@@ -12832,8 +13099,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.setNotificationCategories",
-						"id": 492
+						"id": 492,
+						"name": "Module.setNotificationCategories"
 					}
 				},
 				{
@@ -12850,7 +13117,9 @@
 							"name": "stopForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"comment": {
 								"shortText": "Call this to stop the foreground service that is running",
 								"tags": [
@@ -12862,18 +13131,18 @@
 							},
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "Module.stopForegroundService",
-								"id": 487
+								"id": 487,
+								"name": "Module.stopForegroundService"
 							}
 						}
 					],
@@ -12886,8 +13155,8 @@
 					],
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "Module.stopForegroundService",
-						"id": 487
+						"id": 487,
+						"name": "Module.stopForegroundService"
 					}
 				}
 			],
@@ -12954,13 +13223,13 @@
 			"extendedTypes": [
 				{
 					"type": "reference",
-					"name": "Module",
-					"id": 412
+					"id": 412,
+					"name": "Module"
 				},
 				{
 					"type": "reference",
-					"name": "ModuleStatics",
-					"id": 527
+					"id": 527,
+					"name": "ModuleStatics"
 				}
 			]
 		},
@@ -13022,8 +13291,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.badge",
-						"id": 208
+						"id": 208,
+						"name": "AndroidChannel.badge"
 					}
 				},
 				{
@@ -13091,8 +13360,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.bypassDnd",
-						"id": 209
+						"id": 209,
+						"name": "AndroidChannel.bypassDnd"
 					}
 				},
 				{
@@ -13136,8 +13405,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.description",
-						"id": 210
+						"id": 210,
+						"name": "AndroidChannel.description"
 					}
 				},
 				{
@@ -13175,8 +13444,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.groupId",
-						"id": 213
+						"id": 213,
+						"name": "AndroidChannel.groupId"
 					}
 				},
 				{
@@ -13203,8 +13472,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.id",
-						"id": 206
+						"id": 206,
+						"name": "AndroidChannel.id"
 					}
 				},
 				{
@@ -13229,13 +13498,13 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidImportance",
-						"id": 306
+						"id": 306,
+						"name": "AndroidImportance"
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.importance",
-						"id": 214
+						"id": 214,
+						"name": "AndroidChannel.importance"
 					}
 				},
 				{
@@ -13263,8 +13532,8 @@
 						"types": [
 							{
 								"type": "reference",
-								"name": "AndroidColor",
-								"id": 265
+								"id": 265,
+								"name": "AndroidColor"
 							},
 							{
 								"type": "intrinsic",
@@ -13274,8 +13543,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.lightColor",
-						"id": 215
+						"id": 215,
+						"name": "AndroidChannel.lightColor"
 					}
 				},
 				{
@@ -13317,8 +13586,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.lights",
-						"id": 211
+						"id": 211,
+						"name": "AndroidChannel.lights"
 					}
 				},
 				{
@@ -13346,8 +13615,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.name",
-						"id": 207
+						"id": 207,
+						"name": "AndroidChannel.name"
 					}
 				},
 				{
@@ -13385,8 +13654,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.sound",
-						"id": 218
+						"id": 218,
+						"name": "AndroidChannel.sound"
 					}
 				},
 				{
@@ -13428,8 +13697,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.vibration",
-						"id": 212
+						"id": 212,
+						"name": "AndroidChannel.vibration"
 					}
 				},
 				{
@@ -13461,8 +13730,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.vibrationPattern",
-						"id": 217
+						"id": 217,
+						"name": "AndroidChannel.vibrationPattern"
 					}
 				},
 				{
@@ -13487,13 +13756,13 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidVisibility",
-						"id": 302
+						"id": 302,
+						"name": "AndroidVisibility"
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannel.visibility",
-						"id": 216
+						"id": 216,
+						"name": "AndroidChannel.visibility"
 					}
 				}
 			],
@@ -13529,8 +13798,8 @@
 			"extendedTypes": [
 				{
 					"type": "reference",
-					"name": "AndroidChannel",
-					"id": 205
+					"id": 205,
+					"name": "AndroidChannel"
 				}
 			]
 		},
@@ -13605,8 +13874,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "NativeAndroidChannel",
-							"id": 219
+							"id": 219,
+							"name": "NativeAndroidChannel"
 						}
 					}
 				},
@@ -13651,8 +13920,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannelGroup.description",
-						"id": 237
+						"id": 237,
+						"name": "AndroidChannelGroup.description"
 					}
 				},
 				{
@@ -13679,8 +13948,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannelGroup.id",
-						"id": 235
+						"id": 235,
+						"name": "AndroidChannelGroup.id"
 					}
 				},
 				{
@@ -13708,8 +13977,8 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"name": "AndroidChannelGroup.name",
-						"id": 236
+						"id": 236,
+						"name": "AndroidChannelGroup.name"
 					}
 				}
 			],
@@ -13736,8 +14005,8 @@
 			"extendedTypes": [
 				{
 					"type": "reference",
-					"name": "AndroidChannelGroup",
-					"id": 234
+					"id": 234,
+					"name": "AndroidChannelGroup"
 				}
 			]
 		},
@@ -13763,7 +14032,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 984,
 							"character": 17
 						}
@@ -13771,7 +14040,14 @@
 					"type": {
 						"type": "reference",
 						"name": "ErrorConstructor"
-					}
+					},
+					"extendedBy": [
+						{
+							"type": "reference",
+							"id": 1,
+							"name": "NativeError"
+						}
+					]
 				},
 				{
 					"id": 2,
@@ -13779,7 +14055,8 @@
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
-						"isExported": true
+						"isExported": true,
+						"isReadonly": true
 					},
 					"comment": {
 						"shortText": "Error code, e.g. `invalid-parameter`"
@@ -13802,7 +14079,8 @@
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
-						"isExported": true
+						"isExported": true,
+						"isReadonly": true
 					},
 					"comment": {
 						"shortText": "Error message"
@@ -13833,7 +14111,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 973,
 							"character": 8
 						}
@@ -13844,6 +14122,7 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
+						"id": 6,
 						"name": "Error.name"
 					}
 				},
@@ -13853,7 +14132,8 @@
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
-						"isExported": true
+						"isExported": true,
+						"isReadonly": true
 					},
 					"comment": {
 						"shortText": "The native returned error code, different per platform"
@@ -13885,7 +14165,8 @@
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
-						"isExported": true
+						"isExported": true,
+						"isReadonly": true
 					},
 					"comment": {
 						"shortText": "The native returned error message, different per platform"
@@ -13913,7 +14194,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts",
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
 							"line": 975,
 							"character": 9
 						}
@@ -13933,6 +14214,7 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
+						"id": 7,
 						"name": "Error.stack"
 					}
 				}
@@ -13962,6 +14244,7 @@
 			"extendedTypes": [
 				{
 					"type": "reference",
+					"id": 8,
 					"name": "Error"
 				}
 			]
@@ -14006,8 +14289,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationAndroid",
-						"id": 118
+						"id": 118,
+						"name": "NotificationAndroid"
 					}
 				},
 				{
@@ -14077,21 +14360,27 @@
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"indexSignature": [
 										{
 											"id": 341,
 											"name": "__index",
 											"kind": 8192,
 											"kindString": "Index signature",
-											"flags": {},
+											"flags": {
+												"isExported": true
+											},
 											"parameters": [
 												{
 													"id": 342,
 													"name": "key",
 													"kind": 32768,
 													"kindString": "Parameter",
-													"flags": {},
+													"flags": {
+														"isExported": true
+													},
 													"type": {
 														"type": "intrinsic",
 														"name": "string"
@@ -14170,8 +14459,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationIOS",
-						"id": 9
+						"id": 9,
+						"name": "NotificationIOS"
 					}
 				},
 				{
@@ -14307,8 +14596,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "AndroidAction",
-							"id": 157
+							"id": 157,
+							"name": "AndroidAction"
 						}
 					}
 				},
@@ -14450,8 +14739,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidBadgeIconType",
-						"id": 244
+						"id": 244,
+						"name": "AndroidBadgeIconType"
 					}
 				},
 				{
@@ -14476,8 +14765,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidCategory",
-						"id": 248
+						"id": 248,
+						"name": "AndroidCategory"
 					}
 				},
 				{
@@ -14611,8 +14900,8 @@
 						"types": [
 							{
 								"type": "reference",
-								"name": "AndroidColor",
-								"id": 265
+								"id": 265,
+								"name": "AndroidColor"
 							},
 							{
 								"type": "intrinsic",
@@ -14689,8 +14978,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "AndroidDefaults",
-							"id": 288
+							"id": 288,
+							"name": "AndroidDefaults"
 						}
 					}
 				},
@@ -14716,8 +15005,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationFullScreenAction",
-						"id": 357
+						"id": 357,
+						"name": "NotificationFullScreenAction"
 					}
 				},
 				{
@@ -14742,8 +15031,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidGroupAlertBehavior",
-						"id": 293
+						"id": 293,
+						"name": "AndroidGroupAlertBehavior"
 					}
 				},
 				{
@@ -14846,8 +15135,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidImportance",
-						"id": 306
+						"id": 306,
+						"name": "AndroidImportance"
 					}
 				},
 				{
@@ -14944,8 +15233,8 @@
 								"types": [
 									{
 										"type": "reference",
-										"name": "AndroidColor",
-										"id": 265
+										"id": 265,
+										"name": "AndroidColor"
 									},
 									{
 										"type": "intrinsic",
@@ -15100,8 +15389,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "NotificationPressAction",
-						"id": 352
+						"id": 352,
+						"name": "NotificationPressAction"
 					}
 				},
 				{
@@ -15126,8 +15415,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidProgress",
-						"id": 201
+						"id": 201,
+						"name": "AndroidProgress"
 					}
 				},
 				{
@@ -15372,23 +15661,23 @@
 						"types": [
 							{
 								"type": "reference",
-								"name": "AndroidBigPictureStyle",
-								"id": 168
+								"id": 168,
+								"name": "AndroidBigPictureStyle"
 							},
 							{
 								"type": "reference",
-								"name": "AndroidBigTextStyle",
-								"id": 174
+								"id": 174,
+								"name": "AndroidBigTextStyle"
 							},
 							{
 								"type": "reference",
-								"name": "AndroidInboxStyle",
-								"id": 179
+								"id": 179,
+								"name": "AndroidInboxStyle"
 							},
 							{
 								"type": "reference",
-								"name": "AndroidMessagingStyle",
-								"id": 184
+								"id": 184,
+								"name": "AndroidMessagingStyle"
 							}
 						]
 					}
@@ -15578,8 +15867,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "AndroidVisibility",
-						"id": 302
+						"id": 302,
+						"name": "AndroidVisibility"
 					}
 				}
 			],
@@ -15744,8 +16033,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "AndroidLaunchActivityFlag",
-							"id": 312
+							"id": 312,
+							"name": "AndroidLaunchActivityFlag"
 						}
 					}
 				},
@@ -15853,8 +16142,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "IOSNotificationAttachment",
-							"id": 106
+							"id": 106,
+							"name": "IOSNotificationAttachment"
 						}
 					}
 				},
@@ -16029,8 +16318,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "IOSForegroundPresentationOptions",
-						"id": 22
+						"id": 22,
+						"name": "IOSForegroundPresentationOptions"
 					}
 				},
 				{
@@ -16389,8 +16678,8 @@
 						"type": "array",
 						"elementType": {
 							"type": "reference",
-							"name": "AndroidLaunchActivityFlag",
-							"id": 312
+							"id": 312,
+							"name": "AndroidLaunchActivityFlag"
 						}
 					}
 				},
@@ -16679,8 +16968,8 @@
 							},
 							{
 								"type": "reference",
-								"name": "TimestampTriggerAlarmManager",
-								"id": 388
+								"id": 388,
+								"name": "TimestampTriggerAlarmManager"
 							},
 							{
 								"type": "intrinsic",
@@ -16711,8 +17000,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "RepeatFrequency",
-						"id": 390
+						"id": 390,
+						"name": "RepeatFrequency"
 					}
 				},
 				{
@@ -16758,8 +17047,8 @@
 					],
 					"type": {
 						"type": "reference",
-						"name": "TIMESTAMP",
-						"id": 404
+						"id": 404,
+						"name": "TIMESTAMP"
 					}
 				}
 			],
@@ -16890,37 +17179,43 @@
 					"name": "__type",
 					"kind": 65536,
 					"kindString": "Type literal",
-					"flags": {},
+					"flags": {
+						"isExported": true
+					},
 					"signatures": [
 						{
 							"id": 381,
 							"name": "__call",
 							"kind": 4096,
 							"kindString": "Call signature",
-							"flags": {},
+							"flags": {
+								"isExported": true
+							},
 							"parameters": [
 								{
 									"id": 382,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
-									"flags": {},
+									"flags": {
+										"isExported": true
+									},
 									"type": {
 										"type": "reference",
-										"name": "Notification",
-										"id": 334
+										"id": 334,
+										"name": "Notification"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "Promise",
 								"typeArguments": [
 									{
 										"type": "intrinsic",
 										"name": "void"
 									}
-								]
+								],
+								"name": "Promise"
 							}
 						}
 					],
@@ -16954,13 +17249,13 @@
 				"types": [
 					{
 						"type": "reference",
-						"name": "TimestampTrigger",
-						"id": 383
+						"id": 383,
+						"name": "TimestampTrigger"
 					},
 					{
 						"type": "reference",
-						"name": "IntervalTrigger",
-						"id": 394
+						"id": 394,
+						"name": "IntervalTrigger"
 					}
 				]
 			}
