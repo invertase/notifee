@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.9.1
+- **[Android]**: Fixes an issue where an error is thrown when using trigger notifications with AlarmManager on Android 8 & 7
+
 ## 1.9.0
 - **[Android]**: Support Alarm Manager for trigger notifications.
 - **[iOS]**: Xcode 12.4 and above is now supported
