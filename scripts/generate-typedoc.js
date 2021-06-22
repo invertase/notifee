@@ -4,12 +4,13 @@
 
 const { readFileSync, writeFileSync } = require('fs');
 const path = require('path');
-const { Application } = require('typedoc');
+const { Application, TSConfigReader } = require('typedoc');
 
 const output = path.resolve(process.cwd(), 'docs', 'typedoc.json');
 const outputMin = path.resolve(process.cwd(), 'docs', 'typedoc.min.json');
 
 const app = new Application();
+app.options.addReader(new TSConfigReader());
 
 // https://github.com/TypeStrong/typedoc/issues/956
 const { inputFiles } = app.bootstrap({
