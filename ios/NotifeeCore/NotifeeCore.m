@@ -62,6 +62,11 @@
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
       notificationType == NotifeeCoreNotificationTypeAll)
     [center removeAllPendingNotificationRequests];
+
+  // To clear banner notification, set badge number to 0
+  UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+  [application setApplicationIconBadgeNumber:0];
+
   block(nil);
 }
 
