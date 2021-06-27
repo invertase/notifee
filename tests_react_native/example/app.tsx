@@ -177,24 +177,6 @@ function Root(): any {
         {id != null && (
           <View>
             <Button
-              title={`Cancel ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelNotification(id);
-              }}
-            />
-            <Button
-              title={`Cancel trigger ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelTriggerNotification(id);
-              }}
-            />
-            <Button
-              title={`Cancel displayed ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelDisplayedNotification(id);
-              }}
-            />
-            <Button
               title={`get notifications`}
               onPress={async (): Promise<void> => {
                 const ids = await Notifee.getTriggerNotificationIds();
@@ -213,19 +195,30 @@ function Root(): any {
                 console.log(await Notifee.openPowerManagerSettings());
               }}
             />
-            {/* <Button
-            title={`cancel notification`}
-            onPress={async () => {
-              await Notifee.cancelNotification(id);
-            }}
-          />
-           <Button
-            title={`cancel trigger notification`}
-            onPress={async () => {
-              await Notifee.cancelTriggerNotification(id);
-       
-            }}
-          /> */}
+            <Button
+              title={`Cancel ${id}`}
+              onPress={(): void => {
+                if (id != null) Notifee.cancelNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel trigger ${id}`}
+              onPress={(): void => {
+                if (id != null) Notifee.cancelTriggerNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel displayed ${id}`}
+              onPress={async () => {
+                if (id != null) await Notifee.cancelDisplayedNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel all `}
+              onPress={async () => {
+                await Notifee.cancelAllNotifications();
+              }}
+            />
             <Button
               title={`get channels`}
               onPress={async (): Promise<void> => {

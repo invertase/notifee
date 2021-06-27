@@ -106,6 +106,7 @@ class NotifeeAlarmManager {
           notificationId.hashCode(),
           notificationIntent,
           PendingIntent.FLAG_UPDATE_CURRENT);
+
     } catch (Exception e) {
       Logger.e(TAG, "Unable to create AlarmManager intent", e);
     }
@@ -117,6 +118,7 @@ class NotifeeAlarmManager {
       NotificationModel notificationModel, TimestampTriggerModel timestampTrigger, boolean isNew) {
 
     PendingIntent pendingIntent = getAlarmManagerIntentForNotification(notificationModel.getId());
+
     AlarmManager alarmManager = getAlarmManager();
 
     // Date in milliseconds

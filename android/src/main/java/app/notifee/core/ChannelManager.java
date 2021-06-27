@@ -175,6 +175,37 @@ public class ChannelManager {
         });
   }
 
+
+  static Task<Boolean> isChannelBlocked(String channelId) {
+    return Tasks.call(
+      executorService,
+      () -> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+          return false;
+
+        NotificationChannel channel =
+          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+            .getNotificationChannel(channelId);
+
+        return IMPORTANCE_NONE == channel.getImportance();
+      });
+  }
+
+  static Task<Boolean> isChannelCreated(String channelId) {
+    return Tasks.call(
+      executorService,
+      () -> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+          return false;
+
+        NotificationChannel channel =
+          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+            .getNotificationChannel(channelId);
+
+        return channel != null;
+      });
+  }
+
   static Task<List<Bundle>> getChannelGroups() {
     return Tasks.call(
         executorService,

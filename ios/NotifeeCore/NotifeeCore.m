@@ -66,6 +66,67 @@
 }
 
 /**
+ * Cancel currently displayed or pending trigger notifications by ids.
+ *
+ * @param notificationType NSInteger
+ * @param ids NSInteger
+ * @param block notifeeMethodVoidBlock
+ */
++ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType ids:(NSArray<NSString *> *)ids withBlock:(notifeeMethodVoidBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  // cancel displayed notifications
+  if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+    [center removeDeliveredNotificationsWithIdentifiers: ids];
+
+  // cancel trigger notifications
+  if (notificationType == NotifeeCoreNotificationTypeTrigger ||
+      notificationType == NotifeeCoreNotificationTypeAll)
+    [center removePendingNotificationRequestsWithIdentifiers: ids];
+  block(nil);
+}
+
++ (void)getDisplayedNotifications:(notifeeMethodNSArrayBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> * _Nonnull deliveredNotifications) {
+    NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
+    for (UNNotification *deliveredNotification in deliveredNotifications) {
+      NSMutableDictionary *triggerNotification = [NSMutableDictionary dictionary];
+      triggerNotification[@"id"] = deliveredNotification.request.identifier;
+      // NSDate
+      triggerNotification[@"date"] = deliveredNotification.date;
+      triggerNotification[@"notification"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoNotification];
+      triggerNotification[@"trigger"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoTrigger];
+     
+      [triggerNotifications addObject:deliveredNotification];
+    }
+  }];
+  
+}
+
++ (void)getTriggerNotifications:(notifeeMethodNSArrayBlock)block {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  [center getPendingNotificationRequestsWithCompletionHandler:^(
+              NSArray<UNNotificationRequest *> *_Nonnull requests) {
+    NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
+
+    for (UNNotificationRequest *request in requests) {
+      NSMutableDictionary *triggerNotification = [NSMutableDictionary dictionary];
+
+      triggerNotification[@"notification"] = request.content.userInfo[kNotifeeUserInfoNotification];
+      triggerNotification[@"trigger"] = request.content.userInfo[kNotifeeUserInfoTrigger];
+     
+      [triggerNotifications addObject:triggerNotification];
+    }
+
+    block(nil, triggerNotifications);
+  }];
+}
+
+/**
  * Retrieve a NSArray of pending UNNotificationRequest for the application.
  * Resolves a NSArray of UNNotificationRequest identifiers.
  *
