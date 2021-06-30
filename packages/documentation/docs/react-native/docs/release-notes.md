@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.9.2
+- **[Android]**: Fixes an issue where an error is thrown when the intent was null in rare cases for foreground service events.
+
 ## 1.9.1
 - **[Android]**: Fixes an issue where an error is thrown when using trigger notifications with AlarmManager on Android 8 & 7
 
