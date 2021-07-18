@@ -95,6 +95,8 @@ will be zero.
 
 Generally you will only want to display a badge count when the application is not in the foreground, therefore to integrate badge count handling into your application, a [Background Event](/react-native/docs/events#background-events) can be used to control the badge count.
 
+For example, if a notification is displayed whilst in the background, we can increment the count. However, if the user presses the notification (or an action) we could then decrement the count, for example:
+
 ```js
 import notifee, { EventType } from '@notifee/react-native';
 import { firebase } from '@react-native-firebase/messaging'
