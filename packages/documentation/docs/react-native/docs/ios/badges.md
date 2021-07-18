@@ -93,23 +93,23 @@ will be zero.
 
 # Integration
 
-Generally you will only want to display a badge count when the application is not in the foreground, therefore to integrate
-badge count handling into your application, a [Background Event](/react-native/docs/events#background-events) can be
-used to control the badge count.
-
-For example, if a notification has been delivered whilst in the background, we can increment the count. However, if the
-user presses the notification (or an action) we could then decrement the count, for example:
+Generally you will only want to display a badge count when the application is not in the foreground, therefore to integrate badge count handling into your application, a [Background Event](/react-native/docs/events#background-events) can be used to control the badge count.
 
 ```js
 import notifee, { EventType } from '@notifee/react-native';
+import { firebase } from '@react-native-firebase/messaging'
+
+// Your app's background handler for incoming remote messages
+firebase.messaging().setBackgroundMessageHandler(async (
+  remoteMessage: FirebaseMessagingTypes.RemoteMessage
+) => {
+   await notifee.displayNotification(...)
+   // Increment the count by 1
+   await notifee.incrementBadgeCount();
+})
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
   const { notification, pressAction } = detail;
-
-  if (type === EventType.DELIVERED) {
-    // Increment the count by 1
-    await notifee.incrementBadgeCount();
-  }
 
   // Check if the user pressed the "Mark as read" action
   if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
@@ -122,8 +122,7 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 });
 ```
 
-Since the `onBackgroundEvent` handler only triggers when the application is not in the foreground we can safely assume
-the notification has not been read (unless they interact with it).
+Since the `onBackgroundEvent` handler only triggers when the application is not in the foreground we can safely assume the notification has not been read (unless they interact with it).
 
 If the user opens the application it is then safe to remove the badge count entirely:
 
