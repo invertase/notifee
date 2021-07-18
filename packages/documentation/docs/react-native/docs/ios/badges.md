@@ -124,8 +124,6 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 });
 ```
 
-Since the `onBackgroundEvent` handler only triggers when the application is not in the foreground we can safely assume the notification has not been read (unless they interact with it).
-
 If the user opens the application it is then safe to remove the badge count entirely:
 
 ```jsx
