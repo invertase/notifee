@@ -24,7 +24,7 @@ notifee.displayNotification({
 });
 ```
 
-To use the users default sound, set the value as `default`. For no sound, set the value to `null`.
+To use the users default sound, set the value as `default`. For no sound, do not include the property.
 
 If you are using a custom sound file, it must be less than 30 seconds in length, otherwise the system will play the default sound.
 
