@@ -2,8 +2,8 @@ package app.notifee.core;
 
 import static app.notifee.core.ContextHolder.getApplicationContext;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
+import static app.notifee.core.utility.TextUtils.toHtml;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,8 +12,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.service.notification.StatusBarNotification;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
@@ -48,7 +51,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -479,49 +481,70 @@ class NotificationManager {
   }
 
 
-  public ArrayList getDisplayedNotifications() {
-    ArrayList result = new ArrayList();
+  static Task<ArrayList<Bundle>> getDisplayedNotifications() {
+    return Tasks.call(
+      () -> {
+        ArrayList<Bundle> result = new ArrayList();
 
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      return result;
-    }
-
-    android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-    StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
-
-
-    for (StatusBarNotification sbNotification : delivered) {
-      Notification original = sbNotification.getNotification();
-      Bundle extras = original.extras;
-      Bundle displayNotificationBundle = new Bundle();
-
-      Bundle notificationBundle = new Bundle();
-
-      sbNotification.getPostTime();
-      notificationBundle.putString("id", "" + sbNotification.getId());
-      notificationBundle.putString("title", extras.getString(Notification.EXTRA_TITLE));
-      notificationBundle.putString("body", extras.getString(Notification.EXTRA_TEXT));
-      notificationBundle.putString("tag", sbNotification.getTag());
-      notificationBundle.putString("group", original.getGroup());
-      notificationBundle.putString("subtitle",  extras.getString(Notification.EXTRA_SUB_TEXT));
-
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        Bundle bundle = original.extras;
-        for (String key : bundle.keySet()) {
-          Logger.i(TAG, key + ": " + bundle.get(key));
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+          return result;
         }
-      }
 
-      displayNotificationBundle.putBundle("notification", notificationBundle);
-      displayNotificationBundle.putString("id", "" +  sbNotification.getId();
-      displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-      result.add(displayNotificationBundle);
-    }
+        StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
 
-    return result;
 
+        for (StatusBarNotification sbNotification : delivered) {
+          Notification original = sbNotification.getNotification();
+          Bundle extras = original.extras;
+          Bundle displayNotificationBundle = new Bundle();
+
+          Bundle notificationBundle = new Bundle();
+
+          sbNotification.getPostTime();
+          notificationBundle.putString("id", "" + sbNotification.getId());
+
+          Object title =  extras.get(Notification.EXTRA_TITLE);
+
+          if (title != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("title",  title.toString());
+          }
+
+          Object text = extras.get(Notification.EXTRA_TEXT);
+
+          if (text != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("body", text.toString());
+          }
+
+          Object subtitle =  extras.get(Notification.EXTRA_SUB_TEXT);
+
+          if (subtitle != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("subtitle", subtitle.toString());
+          }
+
+          notificationBundle.putString("tag", sbNotification.getTag());
+          notificationBundle.putString("group", original.getGroup());
+
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Bundle bundle = original.extras;
+            for (String key : bundle.keySet()) {
+              Logger.i(TAG, key + ": " + bundle.get(key));
+            }
+          }
+
+          displayNotificationBundle.putBundle("notification", notificationBundle);
+          displayNotificationBundle.putString("id", "" + sbNotification.getId());
+          displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
+
+          result.add(displayNotificationBundle);
+        }
+
+        return result;
+      });
   }
 
   static Task<Void> displayNotification(NotificationModel notificationModel) {

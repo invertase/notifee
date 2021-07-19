@@ -268,6 +268,41 @@ public class Notifee {
   }
 
   @KeepForSdk
+  public void getDisplayedNotifications(MethodCallResult<List<Bundle>> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("getDisplayedNotifications");
+      result.onComplete(null, Collections.emptyList());
+    } else {
+      NotificationManager.getDisplayedNotifications().addOnCompleteListener(
+        task -> {
+          if (task.isSuccessful()) {
+            result.onComplete(null, task.getResult());
+          } else {
+            result.onComplete(task.getException(), null);
+          }
+        });;
+    }
+  }
+
+  @KeepForSdk
+  public void cancelAllNotificationsWithIds(int type, ArrayList<String> ids, MethodCallResult<Void> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("getDisplayedNotifications");
+      result.onComplete(null, null);
+    } else {
+      NotificationManager.cancelAllNotificationsWithIds(type, ids).addOnCompleteListener(
+        task -> {
+          if (task.isSuccessful()) {
+            result.onComplete(null, task.getResult());
+          } else {
+            result.onComplete(task.getException(), null);
+          }
+        });
+      ;
+    }
+  }
+
+  @KeepForSdk
   public void getChannels(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getChannels");
@@ -336,6 +371,42 @@ public class Notifee {
                   result.onComplete(task.getException(), null);
                 }
               });
+    }
+  }
+
+  @KeepForSdk
+  public void isChannelCreated(String channelId, MethodCallResult<Boolean> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("isChannelCreated");
+      result.onComplete(null, false);
+    } else {
+      ChannelManager.isChannelCreated(channelId)
+        .addOnCompleteListener(
+          task -> {
+            if (task.isSuccessful()) {
+              result.onComplete(null, task.getResult());
+            } else {
+              result.onComplete(task.getException(), null);
+            }
+          });
+    }
+  }
+
+  @KeepForSdk
+  public void isChannelBlocked(String channelId, MethodCallResult<Boolean> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("isChannelBlocked");
+      result.onComplete(null, false);
+    } else {
+      ChannelManager.isChannelBlocked(channelId)
+        .addOnCompleteListener(
+          task -> {
+            if (task.isSuccessful()) {
+              result.onComplete(null, task.getResult());
+            } else {
+              result.onComplete(task.getException(), null);
+            }
+          });
     }
   }
 

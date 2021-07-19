@@ -72,7 +72,7 @@
  * @param ids NSInteger
  * @param block notifeeMethodVoidBlock
  */
-+ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType ids:(NSArray<NSString *> *)ids withBlock:(notifeeMethodVoidBlock)block {
++ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType withIds:(NSArray<NSString *> *)ids withBlock:(notifeeMethodVoidBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
   // cancel displayed notifications
@@ -89,21 +89,27 @@
 
 + (void)getDisplayedNotifications:(notifeeMethodNSArrayBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-
+  NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
   [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> * _Nonnull deliveredNotifications) {
-    NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
+   
     for (UNNotification *deliveredNotification in deliveredNotifications) {
       NSMutableDictionary *triggerNotification = [NSMutableDictionary dictionary];
       triggerNotification[@"id"] = deliveredNotification.request.identifier;
-      // NSDate
-      triggerNotification[@"date"] = deliveredNotification.date;
+      
+
+      triggerNotification[@"date"] = [NotifeeCoreUtil convertToTimestamp:deliveredNotification.date];
       triggerNotification[@"notification"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoNotification];
       triggerNotification[@"trigger"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoTrigger];
+      
+      if (triggerNotification[@"notification"] == nil) {
+        // parse remote notification
+        triggerNotification[@"notification"] = [NotifeeCoreUtil parseUNNotificationRequest:deliveredNotification.request];
+      }
      
-      [triggerNotifications addObject:deliveredNotification];
+      [triggerNotifications addObject:triggerNotification];
     }
+    block(nil, triggerNotifications);
   }];
-  
 }
 
 + (void)getTriggerNotifications:(notifeeMethodNSArrayBlock)block {

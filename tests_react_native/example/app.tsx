@@ -177,10 +177,10 @@ function Root(): any {
         {id != null && (
           <View>
             <Button
-              title={`get notifications`}
+              title={`get delivered notifications`}
               onPress={async (): Promise<void> => {
-                const ids = await Notifee.getTriggerNotificationIds();
-                console.log(ids);
+                const ids = await Notifee.getDisplayedNotifications();
+                console.log('notifications', ids);
               }}
             />
             <Button

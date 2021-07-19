@@ -45,7 +45,7 @@ export const notifications: { key: string; notification: Notification | Notifica
   {
     key: 'Basic',
     notification: {
-      title: 'Title',
+      title: '<p style="color: #4caf50;"><b>Styled HTMLTitle</span></p></b></p> &#128576;',
       android: {
         channelId: 'high',
         pressAction: {
@@ -53,6 +53,7 @@ export const notifications: { key: string; notification: Notification | Notifica
           launchActivity: 'default',
         },
       },
+      ios: {},
     },
   },
   {
