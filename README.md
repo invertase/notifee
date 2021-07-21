@@ -25,7 +25,6 @@ cd notifee/
 
 ```bash
 yarn
-yarn tests_rn:ios:pod:install
 ```
 
 ### Step 3: Start React Native packager
@@ -77,8 +76,8 @@ yarn validate:all:ts
 1. Bump version: `npm version {minor/patch}`
 1. Publish to npm: `npm publish`
 1. Generate TypeDoc reference docs: `yarn gen/reference`
-2. Push changes to master branch on [notifee/react-native-notifee](https://github.com/notifee/react-native-notifee)
-3. Add release notes to [docs](https://github.com/notifee/documentation)
-4. Deploy website ([notifee.app](https://github.com/invertase/notifee-web))
-5. Create a new release on [GitHub](https://github.com/notifee/react-native-notifee/releases) and tag as latest release.
-6. Add to [Release Status](https://github.com/notifee/react-native-notifee/issues/1) and update any other relevant issues.
+1. Push changes to master branch on [notifee/react-native-notifee](https://github.com/notifee/react-native-notifee)
+1. Add release notes to [docs](https://github.com/notifee/documentation)
+1. Deploy website ([notifee.app](https://github.com/invertase/notifee-web))
+1. Create a new release on [GitHub](https://github.com/notifee/react-native-notifee/releases) and tag as latest release.
+1. Add to [Release Status](https://github.com/notifee/react-native-notifee/issues/1) and update any other relevant issues.
