@@ -19,8 +19,8 @@ export function NotificationSpec(spec: TestScope): void {
         importance: AndroidImportance.HIGH,
       },
       {
-        name: '🐴 Sound',
-        id: 'custom_sound',
+        name: 'New 🐴 Sound',
+        id: 'new_custom_sound',
         importance: AndroidImportance.HIGH,
         sound: 'horse.mp3',
       },
@@ -49,6 +49,13 @@ export function NotificationSpec(spec: TestScope): void {
   });
 
   spec.describe('displayNotification', function () {
+    spec.it('configures custom sounds correctly', async function () {
+      const customSoundChannel = await notifee.getChannel('new_custom_sound');
+      console.warn('customSoundChannel looks like: ' + JSON.stringify(customSoundChannel));
+      expect(customSoundChannel.soundURI).contains('horse.mp3');
+      expect(customSoundChannel.sound).equals('horse.mp3');
+    });
+
     spec.it('displays a notification', async function () {
       return new Promise(async resolve => {
         const unsubscribe = notifee.onForegroundEvent((event: Event) => {
