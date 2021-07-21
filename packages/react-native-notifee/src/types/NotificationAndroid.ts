@@ -908,6 +908,13 @@ export interface AndroidChannel {
    * This setting cannot be overridden once the channel is created.
    */
   sound?: string;
+
+  /**
+   * The URI of the notification sound associated with the channel, if any.
+   *
+   * This is a read-only value, and is under user control after the channel is created
+   */
+  soundURI?: string;
 }
 
 /**
