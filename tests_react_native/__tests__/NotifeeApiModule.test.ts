@@ -8,6 +8,7 @@ import {
 } from '@notifee/react-native/src/NotifeeNativeModule';
 import { AndroidChannel } from '@notifee/react-native/src/types/NotificationAndroid';
 import { setPlatform } from './testSetup';
+import { TriggerNotification, TriggerType } from '@notifee/react-native/src';
 
 jest.mock('@notifee/react-native/src/NotifeeNativeModule');
 
@@ -27,6 +28,40 @@ describe('Notifee Api Module', () => {
   });
   test('Constructor', () => {
     expect(apiModule).not.toBeNull();
+  });
+
+  test('getDisplayedNotifications', async () => {
+    const notification = {
+      id: 'notification',
+      date: new Date(Date.now()).getTime(),
+      notification: {
+        id: 'notification',
+      },
+    };
+    const notifications = [notification];
+    mockNotifeeNativeModule.getDisplayedNotifications.mockResolvedValue(notifications);
+
+    const res = await apiModule.getDisplayedNotifications();
+    expect(res.length).toBe(1);
+    expect(res[0]).toBe(notification);
+    expect(mockNotifeeNativeModule.getDisplayedNotifications).toBeCalledTimes(1);
+  });
+
+  test('getTriggerNotifications', async () => {
+    const triggerNotification: TriggerNotification = {
+      notification: { id: 'notification' },
+      trigger: {
+        type: TriggerType.TIMESTAMP,
+        timestamp: new Date(Date.now()).getTime(),
+      },
+    };
+
+    const triggerNotifications = [triggerNotification];
+    mockNotifeeNativeModule.getTriggerNotifications.mockResolvedValue(triggerNotifications);
+
+    const res = await apiModule.getTriggerNotifications();
+    expect(res).toBe(triggerNotifications);
+    expect(mockNotifeeNativeModule.getTriggerNotifications).toBeCalledTimes(1);
   });
 
   test('getTriggerNotificationIds', async () => {
@@ -57,6 +92,27 @@ describe('Notifee Api Module', () => {
 
     expect(res).toBe(undefined);
     expect(mockNotifeeNativeModule.cancelTriggerNotifications).toBeCalledTimes(1);
+  });
+
+  test('cancelAllNotifications(ids)', async () => {
+    const res = await apiModule.cancelAllNotifications(['id']);
+
+    expect(res).toBe(undefined);
+    expect(mockNotifeeNativeModule.cancelAllNotifications).nthCalledWith(1, ['id']);
+  });
+
+  test('cancelDisplayedNotifications(ids)', async () => {
+    const res = await apiModule.cancelDisplayedNotifications(['id']);
+
+    expect(res).toBe(undefined);
+    expect(mockNotifeeNativeModule.cancelDisplayedNotifications).nthCalledWith(1, ['id']);
+  });
+
+  test('cancelTriggerNotifications(ids)', async () => {
+    const res = await apiModule.cancelTriggerNotifications(['id']);
+
+    expect(res).toBe(undefined);
+    expect(mockNotifeeNativeModule.cancelTriggerNotifications).nthCalledWith(1, ['id']);
   });
 
   test('cancelNotification', async () => {
@@ -119,6 +175,62 @@ describe('Notifee Api Module', () => {
         vibration: true,
         visibility: 0,
       });
+    });
+  });
+
+  describe('isChannelBlocked', () => {
+    test('on iOS', async () => {
+      setPlatform('ios');
+      const channel: AndroidChannel = {
+        id: 'channel-id',
+        name: 'channel',
+      };
+
+      const res = await apiModule.isChannelBlocked(channel.id);
+
+      expect(res).toBe(false);
+      expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
+    });
+
+    test('on Android', async () => {
+      setPlatform('android');
+      const channel: AndroidChannel = {
+        id: 'channel-id',
+        name: 'channel',
+      };
+
+      const res = await apiModule.isChannelBlocked(channel.id);
+
+      expect(res).toBe(false);
+      expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
+    });
+  });
+
+  describe('isChannelCreated', () => {
+    test('on iOS', async () => {
+      setPlatform('ios');
+      const channel: AndroidChannel = {
+        id: 'channel-id',
+        name: 'channel',
+      };
+
+      const res = await apiModule.isChannelCreated(channel.id);
+
+      expect(res).toBe(true);
+      expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
+    });
+
+    test('on Android', async () => {
+      setPlatform('android');
+      const channel: AndroidChannel = {
+        id: 'channel-id',
+        name: 'channel',
+      };
+
+      const res = await apiModule.isChannelCreated(channel.id);
+
+      expect(res).toBe(true);
+      expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
     });
   });
 });
