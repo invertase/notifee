@@ -267,6 +267,7 @@ public class ChannelManager {
 
     // can be null, don't include if null
     if (channel.getSound() != null) {
+      channelBundle.putString("soundURI", channel.getSound().toString());
       // try to parse uri
       String soundValue = ResourceUtils.getSoundName(channel.getSound());
       if (soundValue != null) channelBundle.putString("sound", soundValue);
