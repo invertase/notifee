@@ -2,7 +2,6 @@ package app.notifee.core;
 
 import static app.notifee.core.ContextHolder.getApplicationContext;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-import static app.notifee.core.utility.TextUtils.toHtml;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -13,10 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.SpannedString;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
