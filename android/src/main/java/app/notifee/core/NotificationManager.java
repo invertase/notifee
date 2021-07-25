@@ -447,7 +447,7 @@ class NotificationManager {
             });
   }
 
-  static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull ArrayList<String> ids) {
+  static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids) {
     return Tasks.call(
       () -> {
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
@@ -457,11 +457,12 @@ class NotificationManager {
           for(String id: ids) {
             Logger.i(TAG, "Removing notification with id " + id);
             if (notificationType != NOTIFICATION_TYPE_TRIGGER ) {
-              notificationManagerCompat.cancel(Integer.parseInt(id));
+              notificationManagerCompat.cancel(id.hashCode());
             }
 
             if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
               Logger.i(TAG, "Removing notification with id " + id);
+
               workManager.cancelUniqueWork("trigger:" + id);
               // Remove all cancelled and finished work from its internal database
               // states include SUCCEEDED, FAILED and CANCELLED
@@ -469,78 +470,21 @@ class NotificationManager {
 
               // And with alarm manager
               NotifeeAlarmManager.cancelNotification(id);
+
             }
+        }
+        return null;
+      }).continueWith(
+      task -> {
+        // delete all from database
+        if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
+          WorkDataRepository.getInstance(getApplicationContext()).deleteByIds(ids);
         }
         return null;
       });
   }
 
 
-  static Task<ArrayList<Bundle>> getDisplayedNotifications() {
-    return Tasks.call(
-      () -> {
-        ArrayList<Bundle> result = new ArrayList();
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-          return result;
-        }
-
-        android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
-
-
-        for (StatusBarNotification sbNotification : delivered) {
-          Notification original = sbNotification.getNotification();
-          Bundle extras = original.extras;
-          Bundle displayNotificationBundle = new Bundle();
-
-          Bundle notificationBundle = new Bundle();
-
-          sbNotification.getPostTime();
-          notificationBundle.putString("id", "" + sbNotification.getId());
-
-          Object title =  extras.get(Notification.EXTRA_TITLE);
-
-          if (title != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("title",  title.toString());
-          }
-
-          Object text = extras.get(Notification.EXTRA_TEXT);
-
-          if (text != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("body", text.toString());
-          }
-
-          Object subtitle =  extras.get(Notification.EXTRA_SUB_TEXT);
-
-          if (subtitle != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("subtitle", subtitle.toString());
-          }
-
-          notificationBundle.putString("tag", sbNotification.getTag());
-          notificationBundle.putString("group", original.getGroup());
-
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Bundle bundle = original.extras;
-            for (String key : bundle.keySet()) {
-              Logger.i(TAG, key + ": " + bundle.get(key));
-            }
-          }
-
-          displayNotificationBundle.putBundle("notification", notificationBundle);
-          displayNotificationBundle.putString("id", "" + sbNotification.getId());
-          displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
-
-          result.add(displayNotificationBundle);
-        }
-
-        return result;
-      });
-  }
 
   static Task<Void> displayNotification(NotificationModel notificationModel) {
     return notificationBundleToBuilder(notificationModel)
@@ -674,6 +618,71 @@ class NotificationManager {
     }
   }
 
+  static Task<List<Bundle>> getDisplayedNotifications() {
+    return Tasks.call(
+      () -> {
+        List<Bundle> notifications = new ArrayList<Bundle>();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+          return notifications;
+        }
+
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
+
+
+        for (StatusBarNotification sbNotification : delivered) {
+          Notification original = sbNotification.getNotification();
+          Bundle extras = original.extras;
+          Bundle displayNotificationBundle = new Bundle();
+
+          Bundle notificationBundle = new Bundle();
+
+          sbNotification.getPostTime();
+          notificationBundle.putString("id", "" + sbNotification.getId());
+
+          Object title =  extras.get(Notification.EXTRA_TITLE);
+
+          if (title != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("title",  title.toString());
+          }
+
+          Object text = extras.get(Notification.EXTRA_TEXT);
+
+          if (text != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("body", text.toString());
+          }
+
+          Object subtitle =  extras.get(Notification.EXTRA_SUB_TEXT);
+
+          if (subtitle != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("subtitle", subtitle.toString());
+          }
+
+          Bundle androidBundle = new Bundle();
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            androidBundle.putString("channelId", original.getChannelId());
+          }
+          androidBundle.putString("tag", sbNotification.getTag());
+          androidBundle.putString("group", original.getGroup());
+
+          notificationBundle.putBundle("android", androidBundle);
+          displayNotificationBundle.putBundle("notification", notificationBundle);
+          displayNotificationBundle.putString("id", "" + sbNotification.getId());
+          displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
+
+          notifications.add(displayNotificationBundle);
+        }
+
+        return notifications;
+      });
+  }
+
+
   static void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
@@ -685,17 +694,18 @@ class NotificationManager {
 
           if (task.isSuccessful()) {
             List<WorkDataEntity> workDataEntities = task.getResult();
-            for (WorkDataEntity workDataEntity : workDataEntities) {
-              Bundle triggerNotificationBundle = new Bundle();
+             for (WorkDataEntity workDataEntity : workDataEntities) {
+               Bundle triggerNotificationBundle = new Bundle();
 
-              triggerNotificationBundle.putByteArray("notification", workDataEntity.getNotification());
-              triggerNotificationBundle.putByteArray("trigger", workDataEntity.getTrigger());
-              triggerNotifications.add(triggerNotificationBundle);
-            }
+               triggerNotificationBundle.putBundle("notification",  ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
+
+               triggerNotificationBundle.putBundle("trigger", ObjectUtils.bytesToBundle(workDataEntity.getTrigger()));
+               triggerNotifications.add(triggerNotificationBundle);
+             }
 
             result.onComplete(null, triggerNotifications);
           } else {
-            result.onComplete(task.getException(), null);
+            result.onComplete(task.getException(), triggerNotifications);
           }
         });
 

@@ -57,6 +57,13 @@ public class WorkDataRepository {
         });
   }
 
+  public void deleteByIds(List<String> ids) {
+    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+      () -> {
+        mWorkDataDao.deleteByIds(ids);
+      });
+  }
+
   public void deleteAll() {
     NotifeeCoreDatabase.databaseWriteExecutor.execute(
         () -> {

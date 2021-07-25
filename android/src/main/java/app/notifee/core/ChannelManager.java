@@ -187,6 +187,10 @@ public class ChannelManager {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .getNotificationChannel(channelId);
 
+          if (channel == null) {
+            return false;
+          }
+
         return IMPORTANCE_NONE == channel.getImportance();
       });
   }

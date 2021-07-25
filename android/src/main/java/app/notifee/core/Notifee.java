@@ -111,6 +111,24 @@ public class Notifee {
   }
 
   @KeepForSdk
+  public void cancelAllNotificationsWithIds(int type, List<String> ids, MethodCallResult<Void> result) {
+    if (LicenseManager.isLicenseInvalid()) {
+      logLicenseWarningForMethod("cancelAllNotificationsWithIds");
+      result.onComplete(null, null);
+    } else {
+      NotificationManager.cancelAllNotificationsWithIds(type, ids).addOnCompleteListener(
+        task -> {
+          if (task.isSuccessful()) {
+            result.onComplete(null, task.getResult());
+          } else {
+            result.onComplete(task.getException(), null);
+          }
+        });
+      ;
+    }
+  }
+
+  @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("createChannel");
@@ -285,22 +303,16 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void cancelAllNotificationsWithIds(int type, ArrayList<String> ids, MethodCallResult<Void> result) {
+  public void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
     if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getDisplayedNotifications");
-      result.onComplete(null, null);
+      logLicenseWarningForMethod("getTriggerNotifications");
+      result.onComplete(null, Collections.emptyList());
     } else {
-      NotificationManager.cancelAllNotificationsWithIds(type, ids).addOnCompleteListener(
-        task -> {
-          if (task.isSuccessful()) {
-            result.onComplete(null, task.getResult());
-          } else {
-            result.onComplete(task.getException(), null);
-          }
-        });
-      ;
+      NotificationManager.getTriggerNotifications(result);
     }
   }
+
+
 
   @KeepForSdk
   public void getChannels(MethodCallResult<List<Bundle>> result) {

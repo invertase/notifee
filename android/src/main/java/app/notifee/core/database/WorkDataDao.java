@@ -17,6 +17,9 @@ public interface WorkDataDao {
   @Query("DELETE FROM work_data WHERE id = :id")
   void deleteById(String id);
 
+  @Query("DELETE FROM work_data WHERE id in (:ids)")
+  void deleteByIds(List<String> ids);
+
   @Query("SELECT * from work_data WHERE id = :id")
   WorkDataEntity getWorkDataById(String id);
 

@@ -23,6 +23,7 @@ import Notifee, {
   EventType,
   Event,
   IOSAuthorizationStatus,
+  TriggerType,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -165,7 +166,10 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      Notifee.displayNotification(notification)
+      Notifee.createTriggerNotification(notification, {
+        type: TriggerType.TIMESTAMP,
+        timestamp: date.getTime(),
+      })
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
@@ -184,6 +188,13 @@ function Root(): any {
               }}
             />
             <Button
+              title={`get trigger notifications`}
+              onPress={async (): Promise<void> => {
+                const ids = await Notifee.getTriggerNotifications();
+                console.log('trigger notifications', ids);
+              }}
+            />
+            <Button
               title={`get power manager info`}
               onPress={async (): Promise<void> => {
                 console.log(await Notifee.getPowerManagerInfo());
@@ -197,8 +208,15 @@ function Root(): any {
             />
             <Button
               title={`Cancel ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelNotification(id);
+              onPress={async (): void => {
+                console.log('id', id);
+                const date = new Date(Date.now());
+                date.setSeconds(date.getSeconds() + 4);
+                await Notifee.createTriggerNotification(
+                  { title: 'wah', id: 'trigger' },
+                  { type: TriggerType.TIMESTAMP, timestamp: date.getTime() },
+                );
+                Notifee.cancelTriggerNotifications([id, 'trigger']);
               }}
             />
             <Button
@@ -228,6 +246,13 @@ function Root(): any {
                     console.log('res', res);
                   }
                 });
+              }}
+            />
+            <Button
+              title={`get channels`}
+              onPress={async (): Promise<void> => {
+                const triggerNotifications = await Notifee.getTriggerNotifications();
+                console.log('triggerNotifications', triggerNotifications);
               }}
             />
           </View>

@@ -7,7 +7,9 @@ import notifee, {
   AndroidImportance,
   TriggerType,
   Notification,
+  TimestampTrigger,
 } from '@notifee/react-native';
+import { Platform } from 'react-native';
 
 export function ApiSpec(spec: TestScope): void {
   spec.beforeEach(async () => {
@@ -51,8 +53,8 @@ export function ApiSpec(spec: TestScope): void {
     spec.it('get displayed notifications', async function () {
       const payload: Notification = {
         id: 'hello',
-        title: 'Hello',
-        body: 'World',
+        title: 'Displayed',
+        body: 'Notifications',
         android: {
           channelId: 'high',
         },
@@ -62,7 +64,8 @@ export function ApiSpec(spec: TestScope): void {
       };
 
       await notifee.displayNotification(payload);
-      const date = Date.now();
+      const date = new Date(Date.now());
+      date.setSeconds(date.getSeconds() + 10);
       await notifee.createTriggerNotification(
         {
           id: 'trigger',
@@ -71,23 +74,33 @@ export function ApiSpec(spec: TestScope): void {
           android: {
             channelId: 'high',
           },
+          ios: {
+            threadId: 'group',
+          },
         },
         {
           type: TriggerType.TIMESTAMP,
-          timestamp: new Date(date).getTime(),
+          timestamp: date.getTime(),
         },
       );
 
       const notifications = await notifee.getDisplayedNotifications();
 
       expect(notifications.length).equals(1);
-      console.log('notifications', notifications);
-
       const notification = notifications[0];
-      expect(notification.date);
-      expect(notification.id).equals(payload.id);
-      expect(notification.notification).equals(payload);
-      expect(notification.trigger).to.be.null;
+
+      expect(notification.date).is.not.null;
+
+      expect(notification.id).is.not.null;
+      expect(notification.notification.title).equals(payload.title);
+      expect(notification.notification.subtitle).equals(payload.subtitle);
+
+      expect(notification.notification.body).equals(payload.body);
+      if (Platform.OS === 'android')
+        expect(notification.notification.android?.channelId).equals(payload.android?.channelId);
+
+      if (Platform.OS === 'ios')
+        expect(notification.notification.ios?.threadId).equals(payload.ios?.threadId);
     });
 
     spec.it('get trigger notifications', async function () {
@@ -104,7 +117,9 @@ export function ApiSpec(spec: TestScope): void {
       };
 
       await notifee.displayNotification(payload);
-      const date = Date.now();
+      const date = new Date(Date.now());
+      date.setSeconds(date.getSeconds() + 10);
+      const timestamp = date.getTime();
       await notifee.createTriggerNotification(
         {
           id: 'trigger',
@@ -116,18 +131,23 @@ export function ApiSpec(spec: TestScope): void {
         },
         {
           type: TriggerType.TIMESTAMP,
-          timestamp: new Date(date).getTime(),
+          timestamp,
         },
       );
 
       const triggerNotifications = await notifee.getTriggerNotifications();
-
       expect(triggerNotifications.length).equals(1);
-      console.log('notifications', triggerNotifications);
 
       const triggerNotification = triggerNotifications[0];
-      expect(triggerNotification.notification).equals(payload);
-      expect(triggerNotification.trigger).to.be.null;
+      expect(triggerNotification.notification.title).equals(payload.title);
+
+      expect(triggerNotification.trigger).to.not.be.null;
+
+      const timestampTrigger = triggerNotification.trigger as TimestampTrigger;
+      expect(timestampTrigger.type).equals(TriggerType.TIMESTAMP);
+      expect(timestampTrigger.timestamp).equals(timestamp);
+      expect(timestampTrigger.repeatFrequency).equals(-1);
+      expect(timestampTrigger.alarmManager).equals(undefined);
     });
   });
 
@@ -136,19 +156,28 @@ export function ApiSpec(spec: TestScope): void {
       return new Promise(async resolve => {
         const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
           if (event.type === EventType.DELIVERED) {
+            if (event.detail?.notification?.id !== 'on-foreground') {
+              // skip
+              return;
+            }
+
             expect(event.detail.notification).not.equal(undefined);
             if (event.detail.notification) {
               expect(event.detail.notification.title).equals('Hello');
               expect(event.detail.notification.body).equals('World');
             }
 
-            const initialBadgeCount = await notifee.getBadgeCount();
-            expect(initialBadgeCount).equals(1);
+            // Only check badge count for ios
+            if (Platform.OS === 'ios') {
+              const initialBadgeCount = await notifee.getBadgeCount();
+              expect(initialBadgeCount).equals(1);
 
-            await notifee.cancelAllNotifications();
+              await notifee.cancelAllNotifications();
+              await notifee.setBadgeCount(0);
 
-            const lastBadgeCount = await notifee.getBadgeCount();
-            expect(lastBadgeCount).equals(0);
+              const lastBadgeCount = await notifee.getBadgeCount();
+              expect(lastBadgeCount).equals(0);
+            }
 
             unsubscribe();
             resolve();
@@ -156,6 +185,7 @@ export function ApiSpec(spec: TestScope): void {
         });
 
         return notifee.displayNotification({
+          id: 'on-foreground',
           title: 'Hello',
           body: 'World',
           android: {
@@ -166,49 +196,6 @@ export function ApiSpec(spec: TestScope): void {
           },
         });
       });
-    });
-
-    spec.it('cancels all notifications by id', async function () {
-      await notifee.displayNotification({
-        id: 'hello',
-        title: 'Hello',
-        body: 'World',
-        android: {
-          channelId: 'high',
-        },
-        ios: {
-          badgeCount: 1,
-        },
-      });
-
-      const date = Date.now();
-      await notifee.createTriggerNotification(
-        {
-          id: 'trigger',
-          title: 'Hello',
-          body: 'World',
-          android: {
-            channelId: 'high',
-          },
-        },
-        {
-          type: TriggerType.TIMESTAMP,
-          timestamp: new Date(date).getTime(),
-        },
-      );
-
-      // Before
-      let notifications = await notifee.getDisplayedNotifications();
-      let triggerNotificationIds = await notifee.getTriggerNotificationIds();
-      expect(notifications.length + triggerNotificationIds.length).equals(2);
-
-      // Test
-      await notifee.cancelAllNotifications(['hello', 'trigger']);
-
-      // After
-      notifications = await notifee.getDisplayedNotifications();
-      triggerNotificationIds = await notifee.getTriggerNotificationIds();
-      expect(notifications.length + triggerNotificationIds.length).equals(0);
     });
 
     spec.it('cancels display notifications by id', async function () {
@@ -228,7 +215,7 @@ export function ApiSpec(spec: TestScope): void {
       let notifications = await notifee.getDisplayedNotifications();
       expect(notifications?.length).equals(1);
 
-      // Test
+      // Test;
       await notifee.cancelDisplayedNotifications(['hello']);
 
       // After
@@ -237,7 +224,8 @@ export function ApiSpec(spec: TestScope): void {
     });
 
     spec.it('cancels trigger notifications by id', async function () {
-      const date = Date.now();
+      const date = new Date(Date.now());
+      date.setSeconds(date.getSeconds() + 10);
       await notifee.createTriggerNotification(
         {
           id: 'trigger',
@@ -246,10 +234,13 @@ export function ApiSpec(spec: TestScope): void {
           android: {
             channelId: 'high',
           },
+          ios: {
+            threadId: 'group',
+          },
         },
         {
           type: TriggerType.TIMESTAMP,
-          timestamp: new Date(date).getTime(),
+          timestamp: date.getTime(),
         },
       );
 
@@ -257,10 +248,11 @@ export function ApiSpec(spec: TestScope): void {
       let notifications = await notifee.getTriggerNotificationIds();
       expect(notifications.length).equals(1);
 
-      // Test
+      // // Test
+
       await notifee.cancelTriggerNotifications(['trigger']);
 
-      // After
+      // // After
       notifications = await notifee.getTriggerNotificationIds();
       expect(notifications.length).equals(0);
     });
@@ -269,16 +261,21 @@ export function ApiSpec(spec: TestScope): void {
   spec.describe('Channels', function () {
     spec.it('isChannelBlocked() returns correct response', async function () {
       // TODO: figure out how to test when channel is blocked
-      expect(await notifee.isChannelBlocked('high')).to.be.true;
+      expect(await notifee.isChannelBlocked('high')).to.be.false;
 
       //Should return false if channel does not exist
       expect(await notifee.isChannelBlocked('unknown channel')).to.be.false;
     });
 
     spec.it('isChannelCreated() returns correct response', async function () {
+      if (Platform.OS === 'ios') {
+        expect(await notifee.isChannelCreated('high')).to.be.true;
+        return;
+      }
+
       expect(await notifee.isChannelCreated('high')).to.be.true;
 
-      //Should return false if channel does not exist
+      // Should return false if channel does not exist
       expect(await notifee.isChannelCreated('unknown channel')).to.be.false;
     });
   });
