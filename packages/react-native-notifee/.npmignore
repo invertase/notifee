@@ -69,3 +69,4 @@ type-test.ts
 .eslintrc.js
 .prettierignore
 example/
+src/__mocks__/
