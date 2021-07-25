@@ -38,6 +38,7 @@
 		79F8C7AC2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */; };
 		79F8C8102524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */; };
 		79F8C8152524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */; };
+		95824DBD70A285AB91AB93CD /* libPods-NotifeeCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotifeeCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		270DF2F624302ECB0030596A /* NotifeeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCore.h; sourceTree = "<group>"; };
 		277A3BD124302E530001EA96 /* NotifeeCoreDelegateHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDelegateHolder.h; sourceTree = "<group>"; };
 		277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreDelegateHolder.m; sourceTree = "<group>"; };
@@ -69,6 +71,8 @@
 		79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSURLSession.h"; sourceTree = "<group>"; };
 		79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDownloadDelegate.h; sourceTree = "<group>"; };
 		79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreDownloadDelegate.m; sourceTree = "<group>"; };
+		BBD9319BAEF3A4AB6D153FE5 /* Pods-NotifeeCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.release.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.release.xcconfig"; sourceTree = "<group>"; };
+		E01EB6581D36E8E7DA1A0748 /* Pods-NotifeeCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.debug.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +80,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95824DBD70A285AB91AB93CD /* libPods-NotifeeCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24C55261D0A1C83DCB8FFFAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		277A3BD524302E930001EA96 /* Private */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +123,7 @@
 				27E8C35823E46BAB007568A4 /* NotifeeCore */,
 				27E8C35723E46BAB007568A4 /* Products */,
 				C1DA2E856EE7BFD07D5A7C14 /* Pods */,
+				24C55261D0A1C83DCB8FFFAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +156,8 @@
 		C1DA2E856EE7BFD07D5A7C14 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				E01EB6581D36E8E7DA1A0748 /* Pods-NotifeeCore.debug.xcconfig */,
+				BBD9319BAEF3A4AB6D153FE5 /* Pods-NotifeeCore.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -171,6 +187,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27E8C35E23E46BAB007568A4 /* Build configuration list for PBXNativeTarget "NotifeeCore" */;
 			buildPhases = (
+				CAD3FC2771D4D4935D4345DD /* [CP] Check Pods Manifest.lock */,
 				27E8C35123E46BAB007568A4 /* Headers */,
 				27E8C35223E46BAB007568A4 /* Sources */,
 				27E8C35323E46BAB007568A4 /* Frameworks */,
@@ -248,6 +265,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n${SRCROOT}/build_xcframework.sh\n";
+		};
+		CAD3FC2771D4D4935D4345DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotifeeCore-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -398,6 +437,7 @@
 		};
 		27E8C35F23E46BAB007568A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E01EB6581D36E8E7DA1A0748 /* Pods-NotifeeCore.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -420,6 +460,7 @@
 		};
 		27E8C36023E46BAB007568A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBD9319BAEF3A4AB6D153FE5 /* Pods-NotifeeCore.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

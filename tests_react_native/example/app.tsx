@@ -23,6 +23,7 @@ import Notifee, {
   EventType,
   Event,
   IOSAuthorizationStatus,
+  TriggerType,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -177,28 +178,17 @@ function Root(): any {
         {id != null && (
           <View>
             <Button
-              title={`Cancel ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelNotification(id);
-              }}
-            />
-            <Button
-              title={`Cancel trigger ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelTriggerNotification(id);
-              }}
-            />
-            <Button
-              title={`Cancel displayed ${id}`}
-              onPress={(): void => {
-                if (id != null) Notifee.cancelDisplayedNotification(id);
-              }}
-            />
-            <Button
-              title={`get notifications`}
+              title={`get delivered notifications`}
               onPress={async (): Promise<void> => {
-                const ids = await Notifee.getTriggerNotificationIds();
-                console.log(ids);
+                const notifications = await Notifee.getDisplayedNotifications();
+                console.log('notifications: ', notifications);
+              }}
+            />
+            <Button
+              title={`get trigger notifications`}
+              onPress={async (): Promise<void> => {
+                const triggerNotifications = await Notifee.getTriggerNotifications();
+                console.log('trigger notifications: ', triggerNotifications);
               }}
             />
             <Button
@@ -213,28 +203,46 @@ function Root(): any {
                 console.log(await Notifee.openPowerManagerSettings());
               }}
             />
-            {/* <Button
-            title={`cancel notification`}
-            onPress={async () => {
-              await Notifee.cancelNotification(id);
-            }}
-          />
-           <Button
-            title={`cancel trigger notification`}
-            onPress={async () => {
-              await Notifee.cancelTriggerNotification(id);
-       
-            }}
-          /> */}
+            <Button
+              title={`Cancel ${id}`}
+              onPress={(): void => {
+                Notifee.cancelNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel trigger ${id}`}
+              onPress={(): void => {
+                if (id != null) Notifee.cancelTriggerNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel displayed ${id}`}
+              onPress={async () => {
+                if (id != null) await Notifee.cancelDisplayedNotification(id);
+              }}
+            />
+            <Button
+              title={`Cancel all `}
+              onPress={async () => {
+                await Notifee.cancelAllNotifications();
+              }}
+            />
             <Button
               title={`get channels`}
               onPress={async (): Promise<void> => {
                 const buttonChannels = await Notifee.getChannels();
                 buttonChannels.forEach(res => {
-                  if (res.id === 'custom-vibrationsouttt') {
+                  if (res.id === 'custom-vibrations') {
                     console.log('res', res);
                   }
                 });
+              }}
+            />
+            <Button
+              title={`get channels`}
+              onPress={async (): Promise<void> => {
+                const triggerNotifications = await Notifee.getTriggerNotifications();
+                console.log('triggerNotifications', triggerNotifications);
               }}
             />
           </View>

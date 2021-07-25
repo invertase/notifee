@@ -5,11 +5,14 @@ import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.notification.StatusBarNotification;
+
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
@@ -42,6 +45,7 @@ import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -443,6 +447,45 @@ class NotificationManager {
             });
   }
 
+  static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids) {
+    return Tasks.call(
+      () -> {
+        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
+        NotificationManagerCompat notificationManagerCompat =
+          NotificationManagerCompat.from(getApplicationContext());
+
+          for(String id: ids) {
+            Logger.i(TAG, "Removing notification with id " + id);
+            if (notificationType != NOTIFICATION_TYPE_TRIGGER ) {
+              notificationManagerCompat.cancel(id.hashCode());
+            }
+
+            if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
+              Logger.i(TAG, "Removing notification with id " + id);
+
+              workManager.cancelUniqueWork("trigger:" + id);
+              // Remove all cancelled and finished work from its internal database
+              // states include SUCCEEDED, FAILED and CANCELLED
+              workManager.pruneWork();
+
+              // And with alarm manager
+              NotifeeAlarmManager.cancelNotification(id);
+
+            }
+        }
+        return null;
+      }).continueWith(
+      task -> {
+        // delete all from database
+        if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
+          WorkDataRepository.getInstance(getApplicationContext()).deleteByIds(ids);
+        }
+        return null;
+      });
+  }
+
+
+
   static Task<Void> displayNotification(NotificationModel notificationModel) {
     return notificationBundleToBuilder(notificationModel)
         .continueWith(
@@ -573,6 +616,99 @@ class NotificationManager {
       workManager.enqueueUniquePeriodicWork(
           uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
     }
+  }
+
+  static Task<List<Bundle>> getDisplayedNotifications() {
+    return Tasks.call(
+      () -> {
+        List<Bundle> notifications = new ArrayList<Bundle>();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+          return notifications;
+        }
+
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
+
+
+        for (StatusBarNotification sbNotification : delivered) {
+          Notification original = sbNotification.getNotification();
+          Bundle extras = original.extras;
+          Bundle displayNotificationBundle = new Bundle();
+
+          Bundle notificationBundle = new Bundle();
+
+          sbNotification.getPostTime();
+          notificationBundle.putString("id", "" + sbNotification.getId());
+
+          Object title =  extras.get(Notification.EXTRA_TITLE);
+
+          if (title != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("title",  title.toString());
+          }
+
+          Object text = extras.get(Notification.EXTRA_TEXT);
+
+          if (text != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("body", text.toString());
+          }
+
+          Object subtitle =  extras.get(Notification.EXTRA_SUB_TEXT);
+
+          if (subtitle != null) {
+            // TODO: parse html text as spanned string
+            notificationBundle.putString("subtitle", subtitle.toString());
+          }
+
+          Bundle androidBundle = new Bundle();
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            androidBundle.putString("channelId", original.getChannelId());
+          }
+          androidBundle.putString("tag", sbNotification.getTag());
+          androidBundle.putString("group", original.getGroup());
+
+          notificationBundle.putBundle("android", androidBundle);
+          displayNotificationBundle.putBundle("notification", notificationBundle);
+          displayNotificationBundle.putString("id", "" + sbNotification.getId());
+          displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
+
+          notifications.add(displayNotificationBundle);
+        }
+
+        return notifications;
+      });
+  }
+
+
+  static void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
+    WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
+
+    workDataRepository
+      .getAll()
+      .addOnCompleteListener(
+        task -> {
+          List<Bundle> triggerNotifications = new ArrayList<Bundle>();
+
+          if (task.isSuccessful()) {
+            List<WorkDataEntity> workDataEntities = task.getResult();
+             for (WorkDataEntity workDataEntity : workDataEntities) {
+               Bundle triggerNotificationBundle = new Bundle();
+
+               triggerNotificationBundle.putBundle("notification",  ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
+
+               triggerNotificationBundle.putBundle("trigger", ObjectUtils.bytesToBundle(workDataEntity.getTrigger()));
+               triggerNotifications.add(triggerNotificationBundle);
+             }
+
+            result.onComplete(null, triggerNotifications);
+          } else {
+            result.onComplete(task.getException(), triggerNotifications);
+          }
+        });
+
   }
 
   static void getTriggerNotificationIds(MethodCallResult<List<String>> result) {

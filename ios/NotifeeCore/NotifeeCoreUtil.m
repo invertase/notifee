@@ -554,6 +554,85 @@
 }
 
 /**
+ * Returns timestamp in millisecons
+ *
+ * @param date NSDate
+ */
++ (NSNumber *)convertToTimestamp:(NSDate *)date {
+  return [NSNumber numberWithDouble:([date timeIntervalSince1970]*1000)];
+}
+
+/**
+ * Parse UNNotificationRequest to NSDictionary
+ *
+ * @param request UNNotificationRequest
+ */
++ (NSDictionary *)parseUNNotificationRequestToNotification:(UNNotificationRequest *)request {
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  NSMutableDictionary *iosDict = [[NSMutableArray alloc] init];
+     
+  dictionary[@"id"] = request.identifier;
+   
+  UNNotificationContent *content = request.content;
+
+  dictionary[@"subtitle"] = content.subtitle;
+  dictionary[@"body"] = content.body;
+  dictionary[@"badge"] = content.badge;
+  dictionary[@"sound"] = content.sound;
+  dictionary[@"category"] = content.categoryIdentifier;
+  dictionary[@"thread-id"] = content.threadIdentifier;
+  dictionary[@"data"] = [content.userInfo mutableCopy];
+  
+  // title
+  if (content.title != nil) {
+    dictionary[@"title"] = content.title;
+  }
+
+  // subtitle
+  if (content.subtitle != nil) {
+    dictionary[@"subtitle"] = content.subtitle;
+  }
+
+  // body
+  if (content.body != nil) {
+    dictionary[@"body"] = content.body;
+  }
+
+  iosDict[@"badgeCount"] = content.badge;
+
+  // categoryId
+  if (content.categoryIdentifier != nil) {
+    iosDict[@"categoryId"]  = content.categoryIdentifier;
+  }
+
+  // launchImageName
+  if (content.launchImageName != nil) {
+    iosDict[@"launchImageName"]  = content.launchImageName;
+  }
+  
+  // threadId
+  if (content.threadIdentifier != nil) {
+    iosDict[@"threadId"] = content.threadIdentifier;
+  }
+
+  // targetContentId
+  if (content.targetContentIdentifier != nil) {
+    iosDict[@"targetContentId"] = content.targetContentIdentifier;
+  }
+
+
+  // TODO: attachments
+  //  if (content.attachments != nil) {
+  //    iosDict[@"attachments"] =
+  //        [NotifeeCoreUtil DictionaryArrayToNotificationAttachments:content.attachments];
+  //  }
+  
+  dictionary[@"ios"] = iosDict;
+  
+  return dictionary;
+}
+
+/**
  * Returns a random string using UUID
  *
  * @param length int

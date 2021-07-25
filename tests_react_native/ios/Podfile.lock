@@ -456,15 +456,15 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CavyNativeReporter: b0aff4d3057c10cb6d57218634b66385364fe4fd
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: 214de5170a45693d340d23a44559e6c0eeea7b9b
+  FBReactNativeSpec: a107c606af03a1b8abfd5ede1a33a31451d9d565
   Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   FirebaseInstallations: 7f31798a8198c354eadcb87176d2090b62edc187
   FirebaseMessaging: c8871b0907dcf4e76de81241eb6a62be6d657d2f
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
