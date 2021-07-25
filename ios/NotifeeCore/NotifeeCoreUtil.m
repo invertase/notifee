@@ -577,10 +577,6 @@
 
   dictionary[@"subtitle"] = content.subtitle;
   dictionary[@"body"] = content.body;
-  dictionary[@"badge"] = content.badge;
-  dictionary[@"sound"] = content.sound;
-  dictionary[@"category"] = content.categoryIdentifier;
-  dictionary[@"thread-id"] = content.threadIdentifier;
   dictionary[@"data"] = [content.userInfo mutableCopy];
   
   // title
@@ -620,8 +616,13 @@
     iosDict[@"targetContentId"] = content.targetContentIdentifier;
   }
 
+  // TODO: parse sound
+  //  if (content.sound != nil) {
+  //    iosDict[@"sound"] = content.sound;
+  //  }
 
-  // TODO: attachments
+
+  // TODO: parse attachments
   //  if (content.attachments != nil) {
   //    iosDict[@"attachments"] =
   //        [NotifeeCoreUtil DictionaryArrayToNotificationAttachments:content.attachments];
