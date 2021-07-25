@@ -16,6 +16,7 @@ import {
   IOSNotificationPermissions,
 } from './NotificationIOS';
 import { PowerManagerInfo } from './PowerManagerInfo';
+import { DisplayedNotification, TriggerNotification } from '..';
 
 export interface Module {
   /**
@@ -27,7 +28,7 @@ export interface Module {
    * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
    * notifications.
    */
-  cancelAllNotifications(): Promise<void>;
+  cancelAllNotifications(notificationIds?: string[]): Promise<void>;
 
   /**
    * API used to cancel any displayed notifications.
@@ -35,12 +36,12 @@ export interface Module {
    * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
    * notifications.
    */
-  cancelDisplayedNotifications(): Promise<void>;
+  cancelDisplayedNotifications(notificationIds?: string[]): Promise<void>;
 
   /**
    * API used to cancel any trigger notifications.
    */
-  cancelTriggerNotifications(): Promise<void>;
+  cancelTriggerNotifications(notificationIds?: string[]): Promise<void>;
 
   /**
    * API used to cancel a single notification.
@@ -206,6 +207,16 @@ export interface Module {
   getTriggerNotificationIds(): Promise<string[]>;
 
   /**
+   * API used to return the notifications that are displayed.
+   */
+  getDisplayedNotifications(): Promise<DisplayedNotification[]>;
+
+  /**
+   * API used to return the trigger notifications that are pending.
+   */
+  getTriggerNotifications(): Promise<TriggerNotification[]>;
+
+  /**
    * API used to return a channel on supported Android devices.
    *
    * This API is used to return a `NativeAndroidChannel`. Returns `null` if no channel could be matched to
@@ -222,6 +233,24 @@ export interface Module {
    * a unknown channel ID is provided, `null` is returned.
    */
   getChannel(channelId: string): Promise<NativeAndroidChannel | null>;
+
+  /**
+   * API used to check if a channel is created.
+   *
+   * On iOS, this will default to true
+   *
+   * @platform android
+   */
+  isChannelCreated(channelId: string): Promise<boolean>;
+
+  /**
+   * API used to check if a channel is blocked.
+   *
+   * On iOS, this will default to false
+   *
+   * @platform android
+   */
+  isChannelBlocked(channelId: string): Promise<boolean>;
 
   /**
    * API used to return all channels on supported Android devices.

@@ -161,16 +161,39 @@ RCT_EXPORT_METHOD(cancelTriggerNotifications:
   }];
 }
 
-RCT_EXPORT_METHOD(createTriggerNotification:
-  (NSDictionary *)notification
-      trigger:
-      (NSDictionary *)trigger
+RCT_EXPORT_METHOD(cancelAllNotificationsWithIds:
+      (NSArray<NSString *> *)ids
       resolve:
       (RCTPromiseResolveBlock)resolve
       reject:
       (RCTPromiseRejectBlock)reject
 ) {
-  [NotifeeCore createTriggerNotification:notification withTrigger:trigger withBlock:^(NSError *_Nullable error) {
+  [NotifeeCore cancelAllNotificationsWithIds:kReactNativeNotifeeNotificationTypeAll withIds:ids withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+
+RCT_EXPORT_METHOD(cancelDisplayedNotificationsWithIds:
+      (NSArray<NSString *> *)ids
+      resolve:
+      (RCTPromiseResolveBlock)resolve
+      reject:
+      (RCTPromiseRejectBlock)reject
+) {
+  [NotifeeCore cancelAllNotificationsWithIds:kReactNativeNotifeeNotificationTypeDisplayed withIds:ids withBlock:^(NSError *_Nullable error) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+  }];
+}
+
+RCT_EXPORT_METHOD(cancelTriggerNotificationsWithIds:
+      (NSArray<NSString *> *)ids
+      resolve:
+      (RCTPromiseResolveBlock)resolve
+      reject:
+      (RCTPromiseRejectBlock)reject
+) {
+  [NotifeeCore cancelAllNotificationsWithIds:kReactNativeNotifeeNotificationTypeTrigger withIds:ids withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }
@@ -196,6 +219,19 @@ RCT_EXPORT_METHOD(displayNotification:
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }
+
+RCT_EXPORT_METHOD(createTriggerNotification:
+  (NSDictionary *)notification
+      trigger:
+      (NSDictionary *)trigger
+                  resolve:
+                  (RCTPromiseResolveBlock) resolve
+                  reject:
+                  (RCTPromiseRejectBlock) reject) {
+        [NotifeeCore createTriggerNotification:notification withTrigger:trigger withBlock:^(NSError *_Nullable error) {
+          [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
+    }];
+  }
 
 RCT_EXPORT_METHOD(requestPermission:
   (NSDictionary *) permissions
@@ -236,6 +272,26 @@ RCT_EXPORT_METHOD(getNotificationCategories:
 ) {
   [NotifeeCore getNotificationCategories:^(NSError *_Nullable error, NSArray<NSDictionary *> *categories) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:categories];
+  }];
+}
+
+RCT_EXPORT_METHOD(getDisplayedNotifications:
+  (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore getDisplayedNotifications:^(NSError *_Nullable error, NSArray<NSDictionary *> *notifications) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:notifications];
+  }];
+}
+
+RCT_EXPORT_METHOD(getTriggerNotifications:
+  (RCTPromiseResolveBlock) resolve
+      reject:
+      (RCTPromiseRejectBlock) reject
+) {
+  [NotifeeCore getTriggerNotifications:^(NSError *_Nullable error, NSArray<NSDictionary *> *notifications) {
+    [self resolve:resolve orReject:reject promiseWithError:error orResult:notifications];
   }];
 }
 

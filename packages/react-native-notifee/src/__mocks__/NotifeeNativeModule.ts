@@ -7,6 +7,8 @@ import NotifeeJSEventEmitter from '../NotifeeJSEventEmitter';
 
 export const mockNotifeeNativeModule = {
   getTriggerNotificationIds: jest.fn(),
+  getDisplayedNotifications: jest.fn(),
+  getTriggerNotifications: jest.fn(),
   cancelAllNotifications: jest.fn(),
   cancelDisplayedNotifications: jest.fn(),
   cancelTriggerNotifications: jest.fn(),
@@ -25,6 +27,8 @@ export const mockNotifeeNativeModule = {
   getChannels: jest.fn(),
   getChannelGroup: jest.fn(),
   getChannelGroups: jest.fn(),
+  isChannelBlocked: jest.fn(async () => false),
+  isChannelCreated: jest.fn(async () => true),
   getInitialNotification: jest.fn(),
   onBackgroundEvent: jest.fn(),
   onForegroundEvent: jest.fn(),

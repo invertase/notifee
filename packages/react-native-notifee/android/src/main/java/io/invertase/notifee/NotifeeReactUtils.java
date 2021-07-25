@@ -13,9 +13,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
-
 import androidx.annotation.Nullable;
-
+import app.notifee.core.EventSubscriber;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -29,11 +28,8 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.jstasks.HeadlessJsTaskContext;
 import com.facebook.react.jstasks.HeadlessJsTaskEventListener;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-
 import java.lang.reflect.Method;
 import java.util.List;
-
-import app.notifee.core.EventSubscriber;
 
 class NotifeeReactUtils {
   private static final SparseArray<GenericCallback> headlessTasks = new SparseArray<>();

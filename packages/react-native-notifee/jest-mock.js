@@ -37,7 +37,28 @@ export const testChannelGroup = {
   name: 'channel-group',
 };
 
+export const testTrigger = {
+  type: 'TIMESTAMP',
+  timestamp: new Date(Date.now()).getTime(),
+};
+
 export const testTriggerNotificationIds = ['trigger1', 'trigger2'];
+
+export const testTriggerNotifications = [
+  {
+    notification: testNotification,
+    trigger: testTrigger,
+  },
+];
+
+export const testDisplayedNotifications = [
+  {
+    id: testNotification.id,
+    date: testTrigger.timestamp,
+    notification: testNotification,
+    trigger: testTrigger,
+  },
+];
 
 export const testCategory = {
   id: 'test-category',
@@ -88,7 +109,11 @@ export default {
   getChannels: jest.fn(async () => [testChannel]),
   getChannelGroup: jest.fn(async () => testChannelGroup),
   getChannelGroups: jest.fn(async () => [testChannelGroup]),
+  isChannelBlocked: jest.fn(async () => false),
+  isChannelCreated: jest.fn(async () => true),
   getTriggerNotificationIds: jest.fn(async () => testTriggerNotificationIds),
+  getDisplayedNotifications: jest.fn(async () => testDisplayedNotifications),
+  getTriggerNotifications: jest.fn(async () => testTriggerNotifications),
   cancelAllNotifications: jest.fn(async () => {}),
   cancelDisplayedNotifications: jest.fn(async () => {}),
   cancelTriggerNotifications: jest.fn(async () => {}),
