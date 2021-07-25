@@ -12,7 +12,7 @@ const testHookStore = new TestHookStore();
 function TestApp() {
   return (
     <Tester
-      specs={[ApiSpec]}
+      specs={[NotificationSpec, ApiSpec]}
       store={testHookStore}
       customReporter={NativeReporter.reporter}
     >

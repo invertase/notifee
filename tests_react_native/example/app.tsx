@@ -166,10 +166,7 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      Notifee.createTriggerNotification(notification, {
-        type: TriggerType.TIMESTAMP,
-        timestamp: date.getTime(),
-      })
+      Notifee.displayNotification(notification)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
@@ -183,15 +180,15 @@ function Root(): any {
             <Button
               title={`get delivered notifications`}
               onPress={async (): Promise<void> => {
-                const ids = await Notifee.getDisplayedNotifications();
-                console.log('notifications', ids);
+                const notifications = await Notifee.getDisplayedNotifications();
+                console.log('notifications: ', notifications);
               }}
             />
             <Button
               title={`get trigger notifications`}
               onPress={async (): Promise<void> => {
-                const ids = await Notifee.getTriggerNotifications();
-                console.log('trigger notifications', ids);
+                const triggerNotifications = await Notifee.getTriggerNotifications();
+                console.log('trigger notifications: ', triggerNotifications);
               }}
             />
             <Button
@@ -208,15 +205,8 @@ function Root(): any {
             />
             <Button
               title={`Cancel ${id}`}
-              onPress={async (): void => {
-                console.log('id', id);
-                const date = new Date(Date.now());
-                date.setSeconds(date.getSeconds() + 4);
-                await Notifee.createTriggerNotification(
-                  { title: 'wah', id: 'trigger' },
-                  { type: TriggerType.TIMESTAMP, timestamp: date.getTime() },
-                );
-                Notifee.cancelTriggerNotifications([id, 'trigger']);
+              onPress={(): void => {
+                Notifee.cancelNotification(id);
               }}
             />
             <Button
@@ -242,7 +232,7 @@ function Root(): any {
               onPress={async (): Promise<void> => {
                 const buttonChannels = await Notifee.getChannels();
                 buttonChannels.forEach(res => {
-                  if (res.id === 'custom-vibrationsouttt') {
+                  if (res.id === 'custom-vibrations') {
                     console.log('res', res);
                   }
                 });

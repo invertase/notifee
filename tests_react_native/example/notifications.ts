@@ -45,6 +45,7 @@ export const notifications: { key: string; notification: Notification | Notifica
   {
     key: 'Basic',
     notification: {
+      id: 'basic',
       title: '<p style="color: #4caf50;"><b>Styled HTMLTitle</span></p></b></p> &#128576;',
       android: {
         channelId: 'high',

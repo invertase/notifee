@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import { expect } from 'chai';
 import { TestScope } from 'cavy';
 import notifee, {
@@ -9,6 +10,7 @@ import notifee, {
   TriggerType,
   RepeatFrequency,
 } from '@notifee/react-native';
+import { Platform } from 'react-native';
 
 export function NotificationSpec(spec: TestScope): void {
   spec.beforeEach(async () => {
@@ -52,8 +54,10 @@ export function NotificationSpec(spec: TestScope): void {
     spec.it('configures custom sounds correctly', async function () {
       const customSoundChannel = await notifee.getChannel('new_custom_sound');
       console.warn('customSoundChannel looks like: ' + JSON.stringify(customSoundChannel));
-      expect(customSoundChannel.soundURI).contains('horse.mp3');
-      expect(customSoundChannel.sound).equals('horse.mp3');
+      if (Platform.OS === 'android') {
+        expect(customSoundChannel.soundURI).contains('horse.mp3');
+        expect(customSoundChannel.sound).equals('horse.mp3');
+      }
     });
 
     spec.it('displays a notification', async function () {
@@ -273,9 +277,7 @@ export function NotificationSpec(spec: TestScope): void {
               }
             });
 
-            await notifee.createTriggerNotification(notification, trigger);
-
-            const triggerNotificationIds = await notifee.getTriggerNotificationIds();
+            return notifee.createTriggerNotification(notification, trigger);
           });
         });
       });

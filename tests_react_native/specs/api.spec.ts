@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import { expect } from 'chai';
 import { TestScope } from 'cavy';
 import notifee, {
@@ -199,28 +200,34 @@ export function ApiSpec(spec: TestScope): void {
     });
 
     spec.it('cancels display notifications by id', async function () {
-      await notifee.displayNotification({
-        id: 'hello',
-        title: 'Hello',
-        body: 'World',
-        android: {
-          channelId: 'high',
-        },
-        ios: {
-          badgeCount: 1,
-        },
+      return new Promise(async resolve => {
+        await notifee.displayNotification({
+          id: 'hello',
+          title: 'Hello',
+          body: 'World',
+          android: {
+            channelId: 'high',
+          },
+          ios: {
+            badgeCount: 1,
+          },
+        });
+
+        // Before
+        let notifications = await notifee.getDisplayedNotifications();
+        expect(notifications?.length).equals(1);
+
+        // Test;
+        await notifee.cancelDisplayedNotifications(['hello']);
+
+        // TODO: find out why there needs to be a delay on Android
+        setTimeout(async () => {
+          // After
+          notifications = await notifee.getDisplayedNotifications();
+          expect(notifications?.length).equals(0);
+          resolve();
+        }, 1000);
       });
-
-      // Before
-      let notifications = await notifee.getDisplayedNotifications();
-      expect(notifications?.length).equals(1);
-
-      // Test;
-      await notifee.cancelDisplayedNotifications(['hello']);
-
-      // After
-      notifications = await notifee.getDisplayedNotifications();
-      expect(notifications?.length).equals(0);
     });
 
     spec.it('cancels trigger notifications by id', async function () {
