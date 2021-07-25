@@ -567,9 +567,9 @@
  *
  * @param request UNNotificationRequest
  */
-+ (NSDictionary *)parseUNNotificationRequestToNotification:(UNNotificationRequest *)request {
++ (NSDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-  NSMutableDictionary *iosDict = [[NSMutableArray alloc] init];
+  NSMutableDictionary *iosDict = [NSMutableDictionary dictionary];
      
   dictionary[@"id"] = request.identifier;
    
