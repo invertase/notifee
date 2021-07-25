@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.10.0
+- **[Android/iOS]**: Introduces the following APIs: `getDeliveredNotifications`, `getTriggerNotifications`, `isChannelBlocked`, `isChannelCreated`, `cancelAllNotifications(ids)`, `cancelDisplayedNotifications(ids)`,  `cancelTriggerNotifications(ids)`.
+- **[Android]**: Fixes an issue when setting a custom sound on a notification channel (Fixes [#341](https://github.com/notifee/react-native-notifee/issues/341))
+
 ## 1.9.2
 - **[Android]**: Fixes an issue where an error is thrown when the intent was null in rare cases for foreground service events.
 
