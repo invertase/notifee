@@ -6,7 +6,7 @@ previous: /react-native/docs/license-keys
 ---
 
 ## 1.10.0
-- **[Android/iOS]**: Introduces the following APIs: `getDeliveredNotifications`, `getTriggerNotifications`, `isChannelBlocked`, `isChannelCreated`, `cancelAllNotifications(ids)`, `cancelDisplayedNotifications(ids)`,  `cancelTriggerNotifications(ids)`.
+- **[Android/iOS]**: Introduces the following APIs: `getDisplayedNotifications`, `getTriggerNotifications`, `isChannelBlocked`, `isChannelCreated`, `cancelAllNotifications(ids)`, `cancelDisplayedNotifications(ids)`,  `cancelTriggerNotifications(ids)`.
 - **[Android]**: Fixes an issue when setting a custom sound on a notification channel (Fixes [#341](https://github.com/notifee/react-native-notifee/issues/341)) - **If you were using custom sounds on Android>7 prior to this, you will need to create a *new* notification channel or the reference to your custom sound on the channel will likely not survive app updates. We apologize for the inconvenience**
 
 ## 1.9.2
