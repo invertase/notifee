@@ -5,7 +5,7 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
-## 1.10.0
+## 1.10.1
 - **[Android]**: Fixes an issue on Android to prevent `cancelDisplayedNotifications` cancelling trigger notifications. (Fixes [#349](https://github.com/notifee/react-native-notifee/issues/349))
 
 ## 1.10.0
