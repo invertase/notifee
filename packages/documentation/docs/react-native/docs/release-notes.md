@@ -6,6 +6,9 @@ previous: /react-native/docs/license-keys
 ---
 
 ## 1.10.0
+- **[Android]**: Fixes an issue on Android to prevent `cancelDisplayedNotifications` cancelling trigger notifications. (Fixes [#349](https://github.com/notifee/react-native-notifee/issues/349))
+
+## 1.10.0
 - **[Android/iOS]**: Introduces the following APIs:
   - `getDisplayedNotifications`
   - `getTriggerNotifications`
