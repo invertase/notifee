@@ -438,13 +438,15 @@ class NotificationManager {
               }
               return null;
             })
-        .continueWith(CACHED_THREAD_POOL, NotifeeAlarmManager.cancelAllNotifications())
-        .continueWith(
-            task -> {
-              // delete all from database
-              WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
-              return null;
-            });
+        .continueWith(CACHED_THREAD_POOL, task -> {
+          if (notificationType == NOTIFICATION_TYPE_TRIGGER
+            || notificationType == NOTIFICATION_TYPE_ALL) {
+            NotifeeAlarmManager.cancelAllNotifications();
+            // delete all from database
+            WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
+          }
+          return null;
+        });
   }
 
   static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids) {
