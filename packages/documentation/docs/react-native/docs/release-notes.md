@@ -17,7 +17,7 @@ previous: /react-native/docs/license-keys
   - `cancelAllNotifications(ids)`
   - `cancelDisplayedNotifications(ids)`
   - `cancelTriggerNotifications(ids)`
-- **[Android]**: Fixes an issue when setting a custom sound on a notification channel (Fixes [#341](https://github.com/notifee/react-native-notifee/issues/341)) - **If you were using custom sounds on Android>7 prior to this, you will need to create a *new* notification channel or the reference to your custom sound on the channel will likely not survive app updates. We apologize for the inconvenience**
+- **BREAKING**: Fixes an issue when setting a custom sound on a notification channel (Fixes [#341](https://github.com/notifee/react-native-notifee/issues/341)). Sounds now must be specified without the file extension, previously it was optional. **If you were using custom sounds on Android>7 prior to this, you will need to create a *new* notification channel or the reference to your custom sound on the channel will likely not survive app updates. We apologize for the inconvenience**
 
 ## 1.9.2
 - **[Android]**: Fixes an issue where an error is thrown when the intent was null in rare cases for foreground service events.
