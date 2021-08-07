@@ -423,21 +423,29 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void getInitialNotification(MethodCallResult<Bundle> result) {
+  public void getInitialNotification(Activity activity, MethodCallResult<Bundle> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getInitialNotification");
       result.onComplete(null, null);
     } else {
+      // get intent from current activity
+      Intent intent = activity.getIntent();
       InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
-      if (event == null) {
-        result.onComplete(null, null);
-      } else {
-        Bundle initialNotificationBundle = new Bundle();
+
+      Bundle initialNotificationBundle = new Bundle();
+
+      if (event != null) {
         initialNotificationBundle.putAll(event.getExtras());
         initialNotificationBundle.putBundle(
-            "notification", event.getNotificationModel().toBundle());
+          "notification", event.getNotificationModel().toBundle());
         result.onComplete(null, initialNotificationBundle);
-      }
+      } else if (intent != null && intent.getExtras() != null && intent.hasExtra("notification")) {
+          initialNotificationBundle.putBundle(
+            "notification", intent.getBundleExtra("notification"));
+          result.onComplete(null, initialNotificationBundle);
+        } else {
+          result.onComplete(null, null);
+        }
     }
   }
 
