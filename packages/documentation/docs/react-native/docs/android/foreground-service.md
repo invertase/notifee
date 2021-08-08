@@ -34,8 +34,10 @@ a notification object when called.
 ```js
 import notifee from '@notifee/react-native';
 
-notifee.registerForegroundService(async (notification) => {
-    // Add your long running task...
+notifee.registerForegroundService((notification) => {
+  return new Promise(() => {
+    // Long running task...
+  });
 });
 ```
 
