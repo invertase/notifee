@@ -265,6 +265,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   public void getInitialNotification(Promise promise) {
     Notifee.getInstance()
         .getInitialNotification(
+            getCurrentActivity(),
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
