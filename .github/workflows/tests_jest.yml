@@ -6,10 +6,6 @@ on:
     paths-ignore:
       - 'docs/**'
       - '**/*.md'
-  push:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.md'
 
 jobs:
   jest:
