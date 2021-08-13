@@ -90,7 +90,6 @@ async function onDisplayNotification() {
   // See https://notifee.app/react-native/docs/ios/permissions
   await notifee.requestPermission();
 
-
   const notificationId = await notifee.displayNotification({
     id: '123',
     title: 'Notification Title',
