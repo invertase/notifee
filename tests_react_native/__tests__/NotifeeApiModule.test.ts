@@ -98,21 +98,21 @@ describe('Notifee Api Module', () => {
     const res = await apiModule.cancelAllNotifications(['id']);
 
     expect(res).toBe(undefined);
-    expect(mockNotifeeNativeModule.cancelAllNotifications).nthCalledWith(1, ['id']);
+    expect(mockNotifeeNativeModule.cancelAllNotificationsWithIds).nthCalledWith(1, ['id']);
   });
 
   test('cancelDisplayedNotifications(ids)', async () => {
     const res = await apiModule.cancelDisplayedNotifications(['id']);
 
     expect(res).toBe(undefined);
-    expect(mockNotifeeNativeModule.cancelDisplayedNotifications).nthCalledWith(1, ['id']);
+    expect(mockNotifeeNativeModule.cancelDisplayedNotificationsWithIds).nthCalledWith(1, ['id']);
   });
 
   test('cancelTriggerNotifications(ids)', async () => {
     const res = await apiModule.cancelTriggerNotifications(['id']);
 
     expect(res).toBe(undefined);
-    expect(mockNotifeeNativeModule.cancelTriggerNotifications).nthCalledWith(1, ['id']);
+    expect(mockNotifeeNativeModule.cancelTriggerNotificationsWithIds).nthCalledWith(1, ['id']);
   });
 
   test('cancelNotification', async () => {
