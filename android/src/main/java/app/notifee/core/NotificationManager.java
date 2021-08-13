@@ -277,6 +277,7 @@ class NotificationManager {
 
                 if (fullScreenActionBundle.getMainComponent() != null) {
                   launchIntent.putExtra("mainComponent", fullScreenActionBundle.getMainComponent());
+                  launchIntent.putExtra("notification", notificationModel.toBundle());
                   EventBus.postSticky(
                       new MainComponentEvent(fullScreenActionBundle.getMainComponent()));
                 }
@@ -383,12 +384,12 @@ class NotificationManager {
     return Tasks.call(CACHED_THREAD_POOL, builderCallable)
         // get a large image bitmap if largeIcon is set
         .continueWith(CACHED_THREAD_POOL, largeIconContinuation)
-        // set full screen action, if fullScreenAction is set
-        .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation)
         // build notification actions, tasks based to allow image fetching
         .continueWith(CACHED_THREAD_POOL, actionsContinuation)
         // build notification style, tasks based to allow image fetching
-        .continueWith(CACHED_THREAD_POOL, styleContinuation);
+        .continueWith(CACHED_THREAD_POOL, styleContinuation)
+        // set full screen action, if fullScreenAction is set
+        .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation);
   }
 
   static Task<Void> cancelNotification(
