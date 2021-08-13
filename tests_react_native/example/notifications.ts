@@ -14,7 +14,6 @@ export const notifications: { key: string; notification: Notification | Notifica
         channelId: 'custom_sound',
         pressAction: {
           id: 'default',
-          launchActivity: 'rand',
         },
       },
       ios: {
@@ -34,9 +33,6 @@ export const notifications: { key: string; notification: Notification | Notifica
         importance: AndroidImportance.HIGH,
         fullScreenAction: {
           id: 'default',
-          launchActivity: 'random',
-          // launchActivity: 'com.notifee.testing.FullScreenActivity',
-          // launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
           mainComponent: 'full_screen',
         },
       },
@@ -51,7 +47,6 @@ export const notifications: { key: string; notification: Notification | Notifica
         channelId: 'high',
         pressAction: {
           id: 'default',
-          launchActivity: 'default',
         },
       },
       ios: {},

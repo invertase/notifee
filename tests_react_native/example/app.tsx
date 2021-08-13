@@ -23,7 +23,6 @@ import Notifee, {
   EventType,
   Event,
   IOSAuthorizationStatus,
-  TriggerType,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
