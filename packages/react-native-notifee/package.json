@@ -14,7 +14,8 @@
     "prepare": "yarn run build",
     "prepublishOnly": "cd ../.. && yarn run build:core",
     "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
-    "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google"
+    "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
+    "gen-docs": "path-exists ../../docs && typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
   },
   "devDependencies": {
     "@types/react-native": "0.64.10",
@@ -24,8 +25,11 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "genversion": "^3.0.0",
+    "path-exists-cli": "^2.0.0",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
+    "typedoc": "^0.21.5",
+    "typedoc-plugin-markdown": "^3.10.4",
     "typescript": "^4.3.2"
   },
   "peerDependencies": {
