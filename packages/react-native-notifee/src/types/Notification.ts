@@ -139,8 +139,6 @@ export interface TriggerNotification {
 
   /**
    * The trigger that is used to schedule the notification
-   *
-   * @platform iOS
    */
   trigger: Trigger;
 }
