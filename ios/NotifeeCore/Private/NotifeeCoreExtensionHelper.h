@@ -22,10 +22,6 @@ static NSString *const kPayloadOptionsImageURLName = @"image";
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 
-- (void)populateNotificationContent:(UNMutableNotificationContent *)content
-                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler
-    __attribute__((deprecated));
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,11 +22,6 @@ static NSString *const kImagePathPrefix = @"image/";
   return instance;
 }
 
-- (void)populateNotificationContent:(UNMutableNotificationContent *)content
-                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
-  [self populateNotificationContent:nil withContent:content withContentHandler:contentHandler];
-}
-
 - (void)populateNotificationContent:(UNNotificationRequest *)request
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {

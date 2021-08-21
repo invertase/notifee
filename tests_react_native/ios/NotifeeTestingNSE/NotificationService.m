@@ -27,9 +27,12 @@
   self.bestAttemptContent.title =
       [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
 
-  //    self.contentHandler(self.bestAttemptContent);
+  // Deprecated
+  //  [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
+  //                                   withContentHandler:contentHandler];
 
-  [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
+  [NotifeeExtensionHelper populateNotificationContent:request
+                                          withContent:self.bestAttemptContent
                                    withContentHandler:contentHandler];
 }
 
