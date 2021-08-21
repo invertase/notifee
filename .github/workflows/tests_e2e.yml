@@ -7,11 +7,6 @@ on:
       - 'docs/**'
       - '**/*.md'
 
-  push:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.md'
-
 jobs:
   # ------------------
   #      Android
