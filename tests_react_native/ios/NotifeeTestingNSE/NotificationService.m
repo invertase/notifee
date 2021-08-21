@@ -1,8 +1,8 @@
 //
 //  NotificationService.m
-//  NotificationServiceExtension
+//  NotifeeTestingNSE
 //
-//  Created by Helena Ford on 08/03/2021.
+//  Created by Helena Ford on 21/08/2021.
 //  Copyright © 2021 Invertase. All rights reserved.
 //
 
@@ -22,6 +22,12 @@
                    withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
   self.contentHandler = contentHandler;
   self.bestAttemptContent = [request.content mutableCopy];
+
+  // Modify the notification content here...
+  self.bestAttemptContent.title =
+      [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
+
+  //    self.contentHandler(self.bestAttemptContent);
 
   [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
                                    withContentHandler:contentHandler];

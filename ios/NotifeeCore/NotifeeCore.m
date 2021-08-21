@@ -72,40 +72,45 @@
  * @param ids NSInteger
  * @param block notifeeMethodVoidBlock
  */
-+ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType withIds:(NSArray<NSString *> *)ids withBlock:(notifeeMethodVoidBlock)block {
++ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType
+                              withIds:(NSArray<NSString *> *)ids
+                            withBlock:(notifeeMethodVoidBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
   // cancel displayed notifications
   if (notificationType == NotifeeCoreNotificationTypeDisplayed ||
       notificationType == NotifeeCoreNotificationTypeAll)
-    [center removeDeliveredNotificationsWithIdentifiers: ids];
+    [center removeDeliveredNotificationsWithIdentifiers:ids];
 
   // cancel trigger notifications
   if (notificationType == NotifeeCoreNotificationTypeTrigger ||
       notificationType == NotifeeCoreNotificationTypeAll)
-    [center removePendingNotificationRequestsWithIdentifiers: ids];
+    [center removePendingNotificationRequestsWithIdentifiers:ids];
   block(nil);
 }
 
 + (void)getDisplayedNotifications:(notifeeMethodNSArrayBlock)block {
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
-  [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> * _Nonnull deliveredNotifications) {
-   
+  NSMutableArray *triggerNotifications = [[NSMutableArray alloc] init];
+  [center getDeliveredNotificationsWithCompletionHandler:^(
+              NSArray<UNNotification *> *_Nonnull deliveredNotifications) {
     for (UNNotification *deliveredNotification in deliveredNotifications) {
       NSMutableDictionary *triggerNotification = [NSMutableDictionary dictionary];
       triggerNotification[@"id"] = deliveredNotification.request.identifier;
-      
 
-      triggerNotification[@"date"] = [NotifeeCoreUtil convertToTimestamp:deliveredNotification.date];
-      triggerNotification[@"notification"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoNotification];
-      triggerNotification[@"trigger"] = deliveredNotification.request.content.userInfo[kNotifeeUserInfoTrigger];
-      
+      triggerNotification[@"date"] =
+          [NotifeeCoreUtil convertToTimestamp:deliveredNotification.date];
+      triggerNotification[@"notification"] =
+          deliveredNotification.request.content.userInfo[kNotifeeUserInfoNotification];
+      triggerNotification[@"trigger"] =
+          deliveredNotification.request.content.userInfo[kNotifeeUserInfoTrigger];
+
       if (triggerNotification[@"notification"] == nil) {
         // parse remote notification
-        triggerNotification[@"notification"] = [NotifeeCoreUtil parseUNNotificationRequest:deliveredNotification.request];
+        triggerNotification[@"notification"] =
+            [NotifeeCoreUtil parseUNNotificationRequest:deliveredNotification.request];
       }
-     
+
       [triggerNotifications addObject:triggerNotification];
     }
     block(nil, triggerNotifications);
@@ -117,14 +122,14 @@
 
   [center getPendingNotificationRequestsWithCompletionHandler:^(
               NSArray<UNNotificationRequest *> *_Nonnull requests) {
-    NSMutableArray* triggerNotifications = [[NSMutableArray alloc] init];
+    NSMutableArray *triggerNotifications = [[NSMutableArray alloc] init];
 
     for (UNNotificationRequest *request in requests) {
       NSMutableDictionary *triggerNotification = [NSMutableDictionary dictionary];
 
       triggerNotification[@"notification"] = request.content.userInfo[kNotifeeUserInfoNotification];
       triggerNotification[@"trigger"] = request.content.userInfo[kNotifeeUserInfoTrigger];
-     
+
       [triggerNotifications addObject:triggerNotification];
     }
 
@@ -349,8 +354,10 @@
     }
   }
 
-  // attachments
-  if (iosDict[@"attachments"] != nil) {
+  // Ignore downloading attachments here if from NSE
+  BOOL fromExtension = [notification[@"fromExtension"] boolValue];
+
+  if (iosDict[@"attachments"] != nil && !fromExtension) {
     content.attachments =
         [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
   }
