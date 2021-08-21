@@ -17,21 +17,23 @@
 
 #import "AppDelegate.h"
 
+#import <Firebase/Firebase.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <Firebase/Firebase.h>
 
 @import Firebase;
 
 @implementation AppDelegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
   [[UIApplication sharedApplication] registerForRemoteNotifications];
-  
+
   NSURL *jsCodeLocation;
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"
+                                                                  fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"testing"
@@ -43,21 +45,26 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
-  
+
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *, id> *)options {
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
   return NO;
 }
 
-- (BOOL)application:(nonnull UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= 12000) /* __IPHONE_12_0 */
-    (nonnull void (^)(NSArray<id <UIUserActivityRestoring>> *_Nullable))restorationHandler {
+- (BOOL)application:(nonnull UIApplication *)application
+    continueUserActivity:(nonnull NSUserActivity *)userActivity
+      restorationHandler:
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && \
+    (__IPHONE_OS_VERSION_MAX_ALLOWED >= 12000) /* __IPHONE_12_0 */
+          (nonnull void (^)(NSArray<id<UIUserActivityRestoring>> *_Nullable))restorationHandler {
 #else
-  (nonnull void (^)(NSArray *_Nullable))restorationHandler {
+          (nonnull void (^)(NSArray *_Nullable))restorationHandler {
 #endif
   return NO;
 }
