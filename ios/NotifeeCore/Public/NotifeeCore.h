@@ -58,7 +58,9 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 
 + (void)cancelAllNotifications:(NSInteger)notificationType withBlock:(notifeeMethodVoidBlock)block;
 
-+ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType withIds:(NSArray<NSString *> *)ids withBlock:(notifeeMethodVoidBlock)block;
++ (void)cancelAllNotificationsWithIds:(NSInteger)notificationType
+                              withIds:(NSArray<NSString *> *)ids
+                            withBlock:(notifeeMethodVoidBlock)block;
 
 + (void)displayNotification:(NSDictionary *)notification withBlock:(notifeeMethodVoidBlock)block;
 

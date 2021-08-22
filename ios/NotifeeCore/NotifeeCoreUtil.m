@@ -7,9 +7,9 @@
 //
 
 #import "Private/NotifeeCoreUtil.h"
-#import <UIKit/UIKit.h>
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
+#import <UIKit/UIKit.h>
 #import "Private/NotifeeCore+NSURLSession.h"
 
 @implementation NotifeeCoreUtil
@@ -559,7 +559,7 @@
  * @param date NSDate
  */
 + (NSNumber *)convertToTimestamp:(NSDate *)date {
-  return [NSNumber numberWithDouble:([date timeIntervalSince1970]*1000)];
+  return [NSNumber numberWithDouble:([date timeIntervalSince1970] * 1000)];
 }
 
 /**
@@ -570,15 +570,15 @@
 + (NSDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   NSMutableDictionary *iosDict = [NSMutableDictionary dictionary];
-     
+
   dictionary[@"id"] = request.identifier;
-   
+
   UNNotificationContent *content = request.content;
 
   dictionary[@"subtitle"] = content.subtitle;
   dictionary[@"body"] = content.body;
   dictionary[@"data"] = [content.userInfo mutableCopy];
-  
+
   // title
   if (content.title != nil) {
     dictionary[@"title"] = content.title;
@@ -598,14 +598,14 @@
 
   // categoryId
   if (content.categoryIdentifier != nil) {
-    iosDict[@"categoryId"]  = content.categoryIdentifier;
+    iosDict[@"categoryId"] = content.categoryIdentifier;
   }
 
   // launchImageName
   if (content.launchImageName != nil) {
-    iosDict[@"launchImageName"]  = content.launchImageName;
+    iosDict[@"launchImageName"] = content.launchImageName;
   }
-  
+
   // threadId
   if (content.threadIdentifier != nil) {
     iosDict[@"threadId"] = content.threadIdentifier;
@@ -621,15 +621,14 @@
   //    iosDict[@"sound"] = content.sound;
   //  }
 
-
   // TODO: parse attachments
   //  if (content.attachments != nil) {
   //    iosDict[@"attachments"] =
   //        [NotifeeCoreUtil DictionaryArrayToNotificationAttachments:content.attachments];
   //  }
-  
+
   dictionary[@"ios"] = iosDict;
-  
+
   return dictionary;
 }
 
