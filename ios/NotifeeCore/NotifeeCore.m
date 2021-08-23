@@ -174,6 +174,9 @@
                                                                         trigger:nil];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
+  NSMutableDictionary *notificationDetail = [notification mutableCopy];
+  notificationDetail[@"remote"] = @NO;
+
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
@@ -210,6 +213,9 @@
                                                                         content:content
                                                                         trigger:unTrigger];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+  NSMutableDictionary *notificationDetail = [notification mutableCopy];
+  notificationDetail[@"remote"] = @NO;
 
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
@@ -693,11 +699,11 @@
   return [NotifeeCoreUtil notifeeUIApplication];
 };
 
-+ (void)populateNotificationContent: (UNNotificationRequest *)request
-                        withContent: (UNMutableNotificationContent *)content
++ (void)populateNotificationContent:(UNNotificationRequest *)request
+                        withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
   return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:request
-                                                                withContent: content
+                                                                withContent:content
                                                          withContentHandler:contentHandler];
 };
 
