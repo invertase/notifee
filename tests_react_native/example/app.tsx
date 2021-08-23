@@ -101,7 +101,7 @@ function Root(): any {
     await Promise.all(channels.map($ => Notifee.createChannel($)));
     await Notifee.setNotificationCategories([
       {
-        id: 'actions2',
+        id: 'actions',
         actions: [
           {
             id: 'like',
@@ -113,29 +113,25 @@ function Root(): any {
           },
         ],
       },
+      {
+        id: 'stop',
+        actions: [
+          {
+            id: 'stop',
+            title: 'Dismiss',
+          },
+        ],
+      },
+      {
+        id: 'dismiss',
+        actions: [
+          {
+            id: 'dismiss',
+            title: 'Dismiss',
+          },
+        ],
+      },
     ]);
-    // await Notifee.setNotificationCategories([
-    //   {
-    //     id: 'stop',
-    //     actions: [
-    //       {
-    //         id: 'stop',
-    //         title: 'Dismiss',
-    //       },
-    //     ],
-    //   },
-    // ]);
-    // await Notifee.setNotificationCategories([
-    //   {
-    //     id: 'dismiss',
-    //     actions: [
-    //       {
-    //         id: 'dismiss',
-    //         title: 'Dismiss',
-    //       },
-    //     ],
-    //   },
-    // ]);
   }
 
   useEffect(() => {
