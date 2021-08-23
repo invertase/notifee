@@ -354,10 +354,10 @@
     }
   }
 
-  // Ignore downloading attachments here if from NSE
-  BOOL fromExtension = [notification[@"fromExtension"] boolValue];
+  // Ignore downloading attachments here if remote notifications via NSE
+  BOOL remote = [notification[@"remote"] boolValue];
 
-  if (iosDict[@"attachments"] != nil && !fromExtension) {
+  if (iosDict[@"attachments"] != nil && !remote) {
     content.attachments =
         [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
   }
@@ -693,9 +693,11 @@
   return [NotifeeCoreUtil notifeeUIApplication];
 };
 
-+ (void)populateNotificationContent:(UNMutableNotificationContent *)content
++ (void)populateNotificationContent: (UNNotificationRequest *)request
+                        withContent: (UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
-  return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
+  return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:request
+                                                                withContent: content
                                                          withContentHandler:contentHandler];
 };
 

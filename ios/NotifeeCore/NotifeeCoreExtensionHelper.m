@@ -35,14 +35,14 @@ static NSString *const kImagePathPrefix = @"image/";
   // fcm: apns: { payload: {notifee_options: {} } }
   NSMutableDictionary *options = [self.bestAttemptContent.userInfo[@"notifee_options"] mutableCopy];
 
-  options[@"fromExtension"] = @YES;
+  options[@"remote"] = @YES;
 
   // Convert options to Notification and set defaults
   if (options[@"data"] == nil) {
     options[@"data"] = [NSDictionary dictionary];
   }
 
-  // Convert options to Notification and set defaults
+  // Pass id to event handler
   if (request != nil && options[@"id"] == nil) {
     options[@"id"] = request.identifier;
   }
