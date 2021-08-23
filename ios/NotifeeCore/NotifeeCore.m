@@ -183,7 +183,7 @@
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeDelivered),
                  @"detail" : @{
-                   @"notification" : notification,
+                   @"notification" : notificationDetail,
                  }
                }];
              }
@@ -223,7 +223,7 @@
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
                  @"detail" : @{
-                   @"notification" : notification,
+                   @"notification" : notificationDetail,
                  }
                }];
              }
