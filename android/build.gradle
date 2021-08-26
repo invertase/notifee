@@ -96,25 +96,6 @@ android {
   }
 }
 
-android.libraryVariants.all { variant ->
-  def variantName = variant.name.capitalize()
-  def assembleTaskName = "assemble${variantName}"
-  def copyTaskName = "copy${variantName}Artifacts"
-
-  task(copyTaskName, type: Copy, dependsOn: assembleTaskName, group: "build") {
-    variant.outputs.each { output ->
-      def newOutputName = "notifee_core_" + output.name + ".aar"
-      from(output.outputFile.parent) {
-        include output.outputFile.name
-        rename output.outputFile.name, newOutputName
-      }
-    }
-    into new File("$project.rootDir/../packages/react-native/android/libs")
-  }
-
-  project.tasks.getByName(assembleTaskName).finalizedBy(copyTaskName)
-}
-
 repositories {
   google()
   mavenCentral()
@@ -146,4 +127,26 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0' // see above
   androidTestImplementation "androidx.room:room-testing:$room_version"
   androidTestImplementation "androidx.test:monitor:1.4.0"
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            project.tasks.publishAarPublicationToMavenLocal.dependsOn("assembleRelease")
+            groupId 'app.notifee'
+            artifactId 'core'
+            version '202108261754'
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            url = "$rootDir/../packages/react-native/android/libs/"
+        }
+        project.tasks.publishAarPublicationToMavenRepository.dependsOn("assembleRelease")
+
+    }
 }
