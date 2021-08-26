@@ -81,3 +81,4 @@ yarn validate:all:ts
 1. Deploy website ([notifee.app](https://github.com/invertase/notifee-web))
 1. Create a new release on [GitHub](https://github.com/notifee/react-native-notifee/releases) and tag as latest release.
 1. Add to [Release Status](https://github.com/notifee/react-native-notifee/issues/1) and update any other relevant issues.
+ 
