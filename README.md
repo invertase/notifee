@@ -55,6 +55,10 @@ The following package scripts are exported to help you run tests;
 
 Tests can be found in the `tests_react_native/specs` directory.
 
+FIXME: Currently to get native code working correctly you need to do this:
+`cd tests_react_native/node_modules/@notifee && \rm -fr react-native && ln -s ../../../packages/react-native .`
+...that allows xcodebuild and android to link in the raw / maybe-unpublished code from local files instead of NPM package
+
 To run tests, use these commands:
 
 - `Android`: run `yarn tests_rn:android:test`
