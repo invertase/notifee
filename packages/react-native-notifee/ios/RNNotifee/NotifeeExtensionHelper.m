@@ -19,9 +19,19 @@
 
 @implementation NotifeeExtensionHelper
 
++ (void)populateNotificationContent:(UNNotificationRequest *)request
+                        withContent:(UNMutableNotificationContent *)content
+                 withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
+  [NotifeeCore populateNotificationContent:request
+                               withContent:content
+                        withContentHandler:contentHandler];
+};
+
 + (void)populateNotificationContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
-  [NotifeeCore populateNotificationContent:content withContentHandler:contentHandler];
+  [NotifeeExtensionHelper populateNotificationContent:nil
+                                          withContent:content
+                                   withContentHandler:contentHandler];
 };
 
 @end

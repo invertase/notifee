@@ -67,6 +67,13 @@ export interface Notification {
    * @platform ios
    */
   ios?: NotificationIOS;
+
+  /**
+   * Will be populated if it's a remote notification
+   *
+   * @platform ios
+   */
+  readonly remote?: boolean;
 }
 
 /**
@@ -76,6 +83,10 @@ export interface Notification {
  *
  * This interface is returned from [`getInitialNotification`](/react-native/reference/getinitialnotification) when
  * an initial notification is available.
+ *
+ * Deprecated for iOS in favour of `onForegroundEvent`
+ *
+ * @platform android
  */
 export interface InitialNotification {
   /**
