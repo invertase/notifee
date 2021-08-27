@@ -242,7 +242,7 @@ export function validateAndroidMessagingStyleMessage(
   if (objectHasProperty(message, 'person') && message.person !== undefined) {
     try {
       out.person = validateAndroidPerson(message.person);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`'message.person' is invalid. ${e.message}`);
     }
   }
@@ -263,7 +263,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
 
   try {
     person = validateAndroidPerson(style.person);
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`'notification.android.style' MessagingStyle: ${e.message}.`);
   }
 
@@ -276,7 +276,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
   for (let i = 0; i < style.messages.length; i++) {
     try {
       messages.push(validateAndroidMessagingStyleMessage(style.messages[i]));
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(
         `'notification.android.style' MessagingStyle: invalid message at index ${i}. ${e.message}`,
       );

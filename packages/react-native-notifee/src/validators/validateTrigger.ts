@@ -83,7 +83,7 @@ function validateTimestampTrigger(trigger: TimestampTrigger): TimestampTrigger {
     } else {
       try {
         out.alarmManager = validateTimestampAlarmManager(trigger.alarmManager);
-      } catch (e) {
+      } catch (e: any) {
         throw new Error(`'trigger.alarmManager' ${e.message}.`);
       }
     }

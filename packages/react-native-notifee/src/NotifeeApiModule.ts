@@ -179,7 +179,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     let options: AndroidChannel;
     try {
       options = validateAndroidChannel(channel);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.createChannel(*) ${e.message}`);
     }
 
@@ -206,7 +206,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       for (let i = 0; i < channels.length; i++) {
         options[i] = validateAndroidChannel(channels[i]);
       }
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.createChannels(*) 'channels' a channel is invalid: ${e.message}`);
     }
 
@@ -221,7 +221,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     let options: AndroidChannelGroup;
     try {
       options = validateAndroidChannelGroup(channelGroup);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.createChannelGroup(*) ${e.message}`);
     }
 
@@ -250,7 +250,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       for (let i = 0; i < channelGroups.length; i++) {
         options[i] = validateAndroidChannelGroup(channelGroups[i]);
       }
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(
         `notifee.createChannelGroups(*) 'channelGroups' a channel group is invalid: ${e.message}`,
       );
@@ -291,7 +291,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     let options: Notification;
     try {
       options = validateNotification(notification);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.displayNotification(*) ${e.message}`);
     }
 
@@ -309,13 +309,13 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     try {
       options = validateNotification(notification);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.createTriggerNotification(*) ${e.message}`);
     }
 
     try {
       triggerOptions = validateTrigger(trigger);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.createTriggerNotification(*) ${e.message}`);
     }
 
@@ -430,7 +430,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     let options: IOSNotificationPermissions;
     try {
       options = validateIOSPermissions(permissions);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`notifee.requestPermission(*) ${e.message}`);
     }
 
@@ -465,7 +465,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       for (let i = 0; i < categories.length; i++) {
         options[i] = validateIOSCategory(categories[i]);
       }
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(
         `notifee.setNotificationCategories(*) 'categories' a category is invalid: ${e.message}`,
       );

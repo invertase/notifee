@@ -94,7 +94,7 @@ export default function validateAndroidNotification(
       for (let i = 0; i < android.actions.length; i++) {
         actions.push(validateAndroidAction(android.actions[i]));
       }
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`'notification.android.actions' invalid AndroidAction. ${e.message}.`);
     }
 
@@ -383,7 +383,7 @@ export default function validateAndroidNotification(
   if (objectHasProperty(android, 'pressAction') && !isUndefined(android.pressAction)) {
     try {
       out.pressAction = validateAndroidPressAction(android.pressAction);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`'notification.android.pressAction' ${e.message}`);
     }
   }
@@ -394,7 +394,7 @@ export default function validateAndroidNotification(
   if (objectHasProperty(android, 'fullScreenAction') && !isUndefined(android.fullScreenAction)) {
     try {
       out.fullScreenAction = validateAndroidFullScreenAction(android.fullScreenAction);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`'notification.android.fullScreenAction' ${e.message}`);
     }
   }

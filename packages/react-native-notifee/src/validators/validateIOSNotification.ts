@@ -50,7 +50,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     for (let i = 0; i < ios.attachments.length; i++) {
       try {
         attachments.push(validateIOSAttachment(ios.attachments[i]));
-      } catch (e) {
+      } catch (e: any) {
         throw new Error(
           `'notification.ios.attachments' invalid IOSNotificationAttachment. ${e.message}.`,
         );

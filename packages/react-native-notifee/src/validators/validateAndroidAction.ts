@@ -15,7 +15,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
 
   try {
     validateAndroidPressAction(action.pressAction);
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`'action' ${e.message}.`);
   }
 
@@ -42,7 +42,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
     } else {
       try {
         out.input = validateAndroidInput(action.input);
-      } catch (e) {
+      } catch (e: any) {
         throw new Error(`'action.input' ${e.message}.`);
       }
     }

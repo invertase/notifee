@@ -69,7 +69,7 @@ export default function validateIOSAttachment(
   ) {
     try {
       out.thumbnailClippingRect = validateThumbnailClippingRect(attachment.thumbnailClippingRect);
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`'attachment.thumbnailClippingRect' is invalid. ${e.message}`);
     }
   }

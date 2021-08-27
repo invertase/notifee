@@ -31,7 +31,7 @@ export default function validateIOSCategoryAction(
     } else {
       try {
         out.input = validateIOSInput(action.input);
-      } catch (e) {
+      } catch (e: any) {
         throw new Error(`'action' ${e.message}.`);
       }
     }
