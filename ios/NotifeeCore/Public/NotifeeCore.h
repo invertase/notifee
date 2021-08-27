@@ -99,7 +99,8 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 + (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification
                                                withTrigger:(NSDictionary *)trigger;
 
-+ (void)populateNotificationContent:(UNMutableNotificationContent *)content
++ (void)populateNotificationContent:(UNNotificationRequest *)request
+                        withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 
 @end

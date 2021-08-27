@@ -47,6 +47,8 @@ typedef NS_ENUM(NSInteger, NotifeeCoreRepeatFrequency) {
 + (NSMutableArray<UNNotificationAttachment *> *)notificationAttachmentsFromDictionaryArray:
     (NSArray<NSDictionary *> *)attachmentDictionaries;
 
++ (NSDictionary *)attachmentOptionsFromDictionary:(NSDictionary *)optionsDict;
+
 + (NSMutableArray<NSNumber *> *)intentIdentifiersFromStringArray:(NSArray<NSString *> *)identifiers;
 
 + (NSMutableArray<NSString *> *)intentIdentifiersFromNumberArray:(NSArray<NSNumber *> *)identifiers;

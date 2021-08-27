@@ -8,7 +8,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 # Note: you must pod install after changing this value
 
 $NotifeeCoreFromSources = true
-#$NotifeeExtension = true
+$NotifeeExtension = true
 
 # ----------------------------------------------------------------
 
@@ -29,12 +29,9 @@ target 'testing' do
 
 end
 
-#target 'NotifeeContentExtension' do
-#end
-
-#target 'NotificationServiceExtension' do
-#  pod 'RNNotifeeCore', :path => "../../packages/react-native"
-#end
+target 'NotifeeTestingNSE' do
+  pod 'RNNotifeeCore', :path => "../../packages/react-native"
+end
 
 # Enables Flipper.
 #

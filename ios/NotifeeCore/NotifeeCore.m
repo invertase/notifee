@@ -174,13 +174,16 @@
                                                                         trigger:nil];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
+  NSMutableDictionary *notificationDetail = [notification mutableCopy];
+  notificationDetail[@"remote"] = @NO;
+
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeDelivered),
                  @"detail" : @{
-                   @"notification" : notification,
+                   @"notification" : notificationDetail,
                  }
                }];
              }
@@ -211,13 +214,16 @@
                                                                         trigger:unTrigger];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
 
+  NSMutableDictionary *notificationDetail = [notification mutableCopy];
+  notificationDetail[@"remote"] = @NO;
+
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
                  @"detail" : @{
-                   @"notification" : notification,
+                   @"notification" : notificationDetail,
                  }
                }];
              }
@@ -354,8 +360,10 @@
     }
   }
 
-  // attachments
-  if (iosDict[@"attachments"] != nil) {
+  // Ignore downloading attachments here if remote notifications via NSE
+  BOOL remote = [notification[@"remote"] boolValue];
+
+  if (iosDict[@"attachments"] != nil && !remote) {
     content.attachments =
         [NotifeeCoreUtil notificationAttachmentsFromDictionaryArray:iosDict[@"attachments"]];
   }
@@ -691,9 +699,11 @@
   return [NotifeeCoreUtil notifeeUIApplication];
 };
 
-+ (void)populateNotificationContent:(UNMutableNotificationContent *)content
++ (void)populateNotificationContent:(UNNotificationRequest *)request
+                        withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
-  return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:content
+  return [[NotifeeCoreExtensionHelper instance] populateNotificationContent:request
+                                                                withContent:content
                                                          withContentHandler:contentHandler];
 };
 

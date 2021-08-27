@@ -91,7 +91,7 @@ export const notifications: { key: string; notification: Notification | Notifica
       title: 'Actions',
       body: 'Notification with actions',
       ios: {
-        categoryId: 'actions1',
+        categoryId: 'actions',
       },
       android: {
         autoCancel: true,
