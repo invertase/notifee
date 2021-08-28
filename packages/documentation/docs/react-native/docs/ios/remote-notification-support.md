@@ -58,7 +58,9 @@ At this point everything should still be running normally. This is the final ste
 - self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
     
 - self.contentHandler(self.bestAttemptContent);
-+ [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent withContentHandler:contentHandler];
++ [NotifeeExtensionHelper populateNotificationContent:request
+                                withContent: self.bestAttemptContent
+                                withContentHandler:contentHandler];
 ```
 <!-- <Vimeo id="remote-notification-support-3" caption="Step 3 - Edit NotificationService.m" /> -->
 
@@ -77,16 +79,18 @@ Now everything is setup in your app, you can alter your notification payload to 
     apns: {
         payload: {
             aps: {
-                'content-available': 1, // Important, to receive `onMessage` event in the foreground when message is incoming
-                'mutable-content': 1, // Important, without this the extension won't fire
+                'contentAvailable': 1, // Important, to receive `onMessage` event in the foreground when message is incoming
+                'mutableContent': 1, // Important, without this the extension won't fire
             },
             notifee_options: {
                 image: 'https://placeimg.com/640/480/any', // URL to pointing to a remote image
                 ios: {
                     sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
                     categoryId: 'post', // A category that's already been created by your app
+                    attachments: [{url: 'https://placeimg.com/640/480/any', thumbnailHidden: true}] // array of attachments of type `IOSNotificationAttachment`
                     ... // any other api properties for NotificationIOS
                 },
+                ... // any other api properties for Notification, excluding `id`
             },
         },
     },
@@ -94,4 +98,6 @@ Now everything is setup in your app, you can alter your notification payload to 
 };
 ```
 
-> `attachments` will be ignored in favour of `image` to attach a remote image to your notification this way.
+Please note, the `id` of the notification is the `request.identifier` and cannot be changed. For this reason, the `id` property in `notifee_options` should be excluded.
+
+> if both `attachments` and `image` are present, `attachments` will take precedence over `image`

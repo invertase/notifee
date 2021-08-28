@@ -5,6 +5,11 @@ next: /react-native/docs/usage
 previous: /react-native/docs/license-keys
 ---
 
+## 1.11.0
+- **[Android]**: Fixes an issue where the initial notification wasn't being populated for full-screen actions.
+- **[iOS]**: Introduces a new method signature for `NotifeeExtensionHelper.populateNotificationContent` where the `request` is passed down as well as the `bestAttemptContent`. View the [Remote Notification Support](https://notifee.app/react-native/docs/ios/remote-notification-support) documentation for more information.
+- **[iOS]**: Adds a note in the reference documentation that `getInitialNotification()` for iOS is deprecated in favour of `onForegroundEvent`.
+
 ## 1.10.1
 - **[Android]**: Fixes an issue on Android to prevent `cancelDisplayedNotifications` cancelling trigger notifications. (Fixes [#349](https://github.com/notifee/react-native-notifee/issues/349))
 
