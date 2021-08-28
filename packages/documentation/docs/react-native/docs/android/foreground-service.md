@@ -79,12 +79,14 @@ To simplify the experience for developers, a long lived task will continuously r
 For example, we could build a task which subscribes to an event handler:
 
 ```js
-notifee.registerForegroundService(async () => {
-  // Example task subscriber
-  onTaskUpdate(task => {
-    if (task.complete) {
-        await notifee.stopForegroundService()
-    }
+notifee.registerForegroundService(() => {
+  return new Promise(() => {
+    // Example task subscriber
+    onTaskUpdate(task => {
+      if (task.complete) {
+          await notifee.stopForegroundService()
+      }
+    });
   });
 });
 ```
@@ -98,26 +100,28 @@ Foreground notifications behave like any other notification, and can display any
 Whilst our service is running, we can also update the current notification to display different content:
 
 ```js
-notifee.registerForegroundService(async (notification) => {
-  // Example task subscriber
-  onTaskUpdate(task => {
-    if (task.update) {
-      notifee.displayNotification({
-        id: notification.id,
-        body: notification.body,
-        android: {
-          ...notification.android,
-          progress: {
-            max: task.update.total,
-            current: task.update.current,
+notifee.registerForegroundService((notification) => {
+  return new Promise(() => {
+    // Example task subscriber
+    onTaskUpdate(task => {
+      if (task.update) {
+        notifee.displayNotification({
+          id: notification.id,
+          body: notification.body,
+          android: {
+            ...notification.android,
+            progress: {
+              max: task.update.total,
+              current: task.update.current,
+            },
           },
-        },
-      });
-    }
+        });
+      }
 
-    if (task.complete) {
-      await notifee.stopForegroundService()
-    }
+      if (task.complete) {
+        await notifee.stopForegroundService()
+      }
+    });
   });
 });
 ```
@@ -138,11 +142,13 @@ task:
 import notifee, { EventType } from '@notifee/react-native';
 
 // Create the task runner
-notifee.registerForegroundService(async (notification) => {
-  notifee.onForegroundEvent(({ type, detail }) => {
-    if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'stop') {
-      await notifee.stopForegroundService()
-    }
+notifee.registerForegroundService((notification) => {
+  return new Promise(() => {
+    notifee.onForegroundEvent(({ type, detail }) => {
+      if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'stop') {
+        await notifee.stopForegroundService()
+      }
+    });
   });
 });
 ```
