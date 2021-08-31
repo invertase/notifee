@@ -6,6 +6,9 @@ previous: /react-native/docs/license-keys
 ---
 
 ## 1.11.0
+- **[Android]**: Fixes an issue where `getInitialNotification` was sometimes throwing an error leading to a crash if activity was null. (Fixes [#374](https://github.com/notifee/react-native-notifee/issues/374))
+
+## 1.11.0
 - **[Android]**: Fixes an issue where the initial notification wasn't being populated for full-screen actions.
 - **[iOS]**: Introduces a new method signature for `NotifeeExtensionHelper.populateNotificationContent` where the `request` is passed down as well as the `bestAttemptContent`. View the [Remote Notification Support](https://notifee.app/react-native/docs/ios/remote-notification-support) documentation for more information.
 - **[iOS]**: Adds a note in the reference documentation that `getInitialNotification()` for iOS is deprecated in favour of `onForegroundEvent`.
