@@ -7998,7 +7998,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 664,
+							"line": 667,
 							"character": 9
 						}
 					],
@@ -8023,7 +8023,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 669,
+							"line": 672,
 							"character": 5
 						}
 					],
@@ -8047,7 +8047,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 660,
+					"line": 663,
 					"character": 27
 				}
 			]
@@ -8080,7 +8080,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 618,
+							"line": 621,
 							"character": 9
 						}
 					],
@@ -8102,7 +8102,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 611,
+					"line": 614,
 					"character": 34
 				}
 			]
@@ -8135,7 +8135,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 641,
+							"line": 644,
 							"character": 9
 						}
 					],
@@ -8157,7 +8157,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 634,
+					"line": 637,
 					"character": 30
 				}
 			]
@@ -8940,7 +8940,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 499,
+							"line": 502,
 							"character": 21
 						}
 					]
@@ -9177,7 +9177,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 465,
+							"line": 468,
 							"character": 15
 						}
 					]
@@ -9497,7 +9497,7 @@
 							},
 							"comment": {
 								"shortText": "API used to fetch the notification which causes the application to open.",
-								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
+								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n\nDeprecated for iOS in favour of `onForegroundEvent` - you can still use this method on iOS\nbut you will also receive a `onForegroundEvent`\n"
 							},
 							"type": {
 								"type": "reference",
@@ -9524,7 +9524,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 317,
+							"line": 320,
 							"character": 24
 						}
 					]
@@ -9575,7 +9575,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 446,
+							"line": 449,
 							"character": 27
 						}
 					]
@@ -9623,7 +9623,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 456,
+							"line": 459,
 							"character": 25
 						}
 					]
@@ -9671,7 +9671,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 549,
+							"line": 552,
 							"character": 21
 						}
 					]
@@ -9800,7 +9800,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 595,
+							"line": 598,
 							"character": 24
 						}
 					]
@@ -9875,7 +9875,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 489,
+							"line": 492,
 							"character": 21
 						}
 					]
@@ -9922,7 +9922,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 522,
+							"line": 525,
 							"character": 30
 						}
 					]
@@ -10134,7 +10134,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 334,
+													"line": 337,
 													"character": 29
 												}
 											]
@@ -10151,7 +10151,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 334,
+							"line": 337,
 							"character": 19
 						}
 					]
@@ -10233,7 +10233,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 351,
+													"line": 354,
 													"character": 29
 												}
 											]
@@ -10269,7 +10269,7 @@
 									"sources": [
 										{
 											"fileName": "packages/react-native/src/types/Module.ts",
-											"line": 351,
+											"line": 354,
 											"character": 54
 										}
 									]
@@ -10280,7 +10280,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 351,
+							"line": 354,
 							"character": 19
 						}
 					]
@@ -10327,7 +10327,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 511,
+							"line": 514,
 							"character": 33
 						}
 					]
@@ -10402,7 +10402,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 372,
+							"line": 375,
 							"character": 26
 						}
 					]
@@ -10449,7 +10449,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 574,
+							"line": 577,
 							"character": 26
 						}
 					]
@@ -10509,7 +10509,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 389,
+							"line": 392,
 							"character": 27
 						}
 					]
@@ -10577,7 +10577,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 428,
+							"line": 431,
 							"character": 19
 						}
 					]
@@ -10642,7 +10642,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 477,
+							"line": 480,
 							"character": 15
 						}
 					]
@@ -10710,7 +10710,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 437,
+							"line": 440,
 							"character": 27
 						}
 					]
@@ -10756,7 +10756,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 397,
+							"line": 400,
 							"character": 23
 						}
 					]
@@ -10854,7 +10854,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 685,
+							"line": 688,
 							"character": 13
 						}
 					],
@@ -10876,7 +10876,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 681,
+					"line": 684,
 					"character": 30
 				}
 			],
@@ -10911,7 +10911,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 685,
+							"line": 688,
 							"character": 13
 						}
 					],
@@ -11809,7 +11809,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 499,
+							"line": 502,
 							"character": 21
 						}
 					],
@@ -12086,7 +12086,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 465,
+							"line": 468,
 							"character": 15
 						}
 					],
@@ -12461,7 +12461,7 @@
 							},
 							"comment": {
 								"shortText": "API used to fetch the notification which causes the application to open.",
-								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n"
+								"text": "This API can be used to fetch which notification & press action has caused the application to\nopen. The call returns a `null` value when the application wasn't launched by a notification.\n\nOnce the initial notification has been consumed by this API, it is removed and will no longer\nbe available. It will also be removed if the user relaunches the application.\n\nView the [App open events](/react-native/docs/events#app-open-events) documentation for more\ninformation and example usage.\n\nDeprecated for iOS in favour of `onForegroundEvent` - you can still use this method on iOS\nbut you will also receive a `onForegroundEvent`\n"
 							},
 							"type": {
 								"type": "reference",
@@ -12493,7 +12493,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 317,
+							"line": 320,
 							"character": 24
 						}
 					],
@@ -12554,7 +12554,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 446,
+							"line": 449,
 							"character": 27
 						}
 					],
@@ -12612,7 +12612,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 456,
+							"line": 459,
 							"character": 25
 						}
 					],
@@ -12670,7 +12670,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 549,
+							"line": 552,
 							"character": 21
 						}
 					],
@@ -12829,7 +12829,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 595,
+							"line": 598,
 							"character": 24
 						}
 					],
@@ -12914,7 +12914,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 489,
+							"line": 492,
 							"character": 21
 						}
 					],
@@ -12971,7 +12971,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 522,
+							"line": 525,
 							"character": 30
 						}
 					],
@@ -13208,7 +13208,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 334,
+													"line": 337,
 													"character": 29
 												}
 											]
@@ -13230,7 +13230,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 334,
+							"line": 337,
 							"character": 19
 						}
 					],
@@ -13317,7 +13317,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 351,
+													"line": 354,
 													"character": 29
 												}
 											]
@@ -13353,7 +13353,7 @@
 									"sources": [
 										{
 											"fileName": "packages/react-native/src/types/Module.ts",
-											"line": 351,
+											"line": 354,
 											"character": 54
 										}
 									]
@@ -13369,7 +13369,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 351,
+							"line": 354,
 							"character": 19
 						}
 					],
@@ -13426,7 +13426,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 511,
+							"line": 514,
 							"character": 33
 						}
 					],
@@ -13511,7 +13511,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 372,
+							"line": 375,
 							"character": 26
 						}
 					],
@@ -13568,7 +13568,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 574,
+							"line": 577,
 							"character": 26
 						}
 					],
@@ -13638,7 +13638,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 389,
+							"line": 392,
 							"character": 27
 						}
 					],
@@ -13716,7 +13716,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 428,
+							"line": 431,
 							"character": 19
 						}
 					],
@@ -13791,7 +13791,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 477,
+							"line": 480,
 							"character": 15
 						}
 					],
@@ -13869,7 +13869,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 437,
+							"line": 440,
 							"character": 27
 						}
 					],
@@ -13925,7 +13925,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 397,
+							"line": 400,
 							"character": 23
 						}
 					],
@@ -13996,7 +13996,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 688,
+					"line": 691,
 					"character": 34
 				}
 			],
