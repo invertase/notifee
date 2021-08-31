@@ -437,6 +437,7 @@ public class Notifee {
       initialNotificationBundle.putAll(event.getExtras());
       initialNotificationBundle.putBundle("notification", event.getNotificationModel().toBundle());
       result.onComplete(null, initialNotificationBundle);
+      return;
     } else if (activity != null) {
       try {
         // get intent from current activity
