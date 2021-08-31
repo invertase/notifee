@@ -416,6 +416,12 @@ const styles = StyleSheet.create({
 // AppRegistry.registerComponent('testing', () => Root);
 
 function TestComponent(): any {
+  useEffect(() => {
+    (async () => {
+      const initialNotification = await Notifee.getInitialNotification();
+      console.log('TestComponent initialNotification', initialNotification);
+    })();
+  }, []);
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
