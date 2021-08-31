@@ -443,8 +443,8 @@ public class Notifee {
         Intent intent = activity.getIntent();
         if (intent != null && intent.getExtras() != null && intent.hasExtra("notification")) {
           initialNotificationBundle.putBundle("notification", intent.getBundleExtra("notification"));
-           result.onComplete(null, initialNotificationBundle);
-           return;
+          result.onComplete(null, initialNotificationBundle);
+          return;
         }
       } catch(Exception e) {
         Logger.e(TAG, "getInitialNotification", e);
