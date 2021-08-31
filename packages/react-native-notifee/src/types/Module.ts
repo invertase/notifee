@@ -313,6 +313,9 @@ export interface Module {
    *
    * View the [App open events](/react-native/docs/events#app-open-events) documentation for more
    * information and example usage.
+   *
+   * Deprecated for iOS in favour of `onForegroundEvent` - you can still use this method on iOS
+   * but you will also receive a `onForegroundEvent`
    */
   getInitialNotification(): Promise<InitialNotification | null>;
 
