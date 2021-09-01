@@ -3,17 +3,16 @@ buildscript {
     buildToolsVersion = '30.0.3'
     ndkVersion = '20.1.5948944'
     minSdkVersion = 21
-    compileSdkVersion = 29
-    targetSdkVersion = 29
+    compileSdkVersion = 30
+    targetSdkVersion = 30
   }
 
   repositories {
     google()
     mavenCentral()
-    jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.1.1'
+    classpath 'com.android.tools.build:gradle:4.2.1'
     classpath 'com.google.gms:google-services:4.3.8'
   }
 }
@@ -24,8 +23,10 @@ allprojects {
   }
 
   repositories {
-    google()
     mavenLocal()
+    mavenCentral()
+    google()
+    maven { url 'https://www.jitpack.io' }
     maven {
       // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
       url("$rootDir/../node_modules/react-native/android")
@@ -37,9 +38,7 @@ allprojects {
     maven {
       url "$rootDir/../node_modules/detox/Detox-android"
     }
-    jcenter()
   }
-
 }
 
 subprojects {

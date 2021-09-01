@@ -92,7 +92,9 @@
       "**/react",
       "**/react/**",
       "**/react-native",
-      "**/react-native/**"
+      "**/react-native/**",
+      "**/react-native-codegen",
+      "**/react-native-codegen/**"
     ]
   },
   "dependencies": {
