@@ -76,7 +76,8 @@ struct {
 
   // check if we should handle notification created outside of notifee
   if (notifeeNotification == nil) {
-    BOOL shouldHandleNotification = [notification.request.content.userInfo[kNotifeeUserInfoNotifee] boolValue];
+    BOOL shouldHandleNotification =
+        [notification.request.content.userInfo[kNotifeeUserInfoNotifee] boolValue];
     if (shouldHandleNotification) {
       notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:notification.request];
     }
@@ -109,13 +110,13 @@ struct {
     if (notifeeTrigger != nil) {
       NSLog(@"Notifee: Trigger Notification Will present");
     }
-      // post DELIVERED event
-      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-        @"type" : @(NotifeeCoreEventTypeDelivered),
-        @"detail" : @{
-          @"notification" : notifeeNotification,
-        }
-      }];
+    // post DELIVERED event
+    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+      @"type" : @(NotifeeCoreEventTypeDelivered),
+      @"detail" : @{
+        @"notification" : notifeeNotification,
+      }
+    }];
 
     completionHandler(presentationOptions);
 
@@ -134,16 +135,17 @@ struct {
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
   NSMutableDictionary *notifeeNotification =
-  [response.notification.request.content.userInfo[kNotifeeUserInfoNotification] mutableCopy];
+      [response.notification.request.content.userInfo[kNotifeeUserInfoNotification] mutableCopy];
 
   NSLog(@"notifee didReceiveNotificationResponse notifee %@", notifeeNotification);
 
   // check if we should handle notification created outside of notifee
   if (notifeeNotification == nil) {
-    NSDictionary * userInfo  = response.notification.request.content.userInfo;
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
     BOOL shouldHandleNotification = [userInfo[kNotifeeUserInfoNotifee] boolValue];
     if (shouldHandleNotification) {
-      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+      notifeeNotification =
+          [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
     }
   }
 

@@ -574,11 +574,10 @@
   dictionary = [self parseUNNotificationContent:request.content];
   dictionary[@"id"] = request.identifier;
 
-  NSDictionary * userInfo = request.content.userInfo;
+  NSDictionary *userInfo = request.content.userInfo;
 
   // Check for remote details
   if ([request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-
     NSMutableDictionary *remote = [NSMutableDictionary dictionary];
 
     remote[@"messageId"] = userInfo[@"gcm.message_id"];
@@ -601,15 +600,11 @@
   NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
   for (id key in userInfo) {
     // build data dict from remaining keys but skip keys that shouldn't be included in data
-    if (
-        [key isEqualToString:@"aps"] ||
-            [key hasPrefix:@"gcm."] ||
-            [key hasPrefix:@"google."] ||
-            // notifee or notifee_options
-            [key hasPrefix:@"notifee"] ||
-            // fcm_options
-            [key hasPrefix:@"fcm"]
-        ) {
+    if ([key isEqualToString:@"aps"] || [key hasPrefix:@"gcm."] || [key hasPrefix:@"google."] ||
+        // notifee or notifee_options
+        [key hasPrefix:@"notifee"] ||
+        // fcm_options
+        [key hasPrefix:@"fcm"]) {
       continue;
     }
     data[key] = userInfo[key];

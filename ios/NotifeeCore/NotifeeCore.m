@@ -181,12 +181,12 @@
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
                // handled by willPresetNotification
-//               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-//                 @"type" : @(NotifeeCoreEventTypeDelivered),
-//                 @"detail" : @{
-//                   @"notification" : notificationDetail,
-//                 }
-//               }];
+               //               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+               //                 @"type" : @(NotifeeCoreEventTypeDelivered),
+               //                 @"detail" : @{
+               //                   @"notification" : notificationDetail,
+               //                 }
+               //               }];
              }
              block(error);
            }];
