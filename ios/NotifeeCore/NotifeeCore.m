@@ -180,12 +180,13 @@
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
              if (error == nil) {
-               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                 @"type" : @(NotifeeCoreEventTypeDelivered),
-                 @"detail" : @{
-                   @"notification" : notificationDetail,
-                 }
-               }];
+               // handled by willPresetNotification
+//               [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+//                 @"type" : @(NotifeeCoreEventTypeDelivered),
+//                 @"detail" : @{
+//                   @"notification" : notificationDetail,
+//                 }
+//               }];
              }
              block(error);
            }];

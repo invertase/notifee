@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *kNotifeeUserInfoNotifee = @"notifee";
 static NSString *kNotifeeUserInfoNotification = @"__notifee_notification";
 static NSString *kNotifeeUserInfoTrigger = @"__notifee_trigger";
 

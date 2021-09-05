@@ -70,7 +70,7 @@ const channels: AndroidChannel[] = [
 ];
 
 async function onMessage(message: RemoteMessage): Promise<void> {
-  console.log('New FCM Message', message.messageId);
+  console.log('New FCM Message', message.messageId, message);
   await Notifee.displayNotification({
     title: 'onMessage',
     body: `with message ${message.messageId}`,
@@ -92,6 +92,9 @@ function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
+    await firebase.messaging().onNotificationOpenedApp(message => {
+      console.log('onNotificationOpenedApp', message);
+    });
     const fcmToken = await firebase.messaging().getToken();
     console.log({ fcmToken });
     firebase.messaging().onMessage(onMessage);
@@ -150,17 +153,17 @@ function Root(): any {
     }
     currentPermissions = await Notifee.getNotificationSettings();
     console.log('currentPermissions', currentPermissions);
-    await Notifee.setNotificationCategories([
-      {
-        id: 'stop',
-        actions: [
-          {
-            id: 'stop',
-            title: 'Dismiss',
-          },
-        ],
-      },
-    ]);
+    // await Notifee.setNotificationCategories([
+    //   {
+    //     id: 'stop',
+    //     actions: [
+    //       {
+    //         id: 'stop',
+    //         title: 'Dismiss',
+    //       },
+    //     ],
+    //   },
+    // ]);
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {

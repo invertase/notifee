@@ -47,6 +47,7 @@ static NSString *const kImagePathPrefix = @"image/";
     options[@"id"] = request.identifier;
   }
 
+  // Parse attachments
   NSMutableDictionary *attachmentDict = [NSMutableDictionary new];
 
   if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil &&
