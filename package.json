@@ -1,6 +1,7 @@
 {
   "name": "@notifications/root",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "prepare": "yarn lerna:link && lerna run prepare && (yarn tests_rn:ios:pod:install || true)",
     "precommit": "yarn build:all:clean && yarn prepare && yarn build:all && yarn gen:reference && yarn validate:all && yarn test:all",
