@@ -17,7 +17,6 @@ package app.notifee.core;
  *
  */
 
-import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
 import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
 import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
 import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
@@ -111,11 +110,6 @@ public class ReceiverService extends Service {
       return;
     }
 
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForEvent("notification dismissed");
-      return;
-    }
-
     NotificationModel notificationModel = NotificationModel.fromBundle(notification);
     EventBus.post(new NotificationEvent(TYPE_DISMISSED, notificationModel));
   }
@@ -125,11 +119,6 @@ public class ReceiverService extends Service {
     Bundle notification = intent.getBundleExtra("notification");
 
     if (notification == null) {
-      return;
-    }
-
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForEvent("notification press");
       return;
     }
 
@@ -171,11 +160,6 @@ public class ReceiverService extends Service {
     Bundle pressAction = intent.getBundleExtra("pressAction");
 
     if (notification == null || pressAction == null) {
-      return;
-    }
-
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForEvent("notification press action");
       return;
     }
 
