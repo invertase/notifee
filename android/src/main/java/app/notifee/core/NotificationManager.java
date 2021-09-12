@@ -17,9 +17,6 @@ package app.notifee.core;
  *
  */
 
-import static app.notifee.core.ContextHolder.getApplicationContext;
-import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -43,6 +40,20 @@ import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.event.MainComponentEvent;
@@ -59,18 +70,10 @@ import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import static app.notifee.core.ContextHolder.getApplicationContext;
+import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
+import static java.lang.Integer.parseInt;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
@@ -467,7 +470,7 @@ class NotificationManager {
         });
   }
 
-  static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids) {
+  static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids, String tag) {
     return Tasks.call(
       () -> {
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
@@ -476,8 +479,20 @@ class NotificationManager {
 
           for(String id: ids) {
             Logger.i(TAG, "Removing notification with id " + id);
+
+            // Attempt to parse id as integer
+            Integer integerId = null;
+
+            try {
+              integerId = parseInt(id);
+            } catch (Exception e) {
+              Logger.e(
+                TAG, "cancelAllNotificationsWithIds -> Failed to parse id as integer  " + id);
+            }
+
             if (notificationType != NOTIFICATION_TYPE_TRIGGER ) {
-              notificationManagerCompat.cancel(id.hashCode());
+              notificationManagerCompat.cancel(tag, id.hashCode());
+              if (integerId != null) notificationManagerCompat.cancel(tag, integerId);
             }
 
             if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {

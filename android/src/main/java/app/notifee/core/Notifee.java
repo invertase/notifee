@@ -17,17 +17,20 @@ package app.notifee.core;
  *
  */
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.MethodCallResult;
@@ -35,9 +38,9 @@ import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.PowerManagerUtils;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
 
 @KeepForSdk
 public class Notifee {
@@ -92,26 +95,6 @@ public class Notifee {
   /**
    * NOTE: Allow cancelling notifications even if the license is invalid.
    *
-   * @param notificationId
-   * @param result
-   */
-  @KeepForSdk
-  public void cancelNotification(
-      String notificationId, int notificationType, MethodCallResult<Void> result) {
-    NotificationManager.cancelNotification(notificationId, notificationType)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
-  }
-
-  /**
-   * NOTE: Allow cancelling notifications even if the license is invalid.
-   *
    * @param result
    */
   @KeepForSdk
@@ -128,12 +111,12 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void cancelAllNotificationsWithIds(int type, List<String> ids, MethodCallResult<Void> result) {
+  public void cancelAllNotificationsWithIds(int type, List<String> ids, String tag, MethodCallResult<Void> result) {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("cancelAllNotificationsWithIds");
       result.onComplete(null, null);
     } else {
-      NotificationManager.cancelAllNotificationsWithIds(type, ids).addOnCompleteListener(
+      NotificationManager.cancelAllNotificationsWithIds(type, ids, tag).addOnCompleteListener(
         task -> {
           if (task.isSuccessful()) {
             result.onComplete(null, task.getResult());
