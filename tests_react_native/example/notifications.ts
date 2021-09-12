@@ -53,6 +53,21 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
+    key: 'Tag',
+    notification: {
+      id: 'tag',
+      title: 'With tag',
+      android: {
+        channelId: 'high',
+        pressAction: {
+          id: 'default',
+        },
+        tag: 'example-tag',
+      },
+      ios: {},
+    },
+  },
+  {
     key: 'Subtitle',
     notification: {
       title: 'Title',
