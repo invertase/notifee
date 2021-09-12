@@ -1,6 +1,6 @@
 {
   "name": "@notifee/react-native",
-  "version": "1.11.1",
+  "version": "2.0.0-0",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx",
     "validate:all:ts": "tsc --project ./",
     "build": "genversion --es6 --semi src/version.ts && tsc",
-    "build:clean": "rimraf android/libs/notifee_core_debug.aar && rimraf android/build && rimraf ios/build && rimraf dist",
+    "build:clean": "rimraf android/libs && rimraf android/build && rimraf ios/build && rimraf dist",
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
     "prepublishOnly": "cd ../.. && yarn run build:core",

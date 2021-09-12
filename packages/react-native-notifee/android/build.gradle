@@ -9,13 +9,13 @@ buildscript {
     }
 
     dependencies {
-      classpath("com.android.tools.build:gradle:4.1.3")
+      classpath("com.android.tools.build:gradle:7.0.1")
     }
   }
 }
 
 plugins {
-  id "io.invertase.gradle.build" version "1.4"
+  id "io.invertase.gradle.build" version "1.5"
 }
 
 project.evaluationDependsOn(':app')
@@ -65,7 +65,7 @@ dependencies {
   if (findProject(':notifee_core')) {
     implementation findProject(':notifee_core')
   } else {
-    implementation fileTree(include: ['notifee_core_release.aar'], dir: 'libs')
+    implementation(group: 'app.notifee', name:'core', version: '+')
   }
   implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
   implementation 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
