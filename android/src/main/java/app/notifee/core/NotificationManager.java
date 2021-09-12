@@ -480,19 +480,26 @@ class NotificationManager {
           for(String id: ids) {
             Logger.i(TAG, "Removing notification with id " + id);
 
-            // Attempt to parse id as integer
-            Integer integerId = null;
-
-            try {
-              integerId = parseInt(id);
-            } catch (Exception e) {
-              Logger.e(
-                TAG, "cancelAllNotificationsWithIds -> Failed to parse id as integer  " + id);
-            }
-
             if (notificationType != NOTIFICATION_TYPE_TRIGGER ) {
-              notificationManagerCompat.cancel(tag, id.hashCode());
-              if (integerId != null) notificationManagerCompat.cancel(tag, integerId);
+              // Cancel notifications displayed by FCM
+              if (tag != null && tag.startsWith("FCM-")) {
+                // Attempt to parse id as integer
+                Integer integerId = null;
+
+                try {
+                  integerId = parseInt(id);
+                } catch (Exception e) {
+                  Logger.e(
+                    TAG, "cancelAllNotificationsWithIds -> Failed to parse id as integer  " + id);
+                }
+
+                if (integerId != null) {
+                  notificationManagerCompat.cancel(tag, integerId);
+                }
+              } else {
+                // Cancel a notification created with notifee
+                notificationManagerCompat.cancel(tag, id.hashCode());
+              }
             }
 
             if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
