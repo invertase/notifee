@@ -12,6 +12,12 @@
 
 ## Getting Started
 
+### Prerequisites
+
+Ensure you have the following software installed:
+- Xcode 12.4
+- Java 11
+
 ### Step 1: Clone the repository
 
 Ensure you call `git clone` with the `recursive` flag to ensure submodules (packages/react-native) are included:
