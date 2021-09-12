@@ -330,9 +330,11 @@ PODS:
     - Firebase/Messaging (= 8.1.1)
     - React-Core
     - RNFBApp
-  - RNNotifee (1.9.2):
+  - RNNotifee (1.10.2-0):
     - NotifeeCore
     - React-Core
+  - RNNotifeeCore (1.10.2-0):
+    - NotifeeCore
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -370,6 +372,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNNotifee (from `../../packages/react-native`)
+  - RNNotifeeCore (from `../../packages/react-native`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -450,6 +453,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNNotifee:
     :path: "../../packages/react-native"
+  RNNotifeeCore:
+    :path: "../../packages/react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -495,9 +500,10 @@ SPEC CHECKSUMS:
   ReactCommon: 149906e01aa51142707a10665185db879898e966
   RNFBApp: 406bc9586c70ccf20504b4d3b54ac4341c98993f
   RNFBMessaging: 154dc7815e2b6c55941793630ffb3a55f03d77e6
-  RNNotifee: 7084974b13231567bc51e0543e6c89735860e686
+  RNNotifee: fcc1cad53905ac1717d919de0d4986a460240e68
+  RNNotifeeCore: a4f8c374d54268e3195e137edde6ca6b6a7c9cac
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
 
-PODFILE CHECKSUM: 5b755f3aa8eb9349c4caf92b40aca1e2396dd85d
+PODFILE CHECKSUM: 603173468a65c167c1ff88482f79dd40a80018c1
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

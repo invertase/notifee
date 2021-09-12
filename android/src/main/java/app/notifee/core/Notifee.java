@@ -1,5 +1,22 @@
 package app.notifee.core;
 
+/*
+ * Copyright (c) 2016-present Invertase Limited & Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this library except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
 
@@ -427,26 +444,33 @@ public class Notifee {
     if (LicenseManager.isLicenseInvalid()) {
       logLicenseWarningForMethod("getInitialNotification");
       result.onComplete(null, null);
-    } else {
-      // get intent from current activity
-      Intent intent = activity.getIntent();
-      InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
-
-      Bundle initialNotificationBundle = new Bundle();
-
-      if (event != null) {
-        initialNotificationBundle.putAll(event.getExtras());
-        initialNotificationBundle.putBundle(
-          "notification", event.getNotificationModel().toBundle());
-        result.onComplete(null, initialNotificationBundle);
-      } else if (intent != null && intent.getExtras() != null && intent.hasExtra("notification")) {
-          initialNotificationBundle.putBundle(
-            "notification", intent.getBundleExtra("notification"));
-          result.onComplete(null, initialNotificationBundle);
-        } else {
-          result.onComplete(null, null);
-        }
+      return;
     }
+
+    InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
+    Bundle initialNotificationBundle = new Bundle();
+
+    if (event != null) {
+      initialNotificationBundle.putAll(event.getExtras());
+      initialNotificationBundle.putBundle("notification", event.getNotificationModel().toBundle());
+      result.onComplete(null, initialNotificationBundle);
+      return;
+    } else if (activity != null) {
+      try {
+        // get intent from current activity
+        Intent intent = activity.getIntent();
+        if (intent != null && intent.getExtras() != null && intent.hasExtra("notification")) {
+          initialNotificationBundle.putBundle("notification", intent.getBundleExtra("notification"));
+          result.onComplete(null, initialNotificationBundle);
+          return;
+        }
+      } catch(Exception e) {
+        Logger.e(TAG, "getInitialNotification", e);
+      }
+    }
+
+    // If no initial notification, return
+    result.onComplete(null, null);
   }
 
   @KeepForSdk

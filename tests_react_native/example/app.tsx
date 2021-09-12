@@ -70,16 +70,24 @@ const channels: AndroidChannel[] = [
 ];
 
 async function onMessage(message: RemoteMessage): Promise<void> {
-  console.log('New FCM Message', message);
-  Notifee.displayNotification({
-    id: message.collapseKey,
-    title: 'hello',
-    body: 'world',
+  console.log('New FCM Message', message.messageId);
+  await Notifee.displayNotification({
+    title: 'onMessage',
+    body: `with message ${message.messageId}`,
     android: { channelId: 'default', tag: 'hello1' },
   });
 }
 
-firebase.messaging().setBackgroundMessageHandler(onMessage);
+async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
+  console.log('onBackgroundMessage New FCM Message', message);
+  // await Notifee.displayNotification({
+  //   title: 'onMessage',
+  //   body: `with message ${message.messageId}`,
+  //   android: { channelId: 'default', tag: 'hello1' },
+  // });
+}
+
+firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
 function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
@@ -93,7 +101,7 @@ function Root(): any {
     await Promise.all(channels.map($ => Notifee.createChannel($)));
     await Notifee.setNotificationCategories([
       {
-        id: 'actions1',
+        id: 'actions',
         actions: [
           {
             id: 'like',
@@ -105,8 +113,6 @@ function Root(): any {
           },
         ],
       },
-    ]);
-    await Notifee.setNotificationCategories([
       {
         id: 'stop',
         actions: [
@@ -116,8 +122,6 @@ function Root(): any {
           },
         ],
       },
-    ]);
-    await Notifee.setNotificationCategories([
       {
         id: 'dismiss',
         actions: [
@@ -412,6 +416,12 @@ const styles = StyleSheet.create({
 // AppRegistry.registerComponent('testing', () => Root);
 
 function TestComponent(): any {
+  useEffect(() => {
+    (async () => {
+      const initialNotification = await Notifee.getInitialNotification();
+      console.log('TestComponent initialNotification', initialNotification);
+    })();
+  }, []);
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

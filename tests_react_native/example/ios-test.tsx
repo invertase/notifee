@@ -80,8 +80,8 @@ async function testRunner(): Promise<void> {
   ]);
   await Notifee.requestPermission();
   await Notifee.displayNotification({
-    title: 'hello',
-    body: 'world',
+    title: 'hello-test',
+    body: 'world-test',
     ios: {
       categoryId: 'test_category',
     },

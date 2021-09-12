@@ -1,8 +1,8 @@
 //
 //  NotificationService.m
-//  NotificationServiceExtension
+//  NotifeeTestingNSE
 //
-//  Created by Helena Ford on 08/03/2021.
+//  Created by Helena Ford on 21/08/2021.
 //  Copyright © 2021 Invertase. All rights reserved.
 //
 
@@ -23,7 +23,16 @@
   self.contentHandler = contentHandler;
   self.bestAttemptContent = [request.content mutableCopy];
 
-  [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
+  // Modify the notification content here...
+  self.bestAttemptContent.title =
+      [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
+
+  // Deprecated
+  //  [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
+  //                                   withContentHandler:contentHandler];
+
+  [NotifeeExtensionHelper populateNotificationContent:request
+                                          withContent:self.bestAttemptContent
                                    withContentHandler:contentHandler];
 }
 
