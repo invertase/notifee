@@ -17,8 +17,6 @@ package app.notifee.core;
  *
  */
 
-import static app.notifee.core.LicenseManager.logLicenseWarningForEvent;
-
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -111,11 +109,6 @@ public class BlockStateBroadcastReceiver extends BroadcastReceiver {
     // See https://github.com/notifee/react-native-notifee/issues/237
     if (ContextHolder.getApplicationContext() == null) {
       ContextHolder.setApplicationContext(context.getApplicationContext());
-    }
-
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForEvent("block state");
-      return;
     }
 
     String uniqueWorkId = action;

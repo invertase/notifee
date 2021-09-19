@@ -255,7 +255,10 @@ public class ResourceUtils {
       String soundFile = sound.getLastPathSegment();
       try {
         int resourceId = Integer.valueOf(soundFile);
-        Logger.e(TAG, "Loaded sound by resource id. New app builds will fail to play sound. Create a new channel to resolve. Issue #341");
+        Logger.e(
+            TAG,
+            "Loaded sound by resource id. New app builds will fail to play sound. Create a new"
+                + " channel to resolve. Issue #341");
         if (resourceId != 0) {
           TypedValue value = new TypedValue();
           Context context = ContextHolder.getApplicationContext();
@@ -270,7 +273,8 @@ public class ResourceUtils {
         // This implies the sound URI last path segment was by file name, not resourceId
         // They were by resourceId prior to issue #341 where we learned that leads to unstable URIs
         // Now we verify the file exists but use the file name from the raw directory
-        // We still attempt to resolve by resourceId above to gracefully handle URIs created via our previous behavior
+        // We still attempt to resolve by resourceId above to gracefully handle URIs created via our
+        // previous behavior
         return soundFile;
       }
     }
