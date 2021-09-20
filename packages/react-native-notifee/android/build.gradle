@@ -24,7 +24,7 @@ project.ext {
   set('react-native', [
     versions: [
       android: [
-        minSdk    : 16,
+        minSdk    : 20,
         targetSdk : 30,
         compileSdk: 30,
         // optional as gradle.buildTools comes with one by default
