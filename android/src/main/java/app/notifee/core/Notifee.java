@@ -217,7 +217,7 @@ public class Notifee {
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
     NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-    NotificationManager.displayNotification(notificationModel)
+    NotificationManager.displayNotification(notificationModel, null)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
