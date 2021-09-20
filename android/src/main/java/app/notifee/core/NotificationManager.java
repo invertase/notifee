@@ -533,7 +533,7 @@ class NotificationManager {
                 ForegroundService.start(hashCode, notification, notificationModel.toBundle());
               } else {
                 NotificationManagerCompat.from(getApplicationContext())
-                    .notify(hashCode, notification);
+                    .notify(androidBundle.getTag(), hashCode, notification);
               }
 
               EventBus.post(
