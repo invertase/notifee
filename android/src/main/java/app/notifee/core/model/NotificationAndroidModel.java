@@ -188,6 +188,15 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Gets the notification tag
+   *
+   * @return String
+   */
+  public @Nullable String getTag() {
+    return mNotificationAndroidBundle.getString("tag");
+  }
+
+  /**
    * Gets the notification group key
    *
    * @return String

@@ -75,7 +75,7 @@ class NotifeeAlarmManager {
 
           NotificationModel notificationModel = NotificationModel.fromBundle(notificationBundle);
 
-          return NotificationManager.displayNotification(notificationModel)
+          return NotificationManager.displayNotification(notificationModel, triggerBundle)
               .addOnCompleteListener(
                   displayNotificationTask -> {
                     if (!displayNotificationTask.isSuccessful()) {

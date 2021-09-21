@@ -17,6 +17,8 @@ package app.notifee.core;
  *
  */
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,9 +40,8 @@ import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.PowerManagerUtils;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static app.notifee.core.LicenseManager.logLicenseWarningForMethod;
+import java.util.ArrayList;
+import java.util.List;
 
 @KeepForSdk
 public class Notifee {
@@ -73,7 +74,6 @@ public class Notifee {
       mNotifee = new Notifee();
       mNotifeeConfig = notifeeConfig;
       EventSubscriber.register(notifeeConfig.getEventSubscriber());
-      LicenseManager.initialize();
     }
   }
 
@@ -112,10 +112,6 @@ public class Notifee {
 
   @KeepForSdk
   public void cancelAllNotificationsWithIds(int type, List<String> ids, String tag, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("cancelAllNotificationsWithIds");
-      result.onComplete(null, null);
-    } else {
       NotificationManager.cancelAllNotificationsWithIds(type, ids, tag).addOnCompleteListener(
         task -> {
           if (task.isSuccessful()) {
@@ -124,312 +120,218 @@ public class Notifee {
             result.onComplete(task.getException(), null);
           }
         });
-      ;
-    }
   }
 
   @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("createChannel");
-      result.onComplete(null, null);
-    } else {
-      ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
-      ChannelManager.createChannel(channelModel)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
+    ChannelManager.createChannel(channelModel)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void createChannels(List<Bundle> channelsList, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("createChannels");
-      result.onComplete(null, null);
-    } else {
-      ArrayList<ChannelModel> channelModels = new ArrayList<>(channelsList.size());
-      for (Bundle bundle : channelsList) {
-        channelModels.add(ChannelModel.fromBundle(bundle));
-      }
-
-      ChannelManager.createChannels(channelModels)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
+    ArrayList<ChannelModel> channelModels = new ArrayList<>(channelsList.size());
+    for (Bundle bundle : channelsList) {
+      channelModels.add(ChannelModel.fromBundle(bundle));
     }
+
+    ChannelManager.createChannels(channelModels)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void createChannelGroup(Bundle channelGroupMap, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("createChannelGroup");
-      result.onComplete(null, null);
-    } else {
-      ChannelGroupModel channelGroupModel = ChannelGroupModel.fromBundle(channelGroupMap);
-      ChannelManager.createChannelGroup(channelGroupModel)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelGroupModel channelGroupModel = ChannelGroupModel.fromBundle(channelGroupMap);
+    ChannelManager.createChannelGroup(channelGroupModel)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void createChannelGroups(List<Bundle> channelGroupsList, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("createChannelGroups");
-      result.onComplete(null, null);
-    } else {
-      ArrayList<ChannelGroupModel> channelGroupModels = new ArrayList<>(channelGroupsList.size());
-      for (Bundle bundle : channelGroupsList) {
-        channelGroupModels.add(ChannelGroupModel.fromBundle(bundle));
-      }
-
-      ChannelManager.createChannelGroups(channelGroupModels)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
+    ArrayList<ChannelGroupModel> channelGroupModels = new ArrayList<>(channelGroupsList.size());
+    for (Bundle bundle : channelGroupsList) {
+      channelGroupModels.add(ChannelGroupModel.fromBundle(bundle));
     }
+
+    ChannelManager.createChannelGroups(channelGroupModels)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void deleteChannel(String channelId, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("deleteChannel");
-      result.onComplete(null, null);
-    } else {
-      ChannelManager.deleteChannel(channelId);
-      result.onComplete(null, null);
-    }
+    ChannelManager.deleteChannel(channelId);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
   public void deleteChannelGroup(String channelGroupId, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("deleteChannelGroup");
-      result.onComplete(null, null);
-    } else {
-      ChannelManager.deleteChannelGroup(channelGroupId);
-      result.onComplete(null, null);
-    }
+    ChannelManager.deleteChannelGroup(channelGroupId);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("displayNotification");
-      result.onComplete(null, null);
-    } else {
-      NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.displayNotification(notificationModel)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, null);
-                } else {
-                  Logger.e(TAG, "displayNotification", task.getException());
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
+    NotificationManager.displayNotification(notificationModel, null)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, null);
+              } else {
+                Logger.e(TAG, "displayNotification", task.getException());
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void createTriggerNotification(
       Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("createTriggerNotification");
-      result.onComplete(null, null);
-    } else {
-      NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-      NotificationManager.createTriggerNotification(notificationModel, triggerMap)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, null);
-                } else {
-                  Logger.e(TAG, "createTriggerNotification", task.getException());
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
+    NotificationManager.createTriggerNotification(notificationModel, triggerMap)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, null);
+              } else {
+                Logger.e(TAG, "createTriggerNotification", task.getException());
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getTriggerNotificationIds(MethodCallResult<List<String>> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getTriggerNotificationIds");
-      result.onComplete(null, Collections.emptyList());
-    } else {
-      NotificationManager.getTriggerNotificationIds(result);
-    }
+    NotificationManager.getTriggerNotificationIds(result);
   }
 
   @KeepForSdk
   public void getDisplayedNotifications(MethodCallResult<List<Bundle>> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getDisplayedNotifications");
-      result.onComplete(null, Collections.emptyList());
-    } else {
-      NotificationManager.getDisplayedNotifications().addOnCompleteListener(
-        task -> {
-          if (task.isSuccessful()) {
-            result.onComplete(null, task.getResult());
-          } else {
-            result.onComplete(task.getException(), null);
-          }
-        });;
-    }
+    NotificationManager.getDisplayedNotifications()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getTriggerNotifications");
-      result.onComplete(null, Collections.emptyList());
-    } else {
-      NotificationManager.getTriggerNotifications(result);
-    }
+    NotificationManager.getTriggerNotifications(result);
   }
-
-
 
   @KeepForSdk
   public void getChannels(MethodCallResult<List<Bundle>> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getChannels");
-      result.onComplete(null, Collections.emptyList());
-    } else {
-      ChannelManager.getChannels()
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelManager.getChannels()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getChannel(String channelId, MethodCallResult<Bundle> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getChannel");
-      result.onComplete(null, null);
-    } else {
-      ChannelManager.getChannel(channelId)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelManager.getChannel(channelId)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getChannelGroups(MethodCallResult<List<Bundle>> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getChannelGroups");
-      result.onComplete(null, Collections.emptyList());
-    } else {
-      ChannelManager.getChannelGroups()
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelManager.getChannelGroups()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getChannelGroup(String channelGroupId, MethodCallResult<Bundle> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getChannelGroup");
-      result.onComplete(null, null);
-    } else {
-      ChannelManager.getChannelGroup(channelGroupId)
-          .addOnCompleteListener(
-              task -> {
-                if (task.isSuccessful()) {
-                  result.onComplete(null, task.getResult());
-                } else {
-                  result.onComplete(task.getException(), null);
-                }
-              });
-    }
+    ChannelManager.getChannelGroup(channelGroupId)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void isChannelCreated(String channelId, MethodCallResult<Boolean> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("isChannelCreated");
-      result.onComplete(null, false);
-    } else {
-      ChannelManager.isChannelCreated(channelId)
+    ChannelManager.isChannelCreated(channelId)
         .addOnCompleteListener(
-          task -> {
-            if (task.isSuccessful()) {
-              result.onComplete(null, task.getResult());
-            } else {
-              result.onComplete(task.getException(), null);
-            }
-          });
-    }
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void isChannelBlocked(String channelId, MethodCallResult<Boolean> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("isChannelBlocked");
-      result.onComplete(null, false);
-    } else {
-      ChannelManager.isChannelBlocked(channelId)
+    ChannelManager.isChannelBlocked(channelId)
         .addOnCompleteListener(
-          task -> {
-            if (task.isSuccessful()) {
-              result.onComplete(null, task.getResult());
-            } else {
-              result.onComplete(task.getException(), null);
-            }
-          });
-    }
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk
   public void getInitialNotification(Activity activity, MethodCallResult<Bundle> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("getInitialNotification");
-      result.onComplete(null, null);
-      return;
-    }
-
     InitialNotificationEvent event = EventBus.removeStickEvent(InitialNotificationEvent.class);
     Bundle initialNotificationBundle = new Bundle();
 
@@ -443,11 +345,12 @@ public class Notifee {
         // get intent from current activity
         Intent intent = activity.getIntent();
         if (intent != null && intent.getExtras() != null && intent.hasExtra("notification")) {
-          initialNotificationBundle.putBundle("notification", intent.getBundleExtra("notification"));
+          initialNotificationBundle.putBundle(
+              "notification", intent.getBundleExtra("notification"));
           result.onComplete(null, initialNotificationBundle);
           return;
         }
-      } catch(Exception e) {
+      } catch (Exception e) {
         Logger.e(TAG, "getInitialNotification", e);
       }
     }
@@ -479,48 +382,41 @@ public class Notifee {
   public void openPowerManagerSettings(Activity activity, MethodCallResult<Void> result) {
     PowerManagerUtils.openPowerManagerSettings(activity);
     result.onComplete(null, null);
-    return;
   }
 
   @KeepForSdk
   public void openNotificationSettings(
       @Nullable String channelId, Activity activity, MethodCallResult<Void> result) {
-    if (LicenseManager.isLicenseInvalid()) {
-      logLicenseWarningForMethod("openNotificationSettings");
+    if (getContext() == null || activity == null) {
+      Logger.d(
+          "openNotificationSettings",
+          "attempted to start activity but no current activity or context was available.");
       result.onComplete(null, null);
-    } else {
-      if (getContext() == null || activity == null) {
-        Logger.d(
-            "openNotificationSettings",
-            "attempted to start activity but no current activity or context was available.");
-        result.onComplete(null, null);
-        return;
-      }
-
-      Intent intent;
-      if (Build.VERSION.SDK_INT >= 26) {
-        if (channelId != null) {
-          intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-          intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
-        } else {
-          intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
-        }
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
-      } else {
-        intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
-      }
-
-      intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-
-      activity.runOnUiThread(() -> getContext().startActivity(intent));
-      result.onComplete(null, null);
+      return;
     }
+
+    Intent intent;
+    if (Build.VERSION.SDK_INT >= 26) {
+      if (channelId != null) {
+        intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
+      } else {
+        intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+      }
+      intent.putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
+    } else {
+      intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+    }
+
+    intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+
+    activity.runOnUiThread(() -> getContext().startActivity(intent));
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
   public void stopForegroundService(MethodCallResult<Void> result) {
     ForegroundService.stop();
     result.onComplete(null, null);
-    return;
   }
 }

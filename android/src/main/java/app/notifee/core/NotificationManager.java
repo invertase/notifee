@@ -26,7 +26,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
-
 import androidx.annotation.NonNull;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
@@ -70,13 +69,22 @@ import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
-
-import static app.notifee.core.ContextHolder.getApplicationContext;
-import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
-import static java.lang.Integer.parseInt;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
+  private static final String EXTRA_NOTIFEE_NOTIFICATION = "notifee.notification";
+  private static final String EXTRA_NOTIFEE_TRIGGER = "notifee.trigger";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
   private static final int NOTIFICATION_TYPE_ALL = 0;
   private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
@@ -459,15 +467,17 @@ class NotificationManager {
               }
               return null;
             })
-        .continueWith(CACHED_THREAD_POOL, task -> {
-          if (notificationType == NOTIFICATION_TYPE_TRIGGER
-            || notificationType == NOTIFICATION_TYPE_ALL) {
-            NotifeeAlarmManager.cancelAllNotifications();
-            // delete all from database
-            WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
-          }
-          return null;
-        });
+        .continueWith(
+            CACHED_THREAD_POOL,
+            task -> {
+              if (notificationType == NOTIFICATION_TYPE_TRIGGER
+                  || notificationType == NOTIFICATION_TYPE_ALL) {
+                NotifeeAlarmManager.cancelAllNotifications();
+                // delete all from database
+                WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
+              }
+              return null;
+            });
   }
 
   static Task<Void> cancelAllNotificationsWithIds(@NonNull int notificationType, @NonNull List<String> ids, String tag) {
@@ -502,47 +512,57 @@ class NotificationManager {
               }
             }
 
-            if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
-              Logger.i(TAG, "Removing notification with id " + id);
+                if (notificationType != NOTIFICATION_TYPE_DISPLAYED) {
+                  Logger.i(TAG, "Removing notification with id " + id);
 
-              workManager.cancelUniqueWork("trigger:" + id);
-              // Remove all cancelled and finished work from its internal database
-              // states include SUCCEEDED, FAILED and CANCELLED
-              workManager.pruneWork();
+                  workManager.cancelUniqueWork("trigger:" + id);
+                  // Remove all cancelled and finished work from its internal database
+                  // states include SUCCEEDED, FAILED and CANCELLED
+                  workManager.pruneWork();
 
-              // And with alarm manager
-              NotifeeAlarmManager.cancelNotification(id);
-
-            }
-        }
-        return null;
-      }).continueWith(
-      task -> {
-        // delete all from database
-        if (notificationType != NOTIFICATION_TYPE_DISPLAYED ) {
-          WorkDataRepository.getInstance(getApplicationContext()).deleteByIds(ids);
-        }
-        return null;
-      });
+                  // And with alarm manager
+                  NotifeeAlarmManager.cancelNotification(id);
+                }
+       
+              return null;
+            })
+        .continueWith(
+            task -> {
+              // delete all from database
+              if (notificationType != NOTIFICATION_TYPE_DISPLAYED) {
+                WorkDataRepository.getInstance(getApplicationContext()).deleteByIds(ids);
+              }
+              return null;
+            });
   }
 
-
-
-  static Task<Void> displayNotification(NotificationModel notificationModel) {
+  static Task<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
     return notificationBundleToBuilder(notificationModel)
         .continueWith(
             CACHED_THREAD_POOL,
             (task) -> {
               NotificationCompat.Builder builder = task.getResult();
-              NotificationAndroidModel androidBundle = notificationModel.getAndroid();
+
+              // Add the following extras for `getDisplayedNotifications()`
+              Bundle extrasBundle = new Bundle();
+              extrasBundle.putBundle(EXTRA_NOTIFEE_NOTIFICATION, notificationModel.toBundle());
+              if (triggerBundle != null) {
+                extrasBundle.putBundle(EXTRA_NOTIFEE_TRIGGER, triggerBundle);
+              }
+              builder.addExtras(extrasBundle);
+
+              // build notification
               Notification notification = Objects.requireNonNull(builder).build();
+
               int hashCode = notificationModel.getHashCode();
 
+
+              NotificationAndroidModel androidBundle = notificationModel.getAndroid();
               if (androidBundle.getAsForegroundService()) {
                 ForegroundService.start(hashCode, notification, notificationModel.toBundle());
               } else {
                 NotificationManagerCompat.from(getApplicationContext())
-                    .notify(hashCode, notification);
+                    .notify(androidBundle.getTag(), hashCode, notification);
               }
 
               EventBus.post(
@@ -662,95 +682,106 @@ class NotificationManager {
 
   static Task<List<Bundle>> getDisplayedNotifications() {
     return Tasks.call(
-      () -> {
-        List<Bundle> notifications = new ArrayList<Bundle>();
+        () -> {
+          List<Bundle> notifications = new ArrayList<Bundle>();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return notifications;
+          }
+
+          android.app.NotificationManager notificationManager =
+              (android.app.NotificationManager)
+                  getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+          StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
+
+          for (StatusBarNotification sbNotification : delivered) {
+            Notification original = sbNotification.getNotification();
+
+            Bundle extras = original.extras;
+            Bundle displayNotificationBundle = new Bundle();
+
+            Bundle notificationBundle = extras.getBundle(EXTRA_NOTIFEE_NOTIFICATION);
+            Bundle triggerBundle = extras.getBundle(EXTRA_NOTIFEE_TRIGGER);
+
+
+            if (notificationBundle == null) {
+              notificationBundle = new Bundle();
+              notificationBundle.putString("id", "" + sbNotification.getId());
+
+              Object title = extras.get(Notification.EXTRA_TITLE);
+
+              if (title != null) {
+                notificationBundle.putString("title", title.toString());
+              }
+
+              Object text = extras.get(Notification.EXTRA_TEXT);
+
+              if (text != null) {
+                notificationBundle.putString("body", text.toString());
+              }
+
+              Object subtitle = extras.get(Notification.EXTRA_SUB_TEXT);
+
+              if (subtitle != null) {
+                notificationBundle.putString("subtitle", subtitle.toString());
+              }
+
+              Bundle androidBundle = new Bundle();
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                androidBundle.putString("channelId", original.getChannelId());
+              }
+              androidBundle.putString("tag", sbNotification.getTag());
+              androidBundle.putString("group", original.getGroup());
+
+              notificationBundle.putBundle("android", androidBundle);
+
+              displayNotificationBundle.putString("id", "" + sbNotification.getId());
+            } else {
+              displayNotificationBundle.putString("id", "" + notificationBundle.get("id"));
+            }
+
+            if (triggerBundle != null) {
+              displayNotificationBundle.putBundle("trigger", triggerBundle);
+            }
+
+            displayNotificationBundle.putBundle("notification", notificationBundle);
+            displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
+
+            notifications.add(displayNotificationBundle);
+          }
+
           return notifications;
-        }
-
-        android.app.NotificationManager notificationManager = (android.app.NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        StatusBarNotification delivered[] = notificationManager.getActiveNotifications();
-
-
-        for (StatusBarNotification sbNotification : delivered) {
-          Notification original = sbNotification.getNotification();
-          Bundle extras = original.extras;
-          Bundle displayNotificationBundle = new Bundle();
-
-          Bundle notificationBundle = new Bundle();
-
-          sbNotification.getPostTime();
-          notificationBundle.putString("id", "" + sbNotification.getId());
-
-          Object title =  extras.get(Notification.EXTRA_TITLE);
-
-          if (title != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("title",  title.toString());
-          }
-
-          Object text = extras.get(Notification.EXTRA_TEXT);
-
-          if (text != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("body", text.toString());
-          }
-
-          Object subtitle =  extras.get(Notification.EXTRA_SUB_TEXT);
-
-          if (subtitle != null) {
-            // TODO: parse html text as spanned string
-            notificationBundle.putString("subtitle", subtitle.toString());
-          }
-
-          Bundle androidBundle = new Bundle();
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            androidBundle.putString("channelId", original.getChannelId());
-          }
-          androidBundle.putString("tag", sbNotification.getTag());
-          androidBundle.putString("group", original.getGroup());
-
-          notificationBundle.putBundle("android", androidBundle);
-          displayNotificationBundle.putBundle("notification", notificationBundle);
-          displayNotificationBundle.putString("id", "" + sbNotification.getId());
-          displayNotificationBundle.putString("date", "" + sbNotification.getPostTime());
-
-          notifications.add(displayNotificationBundle);
-        }
-
-        return notifications;
-      });
+        });
   }
-
 
   static void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
     workDataRepository
-      .getAll()
-      .addOnCompleteListener(
-        task -> {
-          List<Bundle> triggerNotifications = new ArrayList<Bundle>();
+        .getAll()
+        .addOnCompleteListener(
+            task -> {
+              List<Bundle> triggerNotifications = new ArrayList<Bundle>();
 
-          if (task.isSuccessful()) {
-            List<WorkDataEntity> workDataEntities = task.getResult();
-             for (WorkDataEntity workDataEntity : workDataEntities) {
-               Bundle triggerNotificationBundle = new Bundle();
+              if (task.isSuccessful()) {
+                List<WorkDataEntity> workDataEntities = task.getResult();
+                for (WorkDataEntity workDataEntity : workDataEntities) {
+                  Bundle triggerNotificationBundle = new Bundle();
 
-               triggerNotificationBundle.putBundle("notification",  ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
+                  triggerNotificationBundle.putBundle(
+                      "notification", ObjectUtils.bytesToBundle(workDataEntity.getNotification()));
 
-               triggerNotificationBundle.putBundle("trigger", ObjectUtils.bytesToBundle(workDataEntity.getTrigger()));
-               triggerNotifications.add(triggerNotificationBundle);
-             }
+                  triggerNotificationBundle.putBundle(
+                      "trigger", ObjectUtils.bytesToBundle(workDataEntity.getTrigger()));
+                  triggerNotifications.add(triggerNotificationBundle);
+                }
 
-            result.onComplete(null, triggerNotifications);
-          } else {
-            result.onComplete(task.getException(), triggerNotifications);
-          }
-        });
-
+                result.onComplete(null, triggerNotifications);
+              } else {
+                result.onComplete(task.getException(), triggerNotifications);
+              }
+            });
   }
 
   static void getTriggerNotificationIds(MethodCallResult<List<String>> result) {
@@ -810,7 +841,14 @@ class NotificationManager {
           NotificationModel notificationModel =
               NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
 
-          return NotificationManager.displayNotification(notificationModel);
+          byte[] triggerBytes = workDataEntity.getTrigger();
+          Bundle triggerBundle = null;
+
+          if (workDataEntity.getTrigger() != null) {
+            triggerBundle = ObjectUtils.bytesToBundle(triggerBytes);
+          }
+
+          return NotificationManager.displayNotification(notificationModel, triggerBundle);
         };
 
     workDataRepository
