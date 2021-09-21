@@ -23,6 +23,7 @@ import Notifee, {
   EventType,
   Event,
   IOSAuthorizationStatus,
+  TimestampTrigger,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -169,7 +170,8 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      Notifee.displayNotification(notification)
+      const trigger: TimestampTrigger = { type: 0, timestamp: date.getTime() };
+      Notifee.createTriggerNotification(notification, trigger)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }
@@ -184,7 +186,7 @@ function Root(): any {
               title={`get delivered notifications`}
               onPress={async (): Promise<void> => {
                 const notifications = await Notifee.getDisplayedNotifications();
-                console.log('notifications: ', notifications);
+                console.log('notifications: ', notifications?.[0]?.notification?.android);
               }}
             />
             <Button
@@ -209,7 +211,7 @@ function Root(): any {
             <Button
               title={`Cancel ${id}`}
               onPress={(): void => {
-                Notifee.cancelNotification(id);
+                Notifee.cancelNotification(id, 'hi');
               }}
             />
             <Button
@@ -221,7 +223,7 @@ function Root(): any {
             <Button
               title={`Cancel displayed ${id}`}
               onPress={async () => {
-                if (id != null) await Notifee.cancelDisplayedNotification(id);
+                if (id != null) await Notifee.cancelDisplayedNotification(id, 'hi');
               }}
             />
             <Button
