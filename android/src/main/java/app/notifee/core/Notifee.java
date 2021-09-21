@@ -25,14 +25,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.MethodCallResult;
@@ -111,15 +105,17 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void cancelAllNotificationsWithIds(int type, List<String> ids, String tag, MethodCallResult<Void> result) {
-      NotificationManager.cancelAllNotificationsWithIds(type, ids, tag).addOnCompleteListener(
-        task -> {
-          if (task.isSuccessful()) {
-            result.onComplete(null, task.getResult());
-          } else {
-            result.onComplete(task.getException(), null);
-          }
-        });
+  public void cancelAllNotificationsWithIds(
+      int type, List<String> ids, String tag, MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotificationsWithIds(type, ids, tag)
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                result.onComplete(null, task.getResult());
+              } else {
+                result.onComplete(task.getException(), null);
+              }
+            });
   }
 
   @KeepForSdk

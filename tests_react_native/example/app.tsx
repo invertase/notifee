@@ -211,7 +211,7 @@ function Root(): any {
             <Button
               title={`Cancel ${id}`}
               onPress={(): void => {
-                Notifee.cancelNotification(id, 'hi');
+                Notifee.cancelNotification(id, 'example-tag');
               }}
             />
             <Button
@@ -223,13 +223,13 @@ function Root(): any {
             <Button
               title={`Cancel displayed ${id}`}
               onPress={async () => {
-                if (id != null) await Notifee.cancelDisplayedNotification(id, 'hi');
+                if (id != null) await Notifee.cancelDisplayedNotification(id);
               }}
             />
             <Button
               title={`Cancel all `}
               onPress={async () => {
-                await Notifee.cancelAllNotifications();
+                await Notifee.cancelDisplayedNotifications([id]);
               }}
             />
             <Button
