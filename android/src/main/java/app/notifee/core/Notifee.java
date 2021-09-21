@@ -89,26 +89,6 @@ public class Notifee {
   /**
    * NOTE: Allow cancelling notifications even if the license is invalid.
    *
-   * @param notificationId
-   * @param result
-   */
-  @KeepForSdk
-  public void cancelNotification(
-      String notificationId, int notificationType, MethodCallResult<Void> result) {
-    NotificationManager.cancelNotification(notificationId, notificationType)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
-  }
-
-  /**
-   * NOTE: Allow cancelling notifications even if the license is invalid.
-   *
    * @param result
    */
   @KeepForSdk
@@ -126,8 +106,8 @@ public class Notifee {
 
   @KeepForSdk
   public void cancelAllNotificationsWithIds(
-      int type, List<String> ids, MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotificationsWithIds(type, ids)
+      int type, List<String> ids, String tag, MethodCallResult<Void> result) {
+    NotificationManager.cancelAllNotificationsWithIds(type, ids, tag)
         .addOnCompleteListener(
             task -> {
               if (task.isSuccessful()) {
