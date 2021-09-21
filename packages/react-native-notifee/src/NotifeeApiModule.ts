@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Platform } from 'react-native';
 import { Module } from './types/Module';
 import {
   AndroidChannel,
@@ -31,6 +31,7 @@ import {
   kReactNativeNotifeeForegroundServiceHeadlessTask,
   kReactNativeNotifeeNotificationBackgroundEvent,
   kReactNativeNotifeeNotificationEvent,
+  NotificationType,
 } from './utils';
 import validateNotification from './validators/validateNotification';
 import validateTrigger from './validators/validateTrigger';
@@ -132,33 +133,77 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return this.native.isChannelCreated(channelId);
   };
 
-  public cancelAllNotifications = (notificationIds?: string[]): Promise<void> => {
-    if (notificationIds) return this.native.cancelAllNotificationsWithIds(notificationIds);
+  public cancelAllNotifications = (notificationIds?: string[], tag?: string): Promise<void> => {
+    if (notificationIds) {
+      if (Platform.OS === 'android') {
+        return this.native.cancelAllNotificationsWithIds(
+          notificationIds,
+          NotificationType.ALL,
+          tag,
+        );
+      }
+      return this.native.cancelAllNotificationsWithIds(notificationIds);
+    }
     return this.native.cancelAllNotifications();
   };
 
-  public cancelDisplayedNotifications = (notificationIds?: string[]): Promise<void> => {
-    if (notificationIds) return this.native.cancelDisplayedNotificationsWithIds(notificationIds);
+  public cancelDisplayedNotifications = (
+    notificationIds?: string[],
+    tag?: string,
+  ): Promise<void> => {
+    if (notificationIds) {
+      if (Platform.OS === 'android') {
+        return this.native.cancelAllNotificationsWithIds(
+          notificationIds,
+          NotificationType.DISPLAYED,
+          tag,
+        );
+      }
+
+      return this.native.cancelDisplayedNotificationsWithIds(notificationIds);
+    }
+
     return this.native.cancelDisplayedNotifications();
   };
 
   public cancelTriggerNotifications = (notificationIds?: string[]): Promise<void> => {
-    if (notificationIds) return this.native.cancelTriggerNotificationsWithIds(notificationIds);
+    if (notificationIds) {
+      if (Platform.OS === 'android') {
+        return this.native.cancelAllNotificationsWithIds(
+          notificationIds,
+          NotificationType.TRIGGER,
+          null,
+        );
+      }
+      return this.native.cancelTriggerNotificationsWithIds(notificationIds);
+    }
     return this.native.cancelTriggerNotifications();
   };
 
-  public cancelNotification = (notificationId: string): Promise<void> => {
+  public cancelNotification = (notificationId: string, tag?: string): Promise<void> => {
     if (!isString(notificationId)) {
       throw new Error("notifee.cancelNotification(*) 'notificationId' expected a string value.");
+    }
+
+    if (Platform.OS === 'android') {
+      return this.native.cancelAllNotificationsWithIds([notificationId], NotificationType.ALL, tag);
     }
 
     return this.native.cancelNotification(notificationId);
   };
 
-  public cancelDisplayedNotification = (notificationId: string): Promise<void> => {
+  public cancelDisplayedNotification = (notificationId: string, tag?: string): Promise<void> => {
     if (!isString(notificationId)) {
       throw new Error(
         "notifee.cancelDisplayedNotification(*) 'notificationId' expected a string value.",
+      );
+    }
+
+    if (Platform.OS === 'android') {
+      return this.native.cancelAllNotificationsWithIds(
+        [notificationId],
+        NotificationType.DISPLAYED,
+        tag,
       );
     }
 
@@ -169,6 +214,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     if (!isString(notificationId)) {
       throw new Error(
         "notifee.cancelTriggerNotification(*) 'notificationId' expected a string value.",
+      );
+    }
+
+    if (Platform.OS === 'android') {
+      return this.native.cancelAllNotificationsWithIds(
+        [notificationId],
+        NotificationType.TRIGGER,
+        null,
       );
     }
 

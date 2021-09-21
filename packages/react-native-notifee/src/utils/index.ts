@@ -37,3 +37,9 @@ export const kReactNativeNotifeeNotificationEvent = 'app.notifee.notification-ev
 
 export const kReactNativeNotifeeNotificationBackgroundEvent =
   'app.notifee.notification-event-background';
+
+export enum NotificationType {
+  ALL = 0,
+  DISPLAYED = 1,
+  TRIGGER = 2,
+}

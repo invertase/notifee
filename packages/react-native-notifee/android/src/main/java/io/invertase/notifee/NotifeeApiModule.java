@@ -37,33 +37,6 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void cancelNotification(String notificationId, Promise promise) {
-    Notifee.getInstance()
-        .cancelNotification(
-            notificationId,
-            NOTIFICATION_TYPE_ALL,
-            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
-  }
-
-  @ReactMethod
-  public void cancelDisplayedNotification(String notificationId, Promise promise) {
-    Notifee.getInstance()
-        .cancelNotification(
-            notificationId,
-            NOTIFICATION_TYPE_DISPLAYED,
-            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
-  }
-
-  @ReactMethod
-  public void cancelTriggerNotification(String notificationId, Promise promise) {
-    Notifee.getInstance()
-        .cancelNotification(
-            notificationId,
-            NOTIFICATION_TYPE_TRIGGER,
-            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
-  }
-
-  @ReactMethod
   public void cancelAllNotifications(Promise promise) {
     Notifee.getInstance()
         .cancelAllNotifications(
@@ -86,7 +59,8 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void cancelAllNotificationsWithIds(ReadableArray idsArray, Promise promise) {
+  public void cancelAllNotificationsWithIds(
+      ReadableArray idsArray, int notificationType, String tag, Promise promise) {
     ArrayList<String> ids = new ArrayList<>(idsArray.size());
     for (int i = 0; i < idsArray.size(); i++) {
       ids.add(idsArray.getString(i));
@@ -94,36 +68,9 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
 
     Notifee.getInstance()
         .cancelAllNotificationsWithIds(
-            NOTIFICATION_TYPE_ALL,
+            notificationType,
             ids,
-            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
-  }
-
-  @ReactMethod
-  public void cancelDisplayedNotificationsWithIds(ReadableArray idsArray, Promise promise) {
-    ArrayList<String> ids = new ArrayList<>(idsArray.size());
-    for (int i = 0; i < idsArray.size(); i++) {
-      ids.add(idsArray.getString(i));
-    }
-
-    Notifee.getInstance()
-        .cancelAllNotificationsWithIds(
-            NOTIFICATION_TYPE_DISPLAYED,
-            ids,
-            (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
-  }
-
-  @ReactMethod
-  public void cancelTriggerNotificationsWithIds(ReadableArray idsArray, Promise promise) {
-    ArrayList<String> ids = new ArrayList<>(idsArray.size());
-    for (int i = 0; i < idsArray.size(); i++) {
-      ids.add(idsArray.getString(i));
-    }
-
-    Notifee.getInstance()
-        .cancelAllNotificationsWithIds(
-            NOTIFICATION_TYPE_TRIGGER,
-            ids,
+            tag,
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 

@@ -54,8 +54,10 @@ export interface Module {
    *
    * @param notificationId The unique notification ID. This is automatically generated and returned
    * when creating a notification, or has been set manually via the `id` property.
+   *
+   * @param tag The tag set when creating the notification. This is only relative to Android.
    */
-  cancelNotification(notificationId: string): Promise<void>;
+  cancelNotification(notificationId: string, tag?: string): Promise<void>;
 
   /**
    * API used to cancel a single displayed notification.
@@ -66,8 +68,10 @@ export interface Module {
    *
    * @param notificationId The unique notification ID. This is automatically generated and returned
    * when creating a notification, or has been set manually via the `id` property.
+   *
+   * @param tag The tag set when creating the notification. This is only relative to Android.
    */
-  cancelDisplayedNotification(notificationId: string): Promise<void>;
+  cancelDisplayedNotification(notificationId: string, tag?: string): Promise<void>;
 
   /**
    * API used to cancel a single trigger notification.
