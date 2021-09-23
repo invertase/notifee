@@ -9,7 +9,7 @@ The Android API allows for creating rich, styled and highly interactive notifica
 concept on Android, and frequently receive new updates with each new API version.
 
 Notifee has been designed to integrate with the latest API features, and also provide backwards compatibility for
-older Android devices (Android 4.1 (API 16)).
+older Android devices (Android 4.4W (API 20)).
 
 ## Android Features
 

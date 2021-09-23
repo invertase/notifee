@@ -126,8 +126,10 @@ once complete.
 # App open events
 
 If user interaction on a notification has caused your application to open, you may want to obtain the notification which
-triggered the app to open (e.g. a specific chat message). Notifee exposes a `getInitialNotification` method,
+triggered the app to open (e.g. a specific chat message). Notifee exposes a `getInitialNotification` method on Android,
 which can be called early on in your React lifecycle to obtain the notification which opened the application.
+
+> `getInitialNotification` is deprecated on iOS in favour of the `PRESS` event received by the `onForegroundEvent` event handler
 
 It is recommended to always check if a notification has caused your app to open before displaying the main app content.
 Once consumed, the initial notification is removed.

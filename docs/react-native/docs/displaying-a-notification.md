@@ -127,3 +127,9 @@ async function cancel(notificationId) {
   await notifee.cancelNotification(notificationId);
 }
 ```
+
+It is also possible to cancel a notification with a tag:
+
+```js
+  await notifee.cancelNotification(notificationId, tag);
+```
