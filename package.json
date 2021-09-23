@@ -76,7 +76,7 @@
   },
   "workspaces": {
     "packages": [
-      "packages/react-native",
+      "packages/*",
       "tests_react_native"
     ],
     "nohoist": [
