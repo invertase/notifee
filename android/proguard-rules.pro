@@ -89,6 +89,3 @@
 
 # -----
 -repackageclasses 'n.o.t.i.f.e.e'
-
--classobfuscationdictionary obfuscate_dict.txt
--obfuscationdictionary obfuscate_dict.txt
