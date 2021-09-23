@@ -7998,7 +7998,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 667,
+							"line": 671,
 							"character": 9
 						}
 					],
@@ -8023,7 +8023,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 672,
+							"line": 676,
 							"character": 5
 						}
 					],
@@ -8047,7 +8047,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 663,
+					"line": 667,
 					"character": 27
 				}
 			]
@@ -8080,7 +8080,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 621,
+							"line": 625,
 							"character": 9
 						}
 					],
@@ -8102,7 +8102,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 614,
+					"line": 618,
 					"character": 34
 				}
 			]
@@ -8135,7 +8135,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 644,
+							"line": 648,
 							"character": 9
 						}
 					],
@@ -8157,7 +8157,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 637,
+					"line": 641,
 					"character": 30
 				}
 			]
@@ -8278,6 +8278,9 @@
 										"isExported": true,
 										"isOptional": true
 									},
+									"comment": {
+										"text": "The tag set when creating the notification. This is only relative to Android.\n"
+									},
 									"type": {
 										"type": "union",
 										"types": [
@@ -8308,7 +8311,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 70,
+							"line": 74,
 							"character": 29
 						}
 					]
@@ -8420,6 +8423,9 @@
 										"isExported": true,
 										"isOptional": true
 									},
+									"comment": {
+										"text": "The tag set when creating the notification. This is only relative to Android.\n"
+									},
 									"type": {
 										"type": "union",
 										"types": [
@@ -8450,7 +8456,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 58,
+							"line": 60,
 							"character": 20
 						}
 					]
@@ -8508,7 +8514,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 79,
+							"line": 83,
 							"character": 27
 						}
 					]
@@ -8633,7 +8639,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 98,
+							"line": 102,
 							"character": 15
 						}
 					]
@@ -8699,7 +8705,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 129,
+							"line": 133,
 							"character": 20
 						}
 					]
@@ -8768,7 +8774,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 140,
+							"line": 144,
 							"character": 21
 						}
 					]
@@ -8837,7 +8843,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 109,
+							"line": 113,
 							"character": 16
 						}
 					]
@@ -8914,7 +8920,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 200,
+							"line": 204,
 							"character": 27
 						}
 					]
@@ -8986,7 +8992,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 502,
+							"line": 506,
 							"character": 21
 						}
 					]
@@ -9051,7 +9057,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 155,
+							"line": 159,
 							"character": 15
 						}
 					]
@@ -9116,7 +9122,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 171,
+							"line": 175,
 							"character": 20
 						}
 					]
@@ -9176,7 +9182,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 185,
+							"line": 189,
 							"character": 21
 						}
 					]
@@ -9223,7 +9229,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 468,
+							"line": 472,
 							"character": 15
 						}
 					]
@@ -9298,7 +9304,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 235,
+							"line": 239,
 							"character": 12
 						}
 					]
@@ -9373,7 +9379,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 287,
+							"line": 291,
 							"character": 17
 						}
 					]
@@ -9424,7 +9430,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 303,
+							"line": 307,
 							"character": 18
 						}
 					]
@@ -9475,7 +9481,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 269,
+							"line": 273,
 							"character": 13
 						}
 					]
@@ -9519,7 +9525,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 212,
+							"line": 216,
 							"character": 27
 						}
 					]
@@ -9570,7 +9576,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 320,
+							"line": 324,
 							"character": 24
 						}
 					]
@@ -9621,7 +9627,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 449,
+							"line": 453,
 							"character": 27
 						}
 					]
@@ -9669,7 +9675,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 459,
+							"line": 463,
 							"character": 25
 						}
 					]
@@ -9717,7 +9723,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 552,
+							"line": 556,
 							"character": 21
 						}
 					]
@@ -9761,7 +9767,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 207,
+							"line": 211,
 							"character": 27
 						}
 					]
@@ -9805,7 +9811,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 217,
+							"line": 221,
 							"character": 25
 						}
 					]
@@ -9846,7 +9852,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 598,
+							"line": 602,
 							"character": 24
 						}
 					]
@@ -9921,7 +9927,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 492,
+							"line": 496,
 							"character": 21
 						}
 					]
@@ -9968,7 +9974,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 525,
+							"line": 529,
 							"character": 30
 						}
 					]
@@ -10030,7 +10036,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 253,
+							"line": 257,
 							"character": 18
 						}
 					]
@@ -10092,7 +10098,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 244,
+							"line": 248,
 							"character": 18
 						}
 					]
@@ -10180,7 +10186,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 337,
+													"line": 341,
 													"character": 29
 												}
 											]
@@ -10197,7 +10203,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 337,
+							"line": 341,
 							"character": 19
 						}
 					]
@@ -10279,7 +10285,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 354,
+													"line": 358,
 													"character": 29
 												}
 											]
@@ -10315,7 +10321,7 @@
 									"sources": [
 										{
 											"fileName": "packages/react-native/src/types/Module.ts",
-											"line": 354,
+											"line": 358,
 											"character": 54
 										}
 									]
@@ -10326,7 +10332,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 354,
+							"line": 358,
 							"character": 19
 						}
 					]
@@ -10373,7 +10379,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 514,
+							"line": 518,
 							"character": 33
 						}
 					]
@@ -10448,7 +10454,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 375,
+							"line": 379,
 							"character": 26
 						}
 					]
@@ -10495,7 +10501,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 577,
+							"line": 581,
 							"character": 26
 						}
 					]
@@ -10555,7 +10561,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 392,
+							"line": 396,
 							"character": 27
 						}
 					]
@@ -10623,7 +10629,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 431,
+							"line": 435,
 							"character": 19
 						}
 					]
@@ -10688,7 +10694,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 480,
+							"line": 484,
 							"character": 15
 						}
 					]
@@ -10756,7 +10762,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 440,
+							"line": 444,
 							"character": 27
 						}
 					]
@@ -10802,7 +10808,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 400,
+							"line": 404,
 							"character": 23
 						}
 					]
@@ -10900,7 +10906,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 688,
+							"line": 692,
 							"character": 13
 						}
 					],
@@ -10922,7 +10928,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 684,
+					"line": 688,
 					"character": 30
 				}
 			],
@@ -10957,7 +10963,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 688,
+							"line": 692,
 							"character": 13
 						}
 					],
@@ -11088,6 +11094,9 @@
 										"isExported": true,
 										"isOptional": true
 									},
+									"comment": {
+										"text": "The tag set when creating the notification. This is only relative to Android.\n"
+									},
 									"type": {
 										"type": "union",
 										"types": [
@@ -11123,7 +11132,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 70,
+							"line": 74,
 							"character": 29
 						}
 					],
@@ -11250,6 +11259,9 @@
 										"isExported": true,
 										"isOptional": true
 									},
+									"comment": {
+										"text": "The tag set when creating the notification. This is only relative to Android.\n"
+									},
 									"type": {
 										"type": "union",
 										"types": [
@@ -11285,7 +11297,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 58,
+							"line": 60,
 							"character": 20
 						}
 					],
@@ -11353,7 +11365,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 79,
+							"line": 83,
 							"character": 27
 						}
 					],
@@ -11498,7 +11510,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 98,
+							"line": 102,
 							"character": 15
 						}
 					],
@@ -11574,7 +11586,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 129,
+							"line": 133,
 							"character": 20
 						}
 					],
@@ -11653,7 +11665,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 140,
+							"line": 144,
 							"character": 21
 						}
 					],
@@ -11732,7 +11744,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 109,
+							"line": 113,
 							"character": 16
 						}
 					],
@@ -11819,7 +11831,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 200,
+							"line": 204,
 							"character": 27
 						}
 					],
@@ -11901,7 +11913,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 502,
+							"line": 506,
 							"character": 21
 						}
 					],
@@ -11976,7 +11988,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 155,
+							"line": 159,
 							"character": 15
 						}
 					],
@@ -12051,7 +12063,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 171,
+							"line": 175,
 							"character": 20
 						}
 					],
@@ -12121,7 +12133,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 185,
+							"line": 189,
 							"character": 21
 						}
 					],
@@ -12178,7 +12190,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 468,
+							"line": 472,
 							"character": 15
 						}
 					],
@@ -12263,7 +12275,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 235,
+							"line": 239,
 							"character": 12
 						}
 					],
@@ -12348,7 +12360,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 287,
+							"line": 291,
 							"character": 17
 						}
 					],
@@ -12409,7 +12421,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 303,
+							"line": 307,
 							"character": 18
 						}
 					],
@@ -12470,7 +12482,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 269,
+							"line": 273,
 							"character": 13
 						}
 					],
@@ -12524,7 +12536,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 212,
+							"line": 216,
 							"character": 27
 						}
 					],
@@ -12585,7 +12597,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 320,
+							"line": 324,
 							"character": 24
 						}
 					],
@@ -12646,7 +12658,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 449,
+							"line": 453,
 							"character": 27
 						}
 					],
@@ -12704,7 +12716,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 459,
+							"line": 463,
 							"character": 25
 						}
 					],
@@ -12762,7 +12774,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 552,
+							"line": 556,
 							"character": 21
 						}
 					],
@@ -12816,7 +12828,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 207,
+							"line": 211,
 							"character": 27
 						}
 					],
@@ -12870,7 +12882,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 217,
+							"line": 221,
 							"character": 25
 						}
 					],
@@ -12921,7 +12933,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 598,
+							"line": 602,
 							"character": 24
 						}
 					],
@@ -13006,7 +13018,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 492,
+							"line": 496,
 							"character": 21
 						}
 					],
@@ -13063,7 +13075,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 525,
+							"line": 529,
 							"character": 30
 						}
 					],
@@ -13135,7 +13147,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 253,
+							"line": 257,
 							"character": 18
 						}
 					],
@@ -13207,7 +13219,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 244,
+							"line": 248,
 							"character": 18
 						}
 					],
@@ -13300,7 +13312,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 337,
+													"line": 341,
 													"character": 29
 												}
 											]
@@ -13322,7 +13334,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 337,
+							"line": 341,
 							"character": 19
 						}
 					],
@@ -13409,7 +13421,7 @@
 											"sources": [
 												{
 													"fileName": "packages/react-native/src/types/Module.ts",
-													"line": 354,
+													"line": 358,
 													"character": 29
 												}
 											]
@@ -13445,7 +13457,7 @@
 									"sources": [
 										{
 											"fileName": "packages/react-native/src/types/Module.ts",
-											"line": 354,
+											"line": 358,
 											"character": 54
 										}
 									]
@@ -13461,7 +13473,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 354,
+							"line": 358,
 							"character": 19
 						}
 					],
@@ -13518,7 +13530,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 514,
+							"line": 518,
 							"character": 33
 						}
 					],
@@ -13603,7 +13615,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 375,
+							"line": 379,
 							"character": 26
 						}
 					],
@@ -13660,7 +13672,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 577,
+							"line": 581,
 							"character": 26
 						}
 					],
@@ -13730,7 +13742,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 392,
+							"line": 396,
 							"character": 27
 						}
 					],
@@ -13808,7 +13820,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 431,
+							"line": 435,
 							"character": 19
 						}
 					],
@@ -13883,7 +13895,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 480,
+							"line": 484,
 							"character": 15
 						}
 					],
@@ -13961,7 +13973,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 440,
+							"line": 444,
 							"character": 27
 						}
 					],
@@ -14017,7 +14029,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 400,
+							"line": 404,
 							"character": 23
 						}
 					],
@@ -14088,7 +14100,7 @@
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 691,
+					"line": 695,
 					"character": 34
 				}
 			],
