@@ -1,7 +1,7 @@
 ---
 title: Installation
 description: Quick start guide for installing and running on React Native.
-next: /react-native/docs/license-keys
+next: /react-native/docs/release-notes
 previous: /react-native/docs/environment-support
 ---
 

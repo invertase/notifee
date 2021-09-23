@@ -2,7 +2,7 @@
 title: Releases
 description: Notifee API releases
 next: /react-native/docs/usage
-previous: /react-native/docs/license-keys
+previous: /react-native/docs/installation
 ---
 
 ## 3.0.0
@@ -49,7 +49,7 @@ previous: /react-native/docs/license-keys
 
 ## 1.8.1
 - **[Android/iOS]**: Fix npm bundle to exclude example app
-  
+
 ## 1.8.0
 - **[Android/iOS]**: Include support for jest tests by including a `jest-mock.js` file.
 - **[Android]**: Add an extra safety check to prevent app from crashing if a `launchActivity` property is set to an invalid activity class.
@@ -75,7 +75,7 @@ previous: /react-native/docs/license-keys
 - **[Android]**: Fixed an issue where sometimes the foreground service failed to stop when calling `resolve` due to an issue with hot reloading. It can be stopped by `notifee.stopForegroundService()`. To learn more, view the [Foreground Service](/react-native/docs/android/foreground-service) documentation.
 
 ## 1.2.1
-- **[Android]**: Fixed an issue with Notifee's build script where sometimes an error would occur that the target variant task already existed. 
+- **[Android]**: Fixed an issue with Notifee's build script where sometimes an error would occur that the target variant task already existed.
 
 ## 1.2.0
 - **[iOS]**:  Includes a Notification Service Extension Helper to take advantage of Notifee with remote notifications. To learn more, view the [Remote Notification Support](/react-native/docs/ios/remote-notification-support) documentation.
@@ -122,7 +122,7 @@ previous: /react-native/docs/license-keys
 - **[Android]**: Fixed an issue where `isBatteryOptimizationEnabled` was returning the result as an object instead of a boolean.
 - **[Android]**: Fixed an issue where `openBatteryOptimizationSettings` was sometimes throwing an exception for Samsung and Oppo phones on Android versions 6.0.
 - **[iOS]**: Fixed an issue when a notification is pressed while the app is in the background on iOS 14, which sometimes would cause the app to crash.
-  
+
 ## 0.13.2
 
 - **[Android]**: Fixed an issue where trigger notifications created with v0.12.x and below would cause the app to crash when upgrading to v0.13.x.

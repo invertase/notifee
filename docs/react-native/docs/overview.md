@@ -7,11 +7,6 @@ next: /react-native/docs/environment-support
 Notifee is a library for React Native, bringing local notification support to both Android &
 iOS applications.
 
-Whilst free for development, to use Notifee in production (release builds) you must first purchase a license. To learn
-more about licenses and why they are required, see the [Frequently Asked Questions](/frequently-asked-questions). We
-offer free licenses to React Native Firebase core contributors, free Open Source applications & non-profit organisations.
-If you wish to request a free license, please [contact us](/contact?reason=license).
-
 # The library
 
 Notifee is a local notifications library and does not integrate with any 3rd party messaging services. This provides
@@ -20,20 +15,6 @@ developers greater flexibility on how notifications are managed and integrated w
 The library is a successor to the notifications module in [React Native Firebase v5](https://rnfirebase.io/docs/v5.x.x/notifications/introduction).
 The entire library has been reworked from the ground up focusing on new features, testing, documentation and device
 compatibility.
-
-## Alternative solutions
-
-With Notifee requiring a paid license for release builds, we appreciate this model may not be viable for everyone. Other
-Open Source alternatives are available if required:
-
-- [wix/react-native-notifications](https://github.com/wix/react-native-notifications).
-- [react-native-push-notification-ios](https://github.com/react-native-push-notification-ios/push-notification-ios).
-- [zo0r/react-native-push-notification](https://github.com/zo0r/react-native-push-notification).
-- [invertase/react-native-firebase](https://v5.rnfirebase.io/docs/v5.x.x/notifications/introduction) (version 5 only).
-- [expo-notifications](https://docs.expo.io/push-notifications/overview/)
-
-Paid licenses allow us to ensure the library is well maintained & ensures on-going support to the user base. To learn more
-see our [Frequently Asked Questions](/frequently-asked-questions).
 
 # Documentation
 
