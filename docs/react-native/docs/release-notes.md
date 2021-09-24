@@ -10,6 +10,7 @@ previous: /react-native/docs/installation
 - **[Android]**: Fixes an issue with `getDisplayedNotifications` where the id returned is not the original notification id. (Fixes [#381](https://github.com/notifee/react-native-notifee/issues/381))
 - **[Android]**: Fixes an issue with displaying a notification with `android.tag` (Fixes [#382](https://github.com/notifee/react-native-notifee/issues/382))
 - **[Android]**: Introduces support to cancel a notification with a `tag`
+- Removed licensing validation and related code - Notifee is now free and fully open source. [[Learn More]](https://invertase.io/blog/open-sourcing-notifee)
 
 ## 2.0.0
 - **[Android]: BREAKING CHANGE** - you must add a new maven local repository to your `android/build.gradle` file. (Fixes [#151](https://github.com/notifee/react-native-notifee/issues/151)). See step #2 in [the installation guide](https://notifee.app/react-native/docs/installation)
