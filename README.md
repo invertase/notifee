@@ -17,7 +17,7 @@ A feature rich Android & iOS notifications library for React Native.
 
 ---
 
-> Notifee is going Noti-'free' - free and fully open source. Announcement and more details coming soon.
+> Notifee is going Noti-'free' - free and fully open source. [[Learn more]](https://invertase.io/blog/open-sourcing-notifee)
 
 ---
 
