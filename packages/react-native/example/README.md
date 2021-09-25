@@ -2,8 +2,8 @@
 
 ## Installation
 
-* `git clone https://github.com/notifee/react-native-notifee.git`
-* `cd react-native-notifee/example`
+* `git clone https://github.com/invertase/notifee.git`
+* `cd packages/react-native/example`
 * `yarn`
 
 ## Running Android
@@ -35,7 +35,7 @@ The app consists of 3 buttons:
 
 ### Notifications
 
-You can customise which notification is displayed by choosing from the [example notification payloads](https://github.com/notifee/react-native-notifee/blob/master/example/src/utils/notifications.ts) in `src/utils/notifications` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/master/example/src/content.tsx)
+You can customise which notification is displayed by choosing from the [example notification payloads](https://github.com/invertase/notifee/blob/master/packages/react-native/example/src/utils/notifications.ts) in `src/utils/notifications` and setting it in [src/content](https://github.com/invertase/notifee/blob/master/example/src/content.tsx)
 
 ```js
 // const notification = notifications.basic;
@@ -60,7 +60,7 @@ https://user-images.githubusercontent.com/14185925/119170236-e19e4100-ba5a-11eb-
 
 ## Triggers
 
-You can customise which trigger is displayed by choosing from the [example trigger payloads](https://github.com/notifee/react-native-notifee/blob/master/example/src/utils/triggers.ts) in `src/utils/triggers` and setting it in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L18)
+You can customise which trigger is displayed by choosing from the [example trigger payloads](https://github.com/invertase/notifee/blob/master/packages/react-native/example/src/utils/triggers.ts) in `src/utils/triggers` and setting it in [src/content](https://github.com/invertase/notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L18)
 
 ```js
 // const triggerType = triggers.timestamp;
@@ -69,7 +69,7 @@ const triggerType = triggers.interval;
 
 ### Timestamp
 
-The timestamp trigger is set to trigger 5 seconds from now, to customise the timestamp date you can update the function `getTimestamp` in [src/utils/triggers](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/utils/triggers.ts#L14):
+The timestamp trigger is set to trigger 5 seconds from now, to customise the timestamp date you can update the function `getTimestamp` in [src/utils/triggers](https://github.com/invertase/notifee/blob/master/packages/react-native/example/src/utils/triggers.ts#L14):
 
 ```js
 /* Timestamp Date */
@@ -88,7 +88,7 @@ const trigger = {
 
 ### Interval
 
-The interval trigger is set to trigger every 60 seconds, to customise the interval you can update the code in [src/utils/triggers](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/utils/triggers.ts#L28):
+The interval trigger is set to trigger every 60 seconds, to customise the interval you can update the code in [src/utils/triggers](https://github.com/invertase/notifee/blob/master/packages/react-native/example/src/utils/triggers.ts#L28):
 ```js
 /* Interval */
 const interval = 60;
@@ -103,7 +103,7 @@ const trigger = {
 
 ## Other APIs
 
-You can customise which API is called when pressing the button labelled 'Test Notifee API Action' by editing the code in [src/content](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/src/content.tsx#L63)
+You can customise which API is called when pressing the button labelled 'Test Notifee API Action' by editing the code in [src/content](https://github.com/invertase/notifee/blob/master/packages/react-native/example/src/content.tsx#L63)
 
 ```js
 const onAPIPress = async () => {
@@ -116,7 +116,7 @@ const onAPIPress = async () => {
 
 ## Requesting Permissions
 
-On iOS, it's required to request permissions to be able to display a notification, this is called in [App.tsx](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/App.tsx):
+On iOS, it's required to request permissions to be able to display a notification, this is called in [App.tsx](https://github.com/invertase/notifee/blob/master/packages/react-native/example/App.tsx):
 
 ```js
   useEffect(() => {
@@ -128,7 +128,7 @@ On iOS, it's required to request permissions to be able to display a notificatio
 
 ## Subscribing to events
 
-In [App.tsx](https://github.com/notifee/react-native-notifee/blob/9625612a5740744d64ac1b2fba4e2d8a8fbe04e5/example/App.tsx), `onBackgroundEvent` and `onForegroundEvent` are registered to receive events:
+In [App.tsx](https://github.com/invertase/notifee/blob/master/packages/react-native/example/App.tsx), `onBackgroundEvent` and `onForegroundEvent` are registered to receive events:
 
 ```js
 notifee.onBackgroundEvent(async ({type, detail}) => {

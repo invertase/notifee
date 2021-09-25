@@ -8,10 +8,8 @@ Ensure you have the following software installed:
 
 ### Step 1: Clone the repository
 
-Ensure you call `git clone` with the `recursive` flag to ensure submodules (packages/react-native) are included:
-
 ```bash
-git clone https://github.com/invertase/notifee.git --recursive
+git clone https://github.com/invertase/notifee.git
 cd notifee/
 ```
 
@@ -73,9 +71,4 @@ yarn validate:all:ts
 
 1. Bump version: `npm version {minor/patch}`
 1. Publish to npm: `npm publish`
-1. Generate TypeDoc reference docs: `yarn gen/reference`
-1. Push changes to master branch on [notifee/react-native-notifee](https://github.com/notifee/react-native-notifee)
-1. Add release notes to [docs](https://github.com/notifee/documentation)
-1. Deploy website ([notifee.app](https://github.com/invertase/notifee-web))
-1. Create a new release on [GitHub](https://github.com/notifee/react-native-notifee/releases) and tag as latest release.
-1. Add to [Release Status](https://github.com/notifee/react-native-notifee/issues/1) and update any other relevant issues.
+1. Update release notes [here](https://github.com/invertase/notifee/blob/master/docs/react-native/docs/release-notes.md)
