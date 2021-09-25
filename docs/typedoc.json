@@ -7971,198 +7971,6 @@
 			]
 		},
 		{
-			"id": 550,
-			"name": "JsonConfig",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "An interface describing the contents of a `notifee.config.json` file.",
-				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"android: {\n    \"license\": \"...\"\n  },\n  \"ios\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
-			},
-			"children": [
-				{
-					"id": 551,
-					"name": "android",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "Android specific Notifee configuration."
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 671,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 546,
-						"name": "JsonConfigAndroid"
-					}
-				},
-				{
-					"id": 552,
-					"name": "ios",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"comment": {
-						"shortText": "iOS specific Notifee configuration."
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 676,
-							"character": 5
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 548,
-						"name": "JsonConfigIOS"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						551,
-						552
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 667,
-					"character": 27
-				}
-			]
-		},
-		{
-			"id": 546,
-			"name": "JsonConfigAndroid",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "An interface describing the Android specific configuration properties for the `notifee.config.json` file.",
-				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"android\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
-			},
-			"children": [
-				{
-					"id": 547,
-					"name": "license",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "The license key created via the Notifee account section. A valid license is required\nfor production usage with Notifee.",
-						"text": "The license must match your App ID when created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 625,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						547
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 618,
-					"character": 34
-				}
-			]
-		},
-		{
-			"id": 548,
-			"name": "JsonConfigIOS",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"comment": {
-				"shortText": "An interface describing the iOS specific configuration properties for the `notifee.config.json` file.",
-				"text": "View the [License Keys](/react-native/docs/license-keys) documentation for more information.\n\n```json\n{\n  \"ios\": {\n    \"license\": \"...\"\n  }\n}\n```\n"
-			},
-			"children": [
-				{
-					"id": 549,
-					"name": "license",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "The license key created via the Notifee account section. A valid license is required\nfor production usage with Notifee.",
-						"text": "The license must match your Bundle ID when created.\n"
-					},
-					"sources": [
-						{
-							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 648,
-							"character": 9
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						549
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 641,
-					"character": 30
-				}
-			]
-		},
-		{
 			"id": 423,
 			"name": "Module",
 			"kind": 256,
@@ -10874,13 +10682,13 @@
 			"extendedBy": [
 				{
 					"type": "reference",
-					"id": 555,
+					"id": 548,
 					"name": "ModuleWithStatics"
 				}
 			]
 		},
 		{
-			"id": 553,
+			"id": 546,
 			"name": "ModuleStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -10893,7 +10701,7 @@
 			},
 			"children": [
 				{
-					"id": 554,
+					"id": 547,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10906,7 +10714,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 692,
+							"line": 618,
 							"character": 13
 						}
 					],
@@ -10921,27 +10729,27 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						554
+						547
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 688,
+					"line": 614,
 					"character": 30
 				}
 			],
 			"extendedBy": [
 				{
 					"type": "reference",
-					"id": 555,
+					"id": 548,
 					"name": "ModuleWithStatics"
 				}
 			]
 		},
 		{
-			"id": 555,
+			"id": 548,
 			"name": "ModuleWithStatics",
 			"kind": 256,
 			"kindString": "Interface",
@@ -10950,7 +10758,7 @@
 			},
 			"children": [
 				{
-					"id": 678,
+					"id": 671,
 					"name": "SDK_VERSION",
 					"kind": 1024,
 					"kindString": "Property",
@@ -10963,7 +10771,7 @@
 					"sources": [
 						{
 							"fileName": "packages/react-native/src/types/Module.ts",
-							"line": 692,
+							"line": 618,
 							"character": 13
 						}
 					],
@@ -10973,12 +10781,12 @@
 					},
 					"inheritedFrom": {
 						"type": "reference",
-						"id": 554,
+						"id": 547,
 						"name": "ModuleStatics.SDK_VERSION"
 					}
 				},
 				{
-					"id": 556,
+					"id": 549,
 					"name": "cancelAllNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -10987,7 +10795,7 @@
 					},
 					"signatures": [
 						{
-							"id": 557,
+							"id": 550,
 							"name": "cancelAllNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11000,7 +10808,7 @@
 							},
 							"parameters": [
 								{
-									"id": 558,
+									"id": 551,
 									"name": "notificationIds",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11048,7 +10856,7 @@
 					}
 				},
 				{
-					"id": 569,
+					"id": 562,
 					"name": "cancelDisplayedNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11057,7 +10865,7 @@
 					},
 					"signatures": [
 						{
-							"id": 570,
+							"id": 563,
 							"name": "cancelDisplayedNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11070,7 +10878,7 @@
 							},
 							"parameters": [
 								{
-									"id": 571,
+									"id": 564,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11086,7 +10894,7 @@
 									}
 								},
 								{
-									"id": 572,
+									"id": 565,
 									"name": "tag",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11143,7 +10951,7 @@
 					}
 				},
 				{
-					"id": 559,
+					"id": 552,
 					"name": "cancelDisplayedNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11152,7 +10960,7 @@
 					},
 					"signatures": [
 						{
-							"id": 560,
+							"id": 553,
 							"name": "cancelDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11165,7 +10973,7 @@
 							},
 							"parameters": [
 								{
-									"id": 561,
+									"id": 554,
 									"name": "notificationIds",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11213,7 +11021,7 @@
 					}
 				},
 				{
-					"id": 565,
+					"id": 558,
 					"name": "cancelNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11222,7 +11030,7 @@
 					},
 					"signatures": [
 						{
-							"id": 566,
+							"id": 559,
 							"name": "cancelNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11235,7 +11043,7 @@
 							},
 							"parameters": [
 								{
-									"id": 567,
+									"id": 560,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11251,7 +11059,7 @@
 									}
 								},
 								{
-									"id": 568,
+									"id": 561,
 									"name": "tag",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11308,7 +11116,7 @@
 					}
 				},
 				{
-					"id": 573,
+					"id": 566,
 					"name": "cancelTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11317,7 +11125,7 @@
 					},
 					"signatures": [
 						{
-							"id": 574,
+							"id": 567,
 							"name": "cancelTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11329,7 +11137,7 @@
 							},
 							"parameters": [
 								{
-									"id": 575,
+									"id": 568,
 									"name": "notificationId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11376,7 +11184,7 @@
 					}
 				},
 				{
-					"id": 562,
+					"id": 555,
 					"name": "cancelTriggerNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11385,7 +11193,7 @@
 					},
 					"signatures": [
 						{
-							"id": 563,
+							"id": 556,
 							"name": "cancelTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11397,7 +11205,7 @@
 							},
 							"parameters": [
 								{
-									"id": 564,
+									"id": 557,
 									"name": "notificationIds",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11445,7 +11253,7 @@
 					}
 				},
 				{
-					"id": 576,
+					"id": 569,
 					"name": "createChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11454,7 +11262,7 @@
 					},
 					"signatures": [
 						{
-							"id": 577,
+							"id": 570,
 							"name": "createChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11473,7 +11281,7 @@
 							},
 							"parameters": [
 								{
-									"id": 578,
+									"id": 571,
 									"name": "channel",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11521,7 +11329,7 @@
 					}
 				},
 				{
-					"id": 582,
+					"id": 575,
 					"name": "createChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11530,7 +11338,7 @@
 					},
 					"signatures": [
 						{
-							"id": 583,
+							"id": 576,
 							"name": "createChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11549,7 +11357,7 @@
 							},
 							"parameters": [
 								{
-									"id": 584,
+									"id": 577,
 									"name": "channelGroup",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11597,7 +11405,7 @@
 					}
 				},
 				{
-					"id": 585,
+					"id": 578,
 					"name": "createChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11606,7 +11414,7 @@
 					},
 					"signatures": [
 						{
-							"id": 586,
+							"id": 579,
 							"name": "createChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11625,7 +11433,7 @@
 							},
 							"parameters": [
 								{
-									"id": 587,
+									"id": 580,
 									"name": "channelGroups",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11676,7 +11484,7 @@
 					}
 				},
 				{
-					"id": 579,
+					"id": 572,
 					"name": "createChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11685,7 +11493,7 @@
 					},
 					"signatures": [
 						{
-							"id": 580,
+							"id": 573,
 							"name": "createChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11704,7 +11512,7 @@
 							},
 							"parameters": [
 								{
-									"id": 581,
+									"id": 574,
 									"name": "channels",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11755,7 +11563,7 @@
 					}
 				},
 				{
-					"id": 597,
+					"id": 590,
 					"name": "createTriggerNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11764,7 +11572,7 @@
 					},
 					"signatures": [
 						{
-							"id": 598,
+							"id": 591,
 							"name": "createTriggerNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11777,7 +11585,7 @@
 							},
 							"parameters": [
 								{
-									"id": 599,
+									"id": 592,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11794,7 +11602,7 @@
 									}
 								},
 								{
-									"id": 600,
+									"id": 593,
 									"name": "trigger",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11842,7 +11650,7 @@
 					}
 				},
 				{
-					"id": 665,
+					"id": 658,
 					"name": "decrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11851,7 +11659,7 @@
 					},
 					"signatures": [
 						{
-							"id": 666,
+							"id": 659,
 							"name": "decrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11870,7 +11678,7 @@
 							},
 							"parameters": [
 								{
-									"id": 667,
+									"id": 660,
 									"name": "decrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11924,7 +11732,7 @@
 					}
 				},
 				{
-					"id": 588,
+					"id": 581,
 					"name": "deleteChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -11933,7 +11741,7 @@
 					},
 					"signatures": [
 						{
-							"id": 589,
+							"id": 582,
 							"name": "deleteChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -11952,7 +11760,7 @@
 							},
 							"parameters": [
 								{
-									"id": 590,
+									"id": 583,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -11999,7 +11807,7 @@
 					}
 				},
 				{
-					"id": 591,
+					"id": 584,
 					"name": "deleteChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12008,7 +11816,7 @@
 					},
 					"signatures": [
 						{
-							"id": 592,
+							"id": 585,
 							"name": "deleteChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12027,7 +11835,7 @@
 							},
 							"parameters": [
 								{
-									"id": 593,
+									"id": 586,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12074,7 +11882,7 @@
 					}
 				},
 				{
-					"id": 594,
+					"id": 587,
 					"name": "displayNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12083,7 +11891,7 @@
 					},
 					"signatures": [
 						{
-							"id": 595,
+							"id": 588,
 							"name": "displayNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12096,7 +11904,7 @@
 							},
 							"parameters": [
 								{
-									"id": 596,
+									"id": 589,
 									"name": "notification",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12144,7 +11952,7 @@
 					}
 				},
 				{
-					"id": 657,
+					"id": 650,
 					"name": "getBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12153,7 +11961,7 @@
 					},
 					"signatures": [
 						{
-							"id": 658,
+							"id": 651,
 							"name": "getBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12201,7 +12009,7 @@
 					}
 				},
 				{
-					"id": 607,
+					"id": 600,
 					"name": "getChannel",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12210,7 +12018,7 @@
 					},
 					"signatures": [
 						{
-							"id": 608,
+							"id": 601,
 							"name": "getChannel",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12229,7 +12037,7 @@
 							},
 							"parameters": [
 								{
-									"id": 609,
+									"id": 602,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12286,7 +12094,7 @@
 					}
 				},
 				{
-					"id": 618,
+					"id": 611,
 					"name": "getChannelGroup",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12295,7 +12103,7 @@
 					},
 					"signatures": [
 						{
-							"id": 619,
+							"id": 612,
 							"name": "getChannelGroup",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12314,7 +12122,7 @@
 							},
 							"parameters": [
 								{
-									"id": 620,
+									"id": 613,
 									"name": "channelGroupId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -12371,7 +12179,7 @@
 					}
 				},
 				{
-					"id": 621,
+					"id": 614,
 					"name": "getChannelGroups",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12380,7 +12188,7 @@
 					},
 					"signatures": [
 						{
-							"id": 622,
+							"id": 615,
 							"name": "getChannelGroups",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12432,7 +12240,7 @@
 					}
 				},
 				{
-					"id": 616,
+					"id": 609,
 					"name": "getChannels",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12441,7 +12249,7 @@
 					},
 					"signatures": [
 						{
-							"id": 617,
+							"id": 610,
 							"name": "getChannels",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12493,7 +12301,7 @@
 					}
 				},
 				{
-					"id": 603,
+					"id": 596,
 					"name": "getDisplayedNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12502,7 +12310,7 @@
 					},
 					"signatures": [
 						{
-							"id": 604,
+							"id": 597,
 							"name": "getDisplayedNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12547,7 +12355,7 @@
 					}
 				},
 				{
-					"id": 623,
+					"id": 616,
 					"name": "getInitialNotification",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12556,7 +12364,7 @@
 					},
 					"signatures": [
 						{
-							"id": 624,
+							"id": 617,
 							"name": "getInitialNotification",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12608,7 +12416,7 @@
 					}
 				},
 				{
-					"id": 653,
+					"id": 646,
 					"name": "getNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12617,7 +12425,7 @@
 					},
 					"signatures": [
 						{
-							"id": 654,
+							"id": 647,
 							"name": "getNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12669,7 +12477,7 @@
 					}
 				},
 				{
-					"id": 655,
+					"id": 648,
 					"name": "getNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12678,7 +12486,7 @@
 					},
 					"signatures": [
 						{
-							"id": 656,
+							"id": 649,
 							"name": "getNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12727,7 +12535,7 @@
 					}
 				},
 				{
-					"id": 672,
+					"id": 665,
 					"name": "getPowerManagerInfo",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12736,7 +12544,7 @@
 					},
 					"signatures": [
 						{
-							"id": 673,
+							"id": 666,
 							"name": "getPowerManagerInfo",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12785,7 +12593,7 @@
 					}
 				},
 				{
-					"id": 601,
+					"id": 594,
 					"name": "getTriggerNotificationIds",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12794,7 +12602,7 @@
 					},
 					"signatures": [
 						{
-							"id": 602,
+							"id": 595,
 							"name": "getTriggerNotificationIds",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12839,7 +12647,7 @@
 					}
 				},
 				{
-					"id": 605,
+					"id": 598,
 					"name": "getTriggerNotifications",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12848,7 +12656,7 @@
 					},
 					"signatures": [
 						{
-							"id": 606,
+							"id": 599,
 							"name": "getTriggerNotifications",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12893,7 +12701,7 @@
 					}
 				},
 				{
-					"id": 676,
+					"id": 669,
 					"name": "hideNotificationDrawer",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12902,7 +12710,7 @@
 					},
 					"signatures": [
 						{
-							"id": 677,
+							"id": 670,
 							"name": "hideNotificationDrawer",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12944,7 +12752,7 @@
 					}
 				},
 				{
-					"id": 662,
+					"id": 655,
 					"name": "incrementBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -12953,7 +12761,7 @@
 					},
 					"signatures": [
 						{
-							"id": 663,
+							"id": 656,
 							"name": "incrementBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -12972,7 +12780,7 @@
 							},
 							"parameters": [
 								{
-									"id": 664,
+									"id": 657,
 									"name": "incrementBy",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13029,7 +12837,7 @@
 					}
 				},
 				{
-					"id": 670,
+					"id": 663,
 					"name": "isBatteryOptimizationEnabled",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13038,7 +12846,7 @@
 					},
 					"signatures": [
 						{
-							"id": 671,
+							"id": 664,
 							"name": "isBatteryOptimizationEnabled",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13086,7 +12894,7 @@
 					}
 				},
 				{
-					"id": 613,
+					"id": 606,
 					"name": "isChannelBlocked",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13095,7 +12903,7 @@
 					},
 					"signatures": [
 						{
-							"id": 614,
+							"id": 607,
 							"name": "isChannelBlocked",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13114,7 +12922,7 @@
 							},
 							"parameters": [
 								{
-									"id": 615,
+									"id": 608,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13158,7 +12966,7 @@
 					}
 				},
 				{
-					"id": 610,
+					"id": 603,
 					"name": "isChannelCreated",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13167,7 +12975,7 @@
 					},
 					"signatures": [
 						{
-							"id": 611,
+							"id": 604,
 							"name": "isChannelCreated",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13186,7 +12994,7 @@
 							},
 							"parameters": [
 								{
-									"id": 612,
+									"id": 605,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13230,7 +13038,7 @@
 					}
 				},
 				{
-					"id": 625,
+					"id": 618,
 					"name": "onBackgroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13239,7 +13047,7 @@
 					},
 					"signatures": [
 						{
-							"id": 626,
+							"id": 619,
 							"name": "onBackgroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13252,7 +13060,7 @@
 							},
 							"parameters": [
 								{
-									"id": 627,
+									"id": 620,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13265,7 +13073,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 628,
+											"id": 621,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
@@ -13274,7 +13082,7 @@
 											},
 											"signatures": [
 												{
-													"id": 629,
+													"id": 622,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
@@ -13283,7 +13091,7 @@
 													},
 													"parameters": [
 														{
-															"id": 630,
+															"id": 623,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -13345,7 +13153,7 @@
 					}
 				},
 				{
-					"id": 631,
+					"id": 624,
 					"name": "onForegroundEvent",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13354,7 +13162,7 @@
 					},
 					"signatures": [
 						{
-							"id": 632,
+							"id": 625,
 							"name": "onForegroundEvent",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13367,7 +13175,7 @@
 							},
 							"parameters": [
 								{
-									"id": 633,
+									"id": 626,
 									"name": "observer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13380,7 +13188,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 634,
+											"id": 627,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
@@ -13389,7 +13197,7 @@
 											},
 											"signatures": [
 												{
-													"id": 635,
+													"id": 628,
 													"name": "__call",
 													"kind": 4096,
 													"kindString": "Call signature",
@@ -13398,7 +13206,7 @@
 													},
 													"parameters": [
 														{
-															"id": 636,
+															"id": 629,
 															"name": "event",
 															"kind": 32768,
 															"kindString": "Parameter",
@@ -13432,7 +13240,7 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 637,
+									"id": 630,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
@@ -13441,7 +13249,7 @@
 									},
 									"signatures": [
 										{
-											"id": 638,
+											"id": 631,
 											"name": "__call",
 											"kind": 4096,
 											"kindString": "Call signature",
@@ -13484,7 +13292,7 @@
 					}
 				},
 				{
-					"id": 668,
+					"id": 661,
 					"name": "openBatteryOptimizationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13493,7 +13301,7 @@
 					},
 					"signatures": [
 						{
-							"id": 669,
+							"id": 662,
 							"name": "openBatteryOptimizationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13541,7 +13349,7 @@
 					}
 				},
 				{
-					"id": 639,
+					"id": 632,
 					"name": "openNotificationSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13550,7 +13358,7 @@
 					},
 					"signatures": [
 						{
-							"id": 640,
+							"id": 633,
 							"name": "openNotificationSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13569,7 +13377,7 @@
 							},
 							"parameters": [
 								{
-									"id": 641,
+									"id": 634,
 									"name": "channelId",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13626,7 +13434,7 @@
 					}
 				},
 				{
-					"id": 674,
+					"id": 667,
 					"name": "openPowerManagerSettings",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13635,7 +13443,7 @@
 					},
 					"signatures": [
 						{
-							"id": 675,
+							"id": 668,
 							"name": "openPowerManagerSettings",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13683,7 +13491,7 @@
 					}
 				},
 				{
-					"id": 642,
+					"id": 635,
 					"name": "registerForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13692,7 +13500,7 @@
 					},
 					"signatures": [
 						{
-							"id": 643,
+							"id": 636,
 							"name": "registerForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13711,7 +13519,7 @@
 							},
 							"parameters": [
 								{
-									"id": 644,
+									"id": 637,
 									"name": "task",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13753,7 +13561,7 @@
 					}
 				},
 				{
-					"id": 647,
+					"id": 640,
 					"name": "requestPermission",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13762,7 +13570,7 @@
 					},
 					"signatures": [
 						{
-							"id": 648,
+							"id": 641,
 							"name": "requestPermission",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13781,7 +13589,7 @@
 							},
 							"parameters": [
 								{
-									"id": 649,
+									"id": 642,
 									"name": "permissions",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13831,7 +13639,7 @@
 					}
 				},
 				{
-					"id": 659,
+					"id": 652,
 					"name": "setBadgeCount",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13840,7 +13648,7 @@
 					},
 					"signatures": [
 						{
-							"id": 660,
+							"id": 653,
 							"name": "setBadgeCount",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13859,7 +13667,7 @@
 							},
 							"parameters": [
 								{
-									"id": 661,
+									"id": 654,
 									"name": "count",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13906,7 +13714,7 @@
 					}
 				},
 				{
-					"id": 650,
+					"id": 643,
 					"name": "setNotificationCategories",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13915,7 +13723,7 @@
 					},
 					"signatures": [
 						{
-							"id": 651,
+							"id": 644,
 							"name": "setNotificationCategories",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -13933,7 +13741,7 @@
 							},
 							"parameters": [
 								{
-									"id": 652,
+									"id": 645,
 									"name": "categories",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -13984,7 +13792,7 @@
 					}
 				},
 				{
-					"id": 645,
+					"id": 638,
 					"name": "stopForegroundService",
 					"kind": 2048,
 					"kindString": "Method",
@@ -13993,7 +13801,7 @@
 					},
 					"signatures": [
 						{
-							"id": 646,
+							"id": 639,
 							"name": "stopForegroundService",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -14045,62 +13853,62 @@
 					"title": "Properties",
 					"kind": 1024,
 					"children": [
-						678
+						671
 					]
 				},
 				{
 					"title": "Methods",
 					"kind": 2048,
 					"children": [
-						556,
-						569,
-						559,
-						565,
-						573,
+						549,
 						562,
-						576,
-						582,
-						585,
-						579,
-						597,
-						665,
-						588,
-						591,
-						594,
-						657,
-						607,
-						618,
-						621,
-						616,
-						603,
-						623,
-						653,
-						655,
-						672,
-						601,
-						605,
-						676,
-						662,
-						670,
-						613,
-						610,
-						625,
-						631,
-						668,
-						639,
-						674,
-						642,
-						647,
-						659,
+						552,
+						558,
+						566,
+						555,
+						569,
+						575,
+						578,
+						572,
+						590,
+						658,
+						581,
+						584,
+						587,
 						650,
-						645
+						600,
+						611,
+						614,
+						609,
+						596,
+						616,
+						646,
+						648,
+						665,
+						594,
+						598,
+						669,
+						655,
+						663,
+						606,
+						603,
+						618,
+						624,
+						661,
+						632,
+						667,
+						635,
+						640,
+						652,
+						643,
+						638
 					]
 				}
 			],
 			"sources": [
 				{
 					"fileName": "packages/react-native/src/types/Module.ts",
-					"line": 695,
+					"line": 621,
 					"character": 34
 				}
 			],
@@ -14112,7 +13920,7 @@
 				},
 				{
 					"type": "reference",
-					"id": 553,
+					"id": 546,
 					"name": "ModuleStatics"
 				}
 			]
@@ -18361,12 +18169,9 @@
 				48,
 				377,
 				352,
-				550,
+				423,
 				546,
 				548,
-				423,
-				553,
-				555,
 				220,
 				240,
 				1,

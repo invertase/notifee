@@ -26,7 +26,6 @@ public class NotifeeConfig {
   private EventListener mEventSubscriber;
 
   private NotifeeConfig(
-      String mJsonConfig,
       String mProductVersion,
       String mFrameworkVersion,
       EventListener mEventSubscriber) {
@@ -49,7 +48,6 @@ public class NotifeeConfig {
 
   @KeepForSdk
   public static class Builder {
-    private String mJsonConfig;
     private String mProductVersion;
     private String mFrameworkVersion;
     private EventListener mEventSubscriber;
@@ -71,7 +69,7 @@ public class NotifeeConfig {
 
     @KeepForSdk
     public NotifeeConfig build() {
-      return new NotifeeConfig(mJsonConfig, mProductVersion, mFrameworkVersion, mEventSubscriber);
+      return new NotifeeConfig(mProductVersion, mFrameworkVersion, mEventSubscriber);
     }
   }
 }
