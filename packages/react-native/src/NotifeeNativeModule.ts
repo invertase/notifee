@@ -10,7 +10,6 @@ import {
   NativeModules,
   NativeModulesStatic,
 } from 'react-native';
-import { JsonConfig } from './types/Module';
 
 export interface NativeModuleConfig {
   version: string;
@@ -22,11 +21,9 @@ export default class NotifeeNativeModule {
   private readonly _moduleConfig: NativeModuleConfig;
   private _nativeModule: NativeModulesStatic | null;
   private _nativeEmitter: NativeEventEmitter;
-  private _notifeeConfig: JsonConfig | null;
 
   public constructor(config: NativeModuleConfig) {
     this._nativeModule = null;
-    this._notifeeConfig = null;
     this._moduleConfig = Object.assign({}, config);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - change here needs resolution https://github.com/DefinitelyTyped/DefinitelyTyped/pull/49560/files
@@ -37,16 +34,6 @@ export default class NotifeeNativeModule {
         this.emitter.emit(eventName, payload);
       });
     }
-  }
-
-  public get config(): JsonConfig {
-    if (this._notifeeConfig) {
-      return this._notifeeConfig;
-    }
-
-    this._notifeeConfig = JSON.parse(this.native.NOTIFEE_RAW_JSON);
-
-    return this._notifeeConfig as JsonConfig;
   }
 
   public get emitter(): EventEmitter {
