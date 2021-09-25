@@ -15,7 +15,7 @@
  *
  */
 
-#import "Private/NotifeeCoreUtil.h"
+#import "NotifeeCoreUtil.h"
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
 #import <UIKit/UIKit.h>
