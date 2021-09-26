@@ -16,7 +16,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <NotifeeCore/NotifeeCore.h>
+#import "NotifeeCore.h"
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 

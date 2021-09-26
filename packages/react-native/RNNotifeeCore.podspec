@@ -23,12 +23,12 @@ Pod::Spec.new do |s|
     Pod::UI.warn "RNNotifeeCore: Using NotifeeCore from sources."
     s.dependency 'NotifeeCore'
   else
-    s.ios.vendored_frameworks = 'ios/NotifeeCore.xcframework'
-    s.preserve_paths = 'ios/NotifeeCore.xcframework'
+     s.subspec "NotifeeCore" do |ss|
+      ss.source_files = "ios/NotifeeCore/*.{h,mm,m}"
+    end
   end
 
   s.source_files =  ['ios/RNNotifee/NotifeeExtensionHelper.h', 'ios/RNNotifee/NotifeeExtensionHelper.m']
   s.public_header_files = ['ios/RNNotifee/NotifeeExtensionHelper.h']
 
 end
-

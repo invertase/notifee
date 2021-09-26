@@ -3,15 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		27E8C37823E48C66007568A4 /* NotifeeApiModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C37723E48C66007568A4 /* NotifeeApiModule.m */; };
 		27E8C37923E48C66007568A4 /* NotifeeApiModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27E8C37623E48C66007568A4 /* NotifeeApiModule.h */; };
 		79A3978325FD5D4B00CBBAAB /* NotifeeExtensionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A3978225FD5D4B00CBBAAB /* NotifeeExtensionHelper.m */; };
-		79A3B2CE25FE598B00CBBAAB /* NotifeeCore.xcframework in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B5682586EC800016CF49 /* NotifeeCore.xcframework */; };
-		79F4B5692586EC800016CF49 /* NotifeeCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F4B5682586EC800016CF49 /* NotifeeCore.xcframework */; };
+		79AEF7D62701295A00BE87B5 /* NotifeeExtensionHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79A3978125FD5D4B00CBBAAB /* NotifeeExtensionHelper.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -21,6 +20,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				79AEF7D62701295A00BE87B5 /* NotifeeExtensionHelper.h in CopyFiles */,
 				27E8C37923E48C66007568A4 /* NotifeeApiModule.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,10 +31,8 @@
 		27E8C37323E48C66007568A4 /* libRNNotifee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNNotifee.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E8C37623E48C66007568A4 /* NotifeeApiModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeApiModule.h; sourceTree = "<group>"; };
 		27E8C37723E48C66007568A4 /* NotifeeApiModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeApiModule.m; sourceTree = "<group>"; };
-		27E8C38523E4958E007568A4 /* NotifeeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NotifeeCore.framework; sourceTree = "<group>"; };
 		79A3978125FD5D4B00CBBAAB /* NotifeeExtensionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeExtensionHelper.h; sourceTree = "<group>"; };
 		79A3978225FD5D4B00CBBAAB /* NotifeeExtensionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifeeExtensionHelper.m; sourceTree = "<group>"; };
-		79F4B5682586EC800016CF49 /* NotifeeCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = NotifeeCore.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F4B5692586EC800016CF49 /* NotifeeCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +51,6 @@
 			children = (
 				27E8C37523E48C66007568A4 /* RNNotifee */,
 				27E8C37423E48C66007568A4 /* Products */,
-				27E8C38423E4958E007568A4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,15 +71,6 @@
 				27E8C37723E48C66007568A4 /* NotifeeApiModule.m */,
 			);
 			path = RNNotifee;
-			sourceTree = "<group>";
-		};
-		27E8C38423E4958E007568A4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				79F4B5682586EC800016CF49 /* NotifeeCore.xcframework */,
-				27E8C38523E4958E007568A4 /* NotifeeCore.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +130,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79A3B2CE25FE598B00CBBAAB /* NotifeeCore.xcframework in Sources */,
 				79A3978325FD5D4B00CBBAAB /* NotifeeExtensionHelper.m in Sources */,
 				27E8C37823E48C66007568A4 /* NotifeeApiModule.m in Sources */,
 			);

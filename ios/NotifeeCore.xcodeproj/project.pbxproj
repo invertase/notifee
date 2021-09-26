@@ -3,23 +3,8 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
-
-/* Begin PBXAggregateTarget section */
-		27E8C36123E46BDA007568A4 /* Framework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 27E8C36223E46BDA007568A4 /* Build configuration list for PBXAggregateTarget "Framework" */;
-			buildPhases = (
-				27E8C36523E46FFE007568A4 /* ShellScript */,
-			);
-			dependencies = (
-				27E8C38A23E49744007568A4 /* PBXTargetDependency */,
-			);
-			name = Framework;
-			productName = Framework;
-		};
-/* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
 		277A3BD424302E530001EA96 /* NotifeeCoreDelegateHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */; };
@@ -40,16 +25,6 @@
 		79F8C8152524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */; };
 		95824DBD70A285AB91AB93CD /* libPods-NotifeeCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		27E8C38923E49744007568A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 27E8C34D23E46BAB007568A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 27E8C35523E46BAB007568A4;
-			remoteInfo = NotifeeCore;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotifeeCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,9 +173,6 @@
 					27E8C35523E46BAB007568A4 = {
 						CreatedOnToolsVersion = 11.3;
 					};
-					27E8C36123E46BDA007568A4 = {
-						CreatedOnToolsVersion = 11.3;
-					};
 				};
 			};
 			buildConfigurationList = 27E8C35023E46BAB007568A4 /* Build configuration list for PBXProject "NotifeeCore" */;
@@ -217,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				27E8C35523E46BAB007568A4 /* NotifeeCore */,
-				27E8C36123E46BDA007568A4 /* Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -233,23 +204,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27E8C36523E46FFE007568A4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n${SRCROOT}/build_xcframework.sh\n";
-		};
 		CAD3FC2771D4D4935D4345DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,15 +245,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		27E8C38A23E49744007568A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 27E8C35523E46BAB007568A4 /* NotifeeCore */;
-			targetProxy = 27E8C38923E49744007568A4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		27E8C35C23E46BAB007568A4 /* Debug */ = {
@@ -465,26 +410,6 @@
 			};
 			name = Release;
 		};
-		27E8C36323E46BDA007568A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				OTHER_CFLAGS = "-fembed-bitcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-			};
-			name = Debug;
-		};
-		27E8C36423E46BDA007568A4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				OTHER_CFLAGS = "-fembed-bitcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -502,15 +427,6 @@
 			buildConfigurations = (
 				27E8C35F23E46BAB007568A4 /* Debug */,
 				27E8C36023E46BAB007568A4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		27E8C36223E46BDA007568A4 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				27E8C36323E46BDA007568A4 /* Debug */,
-				27E8C36423E46BDA007568A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
