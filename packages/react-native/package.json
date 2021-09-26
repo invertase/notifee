@@ -13,7 +13,6 @@
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
     "prepublishOnly": "cd ../.. && yarn run build:core",
-    "postpublish": "rimraf ios/core",
     "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
     "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
     "gen-docs": "path-exists ../../docs && typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
