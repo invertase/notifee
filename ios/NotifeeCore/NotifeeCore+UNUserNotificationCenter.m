@@ -86,7 +86,7 @@ struct {
 
   // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
-    UNNotificationPresentationOptions presentationOptions = 0;
+    UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
         notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
 
