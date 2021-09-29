@@ -27,6 +27,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
 import app.notifee.core.event.InitialNotificationEvent;
@@ -40,6 +43,8 @@ public class ReceiverService extends Service {
   private static final String TAG = "ReceiverService";
   public static final String REMOTE_INPUT_RECEIVER_KEY =
       "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
+
+  private static final AtomicInteger uniqueIds = new AtomicInteger(0);
 
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
@@ -69,7 +74,7 @@ public class ReceiverService extends Service {
       }
     }
 
-    int uniqueInt = (int) (System.currentTimeMillis() & 0xfffffff);
+    int uniqueInt = uniqueIds.getAndIncrement();
     return PendingIntent.getService(context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
