@@ -27,7 +27,7 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   if ([FIRApp defaultApp] == nil) {
-    [FIRApp configure];
+      [FIRApp configure];
   }
   [[UIApplication sharedApplication] registerForRemoteNotifications];
 

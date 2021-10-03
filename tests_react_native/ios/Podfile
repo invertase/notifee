@@ -30,9 +30,9 @@ target 'testing' do
 
 end
 
- target 'NotifeeTestingNSE' do
-   pod 'RNNotifeeCore', :path => "../../packages/react-native"
- end
+target 'NotifeeTestingNSE' do
+  pod 'RNNotifeeCore', :path => "../../packages/react-native"
+end
 
 # Enables Flipper.
 #
