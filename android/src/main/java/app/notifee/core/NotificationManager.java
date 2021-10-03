@@ -410,31 +410,6 @@ class NotificationManager {
         .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation);
   }
 
-  static Task<Void> cancelNotification(
-      @NonNull String notificationId, @NonNull int notificationType) {
-    return Tasks.call(
-        () -> {
-          NotificationManagerCompat notificationManagerCompat =
-              NotificationManagerCompat.from(getApplicationContext());
-
-          if (notificationType == NOTIFICATION_TYPE_DISPLAYED
-              || notificationType == NOTIFICATION_TYPE_ALL) {
-            notificationManagerCompat.cancel(notificationId.hashCode());
-          }
-
-          if (notificationType == NOTIFICATION_TYPE_TRIGGER
-              || notificationType == NOTIFICATION_TYPE_ALL) {
-            WorkManager.getInstance(getApplicationContext())
-                .cancelUniqueWork("trigger:" + notificationId);
-            NotifeeAlarmManager.cancelNotification(notificationId);
-          }
-
-          // delete notification entry from database
-          WorkDataRepository.getInstance(getApplicationContext()).deleteById(notificationId);
-          return null;
-        });
-  }
-
   static Task<Void> cancelAllNotifications(@NonNull int notificationType) {
     return Tasks.call(
             () -> {
@@ -482,7 +457,8 @@ class NotificationManager {
                 Logger.i(TAG, "Removing notification with id " + id);
 
                 if (notificationType != NOTIFICATION_TYPE_TRIGGER) {
-                  // Cancel notifications displayed by FCM
+                  // Cancel notifications displayed by FCM which will always have 
+                  // an id of 0 and a tag, see https://github.com/invertase/notifee/pull/175
                   if (tag != null && id.equals("0")) {
                     // Attempt to parse id as integer
                     Integer integerId = null;
