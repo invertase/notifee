@@ -29,7 +29,7 @@ static NSString *const kPayloadOptionsImageURLName = @"image";
 
 + (NotifeeCoreExtensionHelper *)instance NS_SWIFT_NAME(serviceExtension());
 
-+ (void)populateNotificationContent:(UNNotificationRequest *)request
+- (void)populateNotificationContent:(UNNotificationRequest *)request
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 
