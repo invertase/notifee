@@ -64,7 +64,6 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - NotifeeCore (1.0.0)
   - PromisesObjC (1.2.12)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
@@ -331,10 +330,11 @@ PODS:
     - React-Core
     - RNFBApp
   - RNNotifee (3.0.0):
-    - NotifeeCore
     - React-Core
+    - RNNotifeeCore
   - RNNotifeeCore (3.0.0):
-    - NotifeeCore
+    - RNNotifeeCore/NotifeeCore (= 3.0.0)
+  - RNNotifeeCore/NotifeeCore (3.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -343,7 +343,6 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - NotifeeCore (from `../../ios`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -399,8 +398,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
-  NotifeeCore:
-    :path: "../../ios"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -461,19 +458,18 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CavyNativeReporter: b0aff4d3057c10cb6d57218634b66385364fe4fd
-  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: 8dc9c0219d34535f29f047121dcef50fb878929a
+  FBReactNativeSpec: b32123c31e3ce35eaf83b2ba4e5d8bd965d452b4
   Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   FirebaseInstallations: 7f31798a8198c354eadcb87176d2090b62edc187
   FirebaseMessaging: c8871b0907dcf4e76de81241eb6a62be6d657d2f
-  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  NotifeeCore: 09a3968ccc16d2ef774f65a5bc1d8e4ea42e828a
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: 6d3e854f0e7260a648badd0d44fc364bc9da9728
@@ -500,10 +496,10 @@ SPEC CHECKSUMS:
   ReactCommon: 149906e01aa51142707a10665185db879898e966
   RNFBApp: 406bc9586c70ccf20504b4d3b54ac4341c98993f
   RNFBMessaging: 154dc7815e2b6c55941793630ffb3a55f03d77e6
-  RNNotifee: 0a75a496314417c96ad96e5a4234bbe73394fca6
-  RNNotifeeCore: 2c512704c7221746c6d13af147d3493507106a90
+  RNNotifee: 6e5c6b984fa28507407aeee97645fef4c8117941
+  RNNotifeeCore: dce4ab4458ef5d6cfe8d841be4082ed5940642ac
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
 
-PODFILE CHECKSUM: 603173468a65c167c1ff88482f79dd40a80018c1
+PODFILE CHECKSUM: 62c9823f6bffcec596de08e07433d88e825ac881
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

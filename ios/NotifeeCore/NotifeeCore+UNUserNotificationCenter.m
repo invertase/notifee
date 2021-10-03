@@ -15,10 +15,10 @@
  *
  */
 
-#import "Private/NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCore+UNUserNotificationCenter.h"
 
-#import "Private/NotifeeCoreDelegateHolder.h"
-#import "Private/NotifeeCoreUtil.h"
+#import "NotifeeCoreDelegateHolder.h"
+#import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCoreUNUserNotificationCenter
 struct {

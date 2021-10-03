@@ -15,11 +15,11 @@
  *
  */
 
-#import "Private/NotifeeCoreUtil.h"
+#import "NotifeeCoreUtil.h"
 #include <CoreGraphics/CGGeometry.h>
 #import <Intents/INIntentIdentifiers.h>
 #import <UIKit/UIKit.h>
-#import "Private/NotifeeCore+NSURLSession.h"
+#import "NotifeeCore+NSURLSession.h"
 
 @implementation NotifeeCoreUtil
 

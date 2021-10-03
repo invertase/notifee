@@ -16,7 +16,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <NotifeeCore/NotifeeCore.h>
+#import "NotifeeCore.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

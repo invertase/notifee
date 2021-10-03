@@ -15,8 +15,8 @@
  *
  */
 
-#import "Private/NotifeeCore+NSURLSession.h"
-#import "Private/NotifeeCoreDownloadDelegate.h"
+#import "NotifeeCore+NSURLSession.h"
+#import "NotifeeCoreDownloadDelegate.h"
 
 @implementation NotifeeCoreNSURLSession
 

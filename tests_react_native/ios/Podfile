@@ -7,8 +7,9 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 # with this set to false this will be the same way the user would consume NotifeeCore framework
 # Note: you must pod install after changing this value
 
-$NotifeeCoreFromSources = true
+$NotifeeCoreFromSources = false
 $NotifeeExtension = true
+
 
 # ----------------------------------------------------------------
 

@@ -3,73 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		27E8C36123E46BDA007568A4 /* Framework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 27E8C36223E46BDA007568A4 /* Build configuration list for PBXAggregateTarget "Framework" */;
-			buildPhases = (
-				27E8C36523E46FFE007568A4 /* ShellScript */,
-			);
-			dependencies = (
-				27E8C38A23E49744007568A4 /* PBXTargetDependency */,
-			);
-			name = Framework;
-			productName = Framework;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		270DF2F9243037640030596A /* NotifeeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 270DF2F624302ECB0030596A /* NotifeeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		277A3BD324302E530001EA96 /* NotifeeCoreDelegateHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 277A3BD124302E530001EA96 /* NotifeeCoreDelegateHolder.h */; };
 		277A3BD424302E530001EA96 /* NotifeeCoreDelegateHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */; };
-		27CB379124301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CB378F24301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h */; };
 		27CB379224301F38008DC2DC /* NotifeeCore+NSNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CB379024301F38008DC2DC /* NotifeeCore+NSNotificationCenter.m */; };
-		27CB37952430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CB37932430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.h */; };
 		27CB37962430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CB37942430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.m */; };
-		27D187D4243040270067FE5A /* NotifeeCoreUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 27D187D2243040270067FE5A /* NotifeeCoreUtil.h */; };
 		27D187D5243040270067FE5A /* NotifeeCoreUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D187D3243040270067FE5A /* NotifeeCoreUtil.m */; };
 		27E8C36923E47C97007568A4 /* NotifeeCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8C36723E47C97007568A4 /* NotifeeCore.m */; };
 		7939C37A2603F4EA00426610 /* NotifeeCoreExtensionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7939C3792603F4EA00426610 /* NotifeeCoreExtensionHelper.m */; };
-		7939C37E2603F50600426610 /* NotifeeCoreExtensionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7939C37D2603F50600426610 /* NotifeeCoreExtensionHelper.h */; };
+		79AEF7BA26FFD7CB00BE87B5 /* NotifeeCoreDelegateHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B226FFD7CB00BE87B5 /* NotifeeCoreDelegateHolder.h */; };
+		79AEF7BB26FFD7CB00BE87B5 /* NotifeeCoreExtensionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B326FFD7CB00BE87B5 /* NotifeeCoreExtensionHelper.h */; };
+		79AEF7BC26FFD7CB00BE87B5 /* NotifeeCore+UNUserNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B426FFD7CB00BE87B5 /* NotifeeCore+UNUserNotificationCenter.h */; };
+		79AEF7BD26FFD7CB00BE87B5 /* NotifeeCoreDownloadDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B526FFD7CB00BE87B5 /* NotifeeCoreDownloadDelegate.h */; };
+		79AEF7BE26FFD7CB00BE87B5 /* NotifeeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B626FFD7CB00BE87B5 /* NotifeeCore.h */; };
+		79AEF7BF26FFD7CB00BE87B5 /* NotifeeCore+NSURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B726FFD7CB00BE87B5 /* NotifeeCore+NSURLSession.h */; };
+		79AEF7C026FFD7CB00BE87B5 /* NotifeeCoreUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B826FFD7CB00BE87B5 /* NotifeeCoreUtil.h */; };
+		79AEF7C126FFD7CB00BE87B5 /* NotifeeCore+NSNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 79AEF7B926FFD7CB00BE87B5 /* NotifeeCore+NSNotificationCenter.h */; };
 		79F8C7A02524C955000B7FFE /* NotifeeCore+NSURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */; };
-		79F8C7AC2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */; };
-		79F8C8102524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */; };
 		79F8C8152524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */; };
 		95824DBD70A285AB91AB93CD /* libPods-NotifeeCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		27E8C38923E49744007568A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 27E8C34D23E46BAB007568A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 27E8C35523E46BAB007568A4;
-			remoteInfo = NotifeeCore;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		016D70FF2885BF9312104A0F /* libPods-NotifeeCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotifeeCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		270DF2F624302ECB0030596A /* NotifeeCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCore.h; sourceTree = "<group>"; };
-		277A3BD124302E530001EA96 /* NotifeeCoreDelegateHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDelegateHolder.h; sourceTree = "<group>"; };
 		277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreDelegateHolder.m; sourceTree = "<group>"; };
-		27CB378F24301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSNotificationCenter.h"; sourceTree = "<group>"; };
 		27CB379024301F38008DC2DC /* NotifeeCore+NSNotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NotifeeCore+NSNotificationCenter.m"; sourceTree = "<group>"; };
-		27CB37932430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+UNUserNotificationCenter.h"; sourceTree = "<group>"; };
 		27CB37942430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NotifeeCore+UNUserNotificationCenter.m"; sourceTree = "<group>"; };
-		27D187D2243040270067FE5A /* NotifeeCoreUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreUtil.h; sourceTree = "<group>"; };
 		27D187D3243040270067FE5A /* NotifeeCoreUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreUtil.m; sourceTree = "<group>"; };
 		27E8C35623E46BAB007568A4 /* NotifeeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotifeeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E8C35A23E46BAB007568A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27E8C36723E47C97007568A4 /* NotifeeCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifeeCore.m; sourceTree = "<group>"; };
 		7939C3792603F4EA00426610 /* NotifeeCoreExtensionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreExtensionHelper.m; sourceTree = "<group>"; };
-		7939C37D2603F50600426610 /* NotifeeCoreExtensionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreExtensionHelper.h; sourceTree = "<group>"; };
+		79AEF7B226FFD7CB00BE87B5 /* NotifeeCoreDelegateHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDelegateHolder.h; sourceTree = "<group>"; };
+		79AEF7B326FFD7CB00BE87B5 /* NotifeeCoreExtensionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreExtensionHelper.h; sourceTree = "<group>"; };
+		79AEF7B426FFD7CB00BE87B5 /* NotifeeCore+UNUserNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+UNUserNotificationCenter.h"; sourceTree = "<group>"; };
+		79AEF7B526FFD7CB00BE87B5 /* NotifeeCoreDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDownloadDelegate.h; sourceTree = "<group>"; };
+		79AEF7B626FFD7CB00BE87B5 /* NotifeeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCore.h; sourceTree = "<group>"; };
+		79AEF7B726FFD7CB00BE87B5 /* NotifeeCore+NSURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSURLSession.h"; sourceTree = "<group>"; };
+		79AEF7B826FFD7CB00BE87B5 /* NotifeeCoreUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreUtil.h; sourceTree = "<group>"; };
+		79AEF7B926FFD7CB00BE87B5 /* NotifeeCore+NSNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSNotificationCenter.h"; sourceTree = "<group>"; };
 		79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NotifeeCore+NSURLSession.m"; sourceTree = "<group>"; };
-		79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NotifeeCore+NSURLSession.h"; sourceTree = "<group>"; };
-		79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifeeCoreDownloadDelegate.h; sourceTree = "<group>"; };
 		79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifeeCoreDownloadDelegate.m; sourceTree = "<group>"; };
 		BBD9319BAEF3A4AB6D153FE5 /* Pods-NotifeeCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.release.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.release.xcconfig"; sourceTree = "<group>"; };
 		E01EB6581D36E8E7DA1A0748 /* Pods-NotifeeCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotifeeCore.debug.xcconfig"; path = "Target Support Files/Pods-NotifeeCore/Pods-NotifeeCore.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,28 +70,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		277A3BD524302E930001EA96 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				7939C37D2603F50600426610 /* NotifeeCoreExtensionHelper.h */,
-				27D187D2243040270067FE5A /* NotifeeCoreUtil.h */,
-				277A3BD124302E530001EA96 /* NotifeeCoreDelegateHolder.h */,
-				79F8C80F2524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h */,
-				79F8C7AB2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h */,
-				27CB378F24301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h */,
-				27CB37932430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.h */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		277A3BD624302EB50001EA96 /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				270DF2F624302ECB0030596A /* NotifeeCore.h */,
-			);
-			path = Public;
-			sourceTree = "<group>";
-		};
 		27E8C34C23E46BAB007568A4 = {
 			isa = PBXGroup;
 			children = (
@@ -138,17 +91,23 @@
 		27E8C35823E46BAB007568A4 /* NotifeeCore */ = {
 			isa = PBXGroup;
 			children = (
-				277A3BD624302EB50001EA96 /* Public */,
-				277A3BD524302E930001EA96 /* Private */,
-				27E8C35A23E46BAB007568A4 /* Info.plist */,
+				79AEF7B626FFD7CB00BE87B5 /* NotifeeCore.h */,
 				27E8C36723E47C97007568A4 /* NotifeeCore.m */,
+				79AEF7B926FFD7CB00BE87B5 /* NotifeeCore+NSNotificationCenter.h */,
 				27CB379024301F38008DC2DC /* NotifeeCore+NSNotificationCenter.m */,
+				79AEF7B526FFD7CB00BE87B5 /* NotifeeCoreDownloadDelegate.h */,
 				79F8C8142524CCDF000B7FFE /* NotifeeCoreDownloadDelegate.m */,
+				79AEF7B426FFD7CB00BE87B5 /* NotifeeCore+UNUserNotificationCenter.h */,
 				27CB37942430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.m */,
+				79AEF7B726FFD7CB00BE87B5 /* NotifeeCore+NSURLSession.h */,
 				79F8C79F2524C955000B7FFE /* NotifeeCore+NSURLSession.m */,
+				79AEF7B226FFD7CB00BE87B5 /* NotifeeCoreDelegateHolder.h */,
 				277A3BD224302E530001EA96 /* NotifeeCoreDelegateHolder.m */,
+				79AEF7B826FFD7CB00BE87B5 /* NotifeeCoreUtil.h */,
 				27D187D3243040270067FE5A /* NotifeeCoreUtil.m */,
+				79AEF7B326FFD7CB00BE87B5 /* NotifeeCoreExtensionHelper.h */,
 				7939C3792603F4EA00426610 /* NotifeeCoreExtensionHelper.m */,
+				27E8C35A23E46BAB007568A4 /* Info.plist */,
 			);
 			path = NotifeeCore;
 			sourceTree = "<group>";
@@ -169,14 +128,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				277A3BD324302E530001EA96 /* NotifeeCoreDelegateHolder.h in Headers */,
-				27CB379124301F38008DC2DC /* NotifeeCore+NSNotificationCenter.h in Headers */,
-				7939C37E2603F50600426610 /* NotifeeCoreExtensionHelper.h in Headers */,
-				79F8C7AC2524C9A3000B7FFE /* NotifeeCore+NSURLSession.h in Headers */,
-				79F8C8102524CCD8000B7FFE /* NotifeeCoreDownloadDelegate.h in Headers */,
-				27D187D4243040270067FE5A /* NotifeeCoreUtil.h in Headers */,
-				270DF2F9243037640030596A /* NotifeeCore.h in Headers */,
-				27CB37952430218E008DC2DC /* NotifeeCore+UNUserNotificationCenter.h in Headers */,
+				79AEF7BC26FFD7CB00BE87B5 /* NotifeeCore+UNUserNotificationCenter.h in Headers */,
+				79AEF7C026FFD7CB00BE87B5 /* NotifeeCoreUtil.h in Headers */,
+				79AEF7BE26FFD7CB00BE87B5 /* NotifeeCore.h in Headers */,
+				79AEF7C126FFD7CB00BE87B5 /* NotifeeCore+NSNotificationCenter.h in Headers */,
+				79AEF7BF26FFD7CB00BE87B5 /* NotifeeCore+NSURLSession.h in Headers */,
+				79AEF7BD26FFD7CB00BE87B5 /* NotifeeCoreDownloadDelegate.h in Headers */,
+				79AEF7BB26FFD7CB00BE87B5 /* NotifeeCoreExtensionHelper.h in Headers */,
+				79AEF7BA26FFD7CB00BE87B5 /* NotifeeCoreDelegateHolder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,9 +173,6 @@
 					27E8C35523E46BAB007568A4 = {
 						CreatedOnToolsVersion = 11.3;
 					};
-					27E8C36123E46BDA007568A4 = {
-						CreatedOnToolsVersion = 11.3;
-					};
 				};
 			};
 			buildConfigurationList = 27E8C35023E46BAB007568A4 /* Build configuration list for PBXProject "NotifeeCore" */;
@@ -233,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				27E8C35523E46BAB007568A4 /* NotifeeCore */,
-				27E8C36123E46BDA007568A4 /* Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -249,23 +204,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27E8C36523E46FFE007568A4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n${SRCROOT}/build_xcframework.sh\n";
-		};
 		CAD3FC2771D4D4935D4345DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,15 +245,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		27E8C38A23E49744007568A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 27E8C35523E46BAB007568A4 /* NotifeeCore */;
-			targetProxy = 27E8C38923E49744007568A4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		27E8C35C23E46BAB007568A4 /* Debug */ = {
@@ -481,26 +410,6 @@
 			};
 			name = Release;
 		};
-		27E8C36323E46BDA007568A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				OTHER_CFLAGS = "-fembed-bitcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = Public;
-			};
-			name = Debug;
-		};
-		27E8C36423E46BDA007568A4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				OTHER_CFLAGS = "-fembed-bitcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = Public;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -518,15 +427,6 @@
 			buildConfigurations = (
 				27E8C35F23E46BAB007568A4 /* Debug */,
 				27E8C36023E46BAB007568A4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		27E8C36223E46BDA007568A4 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				27E8C36323E46BDA007568A4 /* Debug */,
-				27E8C36423E46BDA007568A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

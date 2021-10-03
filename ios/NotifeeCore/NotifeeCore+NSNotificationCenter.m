@@ -16,8 +16,8 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "Private/NotifeeCore+NSNotificationCenter.h"
-#import "Private/NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCore+NSNotificationCenter.h"
+#import "NotifeeCore+UNUserNotificationCenter.h"
 
 @implementation NotifeeCoreNSNotificationCenter
 

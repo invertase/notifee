@@ -15,7 +15,7 @@
  *
  */
 
-#import "Private/NotifeeCoreDownloadDelegate.h"
+#import "NotifeeCoreDownloadDelegate.h"
 
 @implementation NotifeeCoreDownloadDelegate
 @synthesize error, response, done;

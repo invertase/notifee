@@ -15,7 +15,7 @@
  *
  */
 
-#import "Private/NotifeeCoreDelegateHolder.h"
+#import "NotifeeCoreDelegateHolder.h"
 
 @implementation NotifeeCoreDelegateHolder {
   struct {

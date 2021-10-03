@@ -15,13 +15,13 @@
  *
  */
 
-#import "Public/NotifeeCore.h"
-
 #import <UIKit/UIKit.h>
-#import "Private/NotifeeCore+UNUserNotificationCenter.h"
-#import "Private/NotifeeCoreDelegateHolder.h"
-#import "Private/NotifeeCoreExtensionHelper.h"
-#import "Private/NotifeeCoreUtil.h"
+
+#import "NotifeeCore.h"
+#import "NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCoreDelegateHolder.h"
+#import "NotifeeCoreExtensionHelper.h"
+#import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCore
 

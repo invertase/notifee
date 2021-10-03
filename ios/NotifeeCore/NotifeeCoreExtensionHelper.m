@@ -15,9 +15,9 @@
  *
  */
 
-#import "Private/NotifeeCoreExtensionHelper.h"
-#import "Private/NotifeeCoreUtil.h"
-#import "Public/NotifeeCore.h"
+#import "NotifeeCoreExtensionHelper.h"
+#import "NotifeeCoreUtil.h"
+#import "NotifeeCore.h"
 
 static NSString *const kNoExtension = @"";
 static NSString *const kImagePathPrefix = @"image/";
