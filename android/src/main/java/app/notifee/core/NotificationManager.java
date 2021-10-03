@@ -483,7 +483,7 @@ class NotificationManager {
 
                 if (notificationType != NOTIFICATION_TYPE_TRIGGER) {
                   // Cancel notifications displayed by FCM
-                  if (tag != null && tag.startsWith("FCM-") == true) {
+                  if (tag != null && id.equals("0")) {
                     // Attempt to parse id as integer
                     Integer integerId = null;
 
@@ -498,10 +498,10 @@ class NotificationManager {
                     if (integerId != null) {
                       notificationManagerCompat.cancel(tag, integerId);
                     }
-                  } else {
-                    // Cancel a notification created with notifee
-                    notificationManagerCompat.cancel(tag, id.hashCode());
                   }
+
+                  // Cancel a notification created with notifee
+                  notificationManagerCompat.cancel(tag, id.hashCode());
                 }
 
                 if (notificationType != NOTIFICATION_TYPE_DISPLAYED) {
