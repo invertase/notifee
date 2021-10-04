@@ -6,9 +6,9 @@ previous: /react-native/docs/installation
 ---
 
 ## 3.0.1
-- **[Android]: Fixes an issue where the wrong quick action was triggered when fired in quick succession (Fixes [#121](https://github.com/invertase/notifee/issues/121))
-- **[Android]: Fixes an issue where notifications created by FCM were not being removed from the notification tray when cancelled (Fixes [#120](https://github.com/invertase/notifee/issues/120))
-- **[iOS]: Compiled module no longer depends on a XCFramework, as part of the migration to fully open source the library. [[Learn More]](https://invertase.io/blog/open-sourcing-notifee)
+- **[Android]**: Fixes an issue where the wrong quick action was triggered when fired in quick succession (Fixes [#121](https://github.com/invertase/notifee/issues/121))
+- **[Android]**: Fixes an issue where notifications created by FCM were not being removed from the notification tray when cancelled (Fixes [#120](https://github.com/invertase/notifee/issues/120))
+- **[iOS]**: Compiled module no longer depends on a XCFramework, as part of the migration to fully open source the library. [[Learn More]](https://invertase.io/blog/open-sourcing-notifee)
 
 ## 3.0.0
 - **[Android]: BREAKING CHANGE** - the minimum SDK version has been updated from 16 to 20, providing backwards notification compatibility up to Android 4.4W.
