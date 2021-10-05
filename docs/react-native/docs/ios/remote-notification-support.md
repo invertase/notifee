@@ -86,6 +86,7 @@ Now everything is setup in your app, you can alter your notification payload to 
                 image: 'https://placeimg.com/640/480/any', // URL to pointing to a remote image
                 ios: {
                     sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
+                    foregroundPresentationOptions: {alert true, badge: true, sound: true},
                     categoryId: 'post', // A category that's already been created by your app
                     attachments: [{url: 'https://placeimg.com/640/480/any', thumbnailHidden: true}] // array of attachments of type `IOSNotificationAttachment`
                     ... // any other api properties for NotificationIOS
