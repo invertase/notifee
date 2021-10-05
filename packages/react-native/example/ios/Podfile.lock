@@ -316,7 +316,7 @@ PODS:
     - React-cxxreact (= 0.64.2)
     - React-jsi (= 0.64.2)
     - React-perflogger (= 0.64.2)
-  - RNNotifee (1.8.1):
+  - RNNotifee (3.0.0):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -488,10 +488,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: 24600e3b1aaa77126989bc58b6747509a1ba14f3
   React-runtimeexecutor: a9904c6d0218fb9f8b19d6dd88607225927668f9
   ReactCommon: 149906e01aa51142707a10665185db879898e966
-  RNNotifee: 9ab5ae759f1f1fd80ca1619376c23daa1c093872
+  RNNotifee: 5483be618e37e4b2a4409e4a939458cfe8f59f4e
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 52d4730468a14603cf036e5a7bed6dd442161ac8
+PODFILE CHECKSUM: 027a5fe0f812e0855f569da85f71237fca9ee14a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
