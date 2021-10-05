@@ -185,8 +185,8 @@ function Root(): any {
             <Button
               title={`get delivered notifications`}
               onPress={async (): Promise<void> => {
-                const notifications = await Notifee.getDisplayedNotifications();
-                console.log('notifications: ', notifications?.[0]?.notification?.android);
+                const displayedNotifications = await Notifee.getDisplayedNotifications();
+                console.log('notifications: ', displayedNotifications?.[0]?.notification?.android);
               }}
             />
             <Button
