@@ -3,7 +3,7 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "prepare": "yarn lerna:link && lerna run prepare && (yarn tests_rn:ios:pod:install || true)",
+    "prepare": "yarn lerna:link && lerna run prepare && yarn build:core:ios && (yarn tests_rn:ios:pod:install || true)",
     "precommit": "yarn build:all:clean && yarn prepare && yarn build:all && yarn gen:reference && yarn validate:all && yarn test:all",
     "build:all": "yarn build:core && yarn build:rn",
     "build:core": "yarn build:core:android && yarn build:core:ios",
@@ -33,12 +33,12 @@
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
     "tests_rn:packager:reset-cache": "cd tests_react_native && npx react-native start --reset-cache",
     "run:android": "cd tests_react_native && npx react-native run-android  --variant 'debug' --appIdSuffix dev",
-    "run:ios": "cd tests_react_native && npx react-native run-ios --scheme=Notifee",
+    "run:ios": "cd tests_react_native && npx react-native run-ios --scheme=Notifee --simulator 'iPhone 12'",
     "tests_rn:test": "cd tests_react_native && jest",
     "tests_rn:test-watch": "cd tests_react_native && jest --watch",
     "tests_rn:test-coverage": "cd tests_react_native && jest --coverage",
     "tests_rn:android:test": "cd tests_react_native && npx cavy-cli run-android --appIdSuffix dev",
-    "tests_rn:ios:test": "cd tests_react_native && npx cavy-cli run-ios --scheme=Notifee",
+    "tests_rn:ios:test": "cd tests_react_native && npx cavy-cli run-ios --scheme=Notifee --simulator 'iPhone 12'",
     "tests_rn:ios:pod:install": "cd tests_react_native && cd ios && pod install && cd .."
   },
   "devDependencies": {
