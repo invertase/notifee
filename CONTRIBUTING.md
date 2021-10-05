@@ -1,31 +1,42 @@
-## Getting Started
+# Getting Started
 
-### Prerequisites
+## Prerequisites
 
 Ensure you have the following software installed:
-- Xcode 12.4
-- Java 11
 
-### Step 1: Clone the repository
+- Java 11 (the default in Android Studio 2020.3.1 and higher)
+
+## Step 1: Clone the repository
 
 ```bash
 git clone https://github.com/invertase/notifee.git
 cd notifee/
 ```
 
-### Step 2: Install test project dependencies
+## Step 2: Install test project dependencies
 
 ```bash
 yarn
 ```
 
-### Step 3: Start React Native packager
+Note: During this step, the `package.json` script `prepare` is called, which includes a call to `build:core:ios`.
+During that step, the current "NotifeeCore" iOS files are copied into `packages/react-native/ios/...`. If you modify
+iOS core code and want to test it you will want to re-run that step, or temporarily modify `packages/react-native/RNNotifee.podspec`
+to contain `$NotifeeCoreFromSources=true` so that the up to date source files are actually incorporated in the final build.
+
+The same issue applies to Android code if you need to see development changes to the NotifeeCore Android code in an Android build. Run `yarn build:core:android` to generate a new AAR file for Android then rebuild/restart the Android app for core Android
+changes to take effect.
+
+This "core build" process may change in the future and we are open to suggestions that maintain the NotifeeCore code as a separate item
+so that it may be re-used by other projects (e.g. Flutter), not just the react-native API wrapper.
+
+## Step 3: Start React Native packager
 
 ```bash
 yarn tests_rn:packager
 ```
 
-### Step 4
+## Step 4
 
 Ensure you have TypeScript compiler running to listen to `react-native` submodule changes:
 

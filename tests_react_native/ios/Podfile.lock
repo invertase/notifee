@@ -329,12 +329,12 @@ PODS:
     - Firebase/Messaging (= 8.1.1)
     - React-Core
     - RNFBApp
-  - RNNotifee (3.0.0):
+  - RNNotifee (3.0.1):
     - React-Core
     - RNNotifeeCore
-  - RNNotifeeCore (3.0.0):
-    - RNNotifeeCore/NotifeeCore (= 3.0.0)
-  - RNNotifeeCore/NotifeeCore (3.0.0)
+  - RNNotifeeCore (3.0.1):
+    - RNNotifeeCore/NotifeeCore (= 3.0.1)
+  - RNNotifeeCore/NotifeeCore (3.0.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -460,7 +460,7 @@ SPEC CHECKSUMS:
   CavyNativeReporter: b0aff4d3057c10cb6d57218634b66385364fe4fd
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: b32123c31e3ce35eaf83b2ba4e5d8bd965d452b4
+  FBReactNativeSpec: 9cf1913ccc7b0c759f718cbcd0511b926a24c150
   Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
@@ -496,10 +496,10 @@ SPEC CHECKSUMS:
   ReactCommon: 149906e01aa51142707a10665185db879898e966
   RNFBApp: 406bc9586c70ccf20504b4d3b54ac4341c98993f
   RNFBMessaging: 154dc7815e2b6c55941793630ffb3a55f03d77e6
-  RNNotifee: 6e5c6b984fa28507407aeee97645fef4c8117941
-  RNNotifeeCore: dce4ab4458ef5d6cfe8d841be4082ed5940642ac
+  RNNotifee: 69e9c5027f8941bccb437ecfd859be6175a76335
+  RNNotifeeCore: bd34951e85e6b6935b52610d4701d4019b070ab8
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
 
-PODFILE CHECKSUM: 62c9823f6bffcec596de08e07433d88e825ac881
+PODFILE CHECKSUM: 7d5aca664d01cc642c0fc16b940caf12c8af79e1
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2
