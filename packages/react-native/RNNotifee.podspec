@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage            = "https://notifee.app"
   s.license             = package['license']
   s.authors             = "Invertase Limited"
-  s.source              = { :git => "https://github.com/notifee/react-native-notifee", :tag => "v#{s.version}" }
+  s.source              = { :git => "https://github.com/invertase/notifee", :tag => "v#{s.version}" }
   s.social_media_url    = 'http://twitter.com/notifee_app'
 
   s.cocoapods_version        = '>= 1.10.0'
