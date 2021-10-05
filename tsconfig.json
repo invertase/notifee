@@ -21,6 +21,7 @@
     "preserveConstEnums": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": [

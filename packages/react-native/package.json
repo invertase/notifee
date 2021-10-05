@@ -18,19 +18,19 @@
     "gen-docs": "path-exists ../../docs && typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
   },
   "devDependencies": {
-    "@types/react-native": "0.64.10",
-    "@typescript-eslint/eslint-plugin": "^4.26.1",
-    "@typescript-eslint/parser": "^4.26.1",
-    "eslint": "^7.28.0",
+    "@types/react-native": "0.65.5",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "genversion": "^3.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "genversion": "^3.0.1",
     "path-exists-cli": "^2.0.0",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.21.5",
-    "typedoc-plugin-markdown": "^3.10.4",
-    "typescript": "^4.3.2"
+    "typedoc-plugin-markdown": "^3.11.3",
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "react-native": "*"
