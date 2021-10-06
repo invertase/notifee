@@ -155,6 +155,7 @@ Thumbs.db
 
 # virtual machine crash logs (Reference: http://www.java.com/en/download/help/error_hotspot.xml)
 hs_err_pid*
+*.hprof
 
 ## Plugin-specific files:
 
