@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/node,xcode,gradle,android,webstorm,firebase,reactnative,androidstudio,visualstudiocode
 
+### Expo Config Plugin ###
+plugin/build/
+
 ### Android ###
 # Built application files
 *.apk
