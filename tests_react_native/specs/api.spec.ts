@@ -200,7 +200,7 @@ export function ApiSpec(spec: TestScope): void {
     });
 
     spec.it('cancels display notifications by id', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         await notifee.displayNotification({
           id: 'hello',
           title: 'Hello',
@@ -224,8 +224,12 @@ export function ApiSpec(spec: TestScope): void {
         setTimeout(async () => {
           // After
           notifications = await notifee.getDisplayedNotifications();
-          expect(notifications?.length).equals(0);
-          resolve();
+          try {
+            expect(notifications?.length).equals(0);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
         }, 1000);
       });
     });
