@@ -1,0 +1,136 @@
+name: Testing E2E iOS
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+
+jobs:
+  ios:
+    name: iOS
+    runs-on: macos-11
+    # TODO matrix across APIs, at least 10 and 13 (lowest to highest)
+    timeout-minutes: 40
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    steps:
+      - uses: styfle/cancel-workflow-action@0.9.1
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 50
+          submodules: recursive
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '13.0'
+
+      - name: Start Simulator
+        # The first time you try to `yarn run:ios` after xcode-select, it fails, so get it out of the way...
+        continue-on-error: true
+        run: xcrun simctl boot "iPhone 12"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        name: Yarn Cache
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
+          restore-keys: ${{ runner.os }}-yarn-v1
+
+      - uses: actions/cache@v2
+        name: Cache Pods
+        with:
+          path: tests_react_native/ios/Pods
+          key: ${{ runner.os }}-pods-v2-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-pods-v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3
+
+      - name: Update Ruby build tools
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 2
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: gem update cocoapods xcodeproj
+
+      - name: Yarn Install
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
+
+      - name: Build iOS App
+        run: |
+          export SKIP_BUNDLING=1
+          export RCT_NO_LAUNCH_PACKAGER=1
+          cd tests_react_native/ios
+          xcodebuild -workspace testing.xcworkspace -scheme Notifee -configuration Debug -sdk iphonesimulator -derivedDataPath build | xcpretty
+        shell: bash
+
+      - name: Install applesimutils
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap wix/brew && HOMEBREW_NO_AUTO_UPDATE=1 brew install applesimutils && applesimutils --list
+
+      - name: Pre-fetch Javascript bundle
+        run: |
+          nohup yarn tests_rn:packager &
+          printf 'Waiting for packager to come online'
+          until curl --output /dev/null --silent --head --fail http://localhost:8081/status; do
+            printf '.'
+            sleep 2
+          done
+          echo "Packager is online! Preparing bundle..."
+          curl --output /dev/null --silent --head --fail "http://localhost:8081/index.bundle?platform=ios&dev=true&minify=false&inlineSourceMap=true"
+          echo "...javascript bundle ready"
+
+      - name: Create Simulator Log
+        # With a little delay so the detox test below has time to spawn it, missing the first part of boot is fine
+        # If you boot the simulator separately from detox, some other race fails and detox testee never sends ready to proxy
+        continue-on-error: true
+        run: nohup sh -c "sleep 30 && xcrun simctl spawn booted log stream --level debug --style compact > simulator.log 2>&1 &"
+
+      - name: E2E Test
+        timeout-minutes: 30
+        continue-on-error: true
+        run: yarn tests_rn:ios:test
+
+      - name: Compress Simulator Log
+        if: always()
+        run: gzip -9 simulator.log
+
+      - name: Upload Simulator Log
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: simulator_logs
+          path: simulator.log.gz
+
+      - name: Submit Coverage
+        # This can fail on timeouts etc, wrap with retry
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: curl https://codecov.io/bash -o codecov.sh && bash ./codecov.sh
