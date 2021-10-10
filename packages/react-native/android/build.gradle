@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-      classpath("com.android.tools.build:gradle:7.0.1")
+      classpath("com.android.tools.build:gradle:7.0.2")
     }
   }
 }
@@ -43,10 +43,6 @@ android {
     disable 'GradleCompatible'
     abortOnError false
   }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
   buildTypes {
     release {
       consumerProguardFiles 'proguard-rules.pro'
@@ -69,12 +65,12 @@ dependencies {
   }
   implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
   implementation 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
-  implementation 'androidx.work:work-runtime:2.5.0' // https://developer.android.com/jetpack/androidx/releases/work
+  implementation 'androidx.work:work-runtime:2.6.0' // https://developer.android.com/jetpack/androidx/releases/work
   implementation 'org.greenrobot:eventbus:3.2.0' // https://github.com/greenrobot/EventBus/releases
 
   // needed to enforce version and avoid clashes
   // https://github.com/square/okhttp/blob/master/docs/changelog_3x.md
-  implementation 'com.squareup.okhttp3:okhttp:3.12.12' // okhttp must stay on 3.12.x to support minSdkVersion < 21
+  implementation 'com.squareup.okhttp3:okhttp:3.12.13' // okhttp must stay on 3.12.x to support minSdkVersion < 21
 }
 
 ReactNative.shared.applyPackageVersion()
