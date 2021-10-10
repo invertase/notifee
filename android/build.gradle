@@ -38,7 +38,7 @@ ext {
 }
 
 android {
-  compileSdkVersion 30
+  compileSdkVersion 31
   testOptions {
     unitTests.returnDefaultValues = true
   }
