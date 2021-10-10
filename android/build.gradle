@@ -6,7 +6,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:7.0.1'
+    classpath 'com.android.tools.build:gradle:7.0.2'
   }
 }
 
@@ -16,11 +16,11 @@ apply plugin: 'com.android.library'
 ext {
 
   jvmVersion = Jvm.current().javaVersion.majorVersion
-  if (jvmVersion != "8" && jvmVersion != "11" && jvmVersion != "14") {
+  if (jvmVersion != "11" && jvmVersion != "14") {
     println "\n\n\n"
     println "**************************************************************************************************************"
     println "\n\n\n"
-    println "ERROR: Notifee builds with JVM LTS and current releases (currently major version 8, 11, or 14)."
+    println "ERROR: Notifee builds with JVM LTS and current releases (currently major version 11, or 14)."
     println "  Incompatible major version detected: '" + jvmVersion + "'"
     println "\n\n\n"
     println "**************************************************************************************************************"
@@ -75,11 +75,6 @@ android {
     }
   }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
   testOptions.unitTests.all {
     testLogging {
       events "failed", "skipped"
@@ -99,7 +94,6 @@ android {
 repositories {
   google()
   mavenCentral()
-  jcenter()
 }
 
 dependencies {
@@ -108,10 +102,10 @@ dependencies {
   api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
   api 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
-  api 'androidx.work:work-runtime:2.5.0' // https://developer.android.com/jetpack/androidx/releases/work
+  api 'androidx.work:work-runtime:2.6.0' // https://developer.android.com/jetpack/androidx/releases/work
   // Fresco 2.3.0+ may not be react-native compatible until 0.65.x with this: https://github.com/facebook/react-native/pull/30061
   // But! Fresco 2.2.0 is on JCenter and 2.3.0 is on mavenCentral - use 2.3.0 if you have to? https://github.com/facebook/fresco/issues/2585#issuecomment-822785614
-  api 'com.facebook.fresco:fresco:2.2.0' // https://github.com/facebook/fresco/releases
+  api 'com.facebook.fresco:fresco:2.5.0' // https://github.com/facebook/fresco/releases
 
   def room_version = '2.3.0' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"

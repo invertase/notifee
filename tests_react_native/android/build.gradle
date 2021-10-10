@@ -12,7 +12,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.2.2'
+    classpath 'com.android.tools.build:gradle:7.0.2'
     classpath 'com.google.gms:google-services:4.3.10'
   }
 }
@@ -23,7 +23,6 @@ allprojects {
   }
 
   repositories {
-    google()
     mavenLocal()
     maven {
       // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
@@ -39,7 +38,8 @@ allprojects {
     maven {
       url "$rootDir/../node_modules/@notifee/react-native/android/libs"
     }
-    jcenter()
+    google()
+    mavenCentral()
   }
 
 }
