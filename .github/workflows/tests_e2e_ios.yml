@@ -75,14 +75,6 @@ jobs:
           max_attempts: 3
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
 
-      - name: Build iOS App
-        run: |
-          export SKIP_BUNDLING=1
-          export RCT_NO_LAUNCH_PACKAGER=1
-          cd tests_react_native/ios
-          xcodebuild -workspace testing.xcworkspace -scheme Notifee -configuration Debug -sdk iphonesimulator -derivedDataPath build | xcpretty
-        shell: bash
-
       - name: Install applesimutils
         uses: nick-invision/retry@v2
         with:
@@ -91,9 +83,13 @@ jobs:
           max_attempts: 3
           command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap wix/brew && HOMEBREW_NO_AUTO_UPDATE=1 brew install applesimutils && applesimutils --list
 
+      - name: Prepare test index file
+        # For some reason, in CI, the test file is never running. So let's make all index files the test file.
+        run: cp tests_react_native/index.test.js tests_react_native/index.js
+
       - name: Pre-fetch Javascript bundle
         run: |
-          nohup yarn tests_rn:packager &
+          nohup sh -c "yarn tests_rn:packager > packager.log 2>&1 &"
           printf 'Waiting for packager to come online'
           until curl --output /dev/null --silent --head --fail http://localhost:8081/status; do
             printf '.'
@@ -103,16 +99,96 @@ jobs:
           curl --output /dev/null --silent --head --fail "http://localhost:8081/index.bundle?platform=ios&dev=true&minify=false&inlineSourceMap=true"
           echo "...javascript bundle ready"
 
-      - name: Create Simulator Log
-        # With a little delay so the detox test below has time to spawn it, missing the first part of boot is fine
-        # If you boot the simulator separately from detox, some other race fails and detox testee never sends ready to proxy
+      - uses: hendrikmuhs/ccache-action@v1
+        name: Xcode Compile Cache
+        with:
+          key: ${{ runner.os }}-v2 # makes a unique key w/related restore key internally
+          max-size: 400M
+
+      - name: Build App, Boot Simulator, Run App
+        id: run1
         continue-on-error: true
-        run: nohup sh -c "sleep 30 && xcrun simctl spawn booted log stream --level debug --style compact > simulator.log 2>&1 &"
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          ccache -s
+          export SKIP_BUNDLING=1
+          export RCT_NO_LAUNCH_PACKAGER=1
+          yarn run:ios
+          ccache -s
+        shell: bash
+
+      - name: Build App, Boot Simulator, Run App Retry 1
+        id: run2
+        if: steps.run1.outcome=='failure'
+        continue-on-error: true
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          ccache -s
+          export SKIP_BUNDLING=1
+          export RCT_NO_LAUNCH_PACKAGER=1
+          yarn run:ios
+          ccache -s
+        shell: bash
+
+      - name: Build App, Boot Simulator, Run App Retry 2
+        id: run3
+        if: steps.run2.outcome=='failure'
+        continue-on-error: true
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          ccache -s
+          export SKIP_BUNDLING=1
+          export RCT_NO_LAUNCH_PACKAGER=1
+          yarn run:ios
+          ccache -s
+        shell: bash
+
+      - name: Simulator Status
+        if: always()
+        run: |
+          if ${{ steps.run1.outcome=='success' || steps.run2.outcome=='success' || steps.run3.outcome=='success' }}; then
+             echo "Simulator Started"
+          else
+             exit 1
+          fi
+
+      - name: Grant Notification Permission
+        run: applesimutils --booted --setPermissions notifications=YES --bundle com.notifee.testing
+
+      - name: Record App Video
+        # It seems to take about a minute (based on video recording) for the Simulator to be back up and stable
+        run: sleep 60 && nohup sh -c "xcrun simctl io booted recordVideo --codec=h264 -f simulator.mp4 2>&1 &"
+
+      - name: Create Simulator Log
+        # With a little delay, missing the first part of boot is fine, it will still capture app issues
+        run: nohup sh -c "xcrun simctl spawn booted log stream --level debug --style compact > simulator.log 2>&1 &"
 
       - name: E2E Test
-        timeout-minutes: 30
-        continue-on-error: true
+        timeout-minutes: 6
         run: yarn tests_rn:ios:test
+
+      - name: Stop App Video
+        if: always()
+        run: killall -INT simctl
+
+      - name: Upload App Video
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: simulator_video
+          path: simulator.mp4
 
       - name: Compress Simulator Log
         if: always()
@@ -124,6 +200,13 @@ jobs:
         with:
           name: simulator_logs
           path: simulator.log.gz
+
+      - name: Upload Packager Log
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: packager_log
+          path: packager.log
 
       - name: Submit Coverage
         # This can fail on timeouts etc, wrap with retry

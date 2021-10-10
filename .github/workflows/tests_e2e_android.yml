@@ -92,7 +92,7 @@ jobs:
           timeout_minutes: 10
           retry_wait_seconds: 60
           max_attempts: 3
-          command: cd tests_react_native/android && ./gradlew assembleDebug -DtestBuildType=debug -Dorg.gradle.daemon=false
+          command: yarn tests_rn:android:build
 
       - name: Pre-fetch Javascript bundle
         # Prebuild the bundle so that's fast when the app starts.
