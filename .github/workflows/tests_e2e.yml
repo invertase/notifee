@@ -50,6 +50,26 @@ jobs:
           key: ${{ runner.os }}-gradle-v1-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-v1
 
+      - uses: actions/cache@v2
+        name: Cache Pods
+        with:
+          path: tests_react_native/ios/Pods
+          key: ${{ runner.os }}-pods-v2-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: ${{ runner.os }}-pods-v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3
+
+      - name: Update Ruby build tools
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 2
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: gem update cocoapods xcodeproj
+
       - name: Yarn Install
         uses: nick-invision/retry@v2
         with:
@@ -225,6 +245,19 @@ jobs:
   #         path: tests_react_native/ios/Pods
   #         key: ${{ runner.os }}-pods-v2-${{ hashFiles('**/Podfile.lock') }}
   #         restore-keys: ${{ runner.os }}-pods-v2
+
+  #    - name: Setup Ruby
+  #      uses: ruby/setup-ruby@v1
+  #      with:
+  #        ruby-version: 3
+
+  #    - name: Update Ruby build tools
+  #      uses: nick-invision/retry@v2
+  #      with:
+  #        timeout_minutes: 2
+  #        retry_wait_seconds: 60
+  #        max_attempts: 3
+  #        command: gem update cocoapods xcodeproj
 
   #     - name: Yarn Install
   #       uses: nick-invision/retry@v2
