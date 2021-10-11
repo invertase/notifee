@@ -311,6 +311,10 @@ function logEvent(state: string, event: any): void {
       eventTypeString = 'CHANNEL_GROUP_BLOCKED';
       console.log('Channel Group', detail.channelGroup);
       break;
+    case EventType.TRIGGER_NOTIFICATION_CREATED:
+      eventTypeString = 'TRIGGER_NOTIFICATION_CREATED';
+      console.log('Trigger Notification');
+      break;
     default:
       eventTypeString = 'UNHANDLED_NATIVE_EVENT';
   }
