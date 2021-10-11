@@ -94,10 +94,14 @@ jobs:
           max_attempts: 3
           command: yarn tests_rn:android:build
 
+      - name: Prepare test index file
+        # For some reason, in CI, the test file is never running. So let's make all index files the test file.
+        run: cp tests_react_native/index.test.js tests_react_native/index.js
+
       - name: Pre-fetch Javascript bundle
         # Prebuild the bundle so that's fast when the app starts.
         run: |
-          nohup yarn tests_rn:packager &
+          nohup sh -c "yarn tests_rn:packager > packager.log 2>&1 &"
           printf 'Waiting for packager to come online'
           until curl --output /dev/null --silent --head --fail http://localhost:8081/status; do
             printf '.'
@@ -164,9 +168,13 @@ jobs:
              exit 1
           fi
 
+      - name: Record Emulator Video
+        # screenrecord has a 180 second time limit, with 4 recordings we should capture the run
+        continue-on-error: true
+        run: nohup sh -c 'adb shell "screenrecord /data/local/tmp/emulator1.mp4; screenrecord /data/local/tmp/emulator2.mp4; screenrecord /data/local/tmp/emulator3.mp4; screenrecord /data/local/tmp/emulator4.mp4" &'
+
       - name: E2E Test
-        # Detox uses Espresso to choreograph steps in reaction to UI events, so we need to send a stream of taps.
-        timeout-minutes: 40
+        timeout-minutes: 20
         run: |
           $ANDROID_HOME/platform-tools/adb devices
           $ANDROID_HOME/platform-tools/adb shell settings put global window_animation_scale 0.0
@@ -196,3 +204,31 @@ jobs:
         with:
           name: adb_logs
           path: adb-log.txt.gz
+
+      - name: Upload Packager Log
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: packager_log
+          path: packager.log
+
+      - name: Stop and Retrieve App Video
+        if: always()
+        continue-on-error: true
+        run: |
+          killall -INT adb
+          adb kill-server
+          sleep 2
+          adb start-server
+          sleep 2
+          adb pull /data/local/tmp/emulator1.mp4
+          adb pull /data/local/tmp/emulator2.mp4
+          adb pull /data/local/tmp/emulator3.mp4
+          adb pull /data/local/tmp/emulator4.mp4
+
+      - name: Upload App Video
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: emulator_video
+          path: emulator*.mp4
