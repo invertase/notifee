@@ -154,34 +154,40 @@ export function ApiSpec(spec: TestScope): void {
 
   spec.describe('Cancel Notifications', function () {
     spec.it('cancels all notifications and resets badge count to 0', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
-          if (event.type === EventType.DELIVERED) {
-            if (event.detail?.notification?.id !== 'on-foreground') {
-              // skip
-              return;
+          console.warn('We are checking: ' + JSON.stringify(event));
+          try {
+            if (event.type === EventType.DELIVERED) {
+              if (event.detail?.notification?.id !== 'on-foreground') {
+                // skip
+                return;
+              }
+
+              expect(event.detail.notification).not.equal(undefined);
+              if (event.detail.notification) {
+                expect(event.detail.notification.title).equals('Hello');
+                expect(event.detail.notification.body).equals('World');
+              }
+
+              // Only check badge count for ios
+              if (Platform.OS === 'ios') {
+                const initialBadgeCount = await notifee.getBadgeCount();
+                expect(initialBadgeCount).equals(1);
+
+                await notifee.cancelAllNotifications();
+                await notifee.setBadgeCount(0);
+
+                const lastBadgeCount = await notifee.getBadgeCount();
+                expect(lastBadgeCount).equals(0);
+              }
+
+              unsubscribe();
+              resolve();
             }
-
-            expect(event.detail.notification).not.equal(undefined);
-            if (event.detail.notification) {
-              expect(event.detail.notification.title).equals('Hello');
-              expect(event.detail.notification.body).equals('World');
-            }
-
-            // Only check badge count for ios
-            if (Platform.OS === 'ios') {
-              const initialBadgeCount = await notifee.getBadgeCount();
-              expect(initialBadgeCount).equals(1);
-
-              await notifee.cancelAllNotifications();
-              await notifee.setBadgeCount(0);
-
-              const lastBadgeCount = await notifee.getBadgeCount();
-              expect(lastBadgeCount).equals(0);
-            }
-
+          } catch (e) {
             unsubscribe();
-            resolve();
+            reject(e);
           }
         });
 
@@ -200,7 +206,7 @@ export function ApiSpec(spec: TestScope): void {
     });
 
     spec.it('cancels display notifications by id', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         await notifee.displayNotification({
           id: 'hello',
           title: 'Hello',
@@ -222,10 +228,14 @@ export function ApiSpec(spec: TestScope): void {
 
         // TODO: find out why there needs to be a delay on Android
         setTimeout(async () => {
-          // After
-          notifications = await notifee.getDisplayedNotifications();
-          expect(notifications?.length).equals(0);
-          resolve();
+          try {
+            // After
+            notifications = await notifee.getDisplayedNotifications();
+            expect(notifications?.length).equals(0);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
         }, 1000);
       });
     });
