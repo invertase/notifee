@@ -234,9 +234,9 @@ export function ApiSpec(spec: TestScope): void {
             expect(notifications?.length).equals(0);
             resolve();
           } catch (e) {
-            reject(e);
+            reject('Cancelled notification still present even after a delay.');
           }
-        }, 1000);
+        }, 5000);
       });
     });
 

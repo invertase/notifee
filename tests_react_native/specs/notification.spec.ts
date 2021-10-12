@@ -337,7 +337,7 @@ export function NotificationSpec(spec: TestScope): void {
                 unsubscribe();
                 notifee.cancelTriggerNotifications();
               }
-            }, 200000);
+            }, 600000);
           });
         });
       });
