@@ -6,6 +6,12 @@ on:
     paths:
       - '.github/workflows/*.yml'
       - 'android/**'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
 
 jobs:
   unit:
