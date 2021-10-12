@@ -18,7 +18,7 @@ jobs:
     name: iOS
     runs-on: macos-11
     # TODO matrix across APIs, at least 10 and 13 (lowest to highest)
-    timeout-minutes: 40
+    timeout-minutes: 60
     env:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
@@ -81,7 +81,7 @@ jobs:
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
-          max_attempts: 3
+          max_attempts: 4
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
 
       - name: Install applesimutils
