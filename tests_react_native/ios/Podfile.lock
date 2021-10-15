@@ -350,10 +350,10 @@ PODS:
     - React-jsi (= 0.66.0)
     - React-logger (= 0.66.0)
     - React-perflogger (= 0.66.0)
-  - RNFBApp (12.9.0):
+  - RNFBApp (12.9.1):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
-  - RNFBMessaging (12.9.0):
+  - RNFBMessaging (12.9.1):
     - Firebase/Messaging (= 8.8.0)
     - React-Core
     - RNFBApp
@@ -540,8 +540,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: 53b92d54b923283638cb0186da7a5c2d2b70a49b
   React-runtimeexecutor: 4bb657a97aa74568d9ed634c8bd478299bb8a3a6
   ReactCommon: eb059748e842a1a86025ebbd4ac9d99e74492f88
-  RNFBApp: d11e8ae04b9b6230f3a28b70761f2edd185deaa8
-  RNFBMessaging: dd0bd7d837b7b6b8e881248a2639af5dc36b28ef
+  RNFBApp: ece97bfe0a926247591c0aa0bdfe384f06cf46b5
+  RNFBMessaging: 01fc1d889000c85f0de97930f471e70776c86e16
   RNNotifee: 69e9c5027f8941bccb437ecfd859be6175a76335
   RNNotifeeCore: bd34951e85e6b6935b52610d4701d4019b070ab8
   Yoga: c11abbf5809216c91fcd62f5571078b83d9b6720
