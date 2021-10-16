@@ -5,3 +5,4 @@ coverage
 docs
 dist
 android
+packages/**/plugin/build/**

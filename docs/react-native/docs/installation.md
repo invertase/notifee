@@ -58,3 +58,6 @@ npx react-native run-ios
 # For Android
 npx react-native run-android
 ```
+
+## 4. Expo Config Plugin
+If you're using Expo, make sure to add the @notifee/react-native config plugin to your app.json or app.config.js.
