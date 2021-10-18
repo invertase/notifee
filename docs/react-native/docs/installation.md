@@ -67,7 +67,7 @@ Notifee has a built-in expo plugin you can install into an Expo managed project.
 First, add Notifee to your project:
 `expo install @notifee/react-native`
 
-Then, add the plugin in your app's Expo config (`app.json` or `app.config.js`):
+Then, add `@notifee/react-native` to the list of plugins in your app's Expo config (`app.json` or `app.config.js`):
 ```json
 {
   "name": "my app",
