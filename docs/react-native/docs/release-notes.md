@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 3.0.2
+- **[Android]**: Include support for expo managed projects [[Learn More]](/react-native/docs/installation#miscellaneous)]
+- **[Android]**: Adds support for Android 12
+
 ## 3.0.1
 - **[Android]**: Fixes an issue where the wrong quick action was triggered when fired in quick succession (Fixes [#121](https://github.com/invertase/notifee/issues/121))
 - **[Android]**: Fixes an issue where notifications created by FCM were not being removed from the notification tray when cancelled (Fixes [#120](https://github.com/invertase/notifee/issues/120))
