@@ -44,7 +44,10 @@ def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitect
 android {
   ndkVersion rootProject.ext.ndkVersion
   compileSdkVersion rootProject.ext.compileSdkVersion
-
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
+  }
   defaultConfig {
     applicationId "com.notifee.testing"
     minSdkVersion rootProject.ext.minSdkVersion
