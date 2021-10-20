@@ -186,7 +186,7 @@ There are five types of importance levels which can be used to display a notific
 
 ### High
 
-The highest importance level applied to a channel/notification. Notifications will appear on-top of applications, allowing direct interaction without pulling own the notification shade. This level should only be used for urgent notifications, such as incoming phone calls, messages etc, which require immediate attention.
+The highest importance level applied to a channel/notification. Notifications will appear on-top of applications, allowing direct interaction without pulling down the notification shade. This level should only be used for urgent notifications, such as incoming phone calls, messages etc, which require immediate attention.
 
 <Vimeo id="android-importance-high" caption="Android High Importance Notification" />
 
