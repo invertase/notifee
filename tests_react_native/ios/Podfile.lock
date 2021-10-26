@@ -350,10 +350,10 @@ PODS:
     - React-jsi (= 0.67.0-rc.2)
     - React-logger (= 0.67.0-rc.2)
     - React-perflogger (= 0.67.0-rc.2)
-  - RNFBApp (12.9.1):
+  - RNFBApp (12.9.3):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
-  - RNFBMessaging (12.9.1):
+  - RNFBMessaging (12.9.3):
     - Firebase/Messaging (= 8.8.0)
     - React-Core
     - RNFBApp
@@ -508,14 +508,14 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 2563cb18a723ef9c6ef18318a49519b75dce613c
   FirebaseMessaging: 419b5c9d84f294a753c6501d8cfb9ced1ce37304
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: 5337263514dd6f09803962437687240c5dc39aa4
+  glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   hermes-engine: bf7577d12ac6ccf53ab8b5af3c6ccf0dd8458c5c
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
+  RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: e94bac8c0770aa02dd4959b86e32c6fe0e077e2d
   RCTTypeSafety: 400db7e174b0cb36ba4b85aaef60789df434043e
   React: 921833f22439a2cf6dbc760a56ee1bfc54aeed03
@@ -540,8 +540,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: f4457007b33185bbe9c2cd7cdf00bc05ec16e0eb
   React-runtimeexecutor: 1ff872a9cb0fff8329334829b109cb6b380c7907
   ReactCommon: fda8de1535cec34971adef653f9afd954142eb7c
-  RNFBApp: ece97bfe0a926247591c0aa0bdfe384f06cf46b5
-  RNFBMessaging: 01fc1d889000c85f0de97930f471e70776c86e16
+  RNFBApp: 729c0666395b1953198dc4a1ec6deb8fbe1c302e
+  RNFBMessaging: 8415ec196e5c1196caa26ec0742cdb48ed4d0f97
   RNNotifee: 05d95cdc3bc1ee50267da96ea2e7358918bd1e76
   RNNotifeeCore: b4ce1cbaa06860192c09537f9758195ff87db11a
   Yoga: 63f25ad38b6f7597fa5dfee27088b29a01e83447
