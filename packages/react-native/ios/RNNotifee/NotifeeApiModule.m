@@ -308,13 +308,13 @@ RCT_EXPORT_METHOD(setNotificationCategories:
 }
 
 RCT_EXPORT_METHOD(setBadgeCount:
-  (NSInteger *) count
+  (NSNumber *) count
       resolve:
       (RCTPromiseResolveBlock) resolve
       reject:
       (RCTPromiseRejectBlock) reject
 ) {
-  [NotifeeCore setBadgeCount:count withBlock:^(NSError *_Nullable error) {
+    [NotifeeCore setBadgeCount:[count integerValue] withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }
@@ -330,25 +330,25 @@ RCT_EXPORT_METHOD(getBadgeCount:
 }
 
 RCT_EXPORT_METHOD(incrementBadgeCount:
-  (NSInteger *) incrementBy
+  (NSNumber *) incrementBy
   resolve:
   (RCTPromiseResolveBlock) resolve
   reject:
   (RCTPromiseRejectBlock) reject
 ) {
-  [NotifeeCore incrementBadgeCount:incrementBy withBlock:^(NSError *_Nullable error) {
+    [NotifeeCore incrementBadgeCount:[incrementBy integerValue] withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }
 
 RCT_EXPORT_METHOD(decrementBadgeCount:
-  (NSInteger *) decrementBy
+  (NSNumber *) decrementBy
   resolve:
   (RCTPromiseResolveBlock) resolve
   reject:
   (RCTPromiseRejectBlock) reject
 ) {
-   [NotifeeCore decrementBadgeCount:decrementBy withBlock:^(NSError *_Nullable error) {
+    [NotifeeCore decrementBadgeCount:[decrementBy integerValue] withBlock:^(NSError *_Nullable error) {
     [self resolve:resolve orReject:reject promiseWithError:error orResult:nil];
   }];
 }
