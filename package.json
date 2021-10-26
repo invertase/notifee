@@ -99,7 +99,9 @@
       "**/react",
       "**/react/**",
       "**/react-native",
-      "**/react-native/**"
+      "**/react-native/**",
+      "**/rimraf",
+      "**/rimraf/**"
     ]
   },
   "dependencies": {

@@ -39,8 +39,15 @@ allprojects {
     maven {
       url "$rootDir/../node_modules/@notifee/react-native/android/libs"
     }
+    mavenCentral {
+      // We don't want to fetch react-native from Maven Central as there are
+      // older versions over there.
+      content {
+        excludeGroup "com.facebook.react"
+      }
+    }
     google()
-    mavenCentral()
+    maven { url 'https://www.jitpack.io' }
   }
 
 }
