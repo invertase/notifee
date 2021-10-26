@@ -33,7 +33,7 @@ static NSString *const kImagePathPrefix = @"image/";
   return instance;
 }
 
-- (void)populateNotificationContent:(UNNotificationRequest *)request
+- (void)populateNotificationContent:(UNNotificationRequest *_Nullable)request
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
   self.contentHandler = [contentHandler copy];
