@@ -661,7 +661,7 @@
  */
 + (nullable instancetype)notifeeUIApplication {
   static dispatch_once_t once;
-  static UIApplication *_Nullable sharedInstance;
+  static NotifeeCoreUtil * sharedInstance;
   dispatch_once(&once, ^{
     static Class applicationClass = nil;
     if (![self isAppExtension]) {
@@ -671,7 +671,7 @@
       }
     }
 
-    sharedInstance = [applicationClass sharedApplication];
+    sharedInstance = (NotifeeCoreUtil *)[applicationClass sharedApplication];
   });
 
   return sharedInstance;
