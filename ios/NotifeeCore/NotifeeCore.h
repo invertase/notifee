@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreEventType) {
 + (nullable instancetype)notifeeUIApplication;
 
 + (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification
-                                               withTrigger:(NSDictionary *)trigger;
+                                               withTrigger:(NSDictionary *_Nullable)trigger;
 
 + (void)populateNotificationContent:(UNNotificationRequest *)request
                         withContent:(UNMutableNotificationContent *)content
