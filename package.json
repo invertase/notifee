@@ -90,8 +90,6 @@
       "**/cavy-native-reporter/**",
       "**/chalk/",
       "**/chalk/**",
-      "**/glob/",
-      "**/glob/**",
       "**/prop-types",
       "**/prop-types/**",
       "**/patch-package",
@@ -99,9 +97,7 @@
       "**/react",
       "**/react/**",
       "**/react-native",
-      "**/react-native/**",
-      "**/rimraf",
-      "**/rimraf/**"
+      "**/react-native/**"
     ]
   },
   "dependencies": {
