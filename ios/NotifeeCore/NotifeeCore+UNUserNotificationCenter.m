@@ -204,11 +204,11 @@ struct {
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     openSettingsForNotification:(nullable UNNotification *)notification {
   if (_originalDelegate != nil && originalUNCDelegateRespondsTo.openSettingsForNotification) {
-      if (@available(iOS 12.0, macOS 10.14, macCatalyst 13.0, *)) {
-          [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
-      } else {
-          // Fallback on earlier versions
-      }
+    if (@available(iOS 12.0, macOS 10.14, macCatalyst 13.0, *)) {
+      [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+    } else {
+      // Fallback on earlier versions
+    }
   }
 }
 
