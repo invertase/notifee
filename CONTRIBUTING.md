@@ -77,11 +77,14 @@ yarn validate:all:ts
 ```
 
 ## Publishing
+
 Maintainers with write access to the repo and the npm organization can publish new versions by following the release checklist below.
 
 ### Release Checklist
 
 1. Navigate to the React Native package: `cd packages/react-native`
-1. Bump version: `npm version {minor/patch}`
-1. Publish to npm: `npm publish`
 1. Update release notes [here](https://github.com/invertase/notifee/blob/master/docs/react-native/docs/release-notes.md)
+1. Bump version: `npm version {minor/patch}`
+1. Tag the repo (current format is `@notifee/react-native@x.y.z`)
+1. Push the release notes / version / tag to the repo: `git push --tags`
+1. Publish to npm: `npm publish`
