@@ -308,7 +308,7 @@ RCT_EXPORT_METHOD(setNotificationCategories:
 }
 
 RCT_EXPORT_METHOD(setBadgeCount:
-  (NSNumber *) count
+  (nonnull NSNumber *) count
       resolve:
       (RCTPromiseResolveBlock) resolve
       reject:
@@ -330,7 +330,7 @@ RCT_EXPORT_METHOD(getBadgeCount:
 }
 
 RCT_EXPORT_METHOD(incrementBadgeCount:
-  (NSNumber *) incrementBy
+  (nonnull NSNumber *) incrementBy
   resolve:
   (RCTPromiseResolveBlock) resolve
   reject:
@@ -342,7 +342,7 @@ RCT_EXPORT_METHOD(incrementBadgeCount:
 }
 
 RCT_EXPORT_METHOD(decrementBadgeCount:
-  (NSNumber *) decrementBy
+  (nonnull NSNumber *) decrementBy
   resolve:
   (RCTPromiseResolveBlock) resolve
   reject:
