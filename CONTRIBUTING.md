@@ -87,4 +87,8 @@ Maintainers with write access to the repo and the npm organization can publish n
 1. Bump version: `npm version {minor/patch}`
 1. Tag the repo (current format is `@notifee/react-native@x.y.z`)
 1. Push the release notes / version / tag to the repo: `git push --tags`
+1. Create a release on the repo:
+    ```
+    gh release create @notifee/react-native@x.y.z --title "@notifee/react-native@x.y.z" --notes "[Release Notes](https://notifee.app/react-native/docs/release-notes)"
+    ```
 1. Publish to npm: `npm publish`
