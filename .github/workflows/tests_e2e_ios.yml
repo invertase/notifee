@@ -201,17 +201,20 @@ jobs:
 
       - name: Upload App Video
         uses: actions/upload-artifact@v2
+        continue-on-error: true
         if: always()
         with:
           name: simulator_video
           path: simulator.mp4
 
       - name: Compress Simulator Log
+        continue-on-error: true
         if: always()
         run: gzip -9 simulator.log
 
       - name: Upload Simulator Log
         uses: actions/upload-artifact@v2
+        continue-on-error: true
         if: always()
         with:
           name: simulator_logs
@@ -219,6 +222,7 @@ jobs:
 
       - name: Upload Packager Log
         uses: actions/upload-artifact@v2
+        continue-on-error: true
         if: always()
         with:
           name: packager_log
