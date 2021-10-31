@@ -92,4 +92,3 @@ Maintainers with write access to the repo and the npm organization can publish n
     gh release create @notifee/react-native@x.y.z --title "@notifee/react-native@x.y.z" --notes "[Release Notes](https://notifee.app/react-native/docs/release-notes)"
     ```
 1. Publish to npm: `npm publish`
-1. Update the website with the new release notes
