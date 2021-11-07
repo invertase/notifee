@@ -440,4 +440,19 @@ export interface EventDetail {
    * @platform android API Level >= 28
    */
   blocked?: boolean;
+
+  /**
+   * Boolean flag that indicates if the notification has been shown to the user or not.
+   *
+   * On iOS:
+   * - if the app is in the foreground, it is determined by the [`foregroundPresentOptions`](https://notifee.app/react-native/reference/notificationios#foregroundpresentationoptions)
+   * - if the app is in the background, the notification will always be true
+   *
+   * On Android, this will always be true whether the app is in the foreground or not
+   *
+   * The presented detail is available when the event type is [`EventType.DELIVERED`](/react-native/reference/eventtype#delivered).
+   *
+   * @platform ios
+   */
+  presented?: boolean;
 }

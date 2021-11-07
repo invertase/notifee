@@ -37,17 +37,27 @@ public class NotificationEvent {
   private final int type;
   private final Bundle extras;
   private final NotificationModel notification;
+  private final Boolean presented;
+
+  public NotificationEvent(int type, NotificationModel bundle, Boolean presented) {
+    this.type = type;
+    this.notification = bundle;
+    this.extras = null;
+    this.presented = presented;
+  }
 
   public NotificationEvent(int type, NotificationModel bundle) {
     this.type = type;
     this.notification = bundle;
     this.extras = null;
+    this.presented = null;
   }
 
   public NotificationEvent(int type, NotificationModel bundle, Bundle extras) {
     this.type = type;
     this.notification = bundle;
     this.extras = extras;
+    presented = null;
   }
 
   @KeepForSdk
@@ -58,6 +68,11 @@ public class NotificationEvent {
   @KeepForSdk
   public NotificationModel getNotification() {
     return notification;
+  }
+
+  @KeepForSdk
+  public Boolean getPresented() {
+    return presented;
   }
 
   @KeepForSdk

@@ -457,7 +457,7 @@ class NotificationManager {
                 Logger.i(TAG, "Removing notification with id " + id);
 
                 if (notificationType != NOTIFICATION_TYPE_TRIGGER) {
-                  // Cancel notifications displayed by FCM which will always have 
+                  // Cancel notifications displayed by FCM which will always have
                   // an id of 0 and a tag, see https://github.com/invertase/notifee/pull/175
                   if (tag != null && id.equals("0")) {
                     // Attempt to parse id as integer
@@ -534,7 +534,7 @@ class NotificationManager {
               }
 
               EventBus.post(
-                  new NotificationEvent(NotificationEvent.TYPE_DELIVERED, notificationModel));
+                  new NotificationEvent(NotificationEvent.TYPE_DELIVERED, notificationModel, true));
 
               return null;
             });

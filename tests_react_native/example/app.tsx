@@ -72,11 +72,11 @@ const channels: AndroidChannel[] = [
 
 async function onMessage(message: RemoteMessage): Promise<void> {
   console.log('New FCM Message', message.messageId);
-  await Notifee.displayNotification({
-    title: 'onMessage',
-    body: `with message ${message.messageId}`,
-    android: { channelId: 'default', tag: 'hello1' },
-  });
+  // await Notifee.displayNotification({
+  //   title: 'onMessage',
+  //   body: `with message ${message.messageId}`,
+  //   android: { channelId: 'default', tag: 'hello1' },
+  // });
 }
 
 async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
