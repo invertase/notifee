@@ -84,15 +84,6 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  if (notifeeNotification == nil) {
-    // check if we should handle notification created outside of notifee
-    BOOL shouldHandleNotification =
-        [notification.request.content.userInfo[kNotifeeUserInfoNotifee] boolValue];
-    if (shouldHandleNotification) {
-      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:notification.request];
-    }
-  }
-
   // handle notification
   if (notifeeNotification != nil) {
     // Default to None if foregroundPresentationOptions is not set
@@ -116,12 +107,9 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
-    BOOL presented = presentationOptions != UNNotificationPresentationOptionNone;
-
     [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
       @"type" : @(NotifeeCoreEventTypeDelivered),
       @"detail" : @{
-        @"presented" : @(presented),
         @"notification" : notifeeNotification,
       }
     }];
