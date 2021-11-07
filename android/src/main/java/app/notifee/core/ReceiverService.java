@@ -27,9 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
 import app.notifee.core.event.InitialNotificationEvent;
@@ -38,6 +35,7 @@ import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ReceiverService extends Service {
   private static final String TAG = "ReceiverService";
