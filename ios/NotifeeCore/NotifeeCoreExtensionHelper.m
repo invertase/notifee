@@ -16,8 +16,8 @@
  */
 
 #import "NotifeeCoreExtensionHelper.h"
-#import "NotifeeCoreUtil.h"
 #import "NotifeeCore.h"
+#import "NotifeeCoreUtil.h"
 
 static NSString *const kNoExtension = @"";
 static NSString *const kImagePathPrefix = @"image/";
@@ -33,7 +33,7 @@ static NSString *const kImagePathPrefix = @"image/";
   return instance;
 }
 
-- (void)populateNotificationContent:(UNNotificationRequest *)request
+- (void)populateNotificationContent:(UNNotificationRequest *_Nullable)request
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
   self.contentHandler = [contentHandler copy];

@@ -25,7 +25,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface NotifeeExtensionHelper : NSObject
 
-+ (void)populateNotificationContent:(UNNotificationRequest *)request
++ (void)populateNotificationContent:(UNNotificationRequest *_Nullable)request
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler;
 

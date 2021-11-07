@@ -25,6 +25,9 @@ android/.idea/scopes/scope_settings.xml
 android/.idea/vcs.xml
 android/*.iml
 
+# Expo config plugin - leave source/tsconfig, but tests aren't needed
+plugin/__tests__/
+
 # Xcode
 *.pbxuser
 *.mode1v3

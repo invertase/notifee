@@ -20,7 +20,9 @@
       android:name=".ForegroundService"
       android:exported="false" />
 
-      <receiver android:name=".RebootBroadcastReceiver">
+      <receiver
+        android:name=".RebootBroadcastReceiver"
+        android:exported="false">
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED" />
             <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -29,7 +31,9 @@
     </receiver>
 
 
-    <receiver android:name=".NotificationAlarmReceiver">
+    <receiver
+      android:name=".NotificationAlarmReceiver"
+      android:exported="false">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
         <action android:name="android.intent.action.QUICKBOOT_POWERON" />

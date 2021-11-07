@@ -1,10 +1,11 @@
 buildscript {
   ext {
-    buildToolsVersion = '30.0.3'
+    buildToolsVersion = '31.0.0'
     ndkVersion = "21.4.7075529"
     minSdkVersion = 21
-    compileSdkVersion = 30
-    targetSdkVersion = 30
+    compileSdkVersion = 31
+    targetSdkVersion = 31
+    enableHermes = true
   }
 
   repositories {
@@ -12,7 +13,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.2.2'
+    classpath 'com.android.tools.build:gradle:7.0.3'
     classpath 'com.google.gms:google-services:4.3.10'
   }
 }
@@ -23,7 +24,6 @@ allprojects {
   }
 
   repositories {
-    google()
     mavenLocal()
     maven {
       // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
@@ -39,7 +39,15 @@ allprojects {
     maven {
       url "$rootDir/../node_modules/@notifee/react-native/android/libs"
     }
-    jcenter()
+    mavenCentral {
+      // We don't want to fetch react-native from Maven Central as there are
+      // older versions over there.
+      content {
+        excludeGroup "com.facebook.react"
+      }
+    }
+    google()
+    maven { url 'https://www.jitpack.io' }
   }
 
 }

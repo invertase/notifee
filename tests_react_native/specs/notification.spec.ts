@@ -60,16 +60,21 @@ export function NotificationSpec(spec: TestScope): void {
     });
 
     spec.it('displays a notification', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         const unsubscribe = notifee.onForegroundEvent((event: Event) => {
-          if (event.type === EventType.DELIVERED) {
-            expect(event.detail.notification).not.equal(undefined);
-            if (event.detail.notification) {
-              expect(event.detail.notification.title).equals('Hello');
-              expect(event.detail.notification.body).equals('World');
+          try {
+            if (event.type === EventType.DELIVERED) {
+              expect(event.detail.notification).not.equal(undefined);
+              if (event.detail.notification) {
+                expect(event.detail.notification.title).equals('Hello');
+                expect(event.detail.notification.body).equals('World');
+              }
+              unsubscribe();
+              resolve();
             }
+          } catch (e) {
             unsubscribe();
-            resolve();
+            reject(e);
           }
         });
 
@@ -84,7 +89,7 @@ export function NotificationSpec(spec: TestScope): void {
     });
 
     spec.it('displays a empty notification', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         return notifee
           .displayNotification({
             title: undefined,
@@ -96,12 +101,15 @@ export function NotificationSpec(spec: TestScope): void {
           .then(id => {
             expect(id).equals(id);
             resolve();
+          })
+          .catch(e => {
+            reject(e);
           });
       });
     });
 
     spec.it('displays a empty notification', async function () {
-      return new Promise(async resolve => {
+      return new Promise(async (resolve, reject) => {
         return notifee
           .displayNotification({
             title: '',
@@ -113,13 +121,16 @@ export function NotificationSpec(spec: TestScope): void {
           .then(id => {
             expect(id).equals(id);
             resolve();
+          })
+          .catch(e => {
+            reject(e);
           });
       });
     });
 
     spec.describe('displayNotification with pressAction', function () {
       spec.it('displays a notification with a pressAction with id `default`', async function () {
-        return new Promise(async resolve => {
+        return new Promise(async (resolve, reject) => {
           return notifee
             .displayNotification({
               title: '',
@@ -134,12 +145,15 @@ export function NotificationSpec(spec: TestScope): void {
             .then(id => {
               expect(id).equals(id);
               resolve();
+            })
+            .catch(e => {
+              reject(e);
             });
         });
       });
 
       spec.it('silently fails if `launchActivity` does not exist', async function () {
-        return new Promise(async resolve => {
+        return new Promise(async (resolve, reject) => {
           return notifee
             .displayNotification({
               title: '',
@@ -155,6 +169,9 @@ export function NotificationSpec(spec: TestScope): void {
             .then(id => {
               expect(id).equals(id);
               resolve();
+            })
+            .catch(e => {
+              reject(e);
             });
         });
       });
@@ -164,7 +181,7 @@ export function NotificationSpec(spec: TestScope): void {
       spec.it(
         'displays a notification with a quick action with input set to true',
         async function () {
-          return new Promise(async resolve => {
+          return new Promise(async (resolve, reject) => {
             return notifee
               .displayNotification({
                 title: '',
@@ -185,6 +202,9 @@ export function NotificationSpec(spec: TestScope): void {
               .then(id => {
                 expect(id).equals(id);
                 resolve();
+              })
+              .catch(e => {
+                reject(e);
               });
           });
         },
@@ -196,7 +216,12 @@ export function NotificationSpec(spec: TestScope): void {
     spec.describe('timestampTrigger', function () {
       spec.describe('alarmManager', function () {
         spec.it('not repeating', async function () {
-          return new Promise(async resolve => {
+          // FIXME on iOS this has notification parts missing, see #191
+          if (Platform.OS === 'ios') {
+            return;
+          }
+
+          return new Promise(async (resolve, reject) => {
             const timestamp = new Date(Date.now());
             timestamp.setSeconds(timestamp.getSeconds() + 1);
             const trigger: TimestampTrigger = {
@@ -214,20 +239,33 @@ export function NotificationSpec(spec: TestScope): void {
               },
             };
 
+            let receivedCreatedEvent = false;
+
             const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
-              if (event.type === EventType.DELIVERED) {
+              try {
+                // We get a trigger created event first on android...
+                if (Platform.OS === 'android' && !receivedCreatedEvent) {
+                  expect(event.type).equals(EventType.TRIGGER_NOTIFICATION_CREATED);
+                  receivedCreatedEvent = true;
+                  return;
+                }
+
+                // ...then we get the trigger
+                expect(event.type).equals(EventType.DELIVERED);
                 expect(event.detail.notification).not.equal(undefined);
                 if (event.detail.notification) {
                   expect(event.detail.notification.title).equals(notification.title);
                   expect(event.detail.notification.body).equals(notification.body);
                 }
 
-                // Check next trigger has been set
+                // Check next trigger has not been set
                 const triggerNotificationIds = await notifee.getTriggerNotificationIds();
                 expect(triggerNotificationIds.length).equals(0);
-
                 unsubscribe();
                 resolve();
+              } catch (e) {
+                unsubscribe();
+                reject(e);
               }
             });
 
@@ -236,7 +274,12 @@ export function NotificationSpec(spec: TestScope): void {
         });
 
         spec.it('repeating', async function () {
-          return new Promise(async resolve => {
+          // FIXME on iOS this has notification parts missing, see #191
+          if (Platform.OS === 'ios') {
+            return;
+          }
+
+          return new Promise(async (resolve, reject) => {
             const timestamp = new Date(Date.now());
             timestamp.setSeconds(timestamp.getSeconds() + 1);
             const trigger: TimestampTrigger = {
@@ -247,7 +290,7 @@ export function NotificationSpec(spec: TestScope): void {
             };
 
             const notification = {
-              id: `alarm-manger-repeating-${timestamp.getTime()}`,
+              id: `alarm-manager-repeating-${timestamp.getTime()}`,
               title: 'AlarmManager',
               body: 'Repeating',
               android: {
@@ -255,28 +298,56 @@ export function NotificationSpec(spec: TestScope): void {
               },
             };
 
+            let receivedCreatedEvent = false;
+            let receivedTriggerEvent = false;
+
             const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
-              if (event.type === EventType.DELIVERED) {
+              try {
+                // We get a trigger created event first on android...
+                if (Platform.OS === 'android' && !receivedCreatedEvent) {
+                  expect(event.type).equals(EventType.TRIGGER_NOTIFICATION_CREATED);
+                  receivedCreatedEvent = true;
+                  return;
+                }
+
+                // ...then we get the trigger
+                expect(event.type).equals(EventType.DELIVERED);
                 expect(event.detail.notification).not.equal(undefined);
                 if (event.detail.notification) {
                   expect(event.detail.notification.title).equals(notification.title);
                   expect(event.detail.notification.body).equals(notification.body);
                 }
+                receivedTriggerEvent = true;
 
                 // Check next trigger has been set
                 const triggerNotificationIds = await notifee.getTriggerNotificationIds();
 
                 expect(triggerNotificationIds.length).equals(1);
                 expect(triggerNotificationIds.includes(notification.id)).equals(true);
-
-                await notifee.cancelTriggerNotifications();
-
                 unsubscribe();
+                await notifee.cancelTriggerNotifications();
                 resolve();
+              } catch (e) {
+                unsubscribe();
+                await notifee.cancelTriggerNotifications();
+                reject(e);
               }
             });
 
-            return notifee.createTriggerNotification(notification, trigger);
+            notifee.createTriggerNotification(notification, trigger);
+
+            // Make sure we receive the trigger within a reasonable time
+            setTimeout(async () => {
+              try {
+                expect(receivedTriggerEvent).equals(true);
+                resolve();
+              } catch (e) {
+                reject(new Error('Did not receive trigger in a reasonable amount of time'));
+              } finally {
+                unsubscribe();
+                notifee.cancelTriggerNotifications();
+              }
+            }, 600000);
           });
         });
       });

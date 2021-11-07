@@ -19,8 +19,8 @@
     "format:core": "yarn format:core:android && yarn format:core:ios",
     "format:core:android": "cd android && yarn format:android",
     "format:core:ios": "cd ios && yarn format:ios",
-    "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
-    "format:ios": "npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
+    "format:android": "yarn google-java-format --replace -i $(find . -type f -name \"*.java\")",
+    "format:ios": "yarn clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
     "validate:all": "yarn validate:all:js && yarn validate:all:ts && yarn gen:reference",
     "validate:all:js": "eslint . --ext .js,.jsx,.ts,.tsx --resolve-plugins-relative-to .",
     "validate:all:ts": "tsc --project ./",
@@ -37,13 +37,14 @@
     "tests_rn:test": "cd tests_react_native && jest",
     "tests_rn:test-watch": "cd tests_react_native && jest --watch",
     "tests_rn:test-coverage": "cd tests_react_native && jest --coverage",
-    "tests_rn:android:test": "cd tests_react_native && npx cavy-cli run-android",
+    "tests_rn:android:build": "cd tests_react_native/android && ./gradlew assembleDebug -DtestBuildType=debug",
+    "tests_rn:android:test": "cd tests_react_native && npx cavy-cli run-android --no-jetifier",
     "tests_rn:ios:test": "cd tests_react_native && npx cavy-cli run-ios --scheme=Notifee --simulator 'iPhone 12'",
     "tests_rn:ios:pod:install": "cd tests_react_native && cd ios && pod install --repo-update && cd .."
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^3.0.1",
-    "@types/node": "^16.10.3",
+    "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "clang-format": "^1.5.0",
@@ -51,6 +52,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
+    "google-java-format": "^1.0.1",
     "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
@@ -58,7 +60,7 @@
     "typescript": "^4.4.3"
   },
   "resolutions": {
-    "@types/node": "^16"
+    "@types/node": "^16.11.6"
   },
   "lint-staged": {
     "packages/**/*.js": [
@@ -86,6 +88,8 @@
       "**/cavy/**",
       "**/cavy-native-reporter",
       "**/cavy-native-reporter/**",
+      "**/chalk/",
+      "**/chalk/**",
       "**/prop-types",
       "**/prop-types/**",
       "**/patch-package",
@@ -97,7 +101,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.22.0",
+    "axios": "^0.24.0",
     "shelljs": "^0.8.4"
   }
 }

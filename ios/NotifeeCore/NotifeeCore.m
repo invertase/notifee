@@ -660,7 +660,7 @@
   if (![NotifeeCoreUtil isAppExtension]) {
     // If count is 0, set to -1 instead to avoid notifications in tray being cleared
     NSInteger newCount = count == 0 ? -1 : count;
-    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
     [application setApplicationIconBadgeNumber:newCount];
   }
   block(nil);
@@ -668,7 +668,7 @@
 
 + (void)getBadgeCount:(notifeeMethodNSIntegerBlock)block {
   if (![NotifeeCoreUtil isAppExtension]) {
-    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
     NSInteger badgeCount = application.applicationIconBadgeNumber;
 
     block(nil, badgeCount == -1 ? 0 : badgeCount);
@@ -677,7 +677,7 @@
 
 + (void)incrementBadgeCount:(NSInteger)incrementBy withBlock:(notifeeMethodVoidBlock)block {
   if (![NotifeeCoreUtil isAppExtension]) {
-    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
     NSInteger currentCount = application.applicationIconBadgeNumber;
     // If count is -1, set currentCount to 0 before incrementing
     if (currentCount == -1) {
@@ -693,7 +693,7 @@
 
 + (void)decrementBadgeCount:(NSInteger)decrementBy withBlock:(notifeeMethodVoidBlock)block {
   if (![NotifeeCoreUtil isAppExtension]) {
-    UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+    UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
     NSInteger currentCount = application.applicationIconBadgeNumber;
     NSInteger newCount = currentCount - decrementBy;
     // If count is 0 or less, set to -1 instead to avoid notifications in tray being cleared
@@ -707,7 +707,7 @@
 }
 
 + (nullable instancetype)notifeeUIApplication {
-  return [NotifeeCoreUtil notifeeUIApplication];
+  return (NotifeeCore *)[NotifeeCoreUtil notifeeUIApplication];
 };
 
 + (void)populateNotificationContent:(UNNotificationRequest *)request
