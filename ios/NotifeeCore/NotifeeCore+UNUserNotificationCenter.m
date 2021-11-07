@@ -115,19 +115,16 @@ struct {
           @"notification" : notifeeNotification,
         }
       }];
-
-      return;
+    } else {
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+        @"type" : @(NotifeeCoreEventTypeDelivered),
+        @"detail" : @{
+          @"notification" : notifeeNotification,
+        }
+      }];
     }
 
-    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-      @"type" : @(NotifeeCoreEventTypeDelivered),
-      @"detail" : @{
-        @"notification" : notifeeNotification,
-      }
-    }];
-
     completionHandler(presentationOptions);
-
   } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.willPresentNotification) {
     [_originalDelegate userNotificationCenter:center
                       willPresentNotification:notification
