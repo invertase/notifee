@@ -84,18 +84,8 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  if (notifeeNotification == nil) {
-    // check if we should handle notification created outside of notifee
-    BOOL shouldHandleNotification =
-        [notification.request.content.userInfo[kNotifeeUserInfoNotifee] boolValue];
-    if (shouldHandleNotification) {
-      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:notification.request];
-    }
-  }
-
-  // handle notification
+  // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
-    // Default to None if foregroundPresentationOptions is not set
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
         notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
@@ -235,7 +225,11 @@ struct {
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     openSettingsForNotification:(nullable UNNotification *)notification {
   if (_originalDelegate != nil && originalUNCDelegateRespondsTo.openSettingsForNotification) {
-    [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+    if (@available(iOS 12.0, macOS 10.14, macCatalyst 13.0, *)) {
+      [_originalDelegate userNotificationCenter:center openSettingsForNotification:notification];
+    } else {
+      // Fallback on earlier versions
+    }
   }
 }
 

@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-      classpath("com.android.tools.build:gradle:7.0.1")
+      classpath("com.android.tools.build:gradle:7.0.3")
     }
   }
 }
@@ -25,8 +25,8 @@ project.ext {
     versions: [
       android: [
         minSdk    : 20,
-        targetSdk : 30,
-        compileSdk: 30,
+        targetSdk : 31,
+        compileSdk: 31,
         // optional as gradle.buildTools comes with one by default
         // overriding here though to match the version RN uses
         // buildTools: "29.0.2"
@@ -52,8 +52,8 @@ android {
       consumerProguardFiles 'proguard-rules.pro'
     }
   }
-  compileSdkVersion = 30
-  buildToolsVersion = '30.0.2'
+  compileSdkVersion = 31
+  buildToolsVersion = '30.0.3'
 }
 
 repositories {
@@ -74,7 +74,7 @@ dependencies {
 
   // needed to enforce version and avoid clashes
   // https://github.com/square/okhttp/blob/master/docs/changelog_3x.md
-  implementation 'com.squareup.okhttp3:okhttp:3.12.12' // okhttp must stay on 3.12.x to support minSdkVersion < 21
+  implementation 'com.squareup.okhttp3:okhttp:3.12.13' // okhttp must stay on 3.12.x to support minSdkVersion < 21
 }
 
 ReactNative.shared.applyPackageVersion()

@@ -26,8 +26,8 @@ To get started, you must have the following prerequisites setup and installed:
 - The [`@react-native-firebase/app`](https://www.npmjs.com/package/@react-native-firebase/app) package installed & setup.
 - The [`@react-native-firebase/messaging`](https://www.npmjs.com/package/@react-native-firebase/messaging) package installed & setup.
 
-For more information on how to get started with React Native Firebase, check out the [quick start](https://invertase.io/oss/react-native-firebase/quick-start)
-guide for integrating with your Firebase project, and the steps required to install the [Messaging package](https://invertase.io/oss/react-native-firebase/v6/messaging).
+For more information on how to get started with React Native Firebase, check out the [quick start](https://rnfirebase.io)
+guide for integrating with your Firebase project, and the steps required to install the [Messaging package](https://rnfirebase.io/messaging/usage).
 
 ## Subscribing to messages
 

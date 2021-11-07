@@ -133,3 +133,5 @@ It is also possible to cancel a notification with a tag:
 ```js
   await notifee.cancelNotification(notificationId, tag);
 ```
+
+Please note that on Android, a cancelled notification *may* briefly show up in future calls to `getDisplayedNotifications`. This appears to be a limitation of the platform in that cancel seems to be asynchronous but return immediately. See [the related issue](https://github.com/invertase/notifee/issues/188) for more information.
