@@ -84,8 +84,18 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  // we only care about notifications created through notifee
+  if (notifeeNotification == nil) {
+    // check if we should handle notification created outside of notifee
+    BOOL shouldHandleNotification =
+        [notification.request.content.userInfo[kNotifeeUserInfoNotifee] boolValue];
+    if (shouldHandleNotification) {
+      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:notification.request];
+    }
+  }
+
+  // handle notification
   if (notifeeNotification != nil) {
+    // Default to None if foregroundPresentationOptions is not set
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
         notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
@@ -106,16 +116,15 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
-    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
-    if (notifeeTrigger != nil) {
-      // post DELIVERED event
-      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-        @"type" : @(NotifeeCoreEventTypeDelivered),
-        @"detail" : @{
-          @"notification" : notifeeNotification,
-        }
-      }];
-    }
+    BOOL presented = presentationOptions != UNNotificationPresentationOptionNone;
+
+    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+      @"type" : @(NotifeeCoreEventTypeDelivered),
+      @"detail" : @{
+        @"presented" : @(presented),
+        @"notification" : notifeeNotification,
+      }
+    }];
 
     completionHandler(presentationOptions);
 
@@ -133,10 +142,22 @@ struct {
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
-  NSDictionary *notifeeNotification =
-      response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
+  NSMutableDictionary *notifeeNotification =
+      [response.notification.request.content.userInfo[kNotifeeUserInfoNotification] mutableCopy];
 
-  // we only care about notifications created through notifee
+  NSLog(@"notifee didReceiveNotificationResponse notifee %@", notifeeNotification);
+
+  // check if we should handle notification created outside of notifee
+  if (notifeeNotification == nil) {
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    BOOL shouldHandleNotification = [userInfo[kNotifeeUserInfoNotifee] boolValue];
+    if (shouldHandleNotification) {
+      notifeeNotification =
+          [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+    }
+  }
+
+  // handle notification
   if (notifeeNotification != nil) {
     if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]) {
       // post DISMISSED event, only triggers if notification has a categoryId
