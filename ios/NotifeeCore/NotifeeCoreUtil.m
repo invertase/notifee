@@ -629,36 +629,48 @@
   dictionary[@"subtitle"] = content.subtitle;
   dictionary[@"body"] = content.body;
   dictionary[@"data"] = [content.userInfo mutableCopy];
+
   // title
   if (content.title != nil) {
     dictionary[@"title"] = content.title;
   }
+
   // subtitle
   if (content.subtitle != nil) {
     dictionary[@"subtitle"] = content.subtitle;
   }
+
   // body
   if (content.body != nil) {
     dictionary[@"body"] = content.body;
   }
+
   iosDict[@"badgeCount"] = content.badge;
+
   // categoryId
   if (content.categoryIdentifier != nil) {
     iosDict[@"categoryId"] = content.categoryIdentifier;
   }
+
   // launchImageName
   if (content.launchImageName != nil) {
     iosDict[@"launchImageName"] = content.launchImageName;
   }
+
   // threadId
   if (content.threadIdentifier != nil) {
     iosDict[@"threadId"] = content.threadIdentifier;
   }
+
   // targetContentId
   if (@available(iOS 13.0, macOS 10.15, macCatalyst 13.0, tvOS 13.0, watchOS 6.0, *)) {
     if (content.targetContentIdentifier != nil) {
       iosDict[@"targetContentId"] = content.targetContentIdentifier;
     }
+  }
+
+  if (content.attachments != nil) {
+    // TODO: parse attachments
   }
 
   // sound
