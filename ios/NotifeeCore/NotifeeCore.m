@@ -17,8 +17,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "NotifeeCore.h"
 #import "NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCore.h"
 #import "NotifeeCoreDelegateHolder.h"
 #import "NotifeeCoreExtensionHelper.h"
 #import "NotifeeCoreUtil.h"
@@ -188,7 +188,8 @@
 
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
-             if (error == nil) {
+             UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+             if (error == nil && application.applicationState != UIApplicationStateActive) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeDelivered),
                  @"detail" : @{

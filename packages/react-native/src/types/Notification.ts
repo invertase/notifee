@@ -364,6 +364,13 @@ export enum EventType {
    * Event type is sent when a notification trigger is created.
    */
   TRIGGER_NOTIFICATION_CREATED = 7,
+
+  /**
+   * Event type is sent when a notification is incoming - received by the system but not delivered.
+   *
+   * This is fired when a remote notification is delivered when the app is in the foreground.
+   */
+  INCOMING = 8,
 }
 
 /**

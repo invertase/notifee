@@ -118,10 +118,20 @@ struct {
 
     BOOL presented = presentationOptions != UNNotificationPresentationOptionNone;
 
+    if (!presented) {
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+        @"type" : @(NotifeeCoreEventTypeIncoming),
+        @"detail" : @{
+          @"notification" : notifeeNotification,
+        }
+      }];
+
+      return;
+    }
+
     [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
       @"type" : @(NotifeeCoreEventTypeDelivered),
       @"detail" : @{
-        @"presented" : @(presented),
         @"notification" : notifeeNotification,
       }
     }];
