@@ -147,7 +147,12 @@ const trigger: TimestampTrigger = {
 };
 ```
 
-Please note that for iOS, a trigger with a repeat frequency will fire based on the time and not the date. For example, if it is January 1 at 10 AM and you schedule a daily recurring notification for January 2 at 11 AM, it will fire on January 1 at 11 AM and every day thereafter. For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
+Please note, for iOS, a repeating trigger does not work the same as Android - the initial trigger cannot be delayed:
+- `HOURLY`: the starting date and hour will be ignored, and only the minutes and seconds will be taken into the account. If the timestamp is set to trigger in 3 hours and repeat every 5th minute of the hour, the alert will not fire in 3 hours, but will instead fire immediately on the next 5th minute of the hour.
+- `DAILY`: the starting day will be ignored, and only the time will be taken into account. If it is January 1 at 10 AM and you schedule a daily recurring notification for January 2 at 11 AM, it will fire on January 1 at 11 AM and every day thereafter.
+- `WEEKLY`: the starting week will be ignored, and only the day and time will be taken into account.
+
+>  For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
 
 ## Interval Trigger
 
