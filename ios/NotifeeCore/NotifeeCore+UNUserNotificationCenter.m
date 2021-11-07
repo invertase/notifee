@@ -84,9 +84,8 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  // handle notification
+  // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
-    // Default to None if foregroundPresentationOptions is not set
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
         notifeeNotification[@"ios"][@"foregroundPresentationOptions"];
@@ -107,12 +106,16 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
-    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-      @"type" : @(NotifeeCoreEventTypeDelivered),
-      @"detail" : @{
-        @"notification" : notifeeNotification,
-      }
-    }];
+    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
+    if (notifeeTrigger != nil) {
+      // post DELIVERED event
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+        @"type" : @(NotifeeCoreEventTypeDelivered),
+        @"detail" : @{
+          @"notification" : notifeeNotification,
+        }
+      }];
+    }
 
     completionHandler(presentationOptions);
 
