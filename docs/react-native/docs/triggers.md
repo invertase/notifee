@@ -122,7 +122,7 @@ import notifee, { TimestampTrigger, TriggerType, TimeUnit } from '@notifee/react
 
 const trigger: TimestampTrigger = {
   type: TriggerType.TIMESTAMP,
-  timestamp: Date.now() + 10800, // fire in 3 hours
+  timestamp: Date.now() + 1000 * 60 * 60 * 3, // fire in 3 hours
   repeatFrequency: RepeatFrequency.WEEKLY, // repeat once a week
 };
 ```
