@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:notifee_platform_interface/src/notification.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import '../method_channel/method_channel_notifee.dart';
 
@@ -89,7 +90,7 @@ class NotifeePlatform extends PlatformInterface {
     throw UnimplementedError('deleteChannelGroup() is not implemented');
   }
 
-  Future<String> displayNotification(Object notification) {
+  Future<String> displayNotification(Notification notification) {
     throw UnimplementedError('displayNotification() is not implemented');
   }
 

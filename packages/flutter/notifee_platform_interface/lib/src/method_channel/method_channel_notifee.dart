@@ -84,8 +84,11 @@ class MethodChannelNotifee extends NotifeePlatform {
   }
 
   @override
-  Future<String> displayNotification(Object notification) {
-    throw UnimplementedError();
+  Future<String> displayNotification(Notification notification) async {
+    String? id = await channel.invokeMethod<String>(
+        'displayNotification', notification.asMap());
+
+    return id!;
   }
 
   @override
