@@ -139,19 +139,11 @@ struct {
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
-  NSMutableDictionary *notifeeNotification =
-      [response.notification.request.content.userInfo[kNotifeeUserInfoNotification] mutableCopy];
+  NSDictionary *notifeeNotification = response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  NSLog(@"notifee didReceiveNotificationResponse notifee %@", notifeeNotification);
-
-  // check if we should handle notification created outside of notifee
+  // handle notification outside of notifee
   if (notifeeNotification == nil) {
-    NSDictionary *userInfo = response.notification.request.content.userInfo;
-    BOOL shouldHandleNotification = [userInfo[kNotifeeUserInfoNotifee] boolValue];
-    if (shouldHandleNotification) {
-      notifeeNotification =
-          [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
-    }
+    notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
   }
 
   // handle notification
