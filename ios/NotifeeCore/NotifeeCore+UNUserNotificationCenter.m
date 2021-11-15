@@ -134,9 +134,14 @@ struct {
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
   NSDictionary *notifeeNotification =
-      response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
+      [response.notification.request.content.userInfo[kNotifeeUserInfoNotification] mutableCopy];
 
-  // we only care about notifications created through notifee
+  // handle notification outside of notifee
+  if (notifeeNotification == nil) {
+    notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+  }
+
+  // handle notification
   if (notifeeNotification != nil) {
     if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]) {
       // post DISMISSED event, only triggers if notification has a categoryId
