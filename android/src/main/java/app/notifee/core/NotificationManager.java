@@ -305,7 +305,7 @@ class NotificationManager {
                         getApplicationContext(),
                         notificationModel.getHashCode(),
                         launchIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
                 builder.setFullScreenIntent(fullScreenPendingIntent, true);
               }
 
