@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 4.0.0
+- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required is 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [##238](https://github.com/invertase/notifee/issues/238))
+
 ## 3.0.4
 - **[Android]**:  Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))
 - **[iOS]**: Fixes an issue that was introduced in the previous patch when calling `setBadgeCount` with 0 (Fixes [#212](https://github.com/invertase/notifee/issues/212))
