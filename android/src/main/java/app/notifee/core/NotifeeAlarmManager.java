@@ -23,6 +23,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.AlarmManagerCompat;
 import app.notifee.core.database.WorkDataEntity;
@@ -122,7 +123,7 @@ class NotifeeAlarmManager {
           context,
           notificationId.hashCode(),
           notificationIntent,
-          PendingIntent.FLAG_UPDATE_CURRENT);
+          PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
 
     } catch (Exception e) {
       Logger.e(TAG, "Unable to create AlarmManager intent", e);
@@ -137,6 +138,14 @@ class NotifeeAlarmManager {
     PendingIntent pendingIntent = getAlarmManagerIntentForNotification(notificationModel.getId());
 
     AlarmManager alarmManager = getAlarmManager();
+
+    // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      if (!alarmManager.canScheduleExactAlarms()) {
+        System.err.println("Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
+        return;
+      }
+    }
 
     // Date in milliseconds
     Long timestamp = timestampTrigger.getTimestamp();

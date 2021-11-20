@@ -103,15 +103,12 @@ repositories {
 
 dependencies {
 
-  api 'androidx.annotation:annotation:1.2.0' // https://developer.android.com/jetpack/androidx/releases/annotation
+  api 'androidx.annotation:annotation:1.3.0' // https://developer.android.com/jetpack/androidx/releases/annotation
   api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
   api 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
-  // Unable to upgrade to version 2.6.0 as it requires minCompileSdk (30)
-  api 'androidx.work:work-runtime:2.5.0' // https://developer.android.com/jetpack/androidx/releases/work
-  // Fresco 2.3.0+ may not be react-native compatible until 0.65.x with this: https://github.com/facebook/react-native/pull/30061
-  // But! Fresco 2.2.0 is on JCenter and 2.3.0 is on mavenCentral - use 2.3.0 if you have to? https://github.com/facebook/fresco/issues/2585#issuecomment-822785614
-  api 'com.facebook.fresco:fresco:2.5.0' // https://github.com/facebook/fresco/releases
+  api 'androidx.work:work-runtime:2.7.1' // https://developer.android.com/jetpack/androidx/releases/work
+  api 'com.facebook.fresco:fresco:2.6.0' // https://github.com/facebook/fresco/releases
 
   def room_version = '2.3.0' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"

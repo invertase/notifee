@@ -73,7 +73,7 @@ public class ReceiverService extends Service {
     }
 
     int uniqueInt = uniqueIds.getAndIncrement();
-    return PendingIntent.getService(context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getService(context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
   }
 
   @Nullable
@@ -223,7 +223,7 @@ public class ReceiverService extends Service {
             getApplicationContext(),
             initialNotificationEvent.getNotificationModel().getHashCode(),
             launchIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
 
     try {
       pendingContentIntent.send();

@@ -170,7 +170,7 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 5);
-      const trigger: TimestampTrigger = { type: 0, timestamp: date.getTime() };
+      const trigger: TimestampTrigger = { type: 0, timestamp: date.getTime(), alarmManager: true };
       Notifee.createTriggerNotification(notification, trigger)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
