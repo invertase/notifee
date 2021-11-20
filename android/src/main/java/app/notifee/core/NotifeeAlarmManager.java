@@ -140,9 +140,11 @@ class NotifeeAlarmManager {
     AlarmManager alarmManager = getAlarmManager();
 
     // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
-    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) && !alarmManager.canScheduleExactAlarms()) {
-      System.err.println("Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
-      return;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      if (!alarmManager.canScheduleExactAlarms()) {
+        System.err.println("Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
+        return;
+      }
     }
 
     // Date in milliseconds
