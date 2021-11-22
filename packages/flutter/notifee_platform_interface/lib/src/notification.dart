@@ -1,7 +1,14 @@
 import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 class Notification {
-  Notification({this.id});
+  Notification(
+      {this.id,
+      this.title,
+      this.subtitle,
+      this.body,
+      this.data,
+      this.android,
+      this.ios});
 
   String? id;
   String? title;
