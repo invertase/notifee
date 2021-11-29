@@ -31,9 +31,9 @@
   //  [NotifeeExtensionHelper populateNotificationContent:self.bestAttemptContent
   //                                   withContentHandler:contentHandler];
 
-  [NotifeeExtensionHelper populateNotificationContent:request
-                                          withContent:self.bestAttemptContent
-                                   withContentHandler:contentHandler];
+  //  [NotifeeExtensionHelper populateNotificationContent:request
+  //                                          withContent:self.bestAttemptContent
+  //                                   withContentHandler:contentHandler];
 }
 
 - (void)serviceExtensionTimeWillExpire {

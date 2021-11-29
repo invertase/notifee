@@ -188,7 +188,7 @@
 
   [center addNotificationRequest:request
            withCompletionHandler:^(NSError *error) {
-             UIApplication *application = [NotifeeCoreUtil notifeeUIApplication];
+             UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
              if (error == nil && application.applicationState != UIApplicationStateActive) {
                [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
                  @"type" : @(NotifeeCoreEventTypeDelivered),

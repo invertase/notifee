@@ -18,6 +18,8 @@
 #import <UIKit/UIKit.h>
 #import "NotifeeCore+NSNotificationCenter.h"
 #import "NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCoreDelegateHolder.h"
+#import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCoreNSNotificationCenter
 
@@ -65,8 +67,31 @@
   [[NotifeeCoreUNUserNotificationCenter instance] observe];
 }
 
-- (void)messaging_didReceiveRemoteNotification:(nonnull NSNotification *)notification {
-  // update me with logic
+//
+- (void)messaging_didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+  if ([NotifeeCoreUtil isAppExtension]) {
+    return;
+  }
+
+  UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
+
+  if (application.applicationState == UIApplicationStateActive) {
+    if (userInfo[@"aps"][@"alert"] == nil) {
+      NSDictionary *notifeeNotification = userInfo[kNotifeeUserInfoNotification];
+
+      // handle notification outside of notifee
+      if (notifeeNotification == nil) {
+        // TODO: parse user info
+      }
+
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+        @"type" : @(NotifeeCoreEventTypeIncoming),
+        @"detail" : @{
+         // @"notification" : @"2",
+        }
+      }];
+    }
+  }
 }
 
 @end

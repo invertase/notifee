@@ -84,6 +84,11 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
+  // handle notification outside of notifee
+  if (notifeeNotification == nil) {
+    notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:notification.request];
+  }
+
   // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
@@ -139,11 +144,13 @@ struct {
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
     didReceiveNotificationResponse:(UNNotificationResponse *)response
              withCompletionHandler:(void (^)(void))completionHandler {
-  NSDictionary *notifeeNotification = response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
+  NSDictionary *notifeeNotification =
+      response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
   // handle notification outside of notifee
   if (notifeeNotification == nil) {
-    notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+    notifeeNotification =
+        [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
   }
 
   // handle notification
