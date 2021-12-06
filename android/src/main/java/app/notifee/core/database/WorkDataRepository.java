@@ -99,4 +99,11 @@ public class WorkDataRepository {
 
     mInstance.insert(workData);
   }
+
+  public void update(WorkDataEntity workData) {
+    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+        () -> {
+          mWorkDataDao.update(workData);
+        });
+  }
 }

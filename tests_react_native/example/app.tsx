@@ -24,6 +24,7 @@ import Notifee, {
   Event,
   IOSAuthorizationStatus,
   TimestampTrigger,
+  RepeatFrequency,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -169,8 +170,13 @@ function Root(): any {
       notification.android.channelId = channelId;
 
       const date = new Date(Date.now());
-      date.setSeconds(date.getSeconds() + 5);
-      const trigger: TimestampTrigger = { type: 0, timestamp: date.getTime(), alarmManager: true };
+      date.setSeconds(date.getSeconds() + 15);
+      const trigger: TimestampTrigger = {
+        type: 0,
+        timestamp: date.getTime(),
+        alarmManager: true,
+        repeatFrequency: RepeatFrequency.HOURLY,
+      };
       Notifee.createTriggerNotification(notification, trigger)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
@@ -229,7 +235,7 @@ function Root(): any {
             <Button
               title={`Cancel all `}
               onPress={async () => {
-                await Notifee.cancelDisplayedNotifications([id]);
+                await Notifee.cancelAllNotifications();
               }}
             />
             <Button
