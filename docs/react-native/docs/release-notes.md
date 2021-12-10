@@ -5,12 +5,18 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 4.0.1
+- **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
+
+## 4.0.0
+- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required is 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). **Please note, JDK11 is strongly recommended when using compile or target sdk 31**
+
 ## 3.0.4
-- **[Android]**:  Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))
+- **[Android]**: Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))
 - **[iOS]**: Fixes an issue that was introduced in the previous patch when calling `setBadgeCount` with 0 (Fixes [#212](https://github.com/invertase/notifee/issues/212))
 
 ## 3.0.3
-- **[iOS]**:  Fix iOS API availability guards, and all compile warnings (Fixes [#204](https://github.com/invertase/notifee/issues/204)) 
+- **[iOS]**: Fix iOS API availability guards, and all compile warnings (Fixes [#204](https://github.com/invertase/notifee/issues/204)) 
 
 ## 3.0.2
 - **[Android]**: Include support for expo managed projects [[Learn More]](/react-native/docs/installation#miscellaneous)]

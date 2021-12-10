@@ -61,4 +61,8 @@ public class WorkDataEntity {
   public Boolean getWithAlarmManager() {
     return this.withAlarmManager;
   }
+
+  public void setTrigger(byte[] trigger) {
+    this.trigger = trigger;
+  }
 }

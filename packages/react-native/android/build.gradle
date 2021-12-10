@@ -69,7 +69,7 @@ dependencies {
   }
   implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
   implementation 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
-  implementation 'androidx.work:work-runtime:2.5.0' // https://developer.android.com/jetpack/androidx/releases/work
+  implementation 'androidx.work:work-runtime:2.7.1' // https://developer.android.com/jetpack/androidx/releases/work
   implementation 'org.greenrobot:eventbus:3.2.0' // https://github.com/greenrobot/EventBus/releases
 
   // needed to enforce version and avoid clashes

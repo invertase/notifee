@@ -305,7 +305,7 @@ class NotificationManager {
                         getApplicationContext(),
                         notificationModel.getHashCode(),
                         launchIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
                 builder.setFullScreenIntent(fullScreenPendingIntent, true);
               }
 
@@ -613,7 +613,7 @@ class NotificationManager {
 
     // Schedule notification with alarm manager
     if (withAlarmManager) {
-      NotifeeAlarmManager.scheduleTimestampTriggerNotification(notificationModel, trigger, true);
+      NotifeeAlarmManager.scheduleTimestampTriggerNotification(notificationModel, trigger);
       return;
     }
 

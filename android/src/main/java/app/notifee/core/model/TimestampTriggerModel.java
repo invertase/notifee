@@ -28,6 +28,7 @@ public class TimestampTriggerModel {
   private Boolean mWithAlarmManager = false;
   private Boolean mAllowWhileIdle = false;
   private String mRepeatFrequency = null;
+  private Long mTimestamp = null;
 
   public static final String HOURLY = "HOURLY";
   public static final String DAILY = "DAILY";
@@ -46,6 +47,8 @@ public class TimestampTriggerModel {
     TimeUnit timeUnit = null;
     if (mTimeTriggerBundle.containsKey("repeatFrequency")) {
       Double d = mTimeTriggerBundle.getDouble("repeatFrequency");
+      mTimestamp = (long) mTimeTriggerBundle.getDouble("timestamp");
+
       int repeatFrequency = d.intValue();
 
       switch (repeatFrequency) {
@@ -87,7 +90,7 @@ public class TimestampTriggerModel {
   }
 
   public long getTimestamp() {
-    return (long) mTimeTriggerBundle.getDouble("timestamp");
+    return mTimestamp;
   }
 
   public long getDelay() {
@@ -103,21 +106,27 @@ public class TimestampTriggerModel {
     return delay;
   }
 
-  public long getNextTimestamp() {
+  public void setNextTimestamp() {
     long timestamp = getTimestamp();
+    long interval = 0;
     switch (mRepeatFrequency) {
       case TimestampTriggerModel.WEEKLY:
-        timestamp = timestamp + 7 * DAY_IN_MS;
+        interval = 7 * DAY_IN_MS;
         break;
       case TimestampTriggerModel.DAILY:
-        timestamp = timestamp + DAY_IN_MS;
+        interval = DAY_IN_MS;
         break;
       case TimestampTriggerModel.HOURLY:
-        timestamp = timestamp + HOUR_IN_MS;
+        interval = HOUR_IN_MS;
         break;
     }
 
-    return timestamp;
+    // prevent alarm manager notification firing straight away
+    while (timestamp < System.currentTimeMillis()) {
+      timestamp += interval;
+    }
+
+    this.mTimestamp = timestamp;
   }
 
   public int getInterval() {
