@@ -21,12 +21,16 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 import java.util.List;
 
 @Dao
 public interface WorkDataDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  void insert(WorkDataEntity word);
+  void insert(WorkDataEntity workDataEntity);
+
+  @Update(onConflict = OnConflictStrategy.REPLACE)
+  void update(WorkDataEntity workDataEntity);
 
   @Query("DELETE FROM work_data")
   void deleteAll();
