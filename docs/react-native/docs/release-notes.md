@@ -9,7 +9,7 @@ previous: /react-native/docs/installation
 - **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
 
 ## 4.0.0
-- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required is 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). **Please note, JDK11 is strongly recommended when using compile or target sdk 31**
+- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required has increased to 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). You do not need to alter targetSdkVersion or anything else - but you *must* increase compileSdkVersion to 31. **Please note, JDK11 is strongly recommended when using compile or target sdk 31**. **Please note, we do not correctly handle the new "exact alarm" Android 12 restrictions so we recommend staying on targetSdkVersion 30 for now.**
 
 ## 3.0.4
 - **[Android]**: Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))
