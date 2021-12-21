@@ -45,7 +45,12 @@ export function validateAndroidBigPictureStyle(
   }
 
   if (objectHasProperty(style, 'largeIcon')) {
-    if (!isString(style.largeIcon) && !isNumber(style.largeIcon) && !isObject(style.largeIcon)) {
+    if (
+      style.largeIcon !== null &&
+      !isString(style.largeIcon) &&
+      !isNumber(style.largeIcon) &&
+      !isObject(style.largeIcon)
+    ) {
       throw new Error(
         "'notification.android.style' BigPictureStyle: 'largeIcon' expected a React Native ImageResource value or a valid string URL.",
       );

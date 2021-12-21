@@ -548,7 +548,7 @@ export interface AndroidBigPictureStyle {
    * If set, overrides the main notification `largeIcon` when the notification is expanded.
    */
   /* eslint-disable-next-line @typescript-eslint/ban-types */
-  largeIcon?: string | number | object;
+  largeIcon?: string | number | object | null;
 
   /**
    * If set, overrides the main notification `summary` when the notification is expanded.
