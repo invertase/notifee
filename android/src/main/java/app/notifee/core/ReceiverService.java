@@ -27,9 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.RemoteInput;
 import app.notifee.core.event.InitialNotificationEvent;
@@ -38,6 +35,7 @@ import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ReceiverService extends Service {
   private static final String TAG = "ReceiverService";
@@ -75,7 +73,8 @@ public class ReceiverService extends Service {
     }
 
     int uniqueInt = uniqueIds.getAndIncrement();
-    return PendingIntent.getService(context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getService(
+        context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
   }
 
   @Nullable
@@ -225,7 +224,7 @@ public class ReceiverService extends Service {
             getApplicationContext(),
             initialNotificationEvent.getNotificationModel().getHashCode(),
             launchIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
     try {
       pendingContentIntent.send();

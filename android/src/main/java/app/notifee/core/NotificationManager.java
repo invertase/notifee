@@ -305,7 +305,7 @@ class NotificationManager {
                         getApplicationContext(),
                         notificationModel.getHashCode(),
                         launchIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
                 builder.setFullScreenIntent(fullScreenPendingIntent, true);
               }
 
@@ -457,7 +457,7 @@ class NotificationManager {
                 Logger.i(TAG, "Removing notification with id " + id);
 
                 if (notificationType != NOTIFICATION_TYPE_TRIGGER) {
-                  // Cancel notifications displayed by FCM which will always have 
+                  // Cancel notifications displayed by FCM which will always have
                   // an id of 0 and a tag, see https://github.com/invertase/notifee/pull/175
                   if (tag != null && id.equals("0")) {
                     // Attempt to parse id as integer
@@ -613,7 +613,7 @@ class NotificationManager {
 
     // Schedule notification with alarm manager
     if (withAlarmManager) {
-      NotifeeAlarmManager.scheduleTimestampTriggerNotification(notificationModel, trigger, true);
+      NotifeeAlarmManager.scheduleTimestampTriggerNotification(notificationModel, trigger);
       return;
     }
 

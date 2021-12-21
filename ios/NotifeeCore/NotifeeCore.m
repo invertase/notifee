@@ -17,8 +17,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "NotifeeCore.h"
 #import "NotifeeCore+UNUserNotificationCenter.h"
+#import "NotifeeCore.h"
 #import "NotifeeCoreDelegateHolder.h"
 #import "NotifeeCoreExtensionHelper.h"
 #import "NotifeeCoreUtil.h"

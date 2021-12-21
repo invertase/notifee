@@ -23,6 +23,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.AlarmManagerCompat;
 import app.notifee.core.database.WorkDataEntity;
@@ -88,7 +89,15 @@ class NotifeeAlarmManager {
                           && triggerBundle.getDouble("repeatFrequency") != -1) {
                         TimestampTriggerModel trigger =
                             TimestampTriggerModel.fromBundle(triggerBundle);
-                        scheduleTimestampTriggerNotification(notificationModel, trigger, false);
+                        trigger.setNextTimestamp();
+                        scheduleTimestampTriggerNotification(notificationModel, trigger);
+                        WorkDataRepository.getInstance(getApplicationContext())
+                            .update(
+                                new WorkDataEntity(
+                                    id,
+                                    workDataEntity.getNotification(),
+                                    ObjectUtils.bundleToBytes(triggerBundle),
+                                    true));
                       } else {
                         // not repeating, delete database entry if work is a one-time request
                         WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
@@ -122,7 +131,7 @@ class NotifeeAlarmManager {
           context,
           notificationId.hashCode(),
           notificationIntent,
-          PendingIntent.FLAG_UPDATE_CURRENT);
+          PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
     } catch (Exception e) {
       Logger.e(TAG, "Unable to create AlarmManager intent", e);
@@ -132,25 +141,27 @@ class NotifeeAlarmManager {
   }
 
   static void scheduleTimestampTriggerNotification(
-      NotificationModel notificationModel, TimestampTriggerModel timestampTrigger, boolean isNew) {
+      NotificationModel notificationModel, TimestampTriggerModel timestampTrigger) {
 
     PendingIntent pendingIntent = getAlarmManagerIntentForNotification(notificationModel.getId());
 
     AlarmManager alarmManager = getAlarmManager();
 
-    // Date in milliseconds
-    Long timestamp = timestampTrigger.getTimestamp();
-
-    // If trigger is repeating, calculate next trigger date
-    if (!isNew && timestampTrigger.getRepeatFrequency() != null) {
-      timestamp = timestampTrigger.getNextTimestamp();
+    // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      if (!alarmManager.canScheduleExactAlarms()) {
+        System.err.println(
+            "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
+        return;
+      }
     }
 
     if (timestampTrigger.getAllowWhileIdle()) {
       AlarmManagerCompat.setExactAndAllowWhileIdle(
-          alarmManager, AlarmManager.RTC_WAKEUP, timestamp, pendingIntent);
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
     } else {
-      AlarmManagerCompat.setExact(alarmManager, AlarmManager.RTC_WAKEUP, timestamp, pendingIntent);
+      AlarmManagerCompat.setExact(
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
     }
   }
 
@@ -209,7 +220,7 @@ class NotifeeAlarmManager {
     switch (triggerType) {
       case 0:
         TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
-        scheduleTimestampTriggerNotification(notificationModel, trigger, false);
+        scheduleTimestampTriggerNotification(notificationModel, trigger);
         break;
       case 1:
         // TODO: support interval triggers with alarm manager
