@@ -136,6 +136,8 @@ export function NotificationSpec(spec: TestScope): void {
                 expect(displayNotification.notification.android.style.picture).equals(
                   AndroidStyle.BIGPICTURE,
                 );
+
+                expect(displayNotification.notification.android.style.largeIcon).null;
               }
 
               unsubscribe();
