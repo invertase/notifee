@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 3.0.4 (Pending)
+- **[Android]**:  Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270)) 
+
 ## 3.0.3
 - **[iOS]**:  Fix iOS API availability guards, and all compile warnings (Fixes [#204](https://github.com/invertase/notifee/issues/204)) 
 
