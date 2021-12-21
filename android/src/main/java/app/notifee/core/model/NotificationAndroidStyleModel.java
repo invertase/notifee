@@ -178,7 +178,7 @@ public class NotificationAndroidStyleModel {
           if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
             largeIcon = mNotificationAndroidStyleBundle.getString("largeIcon");
 
-            // largeIcon has been specified to be null for Style.BigPicture
+            // largeIcon has been specified to be null for BigPicture
             if (largeIcon == null) {
               bigPictureStyle.bigLargeIcon(null);
             }
