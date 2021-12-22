@@ -7,9 +7,8 @@ on:
       - 'docs/**'
       - '**/*.md'
   push:
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.md'
+    branches:
+      - main
 
 jobs:
   jest:
