@@ -546,9 +546,11 @@ export interface AndroidBigPictureStyle {
    * A local file path using the 'require()' method or a HTTP or file URL to the picture to display.
    *
    * If set, overrides the main notification `largeIcon` when the notification is expanded.
+   *
+   * To hide the `largeIcon` when the notification is expanded, set to null. Similar to `thumbnailHidden` for attachments on iOS.
    */
   /* eslint-disable-next-line @typescript-eslint/ban-types */
-  largeIcon?: string | number | object;
+  largeIcon?: string | number | object | null;
 
   /**
    * If set, overrides the main notification `summary` when the notification is expanded.

@@ -173,9 +173,18 @@ public class NotificationAndroidStyleModel {
             }
           }
 
+          String largeIcon = null;
+
           if (mNotificationAndroidStyleBundle.containsKey("largeIcon")) {
-            String largeIcon =
-                Objects.requireNonNull(mNotificationAndroidStyleBundle.getString("largeIcon"));
+            largeIcon = mNotificationAndroidStyleBundle.getString("largeIcon");
+
+            // largeIcon has been specified to be null for BigPicture
+            if (largeIcon == null) {
+              bigPictureStyle.bigLargeIcon(null);
+            }
+          }
+
+          if (largeIcon != null) {
             Bitmap largeIconBitmap = null;
 
             try {

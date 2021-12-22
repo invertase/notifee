@@ -59,6 +59,23 @@ describe('Validate Android Style', () => {
       expect($.summary).toEqual('summary');
     });
 
+    test('returns valid when largeIcon is null', () => {
+      const pictureStyle: AndroidBigPictureStyle = {
+        type: AndroidStyle.BIGPICTURE,
+        picture: 'picture',
+        title: 'title',
+        largeIcon: null,
+        summary: 'summary',
+      };
+
+      const $ = validateAndroidBigPictureStyle(pictureStyle);
+      expect($.type).toEqual(AndroidStyle.BIGPICTURE);
+      expect($.picture).toEqual('picture');
+      expect($.title).toEqual('title');
+      expect($.largeIcon).toBeNull();
+      expect($.summary).toEqual('summary');
+    });
+
     test('throws an error with an invalid largeIcon param', () => {
       const pictureStyle: AndroidBigPictureStyle = {
         type: AndroidStyle.BIGPICTURE,

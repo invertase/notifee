@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 4.0.2 (Pending)
+- **[Android]**:  Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
+
 ## 4.0.1
 - **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
 
