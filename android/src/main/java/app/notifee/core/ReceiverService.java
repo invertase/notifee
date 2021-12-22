@@ -28,10 +28,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.event.NotificationEvent;
+import app.notifee.core.model.NotificationAndroidModel;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
@@ -168,6 +170,7 @@ public class ReceiverService extends Service {
     }
 
     NotificationModel notificationModel = NotificationModel.fromBundle(notification);
+    NotificationAndroidModel notificationAndroidModel = notificationModel.getAndroid();
     NotificationAndroidPressActionModel pressActionBundle =
         NotificationAndroidPressActionModel.fromBundle(pressAction);
 
@@ -184,6 +187,14 @@ public class ReceiverService extends Service {
 
     EventBus.post(new NotificationEvent(TYPE_ACTION_PRESS, notificationModel, extras));
 
+    if (notificationModel.getAndroid().getAutoCancel()) {
+      NotificationManagerCompat notificationManagerCompat =
+          NotificationManagerCompat.from(getApplicationContext());
+
+      notificationManagerCompat.cancel(
+          notificationAndroidModel.getTag(), notificationModel.getId().hashCode());
+    }
+
     String launchActivity = pressActionBundle.getLaunchActivity();
     String mainComponent = pressActionBundle.getMainComponent();
 
@@ -195,6 +206,8 @@ public class ReceiverService extends Service {
           launchActivity,
           mainComponent,
           pressActionBundle.getLaunchActivityFlags());
+      ContextHolder.getApplicationContext()
+          .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
     }
   }
 
