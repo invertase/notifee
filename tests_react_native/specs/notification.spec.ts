@@ -112,7 +112,9 @@ export function NotificationSpec(spec: TestScope): void {
     spec.it(
       'displays a notification with AndroidStyle.BIGPICTURE and largeIcon as null',
       async function () {
-        let testId = null;
+        const testId = 'test-id';
+        const testLargeIcon = 'test-large-icon';
+        const testBigPicture = 'test-picture';
 
         if (Platform.OS === 'ios') {
           return;
@@ -128,13 +130,14 @@ export function NotificationSpec(spec: TestScope): void {
               const displayNotifications = await notifee.getDisplayedNotifications();
               const displayNotification = displayNotifications?.[0];
               expect(displayNotification?.id).equals(testId);
-              expect(displayNotification.notification.android.largeIcon).equals('largeIcon');
+              expect(displayNotification.notification.android.largeIcon).equals(testLargeIcon);
               expect(displayNotification.notification.android.style.type).equals(
                 AndroidStyle.BIGPICTURE,
               );
+
               if (displayNotification.notification.android.style.type === AndroidStyle.BIGPICTURE) {
                 expect(displayNotification.notification.android.style.picture).equals(
-                  AndroidStyle.BIGPICTURE,
+                  testBigPicture,
                 );
 
                 expect(displayNotification.notification.android.style.largeIcon).null;
@@ -150,21 +153,21 @@ export function NotificationSpec(spec: TestScope): void {
 
           await notifee
             .displayNotification({
+              id: testId,
               title: '',
               body: '',
               android: {
                 channelId: 'high',
-                largeIcon: 'largeIcon',
+                largeIcon: testLargeIcon,
                 style: {
                   type: AndroidStyle.BIGPICTURE,
                   largeIcon: null,
-                  picture: 'picture',
+                  picture: testBigPicture,
                 },
               },
             })
             .then(id => {
               expect(id).equals(id);
-              testId = id;
             })
             .catch(e => {
               reject(e);
