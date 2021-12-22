@@ -17,6 +17,7 @@ package app.notifee.core;
  *
  */
 
+import static android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE;
 import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
 import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
 import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
@@ -25,6 +26,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
@@ -206,8 +208,16 @@ public class ReceiverService extends Service {
           launchActivity,
           mainComponent,
           pressActionBundle.getLaunchActivityFlags());
-      ContextHolder.getApplicationContext()
+
+      // Close notification drawer with new action for Android 12
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        ContextHolder.getApplicationContext()
+          .sendBroadcast(new Intent(String.valueOf(GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE)));
+      } else {
+        ContextHolder.getApplicationContext()
           .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+      }
+
     }
   }
 
