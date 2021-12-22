@@ -126,21 +126,14 @@ export function NotificationSpec(spec: TestScope): void {
               expect(event.type).equals(EventType.DELIVERED);
               expect(event.detail.notification?.id).equals(testId);
 
-              // Check largeIcon is null
-              const displayNotifications = await notifee.getDisplayedNotifications();
-              const displayNotification = displayNotifications?.[0];
-              expect(displayNotification?.id).equals(testId);
-              expect(displayNotification.notification.android.largeIcon).equals(testLargeIcon);
-              expect(displayNotification.notification.android.style.type).equals(
-                AndroidStyle.BIGPICTURE,
-              );
+              const androidNotification = event.detail.notification?.android;
 
-              if (displayNotification.notification.android.style.type === AndroidStyle.BIGPICTURE) {
-                expect(displayNotification.notification.android.style.picture).equals(
-                  testBigPicture,
-                );
+              expect(androidNotification.style.type).equals(AndroidStyle.BIGPICTURE);
 
-                expect(displayNotification.notification.android.style.largeIcon).null;
+              if (androidNotification.style.type === AndroidStyle.BIGPICTURE) {
+                expect(androidNotification.style.picture).equals(testBigPicture);
+
+                expect(androidNotification.style.largeIcon).null;
               }
 
               unsubscribe();
