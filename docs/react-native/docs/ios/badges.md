@@ -71,7 +71,7 @@ notifee
 To decrement the badge count, call the `decrementBadgeCount` method:
 
 ```js
-// Increment by 1
+// Decrement by 1
 notifee
   .decrementBadgeCount()
   .then(() => notifee.getBadgeCount())
