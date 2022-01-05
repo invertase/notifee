@@ -209,15 +209,14 @@ public class ReceiverService extends Service {
           mainComponent,
           pressActionBundle.getLaunchActivityFlags());
 
-      // Close notification drawer with new action for Android 12
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        ContextHolder.getApplicationContext()
-          .sendBroadcast(new Intent(String.valueOf(GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE)));
-      } else {
+      int targetSdkVersion = ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
+
+      // Close notification drawer if targetSdkVersion is Android 11 and lower
+      // See https://developer.android.com/about/versions/12/behavior-changes-all#close-system-dialogs
+      if (targetSdkVersion < Build.VERSION_CODES.S ) {
         ContextHolder.getApplicationContext()
           .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
       }
-
     }
   }
 
