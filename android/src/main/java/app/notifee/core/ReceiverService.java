@@ -17,7 +17,6 @@ package app.notifee.core;
  *
  */
 
-import static android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_DISMISS_NOTIFICATION_SHADE;
 import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
 import static app.notifee.core.event.NotificationEvent.TYPE_DISMISSED;
 import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
