@@ -18,7 +18,11 @@ plugins {
   id "io.invertase.gradle.build" version "1.5"
 }
 
-project.evaluationDependsOn(':app')
+if (project.hasProperty('reactNativeProjects')) {
+  reactNativeProjects.each(dependent -> project.evaluationDependsOn(dependent))
+} else {
+  project.evaluationDependsOn(':app')
+}
 
 project.ext {
   set('react-native', [
