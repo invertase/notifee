@@ -16,7 +16,7 @@ To get started, you will need to implement a [Notification Service Extension](ht
 * From Xcode top menu go to: File > New > Target...
 * A modal will present a list of possible targets, scroll down or use the filter to select Notification Service Extension. Press Next.
 * Add a product name (use `NotifeeNotificationService` to follow along) and click Finish
-* Make sure that the **deployment target** of your newly added extension (e.g. `NotifeeNotificationService`) matches the **deployment target** of your app. You can check it by selecting you app's target -> Build Settings -> Deployment
+* Make sure that the **deployment target** of your newly added extension (e.g. `NotifeeNotificationService`) matches the **deployment target** of your app. You can check it by selecting you app's target -> `Build Settings` -> `Deployment`
 
 <!-- <Vimeo id="remote-notification-support-1" caption="Step 1 - Add Your Notification Service Extension" /> -->
 
