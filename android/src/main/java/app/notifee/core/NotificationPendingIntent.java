@@ -47,6 +47,8 @@ public class NotificationPendingIntent {
       String[] extraKeys,
       Bundle... extraBundles) {
     Context context = ContextHolder.getApplicationContext();
+
+    // Get launch activity intent
     Intent launchActivityIntent = null;
     if (pressActionModelBundle != null) {
       launchActivityIntent =
@@ -56,36 +58,14 @@ public class NotificationPendingIntent {
               NotificationAndroidPressActionModel.fromBundle(pressActionModelBundle));
     }
 
-    // Set activity to receive notification events
+    // Create an activity to receive notification events
     Intent receiverIntent = new Intent(context, NotificationReceiverActivity.class);
 
-    // set extras for each intent
-    if (launchActivityIntent != null) {
-      launchActivityIntent.putExtra(EVENT_TYPE_INTENT_KEY, eventType);
-      launchActivityIntent.putExtra(NOTIFICATION_ID_INTENT_KEY, notificationId);
-    }
+    // Set extras for each intent
+    setIntentExtras(launchActivityIntent, eventType, notificationId, extraKeys, extraBundles);
+    setIntentExtras(receiverIntent, eventType, notificationId, extraKeys, extraBundles);
 
-    receiverIntent.putExtra(EVENT_TYPE_INTENT_KEY, eventType);
-    receiverIntent.putExtra(NOTIFICATION_ID_INTENT_KEY, notificationId);
-
-    for (int i = 0; i < extraKeys.length; i++) {
-      String key = extraKeys[i];
-
-      if (i <= extraBundles.length - 1) {
-        Bundle bundle = extraBundles[i];
-        receiverIntent.putExtra(key, bundle);
-        if (launchActivityIntent != null) {
-          launchActivityIntent.putExtra(key, bundle);
-        }
-      } else {
-        receiverIntent.putExtra(key, (String) null);
-        if (launchActivityIntent != null) {
-          launchActivityIntent.putExtra(key, (String) null);
-        }
-      }
-    }
-
-    // create pending intent
+    // Create pending intent with activities
     int uniqueInt = uniqueIds.getAndIncrement();
     Intent[] intents;
 
@@ -110,6 +90,31 @@ public class NotificationPendingIntent {
         uniqueInt,
         intents,
         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+  }
+
+  static void setIntentExtras(
+      Intent intent,
+      int eventType,
+      int notificationId,
+      String[] extraKeys,
+      Bundle... extraBundles) {
+    if (intent == null) {
+      return;
+    }
+
+    intent.putExtra(EVENT_TYPE_INTENT_KEY, eventType);
+    intent.putExtra(NOTIFICATION_ID_INTENT_KEY, notificationId);
+
+    for (int i = 0; i < extraKeys.length; i++) {
+      String key = extraKeys[i];
+
+      if (i <= extraBundles.length - 1) {
+        Bundle bundle = extraBundles[i];
+        intent.putExtra(key, bundle);
+      } else {
+        intent.putExtra(key, (String) null);
+      }
+    }
   }
 
   static Intent createLaunchActivityIntent(
