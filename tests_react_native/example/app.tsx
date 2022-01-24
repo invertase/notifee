@@ -177,7 +177,7 @@ function Root(): any {
         alarmManager: true,
         repeatFrequency: RepeatFrequency.HOURLY,
       };
-      Notifee.createTriggerNotification(notification, trigger)
+      Notifee.displayNotification(notification)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
     }

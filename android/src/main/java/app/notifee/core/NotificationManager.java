@@ -19,6 +19,8 @@ package app.notifee.core;
 
 import static app.notifee.core.ContextHolder.getApplicationContext;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
+import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
+import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 import static java.lang.Integer.parseInt;
 
 import android.app.Notification;
@@ -101,13 +103,30 @@ class NotificationManager {
                   ReceiverService.DELETE_INTENT,
                   new String[] {"notification"},
                   notificationModel.toBundle()));
+          int targetSdkVersion =
+              ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
+          if (targetSdkVersion >= Build.VERSION_CODES.S) {
 
-          builder.setContentIntent(
-              ReceiverService.createIntent(
-                  ReceiverService.PRESS_INTENT,
-                  new String[] {"notification", "pressAction"},
-                  notificationModel.toBundle(),
-                  androidModel.getPressAction()));
+            NotificationAndroidPressActionModel pressActionModel =
+                NotificationAndroidPressActionModel.fromBundle(
+                    notificationModel.getAndroid().getPressAction());
+
+            builder.setContentIntent(
+                NotificationPendingIntent.createIntent(
+                    notificationModel.getHashCode(),
+                    pressActionModel,
+                    TYPE_PRESS,
+                    new String[] {"notification", "pressAction"},
+                    notificationModel.toBundle(),
+                    androidModel.getPressAction()));
+          } else {
+            builder.setContentIntent(
+                ReceiverService.createIntent(
+                    ReceiverService.PRESS_INTENT,
+                    new String[] {"notification", "pressAction"},
+                    notificationModel.toBundle(),
+                    androidModel.getPressAction()));
+          }
 
           if (notificationModel.getTitle() != null) {
             builder.setContentTitle(TextUtils.fromHtml(notificationModel.getTitle()));
@@ -326,12 +345,26 @@ class NotificationManager {
           }
 
           for (NotificationAndroidActionModel actionBundle : actionBundles) {
-            PendingIntent pendingIntent =
-                ReceiverService.createIntent(
-                    ACTION_PRESS_INTENT,
-                    new String[] {"notification", "pressAction"},
-                    notificationModel.toBundle(),
-                    actionBundle.getPressAction().toBundle());
+            PendingIntent pendingIntent = null;
+            int targetSdkVersion =
+                ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
+            if (targetSdkVersion >= Build.VERSION_CODES.S) {
+              pendingIntent =
+                  NotificationPendingIntent.createIntent(
+                      notificationModel.getHashCode(),
+                      actionBundle.getPressAction(),
+                      TYPE_ACTION_PRESS,
+                      new String[] {"notification", "pressAction"},
+                      notificationModel.toBundle(),
+                      actionBundle.getPressAction().toBundle());
+            } else {
+              pendingIntent =
+                  ReceiverService.createIntent(
+                      ACTION_PRESS_INTENT,
+                      new String[] {"notification", "pressAction"},
+                      notificationModel.toBundle(),
+                      actionBundle.getPressAction().toBundle());
+            }
 
             String icon = actionBundle.getIcon();
             Bitmap iconBitmap = null;

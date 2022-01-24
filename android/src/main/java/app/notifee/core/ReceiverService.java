@@ -77,7 +77,10 @@ public class ReceiverService extends Service {
 
     int uniqueInt = uniqueIds.getAndIncrement();
     return PendingIntent.getService(
-        context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        context,
+        uniqueInt,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   @Nullable
@@ -208,13 +211,15 @@ public class ReceiverService extends Service {
           mainComponent,
           pressActionBundle.getLaunchActivityFlags());
 
-      int targetSdkVersion = ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
+      int targetSdkVersion =
+          ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
 
       // Close notification drawer if targetSdkVersion is Android 11 and lower
-      // See https://developer.android.com/about/versions/12/behavior-changes-all#close-system-dialogs
-      if (targetSdkVersion < Build.VERSION_CODES.S ) {
+      // See
+      // https://developer.android.com/about/versions/12/behavior-changes-all#close-system-dialogs
+      if (targetSdkVersion < Build.VERSION_CODES.S) {
         ContextHolder.getApplicationContext()
-          .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+            .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
       }
     }
   }
