@@ -21,6 +21,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.utility.IntentUtils;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -51,8 +53,7 @@ public class NotificationPendingIntent {
     Intent receiverIntent = new Intent(context, NotificationReceiverActivity.class);
 
     Intent launchActivityIntent =
-      createLaunchActivityIntent(context, pressActionModel);
-
+      createLaunchActivityIntent(context, notificationId, pressActionModel);
 
     // set extras for each intent
     if (launchActivityIntent != null) {
@@ -79,6 +80,7 @@ public class NotificationPendingIntent {
     // create pending intent
     int uniqueInt = uniqueIds.getAndIncrement();
     Intent[] intents = new Intent[2];
+
     if (launchActivityIntent != null) {
       intents[0] = launchActivityIntent;
 
@@ -101,23 +103,44 @@ public class NotificationPendingIntent {
   }
 
 
-  static Intent createLaunchActivityIntent(Context context, NotificationAndroidPressActionModel pressActionModel) {
-    Intent launchActivityIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+  static Intent createLaunchActivityIntent(Context context, int notificationId, NotificationAndroidPressActionModel pressActionModel) {
+    try {
+      Intent launchActivityIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
 
-    String launchActivity = null;
-    if (pressActionModel != null) {
-      launchActivity = pressActionModel.getLaunchActivity();
+      String launchActivity = null;
+      if (pressActionModel != null) {
+        launchActivity = pressActionModel.getLaunchActivity();
+      }
+
+      if (launchActivityIntent == null && launchActivity != null) {
+        Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
+        launchActivityIntent = new Intent(context, launchActivityClass);
+
+        launchActivityIntent.setPackage(null);
+
+        launchActivityIntent.setFlags(
+          Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+      }
+
+
+      if (pressActionModel.getLaunchActivityFlags() != -1) {
+        launchActivityIntent.setFlags(pressActionModel.getLaunchActivityFlags());
+      }
+
+      if (pressActionModel.getMainComponent() != null) {
+        launchActivityIntent.putExtra("mainComponent", pressActionModel.getMainComponent());
+        EventBus.postSticky(new MainComponentEvent(pressActionModel.getMainComponent()));
+      }
+
+      return launchActivityIntent;
+    } catch (Exception e) {
+      Logger.e(
+        "NotificationPendingIntent",
+        "Failed to create LaunchActivityIntent for notification "
+          + notificationId,
+        e);
     }
 
-    if (launchActivityIntent == null && launchActivity != null) {
-      Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
-      launchActivityIntent = new Intent(context, launchActivityClass);
-
-      launchActivityIntent.setPackage(null);
-      launchActivityIntent.setFlags(
-        Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-    }
-
-    return launchActivityIntent;
+    return null;
   }
 }
