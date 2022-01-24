@@ -17,10 +17,10 @@ package app.notifee.core;
  *
  */
 
-import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
-import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 import static app.notifee.core.NotificationPendingIntent.EVENT_TYPE_INTENT_KEY;
 import static app.notifee.core.NotificationPendingIntent.NOTIFICATION_ID_INTENT_KEY;
+import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
+import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 
 import android.app.RemoteInput;
 import android.content.Context;
@@ -35,7 +35,7 @@ import app.notifee.core.model.NotificationModel;
 
 public class NotificationReceiverHandler {
   public static final String REMOTE_INPUT_RECEIVER_KEY =
-    "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
+      "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
   private static final String TAG = "NotificationReceiverHandler";
 
   static void handleNotification(Context context, Intent intent) {
@@ -91,7 +91,6 @@ public class NotificationReceiverHandler {
       }
     }
 
-    // TODO: check if notification should cancel for inputs
     NotificationManagerCompat.from(context)
         .cancel(intent.getIntExtra(NOTIFICATION_ID_INTENT_KEY, 0));
 

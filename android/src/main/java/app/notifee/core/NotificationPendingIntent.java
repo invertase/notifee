@@ -21,12 +21,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.utility.IntentUtils;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class NotificationPendingIntent {
   public static final String EVENT_TYPE_INTENT_KEY = "notifee_event_type";
@@ -36,24 +34,30 @@ public class NotificationPendingIntent {
 
   /**
    * Creates a PendingIntent, which when sent triggers this class.
+   *
    * @param notificationId int
-   * @param pressActionModel NotificationAndroidPressActionModel.
+   * @param pressActionModelBundle NotificationAndroidPressActionModel.
    * @param extraKeys Array of strings
    * @param extraBundles One or more bundles
    */
   static PendingIntent createIntent(
-    int notificationId,
-    NotificationAndroidPressActionModel pressActionModel,
-    int eventType,
-    String[] extraKeys,
-    Bundle... extraBundles) {
+      int notificationId,
+      Bundle pressActionModelBundle,
+      int eventType,
+      String[] extraKeys,
+      Bundle... extraBundles) {
     Context context = ContextHolder.getApplicationContext();
+    Intent launchActivityIntent = null;
+    if (pressActionModelBundle != null) {
+      launchActivityIntent =
+          createLaunchActivityIntent(
+              context,
+              notificationId,
+              NotificationAndroidPressActionModel.fromBundle(pressActionModelBundle));
+    }
 
     // Set activity to receive notification events
     Intent receiverIntent = new Intent(context, NotificationReceiverActivity.class);
-
-    Intent launchActivityIntent =
-      createLaunchActivityIntent(context, notificationId, pressActionModel);
 
     // set extras for each intent
     if (launchActivityIntent != null) {
@@ -70,42 +74,49 @@ public class NotificationPendingIntent {
       if (i <= extraBundles.length - 1) {
         Bundle bundle = extraBundles[i];
         receiverIntent.putExtra(key, bundle);
-        launchActivityIntent.putExtra(key, bundle);
+        if (launchActivityIntent != null) {
+          launchActivityIntent.putExtra(key, bundle);
+        }
       } else {
         receiverIntent.putExtra(key, (String) null);
-        launchActivityIntent.putExtra(key, (String) null);
+        if (launchActivityIntent != null) {
+          launchActivityIntent.putExtra(key, (String) null);
+        }
       }
     }
 
     // create pending intent
     int uniqueInt = uniqueIds.getAndIncrement();
-    Intent[] intents = new Intent[2];
+    Intent[] intents;
 
     if (launchActivityIntent != null) {
+      intents = new Intent[2];
       intents[0] = launchActivityIntent;
 
       receiverIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
       intents[1] = receiverIntent;
     } else {
+      intents = new Intent[1];
       receiverIntent.setFlags(
-        Intent.FLAG_ACTIVITY_NEW_TASK
-          | Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-          | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+          Intent.FLAG_ACTIVITY_NEW_TASK
+              | Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+              | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
       intents[0] = receiverIntent;
     }
 
     return PendingIntent.getActivities(
-      context,
-      uniqueInt,
-      intents,
-      PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        context,
+        uniqueInt,
+        intents,
+        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
   }
 
-
-  static Intent createLaunchActivityIntent(Context context, int notificationId, NotificationAndroidPressActionModel pressActionModel) {
+  static Intent createLaunchActivityIntent(
+      Context context, int notificationId, NotificationAndroidPressActionModel pressActionModel) {
     try {
-      Intent launchActivityIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+      Intent launchActivityIntent =
+          context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
 
       String launchActivity = null;
       if (pressActionModel != null) {
@@ -119,9 +130,8 @@ public class NotificationPendingIntent {
         launchActivityIntent.setPackage(null);
 
         launchActivityIntent.setFlags(
-          Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
       }
-
 
       if (pressActionModel.getLaunchActivityFlags() != -1) {
         launchActivityIntent.setFlags(pressActionModel.getLaunchActivityFlags());
@@ -135,10 +145,9 @@ public class NotificationPendingIntent {
       return launchActivityIntent;
     } catch (Exception e) {
       Logger.e(
-        "NotificationPendingIntent",
-        "Failed to create LaunchActivityIntent for notification "
-          + notificationId,
-        e);
+          "NotificationPendingIntent",
+          "Failed to create LaunchActivityIntent for notification " + notificationId,
+          e);
     }
 
     return null;

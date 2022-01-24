@@ -106,15 +106,10 @@ class NotificationManager {
           int targetSdkVersion =
               ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
           if (targetSdkVersion >= Build.VERSION_CODES.S) {
-
-            NotificationAndroidPressActionModel pressActionModel =
-                NotificationAndroidPressActionModel.fromBundle(
-                    notificationModel.getAndroid().getPressAction());
-
             builder.setContentIntent(
                 NotificationPendingIntent.createIntent(
                     notificationModel.getHashCode(),
-                    pressActionModel,
+                    androidModel.getPressAction(),
                     TYPE_PRESS,
                     new String[] {"notification", "pressAction"},
                     notificationModel.toBundle(),
@@ -352,7 +347,7 @@ class NotificationManager {
               pendingIntent =
                   NotificationPendingIntent.createIntent(
                       notificationModel.getHashCode(),
-                      actionBundle.getPressAction(),
+                      actionBundle.getPressAction().toBundle(),
                       TYPE_ACTION_PRESS,
                       new String[] {"notification", "pressAction"},
                       notificationModel.toBundle(),
