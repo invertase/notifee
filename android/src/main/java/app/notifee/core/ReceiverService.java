@@ -80,7 +80,7 @@ public class ReceiverService extends Service {
         context,
         uniqueInt,
         intent,
-        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
   }
 
   @Nullable
