@@ -109,6 +109,9 @@ export const notifications: { key: string; notification: Notification | Notifica
         categoryId: 'actions',
       },
       android: {
+        pressAction: {
+          id: 'default',
+        },
         autoCancel: true,
         color: '#9c27b0',
         onlyAlertOnce: true,
@@ -119,6 +122,7 @@ export const notifications: { key: string; notification: Notification | Notifica
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
               id: 'first_action',
+
               // reactComponent: 'test_component',
             },
             input: true,
@@ -134,7 +138,7 @@ export const notifications: { key: string; notification: Notification | Notifica
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
               id: 'second_action',
-              mainComponent: 'test_component',
+              // mainComponent: 'test_component',
             },
             // input: {
             //   choices: ['You'],
@@ -150,7 +154,7 @@ export const notifications: { key: string; notification: Notification | Notifica
             },
           },
         ],
-        channelId: 'foo',
+        channelId: 'high',
       },
     },
   },

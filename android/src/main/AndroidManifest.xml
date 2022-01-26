@@ -17,6 +17,14 @@
       android:name=".ReceiverService"
       android:exported="false" />
 
+    <activity
+      android:name="app.notifee.core.NotificationReceiverActivity"
+      android:noHistory="true"
+      android:excludeFromRecents="true"
+      android:taskAffinity=""
+      android:theme="@android:style/Theme.Translucent.NoTitleBar"
+      android:exported="true" />
+
     <!-- Foreground Service -->
     <service
       android:name=".ForegroundService"

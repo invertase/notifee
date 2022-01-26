@@ -99,7 +99,7 @@ function Root(): any {
     firebase.messaging().onMessage(onMessage);
 
     const initialNotification = await Notifee.getInitialNotification();
-    console.log({ initialNotification });
+    console.log('init: ', { initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
     await Notifee.setNotificationCategories([
       {
