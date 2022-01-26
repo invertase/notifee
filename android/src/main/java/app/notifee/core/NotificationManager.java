@@ -105,7 +105,8 @@ class NotificationManager {
                   notificationModel.toBundle()));
           int targetSdkVersion =
               ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
-          if (targetSdkVersion >= Build.VERSION_CODES.S) {
+          if (targetSdkVersion >= Build.VERSION_CODES.S
+              && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             builder.setContentIntent(
                 NotificationPendingIntent.createIntent(
                     notificationModel.getHashCode(),
@@ -343,7 +344,8 @@ class NotificationManager {
             PendingIntent pendingIntent = null;
             int targetSdkVersion =
                 ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
-            if (targetSdkVersion >= Build.VERSION_CODES.S) {
+            if (targetSdkVersion >= Build.VERSION_CODES.S
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
               pendingIntent =
                   NotificationPendingIntent.createIntent(
                       notificationModel.getHashCode(),
