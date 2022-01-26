@@ -6,9 +6,9 @@ previous: /react-native/docs/installation
 ---
 
 ## 4.1.0
-- **[Android]**:  Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
-- **[Android]**:  Fixes an issue with Android 12 when tapping on a notification (Fixes [#250](https://github.com/invertase/notifee/issues/250))
-- - **[Android]**: Fixes an issue with quick actions when an action is pressed where the notification drawer would remain open and the notification would remain in tray (Fixes [#276](https://github.com/invertase/notifee/issues/276))
+- **[Android]**: Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
+- **[Android]**: Fixes an issue with Android 12 when tapping on a notification (Fixes [#250](https://github.com/invertase/notifee/issues/250))
+- **[Android]**: Fixes an issue when an action is pressed where the notification drawer would remain open with the notification (Fixes [#268](https://github.com/invertase/notifee/issues/268))
 
 ## 4.0.1
 - **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
