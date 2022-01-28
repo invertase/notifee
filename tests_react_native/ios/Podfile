@@ -53,5 +53,13 @@ post_install do |installer|
       config.build_settings["CXX"] = "clang++"
       config.build_settings["LDPLUSPLUS"] = "clang++"
     end
+
+    # Turn off warnings on non-Notifee dependencies - some like libevent are really really noisy
+    if !target.name.include? "Notifee"
+      target.build_configurations.each do |config|
+        config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
+      end
+    end
   end
+
 end
