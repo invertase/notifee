@@ -80,6 +80,9 @@ Now everything is setup in your app, you can alter your notification payload to 
     apns: {
         payload: {
             aps: {
+                // Payloads coming from Admin SDK should specify params in camelCase. 
+                // Payloads from REST API should specify in kebab-case
+                // see their respective reference documentation
                 'contentAvailable': 1, // Important, to receive `onMessage` event in the foreground when message is incoming
                 'mutableContent': 1, // Important, without this the extension won't fire
             },
