@@ -235,20 +235,16 @@ describe('Notifee Api Module', () => {
   });
 
   describe('getNotificationSettings', () => {
-
     describe('on Android', () => {
-      
       beforeEach(() => {
         setPlatform('android');
-      })
+      });
 
       test('return alert 1 with the rest set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          "alert": 1
-        })
-
-        const settings = await apiModule.getNotificationSettings()
-        
+          alert: 1,
+        });
+        const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           alert: 1,
           badge: 1,
@@ -261,16 +257,14 @@ describe('Notifee Api Module', () => {
           notificationCenter: 1,
           inAppNotificationSettings: 1,
           authorizationStatus: 1,
-        })
+        });
       });
 
       test('return alert 0 with the rest set to default data', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          "alert": 0
-        })
-
-        const settings = await apiModule.getNotificationSettings()
-        
+          alert: 0,
+        });
+        const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           alert: 0,
           badge: 1,
@@ -283,9 +277,8 @@ describe('Notifee Api Module', () => {
           notificationCenter: 1,
           inAppNotificationSettings: 1,
           authorizationStatus: 1,
-        })
+        });
       });
-
     });
   });
 });
