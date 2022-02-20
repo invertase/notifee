@@ -25,7 +25,7 @@ async function checkNotificationPermission() {
   const settings = await notifee.getNotificationSettings();
 
   if (settings.authorizationStatus == 1) {
-    console.log('Notification permission has been granted');
+    console.log('Notification permission has been authorized');
   } else if (settings.authorizationStatus == 0) {
     console.log('Notification permission has been denied');
   }
@@ -45,9 +45,9 @@ async function checkChannelPermission() {
   const channel = await notifee.getChannel();
 
   if (channel.blocked) {
-    console.log('Channel notification has been disabled');
+    console.log('Channel notification has been authorized');
   } else {
-    console.log('Channel notification has been enabled');
+    console.log('Channel notification has been denied');
   }
 }
 ```

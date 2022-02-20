@@ -419,11 +419,11 @@ export interface Module {
    * }
    * ```
    *
-   * For iOS specific settings, use the `IOSNotificationSettings` properties to view which specific permissions were
-   * allowed.
+   * For iOS specific settings, use the `iOSSettings` properties to view which specific permissions were
+   * authorized.
    *
    * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
-   * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
+   * and all of the properties on the `iOSSettings` interface response return as `AUTHORIZED`.
    *
    * @param permissions
    */
