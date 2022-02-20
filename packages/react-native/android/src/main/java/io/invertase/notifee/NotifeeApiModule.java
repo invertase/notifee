@@ -217,6 +217,13 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getNotificationSettings(Promise promise) {
+    Notifee.getInstance()
+      .getNotificationSettings(
+        (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+  }
+
+  @ReactMethod
   public void openNotificationSettings(String channelId, Promise promise) {
     Notifee.getInstance()
         .openNotificationSettings(

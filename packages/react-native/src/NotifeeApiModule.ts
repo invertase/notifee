@@ -462,22 +462,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     permissions: IOSNotificationPermissions = {},
   ): Promise<IOSNotificationSettings> => {
     if (isAndroid) {
-      // Android doesn't require permission, so instead we
-      // return a dummy response to allow the permissions
-      // flow work the same on both iOS & Android
-      return Promise.resolve({
-        alert: 1,
-        badge: 1,
-        criticalAlert: 1,
-        showPreviews: 1,
-        sound: 1,
-        carPlay: 1,
-        lockScreen: 1,
-        announcement: 1,
-        notificationCenter: 1,
-        inAppNotificationSettings: 1,
-        authorizationStatus: 1,
-      } as IOSNotificationSettings);
+      return this.native.getNotificationSettings().then((alert: object) => {
+        return {
+          ...alert,
+          badge: 1,
+          criticalAlert: 1,
+          showPreviews: 1,
+          sound: 1,
+          carPlay: 1,
+          lockScreen: 1,
+          announcement: 1,
+          notificationCenter: 1,
+          inAppNotificationSettings: 1,
+          authorizationStatus: 1,
+        } as IOSNotificationSettings
+      })
     }
 
     let options: IOSNotificationPermissions;
@@ -537,22 +536,21 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   public getNotificationSettings = (): Promise<IOSNotificationSettings> => {
     if (isAndroid) {
-      // Android doesn't support this, so instead we
-      // return a dummy response to allow the permissions
-      // flow work the same on both iOS & Android
-      return Promise.resolve({
-        alert: 1,
-        badge: 1,
-        criticalAlert: 1,
-        showPreviews: 1,
-        sound: 1,
-        carPlay: 1,
-        lockScreen: 1,
-        announcement: 1,
-        notificationCenter: 1,
-        inAppNotificationSettings: 1,
-        authorizationStatus: 1,
-      } as IOSNotificationSettings);
+      return this.native.getNotificationSettings().then((alert: object) => {
+        return {
+          ...alert,
+          badge: 1,
+          criticalAlert: 1,
+          showPreviews: 1,
+          sound: 1,
+          carPlay: 1,
+          lockScreen: 1,
+          announcement: 1,
+          notificationCenter: 1,
+          inAppNotificationSettings: 1,
+          authorizationStatus: 1,
+        } as IOSNotificationSettings
+      })
     }
 
     return this.native.getNotificationSettings();

@@ -426,7 +426,8 @@ export interface Module {
    * Use the other `IOSNotificationSettings` properties to view which specific permissions were
    * allowed.
    *
-   * On Android, all of the properties on the `IOSNotificationSettings` interface response return
+   * On Android, `alert` will return `0` if permission is denied, `1` if permission is given.
+   * The rest of the properties on the `IOSNotificationSettings` interface response return
    * as `AUTHORIZED`.
    *
    * @platform ios
@@ -455,7 +456,8 @@ export interface Module {
   /**
    * Get the current notification settings for this application on the current device.
    *
-   * On Android, all of the properties on the `IOSNotificationSettings` interface response return
+   * On Android, `alert` will return `0` if permission is denied, `1` if permission is given.
+   * The rest of the properties on the `IOSNotificationSettings` interface response return
    * as `AUTHORIZED`.
    *
    * @platform ios
