@@ -23,7 +23,7 @@ import Notifee, {
   Notification,
   EventType,
   Event,
-  IOSAuthorizationStatus,
+  AuthorizationStatus,
   TimestampTrigger,
   RepeatFrequency,
 } from '@notifee/react-native';
@@ -146,7 +146,7 @@ function Root(): any {
     channelId: string,
   ): Promise<void> {
     let currentPermissions = await Notifee.getNotificationSettings();
-    if (currentPermissions.authorizationStatus !== IOSAuthorizationStatus.AUTHORIZED) {
+    if (currentPermissions.authorizationStatus !== AuthorizationStatus.AUTHORIZED) {
       await Notifee.requestPermission({ sound: true, criticalAlert: true }).then(props =>
         console.log('fullfilled,', props),
       );

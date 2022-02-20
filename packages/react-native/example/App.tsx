@@ -8,10 +8,7 @@
 
 import React, {useEffect} from 'react';
 import {AppRegistry, Platform, StyleSheet, Text, View} from 'react-native';
-import notifee, {
-  EventType,
-  IOSAuthorizationStatus,
-} from '@notifee/react-native';
+import notifee, {EventType, AuthorizationStatus} from '@notifee/react-native';
 import {Content} from './src/content';
 import {categories} from './src/utils/categories';
 
@@ -45,7 +42,7 @@ function App() {
   const requestUserPermission = async () => {
     const settings = await notifee.requestPermission();
 
-    if (settings.authorizationStatus >= IOSAuthorizationStatus.AUTHORIZED) {
+    if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
       console.log('Permission settings:', settings);
     } else {
       console.log('User declined permissions');

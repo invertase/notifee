@@ -1,6 +1,6 @@
 // @ts-ignore
 import NotifeeApiModule from '@notifee/react-native/src/NotifeeApiModule';
-import Notifee, { IOSAuthorizationStatus } from '@notifee/react-native';
+import Notifee, { AuthorizationStatus } from '@notifee/react-native';
 
 import {
   /* @ts-ignore */
@@ -242,11 +242,11 @@ describe('Notifee Api Module', () => {
 
       test('return authorized with IOSNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
-          authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
           iOSSettings: {
             alert: 1,
             badge: 1,
@@ -258,18 +258,18 @@ describe('Notifee Api Module', () => {
             announcement: 1,
             notificationCenter: 1,
             inAppNotificationSettings: 1,
-            authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
           },
         });
       });
 
       test('return denied with IOSNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          authorizationStatus: IOSAuthorizationStatus.DENIED,
+          authorizationStatus: AuthorizationStatus.DENIED,
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
-          authorizationStatus: IOSAuthorizationStatus.DENIED,
+          authorizationStatus: AuthorizationStatus.DENIED,
           iOSSettings: {
             alert: 1,
             badge: 1,
@@ -281,7 +281,7 @@ describe('Notifee Api Module', () => {
             announcement: 1,
             notificationCenter: 1,
             inAppNotificationSettings: 1,
-            authorizationStatus: IOSAuthorizationStatus.DENIED,
+            authorizationStatus: AuthorizationStatus.DENIED,
           },
         });
       });

@@ -406,15 +406,15 @@ export interface Module {
    * permission was granted, check the `authorizationStatus` property in the response:
    *
    * ```js
-   * import notifee, { IOSAuthorizationStatus } from '@notifee/react-native';
+   * import notifee, { AuthorizationStatus } from '@notifee/react-native';
    *
    * const settings = await notifee.requestPermission(...);
    *
-   * if (settings.authorizationStatus === IOSAuthorizationStatus.DENIED) {
+   * if (settings.authorizationStatus === AuthorizationStatus.DENIED) {
    *   console.log('User denied permissions request');
-   * } else if (settings.authorizationStatus === IOSAuthorizationStatus.AUTHORIZED) {
+   * } else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {
    *    console.log('User granted permissions request');
-   * } else if (settings.authorizationStatus === IOSAuthorizationStatus.PROVISIONAL) {
+   * } else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {
    *    console.log('User provisionally granted permissions request');
    * }
    * ```
@@ -422,7 +422,7 @@ export interface Module {
    * For iOS specific settings, use the `iOSSettings` properties to view which specific permissions were
    * authorized.
    *
-   * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
+   * On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`
    * and all of the properties on the `iOSSettings` interface response return as `AUTHORIZED`.
    *
    * @param permissions
@@ -449,7 +449,7 @@ export interface Module {
 
   /**
    * Get the current notification settings for this application on the current device.
-   * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
+   * On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`
    * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
    */
   getNotificationSettings(): Promise<NotificationSettings>;

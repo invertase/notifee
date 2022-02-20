@@ -33,12 +33,12 @@ the users of your application full control of how notifications are handled:
 The following example shows how to trigger a permission dialog:
 
 ```js
-import notifee, { IOSAuthorizationStatus } from '@notifee/react-native';
+import notifee, { AuthorizationStatus } from '@notifee/react-native';
 
 async function requestUserPermission() {
   const settings = await notifee.requestPermission();
 
-  if (settings.authorizationStatus >= IOSAuthorizationStatus.AUTHORIZED) {
+  if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
     console.log('Permission settings:', settings);
   } else {
     console.log('User declined permissions');

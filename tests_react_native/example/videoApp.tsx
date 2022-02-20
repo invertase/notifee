@@ -16,7 +16,7 @@ import {
 import firebase from '@react-native-firebase/app';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 
-import Notifee, { EventType, Event, IOSAuthorizationStatus } from '@notifee/react-native';
+import Notifee, { EventType, Event, AuthorizationStatus } from '@notifee/react-native';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
 
@@ -84,7 +84,7 @@ function Root(): any {
         <TouchableOpacity
           onPress={async (): Promise<void> => {
             const currentPermissions = await Notifee.getNotificationSettings();
-            if (currentPermissions.authorizationStatus !== IOSAuthorizationStatus.AUTHORIZED) {
+            if (currentPermissions.authorizationStatus !== AuthorizationStatus.AUTHORIZED) {
               await Notifee.requestPermission();
             }
             Notifee.displayNotification({

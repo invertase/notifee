@@ -15,7 +15,7 @@ For each level, you can check whether notifcation permission is enabled on as-ne
 
 ## Application wide
 
-To check whether the user has enabled application-wide notifications, call [`getNotificationSettings`](/reference/getnotificationsettings). The `authorizationStatus` attributes will returns `0` if user has disabled the permission, and `1` if it's granted.
+To check whether the user has enabled application-wide notifications, call [`getNotificationSettings`](/reference/getnotificationsettings). The `authorizationStatus` attributes will returns `DENIED` if user has denied the permission, and `AUTHORIZED` if it's granted.
 
 
 ```js
@@ -24,9 +24,9 @@ import notifee from '@notifee/react-native';
 async function checkNotificationPermission() {
   const settings = await notifee.getNotificationSettings();
 
-  if (settings.authorizationStatus == 1) {
+  if (settings.authorizationStatus == AuthorizationStatus.AUTHORIZED) {
     console.log('Notification permission has been authorized');
-  } else if (settings.authorizationStatus == 0) {
+  } else if (settings.authorizationStatus == AuthorizationStatus.DENIED) {
     console.log('Notification permission has been denied');
   }
 }
