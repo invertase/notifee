@@ -462,7 +462,13 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     permissions: IOSNotificationPermissions = {},
   ): Promise<IOSNotificationSettings> => {
     if (isAndroid) {
-      return this.native.getNotificationSettings().then((alert: object) => {
+      return this.native.getNotificationSettings().then({ alert }: Pick<IOSNotificationSettings, 'alert'>) => {
+      
+      ...
+      return {
+        alert,
+         ...
+      }
         return {
           ...alert,
           badge: 1,
