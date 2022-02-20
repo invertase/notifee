@@ -10,11 +10,7 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
-import {
-  IOSNotificationCategory,
-  IOSNotificationSettings,
-  IOSNotificationPermissions,
-} from './NotificationIOS';
+import { IOSNotificationCategory, IOSNotificationPermissions } from './NotificationIOS';
 import { PowerManagerInfo } from './PowerManagerInfo';
 import { DisplayedNotification, NotificationSettings, TriggerNotification } from '..';
 
@@ -428,7 +424,7 @@ export interface Module {
    *
    * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
    * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
-   * 
+   *
    * @param permissions
    */
   requestPermission(permissions?: IOSNotificationPermissions): Promise<NotificationSettings>;

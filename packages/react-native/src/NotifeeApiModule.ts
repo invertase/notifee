@@ -38,10 +38,7 @@ import validateNotification from './validators/validateNotification';
 import validateTrigger from './validators/validateTrigger';
 import validateAndroidChannel from './validators/validateAndroidChannel';
 import validateAndroidChannelGroup from './validators/validateAndroidChannelGroup';
-import {
-  IOSNotificationCategory,
-  IOSNotificationPermissions,
-} from './types/NotificationIOS';
+import { IOSNotificationCategory, IOSNotificationPermissions } from './types/NotificationIOS';
 import validateIOSCategory from './validators/validateIOSCategory';
 import validateIOSPermissions from './validators/validateIOSPermissions';
 
@@ -462,26 +459,26 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     permissions: IOSNotificationPermissions = {},
   ): Promise<NotificationSettings> => {
     if (isAndroid) {
-      return this.native.getNotificationSettings().then((
-        { authorizationStatus } : Pick<NotificationSettings, 'authorizationStatus'>
-      ) => {
-        return {
-          authorizationStatus,
-          iOSSettings: {
-            alert : 1,
-            badge: 1,
-            criticalAlert: 1,
-            showPreviews: 1,
-            sound: 1,
-            carPlay: 1,
-            lockScreen: 1,
-            announcement: 1,
-            notificationCenter: 1,
-            inAppNotificationSettings: 1,
-            authorizationStatus
-          }
-        }
-      })
+      return this.native
+        .getNotificationSettings()
+        .then(({ authorizationStatus }: Pick<NotificationSettings, 'authorizationStatus'>) => {
+          return {
+            authorizationStatus,
+            iOSSettings: {
+              alert: 1,
+              badge: 1,
+              criticalAlert: 1,
+              showPreviews: 1,
+              sound: 1,
+              carPlay: 1,
+              lockScreen: 1,
+              announcement: 1,
+              notificationCenter: 1,
+              inAppNotificationSettings: 1,
+              authorizationStatus,
+            },
+          };
+        });
     }
 
     let options: IOSNotificationPermissions;
@@ -541,26 +538,26 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
   public getNotificationSettings = (): Promise<NotificationSettings> => {
     if (isAndroid) {
-      return this.native.getNotificationSettings().then((
-        { authorizationStatus } : Pick<NotificationSettings, 'authorizationStatus'>
-      ) => {
-        return {
-          authorizationStatus,
-          iOSSettings: {
-            alert : 1,
-            badge: 1,
-            criticalAlert: 1,
-            showPreviews: 1,
-            sound: 1,
-            carPlay: 1,
-            lockScreen: 1,
-            announcement: 1,
-            notificationCenter: 1,
-            inAppNotificationSettings: 1,
-            authorizationStatus
-          }
-        }
-      })
+      return this.native
+        .getNotificationSettings()
+        .then(({ authorizationStatus }: Pick<NotificationSettings, 'authorizationStatus'>) => {
+          return {
+            authorizationStatus,
+            iOSSettings: {
+              alert: 1,
+              badge: 1,
+              criticalAlert: 1,
+              showPreviews: 1,
+              sound: 1,
+              carPlay: 1,
+              lockScreen: 1,
+              announcement: 1,
+              notificationCenter: 1,
+              inAppNotificationSettings: 1,
+              authorizationStatus,
+            },
+          };
+        });
     }
 
     return this.native.getNotificationSettings();
