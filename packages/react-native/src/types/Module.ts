@@ -430,7 +430,6 @@ export interface Module {
    * The rest of the properties on the `IOSNotificationSettings` interface response return
    * as `AUTHORIZED`.
    *
-   * @platform ios
    * @param permissions
    */
   requestPermission(permissions?: IOSNotificationPermissions): Promise<IOSNotificationSettings>;
@@ -459,8 +458,6 @@ export interface Module {
    * On Android, `alert` will return `0` if permission is denied, `1` if permission is given.
    * The rest of the properties on the `IOSNotificationSettings` interface response return
    * as `AUTHORIZED`.
-   *
-   * @platform ios
    */
   getNotificationSettings(): Promise<IOSNotificationSettings>;
 
