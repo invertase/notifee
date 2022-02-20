@@ -1,7 +1,7 @@
 ---
 title: Interaction
 description: Handle the users interaction with your notifications.
-next: /react-native/docs/android/progress-indicators
+next: /react-native/docs/android/permissions
 previous: /react-native/docs/android/grouping-and-sorting
 ---
 

@@ -23,6 +23,7 @@ The table below summarizes the various topics to read about to customize your no
 | [Foreground Service](/react-native/docs/android/foreground-service)   | Long running background tasks can take advantage of Android Foreground Services to display an on-going, prominent notification. |
 | [Grouping & Sorting](/react-native/docs/android/grouping-and-sorting) | Group and sort related notifications in a single notification pane.                                                             |
 | [Interaction](/react-native/docs/android/interaction)                 | Allow users to interact with your application directly from the notification with actions.                                      |
+| [Permissions](/react-native/docs/android/permissions)                 | Check whether notification has been enabled your app or channel.     
 | [Progress Indicators](/react-native/docs/android/progress-indicators) | Show users a progress indicator of an on-going background task, and learn how to keep it updated.                               |
 | [Styles](/react-native/docs/android/styles)                           | Style notifications to show richer content, such as expandable images/text, or message conversations.                           |
 | [Timers](/react-native/docs/android/timers)                           | Display counting timers on your notification, useful for on-going tasks such as a phone call, or event time remaining.          |
