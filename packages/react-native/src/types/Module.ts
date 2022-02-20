@@ -16,7 +16,7 @@ import {
   IOSNotificationPermissions,
 } from './NotificationIOS';
 import { PowerManagerInfo } from './PowerManagerInfo';
-import { DisplayedNotification, TriggerNotification } from '..';
+import { DisplayedNotification, NotificationSettings, TriggerNotification } from '..';
 
 export interface Module {
   /**
@@ -406,7 +406,7 @@ export interface Module {
   /**
    * Request specific notification permissions for your application on the current device.
    *
-   * Both iOS & Android return an `IOSNotificationSettings` interface. To check whether overall
+   * Both iOS & Android return an `NotificationSettings` interface. To check whether overall
    * permission was granted, check the `authorizationStatus` property in the response:
    *
    * ```js
@@ -423,16 +423,15 @@ export interface Module {
    * }
    * ```
    *
-   * Use the other `IOSNotificationSettings` properties to view which specific permissions were
+   * For iOS specific settings, use the `IOSNotificationSettings` properties to view which specific permissions were
    * allowed.
    *
-   * On Android, `alert` will return `0` if permission is denied, `1` if permission is given.
-   * The rest of the properties on the `IOSNotificationSettings` interface response return
-   * as `AUTHORIZED`.
-   *
+   * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
+   * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
+   * 
    * @param permissions
    */
-  requestPermission(permissions?: IOSNotificationPermissions): Promise<IOSNotificationSettings>;
+  requestPermission(permissions?: IOSNotificationPermissions): Promise<NotificationSettings>;
 
   /**
    * Set the notification categories to be used on this Apple device.
@@ -454,12 +453,10 @@ export interface Module {
 
   /**
    * Get the current notification settings for this application on the current device.
-   *
-   * On Android, `alert` will return `0` if permission is denied, `1` if permission is given.
-   * The rest of the properties on the `IOSNotificationSettings` interface response return
-   * as `AUTHORIZED`.
+   * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`
+   * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
    */
-  getNotificationSettings(): Promise<IOSNotificationSettings>;
+  getNotificationSettings(): Promise<NotificationSettings>;
 
   /**
    * Get the current badge count value for this application on the current device.

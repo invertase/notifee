@@ -233,6 +233,8 @@ export enum IOSAuthorizationStatus {
   /**
    * The app user has not yet chosen whether to allow the application to create notifications. Usually
    * this status is returned prior to the first call of `requestPermission`.
+   * 
+   * @platform ios
    */
   NOT_DETERMINED = -1,
 

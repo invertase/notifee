@@ -1,6 +1,6 @@
 // @ts-ignore
 import NotifeeApiModule from '@notifee/react-native/src/NotifeeApiModule';
-import Notifee from '@notifee/react-native';
+import Notifee, { IOSAuthorizationStatus } from '@notifee/react-native';
 
 import {
   /* @ts-ignore */
@@ -240,43 +240,49 @@ describe('Notifee Api Module', () => {
         setPlatform('android');
       });
 
-      test('return alert 1 with the rest set to default values', async () => {
+      test('return authorized with IOSNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          alert: 1,
+          authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
-          alert: 1,
-          badge: 1,
-          criticalAlert: 1,
-          showPreviews: 1,
-          sound: 1,
-          carPlay: 1,
-          lockScreen: 1,
-          announcement: 1,
-          notificationCenter: 1,
-          inAppNotificationSettings: 1,
-          authorizationStatus: 1,
+          authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
+          iOSSettings: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: IOSAuthorizationStatus.AUTHORIZED,
+          },
         });
       });
 
-      test('return alert 0 with the rest set to default data', async () => {
+      test('return denied with IOSNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          alert: 0,
+          authorizationStatus: IOSAuthorizationStatus.DENIED,
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
-          alert: 0,
-          badge: 1,
-          criticalAlert: 1,
-          showPreviews: 1,
-          sound: 1,
-          carPlay: 1,
-          lockScreen: 1,
-          announcement: 1,
-          notificationCenter: 1,
-          inAppNotificationSettings: 1,
-          authorizationStatus: 1,
+          authorizationStatus: IOSAuthorizationStatus.DENIED,
+          iOSSettings: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: IOSAuthorizationStatus.DENIED,
+          },
         });
       });
     });

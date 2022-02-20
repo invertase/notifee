@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NotificationIOS } from './NotificationIOS';
+import { IOSAuthorizationStatus, IOSNotificationSettings, NotificationIOS } from './NotificationIOS';
 import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
@@ -440,4 +440,17 @@ export interface EventDetail {
    * @platform android API Level >= 28
    */
   blocked?: boolean;
+}
+
+export interface NotificationSettings {
+  /**
+   * Overall notification authorization status for the application.
+   * On Android, `authorizationStatus` will return only either `IOSAuthorizationStatus.DENIED` or `IOSAuthorizationStatus.AUTHORIZED`.
+   */
+   authorizationStatus: IOSAuthorizationStatus;
+  /**
+   * Overall notification settings for the application in iOS.
+   * On Android, this will be populated with default values
+   */
+  iOSSettings: IOSNotificationSettings;
 }

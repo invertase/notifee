@@ -386,9 +386,9 @@ public class Notifee {
     boolean areNotificationsEnabled = NotificationManagerCompat.from(ContextHolder.getApplicationContext()).areNotificationsEnabled();
     Bundle notificationSettingsBundle = new Bundle();
     if (areNotificationsEnabled) {
-      notificationSettingsBundle.putInt("alert", 1);
+      notificationSettingsBundle.putInt("authorizationStatus", 1);
     } else {
-      notificationSettingsBundle.putInt("alert", 0);
+      notificationSettingsBundle.putInt("authorizationStatus", 0);
     }
     result.onComplete(null, notificationSettingsBundle);
   }
