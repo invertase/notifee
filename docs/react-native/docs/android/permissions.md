@@ -7,7 +7,7 @@ previous: /react-native/docs/android/interaction
 
 # Understanding permission
 
-On Android, notification permission is granted by default. However, user can revoke this permission through your app's settings or the notification itself. In addition,user can block notifiation at three levels; application-wide, channel groups and channels. 
+On Android, notification permission is granted by default. However, a user may revoke notification permissions later through various means. In addition, a user may manage or revoke this notification permission at any of three levels; application-wide, channel groups and channels. 
 
 # Checking permission
 
