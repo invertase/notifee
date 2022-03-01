@@ -464,7 +464,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         .then(({ authorizationStatus }: Pick<NotificationSettings, 'authorizationStatus'>) => {
           return {
             authorizationStatus,
-            iOSSettings: {
+            ios: {
               alert: 1,
               badge: 1,
               criticalAlert: 1,
@@ -543,7 +543,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         .then(({ authorizationStatus }: Pick<NotificationSettings, 'authorizationStatus'>) => {
           return {
             authorizationStatus,
-            iOSSettings: {
+            ios: {
               alert: 1,
               badge: 1,
               criticalAlert: 1,

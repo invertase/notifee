@@ -485,5 +485,5 @@ export interface NotificationSettings {
    * Overall notification settings for the application in iOS.
    * On Android, this will be populated with default values
    */
-  iOSSettings: IOSNotificationSettings;
+  ios: IOSNotificationSettings;
 }

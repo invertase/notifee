@@ -10390,7 +10390,7 @@
 							},
 							"comment": {
 								"shortText": "Request specific notification permissions for your application on the current device.",
-								"text": "Both iOS & Android return an `NotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { AuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === AuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nFor iOS specific settings, use the `iOSSettings` properties to view which specific permissions were\nauthorized.\n\nOn Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`\nand all of the properties on the `iOSSettings` interface response return as `AUTHORIZED`.\n"
+								"text": "Both iOS & Android return an `NotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { AuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === AuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nFor iOS specific settings, use the `ios` properties to view which specific permissions were\nauthorized.\n\nOn Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`\nand all of the properties on the `ios` interface response return as `AUTHORIZED`.\n"
 							},
 							"parameters": [
 								{
@@ -13563,7 +13563,7 @@
 							},
 							"comment": {
 								"shortText": "Request specific notification permissions for your application on the current device.",
-								"text": "Both iOS & Android return an `NotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { AuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === AuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nFor iOS specific settings, use the `iOSSettings` properties to view which specific permissions were\nauthorized.\n\nOn Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`\nand all of the properties on the `iOSSettings` interface response return as `AUTHORIZED`.\n"
+								"text": "Both iOS & Android return an `NotificationSettings` interface. To check whether overall\npermission was granted, check the `authorizationStatus` property in the response:\n\n```js\nimport notifee, { AuthorizationStatus } from '@notifee/react-native';\n\nconst settings = await notifee.requestPermission(...);\n\nif (settings.authorizationStatus === AuthorizationStatus.DENIED) {\n  console.log('User denied permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {\n   console.log('User granted permissions request');\n} else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {\n   console.log('User provisionally granted permissions request');\n}\n```\n\nFor iOS specific settings, use the `ios` properties to view which specific permissions were\nauthorized.\n\nOn Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`\nand all of the properties on the `ios` interface response return as `AUTHORIZED`.\n"
 							},
 							"parameters": [
 								{
@@ -17534,7 +17534,7 @@
 				},
 				{
 					"id": 421,
-					"name": "iOSSettings",
+					"name": "ios",
 					"kind": 1024,
 					"kindString": "Property",
 					"flags": {
@@ -17547,7 +17547,7 @@
 						{
 							"fileName": "packages/react-native/src/types/Notification.ts",
 							"line": 488,
-							"character": 13
+							"character": 5
 						}
 					],
 					"type": {

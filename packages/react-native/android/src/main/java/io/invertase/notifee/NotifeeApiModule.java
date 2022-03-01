@@ -219,8 +219,8 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getNotificationSettings(Promise promise) {
     Notifee.getInstance()
-      .getNotificationSettings(
-        (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+        .getNotificationSettings(
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod

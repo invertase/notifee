@@ -25,9 +25,9 @@ async function checkNotificationPermission() {
   const settings = await notifee.getNotificationSettings();
 
   if (settings.authorizationStatus == AuthorizationStatus.AUTHORIZED) {
-    console.log('Notification permission has been authorized');
+    console.log('Notification permissions has been authorized');
   } else if (settings.authorizationStatus == AuthorizationStatus.DENIED) {
-    console.log('Notification permission has been denied');
+    console.log('Notification permissions has been denied');
   }
 }
 ```

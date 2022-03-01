@@ -81,11 +81,9 @@ the setting will be silently updated and the `requestPermission` will instantly 
 ### Observing settings
 
 In some cases, you may wish to observe what permission/settings have been granted on the device. The `requestPermission`
-API used above resolves with an object value containing the current [`IOSNotificationSettings`](/reference/iosnotificationsettings).
+API used above resolves with an object value containing the current [`NotificationSettings`](/reference/notificationsettings).
 The settings contain information such as whether the user has specific settings enabled/disabled, and whether notification
-permission is enabled/disabled for the entire application.
-
-For example, to view whether the user has overall notification permission enabled/disabled:
+permission is enabled/disabled for the entire application, for example:
 
 ```js
 import notifee from '@notifee/react-native';
@@ -93,18 +91,17 @@ import notifee from '@notifee/react-native';
 async function checkApplicationPermission() {
   const settings = await notifee.requestPermission();
 
-  // settings only available on iOS
-  if (settings) {
-    if (settings.authorizationStatus) {
-      console.log('User has notification permissions enabled');
-    } else {
-      console.log('User has notification permissions disabled');
-    }
+  if (settings.authorizationStatus) {
+    console.log('User has notification permissions enabled');
+  } else {
+    console.log('User has notification permissions disabled');
   }
+
+  console.log('iOS settings: ', settings.ios);
 }
 ```
 
-The value of each setting returns a [`IOSNotificationSettings`](/reference/iosnotificationsettings) value, which can be
+The value of each setting in `settings.ios` returns a [`IOSNotificationSettings`](/reference/iosnotificationsettings) value, which can be
 one of three values:
 
 - `NOT_SUPPORTED`: The device either does not support the type of permission (the iOS API may be too low), or the permission has not been requested.

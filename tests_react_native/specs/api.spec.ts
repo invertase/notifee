@@ -296,4 +296,30 @@ export function ApiSpec(spec: TestScope): void {
       expect(await notifee.isChannelCreated('unknown channel')).to.be.false;
     });
   });
+
+  spec.describe('Permissions', function () {
+    spec.it('requestPermissions() returns correct response', async function () {
+      const settings = await notifee.requestPermission();
+
+      expect(settings.authorizationStatus).equals(1);
+      expect(settings.ios.authorizationStatus).equals(1);
+
+      if (Platform.OS === 'ios') {
+        expect(settings.ios.criticalAlert).equals(0);
+        return;
+      }
+    });
+
+    spec.it('getNotificationSettings() returns correct response', async function () {
+      const settings = await notifee.getNotificationSettings();
+
+      expect(settings.authorizationStatus).equals(1);
+      expect(settings.ios.authorizationStatus).equals(1);
+
+      if (Platform.OS === 'ios') {
+        expect(settings.ios.criticalAlert).equals(0);
+        return;
+      }
+    });
+  });
 }

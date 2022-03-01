@@ -247,7 +247,7 @@ describe('Notifee Api Module', () => {
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
-          iOSSettings: {
+          ios: {
             alert: 1,
             badge: 1,
             criticalAlert: 1,
@@ -270,7 +270,7 @@ describe('Notifee Api Module', () => {
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.DENIED,
-          iOSSettings: {
+          ios: {
             alert: 1,
             badge: 1,
             criticalAlert: 1,

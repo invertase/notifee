@@ -69,6 +69,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NotifeeCore (1.0.0)
   - PromisesObjC (2.0.0)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -357,12 +358,11 @@ PODS:
     - Firebase/Messaging (= 8.8.0)
     - React-Core
     - RNFBApp
-  - RNNotifee (3.0.3):
+  - RNNotifee (4.1.0):
+    - NotifeeCore
     - React-Core
-    - RNNotifeeCore
-  - RNNotifeeCore (3.0.3):
-    - RNNotifeeCore/NotifeeCore (= 3.0.3)
-  - RNNotifeeCore/NotifeeCore (3.0.3)
+  - RNNotifeeCore (4.1.0):
+    - NotifeeCore
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -374,6 +374,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (~> 0.9.0)
   - libevent (~> 2.1.12)
+  - NotifeeCore (from `../../ios`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -435,6 +436,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  NotifeeCore:
+    :path: "../../ios"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -514,6 +517,7 @@ SPEC CHECKSUMS:
   hermes-engine: bf7577d12ac6ccf53ab8b5af3c6ccf0dd8458c5c
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NotifeeCore: 7163fe1ba23401a81430438a037a40a00221b80e
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: e94bac8c0770aa02dd4959b86e32c6fe0e077e2d
@@ -542,10 +546,10 @@ SPEC CHECKSUMS:
   ReactCommon: fda8de1535cec34971adef653f9afd954142eb7c
   RNFBApp: 729c0666395b1953198dc4a1ec6deb8fbe1c302e
   RNFBMessaging: 8415ec196e5c1196caa26ec0742cdb48ed4d0f97
-  RNNotifee: f0d07c9f1829438ff3b5f80e66b405891bf54479
-  RNNotifeeCore: 218e4080fb14f8ddfb5d454853baac1bb46cd1d9
+  RNNotifee: db0c45ad1eab8bf41e846b0e2121be2768f796f0
+  RNNotifeeCore: 79bd7f3bdaea136f685698f4069dcad0c57c3f31
   Yoga: 63f25ad38b6f7597fa5dfee27088b29a01e83447
 
-PODFILE CHECKSUM: 8566c3eec5afcd7bbe46173879c6fc8b9dc375ee
+PODFILE CHECKSUM: 5a8c08f65af9bf9f8543478056186aaf3b8e42ef
 
 COCOAPODS: 1.11.2
