@@ -7,7 +7,7 @@ previous: /react-native/docs/android/interaction
 
 # Understanding permissions
 
-On Android, notification permission is granted by default. However, a user may revoke notification permissions later through various means. In addition, a user may manage or revoke this notification permission at any of three levels; application-wide, channel groups and channels. 
+On Android, notification permissions are granted by default. However, a user may revoke them later through various means. In addition, a user may manage or revoke permissions at any of three levels; application-wide, channel groups and channels. 
 
 # Checking permissions
 
@@ -52,8 +52,8 @@ async function checkChannelPermission() {
 }
 ```
 
-For more understanding on channels, you can refer to [Channels & Groups](react-native/docs/android/channels).
+> For more understanding on channels, you can refer to the [Channels & Groups](react-native/docs/android/channels) documentation.
 
 ## Permission events
 
-For listening to permission change events, refer to [Listening to channel events](react-native/docs/android/channels#listening-to-channel-events).
+For listening to permission change events, refer to the [Listening to channel events](react-native/docs/android/channels#listening-to-channel-events) documentation.
