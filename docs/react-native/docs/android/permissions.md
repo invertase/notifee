@@ -1,6 +1,6 @@
 ---
 title: Permissions
-description: Android device grants permission for notification by default
+description: Understanding and Checking Android notification permissions
 next: /react-native/docs/android/progress-indicators
 previous: /react-native/docs/android/interaction
 ---
@@ -11,7 +11,7 @@ On Android, notification permission is granted by default. However, a user may r
 
 # Checking permission
 
-For each level, you can check whether notifcation permission is enabled on as-need basis or with event listeners.
+For each level, you can check whether notifications are permitted through a direct Notifee API call, or listen for changes with event listeners.
 
 ## Application wide
 
@@ -32,11 +32,11 @@ async function checkNotificationPermission() {
 }
 ```
 
-In some cases where notification is disabled, you might want to give an option for user to open notification settings to enable it. After you have setup your UI, you can use Notifee's [`openNotificationSettings`](/reference/opennotificationsettings).
+If you determine notifications are disabled, you may want to offer the user the ability to open notification settings to enable it. The [`openNotificationSettings`](/reference/opennotificationsettings) API may be used to implement this feature.
 
 ## Channels & Channels Groups
 
-To check whether the user has enabled notification for specific channels or channel groups, call either [`getChannel`](/reference/getchannel) or [`getChannelGroups`](/reference/getchannelgroups). Both of these functions will return a respective object with `blocked` attributes in it.
+To check whether the user has enabled notifications for specific channels or channel groups, call either [`getChannel`](/reference/getchannel) or [`getChannelGroups`](/reference/getchannelgroups). Both of these functions will return a respective object with `blocked` attributes in it.
 
 ```js
 import notifee from '@notifee/react-native';
