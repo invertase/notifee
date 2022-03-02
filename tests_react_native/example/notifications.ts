@@ -122,8 +122,6 @@ export const notifications: { key: string; notification: Notification | Notifica
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
               id: 'default',
-
-              // reactComponent: 'test_component',
             },
             input: true,
             // input: {
@@ -140,11 +138,6 @@ export const notifications: { key: string; notification: Notification | Notifica
               id: 'second_action',
               mainComponent: 'test_component',
             },
-            // input: {
-            //   choices: ['You'],
-            //   allowFreeFormInput: true,
-            //   placeholder: 'Second Input',
-            // },
           },
           {
             title: 'Nothing',
