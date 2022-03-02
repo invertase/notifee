@@ -583,6 +583,7 @@
   [center
       getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *_Nonnull settings) {
         NSMutableDictionary *settingsDictionary = [NSMutableDictionary dictionary];
+        NSMutableDictionary *iosDictionary = [NSMutableDictionary dictionary];
 
         // authorizedStatus
         NSNumber *authorizedStatus = @-1;
@@ -612,40 +613,44 @@
         }
 
         if (@available(iOS 13.0, *)) {
-          settingsDictionary[@"announcement"] =
+          iosDictionary[@"announcement"] =
               [NotifeeCoreUtil numberForUNNotificationSetting:settings.announcementSetting];
         } else {
-          settingsDictionary[@"announcement"] = @-1;
+          iosDictionary[@"announcement"] = @-1;
         }
 
         if (@available(iOS 12.0, *)) {
-          settingsDictionary[@"criticalAlert"] =
+          iosDictionary[@"criticalAlert"] =
               [NotifeeCoreUtil numberForUNNotificationSetting:settings.criticalAlertSetting];
         } else {
-          settingsDictionary[@"criticalAlert"] = @-1;
+          iosDictionary[@"criticalAlert"] = @-1;
         }
 
         if (@available(iOS 12.0, *)) {
-          settingsDictionary[@"inAppNotificationSettings"] =
+          iosDictionary[@"inAppNotificationSettings"] =
               settings.providesAppNotificationSettings ? @1 : @0;
         } else {
-          settingsDictionary[@"inAppNotificationSettings"] = @-1;
+          iosDictionary[@"inAppNotificationSettings"] = @-1;
         }
 
-        settingsDictionary[@"showPreviews"] = showPreviews;
-        settingsDictionary[@"authorizationStatus"] = authorizedStatus;
-        settingsDictionary[@"alert"] =
+        iosDictionary[@"showPreviews"] = showPreviews;
+        iosDictionary[@"authorizationStatus"] = authorizedStatus;
+        iosDictionary[@"alert"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.alertSetting];
-        settingsDictionary[@"badge"] =
+        iosDictionary[@"badge"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.badgeSetting];
-        settingsDictionary[@"sound"] =
+        iosDictionary[@"sound"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.soundSetting];
-        settingsDictionary[@"carPlay"] =
+        iosDictionary[@"carPlay"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.carPlaySetting];
-        settingsDictionary[@"lockScreen"] =
+        iosDictionary[@"lockScreen"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.lockScreenSetting];
-        settingsDictionary[@"notificationCenter"] =
+        iosDictionary[@"notificationCenter"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.notificationCenterSetting];
+
+        settingsDictionary[@"authorizedStatus"] = authorizedStatus;
+        settingsDictionary[@"ios"] = iosDictionary;
+
         block(nil, settingsDictionary);
       }];
 }

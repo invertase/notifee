@@ -2,7 +2,7 @@
 title: Progress Indicators
 description: Use notifications to display progress on activities within your application.
 next: /react-native/docs/android/styles
-previous: /react-native/docs/android/interaction
+previous: /react-native/docs/android/permissions
 ---
 
 Notifications can display progress indicators to show users a status of an ongoing operation, for example, the progress

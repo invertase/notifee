@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.MethodCallResult;
@@ -378,6 +379,20 @@ public class Notifee {
   public void openPowerManagerSettings(Activity activity, MethodCallResult<Void> result) {
     PowerManagerUtils.openPowerManagerSettings(activity);
     result.onComplete(null, null);
+  }
+
+  @KeepForSdk
+  public void getNotificationSettings(MethodCallResult<Bundle> result) {
+    boolean areNotificationsEnabled =
+        NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+            .areNotificationsEnabled();
+    Bundle notificationSettingsBundle = new Bundle();
+    if (areNotificationsEnabled) {
+      notificationSettingsBundle.putInt("authorizationStatus", 1);
+    } else {
+      notificationSettingsBundle.putInt("authorizationStatus", 0);
+    }
+    result.onComplete(null, notificationSettingsBundle);
   }
 
   @KeepForSdk

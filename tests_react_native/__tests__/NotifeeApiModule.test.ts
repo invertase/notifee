@@ -1,6 +1,6 @@
 // @ts-ignore
 import NotifeeApiModule from '@notifee/react-native/src/NotifeeApiModule';
-import Notifee from '@notifee/react-native';
+import Notifee, { AuthorizationStatus } from '@notifee/react-native';
 
 import {
   /* @ts-ignore */
@@ -231,6 +231,60 @@ describe('Notifee Api Module', () => {
 
       expect(res).toBe(true);
       expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
+    });
+  });
+
+  describe('getNotificationSettings', () => {
+    describe('on Android', () => {
+      beforeEach(() => {
+        setPlatform('android');
+      });
+
+      test('return authorized with IOSNotificationSettings set to default values', async () => {
+        mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+        });
+        const settings = await apiModule.getNotificationSettings();
+        expect(settings).toEqual({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          },
+        });
+      });
+
+      test('return denied with IOSNotificationSettings set to default values', async () => {
+        mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
+          authorizationStatus: AuthorizationStatus.DENIED,
+        });
+        const settings = await apiModule.getNotificationSettings();
+        expect(settings).toEqual({
+          authorizationStatus: AuthorizationStatus.DENIED,
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.DENIED,
+          },
+        });
+      });
     });
   });
 });

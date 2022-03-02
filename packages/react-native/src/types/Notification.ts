@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { NotificationIOS } from './NotificationIOS';
+import { IOSNotificationSettings, NotificationIOS } from './NotificationIOS';
 import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
@@ -440,4 +440,50 @@ export interface EventDetail {
    * @platform android API Level >= 28
    */
   blocked?: boolean;
+}
+
+/**
+ * An enum representing the notification authorization status for this app on the device.
+ *
+ * Value is greater than 0 if authorized, compare against an exact status (e.g. PROVISIONAL) for a more
+ * granular status.
+ *
+ */
+export enum AuthorizationStatus {
+  /**
+   * The app user has not yet chosen whether to allow the application to create notifications. Usually
+   * this status is returned prior to the first call of `requestPermission`.
+   *
+   * @platform ios
+   */
+  NOT_DETERMINED = -1,
+
+  /**
+   * The app is not authorized to create notifications.
+   */
+  DENIED = 0,
+
+  /**
+   * The app is authorized to create notifications.
+   */
+  AUTHORIZED = 1,
+
+  /**
+   * The app is currently authorized to post non-interrupting user notifications
+   * @platform ios iOS >= 12
+   */
+  PROVISIONAL = 2,
+}
+
+export interface NotificationSettings {
+  /**
+   * Overall notification authorization status for the application.
+   * On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`.
+   */
+  authorizationStatus: AuthorizationStatus;
+  /**
+   * Overall notification settings for the application in iOS.
+   * On Android, this will be populated with default values
+   */
+  ios: IOSNotificationSettings;
 }

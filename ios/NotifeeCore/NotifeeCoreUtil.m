@@ -515,7 +515,7 @@
       // IOSIntentIdentifier.PAUSE_WORKOUT
       [intentIdentifiers addObject:INPauseWorkoutIntentIdentifier];
     } else if ([identifier isEqualToNumber:@11]) {
-      // IOSIntentIdentifier.END_WORKOUT
+      // IntentIdentifier.END_WORKOUT
       [intentIdentifiers addObject:INEndWorkoutIntentIdentifier];
     } else if ([identifier isEqualToNumber:@12]) {
       // IOSIntentIdentifier.CANCEL_WORKOUT

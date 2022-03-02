@@ -5,6 +5,15 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.0.0
+- **[Android/iOS] BREAKING CHANGE**: Added support for checking permissions on Android which introduces a breaking change to `requestPermission` and `getNotificationSettings` APIs.
+
+Both APIs have been updated to return an object of type `NotificationSettings`, in replace of `NotificationSettingsIOS`.
+
+`NotificationSettings` consists of two properties `authorizationStatus` and `ios`, where `ios` is a nested object of type `NotificationSettingsIOS`.
+
+To learn more, see Permissions documentation for [iOS](https://notifee.app/react-native/docs/ios/permissions), and [Android](https://notifee.app/react-native/docs/android/permissions).
+
 ## 4.1.0
 - **[Android]**: Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
 - **[Android]**: Fixes an issue with Android 12 when tapping on a notification (Fixes [#250](https://github.com/invertase/notifee/issues/250))
