@@ -121,9 +121,7 @@ export const notifications: { key: string; notification: Notification | Notifica
             title: 'Reply, Open & Cancel',
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
-              id: 'first_action',
-
-              // reactComponent: 'test_component',
+              id: 'default',
             },
             input: true,
             // input: {
@@ -138,13 +136,8 @@ export const notifications: { key: string; notification: Notification | Notifica
             icon: 'https://invertase.io/icons/icon-48x48.png',
             pressAction: {
               id: 'second_action',
-              // mainComponent: 'test_component',
+              mainComponent: 'test_component',
             },
-            // input: {
-            //   choices: ['You'],
-            //   allowFreeFormInput: true,
-            //   placeholder: 'Second Input',
-            // },
           },
           {
             title: 'Nothing',
