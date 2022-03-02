@@ -283,7 +283,7 @@ export enum IOSNotificationSetting {
  * An interface representing the current authorization status and notification-related settings for your app.
  *
  * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
- * and [`getNotificationSettings`](/reference/getnotificationsettings).
+ * and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
  *
  * View the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.
  *

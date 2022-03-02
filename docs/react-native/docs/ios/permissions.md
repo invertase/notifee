@@ -61,7 +61,7 @@ await notifee.requestPermission({
 });
 ```
 
-The full list of permission settings can be seen in the table below along with their default values (view the [`IOSNotificationPermissions`](/reference/iosnotificationpermissions) reference for more info):
+The full list of permission settings can be seen in the table below along with their default values (view the [`IOSNotificationPermissions`](/react-native/reference/iosnotificationpermissions) reference for more info):
 
 | Permission                  | Default | Description                                                                                                                                                                                             |
 | --------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -81,7 +81,7 @@ the setting will be silently updated and the `requestPermission` will instantly 
 ### Observing settings
 
 In some cases, you may wish to observe what permission/settings have been granted on the device. The `requestPermission`
-API used above resolves with an object value containing the current [`NotificationSettings`](/reference/notificationsettings).
+API used above resolves with an object value containing the current [`NotificationSettings`](/react-native/reference/notificationsettings).
 The settings contain information such as whether the user has specific settings enabled/disabled, and whether notification
 permission is enabled/disabled for the entire application, for example:
 
@@ -111,7 +111,7 @@ one of three values:
 To help improve chances of the the user accepting, it is recommended that permission is requested at a time which makes
 sense during the flow of your application (e.g. starting a new chat), where the user would expect to receive notifications.
 
-It is also possible to fetch the current permission settings without requesting permission, by calling the [`getNotificationSettings`](/reference/getnotificationsettings) API instead:
+It is also possible to fetch the current permission settings without requesting permission, by calling the [`getNotificationSettings`](/react-native/reference/getnotificationsettings) API instead:
 
 ```js
 async function getExistingSettings() {

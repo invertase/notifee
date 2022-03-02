@@ -7431,7 +7431,7 @@
 			},
 			"comment": {
 				"shortText": "An interface representing the current authorization status and notification-related settings for your app.",
-				"text": "This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)\nand [`getNotificationSettings`](/reference/getnotificationsettings).\n\nView the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.\n",
+				"text": "This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)\nand [`getNotificationSettings`](/react-native/reference/getnotificationsettings).\n\nView the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.\n",
 				"tags": [
 					{
 						"tag": "platform",
