@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.0.1
+- **[Android]**: Fixes an issue where quick actions always opens the app on Android 12 (Fixes [#315](https://github.com/invertase/notifee/issues/315).
+- **[Android]**: Fixes an issue where a quick action with an id of `default` failed to open the app
+
 ## 5.0.0
 - **[Android/iOS] BREAKING CHANGE**: Added support for checking permissions on Android which introduces a breaking change to `requestPermission` and `getNotificationSettings` APIs.
 
