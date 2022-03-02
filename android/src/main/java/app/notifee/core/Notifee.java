@@ -120,6 +120,11 @@ public class Notifee {
   }
 
   @KeepForSdk
+  public void canCreateTimeStampTrigger(MethodCallResult<Boolean> result) {
+    result.onComplete(null, NotifeeAlarmManager.canScheduleExactAlarms());
+  }
+
+  @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
     ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
     ChannelManager.createChannel(channelModel)

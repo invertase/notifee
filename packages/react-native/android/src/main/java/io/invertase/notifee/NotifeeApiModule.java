@@ -157,6 +157,13 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void canCreateTimeStampTrigger(Promise promise) {
+    Notifee.getInstance()
+        .canCreateTimeStampTrigger(
+            (e, aBool) -> NotifeeReactUtils.promiseBooleanResolver(promise, e, aBool));
+  }
+
+  @ReactMethod
   public void createTriggerNotification(
       ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
     Notifee.getInstance()

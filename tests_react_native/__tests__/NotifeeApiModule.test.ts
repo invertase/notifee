@@ -287,4 +287,20 @@ describe('Notifee Api Module', () => {
       });
     });
   });
+
+  describe('createTriggerNotification', () => {
+    test('pipe return from native method on Android', async () => {
+      setPlatform('android');
+      mockNotifeeNativeModule.canCreateTimeStampTrigger
+        .mockResolvedValueOnce(false)
+        .mockResolvedValueOnce(true);
+      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(false);
+      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(true);
+    });
+
+    test('always return true on iOS', async () => {
+      setPlatform('iOS');
+      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(true);
+    });
+  });
 });

@@ -231,6 +231,12 @@ function Root(): any {
               console.log(await Notifee.getPowerManagerInfo());
             }}
           />
+           <Button
+            title={`get alarm permission info`}
+            onPress={async (): Promise<void> => {
+              console.log(await Notifee.canCreateTimeStampTrigger());
+            }}
+          />
           <Button
             title={`open power manager `}
             onPress={async (): Promise<void> => {

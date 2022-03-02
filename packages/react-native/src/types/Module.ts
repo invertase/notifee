@@ -185,6 +185,17 @@ export interface Module {
   displayNotification(notification: Notification): Promise<string>;
 
   /**
+   * API used to check whether you can create trigger notification with exact timestamp on Android >= 12.
+   *
+   * on iOS, this will default to true
+   *
+   * If the API version is < 31, this will default to true
+   *
+   * @platform android
+   */
+  canCreateTimeStampTrigger(): Promise<boolean>;
+
+  /**
    * API used to create a trigger notification.
    *
    * All channels/categories should be created before calling this method during the apps lifecycle.

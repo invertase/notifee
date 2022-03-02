@@ -350,6 +350,13 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     });
   };
 
+  public canCreateTimeStampTrigger = (): Promise<boolean> => {
+    if (isAndroid) {
+      return this.native.canCreateTimeStampTrigger();
+    }
+    return Promise.resolve(true);
+  };
+
   public createTriggerNotification = (
     notification: Notification,
     trigger: Trigger,

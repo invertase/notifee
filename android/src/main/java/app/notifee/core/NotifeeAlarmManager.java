@@ -165,6 +165,13 @@ class NotifeeAlarmManager {
     }
   }
 
+  public static boolean canScheduleExactAlarms() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      return getAlarmManager().canScheduleExactAlarms();
+    }
+    return true;
+  }
+
   Task<List<WorkDataEntity>> getScheduledNotifications() {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
     return workDataRepository.getAllWithAlarmManager(true);
