@@ -117,8 +117,26 @@ public class NotificationPendingIntent {
     }
   }
 
+  static boolean shouldCreateLaunchActivityIntent(
+      NotificationAndroidPressActionModel pressActionModel) {
+    if (pressActionModel == null) {
+      return false;
+    }
+
+    if (pressActionModel.getLaunchActivity() == null
+        && pressActionModel.getMainComponent() == null) {
+      return false;
+    }
+
+    return true;
+  }
+
   static Intent createLaunchActivityIntent(
       Context context, int notificationId, NotificationAndroidPressActionModel pressActionModel) {
+    if (!shouldCreateLaunchActivityIntent(pressActionModel)) {
+      return null;
+    }
+
     try {
       Intent launchActivityIntent =
           context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
