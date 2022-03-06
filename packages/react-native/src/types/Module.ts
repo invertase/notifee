@@ -196,6 +196,16 @@ export interface Module {
   canCreateTimeStampTrigger(): Promise<boolean>;
 
   /**
+   * API used to open the Android Alarm special access settings for the application.
+   *
+   * If the API version is >= 31, the alarm special acess settings screen is displayed, otherwise,
+   * this is a no-op & instantly resolves.
+   *
+   * @platform android
+   */
+  openAlarmPermissionSettings(): Promise<void>;
+
+  /**
    * API used to create a trigger notification.
    *
    * All channels/categories should be created before calling this method during the apps lifecycle.

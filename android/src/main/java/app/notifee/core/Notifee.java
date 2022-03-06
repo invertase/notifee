@@ -34,6 +34,7 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.PowerManagerUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,12 @@ public class Notifee {
   @KeepForSdk
   public void canCreateTimeStampTrigger(MethodCallResult<Boolean> result) {
     result.onComplete(null, NotifeeAlarmManager.canScheduleExactAlarms());
+  }
+
+  @KeepForSdk
+  public void openAlarmPermissionSettings(Activity activity, MethodCallResult<Void> result) {
+    AlarmUtils.openAlarmPermissionSettings(activity);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk

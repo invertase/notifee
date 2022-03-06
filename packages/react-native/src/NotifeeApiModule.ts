@@ -357,6 +357,13 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     return Promise.resolve(true);
   };
 
+  public openAlarmPermissionSettings = (): Promise<void> => {
+    if (isIOS) {
+      return Promise.resolve();
+    }
+    return this.native.openAlarmPermissionSettings();
+  };
+
   public createTriggerNotification = (
     notification: Notification,
     trigger: Trigger,
