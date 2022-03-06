@@ -69,15 +69,15 @@ Let's update our trigger we created previously to occur weekly.
 import notifee, { TimestampTrigger, TriggerType } from '@notifee/react-native';
 
 async function onCreateTriggerNotification() {
-    const date = new Date(Date.now());
-    date.setHours(11);
-    date.setMinutes(10);
+  const date = new Date(Date.now());
+  date.setHours(11);
+  date.setMinutes(10);
 
-    const trigger: TimestampTrigger = {
-      type: TriggerType.TIMESTAMP,
-      timestamp: date.getTime(),
-      repeatFrequency: RepeatFrequency.WEEKLY
-    };
+  const trigger: TimestampTrigger = {
+    type: TriggerType.TIMESTAMP,
+    timestamp: date.getTime(),
+    repeatFrequency: RepeatFrequency.WEEKLY,
+  };
 
   await notifee.createTriggerNotification(
     {
@@ -132,7 +132,7 @@ On Android, you have the option to create your trigger notification with Android
 ```js
 const trigger: TimestampTrigger = {
   //...
-  alarmManager: true
+  alarmManager: true,
 };
 ```
 
@@ -143,16 +143,32 @@ const trigger: TimestampTrigger = {
   //...
   alarmManager: {
     allowWhileIdle: true,
-  }
+  },
 };
 ```
 
 Please note, for iOS, a repeating trigger does not work the same as Android - the initial trigger cannot be delayed:
+
 - `HOURLY`: the starting date and hour will be ignored, and only the minutes and seconds will be taken into the account. If the timestamp is set to trigger in 3 hours and repeat every 5th minute of the hour, the alert will not fire in 3 hours, but will instead fire immediately on the next 5th minute of the hour.
 - `DAILY`: the starting day will be ignored, and only the time will be taken into account. If it is January 1 at 10 AM and you schedule a daily recurring notification for January 2 at 11 AM, it will fire on January 1 at 11 AM and every day thereafter.
 - `WEEKLY`: the starting week will be ignored, and only the day and time will be taken into account.
 
->  For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
+> For more details, please see the discussion [here](https://github.com/notifee/react-native-notifee/issues/241).
+
+### Android 12 Limitations
+
+Starting from Android 12, timestamp triggers cannot be created unless user specfically allow the [exact alarm permission](https://developer.android.com/about/versions/12/behavior-changes-12).
+Before you create a timestamp trigger, check whether this permission is allowed with `canCreateTimeStampTrigger`. If it's blocked, you should tell the user to allow the app to schedule alarms. You can also use `openAlarmPermissionSettings` function to display the Alarms & Reminder settings of your app.
+
+```js
+if (Notifee.canCreateTimeStampTrigger()) {
+  //Create timestamp trigger
+} else {
+  await Notifee.openAlarmPermissionSettings();
+}
+```
+
+Please note that when the user revoke the permission, all of the timestamp triggers will be deleted by the system. However, notifee will automatically reschedules these triggers when the user allows the alarm permission again with no need for additional code.
 
 ## Interval Trigger
 
