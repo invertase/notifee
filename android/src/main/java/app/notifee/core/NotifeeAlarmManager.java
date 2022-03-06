@@ -151,7 +151,8 @@ class NotifeeAlarmManager {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       if (!alarmManager.canScheduleExactAlarms()) {
         System.err.println(
-            "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
+            "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. See:"
+                + " https://notifee.app/react-native/docs/triggers#android-12-limitations");
         return;
       }
     }

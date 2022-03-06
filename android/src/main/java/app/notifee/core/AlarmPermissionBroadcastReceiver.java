@@ -15,6 +15,5 @@ public class AlarmPermissionBroadcastReceiver extends BroadcastReceiver {
       Log.i("AlarmPermissionReceiver", "Received alarm permission state changed event");
       new NotifeeAlarmManager().rescheduleNotifications();
     }
-
   }
 }

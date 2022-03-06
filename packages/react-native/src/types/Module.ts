@@ -191,6 +191,8 @@ export interface Module {
    *
    * If the API version is < 31, this will default to true
    *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   *
    * @platform android
    */
   canCreateTimeStampTrigger(): Promise<boolean>;
@@ -200,6 +202,8 @@ export interface Module {
    *
    * If the API version is >= 31, the alarm special acess settings screen is displayed, otherwise,
    * this is a no-op & instantly resolves.
+   *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
    *
    * @platform android
    */

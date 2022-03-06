@@ -244,7 +244,7 @@ function Root(): any {
             }}
           />
           <Button
-            title={`open alarm special acecss settings`}
+            title={`open alarm special access settings`}
             onPress={async (): Promise<void> => {
               console.log(await Notifee.openAlarmPermissionSettings());
             }}
