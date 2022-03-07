@@ -240,7 +240,7 @@ function Root(): any {
           <Button
             title={`check can create timestamp trigger`}
             onPress={async (): Promise<void> => {
-              console.log(await Notifee.canCreateTimeStampTrigger());
+              console.log('Notifee.canCreateTimeStampTrigger: ' + await Notifee.canCreateTimeStampTrigger());
             }}
           />
           <Button
