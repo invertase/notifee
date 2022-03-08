@@ -101,7 +101,7 @@ async function checkApplicationPermission() {
 }
 ```
 
-The value of each setting in `settings.ios` returns a [`IOSNotificationSettings`](/reference/iosnotificationsettings) value, which can be
+The value of each setting in `settings.ios` returns a [`IOSNotificationSettings`](/react-native/reference/iosnotificationsettings) value, which can be
 one of three values:
 
 - `NOT_SUPPORTED`: The device either does not support the type of permission (the iOS API may be too low), or the permission has not been requested.
