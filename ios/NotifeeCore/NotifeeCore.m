@@ -585,19 +585,19 @@
         NSMutableDictionary *settingsDictionary = [NSMutableDictionary dictionary];
         NSMutableDictionary *iosDictionary = [NSMutableDictionary dictionary];
 
-        // authorizedStatus
-        NSNumber *authorizedStatus = @-1;
+        // authorizationStatus
+        NSNumber *authorizationStatus = @-1;
         if (settings.authorizationStatus == UNAuthorizationStatusNotDetermined) {
-          authorizedStatus = @-1;
+          authorizationStatus = @-1;
         } else if (settings.authorizationStatus == UNAuthorizationStatusDenied) {
-          authorizedStatus = @0;
+          authorizationStatus = @0;
         } else if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
-          authorizedStatus = @1;
+          authorizationStatus = @1;
         }
 
         if (@available(iOS 12.0, *)) {
           if (settings.authorizationStatus == UNAuthorizationStatusProvisional) {
-            authorizedStatus = @2;
+            authorizationStatus = @2;
           }
         }
 
@@ -634,7 +634,7 @@
         }
 
         iosDictionary[@"showPreviews"] = showPreviews;
-        iosDictionary[@"authorizationStatus"] = authorizedStatus;
+        iosDictionary[@"authorizationStatus"] = authorizationStatus;
         iosDictionary[@"alert"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.alertSetting];
         iosDictionary[@"badge"] =
@@ -648,7 +648,7 @@
         iosDictionary[@"notificationCenter"] =
             [NotifeeCoreUtil numberForUNNotificationSetting:settings.notificationCenterSetting];
 
-        settingsDictionary[@"authorizedStatus"] = authorizedStatus;
+        settingsDictionary[@"authorizationStatus"] = authorizationStatus;
         settingsDictionary[@"ios"] = iosDictionary;
 
         block(nil, settingsDictionary);
