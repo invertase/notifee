@@ -6,7 +6,7 @@ previous: /react-native/docs/installation
 ---
 
 ## 5.0.2
-- **[iOS]**: Fixes an issue with `NotificationSettings` returning the wrong property name for `authorizationStatus` on iOS (Fixes [#333](https://github.com/invertase/notifee/issues/315)).
+- **[iOS]**: Fixes an issue with `NotificationSettings` returning the wrong property name for `authorizationStatus` on iOS (Fixes [#333](https://github.com/invertase/notifee/issues/333)).
 
 ## 5.0.1
 - **[Android]**: Fixes an issue where quick actions always opens the app on Android 12 (Fixes [#315](https://github.com/invertase/notifee/issues/315)).
