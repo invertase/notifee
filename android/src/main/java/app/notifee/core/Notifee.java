@@ -121,7 +121,7 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void canCreateTimeStampTrigger(MethodCallResult<Boolean> result) {
+  public void canCreateTimestampTrigger(MethodCallResult<Boolean> result) {
     result.onComplete(null, NotifeeAlarmManager.canScheduleExactAlarms());
   }
 

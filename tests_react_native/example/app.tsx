@@ -241,7 +241,7 @@ function Root(): any {
             title={`check can create timestamp trigger`}
             onPress={async (): Promise<void> => {
               console.log(
-                'Notifee.canCreateTimeStampTrigger: ' + (await Notifee.canCreateTimeStampTrigger()),
+                'Notifee.canCreateTimestampTrigger: ' + (await Notifee.canCreateTimestampTrigger()),
               );
             }}
           />

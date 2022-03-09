@@ -195,7 +195,7 @@ export interface Module {
    *
    * @platform android
    */
-  canCreateTimeStampTrigger(): Promise<boolean>;
+  canCreateTimestampTrigger(): Promise<boolean>;
 
   /**
    * API used to open the Android Alarm special access settings for the application.

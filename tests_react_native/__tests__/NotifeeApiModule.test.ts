@@ -291,16 +291,16 @@ describe('Notifee Api Module', () => {
   describe('createTriggerNotification', () => {
     test('pipe return from native method on Android', async () => {
       setPlatform('android');
-      mockNotifeeNativeModule.canCreateTimeStampTrigger
+      mockNotifeeNativeModule.canCreateTimestampTrigger
         .mockResolvedValueOnce(false)
         .mockResolvedValueOnce(true);
-      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(false);
-      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(true);
+      expect(await apiModule.canCreateTimestampTrigger()).toEqual(false);
+      expect(await apiModule.canCreateTimestampTrigger()).toEqual(true);
     });
 
     test('always return true on iOS', async () => {
       setPlatform('iOS');
-      expect(await apiModule.canCreateTimeStampTrigger()).toEqual(true);
+      expect(await apiModule.canCreateTimestampTrigger()).toEqual(true);
     });
   });
 });
