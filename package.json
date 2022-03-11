@@ -38,29 +38,29 @@
     "tests_rn:test-watch": "cd tests_react_native && jest --watch",
     "tests_rn:test-coverage": "cd tests_react_native && jest --coverage",
     "tests_rn:android:build": "cd tests_react_native/android && ./gradlew assembleDebug -DtestBuildType=debug",
-    "tests_rn:android:test": "cd tests_react_native && npx cavy-cli run-android --no-jetifier",
-    "tests_rn:ios:test": "cd tests_react_native && npx cavy-cli run-ios --scheme=Notifee --simulator 'iPhone 12'",
-    "tests_rn:ios:pod:install": "cd tests_react_native && cd ios && pod install --repo-update && cd .."
+    "tests_rn:android:test": "cd tests_react_native && npm_config_yes=true npx cavy-cli run-android --no-jetifier",
+    "tests_rn:ios:test": "cd tests_react_native && npm_config_yes=true npx cavy-cli run-ios --scheme=Notifee --simulator 'iPhone 12'",
+    "tests_rn:ios:pod:install": "cd tests_react_native && npm_config_yes=true npx pod-install && cd .."
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^3.0.1",
-    "@types/node": "^16.11.6",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "clang-format": "^1.5.0",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "clang-format": "^1.6.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react": "^7.29.3",
     "google-java-format": "^1.0.1",
     "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.19.2",
-    "typescript": "^4.4.3"
+    "typescript": "^4.6.2"
   },
   "resolutions": {
-    "@types/node": "^16.11.6"
+    "@types/node": "^17.0.21"
   },
   "lint-staged": {
     "packages/**/*.js": [
@@ -101,7 +101,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "shelljs": "^0.8.4"
+    "axios": "^0.26.0",
+    "shelljs": "^0.8.5"
   }
 }
