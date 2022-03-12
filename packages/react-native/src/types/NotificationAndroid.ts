@@ -417,6 +417,27 @@ export interface NotificationAndroid {
 }
 
 /**
+ * An interface representing the current android only notification-related settings for your app.
+ *
+ * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
+ * and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
+ *
+ * View the [Permissions](/react-native/docs/android/permissions) documentation to learn more.
+ *
+ * @platform android
+ */
+export interface AndroidNotificationSettings {
+  /**
+   * A boolean that determines whether you can create trigger notification with exact timestamp on Android >= 12 / API >= 31
+   *
+   * For Android < 12 / API < 31, this will default to true
+   *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   */
+  allowedTimestampTrigger: boolean;
+}
+
+/**
  * The interface used to describe a notification quick action for Android.
  *
  * Notification actions allow users to interact with notifications, allowing you to handle events

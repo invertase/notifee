@@ -1,6 +1,9 @@
 package app.notifee.core.utility;
 
+import static app.notifee.core.ContextHolder.getApplicationContext;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +14,10 @@ import app.notifee.core.Logger;
 
 public class AlarmUtils {
   private static final String TAG = "AlarmUtils";
+
+  public static AlarmManager getAlarmManager() {
+    return (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+  }
 
   /**
    * Attempts to open the device's alarm special access settings
@@ -34,5 +41,12 @@ public class AlarmUtils {
     } catch (Exception e) {
       Logger.e(TAG, "An error occurred whilst trying to open alarm permission settings", e);
     }
+  }
+
+  public static boolean canScheduleExactAlarms() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      return getAlarmManager().canScheduleExactAlarms();
+    }
+    return true;
   }
 }

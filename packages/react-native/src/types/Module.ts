@@ -185,19 +185,6 @@ export interface Module {
   displayNotification(notification: Notification): Promise<string>;
 
   /**
-   * API used to check whether you can create trigger notification with exact timestamp on Android >= 12 / API >= 31
-   *
-   * on iOS, this will default to true
-   *
-   * For Android < 12 / API < 31, this will default to true
-   *
-   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
-   *
-   * @platform android
-   */
-  canCreateTimestampTrigger(): Promise<boolean>;
-
-  /**
    * API used to open the Android Alarm special access settings for the application.
    *
    * On Android >= 12 / API >= 31, the alarm special access settings screen is displayed, otherwise,

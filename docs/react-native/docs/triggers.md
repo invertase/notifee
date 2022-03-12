@@ -166,10 +166,11 @@ Starting from Android 12, timestamp triggers cannot be created unless user specf
 </manifest>
 ```
 
-Before you create a timestamp trigger, check whether `SCHEDULE_EXACT_ALARM` permission is allowed with `canCreateTimestampTrigger`. If it's blocked, you should tell the user to allow the app to schedule alarms. You can also use `openAlarmPermissionSettings` function to display the Alarms & Reminder settings of your app.
+Before you create a timestamp trigger, check whether `SCHEDULE_EXACT_ALARM` permission is allowed by making a call to `getNotificationSettings`. If ` allowedTimestampTrigger` is `false`, you should educate the user on this permission and ask to allow scheduling alarms. You can then use `openAlarmPermissionSettings` function to display the Alarms & Reminder settings of your app.
 
 ```js
-if (Notifee.canCreateTimestampTrigger()) {
+const settings = Notifee.getNotificationSettings();
+if (settings.android.allowedTimestampTrigger) {
   //Create timestamp trigger
 } else {
   // Show some user information to educate them on what exact alarm permission is,

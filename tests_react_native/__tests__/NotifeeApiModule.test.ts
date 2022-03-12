@@ -240,13 +240,19 @@ describe('Notifee Api Module', () => {
         setPlatform('android');
       });
 
-      test('return authorized with IOSNotificationSettings set to default values', async () => {
+      test('return android settings with IOSNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            allowedTimestampTrigger: false,
+          },
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            allowedTimestampTrigger: false,
+          },
           ios: {
             alert: 1,
             badge: 1,
@@ -262,14 +268,16 @@ describe('Notifee Api Module', () => {
           },
         });
       });
+    });
 
-      test('return denied with IOSNotificationSettings set to default values', async () => {
+    describe('on iOS', () => {
+      beforeEach(() => {
+        setPlatform('iOS');
+      });
+
+      test('return iOS settings with AndroidNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          authorizationStatus: AuthorizationStatus.DENIED,
-        });
-        const settings = await apiModule.getNotificationSettings();
-        expect(settings).toEqual({
-          authorizationStatus: AuthorizationStatus.DENIED,
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
           ios: {
             alert: 1,
             badge: 1,
@@ -281,26 +289,30 @@ describe('Notifee Api Module', () => {
             announcement: 1,
             notificationCenter: 1,
             inAppNotificationSettings: 1,
-            authorizationStatus: AuthorizationStatus.DENIED,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          },
+        });
+        const settings = await apiModule.getNotificationSettings();
+        expect(settings).toEqual({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            allowedTimestampTrigger: true,
+          },
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
           },
         });
       });
-    });
-  });
-
-  describe('createTriggerNotification', () => {
-    test('pipe return from native method on Android', async () => {
-      setPlatform('android');
-      mockNotifeeNativeModule.canCreateTimestampTrigger
-        .mockResolvedValueOnce(false)
-        .mockResolvedValueOnce(true);
-      expect(await apiModule.canCreateTimestampTrigger()).toEqual(false);
-      expect(await apiModule.canCreateTimestampTrigger()).toEqual(true);
-    });
-
-    test('always return true on iOS', async () => {
-      setPlatform('iOS');
-      expect(await apiModule.canCreateTimestampTrigger()).toEqual(true);
     });
   });
 });

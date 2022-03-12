@@ -238,14 +238,6 @@ function Root(): any {
             }}
           />
           <Button
-            title={`check can create timestamp trigger`}
-            onPress={async (): Promise<void> => {
-              console.log(
-                'Notifee.canCreateTimestampTrigger: ' + (await Notifee.canCreateTimestampTrigger()),
-              );
-            }}
-          />
-          <Button
             title={`open alarm special access settings`}
             onPress={async (): Promise<void> => {
               console.log(await Notifee.openAlarmPermissionSettings());

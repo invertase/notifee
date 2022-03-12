@@ -25,7 +25,6 @@ export const mockNotifeeNativeModule = {
   deleteChannel: jest.fn(),
   deleteChannelGroup: jest.fn(),
   displayNotification: jest.fn(),
-  canCreateTimestampTrigger: jest.fn(),
   openAlarmPermissionSettings: jest.fn(),
   createTriggerNotification: jest.fn(),
   getChannel: jest.fn(),

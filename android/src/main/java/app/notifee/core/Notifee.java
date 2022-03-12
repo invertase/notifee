@@ -121,11 +121,6 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public void canCreateTimestampTrigger(MethodCallResult<Boolean> result) {
-    result.onComplete(null, NotifeeAlarmManager.canScheduleExactAlarms());
-  }
-
-  @KeepForSdk
   public void openAlarmPermissionSettings(Activity activity, MethodCallResult<Void> result) {
     AlarmUtils.openAlarmPermissionSettings(activity);
     result.onComplete(null, null);
@@ -404,6 +399,12 @@ public class Notifee {
     } else {
       notificationSettingsBundle.putInt("authorizationStatus", 0);
     }
+
+    boolean canScheduleExactAlarms = AlarmUtils.canScheduleExactAlarms();
+    Bundle androidSettingsBundle = new Bundle();
+
+    androidSettingsBundle.putBoolean("allowedTimestampTrigger", canScheduleExactAlarms);
+    notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
   }
 
