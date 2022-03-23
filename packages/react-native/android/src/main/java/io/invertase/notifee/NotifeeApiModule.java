@@ -14,11 +14,12 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.modules.core.PermissionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NotifeeApiModule extends ReactContextBaseJavaModule {
+public class NotifeeApiModule extends ReactContextBaseJavaModule implements PermissionListener {
   private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
   private static final int NOTIFICATION_TYPE_TRIGGER = 2;
   private static final int NOTIFICATION_TYPE_ALL = 0;
@@ -231,6 +232,14 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void requestPermission(Promise promise) {
+    Notifee.getInstance()
+      .requestPermission(
+        getCurrentActivity(),
+        (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+  }
+
+  @ReactMethod
   public void openNotificationSettings(String channelId, Promise promise) {
     Notifee.getInstance()
         .openNotificationSettings(
@@ -300,4 +309,10 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
     constants.put("ANDROID_API_LEVEL", android.os.Build.VERSION.SDK_INT);
     return constants;
   }
+
+  @Override
+  public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    return Notifee.getInstance().onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+  
 }

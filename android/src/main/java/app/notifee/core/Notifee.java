@@ -19,6 +19,7 @@ package app.notifee.core;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
@@ -44,6 +46,8 @@ public class Notifee {
   private static final String TAG = "API";
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
+
+  public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -411,6 +415,29 @@ public class Notifee {
     
     notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
+  }
+
+  @Nullable
+  private MethodCallResult<Bundle> requestPermissionCallResult;
+
+  @KeepForSdk
+  public void requestPermission(Activity activity, MethodCallResult<Bundle> result) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      requestPermissionCallResult = result;
+      ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE_NOTIFICATION_PERMISSION);
+    } else {
+      getNotificationSettings(result);
+    }
+  }
+
+  public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    if (requestCode == REQUEST_CODE_NOTIFICATION_PERMISSION) {
+      if (requestPermissionCallResult != null) {
+        getNotificationSettings(requestPermissionCallResult);
+        return true;
+      }
+    }
+    return false;
   }
 
   @KeepForSdk

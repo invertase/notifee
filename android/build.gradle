@@ -38,13 +38,13 @@ ext {
 }
 
 android {
-  compileSdkVersion 31
+  compileSdkVersion 'android-Tiramisu'
   testOptions {
     unitTests.returnDefaultValues = true
   }
   defaultConfig {
     minSdkVersion 20
-    targetSdkVersion 30
+    targetSdkVersion 'android-Tiramisu'
     versionCode 1
     versionName "1.0"
 
