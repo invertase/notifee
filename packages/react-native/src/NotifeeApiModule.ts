@@ -512,7 +512,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
             android: {
-              allowedTimestampTrigger: true,
+              alarm: true,
             },
           };
         },
@@ -605,7 +605,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
             android: {
-              allowedTimestampTrigger: true,
+              alarm: true,
             },
           };
         },

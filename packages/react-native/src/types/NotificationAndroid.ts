@@ -434,7 +434,7 @@ export interface AndroidNotificationSettings {
    *
    * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
    */
-  allowedTimestampTrigger: boolean;
+  alarm: boolean;
 }
 
 /**

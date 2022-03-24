@@ -244,14 +244,14 @@ describe('Notifee Api Module', () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            allowedTimestampTrigger: false,
+            alarm: false,
           },
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            allowedTimestampTrigger: false,
+            alarm: false,
           },
           ios: {
             alert: 1,
@@ -296,7 +296,7 @@ describe('Notifee Api Module', () => {
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            allowedTimestampTrigger: true,
+            alarm: true,
           },
           ios: {
             alert: 1,
