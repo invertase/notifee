@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.0.3
+- **[Android]**: Fixes an issue when canceling trigger notifications created via AlarmManager to prevent "Maximum limit of concurrent alarms 500 reached for uid" error being thrown (Fixes [#349](https://github.com/invertase/notifee/issues/349)).
+
 ## 5.0.2
 - **[iOS]**: Fixes an issue with `NotificationSettings` returning the wrong property name for `authorizationStatus` on iOS (Fixes [#333](https://github.com/invertase/notifee/issues/333)).
 
