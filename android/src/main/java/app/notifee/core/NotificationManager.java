@@ -62,6 +62,7 @@ import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
@@ -467,9 +468,14 @@ class NotificationManager {
             task -> {
               if (notificationType == NOTIFICATION_TYPE_TRIGGER
                   || notificationType == NOTIFICATION_TYPE_ALL) {
-                NotifeeAlarmManager.cancelAllNotifications();
-                // delete all from database
-                WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
+                task.continueWith(NotifeeAlarmManager.cancelAllNotifications()).addOnSuccessListener(t -> {
+                    t.continueWith(a -> {
+                        // delete all from database after canceling the alarms
+                        WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
+                        return null;
+                    });
+                });
+
               }
               return null;
             });
