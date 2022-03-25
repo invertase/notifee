@@ -7,6 +7,7 @@ import { Module } from './types/Module';
 import {
   AndroidChannel,
   AndroidChannelGroup,
+  AndroidNotificationSetting,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
@@ -512,7 +513,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
             android: {
-              alarm: true,
+              alarm: AndroidNotificationSetting.ENABLED,
             },
           };
         },
@@ -605,7 +606,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
             android: {
-              alarm: true,
+              alarm: AndroidNotificationSetting.ENABLED,
             },
           };
         },

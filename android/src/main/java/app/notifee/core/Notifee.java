@@ -403,7 +403,12 @@ public class Notifee {
     boolean canScheduleExactAlarms = AlarmUtils.canScheduleExactAlarms();
     Bundle androidSettingsBundle = new Bundle();
 
-    androidSettingsBundle.putBoolean("alarm", canScheduleExactAlarms);
+    if (canScheduleExactAlarms) {
+      androidSettingsBundle.putInt("alarm", 1);
+    } else {
+      androidSettingsBundle.putInt("alarm", 0);
+    }
+    
     notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
   }

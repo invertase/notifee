@@ -6,7 +6,10 @@ import {
   /* @ts-ignore */
   mockNotifeeNativeModule,
 } from '@notifee/react-native/src/NotifeeNativeModule';
-import { AndroidChannel } from '@notifee/react-native/src/types/NotificationAndroid';
+import {
+  AndroidChannel,
+  AndroidNotificationSetting,
+} from '@notifee/react-native/src/types/NotificationAndroid';
 import { setPlatform } from './testSetup';
 import { TriggerNotification, TriggerType } from '@notifee/react-native/src';
 
@@ -244,14 +247,14 @@ describe('Notifee Api Module', () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            alarm: false,
+            alarm: AndroidNotificationSetting.DISABLED,
           },
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            alarm: false,
+            alarm: 0,
           },
           ios: {
             alert: 1,
@@ -296,7 +299,7 @@ describe('Notifee Api Module', () => {
         expect(settings).toEqual({
           authorizationStatus: AuthorizationStatus.AUTHORIZED,
           android: {
-            alarm: true,
+            alarm: AndroidNotificationSetting.ENABLED,
           },
           ios: {
             alert: 1,

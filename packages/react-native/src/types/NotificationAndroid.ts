@@ -426,15 +426,34 @@ export interface NotificationAndroid {
  *
  * @platform android
  */
+
+export enum AndroidNotificationSetting {
+  /**
+   * This setting is not supported on this device. Usually this means that the Android version required
+   * for this setting has not been met.
+   */
+  NOT_SUPPORTED = -1,
+
+  /**
+   * This setting is currently disabled by the user.
+   */
+  DISABLED = 0,
+
+  /**
+   * This setting is currently enabled.
+   */
+  ENABLED = 1,
+}
+
 export interface AndroidNotificationSettings {
   /**
-   * A boolean that determines whether you can create trigger notification with exact timestamp on Android >= 12 / API >= 31
+   * Enum describing if you can create triggers
    *
    * For Android < 12 / API < 31, this will default to true
    *
    * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
    */
-  alarm: boolean;
+  alarm: AndroidNotificationSetting;
 }
 
 /**
