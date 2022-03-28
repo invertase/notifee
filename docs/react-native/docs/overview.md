@@ -12,7 +12,7 @@ iOS applications.
 Notifee is a local notifications library and does not integrate with any 3rd party messaging services. This provides
 developers greater flexibility on how notifications are managed and integrated with new and existing applications.
 
-The library is a successor to the notifications module in [React Native Firebase v5](https://rnfirebase.io/docs/v5.x.x/notifications/introduction).
+The library is a successor to the notifications module in [React Native Firebase v5](https://v5.rnfirebase.io/docs/v5.x.x/notifications/introduction).
 The entire library has been reworked from the ground up focusing on new features, testing, documentation and device
 compatibility.
 
@@ -29,5 +29,5 @@ support for both platforms which is why there are separate guides for [iOS](http
 
 The Notifee [reference API](/react-native/reference) provides developers with a deep dive into each of the methods
 & properties which the API exposes. The reference is generated from [TypeScript](https://www.typescriptlang.org/) & is
-Open Source - if you wish to improve any of the types, feel free to submit a [Pull Request](https://github.com/notifee/notifee/pulls)
-or file an [Issue](https://github.com/notifee/notifee/issues).
+Open Source - if you wish to improve any of the types, feel free to submit a [Pull Request](https://github.com/invertase/notifee/pulls)
+or file an [Issue](https://github.com/invertase/notifee/issues).
