@@ -10,6 +10,7 @@ import {
   AndroidLaunchActivityFlag,
 } from './NotificationAndroid';
 import { AndroidNotificationSettings, Trigger } from '..';
+import { WebNotificationSettings } from './NotificationWeb';
 
 /**
  * Interface for building a local notification for both Android & iOS devices.
@@ -483,12 +484,17 @@ export interface NotificationSettings {
   authorizationStatus: AuthorizationStatus;
   /**
    * Overall notification settings for the application in iOS.
-   * On Android, this will be populated with default values
+   * On non-iOS platforms, this will be populated with default values
    */
   ios: IOSNotificationSettings;
   /**
    * Overall notification settings for the application in android.
-   * On iOS, this will be populated with default values
+   * On non-Android platforms, this will be populated with default values
    */
   android: AndroidNotificationSettings;
+  /**
+   * Overall notification settings for the application in web.
+   * On non-Web platforms, this will be populated with default values
+   */
+  web: WebNotificationSettings;
 }
