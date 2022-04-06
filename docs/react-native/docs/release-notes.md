@@ -5,6 +5,15 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.1.0
+- **[Android]**: Introduces new APIs to help manage Android 12 limitations when creating trigger notifications:
+ - `canScheduleExactAlarms`
+ - `openAlarmPermissionSettings`
+
+And, the ability to check if your app has permissions to create trigger notifications by calling `getNotificationSettings()`.
+
+To learn more, see Triggers documentation for [Android](https://notifee.app/react-native/docs/triggers#android-12-limitations).
+
 ## 5.0.3
 - **[Android]**: Fixes an issue when canceling trigger notifications created via AlarmManager to prevent "Maximum limit of concurrent alarms 500 reached for uid" error being thrown (Fixes [#349](https://github.com/invertase/notifee/issues/349)).
 
