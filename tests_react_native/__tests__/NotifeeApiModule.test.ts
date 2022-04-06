@@ -269,6 +269,7 @@ describe('Notifee Api Module', () => {
             inAppNotificationSettings: 1,
             authorizationStatus: AuthorizationStatus.AUTHORIZED,
           },
+          web: {},
         });
       });
     });
@@ -278,9 +279,9 @@ describe('Notifee Api Module', () => {
         setPlatform('iOS');
       });
 
-      test('return iOS settings with AndroidNotificationSettings set to default values', async () => {
+      test('return web settings with AndroidNotificationSettings set to default values', async () => {
         mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
-          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
           ios: {
             alert: 1,
             badge: 1,
@@ -292,12 +293,13 @@ describe('Notifee Api Module', () => {
             announcement: 1,
             notificationCenter: 1,
             inAppNotificationSettings: 1,
-            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+            authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
           },
+          web: {},
         });
         const settings = await apiModule.getNotificationSettings();
         expect(settings).toEqual({
-          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
           android: {
             alarm: AndroidNotificationSetting.ENABLED,
           },
@@ -312,8 +314,9 @@ describe('Notifee Api Module', () => {
             announcement: 1,
             notificationCenter: 1,
             inAppNotificationSettings: 1,
-            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+            authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
           },
+          web: {},
         });
       });
     });
