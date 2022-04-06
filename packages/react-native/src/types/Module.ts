@@ -185,6 +185,18 @@ export interface Module {
   displayNotification(notification: Notification): Promise<string>;
 
   /**
+   * API used to open the Android Alarm special access settings for the application.
+   *
+   * On Android >= 12 / API >= 31, the alarm special access settings screen is displayed, otherwise,
+   * this is a no-op & instantly resolves.
+   *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   *
+   * @platform android
+   */
+  openAlarmPermissionSettings(): Promise<void>;
+
+  /**
    * API used to create a trigger notification.
    *
    * All channels/categories should be created before calling this method during the apps lifecycle.

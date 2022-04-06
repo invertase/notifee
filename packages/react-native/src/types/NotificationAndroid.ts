@@ -417,6 +417,46 @@ export interface NotificationAndroid {
 }
 
 /**
+ * An interface representing the current android only notification-related settings for your app.
+ *
+ * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
+ * and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
+ *
+ * View the [Permissions](/react-native/docs/android/permissions) documentation to learn more.
+ *
+ * @platform android
+ */
+
+export enum AndroidNotificationSetting {
+  /**
+   * This setting is not supported on this device. Usually this means that the Android version required
+   * for this setting has not been met.
+   */
+  NOT_SUPPORTED = -1,
+
+  /**
+   * This setting is currently disabled by the user.
+   */
+  DISABLED = 0,
+
+  /**
+   * This setting is currently enabled.
+   */
+  ENABLED = 1,
+}
+
+export interface AndroidNotificationSettings {
+  /**
+   * Enum describing if you can create triggers
+   *
+   * For Android < 12 / API < 31, this will default to true
+   *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   */
+  alarm: AndroidNotificationSetting;
+}
+
+/**
  * The interface used to describe a notification quick action for Android.
  *
  * Notification actions allow users to interact with notifications, allowing you to handle events

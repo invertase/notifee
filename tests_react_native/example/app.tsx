@@ -237,6 +237,12 @@ function Root(): any {
               console.log(await Notifee.openPowerManagerSettings());
             }}
           />
+          <Button
+            title={`open alarm special access settings`}
+            onPress={async (): Promise<void> => {
+              console.log(await Notifee.openAlarmPermissionSettings());
+            }}
+          />
           {id != null && (
             <>
               <Button

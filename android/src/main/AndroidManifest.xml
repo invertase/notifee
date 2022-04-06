@@ -30,7 +30,7 @@
       android:name=".ForegroundService"
       android:exported="false" />
 
-      <receiver
+    <receiver
         android:name=".RebootBroadcastReceiver"
         android:exported="false">
         <intent-filter>
@@ -40,6 +40,13 @@
         </intent-filter>
     </receiver>
 
+    <receiver
+      android:name=".AlarmPermissionBroadcastReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+      </intent-filter>
+    </receiver>
 
     <receiver
       android:name=".NotificationAlarmReceiver"

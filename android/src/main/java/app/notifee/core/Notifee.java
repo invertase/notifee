@@ -34,6 +34,7 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.PowerManagerUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +118,12 @@ public class Notifee {
                 result.onComplete(task.getException(), null);
               }
             });
+  }
+
+  @KeepForSdk
+  public void openAlarmPermissionSettings(Activity activity, MethodCallResult<Void> result) {
+    AlarmUtils.openAlarmPermissionSettings(activity);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
@@ -392,6 +399,17 @@ public class Notifee {
     } else {
       notificationSettingsBundle.putInt("authorizationStatus", 0);
     }
+
+    boolean canScheduleExactAlarms = AlarmUtils.canScheduleExactAlarms();
+    Bundle androidSettingsBundle = new Bundle();
+
+    if (canScheduleExactAlarms) {
+      androidSettingsBundle.putInt("alarm", 1);
+    } else {
+      androidSettingsBundle.putInt("alarm", 0);
+    }
+    
+    notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
   }
 

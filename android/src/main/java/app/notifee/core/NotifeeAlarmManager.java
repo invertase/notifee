@@ -30,6 +30,7 @@ import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
+import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.ObjectUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
@@ -118,10 +119,6 @@ class NotifeeAlarmManager {
             });
   }
 
-  private static AlarmManager getAlarmManager() {
-    return (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-  }
-
   public static PendingIntent getAlarmManagerIntentForNotification(String notificationId) {
     try {
       Context context = getApplicationContext();
@@ -145,13 +142,14 @@ class NotifeeAlarmManager {
 
     PendingIntent pendingIntent = getAlarmManagerIntentForNotification(notificationModel.getId());
 
-    AlarmManager alarmManager = getAlarmManager();
+    AlarmManager alarmManager = AlarmUtils.getAlarmManager();
 
     // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       if (!alarmManager.canScheduleExactAlarms()) {
         System.err.println(
-            "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. Issue #239");
+            "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. See:"
+                + " https://notifee.app/react-native/docs/triggers#android-12-limitations");
         return;
       }
     }
@@ -172,7 +170,7 @@ class NotifeeAlarmManager {
 
   public static void cancelNotification(String notificationId) {
     PendingIntent pendingIntent = getAlarmManagerIntentForNotification(notificationId);
-    AlarmManager alarmManager = getAlarmManager();
+    AlarmManager alarmManager = AlarmUtils.getAlarmManager();
     if (pendingIntent != null) {
       alarmManager.cancel(pendingIntent);
     }

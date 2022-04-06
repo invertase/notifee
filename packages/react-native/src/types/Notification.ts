@@ -9,7 +9,7 @@ import {
   NotificationAndroid,
   AndroidLaunchActivityFlag,
 } from './NotificationAndroid';
-import { Trigger } from '..';
+import { AndroidNotificationSettings, Trigger } from '..';
 
 /**
  * Interface for building a local notification for both Android & iOS devices.
@@ -486,4 +486,9 @@ export interface NotificationSettings {
    * On Android, this will be populated with default values
    */
   ios: IOSNotificationSettings;
+  /**
+   * Overall notification settings for the application in android.
+   * On iOS, this will be populated with default values
+   */
+  android: AndroidNotificationSettings;
 }
