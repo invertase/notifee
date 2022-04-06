@@ -2,8 +2,7 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-// @ts-ignore
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import { Image } from 'react-native';
 
 import {
   objectHasProperty,
@@ -301,7 +300,7 @@ export default function validateAndroidNotification(
     }
 
     if (isNumber(android.largeIcon) || isObject(android.largeIcon)) {
-      const image = resolveAssetSource(android.largeIcon);
+      const image = Image.resolveAssetSource(android.largeIcon);
       out.largeIcon = image.uri;
     } else {
       out.largeIcon = android.largeIcon;
