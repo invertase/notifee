@@ -1,12 +1,15 @@
 // @ts-ignore
 import NotifeeApiModule from '@notifee/react-native/src/NotifeeApiModule';
-import Notifee from '@notifee/react-native';
+import Notifee, { AuthorizationStatus } from '@notifee/react-native';
 
 import {
   /* @ts-ignore */
   mockNotifeeNativeModule,
 } from '@notifee/react-native/src/NotifeeNativeModule';
-import { AndroidChannel } from '@notifee/react-native/src/types/NotificationAndroid';
+import {
+  AndroidChannel,
+  AndroidNotificationSetting,
+} from '@notifee/react-native/src/types/NotificationAndroid';
 import { setPlatform } from './testSetup';
 import { TriggerNotification, TriggerType } from '@notifee/react-native/src';
 
@@ -231,6 +234,88 @@ describe('Notifee Api Module', () => {
 
       expect(res).toBe(true);
       expect(mockNotifeeNativeModule.createChannel).not.toBeCalled();
+    });
+  });
+
+  describe('getNotificationSettings', () => {
+    describe('on Android', () => {
+      beforeEach(() => {
+        setPlatform('android');
+      });
+
+      test('return android settings with IOSNotificationSettings set to default values', async () => {
+        mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            alarm: AndroidNotificationSetting.DISABLED,
+          },
+        });
+        const settings = await apiModule.getNotificationSettings();
+        expect(settings).toEqual({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            alarm: 0,
+          },
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          },
+        });
+      });
+    });
+
+    describe('on iOS', () => {
+      beforeEach(() => {
+        setPlatform('iOS');
+      });
+
+      test('return iOS settings with AndroidNotificationSettings set to default values', async () => {
+        mockNotifeeNativeModule.getNotificationSettings.mockResolvedValue({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          },
+        });
+        const settings = await apiModule.getNotificationSettings();
+        expect(settings).toEqual({
+          authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          android: {
+            alarm: AndroidNotificationSetting.ENABLED,
+          },
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.AUTHORIZED,
+          },
+        });
+      });
     });
   });
 });

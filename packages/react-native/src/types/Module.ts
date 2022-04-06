@@ -10,13 +10,9 @@ import {
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './NotificationAndroid';
-import {
-  IOSNotificationCategory,
-  IOSNotificationSettings,
-  IOSNotificationPermissions,
-} from './NotificationIOS';
+import { IOSNotificationCategory, IOSNotificationPermissions } from './NotificationIOS';
 import { PowerManagerInfo } from './PowerManagerInfo';
-import { DisplayedNotification, TriggerNotification } from '..';
+import { DisplayedNotification, NotificationSettings, TriggerNotification } from '..';
 
 export interface Module {
   /**
@@ -187,6 +183,18 @@ export interface Module {
    * to create a notification for both Android & iOS.
    */
   displayNotification(notification: Notification): Promise<string>;
+
+  /**
+   * API used to open the Android Alarm special access settings for the application.
+   *
+   * On Android >= 12 / API >= 31, the alarm special access settings screen is displayed, otherwise,
+   * this is a no-op & instantly resolves.
+   *
+   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   *
+   * @platform android
+   */
+  openAlarmPermissionSettings(): Promise<void>;
 
   /**
    * API used to create a trigger notification.
@@ -406,33 +414,32 @@ export interface Module {
   /**
    * Request specific notification permissions for your application on the current device.
    *
-   * Both iOS & Android return an `IOSNotificationSettings` interface. To check whether overall
+   * Both iOS & Android return an `NotificationSettings` interface. To check whether overall
    * permission was granted, check the `authorizationStatus` property in the response:
    *
    * ```js
-   * import notifee, { IOSAuthorizationStatus } from '@notifee/react-native';
+   * import notifee, { AuthorizationStatus } from '@notifee/react-native';
    *
    * const settings = await notifee.requestPermission(...);
    *
-   * if (settings.authorizationStatus === IOSAuthorizationStatus.DENIED) {
+   * if (settings.authorizationStatus === AuthorizationStatus.DENIED) {
    *   console.log('User denied permissions request');
-   * } else if (settings.authorizationStatus === IOSAuthorizationStatus.AUTHORIZED) {
+   * } else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {
    *    console.log('User granted permissions request');
-   * } else if (settings.authorizationStatus === IOSAuthorizationStatus.PROVISIONAL) {
+   * } else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {
    *    console.log('User provisionally granted permissions request');
    * }
    * ```
    *
-   * Use the other `IOSNotificationSettings` properties to view which specific permissions were
-   * allowed.
+   * For iOS specific settings, use the `ios` properties to view which specific permissions were
+   * authorized.
    *
-   * On Android, all of the properties on the `IOSNotificationSettings` interface response return
-   * as `AUTHORIZED`.
+   * On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`
+   * and all of the properties on the `ios` interface response return as `AUTHORIZED`.
    *
-   * @platform ios
    * @param permissions
    */
-  requestPermission(permissions?: IOSNotificationPermissions): Promise<IOSNotificationSettings>;
+  requestPermission(permissions?: IOSNotificationPermissions): Promise<NotificationSettings>;
 
   /**
    * Set the notification categories to be used on this Apple device.
@@ -454,13 +461,10 @@ export interface Module {
 
   /**
    * Get the current notification settings for this application on the current device.
-   *
-   * On Android, all of the properties on the `IOSNotificationSettings` interface response return
-   * as `AUTHORIZED`.
-   *
-   * @platform ios
+   * On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`
+   * and all of the properties on the `IOSNotificationSettings` interface response return as `AUTHORIZED`.
    */
-  getNotificationSettings(): Promise<IOSNotificationSettings>;
+  getNotificationSettings(): Promise<NotificationSettings>;
 
   /**
    * Get the current badge count value for this application on the current device.

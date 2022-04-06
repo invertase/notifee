@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.interfaces.EventListener;
@@ -34,6 +35,7 @@ import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.PowerManagerUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +117,12 @@ public class Notifee {
                 result.onComplete(task.getException(), null);
               }
             });
+  }
+
+  @KeepForSdk
+  public void openAlarmPermissionSettings(Activity activity, MethodCallResult<Void> result) {
+    AlarmUtils.openAlarmPermissionSettings(activity);
+    result.onComplete(null, null);
   }
 
   @KeepForSdk
@@ -377,6 +385,31 @@ public class Notifee {
   public void openPowerManagerSettings(Activity activity, MethodCallResult<Void> result) {
     PowerManagerUtils.openPowerManagerSettings(activity);
     result.onComplete(null, null);
+  }
+
+  @KeepForSdk
+  public void getNotificationSettings(MethodCallResult<Bundle> result) {
+    boolean areNotificationsEnabled =
+        NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+            .areNotificationsEnabled();
+    Bundle notificationSettingsBundle = new Bundle();
+    if (areNotificationsEnabled) {
+      notificationSettingsBundle.putInt("authorizationStatus", 1);
+    } else {
+      notificationSettingsBundle.putInt("authorizationStatus", 0);
+    }
+
+    boolean canScheduleExactAlarms = AlarmUtils.canScheduleExactAlarms();
+    Bundle androidSettingsBundle = new Bundle();
+
+    if (canScheduleExactAlarms) {
+      androidSettingsBundle.putInt("alarm", 1);
+    } else {
+      androidSettingsBundle.putInt("alarm", 0);
+    }
+    
+    notificationSettingsBundle.putBundle("android", androidSettingsBundle);
+    result.onComplete(null, notificationSettingsBundle);
   }
 
   @KeepForSdk

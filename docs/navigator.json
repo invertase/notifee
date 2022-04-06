@@ -46,6 +46,7 @@
           ["/react-native/docs/android/foreground-service", "Foreground Service"],
           ["/react-native/docs/android/grouping-and-sorting", "Grouping & Sorting"],
           ["/react-native/docs/android/interaction", "Interaction"],
+          ["/react-native/docs/android/permissions", "Permissions"],
           ["/react-native/docs/android/progress-indicators", "Progress Indicators"],
           ["/react-native/docs/android/styles", "Styles"],
           ["/react-native/docs/android/timers", "Timers"],

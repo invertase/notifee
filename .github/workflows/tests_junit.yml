@@ -7,6 +7,8 @@ on:
       - '.github/workflows/*.yml'
       - 'android/**'
   push:
+    branches:
+      - main
     paths-ignore:
       - 'docs/**'
       - '**/*.md'

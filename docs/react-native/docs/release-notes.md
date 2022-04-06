@@ -5,11 +5,35 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.0.3
+- **[Android]**: Fixes an issue when canceling trigger notifications created via AlarmManager to prevent "Maximum limit of concurrent alarms 500 reached for uid" error being thrown (Fixes [#349](https://github.com/invertase/notifee/issues/349)).
+
+## 5.0.2
+- **[iOS]**: Fixes an issue with `NotificationSettings` returning the wrong property name for `authorizationStatus` on iOS (Fixes [#333](https://github.com/invertase/notifee/issues/333)).
+
+## 5.0.1
+- **[Android]**: Fixes an issue where quick actions always opens the app on Android 12 (Fixes [#315](https://github.com/invertase/notifee/issues/315)).
+- **[Android]**: Fixes an issue where a quick action with an id of `default` failed to open the app.
+
+## 5.0.0
+- **[Android/iOS] BREAKING CHANGE**: Added support for checking permissions on Android which introduces a breaking change to `requestPermission` and `getNotificationSettings` APIs.
+
+Both APIs have been updated to return an object of type `NotificationSettings`, in replace of `NotificationSettingsIOS`.
+
+`NotificationSettings` consists of two properties `authorizationStatus` and `ios`, where `ios` is a nested object of type `NotificationSettingsIOS`.
+
+To learn more, see Permissions documentation for [iOS](https://notifee.app/react-native/docs/ios/permissions), and [Android](https://notifee.app/react-native/docs/android/permissions).
+
+## 4.1.0
+- **[Android]**: Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
+- **[Android]**: Fixes an issue with Android 12 when tapping on a notification (Fixes [#250](https://github.com/invertase/notifee/issues/250))
+- **[Android]**: Fixes an issue when an action is pressed where the notification drawer would remain open with the notification (Fixes [#268](https://github.com/invertase/notifee/issues/268))
+
 ## 4.0.1
 - **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
 
 ## 4.0.0
-- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required is 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). **Please note, JDK11 is strongly recommended when using compile or target sdk 31**
+- **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required has increased to 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). You do not need to alter targetSdkVersion or anything else - but you *must* increase compileSdkVersion to 31. **Please note, JDK11 is strongly recommended when using compile or target sdk 31**. **Please note, we do not correctly handle the new "exact alarm" Android 12 restrictions so we recommend staying on targetSdkVersion 30 for now.**
 
 ## 3.0.4
 - **[Android]**: Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))

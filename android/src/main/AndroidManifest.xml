@@ -9,6 +9,7 @@
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+  <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" android:maxSdkVersion="30" />
 
   <application>
     <!-- Receiver Service -->
@@ -16,12 +17,20 @@
       android:name=".ReceiverService"
       android:exported="false" />
 
+    <activity
+      android:name="app.notifee.core.NotificationReceiverActivity"
+      android:noHistory="true"
+      android:excludeFromRecents="true"
+      android:taskAffinity=""
+      android:theme="@android:style/Theme.Translucent.NoTitleBar"
+      android:exported="true" />
+
     <!-- Foreground Service -->
     <service
       android:name=".ForegroundService"
       android:exported="false" />
 
-      <receiver
+    <receiver
         android:name=".RebootBroadcastReceiver"
         android:exported="false">
         <intent-filter>
@@ -31,6 +40,13 @@
         </intent-filter>
     </receiver>
 
+    <receiver
+      android:name=".AlarmPermissionBroadcastReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+      </intent-filter>
+    </receiver>
 
     <receiver
       android:name=".NotificationAlarmReceiver"

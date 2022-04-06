@@ -13,19 +13,21 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
     throw new Error("'action' expected an object value.");
   }
 
-  try {
-    validateAndroidPressAction(action.pressAction);
-  } catch (e: any) {
-    throw new Error(`'action' ${e.message}.`);
-  }
-
   if (!isString(action.title) || !action.title) {
     throw new Error("'action.title' expected a string value.");
   }
 
+  let pressAction;
+
+  try {
+    pressAction = validateAndroidPressAction(action.pressAction);
+  } catch (e: any) {
+    throw new Error(`'action' ${e.message}.`);
+  }
+
   const out: AndroidAction = {
-    pressAction: action.pressAction,
     title: action.title,
+    pressAction,
   };
 
   if (objectHasProperty(action, 'icon') && !isUndefined(action.icon)) {

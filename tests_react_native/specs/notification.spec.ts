@@ -8,6 +8,7 @@ import notifee, {
   TimestampTrigger,
   TriggerType,
   RepeatFrequency,
+  AndroidStyle,
 } from '@notifee/react-native';
 import { Platform } from 'react-native';
 
@@ -108,25 +109,65 @@ export function NotificationSpec(spec: TestScope): void {
       });
     });
 
-    spec.it('displays a empty notification', async function () {
-      return new Promise(async (resolve, reject) => {
-        return notifee
-          .displayNotification({
-            title: '',
-            body: '',
-            android: {
-              channelId: 'high',
-            },
-          })
-          .then(id => {
-            expect(id).equals(id);
-            resolve();
-          })
-          .catch(e => {
-            reject(e);
+    spec.it(
+      'displays a notification with AndroidStyle.BIGPICTURE and largeIcon as null',
+      async function () {
+        const testId = 'test-id';
+        const testLargeIcon = 'test-large-icon';
+        const testBigPicture = 'test-picture';
+
+        if (Platform.OS === 'ios') {
+          return;
+        }
+
+        return new Promise(async (resolve, reject) => {
+          const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
+            try {
+              expect(event.type).equals(EventType.DELIVERED);
+              expect(event.detail.notification?.id).equals(testId);
+
+              const androidNotification = event.detail.notification?.android;
+
+              expect(androidNotification.style.type).equals(AndroidStyle.BIGPICTURE);
+
+              if (androidNotification.style.type === AndroidStyle.BIGPICTURE) {
+                expect(androidNotification.style.picture).equals(testBigPicture);
+
+                expect(androidNotification.style.largeIcon).null;
+              }
+
+              unsubscribe();
+              resolve();
+            } catch (e) {
+              unsubscribe();
+              reject(e);
+            }
           });
-      });
-    });
+
+          await notifee
+            .displayNotification({
+              id: testId,
+              title: '',
+              body: '',
+              android: {
+                channelId: 'high',
+                largeIcon: testLargeIcon,
+                style: {
+                  type: AndroidStyle.BIGPICTURE,
+                  largeIcon: null,
+                  picture: testBigPicture,
+                },
+              },
+            })
+            .then(id => {
+              expect(id).equals(id);
+            })
+            .catch(e => {
+              reject(e);
+            });
+        });
+      },
+    );
 
     spec.describe('displayNotification with pressAction', function () {
       spec.it('displays a notification with a pressAction with id `default`', async function () {

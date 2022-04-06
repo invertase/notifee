@@ -157,6 +157,13 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void openAlarmPermissionSettings(Promise promise) {
+    Notifee.getInstance()
+        .openAlarmPermissionSettings(
+            getCurrentActivity(), (e, avoid) -> NotifeeReactUtils.promiseResolver(promise, e));
+  }
+
+  @ReactMethod
   public void createTriggerNotification(
       ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
     Notifee.getInstance()
@@ -213,6 +220,13 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule {
     Notifee.getInstance()
         .getInitialNotification(
             getCurrentActivity(),
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+  }
+
+  @ReactMethod
+  public void getNotificationSettings(Promise promise) {
+    Notifee.getInstance()
+        .getNotificationSettings(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
