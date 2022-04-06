@@ -56,7 +56,6 @@ android/gradle/
 coverage
 yarn.lock
 e2e/
-src/
 .github
 .vscode
 .nyc_output
@@ -66,7 +65,6 @@ android/.settings
 .eslintignore
 android/libs/notifee_core_debug.aar
 .editorconfig
-tsconfig.json
 type-test.ts
 .prettierrc
 .eslintrc.js
