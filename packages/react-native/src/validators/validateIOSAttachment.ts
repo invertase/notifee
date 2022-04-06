@@ -4,7 +4,7 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import { Image } from 'react-native';
 
 import {
   generateId,
@@ -42,7 +42,7 @@ export default function validateIOSAttachment(
   };
 
   if (isNumber(attachment.url) || isObject(attachment.url)) {
-    const image = resolveAssetSource(attachment.url);
+    const image = Image.resolveAssetSource(attachment.url);
     out.url = image.uri;
   }
 
