@@ -10,9 +10,18 @@ const withNotifeeProjectGradlePlugin: ConfigPlugin = config => {
       return { modResults, ...subConfig };
     }
 
+    modResults.contents = setCompileSdkVersion(modResults.contents);
     modResults.contents = setMavenRepository(modResults.contents);
     return { modResults, ...subConfig };
   });
+};
+
+const setCompileSdkVersion = (buildGradle: string): string => {
+  const pattern = /compileSdkVersion = 30/g;
+  if (!buildGradle.match(pattern)) {
+    return buildGradle;
+  }
+  return buildGradle.replace(/compileSdkVersion = 30/, `compileSdkVersion = 31`);
 };
 
 const setMavenRepository = (projectBuildGradle: string): string => {
@@ -25,5 +34,5 @@ const setMavenRepository = (projectBuildGradle: string): string => {
   );
 };
 
-export { setMavenRepository };
+export { setCompileSdkVersion, setMavenRepository };
 export default withNotifeeProjectGradlePlugin;
