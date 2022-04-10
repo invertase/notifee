@@ -4,7 +4,7 @@ import path from 'path';
 import { setCompileSdkVersion, setMavenRepository } from '../src/withNotifeeProjectGradlePlugin';
 
 describe('[Android] project build.gradle test', () => {
-  it('applies maven repository to project build.grade', async () => {
+  it('updates java compileSdkVersion to 31 in project build.gradle', async () => {
     let projectGradle = await fs.readFile(
       path.resolve(__dirname, '../fixtures/project.build.gradle'),
       {
