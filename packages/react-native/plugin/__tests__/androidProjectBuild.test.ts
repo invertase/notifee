@@ -19,7 +19,7 @@ describe('[Android] project build.gradle test', () => {
     console.log(projectGradle);
   });
 
-  it('applies maven repository to project build.grade', async () => {
+  it('adds custom maven repository to project build.gradle', async () => {
     let projectGradle = await fs.readFile(
       path.resolve(__dirname, '../fixtures/project.build.gradle'),
       {
