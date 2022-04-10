@@ -6,12 +6,16 @@ module.exports = {
     '\\.(ts|tsx)$': 'ts-jest',
   },
   rootDir: '..',
-  testMatch: ['<rootDir>/tests_react_native/__tests__/**/*.test.ts'],
+  testMatch: [
+    '<rootDir>/tests_react_native/__tests__/**/*.test.ts',
+    '<rootDir>/packages/react-native/plugin/__tests__/**/*.test.ts',
+  ],
   modulePaths: ['node_modules', '<rootDir>/tests_react_native/node_modules'],
   collectCoverage: true,
 
   collectCoverageFrom: [
     '<rootDir>/packages/react-native/src/**/*.{ts,tsx}',
+    '<rootDir>/packages/react-native/plugin/**/*.{ts,tsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
   ],
