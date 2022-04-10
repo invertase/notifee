@@ -30,7 +30,7 @@ class _NotificationList extends State<NotificationList> {
       }
 
       setState(() {
-        _notifications= [..._notifications, event.detail.notification!];
+        _notifications = [..._notifications, event.detail.notification!];
       });
     });
   }
@@ -48,10 +48,10 @@ class _NotificationList extends State<NotificationList> {
           NotifeeNotification notification = _notifications[index];
 
           return ListTile(
-            title: Text(
-                notification.title ?? 'no notification title available'),
-            subtitle:
-                Text(notification.body?.toString() ?? DateTime.now().toString()),
+            title:
+                Text(notification.title ?? 'no notification title available'),
+            subtitle: Text(
+                notification.body?.toString() ?? DateTime.now().toString()),
             onTap: () => Navigator.pushNamed(context, '/notification',
                 arguments: NotificationArguments(notification, false)),
           );

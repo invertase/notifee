@@ -30,8 +30,9 @@ class TriggerNotificationListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TriggerNotificationArguments args =
-    ModalRoute.of(context)!.settings.arguments! as TriggerNotificationArguments;
+    final TriggerNotificationArguments args = ModalRoute.of(context)!
+        .settings
+        .arguments! as TriggerNotificationArguments;
     TriggerNotification triggerNotification = args.triggerNotification;
     var trigger = args.triggerNotification.trigger;
 
@@ -41,66 +42,63 @@ class TriggerNotificationListItemView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                row('Notification ID', triggerNotification.notification.id),
-                row('Trigger', triggerNotification.trigger.toString()),
-                ...[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Trigger',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        if (trigger['type'] == TriggerType.interval ) ...[
-                          const SizedBox(height: 16),
-                          const Text(
-                            'Interval Trigger',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        row(
-                          'Type',
-                            TriggerType.interval.name
-                        ),
-                        row(
-                          'Interval',
-                          trigger['interval'],
-                        ),
-                        row(
-                          'Time Unit',
-                          trigger['timeUnit'],
-                        ),
-                        ],
-                        if (trigger['type'] == TriggerType.timestamp) ...[
-                          const SizedBox(height: 16),
-                          const Text(
-                            'Timestamp Trigger',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          row(
-                            'Timestamp',
-                          trigger['timestamp'].toString(),
-                          ),
-                          row(
-                            'Repeat Frequency',
-                              trigger['repeatFrequency'].toString(),
-                          ),
-                          row(
-                            'allowWhileIdle',
-                          trigger['allowWhileIdle'].toString(),
-                          ),
-                        ]
-                      ],
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            row('Notification ID', triggerNotification.notification.id),
+            row('Trigger', triggerNotification.trigger.toString()),
+            ...[
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Trigger',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  )
-                ]
-              ],
-            ),
-          )),
+                    if (trigger['type'] == TriggerType.interval) ...[
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Interval Trigger',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      row('Type', TriggerType.interval.name),
+                      row(
+                        'Interval',
+                        trigger['interval'],
+                      ),
+                      row(
+                        'Time Unit',
+                        trigger['timeUnit'],
+                      ),
+                    ],
+                    if (trigger['type'] == TriggerType.timestamp) ...[
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Timestamp Trigger',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      row(
+                        'Timestamp',
+                        trigger['timestamp'].toString(),
+                      ),
+                      row(
+                        'Repeat Frequency',
+                        trigger['repeatFrequency'].toString(),
+                      ),
+                      row(
+                        'allowWhileIdle',
+                        trigger['allowWhileIdle'].toString(),
+                      ),
+                    ]
+                  ],
+                ),
+              )
+            ]
+          ],
+        ),
+      )),
     );
   }
 }

@@ -31,6 +31,7 @@ export 'src/models/trigger_notification.dart';
 export 'src/models/notification/notification_android.dart';
 export 'src/models/notification/notification_ios.dart';
 export 'src/models/notification/notification.dart';
+export 'src/models/notification/notification_settings.dart';
 
 export 'src/models/trigger/interval_trigger.dart';
 export 'src/models/trigger/timestamp_trigger.dart';

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:example/permissions.dart';
 import 'package:example/trigger_notification_list.dart';
 import 'package:example/trigger_notification_list_item.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +21,6 @@ import 'notification_list.dart';
 
 /// Create a [Channel] for heads up notifications
 late Channel channel;
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,17 +67,18 @@ class Application extends StatefulWidget {
 }
 
 class _Application extends State<Application> {
-
   @override
   void initState() {
     super.initState();
-    notifee.getInitialNotification()
+    notifee
+        .getInitialNotification()
         .then((InitialNotification? initialNotification) {
       if (initialNotification != null) {
         Navigator.pushNamed(
           context,
           '/initialNotification',
-          arguments: NotificationArguments(initialNotification.notification, true),
+          arguments:
+              NotificationArguments(initialNotification.notification, true),
         );
       }
     });
@@ -93,7 +94,8 @@ class _Application extends State<Application> {
       Navigator.pushNamed(
         context,
         '/notification',
-        arguments: NotificationArguments(event.detail.notification!, event.type == EventType.press),
+        arguments: NotificationArguments(
+            event.detail.notification!, event.type == EventType.press),
       );
     });
   }
@@ -103,7 +105,8 @@ class _Application extends State<Application> {
       if (kDebugMode) {
         print('display Notification');
       }
-      await notifee.createChannel(Channel(id: 'general', name: 'General', importance: AndroidImportance.high));
+      await notifee.createChannel(Channel(
+          id: 'general', name: 'General', importance: AndroidImportance.high));
       NotifeeNotification notification = NotifeeNotification(
           title: "bA notification",
           body: "With a body",
@@ -157,17 +160,16 @@ class _Application extends State<Application> {
             print('Notifee Example: cancelDisplayedNotifications');
           }
           await notifee.cancelDisplayedNotifications();
-
         }
         break;
-      case 'permissions':
-        {
-          if (kDebugMode) {
-            print('Notifee Example: Permissions');
-          }
-          Navigator.pushNamed(context, '/permissions');
-        }
-        break;
+      // case 'permissions':
+      //   {
+      //     if (kDebugMode) {
+      //       print('Notifee Example: Permissions');
+      //     }
+      //     Navigator.pushNamed(context, '/permissions');
+      //   }
+      //   break;
       default:
         break;
     }
@@ -191,6 +193,7 @@ class _Application extends State<Application> {
                   value: 'getTriggerNotifications',
                   child: Text('Trigger Notifications'),
                 ),
+
                 const PopupMenuItem(
                   value: 'getChannels',
                   child: Text('Channels'),
@@ -214,8 +217,7 @@ class _Application extends State<Application> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
-            // MetaCard('Permissions', Permissions()),
+            MetaCard('Permissions', Permissions()),
             MetaCard('Notification Stream', NotificationList()),
           ],
         ),

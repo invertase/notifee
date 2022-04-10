@@ -10,7 +10,7 @@ void testsMain() {
   group('requestPermission', () {
     test(
       'authorizationStatus returns AuthorizationStatus.authorized on Android',
-          () async {
+      () async {
         final result = await notifee.requestPermission();
         expect(result, isA<IOSNotificationPermissions>());
         // expect(result.authorizationStatus, AuthorizationStatus.authorized);
@@ -19,12 +19,11 @@ void testsMain() {
     );
   });
 
-
-    group('getInitialMessage', () {
-      test('returns null when no initial message', () async {
-        expect(await notifee.getInitialNotification(), null);
-      });
+  group('getInitialMessage', () {
+    test('returns null when no initial message', () async {
+      expect(await notifee.getInitialNotification(), null);
     });
+  });
 }
 
 void main() => drive.main(testsMain);

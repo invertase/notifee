@@ -202,7 +202,7 @@ class NotifeePlatform extends PlatformInterface {
     throw UnimplementedError('getNotificationCategories() is not implemented');
   }
 
-  Future<Object> getNotificationSettings() async {
+  Future<NotificationSettings> getNotificationSettings() async {
     throw UnimplementedError('getNotificationSettings() is not implemented');
   }
 
@@ -231,7 +231,7 @@ class NotifeePlatform extends PlatformInterface {
     throw UnimplementedError('getPowerManagerInfo() is not implemented');
   }
 
-  Future<Object> requestPermission(
+  Future<NotificationSettings> requestPermission(
       [IOSNotificationPermissions? permissions]) async {
     throw UnimplementedError('requestPermission() is not implemented');
   }
@@ -240,11 +240,11 @@ class NotifeePlatform extends PlatformInterface {
     throw UnimplementedError('setBadgeCount() is not implemented');
   }
 
-  Future<void> setNotificationCategories(List<IOSNotificationCategory> categories) async {
+  Future<void> setNotificationCategories(
+      List<IOSNotificationCategory> categories) async {
     throw UnimplementedError('setNotificationCategories() is not implemented');
   }
 
-  // TODO on background event
   /// Sends a new event via a [Stream] whenever the Installation ID changes.
   Stream<Event> get onForegroundEvent {
     throw UnimplementedError('get onForegroundEvent is not implemented');

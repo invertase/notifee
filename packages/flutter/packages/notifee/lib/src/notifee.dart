@@ -150,14 +150,15 @@ Future<void> openNotificationSettings([String? channelId]) async {
   return _delegate.openNotificationSettings(channelId);
 }
 
-Future<Object> requestPermission(
+Future<NotificationSettings> requestPermission(
     [IOSNotificationPermissions? permissions]) async {
   return _delegate.requestPermission(permissions);
 }
 
 // TODO register foreground service
 
-Future<void> setNotificationCategories(List<IOSNotificationCategory> categories) async {
+Future<void> setNotificationCategories(
+    List<IOSNotificationCategory> categories) async {
   return _delegate.setNotificationCategories(categories);
 }
 
@@ -165,7 +166,7 @@ Future<List<IOSNotificationCategory>> getNotificationCategories() async {
   return _delegate.getNotificationCategories();
 }
 
-Future<Object> getNotificationSettings() async {
+Future<NotificationSettings> getNotificationSettings() async {
   return _delegate.getNotificationSettings();
 }
 

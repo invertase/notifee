@@ -28,7 +28,6 @@ import app.notifee.core.interfaces.EventListener;
 import io.flutter.plugin.common.EventChannel.EventSink;
 import io.flutter.plugins.notifee.background.BackgroundUtils;
 import io.flutter.plugins.notifee.background.FlutterBackgroundService;
-import javax.security.auth.callback.CallbackHandler;
 
 public class NotifeeEventSubscriber implements EventListener {
   protected EventSink eventSink;

@@ -17,7 +17,6 @@ package io.flutter.plugins.notifee;
  *
  */
 
-import static app.notifee.core.Notifee.configure;
 import static io.flutter.plugins.notifee.Utils.convertBundleListToMap;
 import static io.flutter.plugins.notifee.Utils.convertBundleToMap;
 import static io.flutter.plugins.notifee.Utils.mapToBundle;
@@ -25,12 +24,8 @@ import static io.flutter.plugins.notifee.Utils.mapToBundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.json.JSONException;
-
 import app.notifee.core.ContextHolder;
 import app.notifee.core.Notifee;
 import io.flutter.embedding.engine.FlutterShellArgs;
@@ -44,10 +39,9 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.notifee.background.FlutterBackgroundService;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.json.JSONException;
 
 /** NotifeePlugin */
 public class NotifeePlugin
@@ -119,101 +113,101 @@ public class NotifeePlugin
     Bundle bundle = mapToBundle(arguments);
 
     Notifee.getInstance()
-      .createTriggerNotification(
-        bundle.getBundle("notification"),
-        bundle.getBundle("trigger"),
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .createTriggerNotification(
+            bundle.getBundle("notification"),
+            bundle.getBundle("trigger"),
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void cancelAllNotifications(Map<String, Object> arguments, final Result result) {
     Notifee.getInstance()
-      .cancelAllNotifications(
-        (int) arguments.get("type"),
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .cancelAllNotifications(
+            (int) arguments.get("type"),
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void cancelAllNotificationsWithIds(Map<String, Object> arguments, final Result result) {
     Notifee.getInstance()
-      .cancelAllNotificationsWithIds(
-        (int) arguments.get("type"),
-        (List<String>) arguments.get("ids"),
-        (String) arguments.get("tag"),
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .cancelAllNotificationsWithIds(
+            (int) arguments.get("type"),
+            (List<String>) arguments.get("ids"),
+            (String) arguments.get("tag"),
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void getTriggerNotificationIds(final Result result) {
     Notifee.getInstance()
-      .getTriggerNotificationIds(
-        (e, aList) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(aList);
-        });
+        .getTriggerNotificationIds(
+            (e, aList) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(aList);
+            });
   }
 
   private void getTriggerNotifications(final Result result) {
     Notifee.getInstance()
-      .getTriggerNotifications(
-        (e, aList) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getTriggerNotifications(
+            (e, aList) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleListToMap(aList));
-          } catch (JSONException jsonException)  {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleListToMap(aList));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void getDisplayedNotifications(final Result result) {
     Notifee.getInstance()
-      .getDisplayedNotifications(
-        (e, aList) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getDisplayedNotifications(
+            (e, aList) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleListToMap(aList));
-          } catch (JSONException jsonException)  {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleListToMap(aList));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void getInitialNotification(final Result result) {
     Notifee.getInstance()
-      .getInitialNotification(
-        this.mainActivity,
-        (e, aBundle) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getInitialNotification(
+            this.mainActivity,
+            (e, aBundle) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleToMap(aBundle));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleToMap(aBundle));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void createChannel(Map<String, Object> arguments, final Result result) {
@@ -240,14 +234,14 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .createChannelGroup(
-        mapToBundle(arguments),
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .createChannelGroup(
+            mapToBundle(arguments),
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void deleteChannel(String channelId, final Result result) {
@@ -257,14 +251,14 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .deleteChannel(
-        channelId,
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .deleteChannel(
+            channelId,
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void deleteChannelGroup(String channelGroupId, final Result result) {
@@ -274,14 +268,14 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .deleteChannelGroup(
-        channelGroupId,
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .deleteChannelGroup(
+            channelGroupId,
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void getChannel(String channelId, final Result result) {
@@ -291,19 +285,19 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .getChannel(
-        channelId,
-        (e, aBundle) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getChannel(
+            channelId,
+            (e, aBundle) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleToMap(aBundle));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleToMap(aBundle));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void getChannelGroup(String channelGroupId, final Result result) {
@@ -313,19 +307,19 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .getChannel(
-        channelGroupId,
-        (e, aBundle) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getChannel(
+            channelGroupId,
+            (e, aBundle) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleToMap(aBundle));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleToMap(aBundle));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void getChannels(final Result result) {
@@ -335,18 +329,18 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .getChannels(
-        (e, aList) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getChannels(
+            (e, aList) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleListToMap(aList));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleListToMap(aList));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void getChannelGroups(final Result result) {
@@ -356,18 +350,18 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .getChannelGroups(
-        (e, aList) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
+        .getChannelGroups(
+            (e, aList) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
 
-          try {
-            result.success(convertBundleListToMap(aList));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+              try {
+                result.success(convertBundleListToMap(aList));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void isChannelCreated(String channelId, final Result result) {
@@ -377,14 +371,14 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .isChannelCreated(
-        channelId,
-        (e, aBool) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(aBool);
-        });
+        .isChannelCreated(
+            channelId,
+            (e, aBool) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(aBool);
+            });
   }
 
   private void isChannelBlocked(String channelId, final Result result) {
@@ -394,79 +388,78 @@ public class NotifeePlugin
     }
 
     Notifee.getInstance()
-      .isChannelBlocked(
-        channelId,
-        (e, aBool) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(aBool);
-        });
+        .isChannelBlocked(
+            channelId,
+            (e, aBool) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(aBool);
+            });
   }
 
   private void openNotificationSettings(@Nullable String channelId, final Result result) {
     Notifee.getInstance()
-      .openNotificationSettings(
-        channelId,
-        mainActivity,
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .openNotificationSettings(
+            channelId,
+            mainActivity,
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void openPowerManagerSettings(final Result result) {
     Notifee.getInstance()
-      .openPowerManagerSettings(
-        mainActivity,
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .openPowerManagerSettings(
+            mainActivity,
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
 
   private void getPowerManagerInfo(final Result result) {
     Notifee.getInstance()
-      .getPowerManagerInfo(
-        (e, aBundle) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          try {
-            result.success(convertBundleToMap(aBundle));
-          } catch (JSONException jsonException) {
-            result.error(jsonException.toString(), null, null);
-          }
-        });
+        .getPowerManagerInfo(
+            (e, aBundle) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              try {
+                result.success(convertBundleToMap(aBundle));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
   }
 
   private void isBatteryOptimizationEnabled(final Result result) {
     Notifee.getInstance()
-      .isBatteryOptimizationEnabled(
-        (e, aBool) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(aBool);
-        });
+        .isBatteryOptimizationEnabled(
+            (e, aBool) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(aBool);
+            });
   }
 
   private void openBatteryOptimizationSettings(final Result result) {
     Notifee.getInstance()
-      .openBatteryOptimizationSettings(
-        mainActivity,
-        (e, aVoid) -> {
-          if (e != null) {
-            result.error(e.toString(), null, null);
-          }
-          result.success(null);
-        });
+        .openBatteryOptimizationSettings(
+            mainActivity,
+            (e, aVoid) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              result.success(null);
+            });
   }
-
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
@@ -509,7 +502,7 @@ public class NotifeePlugin
     } else if (call.method.equals("isChannelBlocked")) {
       isChannelBlocked((String) call.arguments, result);
     } else if (call.method.equals("hideNotificationDrawer")) {
-//      hideNotificationDrawer(result);
+      //      hideNotificationDrawer(result);
     } else if (call.method.equals("openNotificationSettings")) {
       openNotificationSettings((String) call.arguments, result);
     } else if (call.method.equals("openPowerManagerSettings")) {

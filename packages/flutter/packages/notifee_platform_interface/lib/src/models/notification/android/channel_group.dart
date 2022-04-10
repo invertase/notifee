@@ -16,16 +16,13 @@
  */
 
 class ChannelGroup {
-  ChannelGroup(
-      {required this.id,
-        required this.name,
-        this.description});
+  ChannelGroup({required this.id, required this.name, this.description});
 
   factory ChannelGroup.fromMap(Map<String, dynamic> map) {
     return ChannelGroup(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      description: map['description'] as String?);
+        id: map['id'] as String,
+        name: map['name'] as String,
+        description: map['description'] as String?);
   }
 
   String id;

@@ -18,16 +18,14 @@
 import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 class TriggerNotification {
-  TriggerNotification(
-      {required this.notification, required this.trigger});
+  TriggerNotification({required this.notification, required this.trigger});
 
   NotifeeNotification notification;
   Map<String, dynamic> trigger;
 
   factory TriggerNotification.fromMap(Map<String, dynamic> map) =>
       TriggerNotification(
-        notification: NotifeeNotification.fromMap(
-            Map<String, dynamic>.from(map['notification'] as Map)),
-        trigger: map['trigger']
-      );
+          notification: NotifeeNotification.fromMap(
+              Map<String, dynamic>.from(map['notification'] as Map)),
+          trigger: map['trigger']);
 }

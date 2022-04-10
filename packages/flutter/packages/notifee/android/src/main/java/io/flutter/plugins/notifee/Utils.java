@@ -21,22 +21,18 @@ import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.Bundle;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import app.notifee.core.ContextHolder;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.utility.ObjectUtils;
-
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Utils {
   public static Bundle mapToBundle(Map<String, Object> map) {
@@ -62,7 +58,8 @@ public class Utils {
     return bundle;
   }
 
-  public static List<Map<String, Object>> convertBundleListToMap(List<Bundle> bundleList) throws JSONException {
+  public static List<Map<String, Object>> convertBundleListToMap(List<Bundle> bundleList)
+      throws JSONException {
     List<Map<String, Object>> mapList = new ArrayList<>();
     for (Bundle bundle : bundleList) {
       mapList.add(convertBundleToMap(bundle));
@@ -78,7 +75,7 @@ public class Utils {
       try {
         // json.put(key, bundle.get(key)); see edit below
         json.put(key, JSONObject.wrap(bundle.get(key)));
-      } catch(JSONException e) {
+      } catch (JSONException e) {
         //Handle exception here
       }
     }
@@ -91,11 +88,11 @@ public class Utils {
 
     String key;
     Object object;
-    for(Iterator iterator = jsonObject.keys(); iterator.hasNext(); map.put(key, object)) {
+    for (Iterator iterator = jsonObject.keys(); iterator.hasNext(); map.put(key, object)) {
       if ((object = jsonObject.get(key = (String) iterator.next())) instanceof JSONArray) {
-        object = convertJsonArrayTolist((JSONArray)object);
+        object = convertJsonArrayTolist((JSONArray) object);
       } else if (object instanceof JSONObject) {
-        object = convertJsonToMap((JSONObject)object);
+        object = convertJsonToMap((JSONObject) object);
       }
     }
 
@@ -105,12 +102,12 @@ public class Utils {
   public static List<Object> convertJsonArrayTolist(JSONArray jsonArray) throws JSONException {
     ArrayList arrayList = new ArrayList();
 
-    for(int i = 0; i < jsonArray.length(); ++i) {
+    for (int i = 0; i < jsonArray.length(); ++i) {
       Object object;
       if ((object = jsonArray.get(i)) instanceof JSONArray) {
-        object = convertJsonArrayTolist((JSONArray)object);
+        object = convertJsonArrayTolist((JSONArray) object);
       } else if (object instanceof JSONObject) {
-        object = convertJsonToMap((JSONObject)object);
+        object = convertJsonToMap((JSONObject) object);
       }
 
       arrayList.add(object);

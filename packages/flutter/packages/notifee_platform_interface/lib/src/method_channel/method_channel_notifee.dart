@@ -23,12 +23,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
-enum NotificationType {
-  all,
-  displayed,
-  trigger
-}
-
+enum NotificationType { all, displayed, trigger }
 
 // This is the entrypoint for the background isolate. Since we can only enter
 // an isolate once, we setup a MethodChannel to listen for method invocations
@@ -185,65 +180,78 @@ class MethodChannelNotifee extends NotifeePlatform {
 
   @override
   Future<void> cancelAllNotifications(
-      {List<String>? notificationIds, String? tag, NotificationType? type }) async {
+      {List<String>? notificationIds,
+      String? tag,
+      NotificationType? type}) async {
     if (notificationIds != null && notificationIds.isNotEmpty) {
       await channel.invokeMethod<List<String>>(
-          'cancelAllNotificationsWithIds', <String, dynamic>{ 'notificationIds': notificationIds, 'type': type ?? NotificationType.all} );
+          'cancelAllNotificationsWithIds', <String, dynamic>{
+        'notificationIds': notificationIds,
+        'type': type ?? NotificationType.all
+      });
     }
-    await channel.invokeMethod('cancelAllNotifications', <String, dynamic>{'type': type != null ? type.index : NotificationType.all.index});
+    await channel.invokeMethod('cancelAllNotifications', <String, dynamic>{
+      'type': type != null ? type.index : NotificationType.all.index
+    });
   }
 
   @override
   Future<void> cancelDisplayedNotifications(
       {List<String>? notificationIds, String? tag}) async {
-      await cancelAllNotifications(notificationIds: notificationIds, tag: tag, type: NotificationType.displayed);
+    await cancelAllNotifications(
+        notificationIds: notificationIds,
+        tag: tag,
+        type: NotificationType.displayed);
   }
 
   @override
   Future<void> cancelNotification(
       {required String notificationId, String? tag}) async {
-
-    await cancelAllNotifications(notificationIds: [notificationId], tag: tag, type: NotificationType.displayed);
+    await cancelAllNotifications(
+        notificationIds: [notificationId],
+        tag: tag,
+        type: NotificationType.displayed);
   }
 
   @override
   Future<void> cancelTriggerNotifications(
       {List<String>? notificationIds, String? tag}) async {
-    await cancelAllNotifications(notificationIds: notificationIds, tag: tag, type: NotificationType.trigger);
+    await cancelAllNotifications(
+        notificationIds: notificationIds,
+        tag: tag,
+        type: NotificationType.trigger);
   }
 
-  // TODO: RETURN SETTINGS
   @override
-  Future<Object> requestPermission(
+  Future<NotificationSettings> requestPermission(
       [IOSNotificationPermissions? permissions]) async {
     if (defaultTargetPlatform != TargetPlatform.iOS) {
-      return {};
+      return getNotificationSettings();
     }
 
-    Object? settings = await channel.invokeMethod<Object>(
+    Map<String, dynamic>? results = await channel.invokeMapMethod<String, dynamic>(
         'requestPermission', permissions?.asMap() ?? {});
-    return settings!;
+    return NotificationSettings.fromMap(results!);
   }
 
-  // TODO
   @override
-  Future<Object> getNotificationSettings() async {
-    Object? settings =
-        await channel.invokeMethod<Object>('getNotificationSettings');
-    return settings!;
+  Future<NotificationSettings> getNotificationSettings() async {
+    Map<String, dynamic>? results =
+        await channel.invokeMapMethod<String, dynamic>('getNotificationSettings');
+    return NotificationSettings.fromMap(results!);
   }
 
   @override
   Future<List<Object>> getDisplayedNotifications() async {
-    List<Object>? result =
+    List<Object>? results =
         await channel.invokeListMethod('getDisplayedNotifications');
-    return result!;
+    return results!;
   }
 
   @override
   Future<InitialNotification?> getInitialNotification() async {
-    Map<String, dynamic>? initialNotification =
-        await channel.invokeMapMethod<String, dynamic>('getInitialNotification');
+    Map<String, dynamic>? initialNotification = await channel
+        .invokeMapMethod<String, dynamic>('getInitialNotification');
     return InitialNotification.fromMap(initialNotification!);
   }
 
@@ -256,9 +264,10 @@ class MethodChannelNotifee extends NotifeePlatform {
 
   @override
   Future<List<TriggerNotification>> getTriggerNotifications() async {
-    final List<Map<String, dynamic>>? result =
-        await channel.invokeListMethod<Map<String, dynamic>>('getTriggerNotifications');
-    return (result?.map((e) => TriggerNotification.fromMap(e)).toList()) as List<TriggerNotification>;
+    final List<Map<String, dynamic>>? result = await channel
+        .invokeListMethod<Map<String, dynamic>>('getTriggerNotifications');
+    return (result?.map((e) => TriggerNotification.fromMap(e)).toList())
+        as List<TriggerNotification>;
   }
 
   // iOS
@@ -297,7 +306,8 @@ class MethodChannelNotifee extends NotifeePlatform {
   }
 
   @override
-  Future<void> setNotificationCategories(List<IOSNotificationCategory> categories) async {
+  Future<void> setNotificationCategories(
+      List<IOSNotificationCategory> categories) async {
     if (defaultTargetPlatform != TargetPlatform.iOS) {
       return;
     }
@@ -310,10 +320,11 @@ class MethodChannelNotifee extends NotifeePlatform {
       return [];
     }
 
-    List<Map<String, dynamic>>? categories =
-        await channel.invokeListMethod<Map<String, dynamic>>('getNotificationCategories');
+    List<Map<String, dynamic>>? categories = await channel
+        .invokeListMethod<Map<String, dynamic>>('getNotificationCategories');
 
-    return (categories?.map((e) => IOSNotificationCategory.fromMap(e)).toList()) as List<IOSNotificationCategory>;
+    return (categories?.map((e) => IOSNotificationCategory.fromMap(e)).toList())
+        as List<IOSNotificationCategory>;
   }
 
   // Android
@@ -386,7 +397,8 @@ class MethodChannelNotifee extends NotifeePlatform {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return null;
     }
-    Map<String, dynamic>? result = await channel.invokeMapMethod<String, dynamic>('getChannel', channelId);
+    Map<String, dynamic>? result =
+        await channel.invokeMapMethod<String, dynamic>('getChannel', channelId);
     return Channel.fromMap(result!);
   }
 
@@ -395,7 +407,8 @@ class MethodChannelNotifee extends NotifeePlatform {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return null;
     }
-    Map<String, dynamic>? result = await channel.invokeMapMethod<String, dynamic>('getChannelGroup', channelGroupId);
+    Map<String, dynamic>? result = await channel
+        .invokeMapMethod<String, dynamic>('getChannelGroup', channelGroupId);
     return ChannelGroup.fromMap(result!);
   }
 
@@ -404,8 +417,10 @@ class MethodChannelNotifee extends NotifeePlatform {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return [];
     }
-    List<Map<String, dynamic>>? result = await channel.invokeListMethod<Map<String, dynamic>>('getChannelGroups');
-    return (result?.map((e) => ChannelGroup.fromMap(e)).toList()) as List<ChannelGroup>;
+    List<Map<String, dynamic>>? result = await channel
+        .invokeListMethod<Map<String, dynamic>>('getChannelGroups');
+    return (result?.map((e) => ChannelGroup.fromMap(e)).toList())
+        as List<ChannelGroup>;
   }
 
   @override
