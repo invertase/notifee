@@ -15,11 +15,10 @@
  *
  */
 
-import 'ios/foreground_presentation_options.dart';
-import 'ios/ios_notification_attachment.dart';
+import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
+/// The interface for iOS specific options which are applied to a notification.
 class NotificationIOS {
-  // todo params
   NotificationIOS(
       {this.attachments,
       this.badgeCount,
@@ -37,17 +36,57 @@ class NotificationIOS {
             ForegroundPresentationOptions(
                 alert: true, badge: true, sound: true);
 
+  /// Optional array of [IOSNotificationAttachment] interfaces
+  /// Attachments allow audio, image, or video content to be displayed with the notification, enriching the user's experience.
   List<IOSNotificationAttachment>? attachments;
+
+  /// The application badge count number. Set to null to indicate no change, or 0 to hide.
   int? badgeCount;
+
+  /// Optional property to customise how notifications are presented when the app is in the foreground.
+  /// By default, notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
   ForegroundPresentationOptions? foregroundPresentationOptions;
+
+  /// The id of a registered [IOSCategory] (via the [setNotificationCategories] API) that will be used to determine the
+  /// appropriate actions to display for the notification.
   String? categoryId;
+
+  /// The launch image that will be used when the app is opened from this notification.
   String? launchImageName;
+
+  /// The name of the sound file to be played.
+  ///
+  /// The sound must be in the Library/Sounds folder of the app's data container or
+  /// the Library/Sounds folder of an app group data container.
   String? sound;
+
+  /// If the notification is a critical alert set this property to true; critical alerts will bypass
+  /// the mute switch and also bypass Do Not Disturb.
+  /// iOS >= 12
   bool? critical;
+
+  /// The optional audio volume of the critical sound; a float value between 0.0 and 1.0.
+  /// This property is not used unless the `critical: true` option is also set.
+  /// iOS >= 12
   int? criticalVolume;
+
+  /// A unique id for the thread or conversation related to this notification.
+  /// This will be used to visually group notifications together.
   String? threadId;
+
+  /// The argument that is inserted in the IOSCategory.summaryFormat for this notification.
+  /// iOS >= 12
   String? summaryArgument;
+
+  /// A number that indicates how many items in the summary are being represented.
+  ///
+  /// For example if a messages app sends one notification for 3 new messages in a group chat,
+  /// the summaryArgument could be the name of the group chat and the [summaryArgumentCount] should be 3.
   int? summaryArgumentCount;
+
+  /// The identifier for the window to be opened when the user taps a notification.
+  /// This value determines the window brought forward when the user taps this notification on iPadOS.
+  /// iOS >= 13
   String? targetContentId;
 
   factory NotificationIOS.fromMap(Map<String, dynamic> map) => NotificationIOS(

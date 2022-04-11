@@ -16,18 +16,27 @@
  */
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notifee_platform_interface/src/models/trigger/time_unit.dart';
 import 'package:notifee_platform_interface/src/models/trigger/trigger_type.dart';
 
+/// Interface for building a trigger that repeats at a specified interval.
 class IntervalTrigger {
   IntervalTrigger({required this.interval, this.timeUnit}) {
     timeUnit = TimeUnit.seconds;
   }
 
+  /// Constant enum value used to identify the trigger type.
   TriggerType type = TriggerType.interval;
 
+  /// How frequently the notification should be repeated.
+  ///
+  /// For example, if set to 30, the notification will be displayed every 30 minutes.
+  /// Must be set to a minimum of 15 minutes.
   int interval;
 
+  /// The unit of time that the `interval` is measured in
+  ///
+  /// For example, if set to `TimeUnit.days` and repeat interval is set to 3, the notification will repeat every 3 days
+  ///  Defaults to `TimeUnit.seconds`
   TimeUnit? timeUnit;
 
   factory IntervalTrigger.fromMap(Map<String, dynamic> map) => IntervalTrigger(
@@ -42,3 +51,13 @@ class IntervalTrigger {
     };
   }
 }
+
+/// An interface representing the different units of time which can be used with [IntervalTrigger].
+enum TimeUnit { seconds, minutes, hours, days }
+
+const timeUnitMap = {
+  TimeUnit.seconds: 'SECONDS',
+  TimeUnit.minutes: 'MINUTES',
+  TimeUnit.hours: 'HOURS',
+  TimeUnit.days: 'DAYS',
+};

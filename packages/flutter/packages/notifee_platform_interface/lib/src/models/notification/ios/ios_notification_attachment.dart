@@ -15,8 +15,8 @@
  *
  */
 
+import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 import '../../../utils/generate_id.dart';
-import 'ios_attachment_thumbnail_clipping_rect.dart';
 
 class IOSNotificationAttachment {
   IOSNotificationAttachment(

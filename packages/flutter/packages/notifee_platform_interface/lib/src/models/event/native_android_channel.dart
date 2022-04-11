@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-
+// TODO: properties
 class NativeAndroidChannel {
   NativeAndroidChannel();
 

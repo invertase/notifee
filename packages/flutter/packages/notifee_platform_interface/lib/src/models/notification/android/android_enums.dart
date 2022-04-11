@@ -15,6 +15,19 @@
  *
  */
 
+/// Enum used to define how a notification badge is displayed in badge mode.
+enum AndroidBadgeIconType {
+  /// No badge is displayed, will always show as a number.
+  none,
+
+  /// Shows the badge as the notifications `smallIcon`.
+  small,
+
+  /// Shows the badge as the notifications `largeIcon` (if available).
+  /// This is the default value used by a notification if not provided.
+  large,
+}
+
 /// An enum representing a notification or channel importance on Android.
 enum AndroidImportance {
   /// When a notification is received, the device smallIcon will appear in the notification shade.
@@ -42,4 +55,24 @@ const androidImportanceMap = {
   AndroidImportance.low: 2,
   AndroidImportance.min: 1,
   AndroidImportance.none: 0,
+};
+
+/// An enum representing the visibility level of a notification on Android.
+///
+/// Default value is `AndroidVisibility.PRIVATE`.
+enum AndroidVisibility {
+  /// Show this notification on all lock-screens, but conceal sensitive or private information on secure lock-screens.
+  private,
+
+  /// Show this notification in its entirety on all lock-screens.
+  public,
+
+  /// Do not reveal any part of this notification on a secure lock-screen.
+  secret
+}
+
+const androidVisibilityMap = {
+  AndroidVisibility.private: 0,
+  AndroidVisibility.public: 1,
+  AndroidVisibility.secret: -1,
 };

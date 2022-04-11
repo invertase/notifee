@@ -20,10 +20,8 @@ class _Permissions extends State<Permissions> {
       _fetching = true;
     });
 
-    NotificationSettings settings =
-    await notifee.requestPermission(
-      IOSNotificationPermissions(alert: true)
-    );
+    NotificationSettings settings = await notifee
+        .requestPermission(IOSNotificationPermissions(alert: true));
 
     setState(() {
       _requested = true;
@@ -37,8 +35,7 @@ class _Permissions extends State<Permissions> {
       _fetching = true;
     });
 
-    NotificationSettings settings =
-    await notifee.getNotificationSettings();
+    NotificationSettings settings = await notifee.getNotificationSettings();
 
     setState(() {
       _requested = true;
@@ -81,14 +78,19 @@ class _Permissions extends State<Permissions> {
           style: TextStyle(fontSize: 18),
         ),
         row('Alert', settingsMap[_settings.iosNotificationSetting.alert]!),
-        row('Announcement', settingsMap[_settings.iosNotificationSetting.announcement]!),
+        row('Announcement',
+            settingsMap[_settings.iosNotificationSetting.announcement]!),
         row('Badge', settingsMap[_settings.iosNotificationSetting.badge]!),
         row('Car Play', settingsMap[_settings.iosNotificationSetting.carPlay]!),
-        row('Lock Screen', settingsMap[_settings.iosNotificationSetting.lockScreen]!),
-        row('Notification Center', settingsMap[_settings.iosNotificationSetting.notificationCenter]!),
-        row('Show Previews', previewMap[_settings.iosNotificationSetting.showPreviews]!),
+        row('Lock Screen',
+            settingsMap[_settings.iosNotificationSetting.lockScreen]!),
+        row('Notification Center',
+            settingsMap[_settings.iosNotificationSetting.notificationCenter]!),
+        row('Show Previews',
+            previewMap[_settings.iosNotificationSetting.showPreviews]!),
         row('Sound', settingsMap[_settings.iosNotificationSetting.sound]!),
-        row('Critical', settingsMap[_settings.iosNotificationSetting.criticalAlert]!),
+        row('Critical',
+            settingsMap[_settings.iosNotificationSetting.criticalAlert]!),
       ],
       ...[
         const SizedBox(height: 16),

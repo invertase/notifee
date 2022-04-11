@@ -16,8 +16,7 @@
  */
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notifee_platform_interface/src/models/notification/android/android_importance.dart';
-import 'package:notifee_platform_interface/src/models/notification/android/android_visibility.dart';
+import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 class Channel {
   Channel(

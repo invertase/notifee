@@ -27,8 +27,22 @@ class TimestampTrigger {
 
   TriggerType type = TriggerType.timestamp;
 
+  /// The timestamp when the notification should first be shown, in milliseconds since 1970.
   int timestamp;
+
+  /// The frequency at which the trigger repeats.
+  /// If unset, the notification will only be displayed once.
+  ///
+  /// For example:
+  ///  if set to [RepeatFrequency.hourly], the notification will repeat every hour from the timestamp specified.
+  ///  if set to [RepeatFrequency.daily], the notification will repeat every day from the timestamp specified.
+  ///  if set to [RepeatFrequency.weekly], the notification will repeat every week from the timestamp specified.
   RepeatFrequency? repeatFrequency;
+
+  /// Sets whether your trigger notification should be displayed even when the system is in low-power idle modes.
+  ///
+  /// Defaults to `false`.
+  /// Android only
   bool? allowWhileIdle;
 
   factory TimestampTrigger.fromMap(Map map) => TimestampTrigger(
@@ -47,3 +61,13 @@ class TimestampTrigger {
     };
   }
 }
+
+/// An interface representing the different frequencies which can be used with [TimestampTrigger].
+enum RepeatFrequency { none, hourly, daily, weekly }
+
+const repeatFrequencyMap = {
+  RepeatFrequency.none: -1,
+  RepeatFrequency.hourly: 0,
+  RepeatFrequency.daily: 1,
+  RepeatFrequency.weekly: 2,
+};

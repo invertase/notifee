@@ -21,8 +21,18 @@ class InitialNotification {
   InitialNotification(
       {required this.notification, required this.pressAction, this.input});
 
+  ///  The notification which the user interacted with, which caused the application to open.
   NotifeeNotification notification;
+
+  /// The press action which the user interacted with, on the notification, which caused the application to open.
   Object pressAction;
+
+  /// The input from a notification action.
+  ///
+  /// The input detail is available when the [EventType] is [EventType.ACTION_PRESS] or
+  /// if the notification quick action has input enabled.
+  ///
+  /// Android API Level >= 20
   String? input;
 
   factory InitialNotification.fromMap(Map<String, dynamic> map) =>

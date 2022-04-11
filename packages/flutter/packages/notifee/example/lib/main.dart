@@ -15,9 +15,9 @@ import 'notification_list.dart';
 /// call.
 ///
 /// To verify things are working, check out the native platform logs.
-// Future<void> _notifeeBackgroundHandler(Event event) async {
-//   print('Handling a background event ${notification.id}');
-// }
+Future<void> _notifeeBackgroundHandler(Event event) async {
+  print('Handling a background event ${event.type}');
+}
 
 /// Create a [Channel] for heads up notifications
 late Channel channel;
@@ -26,7 +26,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Set the background handler early on, as a named top-level function
-  // Notifee.onBackgroundEvent(_notifeeBackgroundHandler);
+  notifee.onBackgroundEvent(_notifeeBackgroundHandler);
 
   channel = Channel(
     id: 'high_importance_channel',
@@ -193,7 +193,6 @@ class _Application extends State<Application> {
                   value: 'getTriggerNotifications',
                   child: Text('Trigger Notifications'),
                 ),
-
                 const PopupMenuItem(
                   value: 'getChannels',
                   child: Text('Channels'),

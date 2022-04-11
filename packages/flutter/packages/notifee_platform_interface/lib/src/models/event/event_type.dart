@@ -15,68 +15,49 @@
  *
  */
 
-/// An enum representing an event type, defined on [`Event`](/react-native/reference/event).
-/// View the [Events](/react-native/docs/events) documentation to learn more about foreground and
-/// background events.
-///
+/// An enum representing an event type, defined on [Event]
 enum EventType {
-  ///
   /// Event type is sent when the user dismisses a notification. This is triggered via the user swiping
   /// the notification from the notification shade or performing "Clear all" notifications.
   ///
   /// This event is **not** sent when a notification is cancelled or times out.
   ///
-  /// @platform android Android
-  ///
+  /// Android only
   dismissed,
 
-  ///
   /// Event type is sent when a notification has been pressed by the user.
   ///
   ///On Android, notifications must include an `android.pressAction` property for this event to trigger.
   ///
   /// On iOS, this event is always sent when the user presses a notification.
-  ///
   press,
 
-  ///
   /// Event type is sent when a user presses a notification action.
-  ///
   actionPress,
 
-  ///
   /// Event type sent when a notification has been delivered to the device. For trigger notifications,
   /// this event is sent at the point when the trigger executes, not when a the trigger notification is created.
   ///
   /// It's important to note even though a notification has been delivered, it may not be shown to the
   /// user. For example, they may have notifications disabled on the device/channel/app.
-  ///
   delivered,
 
-  ///
   /// Event is sent when the user changes the notification blocked state for the entire application or
   /// when the user opens the application settings.
   ///
-  /// @platform android API Level >= 28
-  ///
+  /// Android API Level >= 28
   appBlocked,
 
-  ////
   /// Event type is sent when the user changes the notification blocked state for a channel in the application.
   ///
-  /// @platform android API Level >= 28
-  ///
+  /// Android API Level >= 28
   channelBlocked,
 
-  ///
   /// Event type is sent when the user changes the notification blocked state for a channel group in the application.
   ///
-  /// @platform android API Level >= 28
-  ///
+  /// Adroid API Level >= 28
   channelGroupBlocked,
 
-  ///
   /// Event type is sent when a notification trigger is created.
-  ///
   triggerNotificationCreated
 }

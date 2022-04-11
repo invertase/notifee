@@ -15,8 +15,7 @@
  *
  */
 
-import 'ios_intent_identifier.dart';
-import 'ios_notification_category_action.dart';
+import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 class IOSNotificationCategory {
   IOSNotificationCategory({

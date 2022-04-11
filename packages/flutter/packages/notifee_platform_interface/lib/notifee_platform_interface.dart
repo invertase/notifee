@@ -35,10 +35,7 @@ export 'src/models/notification/notification_settings.dart';
 
 export 'src/models/trigger/interval_trigger.dart';
 export 'src/models/trigger/timestamp_trigger.dart';
-export 'src/models/trigger/timestamp_trigger_alarm_manager.dart';
-export 'src/models/trigger/trigger.dart';
 export 'src/models/trigger/trigger_type.dart';
-export 'src/models/trigger/repeat_frequency.dart';
 
 export 'src/models/notification/ios/ios_notification_permissions.dart';
 export 'src/models/notification/ios/ios_notification_attachment.dart';
@@ -46,9 +43,9 @@ export 'src/models/notification/ios/ios_attachment_thumbnail_clipping_rect.dart'
 export 'src/models/notification/ios/foreground_presentation_options.dart';
 export 'src/models/notification/ios/ios_notification_category.dart';
 export 'src/models/notification/ios/ios_notification_category_action.dart';
+export 'src/models/notification/ios/ios_enums.dart';
 
 export 'src/models/notification/android/channel.dart';
 export 'src/models/notification/android/channel_group.dart';
-export 'src/models/notification/android/android_importance.dart';
-export 'src/models/notification/android/android_visibility.dart';
 export 'src/models/notification/android/notification_press_action.dart';
+export 'src/models/notification/android/android_enums.dart';

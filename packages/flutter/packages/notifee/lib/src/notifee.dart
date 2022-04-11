@@ -22,93 +22,145 @@ NotifeePlatform get _delegate {
   return NotifeePlatform.instance;
 }
 
+/// Handles events when the application is in a foreground state.
 Stream<Event> get onForegroundEvent {
   return _delegate.onForegroundEvent;
 }
 
-void onBackgroundMessage(BackgroundEventHandler handler) {
+void onBackgroundEvent(BackgroundEventHandler handler) {
   NotifeePlatform.onBackgroundEvent = handler;
 }
 
+/// Returns the ids of trigger notifications that are pending.
 Future<List<String>> getTriggerNotificationIds() async {
   return _delegate.getTriggerNotificationIds();
 }
 
+/// Returns the trigger notifications that are pending.
 Future<List<TriggerNotification>> getTriggerNotifications() async {
   return _delegate.getTriggerNotifications();
 }
 
+/// Returns the notifications that are displayed.
 Future<List<Object>> getDisplayedNotifications() async {
   return _delegate.getDisplayedNotifications();
 }
 
+/// Checks if a channel is blocked.
+/// On iOS, this will return false
 Future<bool> isChannelBlocked(String channelId) async {
   return _delegate.isChannelBlocked(channelId);
 }
 
+/// Checks if a channel is created.
+/// On iOS, this will return false
 Future<bool> isChannelCreated(String channelId) async {
   return _delegate.isChannelCreated(channelId);
 }
 
+/// Cancels all notifications, which includes removing any displayed notifications from the users device and
+/// any pending trigger notifications.
 Future<void> cancelAllNotifications(
     {List<String>? notificationIds, String? tag}) async {
   return _delegate.cancelAllNotifications(
       notificationIds: notificationIds, tag: tag);
 }
 
+/// Cancels any displayed notifications except for [ForegroundService] notifications.
 Future<void> cancelDisplayedNotifications(
     {List<String>? notificationIds, String? tag}) async {
   return _delegate.cancelDisplayedNotifications(
       notificationIds: notificationIds, tag: tag);
 }
 
+/// Cancels any trigger notifications.
 Future<void> cancelTriggerNotifications({List<String>? notificationIds}) async {
   return _delegate.cancelTriggerNotifications(notificationIds: notificationIds);
 }
 
+/// Cancels a single notification
+///
+/// Removes displayed or pending trigger notifications set for the specified ID,
+/// except for [ForegroundService] notifications.
 Future<void> cancelNotification(
     {required String notificationId, String? tag}) async {
   return _delegate.cancelNotification(notificationId: notificationId, tag: tag);
 }
 
+/// Cancels a single displayed notification
 Future<void> cancelDisplayedNotification(
     {required String notificationId, String? tag}) async {
   return _delegate.cancelDisplayedNotification(
       notificationId: notificationId, tag: tag);
 }
 
+/// Cancels a single trigger notification.
 Future<void> cancelTriggerNotification({required String notificationId}) async {
   return _delegate.cancelTriggerNotification(notificationId: notificationId);
 }
 
+/// Creates and update channels on supported Android devices.
+///
+/// Creates a new Android channel. Channels are used to collectively assign notifications to
+/// a single responsible channel. Users can manage settings for channels, e.g. disabling sound or vibration.
+///
+///  By providing a `groupId` property, channels can be assigned to groups created with [createChannelGroup].
+///
+///  The channel ID is returned once the operation has completed.
 Future<String> createChannel(Channel androidChannel) {
   return _delegate.createChannel(androidChannel);
 }
 
+/// Creates and updates multiple channels on supported Android devices.
 Future<void> createChannels(List<Channel> channels) {
   return _delegate.createChannels(channels);
 }
 
+/// Creates or updates a channel group on supported Android devices.
+///
+/// Creates a new Android channel group. Groups are used to further organize the appearance of your
+/// channels in the settings UI. Groups allow users to easily identify and control multiple notification channels.
+///
+/// Channels can be assigned to groups during creation using the [createChannel]
+/// The channel group ID is returned once the operation has completed.
 Future<String> createChannelGroup(ChannelGroup channelGroup) {
   return _delegate.createChannelGroup(channelGroup);
 }
 
+/// Creates and updates multiple channel groups on supported Android devices.
 Future<void> createChannelGroups(List<ChannelGroup> channelGroups) {
   return _delegate.createChannelGroups(channelGroups);
 }
 
+/// Deletes a channel by ID on supported Android devices.
+///
+/// Channels can be deleted using this API by providing the channel ID. Channel information (including the ID)
+/// can be retrieved from [getChannels]
+///
+/// When a channel is deleted, notifications assigned to that channel will fail to display.
 Future<void> deleteChannel(String channelId) {
   return _delegate.deleteChannel(channelId);
 }
 
+/// Deletes a channel group by ID on supported Android devices.
+///
+/// Channel groups can be deleted using this API by providing the channel ID.
+/// Channel information (including the ID) can be retrieved from the [getChannels].
+///
+/// Deleting a group does not delete channels which are assigned to the group,
+/// they will instead be unassigned the group and continue to function as expected.
 Future<void> deleteChannelGroup(String channelGroupId) {
   return _delegate.deleteChannelGroup(channelGroupId);
 }
 
+/// Displays or updates a notification on the users device.
+///
+/// All channels/categories should be created before triggering this method during the apps lifecycle.
 Future<String> displayNotification(NotifeeNotification notification) {
   return _delegate.displayNotification(notification);
 }
 
+/// Creates a trigger notification that repeats at a specified interval.
 Future<String> createIntervalTriggerNotification(
     {required NotifeeNotification notification,
     required IntervalTrigger trigger}) {
@@ -116,6 +168,7 @@ Future<String> createIntervalTriggerNotification(
       notification: notification, trigger: trigger);
 }
 
+/// Creates a trigger notification that is scheduled at a specific data and time
 Future<String> createTimestampTriggerNotification(
     {required NotifeeNotification notification,
     required TimestampTrigger trigger}) {
@@ -123,6 +176,9 @@ Future<String> createTimestampTriggerNotification(
       notification: notification, trigger: trigger);
 }
 
+/// Returns a channel on supported Android devices.
+///
+/// Returns `null` if no channel could be matched to the given ID.
 Future<Channel?> getChannel(String channelId) async {
   return _delegate.getChannel(channelId);
 }
@@ -143,9 +199,6 @@ Future<InitialNotification?> getInitialNotification() async {
   return _delegate.getInitialNotification();
 }
 
-// TODO on background event
-// TODO on foregound event
-
 Future<void> openNotificationSettings([String? channelId]) async {
   return _delegate.openNotificationSettings(channelId);
 }
@@ -154,8 +207,6 @@ Future<NotificationSettings> requestPermission(
     [IOSNotificationPermissions? permissions]) async {
   return _delegate.requestPermission(permissions);
 }
-
-// TODO register foreground service
 
 Future<void> setNotificationCategories(
     List<IOSNotificationCategory> categories) async {
@@ -202,8 +253,9 @@ Future<void> openPowerManagerSettings() async {
   return _delegate.openPowerManagerSettings();
 }
 
-// TODO stop foreground service
-
 Future<void> hideNotificationDrawer() async {
   return _delegate.hideNotificationDrawer();
 }
+
+// TODO: register foreground service
+// TODO stop foreground service

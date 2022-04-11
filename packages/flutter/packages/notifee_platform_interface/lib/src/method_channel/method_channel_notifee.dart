@@ -90,12 +90,12 @@ class MethodChannelNotifee extends NotifeePlatform {
     // Background Event
     // channel.setMethodCallHandler((MethodCall call) async {
     //   switch (call.method) {
-    //     case 'Messaging#onBackgroundMessage':
-    //     // Apple only. Android calls via separate background channel.
-    //       Map<String, dynamic> messageMap =
+    //     case 'onBackgroundEvent':
+    //     // iOS only. Android calls via separate background channel.
+    //       Map<String, dynamic> results =
     //       Map<String, dynamic>.from(call.arguments);
-    //       return FirebaseMessagingPlatform.onBackgroundMessage
-    //           ?.call(RemoteMessage.fromMap(messageMap));
+    //       return NotifeePlatform.onBackgroundEvent
+    //           ?.call(Event.fromMap(results));
     //     default:
     //       throw UnimplementedError('${call.method} has not been implemented');
     //   }
@@ -229,15 +229,16 @@ class MethodChannelNotifee extends NotifeePlatform {
       return getNotificationSettings();
     }
 
-    Map<String, dynamic>? results = await channel.invokeMapMethod<String, dynamic>(
-        'requestPermission', permissions?.asMap() ?? {});
+    Map<String, dynamic>? results =
+        await channel.invokeMapMethod<String, dynamic>(
+            'requestPermission', permissions?.asMap() ?? {});
     return NotificationSettings.fromMap(results!);
   }
 
   @override
   Future<NotificationSettings> getNotificationSettings() async {
-    Map<String, dynamic>? results =
-        await channel.invokeMapMethod<String, dynamic>('getNotificationSettings');
+    Map<String, dynamic>? results = await channel
+        .invokeMapMethod<String, dynamic>('getNotificationSettings');
     return NotificationSettings.fromMap(results!);
   }
 

@@ -15,6 +15,7 @@
  *
  */
 
+/// Available Trigger Types.
 enum TriggerType { timestamp, interval }
 
 const triggerTypeMap = {

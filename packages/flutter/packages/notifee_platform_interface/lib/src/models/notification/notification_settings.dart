@@ -153,7 +153,8 @@ class NotificationSettings {
         authorizationStatus:
             AuthorizationStatus.values[map['authorizationStatus'] + 1],
         iosNotificationSetting: map['ios'] != null
-            ? IOSNotificationSettings.fromMap(Map<String, dynamic>.from(map['ios'] as Map))
+            ? IOSNotificationSettings.fromMap(
+                Map<String, dynamic>.from(map['ios'] as Map))
             : IOSNotificationSettings(
                 alert: NotificationSetting.enabled,
                 criticalAlert: NotificationSetting.enabled,
@@ -168,7 +169,7 @@ class NotificationSettings {
                 notificationCenter: NotificationSetting.enabled),
         androidNotificationSetting: map['android'] != null
             ? AndroidNotificationSettings.fromMap(
-            Map<String, dynamic>.from(map['android'] as Map))
+                Map<String, dynamic>.from(map['android'] as Map))
             : AndroidNotificationSettings(alarm: NotificationSetting.enabled),
       );
 

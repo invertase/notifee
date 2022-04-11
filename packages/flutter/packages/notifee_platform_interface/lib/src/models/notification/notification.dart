@@ -19,6 +19,7 @@ import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 import '../../utils/generate_id.dart';
 
+///  Interface for building a local notification for both Android & iOS devices.
 class NotifeeNotification {
   NotifeeNotification(
       {this.id,
@@ -31,12 +32,28 @@ class NotifeeNotification {
     id = GenerateId.generateId();
   }
 
+  /// A unique identifier for your notification.
   String? id;
+
+  /// The notification title which appears above the body text.
   String? title;
+
+  /// The notification subtitle, which appears on a new line below/next the title.
   String? subtitle;
+
+  /// The main body content of a notification.
   String? body;
+
+  /// Additional data to store on the notification.
+  ///
+  /// Data can be used to provide additional context to your notification which can be retrieved
+  /// at a later point in time (e.g. via an event).
   Map<String, String>? data;
+
+  /// Android specific notification options.
   NotificationAndroid? android;
+
+  /// iOS specific notification options
   NotificationIOS? ios;
 
   factory NotifeeNotification.fromMap(Map<String, dynamic> map) =>
