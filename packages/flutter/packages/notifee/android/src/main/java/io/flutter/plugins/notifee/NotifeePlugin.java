@@ -423,6 +423,21 @@ public class NotifeePlugin
             });
   }
 
+  private void getNotificationSettings(final Result result) {
+    Notifee.getInstance()
+        .getNotificationSettings(
+            (e, aBundle) -> {
+              if (e != null) {
+                result.error(e.toString(), null, null);
+              }
+              try {
+                result.success(convertBundleToMap(aBundle));
+              } catch (JSONException jsonException) {
+                result.error(jsonException.toString(), null, null);
+              }
+            });
+  }
+
   private void getPowerManagerInfo(final Result result) {
     Notifee.getInstance()
         .getPowerManagerInfo(
@@ -503,6 +518,8 @@ public class NotifeePlugin
       isChannelBlocked((String) call.arguments, result);
     } else if (call.method.equals("hideNotificationDrawer")) {
       //      hideNotificationDrawer(result);
+    } else if (call.method.equals("getNotificationSettings")) {
+      getNotificationSettings(result);
     } else if (call.method.equals("openNotificationSettings")) {
       openNotificationSettings((String) call.arguments, result);
     } else if (call.method.equals("openPowerManagerSettings")) {

@@ -12,8 +12,8 @@ void testsMain() {
       'authorizationStatus returns AuthorizationStatus.authorized on Android',
       () async {
         final result = await notifee.requestPermission();
-        expect(result, isA<IOSNotificationPermissions>());
-        // expect(result.authorizationStatus, AuthorizationStatus.authorized);
+        expect(result, isA<NotificationSettings>());
+        expect(result.authorizationStatus, AuthorizationStatus.authorized);
       },
       skip: defaultTargetPlatform != TargetPlatform.android,
     );

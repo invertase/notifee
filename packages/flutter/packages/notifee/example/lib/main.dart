@@ -111,14 +111,13 @@ class _Application extends State<Application> {
           title: "bA notification",
           body: "With a body",
           subtitle: "And a subtitle",
-          // data: {},
           ios: NotificationIOS(),
           android: NotificationAndroid(
               channelId: 'general', smallIcon: 'ic_launcher'));
       await notifee.requestPermission();
       await notifee.displayNotification(notification);
     } catch (e) {
-      // print(e);
+      print(e);
     }
   }
 
