@@ -38,7 +38,7 @@ allprojects {
 
     // ... you will already have some local repositories defined ...
 
-    // ADD THIS BLOCK - this is how Notifee finds it's Android library:
+    // ADD THIS BLOCK - this is how Notifee finds its Android library:
     maven {
       url "$rootDir/../node_modules/@notifee/react-native/android/libs"
     }
