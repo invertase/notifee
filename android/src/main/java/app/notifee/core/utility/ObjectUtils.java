@@ -88,7 +88,7 @@ public class ObjectUtils {
     return Objects.requireNonNull(bundle);
   }
 
-  public static Map<String, Object> bundleToMap(Bundle bundle) {
+  public static Map<String, Object> bundleToMap(Bundle bundle) throws IllegalArgumentException {
     Map<String, Object> map = new HashMap<>();
     for (String key : bundle.keySet()) {
       Object value = bundle.get(key);
@@ -109,7 +109,7 @@ public class ObjectUtils {
     return map;
   }
 
-  public static ArrayList arrayToMap(Object array) {
+  public static ArrayList arrayToMap(Object array) throws IllegalArgumentException {
     ArrayList catalystArray = new ArrayList();
     if (array instanceof String[]) {
       for (String v : (String[]) array) {
@@ -141,7 +141,7 @@ public class ObjectUtils {
     return catalystArray;
   }
 
-  public static ArrayList listToMap(List list) {
+  public static ArrayList listToMap(List list) throws IllegalArgumentException {
     ArrayList catalystArray = new ArrayList();
     for (Object obj : list) {
       if (obj == null) {

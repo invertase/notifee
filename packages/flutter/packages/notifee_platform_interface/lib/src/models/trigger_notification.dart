@@ -27,5 +27,5 @@ class TriggerNotification {
       TriggerNotification(
           notification: NotifeeNotification.fromMap(
               Map<String, dynamic>.from(map['notification'] as Map)),
-          trigger: map['trigger']);
+          trigger: Map<String, dynamic>.from(map['trigger'] as Map));
 }

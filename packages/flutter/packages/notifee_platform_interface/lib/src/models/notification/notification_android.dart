@@ -30,7 +30,8 @@ class NotificationAndroid {
       : autoCancel = autoCancel ?? true,
         badgeIconType = badgeIconType ?? AndroidBadgeIconType.large,
         chronometerDirection = chronometerDirection ?? 'up',
-        groupAlertBehavior = groupAlertBehavior ?? 'summary',
+        groupAlertBehavior =
+            groupAlertBehavior ?? AndroidGroupAlertBehavior.all,
         importance = importance ?? AndroidImportance.auto;
 
   /// Quick actions to a notification. Quick Actions enable users to interact with your application
@@ -114,7 +115,7 @@ class NotificationAndroid {
   /// This must be called on all notifications you want to mute.
   /// For example, if you want only the summary of your group to make noise, all
   /// children in the group should have the group alert behavior [AndroidGroupAlertBehavior.summary].
-  Object? groupAlertBehavior;
+  AndroidGroupAlertBehavior? groupAlertBehavior;
 
   /// Whether this notification should be a group summary.
   ///
@@ -279,7 +280,7 @@ class NotificationAndroid {
   factory NotificationAndroid.fromMap(Map<String, dynamic> map) =>
       NotificationAndroid(
         channelId: map['channelId'] as String,
-        importance: map['importance'],
+        importance: AndroidImportance.values[map['importance']],
         smallIcon: map['smallIcon'] as String,
       )
         ..actions =
@@ -287,14 +288,15 @@ class NotificationAndroid {
         ..asForegroundService = map['asForegroundService'] as bool?
         ..autoCancel = map['autoCancel'] as bool?
         ..badgeCount = map['badgeCount'] as int?
-        ..badgeIconType = map['badgeIconType']
+        ..badgeIconType = AndroidBadgeIconType.values[map['badgeIconType']]
         ..category = map['category']
         ..color = map['color'] as String?
         ..colorized = map['colorized'] as bool?
         ..chronometerDirection = map['chronometerDirection'] as String?
         ..defaults = map['defaults']
         ..groupId = map['groupId'] as String?
-        ..groupAlertBehavior = map['groupAlertBehavior']
+        ..groupAlertBehavior =
+            AndroidGroupAlertBehavior.values[map['groupAlertBehavior']]
         ..groupSummary = map['groupSummary'] as bool?
         ..inputHistory = (map['inputHistory'] as List<dynamic>?)
             ?.map((e) => e as String)
@@ -339,7 +341,7 @@ class NotificationAndroid {
       'chronometerDirection': chronometerDirection,
       'defaults': defaults,
       'groupId': groupId,
-      'groupAlertBehavior': groupAlertBehavior,
+      'groupAlertBehavior': groupAlertBehavior?.index,
       'groupSummary': groupSummary,
       'inputHistory': inputHistory?.asMap(),
       'largeIcon': largeIcon,

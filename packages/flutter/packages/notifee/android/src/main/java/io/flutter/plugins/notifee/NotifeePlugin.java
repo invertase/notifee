@@ -17,8 +17,6 @@ package io.flutter.plugins.notifee;
  *
  */
 
-import static io.flutter.plugins.notifee.Utils.convertBundleListToMap;
-import static io.flutter.plugins.notifee.Utils.convertBundleToMap;
 import static io.flutter.plugins.notifee.Utils.mapToBundle;
 
 import android.app.Activity;
@@ -28,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import app.notifee.core.ContextHolder;
 import app.notifee.core.Notifee;
+import app.notifee.core.utility.ObjectUtils;
 import io.flutter.embedding.engine.FlutterShellArgs;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -41,7 +40,6 @@ import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.notifee.background.FlutterBackgroundService;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONException;
 
 /** NotifeePlugin */
 public class NotifeePlugin
@@ -170,9 +168,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleListToMap(aList));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.listToMap(aList));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -186,9 +184,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleListToMap(aList));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.listToMap(aList));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -203,9 +201,13 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleToMap(aBundle));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                if (aBundle == null) {
+                  result.success(null);
+                  return;
+                }
+                result.success(ObjectUtils.bundleToMap(aBundle));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -293,9 +295,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleToMap(aBundle));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.bundleToMap(aBundle));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -315,9 +317,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleToMap(aBundle));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.bundleToMap(aBundle));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -336,9 +338,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleListToMap(aList));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.listToMap(aList));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -357,9 +359,9 @@ public class NotifeePlugin
               }
 
               try {
-                result.success(convertBundleListToMap(aList));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.listToMap(aList));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -431,9 +433,9 @@ public class NotifeePlugin
                 result.error(e.toString(), null, null);
               }
               try {
-                result.success(convertBundleToMap(aBundle));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.bundleToMap(aBundle));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }
@@ -446,9 +448,9 @@ public class NotifeePlugin
                 result.error(e.toString(), null, null);
               }
               try {
-                result.success(convertBundleToMap(aBundle));
-              } catch (JSONException jsonException) {
-                result.error(jsonException.toString(), null, null);
+                result.success(ObjectUtils.bundleToMap(aBundle));
+              } catch (Exception exception) {
+                result.error(exception.toString(), null, null);
               }
             });
   }

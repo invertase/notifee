@@ -72,7 +72,6 @@ public class ChannelModel {
 
   public Integer getImportance() {
     if (mChannelBundle.containsKey("importance")) {
-//      if (mChannelBundle.get)
       return (int) mChannelBundle.get("importance");
     }
 
@@ -89,7 +88,6 @@ public class ChannelModel {
 
   public int getVisibility() {
     if (mChannelBundle.containsKey("visibility")) {
-//      return (int) mChannelBundle.getDouble("visibility");
       return (int) mChannelBundle.get("visibility");
     }
 

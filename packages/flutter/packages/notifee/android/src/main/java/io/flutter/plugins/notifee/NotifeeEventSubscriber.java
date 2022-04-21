@@ -67,20 +67,17 @@ public class NotifeeEventSubscriber implements EventListener {
 
   @Override
   public void onLogEvent(LogEvent logEvent) {
-    // TODO
-    //    if (Utils.isApplicationForeground() && eventSink != null) {
-    //      eventSink.success(logEvent.toMap());
-    //      return;
-    //    }
-
+    // TODO: log events
   }
 
   @Override
   public void onBlockStateEvent(BlockStateEvent blockStateEvent) {
-    //    if (Utils.isApplicationForeground() && eventSink != null) {
-    //      eventSink.success(blockStateEvent.toMap());
-    //      return;
-    //    }
+    if (Utils.isApplicationForeground() && eventSink != null) {
+      eventSink.success(blockStateEvent.toMap());
+      return;
+    }
+
+    // TODO: log events in background
   }
 
   @Override

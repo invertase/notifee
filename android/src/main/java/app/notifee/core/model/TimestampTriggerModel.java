@@ -47,7 +47,7 @@ public class TimestampTriggerModel {
     TimeUnit timeUnit = null;
     if (mTimeTriggerBundle.containsKey("repeatFrequency")) {
       Double d = mTimeTriggerBundle.getDouble("repeatFrequency");
-      mTimestamp = (long) mTimeTriggerBundle.getDouble("timestamp");
+      mTimestamp = (long) mTimeTriggerBundle.get("timestamp");
 
       int repeatFrequency = d.intValue();
 
@@ -97,7 +97,7 @@ public class TimestampTriggerModel {
     long delay = 0;
 
     if (mTimeTriggerBundle.containsKey("timestamp")) {
-      long timestamp = (long) mTimeTriggerBundle.getDouble("timestamp");
+      long timestamp = (long) mTimeTriggerBundle.get("timestamp");
       if (timestamp > 0) {
         delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
       }

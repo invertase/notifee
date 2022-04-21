@@ -253,7 +253,11 @@ class MethodChannelNotifee extends NotifeePlatform {
   Future<InitialNotification?> getInitialNotification() async {
     Map<String, dynamic>? initialNotification = await channel
         .invokeMapMethod<String, dynamic>('getInitialNotification');
-    return InitialNotification.fromMap(initialNotification!);
+    if (initialNotification == null) {
+      return null;
+    }
+
+    return InitialNotification.fromMap(initialNotification);
   }
 
   @override
@@ -265,10 +269,15 @@ class MethodChannelNotifee extends NotifeePlatform {
 
   @override
   Future<List<TriggerNotification>> getTriggerNotifications() async {
-    final List<Map<String, dynamic>>? result = await channel
-        .invokeListMethod<Map<String, dynamic>>('getTriggerNotifications');
-    return (result?.map((e) => TriggerNotification.fromMap(e)).toList())
-        as List<TriggerNotification>;
+    final List<Map>? result =
+        await channel.invokeListMethod<Map>('getTriggerNotifications');
+    if (result == null) {
+      return List.empty();
+    }
+
+    return result
+        .map((e) => TriggerNotification.fromMap(Map<String, dynamic>.from(e)))
+        .toList();
   }
 
   // iOS
@@ -418,10 +427,10 @@ class MethodChannelNotifee extends NotifeePlatform {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return [];
     }
-    List<Map<String, dynamic>>? result = await channel
-        .invokeListMethod<Map<String, dynamic>>('getChannelGroups');
-    return (result?.map((e) => ChannelGroup.fromMap(e)).toList())
-        as List<ChannelGroup>;
+    List<Map>? result = await channel.invokeListMethod<Map>('getChannelGroups');
+    return (result
+        ?.map((e) => ChannelGroup.fromMap(e as Map<String, dynamic>))
+        .toList()) as List<ChannelGroup>;
   }
 
   @override

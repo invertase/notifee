@@ -56,10 +56,19 @@ public class Notifee {
     return ContextHolder.getApplicationContext();
   }
 
+  @KeepForSdk
+  public static void configure(@NonNull NotifeeConfig notifeeConfig) {
+     synchronized (Notifee.class) {
+       initialize(notifeeConfig);
+    }
+  }
 
+  @KeepForSdk
   public static void configure(@NonNull EventListener eventListener) {
     synchronized (Notifee.class) {
-      initialize(new NotifeeConfig(null, null, eventListener));
+      NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
+      configBuilder.setEventSubscriber(eventListener);
+      initialize(configBuilder.build());
     }
   }
 
@@ -407,7 +416,7 @@ public class Notifee {
     } else {
       androidSettingsBundle.putInt("alarm", 0);
     }
-    
+
     notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
   }

@@ -28,6 +28,18 @@ enum AndroidBadgeIconType {
   large,
 }
 
+/// Enum used to describe how a notification alerts the user when it apart of a group.
+enum AndroidGroupAlertBehavior {
+  /// All notifications will alert.
+  all,
+
+  /// Only the summary notification will alert the user when displayed. The children of the group will not alert.
+  summary,
+
+  /// Children of a group will alert the user. The summary notification will not alert when displayed.
+  children,
+}
+
 /// An enum representing a notification or channel importance on Android.
 enum AndroidImportance {
   /// When a notification is received, the device smallIcon will appear in the notification shade.

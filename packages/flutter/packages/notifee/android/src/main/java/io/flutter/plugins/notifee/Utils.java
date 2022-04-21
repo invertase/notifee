@@ -22,17 +22,8 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.Bundle;
 import app.notifee.core.ContextHolder;
-import app.notifee.core.event.NotificationEvent;
-import app.notifee.core.utility.ObjectUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Utils {
   public static Bundle mapToBundle(Map<String, Object> map) {
@@ -43,6 +34,7 @@ public class Utils {
       if (value instanceof Map<?, ?>) {
         bundle.putBundle(entry.getKey(), mapToBundle((Map<String, Object>) value));
       } else if (value instanceof List<?>) {
+        // TODO: check if this is needed
         //          value = listToJson((List<Object>) value);
       } else if (value instanceof Boolean) {
         bundle.putBoolean(entry.getKey(), (Boolean) value);
@@ -50,78 +42,14 @@ public class Utils {
         bundle.putString(entry.getKey(), (String) value);
       } else if (value instanceof Double) {
         bundle.putDouble(entry.getKey(), (Double) value);
+      } else if (value instanceof Long) {
+        bundle.putLong(entry.getKey(), (Long) value);
       } else if (value instanceof Number) {
         bundle.putInt(entry.getKey(), (int) value);
       }
     }
 
     return bundle;
-  }
-
-  public static List<Map<String, Object>> convertBundleListToMap(List<Bundle> bundleList)
-      throws JSONException {
-    List<Map<String, Object>> mapList = new ArrayList<>();
-    for (Bundle bundle : bundleList) {
-      mapList.add(convertBundleToMap(bundle));
-    }
-
-    return mapList;
-  }
-
-  public static Map<String, Object> convertBundleToMap(Bundle bundle) throws JSONException {
-    JSONObject json = new JSONObject();
-    Set<String> keys = bundle.keySet();
-    for (String key : keys) {
-      try {
-        // json.put(key, bundle.get(key)); see edit below
-        json.put(key, JSONObject.wrap(bundle.get(key)));
-      } catch (JSONException e) {
-        //Handle exception here
-      }
-    }
-
-    return convertJsonToMap(json);
-  }
-
-  public static Map<String, Object> convertJsonToMap(JSONObject jsonObject) throws JSONException {
-    Map map = new HashMap();
-
-    String key;
-    Object object;
-    for (Iterator iterator = jsonObject.keys(); iterator.hasNext(); map.put(key, object)) {
-      if ((object = jsonObject.get(key = (String) iterator.next())) instanceof JSONArray) {
-        object = convertJsonArrayTolist((JSONArray) object);
-      } else if (object instanceof JSONObject) {
-        object = convertJsonToMap((JSONObject) object);
-      }
-    }
-
-    return map;
-  }
-
-  public static List<Object> convertJsonArrayTolist(JSONArray jsonArray) throws JSONException {
-    ArrayList arrayList = new ArrayList();
-
-    for (int i = 0; i < jsonArray.length(); ++i) {
-      Object object;
-      if ((object = jsonArray.get(i)) instanceof JSONArray) {
-        object = convertJsonArrayTolist((JSONArray) object);
-      } else if (object instanceof JSONObject) {
-        object = convertJsonToMap((JSONObject) object);
-      }
-
-      arrayList.add(object);
-    }
-
-    return arrayList;
-  }
-
-  public static Map<String, Object> parseNotificationEvent(NotificationEvent event) {
-    Map<String, Object> map = new HashMap<>();
-    map.put("detail", ObjectUtils.bundleToMap(event.getNotification().toBundle()));
-    map.put("type", event.getType());
-
-    return map;
   }
 
   /**

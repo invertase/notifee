@@ -25,7 +25,7 @@ public class NotifeeConfig {
   private String mFrameworkVersion;
   private EventListener mEventSubscriber;
 
-  public NotifeeConfig(
+  private NotifeeConfig(
     String mProductVersion, String mFrameworkVersion, EventListener mEventSubscriber) {
     this.mProductVersion = mProductVersion;
     this.mFrameworkVersion = mFrameworkVersion;

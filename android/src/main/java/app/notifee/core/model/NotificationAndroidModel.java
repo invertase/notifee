@@ -83,7 +83,7 @@ public class NotificationAndroidModel {
    */
   public @Nullable Integer getBadgeIconType() {
     if (mNotificationAndroidBundle.containsKey("badgeIconType")) {
-      return (int) mNotificationAndroidBundle.getDouble("badgeIconType");
+      return (int) mNotificationAndroidBundle.get("badgeIconType");
     }
 
     return NotificationCompat.BADGE_ICON_LARGE;
@@ -212,7 +212,7 @@ public class NotificationAndroidModel {
    */
   public int getGroupAlertBehaviour() {
     if (mNotificationAndroidBundle.containsKey("groupAlertBehavior")) {
-      return (int) mNotificationAndroidBundle.getDouble("groupAlertBehavior");
+      return (int) mNotificationAndroidBundle.get("groupAlertBehavior");
     }
 
     return NotificationCompat.GROUP_ALERT_ALL;
@@ -372,7 +372,7 @@ public class NotificationAndroidModel {
       return NotificationCompat.PRIORITY_DEFAULT;
     }
 
-    int importance = (int) mNotificationAndroidBundle.getDouble("importance");
+    int importance = (int) mNotificationAndroidBundle.get("importance");
     switch (importance) {
       case NotificationManagerCompat.IMPORTANCE_HIGH:
         return NotificationCompat.PRIORITY_HIGH;
