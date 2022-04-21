@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[Android] project build.gradle test applies changes to project build.grade 1`] = `
+exports[`[Android] project build.gradle test adds custom maven repository to project build.gradle 1`] = `
 "// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
