@@ -21,13 +21,16 @@ import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 class NotificationAndroid {
   NotificationAndroid(
       {required this.channelId,
-      importance,
       required this.smallIcon,
+      pressAction,
+      importance,
       autoCancel,
       badgeIconType,
       chronometerDirection,
       groupAlertBehavior})
       : autoCancel = autoCancel ?? true,
+        pressAction = pressAction ??
+            NotificationPressAction(id: 'default', launchActivity: 'default'),
         badgeIconType = badgeIconType ?? AndroidBadgeIconType.large,
         chronometerDirection = chronometerDirection ?? 'up',
         groupAlertBehavior =
@@ -174,8 +177,7 @@ class NotificationAndroid {
   /// By default notifications have no behaviour when a user presses them. The
   /// `pressAction` property allows you to set what happens when a user presses
   /// the notification.
-  // TODO: class
-  Object? pressAction;
+  NotificationPressAction? pressAction;
 
   ///The `fullScreenAction` property allows you to show a custom UI
   /// in full screen when the notification is displayed.
@@ -307,7 +309,10 @@ class NotificationAndroid {
         ..localOnly = map['localOnly'] as bool?
         ..ongoing = map['ongoing'] as bool?
         ..onlyAlertOnce = map['onlyAlertOnce'] as bool?
-        ..pressAction = map['pressAction']
+        ..pressAction = map['pressAction'] != null
+            ? NotificationPressAction.fromMap(
+                Map<String, dynamic>.from(map['pressAction']))
+            : null
         ..fullScreenAction = map['fullScreenAction']
         ..progress = map['progress']
         ..showTimestamp = map['showTimestamp'] as bool?
@@ -350,7 +355,7 @@ class NotificationAndroid {
       'localOnly': localOnly,
       'ongoing': ongoing,
       'onlyAlertOnce': onlyAlertOnce,
-      'pressAction': pressAction,
+      'pressAction': pressAction?.asMap(),
       'fullScreenAction': fullScreenAction,
       'importance': importance?.index,
       'progress': progress,
