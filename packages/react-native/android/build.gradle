@@ -19,7 +19,9 @@ plugins {
 }
 
 if (project.hasProperty('reactNativeProjects')) {
-  reactNativeProjects.each(dependent -> project.evaluationDependsOn(dependent))
+  reactNativeProjects.each { dependent ->
+    project.evaluationDependsOn(dependent)
+  }
 } else {
   project.evaluationDependsOn(':app')
 }
