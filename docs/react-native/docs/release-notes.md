@@ -8,6 +8,7 @@ previous: /react-native/docs/installation
 ## 5.2.0
 - **[Android]**: Fixes a compiling issue for some project configurations with error message "Project with path ':app' could not be found in project ':notifee_react-native'" (Fixes [#288](https://github.com/invertase/notifee/issues/288)).
 - **[Android]**: Fixes an issue where the current version of Notifee does not build when using an expo managed app with the expo plugin (Fixes [#314](https://github.com/invertase/notifee/issues/314)).
+- **[Web]**: Basic support for react-native-web - notifications do not work on web yet, but the package is now compatible with web (PR  [#369](https://github.com/invertase/notifee/pull/369))
 
 ## 5.1.0
 - **[Android]**: Introduces new APIs to help manage Android 12 limitations when creating trigger notifications:
