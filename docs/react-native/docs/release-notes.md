@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.2.1
+- **[Android]**: Fixes a build issue introduced in version 5.2.0 (PR [#384](https://github.com/invertase/notifee/pull/384)).
+
 ## 5.2.0
 - **[Android]**: Fixes a compiling issue for some project configurations with error message "Project with path ':app' could not be found in project ':notifee_react-native'" (Fixes [#288](https://github.com/invertase/notifee/issues/288)).
 - **[Android]**: Fixes an issue where the current version of Notifee does not build when using an expo managed app with the expo plugin (Fixes [#314](https://github.com/invertase/notifee/issues/314)).
