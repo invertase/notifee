@@ -80,7 +80,7 @@ export const testCategory = {
 export const testNotificationSettings = {
   authorizationStatus: Notification.AuthorizationStatus.AUTHORIZED,
   android: {
-    alarm: NotificationAndroid.AndroidNotificationSetting.ENABLED
+    alarm: NotificationAndroid.AndroidNotificationSetting.ENABLED,
   },
   ios: {
     alert: true,
@@ -94,7 +94,7 @@ export const testNotificationSettings = {
     showPreviews: true,
     inAppNotificationSettings: true,
     authorizationStatus: Notification.AuthorizationStatus.AUTHORIZED,
-  }
+  },
 };
 
 export const testBadgeCount = 1;
