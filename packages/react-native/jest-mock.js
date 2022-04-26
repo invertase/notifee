@@ -9,6 +9,9 @@
  */
 
 import { version as SDK_VERSION } from './dist/version';
+import * as Notification from './dist/types/Notification';
+import * as NotificationAndroid from './dist/types/NotificationAndroid';
+import * as TriggerType from './dist/types/Trigger';
 
 export * from './dist/types/Library';
 export * from './dist/types/Notification';
@@ -75,16 +78,23 @@ export const testCategory = {
 };
 
 export const testNotificationSettings = {
-  alert: true,
-  badge: true,
-  sound: true,
-  carPlay: true,
-  criticalAlert: true,
-  provisional: true,
-  lockScreen: true,
-  notificationCenter: true,
-  showPreviews: true,
-  inAppNotificationSettings: true,
+  authorizationStatus: Notification.AuthorizationStatus.AUTHORIZED,
+  android: {
+    alarm: NotificationAndroid.AndroidNotificationSetting.ENABLED
+  },
+  ios: {
+    alert: true,
+    badge: true,
+    sound: true,
+    carPlay: true,
+    criticalAlert: true,
+    provisional: true,
+    lockScreen: true,
+    notificationCenter: true,
+    showPreviews: true,
+    inAppNotificationSettings: true,
+    authorizationStatus: Notification.AuthorizationStatus.AUTHORIZED,
+  }
 };
 
 export const testBadgeCount = 1;
@@ -98,6 +108,8 @@ export const testPowerManagerSettings = {
 
 export default {
   SDK_VERSION,
+  AndroidNotificationSetting: NotificationAndroid.AndroidNotificationSetting,
+  TriggerType,
   displayNotification: jest.fn(async notification => notification?.id || testNotification.id),
   createTriggerNotification: jest.fn(
     async (notification, _) => notification?.id || testNotification.id,
