@@ -139,6 +139,16 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
            })
       }
 
+            internal func getDisplayedNotifications(result: @escaping FlutterResult) {
+         NotifeeCore.getDisplayedNotifications({(error: Error?, notifications: Any?) in
+               if error != nil {
+                 result(error)
+               } else {
+                   result(notifications)
+               }
+           })
+      }
+
       internal func incrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
          NotifeeCore.incrementBadgeCount(arguments, with: {(error: Error?) in
                if error != nil {

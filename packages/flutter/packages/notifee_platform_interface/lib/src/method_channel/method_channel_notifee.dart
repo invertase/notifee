@@ -214,6 +214,22 @@ class MethodChannelNotifee extends NotifeePlatform {
   }
 
   @override
+  Future<void> cancelDisplayedNotification(
+      {required String notificationId, String? tag}) async {
+    await cancelAllNotifications(
+        notificationIds: [notificationId],
+        tag: tag,
+        type: NotificationType.displayed);
+  }
+
+  @override
+  Future<void> cancelTriggerNotification(
+      {required String notificationId}) async {
+    await cancelAllNotifications(
+        notificationIds: [notificationId], type: NotificationType.trigger);
+  }
+
+  @override
   Future<void> cancelTriggerNotifications(
       {List<String>? notificationIds, String? tag}) async {
     await cancelAllNotifications(

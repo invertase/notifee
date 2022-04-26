@@ -38,6 +38,7 @@ Future<void> main() async {
   ///
   /// We use this channel in the `AndroidManifest.xml` file to override the
   /// default FCM channel to enable heads up notifications.
+  /// default FCM channel to enable heads up notifications.
   await notifee.createChannel(channel);
 
   runApp(NotifeeExampleApp());
