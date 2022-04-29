@@ -122,7 +122,9 @@ class _Application extends State<Application> {
           title: "bA notification",
           body: "With a body",
           subtitle: "And a subtitle",
-          ios: NotificationIOS(),
+          ios: NotificationIOS(
+              foregroundPresentationOptions: ForegroundPresentationOptions(
+                  alert: true, badge: true, sound: true)),
           android: NotificationAndroid(
               channelId: androidChannelId, smallIcon: 'ic_launcher'));
       await notifee.requestPermission();

@@ -22,6 +22,7 @@ export 'package:notifee_platform_interface/notifee_platform_interface.dart'
     show
         NotifeeNotification,
         NotificationIOS,
+        ForegroundPresentationOptions,
         NotificationAndroid,
         NotificationSettings,
         NotificationSetting,
