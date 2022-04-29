@@ -19,8 +19,8 @@ void testsMain() {
     );
   });
 
-  group('getInitialMessage', () {
-    test('returns null when no initial message', () async {
+  group('getInitialNotification', () {
+    test('returns null when no initial notification', () async {
       expect(await notifee.getInitialNotification(), null);
     });
   });

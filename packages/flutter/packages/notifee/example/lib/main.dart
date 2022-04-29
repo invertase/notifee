@@ -19,8 +19,10 @@ Future<void> _notifeeBackgroundHandler(Event event) async {
   print('Handling a background event ${event.type}');
 }
 
-/// Create a [Channel] for heads up notifications
-late Channel channel;
+/// Used by displayNotification() to demonstrate different [Channel] behaviour
+enum ExampleAndroidChannelIds { horse, highImportance }
+// TODO: make into a dropdown
+String androidChannelId = ExampleAndroidChannelIds.horse.name;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,17 +30,25 @@ Future<void> main() async {
   // Set the background handler early on, as a named top-level function
   notifee.onBackgroundEvent(_notifeeBackgroundHandler);
 
-  channel = Channel(
-    id: 'high_importance_channel',
+  /// Create Android Notification Channels.
+  Channel channel = Channel(
+    id: ExampleAndroidChannelIds.highImportance.name,
     name: 'High Importance Notifications',
     importance: AndroidImportance.high,
   );
 
-  /// Create an Android Notification Channel.
-  ///
-  /// We use this channel in the `AndroidManifest.xml` file to override the
-  /// default FCM channel to enable heads up notifications.
-  /// default FCM channel to enable heads up notifications.
+  await notifee.deleteChannel(channel.id);
+  await notifee.createChannel(channel);
+
+  channel = Channel(
+      id: ExampleAndroidChannelIds.horse.name,
+      name: 'Horse Sound Notifications',
+      importance: AndroidImportance.high,
+      sound: 'horse');
+
+  await notifee.deleteChannel(channel.id);
+  await notifee.createChannel(channel);
+
   await notifee.createChannel(channel);
 
   runApp(NotifeeExampleApp());
@@ -114,7 +124,7 @@ class _Application extends State<Application> {
           subtitle: "And a subtitle",
           ios: NotificationIOS(),
           android: NotificationAndroid(
-              channelId: 'general', smallIcon: 'ic_launcher'));
+              channelId: androidChannelId, smallIcon: 'ic_launcher'));
       await notifee.requestPermission();
       await notifee.displayNotification(notification);
     } catch (e) {
@@ -162,14 +172,6 @@ class _Application extends State<Application> {
           await notifee.cancelDisplayedNotifications();
         }
         break;
-      // case 'permissions':
-      //   {
-      //     if (kDebugMode) {
-      //       print('Notifee Example: Permissions');
-      //     }
-      //     Navigator.pushNamed(context, '/permissions');
-      //   }
-      //   break;
       default:
         break;
     }

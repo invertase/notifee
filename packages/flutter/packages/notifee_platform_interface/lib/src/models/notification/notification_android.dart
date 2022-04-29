@@ -19,16 +19,17 @@ import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 /// The interface for Android specific options which are applied to a notification.
 class NotificationAndroid {
-  NotificationAndroid(
-      {required this.channelId,
-      required this.smallIcon,
-      pressAction,
-      importance,
-      autoCancel,
-      badgeIconType,
-      chronometerDirection,
-      groupAlertBehavior})
-      : autoCancel = autoCancel ?? true,
+  NotificationAndroid({
+    required this.channelId,
+    required this.smallIcon,
+    this.sound,
+    pressAction,
+    importance,
+    autoCancel,
+    badgeIconType,
+    chronometerDirection,
+    groupAlertBehavior,
+  })  : autoCancel = autoCancel ?? true,
         pressAction = pressAction ??
             NotificationPressAction(id: 'default', launchActivity: 'default'),
         badgeIconType = badgeIconType ?? AndroidBadgeIconType.large,
