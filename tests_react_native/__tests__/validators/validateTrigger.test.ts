@@ -95,6 +95,22 @@ describe('Validate Trigger', () => {
         );
       });
 
+      test('accepts -1 for repeatFrequency when creating a timestamp trigger', () => {
+        const date = new Date(Date.now());
+        date.setSeconds(date.getSeconds() + 10);
+
+        const trigger: TimestampTrigger = {
+          type: TriggerType.TIMESTAMP,
+          timestamp: date.getTime(),
+          repeatFrequency: -1,
+        };
+
+        const $ = validateTrigger(trigger) as TimestampTrigger;
+
+        expect($.repeatFrequency).toEqual(-1);
+        expect($.timestamp).toEqual(date.getTime());
+      });
+
       test('returns a valid timestamp trigger object', () => {
         const date = new Date(Date.now());
         date.setSeconds(date.getSeconds() + 10);
