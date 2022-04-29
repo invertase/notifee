@@ -56,6 +56,7 @@ export interface TimestampTriggerAlarmManager {
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
  */
 export enum RepeatFrequency {
+  NONE = -1,
   HOURLY = 0,
   DAILY = 1,
   WEEKLY = 2,
