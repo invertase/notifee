@@ -34,6 +34,8 @@
     "tests_rn:packager:reset-cache": "cd tests_react_native && npx react-native start --reset-cache",
     "run:android": "cd tests_react_native && npx react-native run-android  --variant 'debug'",
     "run:ios": "cd tests_react_native && npx react-native run-ios --scheme=Notifee --simulator 'iPhone 12'",
+    "run:web": "cd tests_react_native && npx react-scripts start",
+    "build:web": "cd tests_react_native && npx react-scripts build",
     "tests_rn:test": "cd tests_react_native && jest",
     "tests_rn:test-watch": "cd tests_react_native && jest --watch",
     "tests_rn:test-coverage": "cd tests_react_native && jest --coverage",
