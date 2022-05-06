@@ -7,7 +7,7 @@ export interface TimestampTrigger {
   /**
    * Constant enum value used to identify the trigger type.
    */
-  type: TriggerType.TIMESTAMP;
+  type: TriggerType;
   /**
    * The timestamp when the notification should first be shown, in milliseconds since 1970.
    */
