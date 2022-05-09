@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:notifee/notifee.dart';
 import 'package:notifee/notifee.dart' as notifee;
 
+import 'example_notifications.dart';
 import 'trigger_notification_list_item.dart';
 
 /// List of trigger notifications
@@ -28,20 +29,22 @@ class _TriggerNotificationList extends State<TriggerNotificationList> {
 
   Future<void> createTriggerNotification() async {
     try {
-      await notifee.createChannel(Channel(
-          id: 'general', name: 'General', importance: AndroidImportance.high));
-      NotifeeNotification notification = NotifeeNotification(
-          title: "Notification Title",
-          body: "With a body",
-          subtitle: "And a subtitle",
-          ios: NotificationIOS(),
-          android: NotificationAndroid(
-              channelId: 'general', smallIcon: 'ic_launcher'));
+      NotifeeNotification notification = selectedNotification!;
+
+      if (notification.android != null) {
+        notification.android!.channelId = selectedAndroidChannelId;
+        notification.android!.smallIcon = exampleSmallIcon;
+      } else {
+        notification.android = NotificationAndroid(
+            channelId: selectedAndroidChannelId, smallIcon: exampleSmallIcon);
+      }
+
       await notifee.requestPermission();
       TimestampTrigger trigger = TimestampTrigger(
           timestamp: DateTime.now()
               .add(const Duration(seconds: 15))
-              .millisecondsSinceEpoch);
+              .millisecondsSinceEpoch,
+          repeatFrequency: RepeatFrequency.hourly);
       await notifee.createTimestampTriggerNotification(
           notification: notification, trigger: trigger);
 

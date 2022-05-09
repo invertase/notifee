@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:notifee/notifee.dart';
 import 'package:notifee/notifee.dart' as notifee;
 
+import 'example_notifications.dart';
 import 'notification_list_item.dart';
 import 'notification_list.dart';
 
@@ -18,11 +19,6 @@ import 'notification_list.dart';
 Future<void> _notifeeBackgroundHandler(Event event) async {
   print('Handling a background event ${event.type}');
 }
-
-/// Used by displayNotification() to demonstrate different [Channel] behaviour
-enum ExampleAndroidChannelIds { horse, highImportance }
-// TODO: make into a dropdown
-String androidChannelId = ExampleAndroidChannelIds.horse.name;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,20 +109,15 @@ class _Application extends State<Application> {
 
   Future<void> displayNotification() async {
     try {
-      if (kDebugMode) {
-        print('display Notification');
+      NotifeeNotification notification = selectedNotification!;
+      if (notification.android != null) {
+        notification.android!.channelId = selectedAndroidChannelId;
+        notification.android!.smallIcon = exampleSmallIcon;
+      } else {
+        notification.android = NotificationAndroid(
+            channelId: selectedAndroidChannelId, smallIcon: exampleSmallIcon);
       }
-      await notifee.createChannel(Channel(
-          id: 'general', name: 'General', importance: AndroidImportance.high));
-      NotifeeNotification notification = NotifeeNotification(
-          title: "bA notification",
-          body: "With a body",
-          subtitle: "And a subtitle",
-          ios: NotificationIOS(
-              foregroundPresentationOptions: ForegroundPresentationOptions(
-                  alert: true, badge: true, sound: true)),
-          android: NotificationAndroid(
-              channelId: androidChannelId, smallIcon: 'ic_launcher'));
+
       await notifee.requestPermission();
       await notifee.displayNotification(notification);
     } catch (e) {

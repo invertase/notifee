@@ -36,9 +36,10 @@ export 'package:notifee_platform_interface/notifee_platform_interface.dart'
         Channel,
         AndroidImportance,
         IOSNotificationPermissions,
-        Trigger,
+        IOSNotificationAttachment,
+        IOSAttachmentThumbnailClippingRect,
+        RepeatFrequency,
         TimestampTrigger,
-        TimestampTriggerAlarmManager,
         TriggerType,
         IntervalTrigger,
         TriggerNotification;

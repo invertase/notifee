@@ -22,7 +22,7 @@ class NotificationIOS {
   NotificationIOS(
       {this.attachments,
       this.badgeCount,
-      foregroundPresentationOptions,
+      this.foregroundPresentationOptions,
       this.categoryId,
       this.launchImageName,
       this.sound,
@@ -31,10 +31,10 @@ class NotificationIOS {
       this.threadId,
       this.summaryArgument,
       this.summaryArgumentCount,
-      this.targetContentId})
-      : foregroundPresentationOptions = foregroundPresentationOptions ??
-            ForegroundPresentationOptions(
-                alert: true, badge: true, sound: true);
+      this.targetContentId}) {
+    foregroundPresentationOptions ??=
+        ForegroundPresentationOptions(alert: true, badge: true, sound: true);
+  }
 
   /// Optional array of [IOSNotificationAttachment] interfaces
   /// Attachments allow audio, image, or video content to be displayed with the notification, enriching the user's experience.
@@ -124,7 +124,9 @@ class NotificationIOS {
       'threadId': threadId,
       'summaryArgument': summaryArgument,
       'summaryArgumentCount': summaryArgumentCount,
-      'targetContentId': targetContentId
+      'targetContentId': targetContentId,
+      'attachments':
+          attachments?.map((attachment) => attachment.asMap()).toList()
     };
 
     map.removeWhere((_, value) => value == null);

@@ -29,7 +29,8 @@ class NotifeeNotification {
       this.data,
       this.android,
       this.ios}) {
-    id = GenerateId.generateId();
+    id ??= GenerateId.generateId();
+    ios ??= NotificationIOS();
   }
 
   /// A unique identifier for your notification.
