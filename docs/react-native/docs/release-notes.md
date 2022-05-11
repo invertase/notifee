@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.2.2
+- **[Android]**: Allows `repeatFrequency` to be set to -1 when creating notifications (Fixes [#384](https://github.com/invertase/notifee/issues/379)).
+- **[Android]**: Fixes an issue with rescheduling notifications with alarm manager (Fixes [#384](https://github.com/invertase/notifee/issues/248)).
+
 ## 5.2.1
 - **[Android]**: Fixes a build issue introduced in version 5.2.0 (PR [#384](https://github.com/invertase/notifee/pull/384)).
 
