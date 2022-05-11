@@ -202,7 +202,7 @@ class NotifeeAlarmManager {
 
   /* On reboot, reschedule trigger notifications created via alarm manager  */
   void rescheduleNotification(WorkDataEntity workDataEntity) {
-    if (workDataEntity.getNotification() != null && workDataEntity.getTrigger() != null) {
+    if (workDataEntity.getNotification() == null || workDataEntity.getTrigger() == null) {
       return;
     }
 

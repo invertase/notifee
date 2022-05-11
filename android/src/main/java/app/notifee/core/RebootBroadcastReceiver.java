@@ -30,6 +30,9 @@ public class RebootBroadcastReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     Log.i("RebootReceiver", "Received reboot event");
+    if (ContextHolder.getApplicationContext() == null) {
+      ContextHolder.setApplicationContext(context.getApplicationContext());
+    }
     new NotifeeAlarmManager().rescheduleNotifications();
   }
 }
