@@ -231,6 +231,7 @@ class NotifeeAlarmManager {
   }
 
   void rescheduleNotifications() {
+    Logger.d(TAG, "Reschedule Notifications on reboot");
     getScheduledNotifications()
         .addOnCompleteListener(
             task -> {
