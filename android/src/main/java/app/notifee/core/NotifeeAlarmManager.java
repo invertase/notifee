@@ -218,6 +218,10 @@ class NotifeeAlarmManager {
     switch (triggerType) {
       case 0:
         TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
+        if (!trigger.getWithAlarmManager()) {
+          return;
+        }
+
         scheduleTimestampTriggerNotification(notificationModel, trigger);
         break;
       case 1:
