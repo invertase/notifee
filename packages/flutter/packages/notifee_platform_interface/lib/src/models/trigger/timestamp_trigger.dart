@@ -19,11 +19,9 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 
 class TimestampTrigger {
-  TimestampTrigger(
-      {required this.timestamp, this.repeatFrequency, this.allowWhileIdle}) {
-    allowWhileIdle = allowWhileIdle ?? false;
-    repeatFrequency = repeatFrequency ?? RepeatFrequency.none;
-  }
+  TimestampTrigger({required this.timestamp, repeatFrequency, allowWhileIdle})
+      : allowWhileIdle = allowWhileIdle ?? false,
+        repeatFrequency = repeatFrequency ?? RepeatFrequency.none;
 
   TriggerType type = TriggerType.timestamp;
 
@@ -56,7 +54,7 @@ class TimestampTrigger {
     return {
       'type': triggerTypeMap[type],
       'timestamp': timestamp,
-      'allowWhileIdol': allowWhileIdle,
+      'allowWhileIdle': allowWhileIdle,
       'repeatFrequency': repeatFrequencyMap[repeatFrequency],
     };
   }
