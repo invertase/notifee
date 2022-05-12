@@ -40,6 +40,13 @@ export interface NotificationAndroid {
   asForegroundService?: boolean;
 
   /**
+   * When set to `true` the screen will light up when the notification is displayed.
+   *
+   * Defaults to `false`.
+   */
+  lightUpScreen?: boolean;
+
+  /**
    * Setting this flag will make it so the notification is automatically canceled when the user
    * presses it in the panel.
    *
