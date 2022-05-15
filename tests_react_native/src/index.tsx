@@ -496,6 +496,12 @@ function Root(): any {
       <ScrollView style={[styles.container]}>
         <View>
           <Button
+            title="Request Permission"
+            onPress={async (): Promise<void> => {
+              console.log(await Notifee.requestPermission());
+            }}
+          />
+          <Button
             title={'get notification settings'}
             onPress={async (): Promise<void> => {
               const notificationSettings = await Notifee.getNotificationSettings();

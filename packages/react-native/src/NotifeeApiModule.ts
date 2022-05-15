@@ -574,6 +574,8 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         );
     }
 
+    window.Notification.requestPermission()
+
     // assume web
     return Promise.resolve({
       authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
