@@ -1,4 +1,4 @@
-name: flutter_checks
+name: Flutter Checks
 
 on:
   pull_request:
@@ -30,6 +30,7 @@ jobs:
         working-directory: ./packages/flutter
       - name: "Run Analyze"
         run: melos run analyze
+        working-directory: ./packages/flutter
       - name: "Pub Check"
         run: |
           melos exec -c 1 --no-private --ignore="*example*" -- \
