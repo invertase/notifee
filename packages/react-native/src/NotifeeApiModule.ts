@@ -7,7 +7,6 @@ import { Module } from './types/Module';
 import {
   AndroidChannel,
   AndroidChannelGroup,
-  AndroidNotificationSetting,
   NativeAndroidChannel,
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
@@ -24,6 +23,7 @@ import { PowerManagerInfo } from './types/PowerManagerInfo';
 import { Trigger } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
+  defaultNotificationSettings,
   hasNotificationSupport,
   isAndroid,
   isArray,
@@ -527,22 +527,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             android,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'android'>) => {
             return {
+              ...defaultNotificationSettings,
               authorizationStatus,
               android,
-              ios: {
-                alert: 1,
-                badge: 1,
-                criticalAlert: 1,
-                showPreviews: 1,
-                sound: 1,
-                carPlay: 1,
-                lockScreen: 1,
-                announcement: 1,
-                notificationCenter: 1,
-                inAppNotificationSettings: 1,
-                authorizationStatus,
-              },
-              web: {},
+              ios: { ...defaultNotificationSettings.ios, authorizationStatus, },
             };
           },
         );
@@ -563,20 +551,12 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'ios'>) => {
-            return {
-              authorizationStatus,
-              ios,
-              android: {
-                alarm: AndroidNotificationSetting.ENABLED,
-              },
-              web: {},
-            };
+            return { ...defaultNotificationSettings, authorizationStatus, ios, };
           },
         );
     }
 
-    // assume web
-    if (hasNotificationSupport()) {
+    if (isWeb && hasNotificationSupport()) {
       return window.Notification.requestPermission().then(permission => {
         let authorizationStatus = AuthorizationStatus.NOT_DETERMINED;
         switch (permission) {
@@ -590,49 +570,11 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus = AuthorizationStatus.AUTHORIZED
             break;
         }
-        return {
-          authorizationStatus,
-          android: {
-            alarm: AndroidNotificationSetting.ENABLED,
-          },
-          ios: {
-            alert: 1,
-            badge: 1,
-            criticalAlert: 1,
-            showPreviews: 1,
-            sound: 1,
-            carPlay: 1,
-            lockScreen: 1,
-            announcement: 1,
-            notificationCenter: 1,
-            inAppNotificationSettings: 1,
-            authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
-          },
-          web: {},
-        }
+        return { ...defaultNotificationSettings, authorizationStatus, }
       })
     }
 
-    return Promise.resolve({
-      authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
-      android: {
-        alarm: AndroidNotificationSetting.ENABLED,
-      },
-      ios: {
-        alert: 1,
-        badge: 1,
-        criticalAlert: 1,
-        showPreviews: 1,
-        sound: 1,
-        carPlay: 1,
-        lockScreen: 1,
-        announcement: 1,
-        notificationCenter: 1,
-        inAppNotificationSettings: 1,
-        authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
-      },
-      web: {},
-    });
+    return Promise.resolve(defaultNotificationSettings);
   };
 
   public registerForegroundService(runner: (notification: Notification) => Promise<void>): void {
@@ -690,22 +632,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             android,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'android'>) => {
             return {
+              ...defaultNotificationSettings,
               authorizationStatus,
               android,
-              ios: {
-                alert: 1,
-                badge: 1,
-                criticalAlert: 1,
-                showPreviews: 1,
-                sound: 1,
-                carPlay: 1,
-                lockScreen: 1,
-                announcement: 1,
-                notificationCenter: 1,
-                inAppNotificationSettings: 1,
-                authorizationStatus,
-              },
-              web: {},
+              ios: { ...defaultNotificationSettings.ios, authorizationStatus, }
             };
           },
         );
@@ -719,38 +649,28 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'ios'>) => {
-            return {
-              authorizationStatus,
-              ios,
-              android: {
-                alarm: AndroidNotificationSetting.ENABLED,
-              },
-            };
+            return { ...defaultNotificationSettings, authorizationStatus, ios, };
           },
         );
     }
 
-    // assume web
-    return Promise.resolve({
-      authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
-      android: {
-        alarm: AndroidNotificationSetting.ENABLED,
-      },
-      ios: {
-        alert: 1,
-        badge: 1,
-        criticalAlert: 1,
-        showPreviews: 1,
-        sound: 1,
-        carPlay: 1,
-        lockScreen: 1,
-        announcement: 1,
-        notificationCenter: 1,
-        inAppNotificationSettings: 1,
-        authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
-      },
-      web: {},
-    });
+    if(isWeb && hasNotificationSupport()) {
+      let authorizationStatus = AuthorizationStatus.NOT_DETERMINED;
+      switch (window.Notification.permission) {
+        case "default":
+          authorizationStatus = AuthorizationStatus.NOT_DETERMINED
+          break;
+        case "denied":
+          authorizationStatus = AuthorizationStatus.DENIED
+          break;
+        case "granted":
+          authorizationStatus = AuthorizationStatus.AUTHORIZED
+          break;
+      }
+      return Promise.resolve({ ...defaultNotificationSettings, authorizationStatus })
+    }
+
+    return Promise.resolve(defaultNotificationSettings);
   };
 
   public getBadgeCount = (): Promise<number> => {

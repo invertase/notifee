@@ -3,6 +3,8 @@
  */
 
 import { Platform } from 'react-native';
+import { AuthorizationStatus, NotificationSettings } from "../types/Notification";
+import { AndroidNotificationSetting } from "../types/NotificationAndroid";
 
 export * from './id';
 export * from './validate';
@@ -47,6 +49,27 @@ export const hasNotificationSupport = (): boolean => {
   }
 
   return true;
+}
+
+export const defaultNotificationSettings: NotificationSettings = {
+  authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
+  android: {
+    alarm: AndroidNotificationSetting.ENABLED,
+  },
+  ios: {
+    alert: 1,
+    badge: 1,
+    criticalAlert: 1,
+    showPreviews: 1,
+    sound: 1,
+    carPlay: 1,
+    lockScreen: 1,
+    announcement: 1,
+    notificationCenter: 1,
+    inAppNotificationSettings: 1,
+    authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
+  },
+  web: {}
 }
 
 export function noop(): void {
