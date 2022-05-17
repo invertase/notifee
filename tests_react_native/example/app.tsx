@@ -14,8 +14,8 @@ import {
   View,
 } from 'react-native';
 
-import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/messaging';
+// import firebase from '@react-native-firebase/app';
+// import '@react-native-firebase/messaging';
 
 import Notifee, {
   AndroidChannel,
@@ -28,7 +28,7 @@ import Notifee, {
   RepeatFrequency,
 } from '@notifee/react-native';
 
-import { notifications } from './notifications';
+import { notifications } from './notifications.ts';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 
 type RemoteMessage = FirebaseMessagingTypes.RemoteMessage;
@@ -90,14 +90,14 @@ async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
   // });
 }
 
-firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
+// firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
 function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
-    const fcmToken = await firebase.messaging().getToken();
-    console.log({ fcmToken });
-    firebase.messaging().onMessage(onMessage);
+    // const fcmToken = await firebase.messaging().getToken();
+    // console.log({ fcmToken });
+    // firebase.messaging().onMessage(onMessage);
 
     const initialNotification = await Notifee.getInitialNotification();
     console.log('init: ', { initialNotification });
