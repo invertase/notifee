@@ -29,6 +29,26 @@ export const isAndroid = Platform.OS === 'android';
 
 export const isWeb = Platform.OS === 'web';
 
+export const hasNotificationSupport = (): boolean => {
+  if (!('Notification' in window) || !Notification.requestPermission) {
+    return false;
+  }
+
+  // don't test for `new Notification` if permission has already been granted
+  // otherwise this sends a real notification on supported browsers
+  if (Notification.permission !== 'granted') {
+    try {
+      new Notification('');
+    } catch (e: any) {
+      if (e.name === 'TypeError') {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
 export function noop(): void {
   // noop-🐈
 }
