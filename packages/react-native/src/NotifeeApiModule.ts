@@ -11,7 +11,6 @@ import {
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
 import {
-  AuthorizationStatus,
   DisplayedNotification,
   Event,
   InitialNotification,
@@ -36,6 +35,7 @@ import {
   kReactNativeNotifeeForegroundServiceHeadlessTask,
   kReactNativeNotifeeNotificationBackgroundEvent,
   kReactNativeNotifeeNotificationEvent,
+  notificationPermissionMapper,
   NotificationType,
 } from './utils';
 import validateNotification from './validators/validateNotification';
@@ -557,21 +557,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     if (isWeb && hasNotificationSupport()) {
-      return window.Notification.requestPermission().then(permission => {
-        let authorizationStatus = AuthorizationStatus.NOT_DETERMINED;
-        switch (permission) {
-          case "default":
-            authorizationStatus = AuthorizationStatus.NOT_DETERMINED
-            break;
-          case "denied":
-            authorizationStatus = AuthorizationStatus.DENIED
-            break;
-          case "granted":
-            authorizationStatus = AuthorizationStatus.AUTHORIZED
-            break;
-        }
-        return { ...defaultNotificationSettings, authorizationStatus, }
-      })
+      return window.Notification.requestPermission().then(permission => ({
+        ...defaultNotificationSettings,
+        authorizationStatus: notificationPermissionMapper(permission),
+      }))
     }
 
     return Promise.resolve(defaultNotificationSettings);
@@ -655,19 +644,10 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     }
 
     if(isWeb && hasNotificationSupport()) {
-      let authorizationStatus = AuthorizationStatus.NOT_DETERMINED;
-      switch (window.Notification.permission) {
-        case "default":
-          authorizationStatus = AuthorizationStatus.NOT_DETERMINED
-          break;
-        case "denied":
-          authorizationStatus = AuthorizationStatus.DENIED
-          break;
-        case "granted":
-          authorizationStatus = AuthorizationStatus.AUTHORIZED
-          break;
-      }
-      return Promise.resolve({ ...defaultNotificationSettings, authorizationStatus })
+      return Promise.resolve({
+        ...defaultNotificationSettings,
+        authorizationStatus: notificationPermissionMapper(window.Notification.permission)
+      })
     }
 
     return Promise.resolve(defaultNotificationSettings);

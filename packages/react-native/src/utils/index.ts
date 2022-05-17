@@ -51,6 +51,22 @@ export const hasNotificationSupport = (): boolean => {
   return true;
 }
 
+export const notificationPermissionMapper = (permission: NotificationPermission): AuthorizationStatus => {
+  let authorizationStatus: AuthorizationStatus;
+  switch (permission) {
+    case "default":
+      authorizationStatus = AuthorizationStatus.NOT_DETERMINED
+      break;
+    case "denied":
+      authorizationStatus = AuthorizationStatus.DENIED
+      break;
+    case "granted":
+      authorizationStatus = AuthorizationStatus.AUTHORIZED
+      break;
+  }
+  return authorizationStatus;
+}
+
 export const defaultNotificationSettings: NotificationSettings = {
   authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
   android: {
