@@ -13,17 +13,18 @@ import {
 } from './types/NotificationAndroid';
 import {
   AuthorizationStatus,
+  DisplayedNotification,
+  Event,
   InitialNotification,
   Notification,
-  Event,
-  TriggerNotification,
-  DisplayedNotification,
   NotificationSettings,
+  TriggerNotification,
 } from './types/Notification';
 import { PowerManagerInfo } from './types/PowerManagerInfo';
 import { Trigger } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
+  hasNotificationSupport,
   isAndroid,
   isArray,
   isFunction,
@@ -574,9 +575,44 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         );
     }
 
-    window.Notification.requestPermission()
-
     // assume web
+    if (hasNotificationSupport()) {
+      return window.Notification.requestPermission().then(permission => {
+        let authorizationStatus = AuthorizationStatus.NOT_DETERMINED;
+        switch (permission) {
+          case "default":
+            authorizationStatus = AuthorizationStatus.NOT_DETERMINED
+            break;
+          case "denied":
+            authorizationStatus = AuthorizationStatus.DENIED
+            break;
+          case "granted":
+            authorizationStatus = AuthorizationStatus.AUTHORIZED
+            break;
+        }
+        return {
+          authorizationStatus,
+          android: {
+            alarm: AndroidNotificationSetting.ENABLED,
+          },
+          ios: {
+            alert: 1,
+            badge: 1,
+            criticalAlert: 1,
+            showPreviews: 1,
+            sound: 1,
+            carPlay: 1,
+            lockScreen: 1,
+            announcement: 1,
+            notificationCenter: 1,
+            inAppNotificationSettings: 1,
+            authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
+          },
+          web: {},
+        }
+      })
+    }
+
     return Promise.resolve({
       authorizationStatus: AuthorizationStatus.NOT_DETERMINED,
       android: {
