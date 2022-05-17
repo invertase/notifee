@@ -391,6 +391,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       });
     }
 
+    if(isWeb && hasNotificationSupport()) {
+      new window.Notification(notification.title ?? '', {
+        body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
+        data: notification.data
+      })
+      return Promise.resolve(options.id as string);
+    }
+
     return Promise.resolve('');
   };
 
@@ -425,6 +433,14 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return this.native.createTriggerNotification(options, triggerOptions).then((): string => {
         return options.id as string;
       });
+    }
+
+    if(isWeb && hasNotificationSupport()) {
+      new window.Notification(notification.title ?? '', {
+        body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
+        data: notification.data
+      })
+      return Promise.resolve(options.id as string);
     }
 
     return Promise.resolve('');
