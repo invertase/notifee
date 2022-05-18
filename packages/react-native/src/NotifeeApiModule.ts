@@ -19,7 +19,7 @@ import {
   TriggerNotification,
 } from './types/Notification';
 import { PowerManagerInfo } from './types/PowerManagerInfo';
-import { Trigger } from './types/Trigger';
+import { Trigger, TriggerType } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
   defaultNotificationSettings,
@@ -396,7 +396,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
         data: notification.data
       })
-      return Promise.resolve(options.id as string);
+      return Promise.resolve(options.id!);
     }
 
     return Promise.resolve('');
@@ -435,12 +435,16 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       });
     }
 
-    if(isWeb && hasNotificationSupport()) {
-      new window.Notification(notification.title ?? '', {
-        body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
-        data: notification.data
-      })
-      return Promise.resolve(options.id as string);
+    if (isWeb && hasNotificationSupport()) {
+      if (triggerOptions.type === TriggerType.TIMESTAMP) {
+        setTimeout(() => {
+          new window.Notification(notification.title ?? '', {
+            body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
+            data: notification.data
+          })
+        }, triggerOptions.timestamp - Date.now())
+      }
+      return Promise.resolve(options.id!);
     }
 
     return Promise.resolve('');
