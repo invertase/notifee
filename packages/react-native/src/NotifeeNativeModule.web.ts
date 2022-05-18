@@ -62,11 +62,13 @@ export default class NotifeeNativeModule {
       displayNotification: (notification: Notification): Promise<void> => {
         if (sw) {
           return sw.showNotification(notification.title ?? '', {
+            ...notification.web,
             body: formatNotificationBody(notification.subtitle, notification.body),
             data: notification.data,
           });
         } else if (hasNotificationSupport) {
           new Notification(notification.title ?? '', {
+            ...notification.web,
             body: formatNotificationBody(notification.subtitle, notification.body),
             data: notification.data,
           });

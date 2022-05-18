@@ -1,5 +1,25 @@
-/**
- * Empty at the moment but will contain web-specific settings as needed
- */
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface WebNotificationSettings {}
+export interface NotificationWeb {
+  actions?: NotificationAction[];
+
+  badge?: string;
+
+  dir?: NotificationDirection;
+
+  icon?: string;
+
+  image?: string;
+
+  lang?: string;
+
+  renotify?: boolean;
+
+  requireInteraction?: boolean;
+
+  silent?: boolean;
+
+  tag?: string;
+
+  timestamp?: EpochTimeStamp;
+
+  vibrate?: VibratePattern;
+}

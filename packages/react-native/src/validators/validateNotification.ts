@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateId, objectHasProperty, isObject, isString, isAndroid, isIOS } from '../utils';
+import { generateId, objectHasProperty, isObject, isString, isAndroid, isIOS, isWeb } from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateIOSNotification from './validateIOSNotification';
@@ -54,6 +54,8 @@ export default function validateNotification(notification: Notification): Notifi
     out.android = {};
   } else if (isIOS) {
     out.ios = {};
+  } else if(isWeb) {
+    out.web = {}
   }
 
   /**
@@ -142,6 +144,13 @@ export default function validateNotification(notification: Notification): Notifi
   const validatedIOS = validatePlatformSpecificNotification(notification, 'ios') as NotificationIOS;
   if (isIOS) {
     out.ios = validatedIOS;
+  }
+
+  /**
+   * web
+   */
+  if(isWeb) {
+    out.web = notification.web;
   }
 
   return out;

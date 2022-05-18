@@ -1,9 +1,9 @@
 import {
-  AndroidStyle,
-  Notification,
-  AndroidLaunchActivityFlag,
   AndroidCategory,
   AndroidImportance,
+  AndroidLaunchActivityFlag,
+  AndroidStyle,
+  Notification,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
@@ -148,6 +148,25 @@ export const notifications: { key: string; notification: Notification | Notifica
           },
         ],
         channelId: 'high',
+      },
+      web: {
+        actions: [
+          {
+            title: 'Reply, Open & Cancel',
+            action: 'default',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+          },
+          {
+            title: 'Open & Cancel',
+            action: 'second_action',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+          },
+          {
+            title: 'Nothing',
+            action: 'third_action',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+          },
+        ],
       },
     },
   },

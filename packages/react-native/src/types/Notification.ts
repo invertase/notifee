@@ -10,7 +10,7 @@ import {
   AndroidLaunchActivityFlag,
 } from './NotificationAndroid';
 import { AndroidNotificationSettings, Trigger } from '..';
-import { WebNotificationSettings } from './NotificationWeb';
+import { NotificationWeb, WebNotificationSettings } from './NotificationWeb';
 
 /**
  * Interface for building a local notification for both Android & iOS devices.
@@ -68,6 +68,14 @@ export interface Notification {
    * @platform ios
    */
   ios?: NotificationIOS;
+
+  /**
+   * Web specific notification options. See the [`NotificationWeb`](/react-native/reference/notificationweb)
+   * interface for more information and default options which are applied to a notification.
+   *
+   * @platform web
+   */
+  web?: NotificationWeb;
 
   /**
    * Will be populated if it's a remote notification
