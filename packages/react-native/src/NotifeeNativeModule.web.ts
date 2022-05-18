@@ -17,12 +17,15 @@ export default class NotifeeNativeModule {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('notifee-sw.js').then(serviceWorkerRegistration => {
         this.sw = serviceWorkerRegistration;
-        console.log('serviceworker registered')
-      }).catch(() => {
-        console.log('couldn\'t register serviceworker using browser notifications')
+        console.log('Service worker `notifee-sw.js` is registered.')
+      }).catch((e) => {
+        console.error(e)
+        console.log('The service worker could not be registered. Using the browser Notification.\n' +
+          'Browser Notification does not include all features, to unlock Notifee full power add `notifee-sw.js` service worker.\n' +
+          'Learn how to add `notifee-sw.js`: https://notifee.com');
       })
     } else {
-      console.log('your browser doesnt support service workers browser notifications')
+      console.log('Your browser does not support service workers. Using the browser Notification.')
     }
   }
 
