@@ -14,8 +14,8 @@ import {
   View,
 } from 'react-native';
 
-// import firebase from '@react-native-firebase/app';
-// import '@react-native-firebase/messaging';
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/messaging';
 
 import Notifee, {
   AndroidChannel,
@@ -95,9 +95,9 @@ function Root(): any {
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
-    // const fcmToken = await firebase.messaging().getToken();
-    // console.log({ fcmToken });
-    // firebase.messaging().onMessage(onMessage);
+    const fcmToken = await firebase.messaging().getToken();
+    console.log({ fcmToken });
+    firebase.messaging().onMessage(onMessage);
 
     const initialNotification = await Notifee.getInitialNotification();
     console.log('init: ', { initialNotification });
