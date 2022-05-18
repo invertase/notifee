@@ -59,6 +59,7 @@ export default class NotifeeNativeModule {
         }
       });
     };
+
     const displayNotification = (notification: Notification): Promise<void> => {
       if (sw) {
         return sw.showNotification(notification.title ?? '', {
@@ -75,6 +76,7 @@ export default class NotifeeNativeModule {
       }
       return Promise.resolve();
     };
+
     const createTriggerNotification = (
       notification: Notification,
       trigger: Trigger,
@@ -87,10 +89,24 @@ export default class NotifeeNativeModule {
       return Promise.resolve();
     };
 
+    const getNotificationSettings = (): AuthorizationStatus => {
+      if (!hasNotificationSupport) return AuthorizationStatus.NOT_DETERMINED;
+
+      switch (window.Notification.permission) {
+        case 'default':
+          return AuthorizationStatus.NOT_DETERMINED;
+        case 'denied':
+          return AuthorizationStatus.DENIED;
+        case 'granted':
+          return AuthorizationStatus.AUTHORIZED;
+      }
+    };
+
     return {
       requestPermission,
       displayNotification,
       createTriggerNotification,
+      getNotificationSettings
     };
   }
 

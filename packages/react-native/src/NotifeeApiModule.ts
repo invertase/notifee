@@ -36,7 +36,6 @@ import {
   kReactNativeNotifeeForegroundServiceHeadlessTask,
   kReactNativeNotifeeNotificationBackgroundEvent,
   kReactNativeNotifeeNotificationEvent,
-  notificationPermissionMapper,
   NotificationType,
 } from './utils';
 import validateNotification from './validators/validateNotification';
@@ -635,7 +634,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
     if (isWeb && hasNotificationSupport()) {
       return Promise.resolve({
         ...defaultNotificationSettings,
-        authorizationStatus: notificationPermissionMapper(window.Notification.permission),
+        authorizationStatus: this.native.getNotificationSettings()
       })
     }
 
