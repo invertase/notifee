@@ -24,7 +24,6 @@ import { Trigger } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
   defaultNotificationSettings,
-  hasNotificationSupport,
   isAndroid,
   isArray,
   isFunction,
@@ -631,7 +630,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         );
     }
 
-    if (isWeb && hasNotificationSupport()) {
+    if (isWeb) {
       return Promise.resolve({
         ...defaultNotificationSettings,
         authorizationStatus: this.native.getNotificationSettings()
