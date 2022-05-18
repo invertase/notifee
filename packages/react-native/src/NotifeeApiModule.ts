@@ -11,6 +11,7 @@ import {
   NativeAndroidChannelGroup,
 } from './types/NotificationAndroid';
 import {
+  AuthorizationStatus,
   DisplayedNotification,
   Event,
   InitialNotification,
@@ -576,13 +577,13 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
         );
     }
 
-    if (isWeb && hasNotificationSupport()) {
-      return window.Notification.requestPermission().then(permission => ({
-        ...defaultNotificationSettings,
-        authorizationStatus: notificationPermissionMapper(permission),
-      }))
+    if (isWeb) {
+      return this.native.requestPermission()
+        .then((authorizationStatus: AuthorizationStatus) => ({
+          ...defaultNotificationSettings,
+          authorizationStatus
+        }))
     }
-
     return Promise.resolve(defaultNotificationSettings);
   };
 

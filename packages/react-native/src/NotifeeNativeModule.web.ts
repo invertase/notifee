@@ -1,4 +1,5 @@
 import { EventEmitter, NativeEventEmitter, NativeModulesStatic } from 'react-native';
+import { AuthorizationStatus } from "./types/Notification";
 
 export interface NativeModuleConfig {
   version: string;
@@ -36,7 +37,23 @@ export default class NotifeeNativeModule {
   public get native(): NativeModulesStatic {
     const hasNotificationSupport = NotifeeNativeModule.hasNotificationSupport
 
-    return {};
+    return {
+      requestPermission: () => {
+        if (!hasNotificationSupport)
+          return Promise.resolve(AuthorizationStatus.NOT_DETERMINED);
+
+        return window.Notification.requestPermission().then(permission => {
+          switch (permission) {
+            case "default":
+              return AuthorizationStatus.NOT_DETERMINED
+            case "denied":
+              return AuthorizationStatus.DENIED
+            case "granted":
+              return AuthorizationStatus.AUTHORIZED
+          }
+        })
+      },
+    };
   }
 
   private static get hasServiceWorkerSupport() {
