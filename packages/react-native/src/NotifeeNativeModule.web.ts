@@ -1,5 +1,6 @@
 import { EventEmitter, NativeEventEmitter, NativeModulesStatic } from 'react-native';
 import { AuthorizationStatus, Notification } from './types/Notification';
+import { Trigger, TriggerType } from './types/Trigger';
 
 export interface NativeModuleConfig {
   version: string;
@@ -44,37 +45,52 @@ export default class NotifeeNativeModule {
     const hasNotificationSupport = NotifeeNativeModule.hasNotificationSupport;
     const formatNotificationBody = NotifeeNativeModule.formatNotificationBody;
 
-    return {
-      requestPermission: (): Promise<AuthorizationStatus> => {
-        if (!hasNotificationSupport) return Promise.resolve(AuthorizationStatus.NOT_DETERMINED);
+    const requestPermission = (): Promise<AuthorizationStatus> => {
+      if (!hasNotificationSupport) return Promise.resolve(AuthorizationStatus.NOT_DETERMINED);
 
-        return window.Notification.requestPermission().then(permission => {
-          switch (permission) {
-            case 'default':
-              return AuthorizationStatus.NOT_DETERMINED;
-            case 'denied':
-              return AuthorizationStatus.DENIED;
-            case 'granted':
-              return AuthorizationStatus.AUTHORIZED;
-          }
-        });
-      },
-      displayNotification: (notification: Notification): Promise<void> => {
-        if (sw) {
-          return sw.showNotification(notification.title ?? '', {
-            ...notification.web,
-            body: formatNotificationBody(notification.subtitle, notification.body),
-            data: notification.data,
-          });
-        } else if (hasNotificationSupport) {
-          new Notification(notification.title ?? '', {
-            ...notification.web,
-            body: formatNotificationBody(notification.subtitle, notification.body),
-            data: notification.data,
-          });
+      return window.Notification.requestPermission().then(permission => {
+        switch (permission) {
+          case 'default':
+            return AuthorizationStatus.NOT_DETERMINED;
+          case 'denied':
+            return AuthorizationStatus.DENIED;
+          case 'granted':
+            return AuthorizationStatus.AUTHORIZED;
         }
-        return Promise.resolve();
-      },
+      });
+    };
+    const displayNotification = (notification: Notification): Promise<void> => {
+      if (sw) {
+        return sw.showNotification(notification.title ?? '', {
+          ...notification.web,
+          body: formatNotificationBody(notification.subtitle, notification.body),
+          data: notification.data,
+        });
+      } else if (hasNotificationSupport) {
+        new Notification(notification.title ?? '', {
+          ...notification.web,
+          body: formatNotificationBody(notification.subtitle, notification.body),
+          data: notification.data,
+        });
+      }
+      return Promise.resolve();
+    };
+    const createTriggerNotification = (
+      notification: Notification,
+      trigger: Trigger,
+    ): Promise<void> => {
+      if (trigger.type === TriggerType.TIMESTAMP) {
+        setTimeout(() => {
+          return displayNotification(notification);
+        }, trigger.timestamp - Date.now());
+      }
+      return Promise.resolve();
+    };
+
+    return {
+      requestPermission,
+      displayNotification,
+      createTriggerNotification,
     };
   }
 

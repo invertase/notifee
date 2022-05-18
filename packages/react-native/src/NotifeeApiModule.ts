@@ -20,7 +20,7 @@ import {
   TriggerNotification,
 } from './types/Notification';
 import { PowerManagerInfo } from './types/PowerManagerInfo';
-import { Trigger, TriggerType } from './types/Trigger';
+import { Trigger } from './types/Trigger';
 import NotifeeNativeModule, { NativeModuleConfig } from './NotifeeNativeModule';
 import {
   defaultNotificationSettings,
@@ -416,25 +416,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.createTriggerNotification(*) ${e.message}`);
     }
 
-    if (isIOS || isAndroid) {
-      return this.native.createTriggerNotification(options, triggerOptions).then((): string => {
-        return options.id as string;
-      });
-    }
-
-    if (isWeb && hasNotificationSupport()) {
-      if (triggerOptions.type === TriggerType.TIMESTAMP) {
-        setTimeout(() => {
-          new window.Notification(notification.title ?? '', {
-            body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
-            data: notification.data
-          })
-        }, triggerOptions.timestamp - Date.now())
-      }
-      return Promise.resolve(options.id!);
-    }
-
-    return Promise.resolve('');
+    return this.native.createTriggerNotification(options, triggerOptions).then((): string => options.id!);
   };
 
   public getChannel = (channelId: string): Promise<NativeAndroidChannel | null> => {
@@ -537,7 +519,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
               ...defaultNotificationSettings,
               authorizationStatus,
               android,
-              ios: { ...defaultNotificationSettings.ios, authorizationStatus, },
+              ios: { ...defaultNotificationSettings.ios, authorizationStatus },
             };
           },
         );
@@ -558,7 +540,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'ios'>) => {
-            return { ...defaultNotificationSettings, authorizationStatus, ios, };
+            return { ...defaultNotificationSettings, authorizationStatus, ios };
           },
         );
     }
@@ -567,7 +549,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return this.native.requestPermission()
         .then((authorizationStatus: AuthorizationStatus) => ({
           ...defaultNotificationSettings,
-          authorizationStatus
+          authorizationStatus,
         }))
     }
     return Promise.resolve(defaultNotificationSettings);
@@ -631,7 +613,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
               ...defaultNotificationSettings,
               authorizationStatus,
               android,
-              ios: { ...defaultNotificationSettings.ios, authorizationStatus, }
+              ios: { ...defaultNotificationSettings.ios, authorizationStatus },
             };
           },
         );
@@ -645,15 +627,15 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
             authorizationStatus,
             ios,
           }: Pick<NotificationSettings, 'authorizationStatus' | 'ios'>) => {
-            return { ...defaultNotificationSettings, authorizationStatus, ios, };
+            return { ...defaultNotificationSettings, authorizationStatus, ios };
           },
         );
     }
 
-    if(isWeb && hasNotificationSupport()) {
+    if (isWeb && hasNotificationSupport()) {
       return Promise.resolve({
         ...defaultNotificationSettings,
-        authorizationStatus: notificationPermissionMapper(window.Notification.permission)
+        authorizationStatus: notificationPermissionMapper(window.Notification.permission),
       })
     }
 
