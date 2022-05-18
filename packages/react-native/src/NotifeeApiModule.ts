@@ -386,21 +386,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       throw new Error(`notifee.displayNotification(*) ${e.message}`);
     }
 
-    if (isIOS || isAndroid) {
-      return this.native.displayNotification(options).then((): string => {
-        return options.id as string;
-      });
-    }
-
-    if(isWeb && hasNotificationSupport()) {
-      new window.Notification(notification.title ?? '', {
-        body: notification.subtitle ? notification.subtitle + '\n' + notification.body : notification.body,
-        data: notification.data
-      })
-      return Promise.resolve(options.id!);
-    }
-
-    return Promise.resolve('');
+    return this.native.displayNotification(options).then((): string => options.id!);
   };
 
   public openAlarmPermissionSettings = (): Promise<void> => {
