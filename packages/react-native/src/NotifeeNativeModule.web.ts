@@ -7,12 +7,23 @@ export interface NativeModuleConfig {
 }
 
 export default class NotifeeNativeModule {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore unused value
   private readonly _moduleConfig: NativeModuleConfig;
+
+  private sw: ServiceWorkerRegistration | undefined;
 
   public constructor(config: NativeModuleConfig) {
     this._moduleConfig = Object.assign({}, config);
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('notifee-sw.js').then(serviceWorkerRegistration => {
+        this.sw = serviceWorkerRegistration;
+        console.log('serviceworker registered')
+      }).catch(() => {
+        console.log('couldn\'t register serviceworker using browser notifications')
+      })
+    } else {
+      console.log('your browser doesnt support service workers browser notifications')
+    }
   }
 
   public get emitter(): EventEmitter {
