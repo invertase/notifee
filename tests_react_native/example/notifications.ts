@@ -227,6 +227,9 @@ export const notifications: { key: string; notification: Notification | Notifica
           },
         ],
       },
+      web: {
+        icon: '/icon-512x512.png',
+      },
     },
   },
   {
