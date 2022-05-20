@@ -137,19 +137,46 @@ export default class NotifeeNativeModule {
       return Promise.resolve();
     };
 
+    const cancelTriggerNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
+      this.pending
+        .filter($ => $.notification.id && notificationIds.includes($.notification.id))
+        .forEach($ => cancelTriggerNotification($.notification.id!));
+      return Promise.resolve();
+    };
+
+    const cancelTriggerNotifications = (): Promise<void> => {
+      this.pending.forEach($ => {
+        cancelTriggerNotification($.notification.id!);
+      });
+
+      return Promise.resolve();
+    };
+
+    const cancelAllNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
+      cancelDisplayedNotificationsWithIds(notificationIds);
+      cancelTriggerNotificationsWithIds(notificationIds);
+      return Promise.resolve();
+    };
+
+    const cancelAllNotifications = (): Promise<void> => {
+      cancelDisplayedNotifications();
+      cancelTriggerNotifications();
+      return Promise.resolve();
+    };
+
     const cancelNotification = (notificationId: string): Promise<void> => {
       const pending = this.pending.find($ => $.notification.id === notificationId);
-      if(pending) {
+      if (pending) {
         return cancelTriggerNotification(notificationId);
       }
 
       const displayed = this.displayed.find($ => $.notification.id === notificationId);
-      if(displayed) {
-        return cancelDisplayedNotification(notificationId)
+      if (displayed) {
+        return cancelDisplayedNotification(notificationId);
       }
 
       return Promise.resolve();
-    }
+    };
 
     const getNotificationSettings = (): AuthorizationStatus => {
       if (!hasNotificationSupport) return AuthorizationStatus.NOT_DETERMINED;
@@ -166,10 +193,14 @@ export default class NotifeeNativeModule {
 
     return {
       cancelTriggerNotification,
+      cancelTriggerNotificationsWithIds,
+      cancelTriggerNotifications,
       cancelDisplayedNotification,
       cancelDisplayedNotificationsWithIds,
       cancelDisplayedNotifications,
       cancelNotification,
+      cancelAllNotificationsWithIds,
+      cancelAllNotifications,
       requestPermission,
       displayNotification,
       createTriggerNotification,
