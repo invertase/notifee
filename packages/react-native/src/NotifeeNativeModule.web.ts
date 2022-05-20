@@ -27,8 +27,8 @@ export default class NotifeeNativeModule {
           console.error(e);
           console.log(
             'The service worker could not be registered. Using the browser Notification.\n' +
-            'Browser Notification does not include all features, to unlock Notifee full power add `notifee-sw.js` service worker.\n' +
-            'Learn how to add "notifee-sw.js": https://notifee.com',
+              'Browser Notification does not include all features, to unlock Notifee full power add `notifee-sw.js` service worker.\n' +
+              'Learn how to add "notifee-sw.js": https://notifee.com',
           );
         });
     } else {
@@ -40,10 +40,21 @@ export default class NotifeeNativeModule {
     return new NativeEventEmitter();
   }
 
+  private displayed: Array<{ notification: Notification; ref: globalThis.Notification }> = [];
+
   public get native(): NativeModulesStatic {
     const sw = this.sw;
     const hasNotificationSupport = NotifeeNativeModule.hasNotificationSupport;
     const formatNotificationBody = NotifeeNativeModule.formatNotificationBody;
+
+    const cancelDisplayedNotification = (notificationId: string): Promise<void> => {
+      if (sw) {
+      } else if (hasNotificationSupport) {
+        const notification = this.displayed.find($ => $.notification.id === notificationId);
+        notification?.ref.close();
+      }
+      return Promise.resolve();
+    };
 
     const requestPermission = (): Promise<AuthorizationStatus> => {
       if (!hasNotificationSupport) return Promise.resolve(AuthorizationStatus.NOT_DETERMINED);
@@ -68,11 +79,12 @@ export default class NotifeeNativeModule {
           data: notification.data,
         });
       } else if (hasNotificationSupport) {
-        new Notification(notification.title ?? '', {
+        const ref = new window.Notification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
           data: notification.data,
         });
+        this.displayed.push({ notification, ref });
       }
       return Promise.resolve();
     };
@@ -103,14 +115,16 @@ export default class NotifeeNativeModule {
     };
 
     return {
+      cancelDisplayedNotification,
       requestPermission,
       displayNotification,
       createTriggerNotification,
-      getNotificationSettings
+      getNotificationSettings,
     };
   }
 
   private static get hasServiceWorkerSupport() {
+    return false;
     return 'serviceWorker' in navigator;
   }
 
