@@ -47,7 +47,7 @@ export default class NotifeeNativeModule {
 
   private displayedNotifications: Array<{
     notification: DisplayedNotification;
-    nativeNotification?: globalThis.Notification;
+    nativeNotification: globalThis.Notification;
   }> = [];
 
   private pendingNotifications: Array<{
@@ -100,9 +100,8 @@ export default class NotifeeNativeModule {
         await sw.showNotification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
-          data: notification.data,
+          data: { ...notification.data, displayedNotification },
         });
-        this.displayedNotifications.push({ notification: displayedNotification });
       } else if (hasNotificationSupport) {
         const nativeNotification = new window.Notification(notification.title ?? '', {
           ...notification.web,
@@ -116,43 +115,67 @@ export default class NotifeeNativeModule {
       }
     };
 
-    const getDisplayedNotifications = () => {
-      return Promise.resolve(
-        this.displayedNotifications.map(
+    const getDisplayedNotifications = async () => {
+      if (sw) {
+        return new Promise(resolve => {
+          const listener = (evt: MessageEvent) => {
+            resolve(JSON.parse(evt.data.notifications));
+            console.log(JSON.parse(evt.data.notifications));
+            navigator.serviceWorker.removeEventListener('message', listener);
+          };
+          navigator.serviceWorker.addEventListener('message', listener);
+          navigator.serviceWorker.ready.then(reg => {
+            reg.active?.postMessage({ notifee: 'get_displayed_notifications' });
+          });
+        });
+      } else if (hasNotificationSupport) {
+        return this.displayedNotifications.map(
           displayedNotification => displayedNotification.notification,
-        ),
-      );
+        );
+      }
     };
 
     const cancelDisplayedNotification = async (notificationId: string) => {
       if (sw) {
+        const reg = await navigator.serviceWorker.ready;
+        reg.active?.postMessage({ notifee: 'cancel_displayed_notification', notificationId });
       } else if (hasNotificationSupport) {
         const notification = this.displayedNotifications.find(
           displayedNotification => displayedNotification.notification.id === notificationId,
         );
         notification?.nativeNotification?.close();
+        this.displayedNotifications = this.displayedNotifications.filter(
+          displayedNotification => displayedNotification.notification.id !== notificationId,
+        );
       }
-      this.displayedNotifications = this.displayedNotifications.filter(
-        displayedNotification => displayedNotification.notification.id !== notificationId,
-      );
     };
 
     const cancelDisplayedNotificationsWithIds = async (notificationIds: string[]) => {
-      const promises = this.displayedNotifications
-        .filter(displayedNotification =>
-          notificationIds.includes(displayedNotification.notification.id!),
-        )
-        .map(displayedNotification =>
-          cancelDisplayedNotification(displayedNotification.notification.id!),
-        );
-      await Promise.all(promises);
+      if (sw) {
+        const reg = await navigator.serviceWorker.ready;
+        reg.active?.postMessage({ notifee: 'cancel_notifications_with_ids', notificationIds });
+      } else if (hasNotificationSupport) {
+        const promises = this.displayedNotifications
+          .filter(displayedNotification =>
+            notificationIds.includes(displayedNotification.notification.id!),
+          )
+          .map(displayedNotification =>
+            cancelDisplayedNotification(displayedNotification.notification.id!),
+          );
+        await Promise.all(promises);
+      }
     };
 
     const cancelDisplayedNotifications = async () => {
-      const promises = this.displayedNotifications.map(displayedNotification =>
-        cancelDisplayedNotification(displayedNotification.notification.id!),
-      );
-      await Promise.all(promises);
+      if (sw) {
+        const reg = await navigator.serviceWorker.ready;
+        reg.active?.postMessage({ notifee: 'cancel_displayed_notifications' });
+      } else if (hasNotificationSupport) {
+        const promises = this.displayedNotifications.map(displayedNotification =>
+          cancelDisplayedNotification(displayedNotification.notification.id!),
+        );
+        await Promise.all(promises);
+      }
     };
 
     const createTriggerNotification = async (notification: Notification, trigger: Trigger) => {
@@ -256,7 +279,6 @@ export default class NotifeeNativeModule {
   }
 
   private static get hasServiceWorkerSupport() {
-    return false;
     return 'serviceWorker' in navigator;
   }
 
