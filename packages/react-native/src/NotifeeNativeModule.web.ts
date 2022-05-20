@@ -1,5 +1,10 @@
 import { EventEmitter, NativeEventEmitter, NativeModulesStatic } from 'react-native';
-import { AuthorizationStatus, DisplayedNotification, Notification } from './types/Notification';
+import {
+  AuthorizationStatus,
+  DisplayedNotification,
+  Notification,
+  TriggerNotification,
+} from './types/Notification';
 import { Trigger, TriggerType } from './types/Trigger';
 
 export interface NativeModuleConfig {
@@ -163,6 +168,17 @@ export default class NotifeeNativeModule {
       }
     };
 
+    const getTriggerNotifications = () => {
+      return Promise.resolve(
+        this.pendingNotifications.map(
+          (pendingNotification): TriggerNotification => ({
+            trigger: pendingNotification.trigger,
+            notification: pendingNotification.notification,
+          }),
+        ),
+      );
+    };
+
     const cancelTriggerNotification = (notificationId: string) => {
       const notification = this.pendingNotifications.find(
         pendingNotification => pendingNotification.notification.id === notificationId,
@@ -222,6 +238,7 @@ export default class NotifeeNativeModule {
       cancelDisplayedNotificationsWithIds,
       cancelDisplayedNotifications,
       createTriggerNotification,
+      getTriggerNotifications,
       cancelTriggerNotification,
       cancelTriggerNotificationsWithIds,
       cancelTriggerNotifications,
