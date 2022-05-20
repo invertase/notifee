@@ -107,6 +107,21 @@ export default class NotifeeNativeModule {
       return Promise.resolve();
     };
 
+    const cancelDisplayedNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
+      this.displayed
+        .filter($ => $.notification.id && notificationIds.includes($.notification.id))
+        .forEach($ => cancelDisplayedNotification($.notification.id!));
+
+      return Promise.resolve();
+    };
+
+    const cancelDisplayedNotifications = (): Promise<void> => {
+      this.displayed.forEach($ => {
+        cancelTriggerNotification($.notification.id!);
+      });
+      return Promise.resolve();
+    };
+
     const createTriggerNotification = (
       notification: Notification,
       trigger: Trigger,
@@ -138,6 +153,8 @@ export default class NotifeeNativeModule {
     return {
       cancelTriggerNotification,
       cancelDisplayedNotification,
+      cancelDisplayedNotificationsWithIds,
+      cancelDisplayedNotifications,
       requestPermission,
       displayNotification,
       createTriggerNotification,
