@@ -42,6 +42,12 @@ export default class NotifeeNativeModule {
 
   private displayed: Array<{ notification: Notification; ref: globalThis.Notification }> = [];
 
+  private pending: Array<{
+    notification: Notification;
+    trigger: Trigger;
+    timeout: NodeJS.Timeout;
+  }> = [];
+
   public get native(): NativeModulesStatic {
     const sw = this.sw;
     const hasNotificationSupport = NotifeeNativeModule.hasNotificationSupport;
@@ -52,6 +58,18 @@ export default class NotifeeNativeModule {
       } else if (hasNotificationSupport) {
         const notification = this.displayed.find($ => $.notification.id === notificationId);
         notification?.ref.close();
+      }
+      return Promise.resolve();
+    };
+
+    const cancelTriggerNotification = (notificationId: string): Promise<void> => {
+      if (sw) {
+      } else if (hasNotificationSupport) {
+        const notification = this.pending.find($ => $.notification.id === notificationId);
+        if (notification?.timeout !== undefined) {
+          clearTimeout(notification.timeout);
+          this.pending = this.pending.filter($ => $.notification.id !== notificationId);
+        }
       }
       return Promise.resolve();
     };
@@ -94,9 +112,12 @@ export default class NotifeeNativeModule {
       trigger: Trigger,
     ): Promise<void> => {
       if (trigger.type === TriggerType.TIMESTAMP) {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
+          this.pending = this.pending.filter($ => $.notification !== notification);
           return displayNotification(notification);
         }, trigger.timestamp - Date.now());
+
+        this.pending.push({ notification, trigger, timeout });
       }
       return Promise.resolve();
     };
@@ -115,6 +136,7 @@ export default class NotifeeNativeModule {
     };
 
     return {
+      cancelTriggerNotification,
       cancelDisplayedNotification,
       requestPermission,
       displayNotification,

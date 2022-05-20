@@ -253,11 +253,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       );
     }
 
-    if (isIOS) {
-      return this.native.cancelTriggerNotification(notificationId);
-    }
-
-    return Promise.resolve();
+    return this.native.cancelTriggerNotification(notificationId);
   };
 
   public createChannel = (channel: AndroidChannel): Promise<string> => {
