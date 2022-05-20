@@ -113,11 +113,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   };
 
   public getDisplayedNotifications = (): Promise<DisplayedNotification[]> => {
-    if (isAndroid || isIOS) {
-      return this.native.getDisplayedNotifications();
-    }
-
-    return Promise.resolve([]);
+    return this.native.getDisplayedNotifications();
   };
 
   public isChannelBlocked = (channelId: string): Promise<boolean> => {

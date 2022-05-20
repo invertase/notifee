@@ -145,7 +145,7 @@ export interface DisplayedNotification {
    *
    * @platform iOS
    */
-  trigger: Trigger;
+  trigger?: Trigger;
 }
 
 /**

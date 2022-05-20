@@ -1,5 +1,5 @@
 import { EventEmitter, NativeEventEmitter, NativeModulesStatic } from 'react-native';
-import { AuthorizationStatus, Notification } from './types/Notification';
+import { AuthorizationStatus, DisplayedNotification, Notification } from './types/Notification';
 import { Trigger, TriggerType } from './types/Trigger';
 
 export interface NativeModuleConfig {
@@ -41,7 +41,7 @@ export default class NotifeeNativeModule {
   }
 
   private displayedNotifications: Array<{
-    notification: Notification;
+    notification: DisplayedNotification;
     nativeNotification?: globalThis.Notification;
   }> = [];
 
@@ -85,21 +85,38 @@ export default class NotifeeNativeModule {
     };
 
     const displayNotification = async (notification: Notification) => {
+      const displayedNotification: DisplayedNotification = {
+        id: notification.id,
+        date: new Date().toISOString(),
+        notification,
+      };
+
       if (sw) {
         await sw.showNotification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
           data: notification.data,
         });
-        this.displayedNotifications.push({ notification });
+        this.displayedNotifications.push({ notification: displayedNotification });
       } else if (hasNotificationSupport) {
         const nativeNotification = new window.Notification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
           data: notification.data,
         });
-        this.displayedNotifications.push({ notification, nativeNotification });
+        this.displayedNotifications.push({
+          notification: displayedNotification,
+          nativeNotification,
+        });
       }
+    };
+
+    const getDisplayedNotifications = () => {
+      return Promise.resolve(
+        this.displayedNotifications.map(
+          displayedNotification => displayedNotification.notification,
+        ),
+      );
     };
 
     const cancelDisplayedNotification = async (notificationId: string) => {
@@ -200,6 +217,7 @@ export default class NotifeeNativeModule {
       requestPermission,
       getNotificationSettings,
       displayNotification,
+      getDisplayedNotifications,
       cancelDisplayedNotification,
       cancelDisplayedNotificationsWithIds,
       cancelDisplayedNotifications,
