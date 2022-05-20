@@ -179,6 +179,12 @@ export default class NotifeeNativeModule {
       );
     };
 
+    const getTriggerNotificationIds = () => {
+      return Promise.resolve(
+        this.pendingNotifications.map(pendingNotification => pendingNotification.notification.id!),
+      );
+    };
+
     const cancelTriggerNotification = (notificationId: string) => {
       const notification = this.pendingNotifications.find(
         pendingNotification => pendingNotification.notification.id === notificationId,
@@ -239,6 +245,7 @@ export default class NotifeeNativeModule {
       cancelDisplayedNotifications,
       createTriggerNotification,
       getTriggerNotifications,
+      getTriggerNotificationIds,
       cancelTriggerNotification,
       cancelTriggerNotificationsWithIds,
       cancelTriggerNotifications,

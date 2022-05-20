@@ -97,11 +97,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   }
 
   public getTriggerNotificationIds = (): Promise<string[]> => {
-    if (isAndroid || isIOS) {
-      return this.native.getTriggerNotificationIds();
-    }
-
-    return Promise.resolve([]);
+    return this.native.getTriggerNotificationIds();
   };
 
   public getTriggerNotifications = (): Promise<TriggerNotification[]> => {
