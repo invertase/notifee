@@ -84,13 +84,14 @@ export default class NotifeeNativeModule {
       }
     };
 
-    const displayNotification = (notification: Notification): Promise<void> => {
+    const displayNotification = async (notification: Notification) => {
       if (sw) {
-        return sw.showNotification(notification.title ?? '', {
+        await sw.showNotification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
           data: notification.data,
         });
+        this.displayedNotifications.push({ notification });
       } else if (hasNotificationSupport) {
         const nativeNotification = new window.Notification(notification.title ?? '', {
           ...notification.web,
@@ -99,107 +100,100 @@ export default class NotifeeNativeModule {
         });
         this.displayedNotifications.push({ notification, nativeNotification });
       }
-      return Promise.resolve();
     };
 
-    const cancelDisplayedNotification = (notificationId: string): Promise<void> => {
+    const cancelDisplayedNotification = async (notificationId: string) => {
       if (sw) {
       } else if (hasNotificationSupport) {
         const notification = this.displayedNotifications.find(
-          $ => $.notification.id === notificationId,
+          displayedNotification => displayedNotification.notification.id === notificationId,
         );
         notification?.nativeNotification?.close();
       }
-      return Promise.resolve();
+      this.displayedNotifications = this.displayedNotifications.filter(
+        displayedNotification => displayedNotification.notification.id !== notificationId,
+      );
     };
 
-    const cancelDisplayedNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
-      this.displayedNotifications
-        .filter($ => $.notification.id && notificationIds.includes($.notification.id))
-        .forEach($ => cancelDisplayedNotification($.notification.id!));
-
-      return Promise.resolve();
+    const cancelDisplayedNotificationsWithIds = async (notificationIds: string[]) => {
+      const promises = this.displayedNotifications
+        .filter(displayedNotification =>
+          notificationIds.includes(displayedNotification.notification.id!),
+        )
+        .map(displayedNotification =>
+          cancelDisplayedNotification(displayedNotification.notification.id!),
+        );
+      await Promise.all(promises);
     };
 
-    const cancelDisplayedNotifications = (): Promise<void> => {
-      this.displayedNotifications.forEach($ => {
-        cancelTriggerNotification($.notification.id!);
-      });
-      return Promise.resolve();
+    const cancelDisplayedNotifications = async () => {
+      const promises = this.displayedNotifications.map(displayedNotification =>
+        cancelDisplayedNotification(displayedNotification.notification.id!),
+      );
+      await Promise.all(promises);
     };
 
-    const createTriggerNotification = (
-      notification: Notification,
-      trigger: Trigger,
-    ): Promise<void> => {
+    const createTriggerNotification = async (notification: Notification, trigger: Trigger) => {
       if (trigger.type === TriggerType.TIMESTAMP) {
         const timeout = setTimeout(() => {
           this.pendingNotifications = this.pendingNotifications.filter(
-            $ => $.notification !== notification,
+            pendingNotification => pendingNotification.notification !== notification,
           );
-          return displayNotification(notification);
+          displayNotification(notification);
         }, trigger.timestamp - Date.now());
 
         this.pendingNotifications.push({ notification, trigger, timeout });
       }
+    };
+
+    const cancelTriggerNotification = (notificationId: string) => {
+      const notification = this.pendingNotifications.find(
+        pendingNotification => pendingNotification.notification.id === notificationId,
+      );
+
+      if (notification?.timeout !== undefined) clearTimeout(notification.timeout);
+
+      this.pendingNotifications = this.pendingNotifications.filter(
+        pendingNotification => pendingNotification !== notification,
+      );
       return Promise.resolve();
     };
 
-    const cancelTriggerNotification = (notificationId: string): Promise<void> => {
-      if (sw) {
-      } else if (hasNotificationSupport) {
-        const notification = this.pendingNotifications.find(
-          $ => $.notification.id === notificationId,
+    const cancelTriggerNotificationsWithIds = async (notificationIds: string[]) => {
+      const promises = this.pendingNotifications
+        .filter(pendingNotification =>
+          notificationIds.includes(pendingNotification.notification.id!),
+        )
+        .map(pendingNotification =>
+          cancelTriggerNotification(pendingNotification.notification.id!),
         );
-        if (notification?.timeout !== undefined) {
-          clearTimeout(notification.timeout);
-          this.pendingNotifications = this.pendingNotifications.filter(
-            $ => $.notification.id !== notificationId,
-          );
-        }
-      }
-      return Promise.resolve();
+
+      await Promise.all(promises);
     };
 
-    const cancelTriggerNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
-      this.pendingNotifications
-        .filter($ => $.notification.id && notificationIds.includes($.notification.id))
-        .forEach($ => cancelTriggerNotification($.notification.id!));
-      return Promise.resolve();
+    const cancelTriggerNotifications = async () => {
+      const promises = this.pendingNotifications.map(pendingNotification =>
+        cancelTriggerNotification(pendingNotification.notification.id!),
+      );
+      await Promise.all(promises);
     };
 
-    const cancelTriggerNotifications = (): Promise<void> => {
-      this.pendingNotifications.forEach($ => {
-        cancelTriggerNotification($.notification.id!);
-      });
-
-      return Promise.resolve();
+    const cancelNotification = async (notificationId: string) => {
+      await Promise.all([
+        cancelDisplayedNotification(notificationId),
+        cancelTriggerNotification(notificationId),
+      ]);
     };
 
-    const cancelNotification = (notificationId: string): Promise<void> => {
-      const pending = this.pendingNotifications.find($ => $.notification.id === notificationId);
-      if (pending) {
-        return cancelTriggerNotification(notificationId);
-      }
-
-      const displayed = this.displayedNotifications.find($ => $.notification.id === notificationId);
-      if (displayed) {
-        return cancelDisplayedNotification(notificationId);
-      }
-
-      return Promise.resolve();
+    const cancelAllNotificationsWithIds = async (notificationIds: string[]) => {
+      await Promise.all([
+        cancelDisplayedNotificationsWithIds(notificationIds),
+        cancelTriggerNotificationsWithIds(notificationIds),
+      ]);
     };
 
-    const cancelAllNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
-      cancelDisplayedNotificationsWithIds(notificationIds);
-      cancelTriggerNotificationsWithIds(notificationIds);
-      return Promise.resolve();
-    };
-
-    const cancelAllNotifications = (): Promise<void> => {
-      cancelDisplayedNotifications();
-      cancelTriggerNotifications();
-      return Promise.resolve();
+    const cancelAllNotifications = async () => {
+      await Promise.all([cancelDisplayedNotifications(), cancelTriggerNotifications()]);
     };
 
     return {
