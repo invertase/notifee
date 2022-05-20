@@ -40,12 +40,15 @@ export default class NotifeeNativeModule {
     return new NativeEventEmitter();
   }
 
-  private displayed: Array<{ notification: Notification; ref: globalThis.Notification }> = [];
-
-  private pending: Array<{
+  private pendingNotifications: Array<{
     notification: Notification;
     trigger: Trigger;
-    timeout: NodeJS.Timeout;
+    timeout?: NodeJS.Timeout;
+  }> = [];
+
+  private displayedNotifications: Array<{
+    notification: Notification;
+    nativeNotification?: globalThis.Notification;
   }> = [];
 
   public get native(): NativeModulesStatic {
@@ -56,8 +59,10 @@ export default class NotifeeNativeModule {
     const cancelDisplayedNotification = (notificationId: string): Promise<void> => {
       if (sw) {
       } else if (hasNotificationSupport) {
-        const notification = this.displayed.find($ => $.notification.id === notificationId);
-        notification?.ref.close();
+        const notification = this.displayedNotifications.find(
+          $ => $.notification.id === notificationId,
+        );
+        notification?.nativeNotification?.close();
       }
       return Promise.resolve();
     };
@@ -65,10 +70,14 @@ export default class NotifeeNativeModule {
     const cancelTriggerNotification = (notificationId: string): Promise<void> => {
       if (sw) {
       } else if (hasNotificationSupport) {
-        const notification = this.pending.find($ => $.notification.id === notificationId);
+        const notification = this.pendingNotifications.find(
+          $ => $.notification.id === notificationId,
+        );
         if (notification?.timeout !== undefined) {
           clearTimeout(notification.timeout);
-          this.pending = this.pending.filter($ => $.notification.id !== notificationId);
+          this.pendingNotifications = this.pendingNotifications.filter(
+            $ => $.notification.id !== notificationId,
+          );
         }
       }
       return Promise.resolve();
@@ -97,18 +106,18 @@ export default class NotifeeNativeModule {
           data: notification.data,
         });
       } else if (hasNotificationSupport) {
-        const ref = new window.Notification(notification.title ?? '', {
+        const nativeNotification = new window.Notification(notification.title ?? '', {
           ...notification.web,
           body: formatNotificationBody(notification.subtitle, notification.body),
           data: notification.data,
         });
-        this.displayed.push({ notification, ref });
+        this.displayedNotifications.push({ notification, nativeNotification });
       }
       return Promise.resolve();
     };
 
     const cancelDisplayedNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
-      this.displayed
+      this.displayedNotifications
         .filter($ => $.notification.id && notificationIds.includes($.notification.id))
         .forEach($ => cancelDisplayedNotification($.notification.id!));
 
@@ -116,7 +125,7 @@ export default class NotifeeNativeModule {
     };
 
     const cancelDisplayedNotifications = (): Promise<void> => {
-      this.displayed.forEach($ => {
+      this.displayedNotifications.forEach($ => {
         cancelTriggerNotification($.notification.id!);
       });
       return Promise.resolve();
@@ -128,24 +137,26 @@ export default class NotifeeNativeModule {
     ): Promise<void> => {
       if (trigger.type === TriggerType.TIMESTAMP) {
         const timeout = setTimeout(() => {
-          this.pending = this.pending.filter($ => $.notification !== notification);
+          this.pendingNotifications = this.pendingNotifications.filter(
+            $ => $.notification !== notification,
+          );
           return displayNotification(notification);
         }, trigger.timestamp - Date.now());
 
-        this.pending.push({ notification, trigger, timeout });
+        this.pendingNotifications.push({ notification, trigger, timeout });
       }
       return Promise.resolve();
     };
 
     const cancelTriggerNotificationsWithIds = (notificationIds: string[]): Promise<void> => {
-      this.pending
+      this.pendingNotifications
         .filter($ => $.notification.id && notificationIds.includes($.notification.id))
         .forEach($ => cancelTriggerNotification($.notification.id!));
       return Promise.resolve();
     };
 
     const cancelTriggerNotifications = (): Promise<void> => {
-      this.pending.forEach($ => {
+      this.pendingNotifications.forEach($ => {
         cancelTriggerNotification($.notification.id!);
       });
 
@@ -165,12 +176,12 @@ export default class NotifeeNativeModule {
     };
 
     const cancelNotification = (notificationId: string): Promise<void> => {
-      const pending = this.pending.find($ => $.notification.id === notificationId);
+      const pending = this.pendingNotifications.find($ => $.notification.id === notificationId);
       if (pending) {
         return cancelTriggerNotification(notificationId);
       }
 
-      const displayed = this.displayed.find($ => $.notification.id === notificationId);
+      const displayed = this.displayedNotifications.find($ => $.notification.id === notificationId);
       if (displayed) {
         return cancelDisplayedNotification(notificationId);
       }
