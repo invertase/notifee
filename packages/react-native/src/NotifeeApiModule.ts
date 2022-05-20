@@ -179,21 +179,17 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   };
 
   public cancelTriggerNotifications = (notificationIds?: string[]): Promise<void> => {
-    if (isAndroid || isIOS) {
-      if (notificationIds) {
-        if (isAndroid) {
-          return this.native.cancelAllNotificationsWithIds(
-            notificationIds,
-            NotificationType.TRIGGER,
-            null,
-          );
-        }
-        return this.native.cancelTriggerNotificationsWithIds(notificationIds);
+    if (notificationIds) {
+      if (isAndroid) {
+        return this.native.cancelAllNotificationsWithIds(
+          notificationIds,
+          NotificationType.TRIGGER,
+          null,
+        );
       }
-      return this.native.cancelTriggerNotifications();
+      return this.native.cancelTriggerNotificationsWithIds(notificationIds);
     }
-
-    return Promise.resolve();
+    return this.native.cancelTriggerNotifications();
   };
 
   public cancelNotification = (notificationId: string, tag?: string): Promise<void> => {
