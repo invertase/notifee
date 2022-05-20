@@ -209,11 +209,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
       return this.native.cancelAllNotificationsWithIds([notificationId], NotificationType.ALL, tag);
     }
 
-    if (isIOS) {
-      return this.native.cancelNotification(notificationId);
-    }
-
-    return Promise.resolve();
+    return this.native.cancelNotification(notificationId);
   };
 
   public cancelDisplayedNotification = (notificationId: string, tag?: string): Promise<void> => {

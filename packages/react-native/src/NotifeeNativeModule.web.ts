@@ -137,6 +137,20 @@ export default class NotifeeNativeModule {
       return Promise.resolve();
     };
 
+    const cancelNotification = (notificationId: string): Promise<void> => {
+      const pending = this.pending.find($ => $.notification.id === notificationId);
+      if(pending) {
+        return cancelTriggerNotification(notificationId);
+      }
+
+      const displayed = this.displayed.find($ => $.notification.id === notificationId);
+      if(displayed) {
+        return cancelDisplayedNotification(notificationId)
+      }
+
+      return Promise.resolve();
+    }
+
     const getNotificationSettings = (): AuthorizationStatus => {
       if (!hasNotificationSupport) return AuthorizationStatus.NOT_DETERMINED;
 
@@ -155,6 +169,7 @@ export default class NotifeeNativeModule {
       cancelDisplayedNotification,
       cancelDisplayedNotificationsWithIds,
       cancelDisplayedNotifications,
+      cancelNotification,
       requestPermission,
       displayNotification,
       createTriggerNotification,
