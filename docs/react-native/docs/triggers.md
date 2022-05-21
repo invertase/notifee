@@ -160,13 +160,13 @@ Please note, for iOS, a repeating trigger does not work the same as Android - th
 Starting from Android 12, timestamp triggers cannot be created unless user specfically allow the [exact alarm permission](https://developer.android.com/reference/android/Manifest.permission#SCHEDULE_EXACT_ALARM). Before you create a timestamp trigger, check whether `SCHEDULE_EXACT_ALARM` permission is allowed by making a call to `getNotificationSettings`. If ` alarm` is `DISABLED`, you should educate the user on this permission and ask to enable scheduling alarms. You can then use `openAlarmPermissionSettings` function to display the Alarms & Reminder settings of your app.
 
 ```js
-const settings = Notifee.getNotificationSettings();
+const settings = notifee.getNotificationSettings();
 if (settings.android.alarm == AndroidNotificationSetting.ENABLED) {
   //Create timestamp trigger
 } else {
   // Show some user information to educate them on what exact alarm permission is,
   // and why it is necessary for your app functionality, then send them to system preferences:
-  await Notifee.openAlarmPermissionSettings();
+  await notifee.openAlarmPermissionSettings();
 }
 ```
 
