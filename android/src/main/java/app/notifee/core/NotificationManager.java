@@ -61,6 +61,7 @@ import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
+import app.notifee.core.utility.PowerManagerUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -562,6 +563,11 @@ class NotificationManager {
               int hashCode = notificationModel.getHashCode();
 
               NotificationAndroidModel androidBundle = notificationModel.getAndroid();
+
+              if (androidBundle.getLightUpScreen()) {
+                PowerManagerUtils.lightUpScreenIfNeeded(ContextHolder.getApplicationContext());
+              }
+
               if (androidBundle.getAsForegroundService()) {
                 ForegroundService.start(hashCode, notification, notificationModel.toBundle());
               } else {

@@ -94,6 +94,26 @@ public class PowerManagerUtils {
   }
 
   /**
+   * Lights up the screen if it is not already lit
+   *
+   * @param context
+   */
+  public static void lightUpScreenIfNeeded(Context context) {
+    PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+    Boolean isInteractive = pm.isInteractive();
+
+    if (isInteractive == false) {
+        PowerManager.WakeLock wl = pm.newWakeLock(
+          PowerManager.FULL_WAKE_LOCK |PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE, "Notifee:lock"
+        );
+        wl.acquire();
+
+        PowerManager.WakeLock wl_cpu = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Notifee:cpuLock");
+        wl_cpu.acquire();
+    }
+  }
+
+  /**
    * Retrieves information about the device and its Power Manager Settings
    *
    * @return PowerManagerInfo

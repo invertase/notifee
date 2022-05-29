@@ -52,6 +52,7 @@ export default function validateAndroidNotification(
   const out: NotificationAndroid = {
     autoCancel: true,
     asForegroundService: false,
+    lightUpScreen: false,
     badgeIconType: AndroidBadgeIconType.LARGE,
     colorized: false,
     chronometerDirection: 'up',
@@ -111,6 +112,17 @@ export default function validateAndroidNotification(
     }
 
     out.asForegroundService = android.asForegroundService;
+  }
+
+  /**
+   * lightUpScreen
+   */
+  if (objectHasProperty(android, 'lightUpScreen')) {
+    if (!isBoolean(android.lightUpScreen)) {
+      throw new Error("'notification.android.lightUpScreen' expected a boolean value.");
+    }
+
+    out.lightUpScreen = android.lightUpScreen;
   }
 
   /**
