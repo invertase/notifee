@@ -87,3 +87,10 @@ ReactNative.shared.applyPackageVersion()
 ReactNative.shared.applyDefaultExcludes()
 ReactNative.module.applyAndroidVersions()
 ReactNative.module.applyReactNativeDependency("api")
+rootProject.allprojects {
+  repositories {
+    maven {
+      url "$rootDir/../node_modules/@notifee/react-native/android/libs"
+    }
+  }
+}

@@ -42,7 +42,7 @@ export interface Module {
   /**
    * API used to cancel a single notification.
    *
-   * The `cancelNotification` API removes removes any displayed notifications or ones with triggers
+   * The `cancelNotification` API removes any displayed notifications or ones with triggers
    * set for the specified ID.
    *
    * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
