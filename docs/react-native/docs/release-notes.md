@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.3.0
+- **[Android]**: Elimates the need to add the local maven repository manually to your project  (PR [#414](https://github.com/invertase/notifee/pull/414)).
+- **[Android]**: Implements support to light up the screen when a notification is displayed. Introduces a new property `lightUpScreen` on the `NotificationAndroid` interface (PR [#403](https://github.com/invertase/notifee/pull/403)).
+
 ## 5.2.2
 - **[Android]**: Allows `repeatFrequency` to be set to -1 when creating notifications (Fixes [#384](https://github.com/invertase/notifee/issues/379)).
 - **[Android]**: Fixes an issue with rescheduling notifications with alarm manager (Fixes [#384](https://github.com/invertase/notifee/issues/248)).
