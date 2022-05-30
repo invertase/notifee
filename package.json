@@ -57,7 +57,7 @@
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.19.2",
-    "typescript": "4.4.3"
+    "typescript": "^4.6.2"
   },
   "resolutions": {
     "@types/node": "^17.0.21"
