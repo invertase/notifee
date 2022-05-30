@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - 'docs/**'
+      - 'docs-react-native/**'
       - '**/*.md'
   push:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'docs-react-native/**'
       - '**/*.md'
 
 jobs:

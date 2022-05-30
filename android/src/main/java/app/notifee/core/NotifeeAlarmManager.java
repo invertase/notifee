@@ -202,7 +202,7 @@ class NotifeeAlarmManager {
 
   /* On reboot, reschedule trigger notifications created via alarm manager  */
   void rescheduleNotification(WorkDataEntity workDataEntity) {
-    if (workDataEntity.getNotification() != null && workDataEntity.getTrigger() != null) {
+    if (workDataEntity.getNotification() == null || workDataEntity.getTrigger() == null) {
       return;
     }
 
@@ -218,6 +218,10 @@ class NotifeeAlarmManager {
     switch (triggerType) {
       case 0:
         TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
+        if (!trigger.getWithAlarmManager()) {
+          return;
+        }
+
         scheduleTimestampTriggerNotification(notificationModel, trigger);
         break;
       case 1:
@@ -227,6 +231,7 @@ class NotifeeAlarmManager {
   }
 
   void rescheduleNotifications() {
+    Logger.d(TAG, "Reschedule Notifications on reboot");
     getScheduledNotifications()
         .addOnCompleteListener(
             task -> {

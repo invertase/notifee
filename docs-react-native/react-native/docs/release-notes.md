@@ -5,6 +5,31 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.3.0
+- **[Android]**: Elimates the need to add the local maven repository manually to your project  (PR [#414](https://github.com/invertase/notifee/pull/414)).
+- **[Android]**: Implements support to light up the screen when a notification is displayed. Introduces a new property `lightUpScreen` on the `NotificationAndroid` interface (PR [#403](https://github.com/invertase/notifee/pull/403)).
+
+## 5.2.2
+- **[Android]**: Allows `repeatFrequency` to be set to -1 when creating notifications (Fixes [#384](https://github.com/invertase/notifee/issues/379)).
+- **[Android]**: Fixes an issue with rescheduling notifications with alarm manager (Fixes [#384](https://github.com/invertase/notifee/issues/248)).
+
+## 5.2.1
+- **[Android]**: Fixes a build issue introduced in version 5.2.0 (PR [#384](https://github.com/invertase/notifee/pull/384)).
+
+## 5.2.0
+- **[Android]**: Fixes a compiling issue for some project configurations with error message "Project with path ':app' could not be found in project ':notifee_react-native'" (Fixes [#288](https://github.com/invertase/notifee/issues/288)).
+- **[Android]**: Fixes an issue where the current version of Notifee does not build when using an expo managed app with the expo plugin (Fixes [#314](https://github.com/invertase/notifee/issues/314)).
+- **[Web]**: Basic support for react-native-web - notifications do not work on web yet, but the package is now compatible with web (PR  [#369](https://github.com/invertase/notifee/pull/369))
+
+## 5.1.0
+- **[Android]**: Introduces new APIs to help manage Android 12 limitations when creating trigger notifications:
+ - `canScheduleExactAlarms`
+ - `openAlarmPermissionSettings`
+
+And, the ability to check if your app has permissions to create trigger notifications by calling `getNotificationSettings()`.
+
+To learn more, see Triggers documentation for [Android](https://notifee.app/react-native/docs/triggers#android-12-limitations).
+
 ## 5.0.3
 - **[Android]**: Fixes an issue when canceling trigger notifications created via AlarmManager to prevent "Maximum limit of concurrent alarms 500 reached for uid" error being thrown (Fixes [#349](https://github.com/invertase/notifee/issues/349)).
 

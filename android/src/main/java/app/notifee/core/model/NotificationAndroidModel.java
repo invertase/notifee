@@ -68,6 +68,15 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Gets if the notification should light up the screen when displayed
+   *
+   * @return Boolean
+   */
+  public Boolean getLightUpScreen() {
+    return mNotificationAndroidBundle.getBoolean("lightUpScreen", false);
+  }
+
+  /**
    * Gets whether the notification can be auto cancelled
    *
    * @return Boolean

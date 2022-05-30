@@ -1,6 +1,6 @@
 {
   "name": "@notifee/react-native",
-  "version": "5.0.3",
+  "version": "5.3.0",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "prepublishOnly": "cd ../.. && yarn run build:core",
     "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
     "format:ios": "npm_config_yes=true npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
-    "gen-docs": "path-exists ../../docs && typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
+    "gen-docs": "typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
   },
   "devDependencies": {
     "@expo/config-plugins": "^4.1.0",
@@ -27,7 +27,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "genversion": "^3.0.2",
-    "path-exists-cli": "^2.0.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "typedoc": "^0.22.13",

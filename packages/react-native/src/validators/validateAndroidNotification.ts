@@ -2,8 +2,7 @@
 /*
  * Copyright (c) 2016-present Invertase Limited
  */
-// @ts-ignore
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+import { Image } from 'react-native';
 
 import {
   objectHasProperty,
@@ -53,6 +52,7 @@ export default function validateAndroidNotification(
   const out: NotificationAndroid = {
     autoCancel: true,
     asForegroundService: false,
+    lightUpScreen: false,
     badgeIconType: AndroidBadgeIconType.LARGE,
     colorized: false,
     chronometerDirection: 'up',
@@ -112,6 +112,17 @@ export default function validateAndroidNotification(
     }
 
     out.asForegroundService = android.asForegroundService;
+  }
+
+  /**
+   * lightUpScreen
+   */
+  if (objectHasProperty(android, 'lightUpScreen')) {
+    if (!isBoolean(android.lightUpScreen)) {
+      throw new Error("'notification.android.lightUpScreen' expected a boolean value.");
+    }
+
+    out.lightUpScreen = android.lightUpScreen;
   }
 
   /**
@@ -301,7 +312,7 @@ export default function validateAndroidNotification(
     }
 
     if (isNumber(android.largeIcon) || isObject(android.largeIcon)) {
-      const image = resolveAssetSource(android.largeIcon);
+      const image = Image.resolveAssetSource(android.largeIcon);
       out.largeIcon = image.uri;
     } else {
       out.largeIcon = android.largeIcon;

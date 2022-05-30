@@ -26,6 +26,7 @@ describe('Validate Android Notification', () => {
       const androidInput: NotificationAndroid = {
         autoCancel: true,
         asForegroundService: false,
+        lightUpScreen: false,
         badgeIconType: AndroidBadgeIconType.LARGE,
         colorized: false,
         chronometerDirection: 'up',
@@ -63,6 +64,7 @@ describe('Validate Android Notification', () => {
       const $ = validateAndroidNotification(androidInput);
       expect($.autoCancel).toEqual(true);
       expect($.asForegroundService).toEqual(false);
+      expect($.lightUpScreen).toEqual(false);
       expect($.badgeIconType).toEqual(AndroidBadgeIconType.LARGE);
       expect($.colorized).toEqual(false);
       expect($.chronometerDirection).toEqual('up');
@@ -97,6 +99,7 @@ describe('Validate Android Notification', () => {
 
       expect($.autoCancel).toEqual(true);
       expect($.asForegroundService).toEqual(false);
+      expect($.lightUpScreen).toEqual(false);
       expect($.badgeIconType).toEqual(AndroidBadgeIconType.LARGE);
       expect($.colorized).toEqual(false);
       expect($.chronometerDirection).toEqual('up');
@@ -148,6 +151,17 @@ describe('Validate Android Notification', () => {
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
         "'notification.android.asForegroundService' expected a boolean value.",
+      );
+    });
+
+    test('throws an error when lightUpScreen is invalid', () => {
+      const channelGroup: NotificationAndroid = {
+        channelId: 'channelId',
+        lightUpScreen: [] as any,
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.lightUpScreen' expected a boolean value.",
       );
     });
 

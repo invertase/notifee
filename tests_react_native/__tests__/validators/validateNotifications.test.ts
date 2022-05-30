@@ -27,6 +27,7 @@ describe('Validate Notification', () => {
       expect($.data).toEqual({ test: 'test' });
       expect($.android).toEqual({
         asForegroundService: false,
+        lightUpScreen: false,
         autoCancel: true,
         badgeIconType: 2,
         channelId: 'channelId',

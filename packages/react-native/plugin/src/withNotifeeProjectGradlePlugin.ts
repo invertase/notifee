@@ -10,20 +10,18 @@ const withNotifeeProjectGradlePlugin: ConfigPlugin = config => {
       return { modResults, ...subConfig };
     }
 
-    modResults.contents = setMavenRepository(modResults.contents);
+    modResults.contents = setCompileSdkVersion(modResults.contents);
     return { modResults, ...subConfig };
   });
 };
 
-const setMavenRepository = (projectBuildGradle: string): string => {
-  if (projectBuildGradle.includes('@notifee/react-native/android/libs')) return projectBuildGradle;
-
-  return projectBuildGradle.replace(
-    /mavenLocal\(\)/,
-    `mavenLocal()
-        maven { url "$rootDir/../node_modules/@notifee/react-native/android/libs" }`,
-  );
+const setCompileSdkVersion = (buildGradle: string): string => {
+  const pattern = /compileSdkVersion = 30/g;
+  if (!buildGradle.match(pattern)) {
+    return buildGradle;
+  }
+  return buildGradle.replace(/compileSdkVersion = 30/, `compileSdkVersion = 31`);
 };
 
-export { setMavenRepository };
+export { setCompileSdkVersion };
 export default withNotifeeProjectGradlePlugin;
