@@ -10,6 +10,7 @@ import 'trigger_notification_list_item.dart';
 
 /// List of trigger notifications
 class TriggerNotificationList extends StatefulWidget {
+  const TriggerNotificationList({super.key});
   @override
   State<StatefulWidget> createState() => _TriggerNotificationList();
 }

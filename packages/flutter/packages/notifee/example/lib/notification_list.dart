@@ -9,6 +9,7 @@ import 'notification_list_item.dart';
 
 /// Listens for incoming foreground messages and displays them in a list.
 class NotificationList extends StatefulWidget {
+  const NotificationList({super.key});
   @override
   State<StatefulWidget> createState() => _NotificationList();
 }

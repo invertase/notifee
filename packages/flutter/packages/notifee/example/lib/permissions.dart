@@ -6,6 +6,7 @@ import 'package:notifee/notifee.dart' as notifee;
 
 /// Requests & displays the current user permissions for this device.
 class Permissions extends StatefulWidget {
+  const Permissions({super.key});
   @override
   State<StatefulWidget> createState() => _Permissions();
 }

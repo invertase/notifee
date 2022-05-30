@@ -17,7 +17,9 @@ import 'notification_list.dart';
 ///
 /// To verify things are working, check out the native platform logs.
 Future<void> _notifeeBackgroundHandler(Event event) async {
-  print('Handling a background event ${event.type}');
+  if (kDebugMode) {
+    print('Handling a background event ${event.type}');
+  }
 }
 
 Future<void> main() async {
@@ -47,21 +49,23 @@ Future<void> main() async {
 
   await notifee.createChannel(channel);
 
-  runApp(NotifeeExampleApp());
+  runApp(const NotifeeExampleApp());
 }
 
 /// Entry point for the example application.
 class NotifeeExampleApp extends StatelessWidget {
+  const NotifeeExampleApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Notifee Example App',
       theme: ThemeData.dark(),
       routes: {
-        '/': (context) => Application(),
-        '/notification': (context) => NotificationListItemView(),
-        '/trigger_notification': (context) => TriggerNotificationListItemView(),
-        '/trigger_notifications': (context) => TriggerNotificationList(),
+        '/': (context) => const Application(),
+        '/notification': (context) => const NotificationListItemView(),
+        '/trigger_notification': (context) =>
+            const TriggerNotificationListItemView(),
+        '/trigger_notifications': (context) => const TriggerNotificationList(),
       },
     );
   }
@@ -69,6 +73,7 @@ class NotifeeExampleApp extends StatelessWidget {
 
 /// Renders the example application.
 class Application extends StatefulWidget {
+  const Application({super.key});
   @override
   State<StatefulWidget> createState() => _Application();
 }
@@ -121,7 +126,9 @@ class _Application extends State<Application> {
       await notifee.requestPermission();
       await notifee.displayNotification(notification);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -210,9 +217,10 @@ class _Application extends State<Application> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            MetaCard('Permissions', Permissions()),
-            MetaCard('Notification Stream', NotificationList()),
+          children: const [
+            MetaCard(title: 'Permissions', children: Permissions()),
+            MetaCard(
+                title: 'Notification Stream', children: NotificationList()),
           ],
         ),
       ),
@@ -222,11 +230,11 @@ class _Application extends State<Application> {
 
 /// UI Widget for displaying metadata.
 class MetaCard extends StatelessWidget {
-  final String _title;
-  final Widget _children;
-
   // ignore: public_member_api_docs
-  MetaCard(this._title, this._children);
+  const MetaCard({required this.title, required this.children, super.key});
+
+  final String title;
+  final Widget children;
 
   @override
   Widget build(BuildContext context) {
@@ -240,9 +248,9 @@ class MetaCard extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(bottom: 16),
-                child: Text(_title, style: const TextStyle(fontSize: 18)),
+                child: Text(title, style: const TextStyle(fontSize: 18)),
               ),
-              _children,
+              children,
             ],
           ),
         ),

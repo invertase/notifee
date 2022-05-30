@@ -14,6 +14,8 @@ class TriggerNotificationArguments {
 
 /// Displays information about a [TriggerNotification].
 class TriggerNotificationListItemView extends StatelessWidget {
+  const TriggerNotificationListItemView({super.key});
+
   /// A single data row.
   Widget row(String title, String? value) {
     return Padding(

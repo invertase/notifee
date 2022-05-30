@@ -17,6 +17,8 @@ class NotificationArguments {
 
 /// Displays information about a [NotifeeNotification].
 class NotificationListItemView extends StatelessWidget {
+  const NotificationListItemView({super.key});
+
   /// A single data row.
   Widget row(String title, String? value) {
     return Padding(
