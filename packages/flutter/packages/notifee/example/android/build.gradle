@@ -15,9 +15,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-          url "${project(':notifee').projectDir}/libs"
-        }
+        // maven {
+        //   url "${project(':notifee').projectDir}/libs"
+        // }
     }
 }
 

@@ -48,7 +48,6 @@ android {
      if (findProject(':notifee_core')) {
        implementation findProject(':notifee_core')
      } else {
-//      implementation(group: 'app.notifee', name:'core', version: '+')
         api(group: 'app.notifee', name:'core', version: '+')
      }
 
@@ -62,5 +61,13 @@ android {
       // needed to enforce version and avoid clashes
       // https://github.com/square/okhttp/blob/master/docs/changelog_3x.md
       implementation 'com.squareup.okhttp3:okhttp:3.12.13' // okhttp must stay on 3.12.x to support minSdkVersion < 21
+    }
+
+    rootProject.allprojects {
+      repositories {
+        maven {
+          url "${project(':notifee').projectDir}/libs"
+        }
+      }
     }
 
