@@ -5,6 +5,16 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 6.0.0-0
+- **[iOS]: BREAKING CHANGE** : Notifee now handles response events for remote notifications on iOS:
+  - PRESSED
+  - ACTION_PRESSED
+  - DISMISSED
+This allows quick actions from remote notifications to be supported without the need of a NSE [[Learn More]](https://notifee.app/react-native/docs/ios/remote-notification-support)
+
+  **`onNotificationOpenedApp` and `getInitialNotification` from `RNFB Messaging` will no longer trigger as notifee will handle the event. Should not require any code changes to these `RNFB` event handlers, as events on Android will continue to work as normal**
+
+
 ## 5.3.0
 - **[Android]**: Elimates the need to add the local maven repository manually to your project  (PR [#414](https://github.com/invertase/notifee/pull/414)).
 - **[Android]**: Implements support to light up the screen when a notification is displayed. Introduces a new property `lightUpScreen` on the `NotificationAndroid` interface (PR [#403](https://github.com/invertase/notifee/pull/403)).
