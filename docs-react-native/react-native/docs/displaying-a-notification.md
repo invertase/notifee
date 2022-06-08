@@ -5,6 +5,8 @@ next: /react-native/docs/events
 previous: /react-native/docs/usage
 ---
 
+> iOS devices require that permission is granted from users before notifications can be displayed on the device.
+
 # Notification Title & Body
 
 Notifications in their basic form contain a title and a main body of text. Let's go ahead and display a
