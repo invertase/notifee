@@ -3,8 +3,8 @@ buildscript {
     buildToolsVersion = '31.0.0'
     ndkVersion = "21.4.7075529"
     minSdkVersion = 21
-    compileSdkVersion = 'android-Tiramisu'
-    targetSdkVersion = 'Tiramisu'
+    compileSdkVersion = 33
+    targetSdkVersion = 33
     enableHermes = true
   }
 
@@ -65,11 +65,11 @@ subprojects {
   afterEvaluate { project ->
     if (!project.name.equalsIgnoreCase('app') && project.hasProperty('android')) {
       android {
-        compileSdkVersion 'android-Tiramisu'
+        compileSdkVersion 33
         buildToolsVersion buildTools
         defaultConfig {
           minSdkVersion minSdk
-          targetSdkVersion 'Tiramisu'
+          targetSdkVersion 33
         }
       }
     }
