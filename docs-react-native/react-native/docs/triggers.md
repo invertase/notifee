@@ -185,7 +185,7 @@ import notifee, { IntervalTrigger, TriggerType, TimeUnit } from '@notifee/react-
 
 const trigger: IntervalTrigger = {
   type: TriggerType.INTERVAL,
-  interval: 30
+  interval: 30,
   timeUnit: TimeUnit.MINUTES
 };
 ```
