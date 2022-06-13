@@ -1,5 +1,7 @@
 name: notifee_platform_interface
 description: A new flutter plugin project.
+homepage: https://github.com/invertase/notifee/tree/master/packages/flutter/packages/notifee_platform_interface
+repository: https://github.com/invertase/notifee/tree/master/packages/flutter/packages/notifee_platform_interface
 version: 0.0.1
 
 environment:

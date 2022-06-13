@@ -1,7 +1,8 @@
 name: notifee
 description: A feature rich Android & iOS notifications library for Flutter.
 version: 0.0.1
-homepage: https://notifee.app
+homepage: https://github.com/invertase/notifee/tree/main/packages/flutter/packages/notifee
+repository: https://github.com/invertase/notifee/tree/main/packages/flutter/packages/notifee
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

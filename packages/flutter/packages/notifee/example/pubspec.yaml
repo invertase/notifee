@@ -1,5 +1,6 @@
 name: example
 description: A new Flutter project.
+homepage: https://github.com/invertase/notifee/tree/main/packages/flutter/packages/notifee/example
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
