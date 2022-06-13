@@ -12,7 +12,7 @@ In [their react-native documentation](https://documentation.onesignal.com/docs/r
 With special thanks to users [Ashok Kumar](https://github.com/ashokkumar88) and [burhanDebug](https://github.com/burhanDebug) and [zaweisise](https://github.com/zaweiswise) for helping us figure it out and confirm a solution, this is how to integrate notifee with OneSignal:
 
 1. Do *not* use the onesignal gradle plugin (currently step 3.2 in their documentation)
-1. Edit `node_modules/react-native-onesignal/android/build.gradle`:
+1. If using a `react-native-onesignal` version earlier than 4.0.0 - edit `node_modules/react-native-onesignal/android/build.gradle`:
 
 In the android dependencies modify the api ('com.onesignal:OneSignal:3.15.1') to
 
