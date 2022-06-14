@@ -18,6 +18,10 @@ package app.notifee.core.event;
  */
 
 import android.os.Bundle;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import app.notifee.core.model.NotificationModel;
 
 public class InitialNotificationEvent {
@@ -36,5 +40,13 @@ public class InitialNotificationEvent {
 
   public Bundle getExtras() {
     return extras;
+  }
+
+  public Map<String, Object> toMap() {
+    Map<String, Object> initialNotificationEventMap = new HashMap<>();
+    initialNotificationEventMap.put("notificationModel", notificationModel.toBundle());
+    initialNotificationEventMap.put("extras", extras);
+
+    return initialNotificationEventMap;
   }
 }

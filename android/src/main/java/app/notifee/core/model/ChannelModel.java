@@ -72,7 +72,7 @@ public class ChannelModel {
 
   public Integer getImportance() {
     if (mChannelBundle.containsKey("importance")) {
-      return (int) mChannelBundle.getDouble("importance");
+      return (int) mChannelBundle.get("importance");
     }
 
     return NotificationManagerCompat.IMPORTANCE_DEFAULT;
@@ -88,7 +88,7 @@ public class ChannelModel {
 
   public int getVisibility() {
     if (mChannelBundle.containsKey("visibility")) {
-      return (int) mChannelBundle.getDouble("visibility");
+      return (int) mChannelBundle.get("visibility");
     }
 
     return NotificationCompat.VISIBILITY_PRIVATE;

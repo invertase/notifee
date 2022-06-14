@@ -21,6 +21,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import java.util.concurrent.TimeUnit;
 
+import app.notifee.core.Logger;
+
 public class TimestampTriggerModel {
   private Bundle mTimeTriggerBundle;
   private int mInterval = -1;
@@ -46,10 +48,8 @@ public class TimestampTriggerModel {
     // set initial values
     TimeUnit timeUnit = null;
     if (mTimeTriggerBundle.containsKey("repeatFrequency")) {
-      Double d = mTimeTriggerBundle.getDouble("repeatFrequency");
-      mTimestamp = (long) mTimeTriggerBundle.getDouble("timestamp");
-
-      int repeatFrequency = d.intValue();
+      int repeatFrequency = (int) mTimeTriggerBundle.get("repeatFrequency");
+      mTimestamp = (long) mTimeTriggerBundle.get("timestamp");
 
       switch (repeatFrequency) {
         case -1:
@@ -82,6 +82,9 @@ public class TimestampTriggerModel {
       if (alarmManagerBundle.containsKey("allowWhileIdle")) {
         mAllowWhileIdle = alarmManagerBundle.getBoolean("allowWhileIdle");
       }
+    } else if (mTimeTriggerBundle.containsKey("allowWhileIdle")) {
+      mWithAlarmManager = true;
+      mAllowWhileIdle = mTimeTriggerBundle.getBoolean("allowWhileIdle");
     }
   }
 
@@ -97,7 +100,7 @@ public class TimestampTriggerModel {
     long delay = 0;
 
     if (mTimeTriggerBundle.containsKey("timestamp")) {
-      long timestamp = (long) mTimeTriggerBundle.getDouble("timestamp");
+      long timestamp = (long) mTimeTriggerBundle.get("timestamp");
       if (timestamp > 0) {
         delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
       }

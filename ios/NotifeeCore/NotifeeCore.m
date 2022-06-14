@@ -217,8 +217,10 @@
     // do nothing if trigger is null
     return block(nil);
   }
+  
+  NSString *identifier = notification[@"id"];
 
-  UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
+  UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier
                                                                         content:content
                                                                         trigger:unTrigger];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -265,9 +267,13 @@
   if (notification[@"body"] != nil) {
     content.body = notification[@"body"];
   }
+  
+  NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
 
   // data
-  NSMutableDictionary *userInfo = [notification[@"data"] mutableCopy];
+  if (notification[@"data"] != nil) {
+    userInfo = [notification[@"data"] mutableCopy];
+  }
 
   // attach a copy of the original notification payload into the data object,
   // for internal use
@@ -282,17 +288,17 @@
   content.badge = iosDict[@"badgeCount"];
 
   // categoryId
-  if (iosDict[@"categoryId"] != nil) {
+  if (iosDict[@"categoryId"] != nil && iosDict[@"categoryId"] != [NSNull null]) {
     content.categoryIdentifier = iosDict[@"categoryId"];
   }
 
   // launchImageName
-  if (iosDict[@"launchImageName"] != nil) {
+  if (iosDict[@"launchImageName"] != nil && iosDict[@"launchImageName"] != [NSNull null]) {
     content.launchImageName = iosDict[@"launchImageName"];
   }
 
   // critical, criticalVolume, sound
-  if (iosDict[@"critical"] != nil) {
+  if (iosDict[@"critical"] != nil && iosDict[@"critical"] != [NSNull null]) {
     UNNotificationSound *notificationSound;
     BOOL criticalSound = [iosDict[@"critical"] boolValue];
     NSNumber *criticalSoundVolume = iosDict[@"criticalVolume"];

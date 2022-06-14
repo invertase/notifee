@@ -24,8 +24,10 @@ import androidx.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.ArrayList;
 
 public class ObjectUtils {
 
@@ -84,6 +86,85 @@ public class ObjectUtils {
     Bundle bundle = parcel.readBundle(ObjectUtils.class.getClassLoader());
     parcel.recycle();
     return Objects.requireNonNull(bundle);
+  }
+
+  public static Map<String, Object> bundleToMap(Bundle bundle) throws IllegalArgumentException {
+    Map<String, Object> map = new HashMap<>();
+    for (String key : bundle.keySet()) {
+      Object value = bundle.get(key);
+      if (value == null) {
+        map.put(key, null);
+      } else if (value.getClass().isArray()) {
+        map.put(key, arrayToMap(value));
+      }
+      else if (value instanceof Bundle) {
+        map.put(key, bundleToMap((Bundle) value));
+      }
+      else if (value instanceof List) {
+        map.put(key, listToMap((List) value));
+      } else {
+        map.put(key, value);
+      }
+    }
+    return map;
+  }
+
+  public static ArrayList arrayToMap(Object array) throws IllegalArgumentException {
+    ArrayList catalystArray = new ArrayList();
+    if (array instanceof String[]) {
+      for (String v : (String[]) array) {
+        catalystArray.add(v);
+      }
+    } else if (array instanceof Bundle[]) {
+      for (Bundle v : (Bundle[]) array) {
+        catalystArray.add(ObjectUtils.bundleToMap(v));
+      }
+    } else if (array instanceof int[]) {
+      for (int v : (int[]) array) {
+        catalystArray.add(v);
+      }
+    } else if (array instanceof float[]) {
+      for (float v : (float[]) array) {
+        catalystArray.add(v);
+      }
+    } else if (array instanceof double[]) {
+      for (double v : (double[]) array) {
+        catalystArray.add(v);
+      }
+    } else if (array instanceof boolean[]) {
+      for (boolean v : (boolean[]) array) {
+        catalystArray.add(v);
+      }
+    } else {
+      throw new IllegalArgumentException("Unknown array type " + array.getClass());
+    }
+    return catalystArray;
+  }
+
+  public static ArrayList listToMap(List list) throws IllegalArgumentException {
+    ArrayList catalystArray = new ArrayList();
+    for (Object obj : list) {
+      if (obj == null) {
+        catalystArray.add(null);
+      } else if (obj.getClass().isArray()) {
+        catalystArray.add(arrayToMap(obj));
+      } else if (obj instanceof Bundle) {
+        catalystArray.add(ObjectUtils.bundleToMap((Bundle) obj));
+      } else if (obj instanceof List) {
+        catalystArray.add(listToMap((List) obj));
+      } else if (obj instanceof String) {
+        catalystArray.add((String) obj);
+      } else if (obj instanceof Integer) {
+        catalystArray.add((Integer) obj);
+      } else if (obj instanceof Number) {
+        catalystArray.add(((Number) obj).doubleValue());
+      } else if (obj instanceof Boolean) {
+        catalystArray.add((Boolean) obj);
+      } else {
+        throw new IllegalArgumentException("Unknown value type " + obj.getClass());
+      }
+    }
+    return catalystArray;
   }
 
   public interface TypedCallback<T> {
