@@ -19,9 +19,8 @@ package app.notifee.core.model;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import app.notifee.core.utility.ObjectUtils;
 import java.util.concurrent.TimeUnit;
-
-import app.notifee.core.Logger;
 
 public class TimestampTriggerModel {
   private Bundle mTimeTriggerBundle;
@@ -48,7 +47,7 @@ public class TimestampTriggerModel {
     // set initial values
     TimeUnit timeUnit = null;
     if (mTimeTriggerBundle.containsKey("repeatFrequency")) {
-      int repeatFrequency = (int) mTimeTriggerBundle.get("repeatFrequency");
+      int repeatFrequency = ObjectUtils.getInt(mTimeTriggerBundle.get("repeatFrequency"));
       mTimestamp = (long) mTimeTriggerBundle.get("timestamp");
 
       switch (repeatFrequency) {

@@ -25,6 +25,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import app.notifee.core.Logger;
+import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Task;
@@ -113,7 +114,7 @@ public class NotificationAndroidStyleModel {
 
   @Nullable
   public Task<NotificationCompat.Style> getStyleTask(Executor executor) {
-    int type = (int) mNotificationAndroidStyleBundle.getDouble("type");
+    int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
     Task<NotificationCompat.Style> styleTask = null;
 
     switch (type) {

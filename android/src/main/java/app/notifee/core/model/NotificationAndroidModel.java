@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.Logger;
+import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -92,7 +93,8 @@ public class NotificationAndroidModel {
    */
   public @Nullable Integer getBadgeIconType() {
     if (mNotificationAndroidBundle.containsKey("badgeIconType")) {
-      return (int) mNotificationAndroidBundle.get("badgeIconType");
+
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("badgeIconType"));
     }
 
     return NotificationCompat.BADGE_ICON_LARGE;
@@ -221,7 +223,7 @@ public class NotificationAndroidModel {
    */
   public int getGroupAlertBehaviour() {
     if (mNotificationAndroidBundle.containsKey("groupAlertBehavior")) {
-      return (int) mNotificationAndroidBundle.get("groupAlertBehavior");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("groupAlertBehavior"));
     }
 
     return NotificationCompat.GROUP_ALERT_ALL;
@@ -314,7 +316,7 @@ public class NotificationAndroidModel {
    */
   public Integer getNumber() {
     if (mNotificationAndroidBundle.containsKey("badgeCount")) {
-      return (int) mNotificationAndroidBundle.getDouble("badgeCount");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("badgeCount"));
     }
 
     return null;
@@ -381,7 +383,7 @@ public class NotificationAndroidModel {
       return NotificationCompat.PRIORITY_DEFAULT;
     }
 
-    int importance = (int) mNotificationAndroidBundle.get("importance");
+    int importance = ObjectUtils.getInt(mNotificationAndroidBundle.get("importance"));
     switch (importance) {
       case NotificationManagerCompat.IMPORTANCE_HIGH:
         return NotificationCompat.PRIORITY_HIGH;
@@ -406,8 +408,8 @@ public class NotificationAndroidModel {
           Objects.requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
       return new AndroidProgress(
-          (int) progressBundle.getDouble("max"),
-          (int) progressBundle.getDouble("current"),
+          ObjectUtils.getInt(progressBundle.get("max")),
+          ObjectUtils.getInt(progressBundle.get("current")),
           progressBundle.getBoolean("indeterminate", false));
     }
 
@@ -568,7 +570,7 @@ public class NotificationAndroidModel {
    */
   public int getVisibility() {
     if (mNotificationAndroidBundle.containsKey("visibility")) {
-      return (int) mNotificationAndroidBundle.getDouble("visibility");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("visibility"));
     }
 
     return NotificationCompat.VISIBILITY_PRIVATE;

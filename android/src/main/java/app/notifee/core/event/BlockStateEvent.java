@@ -19,13 +19,11 @@ package app.notifee.core.event;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import app.notifee.core.KeepForSdk;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.utility.ObjectUtils;
+import java.util.HashMap;
+import java.util.Map;
 
 @KeepForSdk
 public class BlockStateEvent {
@@ -86,11 +84,10 @@ public class BlockStateEvent {
     blockStateEventMap.put("type", type);
 
     if (type == BlockStateEvent.TYPE_CHANNEL_BLOCKED
-      || type == BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED) {
+        || type == BlockStateEvent.TYPE_CHANNEL_GROUP_BLOCKED) {
       String mapKey = type == BlockStateEvent.TYPE_CHANNEL_BLOCKED ? "channel" : "channelGroup";
       if (channelOrGroupBundle != null) {
-        blockStateEventDetailMap.put(
-          mapKey, ObjectUtils.bundleToMap(channelOrGroupBundle));
+        blockStateEventDetailMap.put(mapKey, ObjectUtils.bundleToMap(channelOrGroupBundle));
       }
     }
 
@@ -99,7 +96,6 @@ public class BlockStateEvent {
     }
 
     blockStateEventMap.put("detail", blockStateEventDetailMap);
-
 
     return blockStateEventMap;
   }

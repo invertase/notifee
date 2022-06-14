@@ -213,7 +213,7 @@ class NotifeeAlarmManager {
     NotificationModel notificationModel =
         NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
 
-    int triggerType = (int) triggerBundle.getDouble("type");
+    int triggerType = ObjectUtils.getInt(triggerBundle.get("type"));
 
     switch (triggerType) {
       case 0:
