@@ -23,11 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.ArrayList;
 
 public class ObjectUtils {
 
@@ -70,6 +70,14 @@ public class ObjectUtils {
     return properties;
   }
 
+  public static int getInt(Object value) {
+    if (value instanceof Double) {
+      return (int) ((Double) value).doubleValue();
+    }
+
+    return (int) value;
+  }
+
   public static byte[] bundleToBytes(@NonNull Bundle bundle) {
     Parcel parcel = Parcel.obtain();
     parcel.writeBundle(bundle);
@@ -96,11 +104,9 @@ public class ObjectUtils {
         map.put(key, null);
       } else if (value.getClass().isArray()) {
         map.put(key, arrayToMap(value));
-      }
-      else if (value instanceof Bundle) {
+      } else if (value instanceof Bundle) {
         map.put(key, bundleToMap((Bundle) value));
-      }
-      else if (value instanceof List) {
+      } else if (value instanceof List) {
         map.put(key, listToMap((List) value));
       } else {
         map.put(key, value);

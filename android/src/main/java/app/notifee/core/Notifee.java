@@ -58,8 +58,8 @@ public class Notifee {
 
   @KeepForSdk
   public static void configure(@NonNull NotifeeConfig notifeeConfig) {
-     synchronized (Notifee.class) {
-       initialize(notifeeConfig);
+    synchronized (Notifee.class) {
+      initialize(notifeeConfig);
     }
   }
 
