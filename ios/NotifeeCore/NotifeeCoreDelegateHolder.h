@@ -27,8 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)instance;
 
-
-
 - (void)didReceiveNotifeeCoreEvent:(NSDictionary *)event;
 
 @end

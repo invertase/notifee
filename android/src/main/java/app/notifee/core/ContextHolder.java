@@ -26,7 +26,7 @@ public class ContextHolder {
     return applicationContext;
   }
 
- public static void setApplicationContext(Context applicationContext) {
+  static void setApplicationContext(Context applicationContext) {
     Logger.d("context", "received application context");
     ContextHolder.applicationContext = applicationContext;
   }
