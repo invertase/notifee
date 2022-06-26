@@ -516,7 +516,7 @@ public class NotificationAndroidModel {
    */
   public @Nullable Long getTimeoutAfter() {
     if (mNotificationAndroidBundle.containsKey("timeoutAfter")) {
-      return (long) mNotificationAndroidBundle.getDouble("timeoutAfter");
+      return ObjectUtils.getLong(mNotificationAndroidBundle.get("timeoutAfter"));
     }
 
     return null;
@@ -583,7 +583,7 @@ public class NotificationAndroidModel {
    */
   public long getTimestamp() {
     if (mNotificationAndroidBundle.containsKey("timestamp")) {
-      return (long) mNotificationAndroidBundle.getDouble("timestamp");
+      return ObjectUtils.getLong(mNotificationAndroidBundle.get("timestamp"));
     }
 
     return -1;
