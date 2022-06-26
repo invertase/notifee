@@ -124,7 +124,7 @@ public class TimestampTriggerModel {
     }
 
     // prevent alarm manager notification firing straight away
-    while (timestamp <= System.currentTimeMillis()) {
+    while (timestamp < System.currentTimeMillis()) {
       timestamp += interval;
     }
 

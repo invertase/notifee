@@ -90,7 +90,8 @@ class NotifeeAlarmManager {
                           && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
                         TimestampTriggerModel trigger =
                             TimestampTriggerModel.fromBundle(triggerBundle);
-
+                        // Ensure trigger is in the future and the latest timestamp is updated in the database
+                        trigger.setNextTimestamp();
                         scheduleTimestampTriggerNotification(notificationModel, trigger);
                         WorkDataRepository.getInstance(getApplicationContext())
                             .update(
