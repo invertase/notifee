@@ -21,7 +21,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import app.notifee.core.Logger;
 import app.notifee.core.utility.ObjectUtils;
-
 import java.util.concurrent.TimeUnit;
 
 public class IntervalTriggerModel {
