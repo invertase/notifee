@@ -87,7 +87,7 @@ class NotifeeAlarmManager {
                           displayNotificationTask.getException());
                     } else {
                       if (triggerBundle.containsKey("repeatFrequency")
-                          && triggerBundle.getDouble("repeatFrequency") != -1) {
+                          && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
                         TimestampTriggerModel trigger =
                             TimestampTriggerModel.fromBundle(triggerBundle);
                         trigger.setNextTimestamp();
