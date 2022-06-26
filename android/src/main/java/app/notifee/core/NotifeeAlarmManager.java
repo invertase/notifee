@@ -90,6 +90,7 @@ class NotifeeAlarmManager {
                           && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
                         TimestampTriggerModel trigger =
                             TimestampTriggerModel.fromBundle(triggerBundle);
+                        // Ensure trigger is in the future and the latest timestamp is updated in the database
                         trigger.setNextTimestamp();
                         scheduleTimestampTriggerNotification(notificationModel, trigger);
                         WorkDataRepository.getInstance(getApplicationContext())
@@ -153,6 +154,9 @@ class NotifeeAlarmManager {
         return;
       }
     }
+
+    // Ensure timestamp is always in the future when scheduling the alarm
+    timestampTrigger.setNextTimestamp();
 
     if (timestampTrigger.getAllowWhileIdle()) {
       AlarmManagerCompat.setExactAndAllowWhileIdle(
