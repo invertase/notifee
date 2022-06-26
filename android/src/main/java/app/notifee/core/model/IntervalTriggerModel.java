@@ -20,6 +20,8 @@ package app.notifee.core.model;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import app.notifee.core.Logger;
+import app.notifee.core.utility.ObjectUtils;
+
 import java.util.concurrent.TimeUnit;
 
 public class IntervalTriggerModel {
@@ -54,8 +56,7 @@ public class IntervalTriggerModel {
 
   public int getInterval() {
     if (mIntervalTriggerBundle.containsKey("interval")) {
-      Double d = mIntervalTriggerBundle.getDouble("interval");
-      return d.intValue();
+      return ObjectUtils.getInt(mIntervalTriggerBundle.get("interval"));
     }
 
     return -1;

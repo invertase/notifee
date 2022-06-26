@@ -319,7 +319,7 @@ public class NotificationAndroidStyleModel {
           for (int i = 0; i < Objects.requireNonNull(messages).size(); i++) {
             Bundle message = messages.get(i);
             Person messagePerson = null;
-            long timestamp = (long) message.getDouble("timestamp");
+            long timestamp = ObjectUtils.getLong(message.get("timestamp"));
 
             if (message.containsKey("person")) {
               messagePerson =

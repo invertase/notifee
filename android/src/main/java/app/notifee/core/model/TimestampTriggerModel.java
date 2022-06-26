@@ -48,7 +48,7 @@ public class TimestampTriggerModel {
     TimeUnit timeUnit = null;
     if (mTimeTriggerBundle.containsKey("repeatFrequency")) {
       int repeatFrequency = ObjectUtils.getInt(mTimeTriggerBundle.get("repeatFrequency"));
-      mTimestamp = (long) mTimeTriggerBundle.get("timestamp");
+      mTimestamp = ObjectUtils.getLong(mTimeTriggerBundle.get("timestamp"));
 
       switch (repeatFrequency) {
         case -1:
@@ -99,7 +99,7 @@ public class TimestampTriggerModel {
     long delay = 0;
 
     if (mTimeTriggerBundle.containsKey("timestamp")) {
-      long timestamp = (long) mTimeTriggerBundle.get("timestamp");
+      long timestamp = ObjectUtils.getLong(mTimeTriggerBundle.get("timestamp"));
       if (timestamp > 0) {
         delay = Math.round((timestamp - System.currentTimeMillis()) / 1000);
       }
@@ -124,7 +124,7 @@ public class TimestampTriggerModel {
     }
 
     // prevent alarm manager notification firing straight away
-    while (timestamp < System.currentTimeMillis()) {
+    while (timestamp <= System.currentTimeMillis()) {
       timestamp += interval;
     }
 
