@@ -47,9 +47,10 @@ function Screen() {
       android: {
         channelId,
         smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+        // pressAction is needed if you would like the notification to open the app when tapped
         pressAction: {
-          id: 'default'
-        }
+          id: 'default',
+        },
       },
     });
   }
