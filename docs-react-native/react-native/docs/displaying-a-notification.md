@@ -31,7 +31,10 @@ Now the button is in place, create a function to handle the button press and dis
 ```js
 function Screen() {
   async function onDisplayNotification() {
-    // Create a channel
+    // Request permissions (required for iOS)
+    await notifee.requestPermission()
+
+    // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
@@ -44,6 +47,9 @@ function Screen() {
       android: {
         channelId,
         smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+        pressAction: {
+          id: 'default'
+        }
       },
     });
   }
