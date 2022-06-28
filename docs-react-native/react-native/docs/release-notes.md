@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.4.0
+- **[Android]**: Fixes an issue when recreating the trigger notifications after a reboot with AlarmManager  (Fixes [#422](https://github.com/invertase/notifee/issues/422)).
+- **[Android]**: Fixes an issue around displaying a heads-up notification on Xiaomi devices by adding the permission `ACCESS_NOTIFICATION_POLICY` to the `AndroidManifest` (Fixes [#296](https://github.com/invertase/notifee/issues/296)).
+
 ## 5.3.0
 - **[Android]**: Elimates the need to add the local maven repository manually to your project  (PR [#414](https://github.com/invertase/notifee/pull/414)).
 - **[Android]**: Implements support to light up the screen when a notification is displayed. Introduces a new property `lightUpScreen` on the `NotificationAndroid` interface (PR [#403](https://github.com/invertase/notifee/pull/403)).
