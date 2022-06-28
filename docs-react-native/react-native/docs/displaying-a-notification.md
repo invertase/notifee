@@ -62,7 +62,11 @@ function Screen() {
 }
 ```
 
-When the button is pressed, we perform two tasks: creating a channel & displaying a notification.
+When the button is pressed, we perform three tasks: requesting permissions, creating a channel & displaying a notification.
+
+Requesting permission is required for iOS as notifications are disabled by default. You need to ask the user to enable notifications by calling `requestPermission` before displaying any notifications.
+
+> To learn more about requesting permissions, view the [iOS Permissions](/react-native/docs/ios/permissions) documentation
 
 Channels are an Android-only concept used to categorize and allow users to control how notifications are handled
 on their devices. Channels are created with sensible default settings and are created or updated each time a
