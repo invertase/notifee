@@ -62,7 +62,7 @@ function Screen() {
 }
 ```
 
-When the button is pressed, we perform three tasks: requesting permissions, creating a channel & displaying a notification.
+When the button is pressed, we perform three tasks: requesting permission, creating a channel & displaying a notification.
 
 Requesting permission is required for iOS as notifications are disabled by default. You need to ask the user to enable notifications by calling `requestPermission` before displaying any notifications.
 
