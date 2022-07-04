@@ -70,7 +70,7 @@ Before, moving to the next step, run the app and check it builds successfully â€
 ## Edit the payload
 Now everything is setup in your app, you can alter your notification payload in two ways:
 
-1. When sending from your BE (either via REST api or firebase admin sdk)
+1. When creating the message contents for sending, in your back-end
 2. In Notification Service Extension when you receive notification
 
 > Make sure that you will set `mutable-content: 1` (mutableContent if you are using firebase admin sdk) when sending notification otherwise Notification Service Extension will NOT be triggered
