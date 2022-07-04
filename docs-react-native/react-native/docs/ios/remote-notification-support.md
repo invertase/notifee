@@ -68,7 +68,17 @@ At this point everything should still be running normally. This is the final ste
 Before, moving to the next step, run the app and check it builds successfully – make sure you have the correct target selected. 
 
 ## Edit the payload
-Now everything is setup in your app, you can alter your notification payload to include `notifee_options`:
+Now everything is setup in your app, you can alter your notification payload in two ways:
+
+1. When sending from your BE (either via REST api or firebase admin sdk)
+2. In Notification Service Extension when you receive notification
+
+> Make sure that you will set `mutable-content: 1` (mutableContent if you are using firebase admin sdk) when sending notification otherwise Notification Service Extension will NOT be triggered
+
+> Make sure that you will set `content-available: 1` (contentAvailable if you are using firebase admin sdk) if you want to receive notification when your app is in foreground
+
+
+### 1. When sending from your BE
 
 ```json
 // FCM
@@ -101,6 +111,28 @@ Now everything is setup in your app, you can alter your notification payload to 
     },
     ...
 };
+```
+
+### 2. In Notification Service Extension
+
+In your NotifeeNotificationService.m file you should have method `didReceiveNotificationRequest` where we are calling `NotifeeExtensionHelper`. Now you can modify
+`bestAttemptContent` before you send it to `NotifeeExtensionHelper`:
+
+```objectivec
+- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
+    self.contentHandler = contentHandler;
+    self.bestAttemptContent = [request.content mutableCopy];
+  
+    NSMutableDictionary *userInfoDict = [self.bestAttemptContent.userInfo mutableCopy];
+    userInfoDict[@"notifee_options"] = [NSMutableDictionary dictionary];
+    userInfoDict[@"notifee_options"][@"title"] = @"Modified Title";
+  
+    self.bestAttemptContent.userInfo = userInfoDict;
+
+    [NotifeeExtensionHelper populateNotificationContent:request
+                                withContent: self.bestAttemptContent
+                                withContentHandler:contentHandler];
+}
 ```
 
 Please note, the `id` of the notification is the `request.identifier` and cannot be changed. For this reason, the `id` property in `notifee_options` should be excluded.
