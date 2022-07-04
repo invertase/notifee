@@ -78,7 +78,7 @@ Now everything is setup in your app, you can alter your notification payload in 
 > Make sure that you will set `content-available: 1` (contentAvailable if you are using firebase admin sdk) if you want to receive notification when your app is in foreground
 
 
-### 1. When sending from your BE
+### 1. When creating the message contents for sending, in your back-end
 
 ```json
 // FCM
@@ -113,7 +113,7 @@ Now everything is setup in your app, you can alter your notification payload in 
 };
 ```
 
-### 2. In Notification Service Extension
+### 2. In a Notification Service Extension in your app when a device receives a remote message
 
 In your NotifeeNotificationService.m file you should have method `didReceiveNotificationRequest` where we are calling `NotifeeExtensionHelper`. Now you can modify
 `bestAttemptContent` before you send it to `NotifeeExtensionHelper`:
