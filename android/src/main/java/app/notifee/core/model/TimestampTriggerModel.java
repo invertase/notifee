@@ -109,8 +109,14 @@ public class TimestampTriggerModel {
   }
 
   public void setNextTimestamp() {
+    // Skip for non-repeating triggers
+    if (mRepeatFrequency == null) {
+      return;
+    }
+
     long timestamp = getTimestamp();
     long interval = 0;
+
     switch (mRepeatFrequency) {
       case TimestampTriggerModel.WEEKLY:
         interval = 7 * DAY_IN_MS;
