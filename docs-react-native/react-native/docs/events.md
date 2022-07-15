@@ -18,10 +18,9 @@ active & killed. Notifee provides a simple API for handling both scenarios.
 
 ## Foreground Events
 
-An application is deemed in the "foreground" under the following situations:
+An application is deemed in the "foreground" only under the following situation:
 
-- The device is unlocked.
-- The application is running & is in view (foreground).
+- The device is unlocked and the application is running & is in view (foreground).
 
 In any other situation a [Background Event](/react-native/docs/events#background-events) is used instead. If the user
 has opened your application and switched to another task (e.g. opened another app, pressed the "home" button) but not
