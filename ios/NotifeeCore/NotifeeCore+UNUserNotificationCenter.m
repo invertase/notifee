@@ -93,6 +93,8 @@ struct {
     BOOL alert = [foregroundPresentationOptions[@"alert"] boolValue];
     BOOL badge = [foregroundPresentationOptions[@"badge"] boolValue];
     BOOL sound = [foregroundPresentationOptions[@"sound"] boolValue];
+    BOOL banner = [foregroundPresentationOptions[@"banner"] boolValue];
+    BOOL list = [foregroundPresentationOptions[@"list"] boolValue];
 
     if (badge) {
       presentationOptions |= UNNotificationPresentationOptionBadge;
@@ -104,6 +106,18 @@ struct {
 
     if (alert) {
       presentationOptions |= UNNotificationPresentationOptionAlert;
+    }
+
+    if (banner) {
+      if (@available(iOS 14, *)) {
+        presentationOptions |= UNNotificationPresentationOptionBanner;
+      }
+    }
+
+    if (list) {
+      if (@available(iOS 14, *)) {
+        presentationOptions |= UNNotificationPresentationOptionList;
+      }
     }
 
     NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
