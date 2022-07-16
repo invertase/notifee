@@ -16,20 +16,26 @@
  */
 
 class ForegroundPresentationOptions {
-  ForegroundPresentationOptions({bool? alert, bool? badge, bool? sound})
+  ForegroundPresentationOptions({bool? alert, bool? badge, bool? sound, bool? banner, bool? list})
       : alert = alert ?? false,
         badge = badge ?? false,
         sound = sound ?? false;
+        banner = banner ?? false;
+        list = list ?? false;
 
   bool alert;
   bool badge;
   bool sound;
+  bool banner;
+  bool list;
 
   factory ForegroundPresentationOptions.fromMap(Map<String, dynamic> json) =>
       ForegroundPresentationOptions(
         alert: json['alert'] as bool?,
         badge: json['badge'] as bool?,
         sound: json['sound'] as bool?,
+        banner: json['banner'] as bool?,
+        list: json['list'] as bool?,
       );
 
   Map<String, Object?> asMap() {
@@ -37,6 +43,8 @@ class ForegroundPresentationOptions {
       'alert': alert,
       'badge': badge,
       'sound': sound,
+      'banner': banner,
+      'list': list,
     };
 
     return map;

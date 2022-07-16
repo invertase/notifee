@@ -33,7 +33,7 @@ class NotificationIOS {
       this.summaryArgumentCount,
       this.targetContentId}) {
     foregroundPresentationOptions ??=
-        ForegroundPresentationOptions(alert: true, badge: true, sound: true);
+        ForegroundPresentationOptions(alert: true, badge: true, sound: true, banner: true, list: true);
   }
 
   /// Optional array of [IOSNotificationAttachment] interfaces
@@ -98,7 +98,7 @@ class NotificationIOS {
         foregroundPresentationOptions: map['foregroundPresentationOptions'] ==
                 null
             ? ForegroundPresentationOptions(
-                alert: true, badge: true, sound: true)
+                alert: true, badge: true, sound: true, banner: true, list: true)
             : ForegroundPresentationOptions.fromMap(Map<String, dynamic>.from(
                 map['foregroundPresentationOptions'] as Map)),
         categoryId: map['categoryId'] as String?,
