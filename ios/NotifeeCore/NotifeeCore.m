@@ -217,7 +217,7 @@
     // do nothing if trigger is null
     return block(nil);
   }
-  
+
   NSString *identifier = notification[@"id"];
 
   UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier
@@ -267,7 +267,7 @@
   if (notification[@"body"] != nil) {
     content.body = notification[@"body"];
   }
-  
+
   NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
 
   // data
