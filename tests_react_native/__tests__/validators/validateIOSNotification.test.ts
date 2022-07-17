@@ -35,7 +35,7 @@ describe('Validate IOS Input', () => {
     test('returns valid when no value is provided', () => {
       const $ = validateIOSNotification();
       expect($).toEqual({
-        foregroundPresentationOptions: { alert: true, badge: true, sound: true },
+        foregroundPresentationOptions: { alert: true, badge: true, sound: true, banner: true, list: true },
       });
     });
 

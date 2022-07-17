@@ -73,6 +73,8 @@ describe('Validate Notification', () => {
           alert: true,
           badge: true,
           sound: true,
+          banner: true,
+          list: true,
         },
       });
     });

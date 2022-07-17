@@ -27,6 +27,8 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
       alert: true,
       badge: true,
       sound: true,
+      banner: true,
+      list: true,
     },
   };
 
@@ -232,6 +234,36 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
       }
 
       out.foregroundPresentationOptions.badge = ios.foregroundPresentationOptions.badge;
+    }
+
+    if (
+      objectHasProperty<IOSForegroundPresentationOptions>(
+        ios.foregroundPresentationOptions,
+        'banner',
+      )
+    ) {
+      if (!isBoolean(ios.foregroundPresentationOptions.banner)) {
+        throw new Error(
+          "'notification.ios.foregroundPresentationOptions.banner' expected a boolean value.",
+        );
+      }
+
+      out.foregroundPresentationOptions.banner = ios.foregroundPresentationOptions.banner;
+    }
+
+    if (
+      objectHasProperty<IOSForegroundPresentationOptions>(
+        ios.foregroundPresentationOptions,
+        'list',
+      )
+    ) {
+      if (!isBoolean(ios.foregroundPresentationOptions.list)) {
+        throw new Error(
+          "'notification.ios.foregroundPresentationOptions.list' expected a boolean value.",
+        );
+      }
+
+      out.foregroundPresentationOptions.list = ios.foregroundPresentationOptions.list;
     }
   }
 
