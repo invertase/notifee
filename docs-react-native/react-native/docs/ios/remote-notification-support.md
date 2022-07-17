@@ -78,7 +78,7 @@ Now everything is setup in your app, you can alter your notification payload in 
 > Make sure that you will set `content-available: 1` (contentAvailable if you are using firebase admin sdk) if you want to receive notification when your app is in foreground
 
 
-### 1. When creating the message contents for sending, in your back-end
+### 1. Update the message payload, sent via your backend
 
 ```json
 // FCM
