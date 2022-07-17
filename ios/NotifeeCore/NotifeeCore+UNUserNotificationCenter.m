@@ -105,7 +105,12 @@ struct {
     }
 
     if (alert) {
-      presentationOptions |= UNNotificationPresentationOptionAlert;
+      if (@available(iOS 14, *)) {
+        presentationOptions |=
+            UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner;
+      } else {
+        presentationOptions |= UNNotificationPresentationOptionAlert;
+      }
     }
 
     if (banner) {

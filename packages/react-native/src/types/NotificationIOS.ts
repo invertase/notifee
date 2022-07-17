@@ -126,7 +126,8 @@ export interface IOSForegroundPresentationOptions {
    * App in foreground dialog box which indicates when a decision has to be made
    *
    * Defaults to true
-   * @deprecated Deprecated in iOS 14. Use `banner` and `list` instead
+   * @(will-be)deprecated Deprecated in iOS 14. Use `banner` and `list` instead.
+   * TODO: Deprecate `alert` when our minimum deployment target becomes iOS 14.
    */
   alert?: boolean;
 
