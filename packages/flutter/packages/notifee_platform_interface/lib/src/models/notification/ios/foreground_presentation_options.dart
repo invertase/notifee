@@ -16,7 +16,8 @@
  */
 
 class ForegroundPresentationOptions {
-  ForegroundPresentationOptions({bool? alert, bool? badge, bool? sound, bool? banner, bool? list})
+  ForegroundPresentationOptions(
+      {bool? alert, bool? badge, bool? sound, bool? banner, bool? list})
       : alert = alert ?? false,
         badge = badge ?? false,
         sound = sound ?? false,
