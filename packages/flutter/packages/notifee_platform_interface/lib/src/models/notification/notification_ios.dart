@@ -32,8 +32,8 @@ class NotificationIOS {
       this.summaryArgument,
       this.summaryArgumentCount,
       this.targetContentId}) {
-    foregroundPresentationOptions ??=
-        ForegroundPresentationOptions(alert: true, badge: true, sound: true, banner: true, list: true);
+    foregroundPresentationOptions ??= ForegroundPresentationOptions(
+        alert: true, badge: true, sound: true, banner: true, list: true);
   }
 
   /// Optional array of [IOSNotificationAttachment] interfaces
