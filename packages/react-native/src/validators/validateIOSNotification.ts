@@ -24,6 +24,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     foregroundPresentationOptions: IOSForegroundPresentationOptions;
   } = {
     foregroundPresentationOptions: {
+      alert: true,
       badge: true,
       sound: true,
       banner: true,
