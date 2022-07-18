@@ -126,7 +126,7 @@ export interface IOSForegroundPresentationOptions {
    * App in foreground dialog box which indicates when a decision has to be made
    *
    * Defaults to true
-   * @deprecated Deprecated in iOS 14. Use `banner` and `list` instead
+   * @deprecated Use `banner` and `list` instead
    */
   alert?: boolean;
 
@@ -147,12 +147,16 @@ export interface IOSForegroundPresentationOptions {
   /**
    * Present the notification as a banner
    *
+   * For iOS 13 and lower, will be equivalent to setting `alert` to true
+   *
    * Defaults to true
    */
   banner?: boolean;
 
   /**
    * Show the notification in Notification Center
+   *
+   * For iOS 13 and lower, will be equivalent to setting `alert` to true
    *
    * Defaults to true
    */

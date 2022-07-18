@@ -67,7 +67,6 @@ await notifee.displayNotification({
   body: 'You are overdue payment on one or more of your accounts!',
   ios: {
     foregroundPresentationOptions: {
-      alert: true, // deprecated in iOS 14
       badge: true,
       sound: true,
       banner: true,
