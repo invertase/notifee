@@ -252,10 +252,7 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
     }
 
     if (
-      objectHasProperty<IOSForegroundPresentationOptions>(
-        ios.foregroundPresentationOptions,
-        'list',
-      )
+      objectHasProperty<IOSForegroundPresentationOptions>(ios.foregroundPresentationOptions, 'list')
     ) {
       if (!isBoolean(ios.foregroundPresentationOptions.list)) {
         throw new Error(
