@@ -104,6 +104,7 @@ To utilise Detox's functionality to mock a local notification and trigger notife
       ios: {
         foregroundPresentationOptions: {
           banner: true,
+          list: true,
         },
       },
       data: {}
