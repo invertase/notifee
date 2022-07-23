@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.5.0
+- **[Android]**: Fixes a compile issue for monorepos where sometimes `app.notifee:core:+` cannot be found (Fixes [#350](https://github.com/invertase/notifee/issues/350)).
+- **[iOS]**: Adds new `list` and `banner` options to `IOSForegroundPresentationOptions` on iOS. These new options should be used as a replacement for the `alert` option which is now deprecated in notifee; notifee will fallback to using Apple's `UNNotificationPresentationOptionAlert` option for iOS 13 when either `banner` or `list` is set to true. There are no breaking changes, but we encourage you to update your project as soon as you can if you set custom `IOSForegroundPresentationOptions`. To learn more, view the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) documentation (Enhancement [#382](https://github.com/invertase/notifee/issues/382)).
+
 ## 5.4.1
 - **[Android]**: Fixes an issue when creating a one-time trigger notifications with AlarmManager (Fixes [#445](https://github.com/invertase/notifee/issues/445)).
 
