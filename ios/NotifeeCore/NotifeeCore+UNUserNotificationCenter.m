@@ -106,26 +106,26 @@ struct {
 
     // if list or banner is true, ignore alert property
     if (banner || list) {
-        if (banner) {
-          if (@available(iOS 14, *)) {
-            presentationOptions |= UNNotificationPresentationOptionBanner;
-          } else {
-              // for iOS 13 we need to set alert
-            presentationOptions |= UNNotificationPresentationOptionAlert;
-          }
+      if (banner) {
+        if (@available(iOS 14, *)) {
+          presentationOptions |= UNNotificationPresentationOptionBanner;
+        } else {
+          // for iOS 13 we need to set alert
+          presentationOptions |= UNNotificationPresentationOptionAlert;
         }
+      }
 
-        if (list) {
-          if (@available(iOS 14, *)) {
-            presentationOptions |= UNNotificationPresentationOptionList;
-          } else {
-              // for iOS 13 we need to set alert
-            presentationOptions |= UNNotificationPresentationOptionAlert;
-          }
+      if (list) {
+        if (@available(iOS 14, *)) {
+          presentationOptions |= UNNotificationPresentationOptionList;
+        } else {
+          // for iOS 13 we need to set alert
+          presentationOptions |= UNNotificationPresentationOptionAlert;
         }
+      }
     } else if (alert) {
-        // TODO: remove alert once it has been fully removed from the notifee API
-        presentationOptions |= UNNotificationPresentationOptionAlert;
+      // TODO: remove alert once it has been fully removed from the notifee API
+      presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
     NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
