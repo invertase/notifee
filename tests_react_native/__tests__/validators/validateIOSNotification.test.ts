@@ -45,6 +45,27 @@ describe('Validate IOS Input', () => {
       });
     });
 
+    test('returns valid when there is a foregroundPresentationOptions', () => {
+      let $ = validateIOSNotification({
+        foregroundPresentationOptions: {
+          alert: true,
+          badge: true,
+          sound: true,
+          banner: true,
+          list: true,
+        }
+      });
+      expect($).toEqual({
+        foregroundPresentationOptions: {
+          alert: true,
+          badge: true,
+          sound: true,
+          banner: true,
+          list: true,
+        },
+      });
+    });
+
     test('returns invalid when an invalid critical property is provided', () => {
       const notification: NotificationIOS = {
         critical: {} as any,
