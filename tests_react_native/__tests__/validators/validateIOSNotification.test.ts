@@ -46,14 +46,14 @@ describe('Validate IOS Input', () => {
     });
 
     test('returns valid when there is a foregroundPresentationOptions', () => {
-      let $ = validateIOSNotification({
+      const $ = validateIOSNotification({
         foregroundPresentationOptions: {
           alert: true,
           badge: true,
           sound: true,
           banner: true,
           list: true,
-        }
+        },
       });
       expect($).toEqual({
         foregroundPresentationOptions: {
