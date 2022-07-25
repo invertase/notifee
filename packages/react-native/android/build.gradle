@@ -20,7 +20,7 @@ plugins {
   id "io.invertase.gradle.build" version "1.5"
 }
 
-// https://github.com/facebook/react-native/blob/main/ReactAndroid/build.gradle#L168-L201
+// https://github.com/facebook/react-native/blob/a70354df12ef71aec08583cca4f1fed5fb77d874/ReactAndroid/build.gradle#L168-L201
 def findNodeModulePath(baseDir, packageName) {
   def basePath = baseDir.toPath().normalize()
   // Node's module resolution algorithm searches up to the root directory,
