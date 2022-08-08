@@ -346,7 +346,20 @@ public class NotificationAndroidModel {
    * @return int[]
    */
   public int[] getFlags() {
-    return (int[]) mNotificationAndroidBundle.get("flags");
+    if (!mNotificationAndroidBundle.containsKey("flags")) {
+      return null;
+    }
+
+    ArrayList<?> flagsArrayList =
+        Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("flags"));
+
+    int[] flagsArray = new int[flagsArrayList.size()];
+
+    for (int i = 0; i < flagsArrayList.size(); i++) {
+      flagsArray[i] = ObjectUtils.getInt(flagsArrayList.get(i));
+    }
+
+    return flagsArray;
   }
 
   /**

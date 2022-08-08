@@ -59,10 +59,11 @@ export const notifications: { key: string; notification: Notification | Notifica
       id: 'loopSound',
       title: 'loop sound',
       android: {
-        channelId: 'high',
+        channelId: 'custom_sound',
         pressAction: {
           id: 'default',
         },
+        ongoing: true,
         loopSound: true,
       },
       ios: {},
@@ -71,13 +72,15 @@ export const notifications: { key: string; notification: Notification | Notifica
   {
     key: 'Android Flags',
     notification: {
-      id: 'loopSound',
-      title: 'loop sound',
+      id: 'customSound',
+      title: 'custom sound',
       android: {
-        channelId: 'high',
+        channelId: 'default',
         pressAction: {
           id: 'default',
         },
+        sound: 'hollow',
+        ongoing: true,
         flags: [AndroidFlags.FLAG_INSISTENT],
       },
       ios: {},
