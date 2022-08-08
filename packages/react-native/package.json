@@ -15,8 +15,7 @@
     "prepare": "yarn run build && yarn run build:plugin",
     "prepublishOnly": "cd ../.. && yarn run build:core",
     "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
-    "format:ios": "npm_config_yes=true npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google",
-    "gen-docs": "typedoc src/index.ts src/types/*.ts src/NotifeeApiModule.ts --out \"../../docs/docs-md\" || echo \"FAILED: gen-docs command only available running package as submodule of notifee.\" "
+    "format:ios": "npm_config_yes=true npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google"
   },
   "devDependencies": {
     "@expo/config-plugins": "^4.1.0",
