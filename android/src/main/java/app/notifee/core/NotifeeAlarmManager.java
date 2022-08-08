@@ -161,16 +161,10 @@ class NotifeeAlarmManager {
 
     if (timestampTrigger.getAllowWhileIdle()) {
       AlarmManagerCompat.setExactAndAllowWhileIdle(
-          alarmManager,
-          AlarmManager.ELAPSED_REALTIME_WAKEUP,
-          timestampTrigger.getTimestamp(),
-          pendingIntent);
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
     } else {
       AlarmManagerCompat.setExact(
-          alarmManager,
-          AlarmManager.ELAPSED_REALTIME_WAKEUP,
-          timestampTrigger.getTimestamp(),
-          pendingIntent);
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
     }
   }
 
