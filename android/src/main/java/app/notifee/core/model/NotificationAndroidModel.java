@@ -332,6 +332,24 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Gets whether this notification should loop the sound
+   *
+   * @return Boolean
+   */
+  public Boolean getLoopSound() {
+    return mNotificationAndroidBundle.getBoolean("loopSound", false);
+  }
+
+  /**
+   * Gets an array of flags
+   *
+   * @return int[]
+   */
+  public int[] getFlags() {
+    return (int[]) mNotificationAndroidBundle.get("flags");
+  }
+
+  /**
    * Gets whether this notification should only alert once if updated
    *
    * @return Boolean

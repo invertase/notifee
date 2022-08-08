@@ -240,6 +240,18 @@ export interface NotificationAndroid {
   ongoing?: boolean;
 
   /**
+   * Set whether the sound should loop, by default, the sound will only play once.
+   * 
+   * This property is useful if you have an ongoing notification.
+   */
+  loopSound?: boolean;
+
+  /**
+   * Set any additional flags
+   */
+   flags?: AndroidFlags[];
+
+  /**
    * Notifications with the same `id` will only show a single instance at any one time on your device,
    * however will still alert the user (for example, by making a sound).
    *
@@ -1169,6 +1181,18 @@ export enum AndroidDefaults {
    * The notification will vibrate to alert the user.
    */
   VIBRATE = 2,
+}
+
+/**
+ * Enum used to set any additional flags supported on Android.
+ * See Android's [setFlag()](https://developer.android.com/reference/android/app/Notification.Builder#setFlag(int,%20boolean)) documentation.
+ */
+ export enum AndroidFlags {
+  /**
+   * The audio will be repeated until the notification is cancelled or the notification window is opened.
+   * This will be set for you by setting `loopSound`.
+   */
+   FLAG_INSISTENT = -1,
 }
 
 /**
