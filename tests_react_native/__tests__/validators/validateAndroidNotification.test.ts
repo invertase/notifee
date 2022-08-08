@@ -34,6 +34,7 @@ describe('Validate Android Notification', () => {
         groupAlertBehavior: AndroidGroupAlertBehavior.ALL,
         groupSummary: false,
         localOnly: false,
+        loopSound: false,
         ongoing: false,
         onlyAlertOnce: false,
         importance: AndroidImportance.DEFAULT,
