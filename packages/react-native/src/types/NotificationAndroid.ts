@@ -1192,7 +1192,7 @@ export enum AndroidDefaults {
    * The audio will be repeated until the notification is cancelled or the notification window is opened.
    * This will be set for you by setting `loopSound`.
    */
-   FLAG_INSISTENT = -1,
+   FLAG_INSISTENT = 4,
 }
 
 /**
