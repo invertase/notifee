@@ -393,15 +393,13 @@ export default function validateAndroidNotification(
   /**
    * flags
    */
-   if (objectHasProperty(android, 'flags') && !isUndefined(android.flags)) {
+  if (objectHasProperty(android, 'flags') && !isUndefined(android.flags)) {
     if (!isArray(android.flags)) {
       throw new Error("'notification.android.flags' expected an array.");
     }
 
     if (android.flags.length === 0) {
-      throw new Error(
-        "'notification.android.flags' expected an array containing AndroidDefaults.",
-      );
+      throw new Error("'notification.android.flags' expected an array containing AndroidDefaults.");
     }
 
     const defaults = Object.values(AndroidFlags);
