@@ -39,6 +39,7 @@ describe('Validate Notification', () => {
         groupSummary: false,
         importance: 3,
         localOnly: false,
+        loopSound: false,
         ongoing: false,
         onlyAlertOnce: false,
         showChronometer: false,
