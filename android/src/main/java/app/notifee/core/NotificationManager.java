@@ -564,6 +564,15 @@ class NotificationManager {
               int hashCode = notificationModel.getHashCode();
 
               NotificationAndroidModel androidBundle = notificationModel.getAndroid();
+              if (androidBundle.getLoopSound()) {
+                notification.flags |= Notification.FLAG_INSISTENT;
+              }
+
+              if (androidBundle.getFlags() != null && androidBundle.getFlags().length > 0) {
+                for (int flag : androidBundle.getFlags()) {
+                  notification.flags |= flag;
+                }
+              }
 
               if (androidBundle.getLightUpScreen()) {
                 PowerManagerUtils.lightUpScreenIfNeeded(ContextHolder.getApplicationContext());

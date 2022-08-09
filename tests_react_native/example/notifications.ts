@@ -5,6 +5,7 @@ import {
   AndroidCategory,
   AndroidImportance,
 } from '@notifee/react-native';
+import { AndroidFlags } from '@notifee/react-native/src';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {
@@ -48,6 +49,39 @@ export const notifications: { key: string; notification: Notification | Notifica
         pressAction: {
           id: 'default',
         },
+      },
+      ios: {},
+    },
+  },
+  {
+    key: 'Loop Sound',
+    notification: {
+      id: 'loopSound',
+      title: 'loop sound',
+      android: {
+        channelId: 'custom_sound',
+        pressAction: {
+          id: 'default',
+        },
+        ongoing: true,
+        loopSound: true,
+      },
+      ios: {},
+    },
+  },
+  {
+    key: 'Android Flags',
+    notification: {
+      id: 'customSound',
+      title: 'custom sound',
+      android: {
+        channelId: 'default',
+        pressAction: {
+          id: 'default',
+        },
+        sound: 'hollow',
+        ongoing: true,
+        flags: [AndroidFlags.FLAG_INSISTENT],
       },
       ios: {},
     },

@@ -332,6 +332,37 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Gets whether this notification should loop the sound
+   *
+   * @return Boolean
+   */
+  public Boolean getLoopSound() {
+    return mNotificationAndroidBundle.getBoolean("loopSound", false);
+  }
+
+  /**
+   * Gets an array of flags
+   *
+   * @return int[]
+   */
+  public int[] getFlags() {
+    if (!mNotificationAndroidBundle.containsKey("flags")) {
+      return null;
+    }
+
+    ArrayList<?> flagsArrayList =
+        Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("flags"));
+
+    int[] flagsArray = new int[flagsArrayList.size()];
+
+    for (int i = 0; i < flagsArrayList.size(); i++) {
+      flagsArray[i] = ObjectUtils.getInt(flagsArrayList.get(i));
+    }
+
+    return flagsArray;
+  }
+
+  /**
    * Gets whether this notification should only alert once if updated
    *
    * @return Boolean

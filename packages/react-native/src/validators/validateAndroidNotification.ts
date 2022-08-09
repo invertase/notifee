@@ -21,6 +21,7 @@ import {
   AndroidBadgeIconType,
   AndroidCategory,
   AndroidDefaults,
+  AndroidFlags,
   AndroidGroupAlertBehavior,
   AndroidProgress,
   AndroidStyle,
@@ -61,6 +62,7 @@ export default function validateAndroidNotification(
     groupSummary: false,
     localOnly: false,
     ongoing: false,
+    loopSound: false,
     onlyAlertOnce: false,
     importance: AndroidImportance.DEFAULT,
     showTimestamp: false,
@@ -375,6 +377,42 @@ export default function validateAndroidNotification(
     }
 
     out.ongoing = android.ongoing;
+  }
+
+  /**
+   * loopSound
+   */
+  if (objectHasProperty(android, 'loopSound')) {
+    if (!isBoolean(android.loopSound)) {
+      throw new Error("'notification.android.loopSound' expected a boolean value.");
+    }
+
+    out.loopSound = android.loopSound;
+  }
+
+  /**
+   * flags
+   */
+  if (objectHasProperty(android, 'flags') && !isUndefined(android.flags)) {
+    if (!isArray(android.flags)) {
+      throw new Error("'notification.android.flags' expected an array.");
+    }
+
+    if (android.flags.length === 0) {
+      throw new Error("'notification.android.flags' expected an array containing AndroidDefaults.");
+    }
+
+    const defaults = Object.values(AndroidFlags);
+
+    for (let i = 0; i < android.flags.length; i++) {
+      if (!defaults.includes(android.flags[i])) {
+        throw new Error(
+          "'notification.android.flags' invalid array value, expected an AndroidFlags value.",
+        );
+      }
+    }
+
+    out.flags = android.flags;
   }
 
   /**
