@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 5.6.0
+- **[Android]**: Adds new `loopSound` and `flags` properties to `NotificationAndroid` to support custom flags and to loop the sound when a push notification is displayed (Fixes [#454](https://github.com/invertase/notifee/issues/454)).
+
 ## 5.5.0
 - **[Android]**: Fixes a compile issue for monorepos where sometimes `app.notifee:core:+` cannot be found (Fixes [#350](https://github.com/invertase/notifee/issues/350)).
 - **[iOS]**: Adds new `list` and `banner` options to `IOSForegroundPresentationOptions` on iOS. These new options should be used as a replacement for the `alert` option which is now deprecated in notifee; notifee will fallback to using Apple's `UNNotificationPresentationOptionAlert` option for iOS 13 when either `banner` or `list` is set to true. There are no breaking changes, but we encourage you to update your project as soon as you can if you set custom `IOSForegroundPresentationOptions`. To learn more, view the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) documentation (Enhancement [#382](https://github.com/invertase/notifee/issues/382)).
