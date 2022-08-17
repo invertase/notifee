@@ -52,8 +52,8 @@ async function checkChannelPermission() {
 }
 ```
 
-> For more understanding on channels, you can refer to the [Channels & Groups](react-native/docs/android/channels) documentation.
+> For more understanding on channels, you can refer to the [Channels & Groups](/react-native/docs/android/channels) documentation.
 
 ## Permission events
 
-For listening to permission change events, refer to the [Listening to channel events](react-native/docs/android/channels#listening-to-channel-events) documentation.
+For listening to permission change events, refer to the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events) documentation.
