@@ -52,7 +52,7 @@ Then, add `@notifee/react-native` to the list of plugins in your app's Expo conf
 
 Finally, ensure you run `expo prebuild` and rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
 
-Please note that Notifee needs Java JDK 11+ to build on Android. If you are building the app with EAS, you need to change the image used for the build. You will have to use `image` as `ubuntu-18.04-jdk-11-ndk-r19c` or another image that has jdk 11 as in the following configuration. ([EAS Build Server Configuration](https://docs.expo.dev/build-reference/infrastructure/#image--ubuntu-1804-jdk-8-ndk-r19c--alias--default))
+Please note that Notifee needs Java JDK 11+ to build on Android. If you are building the app with EAS without the default image, you may need to change the image used for the build. You will have to change your `image` to `ubuntu-20.04-jdk-11-ndk-r21e` or another image that has jdk 11 as in the following configuration. ([EAS Build Server Configuration](https://docs.expo.dev/build-reference/infrastructure/#image--ubuntu-2004-jdk-11-ndk-r21e--alias--default))
 
 eas.json:
 ```json
@@ -62,7 +62,7 @@ eas.json:
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
+        "image": "ubuntu-20.04-jdk-11-ndk-r21e"
       }
     }
 }
