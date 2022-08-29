@@ -48,7 +48,7 @@ export interface NotificationIOS {
    */
   sound?: string;
 
-    /**
+  /**
    * Value that indicate the importance and delivery timing of a notification.
    *
    * @platform ios iOS >= 15
@@ -654,4 +654,4 @@ export interface IOSAttachmentThumbnailClippingRect {
  *
  * @platform ios
  */
-export type IOSNotificationInterruptionLevel = 'active' | 'critical' | 'passive' | 'timeSensitive'
+export type IOSNotificationInterruptionLevel = 'active' | 'critical' | 'passive' | 'timeSensitive';
