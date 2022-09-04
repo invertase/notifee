@@ -49,6 +49,13 @@ export interface NotificationIOS {
   sound?: string;
 
   /**
+   * Value that indicate the importance and delivery timing of a notification.
+   *
+   * @platform ios iOS >= 15
+   */
+  interruptionLevel?: IOSNotificationInterruptionLevel;
+
+  /**
    * If the notification is a critical alert set this property to true; critical alerts will bypass
    * the mute switch and also bypass Do Not Disturb.
    *
@@ -640,3 +647,11 @@ export interface IOSAttachmentThumbnailClippingRect {
   width: number;
   height: number;
 }
+
+/**
+ * Constants that indicate the importance and delivery timing of a notification.
+ * https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel
+ *
+ * @platform ios
+ */
+export type IOSNotificationInterruptionLevel = 'active' | 'critical' | 'passive' | 'timeSensitive';

@@ -28,6 +28,21 @@ To use the users default sound, set the value as `default`. For no sound, do not
 
 If you are using a custom sound file, it must be less than 30 seconds in length, otherwise the system will play the default sound.
 
+# Interruption Levels
+
+With iOS 15’s new Focus Mode, users are more in control over when app notifications can “interrupt” them with a sound or vibration. We can make use of the new `interruptionLevel` [API]([url](https://developer.apple.com/documentation/usernotifications/unnotificationcontent/3747256-interruptionlevel)) to control the notification’s importance and required delivery timing.
+
+```js
+// iOS > 15
+notifee.displayNotification({
+  title: 'ALERT!',
+  body: 'This is a critical notification!',
+  ios: {
+    interruptionLevel: 'timeSensitive',
+  },
+});
+```
+
 # Critical Notifications
 
 In some scenarios you may wish to alert the user to a notification and bypass the users preferences such as the mute switch or Do Not Disturb mode.
