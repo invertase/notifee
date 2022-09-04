@@ -296,20 +296,20 @@
   if (iosDict[@"launchImageName"] != nil && iosDict[@"launchImageName"] != [NSNull null]) {
     content.launchImageName = iosDict[@"launchImageName"];
   }
-  
+
   // interruptionLevel
   if (@available(iOS 15.0, *)) {
-      if (iosDict[@"interruptionLevel"] != nil) {
-          if ([iosDict[@"interruptionLevel"] isEqualToString:@"passive"]) {
-              content.interruptionLevel = UNNotificationInterruptionLevelPassive;
-          } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"active"]) {
-              content.interruptionLevel = UNNotificationInterruptionLevelActive;
-          } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"timeSensitive"]) {
-              content.interruptionLevel = UNNotificationInterruptionLevelTimeSensitive;
-          } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"critical"]) {
-              content.interruptionLevel = UNNotificationInterruptionLevelCritical;
-          }
+    if (iosDict[@"interruptionLevel"] != nil) {
+      if ([iosDict[@"interruptionLevel"] isEqualToString:@"passive"]) {
+        content.interruptionLevel = UNNotificationInterruptionLevelPassive;
+      } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"active"]) {
+        content.interruptionLevel = UNNotificationInterruptionLevelActive;
+      } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"timeSensitive"]) {
+        content.interruptionLevel = UNNotificationInterruptionLevelTimeSensitive;
+      } else if ([iosDict[@"interruptionLevel"] isEqualToString:@"critical"]) {
+        content.interruptionLevel = UNNotificationInterruptionLevelCritical;
       }
+    }
   }
 
   // critical, criticalVolume, sound

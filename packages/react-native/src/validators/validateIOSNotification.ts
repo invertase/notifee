@@ -68,9 +68,11 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
    * interruptionLevel
    */
   if (objectHasProperty(ios, 'interruptionLevel')) {
-    if (isString(ios.interruptionLevel) && ['active', 'critical', 'passive', 'timeSensitive'].includes(ios.interruptionLevel)) {
+    if (
+      isString(ios.interruptionLevel) &&
+      ['active', 'critical', 'passive', 'timeSensitive'].includes(ios.interruptionLevel)
+    ) {
       out.interruptionLevel = ios.interruptionLevel;
-
     } else {
       throw new Error(
         "'notification.ios.interruptionLevel' must be a string value: 'active','critical','passive','timeSensitive'.",
