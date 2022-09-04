@@ -31,9 +31,13 @@ import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.AlarmUtils;
+import app.notifee.core.utility.ExtendedListenableFuture;
 import app.notifee.core.utility.ObjectUtils;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.Task;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -42,6 +46,8 @@ class NotifeeAlarmManager {
   private static final String TAG = "NotifeeAlarmManager";
   private static final String NOTIFICATION_ID_INTENT_KEY = "notificationId";
   private static final ExecutorService alarmManagerExecutor = Executors.newCachedThreadPool();
+  private static final ListeningExecutorService alarmManagerListeningExecutor = MoreExecutors.listeningDecorator(
+    alarmManagerExecutor);
 
   static void displayScheduledNotification(Bundle alarmManagerNotification) {
     if (alarmManagerNotification == null) {
@@ -55,10 +61,10 @@ class NotifeeAlarmManager {
 
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
-    Continuation<WorkDataEntity, Task<Void>> workContinuation =
-        task -> {
-          WorkDataEntity workDataEntity = task.getResult();
+    Futures.addCallback(
+      Futures.transformAsync(workDataRepository.getWorkDataById(id),
 
+        workDataEntity -> {
           Bundle notificationBundle;
 
           Bundle triggerBundle;
@@ -77,15 +83,10 @@ class NotifeeAlarmManager {
 
           NotificationModel notificationModel = NotificationModel.fromBundle(notificationBundle);
 
-          return NotificationManager.displayNotification(notificationModel, triggerBundle)
-              .addOnCompleteListener(
-                  displayNotificationTask -> {
-                    if (!displayNotificationTask.isSuccessful()) {
-                      Logger.e(
-                          TAG,
-                          "Failed to display notification",
-                          displayNotificationTask.getException());
-                    } else {
+          return Futures.transformAsync(
+            NotificationManager.displayNotification(notificationModel,
+              triggerBundle),
+            voidDisplayedNotification -> {
                       if (triggerBundle.containsKey("repeatFrequency")
                           && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
                         TimestampTriggerModel trigger =
@@ -105,20 +106,21 @@ class NotifeeAlarmManager {
                         // not repeating, delete database entry if work is a one-time request
                         WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
                       }
-                    }
-                  });
-        };
+                  return null;
+                }, alarmManagerExecutor);
+        }
+        , alarmManagerExecutor),
+      new FutureCallback<Void>() {
+        @Override
+        public void onSuccess(Void workDataEntities) {
+          // silent finish
+        }
 
-    workDataRepository
-        .getWorkDataById(id)
-        .continueWithTask(alarmManagerExecutor, workContinuation)
-        .addOnCompleteListener(
-            task -> {
-              if (!task.isSuccessful()) {
-                Logger.e(TAG, "Failed to display notification", task.getException());
-                return;
-              }
-            });
+        @Override
+        public void onFailure(Throwable t) {
+                Logger.e(TAG, "Failed to display notification", new Exception(t));
+        }
+      }, alarmManagerListeningExecutor);
   }
 
   public static PendingIntent getAlarmManagerIntentForNotification(String notificationId) {
@@ -168,7 +170,7 @@ class NotifeeAlarmManager {
     }
   }
 
-  Task<List<WorkDataEntity>> getScheduledNotifications() {
+  ListenableFuture<List<WorkDataEntity>> getScheduledNotifications() {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
     return workDataRepository.getAllWithAlarmManager(true);
   }
@@ -181,28 +183,21 @@ class NotifeeAlarmManager {
     }
   }
 
-  public static Continuation<Object, Task> cancelAllNotifications() {
-
-    Continuation continuation =
-        task -> {
+  public static ListenableFuture<Void> cancelAllNotifications() {
           WorkDataRepository workDataRepository =
               WorkDataRepository.getInstance(getApplicationContext());
 
-          return workDataRepository
-              .getAllWithAlarmManager(true)
-              .continueWith(
-                  resultTask -> {
-                    if (resultTask.isSuccessful()) {
-                      List<WorkDataEntity> workDataEntities = resultTask.getResult();
-                      for (WorkDataEntity workDataEntity : workDataEntities) {
-                        NotifeeAlarmManager.cancelNotification(workDataEntity.getId());
-                      }
+      return new ExtendedListenableFuture<>(workDataRepository
+        .getAllWithAlarmManager(true))
+        .continueWith(
+            workDataEntities -> {
+                if (workDataEntities != null) {
+                  for (WorkDataEntity workDataEntity : workDataEntities) {
+                      NotifeeAlarmManager.cancelNotification(workDataEntity.getId());
                     }
-                    return null;
-                  });
-        };
-
-    return continuation;
+                }
+            return Futures.immediateFuture(null);
+      }, alarmManagerListeningExecutor);
   }
 
   /* On reboot, reschedule trigger notifications created via alarm manager  */
@@ -237,14 +232,19 @@ class NotifeeAlarmManager {
 
   void rescheduleNotifications() {
     Logger.d(TAG, "Reschedule Notifications on reboot");
-    getScheduledNotifications()
-        .addOnCompleteListener(
-            task -> {
-              List<WorkDataEntity> workDataEntities = task.getResult();
+    Futures.addCallback(getScheduledNotifications(),
+      new FutureCallback<List<WorkDataEntity>>() {
+        @Override
+        public void onSuccess(List<WorkDataEntity> workDataEntities) {
+          for (WorkDataEntity workDataEntity : workDataEntities) {
+            rescheduleNotification(workDataEntity);
+          }
+        }
 
-              for (WorkDataEntity workDataEntity : workDataEntities) {
-                rescheduleNotification(workDataEntity);
-              }
-            });
+        @Override
+        public void onFailure(Throwable t) {
+          // silently fail
+        }
+      }, alarmManagerListeningExecutor);
   }
 }

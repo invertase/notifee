@@ -42,6 +42,7 @@ import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.ListenableWorker;
+import androidx.work.ListenableWorker.Result;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -57,14 +58,19 @@ import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationAndroidStyleModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
+import app.notifee.core.utility.Callbackable;
+import app.notifee.core.utility.ExtendedListenableFuture;
 import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.PowerManagerUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -79,12 +85,14 @@ class NotificationManager {
   private static final String EXTRA_NOTIFEE_NOTIFICATION = "notifee.notification";
   private static final String EXTRA_NOTIFEE_TRIGGER = "notifee.trigger";
   private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
+  private static final ListeningExecutorService LISTENING_CACHED_THREAD_POOL = MoreExecutors.listeningDecorator(
+    CACHED_THREAD_POOL);
   private static final int NOTIFICATION_TYPE_ALL = 0;
   private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
   private static final int NOTIFICATION_TYPE_TRIGGER = 2;
 
-  private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
-      NotificationModel notificationModel) {
+  private static ListenableFuture<NotificationCompat.Builder> notificationBundleToBuilder(
+    NotificationModel notificationModel) {
     final NotificationAndroidModel androidModel = notificationModel.getAndroid();
 
     /*
@@ -247,17 +255,17 @@ class NotificationManager {
     /*
      * A task continuation that fetches the largeIcon through Fresco, if specified.
      */
-    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> largeIconContinuation =
-        task -> {
-          NotificationCompat.Builder builder = task.getResult();
+    AsyncFunction<NotificationCompat.Builder, NotificationCompat.Builder> largeIconContinuation =
+        taskResult -> LISTENING_CACHED_THREAD_POOL.submit(() -> {
+          NotificationCompat.Builder builder = taskResult;
 
           if (androidModel.hasLargeIcon()) {
             String largeIcon = androidModel.getLargeIcon();
             Bitmap largeIconBitmap = null;
 
             try {
-              largeIconBitmap =
-                  Tasks.await(ResourceUtils.getImageBitmapFromUrl(largeIcon), 10, TimeUnit.SECONDS);
+              largeIconBitmap = ResourceUtils.getImageBitmapFromUrl(largeIcon)
+                      .get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -280,15 +288,15 @@ class NotificationManager {
           }
 
           return builder;
-        };
+        });
 
     /*
      * A task continuation for full-screen action, if specified.
      */
-    Continuation<NotificationCompat.Builder, NotificationCompat.Builder>
+    AsyncFunction<NotificationCompat.Builder, NotificationCompat.Builder>
         fullScreenActionContinuation =
-            task -> {
-              NotificationCompat.Builder builder = task.getResult();
+            taskResult -> LISTENING_CACHED_THREAD_POOL.submit(() -> {
+              NotificationCompat.Builder builder = taskResult;
               if (androidModel.hasFullScreenAction()) {
                 NotificationAndroidPressActionModel fullScreenActionBundle =
                     androidModel.getFullScreenAction();
@@ -326,15 +334,15 @@ class NotificationManager {
               }
 
               return builder;
-            };
+            });
 
     /*
      * A task continuation that builds all actions, if any. Additionally fetches
      * icon bitmaps through Fresco.
      */
-    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> actionsContinuation =
-        task -> {
-          NotificationCompat.Builder builder = task.getResult();
+    AsyncFunction<NotificationCompat.Builder, NotificationCompat.Builder> actionsContinuation =
+        taskResult -> LISTENING_CACHED_THREAD_POOL.submit(() -> {
+          NotificationCompat.Builder builder = taskResult;
           ArrayList<NotificationAndroidActionModel> actionBundles = androidModel.getActions();
 
           if (actionBundles == null) {
@@ -370,10 +378,8 @@ class NotificationManager {
             if (icon != null) {
               try {
                 iconBitmap =
-                    Tasks.await(
-                        ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon()),
-                        10,
-                        TimeUnit.SECONDS);
+                    ResourceUtils.getImageBitmapFromUrl(actionBundle.getIcon())
+                      .get(10, TimeUnit.SECONDS);
               } catch (TimeoutException e) {
                 Logger.e(
                     TAG, "Timeout occurred whilst trying to retrieve an action icon: " + icon, e);
@@ -401,48 +407,48 @@ class NotificationManager {
           }
 
           return builder;
-        };
+        });
 
     /*
      * A task continuation that builds the notification style, if any. Additionally
      * fetches any image bitmaps (e.g. Person image, or BigPicture image) through
      * Fresco.
      */
-    Continuation<NotificationCompat.Builder, NotificationCompat.Builder> styleContinuation =
-        task -> {
-          NotificationCompat.Builder builder = task.getResult();
+    AsyncFunction<NotificationCompat.Builder, NotificationCompat.Builder> styleContinuation =
+        builder -> LISTENING_CACHED_THREAD_POOL.submit(() -> {
           NotificationAndroidStyleModel androidStyleBundle = androidModel.getStyle();
           if (androidStyleBundle == null) {
             return builder;
           }
 
-          Task<NotificationCompat.Style> styleTask =
-              androidStyleBundle.getStyleTask(CACHED_THREAD_POOL);
+          ListenableFuture<NotificationCompat.Style> styleTask =
+            androidStyleBundle.getStyleTask(LISTENING_CACHED_THREAD_POOL);
           if (styleTask == null) {
             return builder;
           }
 
-          NotificationCompat.Style style = Tasks.await(styleTask);
+          NotificationCompat.Style style = styleTask.get();
           if (style != null) {
             builder.setStyle(style);
           }
 
           return builder;
-        };
+        });
 
-    return Tasks.call(CACHED_THREAD_POOL, builderCallable)
+    return new ExtendedListenableFuture<>(
+        LISTENING_CACHED_THREAD_POOL.submit(builderCallable))
         // get a large image bitmap if largeIcon is set
-        .continueWith(CACHED_THREAD_POOL, largeIconContinuation)
+        .continueWith(largeIconContinuation, LISTENING_CACHED_THREAD_POOL)
         // build notification actions, tasks based to allow image fetching
-        .continueWith(CACHED_THREAD_POOL, actionsContinuation)
+        .continueWith(actionsContinuation, LISTENING_CACHED_THREAD_POOL)
         // build notification style, tasks based to allow image fetching
-        .continueWith(CACHED_THREAD_POOL, styleContinuation)
+        .continueWith(styleContinuation, LISTENING_CACHED_THREAD_POOL)
         // set full screen action, if fullScreenAction is set
-        .continueWith(CACHED_THREAD_POOL, fullScreenActionContinuation);
+        .continueWith(fullScreenActionContinuation, LISTENING_CACHED_THREAD_POOL);
   }
 
-  static Task<Void> cancelAllNotifications(@NonNull int notificationType) {
-    return Tasks.call(
+  static ListenableFuture<Void> cancelAllNotifications(@NonNull int notificationType) {
+    return new ExtendedListenableFuture<>(LISTENING_CACHED_THREAD_POOL.submit(
             () -> {
               NotificationManagerCompat notificationManagerCompat =
                   NotificationManagerCompat.from(getApplicationContext());
@@ -462,30 +468,29 @@ class NotificationManager {
                 workManager.pruneWork();
               }
               return null;
-            })
-        .continueWith(
-            CACHED_THREAD_POOL,
-            task -> {
+            }))
+        .continueWith(task -> {
               if (notificationType == NOTIFICATION_TYPE_TRIGGER
                   || notificationType == NOTIFICATION_TYPE_ALL) {
-                task.continueWith(NotifeeAlarmManager.cancelAllNotifications())
-                    .addOnSuccessListener(
-                        t -> {
-                          t.continueWith(
-                              a -> {
-                                // delete all from database after canceling the alarms
-                                WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
-                                return null;
-                              });
-                        });
-              }
-              return null;
-            });
+                return new ExtendedListenableFuture<>(
+                    LISTENING_CACHED_THREAD_POOL.submit(
+                        NotifeeAlarmManager::cancelAllNotifications)
+                          ).continueWith((result) -> {
+                            if (result != null) {
+                              WorkDataRepository.getInstance(getApplicationContext())
+                                .deleteAll();
+                              return Futures.immediateFuture(null);
+                            }
+                            return Futures.immediateFuture(null);
+                          }, LISTENING_CACHED_THREAD_POOL);
+      }
+      return Futures.immediateFuture(null);
+    }, LISTENING_CACHED_THREAD_POOL);
   }
 
-  static Task<Void> cancelAllNotificationsWithIds(
+  static ListenableFuture<Void> cancelAllNotificationsWithIds(
       @NonNull int notificationType, @NonNull List<String> ids, String tag) {
-    return Tasks.call(
+    return new ExtendedListenableFuture<>(LISTENING_CACHED_THREAD_POOL.submit(
             () -> {
               WorkManager workManager = WorkManager.getInstance(getApplicationContext());
               NotificationManagerCompat notificationManagerCompat =
@@ -532,23 +537,22 @@ class NotificationManager {
               }
 
               return null;
-            })
+            }))
         .continueWith(
             task -> {
               // delete all from database
               if (notificationType != NOTIFICATION_TYPE_DISPLAYED) {
                 WorkDataRepository.getInstance(getApplicationContext()).deleteByIds(ids);
               }
-              return null;
-            });
+              return Futures.immediateFuture(null);
+            }, LISTENING_CACHED_THREAD_POOL);
   }
 
-  static Task<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
-    return notificationBundleToBuilder(notificationModel)
+  static ListenableFuture<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
+    return new ExtendedListenableFuture<>(notificationBundleToBuilder(notificationModel))
         .continueWith(
-            CACHED_THREAD_POOL,
-            (task) -> {
-              NotificationCompat.Builder builder = task.getResult();
+                        (taskResult) -> {
+              NotificationCompat.Builder builder = taskResult;
 
               // Add the following extras for `getDisplayedNotifications()`
               Bundle extrasBundle = new Bundle();
@@ -588,14 +592,14 @@ class NotificationManager {
               EventBus.post(
                   new NotificationEvent(NotificationEvent.TYPE_DELIVERED, notificationModel));
 
-              return null;
-            });
+              return Futures.immediateFuture(null);
+            }, CACHED_THREAD_POOL);
   }
 
-  static Task<Void> createTriggerNotification(
+  static ListenableFuture<Void> createTriggerNotification(
       NotificationModel notificationModel, Bundle triggerBundle) {
-    return Tasks.call(
-        CACHED_THREAD_POOL,
+    return
+        LISTENING_CACHED_THREAD_POOL.submit(
         () -> {
           int triggerType = ObjectUtils.getInt(triggerBundle.get("type"));
           switch (triggerType) {
@@ -700,8 +704,8 @@ class NotificationManager {
     }
   }
 
-  static Task<List<Bundle>> getDisplayedNotifications() {
-    return Tasks.call(
+  static ListenableFuture<List<Bundle>> getDisplayedNotifications() {
+    return LISTENING_CACHED_THREAD_POOL.submit(
         () -> {
           List<Bundle> notifications = new ArrayList<Bundle>();
 
@@ -777,14 +781,12 @@ class NotificationManager {
   static void getTriggerNotifications(MethodCallResult<List<Bundle>> result) {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
-    workDataRepository
-        .getAll()
-        .addOnCompleteListener(
-            task -> {
-              List<Bundle> triggerNotifications = new ArrayList<Bundle>();
+    List<Bundle> triggerNotifications = new ArrayList<Bundle>();
 
-              if (task.isSuccessful()) {
-                List<WorkDataEntity> workDataEntities = task.getResult();
+    Futures.addCallback(workDataRepository.getAll(),
+      new FutureCallback<List<WorkDataEntity>>() {
+        @Override
+        public void onSuccess(List<WorkDataEntity> workDataEntities) {
                 for (WorkDataEntity workDataEntity : workDataEntities) {
                   Bundle triggerNotificationBundle = new Bundle();
 
@@ -796,33 +798,38 @@ class NotificationManager {
                   triggerNotifications.add(triggerNotificationBundle);
                 }
 
-                result.onComplete(null, triggerNotifications);
-              } else {
-                result.onComplete(task.getException(), triggerNotifications);
-              }
-            });
+          result.onComplete(null, triggerNotifications);
+        }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), triggerNotifications);
+          }
+        }, LISTENING_CACHED_THREAD_POOL);
   }
 
   static void getTriggerNotificationIds(MethodCallResult<List<String>> result) {
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
-    workDataRepository
-        .getAll()
-        .addOnCompleteListener(
-            task -> {
+    Futures.addCallback(workDataRepository
+        .getAll(),
+      new FutureCallback<List<WorkDataEntity>>() {
+        @Override
+        public void onSuccess(List<WorkDataEntity> workDataEntities) {
               List<String> triggerNotificationIds = new ArrayList<String>();
-
-              if (task.isSuccessful()) {
-                List<WorkDataEntity> workDataEntities = task.getResult();
                 for (WorkDataEntity workDataEntity : workDataEntities) {
                   triggerNotificationIds.add(workDataEntity.getId());
                 }
 
                 result.onComplete(null, triggerNotificationIds);
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+          result.onComplete(new Exception(t), null);
+        }
+      }, LISTENING_CACHED_THREAD_POOL);
+
   }
 
   /* Execute work from trigger notifications via WorkManager*/
@@ -833,11 +840,9 @@ class NotificationManager {
 
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
-    Continuation<WorkDataEntity, Task<Void>> workContinuation =
-        task -> {
-          WorkDataEntity workDataEntity = task.getResult();
-
-          byte[] notificationBytes;
+    AsyncFunction<WorkDataEntity, ListenableFuture<Void>> workContinuation =
+      workDataEntity -> LISTENING_CACHED_THREAD_POOL.submit(() -> {
+        byte[] notificationBytes;
 
           if (workDataEntity == null || workDataEntity.getNotification() == null) {
             // check if notification bundle is stored with Work Manager
@@ -868,25 +873,37 @@ class NotificationManager {
           }
 
           return NotificationManager.displayNotification(notificationModel, triggerBundle);
-        };
+        });
 
-    workDataRepository
-        .getWorkDataById(id)
-        .continueWithTask(CACHED_THREAD_POOL, workContinuation)
+    new ExtendedListenableFuture<>(workDataRepository
+        .getWorkDataById(id))
+        .continueWith(workContinuation, LISTENING_CACHED_THREAD_POOL)
         .addOnCompleteListener(
-            task -> {
-              completer.set(ListenableWorker.Result.success());
-
-              if (!task.isSuccessful()) {
-                Logger.e(TAG, "Failed to display notification", task.getException());
+        (Callbackable<ListenableFuture<Void>>) (e, result) -> {
+          {
+        if (result != null) {
+          new ExtendedListenableFuture<>(result).addOnCompleteListener(
+            (Callbackable<Void>) (e2, _unused) -> {
+              completer.set(Result.success());
+              if (e2 != null) {
+                Logger.e(TAG, "Failed to display notification", e2);
               } else {
-                String workerRequestType = data.getString(Worker.KEY_WORK_REQUEST);
+                String workerRequestType = data.getString(
+                  Worker.KEY_WORK_REQUEST);
                 if (workerRequestType != null
-                    && workerRequestType.equals(Worker.WORK_REQUEST_ONE_TIME)) {
+                  && workerRequestType.equals(
+                  Worker.WORK_REQUEST_ONE_TIME)) {
                   // delete database entry if work is a one-time request
-                  WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
+                  WorkDataRepository.getInstance(getApplicationContext())
+                    .deleteById(id);
                 }
               }
-            });
+            }, LISTENING_CACHED_THREAD_POOL);
+        } else {
+          completer.set(Result.success());
+          Logger.e(TAG, "Failed to display notification", e);
+        }
+      }
+    }, LISTENING_CACHED_THREAD_POOL);
   }
 }
