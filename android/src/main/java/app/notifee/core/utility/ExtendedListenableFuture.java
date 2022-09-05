@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+/**
+ * A simple wrapper around {@link ListenableFuture} that provides additional
+ * methods that makes chaining {@link ListenableFuture}s easier and more readable.
+ */
 public class ExtendedListenableFuture<T> implements ListenableFuture<T> {
 
   private final ListenableFuture<T> future;
@@ -18,6 +22,11 @@ public class ExtendedListenableFuture<T> implements ListenableFuture<T> {
     this.future = future;
   }
 
+  /**
+   * A wrapper around {@link Futures#transformAsync} that uses the
+   * Future It's called on as first parameter by default.
+   * This allows easier chaining.
+   */
   public <O extends @Nullable Object> ExtendedListenableFuture<O> continueWith(
     AsyncFunction<T, O> asyncFunction, Executor lExecutor) {
     ListenableFuture<O> future = Futures.transformAsync(this, asyncFunction,
