@@ -1,5 +1,5 @@
 {
-  "name": "@notifee/react-native",
+  "name": "@curefit/notifee",
   "version": "5.7.0",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/invertase/notifee"
+    "url": "https://github.com/curefit/notifee"
   },
   "license": "Apache-2.0",
   "keywords": [
