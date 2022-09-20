@@ -2,7 +2,7 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { objectHasProperty, isBoolean, isObject, isString, isUndefined } from '../utils';
+import { objectHasProperty, isObject, isString, isUndefined } from '../utils';
 
 import { AndroidAction } from '../types/NotificationAndroid';
 import validateAndroidPressAction from './validateAndroidPressAction';
@@ -39,7 +39,7 @@ export default function validateAndroidAction(action: AndroidAction): AndroidAct
   }
 
   if (objectHasProperty(action, 'input') && !isUndefined(action.input)) {
-    if (isBoolean(action.input) && action.input) {
+    if (action.input === true) {
       out.input = validateAndroidInput();
     } else {
       try {
