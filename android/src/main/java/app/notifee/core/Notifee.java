@@ -46,6 +46,8 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
 
+  public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
+
   @KeepForSdk
   public static Notifee getInstance() {
     return mNotifee;
@@ -401,6 +403,7 @@ public class Notifee {
     boolean areNotificationsEnabled =
         NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .areNotificationsEnabled();
+
     Bundle notificationSettingsBundle = new Bundle();
     if (areNotificationsEnabled) {
       notificationSettingsBundle.putInt("authorizationStatus", 1);
@@ -419,6 +422,28 @@ public class Notifee {
 
     notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
+  }
+
+  @Nullable private MethodCallResult<Bundle> requestPermissionCallResult;
+
+  @KeepForSdk
+  public void setRequestPermissionCallback(MethodCallResult<Bundle> result) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      requestPermissionCallResult = result;
+    } else {
+      getNotificationSettings(result);
+    }
+  }
+
+  public boolean onRequestPermissionsResult(
+      int requestCode, String[] permissions, int[] grantResults) {
+    if (requestCode == REQUEST_CODE_NOTIFICATION_PERMISSION) {
+      if (requestPermissionCallResult != null) {
+        getNotificationSettings(requestPermissionCallResult);
+        return true;
+      }
+    }
+    return false;
   }
 
   @KeepForSdk

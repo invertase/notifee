@@ -519,7 +519,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
   ): Promise<NotificationSettings> => {
     if (isAndroid) {
       return this.native
-        .getNotificationSettings()
+        .requestPermission()
         .then(
           ({
             authorizationStatus,
