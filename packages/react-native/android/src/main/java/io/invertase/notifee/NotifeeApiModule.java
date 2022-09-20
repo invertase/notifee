@@ -4,6 +4,7 @@
 
 package io.invertase.notifee;
 
+import android.Manifest;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import app.notifee.core.Notifee;
@@ -14,6 +15,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -234,9 +236,14 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   @ReactMethod
   public void requestPermission(Promise promise) {
     Notifee.getInstance()
-      .requestPermission(
-        getCurrentActivity(),
-        (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+        .setRequestPermissionCallback(
+            (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+
+    PermissionAwareActivity activity = (PermissionAwareActivity) getCurrentActivity();
+    activity.requestPermissions(
+        new String[] {Manifest.permission.POST_NOTIFICATIONS},
+        Notifee.REQUEST_CODE_NOTIFICATION_PERMISSION,
+        this);
   }
 
   @ReactMethod
@@ -311,8 +318,8 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   }
 
   @Override
-  public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+  public boolean onRequestPermissionsResult(
+      int requestCode, String[] permissions, int[] grantResults) {
     return Notifee.getInstance().onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
-  
 }
