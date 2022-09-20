@@ -27,6 +27,7 @@ describe('Validate Notification', () => {
       expect($.data).toEqual({ test: 'test' });
       expect($.android).toEqual({
         asForegroundService: false,
+        lightUpScreen: false,
         autoCancel: true,
         badgeIconType: 2,
         channelId: 'channelId',
@@ -38,6 +39,7 @@ describe('Validate Notification', () => {
         groupSummary: false,
         importance: 3,
         localOnly: false,
+        loopSound: false,
         ongoing: false,
         onlyAlertOnce: false,
         showChronometer: false,
@@ -72,6 +74,8 @@ describe('Validate Notification', () => {
           alert: true,
           badge: true,
           sound: true,
+          banner: true,
+          list: true,
         },
       });
     });

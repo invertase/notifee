@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - notifee (0.0.1):
+    - Flutter
+    - NotifeeCore
+  - NotifeeCore (1.0.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - notifee (from `.symlinks/plugins/notifee/ios`)
+  - NotifeeCore (from `../../../../../../ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  notifee:
+    :path: ".symlinks/plugins/notifee/ios"
+  NotifeeCore:
+    :path: "../../../../../../ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  notifee: 38086e872609be5881d9307f8d066acdb47f6275
+  NotifeeCore: 7163fe1ba23401a81430438a037a40a00221b80e
+
+PODFILE CHECKSUM: 1eebba25aefa3bff05bdafcb0239f34af44baa13
+
+COCOAPODS: 1.11.3

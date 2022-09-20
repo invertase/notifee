@@ -30,6 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
+import app.notifee.core.interfaces.EventListener;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
@@ -60,9 +61,16 @@ public class Notifee {
   @KeepForSdk
   public static void configure(@NonNull NotifeeConfig notifeeConfig) {
     synchronized (Notifee.class) {
-      if (mNotifee == null) {
-        initialize(notifeeConfig);
-      }
+      initialize(notifeeConfig);
+    }
+  }
+
+  @KeepForSdk
+  public static void configure(@NonNull EventListener eventListener) {
+    synchronized (Notifee.class) {
+      NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
+      configBuilder.setEventSubscriber(eventListener);
+      initialize(configBuilder.build());
     }
   }
 

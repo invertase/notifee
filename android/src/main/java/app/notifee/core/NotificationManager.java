@@ -59,10 +59,10 @@ import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.IntentUtils;
 import app.notifee.core.utility.ObjectUtils;
+import app.notifee.core.utility.PowerManagerUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
 import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
@@ -468,14 +468,16 @@ class NotificationManager {
             task -> {
               if (notificationType == NOTIFICATION_TYPE_TRIGGER
                   || notificationType == NOTIFICATION_TYPE_ALL) {
-                task.continueWith(NotifeeAlarmManager.cancelAllNotifications()).addOnSuccessListener(t -> {
-                    t.continueWith(a -> {
-                        // delete all from database after canceling the alarms
-                        WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
-                        return null;
-                    });
-                });
-
+                task.continueWith(NotifeeAlarmManager.cancelAllNotifications())
+                    .addOnSuccessListener(
+                        t -> {
+                          t.continueWith(
+                              a -> {
+                                // delete all from database after canceling the alarms
+                                WorkDataRepository.getInstance(getApplicationContext()).deleteAll();
+                                return null;
+                              });
+                        });
               }
               return null;
             });
@@ -562,6 +564,20 @@ class NotificationManager {
               int hashCode = notificationModel.getHashCode();
 
               NotificationAndroidModel androidBundle = notificationModel.getAndroid();
+              if (androidBundle.getLoopSound()) {
+                notification.flags |= Notification.FLAG_INSISTENT;
+              }
+
+              if (androidBundle.getFlags() != null && androidBundle.getFlags().length > 0) {
+                for (int flag : androidBundle.getFlags()) {
+                  notification.flags |= flag;
+                }
+              }
+
+              if (androidBundle.getLightUpScreen()) {
+                PowerManagerUtils.lightUpScreenIfNeeded(ContextHolder.getApplicationContext());
+              }
+
               if (androidBundle.getAsForegroundService()) {
                 ForegroundService.start(hashCode, notification, notificationModel.toBundle());
               } else {
@@ -581,7 +597,7 @@ class NotificationManager {
     return Tasks.call(
         CACHED_THREAD_POOL,
         () -> {
-          int triggerType = (int) triggerBundle.getDouble("type");
+          int triggerType = ObjectUtils.getInt(triggerBundle.get("type"));
           switch (triggerType) {
             case 0:
               createTimestampTriggerNotification(notificationModel, triggerBundle);

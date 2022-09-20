@@ -27,7 +27,7 @@ import java.util.Objects;
 public class NotificationModel {
   private Bundle mNotificationBundle;
 
-  private NotificationModel(Bundle bundle) {
+  public NotificationModel(Bundle bundle) {
     mNotificationBundle = bundle;
   }
 

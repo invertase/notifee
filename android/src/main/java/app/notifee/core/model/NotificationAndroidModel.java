@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.Logger;
+import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -68,6 +69,15 @@ public class NotificationAndroidModel {
   }
 
   /**
+   * Gets if the notification should light up the screen when displayed
+   *
+   * @return Boolean
+   */
+  public Boolean getLightUpScreen() {
+    return mNotificationAndroidBundle.getBoolean("lightUpScreen", false);
+  }
+
+  /**
    * Gets whether the notification can be auto cancelled
    *
    * @return Boolean
@@ -83,7 +93,8 @@ public class NotificationAndroidModel {
    */
   public @Nullable Integer getBadgeIconType() {
     if (mNotificationAndroidBundle.containsKey("badgeIconType")) {
-      return (int) mNotificationAndroidBundle.getDouble("badgeIconType");
+
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("badgeIconType"));
     }
 
     return NotificationCompat.BADGE_ICON_LARGE;
@@ -212,7 +223,7 @@ public class NotificationAndroidModel {
    */
   public int getGroupAlertBehaviour() {
     if (mNotificationAndroidBundle.containsKey("groupAlertBehavior")) {
-      return (int) mNotificationAndroidBundle.getDouble("groupAlertBehavior");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("groupAlertBehavior"));
     }
 
     return NotificationCompat.GROUP_ALERT_ALL;
@@ -305,7 +316,7 @@ public class NotificationAndroidModel {
    */
   public Integer getNumber() {
     if (mNotificationAndroidBundle.containsKey("badgeCount")) {
-      return (int) mNotificationAndroidBundle.getDouble("badgeCount");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("badgeCount"));
     }
 
     return null;
@@ -318,6 +329,37 @@ public class NotificationAndroidModel {
    */
   public Boolean getOngoing() {
     return mNotificationAndroidBundle.getBoolean("ongoing", false);
+  }
+
+  /**
+   * Gets whether this notification should loop the sound
+   *
+   * @return Boolean
+   */
+  public Boolean getLoopSound() {
+    return mNotificationAndroidBundle.getBoolean("loopSound", false);
+  }
+
+  /**
+   * Gets an array of flags
+   *
+   * @return int[]
+   */
+  public int[] getFlags() {
+    if (!mNotificationAndroidBundle.containsKey("flags")) {
+      return null;
+    }
+
+    ArrayList<?> flagsArrayList =
+        Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("flags"));
+
+    int[] flagsArray = new int[flagsArrayList.size()];
+
+    for (int i = 0; i < flagsArrayList.size(); i++) {
+      flagsArray[i] = ObjectUtils.getInt(flagsArrayList.get(i));
+    }
+
+    return flagsArray;
   }
 
   /**
@@ -372,7 +414,7 @@ public class NotificationAndroidModel {
       return NotificationCompat.PRIORITY_DEFAULT;
     }
 
-    int importance = (int) mNotificationAndroidBundle.getDouble("importance");
+    int importance = ObjectUtils.getInt(mNotificationAndroidBundle.get("importance"));
     switch (importance) {
       case NotificationManagerCompat.IMPORTANCE_HIGH:
         return NotificationCompat.PRIORITY_HIGH;
@@ -397,8 +439,8 @@ public class NotificationAndroidModel {
           Objects.requireNonNull(mNotificationAndroidBundle.getBundle("progress"));
 
       return new AndroidProgress(
-          (int) progressBundle.getDouble("max"),
-          (int) progressBundle.getDouble("current"),
+          ObjectUtils.getInt(progressBundle.get("max")),
+          ObjectUtils.getInt(progressBundle.get("current")),
           progressBundle.getBoolean("indeterminate", false));
     }
 
@@ -505,7 +547,7 @@ public class NotificationAndroidModel {
    */
   public @Nullable Long getTimeoutAfter() {
     if (mNotificationAndroidBundle.containsKey("timeoutAfter")) {
-      return (long) mNotificationAndroidBundle.getDouble("timeoutAfter");
+      return ObjectUtils.getLong(mNotificationAndroidBundle.get("timeoutAfter"));
     }
 
     return null;
@@ -559,7 +601,7 @@ public class NotificationAndroidModel {
    */
   public int getVisibility() {
     if (mNotificationAndroidBundle.containsKey("visibility")) {
-      return (int) mNotificationAndroidBundle.getDouble("visibility");
+      return ObjectUtils.getInt(mNotificationAndroidBundle.get("visibility"));
     }
 
     return NotificationCompat.VISIBILITY_PRIVATE;
@@ -572,7 +614,7 @@ public class NotificationAndroidModel {
    */
   public long getTimestamp() {
     if (mNotificationAndroidBundle.containsKey("timestamp")) {
-      return (long) mNotificationAndroidBundle.getDouble("timestamp");
+      return ObjectUtils.getLong(mNotificationAndroidBundle.get("timestamp"));
     }
 
     return -1;

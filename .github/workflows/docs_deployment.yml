@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'docs/**'
+      - 'docs-react-native/**'
 
 jobs:
   build:

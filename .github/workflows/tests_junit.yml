@@ -10,7 +10,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'docs-react-native/**'
       - '**/*.md'
 
 jobs:

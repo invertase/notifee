@@ -49,6 +49,13 @@ export interface NotificationIOS {
   sound?: string;
 
   /**
+   * Value that indicate the importance and delivery timing of a notification.
+   *
+   * @platform ios iOS >= 15
+   */
+  interruptionLevel?: IOSNotificationInterruptionLevel;
+
+  /**
    * If the notification is a critical alert set this property to true; critical alerts will bypass
    * the mute switch and also bypass Do Not Disturb.
    *
@@ -125,21 +132,42 @@ export interface IOSForegroundPresentationOptions {
   /**
    * App in foreground dialog box which indicates when a decision has to be made
    *
-   * Defaults to false
+   * Defaults to true
+   * @deprecated Use `banner` and `list` instead
    */
   alert?: boolean;
+
   /**
    * App in foreground notification sound
    *
-   * Defaults to false
+   * Defaults to true
    */
   sound?: boolean;
+
   /**
    * App in foreground badge update
    *
    * Defaults to true
    */
   badge?: boolean;
+
+  /**
+   * Present the notification as a banner
+   *
+   * For iOS 13 and lower, will be equivalent to setting `alert` to true
+   *
+   * Defaults to true
+   */
+  banner?: boolean;
+
+  /**
+   * Show the notification in Notification Center
+   *
+   * For iOS 13 and lower, will be equivalent to setting `alert` to true
+   *
+   * Defaults to true
+   */
+  list?: boolean;
 }
 
 /**
@@ -619,3 +647,11 @@ export interface IOSAttachmentThumbnailClippingRect {
   width: number;
   height: number;
 }
+
+/**
+ * Constants that indicate the importance and delivery timing of a notification.
+ * https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel
+ *
+ * @platform ios
+ */
+export type IOSNotificationInterruptionLevel = 'active' | 'critical' | 'passive' | 'timeSensitive';

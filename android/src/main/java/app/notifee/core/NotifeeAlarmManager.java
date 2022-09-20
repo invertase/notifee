@@ -87,9 +87,11 @@ class NotifeeAlarmManager {
                           displayNotificationTask.getException());
                     } else {
                       if (triggerBundle.containsKey("repeatFrequency")
-                          && triggerBundle.getDouble("repeatFrequency") != -1) {
+                          && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
                         TimestampTriggerModel trigger =
                             TimestampTriggerModel.fromBundle(triggerBundle);
+                        // Ensure trigger is in the future and the latest timestamp is updated in
+                        // the database
                         trigger.setNextTimestamp();
                         scheduleTimestampTriggerNotification(notificationModel, trigger);
                         WorkDataRepository.getInstance(getApplicationContext())
@@ -154,6 +156,9 @@ class NotifeeAlarmManager {
       }
     }
 
+    // Ensure timestamp is always in the future when scheduling the alarm
+    timestampTrigger.setNextTimestamp();
+
     if (timestampTrigger.getAllowWhileIdle()) {
       AlarmManagerCompat.setExactAndAllowWhileIdle(
           alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
@@ -202,7 +207,7 @@ class NotifeeAlarmManager {
 
   /* On reboot, reschedule trigger notifications created via alarm manager  */
   void rescheduleNotification(WorkDataEntity workDataEntity) {
-    if (workDataEntity.getNotification() != null && workDataEntity.getTrigger() != null) {
+    if (workDataEntity.getNotification() == null || workDataEntity.getTrigger() == null) {
       return;
     }
 
@@ -213,11 +218,15 @@ class NotifeeAlarmManager {
     NotificationModel notificationModel =
         NotificationModel.fromBundle(ObjectUtils.bytesToBundle(notificationBytes));
 
-    int triggerType = (int) triggerBundle.getDouble("type");
+    int triggerType = ObjectUtils.getInt(triggerBundle.get("type"));
 
     switch (triggerType) {
       case 0:
         TimestampTriggerModel trigger = TimestampTriggerModel.fromBundle(triggerBundle);
+        if (!trigger.getWithAlarmManager()) {
+          return;
+        }
+
         scheduleTimestampTriggerNotification(notificationModel, trigger);
         break;
       case 1:
@@ -227,6 +236,7 @@ class NotifeeAlarmManager {
   }
 
   void rescheduleNotifications() {
+    Logger.d(TAG, "Reschedule Notifications on reboot");
     getScheduledNotifications()
         .addOnCompleteListener(
             task -> {

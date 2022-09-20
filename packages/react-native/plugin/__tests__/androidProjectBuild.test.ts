@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-import { setCompileSdkVersion, setMavenRepository } from '../src/withNotifeeProjectGradlePlugin';
+import { setCompileSdkVersion } from '../src/withNotifeeProjectGradlePlugin';
 
 const getProjectGradle = () => {
   return fs.readFile(path.resolve(__dirname, './fixtures/project.build.gradle'), {
@@ -15,12 +15,5 @@ describe('[Android] project build.gradle test', () => {
     const newProjectGradle = setCompileSdkVersion(projectGradle);
 
     expect(newProjectGradle).toContain('compileSdkVersion = 31');
-  });
-
-  it('adds custom maven repository to project build.gradle', async () => {
-    const projectGradle = await getProjectGradle();
-    const newProjectGradle = setMavenRepository(projectGradle);
-
-    expect(newProjectGradle).toMatchSnapshot();
   });
 });
