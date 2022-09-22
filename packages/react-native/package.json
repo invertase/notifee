@@ -1,6 +1,6 @@
 {
   "name": "@curefit/notifee",
-  "version": "5.7.1-stage.24",
+  "version": "5.7.1-stage.27",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "dist/index.js",
