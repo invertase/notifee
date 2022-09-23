@@ -26,7 +26,7 @@ import Notifee, {
   AuthorizationStatus,
   TimestampTrigger,
   RepeatFrequency,
-} from '@notifee/react-native';
+} from '@curefit/notifee';
 
 import { notifications } from './notifications';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';

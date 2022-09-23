@@ -3,7 +3,7 @@ import {View, Button, StyleSheet, Text, Platform} from 'react-native';
 import notifee, {
   AndroidImportance,
   AndroidVisibility,
-} from '@notifee/react-native';
+} from '@curefit/notifee';
 
 import {notifications} from './utils/notifications';
 import {triggers} from './utils/triggers';
@@ -30,7 +30,17 @@ export const Content: React.FC<Props> = () => {
     });
 
     try {
-      await notifee.displayNotification(notification);
+      await notifee.displayNotification({
+        title: '&#11088; Claim Your Prize &#11088;',
+        body: ' Tap to claim your time limited prize! Hurry! Tap to claim your time limited prize! Hurry! &#10024;',
+        subtitle: 'Prizes',
+        android: {
+          channelId: notification.android?.channelId || 'default',
+          showChronometer: true,
+          chronometerDirection: 'down',
+          timestamp: Date.now() + 60000000,
+        },
+      });
     } catch (e) {
       console.error(e);
     }
@@ -77,27 +87,6 @@ export const Content: React.FC<Props> = () => {
               color={(Platform.OS === 'ios' && '#fff') || '#44337A'}
               title={'Display Notification'}
               onPress={onDisplayNotificationPress}
-            />
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text>{`Trigger Type: ${triggerType.name}`}</Text>
-          </View>
-          <View style={[styles.button]}>
-            <Button
-              color={(Platform.OS === 'ios' && '#fff') || '#44337A'}
-              title={'Create Trigger Notification'}
-              onPress={onTriggerNotificationPress}
-            />
-          </View>
-        </View>
-        <View style={[styles.contentItem, styles.apiActionButton]}>
-          <View style={[styles.button]}>
-            <Button
-              color={(Platform.OS === 'ios' && '#fff') || '#44337A'}
-              title={'Test Notifee API Action'}
-              onPress={onAPIPress}
             />
           </View>
         </View>

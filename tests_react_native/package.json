@@ -7,7 +7,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
-    "@notifee/react-native": "*",
+    "@curefit/notifee": "*",
     "@react-native-firebase/app": "^14.5.1",
     "@react-native-firebase/messaging": "^14.5.1",
     "cross-env": "^7.0.2",

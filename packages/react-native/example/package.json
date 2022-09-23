@@ -8,10 +8,10 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "postinstall": "cd node_modules/@notifee/react-native && yarn"
+    "postinstall": "cd node_modules/@curefit/notifee && yarn"
   },
   "dependencies": {
-    "@notifee/react-native": "link:../",
+    "@curefit/notifee": "5.7.1-stage.24",
     "react": "17.0.2",
     "react-native": "0.66.0"
   },

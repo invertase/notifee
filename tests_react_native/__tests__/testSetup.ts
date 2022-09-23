@@ -1,4 +1,4 @@
-import * as utils from '@notifee/react-native/src/utils';
+import * as utils from '@curefit/notifee/src/utils';
 
 export const setPlatform = (platform: string): void => {
   Object.defineProperty(utils, 'isIOS', { value: platform === 'ios' });

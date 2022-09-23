@@ -8,7 +8,7 @@
 
 import React, {useEffect} from 'react';
 import {AppRegistry, Platform, StyleSheet, Text, View} from 'react-native';
-import notifee, {EventType, AuthorizationStatus} from '@notifee/react-native';
+import notifee, {EventType, AuthorizationStatus} from '@curefit/notifee';
 import {Content} from './src/content';
 import {categories} from './src/utils/categories';
 

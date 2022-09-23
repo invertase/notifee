@@ -35,7 +35,7 @@ def findNodeModulePath(baseDir, packageName) {
   return null
 }
 
-def notifeeDir = findNodeModulePath(projectDir, "@notifee/react-native") ?: "$rootDir/../node_modules/@notifee/react-native"
+def notifeeDir = findNodeModulePath(projectDir, "@curefit/notifee") ?: "$rootDir/../node_modules/@curefit/notifee"
 println ":${project.name} @notifee/react-native found at $notifeeDir"
 
 if (project.hasProperty('reactNativeProjects')) {

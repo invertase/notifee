@@ -4,8 +4,8 @@ import {
   AndroidLaunchActivityFlag,
   AndroidCategory,
   AndroidImportance,
-} from '@notifee/react-native';
-import { AndroidFlags } from '@notifee/react-native/src';
+} from '@curefit/notifee';
+import { AndroidFlags } from '@curefit/notifee/src';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
   {

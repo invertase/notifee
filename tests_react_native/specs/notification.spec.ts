@@ -9,7 +9,7 @@ import notifee, {
   TriggerType,
   RepeatFrequency,
   AndroidStyle,
-} from '@notifee/react-native';
+} from '@curefit/notifee';
 import { Platform } from 'react-native';
 
 export function NotificationSpec(spec: TestScope): void {

@@ -8,7 +8,7 @@ import { AppRegistry, Button, Text, View } from 'react-native';
 import '@react-native-firebase/messaging';
 import '@react-native-firebase/functions';
 
-import Notifee, { EventType } from '@notifee/react-native';
+import Notifee, { EventType } from '@curefit/notifee';
 
 Notifee.onForegroundEvent(async event => {
   switch (event.type) {
