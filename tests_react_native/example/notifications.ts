@@ -54,6 +54,30 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
+    key: 'Communications',
+    notification: {
+      id: 'communication-id',
+      title: 'Communication PN',
+      android: {
+        channelId: 'high',
+        pressAction: {
+          id: 'default',
+        },
+      },
+      ios: {
+        categoryId: 'communicationId',
+        communicationInfo: {
+          conversationId: '123',
+          sender: {
+            id: 'abcde',
+            avatar: 'https://pbs.twimg.com/profile_images/1070077650713133056/oji2RT4i_normal.jpg',
+            displayName: 'Helena Ford',
+          },
+        },
+      },
+    },
+  },
+  {
     key: 'Loop Sound',
     notification: {
       id: 'loopSound',

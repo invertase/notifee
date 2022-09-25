@@ -5,8 +5,8 @@
 import {
   NotificationIOS,
   IOSForegroundPresentationOptions,
-  IOSNotificationAttachment,
-} from '../types/NotificationIOS';
+  IOSNotificationAttachment, IOSCommunicationInfo, IOSNotificationCategoryAction, IOSCommunicationInfoSender
+} from "../types/NotificationIOS";
 import {
   objectHasProperty,
   isBoolean,
@@ -61,6 +61,45 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
 
     if (attachments.length) {
       out.attachments = attachments;
+    }
+  }
+
+  /**
+   * communicationInfo
+   */
+  if (objectHasProperty(ios, 'communicationInfo')) {
+    if (!isObject(ios.communicationInfo)) {
+      throw new Error("'ios.communicationInfo' expected an object.");
+    }
+
+    if (!isString(ios.communicationInfo.conversationId)) {
+      throw new Error('"ios.communicationInfo.conversationId" expected a valid string value.');
+    }
+
+    if (ios.communicationInfo.body && !isString(ios.communicationInfo.body)) {
+      throw new Error('"ios.communicationInfo.body" expected a valid string value.');
+    }
+
+    if (ios.communicationInfo.sender && !isObject(ios.communicationInfo.sender)) {
+      throw new Error('"ios.communicationInfo.sender" expected a valid object value.');
+    }
+
+    if (!isString(ios.communicationInfo.sender.id )) {
+      throw new Error('"ios.communicationInfo.sender.id" expected a valid string value.');
+    }
+
+    if (!isString(ios.communicationInfo.sender.avatar )) {
+      throw new Error('"ios.communicationInfo.sender.avatar" expected a valid string value.');
+    }
+
+    if (!isString(ios.communicationInfo.sender.displayName )) {
+      throw new Error('"ios.communicationInfo.sender.displayName" expected a valid string value.');
+    }
+
+    out.communicationInfo = {
+      conversationId: ios.communicationInfo.conversationId,
+      body: ios.communicationInfo.body,
+      sender: ios.communicationInfo.sender
     }
   }
 

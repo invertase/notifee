@@ -73,12 +73,12 @@ const channels: AndroidChannel[] = [
 ];
 
 async function onMessage(message: RemoteMessage): Promise<void> {
-  console.log('New FCM Message', message.messageId);
-  await Notifee.displayNotification({
-    title: 'onMessage',
-    body: `with message ${message.messageId}`,
-    android: { channelId: 'default', tag: 'hello1' },
-  });
+  console.log('New FCM Message', message.data);
+  // await Notifee.displayNotification({
+  //   title: 'onMessage',
+  //   body: `with message ${message.messageId}`,
+  //   android: { channelId: 'default', tag: 'hello1' },
+  // });
 }
 
 async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
@@ -134,6 +134,15 @@ function Root(): any {
           },
         ],
       },
+      {
+        id: 'communications',
+        actions: [
+          {
+            id: 'communication',
+            title: 'test',
+          },
+        ],
+      },
     ]);
   }
 
@@ -172,15 +181,16 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 15);
-      const trigger: TimestampTrigger = {
-        type: 0,
-        timestamp: date.getTime(),
-        alarmManager: true,
-        repeatFrequency: RepeatFrequency.HOURLY,
-      };
-      Notifee.createTriggerNotification(notification, trigger)
-        .then(notificationId => setId(notificationId))
-        .catch(console.error);
+      // const trigger: TimestampTrigger = {
+      //   type: 0,
+      //   timestamp: date.getTime(),
+      //   alarmManager: true,
+      //   repeatFrequency: RepeatFrequency.HOURLY,
+      // };
+      // Notifee.createTriggerNotification(notification, trigger)
+      //   .then(notificationId => setId(notificationId))
+      //   .catch(console.error);
+      Notifee.displayNotification(notification)
     }
   }
 

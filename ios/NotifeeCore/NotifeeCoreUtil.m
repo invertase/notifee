@@ -643,6 +643,42 @@
   return dictionary;
 }
 
++ (INSendMessageIntent *)generateSenderIntentForCommunicationNotifciation:
+    (NSDictionary *)communicationInfo {
+  if (@available(iOS 15.0, *)) {
+    NSDictionary *sender = communicationInfo[@"sender"];
+    INPersonHandle *senderPersonHandle =
+        [[INPersonHandle alloc] initWithValue:sender[@"id"] type:INPersonHandleTypeUnknown];
+
+    // Parse sender's avatar
+    INImage *avatar = nil;
+    if (sender[@"avatar"] != nil) {
+      NSURL *url = [[NSURL alloc] initWithString:sender[@"avatar"]];
+      avatar = [INImage imageWithURL:url];
+    }
+
+    INPerson *senderPerson = [[INPerson alloc] initWithPersonHandle:senderPersonHandle
+                                                     nameComponents:nil
+                                                        displayName:sender[@"displayName"]
+                                                              image:avatar
+                                                  contactIdentifier:nil
+                                                   customIdentifier:nil];
+
+    INSendMessageIntent *intent =
+        [[INSendMessageIntent alloc] initWithRecipients:nil
+                                    outgoingMessageType:INOutgoingMessageTypeOutgoingMessageText
+                                                content:communicationInfo[@"body"]
+                                     speakableGroupName:nil
+                                 conversationIdentifier:communicationInfo[@"conversationId"]
+                                            serviceName:nil
+                                                 sender:senderPerson
+                                            attachments:nil];
+
+    return intent;
+  }
+
+  return nil;
+}
 /**
  * Returns a random string using UUID
  *

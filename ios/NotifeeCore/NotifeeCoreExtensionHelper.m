@@ -16,9 +16,9 @@
  */
 
 #import "NotifeeCoreExtensionHelper.h"
+#import "Intents/Intents.h"
 #import "NotifeeCore.h"
 #import "NotifeeCoreUtil.h"
-#import "Intents/Intents.h"
 
 static NSString *const kNoExtension = @"";
 static NSString *const kImagePathPrefix = @"image/";
@@ -69,65 +69,57 @@ static NSString *const kImagePathPrefix = @"image/";
   }
 
   self.modifiedContent = [NotifeeCore buildNotificationContent:options withTrigger:nil];
-  [self processCommunicationData: options];
+  [self processCommunicationData:options];
 }
 
-- (void)processCommunicationData: (NSMutableDictionary *) options {
-    
-    if (options[@"senderInfo"] == nil) {
-        [self handleAttachmentsAndDeliverNotificaiton: options];
-        return;
+- (void)processCommunicationData:(NSMutableDictionary *)options {
+  if (options[@"ios"] == nil || options[@"ios"][@"communicationInfo"] == nil) {
+    [self handleAttachmentsAndDeliverNotificaiton:options];
+    return;
+  }
+
+  if (@available(iOS 15.0, *)) {
+    NSMutableDictionary *communicationInfo = [options[@"ios"][@"communicationInfo"] mutableCopy];
+    communicationInfo[@"body"] = options[@"body"];
+    INSendMessageIntent *intent = [NotifeeCoreUtil
+        generateSenderIntentForCommunicationNotifciation:options[@"ios"][@"communicationInfo"]];
+    // Use the intent to initialize the interaction.
+    INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
+    interaction.direction = INInteractionDirectionIncoming;
+
+    NSError *error = nil;
+    UNNotificationContent *updatedContent =
+        [self.modifiedContent contentByUpdatingWithProvider:intent error:&error];
+    if (error) {
+      NSLog(@"NotifeeCoreExtensionHelper: Could not update notification content: %@", error);
+      [self handleAttachmentsAndDeliverNotificaiton:options];
+      return;
     }
-    
-    if (@available(iOS 15.0, *)) {
-        NSDictionary* senderInfo = options[@"senderInfo"];
-        INPersonHandle *senderPerson = [[INPersonHandle alloc] initWithValue:senderInfo[@"id"] type:INPersonHandleTypeUnknown];
-        
-        // Parse sender's avatar
-        INImage *avatar = nil;
-        if (senderInfo[@"avatar"] != nil) {
-            NSURL *url = [[NSURL alloc] initWithString: senderInfo[@"avatar"]];
-            avatar = [INImage imageWithURL:url];
-        }
 
-        INPerson *sender = [[INPerson alloc] initWithPersonHandle:senderPerson nameComponents:nil displayName: senderInfo[@"displayName"] image:avatar contactIdentifier:nil customIdentifier:nil ];
+    NSLog(@"NotifeeCoreExtensionHelper: Processing communication notification");
+    self.modifiedContent = [updatedContent mutableCopy];
+    [self handleAttachmentsAndDeliverNotificaiton:options];
 
-        INSendMessageIntent *intent = [[INSendMessageIntent alloc] initWithRecipients:nil outgoingMessageType: INOutgoingMessageTypeOutgoingMessageText content:self.modifiedContent.body speakableGroupName:nil conversationIdentifier:senderInfo[@"conversationId"] serviceName:nil sender:sender attachments:nil];
-
-        // Use the intent to initialize the interaction.
-        INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response: nil];
-        interaction.direction = INInteractionDirectionIncoming;
-
-        NSError* error = nil;
-        UNNotificationContent* updatedContent = [self.modifiedContent contentByUpdatingWithProvider:intent error:&error];
-        if (error) {
-            NSLog(@"NotifeeCoreExtensionHelper: Could not update notification content: %@", error);
-            [self handleAttachmentsAndDeliverNotificaiton: options];
-            return;
-        }
-
-        NSLog(@"NotifeeCoreExtensionHelper: Processing communication notification");
-        self.modifiedContent = [updatedContent mutableCopy];
-        [self handleAttachmentsAndDeliverNotificaiton: options];
-
-        [interaction donateInteractionWithCompletion:^(NSError *error) {
-          if(error)
-            NSLog(@"NotifeeCoreExtensionHelper: Could not donate interaction for communication notification: %@", error);
-        }];
-    } else {
-        // Skip, Communication notifications not supported on iOS 15
-        [self handleAttachmentsAndDeliverNotificaiton: options];
-    }
+    [interaction donateInteractionWithCompletion:^(NSError *error) {
+      if (error)
+        NSLog(@"NotifeeCoreExtensionHelper: Could not donate interaction for communication "
+              @"notification: %@",
+              error);
+    }];
+  } else {
+    // Skip, Communication notifications not supported on iOS 15
+    [self handleAttachmentsAndDeliverNotificaiton:options];
+  }
 }
 
-- (void)handleAttachmentsAndDeliverNotificaiton: (NSMutableDictionary *) options {
-    NSMutableDictionary *attachmentDict = [NSMutableDictionary new];
+- (void)handleAttachmentsAndDeliverNotificaiton:(NSMutableDictionary *)options {
+  NSMutableDictionary *attachmentDict = [NSMutableDictionary new];
 
-    if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil &&
-        [options[@"ios"][@"attachments"] isKindOfClass:[NSArray class]] &&
-        [options[@"ios"][@"attachments"] count] != 0) {
-      attachmentDict = options[@"ios"][@"attachments"][0];
-    }
+  if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil &&
+      [options[@"ios"][@"attachments"] isKindOfClass:[NSArray class]] &&
+      [options[@"ios"][@"attachments"] count] != 0) {
+    attachmentDict = options[@"ios"][@"attachments"][0];
+  }
 
   // Check if image url is in payload and parse it if attachmentDict is empty
   NSString *currentImageURL = options[kPayloadOptionsImageURLName];
@@ -137,20 +129,20 @@ static NSString *const kImagePathPrefix = @"image/";
     attachmentDict[@"url"] = currentImageURL;
   }
 
-    if ([attachmentDict count] == 0) {
-      [self deliverNotification];
-      return;
-    }
+  if ([attachmentDict count] == 0) {
+    [self deliverNotification];
+    return;
+  }
 
-    // Attempt to download attachment
-    [self loadAttachment:attachmentDict
-        completionHandler:^(UNNotificationAttachment *attachment) {
-          if (attachment != nil) {
-            self.modifiedContent.attachments = @[ attachment ];
-          }
+  // Attempt to download attachment
+  [self loadAttachment:attachmentDict
+      completionHandler:^(UNNotificationAttachment *attachment) {
+        if (attachment != nil) {
+          self.modifiedContent.attachments = @[ attachment ];
+        }
 
-          [self deliverNotification];
-        }];
+        [self deliverNotification];
+      }];
 }
 
 - (NSString *)fileExtensionForResponse:(NSURLResponse *)response {
