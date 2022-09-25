@@ -28,7 +28,7 @@ var payload = {
             conversationId: 'id-abcde',
             sender: {
               id: 'senderId',
-              avatar: 'https://pbs.twimg.com/profile_images/1070077650713133056/oji2RT4i_normal.jpg',
+              avatar: 'https://placeimg.com/640/480/any',
               displayName: 'Helena Ford',
             },
           },
