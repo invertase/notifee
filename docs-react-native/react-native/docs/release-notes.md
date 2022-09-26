@@ -5,7 +5,7 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
-## 7.0.0
+## next
 - **[iOS]: BREAKING CHANGE** : Notifee now handles response events for remote notifications on iOS:
   - PRESSED
   - ACTION_PRESSED
