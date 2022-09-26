@@ -46,6 +46,7 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
 
+  @KeepForSdk
   public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
 
   @KeepForSdk
@@ -435,6 +436,7 @@ public class Notifee {
     }
   }
 
+  @KeepForSdk
   public boolean onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
     if (requestCode == REQUEST_CODE_NOTIFICATION_PERMISSION) {
