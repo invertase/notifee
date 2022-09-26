@@ -576,13 +576,54 @@
  *
  * @param request UNNotificationRequest
  */
-+ (NSDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request {
++ (NSMutableDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-  NSMutableDictionary *iosDict = [NSMutableDictionary dictionary];
 
+  dictionary = [self parseUNNotificationContent:request.content];
   dictionary[@"id"] = request.identifier;
 
-  UNNotificationContent *content = request.content;
+  NSDictionary *userInfo = request.content.userInfo;
+
+  // Check for remote details
+  if ([request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+    NSMutableDictionary *remote = [NSMutableDictionary dictionary];
+
+    remote[@"messageId"] = userInfo[@"gcm.message_id"];
+    remote[@"senderId"] = userInfo[@"google.c.sender.id"];
+
+    if (userInfo[@"aps"] != nil) {
+      remote[@"mutableContent"] = userInfo[@"aps"][@"mutable-content"];
+      remote[@"contentAvailable"] = userInfo[@"aps"][@"content-available"];
+    }
+
+    dictionary[@"remote"] = remote;
+  }
+
+  dictionary[@"data"] = [self parseDataFromUserInfo:userInfo];
+
+  return dictionary;
+}
+
++ (NSMutableDictionary *)parseDataFromUserInfo:(NSDictionary *)userInfo {
+  NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+  for (id key in userInfo) {
+    // build data dict from remaining keys but skip keys that shouldn't be included in data
+    if ([key isEqualToString:@"aps"] || [key hasPrefix:@"gcm."] || [key hasPrefix:@"google."] ||
+       // notifee or notifee_options
+      [key hasPrefix:@"notifee"] ||
+       // fcm_options
+       [key hasPrefix:@"fcm"]) {
+      continue;
+   }
+    data[key] = userInfo[key];
+ }
+
+ return data;
+}
+
++ (NSMutableDictionary *)parseUNNotificationContent:(UNNotificationContent *)content {
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  NSMutableDictionary *iosDict = [NSMutableDictionary dictionary];
 
   dictionary[@"subtitle"] = content.subtitle;
   dictionary[@"body"] = content.body;
@@ -627,19 +668,39 @@
     }
   }
 
-  // TODO: parse sound
-  //  if (content.sound != nil) {
-  //    iosDict[@"sound"] = content.sound;
-  //  }
+  if (content.attachments != nil) {
+    // TODO: parse attachments
+  }
 
-  // TODO: parse attachments
-  //  if (content.attachments != nil) {
-  //    iosDict[@"attachments"] =
-  //        [NotifeeCoreUtil DictionaryArrayToNotificationAttachments:content.attachments];
-  //  }
+  // sound
+  if (content.sound != nil) {
+    if ([content.sound isKindOfClass:[NSString class]]) {
+      iosDict[@"sound"] = content.sound;
+    } else if ([content.sound isKindOfClass:[NSDictionary class]]) {
+      NSDictionary *soundDict = content.sound;
+      NSMutableDictionary *notificationIOSSound = [[NSMutableDictionary alloc] init];
+
+      // ios.sound.name String
+      if (soundDict[@"name"] != nil) {
+        notificationIOSSound[@"name"] = soundDict[@"name"];
+      }
+
+      // sound.critical Boolean
+      if (soundDict[@"critical"] != nil) {
+        notificationIOSSound[@"critical"] = soundDict[@"critical"];
+      }
+
+      // ios.sound.volume Number
+      if (soundDict[@"volume"] != nil) {
+        notificationIOSSound[@"volume"] = soundDict[@"volume"];
+      }
+
+      // ios.sound
+      iosDict[@"sound"] = notificationIOSSound;
+    }
+  }
 
   dictionary[@"ios"] = iosDict;
-
   return dictionary;
 }
 
