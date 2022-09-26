@@ -5,6 +5,8 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 6.0.0
+- **[Android] BREAKING CHANGE**: Added support for requesting permission on Android 13 via `requestPermission`,  the minimum compileSdkVersion required has increased to 33. And, to support this feature, the targetSdkVersion must also be increased to 33.
 ## 5.7.0
 - **[iOS]**: Adds new `interruptionLevel` property to `NotificationIOS` which provides the option to display time-sensitive notifications (Fixes [#287](https://github.com/invertase/notifee/issues/287)).
 
