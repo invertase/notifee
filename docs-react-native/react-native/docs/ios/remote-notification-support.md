@@ -5,7 +5,37 @@ next: /
 previous: /react-native/docs/ios/permissions
 ---
 
-It's possible to display a notification with Notifee features from outside the app using remote notifications (a.k.a push notifications).
+It's possible to display a notification with Notifee features from outside the app using remote notifications (a.k.a push notifications) in two ways:
+ - using APNs keys
+ - using `notifee_options` with our notification service extension helper
+
+It is recommended to only use a notification service extension if you require an image or need to modify the contents of the notification before its displayed.
+
+### Using APNs keys
+
+Notification messages sent through APNs follow the APNs payload format which allows us to be able to specify a category or a custom sound with no extra configuration on the client:
+
+```json
+// FCM
+{
+    notification: {
+      title: 'A notification title!',
+      body: 'A notification body',
+    },
+    apns: {
+        payload: {
+            aps: {
+                category: 'post', // A category that's already been created by your app
+                sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
+                 ... // any other properties
+            },
+        },
+    },
+    ...
+};
+```
+
+### Using `notifee_options`
 
 By adding a custom key `notifee_options` in the message payload, the notification will be modified by Notifee before it is finally displayed to the end user.
 
@@ -138,3 +168,33 @@ In your NotifeeNotificationService.m file you should have method `didReceiveNoti
 Please note, the `id` of the notification is the `request.identifier` and cannot be changed. For this reason, the `id` property in `notifee_options` should be excluded.
 
 > if both `attachments` and `image` are present, `attachments` will take precedence over `image`
+
+### Handling Events
+
+Currently, notifee supports the following events for remote notifications:
+- `PRESSED`
+- `ACTION_PRESSED`
+- `DISMISSED`
+
+To know identify when an interaction is from a remote notification, we can check if `notification.remote` is populated:
+
+```jsx
+import { useEffect } from 'react';
+import notifee, { EventType } from '@notifee/react-native';
+function App() {
+  // Subscribe to events
+  useEffect(() => {
+    return notifee.onForegroundEvent(({ type, detail }) => {
+      console.log('Remote notification info: ', detail.notification?.remote)
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('User dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('User pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
+}
+```

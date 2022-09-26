@@ -5,6 +5,15 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## next
+- **[iOS]: BREAKING CHANGE** : Notifee now handles response events for remote notifications on iOS:
+  - PRESSED
+  - ACTION_PRESSED
+  - DISMISSED
+This allows quick actions from remote notifications to be supported without the need of a NSE [[Learn More]](https://notifee.app/react-native/docs/ios/remote-notification-support)
+
+  **`onNotificationOpenedApp` and `getInitialNotification` from `RNFB Messaging` will no longer trigger as notifee will handle the event. Should not require any code changes to these `RNFB` event handlers, as events on Android will continue to work as normal**
+
 ## 6.0.0
 - **[Android] BREAKING CHANGE**: Added support for requesting permission on Android 13 via `requestPermission`,  the minimum compileSdkVersion required has increased to 33. And, to support this feature, the targetSdkVersion must also be increased to 33.
 ## 5.7.0
