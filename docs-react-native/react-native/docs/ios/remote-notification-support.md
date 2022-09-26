@@ -98,7 +98,17 @@ At this point everything should still be running normally. This is the final ste
 Before, moving to the next step, run the app and check it builds successfully – make sure you have the correct target selected. 
 
 ## Edit the payload
-Now everything is setup in your app, you can alter your notification payload to include `notifee_options`:
+Now everything is setup in your app, you can alter your notification payload in two ways:
+
+1. Update the message payload, sent via your backend
+2. In a Notification Service Extension in your app when a device receives a remote message
+
+> Make sure that you will set `mutable-content: 1` (mutableContent if you are using firebase admin sdk) when sending notification otherwise Notification Service Extension will NOT be triggered
+
+> Make sure that you will set `content-available: 1` (contentAvailable if you are using firebase admin sdk) if you want to receive notification when your app is in foreground
+
+
+### 1. Update the message payload, sent via your backend
 
 ```json
 // FCM
@@ -120,7 +130,7 @@ Now everything is setup in your app, you can alter your notification payload to 
                 image: 'https://placeimg.com/640/480/any', // URL to pointing to a remote image
                 ios: {
                     sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
-                    foregroundPresentationOptions: {alert true, badge: true, sound: true},
+                    foregroundPresentationOptions: {alert: true, badge: true, sound: true, banner: true, list: true},
                     categoryId: 'post', // A category that's already been created by your app
                     attachments: [{url: 'https://placeimg.com/640/480/any', thumbnailHidden: true}] // array of attachments of type `IOSNotificationAttachment`
                     ... // any other api properties for NotificationIOS
@@ -131,6 +141,28 @@ Now everything is setup in your app, you can alter your notification payload to 
     },
     ...
 };
+```
+
+### 2. In a Notification Service Extension in your app when a device receives a remote message
+
+In your NotifeeNotificationService.m file you should have method `didReceiveNotificationRequest` where we are calling `NotifeeExtensionHelper`. Now you can modify
+`bestAttemptContent` before you send it to `NotifeeExtensionHelper`:
+
+```objectivec
+- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
+    self.contentHandler = contentHandler;
+    self.bestAttemptContent = [request.content mutableCopy];
+  
+    NSMutableDictionary *userInfoDict = [self.bestAttemptContent.userInfo mutableCopy];
+    userInfoDict[@"notifee_options"] = [NSMutableDictionary dictionary];
+    userInfoDict[@"notifee_options"][@"title"] = @"Modified Title";
+  
+    self.bestAttemptContent.userInfo = userInfoDict;
+
+    [NotifeeExtensionHelper populateNotificationContent:request
+                                withContent: self.bestAttemptContent
+                                withContentHandler:contentHandler];
+}
 ```
 
 Please note, the `id` of the notification is the `request.identifier` and cannot be changed. For this reason, the `id` property in `notifee_options` should be excluded.

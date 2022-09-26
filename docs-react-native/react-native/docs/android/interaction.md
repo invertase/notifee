@@ -335,8 +335,8 @@ If the user has provided custom input via free text or choices, we're able to gr
 import notifee, { EventType } from '@notifee/react-native';
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
-  if (type === EventType.ACTION_PRESS && detail.action.id === 'reply') {
-    await updateChat(detail.notification.data.chatId, detail.action.input);
+  if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'reply') {
+    await updateChat(detail.notification.data.chatId, detail.input);
     await notifee.cancelNotification(detail.notification.id);
   }
 });

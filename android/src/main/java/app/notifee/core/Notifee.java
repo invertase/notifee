@@ -30,6 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.InitialNotificationEvent;
 import app.notifee.core.event.MainComponentEvent;
+import app.notifee.core.interfaces.EventListener;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
@@ -45,6 +46,8 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
 
+  public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
+
   @KeepForSdk
   public static Notifee getInstance() {
     return mNotifee;
@@ -58,9 +61,16 @@ public class Notifee {
   @KeepForSdk
   public static void configure(@NonNull NotifeeConfig notifeeConfig) {
     synchronized (Notifee.class) {
-      if (mNotifee == null) {
-        initialize(notifeeConfig);
-      }
+      initialize(notifeeConfig);
+    }
+  }
+
+  @KeepForSdk
+  public static void configure(@NonNull EventListener eventListener) {
+    synchronized (Notifee.class) {
+      NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
+      configBuilder.setEventSubscriber(eventListener);
+      initialize(configBuilder.build());
     }
   }
 
@@ -393,6 +403,7 @@ public class Notifee {
     boolean areNotificationsEnabled =
         NotificationManagerCompat.from(ContextHolder.getApplicationContext())
             .areNotificationsEnabled();
+
     Bundle notificationSettingsBundle = new Bundle();
     if (areNotificationsEnabled) {
       notificationSettingsBundle.putInt("authorizationStatus", 1);
@@ -408,9 +419,31 @@ public class Notifee {
     } else {
       androidSettingsBundle.putInt("alarm", 0);
     }
-    
+
     notificationSettingsBundle.putBundle("android", androidSettingsBundle);
     result.onComplete(null, notificationSettingsBundle);
+  }
+
+  @Nullable private MethodCallResult<Bundle> requestPermissionCallResult;
+
+  @KeepForSdk
+  public void setRequestPermissionCallback(MethodCallResult<Bundle> result) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      requestPermissionCallResult = result;
+    } else {
+      getNotificationSettings(result);
+    }
+  }
+
+  public boolean onRequestPermissionsResult(
+      int requestCode, String[] permissions, int[] grantResults) {
+    if (requestCode == REQUEST_CODE_NOTIFICATION_PERMISSION) {
+      if (requestPermissionCallResult != null) {
+        getNotificationSettings(requestPermissionCallResult);
+        return true;
+      }
+    }
+    return false;
   }
 
   @KeepForSdk

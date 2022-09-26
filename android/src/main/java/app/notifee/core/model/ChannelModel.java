@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import app.notifee.core.utility.ObjectUtils;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -72,7 +73,7 @@ public class ChannelModel {
 
   public Integer getImportance() {
     if (mChannelBundle.containsKey("importance")) {
-      return (int) mChannelBundle.getDouble("importance");
+      return ObjectUtils.getInt(mChannelBundle.get("importance"));
     }
 
     return NotificationManagerCompat.IMPORTANCE_DEFAULT;
@@ -88,7 +89,7 @@ public class ChannelModel {
 
   public int getVisibility() {
     if (mChannelBundle.containsKey("visibility")) {
-      return (int) mChannelBundle.getDouble("visibility");
+      return ObjectUtils.getInt(mChannelBundle.get("visibility"));
     }
 
     return NotificationCompat.VISIBILITY_PRIVATE;

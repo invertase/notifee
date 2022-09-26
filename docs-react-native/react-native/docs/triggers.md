@@ -147,6 +147,13 @@ const trigger: TimestampTrigger = {
 };
 ```
 
+### Maximum TimestampTrigger Count
+
+Android has a system limit of 50 timestamp triggers active at one time.
+iOS appears to have a limit of [64 timestamp triggers active at one time](https://developer.apple.com/forums/thread/23288), but it is not in [the official documentation](https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/1649508-add).
+
+### iOS Initial Trigger Limitations
+
 Please note, for iOS, a repeating trigger does not work the same as Android - the initial trigger cannot be delayed:
 
 - `HOURLY`: the starting date and hour will be ignored, and only the minutes and seconds will be taken into the account. If the timestamp is set to trigger in 3 hours and repeat every 5th minute of the hour, the alert will not fire in 3 hours, but will instead fire immediately on the next 5th minute of the hour.
@@ -185,7 +192,7 @@ import notifee, { IntervalTrigger, TriggerType, TimeUnit } from '@notifee/react-
 
 const trigger: IntervalTrigger = {
   type: TriggerType.INTERVAL,
-  interval: 30
+  interval: 30,
   timeUnit: TimeUnit.MINUTES
 };
 ```

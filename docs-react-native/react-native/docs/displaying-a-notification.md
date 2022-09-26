@@ -31,7 +31,10 @@ Now the button is in place, create a function to handle the button press and dis
 ```js
 function Screen() {
   async function onDisplayNotification() {
-    // Create a channel
+    // Request permissions (required for iOS)
+    await notifee.requestPermission()
+
+    // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
@@ -44,6 +47,10 @@ function Screen() {
       android: {
         channelId,
         smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+        // pressAction is needed if you want the notification to open the app when pressed
+        pressAction: {
+          id: 'default',
+        },
       },
     });
   }
@@ -56,7 +63,11 @@ function Screen() {
 }
 ```
 
-When the button is pressed, we perform two tasks: creating a channel & displaying a notification.
+When the button is pressed, we perform three tasks: requesting permission, creating a channel & displaying a notification.
+
+Requesting permission is required for iOS as notifications are disabled by default. You need to ask the user to enable notifications by calling `requestPermission` before displaying any notifications.
+
+> To learn more about requesting permissions, view the [iOS Permissions](/react-native/docs/ios/permissions) documentation
 
 Channels are an Android-only concept used to categorize and allow users to control how notifications are handled
 on their devices. Channels are created with sensible default settings and are created or updated each time a

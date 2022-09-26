@@ -21,6 +21,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import app.notifee.core.KeepForSdk;
 import app.notifee.core.model.NotificationModel;
+import app.notifee.core.utility.ObjectUtils;
+import java.util.HashMap;
+import java.util.Map;
 
 @KeepForSdk
 public class NotificationEvent {
@@ -58,6 +61,30 @@ public class NotificationEvent {
   @KeepForSdk
   public NotificationModel getNotification() {
     return notification;
+  }
+
+  public Map<String, Object> toMap() {
+    Map<String, Object> eventMap = new HashMap<>();
+    Map<String, Object> eventDetailMap = new HashMap<>();
+    eventMap.put("type", type);
+
+    eventDetailMap.put("notification", ObjectUtils.bundleToMap(notification.toBundle()));
+
+    if (extras != null) {
+      Bundle pressAction = extras.getBundle("press_action");
+      if (pressAction != null) {
+        eventDetailMap.put("press_action", ObjectUtils.bundleToMap(pressAction));
+      }
+
+      String input = extras.getString("input");
+      if (input != null) {
+        eventDetailMap.put("input", input);
+      }
+    }
+
+    eventMap.put("detail", eventDetailMap);
+
+    return eventMap;
   }
 
   @KeepForSdk

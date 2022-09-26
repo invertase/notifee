@@ -26,7 +26,7 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 The `detail` provided with the event contains a `pressAction` with an `id` of `default`. Since there is no way to
 override the iOS behaviour for notification press, this is automatically set.
 
-If your application has been freshly launched via a notification press, it will an [App open event](/react-native/docs/events#app-open-events).
+If your application has been freshly launched via a notification press, it will generate an [App open event](/react-native/docs/events#app-open-events).
 
 # Quick Actions
 

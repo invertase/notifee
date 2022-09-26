@@ -38,13 +38,13 @@ ext {
 }
 
 android {
-  compileSdkVersion 31
+  compileSdkVersion 33
   testOptions {
     unitTests.returnDefaultValues = true
   }
   defaultConfig {
     minSdkVersion 20
-    targetSdkVersion 30
+    targetSdkVersion 33
     versionCode 1
     versionName "1.0"
 
@@ -110,7 +110,7 @@ dependencies {
   api 'androidx.work:work-runtime:2.7.1' // https://developer.android.com/jetpack/androidx/releases/work
   api 'com.facebook.fresco:fresco:2.6.0' // https://github.com/facebook/fresco/releases
 
-  def room_version = '2.3.0' // https://developer.android.com/jetpack/androidx/releases/room
+  def room_version = '2.4.3' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"
   annotationProcessor "androidx.room:room-compiler:$room_version"
 

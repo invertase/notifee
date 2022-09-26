@@ -17,7 +17,6 @@ For each level, you can check whether notifications are permitted through a dire
 
 To check whether the user has enabled notifications for your app, call [`getNotificationSettings`](/react-native/reference/getnotificationsettings). The `authorizationStatus` attributes will returns `DENIED` if user has denied the permission, and `AUTHORIZED` if it's granted.
 
-
 ```js
 import notifee from '@notifee/react-native';
 
@@ -52,8 +51,8 @@ async function checkChannelPermission() {
 }
 ```
 
-> For more understanding on channels, you can refer to the [Channels & Groups](react-native/docs/android/channels) documentation.
+> For more understanding on channels, you can refer to the [Channels & Groups](/react-native/docs/android/channels) documentation.
 
 ## Permission events
 
-For listening to permission change events, refer to the [Listening to channel events](react-native/docs/android/channels#listening-to-channel-events) documentation.
+For listening to permission change events, refer to the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events) documentation.
