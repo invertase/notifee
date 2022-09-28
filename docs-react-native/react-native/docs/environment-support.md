@@ -19,4 +19,4 @@ The below table contains the current tested and supported environments in which 
 
 ## Additional Requirements
 
-- For iOS development, Xcode 12.4+ is required
+- For iOS development, Xcode 13.x is required
