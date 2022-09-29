@@ -237,7 +237,7 @@ class NotificationManager {
           builder.setTimeoutAfter(androidModel.getTimeoutAfter());
         }
 
-        builder.setUsesChronometer(false);
+        builder.setUsesChronometer(androidModel.getShowChronometer());
 
         long[] vibrationPattern = androidModel.getVibrationPattern();
         if (vibrationPattern.length > 0) builder.setVibrate(vibrationPattern);
@@ -281,6 +281,8 @@ class NotificationManager {
           bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
           builder.setCustomBigContentView(bigNotificationView);
           builder.setCustomHeadsUpContentView(notificationView);
+          builder.setUsesChronometer(false);
+          builder.setShowWhen(false);
         }
 
         return builder;
