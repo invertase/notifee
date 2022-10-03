@@ -34,7 +34,7 @@ public class ExtendedListenableFuture<T> implements ListenableFuture<T> {
     return new ExtendedListenableFuture<>(future);
   }
 
-  public void addOnCompleteListener(Callbackable<T> callbackable,
+  public ExtendedListenableFuture<T> addOnCompleteListener(Callbackable<T> callbackable,
     Executor executor) {
     Futures.addCallback(this, new FutureCallback<T>() {
       @Override
@@ -47,6 +47,7 @@ public class ExtendedListenableFuture<T> implements ListenableFuture<T> {
         callbackable.call(new Exception(t), null);
       }
     }, executor);
+    return this;
   }
 
   @Override

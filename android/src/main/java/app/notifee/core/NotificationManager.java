@@ -876,11 +876,10 @@ class NotificationManager {
         .getWorkDataById(id))
         .continueWith(workContinuation, LISTENING_CACHED_THREAD_POOL)
         .addOnCompleteListener(
-        (Callbackable<ListenableFuture<Void>>) (e, result) -> {
-          {
+        (e, result) -> {
         if (result != null) {
           new ExtendedListenableFuture<>(result).addOnCompleteListener(
-            (Callbackable<Void>) (e2, _unused) -> {
+            (e2, _unused) -> {
               completer.set(Result.success());
               if (e2 != null) {
                 Logger.e(TAG, "Failed to display notification", e2);
@@ -900,7 +899,6 @@ class NotificationManager {
           completer.set(Result.success());
           Logger.e(TAG, "Failed to display notification", e);
         }
-      }
     }, LISTENING_CACHED_THREAD_POOL);
   }
 }

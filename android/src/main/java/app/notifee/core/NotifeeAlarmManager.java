@@ -26,11 +26,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.AlarmManagerCompat;
+import androidx.work.ListenableWorker.Result;
+
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.AlarmUtils;
+import app.notifee.core.utility.Callbackable;
 import app.notifee.core.utility.ExtendedListenableFuture;
 import app.notifee.core.utility.ObjectUtils;
 import com.google.common.util.concurrent.FutureCallback;
@@ -61,66 +64,56 @@ class NotifeeAlarmManager {
 
     WorkDataRepository workDataRepository = new WorkDataRepository(getApplicationContext());
 
-    Futures.addCallback(
-      Futures.transformAsync(workDataRepository.getWorkDataById(id),
+    ListenableFuture<?> displayFuture = new ExtendedListenableFuture<>(workDataRepository.getWorkDataById(id)).continueWith(workDataEntity -> {
+        Bundle notificationBundle;
 
-        workDataEntity -> {
-          Bundle notificationBundle;
+        Bundle triggerBundle;
 
-          Bundle triggerBundle;
+        if (workDataEntity == null
+          || workDataEntity.getNotification() == null
+          || workDataEntity.getTrigger() == null) {
+          // check if notification bundle is stored with Work Manager
+          Logger.w(
+            TAG, "Attempted to handle doScheduledWork but no notification data was found.");
+          return Futures.immediateFuture(null);
+        } else {
+          triggerBundle = ObjectUtils.bytesToBundle(workDataEntity.getTrigger());
+          notificationBundle = ObjectUtils.bytesToBundle(workDataEntity.getNotification());
+        }
 
-          if (workDataEntity == null
-              || workDataEntity.getNotification() == null
-              || workDataEntity.getTrigger() == null) {
-            // check if notification bundle is stored with Work Manager
-            Logger.w(
-                TAG, "Attempted to handle doScheduledWork but no notification data was found.");
-            return null;
+        NotificationModel notificationModel = NotificationModel.fromBundle(notificationBundle);
+
+        return new ExtendedListenableFuture<>(
+          NotificationManager.displayNotification(notificationModel, triggerBundle)
+        ).continueWith(voidDisplayedNotification -> {
+          if (triggerBundle.containsKey("repeatFrequency")
+            && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
+            TimestampTriggerModel trigger =
+              TimestampTriggerModel.fromBundle(triggerBundle);
+            // Ensure trigger is in the future and the latest timestamp is updated in
+            // the database
+            trigger.setNextTimestamp();
+            scheduleTimestampTriggerNotification(notificationModel, trigger);
+            WorkDataRepository.getInstance(getApplicationContext())
+              .update(
+                new WorkDataEntity(
+                  id,
+                  workDataEntity.getNotification(),
+                  ObjectUtils.bundleToBytes(triggerBundle),
+                  true));
           } else {
-            triggerBundle = ObjectUtils.bytesToBundle(workDataEntity.getTrigger());
-            notificationBundle = ObjectUtils.bytesToBundle(workDataEntity.getNotification());
+            // not repeating, delete database entry if work is a one-time request
+            WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
           }
-
-          NotificationModel notificationModel = NotificationModel.fromBundle(notificationBundle);
-
-          return Futures.transformAsync(
-            NotificationManager.displayNotification(notificationModel,
-              triggerBundle),
-            voidDisplayedNotification -> {
-                      if (triggerBundle.containsKey("repeatFrequency")
-                          && ObjectUtils.getInt(triggerBundle.get("repeatFrequency")) != -1) {
-                        TimestampTriggerModel trigger =
-                            TimestampTriggerModel.fromBundle(triggerBundle);
-                        // Ensure trigger is in the future and the latest timestamp is updated in
-                        // the database
-                        trigger.setNextTimestamp();
-                        scheduleTimestampTriggerNotification(notificationModel, trigger);
-                        WorkDataRepository.getInstance(getApplicationContext())
-                            .update(
-                                new WorkDataEntity(
-                                    id,
-                                    workDataEntity.getNotification(),
-                                    ObjectUtils.bundleToBytes(triggerBundle),
-                                    true));
-                      } else {
-                        // not repeating, delete database entry if work is a one-time request
-                        WorkDataRepository.getInstance(getApplicationContext()).deleteById(id);
-                      }
-                  return null;
-                }, alarmManagerExecutor);
-        }
-        , alarmManagerExecutor),
-      new FutureCallback<Void>() {
-        @Override
-        public void onSuccess(Void workDataEntities) {
-          // silent finish
-        }
-
-        @Override
-        public void onFailure(Throwable t) {
-                Logger.e(TAG, "Failed to display notification", new Exception(t));
-        }
-      }, alarmManagerListeningExecutor);
+          return Futures.immediateFuture(null);
+        }, alarmManagerExecutor);
+      }, alarmManagerExecutor)
+      .addOnCompleteListener(
+        (e, result) -> {
+            if (e != null) {
+              Logger.e(TAG, "Failed to display notification", e);
+            }
+        }, alarmManagerExecutor);
   }
 
   public static PendingIntent getAlarmManagerIntentForNotification(String notificationId) {
