@@ -475,13 +475,10 @@ class NotificationManager {
                 return new ExtendedListenableFuture<>(
                     LISTENING_CACHED_THREAD_POOL.submit(
                         NotifeeAlarmManager::cancelAllNotifications)
-                          ).continueWith((result) -> {
-                            if (result != null) {
+                          ).continueWith((_ignoreResult) -> {
                               WorkDataRepository.getInstance(getApplicationContext())
                                 .deleteAll();
                               return Futures.immediateFuture(null);
-                            }
-                            return Futures.immediateFuture(null);
                           }, LISTENING_CACHED_THREAD_POOL);
       }
       return Futures.immediateFuture(null);
