@@ -876,7 +876,7 @@ class NotificationManager {
         .continueWith(workContinuation, LISTENING_CACHED_THREAD_POOL)
         .addOnCompleteListener(
         (e, result) -> {
-        if (result != null) {
+        if (e == null) {
           new ExtendedListenableFuture<>(result).addOnCompleteListener(
             (e2, _unused) -> {
               completer.set(Result.success());
