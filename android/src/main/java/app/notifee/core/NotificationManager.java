@@ -472,14 +472,13 @@ class NotificationManager {
         .continueWith(task -> {
               if (notificationType == NOTIFICATION_TYPE_TRIGGER
                   || notificationType == NOTIFICATION_TYPE_ALL) {
-                return new ExtendedListenableFuture<>(
-                    LISTENING_CACHED_THREAD_POOL.submit(
-                        NotifeeAlarmManager::cancelAllNotifications)
-                          ).continueWith((_ignoreResult) -> {
-                              WorkDataRepository.getInstance(getApplicationContext())
-                                .deleteAll();
-                              return Futures.immediateFuture(null);
-                          }, LISTENING_CACHED_THREAD_POOL);
+                return new ExtendedListenableFuture<Void>(NotifeeAlarmManager.cancelAllNotifications())
+                  .addOnCompleteListener((e, result) -> {
+                      if (e == null) {
+                        WorkDataRepository.getInstance(getApplicationContext())
+                          .deleteAll();
+                      }
+                }, LISTENING_CACHED_THREAD_POOL);
       }
       return Futures.immediateFuture(null);
     }, LISTENING_CACHED_THREAD_POOL);
