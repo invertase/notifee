@@ -74,7 +74,7 @@ unsubscribe();
 An application is deemed in the "background" under the following situations:
 
 - The device is locked.
-- The application is running & is in not in view (minimized).
+- The application is running & is not in view (minimized).
 - The application is killed/quit.
 
 The [`onBackgroundEvent`](/react-native/reference/onbackgroundevent) method is used to register a callback handler
