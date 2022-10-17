@@ -48,7 +48,7 @@ Below you'll find guides that cover the supported iOS features.
 
 | Topic                                                             |                                                                          |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [Appearance](https://notifee.app/react-native/docs/ios/appearance)           | Change now, the notification that is displayed to your users.       |
+| [Appearance](https://notifee.app/react-native/docs/ios/appearance)           | Change how the notification is displayed to your users.       |
 | [Behaviour](https://notifee.app/react-native/docs/ios/behaviour)            | Control how notifications behave when they are displayed on a device; sound, crtitial alerts, etc.  |
 | [Categories](https://notifee.app/react-native/docs/ios/categories) | Create & assign categories to notifications.          |
 | [Interaction](https://notifee.app/react-native/docs/ios/interaction)                 | Handle user interaction with your notifications. |                                                    |
