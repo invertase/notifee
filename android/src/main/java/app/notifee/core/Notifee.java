@@ -46,8 +46,7 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
 
-  @KeepForSdk
-  public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
+  @KeepForSdk public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -429,11 +428,7 @@ public class Notifee {
 
   @KeepForSdk
   public void setRequestPermissionCallback(MethodCallResult<Bundle> result) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-      requestPermissionCallResult = result;
-    } else {
-      getNotificationSettings(result);
-    }
+    requestPermissionCallResult = result;
   }
 
   @KeepForSdk
