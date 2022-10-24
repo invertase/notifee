@@ -20,7 +20,7 @@ const setCompileSdkVersion = (buildGradle: string): string => {
   if (!buildGradle.match(pattern)) {
     return buildGradle;
   }
-  return buildGradle.replace(/compileSdkVersion = 30/, `compileSdkVersion = 31`);
+  return buildGradle.replace(/compileSdkVersion = 30/, `compileSdkVersion = 33`);
 };
 
 export { setCompileSdkVersion };
