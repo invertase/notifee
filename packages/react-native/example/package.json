@@ -11,7 +11,7 @@
     "postinstall": "cd node_modules/@curefit/notifee && yarn"
   },
   "dependencies": {
-    "@curefit/notifee": "5.7.2",
+    "@curefit/notifee": "5.7.3",
     "react": "17.0.2",
     "react-native": "0.66.0"
   },
