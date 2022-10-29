@@ -1,20 +1,10 @@
+// prettier-ignore
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "jsx": "react-native",
-        "noEmit": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "baseUrl": "./", /* Base directory to resolve non-absolute module names. */
-        "esModuleInterop": true
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "./*.tsx"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    /* Completeness */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  }
 }
