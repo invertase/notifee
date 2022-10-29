@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
-
-# echo "You should only do this when your git working set is completely clean (e.g., git reset --hard)"
-# echo "You must have already run \`yarn\` in the repository so \`npx react-native\` will work"
-# echo "This scaffolding refresh has been tested on macOS, not on windows or linux"
+echo "Please ensure you run this from the packages/react-native directory inside the cloned invertase/notifee repo"
+echo "You should only do this when your git working set is completely clean (e.g., git reset --hard)"
+echo "You must have already run \`yarn\` in the repository so \`npx react-native\` will work"
+echo "This scaffolding refresh has been tested on macOS, not on windows or linux"
 
 # Copy the important files out temporarily
 if [ -d TEMP ]; then
@@ -14,6 +14,7 @@ elif [ -d example ]; then
   mkdir -p TEMP/android/app/src/main/java/com/example
   cp example/README.md TEMP/
   cp example/android/local.properties TEMP/android/ || true
+  cp example/android/app/src/main/java/com/example/CustomActivity.java TEMP/android/app/src/main/java/com/example/
 
   cp -R example/src TEMP/
   cp example/App.tsx TEMP/
@@ -39,6 +40,14 @@ npx json -I -f package.json -e 'this.scripts.postinstall = "cd node_modules/@not
 echo "Updating android/build.gradle"
 sed -i -e $'s/ 31/ 33/' android/build.gradle
 rm -f android/build.gradle??
+
+echo "Updating AndroidManifest.xml"
+sed -i -e $'s/android:name=".MainActivity"/android:name=".MainActivity"\\\n      android:showWhenLocked="true"\\\n        android:turnScreenOn="true"/' android/app/src/main/AndroidManifest.xml
+sed -i -e $'s/\<\/activity\>/\<\/activity\>\\\n      \<activity\\\n        android:name="com.example.CustomActivity"\\\n      android:showWhenLocked="true"\\\n      android:turnScreenOn="true"\\\n    \/\>/' android/app/src/main/AndroidManifest.xml
+
+echo "Updating MainActivity.java"
+sed -i -e $'s/return "example"/return NotifeeApiModule.getMainComponent("example")/' android/app/src/main/java/com/example/MainActivity.java
+sed -i -e $'s/package com.example;/package com.example;\\\nimport io.invertase.notifee.NotifeeApiModule;/' android/app/src/main/java/com/example/MainActivity.java
 
 echo "Updating iOS Podfile"
 # This is just a speed optimization, very optional, but asks xcodebuild to use clang and clang++ without the fully-qualified path
