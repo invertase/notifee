@@ -13,7 +13,6 @@ elif [ -d example ]; then
   mkdir -p TEMP/android
   mkdir -p TEMP/android/app/src/main/java/com/example
   cp example/README.md TEMP/
-  cp example/android/local.properties TEMP/android/ || true
   cp example/android/app/src/main/java/com/example/CustomActivity.java TEMP/android/app/src/main/java/com/example/
 
   cp -R example/src TEMP/
@@ -42,12 +41,10 @@ sed -i -e $'s/ 31/ 33/' android/build.gradle
 rm -f android/build.gradle??
 
 echo "Updating AndroidManifest.xml"
-sed -i -e $'s/android:name=".MainActivity"/android:name=".MainActivity"\\\n      android:showWhenLocked="true"\\\n        android:turnScreenOn="true"/' android/app/src/main/AndroidManifest.xml
-sed -i -e $'s/\<\/activity\>/\<\/activity\>\\\n      \<activity\\\n        android:name="com.example.CustomActivity"\\\n      android:showWhenLocked="true"\\\n      android:turnScreenOn="true"\\\n    \/\>/' android/app/src/main/AndroidManifest.xml
+sed -i "" -e $'s/android:name=".MainActivity"/android:name=".MainActivity"\\\n      android:showWhenLocked="true"\\\n        android:turnScreenOn="true"/;s/\<\/activity\>/\<\/activity\>\\\n      \<activity\\\n        android:name="com.example.CustomActivity"\\\n      android:showWhenLocked="true"\\\n      android:turnScreenOn="true"\\\n    \/\>/' android/app/src/main/AndroidManifest.xml
 
 echo "Updating MainActivity.java"
-sed -i -e $'s/return "example"/return NotifeeApiModule.getMainComponent("example")/' android/app/src/main/java/com/example/MainActivity.java
-sed -i -e $'s/package com.example;/package com.example;\\\nimport io.invertase.notifee.NotifeeApiModule;/' android/app/src/main/java/com/example/MainActivity.java
+sed -i "" -e $'s/package com.example;/package com.example;\\\nimport io.invertase.notifee.NotifeeApiModule;/;s/return "example"/return NotifeeApiModule.getMainComponent("example")/' android/app/src/main/java/com/example/MainActivity.java
 
 echo "Updating iOS Podfile"
 # This is just a speed optimization, very optional, but asks xcodebuild to use clang and clang++ without the fully-qualified path
@@ -58,9 +55,6 @@ rm -f ios/Podfile??
 
 echo "Installing pods"
 npx pod-install
-
-# remove App.js in favour of our custom App.tsx
-rm App.js
 
 # We use typescript and there are linter collisions with transitive dependencies on old versions
 # Merge the result of a PR we made upstream so lint is clean even with our 3-deep layer of packages

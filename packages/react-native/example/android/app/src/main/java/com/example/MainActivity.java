@@ -1,4 +1,5 @@
 package com.example;
+import io.invertase.notifee.NotifeeApiModule;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +13,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "example";
+    return NotifeeApiModule.getMainComponent("example");
   }
 
   /**
