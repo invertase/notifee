@@ -557,3 +557,6 @@ android/libs/notifee_core_debug.aar
 package-lock.json
 yarn.lock
 ios/NotifeeCore
+
+# Generated directory when running refresh-example.sh
+TEMP
