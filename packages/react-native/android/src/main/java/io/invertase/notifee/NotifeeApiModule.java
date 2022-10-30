@@ -5,8 +5,10 @@
 package io.invertase.notifee;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import app.notifee.core.Logger;
 import app.notifee.core.Notifee;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -235,11 +237,33 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void requestPermission(Promise promise) {
+    // For Android 12 and below, we return the notification settings
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+      Notifee.getInstance()
+          .getNotificationSettings(
+              (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+      return;
+    }
+
+    // We have to handle this logic outside of our core module due to a react-native limitation
+    // with obtaining the correct actvity
+    PermissionAwareActivity activity = (PermissionAwareActivity) getCurrentActivity();
+    if (activity == null) {
+      Logger.d(
+          "requestPermission",
+          "Unable to get permissionAwareActivity for " + Build.VERSION.SDK_INT);
+
+      Notifee.getInstance()
+          .getNotificationSettings(
+              (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
+      return;
+    }
+
+    // Setting the request permission callback before attempting to call requestPermissions
     Notifee.getInstance()
         .setRequestPermissionCallback(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
 
-    PermissionAwareActivity activity = (PermissionAwareActivity) getCurrentActivity();
     activity.requestPermissions(
         new String[] {Manifest.permission.POST_NOTIFICATIONS},
         Notifee.REQUEST_CODE_NOTIFICATION_PERMISSION,

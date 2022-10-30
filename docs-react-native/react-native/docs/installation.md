@@ -5,7 +5,7 @@ next: /react-native/docs/release-notes
 previous: /react-native/docs/environment-support
 ---
 
-## 1. Install via npm
+## 1. Install from npmjs.com
 
 Install Notifee to the root of your React Native project with [npm](https://www.npmjs.com/) or
 [Yarn](https://yarnpkg.com/lang/en/)
@@ -18,8 +18,32 @@ npm install --save @notifee/react-native
 yarn add @notifee/react-native
 ```
 
+## 2. Configuration Changes
 
-## 2. Autolinking with React Native
+### 2a. Android API versions
+
+The values of the compileSdkVersion & targetSdkVersion might need to be chnaged. compileSdkVersion needs to be at least 33. In addition, if your app is going to request permission on Android 13 via requestPermission, targetSdkVersion needs to be at least 33, as well. These setting are in the file `/android/build.gradle`. 
+
+```gradle
+buildscript {
+  ext {
+    compileSdkVersion = 33 // at least 33
+    targetSdkVersion = 33 // If requesting permission on Android 13 via requestPermission, at least 33 
+    ... 
+ } 
+ ... 
+}
+```
+
+Your android project will fail to build with missing symbols if you do not alter these settings, as we require API33 symbols to support Android 13 notification permissions.
+
+### 2b. Gradle versions
+
+The minimum version of gradle is 7.2.x, and the mimimum version of the android gradle plugin is 7.1.x.
+
+Your android project will fail to build with errors related to resource compilation / packaging if you do not use a new enough android gradle plugin / gradle combination.
+
+## 3. Autolinking with React Native
 Users on React Native 0.60+ automatically have access to "[autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md)",
 requiring no further manual installation steps. To automatically link the package, rebuild your project:
 

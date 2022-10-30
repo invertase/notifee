@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.0.4
+- **[Android]**: Fixes an issue when calling requestPermissions for Android 12 or lower (Fixes [#555](https://github.com/invertase/notifee/issues/555)).
+
+## 7.0.3
+- **[Android]**: Fixes an issue that was introduced in v6.0.0 to support targetSdkVersion 33 (Fixes [#547](https://github.com/invertase/notifee/issues/547)).
+
 ## 7.0.1
 - **[Android]**: Fixes an issue that was introduced in v6.0.0 (Fixes [#528](https://github.com/invertase/notifee/issues/528)).
 

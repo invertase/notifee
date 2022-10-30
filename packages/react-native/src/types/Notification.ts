@@ -74,7 +74,12 @@ export interface Notification {
    *
    * @platform ios
    */
-  readonly remote?: boolean;
+  readonly remote?: {
+    messageId: string;
+    senderId: string;
+    mutableContent?: number;
+    contentAvailable?: number;
+  };
 }
 
 /**
