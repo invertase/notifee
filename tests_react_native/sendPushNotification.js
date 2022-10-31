@@ -1,9 +1,9 @@
-var admin = require('firebase-admin')
+var admin = require('firebase-admin');
 
-var serviceAccount = require('./notifee-admin.json')
+var serviceAccount = require('./notifee-admin.json');
 
 // TODO: put as env
-const TOKEN = ''
+const TOKEN = '';
 
 var payload = {
   android: {
@@ -37,17 +37,17 @@ var payload = {
     },
   },
   token: TOKEN,
-}
+};
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-})
+});
 admin
   .messaging()
   .send(payload)
-  .then((response) => {
-    console.log('Successfully sent message:', response)
+  .then(response => {
+    console.log('Successfully sent message:', response);
   })
-  .catch((error) => {
-    console.log('Error sending message:', error)
+  .catch(error => {
+    console.log('Error sending message:', error);
   })
-  .finally(() => process.exit())
+  .finally(() => process.exit());

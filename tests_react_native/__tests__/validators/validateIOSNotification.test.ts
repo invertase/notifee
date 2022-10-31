@@ -69,19 +69,19 @@ describe('Validate IOS Notification', () => {
     test('returns valid when there is a valid communicationInfo property', () => {
       const $ = validateIOSNotification({
         communicationInfo: {
-         conversationId: 'id',
-         sender: {
-          id: 'sender-id',
-          displayName: 'John Doe'
-         },
+          conversationId: 'id',
+          sender: {
+            id: 'sender-id',
+            displayName: 'John Doe',
+          },
         },
       });
       expect($).toEqual({
         communicationInfo: {
           conversationId: 'id',
           sender: {
-           id: 'sender-id',
-           displayName: 'John Doe'
+            id: 'sender-id',
+            displayName: 'John Doe',
           },
         },
       });

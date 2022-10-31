@@ -164,7 +164,7 @@ function Root(): any {
     }
     currentPermissions = await Notifee.getNotificationSettings();
     console.log('currentPermissions', currentPermissions);
-  
+
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {
