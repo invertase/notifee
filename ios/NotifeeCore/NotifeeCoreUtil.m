@@ -609,16 +609,16 @@
   for (id key in userInfo) {
     // build data dict from remaining keys but skip keys that shouldn't be included in data
     if ([key isEqualToString:@"aps"] || [key hasPrefix:@"gcm."] || [key hasPrefix:@"google."] ||
-       // notifee or notifee_options
-      [key hasPrefix:@"notifee"] ||
-       // fcm_options
-       [key hasPrefix:@"fcm"]) {
+        // notifee or notifee_options
+        [key hasPrefix:@"notifee"] ||
+        // fcm_options
+        [key hasPrefix:@"fcm"]) {
       continue;
-   }
+    }
     data[key] = userInfo[key];
- }
+  }
 
- return data;
+  return data;
 }
 
 + (NSMutableDictionary *)parseUNNotificationContent:(UNNotificationContent *)content {

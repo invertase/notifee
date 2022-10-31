@@ -102,6 +102,7 @@ function Root(): any {
     const initialNotification = await Notifee.getInitialNotification();
     console.log('init: ', { initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
+
     await Notifee.setNotificationCategories([
       {
         id: 'actions',
@@ -140,6 +141,7 @@ function Root(): any {
           {
             id: 'communication',
             title: 'test',
+            input: true,
           },
         ],
       },
@@ -162,17 +164,17 @@ function Root(): any {
     }
     currentPermissions = await Notifee.getNotificationSettings();
     console.log('currentPermissions', currentPermissions);
-    await Notifee.setNotificationCategories([
-      {
-        id: 'stop',
-        actions: [
-          {
-            id: 'stop',
-            title: 'Dismiss',
-          },
-        ],
-      },
-    ]);
+    // await Notifee.setNotificationCategories([
+    //   {
+    //     id: 'stop',
+    //     actions: [
+    //       {
+    //         id: 'stop',
+    //         title: 'Dismiss',
+    //       },
+    //     ],
+    //   },
+    // ]);
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {

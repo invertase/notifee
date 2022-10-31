@@ -5,7 +5,7 @@
 import {
   NotificationIOS,
   IOSForegroundPresentationOptions,
-  IOSNotificationAttachment, IOSCommunicationInfo, IOSNotificationCategoryAction, IOSCommunicationInfoSender
+  IOSNotificationAttachment,
 } from "../types/NotificationIOS";
 import {
   objectHasProperty,
@@ -17,6 +17,7 @@ import {
   isArray,
   isAndroid,
 } from '../utils';
+import validateIOSCommunicationInfo from "./iosCommunicationInfo/validateIOSCommunicationInfo";
 import validateIOSAttachment from './validateIOSAttachment';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
@@ -67,39 +68,11 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
   /**
    * communicationInfo
    */
-  if (objectHasProperty(ios, 'communicationInfo')) {
-    if (!isObject(ios.communicationInfo)) {
-      throw new Error("'ios.communicationInfo' expected an object.");
-    }
-
-    if (!isString(ios.communicationInfo.conversationId)) {
-      throw new Error('"ios.communicationInfo.conversationId" expected a valid string value.');
-    }
-
-    if (ios.communicationInfo.body && !isString(ios.communicationInfo.body)) {
-      throw new Error('"ios.communicationInfo.body" expected a valid string value.');
-    }
-
-    if (ios.communicationInfo.sender && !isObject(ios.communicationInfo.sender)) {
-      throw new Error('"ios.communicationInfo.sender" expected a valid object value.');
-    }
-
-    if (!isString(ios.communicationInfo.sender.id )) {
-      throw new Error('"ios.communicationInfo.sender.id" expected a valid string value.');
-    }
-
-    if (!isString(ios.communicationInfo.sender.avatar )) {
-      throw new Error('"ios.communicationInfo.sender.avatar" expected a valid string value.');
-    }
-
-    if (!isString(ios.communicationInfo.sender.displayName )) {
-      throw new Error('"ios.communicationInfo.sender.displayName" expected a valid string value.');
-    }
-
-    out.communicationInfo = {
-      conversationId: ios.communicationInfo.conversationId,
-      body: ios.communicationInfo.body,
-      sender: ios.communicationInfo.sender
+   if (objectHasProperty(ios, 'communicationInfo') && !isUndefined(ios.communicationInfo)) {
+    try {
+      out.communicationInfo = validateIOSCommunicationInfo(ios.communicationInfo);
+    } catch (e: any) {
+      throw new Error(`'ios.communicationInfo' ${e.message}`);
     }
   }
 

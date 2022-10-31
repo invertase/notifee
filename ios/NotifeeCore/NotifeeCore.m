@@ -185,20 +185,22 @@
   notificationDetail[@"remote"] = @NO;
 
   if (@available(iOS 15.0, *)) {
-    INSendMessageIntent *intent = [NotifeeCoreUtil
-        generateSenderIntentForCommunicationNotifciation:notification[@"ios"]
-                                                                     [@"communicationInfo"]];
+    if (notification[@"ios"][@"communicationInfo"] != nil) {
+      INSendMessageIntent *intent = [NotifeeCoreUtil
+          generateSenderIntentForCommunicationNotifciation:notification[@"ios"]
+                                                                       [@"communicationInfo"]];
 
-    // Use the intent to initialize the interaction.
-    INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
-    interaction.direction = INInteractionDirectionIncoming;
-    [interaction donateInteractionWithCompletion:^(NSError *error) {
-      if (error)
-        NSLog(@"NotifeeCore: Could not donate interaction for communication notification: %@",
-              error);
-    }];
+      // Use the intent to initialize the interaction.
+      INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
+      interaction.direction = INInteractionDirectionIncoming;
+      [interaction donateInteractionWithCompletion:^(NSError *error) {
+        if (error)
+          NSLog(@"NotifeeCore: Could not donate interaction for communication notification: %@",
+                error);
+      }];
 
-    content = [[content contentByUpdatingWithProvider:intent error:nil] mutableCopy];
+      content = [[content contentByUpdatingWithProvider:intent error:nil] mutableCopy];
+    }
   }
 
   UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]

@@ -160,7 +160,8 @@ struct {
 
   // handle notification outside of notifee
   if (notifeeNotification == nil) {
-    notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+    notifeeNotification =
+        [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
   }
 
   if (notifeeNotification != nil) {
