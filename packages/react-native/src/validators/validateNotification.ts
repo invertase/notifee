@@ -2,7 +2,15 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateId, objectHasProperty, isObject, isString, isAndroid, isIOS, isNumber } from "../utils";
+import {
+  generateId,
+  objectHasProperty,
+  isObject,
+  isString,
+  isAndroid,
+  isIOS,
+  isNumber,
+} from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateIOSNotification from './validateIOSNotification';

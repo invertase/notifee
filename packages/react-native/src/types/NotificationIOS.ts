@@ -133,7 +133,7 @@ export interface NotificationIOS {
 export interface IOSCommunicationInfo {
   conversationId: string;
   body?: string;
-  sender: IOSCommunicationInfoPerson
+  sender: IOSCommunicationInfoPerson;
 }
 
 export interface IOSCommunicationInfoPerson {

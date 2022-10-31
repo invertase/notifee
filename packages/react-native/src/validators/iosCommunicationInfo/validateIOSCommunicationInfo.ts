@@ -5,11 +5,14 @@ import validateIOSCommunicationInfoPerson from './validateIOSCommunicationInfoPe
 export default function validateIOSCommunicationInfo(
   communicationInfo: IOSCommunicationInfo,
 ): IOSCommunicationInfo {
-    if (!isObject(communicationInfo)) {
-        throw new Error("expected an object.");
-    }
+  if (!isObject(communicationInfo)) {
+    throw new Error('expected an object.');
+  }
 
-  if (!isString(communicationInfo.conversationId) || communicationInfo.conversationId.length === 0) {
+  if (
+    !isString(communicationInfo.conversationId) ||
+    communicationInfo.conversationId.length === 0
+  ) {
     throw new Error("'conversationId' expected a valid string value.");
   }
 
@@ -35,7 +38,7 @@ export default function validateIOSCommunicationInfo(
       throw new Error("'body' expected a valid string value.");
     }
 
-   out.body = communicationInfo.body
+    out.body = communicationInfo.body;
   }
 
   return out;
