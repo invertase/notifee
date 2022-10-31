@@ -1,5 +1,5 @@
 import { IOSCommunicationInfoPerson } from '../../types/NotificationIOS';
-import { objectHasProperty, isBoolean, isObject, isString, isUndefined } from '../../utils';
+import { objectHasProperty, isObject, isString, isUndefined } from '../../utils';
 
 export default function validateIOSCommunicationInfoPerson(
   person: IOSCommunicationInfoPerson,

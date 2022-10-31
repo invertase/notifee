@@ -164,17 +164,7 @@ function Root(): any {
     }
     currentPermissions = await Notifee.getNotificationSettings();
     console.log('currentPermissions', currentPermissions);
-    // await Notifee.setNotificationCategories([
-    //   {
-    //     id: 'stop',
-    //     actions: [
-    //       {
-    //         id: 'stop',
-    //         title: 'Dismiss',
-    //       },
-    //     ],
-    //   },
-    // ]);
+  
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {
@@ -183,16 +173,16 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 15);
-      // const trigger: TimestampTrigger = {
-      //   type: 0,
-      //   timestamp: date.getTime(),
-      //   alarmManager: true,
-      //   repeatFrequency: RepeatFrequency.HOURLY,
-      // };
-      // Notifee.createTriggerNotification(notification, trigger)
-      //   .then(notificationId => setId(notificationId))
-      //   .catch(console.error);
-      Notifee.displayNotification(notification)
+      const trigger: TimestampTrigger = {
+        type: 0,
+        timestamp: date.getTime(),
+        alarmManager: true,
+        repeatFrequency: RepeatFrequency.HOURLY,
+      };
+      Notifee.createTriggerNotification(notification, trigger)
+        .then(notificationId => setId(notificationId))
+        .catch(console.error);
+      // Notifee.displayNotification(notification)
     }
   }
 
