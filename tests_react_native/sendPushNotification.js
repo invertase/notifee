@@ -1,5 +1,4 @@
 var admin = require('firebase-admin');
-
 var serviceAccount = require('./notifee-admin.json');
 
 // TODO: put as env
