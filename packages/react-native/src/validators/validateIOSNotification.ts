@@ -17,6 +17,7 @@ import {
   isArray,
   isAndroid,
 } from '../utils';
+import validateIOSCommunicationInfo from './iosCommunicationInfo/validateIOSCommunicationInfo';
 import validateIOSAttachment from './validateIOSAttachment';
 
 export default function validateIOSNotification(ios?: NotificationIOS): NotificationIOS {
@@ -61,6 +62,17 @@ export default function validateIOSNotification(ios?: NotificationIOS): Notifica
 
     if (attachments.length) {
       out.attachments = attachments;
+    }
+  }
+
+  /**
+   * communicationInfo
+   */
+  if (objectHasProperty(ios, 'communicationInfo') && !isUndefined(ios.communicationInfo)) {
+    try {
+      out.communicationInfo = validateIOSCommunicationInfo(ios.communicationInfo);
+    } catch (e: any) {
+      throw new Error(`'ios.communicationInfo' ${e.message}`);
     }
   }
 

@@ -1,8 +1,8 @@
 import validateIOSNotification from '@notifee/react-native/src/validators/validateIOSNotification';
 import { NotificationIOS } from '@notifee/react-native/src/types/NotificationIOS';
 
-describe('Validate IOS Input', () => {
-  describe('validateIOSInput()', () => {
+describe('Validate IOS Notification', () => {
+  describe('validateIOSNotification()', () => {
     test('returns valid ', () => {
       const notification: NotificationIOS = {
         attachments: [],
@@ -62,6 +62,27 @@ describe('Validate IOS Input', () => {
           sound: true,
           banner: true,
           list: true,
+        },
+      });
+    });
+
+    test('returns valid when there is a valid communicationInfo property', () => {
+      const $ = validateIOSNotification({
+        communicationInfo: {
+          conversationId: 'id',
+          sender: {
+            id: 'sender-id',
+            displayName: 'John Doe',
+          },
+        },
+      });
+      expect($).toEqual({
+        communicationInfo: {
+          conversationId: 'id',
+          sender: {
+            id: 'sender-id',
+            displayName: 'John Doe',
+          },
         },
       });
     });
@@ -151,6 +172,16 @@ describe('Validate IOS Input', () => {
 
       expect(() => validateIOSNotification(notification)).toThrowError(
         "'notification.ios.launchImageName' expected a string value.",
+      );
+    });
+
+    test('returns invalid when an invalid communicationInfo property is provided', () => {
+      const notification: NotificationIOS = {
+        communicationInfo: {} as any,
+      };
+
+      expect(() => validateIOSNotification(notification)).toThrowError(
+        "'ios.communicationInfo' expected an object.",
       );
     });
   });

@@ -16,6 +16,7 @@
  */
 
 #import "NotifeeCoreExtensionHelper.h"
+#import "Intents/Intents.h"
 #import "NotifeeCore.h"
 #import "NotifeeCoreUtil.h"
 
@@ -37,14 +38,15 @@ static NSString *const kImagePathPrefix = @"image/";
                         withContent:(UNMutableNotificationContent *)content
                  withContentHandler:(void (^)(UNNotificationContent *_Nonnull))contentHandler {
   self.contentHandler = [contentHandler copy];
-  self.bestAttemptContent = content;
+  self.modifiedContent = content;
+
   if (!content.userInfo[@"notifee_options"]) {
     [self deliverNotification];
     return;
   }
 
   // fcm: apns: { payload: {notifee_options: {} } }
-  NSMutableDictionary *options = [self.bestAttemptContent.userInfo[@"notifee_options"] mutableCopy];
+  NSMutableDictionary *options = [self.modifiedContent.userInfo[@"notifee_options"] mutableCopy];
 
   options[@"remote"] = @YES;
 
@@ -58,6 +60,59 @@ static NSString *const kImagePathPrefix = @"image/";
     options[@"id"] = request.identifier;
   }
 
+  if (options[@"title"] == nil && content.title != nil) {
+    options[@"title"] = self.modifiedContent.title;
+  }
+
+  if (options[@"body"] == nil) {
+    options[@"body"] = self.modifiedContent.body;
+  }
+
+  self.modifiedContent = [NotifeeCore buildNotificationContent:options withTrigger:nil];
+  [self processCommunicationData:options];
+}
+
+- (void)processCommunicationData:(NSMutableDictionary *)options {
+  if (options[@"ios"] == nil || options[@"ios"][@"communicationInfo"] == nil) {
+    [self handleAttachmentsAndDeliverNotificaiton:options];
+    return;
+  }
+
+  if (@available(iOS 15.0, *)) {
+    NSMutableDictionary *communicationInfo = [options[@"ios"][@"communicationInfo"] mutableCopy];
+    communicationInfo[@"body"] = options[@"body"];
+    INSendMessageIntent *intent = [NotifeeCoreUtil
+        generateSenderIntentForCommunicationNotifciation:options[@"ios"][@"communicationInfo"]];
+    // Use the intent to initialize the interaction.
+    INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
+    interaction.direction = INInteractionDirectionIncoming;
+
+    NSError *error = nil;
+    UNNotificationContent *updatedContent =
+        [self.modifiedContent contentByUpdatingWithProvider:intent error:&error];
+    if (error) {
+      NSLog(@"NotifeeCoreExtensionHelper: Could not update notification content: %@", error);
+      [self handleAttachmentsAndDeliverNotificaiton:options];
+      return;
+    }
+
+    NSLog(@"NotifeeCoreExtensionHelper: Processing communication notification");
+    self.modifiedContent = [updatedContent mutableCopy];
+    [self handleAttachmentsAndDeliverNotificaiton:options];
+
+    [interaction donateInteractionWithCompletion:^(NSError *error) {
+      if (error)
+        NSLog(@"NotifeeCoreExtensionHelper: Could not donate interaction for communication "
+              @"notification: %@",
+              error);
+    }];
+  } else {
+    // Skip, Communication notifications not supported on iOS 15
+    [self handleAttachmentsAndDeliverNotificaiton:options];
+  }
+}
+
+- (void)handleAttachmentsAndDeliverNotificaiton:(NSMutableDictionary *)options {
   NSMutableDictionary *attachmentDict = [NSMutableDictionary new];
 
   if (options[@"ios"] != nil && options[@"ios"][@"attachments"] != nil &&
@@ -65,16 +120,6 @@ static NSString *const kImagePathPrefix = @"image/";
       [options[@"ios"][@"attachments"] count] != 0) {
     attachmentDict = options[@"ios"][@"attachments"][0];
   }
-
-  if (options[@"title"] == nil && content.title != nil) {
-    options[@"title"] = self.bestAttemptContent.title;
-  }
-
-  if (options[@"body"] == nil) {
-    options[@"body"] = self.bestAttemptContent.body;
-  }
-
-  self.bestAttemptContent = [NotifeeCore buildNotificationContent:options withTrigger:nil];
 
   // Check if image url is in payload and parse it if attachmentDict is empty
   NSString *currentImageURL = options[kPayloadOptionsImageURLName];
@@ -93,7 +138,7 @@ static NSString *const kImagePathPrefix = @"image/";
   [self loadAttachment:attachmentDict
       completionHandler:^(UNNotificationAttachment *attachment) {
         if (attachment != nil) {
-          self.bestAttemptContent.attachments = @[ attachment ];
+          self.modifiedContent.attachments = @[ attachment ];
         }
 
         [self deliverNotification];
@@ -172,7 +217,7 @@ static NSString *const kImagePathPrefix = @"image/";
 
 - (void)deliverNotification {
   if (self.contentHandler) {
-    self.contentHandler(self.bestAttemptContent);
+    self.contentHandler(self.modifiedContent);
   }
 }
 

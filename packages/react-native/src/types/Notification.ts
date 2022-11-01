@@ -51,7 +51,7 @@ export interface Notification {
    * Data can be used to provide additional context to your notification which can be retrieved
    * at a later point in time (e.g. via an event).
    */
-  data?: { [key: string]: string };
+  data?: { [key: string]: string | object | number };
 
   /**
    * Android specific notification options. See the [`NotificationAndroid`](/react-native/reference/notificationandroid)
