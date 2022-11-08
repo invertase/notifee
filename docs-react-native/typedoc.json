@@ -6366,7 +6366,7 @@
 					"type": {
 						"type": "reference",
 						"id": 29,
-						"name": "IOSCommunicationInfoSender"
+						"name": "IOSCommunicationInfoPerson"
 					}
 				}
 			],
@@ -6391,7 +6391,7 @@
 		},
 		{
 			"id": 29,
-			"name": "IOSCommunicationInfoSender",
+			"name": "IOSCommunicationInfoPerson",
 			"kind": 256,
 			"kindString": "Interface",
 			"flags": {
@@ -15360,7 +15360,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1033,
+							"line": 1051,
 							"character": 17
 						}
 					],
@@ -15393,9 +15393,8 @@
 						}
 					],
 					"type": {
-						"type": "reference",
-						"id": 8,
-						"name": "Error"
+						"type": "intrinsic",
+						"name": "unknown"
 					},
 					"inheritedFrom": {
 						"type": "reference",
@@ -15466,7 +15465,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1022,
+							"line": 1040,
 							"character": 8
 						}
 					],
@@ -15549,7 +15548,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1024,
+							"line": 1042,
 							"character": 9
 						}
 					],
