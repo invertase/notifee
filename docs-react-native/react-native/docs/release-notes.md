@@ -5,6 +5,9 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.1.0
+- **[iOS]**: Supports communication notifications on iOS (PR [##526](https://github.com/invertase/notifee/issues/#526)).
+
 ## 7.0.4
 - **[Android]**: Fixes an issue when calling requestPermissions for Android 12 or lower (Fixes [#555](https://github.com/invertase/notifee/issues/555)).
 
