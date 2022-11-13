@@ -2329,14 +2329,8 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Event type is sent when the user dismisses a notification. This is triggered via the user swiping\nthe notification from the notification shade or performing \"Clear all\" notifications.",
-						"text": "This event is **not** sent when a notification is cancelled or times out.\n",
-						"tags": [
-							{
-								"tag": "platform",
-								"text": "android Android\n"
-							}
-						]
+						"shortText": "Event type is sent when the user dismisses a notification. This is triggered via the user swiping\nthe notification from the notification shade.",
+						"text": "On Android, the event is also sent when performing \"Clear all\" notifications unlike on iOS.\n\nThis event is **not** sent when a notification is cancelled or times out.\n"
 					},
 					"sources": [
 						{
@@ -15360,7 +15354,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1051,
+							"line": 1033,
 							"character": 17
 						}
 					],
@@ -15393,8 +15387,9 @@
 						}
 					],
 					"type": {
-						"type": "intrinsic",
-						"name": "unknown"
+						"type": "reference",
+						"id": 8,
+						"name": "Error"
 					},
 					"inheritedFrom": {
 						"type": "reference",
@@ -15465,7 +15460,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1040,
+							"line": 1022,
 							"character": 8
 						}
 					],
@@ -15548,7 +15543,7 @@
 					"sources": [
 						{
 							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
-							"line": 1042,
+							"line": 1024,
 							"character": 9
 						}
 					],

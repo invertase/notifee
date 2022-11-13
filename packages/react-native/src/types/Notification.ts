@@ -313,11 +313,11 @@ export enum EventType {
 
   /**
    * Event type is sent when the user dismisses a notification. This is triggered via the user swiping
-   * the notification from the notification shade or performing "Clear all" notifications.
+   * the notification from the notification shade.
+   *
+   * On Android, the event is also sent when performing "Clear all" notifications unlike on iOS.
    *
    * This event is **not** sent when a notification is cancelled or times out.
-   *
-   * @platform android Android
    */
   DISMISSED = 0,
 
