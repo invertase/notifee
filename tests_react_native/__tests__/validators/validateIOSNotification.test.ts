@@ -84,6 +84,13 @@ describe('Validate IOS Notification', () => {
             displayName: 'John Doe',
           },
         },
+        foregroundPresentationOptions: {
+          alert: true,
+          badge: true,
+          sound: true,
+          banner: true,
+          list: true,
+        },
       });
     });
 
@@ -176,12 +183,20 @@ describe('Validate IOS Notification', () => {
     });
 
     test('returns invalid when an invalid communicationInfo property is provided', () => {
-      const notification: NotificationIOS = {
-        communicationInfo: {} as any,
+      let notification: NotificationIOS = {
+        communicationInfo: '' as any,
       };
 
       expect(() => validateIOSNotification(notification)).toThrowError(
         "'ios.communicationInfo' expected an object.",
+      );
+
+      notification = {
+        communicationInfo: {} as any,
+      };
+
+      expect(() => validateIOSNotification(notification)).toThrowError(
+        "'ios.communicationInfo' 'conversationId' expected a valid string value.",
       );
     });
   });
