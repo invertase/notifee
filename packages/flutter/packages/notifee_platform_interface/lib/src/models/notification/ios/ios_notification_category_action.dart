@@ -36,13 +36,14 @@ class IOSNotificationCategoryAction {
 
   bool? authenticationRequired;
 
-  factory IOSNotificationCategoryAction.fromMap(Map<String, dynamic> map) =>
+  factory IOSNotificationCategoryAction.fromMap(Map map) =>
       IOSNotificationCategoryAction(
         id: map['id'] as String,
         title: map['title'] as String?,
-        destructive: map['destructive'] as bool?,
-        foreground: map['foreground'] as bool?,
-        authenticationRequired: map['authenticationRequired'] as bool?,
+        destructive: map['destructive'] == 0 ? false : true,
+        foreground: map['foreground'] == 0 ? false : true,
+        authenticationRequired:
+            map['authenticationRequired'] == 0 ? false : true,
       );
 
   Map<String, Object?> asMap() {

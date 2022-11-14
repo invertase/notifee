@@ -20,17 +20,21 @@ class NotificationListItemView extends StatelessWidget {
   const NotificationListItemView({super.key});
 
   /// A single data row.
-  Widget row(String title, String? value) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('$title: '),
-          Expanded(child: Text(value ?? 'N/A')),
-        ],
-      ),
-    );
+  Widget row(String title, value) {
+    if (value == null) {
+      return SizedBox(height: 0);
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('$title: '),
+            Expanded(child: Text(value.toString())),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -51,8 +55,8 @@ class NotificationListItemView extends StatelessWidget {
             row('Triggered application open',
                 args.openedApplication.toString()),
             row('Notification ID', notification.id),
-            row('iOS', notification.ios?.toString()),
-            row('Android', notification.android?.toString()),
+            row('iOS', notification.ios),
+            row('Android', notification.android),
             ...[
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -83,7 +87,7 @@ class NotificationListItemView extends StatelessWidget {
                       ),
                       row(
                         'Actions',
-                        notification.android!.actions?.toString(),
+                        notification.android!.actions,
                       ),
                       row(
                         'Color',
@@ -91,11 +95,12 @@ class NotificationListItemView extends StatelessWidget {
                       ),
                       row(
                         'Press Action',
-                        notification.android!.pressAction.toString(),
+                        notification.android!.pressAction?.launchActivity
+                            .toString(),
                       ),
                       row(
                         'Importance',
-                        notification.android!.importance.toString(),
+                        notification.android!.importance!.name,
                       ),
                       row(
                         'Sound',
@@ -107,15 +112,15 @@ class NotificationListItemView extends StatelessWidget {
                       ),
                       row(
                         'Visibility',
-                        notification.android!.visibility.toString(),
+                        notification.android!.visibility,
                       ),
                       row(
                         'Group ID',
-                        notification.android!.groupId?.toString(),
+                        notification.android!.groupId,
                       ),
                       row(
                         'Group Summary',
-                        notification.android!.groupSummary.toString(),
+                        notification.android!.groupSummary,
                       ),
                     ],
                     if (notification.ios != null) ...[
@@ -124,13 +129,14 @@ class NotificationListItemView extends StatelessWidget {
                         'iOS Properties',
                         style: TextStyle(fontSize: 18),
                       ),
+                      row('Category Id', notification.ios!.categoryId),
                       row(
                         'Thread Id',
                         notification.ios!.threadId,
                       ),
                       row(
                         'Badge Count',
-                        notification.ios!.badgeCount.toString(),
+                        notification.ios!.badgeCount,
                       ),
                       row(
                         'Sound',

@@ -1,16 +1,19 @@
 import 'dart:async';
 
+import 'package:example/displayed_notifications.dart';
 import 'package:example/permissions.dart';
+import 'package:example/notification_list.dart';
 import 'package:example/trigger_notification_list.dart';
 import 'package:example/trigger_notification_list_item.dart';
+import 'package:example/notification_list_item.dart';
+import 'package:example/create_notification_modal.dart';
+import 'package:example/channels.dart';
+import 'package:example/common.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:notifee/notifee.dart';
 import 'package:notifee/notifee.dart' as notifee;
-
-import 'example_notifications.dart';
-import 'notification_list_item.dart';
-import 'notification_list.dart';
+import 'notification_list.dart' as _notification_list;
 
 /// Define a top-level named handler which background/terminated notifications will
 /// call.
@@ -28,13 +31,38 @@ Future<void> main() async {
   // Set the background handler early on, as a named top-level function
   notifee.onBackgroundEvent(_notifeeBackgroundHandler);
 
+  runApp(const NotifeeExampleApp());
+}
+
+/// Entry point for the example application.
+class NotifeeExampleApp extends StatelessWidget {
+  const NotifeeExampleApp({super.key});
+  void superInit() {}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Notifee Example App',
+      theme: ThemeData.dark(),
+      routes: {
+        '/': (context) => const Application(),
+        '/notification': (context) => const NotificationListItemView(),
+        '/trigger_notification': (context) =>
+            const TriggerNotificationListItemView(),
+        '/trigger_notifications': (context) => const TriggerNotificationList(),
+        '/displayed_notifications': (context) => const DisplayedNotifications(),
+        '/channels': (context) => const Channels(),
+      },
+    );
+  }
+}
+
+Future<void> createResources() async {
   /// Create Android Notification Channels.
   Channel channel = Channel(
     id: ExampleAndroidChannelIds.highImportance.name,
     name: 'High Importance Notifications',
     importance: AndroidImportance.high,
   );
-
   await notifee.deleteChannel(channel.id);
   await notifee.createChannel(channel);
 
@@ -47,28 +75,15 @@ Future<void> main() async {
   await notifee.deleteChannel(channel.id);
   await notifee.createChannel(channel);
 
-  await notifee.createChannel(channel);
+  // Create iOS category with actions
+  final List<IOSNotificationCategory> categories = [
+    IOSNotificationCategory(id: 'cat-cat', actions: [
+      IOSNotificationCategoryAction(id: 'scratch', title: 'scratch'),
+      IOSNotificationCategoryAction(id: 'purr', title: 'scratch'),
+    ])
+  ];
 
-  runApp(const NotifeeExampleApp());
-}
-
-/// Entry point for the example application.
-class NotifeeExampleApp extends StatelessWidget {
-  const NotifeeExampleApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Notifee Example App',
-      theme: ThemeData.dark(),
-      routes: {
-        '/': (context) => const Application(),
-        '/notification': (context) => const NotificationListItemView(),
-        '/trigger_notification': (context) =>
-            const TriggerNotificationListItemView(),
-        '/trigger_notifications': (context) => const TriggerNotificationList(),
-      },
-    );
-  }
+  await notifee.setNotificationCategories(categories);
 }
 
 /// Renders the example application.
@@ -82,6 +97,9 @@ class _Application extends State<Application> {
   @override
   void initState() {
     super.initState();
+
+    createResources();
+
     notifee
         .getInitialNotification()
         .then((InitialNotification? initialNotification) {
@@ -94,6 +112,17 @@ class _Application extends State<Application> {
         );
       }
     });
+
+    void getChannels() async {
+      List<Channel> channels = await notifee.getChannels();
+      for (var i = 0; i < channels.length; i++) {
+        if (channelIds.contains(channels[i].name.toString())) {
+        } else {
+          channelIds.add(channels[i].name.toString());
+        }
+      }
+      selectedAndroidChannelId = channelIds[0];
+    }
 
     notifee.onForegroundEvent.listen((Event event) {
       if (kDebugMode) {
@@ -114,14 +143,17 @@ class _Application extends State<Application> {
 
   Future<void> displayNotification() async {
     try {
+      createResources();
       NotifeeNotification notification = selectedNotification!;
-      if (notification.android != null) {
-        notification.android!.channelId = selectedAndroidChannelId;
-        notification.android!.smallIcon = exampleSmallIcon;
-      } else {
+
+      if (notification.android == null) {
         notification.android = NotificationAndroid(
             channelId: selectedAndroidChannelId, smallIcon: exampleSmallIcon);
+      } else {
+        notification.android!.channelId = selectedAndroidChannelId;
+        notification.android!.smallIcon = exampleSmallIcon;
       }
+      notification.ios = NotificationIOS(categoryId: 'cat-cat');
 
       await notifee.requestPermission();
       await notifee.displayNotification(notification);
@@ -170,6 +202,7 @@ class _Application extends State<Application> {
             print('Notifee Example: cancelDisplayedNotifications');
           }
           await notifee.cancelDisplayedNotifications();
+          _notification_list.notifications.value = [];
         }
         break;
       default:
@@ -208,8 +241,19 @@ class _Application extends State<Application> {
           ),
         ],
       ),
-      floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
+      floatingActionButton: InkWell(
+        splashColor: Colors.deepPurple[700],
+        onLongPress: () {
+          showModalBottomSheet(
+              enableDrag: false,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return const CreateNotificationModal();
+              });
+        },
+        child: FloatingActionButton(
           onPressed: displayNotification,
           backgroundColor: Colors.white,
           child: const Icon(Icons.send),

@@ -337,7 +337,8 @@ class MethodChannelNotifee extends NotifeePlatform {
     if (defaultTargetPlatform != TargetPlatform.iOS) {
       return;
     }
-    await channel.invokeMethod('setNotificationCategories', categories);
+    await channel.invokeMethod(
+        'setNotificationCategories', categories.map((e) => e.asMap()).toList());
   }
 
   @override
@@ -346,11 +347,12 @@ class MethodChannelNotifee extends NotifeePlatform {
       return [];
     }
 
-    List<Map<String, dynamic>>? categories = await channel
-        .invokeListMethod<Map<String, dynamic>>('getNotificationCategories');
+    List<Map>? result =
+        await channel.invokeListMethod<Map>('getNotificationCategories');
 
-    return (categories?.map((e) => IOSNotificationCategory.fromMap(e)).toList())
-        as List<IOSNotificationCategory>;
+    return (result
+        ?.map((e) => IOSNotificationCategory.fromMap(e.cast()))
+        .toList()) as List<IOSNotificationCategory>;
   }
 
   // Android
@@ -455,9 +457,9 @@ class MethodChannelNotifee extends NotifeePlatform {
       return [];
     }
 
-    List<Map<String, dynamic>>? result =
-        await channel.invokeListMethod<Map<String, dynamic>>('getChannels');
-    return (result?.map((e) => Channel.fromMap(e)).toList()) as List<Channel>;
+    List<Map>? result = await channel.invokeListMethod<Map>('getChannels');
+    return (result?.map((e) => Channel.fromMap(e.cast())).toList())
+        as List<Channel>;
   }
 
   @override

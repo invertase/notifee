@@ -25,7 +25,7 @@ class IOSNotificationCategory {
     allowAnnouncement,
     hiddenPreviewsShowTitle,
     hiddenPreviewsShowSubtitle,
-    this.hiddenPreviewsBodyPlaceholder,
+    hiddenPreviewsBodyPlaceholder,
     this.intentIdentifiers,
     this.actions,
   })  : allowInCarPlay = allowInCarPlay ?? false,
@@ -38,7 +38,6 @@ class IOSNotificationCategory {
   String? summaryFormat;
 
   bool? allowInCarPlay;
-
   bool? allowAnnouncement;
 
   bool? hiddenPreviewsShowTitle;
@@ -53,22 +52,22 @@ class IOSNotificationCategory {
 
   factory IOSNotificationCategory.fromMap(Map<String, dynamic> map) =>
       IOSNotificationCategory(
-        id: map['id'] as String,
-        summaryFormat: map['summaryFormat'] as String?,
-        allowInCarPlay: map['allowInCarPlay'] as bool?,
-        allowAnnouncement: map['allowAnnouncement'] as bool?,
-        hiddenPreviewsShowTitle: map['hiddenPreviewsShowTitle'] as bool?,
-        hiddenPreviewsShowSubtitle: map['hiddenPreviewsShowSubtitle'] as bool?,
-        hiddenPreviewsBodyPlaceholder:
-            map['hiddenPreviewsBodyPlaceholder'] as bool?,
-        intentIdentifiers: (map['intentIdentifiers'] as List<dynamic>?)
-            ?.map((e) => IOSIntentIdentifier.values[e])
-            .toList(),
-        actions: (map['actions'] as List<dynamic>?)
-            ?.map((e) => IOSNotificationCategoryAction.fromMap(
-                Map<String, dynamic>.from(e as Map)))
-            .toList(),
-      );
+          id: map['id'] as String,
+          summaryFormat: map['summaryFormat'] as String?,
+          allowInCarPlay: map['allowInCarPlay'] == 0 ? false : true,
+          allowAnnouncement: map['allowAnnouncement'] == 0 ? false : true,
+          hiddenPreviewsShowTitle:
+              map['hiddenPreviewsShowTitle'] == 0 ? false : true,
+          hiddenPreviewsShowSubtitle:
+              map['hiddenPreviewsShowSubtitle'] == 0 ? false : true,
+          hiddenPreviewsBodyPlaceholder:
+              map['hiddenPreviewsBodyPlaceholder'] == 0 ? false : true,
+          intentIdentifiers: (map['intentIdentifiers'] as List<dynamic>?)
+              ?.map((e) => IOSIntentIdentifier.values[e])
+              .toList(),
+          actions: (map['actions'] as List<dynamic>?)
+              ?.map((e) => IOSNotificationCategoryAction.fromMap(e))
+              .toList());
 
   Map<String, Object?> asMap() {
     Map<String, Object?> map = {
@@ -80,8 +79,10 @@ class IOSNotificationCategory {
       'hiddenPreviewsShowSubtitle': hiddenPreviewsShowSubtitle,
       'hiddenPreviewsBodyPlaceholder': hiddenPreviewsBodyPlaceholder,
       'intentIdentifiers': intentIdentifiers?.asMap(),
-      'actions': actions?.asMap(),
+      'actions': actions?.map((item) => item.asMap()).toList(),
     };
+
+    map.removeWhere((_, value) => value == null);
 
     return map;
   }

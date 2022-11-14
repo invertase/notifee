@@ -35,6 +35,8 @@ export 'package:notifee_platform_interface/notifee_platform_interface.dart'
         InitialNotification,
         Channel,
         AndroidImportance,
+        IOSNotificationCategory,
+        IOSNotificationCategoryAction,
         IOSNotificationPermissions,
         IOSNotificationAttachment,
         IOSAttachmentThumbnailClippingRect,
