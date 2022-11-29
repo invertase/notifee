@@ -51,9 +51,9 @@ public class Notifee {
   @KeepForSdk
   public static Notifee getInstance() {
     if (!mIsnitialized) {
-        Logger.w(TAG, "getInstance() accessed before event listener is initialized");
-        mNotifee = new Notifee();
-    };
+      Logger.w(TAG, "getInstance() accessed before event listener is initialized");
+      mNotifee = new Notifee();
+    }
 
     return mNotifee;
   }
@@ -67,12 +67,12 @@ public class Notifee {
   public static void initialize(@Nullable EventListener eventListener) {
     synchronized (Notifee.class) {
       if (mIsnitialized) {
-          return;
-      };
+        return;
+      }
 
       if (mNotifee == null) {
         mNotifee = new Notifee();
-      };
+      }
 
       if (eventListener != null) {
         EventSubscriber.register(eventListener);
