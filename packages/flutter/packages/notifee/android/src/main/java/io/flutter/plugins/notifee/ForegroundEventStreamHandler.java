@@ -17,7 +17,7 @@ package io.flutter.plugins.notifee;
  *
  */
 
-import static app.notifee.core.Notifee.configure;
+import static app.notifee.core.Notifee.initialize;
 
 import io.flutter.plugin.common.EventChannel;
 
@@ -26,7 +26,7 @@ public class ForegroundEventStreamHandler implements EventChannel.StreamHandler 
 
   public ForegroundEventStreamHandler() {
     this.notifeeEventListener = new NotifeeEventSubscriber();
-    configure(notifeeEventListener);
+    initialize(notifeeEventListener);
   }
 
   @Override

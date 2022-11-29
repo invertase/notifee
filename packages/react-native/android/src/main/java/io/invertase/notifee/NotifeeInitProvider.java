@@ -9,7 +9,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import app.notifee.core.InitProvider;
 import app.notifee.core.Notifee;
-import app.notifee.core.NotifeeConfig;
 import com.facebook.react.modules.systeminfo.ReactNativeVersion;
 import java.util.Map;
 
@@ -18,12 +17,7 @@ public class NotifeeInitProvider extends InitProvider {
   public boolean onCreate() {
     boolean onCreate = super.onCreate();
 
-    NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
-    configBuilder.setProductVersion(getApplicationVersionString());
-    configBuilder.setFrameworkVersion(getReactNativeVersionString());
-    configBuilder.setEventSubscriber(new NotifeeEventSubscriber());
-
-    Notifee.configure(configBuilder.build());
+    Notifee.initialize(new NotifeeEventSubscriber());
     return onCreate;
   }
 

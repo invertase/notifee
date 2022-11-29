@@ -44,12 +44,17 @@ import java.util.List;
 public class Notifee {
   private static final String TAG = "API";
   private static Notifee mNotifee = null;
-  private static NotifeeConfig mNotifeeConfig = null;
+  private static boolean mIsnitialized = false;
 
   @KeepForSdk public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
 
   @KeepForSdk
   public static Notifee getInstance() {
+    if (!mIsnitialized) {
+      Logger.w(TAG, "getInstance() accessed before event listener is initialized");
+      mNotifee = new Notifee();
+    }
+
     return mNotifee;
   }
 
@@ -59,32 +64,22 @@ public class Notifee {
   }
 
   @KeepForSdk
-  public static void configure(@NonNull NotifeeConfig notifeeConfig) {
+  public static void initialize(@Nullable EventListener eventListener) {
     synchronized (Notifee.class) {
-      initialize(notifeeConfig);
-    }
-  }
+      if (mIsnitialized) {
+        return;
+      }
 
-  @KeepForSdk
-  public static void configure(@NonNull EventListener eventListener) {
-    synchronized (Notifee.class) {
-      NotifeeConfig.Builder configBuilder = new NotifeeConfig.Builder();
-      configBuilder.setEventSubscriber(eventListener);
-      initialize(configBuilder.build());
-    }
-  }
+      if (mNotifee == null) {
+        mNotifee = new Notifee();
+      }
 
-  private static void initialize(NotifeeConfig notifeeConfig) {
-    synchronized (Notifee.class) {
-      if (mNotifee != null) return;
-      mNotifee = new Notifee();
-      mNotifeeConfig = notifeeConfig;
-      EventSubscriber.register(notifeeConfig.getEventSubscriber());
-    }
-  }
+      if (eventListener != null) {
+        EventSubscriber.register(eventListener);
+      }
 
-  static NotifeeConfig getNotifeeConfig() {
-    return mNotifeeConfig;
+      mIsnitialized = true;
+    }
   }
 
   @KeepForSdk
