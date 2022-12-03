@@ -280,12 +280,12 @@ export function NotificationSpec(spec: TestScope): void {
 
         // Manual steps:
         // 1. Minimize app
-        // 2. Open notification drawer
+        // 2. Open notifications
         // 3. Tap on 'First Action'
         // 4. Make sure you see:
         // >  WARN  Received a ACTION_PRESS Background event in JS mode.
         // >  WARN  Notification Cancelled first_action
-      });
+      }, 'focus');
     });
   });
 
