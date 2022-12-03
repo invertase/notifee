@@ -15,7 +15,6 @@ function TestApp() {
       specs={[NotificationSpec, ApiSpec]}
       store={testHookStore}
       customReporter={NativeReporter.reporter}
-      only={['focus']}
     >
       <App />
     </Tester>
