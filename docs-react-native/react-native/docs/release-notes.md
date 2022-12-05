@@ -6,8 +6,8 @@ previous: /react-native/docs/installation
 ---
 
 ## 7.2.0
-- **[Android]**: Fixes an issue for Android 12 with quick actions when the app is in the background  (Fixes [#404](https://github.com/invertase/notifee/pull/404)).
-- **[Android]**: Prevents a NullPointerException to occur when a background service is triggered (PR [#592](https://github.com/invertase/notifee/pull/592)).
+- **[Android]**: Fixes an issue for Android 12 with quick actions when the app is in the background  (Fixes [#404](https://github.com/invertase/notifee/issues/404)).
+- **[Android]**: Prevents a NullPointerException to occur when a background service is triggered (Fixes [#592](https://github.com/invertase/notifee/issues/592)).
 
 ## 7.1.0
 - **[iOS]**: Supports communication notifications on iOS (PR [#526](https://github.com/invertase/notifee/pull/526)).
