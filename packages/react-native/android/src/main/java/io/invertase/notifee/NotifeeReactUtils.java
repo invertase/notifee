@@ -210,12 +210,9 @@ class NotifeeReactUtils {
     for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
       if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
           && appProcess.processName.equals(packageName)) {
-        ReactContext reactContext;
-
-        try {
-          reactContext = (ReactContext) context;
-        } catch (ClassCastException exception) {
-          return true;
+        ReactContext reactContext = getReactContext();
+        if (reactContext == null) {
+          return false;
         }
 
         return reactContext.getLifecycleState() == LifecycleState.RESUMED;
