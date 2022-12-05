@@ -250,6 +250,42 @@ export function NotificationSpec(spec: TestScope): void {
           });
         },
       );
+
+      spec.it('displays a notification with a quick action without input', async function () {
+        return new Promise(async (resolve, reject) => {
+          return notifee
+            .displayNotification({
+              title: '',
+              body: '',
+              android: {
+                channelId: 'high',
+                actions: [
+                  {
+                    title: 'First Action',
+                    pressAction: {
+                      id: 'first_action',
+                    },
+                  },
+                ],
+              },
+            })
+            .then(id => {
+              expect(id).equals(id);
+              resolve();
+            })
+            .catch(e => {
+              reject(e);
+            });
+        });
+
+        // Manual steps:
+        // 1. Minimize app
+        // 2. Open notification drawer
+        // 3. Tap on 'First Action'
+        // 4. Make sure you see:
+        // >  WARN  Received a ACTION_PRESS Background event in JS mode.
+        // >  WARN  Notification Cancelled first_action
+      });
     });
   });
 
