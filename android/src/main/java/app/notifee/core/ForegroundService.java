@@ -45,10 +45,12 @@ public class ForegroundService extends Service {
     intent.putExtra("notification", notification);
     intent.putExtra("notificationBundle", notificationBundle);
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    // TODO pass this config from notificationBundle
+    boolean startServiceWithPromise = false;
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && startServiceWithPromise) {
       ContextHolder.getApplicationContext().startForegroundService(intent);
     } else {
-      // TODO test this on older device
       ContextHolder.getApplicationContext().startService(intent);
     }
   }
