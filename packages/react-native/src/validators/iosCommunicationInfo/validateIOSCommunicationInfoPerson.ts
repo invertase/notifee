@@ -21,8 +21,6 @@ export default function validateIOSCommunicationInfoPerson(
     displayName: person.displayName,
   };
 
-  console.log('avattt', person.avatar);
-
   if (objectHasProperty(person, 'avatar') && !isUndefined(person.avatar)) {
     if (!isString(person.avatar)) {
       throw new Error('"person.avatar" expected a valid object value.');
