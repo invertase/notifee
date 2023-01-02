@@ -142,7 +142,7 @@ describe('Validate Notification', () => {
 
     test('returns invalid when an invalid data properties are provided', () => {
       const notification: Notification = {
-        data: { id: 0 as any },
+        data: { id: [] as any },
       };
 
       expect(() => validateNotification(notification)).toThrowError(

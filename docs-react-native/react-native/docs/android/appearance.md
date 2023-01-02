@@ -116,6 +116,9 @@ notifee.displayNotification({
 
     // Android resource (mipmap or drawable)
     largeIcon: 'large_icon',
+    
+    // Base 64 image
+    largeIcon: `data:${image.mime};base64,${image.rawBase64Data}`
   },
 });
 ```

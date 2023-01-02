@@ -94,6 +94,10 @@ public class NotificationReceiverHandler {
     NotificationManagerCompat.from(context)
         .cancel(intent.getIntExtra(NOTIFICATION_ID_INTENT_KEY, 0));
 
+    InitialNotificationEvent initialNotificationEvent =
+        new InitialNotificationEvent(notificationModel, extras);
+    EventBus.postSticky(initialNotificationEvent);
+
     // Send event
     EventBus.post(new NotificationEvent(TYPE_ACTION_PRESS, notificationModel, extras));
   }

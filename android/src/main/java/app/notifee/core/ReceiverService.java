@@ -211,10 +211,10 @@ public class ReceiverService extends Service {
       int targetSdkVersion =
           ContextHolder.getApplicationContext().getApplicationInfo().targetSdkVersion;
 
-      // Close notification drawer if targetSdkVersion is Android 11 and lower
+      // Close notification drawer if application SDK is Android 11 and lower
       // See
       // https://developer.android.com/about/versions/12/behavior-changes-all#close-system-dialogs
-      if (targetSdkVersion < Build.VERSION_CODES.S) {
+      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
         ContextHolder.getApplicationContext()
             .sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
       }

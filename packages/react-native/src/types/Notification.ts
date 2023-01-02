@@ -51,7 +51,7 @@ export interface Notification {
    * Data can be used to provide additional context to your notification which can be retrieved
    * at a later point in time (e.g. via an event).
    */
-  data?: { [key: string]: string };
+  data?: { [key: string]: string | object | number };
 
   /**
    * Android specific notification options. See the [`NotificationAndroid`](/react-native/reference/notificationandroid)
@@ -313,11 +313,11 @@ export enum EventType {
 
   /**
    * Event type is sent when the user dismisses a notification. This is triggered via the user swiping
-   * the notification from the notification shade or performing "Clear all" notifications.
+   * the notification from the notification shade.
+   *
+   * On Android, the event is also sent when performing "Clear all" notifications unlike on iOS.
    *
    * This event is **not** sent when a notification is cancelled or times out.
-   *
-   * @platform android Android
    */
   DISMISSED = 0,
 

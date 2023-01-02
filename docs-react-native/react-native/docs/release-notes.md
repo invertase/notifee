@@ -5,6 +5,17 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.3.0
+- **[Android]**: Fixes an issue for Android 11 and lower to ensure notification drawer is closed when a quick action is pressed. (Fixes [#614](https://github.com/invertase/notifee/issues/614)).
+- **[Android]**: Fixes an issue where the initial notification was not set if the app opened via a quick action (PR [#605](https://github.com/invertase/notifee/pull/605)).
+
+## 7.2.0
+- **[Android]**: Fixes an issue for Android 12 with quick actions when the app is in the background  (Fixes [#404](https://github.com/invertase/notifee/issues/404)).
+- **[Android]**: Prevents a NullPointerException to occur when a background service is triggered (Fixes [#592](https://github.com/invertase/notifee/issues/592)).
+
+## 7.1.0
+- **[iOS]**: Supports communication notifications on iOS (PR [#526](https://github.com/invertase/notifee/pull/526)).
+
 ## 7.0.4
 - **[Android]**: Fixes an issue when calling requestPermissions for Android 12 or lower (Fixes [#555](https://github.com/invertase/notifee/issues/555)).
 

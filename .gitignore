@@ -549,6 +549,7 @@ Pods/*
 **/version.js
 typedoc.raw.json
 tests/ios/Firebase
+notifee-admin.json
 .tmp
 
 

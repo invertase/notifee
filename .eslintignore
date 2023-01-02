@@ -6,3 +6,4 @@ docs
 dist
 android
 packages/**/plugin/build/**
+sendPushNotification.js

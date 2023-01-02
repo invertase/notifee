@@ -116,6 +116,30 @@ export interface NotificationIOS {
    * By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
    */
   foregroundPresentationOptions?: IOSForegroundPresentationOptions;
+
+  /**
+   * Optional property for communication notifications
+   *
+   * @platform ios iOS >= 15
+   */
+  communicationInfo?: IOSCommunicationInfo;
+}
+
+/**
+ * An interface to support communication notifications on iOS 15 and above
+ *
+ * @platform ios
+ */
+export interface IOSCommunicationInfo {
+  conversationId: string;
+  body?: string;
+  sender: IOSCommunicationInfoPerson;
+}
+
+export interface IOSCommunicationInfoPerson {
+  id: string;
+  displayName: string;
+  avatar?: string;
 }
 
 /**

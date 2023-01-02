@@ -2,7 +2,15 @@
  * Copyright (c) 2016-present Invertase Limited
  */
 
-import { generateId, objectHasProperty, isObject, isString, isAndroid, isIOS } from '../utils';
+import {
+  generateId,
+  objectHasProperty,
+  isObject,
+  isString,
+  isAndroid,
+  isIOS,
+  isNumber,
+} from '../utils';
 
 import validateAndroidNotification from './validateAndroidNotification';
 import validateIOSNotification from './validateIOSNotification';
@@ -114,7 +122,7 @@ export default function validateNotification(notification: Notification): Notifi
 
     for (let i = 0; i < entries.length; i++) {
       const [key, value] = entries[i];
-      if (!isString(value)) {
+      if (!isString(value) && !isNumber(value) && !isObject(value)) {
         throw new Error(
           `'notification.data' value for key "${key}" is invalid, expected a string value.`,
         );

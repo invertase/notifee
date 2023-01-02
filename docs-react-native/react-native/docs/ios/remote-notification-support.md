@@ -198,3 +198,5 @@ function App() {
   }, []);
 }
 ```
+
+> On iOS, only notifications with a `categoryId` will receive a `DISMISSED` event.

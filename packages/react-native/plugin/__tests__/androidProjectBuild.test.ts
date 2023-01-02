@@ -10,10 +10,10 @@ const getProjectGradle = () => {
 };
 
 describe('[Android] project build.gradle test', () => {
-  it('updates java compileSdkVersion to 31 in project build.gradle', async () => {
+  it('updates java compileSdkVersion to 33 in project build.gradle', async () => {
     const projectGradle = await getProjectGradle();
     const newProjectGradle = setCompileSdkVersion(projectGradle);
 
-    expect(newProjectGradle).toContain('compileSdkVersion = 31');
+    expect(newProjectGradle).toContain('compileSdkVersion = 33');
   });
 });

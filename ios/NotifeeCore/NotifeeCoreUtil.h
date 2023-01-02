@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 
 #import <UserNotifications/UserNotifications.h>
+#import "Intents/Intents.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -67,6 +68,9 @@ typedef NS_ENUM(NSInteger, NotifeeCoreRepeatFrequency) {
 + (NSNumber *)convertToTimestamp:(NSDate *)date;
 
 + (NSDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request;
+
++ (INSendMessageIntent *)generateSenderIntentForCommunicationNotifciation:
+    (NSMutableDictionary *)options;
 
 + (BOOL)isAppExtension;
 

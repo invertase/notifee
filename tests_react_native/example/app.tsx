@@ -73,12 +73,12 @@ const channels: AndroidChannel[] = [
 ];
 
 async function onMessage(message: RemoteMessage): Promise<void> {
-  console.log('New FCM Message', message.messageId);
-  await Notifee.displayNotification({
-    title: 'onMessage',
-    body: `with message ${message.messageId}`,
-    android: { channelId: 'default', tag: 'hello1' },
-  });
+  console.log('New FCM Message', message.data);
+  // await Notifee.displayNotification({
+  //   title: 'onMessage',
+  //   body: `with message ${message.messageId}`,
+  //   android: { channelId: 'default', tag: 'hello1' },
+  // });
 }
 
 async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
@@ -102,6 +102,7 @@ function Root(): any {
     const initialNotification = await Notifee.getInitialNotification();
     console.log('init: ', { initialNotification });
     await Promise.all(channels.map($ => Notifee.createChannel($)));
+
     await Notifee.setNotificationCategories([
       {
         id: 'actions',
@@ -134,6 +135,16 @@ function Root(): any {
           },
         ],
       },
+      {
+        id: 'communications',
+        actions: [
+          {
+            id: 'communication',
+            title: 'test',
+            input: true,
+          },
+        ],
+      },
     ]);
   }
 
@@ -153,17 +164,7 @@ function Root(): any {
     }
     currentPermissions = await Notifee.getNotificationSettings();
     console.log('currentPermissions', currentPermissions);
-    await Notifee.setNotificationCategories([
-      {
-        id: 'stop',
-        actions: [
-          {
-            id: 'stop',
-            title: 'Dismiss',
-          },
-        ],
-      },
-    ]);
+
     if (Array.isArray(notification)) {
       Promise.all(notification.map($ => Notifee.displayNotification($))).catch(console.error);
     } else {
@@ -181,6 +182,7 @@ function Root(): any {
       Notifee.createTriggerNotification(notification, trigger)
         .then(notificationId => setId(notificationId))
         .catch(console.error);
+      // Notifee.displayNotification(notification)
     }
   }
 
