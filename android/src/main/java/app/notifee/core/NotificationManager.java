@@ -579,7 +579,11 @@ class NotificationManager {
               }
 
               if (androidBundle.getAsForegroundService()) {
-                ForegroundService.start(hashCode, notification, notificationModel.toBundle());
+                if(ForegroundService.start(hashCode, notification, notificationModel.toBundle()) != null) {
+                  EventBus.post(
+                    new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
+                  return null;
+                }
               } else {
                 NotificationManagerCompat.from(getApplicationContext())
                     .notify(androidBundle.getTag(), hashCode, notification);

@@ -19,6 +19,7 @@ package app.notifee.core;
 
 import android.app.Notification;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class ForegroundService extends Service {
 
   public static String mCurrentNotificationId = null;
 
-  static void start(int hashCode, Notification notification, Bundle notificationBundle) {
+  static ComponentName start(int hashCode, Notification notification, Bundle notificationBundle) {
     Intent intent = new Intent(ContextHolder.getApplicationContext(), ForegroundService.class);
     intent.setAction(START_FOREGROUND_SERVICE_ACTION);
     intent.putExtra("hashCode", hashCode);
@@ -46,10 +47,10 @@ public class ForegroundService extends Service {
     intent.putExtra("notificationBundle", notificationBundle);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      ContextHolder.getApplicationContext().startForegroundService(intent);
+      return ContextHolder.getApplicationContext().startForegroundService(intent);
     } else {
       // TODO test this on older device
-      ContextHolder.getApplicationContext().startService(intent);
+      return ContextHolder.getApplicationContext().startService(intent);
     }
   }
 

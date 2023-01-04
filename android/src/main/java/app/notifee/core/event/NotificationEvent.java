@@ -37,6 +37,8 @@ public class NotificationEvent {
 
   @KeepForSdk public static final int TYPE_TRIGGER_NOTIFICATION_CREATED = 7;
 
+  @KeepForSdk public static final int TYPE_FG_ALREADY_EXIST = 8;
+
   private final int type;
   private final Bundle extras;
   private final NotificationModel notification;
