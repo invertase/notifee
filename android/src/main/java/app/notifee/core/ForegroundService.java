@@ -19,7 +19,6 @@ package app.notifee.core;
 
 import android.app.Notification;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
