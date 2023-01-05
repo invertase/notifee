@@ -26,6 +26,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.ForegroundServiceEvent;
+import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.NotificationModel;
 
@@ -106,6 +107,9 @@ public class ForegroundService extends Service {
         } else if (mCurrentNotificationId.equals(notificationModel.getId())) {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
               .notify(hashCode, notification);
+        } else {
+          EventBus.post(
+            new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
         }
       }
     }
