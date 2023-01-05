@@ -27,6 +27,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.ForegroundServiceEvent;
+import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.interfaces.MethodCallResult;
 import app.notifee.core.model.NotificationModel;
 
@@ -39,7 +40,7 @@ public class ForegroundService extends Service {
 
   public static String mCurrentNotificationId = null;
 
-  static ComponentName start(int hashCode, Notification notification, Bundle notificationBundle) {
+  static void start(int hashCode, Notification notification, Bundle notificationBundle) {
     Intent intent = new Intent(ContextHolder.getApplicationContext(), ForegroundService.class);
     intent.setAction(START_FOREGROUND_SERVICE_ACTION);
     intent.putExtra("hashCode", hashCode);
@@ -47,10 +48,10 @@ public class ForegroundService extends Service {
     intent.putExtra("notificationBundle", notificationBundle);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      return ContextHolder.getApplicationContext().startForegroundService(intent);
+      ContextHolder.getApplicationContext().startForegroundService(intent);
     } else {
       // TODO test this on older device
-      return ContextHolder.getApplicationContext().startService(intent);
+      ContextHolder.getApplicationContext().startService(intent);
     }
   }
 
@@ -107,6 +108,9 @@ public class ForegroundService extends Service {
         } else if (mCurrentNotificationId.equals(notificationModel.getId())) {
           NotificationManagerCompat.from(ContextHolder.getApplicationContext())
               .notify(hashCode, notification);
+        } else {
+          EventBus.post(
+            new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
         }
       }
     }
