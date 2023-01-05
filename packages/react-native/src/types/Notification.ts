@@ -373,7 +373,7 @@ export enum EventType {
 
   /**
    * **ANDROID ONLY**
-   * 
+   *
    * Event type is sent when a notification wants to start a foreground service but a foreground service is already started.
    */
   FG_ALREADY_EXIST = 8,
