@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Button, StyleSheet, Text, Platform} from 'react-native';
 import notifee, {
   AndroidImportance,
@@ -11,6 +11,14 @@ import {triggers} from './utils/triggers';
 type Props = {};
 
 export const Content: React.FC<Props> = () => {
+  useEffect(() => {
+    const unsubscribeNotifee = notifee.registerForegroundService(() => {
+      return new Promise(() => {});
+    });
+
+    return unsubscribeNotifee;
+  }, []);
+
   /* Change the notification payload */
   const notification = notifications.basic;
 
