@@ -5,6 +5,7 @@ import {
   AndroidCategory,
   AndroidImportance,
   AndroidFlags,
+  AndroidColor,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
@@ -49,6 +50,7 @@ export const notifications: { key: string; notification: Notification | Notifica
         pressAction: {
           id: 'default',
         },
+        lights: [AndroidColor.PURPLE, 300, 600],
       },
       ios: {},
     },
