@@ -11,6 +11,7 @@
 import { version as SDK_VERSION } from './dist/version';
 import * as Notification from './dist/types/Notification';
 import * as NotificationAndroid from './dist/types/NotificationAndroid';
+import * as NotificationIOS from './dist/types/NotificationIOS';
 import * as TriggerType from './dist/types/Trigger';
 
 export * from './dist/types/Library';
@@ -108,7 +109,9 @@ export const testPowerManagerSettings = {
 
 export default {
   SDK_VERSION,
-  AndroidNotificationSetting: NotificationAndroid.AndroidNotificationSetting,
+  ...Notification,
+  ...NotificationAndroid,
+  ...NotificationIOS,
   TriggerType,
   displayNotification: jest.fn(async notification => notification?.id || testNotification.id),
   createTriggerNotification: jest.fn(
@@ -137,11 +140,11 @@ export default {
   createChannelGroups: jest.fn(async () => {}),
   deleteChannel: jest.fn(async () => {}),
   getInitialNotification: jest.fn(async () => testNotification),
-  onBackgroundEvent: jest.fn(),
-  onForegroundEvent: jest.fn(),
+  onBackgroundEvent: jest.fn(() => jest.fn()),
+  onForegroundEvent: jest.fn(() => jest.fn()),
   openNotificationSettings: jest.fn(),
   requestPermission: jest.fn(async () => testNotificationSettings),
-  registerForegroundService: jest.fn(),
+  registerForegroundService: jest.fn(() => jest.fn()),
   setNotificationCategories: jest.fn(async () => {}),
   getNotificationCategories: jest.fn(async () => [testCategory]),
   getNotificationSettings: jest.fn(async () => testNotificationSettings),
