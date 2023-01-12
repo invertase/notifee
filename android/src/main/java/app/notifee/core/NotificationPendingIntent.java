@@ -146,7 +146,7 @@ public class NotificationPendingIntent {
         launchActivity = pressActionModel.getLaunchActivity();
       }
 
-      if (launchActivityIntent == null && launchActivity != null) {
+      if (launchActivity != null) {
         Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
         launchActivityIntent = new Intent(context, launchActivityClass);
 
