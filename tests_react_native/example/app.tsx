@@ -179,10 +179,10 @@ function Root(): any {
         alarmManager: true,
         repeatFrequency: RepeatFrequency.HOURLY,
       };
-      Notifee.createTriggerNotification(notification, trigger)
-        .then(notificationId => setId(notificationId))
-        .catch(console.error);
-      // Notifee.displayNotification(notification)
+      // Notifee.createTriggerNotification(notification, trigger)
+      //   .then(notificationId => setId(notificationId))
+      //   .catch(console.error);
+      Notifee.displayNotification(notification);
     }
   }
 
@@ -479,6 +479,22 @@ function TestComponent(): any {
 AppRegistry.registerComponent('test_component', () => TestComponent);
 
 function FullScreenComponent(): any {
+  useEffect(() => {
+    (async () => {
+      await Notifee.displayNotification({
+        title: 'Testing SINGLE_TOP launch.',
+        body: 'Expand for a cat!',
+        android: {
+          channelId: 'high',
+          pressAction: {
+            id: 'default',
+            launchActivity: 'default',
+          },
+        },
+      });
+      console.log('displayed initialNotification');
+    })();
+  }, []);
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
