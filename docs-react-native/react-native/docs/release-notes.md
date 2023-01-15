@@ -5,6 +5,14 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.4.0
+
+- **[Android]**: Fixes an issue when setting a custom launchActivity to ensure the correct activity is launched when a notification is pressed when app is closed (Fixes [#646](https://github.com/invertase/notifee/issues/646)).
+- **[Android]**: Fixes an issue with Android `lights` when parsing colors as strings for trigger notifications (Fixes [#618](https://github.com/invertase/notifee/issues/618)).
+- **[Android]**: Fixes an issue with jest mock where some mocks were not returning the correct type (Fixes [#636](https://github.com/invertase/notifee/issues/636)).
+- **[Android]**: Adds a new `TYPE_FG_ALREADY_EXIST` event type for foreground services (PR [#634](https://github.com/invertase/notifee/pull/634)).
+- **[iOS]**: Removes a debug console.log statement that was commited to the main branch (PR [#617](https://github.com/invertase/notifee/pull/617)).
+
 ## 7.3.0
 - **[Android]**: Fixes an issue for Android 11 and lower to ensure notification drawer is closed when a quick action is pressed. (Fixes [#614](https://github.com/invertase/notifee/issues/614)).
 - **[Android]**: Fixes an issue where the initial notification was not set if the app opened via a quick action (PR [#605](https://github.com/invertase/notifee/pull/605)).
