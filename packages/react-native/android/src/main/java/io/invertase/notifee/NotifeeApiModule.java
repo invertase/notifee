@@ -246,7 +246,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
     }
 
     // We have to handle this logic outside of our core module due to a react-native limitation
-    // with obtaining the correct actvity
+    // with obtaining the correct activity
     PermissionAwareActivity activity = (PermissionAwareActivity) getCurrentActivity();
     if (activity == null) {
       Logger.d(
