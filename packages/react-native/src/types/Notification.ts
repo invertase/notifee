@@ -370,6 +370,13 @@ export enum EventType {
    * Event type is sent when a notification trigger is created.
    */
   TRIGGER_NOTIFICATION_CREATED = 7,
+
+  /**
+   * **ANDROID ONLY**
+   *
+   * Event type is sent when a notification wants to start a foreground service but a foreground service is already started.
+   */
+  FG_ALREADY_EXIST = 8,
 }
 
 /**
@@ -388,6 +395,7 @@ export interface EventDetail {
    *  - [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
    *  - [`EventType.DELIVERED`](/react-native/reference/eventtype#delivered)
    *  - [`EventType.TRIGGER_NOTIFICATION_CREATED`](/react-native/reference/eventtype#trigger_notification_created)
+   *  - [`EventType.FG_ALREADY_EXIST`](/react-native/reference/eventtype#fg_already_exist)
    */
   notification?: Notification;
 

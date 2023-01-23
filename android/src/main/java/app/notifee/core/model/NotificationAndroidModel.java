@@ -33,6 +33,7 @@ import java.util.Objects;
 
 @Keep
 public class NotificationAndroidModel {
+  private static final String TAG = "NotificationAndroidModel";
   private Bundle mNotificationAndroidBundle;
 
   private NotificationAndroidModel(Bundle bundle) {
@@ -285,16 +286,23 @@ public class NotificationAndroidModel {
    */
   public @Nullable ArrayList<Integer> getLights() {
     if (mNotificationAndroidBundle.containsKey("lights")) {
-      ArrayList<?> lightList =
-          Objects.requireNonNull(mNotificationAndroidBundle.getIntegerArrayList("lights"));
-      String rawColor = (String) lightList.get(0);
+      try {
+        ArrayList<?> lightList =
+          Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("lights"));
+        String rawColor = (String) lightList.get(0);
 
-      ArrayList<Integer> lights = new ArrayList<>(3);
-      lights.add(Color.parseColor(rawColor));
-      lights.add((Integer) lightList.get(1));
-      lights.add((Integer) lightList.get(2));
+        ArrayList<Integer> lights = new ArrayList<>(3);
+        lights.add(Color.parseColor(rawColor));
+        lights.add((Integer) lightList.get(1));
+        lights.add((Integer) lightList.get(2));
 
-      return lights;
+        return lights;
+      } catch (Exception e) {
+        Logger.e(
+          TAG,
+          "getLights -> Failed to parse lights");
+        return null;
+      }
     }
 
     return null;

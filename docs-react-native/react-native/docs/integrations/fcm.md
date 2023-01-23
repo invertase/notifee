@@ -14,7 +14,7 @@ versatile message targeting, client-to-client communication and web notification
 
 # React Native Firebase
 
-[React Native Firebase](https://invertase.io/oss/react-native-firebase) is the officially recommended library for
+[React Native Firebase](https://rnfirebase.io/) is the officially recommended library for
 integrating React Native with [Firebase](https://firebase.google.com/). Using React Native Firebase, we can easily
 integrate with FCM and display notifications with Notifee.
 

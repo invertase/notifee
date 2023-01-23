@@ -141,12 +141,22 @@ public class NotificationPendingIntent {
       Intent launchActivityIntent =
           context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
 
+      // Get launchActivity value from payload
       String launchActivity = null;
       if (pressActionModel != null) {
         launchActivity = pressActionModel.getLaunchActivity();
       }
 
-      if (launchActivityIntent == null && launchActivity != null) {
+      // Determine if existing launchActivityIntent should be overwritten
+      // to handle a custom launchActivity
+      Boolean shouldOverwriteDefaultLaunchActivityIntent = launchActivityIntent == null;
+      if (launchActivityIntent != null) {
+        // overwrite if custom launch activity set (launch activity in payload does not equal current activity)
+        shouldOverwriteDefaultLaunchActivityIntent = launchActivity != "default" && launchActivityIntent.getComponent().getClassName() != launchActivity;
+      }
+
+      // Set new launch activity intent
+      if (launchActivity != null && shouldOverwriteDefaultLaunchActivityIntent) {
         Class<?> launchActivityClass = IntentUtils.getLaunchActivity(launchActivity);
         launchActivityIntent = new Intent(context, launchActivityClass);
 
@@ -156,6 +166,7 @@ public class NotificationPendingIntent {
             Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
       }
 
+      // Set any additional flags or main component if specified
       if (pressActionModel.getLaunchActivityFlags() != -1) {
         launchActivityIntent.setFlags(pressActionModel.getLaunchActivityFlags());
       }

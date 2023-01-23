@@ -5,6 +5,7 @@ import {
   AndroidCategory,
   AndroidImportance,
   AndroidFlags,
+  AndroidColor,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
@@ -49,6 +50,7 @@ export const notifications: { key: string; notification: Notification | Notifica
         pressAction: {
           id: 'default',
         },
+        lights: [AndroidColor.PURPLE, 300, 600],
       },
       ios: {},
     },
@@ -301,7 +303,7 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
-    key: 'Android Launch Activity Flags',
+    key: 'Android Launch Activity Flags default',
     notification: {
       title: 'Testing SINGLE_TOP launch.',
       body: 'Expand for a cat!',
@@ -316,6 +318,20 @@ export const notifications: { key: string; notification: Notification | Notifica
         style: {
           type: AndroidStyle.BIGPICTURE,
           picture: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+        },
+      },
+    },
+  },
+  {
+    key: 'Android Launch Activity Flags custom',
+    notification: {
+      title: 'Testing Custom launch.',
+      body: 'Expand for a cat!',
+      android: {
+        channelId: 'foo',
+        pressAction: {
+          id: 'default',
+          launchActivity: 'com.notifee.testing.FullScreenActivity',
         },
       },
     },
