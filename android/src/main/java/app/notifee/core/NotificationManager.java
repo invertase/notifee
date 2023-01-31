@@ -852,7 +852,7 @@ class NotificationManager {
               Logger.w(
                   TAG, "Attempted to handle doScheduledWork but no notification data was found.");
               completer.set(ListenableWorker.Result.success());
-              return null;
+              return Futures.immediateFuture(null);
             }
           } else {
             notificationBytes = workDataEntity.getNotification();
