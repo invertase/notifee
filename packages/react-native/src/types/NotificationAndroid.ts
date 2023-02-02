@@ -276,7 +276,7 @@ export interface NotificationAndroid {
    * The `fullScreenAction` property allows you to show a custom UI
    * in full screen when the notification is displayed.
    *
-   * View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen-action) documentation to learn
+   * View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen) documentation to learn
    * more.
    */
   fullScreenAction?: NotificationFullScreenAction;

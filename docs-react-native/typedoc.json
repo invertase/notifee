@@ -16547,7 +16547,7 @@
 					},
 					"comment": {
 						"shortText": "The `fullScreenAction` property allows you to show a custom UI\nin full screen when the notification is displayed.",
-						"text": "View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen-action) documentation to learn\nmore.\n"
+						"text": "View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen) documentation to learn\nmore.\n"
 					},
 					"sources": [
 						{
@@ -17568,7 +17568,7 @@
 			},
 			"comment": {
 				"shortText": "The interface used to describe a full-screen action for a notification.",
-				"text": "By setting a `fullScreenAction`, when the notification is displayed, it will launch a full-screen intent.\n\nOn Android; when provided to a notification action, the action will only open you application if\na `launchActivity` and/or a `mainComponent` is provided.\n\nPlease see the [FullScreen Action](/react-native/docs/android/behaviour#full-screen-action) document to learn more.\n"
+				"text": "By setting a `fullScreenAction`, when the notification is displayed, it will launch a full-screen intent.\n\nOn Android; when provided to a notification action, the action will only open you application if\na `launchActivity` and/or a `mainComponent` is provided.\n\nPlease see the [FullScreen Action](/react-native/docs/android/behaviour#full-screen) document to learn more.\n"
 			},
 			"children": [
 				{
@@ -17606,7 +17606,7 @@
 					},
 					"comment": {
 						"shortText": "The custom Android Activity to launch on a full-screen action.",
-						"text": "This property can be used in advanced scenarios to launch a custom Android Activity when the user\nperforms a full-screen action.\n\nView the [Android Full Screen](/react-native/docs/android/behviour#full-screen-action) docs to learn more.\n",
+						"text": "This property can be used in advanced scenarios to launch a custom Android Activity when the user\nperforms a full-screen action.\n\nView the [Android Full Screen](/react-native/docs/android/behaviour#full-screen) docs to learn more.\n",
 						"tags": [
 							{
 								"tag": "platform",
@@ -17681,7 +17681,7 @@
 					},
 					"comment": {
 						"shortText": "A custom registered React component to launch on press action.",
-						"text": "This property can be used to open a custom React component when the notification is displayed.\nFor this to correctly function on Android, a minor native code change is required.\n\nView the [Full-screen Action](/react-native/docs/android/behviour#full-screen-action) document to learn more.\n",
+						"text": "This property can be used to open a custom React component when the notification is displayed.\nFor this to correctly function on Android, a minor native code change is required.\n\nView the [Full-screen Action](/react-native/docs/android/behaviour#full-screen) document to learn more.\n",
 						"tags": [
 							{
 								"tag": "platform",
