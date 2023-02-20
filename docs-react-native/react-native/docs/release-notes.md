@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.5.0
+
+- **[Android]**: Updates the Android EventBus dependency to comply with the Google Play Store requirements (Fixes [#668](https://github.com/invertase/notifee/issues/668)).
+
 ## 7.4.0
 
 - **[Android]**: Fixes an issue when setting a custom launchActivity to ensure the correct activity is launched when a notification is pressed when app is closed (Fixes [#646](https://github.com/invertase/notifee/issues/646)).
