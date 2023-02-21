@@ -17,10 +17,14 @@ package app.notifee.core.model;
  *
  */
 
+import static java.lang.Integer.parseInt;
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import app.notifee.core.KeepForSdk;
+import app.notifee.core.Logger;
+
 import java.util.Objects;
 
 @KeepForSdk
@@ -36,6 +40,13 @@ public class NotificationModel {
   }
 
   public @NonNull Integer getHashCode() {
+    String id = getId();
+
+   // To update FCM notifications as the id is always 0
+    if (getAndroid().getTag() != null && id.equals("0")) {
+      return 0;
+    }
+
     return getId().hashCode();
   }
 
