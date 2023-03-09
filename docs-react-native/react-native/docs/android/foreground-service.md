@@ -82,7 +82,7 @@ For example, we could build a task which subscribes to an event handler:
 notifee.registerForegroundService(() => {
   return new Promise(() => {
     // Example task subscriber
-    onTaskUpdate(task => {
+    onTaskUpdate(async (task) => {
       if (task.complete) {
           await notifee.stopForegroundService()
       }
@@ -103,7 +103,7 @@ Whilst our service is running, we can also update the current notification to di
 notifee.registerForegroundService((notification) => {
   return new Promise(() => {
     // Example task subscriber
-    onTaskUpdate(task => {
+    onTaskUpdate(async (task) => {
       if (task.update) {
         notifee.displayNotification({
           id: notification.id,
@@ -144,7 +144,7 @@ import notifee, { EventType } from '@notifee/react-native';
 // Create the task runner
 notifee.registerForegroundService((notification) => {
   return new Promise(() => {
-    notifee.onForegroundEvent(({ type, detail }) => {
+    notifee.onForegroundEvent(async ({ type, detail }) => {
       if (type === EventType.ACTION_PRESS && detail.pressAction.id === 'stop') {
         await notifee.stopForegroundService()
       }
