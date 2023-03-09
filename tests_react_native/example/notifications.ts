@@ -159,7 +159,27 @@ export const notifications: { key: string; notification: Notification | Notifica
       },
     },
   },
-
+  {
+    key: 'Ongoing with Press',
+    notification: {
+      title: 'Ongoing with Press',
+      body: 'Notification with actions',
+      ios: {
+        categoryId: 'actions',
+      },
+      android: {
+        pressAction: { id: 'default', launchActivity: 'default' },
+        actions: [
+          {
+            pressAction: { id: 'an-action-id' },
+            title: 'An Action',
+          },
+        ],
+        autoCancel: false,
+        ongoing: true,
+      },
+    },
+  },
   {
     key: 'Actions (event only)',
     notification: {
