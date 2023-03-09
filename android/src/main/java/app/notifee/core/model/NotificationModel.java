@@ -43,7 +43,7 @@ public class NotificationModel {
     String id = getId();
 
    // To update FCM notifications as the id is always 0
-    if (getAndroid().getTag() != null && id.equals("0")) {
+    if (id.equals("0")) {
       return 0;
     }
 

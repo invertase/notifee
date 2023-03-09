@@ -82,12 +82,14 @@ async function onMessage(message: RemoteMessage): Promise<void> {
 }
 
 async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
-  console.log('onBackgroundMessage New FCM Message', message);
-  // await Notifee.displayNotification({
-  //   title: 'onMessage',
-  //   body: `with message ${message.messageId}`,
-  //   android: { channelId: 'default', tag: 'hello1' },
-  // });
+  await Notifee.displayNotification({
+    id: '0',
+    title: 'Update FCM when in background',
+    android: {
+      channelId: 'fcm_fallback_notification_channel',
+      tag: 'auniquetag',
+    },
+  });
 }
 
 firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
@@ -243,6 +245,19 @@ function Root(): any {
             title={`open alarm special access settings`}
             onPress={async (): Promise<void> => {
               console.log(await Notifee.openAlarmPermissionSettings());
+            }}
+          />
+          <Button
+            title={`Update FCM Notification`}
+            onPress={async (): Promise<void> => {
+              await Notifee.displayNotification({
+                id: '0',
+                title: 'update fcm',
+                android: {
+                  channelId: 'fcm_fallback_notification_channel',
+                  tag: 'auniquetag',
+                },
+              });
             }}
           />
           {id != null && (
