@@ -492,6 +492,7 @@ export default class NotifeeApiModule extends NotifeeNativeModule implements Mod
 
     const subscriber = this.emitter.addListener(
       kReactNativeNotifeeNotificationEvent,
+      // @ts-ignore See https://github.com/facebook/react-native/pull/36462
       ({ type, detail }) => {
         observer({ type, detail });
       },
