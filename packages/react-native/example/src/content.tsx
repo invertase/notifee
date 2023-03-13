@@ -20,7 +20,7 @@ export const Content: React.FC<Props> = () => {
   }, []);
 
   /* Change the notification payload */
-  const notification = notifications.basic;
+  const notification = notifications.image;
 
   /* Change the trigger type */
   const triggerType = triggers.timestamp;
