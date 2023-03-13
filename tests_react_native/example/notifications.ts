@@ -262,6 +262,35 @@ export const notifications: { key: string; notification: Notification | Notifica
     },
   },
   {
+    key: 'Progress indeterminate',
+    notification: {
+      title: 'Background Task',
+      body: 'Doing some work...',
+      android: {
+        autoCancel: true,
+        color: '#9c27b0',
+        onlyAlertOnce: true,
+        asForegroundService: true,
+        progress: {
+          indeterminate: true,
+        },
+        actions: [
+          {
+            title: 'Stop',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+            pressAction: {
+              id: 'stop',
+            },
+          },
+        ],
+        channelId: 'high',
+      },
+      ios: {
+        categoryId: 'stop',
+      },
+    },
+  },
+  {
     key: 'Big Picture Style',
     notification: {
       title: 'Big Picture Style',
