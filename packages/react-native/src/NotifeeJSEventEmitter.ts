@@ -7,5 +7,6 @@
 import EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter';
 import { EventEmitter as EventEmitterInterface } from 'react-native';
 
+// @ts-ignore
 const emitter: EventEmitterInterface = new EventEmitter();
 export default emitter;
