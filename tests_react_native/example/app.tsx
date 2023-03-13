@@ -182,7 +182,11 @@ function Root(): any {
       // Notifee.createTriggerNotification(notification, trigger)
       //   .then(notificationId => setId(notificationId))
       //   .catch(console.error);
-      Notifee.displayNotification(notification);
+      try {
+        await Notifee.displayNotification(notification);
+      } catch (e) {
+        console.log('DisplayNotification Error', e);
+      }
     }
   }
 
