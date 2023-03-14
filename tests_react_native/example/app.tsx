@@ -249,6 +249,12 @@ function Root(): any {
               console.log(await Notifee.openAlarmPermissionSettings());
             }}
           />
+          <Button
+            title={`Cancel all `}
+            onPress={async () => {
+              await Notifee.cancelAllNotifications();
+            }}
+          />
           {id != null && (
             <>
               <Button
@@ -267,12 +273,6 @@ function Root(): any {
                 title={`Cancel displayed ${id}`}
                 onPress={async () => {
                   if (id != null) await Notifee.cancelDisplayedNotification(id);
-                }}
-              />
-              <Button
-                title={`Cancel all `}
-                onPress={async () => {
-                  await Notifee.cancelDisplayedNotifications([id]);
                 }}
               />
             </>
