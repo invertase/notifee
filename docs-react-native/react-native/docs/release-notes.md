@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.6.1
+
+- No changes, used to force `npm` registry to update for the previous version to appear.
+
 ## 7.6.0
 
 - **[Android]**: Fixes an issue with interval triggers firing immediately (Fixes [#696](https://github.com/invertase/notifee/issues/696)).
