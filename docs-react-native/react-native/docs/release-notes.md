@@ -5,6 +5,19 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.6.1
+
+- No changes, used to force `npm` registry to update for the previous version to appear.
+
+## 7.6.0
+
+- **[Android]**: Fixes an issue with interval triggers firing immediately (Fixes [#696](https://github.com/invertase/notifee/issues/696)).
+- **[Android]**: Fixes an issue with progress notification with `indeterminate` set to `true` (Fixes [#682](https://github.com/invertase/notifee/issues/682)).
+- **[Android]**: Android flag `Flag_NO_CLEAR` is now supported but can get the same behaviour with `ongoing` set to `true` (Fixes [#674](https://github.com/invertase/notifee/issues/674)).
+- **[Android/iOS]**: Fixes a ts error with latest React Native version 0.71+ (Fixes [#708](https://github.com/invertase/notifee/issues/708)).
+- **[Android]**: Fixes an issue where if `autoCancel` is set to `false`, for Android actions this was ignored for Android 12 and above (Fixes [#697](https://github.com/invertase/notifee/issues/697)).
+- **[Android]**: Remove unused android dependenecy `okhttp3` which was reported to have been causing a problem (Fixes [#699](https://github.com/invertase/notifee/issues/699)).
+
 ## 7.5.0
 
 - **[Android]**: Updates the Android EventBus dependency to comply with the Google Play Store requirements (Fixes [#668](https://github.com/invertase/notifee/issues/668)).

@@ -182,7 +182,11 @@ function Root(): any {
       // Notifee.createTriggerNotification(notification, trigger)
       //   .then(notificationId => setId(notificationId))
       //   .catch(console.error);
-      Notifee.displayNotification(notification);
+      try {
+        await Notifee.displayNotification(notification);
+      } catch (e) {
+        console.log('DisplayNotification Error', e);
+      }
     }
   }
 
@@ -245,6 +249,12 @@ function Root(): any {
               console.log(await Notifee.openAlarmPermissionSettings());
             }}
           />
+          <Button
+            title={`Cancel all `}
+            onPress={async () => {
+              await Notifee.cancelAllNotifications();
+            }}
+          />
           {id != null && (
             <>
               <Button
@@ -263,12 +273,6 @@ function Root(): any {
                 title={`Cancel displayed ${id}`}
                 onPress={async () => {
                   if (id != null) await Notifee.cancelDisplayedNotification(id);
-                }}
-              />
-              <Button
-                title={`Cancel all `}
-                onPress={async () => {
-                  await Notifee.cancelDisplayedNotifications([id]);
                 }}
               />
             </>

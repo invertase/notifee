@@ -70,7 +70,11 @@ public class ObjectUtils {
     return properties;
   }
 
-  public static int getInt(Object value) {
+  public static int getInt(@Nullable Object value) {
+    if (value == null) {
+      return 0;
+    }
+
     if (value instanceof Double) {
       return (int) ((Double) value).doubleValue();
     }

@@ -159,7 +159,50 @@ export const notifications: { key: string; notification: Notification | Notifica
       },
     },
   },
-
+  {
+    key: 'Ongoing with Press',
+    notification: {
+      id: 'ongoing',
+      title: 'Ongoing with Press',
+      body: '---',
+      ios: {
+        categoryId: 'actions',
+      },
+      android: {
+        pressAction: { id: 'default', launchActivity: 'default' },
+        actions: [
+          {
+            pressAction: { id: 'an-action-id' },
+            title: 'An Action',
+          },
+        ],
+        // autoCancel: false,
+        ongoing: true,
+      },
+    },
+  },
+  {
+    key: 'With Flag NO CLEAR',
+    notification: {
+      id: 'noclear',
+      title: 'NO CLEAR',
+      body: '---',
+      ios: {
+        categoryId: 'actions',
+      },
+      android: {
+        pressAction: { id: 'default', launchActivity: 'default' },
+        actions: [
+          {
+            pressAction: { id: 'an-action-id' },
+            title: 'An Action',
+          },
+        ],
+        // autoCancel: false,
+        flags: [AndroidFlags.FLAG_NO_CLEAR],
+      },
+    },
+  },
   {
     key: 'Actions (event only)',
     notification: {
@@ -235,6 +278,35 @@ export const notifications: { key: string; notification: Notification | Notifica
           },
         ],
         channelId: 'foo',
+      },
+      ios: {
+        categoryId: 'stop',
+      },
+    },
+  },
+  {
+    key: 'Progress indeterminate',
+    notification: {
+      title: 'Background Task',
+      body: 'Doing some work...',
+      android: {
+        autoCancel: true,
+        color: '#9c27b0',
+        onlyAlertOnce: true,
+        asForegroundService: true,
+        progress: {
+          indeterminate: true,
+        },
+        actions: [
+          {
+            title: 'Stop',
+            icon: 'https://invertase.io/icons/icon-48x48.png',
+            pressAction: {
+              id: 'stop',
+            },
+          },
+        ],
+        channelId: 'high',
       },
       ios: {
         categoryId: 'stop',

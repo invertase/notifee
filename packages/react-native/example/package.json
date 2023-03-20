@@ -12,14 +12,14 @@
   },
   "dependencies": {
     "@notifee/react-native": "file:../",
-    "react": "18.1.0",
-    "react-native": "0.70.4"
+    "react": "18.2.0",
+    "react-native": "0.71.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^3",
-    "@testing-library/react-native": "^11.5.0",
+    "@testing-library/react-native": "^11.5.4",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/react": "^18.0.21",
@@ -36,12 +36,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "./jestSetup.js"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?@react-native|@notifee/react-native|react-native)"
-    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",

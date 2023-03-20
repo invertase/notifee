@@ -5,7 +5,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter';
-import { EventEmitter as EventEmitterInterface } from 'react-native';
 
-const emitter: EventEmitterInterface = new EventEmitter();
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore See https://github.com/facebook/react-native/pull/36462
+const emitter = new EventEmitter();
 export default emitter;

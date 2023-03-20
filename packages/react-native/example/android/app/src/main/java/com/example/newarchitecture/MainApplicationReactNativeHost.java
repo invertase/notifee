@@ -2,9 +2,6 @@ package com.example.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
-import com.example.BuildConfig;
-import com.example.newarchitecture.components.MainComponentsRegistry;
-import com.example.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -22,6 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
+import com.example.BuildConfig;
+import com.example.newarchitecture.components.MainComponentsRegistry;
+import com.example.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

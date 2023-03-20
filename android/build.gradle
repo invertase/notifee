@@ -104,15 +104,14 @@ repositories {
 dependencies {
 
   api 'androidx.annotation:annotation:1.3.0' // https://developer.android.com/jetpack/androidx/releases/annotation
-  api "com.squareup.okhttp3:okhttp:3.12.12" // okhttp must stay on 3.12.x to support minSdkVersion < 21
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-  api 'androidx.work:work-runtime:2.7.1' // https://developer.android.com/jetpack/androidx/releases/work
+  api 'androidx.work:work-runtime:2.8.0' // https://developer.android.com/jetpack/androidx/releases/work
   api 'com.facebook.fresco:fresco:2.6.0' // https://github.com/facebook/fresco/releases
 
   implementation("com.google.guava:guava:31.1-android") // https://github.com/google/guava
   implementation 'androidx.core:core:1.6.0'
 
-  def room_version = '2.4.3' // https://developer.android.com/jetpack/androidx/releases/room
+  def room_version = '2.5.0' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"
   annotationProcessor "androidx.room:room-compiler:$room_version"
 

@@ -4,7 +4,6 @@
 
 import NotifeeJSEventEmitter from './NotifeeJSEventEmitter';
 import {
-  EventEmitter,
   EventSubscriptionVendor,
   NativeEventEmitter,
   NativeModules,
@@ -36,7 +35,7 @@ export default class NotifeeNativeModule {
     }
   }
 
-  public get emitter(): EventEmitter {
+  public get emitter() {
     return NotifeeJSEventEmitter;
   }
 

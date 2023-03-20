@@ -634,13 +634,13 @@ class NotificationManager {
 
     PeriodicWorkRequest.Builder workRequestBuilder;
     workRequestBuilder =
-        new PeriodicWorkRequest.Builder(Worker.class, interval, trigger.getTimeUnit());
+        new PeriodicWorkRequest.Builder(Worker.class, interval, trigger.getTimeUnit()).setInitialDelay(interval, trigger.getTimeUnit());
 
     workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
     workRequestBuilder.addTag(uniqueWorkName);
     workRequestBuilder.setInputData(workDataBuilder.build());
     workManager.enqueueUniquePeriodicWork(
-        uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+        uniqueWorkName, ExistingPeriodicWorkPolicy.UPDATE, workRequestBuilder.build());
   }
 
   static void createTimestampTriggerNotification(
@@ -696,7 +696,7 @@ class NotificationManager {
       workDataBuilder.putString(Worker.KEY_WORK_REQUEST, Worker.WORK_REQUEST_PERIODIC);
       workRequestBuilder.setInputData(workDataBuilder.build());
       workManager.enqueueUniquePeriodicWork(
-          uniqueWorkName, ExistingPeriodicWorkPolicy.REPLACE, workRequestBuilder.build());
+          uniqueWorkName, ExistingPeriodicWorkPolicy.UPDATE, workRequestBuilder.build());
     }
   }
 
