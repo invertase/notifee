@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+// For Android 12 +
 public class NotificationReceiverActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
