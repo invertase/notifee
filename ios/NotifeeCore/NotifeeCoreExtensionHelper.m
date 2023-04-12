@@ -82,7 +82,7 @@ static NSString *const kImagePathPrefix = @"image/";
     NSMutableDictionary *communicationInfo = [options[@"ios"][@"communicationInfo"] mutableCopy];
     communicationInfo[@"body"] = options[@"body"];
     INSendMessageIntent *intent = [NotifeeCoreUtil
-        generateSenderIntentForCommunicationNotifciation:options[@"ios"][@"communicationInfo"]];
+        generateSenderIntentForCommunicationNotification:options[@"ios"][@"communicationInfo"]];
     // Use the intent to initialize the interaction.
     INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
     interaction.direction = INInteractionDirectionIncoming;

@@ -717,7 +717,7 @@
   return dictionary;
 }
 
-+ (INSendMessageIntent *)generateSenderIntentForCommunicationNotifciation:
++ (INSendMessageIntent *)generateSenderIntentForCommunicationNotification:
     (NSDictionary *)communicationInfo {
   if (@available(iOS 15.0, *)) {
     NSDictionary *sender = communicationInfo[@"sender"];
