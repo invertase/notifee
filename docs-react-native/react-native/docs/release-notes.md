@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.7.1
+
+- **[iOS]**: Adds image caching for the avatar for Communication Notifications (PR [#742)](https://github.com/invertase/notifee/pull/742))).
+
 ## 7.7.0
 
 - **[Android]**: Fixes an issue with foreground `PRESS` event being treated as a background event (Fixes [#621](https://github.com/invertase/notifee/issues/621)).
