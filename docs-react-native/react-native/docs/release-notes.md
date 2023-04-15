@@ -5,7 +5,7 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
-## 7.7.0-0
+## 7.7.0
 
 - **[Android]**: Fixes an issue with foreground `PRESS` event being treated as a background event (Fixes [#621](https://github.com/invertase/notifee/issues/621)).
 - **[Android]**: Fixes an issue where the event details of a notification were incorrect and were from another notification (Fixes [#637](https://github.com/invertase/notifee/issues/637) and [#651](https://github.com/invertase/notifee/issues/651)).
