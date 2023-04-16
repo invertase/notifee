@@ -79,6 +79,12 @@ public class TimestampTriggerModel {
       Bundle alarmManagerBundle = mTimeTriggerBundle.getBundle("alarmManager");
 
       int type = alarmManagerBundle.getInt("type", 2);
+
+      if (alarmManagerBundle.containsKey("allowWhileIdle") &&
+          alarmManagerBundle.getBoolean("allowWhileIdle")) {
+        type = 3;
+      }
+
       switch (type){
         case 0:
           mAlarmType = AlarmType.SET;
