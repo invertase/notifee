@@ -18,6 +18,7 @@ import {
   IntervalTrigger,
   TriggerType,
   TimestampTriggerAlarmManager,
+  AlarmType,
 } from '../types/Trigger';
 
 const MINIMUM_INTERVAL = 15;
@@ -96,14 +97,21 @@ function validateTimestampAlarmManager(
   alarmManager?: TimestampTriggerAlarmManager,
 ): TimestampTriggerAlarmManager {
   const out: TimestampTriggerAlarmManager = {
-    allowWhileIdle: false,
+    type: AlarmType.SET_EXACT
   };
   if (!alarmManager) {
     return out;
   }
   if (isBoolean(alarmManager.allowWhileIdle) && alarmManager.allowWhileIdle) {
-    out.allowWhileIdle = true;
+    out.type = AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE
   }
+
+  if (objectHasProperty(alarmManager, 'type') && !isUndefined(alarmManager.type)) {
+    if (!isValidEnum(alarmManager.type, AlarmType)) {
+      throw new Error("'alarmManager.type' expected a AlarmType value.");
+    }
+    out.type = alarmManager.type;
+  } 
 
   return out;
 }

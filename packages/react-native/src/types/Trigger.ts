@@ -35,6 +35,19 @@ export interface TimestampTrigger {
 }
 
 /**
+ * An interface representing the different alarm types which can be used with `TimestampTrigger.alarmManager.type`.
+ *
+ * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ */
+export enum AlarmType {
+  SET,
+  SET_AND_ALLOW_WHILE_IDLE,
+  SET_EXACT,
+  SET_EXACT_AND_ALLOW_WHILE_IDLE,
+  SET_ALARM_CLOCK,
+}
+
+/**
  * Interface to specify additional options for the AlarmManager which can be used with `TimestampTrigger.alarmManager`.
  *
  * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
@@ -43,11 +56,17 @@ export interface TimestampTrigger {
  */
 export interface TimestampTriggerAlarmManager {
   /**
+   * @deprecated use `type` instead
+   * -----
+   * 
    * Sets whether your trigger notification should be displayed even when the system is in low-power idle modes.
    *
    * Defaults to `false`.
    */
   allowWhileIdle?: boolean;
+
+  /** The type of alarm set by alarm manager of android */
+  type?: AlarmType;
 }
 
 /**

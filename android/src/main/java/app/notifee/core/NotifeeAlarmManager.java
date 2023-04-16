@@ -28,6 +28,7 @@ import android.os.Bundle;
 import androidx.core.app.AlarmManagerCompat;
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
+import app.notifee.core.model.AlarmType;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.AlarmUtils;
@@ -159,12 +160,45 @@ class NotifeeAlarmManager {
     // Ensure timestamp is always in the future when scheduling the alarm
     timestampTrigger.setNextTimestamp();
 
-    if (timestampTrigger.getAllowWhileIdle()) {
-      AlarmManagerCompat.setExactAndAllowWhileIdle(
+    AlarmType alarmType = timestampTrigger.getAlarmType();
+
+    switch (alarmType) {
+      case SET:
+        alarmManager.set(AlarmManager.RTC, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_AND_ALLOW_WHILE_IDLE:
+        AlarmManagerCompat.setAndAllowWhileIdle(
           alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
-    } else {
-      AlarmManagerCompat.setExact(
+        break;
+      case SET_EXACT:
+        AlarmManagerCompat.setExact(
           alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_EXACT_AND_ALLOW_WHILE_IDLE:
+        AlarmManagerCompat.setExactAndAllowWhileIdle(
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_ALARM_CLOCK:
+        // probably a good default behavior for setAlarmClock's
+
+        int mutabilityFlag = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+          mutabilityFlag = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
+        }
+
+        Context context = getApplicationContext();
+        Intent launchActivityIntent =
+          context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+
+        PendingIntent pendingLaunchIntent =
+          PendingIntent.getActivity(
+            context,
+            notificationModel.getId().hashCode(),
+            launchActivityIntent,
+            mutabilityFlag);
+        AlarmManagerCompat.setAlarmClock(
+          alarmManager, timestampTrigger.getTimestamp(), pendingLaunchIntent, pendingIntent);
+        break;
     }
   }
 

@@ -27,7 +27,7 @@ public class TimestampTriggerModel {
   private int mInterval = -1;
   private TimeUnit mTimeUnit = null;
   private Boolean mWithAlarmManager = false;
-  private Boolean mAllowWhileIdle = false;
+  private AlarmType mAlarmType = AlarmType.SET_EXACT;
   private String mRepeatFrequency = null;
   private Long mTimestamp = null;
 
@@ -78,12 +78,30 @@ public class TimestampTriggerModel {
 
       Bundle alarmManagerBundle = mTimeTriggerBundle.getBundle("alarmManager");
 
-      if (alarmManagerBundle.containsKey("allowWhileIdle")) {
-        mAllowWhileIdle = alarmManagerBundle.getBoolean("allowWhileIdle");
+      int type = alarmManagerBundle.getInt("type", 2);
+      switch (type){
+        case 0:
+          mAlarmType = AlarmType.SET;
+          break;
+        case 1:
+          mAlarmType = AlarmType.SET_AND_ALLOW_WHILE_IDLE;
+          break;
+        // default behavior when alarmManager is true:
+        default:
+        case 2:
+          mAlarmType = AlarmType.SET_EXACT;
+          break;
+        case 3:
+          mAlarmType = AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE;
+          break;
+        case 4:
+          mAlarmType = AlarmType.SET_ALARM_CLOCK;
+          break;
       }
     } else if (mTimeTriggerBundle.containsKey("allowWhileIdle")) {
+      // for dart
       mWithAlarmManager = true;
-      mAllowWhileIdle = mTimeTriggerBundle.getBoolean("allowWhileIdle");
+      mAlarmType = AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE;
     }
   }
 
@@ -149,8 +167,8 @@ public class TimestampTriggerModel {
     return mWithAlarmManager;
   }
 
-  public Boolean getAllowWhileIdle() {
-    return mAllowWhileIdle;
+  public AlarmType getAlarmType() {
+    return mAlarmType;
   }
 
   public String getRepeatFrequency() {
