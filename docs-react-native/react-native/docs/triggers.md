@@ -118,7 +118,7 @@ It's also possible to cancel all of your trigger notifications, by calling [canc
 The [`TimestampTrigger`](/react-native/reference/timestamptrigger) allows you to create a trigger that displays a notification at a specific time and date, using the property `timestamp` and an optional `repeatFrequency` property:
 
 ```js
-import notifee, { TimestampTrigger, TriggerType, TimeUnit } from '@notifee/react-native';
+import notifee, { TimestampTrigger, TriggerType, TimeUnit, AlarmType } from '@notifee/react-native';
 
 const trigger: TimestampTrigger = {
   type: TriggerType.TIMESTAMP,
@@ -132,17 +132,17 @@ On Android, you have the option to create your trigger notification with Android
 ```js
 const trigger: TimestampTrigger = {
   //...
-  alarmManager: true,
+  alarmManager: true, // uses android's `AlarmManagerCompat.setExact`
 };
 ```
 
-If you want to allow the notification to display when in low-power idle modes, set `allowWhileIdle`:
+If you want to allow the notification to display when in low-power idle modes, use `type` property:
 
 ```js
 const trigger: TimestampTrigger = {
   //...
   alarmManager: {
-    allowWhileIdle: true,
+    type: AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
   },
 };
 ```
