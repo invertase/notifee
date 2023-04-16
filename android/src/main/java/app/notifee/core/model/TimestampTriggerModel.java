@@ -80,6 +80,7 @@ public class TimestampTriggerModel {
 
       int type = alarmManagerBundle.getInt("type", 2);
 
+      // this is for the deprecated `alarmManager.allowWhileIdle` option
       if (alarmManagerBundle.containsKey("allowWhileIdle") &&
           alarmManagerBundle.getBoolean("allowWhileIdle")) {
         type = 3;
