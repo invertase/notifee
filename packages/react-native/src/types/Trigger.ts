@@ -58,7 +58,7 @@ export interface TimestampTriggerAlarmManager {
   /**
    * @deprecated use `type` instead
    * -----
-   * 
+   *
    * Sets whether your trigger notification should be displayed even when the system is in low-power idle modes.
    *
    * Defaults to `false`.

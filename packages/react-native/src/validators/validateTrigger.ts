@@ -97,13 +97,13 @@ function validateTimestampAlarmManager(
   alarmManager?: TimestampTriggerAlarmManager,
 ): TimestampTriggerAlarmManager {
   const out: TimestampTriggerAlarmManager = {
-    type: AlarmType.SET_EXACT
+    type: AlarmType.SET_EXACT,
   };
   if (!alarmManager) {
     return out;
   }
   if (isBoolean(alarmManager.allowWhileIdle) && alarmManager.allowWhileIdle) {
-    out.type = AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE
+    out.type = AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE;
   }
 
   if (objectHasProperty(alarmManager, 'type') && !isUndefined(alarmManager.type)) {
@@ -111,7 +111,7 @@ function validateTimestampAlarmManager(
       throw new Error("'alarmManager.type' expected a AlarmType value.");
     }
     out.type = alarmManager.type;
-  } 
+  }
 
   return out;
 }
