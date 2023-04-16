@@ -28,7 +28,6 @@ import android.os.Bundle;
 import androidx.core.app.AlarmManagerCompat;
 import app.notifee.core.database.WorkDataEntity;
 import app.notifee.core.database.WorkDataRepository;
-import app.notifee.core.model.AlarmType;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.model.TimestampTriggerModel;
 import app.notifee.core.utility.AlarmUtils;
@@ -160,7 +159,7 @@ class NotifeeAlarmManager {
     // Ensure timestamp is always in the future when scheduling the alarm
     timestampTrigger.setNextTimestamp();
 
-    AlarmType alarmType = timestampTrigger.getAlarmType();
+    TimestampTriggerModel.AlarmType alarmType = timestampTrigger.getAlarmType();
 
     switch (alarmType) {
       case SET:
