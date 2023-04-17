@@ -24,12 +24,13 @@ import android.os.Bundle;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.utility.IntentUtils;
+
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NotificationPendingIntent {
   public static final String EVENT_TYPE_INTENT_KEY = "notifee_event_type";
   public static final String NOTIFICATION_ID_INTENT_KEY = "notification_id";
-  private static final AtomicInteger uniqueIds = new AtomicInteger(0);
   private static final String TAG = "NotificationPendingIntent";
 
   /**
@@ -66,7 +67,7 @@ public class NotificationPendingIntent {
     setIntentExtras(receiverIntent, eventType, notificationId, extraKeys, extraBundles);
 
     // Create pending intent with activities
-    int uniqueInt = uniqueIds.getAndIncrement();
+    int uniqueInt = UUID.randomUUID().hashCode();
     Intent[] intents;
 
     if (launchActivityIntent != null) {

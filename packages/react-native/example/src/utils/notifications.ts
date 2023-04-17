@@ -31,7 +31,7 @@ export const notifications: NotificationItems = {
     title: 'Image',
     body: 'notification',
     android: {
-      channelId: 'default',
+      channelId: 'high',
       pressAction: {
         id: 'default',
       },
