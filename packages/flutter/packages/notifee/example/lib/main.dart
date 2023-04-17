@@ -20,6 +20,20 @@ Future<void> _notifeeBackgroundHandler(Event event) async {
   if (kDebugMode) {
     print('Handling a background event ${event.type}');
   }
+  if (event.type == EventType.press) {
+    NotifeeNotification notification = selectedNotification!;
+    if (notification.android != null) {
+      notification.android!.channelId = selectedAndroidChannelId;
+      notification.android!.smallIcon = exampleSmallIcon;
+    } else {
+      notification.android = NotificationAndroid(
+          channelId: selectedAndroidChannelId, smallIcon: exampleSmallIcon);
+    }
+
+    notification.title = "bg";
+
+    await notifee.displayNotification(notification);
+  }
 }
 
 Future<void> main() async {
@@ -97,10 +111,16 @@ class _Application extends State<Application> {
 
     notifee.onForegroundEvent.listen((Event event) {
       if (kDebugMode) {
-        print('A new event was published!');
+        print('A new event was published1!');
+        print('in here');
       }
       if (event.detail.notification == null) {
         return;
+      }
+
+      if (event.type == EventType.press) {
+        print('in here');
+        displayNotification();
       }
 
       Navigator.pushNamed(
@@ -122,6 +142,8 @@ class _Application extends State<Application> {
         notification.android = NotificationAndroid(
             channelId: selectedAndroidChannelId, smallIcon: exampleSmallIcon);
       }
+
+      notification.title = "fg";
 
       await notifee.requestPermission();
       await notifee.displayNotification(notification);

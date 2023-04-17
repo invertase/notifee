@@ -88,18 +88,18 @@ class MethodChannelNotifee extends NotifeePlatform {
   MethodChannelNotifee() : super() {
     if (_initialized) return;
     // Background Event
-    // channel.setMethodCallHandler((MethodCall call) async {
-    //   switch (call.method) {
-    //     case 'onBackgroundEvent':
-    //     // iOS only. Android calls via separate background channel.
-    //       Map<String, dynamic> results =
-    //       Map<String, dynamic>.from(call.arguments);
-    //       return NotifeePlatform.onBackgroundEvent
-    //           ?.call(Event.fromMap(results));
-    //     default:
-    //       throw UnimplementedError('${call.method} has not been implemented');
-    //   }
-    // });
+    channel.setMethodCallHandler((MethodCall call) async {
+      switch (call.method) {
+        case 'Notifee#onBackgroundEvent':
+          // iOS only. Android calls via separate background channel.
+          Map<String, dynamic> results =
+              Map<String, dynamic>.from(call.arguments);
+          return NotifeePlatform.onBackgroundEvent
+              ?.call(Event.fromMap(results));
+        default:
+          throw UnimplementedError('${call.method} has not been implemented');
+      }
+    });
 
     // Foreground Event
     _eventChannel
