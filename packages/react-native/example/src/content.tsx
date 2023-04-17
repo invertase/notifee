@@ -31,8 +31,8 @@ export const Content: React.FC<Props> = () => {
     await notifee.createChannel({
       id: notification.android?.channelId || 'default',
       name: notification.android?.channelId || 'default',
-      importance: notification.android?.importance || AndroidImportance.DEFAULT,
-      visibility: notification.android?.visibility || AndroidVisibility.PRIVATE,
+      importance: notification.android?.importance || AndroidImportance.HIGH,
+      visibility: notification.android?.visibility || AndroidVisibility.PUBLIC,
       vibration: true,
       sound: notification.android?.sound || 'default',
     });
@@ -50,7 +50,7 @@ export const Content: React.FC<Props> = () => {
     await notifee.createChannel({
       id: notification.android?.channelId || 'default',
       name: notification.android?.channelId || 'default',
-      importance: notification.android?.importance || AndroidImportance.DEFAULT,
+      importance: notification.android?.importance || AndroidImportance.HIGH,
       visibility: notification.android?.visibility || AndroidVisibility.PRIVATE,
       vibration: true,
       sound: notification.android?.sound || 'default',

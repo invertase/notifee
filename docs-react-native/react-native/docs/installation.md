@@ -22,7 +22,7 @@ yarn add @notifee/react-native
 
 ### 2a. Android API versions
 
-The values of the compileSdkVersion & targetSdkVersion might need to be chnaged. compileSdkVersion needs to be at least 33. In addition, if your app is going to request permission on Android 13 via requestPermission, targetSdkVersion needs to be at least 33, as well. These setting are in the file `/android/build.gradle`. 
+The values of the compileSdkVersion & targetSdkVersion might need to be changed. compileSdkVersion needs to be at least 33. In addition, if your app is going to request permission on Android 13 via requestPermission, targetSdkVersion needs to be at least 33, as well. These setting are in the file `/android/build.gradle`. 
 
 ```gradle
 buildscript {
@@ -62,7 +62,7 @@ npx react-native run-android
 Notifee has a built-in expo plugin you can install into an Expo managed project.
 
 First, add Notifee to your project:
-`expo install @notifee/react-native`
+`npx expo install @notifee/react-native`
 
 Then, add `@notifee/react-native` to the list of plugins in your app's Expo config (`app.json` or `app.config.js`):
 ```json
@@ -74,7 +74,7 @@ Then, add `@notifee/react-native` to the list of plugins in your app's Expo conf
 }
 ```
 
-Finally, ensure you run `expo prebuild` and rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
+Finally, ensure you run `npx expo prebuild` and rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
 
 Please note that Notifee needs Java JDK 11+ to build on Android. If you are building the app with EAS, you need to change the image used for the build. You will have to use `image` as `ubuntu-18.04-jdk-11-ndk-r19c` or another image that has jdk 11 as in the following configuration. ([EAS Build Server Configuration](https://docs.expo.dev/build-reference/infrastructure/#image--ubuntu-1804-jdk-8-ndk-r19c--alias--default))
 

@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, NotifeeCoreRepeatFrequency) {
 
 + (NSDictionary *)parseUNNotificationRequest:(UNNotificationRequest *)request;
 
-+ (INSendMessageIntent *)generateSenderIntentForCommunicationNotifciation:
++ (INSendMessageIntent *)generateSenderIntentForCommunicationNotification:
     (NSMutableDictionary *)options;
 
 + (BOOL)isAppExtension;

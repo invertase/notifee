@@ -151,18 +151,8 @@
 + (UNNotificationAttachment *)attachmentFromDictionary:(NSDictionary *)attachmentDict {
   NSString *identifier = attachmentDict[@"id"];
   NSString *urlString = attachmentDict[@"url"];
-  NSURL *url;
 
-  if ([urlString hasPrefix:@"http://"] || [urlString hasPrefix:@"https://"]) {
-    // handle remote url by attempting to download attachement synchronously
-    url = [self downloadMediaSynchronously:urlString];
-  } else if ([urlString hasPrefix:@"/"]) {
-    // handle absolute file path
-    url = [NSURL fileURLWithPath:urlString];
-  } else {
-    // try to resolve local resource
-    url = [[NSBundle mainBundle] URLForResource:attachmentDict[@"url"] withExtension:nil];
-  }
+  NSURL *url = [self getURLFromString:urlString];
 
   if (url) {
     NSError *error;
@@ -187,6 +177,29 @@
 
   NSLog(@"NotifeeCore: Unable to resolve url for attachment: %@", attachmentDict);
   return nil;
+}
+
+/*
+ * get the URL from a string
+ *
+ * @param urlString NSString
+ * @return NSURL
+ */
++ (NSURL *)getURLFromString:(NSString *)urlString {
+  NSURL *url;
+
+  if ([urlString hasPrefix:@"http://"] || [urlString hasPrefix:@"https://"]) {
+    // handle remote url by attempting to download attachement synchronously
+    url = [self downloadMediaSynchronously:urlString];
+  } else if ([urlString hasPrefix:@"/"]) {
+    // handle absolute file path
+    url = [NSURL fileURLWithPath:urlString];
+  } else {
+    // try to resolve local resource
+    url = [[NSBundle mainBundle] URLForResource:urlString withExtension:nil];
+  }
+
+  return url;
 }
 
 /*
@@ -704,7 +717,7 @@
   return dictionary;
 }
 
-+ (INSendMessageIntent *)generateSenderIntentForCommunicationNotifciation:
++ (INSendMessageIntent *)generateSenderIntentForCommunicationNotification:
     (NSDictionary *)communicationInfo {
   if (@available(iOS 15.0, *)) {
     NSDictionary *sender = communicationInfo[@"sender"];
@@ -714,7 +727,7 @@
     // Parse sender's avatar
     INImage *avatar = nil;
     if (sender[@"avatar"] != nil) {
-      NSURL *url = [[NSURL alloc] initWithString:sender[@"avatar"]];
+      NSURL *url = [self getURLFromString:sender[@"avatar"]];
       avatar = [INImage imageWithURL:url];
     }
 

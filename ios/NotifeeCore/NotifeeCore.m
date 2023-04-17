@@ -187,7 +187,7 @@
   if (@available(iOS 15.0, *)) {
     if (notification[@"ios"][@"communicationInfo"] != nil) {
       INSendMessageIntent *intent = [NotifeeCoreUtil
-          generateSenderIntentForCommunicationNotifciation:notification[@"ios"]
+          generateSenderIntentForCommunicationNotification:notification[@"ios"]
                                                                        [@"communicationInfo"]];
 
       // Use the intent to initialize the interaction.
@@ -247,7 +247,7 @@
   if (@available(iOS 15.0, *)) {
     if (notification[@"ios"][@"communicationInfo"] != nil) {
       INSendMessageIntent *intent = [NotifeeCoreUtil
-          generateSenderIntentForCommunicationNotifciation:notification[@"ios"]
+          generateSenderIntentForCommunicationNotification:notification[@"ios"]
                                                                          [@"communicationInfo"]];
 
       // Use the intent to initialize the interaction.

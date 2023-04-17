@@ -33,6 +33,7 @@ import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 
+// For Android 12 +
 public class NotificationReceiverHandler {
   public static final String REMOTE_INPUT_RECEIVER_KEY =
       "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
