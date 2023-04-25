@@ -46,7 +46,7 @@ export interface Notification {
   body?: string | undefined;
 
   /**
-   * Additional data to store on the notification. Only `string` values can be stored.
+   * Additional data to store on the notification.
    *
    * Data can be used to provide additional context to your notification which can be retrieved
    * at a later point in time (e.g. via an event).
