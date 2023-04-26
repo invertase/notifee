@@ -155,6 +155,16 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
             }
         }
     }
+  
+    internal func getInitialNotification(result: @escaping FlutterResult) {
+        NotifeeCore.getInitialNotification { (error: Error?, notification: Any?) in
+            if error != nil {
+                result(error)
+            } else {
+                result(notification)
+            }
+        }
+    }
 
     internal func incrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
         NotifeeCore.incrementBadgeCount(arguments, with: { (error: Error?) in
@@ -199,6 +209,8 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "displayNotification" {
             displayNotification(arguments: call.arguments as! [String: Any], result: result)
+        } else if call.method == "getInitialNotification" {
+          getInitialNotification(result: result)
         } else if call.method == "createTriggerNotification" {
             createTriggerNotification(arguments: call.arguments as! [String: Any], result: result)
         } else if call.method == "cancelAllNotifications" {

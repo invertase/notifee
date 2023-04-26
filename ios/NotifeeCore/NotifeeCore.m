@@ -248,7 +248,7 @@
     if (notification[@"ios"][@"communicationInfo"] != nil) {
       INSendMessageIntent *intent = [NotifeeCoreUtil
           generateSenderIntentForCommunicationNotification:notification[@"ios"]
-                                                                         [@"communicationInfo"]];
+                                                                       [@"communicationInfo"]];
 
       // Use the intent to initialize the interaction.
       INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
@@ -716,7 +716,8 @@
 }
 
 + (void)getInitialNotification:(notifeeMethodNSDictionaryBlock)block {
-  block(nil, [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification]);
+  [NotifeeCoreUNUserNotificationCenter instance].initialNotificationBlock = block;
+  [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification];
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {
