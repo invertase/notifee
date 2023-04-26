@@ -33,6 +33,8 @@ struct {
   dispatch_once(&once, ^{
     sharedInstance = [[NotifeeCoreUNUserNotificationCenter alloc] init];
     sharedInstance.initialNotification = nil;
+    sharedInstance.initialNotificationGathered = false;
+    sharedInstance.initialNotificationBlock = nil;
   });
   return sharedInstance;
 }
@@ -46,24 +48,41 @@ struct {
     if (center.delegate != nil) {
       _originalDelegate = center.delegate;
       originalUNCDelegateRespondsTo.openSettingsForNotification = (unsigned int)[_originalDelegate
-          respondsToSelector:@selector(userNotificationCenter:openSettingsForNotification:)];
+                                                                                 respondsToSelector:@selector(userNotificationCenter:openSettingsForNotification:)];
       originalUNCDelegateRespondsTo.willPresentNotification = (unsigned int)[_originalDelegate
-          respondsToSelector:@selector(userNotificationCenter:
-                                      willPresentNotification:withCompletionHandler:)];
+                                                                             respondsToSelector:@selector(userNotificationCenter:
+                                                                                                          willPresentNotification:withCompletionHandler:)];
       originalUNCDelegateRespondsTo.didReceiveNotificationResponse =
-          (unsigned int)[_originalDelegate
-              respondsToSelector:@selector(userNotificationCenter:
-                                     didReceiveNotificationResponse:withCompletionHandler:)];
+      (unsigned int)[_originalDelegate
+                     respondsToSelector:@selector(userNotificationCenter:
+                                                  didReceiveNotificationResponse:withCompletionHandler:)];
     }
     center.delegate = strongSelf;
   });
 }
 
+- (void)onDidFinishLaunchingNotification: (nonnull NSDictionary *)notifUserInfo {
+  if (notifUserInfo != nil) {
+    NSDictionary *notifeeNotification = notifUserInfo[kNotifeeUserInfoNotification];
+    _initialNoticationID = notifeeNotification[@"id"];
+  }
+
+  _initialNotificationGathered = YES;
+}
+
 - (nullable NSDictionary *)getInitialNotification {
-  if (_initialNotification != nil) {
-    NSDictionary *initialNotificationCopy = [_initialNotification copy];
-    _initialNotification = nil;
-    return initialNotificationCopy;
+  if (_initialNotificationGathered && _initialNotificationBlock != nil) {
+    // copying initial notification
+    if (_initialNotification != nil &&
+        [_initialNoticationID isEqualToString:_notificationOpenedAppID]) {
+      NSDictionary *initialNotificationCopy = [_initialNotification copy];
+      _initialNotification = nil;
+      _initialNotificationBlock(nil, initialNotificationCopy);
+    } else {
+      _initialNotificationBlock(nil, nil);
+    }
+    
+    _initialNotificationBlock = nil;
   }
 
   return nil;
@@ -157,6 +176,10 @@ struct {
              withCompletionHandler:(void (^)(void))completionHandler {
   NSDictionary *notifeeNotification =
       response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
+  
+  NSDictionary *remoteNotification = response.notification.request.content.userInfo;
+//  _notificationOpenedAppID = remoteNotification[@"gcm.message_id"];
+  _notificationOpenedAppID = notifeeNotification[@"id"];
 
   // handle notification outside of notifee
   if (notifeeNotification == nil) {
@@ -212,6 +235,12 @@ struct {
     _initialNotification = [eventDetail copy];
 
     // post PRESS/ACTION_PRESS event
+    // Set is initial notification to true
+    if (_notificationOpenedAppID != nil &&
+        [_initialNoticationID isEqualToString:_notificationOpenedAppID]) {
+      eventDetail[@"initialNotification"] = @1;
+    }
+
     [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:event];
 
     // TODO figure out if this is needed or if we can just complete immediately

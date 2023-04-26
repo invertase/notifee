@@ -716,7 +716,8 @@
 }
 
 + (void)getInitialNotification:(notifeeMethodNSDictionaryBlock)block {
-  block(nil, [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification]);
+   [NotifeeCoreUNUserNotificationCenter instance].initialNotificationBlock = block;
+   [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification];
 }
 
 + (void)setBadgeCount:(NSInteger)count withBlock:(notifeeMethodVoidBlock)block {

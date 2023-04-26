@@ -77,6 +77,7 @@ class NotifeeExampleApp extends StatelessWidget {
       routes: {
         '/': (context) => const Application(),
         '/notification': (context) => const NotificationListItemView(),
+        '/initialNotification': (context) => const NotificationListItemView(),
         '/trigger_notification': (context) =>
             const TriggerNotificationListItemView(),
         '/trigger_notifications': (context) => const TriggerNotificationList(),
