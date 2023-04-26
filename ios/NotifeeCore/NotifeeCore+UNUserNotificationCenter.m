@@ -177,8 +177,6 @@ struct {
   NSDictionary *notifeeNotification =
       response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  NSDictionary *remoteNotification = response.notification.request.content.userInfo;
-  //  _notificationOpenedAppID = remoteNotification[@"gcm.message_id"];
   _notificationOpenedAppID = notifeeNotification[@"id"];
 
   // handle notification outside of notifee
