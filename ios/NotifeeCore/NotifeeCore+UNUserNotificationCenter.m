@@ -48,20 +48,20 @@ struct {
     if (center.delegate != nil) {
       _originalDelegate = center.delegate;
       originalUNCDelegateRespondsTo.openSettingsForNotification = (unsigned int)[_originalDelegate
-                                                                                 respondsToSelector:@selector(userNotificationCenter:openSettingsForNotification:)];
+          respondsToSelector:@selector(userNotificationCenter:openSettingsForNotification:)];
       originalUNCDelegateRespondsTo.willPresentNotification = (unsigned int)[_originalDelegate
-                                                                             respondsToSelector:@selector(userNotificationCenter:
-                                                                                                          willPresentNotification:withCompletionHandler:)];
+          respondsToSelector:@selector(userNotificationCenter:
+                                      willPresentNotification:withCompletionHandler:)];
       originalUNCDelegateRespondsTo.didReceiveNotificationResponse =
-      (unsigned int)[_originalDelegate
-                     respondsToSelector:@selector(userNotificationCenter:
-                                                  didReceiveNotificationResponse:withCompletionHandler:)];
+          (unsigned int)[_originalDelegate
+              respondsToSelector:@selector(userNotificationCenter:
+                                     didReceiveNotificationResponse:withCompletionHandler:)];
     }
     center.delegate = strongSelf;
   });
 }
 
-- (void)onDidFinishLaunchingNotification: (nonnull NSDictionary *)notifUserInfo {
+- (void)onDidFinishLaunchingNotification:(nonnull NSDictionary *)notifUserInfo {
   if (notifUserInfo != nil) {
     NSDictionary *notifeeNotification = notifUserInfo[kNotifeeUserInfoNotification];
     _initialNoticationID = notifeeNotification[@"id"];
@@ -81,7 +81,7 @@ struct {
     } else {
       _initialNotificationBlock(nil, nil);
     }
-    
+
     _initialNotificationBlock = nil;
   }
 
@@ -176,9 +176,9 @@ struct {
              withCompletionHandler:(void (^)(void))completionHandler {
   NSDictionary *notifeeNotification =
       response.notification.request.content.userInfo[kNotifeeUserInfoNotification];
-  
+
   NSDictionary *remoteNotification = response.notification.request.content.userInfo;
-//  _notificationOpenedAppID = remoteNotification[@"gcm.message_id"];
+  //  _notificationOpenedAppID = remoteNotification[@"gcm.message_id"];
   _notificationOpenedAppID = notifeeNotification[@"id"];
 
   // handle notification outside of notifee

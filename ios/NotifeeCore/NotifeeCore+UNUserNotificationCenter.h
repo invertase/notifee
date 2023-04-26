@@ -41,7 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification;
 
-
 @end
 
 NS_ASSUME_NONNULL_END
