@@ -59,17 +59,27 @@ npx react-native run-android
 ## Miscellaneous
 
 ### Expo Support
-Notifee has a built-in expo plugin you can install into an Expo managed project.
 
-First, add Notifee to your project:
-`npx expo install @notifee/react-native`
+To be able to run Notifee, it is necessary to compile your Android app with `compileSdkVersion` of 33. As of Expo SDK 48, this is a default, so unless you're overriding the `compileSdkVersion`, there's no additional actions you need to take. 
+
+If, however, you're currently compiling your app for SDK version lower than 33, please utilize the `expo-build-properties` config plugin to bump the `compileSdkVersion` to 33. First, install `expo-build-properties`:
+
+`npx expo install expo-build-properties`
 
 Then, add `@notifee/react-native` to the list of plugins in your app's Expo config (`app.json` or `app.config.js`):
-```json
+```js
 {
   "name": "my app",
   "plugins": [
-    "@notifee/react-native"
+    [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33 // Only needed if requesting permission on Android 13 via requestPermission, at least 33 
+          },
+        },
+      ],
   ]
 }
 ```
