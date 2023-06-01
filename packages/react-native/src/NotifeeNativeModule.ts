@@ -4,11 +4,11 @@
 
 import NotifeeJSEventEmitter from './NotifeeJSEventEmitter';
 import {
-  EventSubscriptionVendor,
   NativeEventEmitter,
   NativeModules,
   NativeModulesStatic,
 } from 'react-native';
+import { EventSubscriptionVendor } from 'react-native/Libraries/vendor/emitter/EventEmitter';
 
 export interface NativeModuleConfig {
   version: string;
