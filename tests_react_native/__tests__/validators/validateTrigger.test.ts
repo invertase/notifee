@@ -5,6 +5,7 @@ import {
   TriggerType,
   IntervalTrigger,
   TimeUnit,
+  AlarmType,
 } from '@notifee/react-native/src/types/Trigger';
 
 describe('Validate Trigger', () => {
@@ -164,10 +165,10 @@ describe('Validate Trigger', () => {
           // expect($.).toEqual(date.getTime());
           expect($.repeatFrequency).toEqual(2);
           expect($.timestamp).toEqual(date.getTime());
-          expect($.alarmManager).toEqual({ allowWhileIdle: false });
+          expect($.alarmManager).toEqual({ type: AlarmType.SET_EXACT });
         });
 
-        test('parses property to an object with allowIdle as true', () => {
+        test('parses deprecated property to an object with proper alarm type set', () => {
           const date = new Date(Date.now());
           date.setSeconds(date.getSeconds() + 10);
 
@@ -185,7 +186,28 @@ describe('Validate Trigger', () => {
           // expect($.).toEqual(date.getTime());
           expect($.repeatFrequency).toEqual(2);
           expect($.timestamp).toEqual(date.getTime());
-          expect($.alarmManager).toEqual({ allowWhileIdle: true });
+          expect($.alarmManager).toEqual({ type: AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE });
+        });
+
+        test('parses property to an object with proper alarm type set', () => {
+          const date = new Date(Date.now());
+          date.setSeconds(date.getSeconds() + 10);
+
+          const trigger: TimestampTrigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: date.getTime(),
+            repeatFrequency: 2,
+            alarmManager: {
+              type: AlarmType.SET_ALARM_CLOCK,
+            },
+          };
+
+          const $ = validateTrigger(trigger) as TimestampTrigger;
+
+          // expect($.).toEqual(date.getTime());
+          expect($.repeatFrequency).toEqual(2);
+          expect($.timestamp).toEqual(date.getTime());
+          expect($.alarmManager).toEqual({ type: AlarmType.SET_ALARM_CLOCK });
         });
       });
     });
