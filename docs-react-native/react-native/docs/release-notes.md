@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.8.0
+
+- **[Android]**: Adds the ability to create all types of alarms with Android, affects the `TimestampTriggerAlarmManager` API type and depreactes property `allowWhileIdle` (Addresses issue [#655)](https://github.com/invertase/notifee/issues/655))).
+- **[iOS]**: Fixes an issue where the UI thread was getting blocked when creating a notification with attachments (Fixes [#234)](https://github.com/invertase/notifee/issues/234))).
+
+
 ## 7.7.1
 
 - **[iOS]**: Adds image caching for the avatar for Communication Notifications (PR [#742)](https://github.com/invertase/notifee/pull/742))).
