@@ -9,6 +9,7 @@ previous: /react-native/docs/installation
 
 - **[Android]**: Adds the ability to create all types of alarms with Android, affects the `TimestampTriggerAlarmManager` API type and depreactes property `allowWhileIdle` (Addresses issue [#655)](https://github.com/invertase/notifee/issues/655))).
 - **[iOS]**: Fixes an issue where the UI thread was getting blocked when creating a notification with attachments (Fixes [#234)](https://github.com/invertase/notifee/issues/234))).
+- **[Android/iOS]: BREAKING CHANGE**: For Expo, there is no config plugin anymore, please remove the plugin from `app.config.js` (See issue [#799](https://github.com/invertase/notifee/issues/799) for more info).
 
 
 ## 7.7.1
