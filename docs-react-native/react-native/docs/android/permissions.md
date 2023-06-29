@@ -7,7 +7,36 @@ previous: /react-native/docs/android/interaction
 
 # Understanding permissions
 
-On Android, notification permissions are granted by default. However, a user may revoke them later through various means. In addition, a user may manage or revoke permissions at any of three levels; application-wide, channel groups and channels. 
+On Android 13+, notifications are blocked by default and you will need to present a runtime permission dialog to the user. You have to target at least SDK 33 to perform a runtime request on Android 13.+. The permission is always granted for prior versions.
+
+A user may revoke the permissions later through various means. In addition, a user may manage or revoke permissions at any of three levels; application-wide, channel groups and channels.
+
+# Requesting permissions
+
+To get started and request notification permission from your users, call the [`requestPermission`](/react-native/reference/requestpermission)
+method.
+
+If the user declines the permission, Android prevents the permission dialog from being displayed again. This allows
+the users of your application full control of how notifications are handled:
+
+- If the user declines the runtime permission dialog, they must manually allow notifications via the device Settings UI for your application.
+- If the user accepts the runtime permission dialog, notifications will be shown using the settings requested (e.g. with or without sound).
+
+The following example shows how to trigger a permission dialog:
+
+```js
+import notifee, { AuthorizationStatus } from '@notifee/react-native';
+
+async function requestUserPermission() {
+  const settings = await notifee.requestPermission();
+
+  if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+    console.log('Permission settings:', settings);
+  } else {
+    console.log('User declined permissions');
+  }
+}
+```
 
 # Checking permissions
 
