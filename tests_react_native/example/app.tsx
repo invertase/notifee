@@ -92,6 +92,7 @@ async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
 
 firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
 function Root(): any {
+  // @ts-ignore
   const [id, setId] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
@@ -173,6 +174,7 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 15);
+      // @ts-ignore
       const trigger: TimestampTrigger = {
         type: 0,
         timestamp: date.getTime(),
