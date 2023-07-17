@@ -47,7 +47,7 @@ For each level, you can check whether notifications are permitted through a dire
 To check whether the user has enabled notifications for your app, call [`getNotificationSettings`](/react-native/reference/getnotificationsettings). The `authorizationStatus` attributes will returns `DENIED` if user has denied the permission, and `AUTHORIZED` if it's granted.
 
 ```js
-import notifee from '@notifee/react-native';
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
 
 async function checkNotificationPermission() {
   const settings = await notifee.getNotificationSettings();
