@@ -38,7 +38,7 @@ function Screen() {
         title: 'Meeting with Jane',
         body: 'Today at 11:20am',
         android: {
-          channelId: 'your-channel-id',
+          channelId: yourChannelId,
         },
       },
       trigger,
