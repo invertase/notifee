@@ -27,6 +27,11 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 31
 
+    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+    if (agpVersion >= 7) {
+      namespace 'io.flutter.plugins.notifee'
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
