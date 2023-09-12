@@ -112,9 +112,6 @@ class NotificationManager {
         Boolean hasCustomSound = false;
         NotificationCompat.Builder builder =
           new NotificationCompat.Builder(getApplicationContext(), androidModel.getChannelId());
-        if(androidModel.getShowChronometer()) {
-          builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-        }
 
         // must always keep at top
         builder.setExtras(notificationModel.getData());
