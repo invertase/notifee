@@ -278,7 +278,8 @@ class NotificationManager {
              notificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
           }
           notificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
-          notificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+//          notificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+          notificationView.setChronometer(R.id.timer, androidModel.getTimestamp(), null, true);
           builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
           builder.setCustomContentView(notificationView);
 
@@ -293,7 +294,8 @@ class NotificationManager {
             bigNotificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
           }
           bigNotificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
-          bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+//          bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+          bigNotificationView.setChronometer(R.id.timer, androidModel.getTimestamp(), null, true);
           builder.setCustomBigContentView(bigNotificationView);
           builder.setCustomHeadsUpContentView(notificationView);
           builder.setUsesChronometer(false);
