@@ -23,6 +23,7 @@ import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
 import static app.notifee.core.event.NotificationEvent.TYPE_PRESS;
 import static java.lang.Integer.parseInt;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -34,10 +35,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.service.notification.StatusBarNotification;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -91,6 +90,16 @@ class NotificationManager {
   private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
   private static final int NOTIFICATION_TYPE_TRIGGER = 2;
 
+  public static int getViewIdOfActions(int i) {
+    if (i == 1) {
+      return R.id.action_button1;
+    }
+    if (i == 2) {
+      return R.id.action_button2;
+    }
+    return R.id.action_button1;
+  }
+
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
     NotificationModel notificationModel) {
     final NotificationAndroidModel androidModel = notificationModel.getAndroid();
@@ -103,6 +112,9 @@ class NotificationManager {
         Boolean hasCustomSound = false;
         NotificationCompat.Builder builder =
           new NotificationCompat.Builder(getApplicationContext(), androidModel.getChannelId());
+        if(androidModel.getShowChronometer()) {
+          builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
+        }
 
         // must always keep at top
         builder.setExtras(notificationModel.getData());
@@ -250,7 +262,8 @@ class NotificationManager {
         builder.setAutoCancel(androidModel.getAutoCancel());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && androidModel.getShowChronometer()) {
-          RemoteViews notificationView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.custom_timer_view);
+          Boolean isPnWithActions = androidModel.getActions() != null && !androidModel.getActions().isEmpty();
+          RemoteViews notificationView = new RemoteViews(getApplicationContext().getPackageName(), isPnWithActions ? R.layout.custom_timer_view_with_actions : R.layout.custom_timer_view);
           Integer smallIconDetail = androidModel.getSmallIcon();
           if (smallIconDetail != null) {
             notificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
@@ -263,20 +276,25 @@ class NotificationManager {
           }
           notificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
           notificationView.setTextViewText(R.id.title, TextUtils.fromHtml(notificationModel.getTitle()));
-          notificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
-          notificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+          if(!isPnWithActions) {
+             notificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
+             notificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+          }
           notificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
           notificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+          builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
           builder.setCustomContentView(notificationView);
 
-          RemoteViews bigNotificationView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.big_custom_timer_view);
+          RemoteViews bigNotificationView = new RemoteViews(getApplicationContext().getPackageName(), isPnWithActions ? R.layout.big_custom_timer_with_actions : R.layout.big_custom_timer_view);
           if (smallIconDetail != null) {
             bigNotificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
           }
           bigNotificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
           bigNotificationView.setTextViewText(R.id.title, TextUtils.fromHtml(notificationModel.getTitle()));
-          bigNotificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
-          bigNotificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+          if(!isPnWithActions) {
+            bigNotificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
+            bigNotificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+          }
           bigNotificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
           bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
           builder.setCustomBigContentView(bigNotificationView);
@@ -384,6 +402,7 @@ class NotificationManager {
         if (actionBundles == null) {
           return builder;
         }
+        int cActions = 0;
 
         for (NotificationAndroidActionModel actionBundle : actionBundles) {
           PendingIntent pendingIntent = null;
@@ -439,6 +458,19 @@ class NotificationManager {
           RemoteInput remoteInput = actionBundle.getRemoteInput(actionBuilder);
           if (remoteInput != null) {
             actionBuilder.addRemoteInput(remoteInput);
+          }
+          if(androidModel.getShowChronometer()) {
+            cActions++;
+            @SuppressLint("RestrictedApi") RemoteViews customView = builder.getContentView();
+            int viewId = getViewIdOfActions(cActions);
+            Logger.v(TAG, customView.toString());
+            customView.setOnClickPendingIntent(viewId, pendingIntent);
+            customView.setTextViewText(viewId, actionBundle.getTitle());
+            builder.setCustomContentView(customView);
+            @SuppressLint("RestrictedApi") RemoteViews customView1 = builder.getBigContentView();
+            customView1.setOnClickPendingIntent(viewId, pendingIntent);
+            customView1.setTextViewText(viewId, actionBundle.getTitle());
+            builder.setCustomBigContentView(customView1);
           }
 
           builder.addAction(actionBuilder.build());
@@ -587,13 +619,13 @@ class NotificationManager {
         });
   }
 
+  @SuppressLint("RestrictedApi")
   static Task<Void> displayNotification(NotificationModel notificationModel, Bundle triggerBundle) {
     return notificationBundleToBuilder(notificationModel)
       .continueWith(
         CACHED_THREAD_POOL,
         (task) -> {
           NotificationCompat.Builder builder = task.getResult();
-
           // Add the following extras for `getDisplayedNotifications()`
           Bundle extrasBundle = new Bundle();
           extrasBundle.putBundle(EXTRA_NOTIFEE_NOTIFICATION, notificationModel.toBundle());

@@ -16,7 +16,7 @@ type TriggersItems = {
 /* Timestamp Date */
 const getTimestamp = () => {
   const timestampDate = new Date(Date.now());
-  timestampDate.setSeconds(timestampDate.getSeconds() + 5);
+  timestampDate.setSeconds(timestampDate.getSeconds() + 2);
   return timestampDate.getTime();
 };
 

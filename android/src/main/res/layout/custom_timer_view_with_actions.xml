@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="10dp">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+      android:id="@+id/small_icon"
+      android:layout_width="16dp"
+      android:layout_height="16dp"
+      android:layout_gravity="center"
+      android:tint="@color/image_colour"
+      android:src="@android:drawable/ic_btn_speak_now" />
+
+    <TextView
+      android:id="@+id/appName"
+      style="@style/TextAppearance.Compat.Notification.Info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:paddingLeft="10dp"
+      tools:text="App Name" />
+
+  </LinearLayout>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentStart="true"
+      android:layout_toLeftOf="@id/timer"
+      android:orientation="horizontal">
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="start"
+        android:id="@+id/title"
+        style="@style/TextAppearance.Compat.Notification.Title"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="Your Gym session started" />
+
+      <Chronometer
+        android:id="@+id/timer"
+        style="@style/TextAppearance.Compat.Notification.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="end"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:minWidth="160dp"
+        android:paddingLeft="10dp"
+        android:textSize="25dp" />
+    </LinearLayout>
+
+
+
+
+
+  </RelativeLayout>
+  <LinearLayout
+    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_toLeftOf="@id/timer"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/action_button1"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_gravity="start"
+      android:fontFamily="sans-serif-black"
+      tools:text="Action 1 SS" />
+
+    <Button
+      android:id="@+id/action_button2"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_gravity="end"
+      android:fontFamily="sans-serif-black"
+      tools:text="Action 2 SS"
+      />
+  </LinearLayout>
+</LinearLayout>

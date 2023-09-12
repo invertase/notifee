@@ -31,15 +31,54 @@ export const Content: React.FC<Props> = () => {
 
     try {
       await notifee.displayNotification({
-        title: '&#11088; Claim Your Prize &#11088;',
-        body: ' Tap to claim your time limited prize! Hurry! Tap to claim your time limited prize! Hurry! &#10024;',
+        title: 'Stay Hydrated',
+        body: 'We are what we repeatedly do. Excellence then is not an act but a habit.',
         subtitle: 'Prizes',
-        android: {
-          channelId: notification.android?.channelId || 'default',
-          showChronometer: true,
-          chronometerDirection: 'down',
-          timestamp: Date.now() + 60000000,
-        },
+        // android: {
+        //   channelId: notification.android?.channelId || 'default',
+        //   showChronometer: true,
+        //   chronometerDirection: 'down',
+        //   timestamp: Date.now() + 60000000,
+        // },
+        "android": {
+          // "ongoing": true,
+          "style": {
+            "type": 1,
+            "text": "With 12-month cultpasss ELITE testing is now completes"
+          },
+          // "smallIcon": "notify_logo",
+          "largeIcon": "https://curefit-content.s3.ap-south-1.amazonaws.com/prod/asset-manager/default/image/default/Group%20162%402x-1616417995961.png",
+          "sound": "default",
+          "channelId": notification.android?.channelId || 'default',
+          "pressAction": {
+            "id": "curefit://listpage?pageId=Elite_lp_sale&utm_source=PN",
+            "launchActivity": "default"
+          },
+          // "actions": [],
+          "actions": [
+            {
+              "title": "FINISH WORKOUT",
+              "pressAction": {
+                "id": "GYM_CHECKOUT",
+                "launchActivity": "default"
+              }
+            },
+            {
+              "title": "DISMISS",
+              "pressAction": {
+                "id": "DISMISS_PN",
+                "launchActivity": "default"
+              }
+            }
+          ],
+          "groupId": "123",
+          "sortKey": "B",
+          "showTimestamp": true,
+          "showChronometer": true,
+          "chronometerDirection": "up",
+          "timestamp": 1694080815000,
+          "timeoutAfter": 1000000
+        }
       });
     } catch (e) {
       console.error(e);
