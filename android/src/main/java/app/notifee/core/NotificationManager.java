@@ -262,39 +262,39 @@ class NotificationManager {
           Boolean isPnWithActions = androidModel.getActions() != null && !androidModel.getActions().isEmpty();
           RemoteViews notificationView = new RemoteViews(getApplicationContext().getPackageName(), isPnWithActions ? R.layout.custom_timer_view_with_actions : R.layout.custom_timer_view);
           Integer smallIconDetail = androidModel.getSmallIcon();
-          if (smallIconDetail != null) {
-            notificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
-          }
+          // if (smallIconDetail != null) {
+          //   notificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
+          // }
           String appName;
           try {
             appName = getApplicationContext().getApplicationInfo().loadLabel(getApplicationContext().getPackageManager()).toString();
           } catch (Exception e) {
             appName = "cult.fit";
           }
-          notificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
+          // notificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
           notificationView.setTextViewText(R.id.title, TextUtils.fromHtml(notificationModel.getTitle()));
           if(!isPnWithActions) {
              notificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
-             notificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+            //  notificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
           }
-          notificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
-//          notificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+//          notificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
+          notificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
           notificationView.setChronometer(R.id.timer, androidModel.getTimestamp(), null, true);
           builder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
           builder.setCustomContentView(notificationView);
 
           RemoteViews bigNotificationView = new RemoteViews(getApplicationContext().getPackageName(), isPnWithActions ? R.layout.big_custom_timer_with_actions : R.layout.big_custom_timer_view);
-          if (smallIconDetail != null) {
-            bigNotificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
-          }
-          bigNotificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
+          // if (smallIconDetail != null) {
+          //   bigNotificationView.setImageViewResource(R.id.small_icon, smallIconDetail);
+          // }
+          // bigNotificationView.setTextViewText(R.id.appName, TextUtils.fromHtml(appName));
           bigNotificationView.setTextViewText(R.id.title, TextUtils.fromHtml(notificationModel.getTitle()));
           if(!isPnWithActions) {
             bigNotificationView.setTextViewText(R.id.body, TextUtils.fromHtml(notificationModel.getBody()));
-            bigNotificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
+            // bigNotificationView.setTextViewText(R.id.subTitle, TextUtils.fromHtml(notificationModel.getSubTitle() != null ? notificationModel.getSubTitle() : ""));
           }
-          bigNotificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
-//          bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
+//          bigNotificationView.setChronometerCountDown(R.id.timer, androidModel.getChronometerCountDown());
+          bigNotificationView.setChronometer(R.id.timer, SystemClock.elapsedRealtime() + (androidModel.getTimestamp() - System.currentTimeMillis()), null, true);
           bigNotificationView.setChronometer(R.id.timer, androidModel.getTimestamp(), null, true);
           builder.setCustomBigContentView(bigNotificationView);
           builder.setCustomHeadsUpContentView(notificationView);
