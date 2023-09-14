@@ -5,42 +5,42 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:paddingTop="10dp">
+  android:padding="10dp">
 
-<!--  <LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content">-->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-<!--    <ImageView-->
-<!--      android:id="@+id/small_icon"-->
-<!--      android:layout_width="16dp"-->
-<!--      android:layout_height="16dp"-->
-<!--      android:layout_gravity="center"-->
-<!--      android:tint="@color/image_colour"-->
-<!--      android:src="@android:drawable/ic_btn_speak_now" />-->
+    <ImageView
+      android:id="@+id/small_icon"
+      android:layout_width="16dp"
+      android:layout_height="16dp"
+      android:layout_gravity="center"
+      android:tint="@color/image_colour"
+      android:src="@android:drawable/ic_btn_speak_now" />
 
-<!--    <TextView-->
-<!--      android:id="@+id/appName"-->
-<!--      style="@style/TextAppearance.Compat.Notification.Info"-->
-<!--      android:layout_width="wrap_content"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:layout_gravity="center"-->
-<!--      android:paddingLeft="10dp"-->
-<!--      tools:text="App Name" />-->
+    <TextView
+      android:id="@+id/appName"
+      style="@style/TextAppearance.Compat.Notification.Info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:paddingLeft="10dp"
+      tools:text="App Name" />
 
-<!--    <TextView-->
-<!--      android:id="@+id/subTitle"-->
-<!--      style="@style/TextAppearance.Compat.Notification.Info"-->
-<!--      android:layout_width="wrap_content"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:layout_gravity="center"-->
-<!--      android:ellipsize="end"-->
-<!--      android:maxWidth="200dp"-->
-<!--      android:maxLines="1"-->
-<!--      android:paddingLeft="10dp"-->
-<!--      tools:text="SubTitle" />-->
+    <TextView
+      android:id="@+id/subTitle"
+      style="@style/TextAppearance.Compat.Notification.Info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:ellipsize="end"
+      android:maxWidth="200dp"
+      android:maxLines="1"
+      android:paddingLeft="10dp"
+      tools:text="SubTitle" />
 
-<!--  </LinearLayout>-->
+  </LinearLayout>
 
   <RelativeLayout
     android:layout_width="match_parent"

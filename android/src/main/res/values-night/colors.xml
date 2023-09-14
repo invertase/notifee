@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="image_colour">#FFFFFF</color>
+  <color name="action_button_bg">#3B3B3B</color>
 </resources>
