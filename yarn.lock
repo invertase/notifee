@@ -1585,11 +1585,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@curefit/notifee@*":
-  version "5.7.1"
-  resolved "https://npm.pkg.github.com/download/@curefit/notifee/5.7.1/0235f8e582680e9205e7ce845d6367c6b4b8a1fc#0235f8e582680e9205e7ce845d6367c6b4b8a1fc"
-  integrity sha512-QOzdEmywjDLOHNPekj1ah/AAZsKhy/vwnte/ZQ95M+hpTJx0aXRJxHnx+eVPZU2c/NxCza42Fw7tki8hfDofJg==
-
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
