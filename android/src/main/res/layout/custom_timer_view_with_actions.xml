@@ -5,30 +5,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:padding="10dp">
+  android:padding="0dp">
 
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-      android:id="@+id/small_icon"
-      android:layout_width="16dp"
-      android:layout_height="16dp"
-      android:layout_gravity="center"
-      android:tint="@color/image_colour"
-      android:src="@android:drawable/ic_btn_speak_now" />
-
-    <TextView
-      android:id="@+id/appName"
-      style="@style/TextAppearance.Compat.Notification.Info"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:paddingLeft="10dp"
-      tools:text="App Name" />
-
-  </LinearLayout>
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -108,7 +86,7 @@
       tools:text="Action 1 SS" />
 
     <Button
-      android:backgroundTint="@color/action_button_bg"
+      android:backgroundTint="@color/action_button_primary_bg"
       android:layout_marginLeft="5dp"
       android:id="@+id/action_button2"
       android:layout_width="0dp"
@@ -116,7 +94,7 @@
       android:layout_weight="1"
       android:layout_gravity="end"
       android:fontFamily="sans-serif-black"
-      android:textColor="@color/image_colour"
+      android:textColor="@color/action_text_primary"
       tools:text="Action 2 SS"
       />
   </LinearLayout>

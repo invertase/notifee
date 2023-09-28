@@ -2,4 +2,6 @@
 <resources>
   <color name="image_colour">#000000</color>
   <color name="action_button_bg">#DFDFDF</color>
+  <color name="action_button_primary_bg">#3B3B3B</color>
+  <color name="action_text_primary">#FFFFFF</color>
 </resources>
