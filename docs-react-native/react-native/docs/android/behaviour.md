@@ -191,7 +191,7 @@ notifee.displayNotification({
 });
 ```
 
-and, by adding `showWhenLocked` and `turnScreenOn` to your activity:
+and, by adding `showWhenLocked` and `turnScreenOn` to your activity in android/app/src/main/AndroidManifest.xml:
 ```xml
   <activity
     ...
@@ -199,6 +199,8 @@ and, by adding `showWhenLocked` and `turnScreenOn` to your activity:
     android:turnScreenOn="true"
   />
 ```
+
+> After making these changes, be sure to run `cd android` and `./gradlew clean`, then re-install the app.
 
 Running this code, Notifee will attempt to launch the activity when the notification is displayed.
 
