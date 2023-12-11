@@ -105,9 +105,11 @@ dependencies {
 
   api 'androidx.annotation:annotation:1.3.0' // https://developer.android.com/jetpack/androidx/releases/annotation
   api 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-  api 'com.google.android.gms:play-services-tasks:18.0.1' // https://developers.google.com/android/guides/releases
   api 'androidx.work:work-runtime:2.8.0' // https://developer.android.com/jetpack/androidx/releases/work
   api 'com.facebook.fresco:fresco:2.6.0' // https://github.com/facebook/fresco/releases
+
+  implementation("com.google.guava:guava:31.1-android") // https://github.com/google/guava
+  implementation 'androidx.core:core:1.6.0'
 
   def room_version = '2.5.0' // https://developer.android.com/jetpack/androidx/releases/room
   implementation "androidx.room:room-runtime:$room_version"

@@ -28,11 +28,12 @@ import app.notifee.core.Logger;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.SettableFuture;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -55,9 +56,9 @@ public class NotificationAndroidStyleModel {
    * @param personBundle
    * @return
    */
-  private static Task<Person> getPerson(Executor executor, Bundle personBundle) {
-    return Tasks.call(
-        executor,
+  private static ListenableFuture<Person> getPerson(
+    ListeningExecutorService lExecutor, Bundle personBundle) {
+    return lExecutor.submit(
         () -> {
           Person.Builder personBuilder = new Person.Builder();
 
@@ -81,8 +82,8 @@ public class NotificationAndroidStyleModel {
 
             try {
               personIconBitmap =
-                  Tasks.await(
-                      ResourceUtils.getImageBitmapFromUrl(personIcon), 10, TimeUnit.SECONDS);
+                      ResourceUtils.getImageBitmapFromUrl(personIcon)
+                          .get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -113,22 +114,23 @@ public class NotificationAndroidStyleModel {
   }
 
   @Nullable
-  public Task<NotificationCompat.Style> getStyleTask(Executor executor) {
+  public ListenableFuture<NotificationCompat.Style> getStyleTask(
+    ListeningExecutorService lExecutor) {
     int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
-    Task<NotificationCompat.Style> styleTask = null;
+    ListenableFuture<NotificationCompat.Style> styleTask = null;
 
     switch (type) {
       case 0:
-        styleTask = getBigPictureStyleTask(executor);
+        styleTask = getBigPictureStyleTask(lExecutor);
         break;
       case 1:
-        styleTask = Tasks.forResult(getBigTextStyle());
+        styleTask = Futures.immediateFuture(getBigTextStyle());
         break;
       case 2:
-        styleTask = Tasks.forResult(getInboxStyle());
+        styleTask = Futures.immediateFuture(getInboxStyle());
         break;
       case 3:
-        styleTask = getMessagingStyleTask(executor);
+        styleTask = getMessagingStyleTask(lExecutor);
         break;
     }
 
@@ -140,9 +142,9 @@ public class NotificationAndroidStyleModel {
    *
    * @return
    */
-  private Task<NotificationCompat.Style> getBigPictureStyleTask(Executor executor) {
-    return Tasks.call(
-        executor,
+  private ListenableFuture<NotificationCompat.Style> getBigPictureStyleTask(
+    ListeningExecutorService lExecutor) {
+    return lExecutor.submit(
         () -> {
           NotificationCompat.BigPictureStyle bigPictureStyle =
               new NotificationCompat.BigPictureStyle();
@@ -153,8 +155,9 @@ public class NotificationAndroidStyleModel {
             Bitmap pictureBitmap = null;
 
             try {
-              pictureBitmap =
-                  Tasks.await(ResourceUtils.getImageBitmapFromUrl(picture), 10, TimeUnit.SECONDS);
+              pictureBitmap = 
+                  ResourceUtils.getImageBitmapFromUrl(picture)
+                      .get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -189,8 +192,9 @@ public class NotificationAndroidStyleModel {
             Bitmap largeIconBitmap = null;
 
             try {
-              largeIconBitmap =
-                  Tasks.await(ResourceUtils.getImageBitmapFromUrl(largeIcon), 10, TimeUnit.SECONDS);
+              largeIconBitmap = 
+                  ResourceUtils.getImageBitmapFromUrl(largeIcon)
+                    .get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -286,17 +290,15 @@ public class NotificationAndroidStyleModel {
   }
 
   /** Gets a MessagingStyle for a notification */
-  private Task<NotificationCompat.Style> getMessagingStyleTask(Executor executor) {
-    return Tasks.call(
-        executor,
+  private ListenableFuture<NotificationCompat.Style> getMessagingStyleTask(
+    ListeningExecutorService lExecutor) {
+    return lExecutor.submit(
         () -> {
           Person person =
-              Tasks.await(
-                  getPerson(
-                      executor,
-                      Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person"))),
-                  20,
-                  TimeUnit.SECONDS);
+              getPerson(lExecutor, 
+                  Objects.requireNonNull(
+                      mNotificationAndroidStyleBundle.getBundle("person"))
+              ).get(20, TimeUnit.SECONDS);
 
           NotificationCompat.MessagingStyle messagingStyle =
               new NotificationCompat.MessagingStyle(person);
@@ -323,10 +325,9 @@ public class NotificationAndroidStyleModel {
 
             if (message.containsKey("person")) {
               messagePerson =
-                  Tasks.await(
-                      getPerson(executor, Objects.requireNonNull(message.getBundle("person"))),
-                      20,
-                      TimeUnit.SECONDS);
+                  getPerson(lExecutor,
+                      Objects.requireNonNull(message.getBundle("person"))
+                  ).get(20, TimeUnit.SECONDS);
             }
 
             messagingStyle =

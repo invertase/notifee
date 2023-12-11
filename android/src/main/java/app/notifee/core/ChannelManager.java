@@ -31,8 +31,9 @@ import app.notifee.core.model.ChannelGroupModel;
 import app.notifee.core.model.ChannelModel;
 import app.notifee.core.utility.ColorUtils;
 import app.notifee.core.utility.ResourceUtils;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,16 +41,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ChannelManager {
+
   private static String TAG = "ChannelManager";
   private static ExecutorService executorService = Executors.newCachedThreadPool();
+  private static ListeningExecutorService lExecutorService = MoreExecutors.listeningDecorator(
+    executorService);
 
-  static Task<Void> createChannel(ChannelModel channelModel) {
-    return Tasks.call(
-        executorService,
-        () -> {
-          if (Build.VERSION.SDK_INT < 26) {
-            return null;
-          }
+  static ListenableFuture<Void> createChannel(ChannelModel channelModel) {
+    return lExecutorService.submit(
+      () -> {
+        if (Build.VERSION.SDK_INT < 26) {
+          return null;
+        }
 
           NotificationChannel channel =
               new NotificationChannel(
@@ -99,21 +102,19 @@ public class ChannelManager {
         });
   }
 
-  static Task<Void> createChannels(List<ChannelModel> channelModels) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Void> createChannels(List<ChannelModel> channelModels) {
+    return lExecutorService.submit(
         () -> {
           for (ChannelModel channelModel : channelModels) {
-            Tasks.await(createChannel(channelModel));
+            createChannel(channelModel).get();
           }
 
           return null;
         });
   }
 
-  static Task<Void> createChannelGroup(ChannelGroupModel channelGroupModel) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Void> createChannelGroup(ChannelGroupModel channelGroupModel) {
+    return lExecutorService.submit(
         () -> {
           if (Build.VERSION.SDK_INT < 26) {
             return null;
@@ -133,16 +134,16 @@ public class ChannelManager {
         });
   }
 
-  static Task<Void> createChannelGroups(List<ChannelGroupModel> channelGroupModels) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Void> createChannelGroups(
+      List<ChannelGroupModel> channelGroupModels) {
+      return lExecutorService.submit(
         () -> {
           if (Build.VERSION.SDK_INT < 26) {
             return null;
           }
 
           for (ChannelGroupModel channelGroupModel : channelGroupModels) {
-            Tasks.await(createChannelGroup(channelGroupModel));
+            createChannelGroup(channelGroupModel).get();
           }
 
           return null;
@@ -159,9 +160,8 @@ public class ChannelManager {
         .deleteNotificationChannelGroup(channelGroupId);
   }
 
-  static Task<List<Bundle>> getChannels() {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<List<Bundle>> getChannels() {
+    return lExecutorService.submit(
         () -> {
           List<NotificationChannel> channels =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext())
@@ -180,9 +180,8 @@ public class ChannelManager {
         });
   }
 
-  static Task<Bundle> getChannel(String channelId) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Bundle> getChannel(String channelId) {
+    return lExecutorService.submit(
         () -> {
           NotificationChannel channel =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext())
@@ -192,9 +191,8 @@ public class ChannelManager {
         });
   }
 
-  static Task<Boolean> isChannelBlocked(String channelId) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Boolean> isChannelBlocked(String channelId) {
+    return lExecutorService.submit(
         () -> {
           if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
 
@@ -210,9 +208,8 @@ public class ChannelManager {
         });
   }
 
-  static Task<Boolean> isChannelCreated(String channelId) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Boolean> isChannelCreated(String channelId) {
+    return lExecutorService.submit(
         () -> {
           if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
 
@@ -224,9 +221,8 @@ public class ChannelManager {
         });
   }
 
-  static Task<List<Bundle>> getChannelGroups() {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<List<Bundle>> getChannelGroups() {
+      return lExecutorService.submit(
         () -> {
           List<NotificationChannelGroup> channelGroups =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext())
@@ -245,13 +241,12 @@ public class ChannelManager {
         });
   }
 
-  static Task<Bundle> getChannelGroup(String channelGroupId) {
-    return Tasks.call(
-        executorService,
+  static ListenableFuture<Bundle> getChannelGroup(String channelGroupId) {
+    return lExecutorService.submit(
         () -> {
           NotificationChannelGroup channelGroup =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannelGroup(channelGroupId);
+            NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+              .getNotificationChannelGroup(channelGroupId);
 
           return convertChannelGroupToBundle(channelGroup);
         });
@@ -348,5 +343,9 @@ public class ChannelManager {
     }
 
     return channelGroupBundle;
+  }
+
+  public static ListeningExecutorService getListeningExecutorService() {
+    return lExecutorService;
   }
 }
