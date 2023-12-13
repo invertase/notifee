@@ -5,7 +5,7 @@ homepage: https://github.com/invertase/notifee/tree/main/packages/flutter/packag
 repository: https://github.com/invertase/notifee/tree/main/packages/flutter/packages/notifee
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.12.0 <4.0.0'
   flutter: '>=1.17.0'
 
 dependencies:

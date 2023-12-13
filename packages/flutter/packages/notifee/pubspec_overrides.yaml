@@ -1,4 +1,0 @@
-# melos_managed_dependency_overrides: notifee_platform_interface
-dependency_overrides:
-  notifee_platform_interface:
-    path: ../notifee_platform_interface
