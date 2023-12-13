@@ -31,7 +31,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 18
 
       # Set path variables needed for caches
       - name: Set workflow variables
@@ -83,17 +83,11 @@ jobs:
           max_attempts: 4
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
 
-      - name: Configure JDK 1.11
-        uses: actions/setup-java@v2
+      - name: Configure JDK
+        uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
-          java-version: '11' # ubuntu-latest is about to default to 11, force it everywhere
-
-      - name: Verify JDK11
-        # Default JDK varies depending on different runner flavors, make sure we are on 11
-        # Run a check that exits with error unless it is 11 version to future-proof against unexpected upgrades
-        run: java -fullversion 2>&1 | grep '11.0'
-        shell: bash
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Build Android App
         uses: nick-invision/retry@v2
