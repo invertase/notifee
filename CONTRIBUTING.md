@@ -90,6 +90,7 @@ Maintainers with write access to the repo and the npm organization can publish n
 1. Push the release notes / version / tag to the repo: `git push --tags`
 1. Create a release on the repo:
     ```
-    gh release create @notifee/react-native@x.y.z --title "@notifee/react-native@x.y.z" --notes "[Release Notes](https://notifee.app/react-native/docs/release-notes)"
+    export TAGNAME=`git tag --list|sort -r|head -1`
+    gh release create ${TAGNAME} --title "${TAGNAME}" --notes "[Release Notes](https://github.com/invertase/notifee/blob/main/docs-react-native/react-native/docs/release-notes.md)"
     ```
 1. Publish to npm: `npm publish`
