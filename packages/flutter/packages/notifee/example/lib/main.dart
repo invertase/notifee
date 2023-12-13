@@ -112,15 +112,17 @@ class _Application extends State<Application> {
 
     notifee.onForegroundEvent.listen((Event event) {
       if (kDebugMode) {
-        print('A new event was published1!');
-        print('in here');
+        print('A new event was published!');
+        print('in onForegroundEvent listener');
       }
       if (event.detail.notification == null) {
         return;
       }
 
       if (event.type == EventType.press) {
-        print('in here');
+        if (kDebugMode) {
+          print('in EventType.press handler');
+        }
         displayNotification();
       }
 
@@ -238,9 +240,9 @@ class _Application extends State<Application> {
           child: const Icon(Icons.send),
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             MetaCard(title: 'Permissions', children: Permissions()),
             MetaCard(
                 title: 'Notification Stream', children: NotificationList()),
