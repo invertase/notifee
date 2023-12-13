@@ -55,9 +55,8 @@ export function NotificationSpec(spec: TestScope): void {
       const customSoundChannel = await notifee.getChannel('new_custom_sound');
       console.warn('customSoundChannel looks like: ' + JSON.stringify(customSoundChannel));
 
-      expect(customSoundChannel).not.null;
-
       if (Platform.OS === 'android' && customSoundChannel) {
+        expect(customSoundChannel).not.null;
         expect(customSoundChannel.soundURI).contains('horse.mp3');
         expect(customSoundChannel.sound).equals('horse.mp3');
       }

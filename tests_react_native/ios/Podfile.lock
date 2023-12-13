@@ -1,5 +1,7 @@
 PODS:
   - boost (1.76.0)
+  - CavyNativeReporter (0.1.3):
+    - React-Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.69.12)
   - FBReactNativeSpec (0.69.12):
@@ -358,6 +360,7 @@ PODS:
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - CavyNativeReporter (from `../node_modules/cavy-native-reporter`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -412,6 +415,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
+  CavyNativeReporter:
+    :path: "../node_modules/cavy-native-reporter"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -487,6 +492,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
+  CavyNativeReporter: 22479f189ecd26513573801d005244bd47abb188
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 6fab494fa11340bd4206edaebed07279a6bafad4
   FBReactNativeSpec: 76d7b03876b0ad0b86bc5c84d23af8e64db8e096
