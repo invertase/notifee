@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/invertase/notifee"
+    "url": "git+https://github.com/invertase/notifee.git"
   },
   "license": "Apache-2.0",
   "keywords": [
@@ -53,5 +53,20 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "/android",
+    "!/android/build",
+    "/ios",
+    "/src",
+    "!/src/__mocks__",
+    "/dist",
+    "/lib",
+    "/*.podspec",
+    "/jest-mock.js",
+    "/react-native.config.js",
+    "tsconfig.json"
+  ]
 }
