@@ -38,7 +38,7 @@ jobs:
         working-directory: ./packages/flutter
 
   format:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
@@ -48,30 +48,23 @@ jobs:
         run: |
           ./.github/workflows/scripts/install-tools.sh
           curl -sL https://github.com/google/google-java-format/releases/download/google-java-format-1.3/google-java-format-1.3-all-deps.jar -o $HOME/google-java-format.jar
+      - name: Install native formatters
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew install clang-format swiftformat
+
       - name: "Bootstrap Workspace"
         run: melos bootstrap
         working-directory: ./packages/flutter
       - name: "Dart"
         run: |
-          melos exec -c 1 -- \
-            "flutter format ."
+          melos run format
           ../../.github/workflows/scripts/validate-formatting.sh
         working-directory: ./packages/flutter
-      - name: "Objective-C"
-        if: ${{ success() || failure() }}
-        run: |
-          melos exec -c 4 --ignore="*platform_interface*" --ignore="*web*" --dir-exists="ios" -- \
-            find . -maxdepth 3 -name "*.h" -o -name "*.m" -print0 \| xargs -0 clang-format -i --style=Google --verbose
-          ../../.github/workflows/scripts/validate-formatting.sh
-        working-directory: ./packages/flutter
-      - name: "Java"
-        if: ${{ success() || failure() }}
-        run: |
-          melos exec -c 4 --ignore="*platform_interface*" --ignore="*web*" --dir-exists="android" -- \
-            find . -maxdepth 12 -name "*.java" -print0 \| xargs -0 java -jar $HOME/google-java-format.jar --replace
-          ../../.github/workflows/scripts/validate-formatting.sh
-        working-directory: ./packages/flutter
-
+ 
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
