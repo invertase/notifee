@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.8.2
+
+- Fix packaging error / missing `dist/version.js` [#934](https://github.com/invertase/notifee/issues/934)
+
 ## 7.8.1
 
 - **[Android]**: Fix compatibility with android-gradle-plugin 8 (reat-native 0.73+) [#907](https://github.com/invertase/notifee/pull/907)
