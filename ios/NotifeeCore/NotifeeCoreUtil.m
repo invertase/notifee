@@ -363,10 +363,13 @@
                    NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
   }
 
-  NSDateComponents *components = [[NSCalendar currentCalendar] components:calendarUnit
-                                                                 fromDate:date];
-  trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components
-                                                                     repeats:repeats];
+  NSCalendar *utcCalendar = [NSCalendar currentCalendar];
+  [utcCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+
+  // Add components like happens now, but to a UTC (not local) calendar
+  NSDateComponents *components = [utcCalendar components:calendarUnit fromDate:date];
+
+  *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:repeats];
 
   return trigger;
 }
