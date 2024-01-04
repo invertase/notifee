@@ -35,3 +35,20 @@ To use patch-package in this case follow these steps:
 1. Install patch-package according to their docs (`mkdir patches` and edit package.json to add patch-package to your postinstall)
 1. Create the patch: `npx patch-package react-native-onesignal`
 1. Add the patch to source control (for example for git `git add patches && git commit`)
+
+
+In the newer version of RN and OneSignal, if you are getting Duplicate Classes error, something like this:
+```
+Execution failed for task ':app:checkDebugDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+   > Duplicate class androidx.work.OneTimeWorkRequestKt found in modules work-runtime-2.8.0-runtime (androidx.work:work-runtime:2.8.0) and work-runtime-ktx-2.7.1-runtime (androidx.work:work-runtime-ktx:2.7.1)
+     Duplicate class androidx.work.PeriodicWorkRequestKt found in modules work-runtime-2.8.0-runtime (androidx.work:work-runtime:2.8.0) and work-runtime-ktx-2.7.1-runtime (androidx.work:work-runtime-ktx:2.7.1)
+```
+It indicates a conflict in your dependencies related to the AndroidX Work Manager library versions. Specifically, it points out that there are duplicate classes (OneTimeWorkRequestKt and PeriodicWorkRequestKt) found in two different versions of the Work Manager library.
+
+A simple fix is to add the following lines to `android/app/build.gradle` under `dependencies` section:
+```
+  implementation "androidx.work:work-runtime:2.8.0"
+  implementation "androidx.work:work-runtime-ktx:2.8.0"
+```
+Run the build again, and it should work.
