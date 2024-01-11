@@ -38,14 +38,14 @@ import app.notifee.core.model.NotificationAndroidModel;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
+
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ReceiverService extends Service {
   private static final String TAG = "ReceiverService";
   public static final String REMOTE_INPUT_RECEIVER_KEY =
       "app.notifee.core.ReceiverService.REMOTE_INPUT_RECEIVER_KEY";
-
-  private static final AtomicInteger uniqueIds = new AtomicInteger(0);
 
   static final String DELETE_INTENT = "app.notifee.core.ReceiverService.DELETE_INTENT";
   static final String PRESS_INTENT = "app.notifee.core.ReceiverService.PRESS_INTENT";
@@ -75,7 +75,7 @@ public class ReceiverService extends Service {
       }
     }
 
-    int uniqueInt = uniqueIds.getAndIncrement();
+    final int uniqueInt = UUID.randomUUID().hashCode();
     return PendingIntent.getService(
         context, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
   }
