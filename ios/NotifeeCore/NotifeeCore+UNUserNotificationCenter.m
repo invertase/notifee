@@ -181,8 +181,13 @@ struct {
 
   // handle notification outside of notifee
   if (notifeeNotification == nil) {
-    notifeeNotification =
-        [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+    if (_originalDelegate != nil && originalUNCDelegateRespondsTo.didReceiveNotificationResponse) {
+      [_originalDelegate userNotificationCenter:center
+                 didReceiveNotificationResponse:response
+                          withCompletionHandler:completionHandler];
+    } else {
+      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+    }
   }
 
   if (notifeeNotification != nil) {
@@ -247,11 +252,6 @@ struct {
                      completionHandler();
                    });
 
-  } else if (_originalDelegate != nil &&
-             originalUNCDelegateRespondsTo.didReceiveNotificationResponse) {
-    [_originalDelegate userNotificationCenter:center
-               didReceiveNotificationResponse:response
-                        withCompletionHandler:completionHandler];
   }
 }
 
