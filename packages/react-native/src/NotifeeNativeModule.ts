@@ -4,7 +4,7 @@
 
 import NotifeeJSEventEmitter from './NotifeeJSEventEmitter';
 import {
-  EventSubscriptionVendor,
+  EventSubscription,
   NativeEventEmitter,
   NativeModules,
   NativeModulesStatic,
@@ -26,7 +26,7 @@ export default class NotifeeNativeModule {
     this._moduleConfig = Object.assign({}, config);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - change here needs resolution https://github.com/DefinitelyTyped/DefinitelyTyped/pull/49560/files
-    this._nativeEmitter = new NativeEventEmitter(this.native as EventSubscriptionVendor);
+    this._nativeEmitter = new NativeEventEmitter(this.native as EventSubscription['subscriber']);
     for (let i = 0; i < config.nativeEvents.length; i++) {
       const eventName = config.nativeEvents[i];
       this._nativeEmitter.addListener(eventName, (payload: any) => {
