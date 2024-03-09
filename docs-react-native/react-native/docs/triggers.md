@@ -66,7 +66,7 @@ Trigger notifications work in the same way as any other notification. They have 
 Let's update our trigger we created previously to occur weekly.
 
 ```js
-import notifee, { TimestampTrigger, TriggerType } from '@notifee/react-native';
+import notifee, { TimestampTrigger, TriggerType, RepeatFrequency } from '@notifee/react-native';
 
 async function onCreateTriggerNotification() {
   const date = new Date(Date.now());
