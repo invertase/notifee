@@ -41,5 +41,21 @@ export default function validateIOSCommunicationInfo(
     out.body = communicationInfo.body;
   }
 
+  if (communicationInfo.groupName) {
+    if (!isString(communicationInfo.groupName)) {
+      throw new Error("'groupName' expected a valid string value.");
+    }
+
+    out.groupName = communicationInfo.groupName;
+  }
+
+  if (communicationInfo.groupAvatar) {
+    if (!isString(communicationInfo.groupAvatar)) {
+      throw new Error("'groupAvatar' expected a valid string value.");
+    }
+
+    out.groupAvatar = communicationInfo.groupAvatar;
+  }
+
   return out;
 }
