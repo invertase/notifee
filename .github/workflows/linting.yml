@@ -7,13 +7,16 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   linting:
     name: ESLint
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -47,7 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -81,7 +83,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
