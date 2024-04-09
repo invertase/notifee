@@ -47,14 +47,14 @@ jobs:
       - name: Set workflow variables
         id: workflow-variables
         run: |
-          echo "::set-output name=metro-cache::$HOME/.metro"
-          echo "::set-output name=yarn-cache-dir::$(yarn cache dir)"
+          echo "yarn-cache=$(yarn cache dir)" >> $GITHUB_OUTPUT
+          echo "metro-cache=$HOME/.metro" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
-          path: ${{ steps.workflow-variables.outputs.yarn-cache-dir }}
+          path: ${{ steps.workflow-variables.outputs.yarn-cache }}
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-yarn-v1
 
