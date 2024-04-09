@@ -175,17 +175,12 @@ jobs:
         with:
           verbose: true
 
-      - name: Compress Emulator Log
-        if: always()
-        run: gzip -9 adb-log.txt
-        shell: bash
-
       - name: Upload Emulator Log
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: adb_logs
-          path: adb-log.txt.gz
+          path: adb-log.txt
 
       - name: Upload Packager Log
         uses: actions/upload-artifact@v4
