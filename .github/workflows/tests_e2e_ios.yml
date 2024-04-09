@@ -26,11 +26,11 @@ jobs:
     env:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 50
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -50,7 +50,7 @@ jobs:
           echo "::set-output name=metro-cache::$HOME/.metro"
           echo "::set-output name=yarn-cache-dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -58,7 +58,7 @@ jobs:
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-yarn-v1
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Pods
         with:
           path: tests_react_native/ios/Pods
@@ -71,7 +71,7 @@ jobs:
           ruby-version: 3
 
       - name: Update Ruby build tools
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 2
           retry_wait_seconds: 60
@@ -79,7 +79,7 @@ jobs:
           command: gem update cocoapods xcodeproj
 
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -87,7 +87,7 @@ jobs:
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
 
       - name: Install applesimutils
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -99,7 +99,7 @@ jobs:
         run: cp tests_react_native/index.test.js tests_react_native/index.js
 
       - name: Metro Bundler Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.workflow-variables.outputs.metro-cache }}
           key: ${{ runner.os }}-metro-v1-${{ github.run_id }}
@@ -202,7 +202,7 @@ jobs:
         run: killall -INT simctl
 
       - name: Upload App Video
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         continue-on-error: true
         if: always()
         with:
@@ -215,7 +215,7 @@ jobs:
         run: gzip -9 simulator.log
 
       - name: Upload Simulator Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         continue-on-error: true
         if: always()
         with:
@@ -223,7 +223,7 @@ jobs:
           path: simulator.log.gz
 
       - name: Upload Packager Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         continue-on-error: true
         if: always()
         with:
@@ -232,7 +232,7 @@ jobs:
 
       - name: Submit Coverage
         # This can fail on timeouts etc, wrap with retry
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60

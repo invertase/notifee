@@ -27,11 +27,11 @@ jobs:
       EMULATOR_COMMAND: "-avd TestingAVD -noaudio -gpu swiftshader_indirect -camera-back none -no-snapshot -no-window -no-boot-anim -nojni -memory 2048 -timezone 'Europe/London' -cores 2"
       EMULATOR_EXECUTABLE: qemu-system-x86_64-headless
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 50
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -42,7 +42,7 @@ jobs:
           echo "::set-output name=metro-cache::$HOME/.metro"
           echo "::set-output name=yarn-cache-dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -50,14 +50,14 @@ jobs:
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-yarn-v1
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Gradle Cache
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-v1-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-v1
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Pods
         with:
           path: tests_react_native/ios/Pods
@@ -70,7 +70,7 @@ jobs:
           ruby-version: 3
 
       - name: Update Ruby build tools
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 2
           retry_wait_seconds: 60
@@ -78,7 +78,7 @@ jobs:
           command: gem update cocoapods xcodeproj
 
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 15
           retry_wait_seconds: 60
@@ -92,7 +92,7 @@ jobs:
           java-version: '17'
 
       - name: Build Android App
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -104,7 +104,7 @@ jobs:
         run: cp tests_react_native/index.test.js tests_react_native/index.js
 
       - name: Metro Bundler Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.workflow-variables.outputs.metro-cache }}
           key: ${{ runner.os }}-metro-v1-${{ github.run_id }}
@@ -125,7 +125,7 @@ jobs:
 
       - name: Download Emulator Image
         # This can fail on network request, wrap with retry
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -198,7 +198,7 @@ jobs:
 
       - name: Submit Coverage
         # This can fail on timeouts etc, wrap with retry
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -211,14 +211,14 @@ jobs:
         shell: bash
 
       - name: Upload Emulator Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: adb_logs
           path: adb-log.txt.gz
 
       - name: Upload Packager Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: packager_log
@@ -239,7 +239,7 @@ jobs:
           adb pull /data/local/tmp/emulator4.mp4
 
       - name: Upload App Video
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: emulator_video
