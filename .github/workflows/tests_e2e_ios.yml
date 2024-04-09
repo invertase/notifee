@@ -20,7 +20,7 @@ concurrency:
 jobs:
   ios:
     name: iOS
-    runs-on: macos-latest
+    runs-on: macos-14
     # TODO matrix across APIs, at least 10 and 13 (lowest to highest)
     timeout-minutes: 60
     env:
@@ -41,7 +41,7 @@ jobs:
       - name: Start Simulator
         # The first time you try to `yarn run:ios` after xcode-select, it fails, so get it out of the way...
         continue-on-error: true
-        run: xcrun simctl boot "iPhone 14"
+        run: xcrun simctl boot "iPhone 15"
 
       # Set path variables needed for caches
       - name: Set workflow variables
