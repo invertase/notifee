@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: "Install Flutter"
         run: ./.github/workflows/scripts/install-flutter.sh stable
       - name: "Install Tools"
@@ -45,7 +45,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: "Install Flutter"
         run: ./.github/workflows/scripts/install-flutter.sh stable
       - name: "Install Tools"
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: "Install Flutter"
         run: ./.github/workflows/scripts/install-flutter.sh stable
       - name: "Install Tools"

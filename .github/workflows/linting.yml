@@ -17,17 +17,17 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -36,7 +36,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30
@@ -50,17 +50,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -69,7 +69,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30
@@ -83,17 +83,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
@@ -102,7 +102,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30
