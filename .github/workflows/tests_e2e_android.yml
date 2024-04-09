@@ -171,14 +171,9 @@ jobs:
             adb pull /data/local/tmp/emulator4.mp4 || true
             if test -e tests-failed.out; then exit 1; fi         # now exit with error code if tests failed
 
-      - name: Submit Coverage
-        # This can fail on timeouts etc, wrap with retry
-        uses: nick-fields/retry@v3
+      - uses: codecov/codecov-action@v4
         with:
-          timeout_minutes: 10
-          retry_wait_seconds: 60
-          max_attempts: 3
-          command: curl https://codecov.io/bash -o codecov.sh && bash ./codecov.sh
+          verbose: true
 
       - name: Compress Emulator Log
         if: always()
