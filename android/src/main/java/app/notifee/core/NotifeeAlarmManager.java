@@ -35,6 +35,8 @@ import app.notifee.core.utility.ObjectUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -146,9 +148,18 @@ class NotifeeAlarmManager {
 
     AlarmManager alarmManager = AlarmUtils.getAlarmManager();
 
+    TimestampTriggerModel.AlarmType alarmType = timestampTrigger.getAlarmType();
+
     // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      if (!alarmManager.canScheduleExactAlarms()) {
+
+      // Check whether the alarmType is the exact alarm
+      boolean isExactAlarm = Arrays
+          .asList(TimestampTriggerModel.AlarmType.SET_EXACT,
+              TimestampTriggerModel.AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
+              TimestampTriggerModel.AlarmType.SET_ALARM_CLOCK)
+          .contains(alarmType);
+      if (isExactAlarm && !alarmManager.canScheduleExactAlarms()) {
         System.err.println(
             "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. See:"
                 + " https://notifee.app/react-native/docs/triggers#android-12-limitations");
@@ -158,8 +169,6 @@ class NotifeeAlarmManager {
 
     // Ensure timestamp is always in the future when scheduling the alarm
     timestampTrigger.setNextTimestamp();
-
-    TimestampTriggerModel.AlarmType alarmType = timestampTrigger.getAlarmType();
 
     switch (alarmType) {
       case SET:
