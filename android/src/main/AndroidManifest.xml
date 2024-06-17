@@ -30,7 +30,8 @@
     <!-- Foreground Service -->
     <service
       android:name=".ForegroundService"
-      android:exported="false" />
+      android:exported="false"
+      android:foregroundServiceType="shortService" />
 
     <receiver
         android:name=".RebootBroadcastReceiver"
