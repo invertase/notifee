@@ -24,7 +24,10 @@
 
 # Keep the classes/members we need for client functionality.
 -keep @interface app.notifee.core.KeepForSdk
--keep @app.notifee.core.KeepForSdk class *
+-keep @app.notifee.core.KeepForSdk class * {
+  public *;
+  protected *;
+}
 -keepclasseswithmembers class * {
   @app.notifee.core.KeepForSdk <fields>;
 }

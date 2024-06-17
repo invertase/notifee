@@ -282,6 +282,14 @@ export interface NotificationAndroid {
   fullScreenAction?: NotificationFullScreenAction;
 
   /**
+   * Set the foreground service types identifying the work done by the service
+   *
+   * View the [Foreground service types](https://developer.android.com/develop/background-work/services/fg-service-types) documentation to learn
+   * more.
+   */
+  foregroundServiceTypes?: AndroidForegroundServiceType[];
+
+  /**
    * Set a notification importance for devices without channel support.
    *
    * Devices using Android API Level < 26 have no channel support, meaning incoming notifications
@@ -1446,4 +1454,27 @@ export enum AndroidLaunchActivityFlag {
    * See [FLAG_ACTIVITY_MATCH_EXTERNAL](https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_MATCH_EXTERNAL) on the official Android documentation for more information.
    */
   MATCH_EXTERNAL = 20,
+}
+
+/**
+ * Enum used to set the foreground service types identifying the work done by the service.
+ * See Android's [foreground service types](https://developer.android.com/develop/background-work/services/fg-service-types) documentation.
+ *
+ * @platform android
+ */
+export enum AndroidForegroundServiceType {
+  FOREGROUND_SERVICE_TYPE_CAMERA = 64,
+  FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE = 16,
+  FOREGROUND_SERVICE_TYPE_DATA_SYNC = 1,
+  FOREGROUND_SERVICE_TYPE_HEALTH = 256,
+  FOREGROUND_SERVICE_TYPE_LOCATION = 8,
+  FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK = 2,
+  FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION = 32,
+  FOREGROUND_SERVICE_TYPE_MICROPHONE = 128,
+  FOREGROUND_SERVICE_TYPE_PHONE_CALL = 4,
+  FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING = 512,
+  FOREGROUND_SERVICE_TYPE_SHORT_SERVICE = 2048,
+  FOREGROUND_SERVICE_TYPE_SPECIAL_USE = 1073741824,
+  FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED = 1024,
+  FOREGROUND_SERVICE_TYPE_MANIFEST = -1,
 }

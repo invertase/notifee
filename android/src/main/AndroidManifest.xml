@@ -8,11 +8,13 @@
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
   <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" android:maxSdkVersion="30" />
   <!-- For Xiaomi devices to enable heads-up notifications as default (https://github.com/invertase/notifee/issues/296) -->
   <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" android:minSdkVersion="23" />
+
 
   <application>
     <!-- Receiver Service -->
@@ -31,7 +33,8 @@
     <!-- Foreground Service -->
     <service
       android:name=".ForegroundService"
-      android:exported="false" />
+      android:exported="false"
+      android:foregroundServiceType="dataSync" />
 
     <receiver
         android:name=".RebootBroadcastReceiver"

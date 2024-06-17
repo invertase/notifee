@@ -14,9 +14,10 @@ package app.notifee.core;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+  *
  */
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
+
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.NotificationEvent;
 import app.notifee.core.interfaces.MethodCallResult;
@@ -38,6 +40,8 @@ public class ForegroundService extends Service {
       "app.notifee.core.ForegroundService.STOP";
 
   public static String mCurrentNotificationId = null;
+
+  public static int mCurrentForegroundServiceType = -1;
 
   static void start(int hashCode, Notification notification, Bundle notificationBundle) {
     Intent intent = new Intent(ContextHolder.getApplicationContext(), ForegroundService.class);
@@ -69,13 +73,15 @@ public class ForegroundService extends Service {
     }
   }
 
+  @SuppressLint({"ForegroundServiceType", "MissingPermission"})
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
     // Check if action is to stop the foreground service
     if (intent == null || STOP_FOREGROUND_SERVICE_ACTION.equals(intent.getAction())) {
       stopSelf();
       mCurrentNotificationId = null;
-      return 0;
+      mCurrentForegroundServiceType = -1;
+      return Service.START_STICKY_COMPATIBILITY;
     }
 
     Bundle extras = intent.getExtras();
@@ -91,25 +97,47 @@ public class ForegroundService extends Service {
 
         if (mCurrentNotificationId == null) {
           mCurrentNotificationId = notificationModel.getId();
-          startForeground(hashCode, notification);
+
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            int foregroundServiceType = notificationModel.getAndroid().getForegroundServiceType();
+            startForeground(hashCode, notification, foregroundServiceType);
+            mCurrentForegroundServiceType = foregroundServiceType;
+          } else {
+            startForeground(hashCode, notification);
+          }
 
           // On headless task complete
           final MethodCallResult<Void> methodCallResult =
-              (e, aVoid) -> {
-                stopForeground(true);
-                mCurrentNotificationId = null;
-              };
+            (e, aVoid) -> {
+              stopForeground(true);
+              mCurrentNotificationId = null;
+              mCurrentForegroundServiceType = -1;
+            };
 
           ForegroundServiceEvent foregroundServiceEvent =
-              new ForegroundServiceEvent(notificationModel, methodCallResult);
+            new ForegroundServiceEvent(notificationModel, methodCallResult);
 
           EventBus.post(foregroundServiceEvent);
-        } else if (mCurrentNotificationId.equals(notificationModel.getId())) {
-          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-              .notify(hashCode, notification);
         } else {
-          EventBus.post(
-            new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
+          if (mCurrentNotificationId.equals(notificationModel.getId())) {
+            boolean shouldPostNotificationAgain = true;
+            // find if we need to start the service again if the type was changed
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+              int foregroundServiceType = notificationModel.getAndroid().getForegroundServiceType();
+              if (foregroundServiceType != mCurrentForegroundServiceType) {
+                startForeground(hashCode, notification, foregroundServiceType);
+                mCurrentForegroundServiceType = foregroundServiceType;
+                shouldPostNotificationAgain = false;
+              }
+            }
+            if (shouldPostNotificationAgain) {
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                .notify(hashCode, notification);
+            }
+          } else {
+            EventBus.post(
+              new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
+          }
         }
       }
     }

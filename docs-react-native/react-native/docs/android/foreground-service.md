@@ -186,9 +186,29 @@ To specify which service types you require, add `notifee`'s foreground service t
 <manifest>
     ...
     <!-- For example, with one service type -->
-    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location" />
+    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location" tools:replace="android:foregroundServiceType" />
 
      <!-- Or, with multiple service types -->
-    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" />
+    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" tools:replace="android:foregroundServiceType" />
 </manifest>
 ```
+
+From Android 14 (API level 34) or higher, the operating system checks when you create a foreground service to make sure your app has all the appropriate permissions for that service type. For example, when you create a foreground service of type `microphone`, the operating system verifies that your app currently has the `RECORD_AUDIO` permission. If you don't have that permission, the system throws a `SecurityException`. To support this, a notification can be created with `foregroundServiceTypes` property which specifies the types to be used while creating the service:
+
+```js
+import notifee, { AndroidForegroundServiceType } from '@notifee/react-native';
+
+notifee.displayNotification({
+  title: 'Foreground service',
+  body: 'This notification will exist for the lifetime of the service runner',
+  android: {
+    channelId,
+    asForegroundService: true,
+    foregroundServiceTypes: [AndroidForegroundServiceType.FOREGROUND_SERVICE_TYPE_CAMERA, AndroidForegroundServiceType.FOREGROUND_SERVICE_TYPE_MICROPHONE],
+  },
+});
+```
+
+If no [foregroundServiceTypes](/react-native/docs/android/interaction#quick-actions) property is provided, the types are taken from the manifest.
+
+If any permission was granted while running the service, the same notification (with the same notification ID and same channel ID) can be posted again with the new `foregroundServiceTypes` property array with the same notification ID and the current running service will be updated with the new types.
