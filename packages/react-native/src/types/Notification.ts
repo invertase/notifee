@@ -251,6 +251,11 @@ export interface NotificationPressAction {
  * On Android; when provided to a notification action, the action will only open you application if
  * a `launchActivity` and/or a `mainComponent` is provided.
  *
+ * Requires the following permission to be added to your `AndroidManifest.xml`:
+ * ```xml
+ * <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+ * ```
+ *
  * Please see the [FullScreen Action](/react-native/docs/android/behaviour#full-screen) document to learn more.
  */
 export interface NotificationFullScreenAction {
