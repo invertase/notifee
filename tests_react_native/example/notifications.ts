@@ -70,8 +70,9 @@ export const notifications: { key: string; notification: Notification | Notifica
         categoryId: 'communicationId',
         communicationInfo: {
           conversationId: '123',
-          groupName: "Friends",
-          groupAvatar: 'https://pbs.twimg.com/profile_images/1070077650713133056/oji2RT4i_normal.jpg',
+          groupName: 'Friends',
+          groupAvatar:
+            'https://pbs.twimg.com/profile_images/1070077650713133056/oji2RT4i_normal.jpg',
           sender: {
             id: 'abcde',
             avatar: 'https://pbs.twimg.com/profile_images/1070077650713133056/oji2RT4i_normal.jpg',
