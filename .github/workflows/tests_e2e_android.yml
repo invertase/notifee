@@ -13,49 +13,75 @@ on:
       - 'docs-react-native/**'
       - '**/*.md'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   android:
     name: Android
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        # Currently just API31 to mirror prior testing
+        # TODO: determine min we can test, and test max as well
+        api-level: [31]
+        arch: [x86_64]
+        target: [google_apis]
+        # This is useful for benchmarking, do 0, 1, 2, etc (up to 256 max job-per-matrix limit) for averages
+        iteration: [0]
     env:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      EMULATOR_COMMAND: "-avd TestingAVD -noaudio -gpu swiftshader_indirect -camera-back none -no-snapshot -no-window -no-boot-anim -nojni -memory 2048 -timezone 'Europe/London' -cores 2"
-      EMULATOR_EXECUTABLE: qemu-system-x86_64-headless
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
+      - name: Liberate disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: false
 
-      - uses: actions/checkout@v2
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 50
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
-      # Set path variables needed for caches
       - name: Set workflow variables
         id: workflow-variables
         run: |
-          echo "::set-output name=metro-cache::$HOME/.metro"
-          echo "::set-output name=yarn-cache-dir::$(yarn cache dir)"
+          echo "yarn-cache=$(yarn cache dir)" >> $GITHUB_OUTPUT
+          echo "metro-cache=$HOME/.metro" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
-          path: ${{ steps.workflow-variables.outputs.yarn-cache-dir }}
+          path: ${{ steps.workflow-variables.outputs.yarn-cache }}
           key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
           restore-keys: ${{ runner.os }}-yarn-v1
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Gradle Cache
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-v1-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-v1
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Pods
         with:
           path: tests_react_native/ios/Pods
@@ -68,7 +94,7 @@ jobs:
           ruby-version: 3
 
       - name: Update Ruby build tools
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 2
           retry_wait_seconds: 60
@@ -76,27 +102,21 @@ jobs:
           command: gem update cocoapods xcodeproj
 
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 15
           retry_wait_seconds: 60
           max_attempts: 4
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
 
-      - name: Configure JDK 1.11
-        uses: actions/setup-java@v2
+      - name: Configure JDK
+        uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
-          java-version: '11' # ubuntu-latest is about to default to 11, force it everywhere
-
-      - name: Verify JDK11
-        # Default JDK varies depending on different runner flavors, make sure we are on 11
-        # Run a check that exits with error unless it is 11 version to future-proof against unexpected upgrades
-        run: java -fullversion 2>&1 | grep '11.0'
-        shell: bash
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Build Android App
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           retry_wait_seconds: 60
@@ -108,7 +128,7 @@ jobs:
         run: cp tests_react_native/index.test.js tests_react_native/index.js
 
       - name: Metro Bundler Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.workflow-variables.outputs.metro-cache }}
           key: ${{ runner.os }}-metro-v1-${{ github.run_id }}
@@ -127,123 +147,50 @@ jobs:
           curl --output /dev/null --silent --head --fail "http://localhost:8081/index.bundle?platform=android&dev=true&minify=false&inlineSourceMap=true"
           echo "...javascript bundle ready."
 
-      - name: Download Emulator Image
-        # This can fail on network request, wrap with retry
-        uses: nick-invision/retry@v2
+      - name: Emulator Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        timeout-minutes: 60
         with:
-          timeout_minutes: 10
-          retry_wait_seconds: 60
-          max_attempts: 3
-          command: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-31;google_apis;x86_64"
+          api-level: ${{ matrix.api-level }}
+          avd-name: TestingAVD
+          target: ${{ matrix.target }}
+          arch: ${{ matrix.arch }}
+          pre-emulator-launch-script: |
+            sudo mkdir /mnt/avd
+            sudo chown $USER:$USER /mnt/avd
+            mkdir -p $HOME/.android
+            ln -s /mnt/avd $HOME/.android/avd
+          script: |
+            $ANDROID_HOME/platform-tools/adb devices
+            nohup sh -c "$ANDROID_HOME/platform-tools/adb logcat '*:D' > adb-log.txt" &
+            nohup sh -c 'adb shell "screenrecord /data/local/tmp/emulator1.mp4; screenrecord /data/local/tmp/emulator2.mp4; screenrecord /data/local/tmp/emulator3.mp4; screenrecord /data/local/tmp/emulator4.mp4" &'
+            yarn tests_rn:android:test || touch tests-failed.out # even on failure do not exit yet...
+            adb pull /data/local/tmp/emulator1.mp4 || true       # ...because we want to download our videos...
+            adb pull /data/local/tmp/emulator2.mp4 || true       # ...and we need the emulator up to fetch them
+            adb pull /data/local/tmp/emulator3.mp4 || true
+            adb pull /data/local/tmp/emulator4.mp4 || true
+            if test -e tests-failed.out; then exit 1; fi         # now exit with error code if tests failed
 
-      - name: Create Emulator
-        run: echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --force --name TestingAVD --device "Nexus 5X" -k 'system-images;android-31;google_apis;x86_64' -g google_apis
-
-      # These Emulator start steps are the current best practice to do retries on multi-line commands with persistent (nohup) processes
-      - name: Start Android Emulator
-        id: emu1
-        timeout-minutes: 5
-        continue-on-error: true
-        run: |
-          echo "Starting emulator"
-          nohup $ANDROID_HOME/emulator/emulator $EMULATOR_COMMAND &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
-
-      - name: Start Android Emulator Retry 1
-        id: emu2
-        if: steps.emu1.outcome=='failure'
-        timeout-minutes: 5
-        continue-on-error: true
-        run: |
-          echo "Starting emulator, second attempt"
-          $ANDROID_HOME/platform-tools/adb devices
-          sudo killall -9 $EMULATOR_EXECUTABLE || true
-          sleep 2
-          nohup $ANDROID_HOME/emulator/emulator $EMULATOR_COMMAND &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
-
-      - name: Start Android Emulator Retry 2
-        id: emu3
-        if: steps.emu2.outcome=='failure'
-        timeout-minutes: 5
-        continue-on-error: true
-        run: |
-          echo "Starting emulator, third attempt"
-          $ANDROID_HOME/platform-tools/adb devices
-          sudo killall -9 $EMULATOR_EXECUTABLE || true
-          sleep 2
-          nohup $ANDROID_HOME/emulator/emulator $EMULATOR_COMMAND &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done'
-
-      - name: Emulator Status
-        if: always()
-        run: |
-          if ${{ steps.emu1.outcome=='success' || steps.emu2.outcome=='success' || steps.emu3.outcome=='success' }}; then
-             echo "Emulator Started"
-          else
-             exit 1
-          fi
-
-      - name: Record Emulator Video
-        # screenrecord has a 180 second time limit, with 4 recordings we should capture the run
-        continue-on-error: true
-        run: nohup sh -c 'adb shell "screenrecord /data/local/tmp/emulator1.mp4; screenrecord /data/local/tmp/emulator2.mp4; screenrecord /data/local/tmp/emulator3.mp4; screenrecord /data/local/tmp/emulator4.mp4" &'
-
-      - name: E2E Test
-        timeout-minutes: 20
-        run: |
-          $ANDROID_HOME/platform-tools/adb devices
-          $ANDROID_HOME/platform-tools/adb shell settings put global window_animation_scale 0.0
-          $ANDROID_HOME/platform-tools/adb shell settings put global transition_animation_scale 0.0
-          $ANDROID_HOME/platform-tools/adb shell settings put global animator_duration_scale 0.0
-          nohup sh -c "$ANDROID_HOME/platform-tools/adb logcat '*:D' > adb-log.txt" &
-          yarn tests_rn:android:test
-        shell: bash
-
-      - name: Submit Coverage
-        # This can fail on timeouts etc, wrap with retry
-        uses: nick-invision/retry@v2
+      - uses: codecov/codecov-action@v4
         with:
-          timeout_minutes: 10
-          retry_wait_seconds: 60
-          max_attempts: 3
-          command: curl https://codecov.io/bash -o codecov.sh && bash ./codecov.sh
-
-      - name: Compress Emulator Log
-        if: always()
-        run: gzip -9 adb-log.txt
-        shell: bash
+          verbose: true
 
       - name: Upload Emulator Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: adb_logs
-          path: adb-log.txt.gz
+          path: adb-log.txt
 
       - name: Upload Packager Log
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: packager_log
           path: packager.log
 
-      - name: Stop and Retrieve App Video
-        if: always()
-        continue-on-error: true
-        run: |
-          killall -INT adb
-          adb kill-server
-          sleep 2
-          adb start-server
-          sleep 2
-          adb pull /data/local/tmp/emulator1.mp4
-          adb pull /data/local/tmp/emulator2.mp4
-          adb pull /data/local/tmp/emulator3.mp4
-          adb pull /data/local/tmp/emulator4.mp4
-
       - name: Upload App Video
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: emulator_video

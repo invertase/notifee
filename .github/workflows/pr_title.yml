@@ -11,7 +11,7 @@ jobs:
     name: Conventional PR Title
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v3.4.2
+      - uses: amannn/action-semantic-pull-request@v5.4.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

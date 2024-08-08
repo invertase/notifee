@@ -5,6 +5,21 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.8.2
+
+- Fix packaging error / missing `dist/version.js` [#934](https://github.com/invertase/notifee/issues/934)
+
+## 7.8.1
+
+- **[Android]**: Fix compatibility with android-gradle-plugin 8 (reat-native 0.73+) [#907](https://github.com/invertase/notifee/pull/907)
+- Dev and Test: lots of CI and test updates so all checks are green again and current versions of developer tools work while developing in the repository
+
+## 7.8.0
+
+- **[Android]**: Adds the ability to create all types of alarms with Android, affects the `TimestampTriggerAlarmManager` API type and deprecates property `allowWhileIdle` (Addresses issue [#655)](https://github.com/invertase/notifee/issues/655))).
+- **[iOS]**: Fixes an issue where the UI thread was getting blocked when creating a notification with attachments (Fixes [#234)](https://github.com/invertase/notifee/issues/234))).
+- **[Android/iOS]: BREAKING CHANGE**: For Expo, there is no config plugin anymore, please remove the plugin from `app.config.js` (See issue [#799](https://github.com/invertase/notifee/issues/799) for more info).
+
 ## 7.7.1
 
 - **[iOS]**: Adds image caching for the avatar for Communication Notifications (PR [#742)](https://github.com/invertase/notifee/pull/742))).
@@ -40,87 +55,109 @@ previous: /react-native/docs/installation
 - **[iOS]**: Removes a debug console.log statement that was commited to the main branch (PR [#617](https://github.com/invertase/notifee/pull/617)).
 
 ## 7.3.0
+
 - **[Android]**: Fixes an issue for Android 11 and lower to ensure notification drawer is closed when a quick action is pressed. (Fixes [#614](https://github.com/invertase/notifee/issues/614)).
 - **[Android]**: Fixes an issue where the initial notification was not set if the app opened via a quick action (PR [#605](https://github.com/invertase/notifee/pull/605)).
 
 ## 7.2.0
+
 - **[Android]**: Fixes an issue for Android 12 with quick actions when the app is in the background  (Fixes [#404](https://github.com/invertase/notifee/issues/404)).
 - **[Android]**: Prevents a NullPointerException to occur when a background service is triggered (Fixes [#592](https://github.com/invertase/notifee/issues/592)).
 
 ## 7.1.0
+
 - **[iOS]**: Supports communication notifications on iOS (PR [#526](https://github.com/invertase/notifee/pull/526)).
 
 ## 7.0.4
+
 - **[Android]**: Fixes an issue when calling requestPermissions for Android 12 or lower (Fixes [#555](https://github.com/invertase/notifee/issues/555)).
 
 ## 7.0.3
+
 - **[Android]**: Fixes an issue that was introduced in v6.0.0 to support targetSdkVersion 33 (Fixes [#547](https://github.com/invertase/notifee/issues/547)).
 
 ## 7.0.1
+
 - **[Android]**: Fixes an issue that was introduced in v6.0.0 (Fixes [#528](https://github.com/invertase/notifee/issues/528)).
 
 ## 7.0.0
+
 - **[iOS]: BREAKING CHANGE**: Notifee now handles response events (PRESSED, ACTION_PRESSED, DISMISSED) for remote notifications on iOS (PR [#236](https://github.com/invertase/notifee/pull/236)).
   - This allows quick actions from remote notifications to be supported without the need of a NSE [[Learn More]](https://notifee.app/react-native/docs/ios/remote-notification-support)
 
   **`onNotificationOpenedApp` and `getInitialNotification` from `RNFB Messaging` will no longer trigger as notifee will handle the event. Should not require any code changes to these `RNFB` event handlers, as events on Android will continue to work as normal**
 
 ## 6.0.0
+
 - **[Android] BREAKING CHANGE**: Added support for requesting permission on Android 13 via `requestPermission`,  the minimum compileSdkVersion required has increased to 33. And, to support this feature, the targetSdkVersion must also be increased to 33.
 
 ## 5.7.0
+
 - **[iOS]**: Adds new `interruptionLevel` property to `NotificationIOS` which provides the option to display time-sensitive notifications (Fixes [#287](https://github.com/invertase/notifee/issues/287)).
 
 ## 5.6.0
+
 - **[Android]**: Adds new `loopSound` and `flags` properties to `NotificationAndroid` to support custom flags and to loop the sound when a push notification is displayed (Fixes [#454](https://github.com/invertase/notifee/issues/454)).
 
 ## 5.5.0
+
 - **[Android]**: Fixes a compile issue for monorepos where sometimes `app.notifee:core:+` cannot be found (Fixes [#350](https://github.com/invertase/notifee/issues/350)).
 - **[iOS]**: Adds new `list` and `banner` options to `IOSForegroundPresentationOptions` on iOS. These new options should be used as a replacement for the `alert` option which is now deprecated in notifee; notifee will fallback to using Apple's `UNNotificationPresentationOptionAlert` option for iOS 13 when either `banner` or `list` is set to true. There are no breaking changes, but we encourage you to update your project as soon as you can if you set custom `IOSForegroundPresentationOptions`. To learn more, view the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) documentation (Enhancement [#382](https://github.com/invertase/notifee/issues/382)).
 
 ## 5.4.1
+
 - **[Android]**: Fixes an issue when creating a one-time trigger notifications with AlarmManager (Fixes [#445](https://github.com/invertase/notifee/issues/445)).
 
 ## 5.4.0
+
 - **[Android]**: Fixes an issue when recreating the trigger notifications after a reboot with AlarmManager  (Fixes [#422](https://github.com/invertase/notifee/issues/422)).
 - **[Android]**: Fixes an issue around displaying a heads-up notification on Xiaomi devices by adding the permission `ACCESS_NOTIFICATION_POLICY` to the `AndroidManifest` (Fixes [#296](https://github.com/invertase/notifee/issues/296)).
 
 ## 5.3.0
+
 - **[Android]**: Elimates the need to add the local maven repository manually to your project  (PR [#414](https://github.com/invertase/notifee/pull/414)).
 - **[Android]**: Implements support to light up the screen when a notification is displayed. Introduces a new property `lightUpScreen` on the `NotificationAndroid` interface (PR [#403](https://github.com/invertase/notifee/pull/403)).
 
 ## 5.2.2
+
 - **[Android]**: Allows `repeatFrequency` to be set to -1 when creating notifications (Fixes [#384](https://github.com/invertase/notifee/issues/379)).
 - **[Android]**: Fixes an issue with rescheduling notifications with alarm manager (Fixes [#384](https://github.com/invertase/notifee/issues/248)).
 
 ## 5.2.1
+
 - **[Android]**: Fixes a build issue introduced in version 5.2.0 (PR [#384](https://github.com/invertase/notifee/pull/384)).
 
 ## 5.2.0
+
 - **[Android]**: Fixes a compiling issue for some project configurations with error message "Project with path ':app' could not be found in project ':notifee_react-native'" (Fixes [#288](https://github.com/invertase/notifee/issues/288)).
 - **[Android]**: Fixes an issue where the current version of Notifee does not build when using an expo managed app with the expo plugin (Fixes [#314](https://github.com/invertase/notifee/issues/314)).
 - **[Web]**: Basic support for react-native-web - notifications do not work on web yet, but the package is now compatible with web (PR  [#369](https://github.com/invertase/notifee/pull/369))
 
 ## 5.1.0
+
 - **[Android]**: Introduces new APIs to help manage Android 12 limitations when creating trigger notifications:
- - `canScheduleExactAlarms`
- - `openAlarmPermissionSettings`
+- `canScheduleExactAlarms`
+- `openAlarmPermissionSettings`
 
 And, the ability to check if your app has permissions to create trigger notifications by calling `getNotificationSettings()`.
 
 To learn more, see Triggers documentation for [Android](https://notifee.app/react-native/docs/triggers#android-12-limitations).
 
 ## 5.0.3
+
 - **[Android]**: Fixes an issue when canceling trigger notifications created via AlarmManager to prevent "Maximum limit of concurrent alarms 500 reached for uid" error being thrown (Fixes [#349](https://github.com/invertase/notifee/issues/349)).
 
 ## 5.0.2
+
 - **[iOS]**: Fixes an issue with `NotificationSettings` returning the wrong property name for `authorizationStatus` on iOS (Fixes [#333](https://github.com/invertase/notifee/issues/333)).
 
 ## 5.0.1
+
 - **[Android]**: Fixes an issue where quick actions always opens the app on Android 12 (Fixes [#315](https://github.com/invertase/notifee/issues/315)).
 - **[Android]**: Fixes an issue where a quick action with an id of `default` failed to open the app.
 
 ## 5.0.0
+
 - **[Android/iOS] BREAKING CHANGE**: Added support for checking permissions on Android which introduces a breaking change to `requestPermission` and `getNotificationSettings` APIs.
 
 Both APIs have been updated to return an object of type `NotificationSettings`, in replace of `NotificationSettingsIOS`.
@@ -130,33 +167,41 @@ Both APIs have been updated to return an object of type `NotificationSettings`, 
 To learn more, see Permissions documentation for [iOS](https://notifee.app/react-native/docs/ios/permissions), and [Android](https://notifee.app/react-native/docs/android/permissions).
 
 ## 4.1.0
+
 - **[Android]**: Add support to set `largeIcon` for `AndroidStyle.BIGPICTURE` to null (Fixes [#270](https://github.com/invertase/notifee/issues/270))
 - **[Android]**: Fixes an issue with Android 12 when tapping on a notification (Fixes [#250](https://github.com/invertase/notifee/issues/250))
 - **[Android]**: Fixes an issue when an action is pressed where the notification drawer would remain open with the notification (Fixes [#268](https://github.com/invertase/notifee/issues/268))
 
 ## 4.0.1
+
 - **[Android]**: Fixes an issue with repeating trigger notifications where the next notification was scheduled at the incorrect time, causing the notification to infinitely display (Fixes [#252](https://github.com/invertase/notifee/issues/252)).
 
 ## 4.0.0
+
 - **[Android]: BREAKING CHANGE** : the minimum compileSdkVersion required has increased to 31, to fix an issue with Android 12 where the app will crash due to a missing Intent immutability flag (Fixes [#238](https://github.com/invertase/notifee/issues/238)). You do not need to alter targetSdkVersion or anything else - but you *must* increase compileSdkVersion to 31. **Please note, JDK11 is strongly recommended when using compile or target sdk 31**. **Please note, we do not correctly handle the new "exact alarm" Android 12 restrictions so we recommend staying on targetSdkVersion 30 for now.**
 
 ## 3.0.4
+
 - **[Android]**: Fixes an issue with buildtools to support gradle plugin 4.2+ (Fixes [#211](https://github.com/invertase/notifee/issues/211))
 - **[iOS]**: Fixes an issue that was introduced in the previous patch when calling `setBadgeCount` with 0 (Fixes [#212](https://github.com/invertase/notifee/issues/212))
 
 ## 3.0.3
+
 - **[iOS]**: Fix iOS API availability guards, and all compile warnings (Fixes [#204](https://github.com/invertase/notifee/issues/204))
 
 ## 3.0.2
+
 - **[Android]**: Include support for expo managed projects [[Learn More]](/react-native/docs/installation#miscellaneous)]
 - **[Android]**: Adds support for Android 12
 
 ## 3.0.1
+
 - **[Android]**: Fixes an issue where the wrong quick action was triggered when fired in quick succession (Fixes [#121](https://github.com/invertase/notifee/issues/121))
 - **[Android]**: Fixes an issue where notifications created by FCM were not being removed from the notification tray when cancelled (Fixes [#120](https://github.com/invertase/notifee/issues/120))
 - **[iOS]**: Compiled module no longer depends on a XCFramework, as part of the migration to fully open source the library. [[Learn More]](https://invertase.io/blog/open-sourcing-notifee)
 
 ## 3.0.0
+
 - **[Android]: BREAKING CHANGE** - the minimum SDK version has been updated from 16 to 20, providing backwards notification compatibility up to Android 4.4W.
 - **[Android]**: Fixes an issue with `getDisplayedNotifications` where the id returned is not the original notification id. (Fixes [#381](https://github.com/notifee/react-native-notifee/issues/381))
 - **[Android]**: Fixes an issue with displaying a notification with `android.tag` (Fixes [#382](https://github.com/notifee/react-native-notifee/issues/382))
@@ -164,21 +209,25 @@ To learn more, see Permissions documentation for [iOS](https://notifee.app/react
 - Removed licensing validation and related code - Notifee is now free and fully open source. [[Learn More]](https://invertase.io/blog/open-sourcing-notifee)
 
 ## 2.0.0
+
 - **[Android]: BREAKING CHANGE** - you must add a new maven local repository to your `android/build.gradle` file. (Fixes [#151](https://github.com/notifee/react-native-notifee/issues/151)). See step #2 in [the installation guide](https://notifee.app/react-native/docs/installation)
 
 ## 1.11.0
+
 - **[Android]**: Fixes an issue where `getInitialNotification` was sometimes throwing an error leading to a crash if activity was null. (Fixes [#374](https://github.com/notifee/react-native-notifee/issues/374))
 
 ## 1.11.0
+
 - **[Android]**: Fixes an issue where the initial notification wasn't being populated for full-screen actions.
 - **[iOS]**: Introduces a new method signature for `NotifeeExtensionHelper.populateNotificationContent` where the `request` is passed down as well as the `bestAttemptContent`. View the [Remote Notification Support](https://notifee.app/react-native/docs/ios/remote-notification-support) documentation for more information.
 - **[iOS]**: Adds a note in the reference documentation that `getInitialNotification()` for iOS is deprecated in favour of `onForegroundEvent`.
 
-
 ## 1.10.1
+
 - **[Android]**: Fixes an issue on Android to prevent `cancelDisplayedNotifications` cancelling trigger notifications. (Fixes [#349](https://github.com/notifee/react-native-notifee/issues/349))
 
 ## 1.10.0
+
 - **[Android/iOS]**: Introduces the following APIs:
   - `getDisplayedNotifications`
   - `getTriggerNotifications`
@@ -190,53 +239,67 @@ To learn more, see Permissions documentation for [iOS](https://notifee.app/react
 - **BREAKING**: Fixes an issue when setting a custom sound on a notification channel (Fixes [#341](https://github.com/notifee/react-native-notifee/issues/341)). Sounds now must be specified without the file extension, previously it was optional. **If you were using custom sounds on Android>7 prior to this, you will need to create a *new* notification channel or the reference to your custom sound on the channel will likely not survive app updates. We apologize for the inconvenience**
 
 ## 1.9.2
+
 - **[Android]**: Fixes an issue where an error is thrown when the intent was null in rare cases for foreground service events.
 
 ## 1.9.1
+
 - **[Android]**: Fixes an issue where an error is thrown when using trigger notifications with AlarmManager on Android 8 & 7
 
 ## 1.9.0
+
 - **[Android]**: Support Alarm Manager for trigger notifications.
 - **[iOS]**: Xcode 12.4 and above is now supported
 
 ## 1.8.1
+
 - **[Android/iOS]**: Fix npm bundle to exclude example app
 
 ## 1.8.0
+
 - **[Android/iOS]**: Include support for jest tests by including a `jest-mock.js` file.
 - **[Android]**: Add an extra safety check to prevent app from crashing if a `launchActivity` property is set to an invalid activity class.
 
 ## 1.7.0
+
 - **[Android/iOS]**: Allows title, body, and subtitle to be set to undefined in addition to string values to prevent an empty space on Android.
 - **[Android/iOS]**: Updated validation to only throw an error for platform-specific properties if the app is running the same platform (Feature enhancement [#297](https://github.com/notifee/react-native-notifee/issues/297)).
 - **[iOS]**: Xcode 12.5 is required on iOS.
 
 ## 1.6.0
+
 - **[Android]**: Fixed an issue with jwt gradle build dependency.
 
 ## 1.5.0
+
 - **[Android]**: Implemented support for `notifee.hideNotificationDrawer` (Feature enhancement [#200](https://github.com/notifee/react-native-notifee/issues/200)).
 
 ## 1.4.0
+
 - **[Android]**: Added support for `fullScreenAction` on `NotificationAndroid` (Feature enhancement [#45](https://github.com/notifee/react-native-notifee/issues/45)).
 
 ## 1.3.1
+
 - **[Android]**: Fixed an issue where sometimes the app would throw an exception when the user changes the notification blocked state for either a channel or the entire application (Fixes [#237](https://github.com/notifee/react-native-notifee/issues/237)).
 
 ## 1.3.0
+
 - **[Android]**: Fixed an issue where sometimes the foreground service failed to stop when calling `resolve` due to an issue with hot reloading. It can be stopped by `notifee.stopForegroundService()`. To learn more, view the [Foreground Service](/react-native/docs/android/foreground-service) documentation.
 
 ## 1.2.1
+
 - **[Android]**: Fixed an issue with Notifee's build script where sometimes an error would occur that the target variant task already existed.
 
 ## 1.2.0
+
 - **[iOS]**:  Includes a Notification Service Extension Helper to take advantage of Notifee with remote notifications. To learn more, view the [Remote Notification Support](/react-native/docs/ios/remote-notification-support) documentation.
 
-
 ## 1.1.2
+
 - **[iOS]**:  Enforce v1.10+ of CocoaPods (Fixes [#230](https://github.com/notifee/react-native-notifee/issues/230)).
 
 ## 1.1.1
+
 - **[Android]**: Includes a solution to fix an error due to a potential race condition that occurs when the user changes the notification blocked state for either a channel or the entire application (Fixes [#237](https://github.com/notifee/react-native-notifee/issues/237)).
 
 ## 1.1.0

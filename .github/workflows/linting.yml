@@ -7,33 +7,37 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   linting:
     name: ESLint
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+          node-version: 18
+      - name: Set workflow variables
+        id: workflow-variables
+        run: |
+          echo "yarn-cache=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: ${{ steps.workflow-variables.outputs.yarn-cache }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30
@@ -47,27 +51,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+          node-version: 18
+      - name: Set workflow variables
+        id: workflow-variables
+        run: |
+          echo "yarn-cache=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: ${{ steps.workflow-variables.outputs.yarn-cache }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30
@@ -81,27 +85,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: styfle/cancel-workflow-action@0.9.1
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+          node-version: 18
+      - name: Set workflow variables
+        id: workflow-variables
+        run: |
+          echo "yarn-cache=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
         name: Yarn Cache
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: ${{ steps.workflow-variables.outputs.yarn-cache }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-with-website
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
-        uses: nick-invision/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           retry_wait_seconds: 30

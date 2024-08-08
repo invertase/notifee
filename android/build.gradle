@@ -16,11 +16,11 @@ apply plugin: 'com.android.library'
 ext {
 
   jvmVersion = Jvm.current().javaVersion.majorVersion
-  if (jvmVersion != "8" && jvmVersion != "11" && jvmVersion != "14") {
+  if (jvmVersion != "8" && jvmVersion != "11" && jvmVersion != "17" && jvmVersion != "21") {
     println "\n\n\n"
     println "**************************************************************************************************************"
     println "\n\n\n"
-    println "ERROR: Notifee builds with JVM LTS and current releases (currently major version 11, or 14)."
+    println "ERROR: Notifee builds with JVM LTS and current releases (currently major version 11, 17, or 21)."
     println "  Incompatible major version detected: '" + jvmVersion + "'"
     println "\n\n\n"
     println "**************************************************************************************************************"

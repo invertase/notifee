@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ $(git ls-files --modified) ]]; then
+if [[ $(git ls-files *[^pubspec.lock] --modified) ]]; then
   echo ""
   echo ""
   echo "These files are not formatted correctly:"

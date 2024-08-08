@@ -36,11 +36,6 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableHermes = project.ext.react.get("enableHermes", false)
 
-/**
- * Architectures to build native code for in debug.
- */
-def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
-
 android {
   ndkVersion rootProject.ext.ndkVersion
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -57,6 +52,7 @@ android {
 
     testBuildType System.getProperty('testBuildType', 'debug')
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
   }
   splits {
     abi {
@@ -85,11 +81,6 @@ android {
   buildTypes {
     debug {
       minifyEnabled false
-      if (nativeArchitectures) {
-        ndk {
-          abiFilters nativeArchitectures.split(',')
-        }
-      }
     }
     release {
       minifyEnabled true
@@ -136,9 +127,10 @@ dependencies {
   }
 
   if (enableHermes) {
-    def hermesPath = "../../node_modules/hermes-engine/android/";
-    debugImplementation files(hermesPath + "hermes-debug.aar")
-    releaseImplementation files(hermesPath + "hermes-release.aar")
+        //noinspection GradleDynamicVersion
+        implementation("com.facebook.react:hermes-engine:+") { // From node_modules
+            exclude group:'com.facebook.fbjni'
+        }
   } else {
     implementation jscFlavor
   }

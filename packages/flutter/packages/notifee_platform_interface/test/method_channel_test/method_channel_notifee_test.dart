@@ -6,14 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 typedef MethodCallCallback = dynamic Function(MethodCall methodCall);
 
 void handleMethodCall(MethodCallCallback methodCallCallback) =>
-    MethodChannelNotifee.channel.setMockMethodCallHandler((call) async {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(MethodChannelNotifee.channel, (call) async {
       return await methodCallCallback(call);
     });
 
 void initializeMethodChannel() {
   TestWidgetsFlutterBinding.ensureInitialized();
-
-  MethodChannelNotifee.channel.setMockMethodCallHandler((call) async {
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(MethodChannelNotifee.channel, (call) async {
     return null;
   });
 }

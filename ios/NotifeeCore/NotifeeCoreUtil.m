@@ -738,15 +738,45 @@
                                                   contactIdentifier:nil
                                                    customIdentifier:nil];
 
+    NSMutableArray *recipients = nil;
+
+    INSpeakableString *speakableGroupName = nil;
+    if (communicationInfo[@"groupName"] != nil) {
+        speakableGroupName = [[INSpeakableString alloc] initWithSpokenPhrase:communicationInfo[@"groupName"]];
+
+        // For the `groupName` to work we need to have more than one recipient, otherwise, it won't be recognized
+        // as a group communication. For this reason, we are adding a placeholder person to the recipients which is
+        // not going to do any harm, the recipients are used as a fallback for when you don't have a `groupName`
+        // it concatenates the recipients name and then use that as a group name.
+        INPersonHandle *placeholderPersonHandle =
+                [[INPersonHandle alloc] initWithValue:@"placeholderId" type:INPersonHandleTypeUnknown];
+        INPerson *placeholderPerson = [[INPerson alloc] initWithPersonHandle:placeholderPersonHandle
+                                                     nameComponents:nil
+                                                        displayName:sender[@"displayName"]
+                                                              image:avatar
+                                                  contactIdentifier:nil
+                                                   customIdentifier:nil];
+        recipients = [NSMutableArray array];
+        [recipients addObject:senderPerson];
+        [recipients addObject:placeholderPerson];
+    }
+
     INSendMessageIntent *intent =
-        [[INSendMessageIntent alloc] initWithRecipients:nil
+        [[INSendMessageIntent alloc] initWithRecipients:recipients
                                     outgoingMessageType:INOutgoingMessageTypeOutgoingMessageText
                                                 content:communicationInfo[@"body"]
-                                     speakableGroupName:nil
+                                     speakableGroupName:speakableGroupName
                                  conversationIdentifier:communicationInfo[@"conversationId"]
                                             serviceName:nil
                                                  sender:senderPerson
                                             attachments:nil];
+
+    if (communicationInfo[@"groupAvatar"] != nil) {
+      NSURL *groupAvatarURL = [[NSURL alloc] initWithString:communicationInfo[@"groupAvatar"]];
+      INImage *groupAvatarImage = [INImage imageWithURL:groupAvatarURL];
+
+      [intent setImage:groupAvatarImage forParameterNamed:@"speakableGroupName"];
+    }
 
     return intent;
   }

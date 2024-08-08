@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -6,18 +5,12 @@ import 'package:notifee_platform_interface/notifee_platform_interface.dart';
 import 'package:notifee/notifee.dart' as notifee;
 
 void main() {
-  const MethodChannel channel = MethodChannel('notifee');
-
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final MockNotifee kMockNotifeePlatform = MockNotifee();
 
   setUpAll(() async {
     NotifeePlatform.instance = kMockNotifeePlatform;
-  });
-
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
   });
 
   group('cancelAllNotifications', () {

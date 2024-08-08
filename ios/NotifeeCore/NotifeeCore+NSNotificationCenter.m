@@ -50,8 +50,6 @@
   });
 }
 
-// start observing immediately on class load - specifically for
-// UIApplicationDidFinishLaunchingNotification
 + (void)load {
   [[self instance] observe];
 }
@@ -60,8 +58,16 @@
 #pragma mark Application Notifications
 
 - (void)application_onDidFinishLaunchingNotification:(nonnull NSNotification *)notification {
-  // setup our delegates after app finishes launching
-  // these methods are idempotent so can safely be called multiple times
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  NSDictionary *notifUserInfo =
+      notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
+  UILocalNotification *launchNotification =
+      (UILocalNotification *)notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
+  [[NotifeeCoreUNUserNotificationCenter instance]
+      onDidFinishLaunchingNotification:launchNotification.userInfo];
+  [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification];
+
   [[NotifeeCoreUNUserNotificationCenter instance] observe];
 }
 

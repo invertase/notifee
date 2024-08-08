@@ -42,6 +42,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -141,9 +143,18 @@ class NotifeeAlarmManager {
 
     AlarmManager alarmManager = AlarmUtils.getAlarmManager();
 
+    TimestampTriggerModel.AlarmType alarmType = timestampTrigger.getAlarmType();
+
     // Verify we can call setExact APIs to avoid a crash, but it requires an Android S+ symbol
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      if (!alarmManager.canScheduleExactAlarms()) {
+
+      // Check whether the alarmType is the exact alarm
+      boolean isExactAlarm = Arrays
+          .asList(TimestampTriggerModel.AlarmType.SET_EXACT,
+              TimestampTriggerModel.AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
+              TimestampTriggerModel.AlarmType.SET_ALARM_CLOCK)
+          .contains(alarmType);
+      if (isExactAlarm && !alarmManager.canScheduleExactAlarms()) {
         System.err.println(
             "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. See:"
                 + " https://notifee.app/react-native/docs/triggers#android-12-limitations");
@@ -154,12 +165,43 @@ class NotifeeAlarmManager {
     // Ensure timestamp is always in the future when scheduling the alarm
     timestampTrigger.setNextTimestamp();
 
-    if (timestampTrigger.getAllowWhileIdle()) {
-      AlarmManagerCompat.setExactAndAllowWhileIdle(
+    switch (alarmType) {
+      case SET:
+        alarmManager.set(AlarmManager.RTC, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_AND_ALLOW_WHILE_IDLE:
+        AlarmManagerCompat.setAndAllowWhileIdle(
           alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
-    } else {
-      AlarmManagerCompat.setExact(
+        break;
+      case SET_EXACT:
+        AlarmManagerCompat.setExact(
           alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_EXACT_AND_ALLOW_WHILE_IDLE:
+        AlarmManagerCompat.setExactAndAllowWhileIdle(
+          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+        break;
+      case SET_ALARM_CLOCK:
+        // probably a good default behavior for setAlarmClock's
+
+        int mutabilityFlag = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+          mutabilityFlag = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
+        }
+
+        Context context = getApplicationContext();
+        Intent launchActivityIntent =
+          context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+
+        PendingIntent pendingLaunchIntent =
+          PendingIntent.getActivity(
+            context,
+            notificationModel.getId().hashCode(),
+            launchActivityIntent,
+            mutabilityFlag);
+        AlarmManagerCompat.setAlarmClock(
+          alarmManager, timestampTrigger.getTimestamp(), pendingLaunchIntent, pendingIntent);
+        break;
     }
   }
 

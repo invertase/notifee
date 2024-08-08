@@ -7,17 +7,25 @@ let kFLTNotifeeChannelName = "plugins.invertase.io/notifee"
 public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
     public static var eventSink: FlutterEventSink?
     private var messenger: FlutterBinaryMessenger
+    private var channel: FlutterMethodChannel?
 
     var args = NSDictionary()
 
-    init(messenger: FlutterBinaryMessenger) {
+    init(messenger: FlutterBinaryMessenger, channel: FlutterMethodChannel) {
         self.messenger = messenger
+        self.channel = channel
     }
 
     public func didReceiveNotifeeCoreEvent(_ event: [AnyHashable: Any]) {
         print(event)
 
-        NotifeePluginSwift.eventSink?(event)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if UIApplication.shared.applicationState == .background {
+                self.channel?.invokeMethod("Notifee#onBackgroundEvent", arguments: event)
+            } else {
+                NotifeePluginSwift.eventSink?(event)
+            }
+        }
     }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -25,7 +33,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         binaryMessenger = registrar.messenger()
 
         let channel = FlutterMethodChannel(name: kFLTNotifeeChannelName, binaryMessenger: binaryMessenger)
-        let instance = NotifeePluginSwift(messenger: binaryMessenger)
+        let instance = NotifeePluginSwift(messenger: binaryMessenger, channel: channel)
 
         registrar.addMethodCallDelegate(instance, channel: channel)
         registrar.publish(instance)
@@ -36,7 +44,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         eventChannel.setStreamHandler(NotifeeStreamHandler())
     }
 
-    internal func displayNotification(arguments: [String: Any], result: @escaping FlutterResult) {
+    func displayNotification(arguments: [String: Any], result: @escaping FlutterResult) {
         NotifeeCore.displayNotification(arguments, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -46,7 +54,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func createTriggerNotification(arguments: [String: Any], result: @escaping FlutterResult) {
+    func createTriggerNotification(arguments: [String: Any], result: @escaping FlutterResult) {
         NotifeeCore.createTriggerNotification(arguments["notification"] as! [String: Any], withTrigger: arguments["trigger"] as! [String: Any], with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -56,7 +64,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func cancelAllNotifications(arguments: [String: Any], result: @escaping FlutterResult) {
+    func cancelAllNotifications(arguments: [String: Any], result: @escaping FlutterResult) {
         NotifeeCore.cancelAllNotifications(arguments["type"] as! Int, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -66,7 +74,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func cancelAllNotificationsWithIds(arguments: [String: Any], result: @escaping FlutterResult) {
+    func cancelAllNotificationsWithIds(arguments: [String: Any], result: @escaping FlutterResult) {
         NotifeeCore.cancelAllNotifications(withIds: arguments["type"] as! Int, withIds: arguments["ids"] as! [String], with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -76,7 +84,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func requestPermission(arguments _: [String: Any], result: @escaping FlutterResult) {
+    func requestPermission(arguments _: [String: Any], result: @escaping FlutterResult) {
         NotifeeCore.requestPermission(["alert": true, "sound": true, "badge": true], with: { (error: Error?, settings: Any?) in
             if error != nil {
                 result(error)
@@ -86,7 +94,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func getBadgeCount(result: @escaping FlutterResult) {
+    func getBadgeCount(result: @escaping FlutterResult) {
         NotifeeCore.getBadgeCount { (error: Error?, count: Any?) in
             if error != nil {
                 result(error)
@@ -96,7 +104,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func getNotificationCategories(result: @escaping FlutterResult) {
+    func getNotificationCategories(result: @escaping FlutterResult) {
         NotifeeCore.getNotificationCategories { (error: Error?, categories: Any?) in
             if error != nil {
                 result(error)
@@ -106,7 +114,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func getNotificationSettings(result: @escaping FlutterResult) {
+    func getNotificationSettings(result: @escaping FlutterResult) {
         NotifeeCore.getNotificationSettings { (error: Error?, settings: Any?) in
             if error != nil {
                 result(error)
@@ -116,7 +124,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func getTriggerNotificationIds(result: @escaping FlutterResult) {
+    func getTriggerNotificationIds(result: @escaping FlutterResult) {
         NotifeeCore.getTriggerNotificationIds { (error: Error?, ids: Any?) in
             if error != nil {
                 result(error)
@@ -126,7 +134,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func getTriggerNotifications(result: @escaping FlutterResult) {
+    func getTriggerNotifications(result: @escaping FlutterResult) {
         NotifeeCore.getTriggerNotifications { (error: Error?, notifications: Any?) in
             if error != nil {
                 result(error)
@@ -136,7 +144,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func getDisplayedNotifications(result: @escaping FlutterResult) {
+    func getDisplayedNotifications(result: @escaping FlutterResult) {
         NotifeeCore.getDisplayedNotifications { (error: Error?, notifications: Any?) in
             if error != nil {
                 result(error)
@@ -146,7 +154,17 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         }
     }
 
-    internal func incrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
+    func getInitialNotification(result: @escaping FlutterResult) {
+        NotifeeCore.getInitialNotification { (error: Error?, notification: Any?) in
+            if error != nil {
+                result(error)
+            } else {
+                result(notification)
+            }
+        }
+    }
+
+    func incrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
         NotifeeCore.incrementBadgeCount(arguments, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -156,7 +174,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func decrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
+    func decrementBadgeCount(arguments: Int, result: @escaping FlutterResult) {
         NotifeeCore.decrementBadgeCount(arguments, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -166,7 +184,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func setBadgeCount(arguments: Int, result: @escaping FlutterResult) {
+    func setBadgeCount(arguments: Int, result: @escaping FlutterResult) {
         NotifeeCore.setBadgeCount(arguments, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -176,7 +194,7 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
         })
     }
 
-    internal func setNotificationCategories(arguments: [[AnyHashable: Any]], result: @escaping FlutterResult) {
+    func setNotificationCategories(arguments: [[AnyHashable: Any]], result: @escaping FlutterResult) {
         NotifeeCore.setNotificationCategories(arguments, with: { (error: Error?) in
             if error != nil {
                 result(error)
@@ -189,6 +207,8 @@ public class NotifeePluginSwift: NSObject, FlutterPlugin, NotifeeCoreDelegate {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if call.method == "displayNotification" {
             displayNotification(arguments: call.arguments as! [String: Any], result: result)
+        } else if call.method == "getInitialNotification" {
+            getInitialNotification(result: result)
         } else if call.method == "createTriggerNotification" {
             createTriggerNotification(arguments: call.arguments as! [String: Any], result: result)
         } else if call.method == "cancelAllNotifications" {
