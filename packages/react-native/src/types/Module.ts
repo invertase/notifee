@@ -23,8 +23,12 @@ export interface Module {
    *
    * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
    * notifications.
+   * @param notificationIds An array of notifications IDs. This is automatically generated and returned
+   * when creating a notification, or has been set manually via the `id` property.
+   *
+   * @param tag The tag set when creating the notification. This is only relative to Android.
    */
-  cancelAllNotifications(notificationIds?: string[]): Promise<void>;
+  cancelAllNotifications(notificationIds?: string[], tag?: string): Promise<void>;
 
   /**
    * API used to cancel any displayed notifications.
