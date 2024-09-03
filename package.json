@@ -1,6 +1,7 @@
 {
-  "name": "@notifications/root",
+  "name": "gunwook-notifee",
   "private": true,
+  "version": "7.8.3",
   "license": "Apache-2.0",
   "scripts": {
     "prepare": "yarn lerna:link && lerna run prepare && yarn build:core:ios && (yarn tests_rn:ios:pod:install || true)",
