@@ -6,7 +6,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:7.0.3'
+    classpath 'com.android.tools.build:gradle:8.5.0'
   }
 }
 
@@ -38,13 +38,15 @@ ext {
 }
 
 android {
-  compileSdkVersion 33
+  namespace "app.notifee.core"
+  compileSdkVersion 34
+
   testOptions {
     unitTests.returnDefaultValues = true
   }
   defaultConfig {
     minSdkVersion 20
-    targetSdkVersion 33
+    targetSdkVersion 34
     versionCode 1
     versionName "1.0"
 

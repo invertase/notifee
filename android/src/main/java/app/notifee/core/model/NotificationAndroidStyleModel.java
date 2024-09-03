@@ -181,7 +181,7 @@ public class NotificationAndroidStyleModel {
 
             // largeIcon has been specified to be null for BigPicture
             if (largeIcon == null) {
-              bigPictureStyle.bigLargeIcon(null);
+              bigPictureStyle.bigLargeIcon((Bitmap) null);
             }
           }
 
