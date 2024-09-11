@@ -34,9 +34,8 @@ import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.ObjectUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
-import java.util.List;
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -154,11 +153,12 @@ class NotifeeAlarmManager {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
       // Check whether the alarmType is the exact alarm
-      boolean isExactAlarm = Arrays
-          .asList(TimestampTriggerModel.AlarmType.SET_EXACT,
-              TimestampTriggerModel.AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
-              TimestampTriggerModel.AlarmType.SET_ALARM_CLOCK)
-          .contains(alarmType);
+      boolean isExactAlarm =
+          Arrays.asList(
+                  TimestampTriggerModel.AlarmType.SET_EXACT,
+                  TimestampTriggerModel.AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
+                  TimestampTriggerModel.AlarmType.SET_ALARM_CLOCK)
+              .contains(alarmType);
       if (isExactAlarm && !alarmManager.canScheduleExactAlarms()) {
         System.err.println(
             "Missing SCHEDULE_EXACT_ALARM permission. Trigger not scheduled. See:"
@@ -176,15 +176,15 @@ class NotifeeAlarmManager {
         break;
       case SET_AND_ALLOW_WHILE_IDLE:
         AlarmManagerCompat.setAndAllowWhileIdle(
-          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+            alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
         break;
       case SET_EXACT:
         AlarmManagerCompat.setExact(
-          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+            alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
         break;
       case SET_EXACT_AND_ALLOW_WHILE_IDLE:
         AlarmManagerCompat.setExactAndAllowWhileIdle(
-          alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
+            alarmManager, AlarmManager.RTC_WAKEUP, timestampTrigger.getTimestamp(), pendingIntent);
         break;
       case SET_ALARM_CLOCK:
         // probably a good default behavior for setAlarmClock's
@@ -196,16 +196,16 @@ class NotifeeAlarmManager {
 
         Context context = getApplicationContext();
         Intent launchActivityIntent =
-          context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+            context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
 
         PendingIntent pendingLaunchIntent =
-          PendingIntent.getActivity(
-            context,
-            notificationModel.getId().hashCode(),
-            launchActivityIntent,
-            mutabilityFlag);
+            PendingIntent.getActivity(
+                context,
+                notificationModel.getId().hashCode(),
+                launchActivityIntent,
+                mutabilityFlag);
         AlarmManagerCompat.setAlarmClock(
-          alarmManager, timestampTrigger.getTimestamp(), pendingLaunchIntent, pendingIntent);
+            alarmManager, timestampTrigger.getTimestamp(), pendingLaunchIntent, pendingIntent);
         break;
     }
   }

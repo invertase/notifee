@@ -94,7 +94,7 @@ public class NotificationReceiverHandler {
 
     if (notificationModel.getAndroid().getAutoCancel()) {
       NotificationManagerCompat.from(context)
-        .cancel(intent.getIntExtra(NOTIFICATION_ID_INTENT_KEY, 0));
+          .cancel(intent.getIntExtra(NOTIFICATION_ID_INTENT_KEY, 0));
     }
 
     InitialNotificationEvent initialNotificationEvent =

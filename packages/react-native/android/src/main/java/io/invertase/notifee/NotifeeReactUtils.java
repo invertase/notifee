@@ -5,7 +5,6 @@
 package io.invertase.notifee;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.util.SparseArray;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
-
 import app.notifee.core.EventSubscriber;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -26,7 +24,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.common.LifecycleState;
 import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.jstasks.HeadlessJsTaskContext;
 import com.facebook.react.jstasks.HeadlessJsTaskEventListener;
@@ -199,7 +196,11 @@ class NotifeeReactUtils {
   }
 
   static boolean isAppInForeground() {
-    Boolean isForeground = ProcessLifecycleOwner.get().getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED);
+    Boolean isForeground =
+        ProcessLifecycleOwner.get()
+            .getLifecycle()
+            .getCurrentState()
+            .isAtLeast(Lifecycle.State.RESUMED);
     return isForeground;
   }
 
