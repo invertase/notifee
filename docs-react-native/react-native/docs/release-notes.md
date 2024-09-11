@@ -5,6 +5,37 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.0.0
+
+BREAKING CHANGES!
+
+Android 14+ requires two changes to avoid crashes or Play Store rejection
+
+1) The USE_FULL_SCREEN_INTENT permission is not longer included by default as most apps do not need it. If you need it you must now manually add the permission to AndroidManifest.xml
+
+2) Foreground Service Types are a strict requirement for Android 14 and require Play Store approval. You must use compileSdk 34 or higher for this release. If you need foreground service types you will need to specify the exact foreground service type permissions in your AndroidManifest.xml and you must replace the service definition in AndroidManifest.xml and you must use the new optional foregroundServiceTypes parameter in the foreground service API call
+
+Thanks to all the contributors that proposed these fixes so that Notifee continues to work well on Android 14 - handling the platform security changes as Google makes new releases is not easy, and they *always* change the Nofitication API surface API. Notifee would not work without the community contributions.
+
+Note, v8.0.0 was published 2 years ago as an alpha on npmjs.com but is unused. However, the version number was consumed by that alpha publish so we have skipped to v9.
+
+- fix(android)!: Remove USE_FULL_SCREEN_INTENT permission from package manifest for Android 14 compat (#1027)
+- feat(android)!: allow adding foreground service types dynamically
+- feat(android): add Android 15 FOREGROUND_SERVICE_TYPE_MEDIA_PROCESSING
+- fix(types): add cancelAllNotifications optional android tag property (#1087)
+- build(android): minimal set of changes for compileSdk 34
+- test(lint): check native code formatting in CI
+- style(lint): result of auto-formatting `yarn format:all`
+- style(lint): constrain formatting globs, add formatting check run scripts
+- docs(android): note apps must now manually add USE_FULL_SCREEN_INTENT if needed
+
+## 8.0.0
+
+Unreleased
+
+alpha publish from 2022, never made non-alpha, never in use, but version number
+consumed
+
 ## 7.9.0
 
 - feat: group support to communication push [#1017](https://github.com/invertase/notifee/issues/1017)
