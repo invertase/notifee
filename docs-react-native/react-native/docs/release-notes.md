@@ -5,6 +5,28 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 7.9.0
+
+- feat: group support to communication push [#1017](https://github.com/invertase/notifee/issues/1017)
+- fix(iOS): Allow the original delegate to handle non-Notifee notifications first [#985](https://github.com/invertase/notifee/issues/985)
+- fix: Remove EventSubcriptionVendor type usage as it's removed in RN0.73 [#1001](https://github.com/invertase/notifee/issues/1001)
+- fix(android): fix an issue when using inexact alarms [#981](https://github.com/invertase/notifee/issues/981)
+- style(lint): fix lint errors from previous commits [#1073](https://github.com/invertase/notifee/issues/1073)
+q- test(ci, ios): ios build behaving strangely - tune timeouts
+- test(example): minimum changes to get example working
+- test(ci): remove log compression pre-artifact upload
+- test(ci): use codecov action vs bash uploader
+- test(ci, ios): switch to macos-14 / apple silicon, iPhone 14
+- test(ci, android): use ubuntu+nested-virt+reactive-circus for emulator tests
+- test(ci): forward port from GITHUB_OUTPUT vs set-output
+- test(ci): bump actions to current versions
+- test(ci): use github built-in concurrency controls
+- style(lint): ignore pubspec.lock files when looking for changes
+- test(android): two alarm manager tests hanging
+- build(deps, ios): Podfile.lock version bumps in test app
+- build(deps): yarn includes information about itself in package.json
+- docs(CONTRIBUTING): auto tag for gh release, point to repo for changelog
+
 ## 7.8.2
 
 - Fix packaging error / missing `dist/version.js` [#934](https://github.com/invertase/notifee/issues/934)
