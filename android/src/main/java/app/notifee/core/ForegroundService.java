@@ -109,7 +109,7 @@ public class ForegroundService extends Service {
               .notify(hashCode, notification);
         } else {
           EventBus.post(
-            new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
+              new NotificationEvent(NotificationEvent.TYPE_FG_ALREADY_EXIST, notificationModel));
         }
       }
     }

@@ -205,9 +205,10 @@
       }
     }
 
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
-                                                                          content:content
-                                                                          trigger:nil];
+    UNNotificationRequest *request =
+        [UNNotificationRequest requestWithIdentifier:notification[@"id"]
+                                             content:content
+                                             trigger:nil];
 
     dispatch_async(dispatch_get_main_queue(), ^{
       [center addNotificationRequest:request
@@ -224,7 +225,6 @@
                }];
     });
   });
-  
 }
 
 /* Create a trigger notification .
@@ -236,63 +236,62 @@
 + (void)createTriggerNotification:(NSDictionary *)notification
                       withTrigger:(NSDictionary *)trigger
                         withBlock:(notifeeMethodVoidBlock)block {
-  
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      UNMutableNotificationContent *content = [self buildNotificationContent:notification
-                                                                 withTrigger:trigger];
-      UNNotificationTrigger *unTrigger = [NotifeeCoreUtil triggerFromDictionary:trigger];
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    UNMutableNotificationContent *content = [self buildNotificationContent:notification
+                                                               withTrigger:trigger];
+    UNNotificationTrigger *unTrigger = [NotifeeCoreUtil triggerFromDictionary:trigger];
 
-      if (unTrigger == nil) {
-        // do nothing if trigger is null
-        return dispatch_async(dispatch_get_main_queue(), ^{
-          block(nil);
-        });
-      }
-
-      UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-
-      NSMutableDictionary *notificationDetail = [notification mutableCopy];
-      notificationDetail[@"remote"] = @NO;
-
-      if (@available(iOS 15.0, *)) {
-        if (notification[@"ios"][@"communicationInfo"] != nil) {
-          INSendMessageIntent *intent = [NotifeeCoreUtil
-              generateSenderIntentForCommunicationNotification:notification[@"ios"]
-                                                                           [@"communicationInfo"]];
-
-          // Use the intent to initialize the interaction.
-          INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
-          interaction.direction = INInteractionDirectionIncoming;
-          [interaction donateInteractionWithCompletion:^(NSError *error) {
-            if (error)
-              NSLog(@"NotifeeCore: Could not donate interaction for communication notification: %@",
-                    error);
-          }];
-
-          content = [[content contentByUpdatingWithProvider:intent error:nil] mutableCopy];
-        }
-      }
-
-      UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:notification[@"id"]
-                                                                            content:content
-                                                                            trigger:unTrigger];
-
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [center addNotificationRequest:request
-                 withCompletionHandler:^(NSError *error) {
-                   if (error == nil) {
-                     [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
-                       @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
-                       @"detail" : @{
-                         @"notification" : notificationDetail,
-                       }
-                     }];
-                   }
-                   block(error);
-                 }];
+    if (unTrigger == nil) {
+      // do nothing if trigger is null
+      return dispatch_async(dispatch_get_main_queue(), ^{
+        block(nil);
       });
+    }
+
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+
+    NSMutableDictionary *notificationDetail = [notification mutableCopy];
+    notificationDetail[@"remote"] = @NO;
+
+    if (@available(iOS 15.0, *)) {
+      if (notification[@"ios"][@"communicationInfo"] != nil) {
+        INSendMessageIntent *intent = [NotifeeCoreUtil
+            generateSenderIntentForCommunicationNotification:notification[@"ios"]
+                                                                         [@"communicationInfo"]];
+
+        // Use the intent to initialize the interaction.
+        INInteraction *interaction = [[INInteraction alloc] initWithIntent:intent response:nil];
+        interaction.direction = INInteractionDirectionIncoming;
+        [interaction donateInteractionWithCompletion:^(NSError *error) {
+          if (error)
+            NSLog(@"NotifeeCore: Could not donate interaction for communication notification: %@",
+                  error);
+        }];
+
+        content = [[content contentByUpdatingWithProvider:intent error:nil] mutableCopy];
+      }
+    }
+
+    UNNotificationRequest *request =
+        [UNNotificationRequest requestWithIdentifier:notification[@"id"]
+                                             content:content
+                                             trigger:unTrigger];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [center addNotificationRequest:request
+               withCompletionHandler:^(NSError *error) {
+                 if (error == nil) {
+                   [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+                     @"type" : @(NotifeeCoreEventTypeTriggerNotificationCreated),
+                     @"detail" : @{
+                       @"notification" : notificationDetail,
+                     }
+                   }];
+                 }
+                 block(error);
+               }];
     });
-  
+  });
 }
 
 /**

@@ -288,7 +288,7 @@ public class NotificationAndroidModel {
     if (mNotificationAndroidBundle.containsKey("lights")) {
       try {
         ArrayList<?> lightList =
-          Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("lights"));
+            Objects.requireNonNull(mNotificationAndroidBundle.getParcelableArrayList("lights"));
         String rawColor = (String) lightList.get(0);
 
         ArrayList<Integer> lights = new ArrayList<>(3);
@@ -298,9 +298,7 @@ public class NotificationAndroidModel {
 
         return lights;
       } catch (Exception e) {
-        Logger.e(
-          TAG,
-          "getLights -> Failed to parse lights");
+        Logger.e(TAG, "getLights -> Failed to parse lights");
         return null;
       }
     }

@@ -634,7 +634,8 @@ class NotificationManager {
 
     PeriodicWorkRequest.Builder workRequestBuilder;
     workRequestBuilder =
-        new PeriodicWorkRequest.Builder(Worker.class, interval, trigger.getTimeUnit()).setInitialDelay(interval, trigger.getTimeUnit());
+        new PeriodicWorkRequest.Builder(Worker.class, interval, trigger.getTimeUnit())
+            .setInitialDelay(interval, trigger.getTimeUnit());
 
     workRequestBuilder.addTag(Worker.WORK_TYPE_NOTIFICATION_TRIGGER);
     workRequestBuilder.addTag(uniqueWorkName);
