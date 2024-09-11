@@ -200,6 +200,12 @@ and, by adding `showWhenLocked` and `turnScreenOn` to your activity in android/a
   />
 ```
 
+and, by adding the USE_FULL_SCREEN_INTENT permission in
+android/app/src/main/AndroidManifest.xml:
+```xml
+  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT">
+```
+
 > After making these changes, be sure to run `cd android` and `./gradlew clean`, then re-install the app.
 
 Running this code, Notifee will attempt to launch the activity when the notification is displayed.
