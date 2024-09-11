@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   linting:
-    name: ESLint
+    name: Lint
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +24,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: Configure JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
       - name: Set workflow variables
         id: workflow-variables
         run: |
@@ -43,8 +48,10 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           command: yarn --no-audit --prefer-offline
-      - name: Lint
+      - name: Lint javascript
         run: yarn validate:all:js
+      - name: Lint Native - validate:all:check
+        run: yarn format:all:check
 
   typescript:
     name: TypeScript Build Validation
