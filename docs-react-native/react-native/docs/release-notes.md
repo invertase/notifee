@@ -5,9 +5,13 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
-## 9.0.1
+## 9.0.2
 
 - fix(android): rn74 compatibility support invalidate alongside deprecated onCatalystInstanceDestroy
+
+## 9.0.1
+
+improperly released, 9.0.2 released immediately after
 
 ## 9.0.0
 
