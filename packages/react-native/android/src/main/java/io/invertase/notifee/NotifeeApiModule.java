@@ -36,8 +36,17 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
     return Notifee.getInstance().getMainComponent(defaultComponent);
   }
 
-  @Override
+  // This method was removed upstream in react-native 0.74+, replaced with invalidate
+  // We will leave this stub here for older react-native versions compatibility
+  // ...but it will just delegate to the new invalidate method
   public void onCatalystInstanceDestroy() {
+    invalidate();
+  }
+
+  // This method was added in react-native 0.74 as a replacement for onCatalystInstanceDestroy
+  // It should be marked @Override but that would cause problems in apps using older react-native
+  // When minimum supported version is 0.74+ add @Override & remove onCatalystInstanceDestroy
+  public void invalidate() {
     NotifeeReactUtils.clearRunningHeadlessTasks();
   }
 
