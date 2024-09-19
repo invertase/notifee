@@ -127,7 +127,7 @@ const trigger: TimestampTrigger = {
 };
 ```
 
-On Android, you have the option to create your trigger notification with Android's AlarmManger API:
+On Android, you have the option to create your trigger notification with Android's AlarmManager API:
 
 ```js
 const trigger: TimestampTrigger = {
