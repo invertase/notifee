@@ -186,7 +186,8 @@ struct {
                  didReceiveNotificationResponse:response
                           withCompletionHandler:completionHandler];
     } else {
-      notifeeNotification = [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
+      notifeeNotification =
+          [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
     }
   }
 
@@ -251,7 +252,6 @@ struct {
                    dispatch_get_main_queue(), ^{
                      completionHandler();
                    });
-
   }
 }
 

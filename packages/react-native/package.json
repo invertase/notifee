@@ -1,6 +1,6 @@
 {
   "name": "@notifee/react-native",
-  "version": "7.8.2",
+  "version": "9.0.2",
   "author": "Invertase <oss@invertase.io> (http://invertase.io)",
   "description": "Notifee - a feature rich notifications library for React Native.",
   "main": "dist/index.js",
@@ -13,8 +13,10 @@
     "build:watch": "tsc --watch",
     "prepare": "yarn run build",
     "prepublishOnly": "cd ../.. && yarn run build:core",
-    "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\")",
-    "format:ios": "npm_config_yes=true npx clang-format -i --glob=\"*/**/*.{h,cpp,m,mm}\" --style=Google"
+    "format:android": "google-java-format --replace -i $(find . -type f -name \"*.java\" ! -path \"*/node_modules/*\" ! -path \"*/generated/*\")",
+    "format:android:check": "google-java-format --set-exit-if-changed --replace -i $(find . -type f -name \"*.java\" ! -path \"*/node_modules/*\" ! -path \"*/generated/*\")",
+    "format:ios": "npm_config_yes=true npx clang-format -i --glob=\"ios/**/*.{h,cpp,m,mm}\" --style=Google",
+    "format:ios:check": "npm_config_yes=true npx clang-format --glob=\"ios/**/*.{h,cpp,m,mm}\" --style=Google -n -Werror"
   },
   "devDependencies": {
     "@types/react-native": "0.67.2",

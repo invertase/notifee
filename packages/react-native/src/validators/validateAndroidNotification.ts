@@ -21,6 +21,7 @@ import {
   AndroidBadgeIconType,
   AndroidCategory,
   AndroidDefaults,
+  AndroidForegroundServiceType,
   AndroidFlags,
   AndroidGroupAlertBehavior,
   AndroidProgress,
@@ -388,6 +389,36 @@ export default function validateAndroidNotification(
     }
 
     out.loopSound = android.loopSound;
+  }
+
+  /**
+   * foregroundServiceTypes
+   */
+  if (
+    objectHasProperty(android, 'foregroundServiceTypes') &&
+    !isUndefined(android.foregroundServiceTypes)
+  ) {
+    if (!isArray(android.foregroundServiceTypes)) {
+      throw new Error("'notification.android.foregroundServiceTypes' expected an array.");
+    }
+
+    if (android.foregroundServiceTypes.length === 0) {
+      throw new Error(
+        "'notification.android.foregroundServiceTypes' expected a non empty array containing AndroidForegroundServiceType.",
+      );
+    }
+
+    const defaults = Object.values(AndroidForegroundServiceType);
+
+    for (let i = 0; i < android.foregroundServiceTypes.length; i++) {
+      if (!defaults.includes(android.foregroundServiceTypes[i])) {
+        throw new Error(
+          "'notification.android.foregroundServiceTypes' invalid array value, expected an AndroidForegroundServiceType value.",
+        );
+      }
+    }
+
+    out.foregroundServiceTypes = android.foregroundServiceTypes;
   }
 
   /**

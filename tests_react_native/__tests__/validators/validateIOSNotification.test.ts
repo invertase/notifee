@@ -70,7 +70,7 @@ describe('Validate IOS Notification', () => {
       const $ = validateIOSNotification({
         communicationInfo: {
           conversationId: 'id',
-          groupName: "Friends",
+          groupName: 'Friends',
           sender: {
             id: 'sender-id',
             displayName: 'John Doe',
@@ -80,7 +80,7 @@ describe('Validate IOS Notification', () => {
       expect($).toEqual({
         communicationInfo: {
           conversationId: 'id',
-          groupName: "Friends",
+          groupName: 'Friends',
           sender: {
             id: 'sender-id',
             displayName: 'John Doe',

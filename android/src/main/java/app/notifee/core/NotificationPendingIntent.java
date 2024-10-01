@@ -24,9 +24,7 @@ import android.os.Bundle;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.utility.IntentUtils;
-
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class NotificationPendingIntent {
   public static final String EVENT_TYPE_INTENT_KEY = "notifee_event_type";
@@ -152,8 +150,11 @@ public class NotificationPendingIntent {
       // to handle a custom launchActivity
       Boolean shouldOverwriteDefaultLaunchActivityIntent = launchActivityIntent == null;
       if (launchActivityIntent != null) {
-        // overwrite if custom launch activity set (launch activity in payload does not equal current activity)
-        shouldOverwriteDefaultLaunchActivityIntent = launchActivity != "default" && launchActivityIntent.getComponent().getClassName() != launchActivity;
+        // overwrite if custom launch activity set (launch activity in payload does not equal
+        // current activity)
+        shouldOverwriteDefaultLaunchActivityIntent =
+            launchActivity != "default"
+                && launchActivityIntent.getComponent().getClassName() != launchActivity;
       }
 
       // Set new launch activity intent

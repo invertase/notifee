@@ -85,7 +85,8 @@ Maintainers with write access to the repo and the npm organization can publish n
 1. Navigate to the React Native package: `cd packages/react-native`
 1. Update release notes [here](https://github.com/invertase/notifee/blob/main/docs-react-native/react-native/docs/release-notes.md)
 1. Bump version: `npm version {minor/patch} --legacy-peer-deps`
-1. Commit those changes
+1. Publish to npm: `npm publish` (this generates a new core AAR)
+1. Commit those changes (after npm publish so new AAR files are committed)
 1. Tag the repo (current format is `@notifee/react-native@x.y.z`)
 1. Push the release notes / version / tag to the repo: `git push --tags`
 1. Create a release on the repo:
@@ -93,4 +94,3 @@ Maintainers with write access to the repo and the npm organization can publish n
     export TAGNAME=`git tag --list|sort -r|head -1`
     gh release create ${TAGNAME} --title "${TAGNAME}" --notes "[Release Notes](https://github.com/invertase/notifee/blob/main/docs-react-native/react-native/docs/release-notes.md)"
     ```
-1. Publish to npm: `npm publish`
