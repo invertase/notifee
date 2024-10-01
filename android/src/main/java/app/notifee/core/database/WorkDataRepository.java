@@ -52,17 +52,17 @@ public class WorkDataRepository {
   }
 
   public ListenableFuture<WorkDataEntity> getWorkDataById(String id) {
-    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(() -> mWorkDataDao.getWorkDataById(id));
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(
+        () -> mWorkDataDao.getWorkDataById(id));
   }
 
   public ListenableFuture<List<WorkDataEntity>> getAllWithAlarmManager(Boolean withAlarmManager) {
-    return
-        NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(
         () -> mWorkDataDao.getAllWithAlarmManager(withAlarmManager));
   }
 
   public ListenableFuture<List<WorkDataEntity>> getAll() {
-    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit( () -> mWorkDataDao.getAll());
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(() -> mWorkDataDao.getAll());
   }
 
   public void deleteById(String id) {

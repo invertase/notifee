@@ -40,7 +40,8 @@ public abstract class NotifeeCoreDatabase extends RoomDatabase {
   private static volatile NotifeeCoreDatabase INSTANCE;
 
   static final ExecutorService databaseWriteExecutor = Executors.newCachedThreadPool();
-  static final ListeningExecutorService databaseWriteListeningExecutor = MoreExecutors.listeningDecorator(databaseWriteExecutor);
+  static final ListeningExecutorService databaseWriteListeningExecutor =
+      MoreExecutors.listeningDecorator(databaseWriteExecutor);
 
   /**
    * Migrate from: version 1 to version 2 - where the {@link WorkDataEntity} has an extra field:

@@ -133,8 +133,7 @@ public class ResourceUtils {
    * @param imageUrl
    * @return Bitmap or null if the image failed to load
    */
-  public static ListenableFuture<Bitmap> getImageBitmapFromUrl(
-    String imageUrl) {
+  public static ListenableFuture<Bitmap> getImageBitmapFromUrl(String imageUrl) {
     Uri imageUri;
     final SettableFuture<Bitmap> bitmapTCS = SettableFuture.create();
 

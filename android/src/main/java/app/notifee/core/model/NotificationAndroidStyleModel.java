@@ -31,7 +31,6 @@ import app.notifee.core.utility.TextUtils;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.SettableFuture;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +56,7 @@ public class NotificationAndroidStyleModel {
    * @return
    */
   private static ListenableFuture<Person> getPerson(
-    ListeningExecutorService lExecutor, Bundle personBundle) {
+      ListeningExecutorService lExecutor, Bundle personBundle) {
     return lExecutor.submit(
         () -> {
           Person.Builder personBuilder = new Person.Builder();
@@ -82,8 +81,7 @@ public class NotificationAndroidStyleModel {
 
             try {
               personIconBitmap =
-                      ResourceUtils.getImageBitmapFromUrl(personIcon)
-                          .get(10, TimeUnit.SECONDS);
+                  ResourceUtils.getImageBitmapFromUrl(personIcon).get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -115,7 +113,7 @@ public class NotificationAndroidStyleModel {
 
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
-    ListeningExecutorService lExecutor) {
+      ListeningExecutorService lExecutor) {
     int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
     ListenableFuture<NotificationCompat.Style> styleTask = null;
 
@@ -143,7 +141,7 @@ public class NotificationAndroidStyleModel {
    * @return
    */
   private ListenableFuture<NotificationCompat.Style> getBigPictureStyleTask(
-    ListeningExecutorService lExecutor) {
+      ListeningExecutorService lExecutor) {
     return lExecutor.submit(
         () -> {
           NotificationCompat.BigPictureStyle bigPictureStyle =
@@ -155,9 +153,8 @@ public class NotificationAndroidStyleModel {
             Bitmap pictureBitmap = null;
 
             try {
-              pictureBitmap = 
-                  ResourceUtils.getImageBitmapFromUrl(picture)
-                      .get(10, TimeUnit.SECONDS);
+              pictureBitmap =
+                  ResourceUtils.getImageBitmapFromUrl(picture).get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -192,9 +189,8 @@ public class NotificationAndroidStyleModel {
             Bitmap largeIconBitmap = null;
 
             try {
-              largeIconBitmap = 
-                  ResourceUtils.getImageBitmapFromUrl(largeIcon)
-                    .get(10, TimeUnit.SECONDS);
+              largeIconBitmap =
+                  ResourceUtils.getImageBitmapFromUrl(largeIcon).get(10, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
               Logger.e(
                   TAG,
@@ -291,14 +287,14 @@ public class NotificationAndroidStyleModel {
 
   /** Gets a MessagingStyle for a notification */
   private ListenableFuture<NotificationCompat.Style> getMessagingStyleTask(
-    ListeningExecutorService lExecutor) {
+      ListeningExecutorService lExecutor) {
     return lExecutor.submit(
         () -> {
           Person person =
-              getPerson(lExecutor, 
-                  Objects.requireNonNull(
-                      mNotificationAndroidStyleBundle.getBundle("person"))
-              ).get(20, TimeUnit.SECONDS);
+              getPerson(
+                      lExecutor,
+                      Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
+                  .get(20, TimeUnit.SECONDS);
 
           NotificationCompat.MessagingStyle messagingStyle =
               new NotificationCompat.MessagingStyle(person);
@@ -325,9 +321,8 @@ public class NotificationAndroidStyleModel {
 
             if (message.containsKey("person")) {
               messagePerson =
-                  getPerson(lExecutor,
-                      Objects.requireNonNull(message.getBundle("person"))
-                  ).get(20, TimeUnit.SECONDS);
+                  getPerson(lExecutor, Objects.requireNonNull(message.getBundle("person")))
+                      .get(20, TimeUnit.SECONDS);
             }
 
             messagingStyle =

@@ -44,15 +44,15 @@ public class ChannelManager {
 
   private static String TAG = "ChannelManager";
   private static ExecutorService executorService = Executors.newCachedThreadPool();
-  private static ListeningExecutorService lExecutorService = MoreExecutors.listeningDecorator(
-    executorService);
+  private static ListeningExecutorService lExecutorService =
+      MoreExecutors.listeningDecorator(executorService);
 
   static ListenableFuture<Void> createChannel(ChannelModel channelModel) {
     return lExecutorService.submit(
-      () -> {
-        if (Build.VERSION.SDK_INT < 26) {
-          return null;
-        }
+        () -> {
+          if (Build.VERSION.SDK_INT < 26) {
+            return null;
+          }
 
           NotificationChannel channel =
               new NotificationChannel(
@@ -134,9 +134,8 @@ public class ChannelManager {
         });
   }
 
-  static ListenableFuture<Void> createChannelGroups(
-      List<ChannelGroupModel> channelGroupModels) {
-      return lExecutorService.submit(
+  static ListenableFuture<Void> createChannelGroups(List<ChannelGroupModel> channelGroupModels) {
+    return lExecutorService.submit(
         () -> {
           if (Build.VERSION.SDK_INT < 26) {
             return null;
@@ -222,7 +221,7 @@ public class ChannelManager {
   }
 
   static ListenableFuture<List<Bundle>> getChannelGroups() {
-      return lExecutorService.submit(
+    return lExecutorService.submit(
         () -> {
           List<NotificationChannelGroup> channelGroups =
               NotificationManagerCompat.from(ContextHolder.getApplicationContext())
@@ -245,8 +244,8 @@ public class ChannelManager {
     return lExecutorService.submit(
         () -> {
           NotificationChannelGroup channelGroup =
-            NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-              .getNotificationChannelGroup(channelGroupId);
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .getNotificationChannelGroup(channelGroupId);
 
           return convertChannelGroupToBundle(channelGroup);
         });
