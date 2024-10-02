@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-v1
+          key: ${{ runner.os }}-gradle-${{ hashFiles('android/build.gradle*') }}-v1
 
       - name: Resolve Gradle Dependencies
         uses: nick-fields/retry@v3
