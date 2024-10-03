@@ -39,8 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onDidFinishLaunchingNotification:(NSDictionary *)notification;
 
-+ (UNMutableNotificationContent *)buildNotificationContent:(NSDictionary *)notification;
-
 @end
 
 NS_ASSUME_NONNULL_END
