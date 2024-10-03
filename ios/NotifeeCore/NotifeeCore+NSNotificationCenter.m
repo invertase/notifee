@@ -60,8 +60,6 @@
 - (void)application_onDidFinishLaunchingNotification:(nonnull NSNotification *)notification {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  NSDictionary *notifUserInfo =
-      notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
   UILocalNotification *launchNotification =
       (UILocalNotification *)notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
   [[NotifeeCoreUNUserNotificationCenter instance]

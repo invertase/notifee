@@ -41,7 +41,7 @@ jobs:
       - name: Start Simulator
         # The first time you try to `yarn run:ios` after xcode-select, it fails, so get it out of the way...
         continue-on-error: true
-        run: xcrun simctl boot "iPhone 15"
+        run: xcrun simctl boot "iPhone 16"
 
       # Set path variables needed for caches
       - name: Set workflow variables
@@ -55,14 +55,14 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.workflow-variables.outputs.yarn-cache }}
-          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('package.json', 'packages/react-native/package.json', 'tests_react_native/package.json') }}
           restore-keys: ${{ runner.os }}-yarn-v1
 
       - uses: actions/cache@v4
         name: Cache Pods
         with:
           path: tests_react_native/ios/Pods
-          key: ${{ runner.os }}-pods-v2-${{ hashFiles('**/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-v2-${{ hashFiles('tests_react_native/ios/Podfile.lock') }}
           restore-keys: ${{ runner.os }}-pods-v2
 
       - name: Setup Ruby
@@ -81,7 +81,7 @@ jobs:
       - name: Yarn Install
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 10
+          timeout_minutes: 15
           retry_wait_seconds: 60
           max_attempts: 4
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
@@ -128,7 +128,7 @@ jobs:
         timeout-minutes: 30
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -146,7 +146,7 @@ jobs:
         if: steps.run1.outcome=='failure'
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -164,7 +164,7 @@ jobs:
         if: steps.run2.outcome=='failure'
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -198,7 +198,15 @@ jobs:
 
       - name: E2E Test
         timeout-minutes: 6
-        run: yarn tests_rn:ios:test
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          ccache -s
+          yarn tests_rn:ios:test
+          ccache -s
 
       - name: Stop App Video
         if: always()

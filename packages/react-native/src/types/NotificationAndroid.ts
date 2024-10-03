@@ -193,7 +193,6 @@ export interface NotificationAndroid {
    * View the [Android Appearance](/react-native/docs/android/appearance#large-icons) documentation to learn
    * more about this property.
    */
-  /* eslint-disable-next-line @typescript-eslint/ban-types */
   largeIcon?: string | number | object;
 
   /**
@@ -601,7 +600,6 @@ export interface AndroidBigPictureStyle {
    * The image will be automatically resized depending on the device and it's size. If the image could
    * not be found a blank space will appear.
    */
-  /* eslint-disable-next-line @typescript-eslint/ban-types */
   picture: string | number | object;
 
   /**
@@ -616,7 +614,6 @@ export interface AndroidBigPictureStyle {
    *
    * To hide the `largeIcon` when the notification is expanded, set to null. Similar to `thumbnailHidden` for attachments on iOS.
    */
-  /* eslint-disable-next-line @typescript-eslint/ban-types */
   largeIcon?: string | number | object | null;
 
   /**

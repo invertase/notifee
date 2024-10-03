@@ -5,6 +5,18 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.0.3
+
+- fix(ios): use new icon badge APIs / correctly clear badge
+- test(ci): use current path to ccache
+- test(ci, ios): increase yarn install timeout to stop flakes
+- test(ios): commit current pod lockfile
+- style(lint, ios): fix various lint warnings
+- style(lint): clean up warnings from `yarn validate:all:js`
+- test(ci): use iPhone 16 now, 15 does not exist for Xcode 16
+- test(ci): use hashFiles with specific paths vs globs
+- docs: fix typo "AlarmManger" to "AlarmManager" (#1101)
+
 ## 9.0.2
 
 - fix(android): rn74 compatibility support invalidate alongside deprecated onCatalystInstanceDestroy

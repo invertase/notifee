@@ -38,7 +38,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.workflow-variables.outputs.yarn-cache }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('package.json', 'packages/react-native/package.json', 'tests_react_native/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
@@ -74,7 +74,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.workflow-variables.outputs.yarn-cache }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('package.json', 'packages/react-native/package.json', 'tests_react_native/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
@@ -108,7 +108,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.workflow-variables.outputs.yarn-cache }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-with-website
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('package.json', 'packages/react-native/package.json', 'tests_react_native/package.json') }}}-with-website
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn Install
