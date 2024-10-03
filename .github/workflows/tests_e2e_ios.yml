@@ -128,7 +128,7 @@ jobs:
         timeout-minutes: 30
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -146,7 +146,7 @@ jobs:
         if: steps.run1.outcome=='failure'
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -164,7 +164,7 @@ jobs:
         if: steps.run2.outcome=='failure'
         continue-on-error: true
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
@@ -198,7 +198,15 @@ jobs:
 
       - name: E2E Test
         timeout-minutes: 6
-        run: yarn tests_rn:ios:test
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
+          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
+          export CCACHE_FILECLONE=true
+          export CCACHE_DEPEND=true
+          export CCACHE_INODECACHE=true
+          ccache -s
+          yarn tests_rn:ios:test
+          ccache -s
 
       - name: Stop App Video
         if: always()
