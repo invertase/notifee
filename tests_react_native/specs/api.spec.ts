@@ -1,4 +1,3 @@
-/* eslint-disable jest/valid-expect */
 import { expect } from 'chai';
 import { TestScope } from 'cavy';
 import notifee, {

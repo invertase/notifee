@@ -24,8 +24,8 @@ import Notifee, {
   EventType,
   Event,
   AuthorizationStatus,
-  TimestampTrigger,
-  RepeatFrequency,
+  // TimestampTrigger,
+  // RepeatFrequency,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
@@ -92,8 +92,7 @@ async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
 
 firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
 function Root(): any {
-  // @ts-ignore
-  const [id, setId] = React.useState<string | null>(null);
+  const [id, _] = React.useState<string | null>(null);
 
   async function init(): Promise<void> {
     const fcmToken = await firebase.messaging().getToken();
@@ -174,13 +173,12 @@ function Root(): any {
 
       const date = new Date(Date.now());
       date.setSeconds(date.getSeconds() + 15);
-      // @ts-ignore
-      const trigger: TimestampTrigger = {
-        type: 0,
-        timestamp: date.getTime(),
-        alarmManager: true,
-        repeatFrequency: RepeatFrequency.HOURLY,
-      };
+      // const trigger: TimestampTrigger = {
+      //   type: 0,
+      //   timestamp: date.getTime(),
+      //   alarmManager: true,
+      //   repeatFrequency: RepeatFrequency.HOURLY,
+      // };
       // Notifee.createTriggerNotification(notification, trigger)
       //   .then(notificationId => setId(notificationId))
       //   .catch(console.error);

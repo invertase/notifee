@@ -11,7 +11,6 @@ export default class NotifeeNativeError extends Error implements NativeError {
   private readonly jsStack: string;
 
   //  TODO native error type
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(nativeError: any, jsStack = '') {
     super();
     const { userInfo } = nativeError;
@@ -54,7 +53,6 @@ export default class NotifeeNativeError extends Error implements NativeError {
   }
 
   // todo errorEvent type
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static fromEvent(errorEvent: any, stack?: string): NotifeeNativeError {
     return new NotifeeNativeError({ userInfo: errorEvent }, stack || new Error().stack);
   }
