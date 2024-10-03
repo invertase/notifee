@@ -690,7 +690,7 @@
     if ([content.sound isKindOfClass:[NSString class]]) {
       iosDict[@"sound"] = content.sound;
     } else if ([content.sound isKindOfClass:[NSDictionary class]]) {
-      NSDictionary *soundDict = content.sound;
+      NSDictionary *soundDict = (NSDictionary *)content.sound;
       NSMutableDictionary *notificationIOSSound = [[NSMutableDictionary alloc] init];
 
       // ios.sound.name String

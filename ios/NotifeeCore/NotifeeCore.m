@@ -771,7 +771,8 @@
   if (![NotifeeCoreUtil isAppExtension]) {
     UIApplication *application = (UIApplication *)[NotifeeCoreUtil notifeeUIApplication];
     NSInteger currentCount = application.applicationIconBadgeNumber;
-    // If count was -1 to clear badge w/o clearing notifications, set currentCount to 0 before incrementing
+    // If count -1 (to clear badge w/o clearing notifications),
+    // set currentCount to 0 before incrementing
     if (currentCount == -1) {
       currentCount = 0;
     }

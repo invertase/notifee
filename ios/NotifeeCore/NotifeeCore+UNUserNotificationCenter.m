@@ -21,6 +21,7 @@
 #import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCoreUNUserNotificationCenter
+
 struct {
   unsigned int willPresentNotification : 1;
   unsigned int didReceiveNotificationResponse : 1;
