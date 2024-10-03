@@ -81,7 +81,7 @@ jobs:
       - name: Yarn Install
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 10
+          timeout_minutes: 15
           retry_wait_seconds: 60
           max_attempts: 4
           command: yarn --no-audit --prefer-offline && npm i -g cavy-cli
