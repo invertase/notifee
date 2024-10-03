@@ -32,121 +32,119 @@ import app.notifee.core.model.ChannelModel;
 import app.notifee.core.utility.ColorUtils;
 import app.notifee.core.utility.ResourceUtils;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ChannelManager {
 
   private static String TAG = "ChannelManager";
-  private static ExecutorService executorService = Executors.newCachedThreadPool();
-  private static ListeningExecutorService lExecutorService =
-      MoreExecutors.listeningDecorator(executorService);
 
   static ListenableFuture<Void> createChannel(ChannelModel channelModel) {
-    return lExecutorService.submit(
-        () -> {
-          if (Build.VERSION.SDK_INT < 26) {
-            return null;
-          }
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              if (Build.VERSION.SDK_INT < 26) {
+                return null;
+              }
 
-          NotificationChannel channel =
-              new NotificationChannel(
-                  channelModel.getId(), channelModel.getName(), channelModel.getImportance());
+              NotificationChannel channel =
+                  new NotificationChannel(
+                      channelModel.getId(), channelModel.getName(), channelModel.getImportance());
 
-          channel.setShowBadge(channelModel.getBadge());
-          channel.setBypassDnd(channelModel.getBypassDnd());
-          channel.setDescription(channelModel.getDescription());
-          channel.setGroup(channelModel.getGroupId());
-          channel.enableLights(channelModel.getLights());
+              channel.setShowBadge(channelModel.getBadge());
+              channel.setBypassDnd(channelModel.getBypassDnd());
+              channel.setDescription(channelModel.getDescription());
+              channel.setGroup(channelModel.getGroupId());
+              channel.enableLights(channelModel.getLights());
 
-          if (channelModel.getLightColor() != null) {
-            channel.setLightColor(channelModel.getLightColor());
-          }
+              if (channelModel.getLightColor() != null) {
+                channel.setLightColor(channelModel.getLightColor());
+              }
 
-          channel.setLockscreenVisibility(channelModel.getVisibility());
-          channel.enableVibration(channelModel.getVibration());
+              channel.setLockscreenVisibility(channelModel.getVisibility());
+              channel.enableVibration(channelModel.getVibration());
 
-          long[] vibrationPattern = channelModel.getVibrationPattern();
-          if (vibrationPattern.length > 0) {
-            channel.setVibrationPattern(vibrationPattern);
-          }
+              long[] vibrationPattern = channelModel.getVibrationPattern();
+              if (vibrationPattern.length > 0) {
+                channel.setVibrationPattern(vibrationPattern);
+              }
 
-          if (channelModel.getSound() != null) {
-            Uri soundUri = ResourceUtils.getSoundUri(channelModel.getSound());
-            if (soundUri != null) {
-              AudioAttributes audioAttributes =
-                  new AudioAttributes.Builder()
-                      .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                      .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                      .build();
-              channel.setSound(soundUri, audioAttributes);
-            } else {
-              Logger.w(
-                  TAG,
-                  "Unable to retrieve sound for channel, sound was specified as: "
-                      + channel.getSound());
-            }
-          } else {
-            channel.setSound(null, null);
-          }
+              if (channelModel.getSound() != null) {
+                Uri soundUri = ResourceUtils.getSoundUri(channelModel.getSound());
+                if (soundUri != null) {
+                  AudioAttributes audioAttributes =
+                      new AudioAttributes.Builder()
+                          .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                          .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                          .build();
+                  channel.setSound(soundUri, audioAttributes);
+                } else {
+                  Logger.w(
+                      TAG,
+                      "Unable to retrieve sound for channel, sound was specified as: "
+                          + channel.getSound());
+                }
+              } else {
+                channel.setSound(null, null);
+              }
 
-          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-              .createNotificationChannel(channel);
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .createNotificationChannel(channel);
 
-          return null;
-        });
+              return null;
+            });
   }
 
   static ListenableFuture<Void> createChannels(List<ChannelModel> channelModels) {
-    return lExecutorService.submit(
-        () -> {
-          for (ChannelModel channelModel : channelModels) {
-            createChannel(channelModel).get();
-          }
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              for (ChannelModel channelModel : channelModels) {
+                createChannel(channelModel).get();
+              }
 
-          return null;
-        });
+              return null;
+            });
   }
 
   static ListenableFuture<Void> createChannelGroup(ChannelGroupModel channelGroupModel) {
-    return lExecutorService.submit(
-        () -> {
-          if (Build.VERSION.SDK_INT < 26) {
-            return null;
-          }
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              if (Build.VERSION.SDK_INT < 26) {
+                return null;
+              }
 
-          NotificationChannelGroup notificationChannelGroup =
-              new NotificationChannelGroup(channelGroupModel.getId(), channelGroupModel.getName());
+              NotificationChannelGroup notificationChannelGroup =
+                  new NotificationChannelGroup(
+                      channelGroupModel.getId(), channelGroupModel.getName());
 
-          if (Build.VERSION.SDK_INT >= 28 && channelGroupModel.getDescription() != null) {
-            notificationChannelGroup.setDescription(channelGroupModel.getDescription());
-          }
+              if (Build.VERSION.SDK_INT >= 28 && channelGroupModel.getDescription() != null) {
+                notificationChannelGroup.setDescription(channelGroupModel.getDescription());
+              }
 
-          NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-              .createNotificationChannelGroup(notificationChannelGroup);
+              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                  .createNotificationChannelGroup(notificationChannelGroup);
 
-          return null;
-        });
+              return null;
+            });
   }
 
   static ListenableFuture<Void> createChannelGroups(List<ChannelGroupModel> channelGroupModels) {
-    return lExecutorService.submit(
-        () -> {
-          if (Build.VERSION.SDK_INT < 26) {
-            return null;
-          }
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              if (Build.VERSION.SDK_INT < 26) {
+                return null;
+              }
 
-          for (ChannelGroupModel channelGroupModel : channelGroupModels) {
-            createChannelGroup(channelGroupModel).get();
-          }
+              for (ChannelGroupModel channelGroupModel : channelGroupModels) {
+                createChannelGroup(channelGroupModel).get();
+              }
 
-          return null;
-        });
+              return null;
+            });
   }
 
   static void deleteChannel(@NonNull String channelId) {
@@ -160,95 +158,101 @@ public class ChannelManager {
   }
 
   static ListenableFuture<List<Bundle>> getChannels() {
-    return lExecutorService.submit(
-        () -> {
-          List<NotificationChannel> channels =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannels();
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              List<NotificationChannel> channels =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannels();
 
-          if (channels.size() == 0 || Build.VERSION.SDK_INT < 26) {
-            return Collections.emptyList();
-          }
+              if (channels.size() == 0 || Build.VERSION.SDK_INT < 26) {
+                return Collections.emptyList();
+              }
 
-          ArrayList<Bundle> channelBundles = new ArrayList<>(channels.size());
-          for (NotificationChannel channel : channels) {
-            channelBundles.add(convertChannelToBundle(channel));
-          }
+              ArrayList<Bundle> channelBundles = new ArrayList<>(channels.size());
+              for (NotificationChannel channel : channels) {
+                channelBundles.add(convertChannelToBundle(channel));
+              }
 
-          return channelBundles;
-        });
+              return channelBundles;
+            });
   }
 
   static ListenableFuture<Bundle> getChannel(String channelId) {
-    return lExecutorService.submit(
-        () -> {
-          NotificationChannel channel =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannel(channelId);
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              NotificationChannel channel =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannel(channelId);
 
-          return convertChannelToBundle(channel);
-        });
+              return convertChannelToBundle(channel);
+            });
   }
 
   static ListenableFuture<Boolean> isChannelBlocked(String channelId) {
-    return lExecutorService.submit(
-        () -> {
-          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
 
-          NotificationChannel channel =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannel(channelId);
+              NotificationChannel channel =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannel(channelId);
 
-          if (channel == null) {
-            return false;
-          }
+              if (channel == null) {
+                return false;
+              }
 
-          return IMPORTANCE_NONE == channel.getImportance();
-        });
+              return IMPORTANCE_NONE == channel.getImportance();
+            });
   }
 
   static ListenableFuture<Boolean> isChannelCreated(String channelId) {
-    return lExecutorService.submit(
-        () -> {
-          if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false;
 
-          NotificationChannel channel =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannel(channelId);
+              NotificationChannel channel =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannel(channelId);
 
-          return channel != null;
-        });
+              return channel != null;
+            });
   }
 
   static ListenableFuture<List<Bundle>> getChannelGroups() {
-    return lExecutorService.submit(
-        () -> {
-          List<NotificationChannelGroup> channelGroups =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannelGroups();
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              List<NotificationChannelGroup> channelGroups =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannelGroups();
 
-          if (channelGroups.size() == 0 || Build.VERSION.SDK_INT < 26) {
-            return Collections.emptyList();
-          }
+              if (channelGroups.size() == 0 || Build.VERSION.SDK_INT < 26) {
+                return Collections.emptyList();
+              }
 
-          ArrayList<Bundle> channelGroupBundles = new ArrayList<>(channelGroups.size());
-          for (NotificationChannelGroup channelGroup : channelGroups) {
-            channelGroupBundles.add(convertChannelGroupToBundle(channelGroup));
-          }
+              ArrayList<Bundle> channelGroupBundles = new ArrayList<>(channelGroups.size());
+              for (NotificationChannelGroup channelGroup : channelGroups) {
+                channelGroupBundles.add(convertChannelGroupToBundle(channelGroup));
+              }
 
-          return channelGroupBundles;
-        });
+              return channelGroupBundles;
+            });
   }
 
   static ListenableFuture<Bundle> getChannelGroup(String channelGroupId) {
-    return lExecutorService.submit(
-        () -> {
-          NotificationChannelGroup channelGroup =
-              NotificationManagerCompat.from(ContextHolder.getApplicationContext())
-                  .getNotificationChannelGroup(channelGroupId);
+    return Notifee.getListeningExecutorService()
+        .submit(
+            () -> {
+              NotificationChannelGroup channelGroup =
+                  NotificationManagerCompat.from(ContextHolder.getApplicationContext())
+                      .getNotificationChannelGroup(channelGroupId);
 
-          return convertChannelGroupToBundle(channelGroup);
-        });
+              return convertChannelGroupToBundle(channelGroup);
+            });
   }
 
   private static Bundle convertChannelToBundle(NotificationChannel channel) {
@@ -342,9 +346,5 @@ public class ChannelManager {
     }
 
     return channelGroupBundle;
-  }
-
-  public static ListeningExecutorService getListeningExecutorService() {
-    return lExecutorService;
   }
 }

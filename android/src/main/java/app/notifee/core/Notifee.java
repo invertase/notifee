@@ -39,8 +39,12 @@ import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.PowerManagerUtils;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @KeepForSdk
 public class Notifee {
@@ -48,7 +52,16 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static boolean mIsnitialized = false;
 
+  private static final ExecutorService executorService = Executors.newCachedThreadPool();
+  private static final ListeningExecutorService lExecutorService =
+      MoreExecutors.listeningDecorator(executorService);
+
   @KeepForSdk public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
+
+  @KeepForSdk
+  public static ListeningExecutorService getListeningExecutorService() {
+    return lExecutorService;
+  }
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -115,7 +128,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -134,7 +147,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -159,7 +172,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -181,7 +194,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -200,7 +213,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -222,7 +235,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -255,7 +268,7 @@ public class Notifee {
             result.onComplete(e, null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -277,7 +290,7 @@ public class Notifee {
             result.onComplete(e, null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -300,7 +313,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -323,7 +336,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -341,7 +354,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -359,7 +372,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -377,7 +390,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -395,7 +408,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -413,7 +426,7 @@ public class Notifee {
             result.onComplete(new Exception(t), null);
           }
         },
-        ChannelManager.getListeningExecutorService());
+        getListeningExecutorService());
   }
 
   @KeepForSdk
