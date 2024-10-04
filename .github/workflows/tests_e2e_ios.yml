@@ -20,7 +20,7 @@ concurrency:
 jobs:
   ios:
     name: iOS
-    runs-on: macos-14
+    runs-on: macos-14-xlarge
     # TODO matrix across APIs, at least 10 and 13 (lowest to highest)
     timeout-minutes: 100
     env:
