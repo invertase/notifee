@@ -40,6 +40,7 @@ jobs:
 
       - name: Start Simulator
         # The first time you try to `yarn run:ios` after xcode-select, it fails, so get it out of the way...
+        # ...also we need to directly grant notification permission
         continue-on-error: true
         run: xcrun simctl boot "iPhone 16"
 
@@ -123,68 +124,6 @@ jobs:
           key: ${{ runner.os }}-v2 # makes a unique key w/related restore key internally
           max-size: 400M
 
-      - name: Build App, Boot Simulator, Run App
-        id: run1
-        timeout-minutes: 30
-        continue-on-error: true
-        run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
-          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
-          export CCACHE_FILECLONE=true
-          export CCACHE_DEPEND=true
-          export CCACHE_INODECACHE=true
-          ccache -s
-          export SKIP_BUNDLING=1
-          export RCT_NO_LAUNCH_PACKAGER=1
-          yarn run:ios
-          ccache -s
-        shell: bash
-
-      - name: Build App, Boot Simulator, Run App Retry 1
-        id: run2
-        timeout-minutes: 30
-        if: steps.run1.outcome=='failure'
-        continue-on-error: true
-        run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
-          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
-          export CCACHE_FILECLONE=true
-          export CCACHE_DEPEND=true
-          export CCACHE_INODECACHE=true
-          ccache -s
-          export SKIP_BUNDLING=1
-          export RCT_NO_LAUNCH_PACKAGER=1
-          yarn run:ios
-          ccache -s
-        shell: bash
-
-      - name: Build App, Boot Simulator, Run App Retry 2
-        id: run3
-        timeout-minutes: 30
-        if: steps.run2.outcome=='failure'
-        continue-on-error: true
-        run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
-          export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
-          export CCACHE_FILECLONE=true
-          export CCACHE_DEPEND=true
-          export CCACHE_INODECACHE=true
-          ccache -s
-          export SKIP_BUNDLING=1
-          export RCT_NO_LAUNCH_PACKAGER=1
-          yarn run:ios
-          ccache -s
-        shell: bash
-
-      - name: Simulator Status
-        if: always()
-        run: |
-          if ${{ steps.run1.outcome=='success' || steps.run2.outcome=='success' || steps.run3.outcome=='success' }}; then
-             echo "Simulator Started"
-          else
-             exit 1
-          fi
-
       - name: Grant Notification Permission
         run: applesimutils --booted --setPermissions notifications=YES --bundle com.notifee.testing
 
@@ -197,9 +136,9 @@ jobs:
         run: nohup sh -c "xcrun simctl spawn booted log stream --level debug --style compact > simulator.log 2>&1 &"
 
       - name: E2E Test
-        timeout-minutes: 12
+        timeout-minutes: 30
         run: |
-          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
+          export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
           export CCACHE_FILECLONE=true
           export CCACHE_DEPEND=true
