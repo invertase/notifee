@@ -20,7 +20,7 @@ concurrency:
 jobs:
   ios:
     name: iOS
-    runs-on: macos-14
+    runs-on: macos-14-xlarge
     # TODO matrix across APIs, at least 10 and 13 (lowest to highest)
     timeout-minutes: 100
     env:
@@ -197,7 +197,7 @@ jobs:
         run: nohup sh -c "xcrun simctl spawn booted log stream --level debug --style compact > simulator.log 2>&1 &"
 
       - name: E2E Test
-        timeout-minutes: 6
+        timeout-minutes: 12
         run: |
           export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:/opt/homebrew/bin:$PATH"
           export CCACHE_SLOPPINESS=clang_index_store,file_stat_matches,include_file_ctime,include_file_mtime,ivfsoverlay,pch_defines,modules,system_headers,time_macros
