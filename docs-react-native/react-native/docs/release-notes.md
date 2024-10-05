@@ -5,6 +5,16 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.1.0
+
+Notifee no longer uses the GMS libraries and thus should be compatible
+with open source distribution channels like F-Droid now. Thanks @meypod!
+
+- feat(android): Remove all gms usages and use guava instead (#510)
+- test(ci, ios): simplify simulator / app interaction
+- test(ci, ios): try more powerful runner, possible de-flake
+- test(ci, ios): allow more time for e2e test
+
 ## 9.0.3
 
 - fix(ios): use new icon badge APIs / correctly clear badge
