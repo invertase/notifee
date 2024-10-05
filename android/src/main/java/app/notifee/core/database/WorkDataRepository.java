@@ -22,8 +22,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.ObjectUtils;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.util.List;
 
 public class WorkDataRepository {
@@ -46,43 +45,42 @@ public class WorkDataRepository {
   }
 
   public void insert(WorkDataEntity workData) {
-    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+    NotifeeCoreDatabase.databaseWriteListeningExecutor.execute(
         () -> {
           mWorkDataDao.insert(workData);
         });
   }
 
-  public Task<WorkDataEntity> getWorkDataById(String id) {
-    return Tasks.call(
-        NotifeeCoreDatabase.databaseWriteExecutor, () -> mWorkDataDao.getWorkDataById(id));
+  public ListenableFuture<WorkDataEntity> getWorkDataById(String id) {
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(
+        () -> mWorkDataDao.getWorkDataById(id));
   }
 
-  public Task<List<WorkDataEntity>> getAllWithAlarmManager(Boolean withAlarmManager) {
-    return Tasks.call(
-        NotifeeCoreDatabase.databaseWriteExecutor,
+  public ListenableFuture<List<WorkDataEntity>> getAllWithAlarmManager(Boolean withAlarmManager) {
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(
         () -> mWorkDataDao.getAllWithAlarmManager(withAlarmManager));
   }
 
-  public Task<List<WorkDataEntity>> getAll() {
-    return Tasks.call(NotifeeCoreDatabase.databaseWriteExecutor, () -> mWorkDataDao.getAll());
+  public ListenableFuture<List<WorkDataEntity>> getAll() {
+    return NotifeeCoreDatabase.databaseWriteListeningExecutor.submit(() -> mWorkDataDao.getAll());
   }
 
   public void deleteById(String id) {
-    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+    NotifeeCoreDatabase.databaseWriteListeningExecutor.execute(
         () -> {
           mWorkDataDao.deleteById(id);
         });
   }
 
   public void deleteByIds(List<String> ids) {
-    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+    NotifeeCoreDatabase.databaseWriteListeningExecutor.execute(
         () -> {
           mWorkDataDao.deleteByIds(ids);
         });
   }
 
   public void deleteAll() {
-    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+    NotifeeCoreDatabase.databaseWriteListeningExecutor.execute(
         () -> {
           mWorkDataDao.deleteAll();
         });
@@ -101,7 +99,7 @@ public class WorkDataRepository {
   }
 
   public void update(WorkDataEntity workData) {
-    NotifeeCoreDatabase.databaseWriteExecutor.execute(
+    NotifeeCoreDatabase.databaseWriteListeningExecutor.execute(
         () -> {
           mWorkDataDao.update(workData);
         });

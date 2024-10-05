@@ -100,7 +100,7 @@ public class TimestampTriggerModel {
         case 1:
           mAlarmType = AlarmType.SET_AND_ALLOW_WHILE_IDLE;
           break;
-          // default behavior when alarmManager is true:
+        // default behavior when alarmManager is true:
         default:
         case 2:
           mAlarmType = AlarmType.SET_EXACT;

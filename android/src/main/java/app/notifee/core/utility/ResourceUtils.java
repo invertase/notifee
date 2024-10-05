@@ -40,8 +40,8 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,16 +133,15 @@ public class ResourceUtils {
    * @param imageUrl
    * @return Bitmap or null if the image failed to load
    */
-  public static Task<Bitmap> getImageBitmapFromUrl(String imageUrl) {
+  public static ListenableFuture<Bitmap> getImageBitmapFromUrl(String imageUrl) {
     Uri imageUri;
-    final TaskCompletionSource<Bitmap> bitmapTCS = new TaskCompletionSource<>();
-    Task<Bitmap> bitmapTask = bitmapTCS.getTask();
+    final SettableFuture<Bitmap> bitmapTCS = SettableFuture.create();
 
     if (!imageUrl.contains("/")) {
       String imageResourceUrl = getImageResourceUrl(imageUrl);
       if (imageResourceUrl == null) {
-        bitmapTCS.setResult(null);
-        return bitmapTask;
+        bitmapTCS.set(null);
+        return bitmapTCS;
       }
       imageUri = getImageSourceUri(imageResourceUrl);
     } else {
@@ -168,19 +167,19 @@ public class ResourceUtils {
         new BaseBitmapDataSubscriber() {
           @Override
           protected void onNewResultImpl(@Nullable Bitmap bitmap) {
-            bitmapTCS.setResult(bitmap);
+            bitmapTCS.set(bitmap);
           }
 
           @Override
           protected void onFailureImpl(
               @NonNull DataSource<CloseableReference<CloseableImage>> dataSource) {
             Logger.e(TAG, "Failed to load an image: " + imageUrl, dataSource.getFailureCause());
-            bitmapTCS.setResult(null);
+            bitmapTCS.set(null);
           }
         },
         CallerThreadExecutor.getInstance());
 
-    return bitmapTask;
+    return bitmapTCS;
   }
 
   /**

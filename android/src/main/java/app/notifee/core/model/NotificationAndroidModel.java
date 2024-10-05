@@ -555,7 +555,7 @@ public class NotificationAndroidModel {
   /**
    * Returns a task containing a notification style
    *
-   * @return Task<NotificationCompat.Style>
+   * @return ListenableFuture<NotificationCompat.Style>
    */
   public @Nullable NotificationAndroidStyleModel getStyle() {
     if (!hasStyle()) {

@@ -99,7 +99,6 @@ dependencies {
     implementation(group: 'app.notifee', name:'core', version: '+')
   }
   implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-  implementation 'com.google.android.gms:play-services-tasks:18.0.1' // https://developers.google.com/android/guides/releases
   implementation 'androidx.work:work-runtime:2.8.0' // https://developer.android.com/jetpack/androidx/releases/work
   implementation 'org.greenrobot:eventbus:3.3.1' // https://github.com/greenrobot/EventBus/releases
   implementation 'androidx.lifecycle:lifecycle-process:2.3.1'

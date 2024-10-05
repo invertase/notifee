@@ -37,8 +37,14 @@ import app.notifee.core.model.ChannelModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.AlarmUtils;
 import app.notifee.core.utility.PowerManagerUtils;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @KeepForSdk
 public class Notifee {
@@ -46,7 +52,16 @@ public class Notifee {
   private static Notifee mNotifee = null;
   private static boolean mIsnitialized = false;
 
+  private static final ExecutorService executorService = Executors.newCachedThreadPool();
+  private static final ListeningExecutorService lExecutorService =
+      MoreExecutors.listeningDecorator(executorService);
+
   @KeepForSdk public static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 11111;
+
+  @KeepForSdk
+  public static ListeningExecutorService getListeningExecutorService() {
+    return lExecutorService;
+  }
 
   @KeepForSdk
   public static Notifee getInstance() {
@@ -100,29 +115,39 @@ public class Notifee {
    */
   @KeepForSdk
   public void cancelAllNotifications(int notificationType, MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotifications(notificationType)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        NotificationManager.cancelAllNotifications(notificationType),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void cancelAllNotificationsWithIds(
       int type, List<String> ids, String tag, MethodCallResult<Void> result) {
-    NotificationManager.cancelAllNotificationsWithIds(type, ids, tag)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        NotificationManager.cancelAllNotificationsWithIds(type, ids, tag),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -134,15 +159,20 @@ public class Notifee {
   @KeepForSdk
   public void createChannel(Bundle channelMap, MethodCallResult<Void> result) {
     ChannelModel channelModel = ChannelModel.fromBundle(channelMap);
-    ChannelManager.createChannel(channelModel)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.createChannel(channelModel),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -151,30 +181,39 @@ public class Notifee {
     for (Bundle bundle : channelsList) {
       channelModels.add(ChannelModel.fromBundle(bundle));
     }
+    Futures.addCallback(
+        ChannelManager.createChannels(channelModels),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
 
-    ChannelManager.createChannels(channelModels)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void createChannelGroup(Bundle channelGroupMap, MethodCallResult<Void> result) {
     ChannelGroupModel channelGroupModel = ChannelGroupModel.fromBundle(channelGroupMap);
-    ChannelManager.createChannelGroup(channelGroupModel)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.createChannelGroup(channelGroupModel),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -183,16 +222,20 @@ public class Notifee {
     for (Bundle bundle : channelGroupsList) {
       channelGroupModels.add(ChannelGroupModel.fromBundle(bundle));
     }
+    Futures.addCallback(
+        ChannelManager.createChannelGroups(channelGroupModels),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
 
-    ChannelManager.createChannelGroups(channelGroupModels)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -210,32 +253,44 @@ public class Notifee {
   @KeepForSdk
   public void displayNotification(Bundle notificationMap, MethodCallResult<Void> result) {
     NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-    NotificationManager.displayNotification(notificationModel, null)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, null);
-              } else {
-                Logger.e(TAG, "displayNotification", task.getException());
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        NotificationManager.displayNotification(notificationModel, null),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            Exception e = new Exception(t);
+            Logger.e(TAG, "displayNotification", e);
+            result.onComplete(e, null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void createTriggerNotification(
       Bundle notificationMap, Bundle triggerMap, MethodCallResult<Void> result) {
     NotificationModel notificationModel = NotificationModel.fromBundle(notificationMap);
-    NotificationManager.createTriggerNotification(notificationModel, triggerMap)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, null);
-              } else {
-                Logger.e(TAG, "createTriggerNotification", task.getException());
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        NotificationManager.createTriggerNotification(notificationModel, triggerMap),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            Exception e = new Exception(t);
+            Logger.e(TAG, "createTriggerNotification", e);
+            result.onComplete(e, null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -245,15 +300,20 @@ public class Notifee {
 
   @KeepForSdk
   public void getDisplayedNotifications(MethodCallResult<List<Bundle>> result) {
-    NotificationManager.getDisplayedNotifications()
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        NotificationManager.getDisplayedNotifications(),
+        new FutureCallback<List<Bundle>>() {
+          @Override
+          public void onSuccess(List<Bundle> taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
@@ -263,80 +323,110 @@ public class Notifee {
 
   @KeepForSdk
   public void getChannels(MethodCallResult<List<Bundle>> result) {
-    ChannelManager.getChannels()
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.getChannels(),
+        new FutureCallback<List<Bundle>>() {
+          @Override
+          public void onSuccess(List<Bundle> taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void getChannel(String channelId, MethodCallResult<Bundle> result) {
-    ChannelManager.getChannel(channelId)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.getChannel(channelId),
+        new FutureCallback<Bundle>() {
+          @Override
+          public void onSuccess(Bundle taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void getChannelGroups(MethodCallResult<List<Bundle>> result) {
-    ChannelManager.getChannelGroups()
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.getChannelGroups(),
+        new FutureCallback<List<Bundle>>() {
+          @Override
+          public void onSuccess(List<Bundle> taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void getChannelGroup(String channelGroupId, MethodCallResult<Bundle> result) {
-    ChannelManager.getChannelGroup(channelGroupId)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.getChannelGroup(channelGroupId),
+        new FutureCallback<Bundle>() {
+          @Override
+          public void onSuccess(Bundle taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void isChannelCreated(String channelId, MethodCallResult<Boolean> result) {
-    ChannelManager.isChannelCreated(channelId)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.isChannelCreated(channelId),
+        new FutureCallback<Boolean>() {
+          @Override
+          public void onSuccess(Boolean taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
   public void isChannelBlocked(String channelId, MethodCallResult<Boolean> result) {
-    ChannelManager.isChannelBlocked(channelId)
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                result.onComplete(null, task.getResult());
-              } else {
-                result.onComplete(task.getException(), null);
-              }
-            });
+    Futures.addCallback(
+        ChannelManager.isChannelBlocked(channelId),
+        new FutureCallback<Boolean>() {
+          @Override
+          public void onSuccess(Boolean taskResult) {
+            result.onComplete(null, taskResult);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            result.onComplete(new Exception(t), null);
+          }
+        },
+        getListeningExecutorService());
   }
 
   @KeepForSdk
