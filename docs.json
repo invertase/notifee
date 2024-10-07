@@ -2,6 +2,7 @@
   "$schema": "https://docs.page/schema.json",
   "name": "Notifee",
   "description": "A powerful notification library for React Native",
+  "favicon": "/assets/notifee.webp",
   "logo": {
     "light": "/assets/notifee.webp",
     "dark": "/assets/notifee.webp"
