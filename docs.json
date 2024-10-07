@@ -1,0 +1,163 @@
+{
+  "$schema": "https://docs.page/schema.json",
+  "name": "Notifee",
+  "description": "A powerful notification library for React Native",
+  "logo": {
+    "light": "",
+    "dark": ""
+  },
+  "theme": {
+    "primary": "#553D9A"
+  },
+  "sidebar": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        {
+          "title": "Overview",
+          "href": "/react-native/overview"
+        },
+        {
+          "title": "Environment Support",
+          "href": "/react-native/environment-support"
+        },
+        {
+          "title": "Installation",
+          "href": "/react-native/installation"
+        },
+        {
+          "title": "Release Notes",
+          "href": "/react-native/release-notes"
+        }
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        {
+          "title": "Basic Usage",
+          "href": "/react-native/usage"
+        },
+        {
+          "title": "Displaying a Notification",
+          "href": "/react-native/displaying-a-notification"
+        },
+        {
+          "title": "Events",
+          "href": "/react-native/events"
+        },
+        {
+          "title": "Triggers",
+          "href": "/react-native/triggers"
+        },
+        {
+          "title": "Debugging",
+          "href": "/react-native/debugging"
+        }
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        {
+          "title": "Firebase Cloud Messaging",
+          "href": "/react-native/integrations/fcm"
+        },
+        {
+          "title": "OneSignal",
+          "href": "/react-native/integrations/onesignal"
+        }
+      ]
+    },
+    {
+      "group": "Android Concepts",
+      "pages": [
+        {
+          "title": "Introduction",
+          "href": "/react-native/android/introduction"
+        },
+        {
+          "title": "Appearance",
+          "href": "/react-native/android/appearance"
+        },
+        {
+          "title": "Behaviour",
+          "href": "/react-native/android/behaviour"
+        },
+        {
+          "title": "Channels & Groups",
+          "href": "/react-native/android/channels"
+        },
+        {
+          "title": "Foreground Service",
+          "href": "/react-native/android/foreground-service"
+        },
+        {
+          "title": "Grouping & Sorting",
+          "href": "/react-native/android/grouping-and-sorting"
+        },
+        {
+          "title": "Interaction",
+          "href": "/react-native/android/interaction"
+        },
+        {
+          "title": "Permissions",
+          "href": "/react-native/android/permissions"
+        },
+        {
+          "title": "Progress Indicators",
+          "href": "/react-native/android/progress-indicators"
+        },
+        {
+          "title": "Styles",
+          "href": "/react-native/android/styles"
+        },
+        {
+          "title": "Timers",
+          "href": "/react-native/android/timers"
+        },
+        {
+          "title": "Background Restrictions",
+          "href": "/react-native/android/background-restrictions"
+        }
+      ]
+    },
+    {
+      "group": "IOS Concepts",
+      "pages": [
+        {
+          "title": "Introduction",
+          "href": "/react-native/ios/introduction"
+        },
+        {
+          "title": "Appearance",
+          "href": "/react-native/ios/appearance"
+        },
+        {
+          "title": "Badges",
+          "href": "/react-native/ios/badges"
+        },
+        {
+          "title": "Behaviour",
+          "href": "/react-native/ios/behaviour"
+        },
+        {
+          "title": "Categories",
+          "href": "/react-native/ios/categories"
+        },
+        {
+          "title": "Interaction",
+          "href": "/react-native/ios/interaction"
+        },
+        {
+          "title": "Permissions",
+          "href": "/react-native/ios/permissions"
+        },
+        {
+          "title": "Remote Notification Support",
+          "href": "/react-native/ios/remote-notification-support"
+        }
+      ]
+    }
+  ]
+}
