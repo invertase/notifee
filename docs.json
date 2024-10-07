@@ -3,8 +3,8 @@
   "name": "Notifee",
   "description": "A powerful notification library for React Native",
   "logo": {
-    "light": "",
-    "dark": ""
+    "light": "/assets/notifee.webp",
+    "dark": "/assets/notifee.webp"
   },
   "theme": {
     "primary": "#553D9A"
