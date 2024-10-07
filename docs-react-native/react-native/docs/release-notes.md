@@ -5,6 +5,10 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.1.1
+
+- fix(android): add guava transitive dep to module deps (#1116)
+
 ## 9.1.0
 
 Notifee no longer uses the GMS libraries and thus should be compatible
