@@ -21,7 +21,6 @@
 #import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCoreUNUserNotificationCenter
-
 struct {
   unsigned int willPresentNotification : 1;
   unsigned int didReceiveNotificationResponse : 1;
@@ -104,7 +103,6 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
@@ -148,23 +146,16 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
-    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
-    if (notifeeTrigger != nil) {
-      // post DELIVERED event
-      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+    // post DELIVERED event
+    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
         @"type" : @(NotifeeCoreEventTypeDelivered),
         @"detail" : @{
           @"notification" : notifeeNotification,
         }
-      }];
-    }
+    }];
 
     completionHandler(presentationOptions);
 
-  } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.willPresentNotification) {
-    [_originalDelegate userNotificationCenter:center
-                      willPresentNotification:notification
-                        withCompletionHandler:completionHandler];
   }
 }
 
