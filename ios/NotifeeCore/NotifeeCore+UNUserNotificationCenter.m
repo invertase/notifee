@@ -72,12 +72,31 @@ struct {
 
 - (nullable NSDictionary *)getInitialNotification {
   if (_initialNotificationGathered && _initialNotificationBlock != nil) {
+
     // copying initial notification
     if (_initialNotification != nil &&
         [_initialNoticationID isEqualToString:_notificationOpenedAppID]) {
-      NSDictionary *initialNotificationCopy = [_initialNotification copy];
+
+      NSMutableDictionary *event = [NSMutableDictionary dictionary];
+      NSMutableDictionary *initialNotificationCopy = [_initialNotification mutableCopy];
+      initialNotificationCopy[@"initialNotification"] = @1;
+
       _initialNotification = nil;
+
+      // Runs getInitialNotification() on JavaScript side with payload:
       _initialNotificationBlock(nil, initialNotificationCopy);
+
+      // Prepare onForegroundEvent() payload
+      event[@"detail"] = [initialNotificationCopy copy];
+      if ([event[@"detail"][@"pressAction"][@"id"] isEqualToString:@"default"]) {
+          event[@"type"] = @1;  // PRESS
+      } else {
+          event[@"type"] = @2;  // ACTION_PRESS
+      }
+
+      // Call onForegroundEvent() on Javascript side with payload:
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:event];
+
     } else {
       _initialNotificationBlock(nil, nil);
     }
