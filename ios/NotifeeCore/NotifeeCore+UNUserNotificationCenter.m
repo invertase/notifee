@@ -83,7 +83,7 @@ struct {
 
       _initialNotification = nil;
 
-      // Runs getInitialNotification() on JavaScript side with payload:
+      // Sets the return payload for getInitialNotification()
       _initialNotificationBlock(nil, initialNotificationCopy);
 
       // Prepare onForegroundEvent() payload
