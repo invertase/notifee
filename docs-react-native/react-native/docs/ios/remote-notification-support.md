@@ -18,7 +18,7 @@ To get started, you will need to implement a [Notification Service Extension](ht
 ### Expo
 
 You can jump straght to [configuring the payload](#configure-the-payload) if you use Expo with one of the community plugins: 
-- https://github.com/LunatiqueCoder/expo-notifee-remote-plugin
+- https://github.com/LunatiqueCoder/expo-notifee-plugin
 - https://github.com/evennit/notifee-expo-plugin
 
 ## Add the notification service extension
@@ -126,7 +126,7 @@ Before moving to the next step, run the app and check it builds successfully –
 ## Configure the payload
 > Make sure that you will set `mutable-content: 1` (mutableContent if you are using firebase admin sdk) when sending notification otherwise Notification Service Extension will NOT be triggered
 >
-> 🔗 [**Apple docs:** Configure-the-payload-for-the-remote-notification](https://developer.apple.com/documentation/usernotifications/modifying-content-in-newly-delivered-notifications#Configure-the-payload-for-the-remote-notification)
+> 🔗 [**Apple docs:** Configure-the-payload-for-thenotification](https://developer.apple.com/documentation/usernotifications/modifying-content-in-newly-delivered-notifications#Configure-the-payload-for-thenotification)
 
 ### Here's an example of a payload sent from the backend with Firebase Admin Node.js SDK
 
