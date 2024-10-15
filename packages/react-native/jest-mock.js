@@ -136,6 +136,7 @@ export default {
   cancelDisplayedNotification: jest.fn(async () => {}),
   cancelTriggerNotification: jest.fn(async () => {}),
   createChannel: jest.fn(async channel => channel?.id || testChannel.id),
+  createChannels: jest.fn(async () => {}),
   createChannelGroup: jest.fn(async channelGroup => channelGroup?.id || testChannelGroup.id),
   createChannelGroups: jest.fn(async () => {}),
   deleteChannel: jest.fn(async () => {}),
