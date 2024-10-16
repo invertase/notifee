@@ -191,7 +191,7 @@ To specify which service types you require, add `notifee`'s foreground service t
   
        <!-- Or, with multiple service types -->
       <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" tools:replace="android:foregroundServiceType" />
-
+      ...
     </application>
 </manifest>
 ```
