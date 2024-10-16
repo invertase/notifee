@@ -183,13 +183,16 @@ You may need access to either location, camera or microphone information in your
 To specify which service types you require, add `notifee`'s foreground service to your `AndroidManifest.xml`:
 
 ```xml
-<manifest>
-    ...
-    <!-- For example, with one service type -->
-    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location" tools:replace="android:foregroundServiceType" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+  <application>
+      ...
+      <!-- For example, with one service type -->
+      <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location" tools:replace="android:foregroundServiceType" />
+  
+       <!-- Or, with multiple service types -->
+      <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" tools:replace="android:foregroundServiceType" />
 
-     <!-- Or, with multiple service types -->
-    <service android:name="app.notifee.core.ForegroundService" android:foregroundServiceType="location|camera|microphone" tools:replace="android:foregroundServiceType" />
+    </application>
 </manifest>
 ```
 
