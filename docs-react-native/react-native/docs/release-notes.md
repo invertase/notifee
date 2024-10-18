@@ -5,6 +5,16 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.1.2
+
+This the minimum version that supports upcoming react-native 0.76 by default.
+
+Older notifee versions will only work if you disable disable New Architecture / disable bridgless mode
+
+- fix(android): forward-port getReactContext to new arch bridgeless mode (#1127 Thanks @Eclipses-Saros!)
+- fix(jest): add missing createChannels method to official mock definitions (#1123)
+- docs(android): clarify foregroundServiceType AndroidManifest example
+
 ## 9.1.1
 
 - fix(android): add guava transitive dep to module deps (#1116)
