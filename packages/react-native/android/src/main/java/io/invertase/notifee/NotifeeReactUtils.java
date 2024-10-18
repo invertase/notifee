@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
@@ -105,11 +106,43 @@ class NotifeeReactUtils {
     }
   }
 
+  @SuppressLint("VisibleForTests")
   private static @Nullable ReactContext getReactContext() {
-    ReactNativeHost reactNativeHost =
-        ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
-    ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
-    return reactInstanceManager.getCurrentReactContext();
+    try {
+
+      // Carefully try to load new architecture classes so we preserve backwards compatibility
+      // These symbols are only available in react-native >= 0.73
+      try {
+        Class<?> entryPoint =
+            Class.forName("com.facebook.react.defaults.DefaultNewArchitectureEntryPoint");
+        Method bridgelessEnabled = entryPoint.getMethod("getBridgelessEnabled");
+        Object result = bridgelessEnabled.invoke(null);
+        if (result == Boolean.TRUE) {
+          Log.d("getReactContext", "We are in bridgeless new architecture mode");
+          Object reactApplication = EventSubscriber.getContext();
+          Method getReactHost = reactApplication.getClass().getMethod("getReactHost");
+          Object reactHostInstance = getReactHost.invoke(reactApplication);
+          Method getCurrentReactContext =
+              reactHostInstance.getClass().getMethod("getCurrentReactContext");
+          return (ReactContext) getCurrentReactContext.invoke(reactHostInstance);
+        } else {
+          Log.d("getReactContext", "we are NOT in bridgeless new architecture mode");
+        }
+      } catch (Exception e) {
+        Log.d("getReactContext", "New Architecture class load failed. Using fallback.");
+      }
+
+      Log.d("getReactContext", "Determining ReactContext using fallback method");
+      ReactNativeHost reactNativeHost =
+          ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
+      ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
+      return reactInstanceManager.getCurrentReactContext();
+    } catch (Exception e) {
+      Log.w("getReactContext", "ReactHost unexpectedly null", e);
+    }
+
+    Log.w("getReactContext", "Unable to determine ReactContext");
+    return null;
   }
 
   private static void initializeReactContext(GenericCallback callback) {
@@ -121,7 +154,7 @@ class NotifeeReactUtils {
     reactInstanceManager.addReactInstanceEventListener(
         new ReactInstanceManager.ReactInstanceEventListener() {
           @Override
-          public void onReactContextInitialized(final ReactContext reactContext) {
+          public void onReactContextInitialized(@NonNull final ReactContext reactContext) {
             reactInstanceManager.removeReactInstanceEventListener(this);
             new Handler(Looper.getMainLooper()).postDelayed(callback::call, 100);
           }
