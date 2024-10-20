@@ -5,19 +5,19 @@ next: /
 previous: /react-native/docs/ios/permissions
 ---
 
-> It is recommended to only use a notification service extension if you require an image or need to modify the contents of the notification before its displayed.
+> It is recommended to only use a notification service extension if you require an image or need to modify the contents of the notification before display.
 
-It's possible to display a notification with Notifee features from outside the app using remote notifications (a.k.a push notifications) by using `notifee_options` in APNs keys with our notification service extension helper.
+It is possible to display a notification with Notifee features from outside the app using remote notifications (a.k.a push notifications) by using the combination of a`notifee_options` section in your remote notification message (see below for example) and the Notifee notification service extension helper.
 
-Adding a custom key `notifee_options` in the message payload enables Notifee to modify the notification before it is finally displayed to the end user. You can also change it as you please during this time.
+Adding a custom key `notifee_options` in the remote notification message (as shown below) enables Notifee to modify the notification before it is finally displayed to the end user. If your use case requires it, you may also use custom native code as shown below to change the notification before display.
 
-> ⭐️ In order to bring the iOS experience closer to the Android one, you can still send **data-only/local/background** notifications for Android while using **remote/alert** notifications for iOS [by configuring the right payload.](#configure-the-payload)
+> ⭐️ In order to bring the iOS experience - where data-only messages are rarely delivered - closer to the Android one where data-only messages have high delivery rates, you may still send **data-only** notifications for Android while using messages with a **notification** payload for iOS [by configuring the right payload.](#configure-the-payload)
 
 To get started, you will need to implement a [Notification Service Extension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) for your iOS app, the following steps will guide you through how to set it up.
 
 ### Expo
 
-You can jump straght to [configuring the payload](#configure-the-payload) if you use Expo with one of the community plugins: 
+You can jump straight to [configuring the payload](#configure-the-payload) if you use Expo with one of the community plugins:
 - https://github.com/LunatiqueCoder/expo-notifee-plugin
 - https://github.com/evennit/notifee-expo-plugin
 
@@ -26,6 +26,7 @@ You can jump straght to [configuring the payload](#configure-the-payload) if you
 * From Xcode top menu go to: File > New > Target...
 * A modal will present a list of possible targets, scroll down or use the filter to select Notification Service Extension. Press Next.
 * Add a product name (use `NotifeeNotificationService` to follow along) and click Finish
+* You may use Swift or Objective-C where it says 'language' but be sure to follow the correct section below depending on your implementation language selection
 * Make sure that the **deployment target** of your newly added extension (e.g. `NotifeeNotificationService`) matches the **deployment target** of your app. You can check it by selecting you app's target -> `Build Settings` -> `Deployment`
 
 
@@ -45,7 +46,7 @@ target 'NotifeeNotificationService' do
 end
 
 ```
-* Assuming you are using `react-native-firebase`, you'll also have to add `use_frameworks!` inside the target above as [you did when you followed their docs](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks). 
+* Assuming you are using `react-native-firebase`, you must also add `use_frameworks!` inside the target above as [you did when you followed their docs](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks).
 * Install or update your pods using pod install from the ios folder
 
 `pod install --repo-update`
@@ -68,7 +69,7 @@ At this point everything should still be running normally. This is the final ste
 ```objectivec
 - // Modify the notification content here...
 - self.bestAttemptContent.title = [NSString stringWithFormat:@"%@ [modified]", self.bestAttemptContent.title];
-    
+
 - self.contentHandler(self.bestAttemptContent);
 + [NotifeeExtensionHelper populateNotificationContent:request
                                 withContent: self.bestAttemptContent
@@ -79,12 +80,15 @@ At this point everything should still be running normally. This is the final ste
 ## Mutate the content with Notifee:
 > 🔗 [Apple Docs: Modifying content in newly delivered notifications](https://developer.apple.com/documentation/usernotifications/modifying-content-in-newly-delivered-notifications#Implement-your-extensions-handler-methods)
 
-#### Objective C:
+#### Objective-C:
 
 In your `NotifeeNotificationService.m` file you should have method `didReceiveNotificationRequest` where we are calling `NotifeeExtensionHelper`. Now you can modify
 `bestAttemptContent` before you send it to `NotifeeExtensionHelper`:
 
 ```objectivec
+#import "NotificationService.h"
+#import "NotifeeExtensionHelper.h"
+
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     self.contentHandler = contentHandler;
     self.bestAttemptContent = [request.content mutableCopy];
@@ -99,10 +103,16 @@ In your `NotifeeNotificationService.m` file you should have method `didReceiveNo
 }
 ```
 
-#### Swift: 
+#### Swift:
 
 In your `NotifeeNotificationService.swift` file, use the `didReceive(_:withContentHandler:)` method to enable the `NotifeeExtensionHelper`.
+
 ```swift
+import UIKit
+import RNNotifeeCore
+
+typealias ContentHandler = (UNNotificationContent) -> Void
+
 override func didReceive(_ request: UNNotificationRequest,
                          withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
     self.contentHandler = contentHandler
@@ -119,9 +129,9 @@ override func didReceive(_ request: UNNotificationRequest,
 }
 ```
 
-<br> 
+<br>
 
-Before moving to the next step, run the app and check it builds successfully – make sure you have the correct target selected. 
+Before moving to the next step, run the app and check it builds successfully – make sure you have the correct target selected.
 
 ## Configure the payload
 > Make sure that you will set `mutable-content: 1` (mutableContent if you are using firebase admin sdk) when sending notification otherwise Notification Service Extension will NOT be triggered
@@ -156,7 +166,7 @@ const notifeeOptions: Notification = {
   },
   ios: {
     sound: 'media/kick.wav', // A local sound file you have inside your app's bundle
-    categoryId: 'post', // A category that's already been created by your app
+    categoryId: 'post', // Must be a category that has already been created by your app
     attachments: [{url: 'https://placeimg.com/640/480/any', thumbnailHidden: true}] // array of attachments of type `IOSNotificationAttachment`
     // 🚧 Adding `foregroundPresentationOptions` controls how to
     // 👇 behave when app is UP AND RUNNING, not terminated, AND not in background!
@@ -170,7 +180,7 @@ const notifeeOptions: Notification = {
 };
 
 
-/** 
+/**
  * @description Firebase Message
  * @link https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.basemessage.md#basemessage_interface
  */
@@ -180,17 +190,17 @@ const message: MulticastMessage = {
   data: {notifee_options: JSON.stringify(notifeeOptions)},
   tokens: [],
   android: {
-    priority: 'high', // Needed to trigger data-only notifications
+    priority: 'high', // Needed to achieve reliable delivery for data-only notifications on Android
   },
   apns: {
     payload: {
       notifee_options: notifeeOptions,
       aps: {
-        // Payloads coming from Admin SDK should specify params in camelCase. 
+        // Payloads coming from Admin SDK should specify params in camelCase.
         // Payloads from REST API should specify in kebab-case
         // see their respective reference documentation
         alert: {
-          // 🚧 This is needed to trigger an alert/remote notification only for iOS
+          // 🚧 This is needed to achieve reliable delivery only for iOS
           // 👍 but Android will continue using data-only notifications
           title: 'ANY_DUMMY_STRING', // Or notifeeOptions.title :)
         },
