@@ -39,6 +39,7 @@ import {
 import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
+  validateAndroidCallStyle,
   validateAndroidInboxStyle,
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
@@ -616,6 +617,9 @@ export default function validateAndroidNotification(
         break;
       case AndroidStyle.MESSAGING:
         out.style = validateAndroidMessagingStyle(android.style);
+        break;
+      case AndroidStyle.CALL:
+        out.style = validateAndroidCallStyle(android.style);
         break;
       default:
         throw new Error(

@@ -9,6 +9,7 @@ import {
   AndroidMessagingStyle,
   AndroidMessagingStyleMessage,
   AndroidPerson,
+  AndroidCallStyle,
   AndroidStyle,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
@@ -290,6 +291,54 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
     messages,
     group: false,
   };
+
+  if (objectHasProperty(style, 'title')) {
+    if (!isString(style.title)) {
+      throw new Error(
+        "'notification.android.style' MessagingStyle: 'title' expected a string value.",
+      );
+    }
+
+    out.title = style.title;
+  }
+
+  if (objectHasProperty(style, 'group')) {
+    if (!isBoolean(style.group)) {
+      throw new Error(
+        "'notification.android.style' MessagingStyle: 'group' expected a boolean value.",
+      );
+    }
+
+    out.group = style.group;
+  }
+
+  return out;
+}
+
+/**
+ * Validates a CallStyle
+ */
+export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallStyle {
+  if (!isObject(style.person)) {
+    throw new Error("'notification.android.style' MessagingStyle: 'person' an object value.");
+  }
+
+  let person;
+  const messages: AndroidMessagingStyleMessage[] = [];
+
+  try {
+    person = validateAndroidPerson(style.person);
+  } catch (e: any) {
+    throw new Error(`'notification.android.style' MessagingStyle: ${e.message}.`);
+  }
+
+  // TODO dprevost add validations here!
+  const out: AndroidCallStyle = {
+    type: AndroidStyle.CALL,
+    person,
+    style: 'incoming' // TODO dprevost!
+  };
+
 
   if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
