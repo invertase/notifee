@@ -457,4 +457,10 @@ describe('Validate Android Style', () => {
       );
     });
   });
+
+  describe('validateAndroidCallStyle()', () => {
+    test('returns valid ', () => {
+      // TODO dprevostù
+    });
+  });
 });

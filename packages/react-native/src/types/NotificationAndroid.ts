@@ -360,7 +360,7 @@ export interface NotificationAndroid {
    * View the [Styles](/react-native/android/styles) documentation to learn more
    * view usage examples.
    **/
-  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
+  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle | AndroidCallStyle;
 
   /**
    * Text that summarizes this notification for accessibility services. As of the Android L release, this
@@ -711,6 +711,44 @@ export interface AndroidMessagingStyle {
    * An array of messages to display inside the notification.
    */
   messages: AndroidMessagingStyleMessage[];
+
+  /**
+   * If set, overrides the main notification `title` when the notification is expanded.
+   */
+  title?: string;
+
+  /**
+   * Sets whether this conversation notification represents a group (3 or more persons).
+   */
+  group?: boolean;
+}
+
+/**
+ * The interface used when displaying a Phone Style notification.
+ *
+ * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
+ *
+ * View the [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+ *
+ * @platform android
+ */
+export interface AndroidCallStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
+  type: AndroidStyle.CALL;
+
+  /**
+   * The person who is receiving a message on the current device.
+   */
+  person: AndroidPerson;
+
+  /**
+   * The style as described by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
+   */
+  style: 'incoming' | 'outgoing' | 'screening' | 'unknown';
+
+  // TODO maybe add more properties here intent?
 
   /**
    * If set, overrides the main notification `title` when the notification is expanded.
@@ -1243,6 +1281,7 @@ export enum AndroidStyle {
   BIGTEXT = 1,
   INBOX = 2,
   MESSAGING = 3,
+  CALL = 4,
 }
 
 /**
