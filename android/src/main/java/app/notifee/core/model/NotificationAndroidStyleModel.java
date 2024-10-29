@@ -17,12 +17,15 @@ package app.notifee.core.model;
  *
  */
 
+import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
@@ -41,7 +44,7 @@ import java.util.concurrent.TimeoutException;
 @Keep
 public class NotificationAndroidStyleModel {
   private static final String TAG = "NotificationAndroidStyle";
-  private Bundle mNotificationAndroidStyleBundle;
+  private final Bundle mNotificationAndroidStyleBundle;
 
   private NotificationAndroidStyleModel(Bundle styleBundle) {
     mNotificationAndroidStyleBundle = styleBundle;
@@ -113,6 +116,7 @@ public class NotificationAndroidStyleModel {
     return (Bundle) mNotificationAndroidStyleBundle.clone();
   }
 
+  @SuppressLint("NewApi")
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
       ListeningExecutorService lExecutor) {
@@ -131,6 +135,11 @@ public class NotificationAndroidStyleModel {
         break;
       case 3:
         styleTask = getMessagingStyleTask(lExecutor);
+        break;
+      case 4:
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+          styleTask = getCallStyleTask(lExecutor);
+        }
         break;
     }
 
@@ -337,4 +346,30 @@ public class NotificationAndroidStyleModel {
           return messagingStyle;
         });
   }
+
+  /**
+   * Gets a CallStyle for a notification
+   *
+   * @return NotificationCompat.CallStyle
+   */
+  @RequiresApi(31)
+  private ListenableFuture<NotificationCompat.Style> getCallStyleTask(
+    ListeningExecutorService lExecutor) {
+    return lExecutor.submit(
+      () -> {
+        Person caller =
+          getPerson(
+            lExecutor,
+            Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
+            .get(20, TimeUnit.SECONDS);
+
+        PendingIntent declineIntent = null;
+        PendingIntent answerIntent = null;
+
+        new NotificationCompat.CallStyle();
+
+        return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
+
+      });
+    }
 }
