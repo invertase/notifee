@@ -39,7 +39,7 @@ public class NotificationPendingIntent {
    * @param extraKeys Array of strings
    * @param extraBundles One or more bundles
    */
-  static PendingIntent createIntent(
+  public static PendingIntent createIntent(
       int notificationId,
       Bundle pressActionModelBundle,
       int eventType,
