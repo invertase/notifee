@@ -324,7 +324,6 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
   }
 
   let person;
-  const messages: AndroidMessagingStyleMessage[] = [];
 
   try {
     person = validateAndroidPerson(style.person);
