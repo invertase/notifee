@@ -724,7 +724,6 @@ export interface AndroidMessagingStyle {
 }
 
 export const enum AndroidCallType {
-  UNKNOWN = 0,
   INCOMING = 1,
   ONGOING = 2,
   SCREENING = 3,
