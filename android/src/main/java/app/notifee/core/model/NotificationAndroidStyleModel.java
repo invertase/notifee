@@ -363,13 +363,22 @@ public class NotificationAndroidStyleModel {
             Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
             .get(20, TimeUnit.SECONDS);
 
+        int callType = mNotificationAndroidStyleBundle.getInt("callType");
+
         PendingIntent declineIntent = null;
         PendingIntent answerIntent = null;
+        PendingIntent hangUpIntent = null;
 
-        new NotificationCompat.CallStyle();
-
-        return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
-
+        switch (callType) {
+          case 0:
+            return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
+          case 1:
+            return NotificationCompat.CallStyle.forOngoingCall(caller, hangUpIntent);
+          case 2:
+            return NotificationCompat.CallStyle.forScreeningCall(caller, hangUpIntent, answerIntent);
+          default:
+            throw new RuntimeException("Invalid callType");
+        }
       });
     }
 }
