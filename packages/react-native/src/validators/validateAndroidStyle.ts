@@ -12,6 +12,7 @@ import {
   AndroidCallStyle,
   AndroidStyle,
   AndroidCallType,
+  AndroidAction,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 import validateAndroidPressAction from './validateAndroidPressAction';
@@ -322,7 +323,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
  */
 export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallStyle {
   if (!isObject(style.person)) {
-    throw new Error("'notification.android.style' CallStyle: 'person' an object value.");
+    throw new Error("'notification.android.style' CallStyle: 'person' expected an object value.");
   }
 
   let person;
@@ -334,7 +335,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
   }
 
   if (!isObject(style.callTypeActions)) {
-    throw new Error("'notification.android.style' CallStyle: 'callTypeActions' an object value.");
+    throw new Error("'notification.android.style' CallStyle: 'callTypeActions' expected an object value.");
   }
 
   if (!isNumber(style.callTypeActions.callType)) {
@@ -349,33 +350,16 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
 
   switch (out.callTypeActions.callType) {
     case AndroidCallType.INCOMING:
-      if (!isString(out.callTypeActions.answerAction.title)) {
-        throw new Error("'notification.android.style' CallStyle: 'callTypeActions.answerAction.title' an string value.");
-      }
-      if (!isString(out.callTypeActions.declineAction.title)) {
-        throw new Error("'notification.android.style' CallStyle: 'callTypeActions.declineAction.title' an string value.");
-      }
-
-      out.callTypeActions.answerAction.pressAction = validateAndroidPressAction(out.callTypeActions.answerAction.pressAction)
-      out.callTypeActions.declineAction.pressAction = validateAndroidPressAction(out.callTypeActions.declineAction.pressAction)
+      out.callTypeActions.answerAction = validateAndroidAction(out.callTypeActions.answerAction)
+      out.callTypeActions.declineAction = validateAndroidAction(out.callTypeActions.declineAction)
       break;
     case AndroidCallType.ONGOING:
-      if (!isString(out.callTypeActions.hangUpAction.title)) {
-        throw new Error("'notification.android.style' CallStyle: 'callTypeActions.hangUpAction.title' an string value.");
-      }
 
-      out.callTypeActions.hangUpAction.pressAction = validateAndroidPressAction(out.callTypeActions.hangUpAction.pressAction)
+      out.callTypeActions.hangUpAction = validateAndroidAction(out.callTypeActions.hangUpAction)
       break;
     case AndroidCallType.SCREENING:
-      if (!isString(out.callTypeActions.answerAction.title)) {
-        throw new Error("'notification.android.style' CallStyle: 'callTypeActions.answerAction.title' an string value.");
-      }
-      if (!isString(out.callTypeActions.hangUpAction.title)) {
-        throw new Error("'notification.android.style' CallStyle: 'callTypeActions.hangUpAction.title' an string value.");
-      }
-
-      out.callTypeActions.answerAction.pressAction = validateAndroidPressAction(out.callTypeActions.answerAction.pressAction)
-      out.callTypeActions.hangUpAction.pressAction = validateAndroidPressAction(out.callTypeActions.hangUpAction.pressAction)
+      out.callTypeActions.answerAction = validateAndroidAction(out.callTypeActions.answerAction)
+      out.callTypeActions.hangUpAction = validateAndroidAction(out.callTypeActions.hangUpAction)
       break;
     default:
       throw new Error("'callType' expected a value of 0, 1 or 2.");
@@ -383,3 +367,15 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
 
   return out;
 }
+
+function validateAndroidAction(
+  action: AndroidAction,
+): AndroidAction {
+  if (!isString(action.title)) {
+    throw new Error("'title' expected a string value.");
+  }
+
+  action.pressAction = validateAndroidPressAction(action.pressAction)
+
+return action;
+};

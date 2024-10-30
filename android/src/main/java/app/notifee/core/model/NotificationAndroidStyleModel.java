@@ -119,7 +119,6 @@ public class NotificationAndroidStyleModel {
     return (Bundle) mNotificationAndroidStyleBundle.clone();
   }
 
-  @SuppressLint("NewApi")
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
       ListeningExecutorService lExecutor, int notificationHashCode) {
