@@ -723,56 +723,6 @@ export interface AndroidMessagingStyle {
   group?: boolean;
 }
 
-export const enum AndroidCallType {
-  INCOMING = 1,
-  ONGOING = 2,
-  SCREENING = 3,
-}
-
-export interface AndroidCallTypeIncoming {
-  callType: AndroidCallType.INCOMING;
-  answerAction: AndroidAction;
-  declineAction: AndroidAction;
-}
-
-export interface AndroidCallTypeOngoing {
-  callType: AndroidCallType.ONGOING;
-  hangUpAction: AndroidAction;
-}
-
-export interface AndroidCallTypeScreening {
-  callType: AndroidCallType.SCREENING;
-  answerAction: AndroidAction;
-  hangUpAction: AndroidAction;
-}
-
-
-/**
- * The interface used when displaying a Phone Style notification.
- *
- * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
- *
- * View the [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
- *
- * @platform android
- */
-export interface AndroidCallStyle {
-  /**
-   * Constant enum value used to identify the style type.
-   */
-  type: AndroidStyle.CALL;
-
-  /**
-   * The person who is receiving a message on the current device.
-   */
-  person: AndroidPerson;
-
-  /**
-   * The actions displaying the buttons on the notification related to the chosen call type
-   */
-  callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
-}
-
 /**
  * The interface for messages when constructing a Messaging Style notification.
  *
@@ -801,6 +751,55 @@ export interface AndroidMessagingStyleMessage {
    * This property should only be provided if the message is from an external person, and not the person receiving the message.
    */
   person?: AndroidPerson;
+}
+
+export const enum AndroidCallType {
+  INCOMING = 1,
+  ONGOING = 2,
+  SCREENING = 3,
+}
+
+export interface AndroidCallTypeIncoming {
+  callType: AndroidCallType.INCOMING;
+  answerAction: AndroidAction;
+  declineAction: AndroidAction;
+}
+
+export interface AndroidCallTypeOngoing {
+  callType: AndroidCallType.ONGOING;
+  hangUpAction: AndroidAction;
+}
+
+export interface AndroidCallTypeScreening {
+  callType: AndroidCallType.SCREENING;
+  answerAction: AndroidAction;
+  hangUpAction: AndroidAction;
+}
+
+/**
+ * The interface used when displaying a Call Style notification.
+ *
+ * <Vimeo id="android-style-call" caption="Android Call Style" />
+ *
+ * View the [Call](/react-native/docs/android/styles#call) documentation to learn more.
+ *
+ * @platform android
+ */
+export interface AndroidCallStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
+  type: AndroidStyle.CALL;
+
+  /**
+   * The person who is on the phone call.
+   */
+  person: AndroidPerson;
+
+  /**
+   * The actions displaying the buttons on the notification related to the chosen call type
+   */
+  callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
 }
 
 /**
