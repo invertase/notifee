@@ -122,7 +122,7 @@ public class NotificationAndroidStyleModel {
   @SuppressLint("NewApi")
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
-      ListeningExecutorService lExecutor, NotificationModel notificationModel) {
+      ListeningExecutorService lExecutor, int notificationHashCode) {
     int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
     ListenableFuture<NotificationCompat.Style> styleTask = null;
 
@@ -141,7 +141,7 @@ public class NotificationAndroidStyleModel {
         break;
       case 4:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-          styleTask = getCallStyleTask(lExecutor, notificationModel);
+          styleTask = getCallStyleTask(lExecutor, notificationHashCode);
         }
         break;
     }
@@ -350,6 +350,7 @@ public class NotificationAndroidStyleModel {
         });
   }
 
+
   /**
    * Gets a CallStyle for a notification
    *
@@ -357,7 +358,7 @@ public class NotificationAndroidStyleModel {
    */
   @RequiresApi(31)
   private ListenableFuture<NotificationCompat.Style> getCallStyleTask(
-    ListeningExecutorService lExecutor, NotificationModel notificationModel) {
+    ListeningExecutorService lExecutor, int notificationHasCode) {
     return lExecutor.submit(
       () -> {
         Person caller =
@@ -366,44 +367,60 @@ public class NotificationAndroidStyleModel {
             Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
             .get(20, TimeUnit.SECONDS);
 
-        int callType = mNotificationAndroidStyleBundle.getInt("callType");
+        Bundle callTypeActionsBundle = Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("callTypeActions"));
 
-
-        ArrayList<NotificationAndroidActionModel> actions = notificationModel.getAndroid().getActions();
-        Objects.requireNonNull(actions);
-
-
-        NotificationAndroidActionModel firstAction  = actions.get(0);
-        NotificationAndroidActionModel secondAction  = actions.get(1);
-
-
-        PendingIntent declineOrHangUpIntent = NotificationPendingIntent.createIntent(
-          notificationModel.getHashCode(),
-          firstAction.getPressAction().toBundle(),
-          TYPE_ACTION_PRESS,
-          new String[] {"notification", "pressAction"},
-          notificationModel.toBundle(),
-          firstAction.getPressAction().toBundle());
-        PendingIntent answerIntent =  NotificationPendingIntent.createIntent(
-          notificationModel.getHashCode(),
-          secondAction.getPressAction().toBundle(),
-          TYPE_ACTION_PRESS,
-          new String[] {"notification", "pressAction"},
-          notificationModel.toBundle(),
-          secondAction.getPressAction().toBundle());
+        int callType = callTypeActionsBundle.getInt("callType");
 
         switch (callType) {
-          case 0:
-            return NotificationCompat.CallStyle.forIncomingCall(caller, declineOrHangUpIntent, answerIntent);
-          case 1:
-            return NotificationCompat.CallStyle.forOngoingCall(caller, declineOrHangUpIntent);
-          case 2:
-            return NotificationCompat.CallStyle.forScreeningCall(caller, declineOrHangUpIntent, answerIntent);
+          case 0: {
+            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationHasCode);
+            PendingIntent declineIntent = getDeclineIntent(callTypeActionsBundle, notificationHasCode + 1 );
+
+            return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
+          }
+          case 1: {
+            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationHasCode);
+
+            return NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
+          }
+          case 2: {
+            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationHasCode);
+            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationHasCode + 1);
+
+            return NotificationCompat.CallStyle.forScreeningCall(caller, hangupIntent, answerIntent);
+          }
           default:
             throw new RuntimeException("Invalid callType");
         }
       });
     }
+
+  private static PendingIntent getAnswerIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+    Bundle answerActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("answerAction"));
+    return NotificationPendingIntent.createIntent(
+      notificationHasCode,
+      answerActionBundle.getBundle("pressAction"),
+      TYPE_ACTION_PRESS,
+      new String[] {"notification", "pressAction", "answer"});
+  }
+
+  private static PendingIntent getDeclineIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+    Bundle declineActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("declineAction"));
+    return NotificationPendingIntent.createIntent(
+      notificationHasCode,
+      declineActionBundle.getBundle("pressAction"),
+      TYPE_ACTION_PRESS,
+      new String[]{"notification", "pressAction", "decline"});
+  }
+
+  private static PendingIntent getHangupIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+    Bundle hangUpActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("hangUpAction"));
+    return NotificationPendingIntent.createIntent(
+      notificationHasCode,
+      hangUpActionBundle.getBundle("pressAction"),
+      TYPE_ACTION_PRESS,
+      new String[] {"notification", "pressAction", "hangUp"});
+  }
 
 
 }

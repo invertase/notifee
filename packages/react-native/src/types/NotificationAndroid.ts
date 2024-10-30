@@ -730,6 +730,24 @@ export const enum AndroidCallType {
   SCREENING = 3,
 }
 
+export interface AndroidCallTypeIncoming {
+  callType: AndroidCallType.INCOMING;
+  answerAction: AndroidAction;
+  declineAction: AndroidAction;
+}
+
+export interface AndroidCallTypeOngoing {
+  callType: AndroidCallType.ONGOING;
+  hangUpAction: AndroidAction;
+}
+
+export interface AndroidCallTypeScreening {
+  callType: AndroidCallType.SCREENING;
+  answerAction: AndroidAction;
+  hangUpAction: AndroidAction;
+}
+
+
 /**
  * The interface used when displaying a Phone Style notification.
  *
@@ -751,11 +769,9 @@ export interface AndroidCallStyle {
   person: AndroidPerson;
 
   /**
-   * The type as described by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
+   * The actions displaying the buttons on the notification related to the chosen call type
    */
-  callType: AndroidCallType;
-
-  // TODO maybe add more properties here intent?
+  callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
 
   /**
    * If set, overrides the main notification `title` when the notification is expanded.

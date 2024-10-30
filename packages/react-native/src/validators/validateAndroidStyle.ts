@@ -331,7 +331,11 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
     throw new Error(`'notification.android.style' CallStyle: ${e.message}.`);
   }
 
-  if (!isNumber(style.callType)) {
+  if (!isObject(style.callTypeActions)) {
+    throw new Error("'notification.android.style' CallStyle: 'callTypeActions' an object value.");
+  }
+
+  if (!isNumber(style.callTypeActions.callType)) {
     throw new Error("'callType' expected a number value.");
   }
 
@@ -339,7 +343,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
   const out: AndroidCallStyle = {
     type: AndroidStyle.CALL,
     person,
-    callType: style.callType,
+    callTypeActions: style.callTypeActions,
   };
 
   if (objectHasProperty(style, 'title')) {
