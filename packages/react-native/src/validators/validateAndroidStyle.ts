@@ -320,7 +320,7 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
  */
 export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallStyle {
   if (!isObject(style.person)) {
-    throw new Error("'notification.android.style' MessagingStyle: 'person' an object value.");
+    throw new Error("'notification.android.style' CallStyle: 'person' an object value.");
   }
 
   let person;
@@ -329,35 +329,38 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
   try {
     person = validateAndroidPerson(style.person);
   } catch (e: any) {
-    throw new Error(`'notification.android.style' MessagingStyle: ${e.message}.`);
+    throw new Error(`'notification.android.style' CallStyle: ${e.message}.`);
+  }
+
+  if (!isNumber(style.callType)) {
+    throw new Error("'callType' expected a number value.");
   }
 
   // TODO dprevost add validations here!
   const out: AndroidCallStyle = {
     type: AndroidStyle.CALL,
     person,
-    style: 'incoming' // TODO dprevost!
+    callType: style.callType,
   };
-
 
   if (objectHasProperty(style, 'title')) {
     if (!isString(style.title)) {
       throw new Error(
-        "'notification.android.style' MessagingStyle: 'title' expected a string value.",
+        "'notification.android.style' CallStyle: 'title' expected a string value.",
       );
     }
 
     out.title = style.title;
   }
 
-  if (objectHasProperty(style, 'group')) {
-    if (!isBoolean(style.group)) {
+  if (objectHasProperty(style, 'summary')) {
+    if (!isString(style.summary)) {
       throw new Error(
-        "'notification.android.style' MessagingStyle: 'group' expected a boolean value.",
+        "'notification.android.style' BigTextStyle: 'summary' expected a string value.",
       );
     }
 
-    out.group = style.group;
+    out.summary = style.summary;
   }
 
   return out;

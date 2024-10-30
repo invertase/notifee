@@ -723,6 +723,13 @@ export interface AndroidMessagingStyle {
   group?: boolean;
 }
 
+export const enum AndroidCallType {
+  UNKNOWN = 0,
+  INCOMING = 1,
+  ONGOING = 2,
+  SCREENING = 3,
+}
+
 /**
  * The interface used when displaying a Phone Style notification.
  *
@@ -744,9 +751,9 @@ export interface AndroidCallStyle {
   person: AndroidPerson;
 
   /**
-   * The style as described by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
+   * The type as described by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
    */
-  style: 'incoming' | 'outgoing' | 'screening' | 'unknown';
+  callType: AndroidCallType;
 
   // TODO maybe add more properties here intent?
 
@@ -756,9 +763,9 @@ export interface AndroidCallStyle {
   title?: string;
 
   /**
-   * Sets whether this conversation notification represents a group (3 or more persons).
+   * If set, overrides the main notification `summary` when the notification is expanded.
    */
-  group?: boolean;
+  summary?: string;
 }
 
 /**
