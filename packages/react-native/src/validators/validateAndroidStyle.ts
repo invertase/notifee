@@ -339,32 +339,12 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
     throw new Error("'callType' expected a number value.");
   }
 
-  // TODO dprevost add validations here!
+  // TODO dprevost add all validations here!
   const out: AndroidCallStyle = {
     type: AndroidStyle.CALL,
     person,
     callTypeActions: style.callTypeActions,
   };
-
-  if (objectHasProperty(style, 'title')) {
-    if (!isString(style.title)) {
-      throw new Error(
-        "'notification.android.style' CallStyle: 'title' expected a string value.",
-      );
-    }
-
-    out.title = style.title;
-  }
-
-  if (objectHasProperty(style, 'summary')) {
-    if (!isString(style.summary)) {
-      throw new Error(
-        "'notification.android.style' BigTextStyle: 'summary' expected a string value.",
-      );
-    }
-
-    out.summary = style.summary;
-  }
 
   return out;
 }
