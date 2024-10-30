@@ -17,6 +17,8 @@ package app.notifee.core.model;
  *
  */
 
+import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
+
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
@@ -30,6 +32,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import app.notifee.core.Logger;
+import app.notifee.core.NotificationPendingIntent;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
 import app.notifee.core.utility.TextUtils;
@@ -119,7 +122,7 @@ public class NotificationAndroidStyleModel {
   @SuppressLint("NewApi")
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
-      ListeningExecutorService lExecutor) {
+      ListeningExecutorService lExecutor, NotificationModel notificationModel) {
     int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
     ListenableFuture<NotificationCompat.Style> styleTask = null;
 
@@ -138,7 +141,7 @@ public class NotificationAndroidStyleModel {
         break;
       case 4:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-          styleTask = getCallStyleTask(lExecutor);
+          styleTask = getCallStyleTask(lExecutor, notificationModel);
         }
         break;
     }
@@ -354,7 +357,7 @@ public class NotificationAndroidStyleModel {
    */
   @RequiresApi(31)
   private ListenableFuture<NotificationCompat.Style> getCallStyleTask(
-    ListeningExecutorService lExecutor) {
+    ListeningExecutorService lExecutor, NotificationModel notificationModel) {
     return lExecutor.submit(
       () -> {
         Person caller =
@@ -365,20 +368,42 @@ public class NotificationAndroidStyleModel {
 
         int callType = mNotificationAndroidStyleBundle.getInt("callType");
 
-        PendingIntent declineIntent = null;
-        PendingIntent answerIntent = null;
-        PendingIntent hangUpIntent = null;
+
+        ArrayList<NotificationAndroidActionModel> actions = notificationModel.getAndroid().getActions();
+        Objects.requireNonNull(actions);
+
+
+        NotificationAndroidActionModel firstAction  = actions.get(0);
+        NotificationAndroidActionModel secondAction  = actions.get(1);
+
+
+        PendingIntent declineOrHangUpIntent = NotificationPendingIntent.createIntent(
+          notificationModel.getHashCode(),
+          firstAction.getPressAction().toBundle(),
+          TYPE_ACTION_PRESS,
+          new String[] {"notification", "pressAction"},
+          notificationModel.toBundle(),
+          firstAction.getPressAction().toBundle());
+        PendingIntent answerIntent =  NotificationPendingIntent.createIntent(
+          notificationModel.getHashCode(),
+          secondAction.getPressAction().toBundle(),
+          TYPE_ACTION_PRESS,
+          new String[] {"notification", "pressAction"},
+          notificationModel.toBundle(),
+          secondAction.getPressAction().toBundle());
 
         switch (callType) {
           case 0:
-            return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
+            return NotificationCompat.CallStyle.forIncomingCall(caller, declineOrHangUpIntent, answerIntent);
           case 1:
-            return NotificationCompat.CallStyle.forOngoingCall(caller, hangUpIntent);
+            return NotificationCompat.CallStyle.forOngoingCall(caller, declineOrHangUpIntent);
           case 2:
-            return NotificationCompat.CallStyle.forScreeningCall(caller, hangUpIntent, answerIntent);
+            return NotificationCompat.CallStyle.forScreeningCall(caller, declineOrHangUpIntent, answerIntent);
           default:
             throw new RuntimeException("Invalid callType");
         }
       });
     }
+
+
 }
