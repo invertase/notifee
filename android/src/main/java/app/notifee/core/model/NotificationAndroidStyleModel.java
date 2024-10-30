@@ -18,6 +18,8 @@ package app.notifee.core.model;
  */
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
@@ -181,7 +183,9 @@ public class NotificationAndroidStyleModel {
 
             // largeIcon has been specified to be null for BigPicture
             if (largeIcon == null) {
-              bigPictureStyle.bigLargeIcon(null);
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                bigPictureStyle.bigLargeIcon((Icon) null);
+              }
             }
           }
 
