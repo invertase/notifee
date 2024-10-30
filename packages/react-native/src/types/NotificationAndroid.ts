@@ -772,16 +772,6 @@ export interface AndroidCallStyle {
    * The actions displaying the buttons on the notification related to the chosen call type
    */
   callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
-
-  /**
-   * If set, overrides the main notification `title` when the notification is expanded.
-   */
-  title?: string;
-
-  /**
-   * If set, overrides the main notification `summary` when the notification is expanded.
-   */
-  summary?: string;
 }
 
 /**
