@@ -12,10 +12,8 @@ import {
   AndroidCallStyle,
   AndroidStyle,
   AndroidCallType,
-  AndroidAction,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
-import validateAndroidPressAction from './validateAndroidPressAction';
 import validateAndroidAction from './validateAndroidAction';
 
 /**
@@ -343,28 +341,46 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
     throw new Error("'callType' expected a number value.");
   }
 
-  const out: AndroidCallStyle = {
-    type: AndroidStyle.CALL,
-    person,
-    callTypeActions: style.callTypeActions,
-  };
 
-  switch (out.callTypeActions.callType) {
-    case AndroidCallType.INCOMING:
-      out.callTypeActions.answerAction = validateAndroidAction(out.callTypeActions.answerAction)
-      out.callTypeActions.declineAction = validateAndroidAction(out.callTypeActions.declineAction)
-      break;
-    case AndroidCallType.ONGOING:
 
-      out.callTypeActions.hangUpAction = validateAndroidAction(out.callTypeActions.hangUpAction)
-      break;
-    case AndroidCallType.SCREENING:
-      out.callTypeActions.answerAction = validateAndroidAction(out.callTypeActions.answerAction)
-      out.callTypeActions.hangUpAction = validateAndroidAction(out.callTypeActions.hangUpAction)
-      break;
-    default:
-      throw new Error("'callType' expected a value of 0, 1 or 2.");
+  switch (style.callTypeActions.callType) {
+    case AndroidCallType.INCOMING: {
+      const answerAction = validateAndroidAction(style.callTypeActions.answerAction)
+      const declineAction = validateAndroidAction(style.callTypeActions.declineAction)
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          answerAction,
+          declineAction
+        },
+      };
+    }
+    case AndroidCallType.ONGOING: {
+      const hangUpAction = validateAndroidAction(style.callTypeActions.hangUpAction)
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          hangUpAction
+        },
+      };
+    }
+    case AndroidCallType.SCREENING: {
+      const answerAction = validateAndroidAction(style.callTypeActions.answerAction)
+      const hangUpAction = validateAndroidAction(style.callTypeActions.hangUpAction)
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          answerAction,
+          hangUpAction
+        },
+      };
+    }
+    default: throw new Error("'callType' expected a value of 0, 1 or 2.");
   }
-
-  return out;
 }
