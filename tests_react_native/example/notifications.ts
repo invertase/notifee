@@ -6,10 +6,32 @@ import {
   AndroidImportance,
   AndroidFlags,
   AndroidColor,
-  AndroidCallType,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
+  {
+    key: 'Android Call Style',
+    notification: {
+      title: 'Android Call Style',
+      body: 'You have a call',
+      android: {
+        asForegroundService: true, // CallStyle notifications must either be for a foreground Service or use a fullScreenIntent.
+        channelId: 'default',
+        autoCancel: true,
+        category: AndroidCategory.CALL,
+        importance: AndroidImportance.HIGH,
+        style: {
+          type: AndroidStyle.CALL,
+          person: { name: 'John Doe' },
+          callTypeActions: {
+            callType: 1,
+            answerAction: { title: 'Answer', pressAction: { id: 'answer' } },
+            declineAction: { title: 'Decline', pressAction: { id: 'decline' } },
+          },
+        },
+      },
+    },
+  },
   {
     key: 'Empty',
     notification: {
@@ -343,29 +365,6 @@ export const notifications: { key: string; notification: Notification | Notifica
             },
           },
         ],
-      },
-    },
-  },
-  {
-    key: 'Android Call Style',
-    notification: {
-      title: 'Android Call Style',
-      body: 'You have a call',
-      android: {
-        asForegroundService: true,
-        channelId: 'high',
-        autoCancel: false,
-        category: AndroidCategory.CALL,
-        importance: AndroidImportance.HIGH,
-        style: {
-          type: AndroidStyle.CALL,
-          person: { name: 'John Doe' },
-          callTypeActions: {
-            callType: 1,
-            answerAction: { title: 'Answer', pressAction: { id: 'answer' } },
-            declineAction: { title: 'Decline', pressAction: { id: 'decline' } },
-          },
-        },
       },
     },
   },
