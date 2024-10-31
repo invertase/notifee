@@ -12,9 +12,11 @@ import {
   AndroidCallStyle,
   AndroidStyle,
   AndroidCallType,
+  CallStyleAction,
+  DefaultActionId,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
-import validateAndroidAction from './validateAndroidAction';
+import validateAndroidPressAction from './validateAndroidPressAction';
 
 /**
  * Validates a BigPictureStyle
@@ -345,8 +347,8 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
 
   switch (style.callTypeActions.callType) {
     case AndroidCallType.INCOMING: {
-      const answerAction = validateAndroidAction(style.callTypeActions.answerAction)
-      const declineAction = validateAndroidAction(style.callTypeActions.declineAction)
+      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, DefaultActionId.ANSWER)
+      const declineAction = validateCallStyleAction(style.callTypeActions.declineAction, DefaultActionId.DECLINE)
       return {
         type: AndroidStyle.CALL,
         person,
@@ -358,7 +360,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
       };
     }
     case AndroidCallType.ONGOING: {
-      const hangUpAction = validateAndroidAction(style.callTypeActions.hangUpAction)
+      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, DefaultActionId.HANG_UP)
       return {
         type: AndroidStyle.CALL,
         person,
@@ -369,8 +371,8 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
       };
     }
     case AndroidCallType.SCREENING: {
-      const answerAction = validateAndroidAction(style.callTypeActions.answerAction)
-      const hangUpAction = validateAndroidAction(style.callTypeActions.hangUpAction)
+      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, DefaultActionId.ANSWER)
+      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, DefaultActionId.HANG_UP)
       return {
         type: AndroidStyle.CALL,
         person,
@@ -382,5 +384,15 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
       };
     }
     default: throw new Error("'callType' expected a value of 0, 1 or 2.");
+  }
+}
+
+function validateCallStyleAction(action: CallStyleAction | undefined, defaultPressActionId: string): CallStyleAction {
+  const { pressAction } = (action || { pressAction : { id: defaultPressActionId }});
+  try {
+    const out = validateAndroidPressAction({...pressAction, id: pressAction.id || defaultPressActionId});
+    return { pressAction: out };
+  } catch (e: any) {
+    throw new Error(`'action' ${e.message}.`);
   }
 }

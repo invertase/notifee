@@ -25,8 +25,8 @@ export const notifications: { key: string; notification: Notification | Notifica
           person: { name: 'John Doe' },
           callTypeActions: {
             callType: 1,
-            answerAction: { title: 'Answer', pressAction: { id: 'answer' } },
-            declineAction: { title: 'Decline', pressAction: { id: 'decline' } },
+            answerAction: { pressAction: { id: 'answer' } },
+            declineAction: { pressAction: { id: 'stop' } },
           },
         },
       },
