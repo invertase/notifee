@@ -753,6 +753,17 @@ export interface AndroidMessagingStyleMessage {
   person?: AndroidPerson;
 }
 
+
+export enum DefaultActionId {
+  ANSWER = 'answer',
+  DECLINE = 'decline',
+  HANG_UP = 'hangUp',
+}
+
+export interface CallStyleAction {
+    pressAction: Omit<NotificationPressAction, 'id'> & { id?: string };
+}
+
 export const enum AndroidCallType {
   INCOMING = 1,
   ONGOING = 2,
@@ -761,19 +772,19 @@ export const enum AndroidCallType {
 
 export interface AndroidCallTypeIncoming {
   callType: AndroidCallType.INCOMING;
-  answerAction: AndroidAction;
-  declineAction: AndroidAction;
+  answerAction?: CallStyleAction;
+  declineAction?: CallStyleAction;
 }
 
 export interface AndroidCallTypeOngoing {
   callType: AndroidCallType.ONGOING;
-  hangUpAction: AndroidAction;
+  hangUpAction?: CallStyleAction;
 }
 
 export interface AndroidCallTypeScreening {
   callType: AndroidCallType.SCREENING;
-  answerAction: AndroidAction;
-  hangUpAction: AndroidAction;
+  answerAction?: CallStyleAction;
+  hangUpAction?: CallStyleAction;
 }
 
 /**
