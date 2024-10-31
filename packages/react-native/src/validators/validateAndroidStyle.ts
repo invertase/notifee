@@ -16,6 +16,7 @@ import {
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 import validateAndroidPressAction from './validateAndroidPressAction';
+import validateAndroidAction from './validateAndroidAction';
 
 /**
  * Validates a BigPictureStyle
@@ -367,15 +368,3 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
 
   return out;
 }
-
-function validateAndroidAction(
-  action: AndroidAction,
-): AndroidAction {
-  if (!isString(action.title)) {
-    throw new Error("'title' expected a string value.");
-  }
-
-  action.pressAction = validateAndroidPressAction(action.pressAction)
-
-return action;
-};
