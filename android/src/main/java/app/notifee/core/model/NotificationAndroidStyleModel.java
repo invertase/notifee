@@ -121,7 +121,7 @@ public class NotificationAndroidStyleModel {
 
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
-      ListeningExecutorService lExecutor, int notificationHashCode) {
+      ListeningExecutorService lExecutor, NotificationModel notificationModel) {
     int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
     ListenableFuture<NotificationCompat.Style> styleTask = null;
 
@@ -140,7 +140,7 @@ public class NotificationAndroidStyleModel {
         break;
       case 4:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-          styleTask = getCallStyleTask(lExecutor, notificationHashCode);
+          styleTask = getCallStyleTask(lExecutor, notificationModel);
         }
         break;
     }
@@ -357,7 +357,7 @@ public class NotificationAndroidStyleModel {
    */
   @RequiresApi(31)
   private ListenableFuture<NotificationCompat.Style> getCallStyleTask(
-    ListeningExecutorService lExecutor, int notificationHasCode) {
+    ListeningExecutorService lExecutor, NotificationModel notificationModel) {
     return lExecutor.submit(
       () -> {
         Person caller =
@@ -368,58 +368,54 @@ public class NotificationAndroidStyleModel {
 
         Bundle callTypeActionsBundle = Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("callTypeActions"));
 
-        int callType = callTypeActionsBundle.getInt("callType");
+        int callType = (int) callTypeActionsBundle.getDouble("callType");
 
         switch (callType) {
-          case 0: {
-            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationHasCode);
-            PendingIntent declineIntent = getDeclineIntent(callTypeActionsBundle, notificationHasCode + 1 );
-
+          case 1: {
+            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent declineIntent = getDeclineIntent(callTypeActionsBundle, notificationModel);
             return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
           }
-          case 1: {
-            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationHasCode);
+          case 2: {
+            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationModel);
 
             return NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
           }
-          case 2: {
-            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationHasCode);
-            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationHasCode + 1);
+          case 3: {
+            PendingIntent answerIntent = getAnswerIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent hangupIntent = getHangupIntent(callTypeActionsBundle, notificationModel);
 
             return NotificationCompat.CallStyle.forScreeningCall(caller, hangupIntent, answerIntent);
           }
           default:
-            throw new RuntimeException("Invalid callType");
+            throw new RuntimeException("CallStyleTask: Invalid callType");
         }
       });
     }
 
-  private static PendingIntent getAnswerIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+  private static PendingIntent getAnswerIntent(Bundle callTypeActionsBundle, NotificationModel notificationModel) {
     Bundle answerActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("answerAction"));
-    return NotificationPendingIntent.createIntent(
-      notificationHasCode,
-      answerActionBundle.getBundle("pressAction"),
-      TYPE_ACTION_PRESS,
-      new String[] {"notification", "pressAction", "answer"});
+    return getPendingIntent(answerActionBundle, notificationModel.getHashCode(), notificationModel);
   }
 
-  private static PendingIntent getDeclineIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+  private static PendingIntent getDeclineIntent(Bundle callTypeActionsBundle, NotificationModel notificationModel) {
     Bundle declineActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("declineAction"));
-    return NotificationPendingIntent.createIntent(
-      notificationHasCode,
-      declineActionBundle.getBundle("pressAction"),
-      TYPE_ACTION_PRESS,
-      new String[]{"notification", "pressAction", "decline"});
+    return getPendingIntent(declineActionBundle, notificationModel.getHashCode() + 1, notificationModel);
   }
 
-  private static PendingIntent getHangupIntent(Bundle callTypeActionsBundle, int notificationHasCode) {
+  private static PendingIntent getHangupIntent(Bundle callTypeActionsBundle,  NotificationModel notificationModel) {
     Bundle hangUpActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("hangUpAction"));
-    return NotificationPendingIntent.createIntent(
-      notificationHasCode,
-      hangUpActionBundle.getBundle("pressAction"),
-      TYPE_ACTION_PRESS,
-      new String[] {"notification", "pressAction", "hangUp"});
+    return getPendingIntent(hangUpActionBundle, notificationModel.getHashCode() + 1, notificationModel);
   }
 
-
+  private static PendingIntent getPendingIntent(Bundle hangUpActionBundle, int notificationModel, NotificationModel notificationModel1) {
+    Bundle pressActionBundle = hangUpActionBundle.getBundle("pressAction");
+    return NotificationPendingIntent.createIntent(
+      notificationModel,
+      pressActionBundle,
+      TYPE_ACTION_PRESS,
+      new String[]{"notification", "pressAction"},
+      notificationModel1.toBundle(),
+      pressActionBundle);
+  }
 }

@@ -438,7 +438,7 @@ class NotificationManager {
                   }
 
                   ListenableFuture<NotificationCompat.Style> styleTask =
-                      androidStyleBundle.getStyleTask(LISTENING_CACHED_THREAD_POOL, notificationModel.getHashCode());
+                      androidStyleBundle.getStyleTask(LISTENING_CACHED_THREAD_POOL, notificationModel);
                   if (styleTask == null) {
                     return builder;
                   }
