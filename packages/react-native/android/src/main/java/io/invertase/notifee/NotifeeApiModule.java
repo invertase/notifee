@@ -273,10 +273,17 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
         .setRequestPermissionCallback(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
 
-    activity.requestPermissions(
-        new String[] {Manifest.permission.POST_NOTIFICATIONS},
-        Notifee.REQUEST_CODE_NOTIFICATION_PERMISSION,
-        this);
+    try {
+      activity.requestPermissions(
+          new String[] {Manifest.permission.POST_NOTIFICATIONS},
+          Notifee.REQUEST_CODE_NOTIFICATION_PERMISSION,
+          this);
+    } catch (Exception e) {
+      Logger.d(
+          "requestPermission",
+          "Failed to request POST_NOTIFICATIONS permission: " + e.getMessage());
+      NotifeeReactUtils.promiseResolver(promise, e);
+    }
   }
 
   @ReactMethod
