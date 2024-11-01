@@ -24,9 +24,6 @@ import Notifee, {
   EventType,
   Event,
   AuthorizationStatus,
-  AndroidStyle,
-  // TimestampTrigger,
-  // RepeatFrequency,
 } from '@notifee/react-native';
 
 import { notifications } from './notifications';
