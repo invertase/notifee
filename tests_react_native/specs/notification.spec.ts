@@ -9,6 +9,7 @@ import notifee, {
   TriggerType,
   RepeatFrequency,
   AndroidStyle,
+  AndroidCallType,
 } from '@notifee/react-native';
 import { Platform } from 'react-native';
 
@@ -222,7 +223,7 @@ export function NotificationSpec(spec: TestScope): void {
                 person: { name: 'Joe' },
                 type: AndroidStyle.CALL,
                 callTypeActions: {
-                  callType: 1,
+                  callType: AndroidCallType.INCOMING,
                 },
               },
             },

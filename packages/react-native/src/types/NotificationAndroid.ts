@@ -771,7 +771,7 @@ export interface CallStyleAction {
 /**
  * The possible call types as defined by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
  */
-export const enum AndroidCallType {
+export enum AndroidCallType {
   INCOMING = 1,
   ONGOING = 2,
   SCREENING = 3,

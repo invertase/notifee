@@ -473,7 +473,7 @@ describe('Validate Android Style', () => {
 
       const $ = validateAndroidCallStyle(style);
       expect($.callTypeActions).toEqual({
-        callType: 1,
+        callType: AndroidCallType.INCOMING,
         answerAction: { pressAction: { id: 'answer' } },
         declineAction: { pressAction: { id: 'decline' } },
       });
@@ -526,7 +526,7 @@ describe('Validate Android Style', () => {
       const $ = validateAndroidCallStyle(style);
       expect($.callTypeActions).toEqual({
         answerAction: { pressAction: { id: 'customAnswer' } },
-        callType: 1,
+        callType: AndroidCallType.INCOMING,
         declineAction: { pressAction: { id: 'customDecline' } },
       });
     });
