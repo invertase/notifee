@@ -63,8 +63,8 @@ yarn run:android
 The following package scripts are exported to help you run tests;
 
 - `yarn tests_rn:test` - run Jest tests once and exit.
-- `yarn tests_rn:jest-watch` - run Jest tests in interactive mode and watch for changes.
-- `yarn tests_rn:jest-coverage` - run Jest tests with coverage. Coverage is output to `./coverage`.
+- `yarn tests_rn:test-watch` - run Jest tests in interactive mode and watch for changes.
+- `yarn tests_rn:test-coverage` - run Jest tests with coverage. Coverage is output to `./coverage`.
 
 ### End-to-end Testing
 
