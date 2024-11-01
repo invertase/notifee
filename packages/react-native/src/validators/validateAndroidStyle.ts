@@ -383,7 +383,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
         },
       };
     }
-    default: throw new Error("'callType' expected a value of 0, 1 or 2.");
+    default: throw new Error("'callType' expected a value of 1, 2 or 3.");
   }
 }
 

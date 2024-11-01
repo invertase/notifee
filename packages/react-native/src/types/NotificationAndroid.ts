@@ -764,23 +764,35 @@ export interface CallStyleAction {
     pressAction: Omit<NotificationPressAction, 'id'> & { id?: string };
 }
 
+/**
+ * The possible call types as defined by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
+ */
 export const enum AndroidCallType {
   INCOMING = 1,
   ONGOING = 2,
   SCREENING = 3,
 }
 
+/**
+ * The actions expected with the incoming call type.
+ */
 export interface AndroidCallTypeIncoming {
   callType: AndroidCallType.INCOMING;
   answerAction?: CallStyleAction;
   declineAction?: CallStyleAction;
 }
 
+/**
+ * The actions expected with the ongoing call type.
+ */
 export interface AndroidCallTypeOngoing {
   callType: AndroidCallType.ONGOING;
   hangUpAction?: CallStyleAction;
 }
 
+/**
+ * The actions expected with the screening call type.
+ */
 export interface AndroidCallTypeScreening {
   callType: AndroidCallType.SCREENING;
   answerAction?: CallStyleAction;
