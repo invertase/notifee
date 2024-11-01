@@ -28,7 +28,6 @@ import app.notifee.core.model.NotificationAndroidPressActionModel;
 import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class NotificationPendingIntent {
@@ -194,22 +193,7 @@ public class NotificationPendingIntent {
     return null;
   }
 
-  public static PendingIntent getAnswerIntent(Bundle callTypeActionsBundle, NotificationModel notificationModel) {
-    Bundle answerActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("answerAction"));
-    return getPendingIntent(answerActionBundle, notificationModel.getHashCode(), notificationModel);
-  }
-
-  public static PendingIntent getDeclineIntent(Bundle callTypeActionsBundle, NotificationModel notificationModel) {
-    Bundle declineActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("declineAction"));
-    return getPendingIntent(declineActionBundle, notificationModel.getHashCode() + 1, notificationModel);
-  }
-
-  public static PendingIntent getHangupIntent(Bundle callTypeActionsBundle,  NotificationModel notificationModel) {
-    Bundle hangUpActionBundle = Objects.requireNonNull(callTypeActionsBundle.getBundle("hangUpAction"));
-    return getPendingIntent(hangUpActionBundle, notificationModel.getHashCode() + 1, notificationModel);
-  }
-
-  private static PendingIntent getPendingIntent(Bundle hangUpActionBundle, int notificationModel, NotificationModel notificationModel1) {
+  public static PendingIntent createPendingIntent(Bundle hangUpActionBundle, int notificationModel, NotificationModel notificationModel1) {
     Bundle pressActionBundle = hangUpActionBundle.getBundle("pressAction");
     return NotificationPendingIntent.createIntent(
       notificationModel,

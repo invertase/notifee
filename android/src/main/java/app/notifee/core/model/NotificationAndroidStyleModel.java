@@ -31,6 +31,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
+
+import app.notifee.core.CallStyleNotificationPendingIntent;
 import app.notifee.core.Logger;
 import app.notifee.core.NotificationPendingIntent;
 import app.notifee.core.utility.ObjectUtils;
@@ -372,19 +374,19 @@ public class NotificationAndroidStyleModel {
 
         switch (callType) {
           case INCOMING: {
-            PendingIntent answerIntent = NotificationPendingIntent.getAnswerIntent(callTypeActionsBundle, notificationModel);
-            PendingIntent declineIntent = NotificationPendingIntent.getDeclineIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent answerIntent = CallStyleNotificationPendingIntent.getAnswerIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent declineIntent = CallStyleNotificationPendingIntent.getDeclineIntent(callTypeActionsBundle, notificationModel);
 
             return NotificationCompat.CallStyle.forIncomingCall(caller, declineIntent, answerIntent);
           }
           case ONGOING: {
-            PendingIntent hangupIntent = NotificationPendingIntent.getHangupIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent hangupIntent = CallStyleNotificationPendingIntent.getHangupIntent(callTypeActionsBundle, notificationModel);
 
             return NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
           }
           case SCREENING: {
-            PendingIntent answerIntent = NotificationPendingIntent.getAnswerIntent(callTypeActionsBundle, notificationModel);
-            PendingIntent hangupIntent = NotificationPendingIntent.getHangupIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent answerIntent = CallStyleNotificationPendingIntent.getAnswerIntent(callTypeActionsBundle, notificationModel);
+            PendingIntent hangupIntent = CallStyleNotificationPendingIntent.getHangupIntent(callTypeActionsBundle, notificationModel);
 
             return NotificationCompat.CallStyle.forScreeningCall(caller, hangupIntent, answerIntent);
           }
