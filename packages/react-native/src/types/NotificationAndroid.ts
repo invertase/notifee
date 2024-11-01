@@ -360,7 +360,12 @@ export interface NotificationAndroid {
    * View the [Styles](/react-native/android/styles) documentation to learn more
    * view usage examples.
    **/
-  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle | AndroidCallStyle;
+  style?:
+    | AndroidBigPictureStyle
+    | AndroidBigTextStyle
+    | AndroidInboxStyle
+    | AndroidMessagingStyle
+    | AndroidCallStyle;
 
   /**
    * Text that summarizes this notification for accessibility services. As of the Android L release, this
@@ -753,7 +758,6 @@ export interface AndroidMessagingStyleMessage {
   person?: AndroidPerson;
 }
 
-
 export enum CallTypeActionsDefaultActionId {
   ANSWER = 'answer',
   DECLINE = 'decline',
@@ -761,7 +765,7 @@ export enum CallTypeActionsDefaultActionId {
 }
 
 export interface CallStyleAction {
-    pressAction: Omit<NotificationPressAction, 'id'> & { id?: string };
+  pressAction: Omit<NotificationPressAction, 'id'> & { id?: string };
 }
 
 /**
