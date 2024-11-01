@@ -6,6 +6,7 @@ import {
   AndroidImportance,
   AndroidFlags,
   AndroidColor,
+  AndroidCallType,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
@@ -24,7 +25,7 @@ export const notifications: { key: string; notification: Notification | Notifica
           type: AndroidStyle.CALL,
           person: { name: 'John Doe' },
           callTypeActions: {
-            callType: 1,
+            callType: AndroidCallType.INCOMING,
             declineAction: { pressAction: { id: 'stop' } },
           },
         },
