@@ -17,17 +17,13 @@ package app.notifee.core;
  *
  */
 
-import static app.notifee.core.event.NotificationEvent.TYPE_ACTION_PRESS;
-
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import app.notifee.core.event.MainComponentEvent;
 import app.notifee.core.model.NotificationAndroidPressActionModel;
-import app.notifee.core.model.NotificationModel;
 import app.notifee.core.utility.IntentUtils;
-
 import java.util.UUID;
 
 public class NotificationPendingIntent {
@@ -191,16 +187,5 @@ public class NotificationPendingIntent {
     }
 
     return null;
-  }
-
-  public static PendingIntent createPendingIntent(Bundle hangUpActionBundle, int notificationModel, NotificationModel notificationModel1) {
-    Bundle pressActionBundle = hangUpActionBundle.getBundle("pressAction");
-    return NotificationPendingIntent.createIntent(
-      notificationModel,
-      pressActionBundle,
-      TYPE_ACTION_PRESS,
-      new String[]{"notification", "pressAction"},
-      notificationModel1.toBundle(),
-      pressActionBundle);
   }
 }

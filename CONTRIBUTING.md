@@ -44,7 +44,11 @@ Ensure you have TypeScript compiler running to listen to `react-native` submodul
 yarn build:rn:watch
 ```
 
-## Step 5
+## Testing Code
+
+### Manual testing
+
+To run the example app and do manual testing. Make sure step 3 above is done first!
 
 Run on iOS. Change `--simulator 'iPhone 16'` for you simulator if needed.
 ```bash
@@ -56,7 +60,6 @@ or Android
 yarn run:android
 ```
 
-## Testing Code
 
 ### Unit Testing
 
