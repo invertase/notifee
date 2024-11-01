@@ -754,7 +754,7 @@ export interface AndroidMessagingStyleMessage {
 }
 
 
-export enum DefaultActionId {
+export enum CallTypeActionsDefaultActionId {
   ANSWER = 'answer',
   DECLINE = 'decline',
   HANG_UP = 'hangUp',

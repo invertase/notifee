@@ -13,7 +13,7 @@ import {
   AndroidStyle,
   AndroidCallType,
   CallStyleAction,
-  DefaultActionId,
+  CallTypeActionsDefaultActionId,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
 import validateAndroidPressAction from './validateAndroidPressAction';
@@ -347,8 +347,8 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
 
   switch (style.callTypeActions.callType) {
     case AndroidCallType.INCOMING: {
-      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, DefaultActionId.ANSWER)
-      const declineAction = validateCallStyleAction(style.callTypeActions.declineAction, DefaultActionId.DECLINE)
+      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, CallTypeActionsDefaultActionId.ANSWER)
+      const declineAction = validateCallStyleAction(style.callTypeActions.declineAction, CallTypeActionsDefaultActionId.DECLINE)
       return {
         type: AndroidStyle.CALL,
         person,
@@ -360,7 +360,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
       };
     }
     case AndroidCallType.ONGOING: {
-      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, DefaultActionId.HANG_UP)
+      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, CallTypeActionsDefaultActionId.HANG_UP)
       return {
         type: AndroidStyle.CALL,
         person,
@@ -371,8 +371,8 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
       };
     }
     case AndroidCallType.SCREENING: {
-      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, DefaultActionId.ANSWER)
-      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, DefaultActionId.HANG_UP)
+      const answerAction = validateCallStyleAction(style.callTypeActions.answerAction, CallTypeActionsDefaultActionId.ANSWER)
+      const hangUpAction = validateCallStyleAction(style.callTypeActions.hangUpAction, CallTypeActionsDefaultActionId.HANG_UP)
       return {
         type: AndroidStyle.CALL,
         person,
