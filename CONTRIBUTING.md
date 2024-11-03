@@ -91,6 +91,13 @@ yarn validate:all:js
 yarn validate:all:ts
 ```
 
+Runs auto-formatting
+
+```bash
+yarn format:all
+```
+
+
 ## Publishing
 
 Maintainers with write access to the repo and the npm organization can publish new versions by following the release checklist below.
