@@ -27,13 +27,14 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   private static final int NOTIFICATION_TYPE_DISPLAYED = 1;
   private static final int NOTIFICATION_TYPE_TRIGGER = 2;
   private static final int NOTIFICATION_TYPE_ALL = 0;
+  private static final Notifee notifeeInstance = Notifee.getInstance()
 
   public NotifeeApiModule(@NonNull ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
   public static String getMainComponent(@NonNull String defaultComponent) {
-    return Notifee.getInstance().getMainComponent(defaultComponent);
+    return notifeeInstance.getMainComponent(defaultComponent);
   }
 
   // This method was removed upstream in react-native 0.74+, replaced with invalidate
@@ -52,14 +53,14 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void cancelAllNotifications(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .cancelAllNotifications(
             NOTIFICATION_TYPE_ALL, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void cancelDisplayedNotifications(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .cancelAllNotifications(
             NOTIFICATION_TYPE_DISPLAYED,
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
@@ -67,7 +68,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void cancelTriggerNotifications(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .cancelAllNotifications(
             NOTIFICATION_TYPE_TRIGGER, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
@@ -80,7 +81,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
       ids.add(idsArray.getString(i));
     }
 
-    Notifee.getInstance()
+    notifeeInstance
         .cancelAllNotificationsWithIds(
             notificationType,
             ids,
@@ -90,21 +91,21 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void getDisplayedNotifications(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getDisplayedNotifications(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getTriggerNotifications(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getTriggerNotifications(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getTriggerNotificationIds(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getTriggerNotificationIds(
             (e, aStringList) ->
                 NotifeeReactUtils.promiseStringListResolver(promise, e, aStringList));
@@ -112,7 +113,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void createChannel(ReadableMap channelMap, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .createChannel(
             Arguments.toBundle(channelMap),
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
@@ -125,13 +126,13 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
       channels.add(Arguments.toBundle(channelsArray.getMap(i)));
     }
 
-    Notifee.getInstance()
+    notifeeInstance
         .createChannels(channels, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void createChannelGroup(ReadableMap channelGroupMap, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .createChannelGroup(
             Arguments.toBundle(channelGroupMap),
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
@@ -145,26 +146,26 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
       channelGroups.add(Arguments.toBundle(channelGroupsArray.getMap(i)));
     }
 
-    Notifee.getInstance()
+    notifeeInstance
         .createChannelGroups(
             channelGroups, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void deleteChannel(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .deleteChannel(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void deleteChannelGroup(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .deleteChannelGroup(channelId, (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void displayNotification(ReadableMap notificationMap, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .displayNotification(
             Arguments.toBundle(notificationMap),
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
@@ -172,7 +173,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void openAlarmPermissionSettings(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .openAlarmPermissionSettings(
             getCurrentActivity(), (e, avoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
@@ -180,7 +181,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   @ReactMethod
   public void createTriggerNotification(
       ReadableMap notificationMap, ReadableMap triggerMap, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .createTriggerNotification(
             Arguments.toBundle(notificationMap),
             Arguments.toBundle(triggerMap),
@@ -189,49 +190,49 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void getChannels(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getChannels(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getChannel(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getChannel(
             channelId, (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void getChannelGroups(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getChannelGroups(
             (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
   }
 
   @ReactMethod
   public void getChannelGroup(String channelGroupId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getChannel(
             channelGroupId, (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void isChannelCreated(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .isChannelCreated(
             channelId, (e, aBool) -> NotifeeReactUtils.promiseBooleanResolver(promise, e, aBool));
   }
 
   @ReactMethod
   public void isChannelBlocked(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .isChannelBlocked(
             channelId, (e, aBool) -> NotifeeReactUtils.promiseBooleanResolver(promise, e, aBool));
   }
 
   @ReactMethod
   public void getInitialNotification(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getInitialNotification(
             getCurrentActivity(),
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
@@ -239,7 +240,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void getNotificationSettings(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getNotificationSettings(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
@@ -248,7 +249,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   public void requestPermission(Promise promise) {
     // For Android 12 and below, we return the notification settings
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-      Notifee.getInstance()
+      notifeeInstance
           .getNotificationSettings(
               (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
       return;
@@ -262,14 +263,14 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
           "requestPermission",
           "Unable to get permissionAwareActivity for " + Build.VERSION.SDK_INT);
 
-      Notifee.getInstance()
+      notifeeInstance
           .getNotificationSettings(
               (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
       return;
     }
 
     // Setting the request permission callback before attempting to call requestPermissions
-    Notifee.getInstance()
+    notifeeInstance
         .setRequestPermissionCallback(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
 
@@ -288,7 +289,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void openNotificationSettings(String channelId, Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .openNotificationSettings(
             channelId,
             getCurrentActivity(),
@@ -297,35 +298,35 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
 
   @ReactMethod
   public void openBatteryOptimizationSettings(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .openBatteryOptimizationSettings(
             getCurrentActivity(), (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void isBatteryOptimizationEnabled(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .isBatteryOptimizationEnabled(
             (e, aBool) -> NotifeeReactUtils.promiseBooleanResolver(promise, e, aBool));
   }
 
   @ReactMethod
   public void getPowerManagerInfo(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .getPowerManagerInfo(
             (e, aBundle) -> NotifeeReactUtils.promiseResolver(promise, e, aBundle));
   }
 
   @ReactMethod
   public void openPowerManagerSettings(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .openPowerManagerSettings(
             getCurrentActivity(), (e, avoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
   @ReactMethod
   public void stopForegroundService(Promise promise) {
-    Notifee.getInstance()
+    notifeeInstance
         .stopForegroundService((e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
 
@@ -360,6 +361,6 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   @Override
   public boolean onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
-    return Notifee.getInstance().onRequestPermissionsResult(requestCode, permissions, grantResults);
+    return notifeeInstance.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 }
