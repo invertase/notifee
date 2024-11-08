@@ -5,8 +5,13 @@
 package io.invertase.notifee;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.notification.StatusBarNotification;
+
 import androidx.annotation.NonNull;
 import app.notifee.core.Logger;
 import app.notifee.core.Notifee;
@@ -21,6 +26,7 @@ import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NotifeeApiModule extends ReactContextBaseJavaModule implements PermissionListener {
