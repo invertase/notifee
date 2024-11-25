@@ -22,12 +22,12 @@ yarn add @notifee/react-native
 
 ### 2a. Android API versions
 
-The values of the compileSdkVersion & targetSdkVersion might need to be changed. compileSdkVersion needs to be at least 33. In addition, if your app is going to request permission on Android 13 via requestPermission, targetSdkVersion needs to be at least 33, as well. These setting are in the file `/android/build.gradle`. 
+The values of the compileSdkVersion & targetSdkVersion might need to be changed. compileSdkVersion needs to be at least 34. In addition, if your app is going to request permission on Android 13 via requestPermission, targetSdkVersion needs to be at least 33, as well. These setting are in the file `/android/build.gradle`.
 
 ```gradle
 buildscript {
   ext {
-    compileSdkVersion = 33 // at least 33
+    compileSdkVersion = 34 // at least 34
     targetSdkVersion = 33 // If requesting permission on Android 13 via requestPermission, at least 33 
     ... 
  } 
