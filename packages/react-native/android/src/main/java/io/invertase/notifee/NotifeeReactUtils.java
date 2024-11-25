@@ -118,7 +118,7 @@ class NotifeeReactUtils {
         Method bridgelessEnabled = entryPoint.getMethod("getBridgelessEnabled");
         Object result = bridgelessEnabled.invoke(null);
         if (result == Boolean.TRUE) {
-          Log.d("getReactContext", "We are in bridgeless new architecture mode");
+          Log.d("Notifee::getReactContext", "We are in bridgeless new architecture mode");
           Object reactApplication = EventSubscriber.getContext();
           Method getReactHost = reactApplication.getClass().getMethod("getReactHost");
           Object reactHostInstance = getReactHost.invoke(reactApplication);
@@ -126,22 +126,22 @@ class NotifeeReactUtils {
               reactHostInstance.getClass().getMethod("getCurrentReactContext");
           return (ReactContext) getCurrentReactContext.invoke(reactHostInstance);
         } else {
-          Log.d("getReactContext", "we are NOT in bridgeless new architecture mode");
+          Log.d("Notifee::getReactContext", "we are NOT in bridgeless new architecture mode");
         }
       } catch (Exception e) {
-        Log.d("getReactContext", "New Architecture class load failed. Using fallback.");
+        Log.d("Notifee::getReactContext", "New Architecture class load failed. Using fallback.");
       }
 
-      Log.d("getReactContext", "Determining ReactContext using fallback method");
+      Log.d("Notifee::getReactContext", "Determining ReactContext using fallback method");
       ReactNativeHost reactNativeHost =
           ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
       ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
       return reactInstanceManager.getCurrentReactContext();
     } catch (Exception e) {
-      Log.w("getReactContext", "ReactHost unexpectedly null", e);
+      Log.w("Notifee::getReactContext", "ReactHost unexpectedly null", e);
     }
 
-    Log.w("getReactContext", "Unable to determine ReactContext");
+    Log.w("Notifee::getReactContext", "Unable to determine ReactContext");
     return null;
   }
 
