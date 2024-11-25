@@ -215,7 +215,8 @@ class NotifeeReactUtils {
     try {
       ReactContext reactContext = getReactContext();
 
-      if (reactContext == null || !reactContext.hasActiveCatalystInstance()) {
+      // hasActiveReactInstance method introduced in react-native 0.65 / August 2021
+      if (reactContext == null || !reactContext.hasActiveReactInstance()) {
         return;
       }
 
