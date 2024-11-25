@@ -1,8 +1,16 @@
 -keep class io.invertase.notifee.NotifeeEventSubscriber
 -keep class io.invertase.notifee.NotifeeInitProvider
--keepnames class com.facebook.react.ReactActivity
 -keepnames class io.invertase.notifee.NotifeePackage
 -keepnames class io.invertase.notifee.NotifeeApiModule
+
+# We depend on certain classes to exist under their names for dynamic
+# class-loading to work. We use this to handle new arch / old arch backwards
+# compatibility despite the class names moving around
+-keep class com.facebook.react.defaults.DefaultNewArchitectureEntryPoint { *; }
+-keep class com.facebook.react.ReactApplication { *; }
+-keep class com.facebook.react.ReactHost { *; }
+-keep class * extends com.facebook.react.ReactHost { *; }
+-keepnames class com.facebook.react.ReactActivity
 
 # Preserve all annotations.
 -keepattributes *Annotation*
