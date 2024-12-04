@@ -6,9 +6,32 @@ import {
   AndroidImportance,
   AndroidFlags,
   AndroidColor,
+  AndroidCallType,
 } from '@notifee/react-native';
 
 export const notifications: { key: string; notification: Notification | Notification[] }[] = [
+  {
+    key: 'Android Call Style',
+    notification: {
+      title: 'Android Call Style',
+      body: 'You have a call',
+      android: {
+        asForegroundService: true, // CallStyle notifications must either be for a foreground Service or use a fullScreenIntent.
+        channelId: 'default',
+        autoCancel: true,
+        category: AndroidCategory.CALL,
+        importance: AndroidImportance.HIGH,
+        style: {
+          type: AndroidStyle.CALL,
+          person: { name: 'John Doe' },
+          callTypeActions: {
+            callType: AndroidCallType.INCOMING,
+            declineAction: { pressAction: { id: 'stop' } },
+          },
+        },
+      },
+    },
+  },
   {
     key: 'Empty',
     notification: {

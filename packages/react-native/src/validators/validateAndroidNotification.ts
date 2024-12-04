@@ -39,6 +39,7 @@ import {
 import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
+  validateAndroidCallStyle,
   validateAndroidInboxStyle,
   validateAndroidMessagingStyle,
 } from './validateAndroidStyle';
@@ -617,9 +618,12 @@ export default function validateAndroidNotification(
       case AndroidStyle.MESSAGING:
         out.style = validateAndroidMessagingStyle(android.style);
         break;
+      case AndroidStyle.CALL:
+        out.style = validateAndroidCallStyle(android.style);
+        break;
       default:
         throw new Error(
-          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT, AndroidStyle.INBOX or AndroidStyle.MESSAGING.",
+          "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT, AndroidStyle.INBOX, AndroidStyle.MESSAGING or AndroidStyle.CALL.",
         );
     }
   }

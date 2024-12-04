@@ -9,9 +9,14 @@ import {
   AndroidMessagingStyle,
   AndroidMessagingStyleMessage,
   AndroidPerson,
+  AndroidCallStyle,
   AndroidStyle,
+  AndroidCallType,
+  CallStyleAction,
+  CallTypeActionsDefaultActionId,
 } from '../types/NotificationAndroid';
 import { objectHasProperty, isArray, isBoolean, isNumber, isObject, isString } from '../utils';
+import validateAndroidPressAction from './validateAndroidPressAction';
 
 /**
  * Validates a BigPictureStyle
@@ -312,4 +317,104 @@ export function validateAndroidMessagingStyle(style: AndroidMessagingStyle): And
   }
 
   return out;
+}
+
+/**
+ * Validates a CallStyle
+ */
+export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallStyle {
+  if (!isObject(style.person)) {
+    throw new Error("'notification.android.style' CallStyle: 'person' expected an object value.");
+  }
+
+  let person;
+
+  try {
+    person = validateAndroidPerson(style.person);
+  } catch (e: any) {
+    throw new Error(`'notification.android.style' CallStyle: ${e.message}.`);
+  }
+
+  if (!isObject(style.callTypeActions)) {
+    throw new Error(
+      "'notification.android.style' CallStyle: 'callTypeActions' expected an object value.",
+    );
+  }
+
+  if (!isNumber(style.callTypeActions.callType)) {
+    throw new Error("'callType' expected a number value.");
+  }
+
+  switch (style.callTypeActions.callType) {
+    case AndroidCallType.INCOMING: {
+      const answerAction = validateCallStyleAction(
+        style.callTypeActions.answerAction,
+        CallTypeActionsDefaultActionId.ANSWER,
+      );
+      const declineAction = validateCallStyleAction(
+        style.callTypeActions.declineAction,
+        CallTypeActionsDefaultActionId.DECLINE,
+      );
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          answerAction,
+          declineAction,
+        },
+      };
+    }
+    case AndroidCallType.ONGOING: {
+      const hangUpAction = validateCallStyleAction(
+        style.callTypeActions.hangUpAction,
+        CallTypeActionsDefaultActionId.HANG_UP,
+      );
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          hangUpAction,
+        },
+      };
+    }
+    case AndroidCallType.SCREENING: {
+      const answerAction = validateCallStyleAction(
+        style.callTypeActions.answerAction,
+        CallTypeActionsDefaultActionId.ANSWER,
+      );
+      const hangUpAction = validateCallStyleAction(
+        style.callTypeActions.hangUpAction,
+        CallTypeActionsDefaultActionId.HANG_UP,
+      );
+      return {
+        type: AndroidStyle.CALL,
+        person,
+        callTypeActions: {
+          ...style.callTypeActions,
+          answerAction,
+          hangUpAction,
+        },
+      };
+    }
+    default:
+      throw new Error("'callType' expected a value of 1, 2 or 3.");
+  }
+}
+
+function validateCallStyleAction(
+  action: CallStyleAction | undefined,
+  defaultPressActionId: string,
+): CallStyleAction {
+  const { pressAction } = action || { pressAction: { id: defaultPressActionId } };
+  try {
+    const out = validateAndroidPressAction({
+      ...pressAction,
+      id: pressAction.id || defaultPressActionId,
+    });
+    return { pressAction: out };
+  } catch (e: any) {
+    throw new Error(`'action' ${e.message}.`);
+  }
 }

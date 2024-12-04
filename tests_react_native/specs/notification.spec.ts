@@ -9,6 +9,7 @@ import notifee, {
   TriggerType,
   RepeatFrequency,
   AndroidStyle,
+  AndroidCallType,
 } from '@notifee/react-native';
 import { Platform } from 'react-native';
 
@@ -174,6 +175,67 @@ export function NotificationSpec(spec: TestScope): void {
         });
       },
     );
+
+    spec.it('displays a notification with AndroidStyle.CALL for incoming call', async function () {
+      const testId = 'incoming-test-id';
+
+      if (Platform.OS === 'ios') {
+        return;
+      }
+
+      return new Promise(async (resolve, reject) => {
+        const unsubscribe = notifee.onForegroundEvent(async (event: Event) => {
+          try {
+            expect(event.type).equals(EventType.DELIVERED);
+            expect(event.detail.notification?.id).equals(testId);
+
+            const androidNotification = event.detail.notification?.android;
+
+            if (!androidNotification || !androidNotification.style) {
+              return;
+            }
+
+            expect(androidNotification.style.type).equals(AndroidStyle.CALL);
+
+            if (androidNotification.style.type === AndroidStyle.CALL) {
+              expect(androidNotification.style.callTypeActions.callType).equals(1);
+            }
+
+            unsubscribe();
+            resolve();
+          } catch (e) {
+            unsubscribe();
+            reject(e);
+          } finally {
+            notifee.stopForegroundService();
+          }
+        });
+
+        await notifee
+          .displayNotification({
+            id: testId,
+            title: '',
+            body: '',
+            android: {
+              channelId: 'high',
+              asForegroundService: true,
+              style: {
+                person: { name: 'Joe' },
+                type: AndroidStyle.CALL,
+                callTypeActions: {
+                  callType: AndroidCallType.INCOMING,
+                },
+              },
+            },
+          })
+          .then(id => {
+            expect(id).equals(id);
+          })
+          .catch(e => {
+            reject(e);
+          });
+      });
+    });
 
     spec.describe('displayNotification with pressAction', function () {
       spec.it('displays a notification with a pressAction with id `default`', async function () {

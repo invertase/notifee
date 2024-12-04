@@ -1,6 +1,7 @@
 import {
   validateAndroidBigPictureStyle,
   validateAndroidBigTextStyle,
+  validateAndroidCallStyle,
   validateAndroidInboxStyle,
   validateAndroidMessagingStyle,
   validateAndroidMessagingStyleMessage,
@@ -14,6 +15,8 @@ import {
   AndroidMessagingStyleMessage,
   AndroidPerson,
   AndroidStyle,
+  AndroidCallStyle,
+  AndroidCallType,
 } from '@notifee/react-native/src/types/NotificationAndroid';
 
 const testText = 'test-text';
@@ -454,6 +457,216 @@ describe('Validate Android Style', () => {
 
       expect(() => validateAndroidMessagingStyle(style)).toThrowError(
         "'notification.android.style' MessagingStyle: 'group' expected a boolean value.",
+      );
+    });
+  });
+
+  describe('validateAndroidCallStyle()', () => {
+    test('returns valid minimal incoming style', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+      };
+
+      const $ = validateAndroidCallStyle(style);
+      expect($.callTypeActions).toEqual({
+        callType: AndroidCallType.INCOMING,
+        answerAction: { pressAction: { id: 'answer' } },
+        declineAction: { pressAction: { id: 'decline' } },
+      });
+    });
+
+    test('returns valid ongoing incoming style', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.ONGOING,
+        },
+      };
+
+      const $ = validateAndroidCallStyle(style);
+      expect($.callTypeActions).toEqual({
+        callType: 2,
+        hangUpAction: { pressAction: { id: 'hangUp' } },
+      });
+    });
+
+    test('returns valid ongoing screening style', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.SCREENING,
+        },
+      };
+
+      const $ = validateAndroidCallStyle(style);
+      expect($.callTypeActions).toEqual({
+        callType: 3,
+        answerAction: { pressAction: { id: 'answer' } },
+        hangUpAction: { pressAction: { id: 'hangUp' } },
+      });
+    });
+
+    test('returns valid style with custom pressActionID', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+          answerAction: { pressAction: { id: 'customAnswer' } },
+          declineAction: { pressAction: { id: 'customDecline' } },
+        },
+      };
+
+      const $ = validateAndroidCallStyle(style);
+      expect($.callTypeActions).toEqual({
+        answerAction: { pressAction: { id: 'customAnswer' } },
+        callType: AndroidCallType.INCOMING,
+        declineAction: { pressAction: { id: 'customDecline' } },
+      });
+    });
+
+    test('throws an error with an invalid person', () => {
+      const style: AndroidCallStyle = {
+        person: 'test' as any,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'notification.android.style' CallStyle: 'person' expected an object value.",
+      );
+    });
+
+    test('throws an error with an invalid person name', () => {
+      const style: AndroidCallStyle = {
+        person: {} as AndroidPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'notification.android.style' CallStyle: 'person.name' expected a string value..",
+      );
+    });
+
+    test('throws an error with an invalid integer call type value', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: 0 as AndroidCallType,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'callType' expected a value of 1, 2 or 3.",
+      );
+    });
+
+    test('throws an error with an invalid call type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: 'test' as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'callType' expected a number value.",
+      );
+    });
+
+    test('throws an error with an invalid call type actions', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: 1 as any,
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'notification.android.style' CallStyle: 'callTypeActions' expected an object value.",
+      );
+    });
+
+    test('throws an error with an invalid answer press actions for incoming type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+          answerAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+    test('throws an error with an invalid decline press actions for incoming type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+          declineAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+    test('throws an error with an invalid hangUp press actions for ongoing type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.ONGOING,
+          hangUpAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+    test('throws an error with an invalid answer press actions for Screening type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.SCREENING,
+          answerAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+    test('throws an error with an invalid hangUp press actions for Screening type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.SCREENING,
+          hangUpAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
       );
     });
   });
