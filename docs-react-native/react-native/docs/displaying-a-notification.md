@@ -118,6 +118,10 @@ async function onDisplayNotification() {
     android: {
       channelId,
     },
+  },
+  {
+    type: TriggerType.TIMESTAMP,
+    timestamp: Date.now() + msUntilNotify,
   });
 }
 ```
