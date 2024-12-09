@@ -112,13 +112,18 @@ async function onDisplayNotification() {
 
   // Sometime later...
   await notifee.displayNotification({
-    id: '123',
-    title: 'Updated Notification Title',
-    body: 'Updated main body content of the notification',
-    android: {
-      channelId,
+      id: '123',
+      title: 'Updated Notification Title',
+      body: 'Updated main body content of the notification',
+      android: {
+        channelId,
+      },
     },
-  });
+    {
+      type: TriggerType.TIMESTAMP,
+      timestamp: Date.now() + msUntilNotify,
+    }
+  );
 }
 ```
 
