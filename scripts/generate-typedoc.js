@@ -15,26 +15,38 @@
  *
  */
 
-const { readFileSync, writeFileSync } = require('fs');
+const { promises: fs } = require('fs');
 const path = require('path');
 const { Application, TSConfigReader } = require('typedoc');
 
-const output = path.resolve(process.cwd(), 'docs-react-native', 'typedoc.json');
-const outputMin = path.resolve(process.cwd(), 'docs-react-native', 'typedoc.min.json');
+const cwd = process.cwd();
+const output = path.resolve(cwd, 'docs-react-native', 'typedoc.json');
+const outputMin = path.resolve(cwd, 'docs-react-native', 'typedoc.min.json');
 
 const app = new Application();
 app.options.addReader(new TSConfigReader());
 
-// https://github.com/TypeStrong/typedoc/issues/956
-const { inputFiles } = app.bootstrap({
-  mode: 'file',
-  includeDeclarations: true,
-  excludeExternals: true,
-  exclude: '**/node_modules/**',
-  tsconfig: path.resolve(process.cwd(), 'tsconfig.docs.json'),
-});
+try {
+  // https://github.com/TypeStrong/typedoc/issues/956
+  const { inputFiles } = app.bootstrap({
+    mode: 'file',
+    includeDeclarations: true,
+    excludeExternals: true,
+    exclude: '**/node_modules/**',
+    tsconfig: path.resolve(cwd, 'tsconfig.docs.json'),
+  });
 
-app.generateJson(inputFiles, output);
+  app.generateJson(inputFiles, output);
 
-const sourceJson = readFileSync(output);
-writeFileSync(outputMin, JSON.stringify(JSON.parse(sourceJson)));
+  // Minify the generated JSON
+  fs.readFile(output, 'utf8')
+    .then((data) => {
+      const minifiedJson = JSON.stringify(JSON.parse(data));
+      return fs.writeFile(outputMin, minifiedJson, 'utf8');
+    })
+    .then(() => console.log(`✅ Minified JSON saved at ${outputMin}`))
+    .catch((error) => console.error('Error while processing JSON:', error));
+  
+} catch (error) {
+  console.error('Error occurred while generating documentation:', error.message);
+}
