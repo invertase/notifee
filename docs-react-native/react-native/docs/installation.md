@@ -66,7 +66,6 @@ If, however, you're currently compiling your app for SDK version lower than 33, 
 
 `npx expo install expo-build-properties`
 
-Then, add `@notifee/react-native` to the list of plugins in your app's Expo config (`app.json` or `app.config.js`):
 ```js
 {
   "name": "my app",
