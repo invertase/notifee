@@ -4,52 +4,28 @@
 
 package io.invertase.notifee;
 
+import static io.invertase.notifee.HeadlessTask.getReactContext;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.util.SparseArray;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
 import app.notifee.core.EventSubscriber;
-import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactNativeHost;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.jstasks.HeadlessJsTaskConfig;
-import com.facebook.react.jstasks.HeadlessJsTaskContext;
-import com.facebook.react.jstasks.HeadlessJsTaskEventListener;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.lang.reflect.Method;
 import java.util.List;
 
 class NotifeeReactUtils {
-  private static final SparseArray<GenericCallback> headlessTasks = new SparseArray<>();
-  private static final HeadlessJsTaskEventListener headlessTasksListener =
-      new HeadlessJsTaskEventListener() {
-        @Override
-        public void onHeadlessJsTaskStart(int taskId) {}
-
-        @Override
-        public void onHeadlessJsTaskFinish(int taskId) {
-          synchronized (headlessTasks) {
-            GenericCallback callback = headlessTasks.get(taskId);
-            if (callback != null) {
-              headlessTasks.remove(taskId);
-              callback.call();
-            }
-          }
-        }
-      };
+  public static final HeadlessTask headlessTaskManager = new HeadlessTask();
 
   static void promiseResolver(Promise promise, Exception e, Bundle bundle) {
     if (e != null) {
@@ -106,114 +82,20 @@ class NotifeeReactUtils {
     }
   }
 
-  @SuppressLint("VisibleForTests")
-  private static @Nullable ReactContext getReactContext() {
-    try {
-
-      // Carefully try to load new architecture classes so we preserve backwards compatibility
-      // These symbols are only available in react-native >= 0.73
-      try {
-        Class<?> entryPoint =
-            Class.forName("com.facebook.react.defaults.DefaultNewArchitectureEntryPoint");
-        Method bridgelessEnabled = entryPoint.getMethod("getBridgelessEnabled");
-        Object result = bridgelessEnabled.invoke(null);
-        if (result == Boolean.TRUE) {
-          Log.d("Notifee::getReactContext", "We are in bridgeless new architecture mode");
-          Object reactApplication = EventSubscriber.getContext();
-          Method getReactHost = reactApplication.getClass().getMethod("getReactHost");
-          Object reactHostInstance = getReactHost.invoke(reactApplication);
-          Method getCurrentReactContext =
-              reactHostInstance.getClass().getMethod("getCurrentReactContext");
-          return (ReactContext) getCurrentReactContext.invoke(reactHostInstance);
-        } else {
-          Log.d("Notifee::getReactContext", "we are NOT in bridgeless new architecture mode");
-        }
-      } catch (Exception e) {
-        Log.d("Notifee::getReactContext", "New Architecture class load failed. Using fallback.");
-      }
-
-      Log.d("Notifee::getReactContext", "Determining ReactContext using fallback method");
-      ReactNativeHost reactNativeHost =
-          ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
-      ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
-      return reactInstanceManager.getCurrentReactContext();
-    } catch (Exception e) {
-      Log.w("Notifee::getReactContext", "ReactHost unexpectedly null", e);
-    }
-
-    Log.w("Notifee::getReactContext", "Unable to determine ReactContext");
-    return null;
-  }
-
-  private static void initializeReactContext(GenericCallback callback) {
-    ReactNativeHost reactNativeHost =
-        ((ReactApplication) EventSubscriber.getContext()).getReactNativeHost();
-
-    ReactInstanceManager reactInstanceManager = reactNativeHost.getReactInstanceManager();
-
-    reactInstanceManager.addReactInstanceEventListener(
-        new ReactInstanceManager.ReactInstanceEventListener() {
-          @Override
-          public void onReactContextInitialized(@NonNull final ReactContext reactContext) {
-            reactInstanceManager.removeReactInstanceEventListener(this);
-            new Handler(Looper.getMainLooper()).postDelayed(callback::call, 100);
-          }
-        });
-
-    if (!reactInstanceManager.hasStartedCreatingInitialContext()) {
-      reactInstanceManager.createReactContextInBackground();
-    }
-  }
-
-  static void clearRunningHeadlessTasks() {
-    for (int i = 0; i < headlessTasks.size(); i++) {
-      GenericCallback callback = headlessTasks.valueAt(i);
-      callback.call();
-      headlessTasks.remove(i);
-    }
-  }
-
   static void startHeadlessTask(
       String taskName,
       WritableMap taskData,
       long taskTimeout,
-      @Nullable GenericCallback taskCompletionCallback) {
-    GenericCallback callback =
-        () -> {
-          HeadlessJsTaskContext taskContext = HeadlessJsTaskContext.getInstance(getReactContext());
-          HeadlessJsTaskConfig taskConfig =
-              new HeadlessJsTaskConfig(taskName, taskData, taskTimeout, true);
+      @Nullable HeadlessTask.GenericCallback taskCompletionCallback) {
 
-          synchronized (headlessTasks) {
-            if (headlessTasks.size() == 0) {
-              taskContext.addTaskEventListener(headlessTasksListener);
-            }
-          }
-
-          headlessTasks.put(
-              taskContext.startTask(taskConfig),
-              () -> {
-                synchronized (headlessTasks) {
-                  if (headlessTasks.size() == 0) {
-                    taskContext.removeTaskEventListener(headlessTasksListener);
-                  }
-                }
-                if (taskCompletionCallback != null) {
-                  taskCompletionCallback.call();
-                }
-              });
-        };
-
-    if (getReactContext() == null) {
-      initializeReactContext(callback);
-    } else {
-      callback.call();
-    }
+    HeadlessTask.TaskConfig config =
+        new HeadlessTask.TaskConfig(taskName, taskTimeout, taskData, taskCompletionCallback);
+    headlessTaskManager.startTask(EventSubscriber.getContext(), config);
   }
 
   static void sendEvent(String eventName, WritableMap eventMap) {
     try {
-      ReactContext reactContext = getReactContext();
+      ReactContext reactContext = getReactContext(EventSubscriber.getContext());
 
       if (reactContext == null || !reactContext.hasActiveCatalystInstance()) {
         return;
@@ -229,12 +111,10 @@ class NotifeeReactUtils {
   }
 
   static boolean isAppInForeground() {
-    Boolean isForeground =
-        ProcessLifecycleOwner.get()
-            .getLifecycle()
-            .getCurrentState()
-            .isAtLeast(Lifecycle.State.RESUMED);
-    return isForeground;
+    return ProcessLifecycleOwner.get()
+        .getLifecycle()
+        .getCurrentState()
+        .isAtLeast(Lifecycle.State.RESUMED);
   }
 
   static void hideNotificationDrawer() {
@@ -251,9 +131,5 @@ class NotifeeReactUtils {
     } catch (Exception e) {
       Log.e("HIDE_NOTIF_DRAWER", "", e);
     }
-  }
-
-  interface GenericCallback {
-    void call();
   }
 }

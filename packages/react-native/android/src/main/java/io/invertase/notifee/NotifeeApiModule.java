@@ -47,7 +47,7 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
   // It should be marked @Override but that would cause problems in apps using older react-native
   // When minimum supported version is 0.74+ add @Override & remove onCatalystInstanceDestroy
   public void invalidate() {
-    NotifeeReactUtils.clearRunningHeadlessTasks();
+    NotifeeReactUtils.headlessTaskManager.stopAllTasks();
   }
 
   @ReactMethod
