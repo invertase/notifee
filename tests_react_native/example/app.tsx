@@ -24,6 +24,8 @@ import Notifee, {
   EventType,
   Event,
   AuthorizationStatus,
+  TimestampTrigger,
+  TriggerType,
   // TimestampTrigger,
   // RepeatFrequency,
 } from '@notifee/react-native';
@@ -42,6 +44,12 @@ const colors: { [key: string]: string } = {
 };
 
 const channels: AndroidChannel[] = [
+  {
+    name: 'Scheduled',
+    id: 'high',
+    importance: AndroidImportance.HIGH,
+    // sound: 'hollow',
+  },
   {
     name: 'High Importance',
     id: 'high',
@@ -152,6 +160,31 @@ function Root(): any {
     init().catch(console.error);
   }, []);
 
+  const scheduleNotification = async () => {
+    const trigger: TimestampTrigger = {
+      type: TriggerType.TIMESTAMP,
+      timestamp: new Date(Date.now() + 10000).getTime(),
+    };
+
+    try {
+      await Notifee.createTriggerNotification(
+        {
+          title: 'title',
+          body: 'body',
+          subtitle: 'subtitle',
+          id: 'notifId',
+          android: {
+            channelId: 'Scheduled',
+            badgeCount: 1,
+          },
+        },
+        trigger,
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   async function displayNotification(
     notification: Notification | Notification[],
     channelId: string,
@@ -248,6 +281,10 @@ function Root(): any {
             onPress={async (): Promise<void> => {
               console.log(await Notifee.openAlarmPermissionSettings());
             }}
+          />
+          <Button
+            title={`create trigger notification +15secs from now`}
+            onPress={async (): Promise<void> => scheduleNotification()}
           />
           <Button
             title={`Cancel all `}
