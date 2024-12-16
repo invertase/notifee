@@ -296,12 +296,12 @@ function Root(): any {
             }}
           />
         </View>
-        {notifications.map(({ key, notification }): any => (
-          <View key={key} style={styles.rowItem}>
+        {notifications.map(({ key, notification }, index): any => (
+          <View key={`${key}_${index}`} style={styles.rowItem}>
             <Text style={styles.header}>{key}</Text>
-            <View style={styles.row}>
-              {channels.map(channel => (
-                <View key={channel.id + key} style={styles.rowItem}>
+            <View key={`${key}_row_${index}`} style={styles.row}>
+              {channels.map((channel, subIndex) => (
+                <View key={channel.id + key + index + subIndex} style={styles.rowItem}>
                   <Button
                     title={`>.`}
                     onPress={(): any => displayNotification(notification, channel.id)}
