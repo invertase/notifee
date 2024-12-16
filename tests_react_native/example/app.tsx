@@ -89,16 +89,6 @@ async function onMessage(message: RemoteMessage): Promise<void> {
   // });
 }
 
-async function onBackgroundMessage(message: RemoteMessage): Promise<void> {
-  console.log('onBackgroundMessage New FCM Message', message);
-  // await Notifee.displayNotification({
-  //   title: 'onMessage',
-  //   body: `with message ${message.messageId}`,
-  //   android: { channelId: 'default', tag: 'hello1' },
-  // });
-}
-
-firebase.messaging().setBackgroundMessageHandler(onBackgroundMessage);
 function Root(): any {
   const [id, _] = React.useState<string | null>(null);
 
