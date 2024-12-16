@@ -16,6 +16,8 @@ buildscript {
   }
 }
 
+// This is just a test commit for semantic-release
+
 plugins {
   id "io.invertase.gradle.build" version "1.5"
 }
