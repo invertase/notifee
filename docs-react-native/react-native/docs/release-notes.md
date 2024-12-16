@@ -5,9 +5,13 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## 9.1.4
+
+- fix(android): fix another new architecture issue via elimination of race condition between headlessJS task and react-native background startup that resulted in null ReactContext (#1176)
+
 ## 9.1.3
 
-- fix(android): fix(android): preserve new-arch classnames used in backwards-compat logic (#1149 special credit to @mbpictures)
+- fix(android): preserve new-arch classnames used in backwards-compat logic (#1149 special credit to @mbpictures)
 
 This fixes Notifee when used in react-native 0.76 in new architecture + release mode when
 used in an android background headlessJS context
