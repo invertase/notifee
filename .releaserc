@@ -1,0 +1,40 @@
+{
+  "extends": "./.releaserc.react-native-path-filter.js",
+  "tagFormat": "@notifee/react-native@${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "docs-react-native/react-native/docs/release-notes.md",
+        "changelogTitle": "---\ntitle: Releases\ndescription: Notifee API releases\nnext: /react-native/docs/usage\nprevious: /react-native/docs/installation\n---"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "packages/react-native",
+        "npmPublish": false
+      }
+    ],
+    "@semantic-release/github",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["docs-react-native/react-native/docs/release-notes.md", "packages/react-native/package.json"],
+        "message": "chore(release): ${nextRelease.version} [skip ci] \n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
