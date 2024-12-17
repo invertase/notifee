@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:clean": "rimraf dist && rimraf android/build && rimraf android/app/build && rimraf android/.gradle && rimraf ios/build",
-    "prepare": "patch-package",
+    "prepare": "patch-package || true",
     "send-pn": "node ./sendPushNotification.js"
   },
   "dependencies": {
