@@ -1,6 +1,6 @@
 path = require('path');
 
-const reactNativePaths = ['ios', 'android', 'packages/react-native'];
+const reactNativePaths = ['ios', 'android', 'packages/react-native', 'build_ios_core.sh'];
 
 Object.keys(require.cache)
   .filter(m => path.posix.normalize(m).endsWith('/node_modules/git-log-parser/src/index.js'))
