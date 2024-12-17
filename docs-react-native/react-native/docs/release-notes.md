@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## [9.1.5](https://github.com/invertase/notifee/compare/@notifee/react-native@9.1.4...@notifee/react-native@9.1.5) (2024-12-17)
+
+### Bug Fixes
+
+* **android:** semantic-release test commit ([cf5c7a9](https://github.com/invertase/notifee/commit/cf5c7a9b5b9c14046ffa6e5ea04c54157e9aff42))
+
 ## 9.1.4
 
 - fix(android): fix another new architecture issue via elimination of race condition between headlessJS task and react-native background startup that resulted in null ReactContext (#1176)
