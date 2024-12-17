@@ -34,7 +34,8 @@
       {
         "assets": [
           "docs/react-native/release-notes.mdx",
-          "packages/react-native/package.json"
+          "packages/react-native/package.json",
+          "packages/react-native/android/libs"
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci] \n\n${nextRelease.notes}"
       }
