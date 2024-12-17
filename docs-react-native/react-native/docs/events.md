@@ -87,6 +87,9 @@ Background tasks run without React context, meaning you cannot update your appli
 to update a remote database, update local device storage or even display/update a notification with Notifee! An example
 of a background event would be handling a "Mark as read" action by updating your database and cancelling the notification.
 
+- `notifee.onBackgroundEvent` should be called in `index.js` for receiving events when app was in killed state
+- `notifee.onBackgroundEvent` should be called when application moved to background for receiving events when app was in background state and notification has displayed with `asForegroundService: false`
+
 Only a single background event handler can be registered. To register your handler, the [`onBackgroundEvent`](/react-native/reference/onbackgroundevent)
 method should be registered as early on in your project as possible (e.g. the `index.js` file):
 
@@ -120,6 +123,41 @@ of an [`async function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 returns an implicit Promise once complete. If you are not using `async`, ensure your handler callback returns a promise
 once complete.
 
+When app goes to background notifee.onBackgroundEvent should be called for receiving events in background also
+
+```tsx
+import { useEffect } from 'react'
+import { AppState, AppStateStatus } from 'react-native'
+import notifee, { EventType } from '@notifee/react-native';
+
+
+function App() {
+  useEffect(() => {
+    const onChange = (newState: AppStateStatus) => {
+      if(newState === 'background') {
+        // Subscribe to events when app goes to background
+        notifee.onBackgroundEvent(({ type, detail }) => {
+          switch (type) {
+            case EventType.DISMISSED:
+              console.log('User dismissed notification', detail.notification);
+              break;
+            case EventType.PRESS:
+              console.log('User pressed notification', detail.notification);
+              break;
+          }
+          return Promise.resolve()
+        });
+      }
+    }
+    const subscription = AppState.addEventListener('change', onChange)
+    return () => {
+      if (typeof subscription?.remove === 'function') {
+        subscription.remove()
+      }
+    }
+  }, []);
+}
+```
 > Please note, for iOS, the `DELIVERED` event is not fired for trigger notifications when the app is in the background.
 
 # App open events
