@@ -3,6 +3,43 @@ title: Releases
 description: Notifee API releases
 ---
 
+## [9.1.6](https://github.com/invertase/notifee/compare/@notifee/react-native@9.1.5...@notifee/react-native@9.1.6) (2024-12-17)
+
+### Bug Fixes
+
+* **android:** remove semantic-release test commit ([0b4ecdf](https://github.com/invertase/notifee/commit/0b4ecdf30f7336f4bcfb8b25a07b0044a2943504))
+
+## [9.1.5](https://github.com/invertase/notifee/compare/@notifee/react-native@9.1.4...@notifee/react-native@9.1.5) (2024-12-17)
+
+### Bug Fixes
+
+* **android:** semantic-release test commit ([cf5c7a9](https://github.com/invertase/notifee/commit/cf5c7a9b5b9c14046ffa6e5ea04c54157e9aff42))
+
+## 9.1.4
+
+- fix(android): fix another new architecture issue via elimination of race condition between headlessJS task and react-native background startup that resulted in null ReactContext (#1176)
+
+## 9.1.3
+
+- fix(android): preserve new-arch classnames used in backwards-compat logic (#1149 special credit to @mbpictures)
+
+This fixes Notifee when used in react-native 0.76 in new architecture + release mode when
+used in an android background headlessJS context
+
+## 9.1.2
+
+This the minimum version that supports upcoming react-native 0.76 by default.
+
+Older notifee versions will only work if you disable disable New Architecture / disable bridgless mode
+
+- fix(android): forward-port getReactContext to new arch bridgeless mode (#1127 Thanks @Eclipses-Saros!)
+- fix(jest): add missing createChannels method to official mock definitions (#1123)
+- docs(android): clarify foregroundServiceType AndroidManifest example
+
+## 9.1.1
+
+- fix(android): add guava transitive dep to module deps (#1116)
+
 ## 9.1.0
 
 Notifee no longer uses the GMS libraries and thus should be compatible
