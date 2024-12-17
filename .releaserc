@@ -17,8 +17,8 @@
     [
       "@semantic-release/changelog",
       {
-        "changelogFile": "docs-react-native/react-native/docs/release-notes.md",
-        "changelogTitle": "---\ntitle: Releases\ndescription: Notifee API releases\nnext: /react-native/docs/usage\nprevious: /react-native/docs/installation\n---"
+        "changelogFile": "docs/react-native/release-notes.mdx",
+        "changelogTitle": "---\ntitle: Releases\ndescription: Notifee API releases\n---"
       }
     ],
     [
@@ -33,7 +33,7 @@
       "@semantic-release/git",
       {
         "assets": [
-          "docs-react-native/react-native/docs/release-notes.md",
+          "docs/react-native/release-notes.mdx",
           "packages/react-native/package.json"
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci] \n\n${nextRelease.notes}"
