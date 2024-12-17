@@ -10,7 +10,7 @@ permissions:
 jobs:
   publish:
     name: Publish
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
@@ -24,7 +24,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
+          node-version: 20
+      - name: Configure JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
 
       # semantic-release uses npm to do final prepare + package + publish
       # npm will not tolerate node_modules directories installed via yarn
