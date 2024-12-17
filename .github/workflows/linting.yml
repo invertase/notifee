@@ -23,7 +23,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Configure JDK
         uses: actions/setup-java@v4
         with:
@@ -64,7 +64,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Set workflow variables
         id: workflow-variables
         run: |
@@ -98,7 +98,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Set workflow variables
         id: workflow-variables
         run: |
