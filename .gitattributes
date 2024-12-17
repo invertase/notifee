@@ -1,4 +1,4 @@
 *.xcodeproj binary
 *.xcworkspace binary
-docs-react-native/typedoc.json merge=theirs linguist-vendored
-docs-react-native/typedoc.min.json merge=theirs linguist-vendored
+docs/typedoc.json merge=theirs linguist-vendored
+docs/typedoc.min.json merge=theirs linguist-vendored

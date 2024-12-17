@@ -17,7 +17,7 @@ const config = {
     blocklist: exclusionList([
       /.*\/__fixtures__\/.*/,
       /.*\/template\/project\/node_modules\/react-native\/.*/,
-      new RegExp(`^${escape(resolve(rootDir, 'docs-react-native'))}\\/.*$`),
+      new RegExp(`^${escape(resolve(rootDir, 'docs'))}\\/.*$`),
       new RegExp(`^${escape(resolve(rootDir, 'tests_react_native/ios'))}\\/.*$`),
       new RegExp(`^${escape(resolve(rootDir, 'tests_react_native/e2e'))}\\/.*$`),
       new RegExp(`^${escape(resolve(rootDir, 'tests_react_native/android'))}\\/.*$`),

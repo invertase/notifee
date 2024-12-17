@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - 'docs-react-native/**'
+      - 'docs/**'
       - '**/*.md'
   push:
     branches:
       - main
     paths-ignore:
-      - 'docs-react-native/**'
+      - 'docs/**'
       - '**/*.md'
 
 concurrency:

@@ -36,7 +36,7 @@
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:link": "lerna link && lerna exec -- yarn link",
     "lerna:clean": "lerna clean",
-    "gen:reference": "rimraf docs-react-native/typedoc.json docs-react-native/typedoc.min.json && node scripts/generate-typedoc.js",
+    "gen:reference": "rimraf docs/typedoc.json docs/typedoc.min.json && node scripts/generate-typedoc.js",
     "test:all": "yarn test:core:android && yarn tests_rn:test && yarn tests_rn:android:test && yarn tests_rn:ios:test",
     "test:core:android": "cd android && ./gradlew testDebugUnit",
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
