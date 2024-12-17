@@ -5,6 +5,12 @@ next: /react-native/docs/usage
 previous: /react-native/docs/installation
 ---
 
+## [9.1.6](https://github.com/invertase/notifee/compare/@notifee/react-native@9.1.5...@notifee/react-native@9.1.6) (2024-12-17)
+
+### Bug Fixes
+
+* **android:** remove semantic-release test commit ([0b4ecdf](https://github.com/invertase/notifee/commit/0b4ecdf30f7336f4bcfb8b25a07b0044a2943504))
+
 ## [9.1.5](https://github.com/invertase/notifee/compare/@notifee/react-native@9.1.4...@notifee/react-native@9.1.5) (2024-12-17)
 
 ### Bug Fixes
