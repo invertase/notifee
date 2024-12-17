@@ -1,3 +1,0 @@
----
-redirect: /docs/android/introduction
----
