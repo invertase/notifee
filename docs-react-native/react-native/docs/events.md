@@ -92,22 +92,33 @@ method should be registered as early on in your project as possible (e.g. the `i
 
 ```js
 // index.js
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Linking } from 'react-native';
 import notifee, { EventType } from '@notifee/react-native';
 import App from './App';
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
   const { notification, pressAction } = detail;
-
+  const actionId = pressAction.id
   // Check if the user pressed the "Mark as read" action
-  if (type === EventType.ACTION_PRESS && pressAction.id === 'mark-as-read') {
-    // Update external API
-    await fetch(`https://my-api.com/chat/${notification.data.chatId}/read`, {
-      method: 'POST',
-    });
+  if (type === EventType.ACTION_PRESS) {
+    if (actionId === 'mark-as-read') {
+      // Update external API
+      await fetch(`https://my-api.com/chat/${notification.data.chatId}/read`, {
+        method: 'POST',
+      });
+  
+      // Remove the notification
+      await notifee.cancelNotification(notification.id);
+    }
 
-    // Remove the notification
-    await notifee.cancelNotification(notification.id);
+    // you might want to open application and navigate to a specific screen
+    // deeplink will does this for you
+    const notificationId = notification?.data?.notificationId
+    let url = 'myapp://'
+    if (notificationId) {
+      url += `notifications/${notificationId}`
+    }
+    await Linking.openURL(url);
   }
 });
 
