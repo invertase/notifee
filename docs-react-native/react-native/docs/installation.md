@@ -28,10 +28,10 @@ The values of the compileSdkVersion & targetSdkVersion might need to be changed.
 buildscript {
   ext {
     compileSdkVersion = 34 // at least 34
-    targetSdkVersion = 33 // If requesting permission on Android 13 via requestPermission, at least 33 
-    ... 
- } 
- ... 
+    targetSdkVersion = 33 // If requesting permission on Android 13 via requestPermission, at least 33
+    ...
+ }
+ ...
 }
 ```
 
@@ -60,7 +60,7 @@ npx react-native run-android
 
 ### Expo Support
 
-To be able to run Notifee, it is necessary to compile your Android app with `compileSdkVersion` of 33. As of Expo SDK 48, this is a default, so unless you're overriding the `compileSdkVersion`, there's no additional actions you need to take. 
+To be able to run Notifee, it is necessary to compile your Android app with `compileSdkVersion` of 33. As of Expo SDK 48, this is a default, so unless you're overriding the `compileSdkVersion`, there's no additional actions you need to take.
 
 If, however, you're currently compiling your app for SDK version lower than 33, please utilize the `expo-build-properties` config plugin to bump the `compileSdkVersion` to 33. First, install `expo-build-properties`:
 
@@ -76,13 +76,35 @@ Then, add `@notifee/react-native` to the list of plugins in your app's Expo conf
         {
           "android": {
             "compileSdkVersion": 33,
-            "targetSdkVersion": 33 // Only needed if requesting permission on Android 13 via requestPermission, at least 33 
+            "targetSdkVersion": 33 // Only needed if requesting permission on Android 13 via requestPermission, at least 33
           },
         },
       ],
   ]
 }
 ```
+
+### Important: Maven Repository Configuration
+
+When using Notifee with Expo, you may encounter dependency resolution errors related to `app.notifee:core`. To resolve this, you need to configure the Maven repository path in your app's Expo config. Add this to your `app.config.js` or `app.json`:
+
+```js
+{
+  "name": "my app",
+  "plugins": [
+    ["@notifee/react-native"],
+    [
+      "expo-build-properties",
+      {
+        "android": {
+          "compileSdkVersion": 33,
+          "targetSdkVersion": 33,
+          "extraMavenRepos": ["../../node_modules/@notifee/react-native/android/libs"]
+        },
+      },
+    ],
+  ]
+}
 
 Finally, ensure you run `npx expo prebuild` and rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
 
