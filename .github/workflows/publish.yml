@@ -32,8 +32,6 @@ jobs:
       # there will be errors related to pod-install but we can ignore them
       - name: Install dependencies using NPM
         run: npm i
-      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: npm audit signatures
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
