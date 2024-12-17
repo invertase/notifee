@@ -5,12 +5,13 @@ on:
   pull_request:
     paths:
       - '.github/workflows/*.yml'
+      - 'docs/**'
       - 'android/**'
   push:
     branches:
       - main
     paths-ignore:
-      - 'docs-react-native/**'
+      - 'docs/**'
       - '**/*.md'
 
 concurrency:
