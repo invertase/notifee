@@ -33,7 +33,7 @@
       "@semantic-release/git",
       {
         "assets": [
-          "docs/react-native/release-notes.mdx",
+          "docs/react-native/",
           "packages/react-native/package.json",
           "packages/react-native/android/libs"
         ],
