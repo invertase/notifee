@@ -15,7 +15,7 @@ import { WebNotificationSettings } from './NotificationWeb';
 /**
  * Interface for building a local notification for both Android & iOS devices.
  *
- * To learn more about displaying a notification, view the [Displaying a Notification](/react-native/docs/displaying-a-notification)
+ * To learn more about displaying a notification, view the [Displaying a Notification](/react-native/displaying-a-notification)
  * documentation.
  *
  */
@@ -85,7 +85,7 @@ export interface Notification {
 /**
  * An interface representing a notification & action that launched the current app / or Android activity.
  *
- * View the [App open events](/react-native/docs/events#app-open-events) documentation to learn more.
+ * View the [App open events](/react-native/events#app-open-events) documentation to learn more.
  *
  * This interface is returned from [`getInitialNotification`](/react-native/reference/getinitialnotification) when
  * an initial notification is available.
@@ -163,7 +163,7 @@ export interface TriggerNotification {
 /**
  * An interface representing a Notifee event.
  *
- * View the [Events](/react-native/docs/events) documentation to learn more about foreground and
+ * View the [Events](/react-native/events) documentation to learn more about foreground and
  * background events.
  */
 export interface Event {
@@ -183,7 +183,7 @@ export interface Event {
  *
  * The task must resolve a promise once complete, and in turn removes the notification.
  *
- * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation to
+ * View the [Foreground Service](/react-native/android/foreground-service) documentation to
  * learn more.
  *
  * @platform android
@@ -215,7 +215,7 @@ export interface NotificationPressAction {
    * This property can be used in advanced scenarios to launch a custom Android Activity when the user
    * performs a press action.
    *
-   * View the [Android Interaction](/react-native/docs/android/interaction) docs to learn more.
+   * View the [Android Interaction](/react-native/android/interaction) docs to learn more.
    *
    * @platform android
    */
@@ -236,7 +236,7 @@ export interface NotificationPressAction {
    * This property can be used to open a custom React component when the user performs a press action.
    * For this to correctly function on Android, a minor native code change is required.
    *
-   * View the [Press Action](/react-native/docs/android/interaction#press-action) document to learn more.
+   * View the [Press Action](/react-native/android/interaction#press-action) document to learn more.
    *
    * @platform android
    */
@@ -256,7 +256,7 @@ export interface NotificationPressAction {
  * <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
  * ```
  *
- * Please see the [FullScreen Action](/react-native/docs/android/behaviour#full-screen) document to learn more.
+ * Please see the [FullScreen Action](/react-native/android/behaviour#full-screen) document to learn more.
  */
 export interface NotificationFullScreenAction {
   /**
@@ -273,7 +273,7 @@ export interface NotificationFullScreenAction {
    * This property can be used in advanced scenarios to launch a custom Android Activity when the user
    * performs a full-screen action.
    *
-   * View the [Android Full Screen](/react-native/docs/android/behaviour#full-screen) docs to learn more.
+   * View the [Android Full Screen](/react-native/android/behaviour#full-screen) docs to learn more.
    *
    * @platform android
    */
@@ -294,7 +294,7 @@ export interface NotificationFullScreenAction {
    * This property can be used to open a custom React component when the notification is displayed.
    * For this to correctly function on Android, a minor native code change is required.
    *
-   * View the [Full-screen Action](/react-native/docs/android/behaviour#full-screen) document to learn more.
+   * View the [Full-screen Action](/react-native/android/behaviour#full-screen) document to learn more.
    *
    * @platform android
    */
@@ -304,7 +304,7 @@ export interface NotificationFullScreenAction {
 /**
  * An enum representing an event type, defined on [`Event`](/react-native/reference/event).
  *
- * View the [Events](/react-native/docs/events) documentation to learn more about foreground and
+ * View the [Events](/react-native/events) documentation to learn more about foreground and
  * background events.
  */
 export enum EventType {
@@ -387,7 +387,7 @@ export enum EventType {
 /**
  * An interface representing the different detail values which can be provided with a notification event.
  *
- * View the [Events](/react-native/docs/events) documentation to learn more.
+ * View the [Events](/react-native/events) documentation to learn more.
  */
 export interface EventDetail {
   /**

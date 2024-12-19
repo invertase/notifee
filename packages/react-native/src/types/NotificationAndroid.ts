@@ -7,7 +7,7 @@ import { NotificationPressAction, NotificationFullScreenAction } from './Notific
 /**
  * The interface for Android specific options which are applied to a notification.
  *
- * To learn more about Android notifications, view the [Android](/react-native/docs/android/introduction)
+ * To learn more about Android notifications, view the [Android](/react-native/android/introduction)
  * documentation for full examples and usage.
  *
  * @platform android
@@ -19,7 +19,7 @@ export interface NotificationAndroid {
    * Adds quick actions to a notification. Quick Actions enable users to interact with your application
    * directly from the notification body, providing an overall greater user experience.
    *
-   * View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation for more information.
+   * View the [Quick Actions](/react-native/android/interaction#quick-actions) documentation for more information.
    */
   actions?: AndroidAction[];
 
@@ -33,7 +33,7 @@ export interface NotificationAndroid {
    * Ensure a foreground service runner function has been provided to `registerForegroundService`.
    * Without one, the notification will not be displayed.
    *
-   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+   * View the [Foreground Service](/react-native/android/foreground-service) documentation for more information.
    *
    * Defaults to `false`.
    */
@@ -71,7 +71,7 @@ export interface NotificationAndroid {
   /**
    * Sets the type of badge used when the notification is being displayed in badge mode.
    *
-   * View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information
+   * View the [Badges](/react-native/android/appearance#badges) documentation for more information
    * and usage examples.
    *
    * Defaults to `AndroidBadgeIconType.LARGE`.
@@ -92,7 +92,7 @@ export interface NotificationAndroid {
    * Specifies the `AndroidChannel` which the notification will be delivered on.
    *
    * On Android 8.0 (API 26) the channel ID is required. Providing a invalid channel ID will throw
-   * an error. View the [Channels & Groups](/react-native/docs/android/channels) documentation for
+   * an error. View the [Channels & Groups](/react-native/android/channels) documentation for
    * more information and usage examples.
    */
   channelId?: string;
@@ -103,7 +103,7 @@ export interface NotificationAndroid {
    *
    * The color can be a predefined system `AndroidColor` or [hexadecimal](https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4).
    *
-   * View the [Color](/react-native/docs/android/appearance#color) documentation for more information.
+   * View the [Color](/react-native/android/appearance#color) documentation for more information.
    */
   color?: AndroidColor | string;
 
@@ -115,7 +115,7 @@ export interface NotificationAndroid {
    * This should only be used for high priority ongoing tasks like navigation, an ongoing call,
    * or other similarly high-priority events for the user.
    *
-   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+   * View the [Foreground Service](/react-native/android/foreground-service) documentation for more information.
    *
    * Defaults to `false`.
    */
@@ -148,7 +148,7 @@ export interface NotificationAndroid {
    *
    * On some devices, the system may automatically group notifications.
    *
-   * View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) documentation to
+   * View the [Android Grouping & Sorting guide](/react-native/android/grouping-and-sorting) documentation to
    * learn more.
    */
   groupId?: string;
@@ -160,7 +160,7 @@ export interface NotificationAndroid {
    * you want to mute. For example, if you want only the summary of your group to make noise, all
    * children in the group should have the group alert behavior `AndroidGroupAlertBehavior.SUMMARY`.
    *
-   * View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour)
+   * View the [Android Grouping & Sorting guide](/react-native/android/grouping-and-sorting#group-behaviour)
    * documentation to learn more.
    */
   groupAlertBehavior?: AndroidGroupAlertBehavior;
@@ -190,7 +190,7 @@ export interface NotificationAndroid {
    *
    * Sets a large icon on the notification.
    *
-   * View the [Android Appearance](/react-native/docs/android/appearance#large-icons) documentation to learn
+   * View the [Android Appearance](/react-native/android/appearance#large-icons) documentation to learn
    * more about this property.
    */
   largeIcon?: string | number | object;
@@ -211,7 +211,7 @@ export interface NotificationAndroid {
    * along with the number of milliseconds to show the light, and the number of milliseconds to
    * turn off the light. The light frequency pattern is repeated.
    *
-   * View the [Lights](/react-native/docs/android/behaviour#lights) documentation for more information.
+   * View the [Lights](/react-native/android/behaviour#lights) documentation for more information.
    */
   lights?: [AndroidColor | string, number, number];
 
@@ -234,7 +234,7 @@ export interface NotificationAndroid {
    * - Ongoing notifications are sorted above the regular notifications in the notification panel.
    * - Ongoing notifications do not have an 'X' close button, and are not affected by the "Clear all" button.
    *
-   * View the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.
+   * View the [Ongoing](/react-native/android/behaviour#ongoing) documentation for more information.
    */
   ongoing?: boolean;
 
@@ -266,7 +266,7 @@ export interface NotificationAndroid {
    * `pressAction` property allows you to set what happens when a user presses
    * the notification.
    *
-   * View the [Interaction](/react-native/docs/android/interaction) documentation to learn
+   * View the [Interaction](/react-native/android/interaction) documentation to learn
    * more.
    */
   pressAction?: NotificationPressAction;
@@ -275,7 +275,7 @@ export interface NotificationAndroid {
    * The `fullScreenAction` property allows you to show a custom UI
    * in full screen when the notification is displayed.
    *
-   * View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen) documentation to learn
+   * View the [FullScreenAction](/react-native/android/behaviour#full-screen) documentation to learn
    * more.
    */
   fullScreenAction?: NotificationFullScreenAction;
@@ -298,7 +298,7 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidImportance.DEFAULT`.
    *
-   * View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
+   * View the [Appearance](/react-native/android/appearance#importance) documentation to learn
    * more.
    *
    * @platform android API Level < 26
@@ -309,7 +309,7 @@ export interface NotificationAndroid {
    * A notification can show current progress of a task. The progress state can either be fixed or
    * indeterminate (unknown).
    *
-   * View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation
+   * View the [Progress Indicators](/react-native/android/progress-indicators) documentation
    * to learn more.
    */
   progress?: AndroidProgress;
@@ -322,14 +322,14 @@ export interface NotificationAndroid {
    *
    * If no `timestamp` is set, this field has no effect.
    *
-   * View the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.
+   * View the [Timestamps](/react-native/android/timers#timestamps) documentation to learn more.
    */
   showTimestamp?: boolean;
 
   /**
    * The small icon to show in the heads-up notification.
    *
-   * View the [Icons](/react-native/docs/android/appearance#small-icons) documentation to learn
+   * View the [Icons](/react-native/android/appearance#small-icons) documentation to learn
    * more.
    */
   smallIcon?: string;
@@ -347,7 +347,7 @@ export interface NotificationAndroid {
    *
    * If a `groupId` has been set, the sort key can also be used to order members of a notification group.
    *
-   * View the [Android Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#sorting)
+   * View the [Android Grouping & Sorting](/react-native/android/grouping-and-sorting#sorting)
    * documentation to learn more.
    */
   sortKey?: string;
@@ -357,7 +357,7 @@ export interface NotificationAndroid {
    *
    * Android supports different styles, however only one can be used with a notification.
    *
-   * View the [Styles](/react-native/docs/android/styles) documentation to learn more
+   * View the [Styles](/react-native/android/styles) documentation to learn more
    * view usage examples.
    **/
   style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
@@ -385,14 +385,14 @@ export interface NotificationAndroid {
    *
    * Defaults to `false`.
    *
-   * View the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.
+   * View the [Timers](/react-native/android/timers#timers) documentation to learn more.
    */
   showChronometer?: boolean;
 
   /**
    * Sets the vibration pattern the notification uses when displayed. Must be an even amount of numbers.
    *
-   * View the [Vibration](/react-native/docs/android/behaviour#vibration) documentation to learn more.
+   * View the [Vibration](/react-native/android/behaviour#vibration) documentation to learn more.
    */
   vibrationPattern?: number[];
 
@@ -402,7 +402,7 @@ export interface NotificationAndroid {
    *
    * Defaults to `AndroidVisibility.PRIVATE`.
    *
-   * View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn
+   * View the [Visibility](/react-native/android/appearance#visibility) documentation to learn
    * more.
    */
   visibility?: AndroidVisibility;
@@ -423,7 +423,7 @@ export interface NotificationAndroid {
    * - Use with `showTimestamp` to show the timestamp to the users.
    * - Use with `showChronometer` to create a on-going timer.
    *
-   * View the [Timers](/react-native/docs/android/timers) documentation to learn more.
+   * View the [Timers](/react-native/android/timers) documentation to learn more.
    */
   timestamp?: number;
 
@@ -435,7 +435,7 @@ export interface NotificationAndroid {
    * This setting has no behaviour on Android after API level version 26, instead you can set the
    * sound on the notification channels.
    *
-   * View the [Sound](/react-native/docs/android/behaviour#sound) documentation for more information.
+   * View the [Sound](/react-native/android/behaviour#sound) documentation for more information.
    *
    * @platform android API Level < 26
    */
@@ -448,7 +448,7 @@ export interface NotificationAndroid {
  * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
  * and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
  *
- * View the [Permissions](/react-native/docs/android/permissions) documentation to learn more.
+ * View the [Permissions](/react-native/android/permissions) documentation to learn more.
  *
  * @platform android
  */
@@ -477,7 +477,7 @@ export interface AndroidNotificationSettings {
    *
    * For Android < 12 / API < 31, this will default to true
    *
-   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   * View the [Trigger](/react-native/android/triggers#android-12-limitations) documentation for more information.
    */
   alarm: AndroidNotificationSetting;
 }
@@ -489,7 +489,7 @@ export interface AndroidNotificationSettings {
  * within your application. When an action completes (e.g. pressing an action, or filling out an input
  * box) an event is sent.
  *
- * View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
+ * View the [Quick Actions](/react-native/android/interaction#quick-actions) documentation to learn more.
  *
  * @platform android
  */
@@ -499,7 +499,7 @@ export interface AndroidAction {
    *
    * Note; unlike the `pressAction` in the notification body, an action does not need to open the application
    * and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
-   * or [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
+   * or [Quick Actions](/react-native/android/interaction#quick-actions) documentation to learn more.
    */
   pressAction: NotificationPressAction;
 
@@ -521,7 +521,7 @@ export interface AndroidAction {
    * If `true`, the user will be able to provide free text input when the action is pressed. This
    * property can be further configured for advanced inputs.
    *
-   * View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to
+   * View the [Action Input](/react-native/android/interaction#action-input) documentation to
    * learn more.
    */
   input?: true | AndroidInput;
@@ -530,7 +530,7 @@ export interface AndroidAction {
 /**
  * The interface used to enable advanced user input on a notification.
  *
- * View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to learn more.
+ * View the [Action Input](/react-native/android/interaction#action-input) documentation to learn more.
  *
  * @platform android
  */
@@ -584,7 +584,7 @@ export interface AndroidInput {
  *
  * <Vimeo id="android-style-bigpicture" caption="Android Big Picture Style" />
  *
- * View the [Big Picture](/react-native/docs/android/styles#big-picture) documentation to learn more.
+ * View the [Big Picture](/react-native/android/styles#big-picture) documentation to learn more.
  *
  * @platform android
  */
@@ -627,7 +627,7 @@ export interface AndroidBigPictureStyle {
  *
  * <Vimeo id="android-style-bigtext" caption="Android Big Text Style" />
  *
- * View the [Big Text](/react-native/docs/android/styles#big-text) documentation to learn more.
+ * View the [Big Text](/react-native/android/styles#big-text) documentation to learn more.
  *
  * @platform android
  */
@@ -658,7 +658,7 @@ export interface AndroidBigTextStyle {
  *
  * <Vimeo id="android-style-inbox" caption="Android Inbox Style" />
  *
- * View the [Inbox](/react-native/docs/android/styles#inbox) documentation to learn more.
+ * View the [Inbox](/react-native/android/styles#inbox) documentation to learn more.
  *
  * @platform android
  */
@@ -692,7 +692,7 @@ export interface AndroidInboxStyle {
  *
  * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
  *
- * View the [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+ * View the [Messaging](/react-native/android/styles#messaging) documentation to learn more.
  *
  * @platform android
  */
@@ -729,7 +729,7 @@ export interface AndroidMessagingStyle {
  * <Vimeo id="android-style-messaging" caption="Android Messaging Style" />
  *
  * View the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference
- * and [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+ * and [Messaging](/react-native/android/styles#messaging) documentation to learn more.
  *
  * @platform android
  */
@@ -817,7 +817,7 @@ export interface AndroidPerson {
  *
  * <Vimeo id="android-progress-summary" caption="Android Progress (w/ Big Picture Style)" />
  *
- * View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation to learn more.
+ * View the [Progress Indicators](/react-native/android/progress-indicators) documentation to learn more.
  *
  * @platform android
  */
@@ -851,7 +851,7 @@ export interface AndroidProgress {
  * Channels override any individual notification preferences (e.g. lights/vibration) and the user
  * has final control over the setting. Once created, only channel metadata can be updated (e.g. name).
  *
- * View the [Channels & Groups](/react-native/docs/android/channels) documentation to learn more.
+ * View the [Channels & Groups](/react-native/android/channels) documentation to learn more.
  *
  * @platform android
  */
@@ -872,7 +872,7 @@ export interface AndroidChannel {
   /**
    * Sets whether badges are enabled for the channel.
    *
-   * View the [Badges](/react-native/docs/android/appearance#badges) documentation to learn more.
+   * View the [Badges](/react-native/android/appearance#badges) documentation to learn more.
    *
    * Defaults to `true`.
    *
@@ -997,7 +997,7 @@ export interface NativeAndroidChannel extends AndroidChannel {
    *
    * On API levels < 28, returns `false`.
    *
-   * View the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events)
+   * View the [Listening to channel events](/react-native/android/channels#listening-to-channel-events)
    * documentation to learn more about subscribing to when a channel is blocked by the user.
    *
    * @platform android API Level >= 28
@@ -1011,7 +1011,7 @@ export interface NativeAndroidChannel extends AndroidChannel {
  * Channel groups have no impact on the notification, they are used to help group channels in the applications
  * settings UI.
  *
- * View the [Channels & Groups](/react-native/docs/android/channels) documentation to learn more.
+ * View the [Channels & Groups](/react-native/android/channels) documentation to learn more.
  *
  * @platform android API Level >= 26
  */
@@ -1053,7 +1053,7 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
    *
    * On API levels < 28, returns `false`.
    *
-   * View the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events)
+   * View the [Listening to channel events](/react-native/android/channels#listening-to-channel-events)
    * documentation to learn more about subscribing to when a channel is blocked by the user.
    *
    * @platform android API Level >= 28
@@ -1069,7 +1069,7 @@ export interface NativeAndroidChannelGroup extends AndroidChannelGroup {
 /**
  * Enum used to define how a notification badge is displayed in badge mode.
  *
- * View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information.
+ * View the [Badges](/react-native/android/appearance#badges) documentation for more information.
  *
  * @platform android
  */
@@ -1127,7 +1127,7 @@ export enum AndroidCategory {
 /**
  * A set or predefined colors which can be used with Android Notifications.
  *
- * View the [Color](/react-native/docs/android/appearance#color) documentation to learn more.
+ * View the [Color](/react-native/android/appearance#color) documentation to learn more.
  *
  * @platform android
  */
@@ -1209,7 +1209,7 @@ export enum AndroidFlags {
 /**
  * Enum used to describe how a notification alerts the user when it apart of a group.
  *
- * View the [Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#group-behaviour) documentation to
+ * View the [Grouping & Sorting](/react-native/android/grouping-and-sorting#group-behaviour) documentation to
  * learn more.
  *
  * @platform android
@@ -1234,7 +1234,7 @@ export enum AndroidGroupAlertBehavior {
 /**
  * Available Android Notification Styles.
  *
- * View the [Styles](/react-native/docs/android/styles) documentation to learn more with example usage.
+ * View the [Styles](/react-native/android/styles) documentation to learn more with example usage.
  *
  * @platform android
  */
@@ -1250,7 +1250,7 @@ export enum AndroidStyle {
  *
  * Use with the `visibility` property on the notification.
  *
- * View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn more.
+ * View the [Visibility](/react-native/android/appearance#visibility) documentation to learn more.
  *
  * Default value is `AndroidVisibility.PRIVATE`.
  *
@@ -1284,7 +1284,7 @@ export enum AndroidVisibility {
  * The importance is used to both change the visual prompt of a received notification
  * and also how it visually appears on the device.
  *
- * View the [Android Appearance](/react-native/docs/android/appearance#importance) documentation to learn more.
+ * View the [Android Appearance](/react-native/android/appearance#importance) documentation to learn more.
  *
  * @platform android
  */

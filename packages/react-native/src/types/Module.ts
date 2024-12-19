@@ -21,7 +21,7 @@ export interface Module {
    * The `cancelAllNotifications` API removes any displayed notifications from the users device and
    * any pending trigger notifications.
    *
-   * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
+   * This method does not cancel Android [Foreground Service](/react-native/android/foreground-service)
    * notifications.
    * @param notificationIds An array of notifications IDs. This is automatically generated and returned
    * when creating a notification, or has been set manually via the `id` property.
@@ -33,7 +33,7 @@ export interface Module {
   /**
    * API used to cancel any displayed notifications.
    *
-   * This method does not cancel Android [Foreground Service](/react-native/docs/android/foreground-service)
+   * This method does not cancel Android [Foreground Service](/react-native/android/foreground-service)
    * notifications.
    */
   cancelDisplayedNotifications(notificationIds?: string[]): Promise<void>;
@@ -49,7 +49,7 @@ export interface Module {
    * The `cancelNotification` API removes any displayed notifications or ones with triggers
    * set for the specified ID.
    *
-   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * This method does not cancel [Foreground Service](/react-native/android/foreground-service)
    * notifications.
    *
    * @param notificationId The unique notification ID. This is automatically generated and returned
@@ -63,7 +63,7 @@ export interface Module {
    * API used to cancel a single displayed notification.
    *
    *
-   * This method does not cancel [Foreground Service](/react-native/docs/android/foreground-service)
+   * This method does not cancel [Foreground Service](/react-native/android/foreground-service)
    * notifications.
    *
    * @param notificationId The unique notification ID. This is automatically generated and returned
@@ -94,7 +94,7 @@ export interface Module {
    *
    * The channel ID is returned once the operation has completed.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channel The [`AndroidChannel`](/react-native/reference/androidchannel) interface used to create/update a group.
@@ -124,7 +124,7 @@ export interface Module {
    *
    * The channel group ID is returned once the operation has completed.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channelGroup The [`AndroidChannelGroup`](/react-native/reference/androidchannelgroup)
@@ -151,7 +151,7 @@ export interface Module {
    *
    * > When a channel is deleted, notifications assigned to that channel will fail to display.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channelId The unique channel ID to delete.
@@ -167,7 +167,7 @@ export interface Module {
    * Deleting a group does not delete channels which are assigned to the group, they will instead be
    * unassigned the group and continue to function as expected.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channelGroupId The unique channel group ID to delete.
@@ -180,7 +180,7 @@ export interface Module {
    * This API is used to display a notification on the users device. All
    * channels/categories should be created before triggering this method during the apps lifecycle.
    *
-   * View the [Displaying a Notification](/react-native/docs/displaying-a-notification)
+   * View the [Displaying a Notification](/react-native/displaying-a-notification)
    * documentation for more information.
    *
    * @param notification The [`Notification`](/react-native/reference/notification) interface used
@@ -194,7 +194,7 @@ export interface Module {
    * On Android >= 12 / API >= 31, the alarm special access settings screen is displayed, otherwise,
    * this is a no-op & instantly resolves.
    *
-   * View the [Trigger](/react-native/docs/android/triggers#android-12-limitations) documentation for more information.
+   * View the [Trigger](/react-native/android/triggers#android-12-limitations) documentation for more information.
    *
    * @platform android
    */
@@ -205,7 +205,7 @@ export interface Module {
    *
    * All channels/categories should be created before calling this method during the apps lifecycle.
    *
-   * View the [Triggers](/react-native/docs/triggers) documentation for more information.
+   * View the [Triggers](/react-native/triggers) documentation for more information.
    *
    * @param notification The [`Notification`](/react-native/reference/notification) interface used
    * to create a notification.
@@ -218,7 +218,7 @@ export interface Module {
   /**
    * API used to return the ids of trigger notifications that are pending.
    *
-   * View the [Triggers](/react-native/docs/triggers) documentation for more information.
+   * View the [Triggers](/react-native/triggers) documentation for more information.
    */
   getTriggerNotificationIds(): Promise<string[]>;
 
@@ -242,7 +242,7 @@ export interface Module {
    * retrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)
    * documentation for more information.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channelId The channel ID created with [`createChannel`](/react-native/reference/createchannel). If
@@ -278,7 +278,7 @@ export interface Module {
    * retrieved from the device. View the [`NativeAndroidChannel`](/react-native/reference/nativeandroidchannel)
    * documentation for more information.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    */
@@ -294,7 +294,7 @@ export interface Module {
    * retrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)
    * documentation for more information.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    * @param channelGroupId The channel ID created with [`createChannelGroup`](/react-native/reference/createchannelgroup). If
@@ -312,7 +312,7 @@ export interface Module {
    * retrieved from the device. View the [`NativeAndroidChannelGroup`](/react-native/reference/nativeandroidchannelgroup)
    * documentation for more information.
    *
-   * View the [Channels & Groups](/react-native/docs/android/channels) documentation for more information.
+   * View the [Channels & Groups](/react-native/android/channels) documentation for more information.
    *
    * @platform android
    */
@@ -327,7 +327,7 @@ export interface Module {
    * Once the initial notification has been consumed by this API, it is removed and will no longer
    * be available. It will also be removed if the user relaunches the application.
    *
-   * View the [App open events](/react-native/docs/events#app-open-events) documentation for more
+   * View the [App open events](/react-native/events#app-open-events) documentation for more
    * information and example usage.
    *
    * Deprecated for iOS in favour of `onForegroundEvent` - you can still use this method on iOS
@@ -342,7 +342,7 @@ export interface Module {
    * to send events. The handler must return a Promise once complete and only a single event handler
    * can be registered for the application.
    *
-   * View the [Background events](/react-native/docs/events#background-events) documentation for more
+   * View the [Background events](/react-native/events#background-events) documentation for more
    * information and example usage.
    *
    * To listen to foreground events, see the [`onForegroundEvent`](/react-native/reference/onforegroundevent) documentation.
@@ -359,7 +359,7 @@ export interface Module {
    * to send events. Multiple foreground observers can be registered throughout the applications
    * lifecycle. The method returns a function, used to unsubscribe from further events,
    *
-   * View the [Foreground events](/react-native/docs/events#foreground-events) documentation for more
+   * View the [Foreground events](/react-native/events#foreground-events) documentation for more
    * information and example usage.
    *
    * To listen to background events, see the [`onBackgroundEvent`](/react-native/reference/onbackgroundevent) documentation.
@@ -399,7 +399,7 @@ export interface Module {
    * Only a single foreground service can exist for the application, and calling this method more
    * than once will update the existing task runner.
    *
-   * View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for
+   * View the [Foreground Service](/react-native/android/foreground-service) documentation for
    * more information.
    *
    * @platform android
@@ -519,7 +519,7 @@ export interface Module {
    * If the API version is >= 23, the battery optimization settings screen is displayed, otherwise,
    * this is a no-op & instantly resolves.
    *
-   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/android/behaviour#background-restrictions) documentation for more information.
    *
    * @platform android
    */
@@ -530,7 +530,7 @@ export interface Module {
    *
    * Supports API versions >= 23.
    *
-   * View the [Background Restrictions](/react-native/docs/android/behaviour#background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/android/behaviour#background-restrictions) documentation for more information.
    *
    * @platform android
    */
@@ -543,7 +543,7 @@ export interface Module {
    *
    * On iOS, an instance of `PowerManagerInfo` will be returned with `activity` set to `null`.
    *
-   * View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/android/background-restrictions) documentation for more information.
    *
    * ```js
    * import notifee from `@notifee/react-native`;
@@ -568,7 +568,7 @@ export interface Module {
    *
    * Call `getPowerManagerInfo()` first to find out if the user's device is supported.
    *
-   * View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation for more information.
+   * View the [Background Restrictions](/react-native/android/background-restrictions) documentation for more information.
    *
    * ```js
    * import notifee from `@notifee/react-native`;
