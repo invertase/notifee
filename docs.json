@@ -29,6 +29,10 @@
         {
           "title": "Release Notes",
           "href": "/react-native/release-notes"
+        },
+        {
+          "title": "API Reference",
+          "href": "/react-native/reference"
         }
       ]
     },
