@@ -79,7 +79,7 @@
     "typedoc": "^0.27.5",
     "typedoc-plugin-markdown": "^4.3.3",
     "typedoc-plugin-remark": "^1.2.1",
-    "typescript": "^4.6.2"
+    "typescript": "^5.7.2"
   },
   "resolutions": {
     "@types/node": "^17.0.21"

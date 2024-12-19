@@ -28,7 +28,7 @@
     "genversion": "^3.0.2",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.6.2"
+    "typescript": "^5.7.2"
   },
   "peerDependencies": {
     "react-native": "*"
