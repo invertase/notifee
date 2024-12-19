@@ -1,0 +1,59 @@
+[**@notifee/react-native**](../README.mdx)
+
+***
+
+[@notifee/react-native](../globals.mdx) / NotificationSettings
+
+# Interface: NotificationSettings
+
+## Properties
+
+### android
+
+> **android**: [`AndroidNotificationSettings`](AndroidNotificationSettings.mdx)
+
+Overall notification settings for the application in android.
+On non-Android platforms, this will be populated with default values
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:512](https://github.com/invertase/notifee/blob/bf6deb3c72c777c677e21f5eda602131249f4f83/packages/react-native/src/types/Notification.ts#L512)
+
+***
+
+### authorizationStatus
+
+> **authorizationStatus**: [`AuthorizationStatus`](../enumerations/AuthorizationStatus.mdx)
+
+Overall notification authorization status for the application.
+On Android, `authorizationStatus` will return only either `AuthorizationStatus.DENIED` or `AuthorizationStatus.AUTHORIZED`.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:502](https://github.com/invertase/notifee/blob/bf6deb3c72c777c677e21f5eda602131249f4f83/packages/react-native/src/types/Notification.ts#L502)
+
+***
+
+### ios
+
+> **ios**: [`IOSNotificationSettings`](IOSNotificationSettings.mdx)
+
+Overall notification settings for the application in iOS.
+On non-iOS platforms, this will be populated with default values
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:507](https://github.com/invertase/notifee/blob/bf6deb3c72c777c677e21f5eda602131249f4f83/packages/react-native/src/types/Notification.ts#L507)
+
+***
+
+### web
+
+> **web**: `WebNotificationSettings`
+
+Overall notification settings for the application in web.
+On non-Web platforms, this will be populated with default values
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:517](https://github.com/invertase/notifee/blob/bf6deb3c72c777c677e21f5eda602131249f4f83/packages/react-native/src/types/Notification.ts#L517)
