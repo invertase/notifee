@@ -1,0 +1,8 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./packages/react-native/src/index.ts"],
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "./docs/react-native/reference",
+  "fileExtension": ".mdx"
+
+}
