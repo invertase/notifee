@@ -1,0 +1,68 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidInboxStyle
+
+# Interface: AndroidInboxStyle
+
+The interface used when displaying a Inbox Style notification.
+
+<Vimeo id="android-style-inbox" caption="Android Inbox Style" />
+
+View the [Inbox](/react-native/docs/android/styles#inbox) documentation to learn more.
+
+## Platform
+
+android
+
+## Properties
+
+### lines
+
+> **lines**: `string`\[]
+
+An array of messages to display, in order provided.
+
+The device will automatically handle displaying the lines visible depending on space in the notification
+shade.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:677](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L677)
+
+***
+
+### summary?
+
+> `optional` **summary**: `string`
+
+If set, overrides the main notification `summary` when the notification is expanded.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:687](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L687)
+
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+If set, overrides the main notification `title` when the notification is expanded.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:682](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L682)
+
+***
+
+### type
+
+> **type**: [`INBOX`](react-native/reference/Enumeration.AndroidStyle#inbox)
+
+Constant enum value used to identify the style type.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:669](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L669)

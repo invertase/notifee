@@ -1,0 +1,93 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / NativeError
+
+# Interface: NativeError
+
+An Error that has occurred in native Android or iOS code converted into a JavaScript Error.
+
+## Extends
+
+* `Error`
+
+## Properties
+
+### code
+
+> `readonly` **code**: `string`
+
+Error code, e.g. `invalid-parameter`
+
+#### Defined in
+
+[packages/react-native/src/types/Library.ts:12](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Library.ts#L12)
+
+***
+
+### message
+
+> `readonly` **message**: `string`
+
+Error message
+
+#### Overrides
+
+`Error.message`
+
+#### Defined in
+
+[packages/react-native/src/types/Library.ts:17](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Library.ts#L17)
+
+***
+
+### name
+
+> **name**: `string`
+
+#### Inherited from
+
+`Error.name`
+
+#### Defined in
+
+node\_modules/typescript/lib/lib.es5.d.ts:1053
+
+***
+
+### nativeErrorCode
+
+> `readonly` **nativeErrorCode**: `string` | `number`
+
+The native returned error code, different per platform
+
+#### Defined in
+
+[packages/react-native/src/types/Library.ts:22](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Library.ts#L22)
+
+***
+
+### nativeErrorMessage
+
+> `readonly` **nativeErrorMessage**: `string`
+
+The native returned error message, different per platform
+
+#### Defined in
+
+[packages/react-native/src/types/Library.ts:27](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Library.ts#L27)
+
+***
+
+### stack?
+
+> `optional` **stack**: `string`
+
+#### Inherited from
+
+`Error.stack`
+
+#### Defined in
+
+node\_modules/typescript/lib/lib.es5.d.ts:1055

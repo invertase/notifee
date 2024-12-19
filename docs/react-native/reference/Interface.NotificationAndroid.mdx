@@ -1,0 +1,746 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / NotificationAndroid
+
+# Interface: NotificationAndroid
+
+The interface for Android specific options which are applied to a notification.
+
+To learn more about Android notifications, view the [Android](/react-native/docs/android/introduction)
+documentation for full examples and usage.
+
+## Platform
+
+android
+
+## Properties
+
+### actions?
+
+> `optional` **actions**: [`AndroidAction`](react-native/reference/Interface.AndroidAction)\[]
+
+An array of [AndroidAction](/react-native/reference/androidaction) interfaces.
+
+Adds quick actions to a notification. Quick Actions enable users to interact with your application
+directly from the notification body, providing an overall greater user experience.
+
+View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation for more information.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:24](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L24)
+
+***
+
+### asForegroundService?
+
+> `optional` **asForegroundService**: `boolean`
+
+When set to `true` this notification will be shown as a foreground service.
+
+The application can only display one foreground service notification at once. If a
+foreground service notification is already running and a new notification with this flag set to
+`true` is provided, the service will stop the existing service and start a new one.
+
+Ensure a foreground service runner function has been provided to `registerForegroundService`.
+Without one, the notification will not be displayed.
+
+View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:40](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L40)
+
+***
+
+### autoCancel?
+
+> `optional` **autoCancel**: `boolean`
+
+Setting this flag will make it so the notification is automatically canceled when the user
+presses it in the panel.
+
+By default when the user taps a notification it is automatically removed from the notification
+panel. Setting this to `false` will keep the notification in the panel.
+
+If `false`, the notification will persist in the notification panel after being pressed. It will
+remain there until the user removes it (e.g. swipes away) or is cancelled via
+[`cancelNotification`](/react-native/reference/cancelNotification).
+
+Defaults to `true`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:62](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L62)
+
+***
+
+### badgeCount?
+
+> `optional` **badgeCount**: `number`
+
+Overrides the current number of active notifications shown on the device.
+
+If no number is provided, the system displays the current number of active notifications.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:69](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L69)
+
+***
+
+### badgeIconType?
+
+> `optional` **badgeIconType**: [`AndroidBadgeIconType`](react-native/reference/Enumeration.AndroidBadgeIconType)
+
+Sets the type of badge used when the notification is being displayed in badge mode.
+
+View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information
+and usage examples.
+
+Defaults to `AndroidBadgeIconType.LARGE`.
+
+#### Platform
+
+android API Level >= 26
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:81](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L81)
+
+***
+
+### category?
+
+> `optional` **category**: [`AndroidCategory`](react-native/reference/Enumeration.AndroidCategory)
+
+Assigns the notification to a category. Use the one which best describes the notification.
+
+The category may be used by the device for ranking and filtering. It has no visual or behavioural
+impact.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:89](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L89)
+
+***
+
+### channelId?
+
+> `optional` **channelId**: `string`
+
+Specifies the `AndroidChannel` which the notification will be delivered on.
+
+On Android 8.0 (API 26) the channel ID is required. Providing a invalid channel ID will throw
+an error. View the [Channels & Groups](/react-native/docs/android/channels) documentation for
+more information and usage examples.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:98](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L98)
+
+***
+
+### chronometerDirection?
+
+> `optional` **chronometerDirection**: `"up"` | `"down"`
+
+If `showChronometer` is `true`, the direction of the chronometer can be changed to count down instead of up.
+
+Has no effect if `showChronometer` is `false`.
+
+Defaults to `up`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:131](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L131)
+
+***
+
+### circularLargeIcon?
+
+> `optional` **circularLargeIcon**: `boolean`
+
+Whether the large icon should be circular.
+
+If `true`, the large icon will be rounded in the shape of a circle.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:205](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L205)
+
+***
+
+### color?
+
+> `optional` **color**: `string`
+
+Set an custom accent color for the notification. If not provided, the default notification
+system color will be used.
+
+The color can be a predefined system `AndroidColor` or [hexadecimal](https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4).
+
+View the [Color](/react-native/docs/android/appearance#color) documentation for more information.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:108](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L108)
+
+***
+
+### colorized?
+
+> `optional` **colorized**: `boolean`
+
+When `asForegroundService` is `true`, the notification will use the provided `color` property
+to set a background color on the notification. This property has no effect when `asForegroundService`
+is `false`.
+
+This should only be used for high priority ongoing tasks like navigation, an ongoing call,
+or other similarly high-priority events for the user.
+
+View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:122](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L122)
+
+***
+
+### defaults?
+
+> `optional` **defaults**: [`AndroidDefaults`](react-native/reference/Enumeration.AndroidDefaults)\[]
+
+For devices without notification channel support, this property sets the default behaviour
+for a notification.
+
+On API Level >= 26, this has no effect.
+
+See [AndroidDefaults](/react-native/reference/androiddefaults) for more information.
+
+#### Platform
+
+android API Level \< 26
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:143](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L143)
+
+***
+
+### flags?
+
+> `optional` **flags**: [`AndroidFlags`](react-native/reference/Enumeration.AndroidFlags)\[]
+
+Set any additional flags
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:251](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L251)
+
+***
+
+### foregroundServiceTypes?
+
+> `optional` **foregroundServiceTypes**: [`AndroidForegroundServiceType`](react-native/reference/Enumeration.AndroidForegroundServiceType)\[]
+
+Set the foreground service types identifying the work done by the service
+
+View the [Foreground service types](https://developer.android.com/develop/background-work/services/fg-service-types) documentation to learn
+more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:289](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L289)
+
+***
+
+### fullScreenAction?
+
+> `optional` **fullScreenAction**: [`NotificationFullScreenAction`](react-native/reference/Interface.NotificationFullScreenAction)
+
+The `fullScreenAction` property allows you to show a custom UI
+in full screen when the notification is displayed.
+
+View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen) documentation to learn
+more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:281](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L281)
+
+***
+
+### groupAlertBehavior?
+
+> `optional` **groupAlertBehavior**: [`AndroidGroupAlertBehavior`](react-native/reference/Enumeration.AndroidGroupAlertBehavior)
+
+Sets the group alert behavior for this notification. Use this method to mute this notification
+if alerts for this notification's group should be handled by a different notification. This is
+only applicable for notifications that belong to a `groupId`. This must be called on all notifications
+you want to mute. For example, if you want only the summary of your group to make noise, all
+children in the group should have the group alert behavior `AndroidGroupAlertBehavior.SUMMARY`.
+
+View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour)
+documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:166](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L166)
+
+***
+
+### groupId?
+
+> `optional` **groupId**: `string`
+
+Set this notification to be part of a group of notifications sharing the same key. Grouped notifications may
+display in a cluster or stack on devices which support such rendering.
+
+On some devices, the system may automatically group notifications.
+
+View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) documentation to
+learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:154](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L154)
+
+***
+
+### groupSummary?
+
+> `optional` **groupSummary**: `boolean`
+
+Whether this notification should be a group summary.
+
+If `true`, Set this notification to be the group summary for a group of notifications. Grouped notifications may display in
+a cluster or stack on devices which support such rendering. Requires a `groupId` key to be set.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:176](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L176)
+
+***
+
+### importance?
+
+> `optional` **importance**: [`AndroidImportance`](react-native/reference/Enumeration.AndroidImportance)
+
+Set a notification importance for devices without channel support.
+
+Devices using Android API Level \< 26 have no channel support, meaning incoming notifications
+won't be assigned an importance level from the channel. If your application supports devices
+without channel support, set this property to directly assign an importance level to the incoming
+notification.
+
+Defaults to `AndroidImportance.DEFAULT`.
+
+View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
+more.
+
+#### Platform
+
+android API Level \< 26
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:306](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L306)
+
+***
+
+### inputHistory?
+
+> `optional` **inputHistory**: `string`\[]
+
+The local user input history for this notification.
+
+Input history is shown on supported devices below the main notification body. History of the
+users input with the notification should be shown when receiving action input by updating
+the existing notification. It is recommended to clear the history when it is no longer
+relevant (e.g. someone has responded to the users input).
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:186](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L186)
+
+***
+
+### largeIcon?
+
+> `optional` **largeIcon**: `string` | `number` | `object`
+
+A local file path using the 'require()' method or a remote http to the picture to display.
+
+Sets a large icon on the notification.
+
+View the [Android Appearance](/react-native/docs/android/appearance#large-icons) documentation to learn
+more about this property.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:196](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L196)
+
+***
+
+### lights?
+
+> `optional` **lights**: \[`string`, `number`, `number`]
+
+Sets the color and frequency of the light pattern. This only has effect on supported devices.
+
+The option takes an array containing a hexadecimal color value or predefined `AndroidColor`,
+along with the number of milliseconds to show the light, and the number of milliseconds to
+turn off the light. The light frequency pattern is repeated.
+
+View the [Lights](/react-native/docs/android/behaviour#lights) documentation for more information.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:216](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L216)
+
+***
+
+### lightUpScreen?
+
+> `optional` **lightUpScreen**: `boolean`
+
+When set to `true` the screen will light up when the notification is displayed.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:47](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L47)
+
+***
+
+### localOnly?
+
+> `optional` **localOnly**: `boolean`
+
+Sets whether the notification will only appear on the local device.
+
+Users who have connected devices which support notifications (such as a smart watch) will
+receive an alert for the notification on that device. If set to `true`, the notification will
+only alert on the main device.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:227](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L227)
+
+***
+
+### loopSound?
+
+> `optional` **loopSound**: `boolean`
+
+Set whether the sound should loop, by default, the sound will only play once.
+
+This property is useful if you have an ongoing notification.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:246](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L246)
+
+***
+
+### ongoing?
+
+> `optional` **ongoing**: `boolean`
+
+Set whether this is an on-going notification.
+
+Setting this value to `true` changes the default behaviour of a notification:
+
+* Ongoing notifications are sorted above the regular notifications in the notification panel.
+* Ongoing notifications do not have an 'X' close button, and are not affected by the "Clear all" button.
+
+View the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:239](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L239)
+
+***
+
+### onlyAlertOnce?
+
+> `optional` **onlyAlertOnce**: `boolean`
+
+Notifications with the same `id` will only show a single instance at any one time on your device,
+however will still alert the user (for example, by making a sound).
+
+If this flag is set to `true`, notifications with the same `id` will only alert the user once whilst
+the notification is visible.
+
+This property is commonly used when frequently updating a notification (such as updating the progress bar).
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:262](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L262)
+
+***
+
+### pressAction?
+
+> `optional` **pressAction**: [`NotificationPressAction`](react-native/reference/Interface.NotificationPressAction)
+
+By default notifications have no behaviour when a user presses them. The
+`pressAction` property allows you to set what happens when a user presses
+the notification.
+
+View the [Interaction](/react-native/docs/android/interaction) documentation to learn
+more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:272](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L272)
+
+***
+
+### progress?
+
+> `optional` **progress**: [`AndroidProgress`](react-native/reference/Interface.AndroidProgress)
+
+A notification can show current progress of a task. The progress state can either be fixed or
+indeterminate (unknown).
+
+View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation
+to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:315](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L315)
+
+***
+
+### showChronometer?
+
+> `optional` **showChronometer**: `boolean`
+
+Shows a counting timer on the notification, useful for on-going notifications such as a phone call.
+
+If no `timestamp` is provided, a counter will display on the notification starting from 00:00. If a `timestamp` is
+provided, the number of hours/minutes/seconds since that have elapsed since that value will be shown instead.
+
+Defaults to `false`.
+
+View the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:390](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L390)
+
+***
+
+### showTimestamp?
+
+> `optional` **showTimestamp**: `boolean`
+
+Sets whether the `timestamp` provided is shown in the notification.
+
+Setting this field is useful for notifications which are more informative with a timestamp,
+such as an E-Mail.
+
+If no `timestamp` is set, this field has no effect.
+
+View the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:327](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L327)
+
+***
+
+### smallIcon?
+
+> `optional` **smallIcon**: `string`
+
+The small icon to show in the heads-up notification.
+
+View the [Icons](/react-native/docs/android/appearance#small-icons) documentation to learn
+more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:335](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L335)
+
+***
+
+### smallIconLevel?
+
+> `optional` **smallIconLevel**: `number`
+
+An additional level parameter for when the icon is an instance of a Android `LevelListDrawable`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:340](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L340)
+
+***
+
+### sortKey?
+
+> `optional` **sortKey**: `string`
+
+Set a sort key that orders this notification among other notifications from the same package.
+This can be useful if an external sort was already applied and an app would like to preserve
+this. Notifications will be sorted lexicographically using this value, although providing
+different priorities in addition to providing sort key may cause this value to be ignored.
+
+If a `groupId` has been set, the sort key can also be used to order members of a notification group.
+
+View the [Android Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#sorting)
+documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:353](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L353)
+
+***
+
+### sound?
+
+> `optional` **sound**: `string`
+
+Overrides the sound the notification is displayed with.
+
+The default value is to play no sound. To play the default system sound use 'default'.
+
+This setting has no behaviour on Android after API level version 26, instead you can set the
+sound on the notification channels.
+
+View the [Sound](/react-native/docs/android/behaviour#sound) documentation for more information.
+
+#### Platform
+
+android API Level \< 26
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:442](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L442)
+
+***
+
+### style?
+
+> `optional` **style**: [`AndroidBigPictureStyle`](react-native/reference/Interface.AndroidBigPictureStyle) | [`AndroidBigTextStyle`](react-native/reference/Interface.AndroidBigTextStyle) | [`AndroidInboxStyle`](react-native/reference/Interface.AndroidInboxStyle) | [`AndroidMessagingStyle`](react-native/reference/Interface.AndroidMessagingStyle)
+
+Styled notifications provide users with more informative content and additional functionality.
+
+Android supports different styles, however only one can be used with a notification.
+
+View the [Styles](/react-native/docs/android/styles) documentation to learn more
+view usage examples.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:363](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L363)
+
+***
+
+### tag?
+
+> `optional` **tag**: `string`
+
+Sets a tag on the notification.
+
+Tags can be used to query groups notifications by the tag value. Setting a tag has no
+impact on the notification itself.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:416](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L416)
+
+***
+
+### ticker?
+
+> `optional` **ticker**: `string`
+
+Text that summarizes this notification for accessibility services. As of the Android L release, this
+text is no longer shown on screen, but it is still useful to accessibility services
+(where it serves as an audible announcement of the notification's appearance).
+
+Ticker text does not show in the notification.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:372](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L372)
+
+***
+
+### timeoutAfter?
+
+> `optional` **timeoutAfter**: `number`
+
+Sets the time in milliseconds at which the notification should be
+automatically cancelled once displayed, if it is not already cancelled.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:378](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L378)
+
+***
+
+### timestamp?
+
+> `optional` **timestamp**: `number`
+
+The timestamp in milliseconds for this notification. Notifications in the panel are sorted by this time.
+
+The timestamp can be used with other properties to change the behaviour of a notification:
+
+* Use with `showTimestamp` to show the timestamp to the users.
+* Use with `showChronometer` to create a on-going timer.
+
+View the [Timers](/react-native/docs/android/timers) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:428](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L428)
+
+***
+
+### vibrationPattern?
+
+> `optional` **vibrationPattern**: `number`\[]
+
+Sets the vibration pattern the notification uses when displayed. Must be an even amount of numbers.
+
+View the [Vibration](/react-native/docs/android/behaviour#vibration) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:397](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L397)
+
+***
+
+### visibility?
+
+> `optional` **visibility**: [`AndroidVisibility`](react-native/reference/Enumeration.AndroidVisibility)
+
+Sets the visibility for this notification. This may be used for apps which show user
+sensitive information (e.g. a banking app).
+
+Defaults to `AndroidVisibility.PRIVATE`.
+
+View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn
+more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:408](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L408)

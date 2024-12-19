@@ -1,0 +1,79 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidAction
+
+# Interface: AndroidAction
+
+The interface used to describe a notification quick action for Android.
+
+Notification actions allow users to interact with notifications, allowing you to handle events
+within your application. When an action completes (e.g. pressing an action, or filling out an input
+box) an event is sent.
+
+View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
+
+## Platform
+
+android
+
+## Properties
+
+### icon?
+
+> `optional` **icon**: `string`
+
+An remote http or local icon path representing the action. Newer devices may not show the icon.
+
+Recommended icon size is 24x24 px.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:516](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L516)
+
+***
+
+### input?
+
+> `optional` **input**: `true` | [`AndroidInput`](react-native/reference/Interface.AndroidInput)
+
+If provided, the action accepts user input.
+
+If `true`, the user will be able to provide free text input when the action is pressed. This
+property can be further configured for advanced inputs.
+
+View the [Action Input](/react-native/docs/android/interaction#action-input) documentation to
+learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:527](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L527)
+
+***
+
+### pressAction
+
+> **pressAction**: [`NotificationPressAction`](react-native/reference/Interface.NotificationPressAction)
+
+The press action interface describing what happens when an action completes.
+
+Note; unlike the `pressAction` in the notification body, an action does not need to open the application
+and can perform background tasks. See the [AndroidPressAction](/react-native/reference/androidpressaction) reference
+or [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:504](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L504)
+
+***
+
+### title
+
+> **title**: `string`
+
+The title of the action, e.g. "Reply", "Mark as read" etc.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:509](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L509)

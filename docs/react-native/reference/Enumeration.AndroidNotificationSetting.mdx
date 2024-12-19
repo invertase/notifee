@@ -1,0 +1,55 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidNotificationSetting
+
+# Enumeration: AndroidNotificationSetting
+
+An interface representing the current android only notification-related settings for your app.
+
+This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
+and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
+
+View the [Permissions](/react-native/docs/android/permissions) documentation to learn more.
+
+## Platform
+
+android
+
+## Enumeration Members
+
+### DISABLED
+
+> **DISABLED**: `0`
+
+This setting is currently disabled by the user.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:466](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L466)
+
+***
+
+### ENABLED
+
+> **ENABLED**: `1`
+
+This setting is currently enabled.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:471](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L471)
+
+***
+
+### NOT\_SUPPORTED
+
+> **NOT\_SUPPORTED**: `-1`
+
+This setting is not supported on this device. Usually this means that the Android version required
+for this setting has not been met.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:461](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L461)

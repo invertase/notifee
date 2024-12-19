@@ -1,0 +1,66 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidDefaults
+
+# Enumeration: AndroidDefaults
+
+On devices which do not support notification channels (API Level \< 26), the notification
+by default will use all methods to alert the user (depending on the importance).
+
+To override the default behaviour, provide an array of defaults to the notification.
+
+On API Levels >= 26, this has no effect and notifications will use the channel behaviour.
+
+## Platform
+
+android API Level \< 26
+
+## Enumeration Members
+
+### ALL
+
+> **ALL**: `-1`
+
+All options will be used, where possible.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1173](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1173)
+
+***
+
+### LIGHTS
+
+> **LIGHTS**: `4`
+
+The notification will use lights to alert the user.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1178](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1178)
+
+***
+
+### SOUND
+
+> **SOUND**: `1`
+
+The notification will use sound to alert the user.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1183](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1183)
+
+***
+
+### VIBRATE
+
+> **VIBRATE**: `2`
+
+The notification will vibrate to alert the user.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1188](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1188)

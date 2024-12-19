@@ -1,0 +1,36 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidFlags
+
+# Enumeration: AndroidFlags
+
+Enum used to set any additional flags supported on Android.
+See Android's [setFlag()](https://developer.android.com/reference/android/app/Notification.Builder#setFlag\(int,%20boolean\)) documentation.
+
+## Enumeration Members
+
+### FLAG\_INSISTENT
+
+> **FLAG\_INSISTENT**: `4`
+
+The audio will be repeated until the notification is cancelled or the notification window is opened.
+This will be set for you by setting `loopSound`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1200](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1200)
+
+***
+
+### FLAG\_NO\_CLEAR
+
+> **FLAG\_NO\_CLEAR**: `32`
+
+Prevents the notification from being canceled when the user clicks the Clear all button.
+This will be set for you by setting `ongoing`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1206](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1206)

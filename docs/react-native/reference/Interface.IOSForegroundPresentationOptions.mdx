@@ -1,0 +1,96 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IOSForegroundPresentationOptions
+
+# Interface: IOSForegroundPresentationOptions
+
+An interface to customise how notifications are shown when the app is in the foreground.
+
+By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
+
+View the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) to learn
+more.
+
+## Platform
+
+ios
+
+## Properties
+
+### ~~alert?~~
+
+> `optional` **alert**: `boolean`
+
+App in foreground dialog box which indicates when a decision has to be made
+
+Defaults to true
+
+#### Deprecated
+
+Use `banner` and `list` instead
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:164](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L164)
+
+***
+
+### badge?
+
+> `optional` **badge**: `boolean`
+
+App in foreground badge update
+
+Defaults to true
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:178](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L178)
+
+***
+
+### banner?
+
+> `optional` **banner**: `boolean`
+
+Present the notification as a banner
+
+For iOS 13 and lower, will be equivalent to setting `alert` to true
+
+Defaults to true
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:187](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L187)
+
+***
+
+### list?
+
+> `optional` **list**: `boolean`
+
+Show the notification in Notification Center
+
+For iOS 13 and lower, will be equivalent to setting `alert` to true
+
+Defaults to true
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:196](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L196)
+
+***
+
+### sound?
+
+> `optional` **sound**: `boolean`
+
+App in foreground notification sound
+
+Defaults to true
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:171](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L171)

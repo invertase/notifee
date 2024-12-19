@@ -1,0 +1,65 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IOSShowPreviewsSetting
+
+# Enumeration: IOSShowPreviewsSetting
+
+An enum representing the show previews notification setting for this app on the device.
+
+Value is greater than 0 if previews are to be shown, compare against an exact value
+(e.g. WHEN\_AUTHENTICATED) for more granular control.
+
+## Platform
+
+ios
+
+## Enumeration Members
+
+### ALWAYS
+
+> **ALWAYS**: `1`
+
+Always show previews even if the device is currently locked.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:302](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L302)
+
+***
+
+### NEVER
+
+> **NEVER**: `0`
+
+Never show previews.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:297](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L297)
+
+***
+
+### NOT\_SUPPORTED
+
+> **NOT\_SUPPORTED**: `-1`
+
+This setting is not supported on this device. Usually this means that the iOS version required
+for this setting (iOS 11+) has not been met.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:292](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L292)
+
+***
+
+### WHEN\_AUTHENTICATED
+
+> **WHEN\_AUTHENTICATED**: `2`
+
+Only show previews when the device is unlocked.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:307](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L307)

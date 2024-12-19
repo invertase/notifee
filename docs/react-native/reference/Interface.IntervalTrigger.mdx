@@ -1,0 +1,55 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IntervalTrigger
+
+# Interface: IntervalTrigger
+
+Interface for building a trigger that repeats at a specified interval.
+
+View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+
+## Properties
+
+### interval
+
+> **interval**: `number`
+
+How frequently the notification should be repeated.
+
+For example, if set to 30, the notification will be displayed every 30 minutes.
+
+Must be set to a minimum of 15 minutes.
+
+#### Defined in
+
+[packages/react-native/src/types/Trigger.ts:102](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Trigger.ts#L102)
+
+***
+
+### timeUnit?
+
+> `optional` **timeUnit**: [`TimeUnit`](react-native/reference/Enumeration.TimeUnit)
+
+The unit of time that the `interval` is measured in.
+
+For example, if set to `TimeUnit.DAYS` and repeat interval is set to 3, the notification will repeat every 3 days.
+
+Defaults to `TimeUnit.SECONDS`
+
+#### Defined in
+
+[packages/react-native/src/types/Trigger.ts:111](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Trigger.ts#L111)
+
+***
+
+### type
+
+> **type**: [`INTERVAL`](react-native/reference/Enumeration.TriggerType#interval)
+
+Constant enum value used to identify the trigger type.
+
+#### Defined in
+
+[packages/react-native/src/types/Trigger.ts:93](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Trigger.ts#L93)

@@ -1,0 +1,52 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidGroupAlertBehavior
+
+# Enumeration: AndroidGroupAlertBehavior
+
+Enum used to describe how a notification alerts the user when it apart of a group.
+
+View the [Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#group-behaviour) documentation to
+learn more.
+
+## Platform
+
+android
+
+## Enumeration Members
+
+### ALL
+
+> **ALL**: `0`
+
+All notifications will alert.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1221](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1221)
+
+***
+
+### CHILDREN
+
+> **CHILDREN**: `2`
+
+Children of a group will alert the user. The summary notification will not alert when displayed.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1231](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1231)
+
+***
+
+### SUMMARY
+
+> **SUMMARY**: `1`
+
+Only the summary notification will alert the user when displayed. The children of the group will not alert.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1226](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1226)

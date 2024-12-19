@@ -1,0 +1,65 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / InitialNotification
+
+# Interface: InitialNotification
+
+An interface representing a notification & action that launched the current app / or Android activity.
+
+View the [App open events](/react-native/docs/events#app-open-events) documentation to learn more.
+
+This interface is returned from [`getInitialNotification`](/react-native/reference/getinitialnotification) when
+an initial notification is available.
+
+Deprecated for iOS in favour of `onForegroundEvent`
+
+## Platform
+
+android
+
+## Properties
+
+### input?
+
+> `optional` **input**: `string`
+
+The input from a notification action.
+
+The input detail is available when the [`EventType`](/react-native/reference/eventtype) is:
+
+* [`EventType.ACTION_PRESS`](/react-native/reference/eventtype#action_press)
+* The notification quick action has input enabled. View [`AndroidInput`](/react-native/reference/androidinput) for more details.
+
+#### Platform
+
+android API Level >= 20
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:118](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L118)
+
+***
+
+### notification
+
+> **notification**: [`Notification`](react-native/reference/Interface.Notification)
+
+The notification which the user interacted with, which caused the application to open.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:101](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L101)
+
+***
+
+### pressAction
+
+> **pressAction**: [`NotificationPressAction`](react-native/reference/Interface.NotificationPressAction)
+
+The press action which the user interacted with, on the notification, which caused the application to open.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:106](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L106)

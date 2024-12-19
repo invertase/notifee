@@ -1,0 +1,126 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IOSNotificationPermissions
+
+# Interface: IOSNotificationPermissions
+
+An interface representing all the available permissions that can be requested by your app via
+the [`requestPermission`](/react-native/reference/requestpermission) API.
+
+View the [Permissions](/react-native/docs/ios/permissions) to learn
+more.
+
+## Platform
+
+ios
+
+## Properties
+
+### alert?
+
+> `optional` **alert**: `boolean`
+
+Request permission to display alerts.
+
+Defaults to true.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:214](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L214)
+
+***
+
+### announcement?
+
+> `optional` **announcement**: `boolean`
+
+Request permission for Siri to automatically read out notification messages over AirPods.
+
+Defaults to false.
+
+#### Platform
+
+ios iOS >= 13
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:263](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L263)
+
+***
+
+### badge?
+
+> `optional` **badge**: `boolean`
+
+Request permission to update the application badge.
+
+Defaults to true.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:231](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L231)
+
+***
+
+### carPlay?
+
+> `optional` **carPlay**: `boolean`
+
+Request permission to display notifications in a CarPlay environment.
+
+Defaults to true.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:245](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L245)
+
+***
+
+### criticalAlert?
+
+> `optional` **criticalAlert**: `boolean`
+
+Request permission to display critical notifications.
+
+View the [Critical Notifications](/react-native/docs/ios/behaviour#critical-notifications) documentation for more information
+and usage examples.
+
+Defaults to false.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:224](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L224)
+
+***
+
+### provisional?
+
+> `optional` **provisional**: `boolean`
+
+Request permission to provisionally create non-interrupting notifications.
+
+Defaults to false.
+
+#### Platform
+
+ios iOS >= 12
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:254](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L254)
+
+***
+
+### sound?
+
+> `optional` **sound**: `boolean`
+
+Request permission to play sounds.
+
+Defaults to true.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:238](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L238)

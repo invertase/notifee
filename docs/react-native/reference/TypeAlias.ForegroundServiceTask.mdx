@@ -1,0 +1,34 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / ForegroundServiceTask
+
+# Type Alias: ForegroundServiceTask()
+
+> **ForegroundServiceTask**: (`notification`) => `Promise`\<`void`>
+
+A representation of a Foreground Service task registered via [`registerForegroundService`](/react-native/reference/registerforegroundservice).
+
+The task must resolve a promise once complete, and in turn removes the notification.
+
+View the [Foreground Service](/react-native/docs/android/foreground-service) documentation to
+learn more.
+
+## Parameters
+
+### notification
+
+[`Notification`](react-native/reference/Interface.Notification)
+
+## Returns
+
+`Promise`\<`void`>
+
+## Platform
+
+android
+
+## Defined in
+
+[packages/react-native/src/types/Notification.ts:191](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L191)

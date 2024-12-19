@@ -1,0 +1,117 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IOSNotificationCategory
+
+# Interface: IOSNotificationCategory
+
+A interface representing a notification category created via [`setNotificationCategories`](/react-native/reference/setnotificationcategories).
+
+At minimum, a category must be created with a unique identifier, all other properties are optional.
+
+View the [Categories](/react-native/docs/ios/categories) documentation to learn more.
+
+## Platform
+
+ios
+
+## Properties
+
+### actions?
+
+> `optional` **actions**: [`IOSNotificationCategoryAction`](react-native/reference/Interface.IOSNotificationCategoryAction)\[]
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:532](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L532)
+
+***
+
+### allowAnnouncement?
+
+> `optional` **allowAnnouncement**: `boolean`
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:499](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L499)
+
+***
+
+### allowInCarPlay?
+
+> `optional` **allowInCarPlay**: `boolean`
+
+Allow notifications in this category to be displayed in a CarPlay environment.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:488](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L488)
+
+***
+
+### hiddenPreviewsBodyPlaceholder?
+
+> `optional` **hiddenPreviewsBodyPlaceholder**: `string`
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:520](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L520)
+
+***
+
+### hiddenPreviewsShowSubtitle?
+
+> `optional` **hiddenPreviewsShowSubtitle**: `boolean`
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:513](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L513)
+
+***
+
+### hiddenPreviewsShowTitle?
+
+> `optional` **hiddenPreviewsShowTitle**: `boolean`
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:506](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L506)
+
+***
+
+### id
+
+> **id**: `string`
+
+The unique ID for the category.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:474](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L474)
+
+***
+
+### intentIdentifiers?
+
+> `optional` **intentIdentifiers**: [`IOSIntentIdentifier`](react-native/reference/Enumeration.IOSIntentIdentifier)\[]
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:522](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L522)
+
+***
+
+### summaryFormat?
+
+> `optional` **summaryFormat**: `string`
+
+Specify a custom format for the summary text, which is visible when notifications are grouped together.
+
+View the [Summary Text](/react-native/docs/ios/categories#category-summary-text) documentation to learn more.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:481](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L481)
