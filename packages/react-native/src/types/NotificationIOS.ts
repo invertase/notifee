@@ -6,7 +6,7 @@ import { AuthorizationStatus } from './Notification';
 /**
  * The interface for iOS specific options which are applied to a notification.
  *
- * To learn more about iOS notifications, view the [iOS](/react-native/docs/iOS/introduction)
+ * To learn more about iOS notifications, view the [iOS](/react-native/iOS/introduction)
  * documentation for full examples and usage.
  *
  * @platform ios
@@ -17,7 +17,7 @@ export interface NotificationIOS {
    *
    * Attachments allow audio, image, or video content to be displayed with the notification, enriching the user's experience.
    *
-   * View the [Attachments](/react-native/docs/ios/appearances#attachments) documentation for more information
+   * View the [Attachments](/react-native/ios/appearances#attachments) documentation for more information
    * and usage examples.
    */
   attachments?: IOSNotificationAttachment[];
@@ -149,7 +149,7 @@ export interface IOSCommunicationInfoPerson {
  *
  * By default, Notifee will show iOS notifications in heads-up mode if your app is currently in the foreground.
  *
- * View the [Foreground Notifications](/react-native/docs/ios/appearance#foreground-notifications) to learn
+ * View the [Foreground Notifications](/react-native/ios/appearance#foreground-notifications) to learn
  * more.
  *
  * @platform ios
@@ -200,7 +200,7 @@ export interface IOSForegroundPresentationOptions {
  * An interface representing all the available permissions that can be requested by your app via
  * the [`requestPermission`](/react-native/reference/requestpermission) API.
  *
- * View the [Permissions](/react-native/docs/ios/permissions) to learn
+ * View the [Permissions](/react-native/ios/permissions) to learn
  * more.
  *
  * @platform ios
@@ -216,7 +216,7 @@ export interface IOSNotificationPermissions {
   /**
    * Request permission to display critical notifications.
    *
-   * View the [Critical Notifications](/react-native/docs/ios/behaviour#critical-notifications) documentation for more information
+   * View the [Critical Notifications](/react-native/ios/behaviour#critical-notifications) documentation for more information
    * and usage examples.
    *
    * Defaults to false.
@@ -339,7 +339,7 @@ export enum IOSNotificationSetting {
  * This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
  * and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
  *
- * View the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.
+ * View the [Observing Settings](/react-native/ios/permissions#observing-settings) documentation to learn more.
  *
  * @platform ios
  */
@@ -463,7 +463,7 @@ export enum IOSIntentIdentifier {
  *
  * At minimum, a category must be created with a unique identifier, all other properties are optional.
  *
- * View the [Categories](/react-native/docs/ios/categories) documentation to learn more.
+ * View the [Categories](/react-native/ios/categories) documentation to learn more.
  *
  * @platform ios
  */
@@ -476,7 +476,7 @@ export interface IOSNotificationCategory {
   /**
    * Specify a custom format for the summary text, which is visible when notifications are grouped together.
    *
-   * View the [Summary Text](/react-native/docs/ios/categories#category-summary-text) documentation to learn more.
+   * View the [Summary Text](/react-native/ios/categories#category-summary-text) documentation to learn more.
    */
   summaryFormat?: string;
 
@@ -539,7 +539,7 @@ export interface IOSNotificationCategory {
  * within your application. When an action completes (e.g. pressing an action, or filling out an input
  * box) an event is sent.
  *
- * View the [Quick Actions](/react-native/docs/ios/interaction#quick-actions) documentation to learn more.
+ * View the [Quick Actions](/react-native/ios/interaction#quick-actions) documentation to learn more.
  *
  * @platform ios
  */
@@ -559,7 +559,7 @@ export interface IOSNotificationCategoryAction {
    * The placeholder and button text can be customized by providing an object
    * of type [`IOSInput`](/react-native/reference/iosinput).
    *
-   * View the [Action Input](/react-native/docs/ios/interaction#action-input) documentation to
+   * View the [Action Input](/react-native/ios/interaction#action-input) documentation to
    * learn more.
    */
   input?: true | IOSInput;
@@ -583,7 +583,7 @@ export interface IOSNotificationCategoryAction {
 /**
  * The interface used to enable advanced user input on a notification.
  *
- * View the [Action input](/react-native/docs/ios/interaction#action-input) documentation to learn more.
+ * View the [Action input](/react-native/ios/interaction#action-input) documentation to learn more.
  *
  * @platform ios
  */
@@ -602,7 +602,7 @@ export interface IOSInput {
 /**
  * An interface for describing an iOS Notification Attachment.
  *
- * View the [Attachments](/react-native/docs/ios/appearance#attachments) documentation to learn more.
+ * View the [Attachments](/react-native/ios/appearance#attachments) documentation to learn more.
  *
  * @platform ios
  */

@@ -5,7 +5,7 @@
 /**
  * The interface that represents the information returned from `getPowerManagerInfo()`.
  *
- * View the [Background Restrictions](/react-native/docs/android/background-restrictions) documentation to learn more.
+ * View the [Background Restrictions](/react-native/android/background-restrictions) documentation to learn more.
  *
  * @platform android
  */

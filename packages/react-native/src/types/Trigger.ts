@@ -1,7 +1,7 @@
 /**
  * Interface for building a trigger with a timestamp.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  */
 export interface TimestampTrigger {
   /**
@@ -37,7 +37,7 @@ export interface TimestampTrigger {
 /**
  * An interface representing the different alarm types which can be used with `TimestampTrigger.alarmManager.type`.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  */
 export enum AlarmType {
   SET,
@@ -50,7 +50,7 @@ export enum AlarmType {
 /**
  * Interface to specify additional options for the AlarmManager which can be used with `TimestampTrigger.alarmManager`.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  *
  * @platform android
  */
@@ -72,7 +72,7 @@ export interface TimestampTriggerAlarmManager {
 /**
  * An interface representing the different frequencies which can be used with `TimestampTrigger.repeatFrequency`.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  */
 export enum RepeatFrequency {
   NONE = -1,
@@ -84,7 +84,7 @@ export enum RepeatFrequency {
 /**
  * Interface for building a trigger that repeats at a specified interval.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  */
 export interface IntervalTrigger {
   /**
@@ -114,7 +114,7 @@ export interface IntervalTrigger {
 /**
  * An interface representing the different units of time which can be used with `IntervalTrigger.timeUnit`.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more.
+ * View the [Triggers](/react-native/triggers) documentation to learn more.
  */
 export enum TimeUnit {
   SECONDS = 'SECONDS',
@@ -126,7 +126,7 @@ export enum TimeUnit {
 /**
  * Available Trigger Types.
  *
- * View the [Triggers](/react-native/docs/triggers) documentation to learn more with example usage.
+ * View the [Triggers](/react-native/triggers) documentation to learn more with example usage.
  */
 export enum TriggerType {
   TIMESTAMP = 0,

@@ -8,7 +8,7 @@
 
 The interface for Android specific options which are applied to a notification.
 
-To learn more about Android notifications, view the [Android](/react-native/docs/android/introduction)
+To learn more about Android notifications, view the [Android](/react-native/android/introduction)
 documentation for full examples and usage.
 
 ## Platform
@@ -26,7 +26,7 @@ An array of [AndroidAction](/react-native/reference/androidaction) interfaces.
 Adds quick actions to a notification. Quick Actions enable users to interact with your application
 directly from the notification body, providing an overall greater user experience.
 
-View the [Quick Actions](/react-native/docs/android/interaction#quick-actions) documentation for more information.
+View the [Quick Actions](/react-native/android/interaction#quick-actions) documentation for more information.
 
 #### Defined in
 
@@ -47,7 +47,7 @@ foreground service notification is already running and a new notification with t
 Ensure a foreground service runner function has been provided to `registerForegroundService`.
 Without one, the notification will not be displayed.
 
-View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+View the [Foreground Service](/react-native/android/foreground-service) documentation for more information.
 
 Defaults to `false`.
 
@@ -99,7 +99,7 @@ If no number is provided, the system displays the current number of active notif
 
 Sets the type of badge used when the notification is being displayed in badge mode.
 
-View the [Badges](/react-native/docs/android/appearance#badges) documentation for more information
+View the [Badges](/react-native/android/appearance#badges) documentation for more information
 and usage examples.
 
 Defaults to `AndroidBadgeIconType.LARGE`.
@@ -136,7 +136,7 @@ impact.
 Specifies the `AndroidChannel` which the notification will be delivered on.
 
 On Android 8.0 (API 26) the channel ID is required. Providing a invalid channel ID will throw
-an error. View the [Channels & Groups](/react-native/docs/android/channels) documentation for
+an error. View the [Channels & Groups](/react-native/android/channels) documentation for
 more information and usage examples.
 
 #### Defined in
@@ -186,7 +186,7 @@ system color will be used.
 
 The color can be a predefined system `AndroidColor` or [hexadecimal](https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4).
 
-View the [Color](/react-native/docs/android/appearance#color) documentation for more information.
+View the [Color](/react-native/android/appearance#color) documentation for more information.
 
 #### Defined in
 
@@ -205,7 +205,7 @@ is `false`.
 This should only be used for high priority ongoing tasks like navigation, an ongoing call,
 or other similarly high-priority events for the user.
 
-View the [Foreground Service](/react-native/docs/android/foreground-service) documentation for more information.
+View the [Foreground Service](/react-native/android/foreground-service) documentation for more information.
 
 Defaults to `false`.
 
@@ -270,7 +270,7 @@ more.
 The `fullScreenAction` property allows you to show a custom UI
 in full screen when the notification is displayed.
 
-View the [FullScreenAction](/react-native/docs/android/behaviour#full-screen) documentation to learn
+View the [FullScreenAction](/react-native/android/behaviour#full-screen) documentation to learn
 more.
 
 #### Defined in
@@ -289,7 +289,7 @@ only applicable for notifications that belong to a `groupId`. This must be calle
 you want to mute. For example, if you want only the summary of your group to make noise, all
 children in the group should have the group alert behavior `AndroidGroupAlertBehavior.SUMMARY`.
 
-View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting#group-behaviour)
+View the [Android Grouping & Sorting guide](/react-native/android/grouping-and-sorting#group-behaviour)
 documentation to learn more.
 
 #### Defined in
@@ -307,7 +307,7 @@ display in a cluster or stack on devices which support such rendering.
 
 On some devices, the system may automatically group notifications.
 
-View the [Android Grouping & Sorting guide](/react-native/docs/android/grouping-and-sorting) documentation to
+View the [Android Grouping & Sorting guide](/react-native/android/grouping-and-sorting) documentation to
 learn more.
 
 #### Defined in
@@ -346,7 +346,7 @@ notification.
 
 Defaults to `AndroidImportance.DEFAULT`.
 
-View the [Appearance](/react-native/docs/android/appearance#importance) documentation to learn
+View the [Appearance](/react-native/android/appearance#importance) documentation to learn
 more.
 
 #### Platform
@@ -384,7 +384,7 @@ A local file path using the 'require()' method or a remote http to the picture t
 
 Sets a large icon on the notification.
 
-View the [Android Appearance](/react-native/docs/android/appearance#large-icons) documentation to learn
+View the [Android Appearance](/react-native/android/appearance#large-icons) documentation to learn
 more about this property.
 
 #### Defined in
@@ -403,7 +403,7 @@ The option takes an array containing a hexadecimal color value or predefined `An
 along with the number of milliseconds to show the light, and the number of milliseconds to
 turn off the light. The light frequency pattern is repeated.
 
-View the [Lights](/react-native/docs/android/behaviour#lights) documentation for more information.
+View the [Lights](/react-native/android/behaviour#lights) documentation for more information.
 
 #### Defined in
 
@@ -468,7 +468,7 @@ Setting this value to `true` changes the default behaviour of a notification:
 * Ongoing notifications are sorted above the regular notifications in the notification panel.
 * Ongoing notifications do not have an 'X' close button, and are not affected by the "Clear all" button.
 
-View the [Ongoing](/react-native/docs/android/behaviour#ongoing) documentation for more information.
+View the [Ongoing](/react-native/android/behaviour#ongoing) documentation for more information.
 
 #### Defined in
 
@@ -502,7 +502,7 @@ By default notifications have no behaviour when a user presses them. The
 `pressAction` property allows you to set what happens when a user presses
 the notification.
 
-View the [Interaction](/react-native/docs/android/interaction) documentation to learn
+View the [Interaction](/react-native/android/interaction) documentation to learn
 more.
 
 #### Defined in
@@ -518,7 +518,7 @@ more.
 A notification can show current progress of a task. The progress state can either be fixed or
 indeterminate (unknown).
 
-View the [Progress Indicators](/react-native/docs/android/progress-indicators) documentation
+View the [Progress Indicators](/react-native/android/progress-indicators) documentation
 to learn more.
 
 #### Defined in
@@ -538,7 +538,7 @@ provided, the number of hours/minutes/seconds since that have elapsed since that
 
 Defaults to `false`.
 
-View the [Timers](/react-native/docs/android/timers#timers) documentation to learn more.
+View the [Timers](/react-native/android/timers#timers) documentation to learn more.
 
 #### Defined in
 
@@ -557,7 +557,7 @@ such as an E-Mail.
 
 If no `timestamp` is set, this field has no effect.
 
-View the [Timestamps](/react-native/docs/android/timers#timestamps) documentation to learn more.
+View the [Timestamps](/react-native/android/timers#timestamps) documentation to learn more.
 
 #### Defined in
 
@@ -571,7 +571,7 @@ View the [Timestamps](/react-native/docs/android/timers#timestamps) documentatio
 
 The small icon to show in the heads-up notification.
 
-View the [Icons](/react-native/docs/android/appearance#small-icons) documentation to learn
+View the [Icons](/react-native/android/appearance#small-icons) documentation to learn
 more.
 
 #### Defined in
@@ -603,7 +603,7 @@ different priorities in addition to providing sort key may cause this value to b
 
 If a `groupId` has been set, the sort key can also be used to order members of a notification group.
 
-View the [Android Grouping & Sorting](/react-native/docs/android/grouping-and-sorting#sorting)
+View the [Android Grouping & Sorting](/react-native/android/grouping-and-sorting#sorting)
 documentation to learn more.
 
 #### Defined in
@@ -623,7 +623,7 @@ The default value is to play no sound. To play the default system sound use 'def
 This setting has no behaviour on Android after API level version 26, instead you can set the
 sound on the notification channels.
 
-View the [Sound](/react-native/docs/android/behaviour#sound) documentation for more information.
+View the [Sound](/react-native/android/behaviour#sound) documentation for more information.
 
 #### Platform
 
@@ -643,7 +643,7 @@ Styled notifications provide users with more informative content and additional 
 
 Android supports different styles, however only one can be used with a notification.
 
-View the [Styles](/react-native/docs/android/styles) documentation to learn more
+View the [Styles](/react-native/android/styles) documentation to learn more
 view usage examples.
 
 #### Defined in
@@ -707,7 +707,7 @@ The timestamp can be used with other properties to change the behaviour of a not
 * Use with `showTimestamp` to show the timestamp to the users.
 * Use with `showChronometer` to create a on-going timer.
 
-View the [Timers](/react-native/docs/android/timers) documentation to learn more.
+View the [Timers](/react-native/android/timers) documentation to learn more.
 
 #### Defined in
 
@@ -721,7 +721,7 @@ View the [Timers](/react-native/docs/android/timers) documentation to learn more
 
 Sets the vibration pattern the notification uses when displayed. Must be an even amount of numbers.
 
-View the [Vibration](/react-native/docs/android/behaviour#vibration) documentation to learn more.
+View the [Vibration](/react-native/android/behaviour#vibration) documentation to learn more.
 
 #### Defined in
 
@@ -738,7 +738,7 @@ sensitive information (e.g. a banking app).
 
 Defaults to `AndroidVisibility.PRIVATE`.
 
-View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn
+View the [Visibility](/react-native/android/appearance#visibility) documentation to learn
 more.
 
 #### Defined in
