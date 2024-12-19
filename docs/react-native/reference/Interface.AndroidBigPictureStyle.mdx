@@ -1,0 +1,84 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidBigPictureStyle
+
+# Interface: AndroidBigPictureStyle
+
+The interface used when displaying a Big Picture Style notification.
+
+<Vimeo id="android-style-bigpicture" caption="Android Big Picture Style" />
+
+View the [Big Picture](/react-native/docs/android/styles#big-picture) documentation to learn more.
+
+## Platform
+
+android
+
+## Properties
+
+### largeIcon?
+
+> `optional` **largeIcon**: `null` | `string` | `number` | `object`
+
+A local file path using the 'require()' method or a HTTP or file URL to the picture to display.
+
+If set, overrides the main notification `largeIcon` when the notification is expanded.
+
+To hide the `largeIcon` when the notification is expanded, set to null. Similar to `thumbnailHidden` for attachments on iOS.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:617](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L617)
+
+***
+
+### picture
+
+> **picture**: `string` | `number` | `object`
+
+A local file path using the 'require()' method or a HTTP or file URL to the picture to display.
+
+The image will be automatically resized depending on the device and it's size. If the image could
+not be found a blank space will appear.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:603](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L603)
+
+***
+
+### summary?
+
+> `optional` **summary**: `string`
+
+If set, overrides the main notification `summary` when the notification is expanded.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:622](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L622)
+
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+If set, overrides the main notification `title` when the notification is expanded.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:608](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L608)
+
+***
+
+### type
+
+> **type**: [`BIGPICTURE`](react-native/reference/Enumeration.AndroidStyle#bigpicture)
+
+Constant enum value used to identify the style type.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:595](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L595)

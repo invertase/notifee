@@ -1,0 +1,77 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidMessagingStyle
+
+# Interface: AndroidMessagingStyle
+
+The interface used when displaying a Messaging Style notification.
+
+<Vimeo id="android-style-messaging" caption="Android Messaging Style" />
+
+View the [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+
+## Platform
+
+android
+
+## Properties
+
+### group?
+
+> `optional` **group**: `boolean`
+
+Sets whether this conversation notification represents a group (3 or more persons).
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:723](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L723)
+
+***
+
+### messages
+
+> **messages**: [`AndroidMessagingStyleMessage`](react-native/reference/Interface.AndroidMessagingStyleMessage)\[]
+
+An array of messages to display inside the notification.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:713](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L713)
+
+***
+
+### person
+
+> **person**: [`AndroidPerson`](react-native/reference/Interface.AndroidPerson)
+
+The person who is receiving a message on the current device.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:708](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L708)
+
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+If set, overrides the main notification `title` when the notification is expanded.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:718](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L718)
+
+***
+
+### type
+
+> **type**: [`MESSAGING`](react-native/reference/Enumeration.AndroidStyle#messaging)
+
+Constant enum value used to identify the style type.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:703](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L703)

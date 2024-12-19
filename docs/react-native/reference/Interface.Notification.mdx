@@ -1,0 +1,150 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / Notification
+
+# Interface: Notification
+
+Interface for building a local notification for both Android & iOS devices.
+
+To learn more about displaying a notification, view the [Displaying a Notification](/react-native/docs/displaying-a-notification)
+documentation.
+
+## Properties
+
+### android?
+
+> `optional` **android**: [`NotificationAndroid`](react-native/reference/Interface.NotificationAndroid)
+
+Android specific notification options. See the [`NotificationAndroid`](/react-native/reference/notificationandroid)
+interface for more information and default options which are applied to a notification.
+
+#### Platform
+
+android
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:62](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L62)
+
+***
+
+### body?
+
+> `optional` **body**: `string`
+
+The main body content of a notification.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:46](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L46)
+
+***
+
+### data?
+
+> `optional` **data**: `object`
+
+Additional data to store on the notification.
+
+Data can be used to provide additional context to your notification which can be retrieved
+at a later point in time (e.g. via an event).
+
+#### Index Signature
+
+\[`key`: `string`]: `string` | `number` | `object`
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:54](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L54)
+
+***
+
+### id?
+
+> `optional` **id**: `string`
+
+A unique identifier for your notification.
+
+Notifications with the same ID will be created as the same instance, allowing you to update
+a notification which already exists on the device.
+
+Defaults to a random string if not provided.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:31](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L31)
+
+***
+
+### ios?
+
+> `optional` **ios**: [`NotificationIOS`](react-native/reference/Interface.NotificationIOS)
+
+iOS specific notification options. See the [`NotificationIOS`](/react-native/reference/notificationios)
+interface for more information and default options which are applied to a notification.
+
+#### Platform
+
+ios
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:70](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L70)
+
+***
+
+### remote?
+
+> `readonly` `optional` **remote**: `object`
+
+Will be populated if it's a remote notification
+
+#### contentAvailable?
+
+> `optional` **contentAvailable**: `number`
+
+#### messageId
+
+> **messageId**: `string`
+
+#### mutableContent?
+
+> `optional` **mutableContent**: `number`
+
+#### senderId
+
+> **senderId**: `string`
+
+#### Platform
+
+ios
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:77](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L77)
+
+***
+
+### subtitle?
+
+> `optional` **subtitle**: `string`
+
+The notification subtitle, which appears on a new line below/next the title.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:41](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L41)
+
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+The notification title which appears above the body text.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:36](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L36)

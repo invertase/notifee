@@ -1,0 +1,250 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidChannel
+
+# Interface: AndroidChannel
+
+An interface for describing an Android Channel.
+
+Channels override any individual notification preferences (e.g. lights/vibration) and the user
+has final control over the setting. Once created, only channel metadata can be updated (e.g. name).
+
+View the [Channels & Groups](/react-native/docs/android/channels) documentation to learn more.
+
+## Platform
+
+android
+
+## Extended by
+
+* [`NativeAndroidChannel`](react-native/reference/Interface.NativeAndroidChannel)
+
+## Properties
+
+### badge?
+
+> `optional` **badge**: `boolean`
+
+Sets whether badges are enabled for the channel.
+
+View the [Badges](/react-native/docs/android/appearance#badges) documentation to learn more.
+
+Defaults to `true`.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:881](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L881)
+
+***
+
+### bypassDnd?
+
+> `optional` **bypassDnd**: `boolean`
+
+Sets whether or not notifications posted to this channel can interrupt the user in
+'Do Not Disturb' mode.
+
+Defaults to `false`.
+
+This setting cannot be overridden once the channel is created.
+
+#### Platform
+
+android API Level >= 29
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:893](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L893)
+
+***
+
+### description?
+
+> `optional` **description**: `string`
+
+Sets the user visible description of this channel.
+
+The recommended maximum length is 300 characters; the value may be truncated if it is too long.
+
+This setting can be updated after creation.
+
+#### Platform
+
+android API Level >= 28
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:904](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L904)
+
+***
+
+### groupId?
+
+> `optional` **groupId**: `string`
+
+Sets what group this channel belongs to. Group information is only used for presentation, not for behavior.
+
+Groups can be created via via [`createChannelGroup`](/react-native/reference/createchannelgroup).
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:931](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L931)
+
+***
+
+### id
+
+> **id**: `string`
+
+The unique channel ID.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:862](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L862)
+
+***
+
+### importance?
+
+> `optional` **importance**: [`AndroidImportance`](react-native/reference/Enumeration.AndroidImportance)
+
+Sets the level of interruption of this notification channel.
+
+Defaults to `AndroidImportance.DEFAULT`.
+
+This setting can only be set to a lower importance level once set.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:940](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L940)
+
+***
+
+### lightColor?
+
+> `optional` **lightColor**: `string`
+
+If lights are enabled (via `lights`), sets/overrides the light color for notifications
+posted to this channel.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:948](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L948)
+
+***
+
+### lights?
+
+> `optional` **lights**: `boolean`
+
+Sets whether notifications posted to this channel should display notification lights, on devices that support that feature.
+
+Defaults to `true`.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:913](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L913)
+
+***
+
+### name
+
+> **name**: `string`
+
+The channel name. This is shown to the user so must be descriptive and relate to the notifications
+which will be delivered under this channel.
+
+This setting can be updated after creation.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:870](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L870)
+
+***
+
+### sound?
+
+> `optional` **sound**: `string`
+
+Overrides the sound the notification is displayed with.
+
+The default value is to play no sound. To play the default system sound use 'default'.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:976](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L976)
+
+***
+
+### soundURI?
+
+> `optional` **soundURI**: `string`
+
+The URI of the notification sound associated with the channel, if any.
+
+This is a read-only value, and is under user control after the channel is created
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:983](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L983)
+
+***
+
+### vibration?
+
+> `optional` **vibration**: `boolean`
+
+Sets whether notification posted to this channel should vibrate.
+
+Defaults to `true`.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:922](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L922)
+
+***
+
+### vibrationPattern?
+
+> `optional` **vibrationPattern**: `number`\[]
+
+Sets/overrides the vibration pattern for notifications posted to this channel.
+
+The pattern in milliseconds. Must be an even amount of numbers.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:967](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L967)
+
+***
+
+### visibility?
+
+> `optional` **visibility**: [`AndroidVisibility`](react-native/reference/Enumeration.AndroidVisibility)
+
+Sets whether notifications posted to this channel appear on the lockscreen or not,
+and if so, whether they appear in a redacted form.
+
+Defaults to `AndroidVisibility.PRIVATE`.
+
+This setting cannot be overridden once the channel is created.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:958](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L958)

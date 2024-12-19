@@ -1,0 +1,57 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidVisibility
+
+# Enumeration: AndroidVisibility
+
+Interface used to define the visibility of an Android notification.
+
+Use with the `visibility` property on the notification.
+
+View the [Visibility](/react-native/docs/android/appearance#visibility) documentation to learn more.
+
+Default value is `AndroidVisibility.PRIVATE`.
+
+## Platform
+
+android
+
+## Enumeration Members
+
+### PRIVATE
+
+> **PRIVATE**: `0`
+
+Show the notification on all lockscreens, but conceal sensitive or private information on secure lockscreens.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1263](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1263)
+
+***
+
+### PUBLIC
+
+> **PUBLIC**: `1`
+
+Show this notification in its entirety on all lockscreens.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1268](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1268)
+
+***
+
+### SECRET
+
+> **SECRET**: `-1`
+
+Do not reveal any part of this notification on a secure lockscreen.
+
+Useful for notifications showing sensitive information such as banking apps.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1275](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1275)

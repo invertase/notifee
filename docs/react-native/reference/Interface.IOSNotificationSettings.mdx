@@ -1,0 +1,152 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / IOSNotificationSettings
+
+# Interface: IOSNotificationSettings
+
+An interface representing the current authorization status and notification-related settings for your app.
+
+This interface is returned from [`requestPermission`](/react-native/reference/requestpermission)
+and [`getNotificationSettings`](/react-native/reference/getnotificationsettings).
+
+View the [Observing Settings](/react-native/docs/ios/permissions#observing-settings) documentation to learn more.
+
+## Platform
+
+ios
+
+## Properties
+
+### alert
+
+> **alert**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications will alert the user.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:350](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L350)
+
+***
+
+### announcement
+
+> **announcement**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications can be announced to the user
+via 3rd party services such as Siri.
+
+For example, if the notification can be automatically read by Siri
+while the user is wearing AirPods.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:389](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L389)
+
+***
+
+### authorizationStatus
+
+> **authorizationStatus**: [`AuthorizationStatus`](react-native/reference/Enumeration.AuthorizationStatus)
+
+Overall notification authorization status for the application.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:401](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L401)
+
+***
+
+### badge
+
+> **badge**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications can update the application badge.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:355](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L355)
+
+***
+
+### carPlay
+
+> **carPlay**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications can be displayed in a CarPlay environment.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:375](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L375)
+
+***
+
+### criticalAlert
+
+> **criticalAlert**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if critical notifications are allowed.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:360](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L360)
+
+***
+
+### inAppNotificationSettings
+
+> **inAppNotificationSettings**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:396](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L396)
+
+***
+
+### lockScreen
+
+> **lockScreen**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications will be displayed on the lock screen.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:380](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L380)
+
+***
+
+### notificationCenter
+
+> **notificationCenter**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications will be displayed in the notification center.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:394](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L394)
+
+***
+
+### showPreviews
+
+> **showPreviews**: [`IOSShowPreviewsSetting`](react-native/reference/Enumeration.IOSShowPreviewsSetting)
+
+Enum describing if notification previews will be shown.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:365](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L365)
+
+***
+
+### sound
+
+> **sound**: [`IOSNotificationSetting`](react-native/reference/Enumeration.IOSNotificationSetting)
+
+Enum describing if notifications can trigger a sound.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationIOS.ts:370](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationIOS.ts#L370)

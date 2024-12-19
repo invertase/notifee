@@ -1,0 +1,107 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidPerson
+
+# Interface: AndroidPerson
+
+The interface used to describe a person shown in notifications.
+
+Currently used with [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) notifications.
+
+## Platform
+
+android
+
+## Properties
+
+### bot?
+
+> `optional` **bot**: `boolean`
+
+If `true` this person represents a machine rather than a human. This is used primarily for testing and automated tooling.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:782](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L782)
+
+***
+
+### icon?
+
+> `optional` **icon**: `string`
+
+The icon to display next to the person in the notification. The icon can be URL or local
+Android resource.
+
+If not provided, an icon will be automatically creating using the `name` property.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:801](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L801)
+
+***
+
+### id?
+
+> `optional` **id**: `string`
+
+An optional unique ID of the person. Setting this property is preferred for unique identification,
+however not required. If no value is provided, the `name` will be used instead..
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:775](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L775)
+
+***
+
+### important?
+
+> `optional` **important**: `boolean`
+
+If `true` this person will be marked as important.
+
+Important users are those who frequently contact the receiving person. If the app is in
+"Do not disturb" mode, a notification containing an important person may override this mode
+if the person has been whitelisted on the device.
+
+Defaults to `false`.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:793](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L793)
+
+***
+
+### name
+
+> **name**: `string`
+
+The name of the person.
+
+If no `id` is provided, the name will be used as the unique identifier.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:769](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L769)
+
+***
+
+### uri?
+
+> `optional` **uri**: `string`
+
+URI contact of the person.
+
+The URI can be any of the following:
+
+* The representation of a contact URI, e.g. `android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI`
+* A `mailto:` string
+* A `tel:` string
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:812](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L812)

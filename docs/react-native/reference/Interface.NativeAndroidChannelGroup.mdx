@@ -1,0 +1,110 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / NativeAndroidChannelGroup
+
+# Interface: NativeAndroidChannelGroup
+
+An interface which describes a channel group which has been fetched from the device.
+
+Contains additional information which is only available when fetching the channel group from the device.
+
+## Platform
+
+android API Level >= 26
+
+## Extends
+
+* [`AndroidChannelGroup`](react-native/reference/Interface.AndroidChannelGroup)
+
+## Properties
+
+### blocked
+
+> **blocked**: `boolean`
+
+Returns whether or not notifications posted to a Channel belonging to this group are
+blocked by the user.
+
+On API levels \< 28, returns `false`.
+
+View the [Listening to channel events](/react-native/docs/android/channels#listening-to-channel-events)
+documentation to learn more about subscribing to when a channel is blocked by the user.
+
+#### Platform
+
+android API Level >= 28
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1061](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1061)
+
+***
+
+### channels
+
+> **channels**: [`NativeAndroidChannel`](react-native/reference/Interface.NativeAndroidChannel)\[]
+
+Returns a list of channels assigned to this channel group.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1066](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1066)
+
+***
+
+### description?
+
+> `optional` **description**: `string`
+
+An optional description of the group. This is visible to the user.
+
+On Android APIs less than 28 this will always be undefined.
+
+#### Platform
+
+android API Level >= 28
+
+#### Inherited from
+
+[`AndroidChannelGroup`](react-native/reference/Interface.AndroidChannelGroup).[`description`](react-native/reference/Interface.AndroidChannelGroup#description)
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1039](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1039)
+
+***
+
+### id
+
+> **id**: `string`
+
+Unique id for this channel group.
+
+#### Inherited from
+
+[`AndroidChannelGroup`](react-native/reference/Interface.AndroidChannelGroup).[`id`](react-native/reference/Interface.AndroidChannelGroup#id)
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1022](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1022)
+
+***
+
+### name
+
+> **name**: `string`
+
+The name of the group. This is visible to the user so should be a descriptive name which
+categorizes other channels (e.g. reminders).
+
+The recommended maximum length is 40 characters; the value may be truncated if it is too long.
+
+#### Inherited from
+
+[`AndroidChannelGroup`](react-native/reference/Interface.AndroidChannelGroup).[`name`](react-native/reference/Interface.AndroidChannelGroup#name)
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:1030](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L1030)

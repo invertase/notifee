@@ -1,0 +1,69 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AuthorizationStatus
+
+# Enumeration: AuthorizationStatus
+
+An enum representing the notification authorization status for this app on the device.
+
+Value is greater than 0 if authorized, compare against an exact status (e.g. PROVISIONAL) for a more
+granular status.
+
+## Enumeration Members
+
+### AUTHORIZED
+
+> **AUTHORIZED**: `1`
+
+The app is authorized to create notifications.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:488](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L488)
+
+***
+
+### DENIED
+
+> **DENIED**: `0`
+
+The app is not authorized to create notifications.
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:483](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L483)
+
+***
+
+### NOT\_DETERMINED
+
+> **NOT\_DETERMINED**: `-1`
+
+The app user has not yet chosen whether to allow the application to create notifications. Usually
+this status is returned prior to the first call of `requestPermission`.
+
+#### Platform
+
+ios
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:478](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L478)
+
+***
+
+### PROVISIONAL
+
+> **PROVISIONAL**: `2`
+
+The app is currently authorized to post non-interrupting user notifications
+
+#### Platform
+
+ios iOS >= 12
+
+#### Defined in
+
+[packages/react-native/src/types/Notification.ts:494](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/Notification.ts#L494)

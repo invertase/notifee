@@ -36,7 +36,7 @@
     "lerna:bootstrap": "lerna bootstrap",
     "lerna:link": "lerna link && lerna exec -- yarn link",
     "lerna:clean": "lerna clean",
-    "gen:reference": "rimraf docs/typedoc.json docs/typedoc.min.json && node scripts/generate-typedoc.js",
+    "gen:reference": "yarn typedoc",
     "test:all": "yarn test:core:android && yarn tests_rn:test && yarn tests_rn:android:test && yarn tests_rn:ios:test",
     "test:core:android": "cd android && ./gradlew testDebugUnit",
     "tests_rn:packager": "cd tests_react_native && npx react-native start",
@@ -73,9 +73,12 @@
     "google-java-format": "^1.4.0",
     "lerna": "^4.0.0",
     "prettier": "^2.5.1",
+    "remark-link-rewrite": "^1.0.7",
     "rimraf": "^3.0.2",
     "semantic-release": "^24.2.0",
-    "typedoc": "^0.19.2",
+    "typedoc": "^0.27.5",
+    "typedoc-plugin-markdown": "^4.3.3",
+    "typedoc-plugin-remark": "^1.2.1",
     "typescript": "^4.6.2"
   },
   "resolutions": {

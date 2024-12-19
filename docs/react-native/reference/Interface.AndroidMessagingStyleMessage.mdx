@@ -1,0 +1,57 @@
+[**@notifee/react-native**](react-native/reference/index)
+
+***
+
+[@notifee/react-native](react-native/reference/index) / AndroidMessagingStyleMessage
+
+# Interface: AndroidMessagingStyleMessage
+
+The interface for messages when constructing a Messaging Style notification.
+
+<Vimeo id="android-style-messaging" caption="Android Messaging Style" />
+
+View the [`AndroidMessagingStyle`](/react-native/reference/androidmessagingstyle) reference
+and [Messaging](/react-native/docs/android/styles#messaging) documentation to learn more.
+
+## Platform
+
+android
+
+## Properties
+
+### person?
+
+> `optional` **person**: [`AndroidPerson`](react-native/reference/Interface.AndroidPerson)
+
+The sender of this message. See [`AndroidPerson`](/react-native/reference/androidperson) reference
+for more information on the properties available.
+
+This property should only be provided if the message is from an external person, and not the person receiving the message.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:753](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L753)
+
+***
+
+### text
+
+> **text**: `string`
+
+The content of the message.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:740](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L740)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of when the message arrived in milliseconds.
+
+#### Defined in
+
+[packages/react-native/src/types/NotificationAndroid.ts:745](https://github.com/invertase/notifee/blob/main/packages/react-native/src/types/NotificationAndroid.ts#L745)
