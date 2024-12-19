@@ -58,13 +58,18 @@
 #pragma mark Application Notifications
 
 - (void)application_onDidFinishLaunchingNotification:(nonnull NSNotification *)notification {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  UILocalNotification *launchNotification =
-      (UILocalNotification *)notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
-  [[NotifeeCoreUNUserNotificationCenter instance]
-      onDidFinishLaunchingNotification:launchNotification.userInfo];
-  [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification];
+  NSDictionary *notifUserInfo =
+      notification.userInfo[UIApplicationLaunchOptionsLocalNotificationKey];
+    
+  if (!notifUserInfo) {
+      // Fallback to remote notification key if local notification key is not available
+      notifUserInfo = notification.userInfo[UIApplicationLaunchOptionsRemoteNotificationKey];
+  }
+
+  if (notifUserInfo) {
+      [[NotifeeCoreUNUserNotificationCenter instance] onDidFinishLaunchingNotification:notifUserInfo];
+      [[NotifeeCoreUNUserNotificationCenter instance] getInitialNotification];
+  }
 
   [[NotifeeCoreUNUserNotificationCenter instance] observe];
 }

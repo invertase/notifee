@@ -21,7 +21,6 @@
 #import "NotifeeCoreUtil.h"
 
 @implementation NotifeeCoreUNUserNotificationCenter
-
 struct {
   unsigned int willPresentNotification : 1;
   unsigned int didReceiveNotificationResponse : 1;
@@ -73,12 +72,31 @@ struct {
 
 - (nullable NSDictionary *)getInitialNotification {
   if (_initialNotificationGathered && _initialNotificationBlock != nil) {
+
     // copying initial notification
     if (_initialNotification != nil &&
         [_initialNoticationID isEqualToString:_notificationOpenedAppID]) {
-      NSDictionary *initialNotificationCopy = [_initialNotification copy];
+
+      NSMutableDictionary *event = [NSMutableDictionary dictionary];
+      NSMutableDictionary *initialNotificationCopy = [_initialNotification mutableCopy];
+      initialNotificationCopy[@"initialNotification"] = @1;
+
       _initialNotification = nil;
+
+      // Sets the return payload for getInitialNotification()
       _initialNotificationBlock(nil, initialNotificationCopy);
+
+      // Prepare onForegroundEvent() payload
+      event[@"detail"] = [initialNotificationCopy copy];
+      if ([event[@"detail"][@"pressAction"][@"id"] isEqualToString:@"default"]) {
+          event[@"type"] = @1;  // PRESS
+      } else {
+          event[@"type"] = @2;  // ACTION_PRESS
+      }
+
+      // Call onForegroundEvent() on Javascript side with payload:
+      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:event];
+
     } else {
       _initialNotificationBlock(nil, nil);
     }
@@ -104,7 +122,6 @@ struct {
   NSDictionary *notifeeNotification =
       notification.request.content.userInfo[kNotifeeUserInfoNotification];
 
-  // we only care about notifications created through notifee
   if (notifeeNotification != nil) {
     UNNotificationPresentationOptions presentationOptions = UNNotificationPresentationOptionNone;
     NSDictionary *foregroundPresentationOptions =
@@ -148,23 +165,16 @@ struct {
       presentationOptions |= UNNotificationPresentationOptionAlert;
     }
 
-    NSDictionary *notifeeTrigger = notification.request.content.userInfo[kNotifeeUserInfoTrigger];
-    if (notifeeTrigger != nil) {
-      // post DELIVERED event
-      [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
+    // post DELIVERED event
+    [[NotifeeCoreDelegateHolder instance] didReceiveNotifeeCoreEvent:@{
         @"type" : @(NotifeeCoreEventTypeDelivered),
         @"detail" : @{
           @"notification" : notifeeNotification,
         }
-      }];
-    }
+    }];
 
     completionHandler(presentationOptions);
 
-  } else if (_originalDelegate != nil && originalUNCDelegateRespondsTo.willPresentNotification) {
-    [_originalDelegate userNotificationCenter:center
-                      willPresentNotification:notification
-                        withCompletionHandler:completionHandler];
   }
 }
 
