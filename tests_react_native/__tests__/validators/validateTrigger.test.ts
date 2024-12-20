@@ -25,10 +25,8 @@ describe('Validate Trigger', () => {
     });
 
     test('throws an error if trigger type is unknown', () => {
-      const trigger: Trigger = {
-        // @ts-ignore
-        type: -1,
-      };
+      // @ts-ignore
+      const trigger: Trigger = { type: -1 };
 
       expect(() => validateTrigger(trigger)).toThrowError('Unknown trigger type');
     });
