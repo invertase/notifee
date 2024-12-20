@@ -32,6 +32,7 @@
  */
 package io.invertase.notifee;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -224,7 +225,7 @@ public class HeadlessTask {
                   }
                   if (taskConfig != null) {
                     // Clear it from the Queue.
-                    Log.d(HEADLESS_TASK_NAME, "taskId: " + taskConfig.getTaskId());
+                    Log.d(HEADLESS_TASK_NAME, "completed taskId: " + taskConfig.getTaskId());
                     mTaskQueue.remove(taskConfig);
                     if (taskConfig.getCallback() != null) {
                       taskConfig.getCallback().call();
@@ -241,7 +242,7 @@ public class HeadlessTask {
       // Provide the RN taskId to our private TaskConfig instance, mapping the RN taskId to our
       // TaskConfig's internal taskId.
       taskConfig.setReactTaskId(taskId);
-      Log.d(HEADLESS_TASK_NAME, "taskId: " + taskId);
+      Log.d(HEADLESS_TASK_NAME, "launched taskId: " + taskId);
     } catch (IllegalStateException e) {
       Log.e(HEADLESS_TASK_NAME, e.getMessage(), e);
     }
@@ -262,11 +263,13 @@ public class HeadlessTask {
     }
   }
 
+  @SuppressLint("VisibleForTests")
   public static ReactContext getReactContext(Context context) {
     if (isBridgelessArchitectureEnabled()) {
       Object reactHost = getReactHost(context);
       Assertions.assertNotNull(reactHost, "getReactHost() is null in New Architecture");
       try {
+        assert reactHost != null;
         Method getCurrentReactContext = reactHost.getClass().getMethod("getCurrentReactContext");
         return (ReactContext) getCurrentReactContext.invoke(reactHost);
       } catch (Exception e) {
@@ -299,6 +302,7 @@ public class HeadlessTask {
                 mIsReactContextInitialized.set(true);
                 drainTaskQueue(reactContext);
                 try {
+                  assert reactHost != null;
                   Method removeReactInstanceEventListener =
                       reactHost
                           .getClass()
@@ -311,6 +315,7 @@ public class HeadlessTask {
               }
             };
         try {
+          assert reactHost != null;
           Method addReactInstanceEventListener =
               reactHost
                   .getClass()
@@ -341,7 +346,7 @@ public class HeadlessTask {
   /**
    * Invokes HeadlessEvents queued while waiting for the ReactContext to initialize.
    *
-   * @param reactContext
+   * @param reactContext context to use for task invocation
    */
   private void drainTaskQueue(final ReactContext reactContext) {
     if (mWillDrainTaskQueue.compareAndSet(false, true)) {
@@ -362,7 +367,7 @@ public class HeadlessTask {
    * Return true if this app is running with RN's bridgeless architecture. Cheers to @mikehardy for
    * this idea.
    *
-   * @return
+   * @return true if new arch bridgeless mode is enabled
    */
   public static boolean isBridgelessArchitectureEnabled() {
     try {
