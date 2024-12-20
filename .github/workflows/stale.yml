@@ -3,7 +3,7 @@ name: Mark stale issues and pull requests
 on:
   workflow_dispatch:
   schedule:
-    - cron: 35 * * * *
+    - cron: 35 0 * * *
 permissions:
   contents: read
 jobs:
