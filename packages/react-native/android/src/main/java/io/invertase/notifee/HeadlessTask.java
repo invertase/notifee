@@ -107,6 +107,7 @@ public class HeadlessTask {
 
   private final List<TaskConfig> mTaskQueue = new ArrayList<>();
   private final AtomicBoolean mIsReactContextInitialized = new AtomicBoolean(false);
+  private final AtomicBoolean mWillDrainTaskQueue = new AtomicBoolean(false);
   private final AtomicBoolean mIsInitializingReactContext = new AtomicBoolean(false);
   private final AtomicBoolean mIsHeadlessJsTaskListenerRegistered = new AtomicBoolean(false);
 
@@ -184,6 +185,10 @@ public class HeadlessTask {
 
   private synchronized void invokeStartTask(
       ReactContext reactContext, final TaskConfig taskConfig) {
+    if (taskConfig.mReactTaskId > 0) {
+      Log.w(HEADLESS_TASK_NAME, "Task already invoked <IGNORED>: " + this);
+      return;
+    }
     final HeadlessJsTaskContext headlessJsTaskContext =
         HeadlessJsTaskContext.getInstance(reactContext);
     try {
@@ -339,16 +344,18 @@ public class HeadlessTask {
    * @param reactContext
    */
   private void drainTaskQueue(final ReactContext reactContext) {
-    new Handler(Looper.getMainLooper())
-        .postDelayed(
-            () -> {
-              synchronized (mTaskQueue) {
-                for (TaskConfig taskConfig : mTaskQueue) {
-                  invokeStartTask(reactContext, taskConfig);
+    if (mWillDrainTaskQueue.compareAndSet(false, true)) {
+      new Handler(Looper.getMainLooper())
+          .postDelayed(
+              () -> {
+                synchronized (mTaskQueue) {
+                  for (TaskConfig taskConfig : mTaskQueue) {
+                    invokeStartTask(reactContext, taskConfig);
+                  }
                 }
-              }
-            },
-            500);
+              },
+              500);
+    }
   }
 
   /**
