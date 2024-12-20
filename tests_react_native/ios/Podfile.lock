@@ -351,10 +351,10 @@ PODS:
     - Firebase/Messaging (= 8.15.0)
     - React-Core
     - RNFBApp
-  - RNNotifee (9.1.7):
+  - RNNotifee (9.1.8):
     - NotifeeCore
     - React-Core
-  - RNNotifeeCore (9.1.7):
+  - RNNotifeeCore (9.1.8):
     - NotifeeCore
   - Yoga (1.14.0)
 
@@ -536,8 +536,8 @@ SPEC CHECKSUMS:
   ReactCommon: f4bb9e5209ea5c3c6ab25e100895119e58d6e50a
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
-  RNNotifee: c5e7609de1ca772202996d1a23367a83a7321220
-  RNNotifeeCore: 5b986883029e934de30a2f214c18cf29e10f3700
+  RNNotifee: f6635868c2a1746c3243abd018409d35d6f7a334
+  RNNotifeeCore: 0cd98b7259ee1c3ac91f2a3b3c6837d08a7c4e5e
   Yoga: 8a90b50af67eaa9fe94fd03e550bfeab06096873
 
 PODFILE CHECKSUM: 0a7cc0c2dfdaa228004324b420c9bdc099bdf0b4
