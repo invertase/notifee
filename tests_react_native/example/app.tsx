@@ -150,7 +150,7 @@ function Root(): any {
     init().catch(console.error);
   }, []);
 
-  const scheduleNotification = async () => {
+  const scheduleNotification = async (notificationId?: number) => {
     const trigger: TimestampTrigger = {
       type: TriggerType.TIMESTAMP,
       timestamp: new Date(Date.now() + 10000).getTime(),
@@ -162,7 +162,7 @@ function Root(): any {
           title: 'title',
           body: 'body',
           subtitle: 'subtitle',
-          id: 'notifId',
+          id: `notifId${notificationId ?? 0}`,
           android: {
             channelId: 'Scheduled',
             badgeCount: 1,
@@ -275,6 +275,12 @@ function Root(): any {
           <Button
             title={`create trigger notification +15secs from now`}
             onPress={async (): Promise<void> => scheduleNotification()}
+          />
+          <Button
+            title={`create 20 trigger notifications +15secs from now`}
+            onPress={async (): Promise<void> => {
+              for (let i = 0; i < 20; i++) scheduleNotification(i);
+            }}
           />
           <Button
             title={`Cancel all `}
