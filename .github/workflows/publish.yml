@@ -31,13 +31,21 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-
       # semantic-release uses npm to do final prepare + package + publish
       # npm will not tolerate node_modules directories installed via yarn
       # so yarn must not be used in this workflow
       # there will be errors related to pod-install but we can ignore them
       - name: Install dependencies using NPM
         run: npm i
+
+      # The release script runs packages/react-native/package.json::prepublishOnly
+      # which will generate these artifacts, but it does that *after* it commits
+      # to git, so we don't get the Android AAR or the reference API typedoc unless
+      # we generate them prior to running the release
+      - name: Generate artifacts before release
+        run: |
+          npm run build:core
+          npm run gen:reference
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
