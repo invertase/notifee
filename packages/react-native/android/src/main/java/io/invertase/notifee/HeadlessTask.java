@@ -96,7 +96,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class HeadlessTask {
-  private static String HEADLESS_TASK_NAME = "NotifeeHeadlessJS";
+  private static final String HEADLESS_TASK_NAME = "NotifeeHeadlessJS";
   // Hard-coded time-limit for headless-tasks is 60000 @todo configurable?
   private static final int TASK_TIMEOUT = 60000;
   private static final AtomicInteger sLastTaskId = new AtomicInteger(0);
@@ -124,7 +124,7 @@ public class HeadlessTask {
    */
   public void onFinishHeadlessTask(int taskId) {
     if (!mIsReactContextInitialized.get()) {
-      Log.w("NotifeeHeadlessJS", taskId + " found no ReactContext");
+      Log.w(HEADLESS_TASK_NAME, taskId + " found no ReactContext");
       return;
     }
     ReactContext reactContext = getReactContext(EventSubscriber.getContext());
@@ -145,12 +145,12 @@ public class HeadlessTask {
           // Tell RN we're done using the mapped getReactTaskId().
           headlessJsTaskContext.finishTask(taskConfig.getReactTaskId());
         } else {
-          Log.w("NotifeeHeadlessJS", "Failed to find task: " + taskId);
+          Log.w(HEADLESS_TASK_NAME, "Failed to find task: " + taskId);
         }
       }
     } else {
       Log.w(
-          "NotifeeHeadlessJS",
+          HEADLESS_TASK_NAME,
           "Failed to finishHeadlessTask: "
               + taskId
               + " -- HeadlessTask onFinishHeadlessTask failed to find a ReactContext.  This is"
@@ -219,13 +219,13 @@ public class HeadlessTask {
                   }
                   if (taskConfig != null) {
                     // Clear it from the Queue.
-                    Log.d("NotifeeHeadlessJS", "taskId: " + taskConfig.getTaskId());
+                    Log.d(HEADLESS_TASK_NAME, "taskId: " + taskConfig.getTaskId());
                     mTaskQueue.remove(taskConfig);
                     if (taskConfig.getCallback() != null) {
                       taskConfig.getCallback().call();
                     }
                   } else {
-                    Log.w("NotifeeHeadlessJS", "Failed to find taskId: " + taskId);
+                    Log.w(HEADLESS_TASK_NAME, "Failed to find taskId: " + taskId);
                   }
                 }
               }
@@ -236,9 +236,9 @@ public class HeadlessTask {
       // Provide the RN taskId to our private TaskConfig instance, mapping the RN taskId to our
       // TaskConfig's internal taskId.
       taskConfig.setReactTaskId(taskId);
-      Log.d("NotifeeHeadlessJS", "taskId: " + taskId);
+      Log.d(HEADLESS_TASK_NAME, "taskId: " + taskId);
     } catch (IllegalStateException e) {
-      Log.e("NotifeeHeadlessJS", e.getMessage(), e);
+      Log.e(HEADLESS_TASK_NAME, e.getMessage(), e);
     }
   }
 
@@ -265,7 +265,7 @@ public class HeadlessTask {
         Method getCurrentReactContext = reactHost.getClass().getMethod("getCurrentReactContext");
         return (ReactContext) getCurrentReactContext.invoke(reactHost);
       } catch (Exception e) {
-        Log.e("NotifeeHeadlessJS", "Reflection error getCurrentReactContext: " + e.getMessage(), e);
+        Log.e(HEADLESS_TASK_NAME, "Reflection error getCurrentReactContext: " + e.getMessage(), e);
       }
     }
     final ReactInstanceManager reactInstanceManager =
@@ -284,7 +284,7 @@ public class HeadlessTask {
       return;
     }
     if (mIsInitializingReactContext.compareAndSet(false, true)) {
-      Log.d("NotifeeHeadlessJS", "initialize ReactContext");
+      Log.d(HEADLESS_TASK_NAME, "initialize ReactContext");
       final Object reactHost = getReactHost(context);
       if (isBridgelessArchitectureEnabled()) { // NEW arch
         ReactInstanceEventListener callback =
@@ -301,7 +301,7 @@ public class HeadlessTask {
                               "removeReactInstanceEventListener", ReactInstanceEventListener.class);
                   removeReactInstanceEventListener.invoke(reactHost, this);
                 } catch (Exception e) {
-                  Log.e("NotifeeHeadlessJS", "reflection error A: " + e, e);
+                  Log.e(HEADLESS_TASK_NAME, "reflection error A: " + e, e);
                 }
               }
             };
@@ -314,7 +314,7 @@ public class HeadlessTask {
           Method startReactHost = reactHost.getClass().getMethod("start");
           startReactHost.invoke(reactHost);
         } catch (Exception e) {
-          Log.e("NotifeeHeadlessJS", "reflection error ReactHost start: " + e.getMessage(), e);
+          Log.e(HEADLESS_TASK_NAME, "reflection error ReactHost start: " + e.getMessage(), e);
         }
       } else { // OLD arch
         final ReactInstanceManager reactInstanceManager =
