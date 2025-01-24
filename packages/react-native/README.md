@@ -122,7 +122,7 @@ The important part is to make sure you have a `__notifee_notification` object un
 ---
 
 <p>
-  <img align="left" width="50px" src="https://static.invertase.io/assets/invertase-logo-small.png">
+  <img align="left" width="50px" src="https://static.invertase.io/assets/invertase/invertase-rounded.png">
   <p align="left">
     Built and maintained with 💛 by <a href="https://invertase.io">Invertase</a>.
   </p>
