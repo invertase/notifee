@@ -706,6 +706,13 @@
           iosDictionary[@"inAppNotificationSettings"] = @-1;
         }
 
+        if (@available(iOS 15.0, *)) {
+          iosDictionary[@"timeSensitive"] =
+            [NotifeeCoreUtil numberForUNNotificationSetting:settings.timeSensitiveSetting];
+        } else {
+          iosDictionary[@"timeSensitive"] = @-1;
+        }
+
         iosDictionary[@"showPreviews"] = showPreviews;
         iosDictionary[@"authorizationStatus"] = authorizationStatus;
         iosDictionary[@"alert"] =
