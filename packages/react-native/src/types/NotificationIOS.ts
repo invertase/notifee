@@ -360,6 +360,11 @@ export interface IOSNotificationSettings {
   criticalAlert: IOSNotificationSetting;
 
   /**
+   * Enum describing if time-sensitive notifications are entitled.
+   */
+  timeSensitive: IOSNotificationSetting;
+
+  /**
    * Enum describing if notification previews will be shown.
    */
   showPreviews: IOSShowPreviewsSetting;
