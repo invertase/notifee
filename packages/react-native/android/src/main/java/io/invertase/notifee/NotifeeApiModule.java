@@ -5,8 +5,13 @@
 package io.invertase.notifee;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.service.notification.StatusBarNotification;
+
 import androidx.annotation.NonNull;
 import app.notifee.core.Logger;
 import app.notifee.core.Notifee;
@@ -21,6 +26,7 @@ import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NotifeeApiModule extends ReactContextBaseJavaModule implements PermissionListener {
@@ -87,12 +93,36 @@ public class NotifeeApiModule extends ReactContextBaseJavaModule implements Perm
             tag,
             (e, aVoid) -> NotifeeReactUtils.promiseResolver(promise, e));
   }
+  private List<Bundle> fetchNotificationData(List<Bundle> aBundleList) {
+    NotificationManager notificationManager = (NotificationManager) getReactApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+    if (notificationManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      StatusBarNotification[] activeNotifications = notificationManager.getActiveNotifications();
+
+      for (StatusBarNotification sbn : activeNotifications) {
+        Notification notification = sbn.getNotification();
+        Bundle extras = notification.extras;
+
+        if (extras != null) {
+          Bundle data = extras.getBundle("data");
+          if (data != null) {
+            for (Bundle originalBundle : aBundleList) {
+              Bundle originalNotificationBundle = originalBundle.getBundle("notification");
+              if (originalNotificationBundle != null && originalNotificationBundle.getString("id").equals(String.valueOf(sbn.getId()))) {
+                originalNotificationBundle.putBundle("data", data);
+              }
+            }
+          }
+        }
+      }
+    }
+    return aBundleList;
+  }
 
   @ReactMethod
   public void getDisplayedNotifications(Promise promise) {
     Notifee.getInstance()
         .getDisplayedNotifications(
-            (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, aBundleList));
+            (e, aBundleList) -> NotifeeReactUtils.promiseResolver(promise, e, fetchNotificationData(aBundleList)));
   }
 
   @ReactMethod
