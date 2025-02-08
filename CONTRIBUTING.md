@@ -48,8 +48,6 @@ yarn build:rn:watch
 
 ### Manual testing
 
-To run the example app and do manual testing. Make sure step 3 above is done first!
-
 Run on iOS. Change `--simulator 'iPhone 16'` for you simulator if needed.
 ```bash
 yarn run:ios
