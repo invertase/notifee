@@ -360,7 +360,12 @@ export interface NotificationAndroid {
    * View the [Styles](/react-native/android/styles) documentation to learn more
    * view usage examples.
    **/
-  style?: AndroidBigPictureStyle | AndroidBigTextStyle | AndroidInboxStyle | AndroidMessagingStyle;
+  style?:
+    | AndroidBigPictureStyle
+    | AndroidBigTextStyle
+    | AndroidInboxStyle
+    | AndroidMessagingStyle
+    | AndroidCallStyle;
 
   /**
    * Text that summarizes this notification for accessibility services. As of the Android L release, this
@@ -751,6 +756,77 @@ export interface AndroidMessagingStyleMessage {
    * This property should only be provided if the message is from an external person, and not the person receiving the message.
    */
   person?: AndroidPerson;
+}
+
+export enum CallTypeActionsDefaultActionId {
+  ANSWER = 'answer',
+  DECLINE = 'decline',
+  HANG_UP = 'hangUp',
+}
+
+export interface CallStyleAction {
+  pressAction: Omit<NotificationPressAction, 'id'> & { id?: string };
+}
+
+/**
+ * The possible call types as defined by the [Android documentation](https://developer.android.com/reference/android/app/Notification.CallStyle#summary)
+ */
+export enum AndroidCallType {
+  INCOMING = 1,
+  ONGOING = 2,
+  SCREENING = 3,
+}
+
+/**
+ * The actions expected with the incoming call type.
+ */
+export interface AndroidCallTypeIncoming {
+  callType: AndroidCallType.INCOMING;
+  answerAction?: CallStyleAction;
+  declineAction?: CallStyleAction;
+}
+
+/**
+ * The actions expected with the ongoing call type.
+ */
+export interface AndroidCallTypeOngoing {
+  callType: AndroidCallType.ONGOING;
+  hangUpAction?: CallStyleAction;
+}
+
+/**
+ * The actions expected with the screening call type.
+ */
+export interface AndroidCallTypeScreening {
+  callType: AndroidCallType.SCREENING;
+  answerAction?: CallStyleAction;
+  hangUpAction?: CallStyleAction;
+}
+
+/**
+ * The interface used when displaying a Call Style notification.
+ *
+ * <Vimeo id="android-style-call" caption="Android Call Style" />
+ *
+ * View the [Call](/react-native/docs/android/styles#call) documentation to learn more.
+ *
+ * @platform android
+ */
+export interface AndroidCallStyle {
+  /**
+   * Constant enum value used to identify the style type.
+   */
+  type: AndroidStyle.CALL;
+
+  /**
+   * The person who is on the phone call.
+   */
+  person: AndroidPerson;
+
+  /**
+   * The actions displaying the buttons on the notification related to the chosen call type
+   */
+  callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
 }
 
 /**
@@ -1243,6 +1319,7 @@ export enum AndroidStyle {
   BIGTEXT = 1,
   INBOX = 2,
   MESSAGING = 3,
+  CALL = 4,
 }
 
 /**

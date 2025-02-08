@@ -17,13 +17,18 @@ package app.notifee.core.model;
  *
  */
 
+import android.app.PendingIntent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
+import app.notifee.core.CallStyleNotificationPendingIntent;
 import app.notifee.core.Logger;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
@@ -39,7 +44,7 @@ import java.util.concurrent.TimeoutException;
 @Keep
 public class NotificationAndroidStyleModel {
   private static final String TAG = "NotificationAndroidStyle";
-  private Bundle mNotificationAndroidStyleBundle;
+  private final Bundle mNotificationAndroidStyleBundle;
 
   private NotificationAndroidStyleModel(Bundle styleBundle) {
     mNotificationAndroidStyleBundle = styleBundle;
@@ -113,22 +118,29 @@ public class NotificationAndroidStyleModel {
 
   @Nullable
   public ListenableFuture<NotificationCompat.Style> getStyleTask(
-      ListeningExecutorService lExecutor) {
-    int type = ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"));
+      ListeningExecutorService lExecutor, NotificationModel notificationModel) {
+    NotificationAndroidStyleType type =
+        NotificationAndroidStyleType.values()[
+            ObjectUtils.getInt(mNotificationAndroidStyleBundle.get("type"))];
     ListenableFuture<NotificationCompat.Style> styleTask = null;
 
     switch (type) {
-      case 0:
+      case BIG_PICTURE:
         styleTask = getBigPictureStyleTask(lExecutor);
         break;
-      case 1:
+      case BIG_TEXT:
         styleTask = Futures.immediateFuture(getBigTextStyle());
         break;
-      case 2:
+      case INBOX:
         styleTask = Futures.immediateFuture(getInboxStyle());
         break;
-      case 3:
+      case MESSAGING:
         styleTask = getMessagingStyleTask(lExecutor);
+        break;
+      case CALL:
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+          styleTask = getCallStyleTask(lExecutor, notificationModel);
+        }
         break;
     }
 
@@ -181,7 +193,9 @@ public class NotificationAndroidStyleModel {
 
             // largeIcon has been specified to be null for BigPicture
             if (largeIcon == null) {
-              bigPictureStyle.bigLargeIcon(null);
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                bigPictureStyle.bigLargeIcon((Icon) null);
+              }
             }
           }
 
@@ -331,6 +345,67 @@ public class NotificationAndroidStyleModel {
           }
 
           return messagingStyle;
+        });
+  }
+
+  /**
+   * Gets a CallStyle for a notification
+   *
+   * @return NotificationCompat.CallStyle
+   */
+  @RequiresApi(31)
+  private ListenableFuture<NotificationCompat.Style> getCallStyleTask(
+      ListeningExecutorService lExecutor, NotificationModel notificationModel) {
+    return lExecutor.submit(
+        () -> {
+          Person caller =
+              getPerson(
+                      lExecutor,
+                      Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("person")))
+                  .get(20, TimeUnit.SECONDS);
+
+          Bundle callTypeActionsBundle =
+              Objects.requireNonNull(mNotificationAndroidStyleBundle.getBundle("callTypeActions"));
+
+          CallType callType =
+              CallType.values()[ObjectUtils.getInt(callTypeActionsBundle.get("callType"))];
+
+          switch (callType) {
+            case INCOMING:
+              {
+                PendingIntent answerIntent =
+                    CallStyleNotificationPendingIntent.getAnswerIntent(
+                        callTypeActionsBundle, notificationModel);
+                PendingIntent declineIntent =
+                    CallStyleNotificationPendingIntent.getDeclineIntent(
+                        callTypeActionsBundle, notificationModel);
+
+                return NotificationCompat.CallStyle.forIncomingCall(
+                    caller, declineIntent, answerIntent);
+              }
+            case ONGOING:
+              {
+                PendingIntent hangupIntent =
+                    CallStyleNotificationPendingIntent.getHangupIntent(
+                        callTypeActionsBundle, notificationModel);
+
+                return NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
+              }
+            case SCREENING:
+              {
+                PendingIntent answerIntent =
+                    CallStyleNotificationPendingIntent.getAnswerIntent(
+                        callTypeActionsBundle, notificationModel);
+                PendingIntent hangupIntent =
+                    CallStyleNotificationPendingIntent.getHangupIntent(
+                        callTypeActionsBundle, notificationModel);
+
+                return NotificationCompat.CallStyle.forScreeningCall(
+                    caller, hangupIntent, answerIntent);
+              }
+            default:
+              throw new RuntimeException("CallStyleTask: Invalid callType " + callType);
+          }
         });
   }
 }

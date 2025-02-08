@@ -9,6 +9,8 @@ import {
   AndroidCategory,
   AndroidProgress,
   AndroidImportance,
+  AndroidStyle,
+  AndroidCallType,
 } from '@notifee/react-native/src/types/NotificationAndroid';
 import { NotificationPressAction } from '@notifee/react-native/src/types/Notification';
 
@@ -93,6 +95,30 @@ describe('Validate Android Notification', () => {
       expect($.vibrationPattern).toEqual([1, 1]);
       expect($.timestamp).toEqual(111);
       expect($.sound).toEqual('sound');
+    });
+
+    test('returns valid call style', () => {
+      const androidInput: NotificationAndroid = {
+        channelId: 'default',
+        style: {
+          type: AndroidStyle.CALL,
+          person: { name: 'name' },
+          callTypeActions: {
+            callType: AndroidCallType.INCOMING,
+          },
+        },
+      };
+
+      const $ = validateAndroidNotification(androidInput);
+      expect($.style).toEqual({
+        ...androidInput.style,
+        person: { name: 'name', bot: false, important: false },
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+          answerAction: { pressAction: { id: 'answer' } },
+          declineAction: { pressAction: { id: 'decline' } },
+        },
+      });
     });
 
     test('returns default values when no params provided ', () => {
@@ -231,7 +257,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when colorized is invalud', () => {
+    test('throws an error when colorized is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         colorized: [] as any,
@@ -242,7 +268,7 @@ describe('Validate Android Notification', () => {
       );
     });
 
-    test('throws an error when chronometerDirection is invalud', () => {
+    test('throws an error when chronometerDirection is invalid', () => {
       const channelGroup: NotificationAndroid = {
         channelId: 'channelId',
         chronometerDirection: [] as any,
@@ -547,6 +573,19 @@ describe('Validate Android Notification', () => {
 
       expect(() => validateAndroidNotification(channelGroup)).toThrowError(
         "'notification.android.style' expected an object value.",
+      );
+    });
+
+    test('throws an error when style type is an invalid enum number', () => {
+      const channelGroup: NotificationAndroid = {
+        channelId: 'channelId',
+        style: {
+          type: -1,
+        } as any,
+      };
+
+      expect(() => validateAndroidNotification(channelGroup)).toThrowError(
+        "'notification.android.style' style type must be one of AndroidStyle.BIGPICTURE, AndroidStyle.BIGTEXT, AndroidStyle.INBOX, AndroidStyle.MESSAGING or AndroidStyle.CALL.",
       );
     });
 

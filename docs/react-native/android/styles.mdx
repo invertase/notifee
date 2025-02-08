@@ -144,3 +144,41 @@ Media style notifications are a way of showing a notification with intractable &
 song/video playing with album art.
 
 > Currently, Media Style notifications are not supported.
+
+# Call
+
+Call-style notifications starting from Android 12 display phone call-related notifications with a top ranking in the shade.
+
+At the root, the style accepts a `person` property, which contains information of the current device user. To see more about
+the options available to you, view the [`AndroidPerson`](/react-native/reference/androidperson) documentation.
+
+The property `callTypeActions` accepts an object with either the desired call type number (incoming, ongoing, screening) or a whole action object with only the `pressAction` object for better customization. When using the call type only, predefined pressAction IDs are provided matching the predefined button name (e.g., `answer`, `decline`, `hangUp`). If desired, we can change those IDs and even provide launch activity flags when defining the `pressAction`.
+
+It is important to known that the call style must be used with the Foreground service or a `fullScreenIntent`.
+
+To implement this style, we provide the `AndroidStyle.CALL` to the `style` object:
+
+```js
+import notifee, { AndroidStyle, AndroidImportance, AndroidCallType } from '@notifee/react-native';
+
+notifee.displayNotification({
+  title: 'Incoming call',
+  body: 'Sarah is calling',
+  android: {
+    channelId,
+    asForegroundService: true, // needs foreground Service or a fullScreenIntent.
+    category: AndroidCategory.CALL,
+    importance: AndroidImportance.HIGH,
+    style: {
+      type: AndroidStyle.CALL,
+      person: {
+        name: 'Sarah Lane',
+        icon: 'https://my-cdn.com/avatars/123.png',
+      },
+      callTypeActions: {
+        callType: AndroidCallType.INCOMING,
+      },
+    },
+  },
+});
+```

@@ -26,6 +26,7 @@ import Notifee, {
   AuthorizationStatus,
   TimestampTrigger,
   TriggerType,
+  AndroidStyle,
   // TimestampTrigger,
   // RepeatFrequency,
 } from '@notifee/react-native';
@@ -460,7 +461,10 @@ Notifee.registerForegroundService(notification => {
       notification.android = {
         progress: { current: current },
       };
-      Notifee.displayNotification(notification);
+      // Skipping call style since it generate a lot of channel id undefined errors
+      if (notification.title !== 'Android Call Style') {
+        Notifee.displayNotification(notification);
+      }
       current++;
     }, 125);
 

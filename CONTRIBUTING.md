@@ -46,13 +46,26 @@ yarn build:rn:watch
 
 ## Testing Code
 
+### Manual testing
+
+Run on iOS. Change `--simulator 'iPhone 16'` for you simulator if needed.
+```bash
+yarn run:ios
+```
+
+or Android
+```bash
+yarn run:android
+```
+
+
 ### Unit Testing
 
 The following package scripts are exported to help you run tests;
 
 - `yarn tests_rn:test` - run Jest tests once and exit.
-- `yarn tests_rn:jest-watch` - run Jest tests in interactive mode and watch for changes.
-- `yarn tests_rn:jest-coverage` - run Jest tests with coverage. Coverage is output to `./coverage`.
+- `yarn tests_rn:test-watch` - run Jest tests in interactive mode and watch for changes.
+- `yarn tests_rn:test-coverage` - run Jest tests with coverage. Coverage is output to `./coverage`.
 
 ### End-to-end Testing
 
@@ -75,6 +88,13 @@ Runs ESLint and respective type checks on project files
 yarn validate:all:js
 yarn validate:all:ts
 ```
+
+Runs auto-formatting
+
+```bash
+yarn format:all
+```
+
 
 ## Publishing
 
