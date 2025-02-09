@@ -19,12 +19,15 @@ package app.notifee.core;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.NotificationEvent;
@@ -33,6 +36,9 @@ import app.notifee.core.model.NotificationModel;
 
 public class ForegroundService extends Service {
   private static final String TAG = "ForegroundService";
+  private static final int DEFAULT_FOREGROUND_NOTIFICATION_ID = 1;
+  private static final String CHANNEL_ID = "foreground_service_channel";
+
   public static final String START_FOREGROUND_SERVICE_ACTION =
       "app.notifee.core.ForegroundService.START";
   public static final String STOP_FOREGROUND_SERVICE_ACTION =
@@ -75,12 +81,18 @@ public class ForegroundService extends Service {
   @SuppressLint({"ForegroundServiceType", "MissingPermission"})
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    // Check if action is to stop the foreground service
-    if (intent == null || STOP_FOREGROUND_SERVICE_ACTION.equals(intent.getAction())) {
-      stopSelf();
-      mCurrentNotificationId = null;
-      mCurrentForegroundServiceType = -1;
-      return Service.START_STICKY_COMPATIBILITY;
+    if (intent == null) {
+        return START_NOT_STICKY;
+    }
+
+    if (STOP_FOREGROUND_SERVICE_ACTION.equals(intent.getAction())) {
+        if (mCurrentNotificationId != null) {
+            ensureForegroundServiceRunning();
+        }
+        stopSelf();
+        mCurrentNotificationId = null;
+        mCurrentForegroundServiceType = -1;
+        return START_NOT_STICKY;
     }
 
     Bundle extras = intent.getExtras();
@@ -142,6 +154,46 @@ public class ForegroundService extends Service {
     }
 
     return START_NOT_STICKY;
+  }
+
+  private void ensureForegroundServiceRunning() {
+    Notification dummyNotification = createDummyNotification();
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && mCurrentForegroundServiceType != -1) {
+      startForeground(DEFAULT_FOREGROUND_NOTIFICATION_ID, dummyNotification, mCurrentForegroundServiceType);
+    } else {
+      startForeground(DEFAULT_FOREGROUND_NOTIFICATION_ID, dummyNotification);
+    }
+  }
+
+  private Notification createDummyNotification() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ID,
+                "Foreground Service",
+                NotificationManager.IMPORTANCE_LOW
+        );
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager)
+        getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+      
+        if (notificationManager != null) {
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+       
+    int iconResId = getResources().getIdentifier("ic_notification", "drawable", getPackageName());
+    if (iconResId == 0) {
+        Logger.w(TAG, "No valid notification icon found, using default.");
+        iconResId = getResources().getIdentifier("ic_launcher", "mipmap", getPackageName());
+    }
+
+    return new NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(iconResId) // Required
+            .setContentTitle("Foreground Service Running") // Default title
+            .setContentText("This service is running in the background.") // Default text
+            .setPriority(NotificationCompat.PRIORITY_LOW) // Prevents high-importance UI behavior
+            .setSilent(true) // No sound or vibration
+            .build();
   }
 
   @Nullable
