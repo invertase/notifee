@@ -19,12 +19,16 @@ package app.notifee.core;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import app.notifee.core.event.ForegroundServiceEvent;
 import app.notifee.core.event.NotificationEvent;
@@ -33,6 +37,9 @@ import app.notifee.core.model.NotificationModel;
 
 public class ForegroundService extends Service {
   private static final String TAG = "ForegroundService";
+  private static final int DEFAULT_FOREGROUND_NOTIFICATION_ID = 1;
+  private static final String CHANNEL_ID = "foreground_service_channel";
+
   public static final String START_FOREGROUND_SERVICE_ACTION =
       "app.notifee.core.ForegroundService.START";
   public static final String STOP_FOREGROUND_SERVICE_ACTION =
@@ -75,12 +82,18 @@ public class ForegroundService extends Service {
   @SuppressLint({"ForegroundServiceType", "MissingPermission"})
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    // Check if action is to stop the foreground service
-    if (intent == null || STOP_FOREGROUND_SERVICE_ACTION.equals(intent.getAction())) {
-      stopSelf();
-      mCurrentNotificationId = null;
-      mCurrentForegroundServiceType = -1;
-      return Service.START_STICKY_COMPATIBILITY;
+    if (intent == null) {
+        return START_NOT_STICKY;
+    }
+
+    if (STOP_FOREGROUND_SERVICE_ACTION.equals(intent.getAction())) {
+        if (mCurrentNotificationId != null) {
+            ensureForegroundServiceRunning();
+        }
+        stopSelf();
+        mCurrentNotificationId = null;
+        mCurrentForegroundServiceType = -1;
+        return START_NOT_STICKY;
     }
 
     Bundle extras = intent.getExtras();
@@ -142,6 +155,33 @@ public class ForegroundService extends Service {
     }
 
     return START_NOT_STICKY;
+  }
+
+  private void ensureForegroundServiceRunning() {
+        Logger.w(TAG, "Stop self before starting foreground service");
+        startForeground(DEFAULT_FOREGROUND_NOTIFICATION_ID, createDummyNotification());
+  }
+
+  private Notification createDummyNotification() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ID,
+                "Foreground Service",
+                NotificationManager.IMPORTANCE_LOW
+        );
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            manager.createNotificationChannel(channel);
+        }
+    }
+
+    return new NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification) // Required
+            .setContentTitle("Foreground Service Running") // Default title
+            .setContentText("This service is running in the background.") // Default text
+            .setPriority(NotificationCompat.PRIORITY_LOW) // Prevents high-importance UI behavior
+            .setSilent(true) // No sound or vibration
+            .build();
   }
 
   @Nullable
