@@ -181,7 +181,7 @@ struct {
   _notificationOpenedAppID = notifeeNotification[@"id"];
 
   // handle notification outside of notifee
-  if (notifeeNotification == nil) {
+  //if (notifeeNotification == nil) {
     if (_originalDelegate != nil && originalUNCDelegateRespondsTo.didReceiveNotificationResponse) {
       [_originalDelegate userNotificationCenter:center
                  didReceiveNotificationResponse:response
@@ -190,7 +190,7 @@ struct {
       notifeeNotification =
           [NotifeeCoreUtil parseUNNotificationRequest:response.notification.request];
     }
-  }
+  //}
 
   if (notifeeNotification != nil) {
     if ([response.actionIdentifier isEqualToString:UNNotificationDismissActionIdentifier]) {
