@@ -25,7 +25,7 @@
       android:excludeFromRecents="true"
       android:taskAffinity=""
       android:theme="@android:style/Theme.Translucent.NoTitleBar"
-      android:exported="true" />
+      android:exported="false" />
 
     <!-- Foreground Service -->
     <service
@@ -45,7 +45,7 @@
 
     <receiver
       android:name=".AlarmPermissionBroadcastReceiver"
-      android:exported="true">
+      android:exported="false">
       <intent-filter>
         <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
       </intent-filter>
