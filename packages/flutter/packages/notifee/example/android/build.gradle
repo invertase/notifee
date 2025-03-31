@@ -6,8 +6,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath('com.android.tools.build:gradle:7.0.3')
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -16,19 +16,19 @@ allprojects {
         google()
         mavenCentral()
         // maven {
-        //   url "${project(':notifee').projectDir}/libs"
+        //   url = "${project(':notifee').projectDir}/libs"
         // }
     }
 }
 
 rootProject.buildDir = '../build'
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.buildDir = "${rootProject.buildDir}/${project.name = }"
 }
 subprojects {
     project.evaluationDependsOn(':app')
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete(rootProject.buildDir)
 }

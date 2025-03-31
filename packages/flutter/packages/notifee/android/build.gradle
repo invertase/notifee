@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath('com.android.tools.build:gradle:7.0.3')
     }
 }
 
@@ -17,7 +17,7 @@ rootProject.allprojects {
         google()
         mavenCentral()
         maven {
-          url './libs'
+          url = './libs'
         }
     }
 }
@@ -25,20 +25,20 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion = 31
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion = 19
     }
 
     repositories {
       maven {
-        url './libs'
+        url = './libs'
       }
     }
 
@@ -46,27 +46,27 @@ android {
 
   dependencies {
      if (findProject(':notifee_core')) {
-       implementation findProject(':notifee_core')
+       implementation(findProject(':notifee_core'))
      } else {
-        api(group: 'app.notifee', name:'core', version: '+')
+        api(group: 'app.notifee', name = :'core', version: '+')
      }
 
 
 
-      implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-      implementation 'com.google.android.gms:play-services-tasks:17.2.1' // https://developers.google.com/android/guides/releases
-      implementation 'androidx.work:work-runtime:2.7.1' // https://developer.android.com/jetpack/androidx/releases/work
-      implementation 'org.greenrobot:eventbus:3.3.1' // https://github.com/greenrobot/EventBus/releases
+      implementation('androidx.concurrent:concurrent-futures:1.1.0') // https://developer.android.com/jetpack/androidx/releases/concurrent
+      implementation('com.google.android.gms:play-services-tasks:17.2.1') // https://developers.google.com/android/guides/releases
+      implementation('androidx.work:work-runtime:2.7.1') // https://developer.android.com/jetpack/androidx/releases/work
+      implementation('org.greenrobot:eventbus:3.3.1') // https://github.com/greenrobot/EventBus/releases
 
       // needed to enforce version and avoid clashes
       // https://github.com/square/okhttp/blob/master/docs/changelog_3x.md
-      implementation 'com.squareup.okhttp3:okhttp:3.12.13' // okhttp must stay on 3.12.x to support minSdkVersion < 21
+      implementation('com.squareup.okhttp3:okhttp:3.12.13') // okhttp must stay on 3.12.x to support minSdkVersion < 21
     }
 
     rootProject.allprojects {
       repositories {
         maven {
-          url "${project(':notifee').projectDir}/libs"
+          url = "${project(':notifee').projectDir}/libs"
         }
       }
     }

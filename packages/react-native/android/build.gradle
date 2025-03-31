@@ -69,19 +69,19 @@ android {
   }
 
   defaultConfig {
-    multiDexEnabled true
+    multiDexEnabled = true
   }
   lintOptions {
-    disable 'GradleCompatible'
-    abortOnError false
+    disable = 'GradleCompatible'
+    abortOnError = false
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
   }
   buildTypes {
     release {
-      consumerProguardFiles 'proguard-rules.pro'
+      consumerProguardFiles = ['proguard-rules.pro']
     }
   }
   compileSdkVersion = 34
@@ -94,16 +94,16 @@ repositories {
 
 dependencies {
   if (findProject(':notifee_core')) {
-    implementation findProject(':notifee_core')
+    implementation(findProject(':notifee_core'))
   } else {
     implementation(group: 'app.notifee', name:'core', version: '+')
   }
 
-  implementation("com.google.guava:guava:33.3.1-android") // https://github.com/google/guava
-  implementation 'androidx.concurrent:concurrent-futures:1.1.0' // https://developer.android.com/jetpack/androidx/releases/concurrent
-  implementation 'androidx.work:work-runtime:2.8.0' // https://developer.android.com/jetpack/androidx/releases/work
-  implementation 'org.greenrobot:eventbus:3.3.1' // https://github.com/greenrobot/EventBus/releases
-  implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
+  implementation('com.google.guava:guava:33.3.1-android') // https://github.com/google/guava
+  implementation('androidx.concurrent:concurrent-futures:1.1.0') // https://developer.android.com/jetpack/androidx/releases/concurrent
+  implementation('androidx.work:work-runtime:2.8.0') // https://developer.android.com/jetpack/androidx/releases/work
+  implementation('org.greenrobot:eventbus:3.3.1') // https://github.com/greenrobot/EventBus/releases
+  implementation('androidx.lifecycle:lifecycle-process:2.3.1')
 }
 
 ReactNative.shared.applyPackageVersion()
@@ -113,7 +113,7 @@ ReactNative.module.applyReactNativeDependency("api")
 rootProject.allprojects {
   repositories {
     maven {
-      url "$notifeeDir/android/libs"
+      url = "$notifeeDir/android/libs"
     }
   }
 }
