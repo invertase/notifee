@@ -23,10 +23,16 @@ export const notifications: { key: string; notification: Notification | Notifica
         importance: AndroidImportance.HIGH,
         style: {
           type: AndroidStyle.CALL,
-          person: { name: 'John Doe' },
+          person: {
+            name: 'John Doe',
+          },
           callTypeActions: {
             callType: AndroidCallType.INCOMING,
             declineAction: { pressAction: { id: 'stop' } },
+          },
+          verification: {
+            text: 'Verified',
+            icon: 'verified',
           },
         },
       },

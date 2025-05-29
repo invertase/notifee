@@ -18,6 +18,7 @@ package app.notifee.core.model;
  */
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -29,6 +30,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import app.notifee.core.CallStyleNotificationPendingIntent;
+import app.notifee.core.ContextHolder;
 import app.notifee.core.Logger;
 import app.notifee.core.utility.ObjectUtils;
 import app.notifee.core.utility.ResourceUtils;
@@ -370,6 +372,7 @@ public class NotificationAndroidStyleModel {
           CallType callType =
               CallType.values()[ObjectUtils.getInt(callTypeActionsBundle.get("callType"))];
 
+          NotificationCompat.CallStyle callStyle;
           switch (callType) {
             case INCOMING:
               {
@@ -380,8 +383,9 @@ public class NotificationAndroidStyleModel {
                     CallStyleNotificationPendingIntent.getDeclineIntent(
                         callTypeActionsBundle, notificationModel);
 
-                return NotificationCompat.CallStyle.forIncomingCall(
+                callStyle = NotificationCompat.CallStyle.forIncomingCall(
                     caller, declineIntent, answerIntent);
+                break;
               }
             case ONGOING:
               {
@@ -389,7 +393,8 @@ public class NotificationAndroidStyleModel {
                     CallStyleNotificationPendingIntent.getHangupIntent(
                         callTypeActionsBundle, notificationModel);
 
-                return NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
+                callStyle = NotificationCompat.CallStyle.forOngoingCall(caller, hangupIntent);
+                break;
               }
             case SCREENING:
               {
@@ -400,12 +405,82 @@ public class NotificationAndroidStyleModel {
                     CallStyleNotificationPendingIntent.getHangupIntent(
                         callTypeActionsBundle, notificationModel);
 
-                return NotificationCompat.CallStyle.forScreeningCall(
+                callStyle = NotificationCompat.CallStyle.forScreeningCall(
                     caller, hangupIntent, answerIntent);
+                break;
               }
             default:
               throw new RuntimeException("CallStyleTask: Invalid callType " + callType);
           }
+
+          NotificationVerificationInfo verificationInfo = getVerificationInfo();
+
+          if (verificationInfo.text != null) {
+              callStyle.setVerificationText(verificationInfo.text);
+          }
+
+          if (verificationInfo.icon != null) {
+              callStyle.setVerificationIcon(verificationInfo.icon);
+          }
+          if (verificationInfo.bitmap != null) {
+              callStyle.setVerificationIcon(verificationInfo.bitmap);
+          }
+
+          return callStyle;
         });
+  }
+
+  private static class NotificationVerificationInfo {
+    public final String text;
+    public final Icon icon;
+    public final Bitmap bitmap;
+
+    public NotificationVerificationInfo(String text, Icon icon, Bitmap bitmap) {
+        this.text = text;
+        this.icon = icon;
+        this.bitmap = bitmap;
+    }
+  }
+
+  @RequiresApi(23)
+  private NotificationVerificationInfo getVerificationInfo() {
+    String verificationText = null;
+    Icon verificationIcon = null;
+    Bitmap verificationBitMap = null;
+
+    if (mNotificationAndroidStyleBundle.containsKey("verification")) {
+        Bundle verificationBundle = mNotificationAndroidStyleBundle.getBundle("verification");
+        if (verificationBundle != null) {
+            if (verificationBundle.containsKey("text")) {
+                verificationText = verificationBundle.getString("text");
+            }
+            if (verificationBundle.containsKey("icon")) {
+                String verificationIconPath = verificationBundle.getString("icon");
+                if (verificationIconPath != null) {
+                    try {
+                      verificationIcon = ResourceUtils.getIconFromResourceName(verificationIconPath);
+                    } catch (Exception e) {
+                        Logger.e(
+                            TAG,
+                            "An error occurred whilst trying to retrieve the verification icon for CallStyle: "
+                                + verificationIconPath,
+                            e);
+                    }
+
+                    // Separating the loading of icon vs bitmap since loading the icon with the below and and setting as a bitmap was just not working
+                    try {
+                        verificationBitMap = ResourceUtils.getImageBitmapFromUrl(verificationIconPath).get(10, TimeUnit.SECONDS);
+                    } catch (Exception e) {
+                        Logger.e(
+                            TAG,
+                            "An error occurred whilst trying to retrieve the verification icon for CallStyle: "
+                                + verificationIconPath,
+                            e);
+                    }
+                }
+            }
+        }
+    }
+    return new NotificationVerificationInfo(verificationText, verificationIcon, verificationBitMap);
   }
 }

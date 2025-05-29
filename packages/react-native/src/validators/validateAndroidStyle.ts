@@ -345,6 +345,13 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
     throw new Error("'callType' expected a number value.");
   }
 
+  if(style.verification?.text && !isString(style.verification.text)) {
+    throw new Error("'notification.android.style' CallStyle: 'verification.text' expected a string value.");
+  }
+  if(style.verification?.icon && !isString(style.verification.icon)) {
+    throw new Error("'notification.android.style' CallStyle: 'verification.icon' expected a string value.");
+  }
+
   switch (style.callTypeActions.callType) {
     case AndroidCallType.INCOMING: {
       const answerAction = validateCallStyleAction(
@@ -363,6 +370,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
           answerAction,
           declineAction,
         },
+        verification: style.verification,
       };
     }
     case AndroidCallType.ONGOING: {
@@ -377,6 +385,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
           ...style.callTypeActions,
           hangUpAction,
         },
+        verification: style.verification,
       };
     }
     case AndroidCallType.SCREENING: {
@@ -396,6 +405,7 @@ export function validateAndroidCallStyle(style: AndroidCallStyle): AndroidCallSt
           answerAction,
           hangUpAction,
         },
+        verification: style.verification,
       };
     }
     default:

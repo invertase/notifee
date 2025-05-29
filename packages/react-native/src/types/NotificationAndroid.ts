@@ -827,6 +827,15 @@ export interface AndroidCallStyle {
    * The actions displaying the buttons on the notification related to the chosen call type
    */
   callTypeActions: AndroidCallTypeIncoming | AndroidCallTypeOngoing | AndroidCallTypeScreening;
+
+  /**
+   * Icon and text related to the verification status of the caller.
+   */
+  verification?: {
+    text?: string;
+    icon?: string;
+  }
+
 }
 
 /**

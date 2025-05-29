@@ -25,11 +25,13 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.drawable.Icon;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.util.TypedValue;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import app.notifee.core.ContextHolder;
 import app.notifee.core.Logger;
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -304,5 +306,15 @@ public class ResourceUtils {
       // Use the actual sound name vs the resource ID, to obtain a stable URI, Issue #341
       return Uri.parse("android.resource://" + context.getPackageName() + "/raw/" + sound);
     }
+  }
+
+  @RequiresApi(23)
+  public static @Nullable Icon getIconFromResourceName(String iconName) {
+    int resId = ResourceUtils.getImageResourceId(iconName);
+    if (resId != 0) {
+      Context context = ContextHolder.getApplicationContext();
+      return Icon.createWithResource(context, resId);
+    }
+    return null;
   }
 }
