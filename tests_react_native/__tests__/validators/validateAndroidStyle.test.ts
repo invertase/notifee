@@ -531,6 +531,26 @@ describe('Validate Android Style', () => {
       });
     });
 
+    test('returns valid style with verified icon and text', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+        verification: {
+          icon: 'verifiedIcon',
+          text: 'Verified',
+        },
+      };
+
+      const $ = validateAndroidCallStyle(style);
+      expect($.verification).toEqual({
+        icon: 'verifiedIcon',
+        text: 'Verified',
+      });
+    });
+
     test('throws an error with an invalid person', () => {
       const style: AndroidCallStyle = {
         person: 'test' as any,
@@ -667,6 +687,55 @@ describe('Validate Android Style', () => {
 
       expect(() => validateAndroidCallStyle(style)).toThrowError(
         "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+
+    test('throws an error with an invalid hangUp press actions for Screening type', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.SCREENING,
+          hangUpAction: {} as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'action' Cannot read properties of undefined (reading 'id').",
+      );
+    });
+
+    test('throws when the verification icon is invalid', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+        verification: {
+          icon: 1 as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'notification.android.style' CallStyle: 'verification.icon' expected a string value.",
+      );
+    });
+
+    test('throws when the verification text is invalid', () => {
+      const style: AndroidCallStyle = {
+        person: testPerson,
+        type: AndroidStyle.CALL,
+        callTypeActions: {
+          callType: AndroidCallType.INCOMING,
+        },
+        verification: {
+          text: 1 as any,
+        },
+      };
+
+      expect(() => validateAndroidCallStyle(style)).toThrowError(
+        "'notification.android.style' CallStyle: 'verification.text' expected a string value.",
       );
     });
   });
