@@ -149,7 +149,7 @@ song/video playing with album art.
 
 Call-style notifications, starting from Android 12, display phone call-related notifications with a top ranking in the shade.
 
-At the root, the style accepts a `person` property, which contains information about the current device user. To see more about
+At the root, the style accepts a `person` property, which contains information about the current device user.
 For the options available to you, refer to the [`AndroidPerson`](/react-native/reference/androidperson) documentation.
 
 The property `callTypeActions` accepts an object with either the desired call type number (incoming, ongoing, screening) or a whole action object with only the `pressAction` object for better customization. When using the call type only, predefined pressAction IDs are provided matching the predefined button name (e.g., `answer`, `decline`, `hangUp`). If desired, we can change those IDs and even provide launch activity flags when defining the `pressAction`.
@@ -181,8 +181,8 @@ notifee.displayNotification({
         callType: AndroidCallType.INCOMING,
       },
       verification: {
-        text: "Verified"
-        icon: "iconVerified"
+        text: "Verified",
+        icon: "verifiedIcon"
       }
     },
   },
